@@ -2,6 +2,10 @@
 
 Desktop Application for Path of Exile divination cards
 
+## Install
+
+Install the latest release (https://github.com/shonya3/divicards/releases)
+
 ## Platform
 
 -   [Tauri](https://tauri.app/)
