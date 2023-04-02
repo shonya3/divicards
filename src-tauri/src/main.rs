@@ -65,7 +65,7 @@ async fn read_polish_csv(
     let map = starter_map().await?;
 
     let mut records = record::csv::string::read(csv_string, minimum_card_price)?;
-    let (records, fixed_names) = record::fix_record_names(&mut records, &record::NAMES, &map);
+    let (records, fixed_names) = record::fix_record_names(&mut records, &record::CARDS, &map);
 
     let not_cards = find_not_divination_cards(&records, &map);
     println!("not cards: {:?}", not_cards);

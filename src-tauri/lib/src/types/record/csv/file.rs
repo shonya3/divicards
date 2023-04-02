@@ -121,7 +121,7 @@ fn merge_n_files(
 
 pub fn write_empty_table(output_path: &str) -> Result<(), Error> {
     let mut records: Vec<Record> = vec![];
-    for name in record::NAMES {
+    for name in record::CARDS {
         let mut new_record = Record::default();
         new_record.name = name.to_string();
 
