@@ -11,17 +11,17 @@
 		"story": "histoire"
 	},
 	"dependencies": {
-		"@formkit/auto-animate": "^1.0.0-beta.3",
-		"@tauri-apps/api": "^1.1.0",
-		"vue": "^3.2.37"
+		"@formkit/auto-animate": "1.0.0-beta.6",
+		"@tauri-apps/api": "^1.2.0",
+		"vue": "^3.2.47"
 	},
 	"devDependencies": {
-		"@histoire/plugin-vue": "^0.11.6",
-		"@tauri-apps/cli": "^1.1.1",
-		"@vitejs/plugin-vue": "^3.1.0",
-		"histoire": "^0.11.6",
-		"typescript": "^4.6.4",
-		"vite": "^3.1.0",
-		"vue-tsc": "^1.0.9"
+		"@histoire/plugin-vue": "^0.15.8",
+		"@tauri-apps/cli": "^1.2.3",
+		"@vitejs/plugin-vue": "^4.1.0",
+		"histoire": "^0.15.9",
+		"typescript": "^5.0.3",
+		"vite": "^4.2.1",
+		"vue-tsc": "^1.2.0"
 	}
 }
