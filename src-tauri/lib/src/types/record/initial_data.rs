@@ -23,7 +23,12 @@ pub const LEGACY_CARDS: [&'static str; 15] = [
     "Treasures of the Vaal",
 ];
 
-pub const CARDS: [&'static str; 433] = [
+pub const CARDS: [&'static str; 438] = [
+    "Brother's Gift",
+    "Soul Quenched",
+    "Poisoned Faith",
+    "A Chilling Wind",
+    "Matryoshka",
     "A Dusty Memory",
     "Alivia's Grace",
     "Auspicious Ambitions",
