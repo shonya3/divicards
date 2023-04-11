@@ -14,12 +14,13 @@ pub fn read(content_string: &str, minimum_card_price: Option<f32>) -> Result<Vec
 
     let mut records: Vec<Record> = vec![];
     for record in reader.deserialize::<Record>() {
-        let record = record?;
-
-        if record.calculated.unwrap_or_default() >= minimum_card_price.unwrap_or_default() {
-            records.push(record);
+        if let Ok(record) = record {
+            if record.calculated.unwrap_or_default() >= minimum_card_price.unwrap_or_default() {
+                records.push(record);
+            }
         }
     }
+
     Ok(records)
 }
 
