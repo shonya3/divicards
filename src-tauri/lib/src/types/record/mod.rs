@@ -1,21 +1,11 @@
 pub mod csv;
 mod initial_data;
 
+use crate::error::Error;
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-// pub use initial_data::create_starter_hashmap;
-// pub use initial_data::download_json;
-// pub use initial_data::dummy_tup_names_prices;
-// pub use initial_data::is_legacy_card;
-// pub use initial_data::names_prices_from_json;
-// pub use initial_data::LEGACY_CARDS;
-// pub use initial_data::NAMES;
-// pub use initial_data::TUP_NAMES_PRICES;
 pub use initial_data::*;
-
-use serde::{Deserialize, Serialize};
-
-use crate::error::Error;
 
 use super::weighted_record::WeightedRecord;
 
@@ -70,26 +60,15 @@ pub fn vec_to_map(
     records: Vec<Record>,
     mut map: HashMap<&'static str, Record>,
 ) -> Result<HashMap<&'static str, Record>, Error> {
-    // let mode = std::env::var("RUST_ENV");
-
-    // let mut map = create_starter_hashmap();
     for r in records {
         let name = r.name.as_str();
         let record_from_map: &mut Record = match map.get_mut(name) {
             Some(record) => record,
             None => {
-                // find_most_similar(name, &NAMES);
-
                 tracing::warn!("{}", Error::NotDivinationCard(name.to_string()));
                 continue;
-
-                // tracing::error!("Could not get record from map. Record name: {}", name);
-                // panic!("Could not get Record from map")
-                // return Err(Error::BadRecord(name.to_string()));
             }
         };
-        // map.get_mut(r.name.as_str())
-        //     .expect("Could not get Record from map");
 
         record_from_map.stack_size = r.stack_size;
         record_from_map.total = Some(
@@ -185,28 +164,6 @@ pub fn polish_records(
     Ok(records)
 }
 
-// #[derive(Debug, Deserialize, Serialize, Clone, PartialEq)]
-// #[serde(rename_all = "camelCase")]
-// pub struct WeightedRecord {
-//     pub stack_size: i32,
-//     pub name: String,
-//     pub calculated: Option<f32>,
-//     pub total: Option<f32>,
-//     pub real_weight: f32,
-// }
-
-// impl Default for WeightedRecord {
-//     fn default() -> Self {
-//         Self {
-//             real_weight: 0.,
-//             stack_size: 0,
-//             name: String::default(),
-//             calculated: Some(0.),
-//             total: Some(0.),
-//         }
-//     }
-// }
-
 fn calc_record_weight(record: &Record, all_stack_size: i32) -> f32 {
     record.stack_size as f32 / all_stack_size as f32
 }
@@ -225,7 +182,10 @@ pub fn weight_records(records: Vec<Record>) -> Vec<WeightedRecord> {
     let all_stack_size: i32 = records.iter().map(|r| r.stack_size).sum();
     let real_stacked_rain_of_chaos_weight: f32 = 2452.65513;
     let condense_factor: f32 = 2.0 / 3.0;
-    let rain_of_chaos = records.iter().find(|r| r.name == "Rain of Chaos").unwrap();
+    let rain_of_chaos = records
+        .iter()
+        .find(|r| r.name == "Rain of Chaos")
+        .expect("no rain of chaos card");
     let weight = rain_of_chaos.stack_size as f32 / all_stack_size as f32;
     let real_stacked_summary_weight = real_stacked_rain_of_chaos_weight / weight;
     records

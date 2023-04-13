@@ -3,10 +3,8 @@ use std::vec;
 
 use csv::Reader;
 use tracing::instrument;
-// use tracing::instrument;
 
 use crate::error::Error;
-
 use crate::types::record::{self, Record};
 
 pub fn read(content_string: &str, minimum_card_price: Option<f32>) -> Result<Vec<Record>, Error> {
@@ -96,97 +94,3 @@ pub fn merge(
 
     Ok(write(&new_vec)?)
 }
-
-mod test {
-    #![allow(unused_variables)]
-
-    use std::collections::HashMap;
-
-    use crate::types::record::Record;
-
-    fn merge() {
-        let doctor_price = 4000.0;
-        let nurse_price = 400.0;
-        let dragonheart_price = 50.0;
-
-        let mut map = HashMap::<&'static str, Record>::new();
-        map.insert(
-            "The Doctor",
-            Record {
-                name: "The Doctor".into(),
-                calculated: Some(doctor_price),
-                ..Default::default()
-            },
-        );
-
-        map.insert(
-            "The Nurse",
-            Record {
-                name: "The Nurse".into(),
-                calculated: Some(nurse_price),
-                ..Default::default()
-            },
-        );
-
-        map.insert(
-            "The Dragon's Heart",
-            Record {
-                name: "The Dragon's Heart".into(),
-                calculated: Some(dragonheart_price),
-                ..Default::default()
-            },
-        );
-
-        let doctor = Record {
-            stack_size: 1,
-            name: "The Doctor".into(),
-            calculated: Some(doctor_price),
-            total: Some(doctor_price),
-        };
-
-        let nurse = Record {
-            stack_size: 2,
-            name: "The Nurse".into(),
-            calculated: Some(nurse_price),
-            total: Some(2 as f32 * nurse_price),
-        };
-
-        let vec1: Vec<Record> = vec![doctor.clone(), nurse.clone()];
-
-        let doctor2 = Record {
-            stack_size: 2,
-            name: "The Doctor".into(),
-            calculated: Some(doctor_price),
-            total: Some(2 as f32 * doctor_price),
-        };
-
-        let dragonsheart = Record {
-            stack_size: 1,
-            name: "The Dragon's Heart".into(),
-            calculated: Some(dragonheart_price),
-            total: Some(dragonheart_price),
-        };
-
-        let vec2: Vec<Record> = vec![doctor2, dragonsheart];
-
-        todo!();
-    }
-}
-
-// pub fn read_csv_from_string(data: &str) -> Result<String, Error> {
-//     let mut reader = Reader::from_reader(data.as_bytes());
-
-//     let mut writer = csv::Writer::from_writer(vec![]);
-//     let mut records: Vec<Record> = vec![];
-//     for record in reader.deserialize::<Record>() {
-//         let record = record?;
-//         writer.serialize(record.clone())?;
-//         records.push(record);
-//     }
-
-//     // let serialized = serde_json::to_string(&records)?;
-
-//     let data = String::from_utf8(writer.into_inner().unwrap())?;
-
-//     Ok(data)
-// }

@@ -5,6 +5,7 @@ pub fn add(left: usize, right: usize) -> usize {
 }
 
 pub mod config;
+pub mod csvm;
 pub mod dev;
 pub mod error;
 pub mod types;

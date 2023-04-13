@@ -520,31 +520,6 @@ pub async fn fetch_div_prices() -> Result<String, Error> {
     Ok(json)
 }
 
-/*
-pub async fn read_json(json_path: &str) -> Result<String, Error> {
-    let json = match std::fs::read_to_string(json_path) {
-        Ok(json) => {
-            // check file age
-            let metadata = match std::fs::metadata(json_path) {
-                Ok(metadata) => metadata,
-                Err(_) => {
-                    todo!()
-                }
-            };
-            todo!()
-        }
-        Err(_) => {
-            // download json
-            match download_json().await {
-                Ok(json) => todo!(),
-                Err(err) => todo!(),
-            }
-        }
-    };
-}
-
-*/
-
 pub fn is_legacy_card(s: &str) -> bool {
     LEGACY_CARDS.contains(&s)
 }
