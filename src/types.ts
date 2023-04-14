@@ -1,6 +1,6 @@
 export interface FileContents {
 	text: string;
-	filename: string;
+	name: string;
 	href: string;
 }
 
@@ -55,18 +55,6 @@ export interface CardRecord {
 }
 
 export type WeightedCardRecord = CardRecord & { realWeight: number };
-
-export interface Contents {
-	fileContent: FileContents;
-	selected: boolean | null;
-	id: string;
-	valid: boolean;
-	error: string | null;
-	price: number;
-	records: WeightedCardRecord[];
-	notCards: string[];
-	fixedNames: Record<string, string>;
-}
 
 export type Order = 'asc' | 'desc';
 export type Column = 'price' | 'stackSize' | 'total';

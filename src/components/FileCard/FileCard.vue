@@ -4,12 +4,13 @@ import CSVIcon from '../icons/CSVIcon.vue';
 import { ref, watch } from 'vue';
 import DivTable from '../DivTable/DivTable.vue';
 import { command } from '../../lib';
-import FixedIcon from './FixedIcon.vue';
 import BasePopup from '../BasePopup.vue';
-import FixedNamesList from '../FixedNamesList.vue';
+import FixedNamesList from './FixedNamesList/FixedNamesList.vue';
+import NotCardsList from './NotCardsList/NotCardsList.vue';
 
 export interface Contents {
 	fileContent: FileContents;
+	file: File;
 	selected: boolean | null;
 	id: string;
 	valid: boolean;
@@ -45,21 +46,15 @@ watch(
 );
 
 const tablePopup = ref<typeof BasePopup | null>(null);
-const fixedNamesPopup = ref<typeof BasePopup | null>(null);
 </script>
 
 <template>
-	<pre v-if="notCards.length">{{ notCards }}</pre>
 	<div class="file" :class="{ 'file-error': error, 'file-selected': selected }">
 		<div class="minor-icons">
-			<FixedIcon
-				v-if="Object.keys(fixedNames).length"
-				@click="fixedNamesPopup?.open()"
-				:width="36"
-				:height="36"
-			/>
+			<fixed-names-list :fixed-names="fixedNames" />
+			<not-cards-list :not-cards="notCards"></not-cards-list>
 		</div>
-		<p class="filename" :class="{ 'filename--error': error }">{{ fileContent.filename }}</p>
+		<p class="filename" :class="{ 'filename--error': error }">{{ fileContent.name }}</p>
 		<CSVIcon class="icon" :width="96" :height="96" @click="tablePopup?.open()" />
 		<label class="slider-box" v-if="valid">
 			<span>{{ minimumChaosPrice }}</span>
@@ -69,7 +64,7 @@ const fixedNamesPopup = ref<typeof BasePopup | null>(null);
 			<p>{{ nf.format(price) }}</p>
 			<img width="35" height="35" class="chaos-img" src="/chaos.png" alt="chaos" />
 		</div>
-		<a class="download" v-if="valid" :download="fileContent.filename" :href="fileContent.href">Download</a>
+		<a class="download" v-if="valid" :download="fileContent.name" :href="fileContent.href">Download</a>
 		<button @click="$emit('delete-me', id)" class="btn-delete">X</button>
 		<input
 			class="checkbox"
@@ -78,10 +73,6 @@ const fixedNamesPopup = ref<typeof BasePopup | null>(null);
 			:checked="selected"
 			@change="e => $emit('update:selected', (e.target as HTMLInputElement).checked)"
 		/>
-
-		<base-popup ref="fixedNamesPopup">
-			<fixed-names-list :fixed-names="fixedNames" />
-		</base-popup>
 
 		<base-popup ref="tablePopup">
 			<div-table v-if="valid" :records="records" />

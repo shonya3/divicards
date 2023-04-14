@@ -4,7 +4,7 @@ withDefaults(
 		width?: number;
 		height?: number;
 	}>(),
-	{ width: 16, height: 16 }
+	{ width: 32, height: 32 }
 );
 </script>
 <template>

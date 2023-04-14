@@ -1,31 +1,21 @@
-import { CommandList, Contents, FileContents, CardRecord, WeightedCardRecord } from './types';
+import type { Contents } from './components/FileCard/FileCard.vue';
+import { CommandList, FileContents, CardRecord, WeightedCardRecord } from './types';
 import { invoke } from '@tauri-apps/api';
 
-export const createCSVLink = (contents: string): string => {
-	const blob = new Blob([contents], { type: 'csv/text' });
-	const href = URL.createObjectURL(blob);
-	return href;
-};
+export const csvFile = (csv: string, name: `${string}.csv`): File => new File([csv], name, { type: 'text/csv' });
 
-export const downloadFiles = (hrefList: FileContents[]): void => {
-	const links: HTMLAnchorElement[] = [];
-	hrefList.forEach(({ filename, href }) => {
-		links.push(createDownloadLink(href, filename));
-	});
-	links.forEach(a => {
-		a.click();
-	});
-};
-
-export const createDownloadLink = (href: string, filename: string): HTMLAnchorElement => {
+export const createDownloadAnchor = (href: string, filename: string): HTMLAnchorElement => {
 	const a = document.createElement('a');
 	a.download = `${filename}`;
 	a.href = href;
 	return a;
 };
 
-export const createCsvFile = (csvString: string, filename: string): File =>
-	new File([csvString], filename, { type: 'text/csv' });
+export const downloadFiles = (hrefList: FileContents[]): void => {
+	for (const { name, href } of hrefList) {
+		createDownloadAnchor(href, name).click();
+	}
+};
 
 export const command = <T extends keyof CommandList>(
 	cmd: T,
@@ -35,9 +25,9 @@ export const command = <T extends keyof CommandList>(
 };
 
 export const createContents = async (file: File): Promise<Contents> => {
-	let error = null;
+	let error: string | null = null;
 	let text = await file.text();
-	let href = '';
+	let href = URL.createObjectURL(file);
 	let records: CardRecord[] = [];
 	let notCards: string[] = [];
 	let fixedNames: Record<string, string> = {};
@@ -48,7 +38,6 @@ export const createContents = async (file: File): Promise<Contents> => {
 		text = data.csv;
 		notCards = data.notCards;
 		fixedNames = data.fixedNames;
-		href = createCSVLink(text);
 	} catch (err) {
 		error = err as string;
 		console.log(err);
@@ -59,7 +48,6 @@ export const createContents = async (file: File): Promise<Contents> => {
 		try {
 			const { csv, records: weighted } = await command('weight_records_to_csv', { records });
 			text = csv;
-			href = createCSVLink(text);
 			weightedRecords = weighted;
 		} catch (err) {
 			error = err as string;
@@ -68,11 +56,13 @@ export const createContents = async (file: File): Promise<Contents> => {
 
 	const fileContent: FileContents = {
 		text,
-		filename: file.name,
+		name: file.name,
 		href,
 	};
+
 	const contents: Contents = {
 		id: crypto.randomUUID(),
+		file,
 		fileContent,
 		valid: !Boolean(error),
 		error,

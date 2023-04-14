@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
-import { Contents } from './types';
-import { downloadFiles, createCsvFile, createContents, command } from './lib';
+import { downloadFiles, csvFile, createContents, command } from './lib';
 import FileCard from './components/FileCard/FileCard.vue';
+import type { Contents } from './components/FileCard/FileCard.vue';
 import autoAnimate from '@formkit/auto-animate';
 
 const filesEl = ref<HTMLElement | null>(null);
@@ -11,11 +11,23 @@ const validContents = computed(() => mainContents.value.filter(({ valid }) => va
 const validSelectedContents = computed(() => mainContents.value.filter(({ valid, selected }) => valid && selected));
 const selectedContents = computed(() => mainContents.value.filter(({ selected }) => selected));
 const validSelectedStrings = computed(() => validSelectedContents.value.map(({ fileContent }) => fileContent.text));
+const mergedContents = ref<Contents | null>(null);
+
+const updateMergeFile = async () => {
+	const mergedCsv = await command('merge_csv', { csvFileStrings: validSelectedStrings.value });
+	const file: File = csvFile(mergedCsv, 'merged.csv');
+	mergedContents.value = null;
+	const contents = await createContents(file);
+
+	// Cannot be selectable, `null` removes checkbox
+	contents.selected = null;
+	mergedContents.value = contents;
+};
 
 const onDrop = (e: DragEvent) => {
 	e.preventDefault();
-	if (!e.dataTransfer) return;
-	const { files } = e.dataTransfer;
+	const files = e.dataTransfer?.files;
+	if (!files) return;
 	Array.from(files).forEach(async file => {
 		try {
 			const contents = await createContents(file);
@@ -28,16 +40,6 @@ const onDrop = (e: DragEvent) => {
 
 const onDelete = (id: string) => {
 	mainContents.value = mainContents.value.filter(contents => contents.id !== id);
-};
-
-const mergedContents = ref<Contents | null>(null);
-const updateMergeFile = async () => {
-	const mergedCsv = await command('merge_csv', { csvFileStrings: validSelectedStrings.value });
-	const file = createCsvFile(mergedCsv, 'merged.csv');
-	mergedContents.value = null;
-	const contents = await createContents(file);
-	contents.selected = null;
-	mergedContents.value = contents;
 };
 
 onMounted(() => {
