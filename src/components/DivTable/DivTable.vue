@@ -7,12 +7,12 @@ const nf = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 const props = defineProps<{ records: WeightedCardRecord[] }>();
 const nameQuery = ref('');
 const minPrice = ref(0);
-const hideZeroStackSize = ref(true);
+const hideZeroTotal = ref(false);
 
 const filteredRecords = computed(() => {
-	return props.records.slice().filter(({ name, calculated, stackSize }) => {
-		if (hideZeroStackSize.value) {
-			if (stackSize == 0) return false;
+	return props.records.slice().filter(({ name, calculated, total }) => {
+		if (hideZeroTotal.value) {
+			if (total == 0) return false;
 		}
 
 		return (
@@ -78,8 +78,8 @@ onMounted(() => {
 				<img width="20" height="20" class="chaos-img" src="/chaos.png" alt="chaos" />
 			</label>
 			<div style="display: flex; gap: 0.8rem">
-				<span>hide names with zero stack size</span>
-				<input type="checkbox" name="" id="" v-model="hideZeroStackSize" />
+				<span>hide names with zero total</span>
+				<input type="checkbox" name="" id="" v-model="hideZeroTotal" />
 			</div>
 			<!-- <div>download filtered file</div> -->
 		</header>

@@ -10,7 +10,6 @@ import NotCardsList from './NotCardsList/NotCardsList.vue';
 
 export interface Contents {
 	fileContent: FileContents;
-	file: File;
 	selected: boolean | null;
 	id: string;
 	valid: boolean;

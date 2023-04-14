@@ -62,7 +62,6 @@ export const createContents = async (file: File): Promise<Contents> => {
 
 	const contents: Contents = {
 		id: crypto.randomUUID(),
-		file,
 		fileContent,
 		valid: !Boolean(error),
 		error,
