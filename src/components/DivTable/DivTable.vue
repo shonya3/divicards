@@ -1,35 +1,25 @@
 <script setup lang="ts">
-import { CardRecord, Order, SortState, Column, WeightedCardRecord } from '../../types';
-import { ref, computed, onMounted, watch, ComputedRef, nextTick } from 'vue';
-import { orderBy, byPrice, byStackSize, byTotal } from './orderBy';
+import { SortState, Column, WeightedCardRecord } from '../../types';
+import { ref, computed, onMounted, watch } from 'vue';
+import { orderBy } from './orderBy';
 import OrderTriangle from '../OrderTriangle/OrderTriangle.vue';
 const nf = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 const props = defineProps<{ records: WeightedCardRecord[] }>();
-console.log(`props`, props);
 const nameQuery = ref('');
 const minPrice = ref(0);
-const allStackSize = computed(() => props.records.reduce((summ, { stackSize }) => (summ += stackSize), 0));
-const REAL_STACKED_RAIN_OF_CHAOS_WEIGHT = 2452.65513;
-const CONDENSE_FACTOR = 2 / 3;
-const realStackedSummaryWeight = computed(() => {
-	const rainOfChaos = props.records.find(({ name }) => name === 'Rain of Chaos');
-	if (!rainOfChaos) throw new Error('No Rain of Chaos card');
-	const weight = rainOfChaos.stackSize / allStackSize.value;
-	return REAL_STACKED_RAIN_OF_CHAOS_WEIGHT / weight;
-});
-
-const calcRecordWeight = (record: CardRecord): number => record.stackSize / allStackSize.value;
-const calcRecordRealWeight = (record: CardRecord): number =>
-	(realStackedSummaryWeight.value * calcRecordWeight(record)) ** (1 / CONDENSE_FACTOR);
+const hideZeroStackSize = ref(true);
 
 const filteredRecords = computed(() => {
-	return props.records
-		.slice()
-		.filter(
-			({ name, calculated }) =>
-				name.toLocaleLowerCase().includes(nameQuery.value.trim().toLocaleLowerCase()) &&
-				calculated >= minPrice.value
+	return props.records.slice().filter(({ name, calculated, stackSize }) => {
+		if (hideZeroStackSize.value) {
+			if (stackSize == 0) return false;
+		}
+
+		return (
+			name.toLocaleLowerCase().includes(nameQuery.value.trim().toLocaleLowerCase()) &&
+			calculated >= minPrice.value
 		);
+	});
 });
 const summary = computed(() => {
 	return filteredRecords.value.reduce(
@@ -87,6 +77,11 @@ onMounted(() => {
 				<span class="ch-3">{{ minPrice }}</span>
 				<img width="20" height="20" class="chaos-img" src="/chaos.png" alt="chaos" />
 			</label>
+			<div style="display: flex; gap: 0.8rem">
+				<span>hide names with zero stack size</span>
+				<input type="checkbox" name="" id="" v-model="hideZeroStackSize" />
+			</div>
+			<!-- <div>download filtered file</div> -->
 		</header>
 		<table class="table">
 			<colgroup>
