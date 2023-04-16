@@ -15,6 +15,7 @@ export interface FileCardProps {
 	valid: boolean;
 	error: string | null;
 	allCardsPrice: number;
+	minimumCardPrice: number;
 	records: WeightedCardRecord[];
 	notCards: string[];
 	fixedNames: Record<string, string>;

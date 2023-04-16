@@ -67,6 +67,7 @@ export const createFileCardProps = async (file: File): Promise<FileCardProps> =>
 		error,
 		selected: false,
 		allCardsPrice: 0,
+		minimumCardPrice: 50,
 		records: weightedRecords,
 		notCards,
 		fixedNames,
