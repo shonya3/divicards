@@ -8,7 +8,7 @@
 		"href": "blob:http://localhost:5173/79f4d016-a174-457d-b0a1-05645692dd92"
 	},
 	"error": null,
-	"price": 44074.2578125,
+	"allCardsPrice": 44074.2578125,
 	"records": [
 		{
 			"calculated": 5,
