@@ -45,8 +45,8 @@ pub async fn read_polish_csv(
 }
 
 #[tauri::command]
-pub fn total_chaos(csv_string: &str, minimum_card_price: Option<f32>) -> Result<f32, Error> {
-    record::csv::string::total_chaos(csv_string, minimum_card_price)
+pub fn all_cards_price(csv_string: &str, minimum_card_price: Option<f32>) -> Result<f32, Error> {
+    record::csv::string::all_cards_price(csv_string, minimum_card_price)
 }
 
 #[tauri::command]

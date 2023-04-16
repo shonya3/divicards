@@ -14,7 +14,7 @@ export interface Contents {
 	id: string;
 	valid: boolean;
 	error: string | null;
-	price: number;
+	allCardsPrice: number;
 	records: WeightedCardRecord[];
 	notCards: string[];
 	fixedNames: Record<string, string>;
@@ -34,7 +34,7 @@ watch(
 	() => minimumChaosPrice.value,
 	async val => {
 		if (!props.valid) return;
-		const price = await command('total_chaos', {
+		const price = await command('all_cards_price', {
 			csvString: props.fileContent.text,
 			minimumCardPrice: val,
 		});
@@ -60,7 +60,7 @@ const tablePopup = ref<typeof BasePopup | null>(null);
 			<input class="slider" type="range" name="" id="" min="0" max="500" v-model.number="minimumChaosPrice" />
 		</label>
 		<div v-if="valid" class="total-price">
-			<p>{{ nf.format(price) }}</p>
+			<p>{{ nf.format(allCardsPrice) }}</p>
 			<img width="35" height="35" class="chaos-img" src="/chaos.png" alt="chaos" />
 		</div>
 		<a class="download" v-if="valid" :download="fileContent.name" :href="fileContent.href">Download</a>

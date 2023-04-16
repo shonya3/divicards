@@ -43,7 +43,10 @@ pub fn read_polish_write(
     Ok(output_content_string)
 }
 
-pub fn total_chaos(content_string: &str, minimum_card_price: Option<f32>) -> Result<f32, Error> {
+pub fn all_cards_price(
+    content_string: &str,
+    minimum_card_price: Option<f32>,
+) -> Result<f32, Error> {
     let records = read(content_string, minimum_card_price)?;
     Ok(record::total_price_chaos(&records))
 }

@@ -59,7 +59,7 @@ onMounted(() => {
 					:key="contents.id"
 					v-bind="contents"
 					@update:selected="e => contents.selected"
-					@minimum-price-updated="p => (contents.price = p)"
+					@minimum-price-updated="p => (contents.allCardsPrice = p)"
 					@delete-me="onDelete"
 					v-model:selected="contents.selected"
 				/>
@@ -80,7 +80,7 @@ onMounted(() => {
 				@delete-me="mergedContents = null"
 				@minimum-price-updated="
 					p => {
-						mergedContents && (mergedContents.price = p);
+						mergedContents && (mergedContents.allCardsPrice = p);
 					}
 				"
 			/>

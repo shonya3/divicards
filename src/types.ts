@@ -37,7 +37,7 @@ export interface CommandList {
 			fixedNames: Record<string, string>;
 		}>;
 	};
-	total_chaos: {
+	all_cards_price: {
 		args: {
 			/** Csv file as string */
 			csvString: string;

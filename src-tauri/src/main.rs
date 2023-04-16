@@ -30,7 +30,7 @@ async fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             commands::read_polish_csv,
-            commands::total_chaos,
+            commands::all_cards_price,
             commands::merge_csv,
             commands::update_prices,
             commands::give_record,

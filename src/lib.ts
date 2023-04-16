@@ -66,7 +66,7 @@ export const createContents = async (file: File): Promise<Contents> => {
 		valid: !Boolean(error),
 		error,
 		selected: false,
-		price: 0,
+		allCardsPrice: 0,
 		records: weightedRecords,
 		notCards,
 		fixedNames,
