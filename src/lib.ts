@@ -1,4 +1,4 @@
-import type { Contents } from './components/FileCard/FileCard.vue';
+import type { FileCardProps } from './components/FileCard/FileCard.vue';
 import { CommandList, FileContents, CardRecord, WeightedCardRecord } from './types';
 import { invoke } from '@tauri-apps/api';
 
@@ -24,7 +24,7 @@ export const command = <T extends keyof CommandList>(
 	return invoke(cmd, args) as CommandList[T]['returnType'];
 };
 
-export const createContents = async (file: File): Promise<Contents> => {
+export const createFileCardProps = async (file: File): Promise<FileCardProps> => {
 	let error: string | null = null;
 	let text = await file.text();
 	let href = URL.createObjectURL(file);
@@ -60,7 +60,7 @@ export const createContents = async (file: File): Promise<Contents> => {
 		href,
 	};
 
-	const contents: Contents = {
+	const contents: FileCardProps = {
 		id: crypto.randomUUID(),
 		fileContent,
 		valid: !Boolean(error),

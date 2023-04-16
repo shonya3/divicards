@@ -3,8 +3,13 @@ import { SortState, Column, WeightedCardRecord } from '../../types';
 import { ref, computed, onMounted, watch } from 'vue';
 import { orderBy } from './orderBy';
 import OrderTriangle from '../OrderTriangle/OrderTriangle.vue';
+
+export interface DivTableProps {
+	records: WeightedCardRecord[];
+}
+
+const props = defineProps<DivTableProps>();
 const nf = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
-const props = defineProps<{ records: WeightedCardRecord[] }>();
 const nameQuery = ref('');
 const minPrice = ref(0);
 const hideZeroTotal = ref(false);

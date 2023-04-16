@@ -8,7 +8,7 @@ import BasePopup from '../BasePopup.vue';
 import FixedNamesList from './FixedNamesList/FixedNamesList.vue';
 import NotCardsList from './NotCardsList/NotCardsList.vue';
 
-export interface Contents {
+export interface FileCardProps {
 	fileContent: FileContents;
 	selected: boolean | null;
 	id: string;
@@ -20,7 +20,7 @@ export interface Contents {
 	fixedNames: Record<string, string>;
 }
 
-const props = defineProps<Contents>();
+const props = defineProps<FileCardProps>();
 const emit = defineEmits<{
 	(event: 'update:selected', e: InputEvent): void;
 	(event: 'minimum-price-updated', price: number): void;

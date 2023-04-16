@@ -1,23 +1,23 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
-import { downloadFiles, csvFile, createContents, command } from './lib';
+import { downloadFiles, csvFile, createFileCardProps, command } from './lib';
 import FileCard from './components/FileCard/FileCard.vue';
-import type { Contents } from './components/FileCard/FileCard.vue';
+import type { FileCardProps } from './components/FileCard/FileCard.vue';
 import autoAnimate from '@formkit/auto-animate';
 
 const filesEl = ref<HTMLElement | null>(null);
-const mainContents = ref<Contents[]>([]);
+const mainContents = ref<FileCardProps[]>([]);
 const validContents = computed(() => mainContents.value.filter(({ valid }) => valid));
 const validSelectedContents = computed(() => mainContents.value.filter(({ valid, selected }) => valid && selected));
 const selectedContents = computed(() => mainContents.value.filter(({ selected }) => selected));
 const validSelectedStrings = computed(() => validSelectedContents.value.map(({ fileContent }) => fileContent.text));
-const mergedContents = ref<Contents | null>(null);
+const mergedContents = ref<FileCardProps | null>(null);
 
 const updateMergeFile = async () => {
 	const mergedCsv = await command('merge_csv', { csvFileStrings: validSelectedStrings.value });
 	const file: File = csvFile(mergedCsv, 'merged.csv');
 	mergedContents.value = null;
-	const contents = await createContents(file);
+	const contents = await createFileCardProps(file);
 
 	// Cannot be selectable, `null` removes checkbox
 	contents.selected = null;
@@ -30,7 +30,7 @@ const onDrop = (e: DragEvent) => {
 	if (!files) return;
 	Array.from(files).forEach(async file => {
 		try {
-			const contents = await createContents(file);
+			const contents = await createFileCardProps(file);
 			mainContents.value.push(contents);
 		} catch (err) {
 			console.log('Error creating contents: ', err);

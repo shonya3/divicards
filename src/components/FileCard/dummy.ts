@@ -1,4 +1,4 @@
-import { Contents } from './FileCard.vue';
+import { FileCardProps } from './FileCard.vue';
 import fileCardPropsJson from './fileCardProps.json' assert { type: 'json' };
 
-export const fileCardProps: Contents = fileCardPropsJson;
+export const fileCardProps: FileCardProps = fileCardPropsJson;
