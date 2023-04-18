@@ -4,6 +4,7 @@ import { FileCardProps } from '../components/FileCard/FileCard.vue';
 import { csvFile } from '../lib';
 import { useCreateFileCard } from '../composables/useCreateFileCard';
 import { command } from '../command';
+import { watch } from 'vue';
 
 type State = {
 	fileCards: FileCardProps[];
@@ -61,7 +62,20 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 
 		addCards(files: File[], minimumCardPrice = 50): void {
 			for (const file of files) {
-				this.fileCards.push(useCreateFileCard(file, minimumCardPrice));
+				const fileCard = useCreateFileCard(file, minimumCardPrice);
+				watch(
+					() => fileCard.minimumCardPrice,
+					async val => {
+						const price = await command('all_cards_price', {
+							csvString: fileCard.data.csvPolished,
+							minimumCardPrice: val,
+						});
+
+						fileCard.data.allCardsPrice = price;
+					}
+				);
+
+				this.fileCards.push(fileCard);
 			}
 		},
 	},

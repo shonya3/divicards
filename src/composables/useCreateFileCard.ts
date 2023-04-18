@@ -11,7 +11,7 @@ export const useCreateFileCard = (file: File, minimumCardPrice = 50): FileCardPr
 	const valid = computed(() => !Boolean(error.value));
 	const id = crypto.randomUUID();
 
-	const fileCard = reactive({
+	return reactive({
 		id,
 		valid,
 		selected,
@@ -22,18 +22,4 @@ export const useCreateFileCard = (file: File, minimumCardPrice = 50): FileCardPr
 		isError,
 		minimumCardPrice,
 	});
-
-	watch(
-		() => fileCard.minimumCardPrice,
-		async val => {
-			const price = await command('all_cards_price', {
-				csvString: fileCard.data.csvPolished,
-				minimumCardPrice: val,
-			});
-
-			fileCard.data.allCardsPrice = price;
-		}
-	);
-
-	return fileCard;
 };
