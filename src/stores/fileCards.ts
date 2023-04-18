@@ -42,10 +42,22 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 			const mergedCsv = await command('merge_csv', { csvFileStrings: this.selectedStrings });
 			const file: File = csvFile(mergedCsv, 'merged.csv');
 
-			this.mergedFile = useCreateFileCard(file, 50);
+			const fileCard = useCreateFileCard(file, 50);
+			watch(
+				() => fileCard.minimumCardPrice,
+				async val => {
+					const price = await command('all_cards_price', {
+						csvString: fileCard.data.csvPolished,
+						minimumCardPrice: val,
+					});
+
+					fileCard.data.allCardsPrice = price;
+				}
+			);
 			// No point to select merged file, `null` makes it nonselectable by removing checkbox
 			// maybe should refactor later
-			this.mergedFile.selected = null;
+			fileCard.selected = null;
+			this.mergedFile = fileCard;
 		},
 
 		deleteMergedFile() {
