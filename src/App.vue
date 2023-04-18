@@ -2,10 +2,15 @@
 import FileCard from './components/FileCard/FileCard.vue';
 import { useFileCardsStore } from './stores/fileCards';
 import { storeToRefs } from 'pinia';
+import { ref } from 'vue';
+import { useAutoAnimate } from './composables/useAutoAnimate';
 
 const filesStore = useFileCardsStore();
 const { fileCards: files, selectedFiles, mergedFile } = storeToRefs(filesStore);
 const { deleteFile, addCards, deleteAllFiles, merge, deleteMergedFile, downloadAll } = filesStore;
+
+const filesTemplateRef = ref<HTMLElement | null>(null);
+useAutoAnimate(filesTemplateRef);
 
 const onDrop = (e: DragEvent) => {
 	const dropFiles = e.dataTransfer?.files;
@@ -18,7 +23,7 @@ const onDrop = (e: DragEvent) => {
 		<div class="drop">Drop files <span>Here!</span></div>
 
 		<Transition>
-			<div v-if="files.length" class="files" v-show="files.length">
+			<div ref="filesTemplateRef" class="files" v-show="files.length">
 				<FileCard
 					v-for="file in files"
 					v-bind="file"
