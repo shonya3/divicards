@@ -33,17 +33,6 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 		},
 	},
 	actions: {
-		async updateAllCardsPrice(id: string, newMinimumPrice: number) {
-			const file = this.getFileById(id);
-			if (!file) return;
-			const price = await command('all_cards_price', {
-				csvString: file.data.csvPolished,
-				minimumCardPrice: newMinimumPrice,
-			});
-
-			file.data.allCardsPrice = price;
-		},
-
 		downloadAll() {
 			this.validFiles.forEach(({ filename, href }) => downloadFile(filename, href));
 		},

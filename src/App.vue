@@ -7,7 +7,7 @@ import { useAutoAnimate } from './composables/useAutoAnimate';
 
 const filesStore = useFileCardsStore();
 const { fileCards: files, selectedFiles, mergedFile } = storeToRefs(filesStore);
-const { deleteFile, addCards, deleteAllFiles, merge, deleteMergedFile, downloadAll, updateAllCardsPrice } = filesStore;
+const { deleteFile, addCards, deleteAllFiles, merge, deleteMergedFile, downloadAll } = filesStore;
 
 const filesTemplateRef = ref<HTMLElement | null>(null);
 useAutoAnimate(filesTemplateRef);
@@ -30,7 +30,6 @@ const onDrop = (e: DragEvent) => {
 					@delete-me="deleteFile(file.id)"
 					v-model:selected="file.selected"
 					v-model:minimumCardPrice.number="file.minimumCardPrice"
-					@update:minimum-card-price="newMinPrice => updateAllCardsPrice(file.id, newMinPrice)"
 				/>
 			</div>
 		</Transition>
@@ -48,7 +47,6 @@ const onDrop = (e: DragEvent) => {
 				@delete-me="deleteMergedFile"
 				v-model:selected="mergedFile.selected"
 				v-model:minimumCardPrice.number="mergedFile.minimumCardPrice"
-				@update:minimum-card-price="newMinPrice => updateAllCardsPrice(mergedFile!.id, newMinPrice)"
 			/>
 		</Transition>
 	</div>
