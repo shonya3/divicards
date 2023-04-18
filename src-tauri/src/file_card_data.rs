@@ -20,7 +20,6 @@ pub struct FileCardData {
     pub not_cards: Vec<String>,
     pub fixed_names: HashMap<String, String>,
     pub csv_polished: String,
-    pub minimum_card_price: Option<f32>,
 }
 
 impl FileCardData {
@@ -40,7 +39,6 @@ impl FileCardData {
             record::csv::string::all_cards_price(&csv_polished, minimum_card_price)?;
 
         Ok(FileCardData {
-            minimum_card_price,
             all_cards_price,
             records,
             not_cards,

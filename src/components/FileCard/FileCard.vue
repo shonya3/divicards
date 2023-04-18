@@ -19,7 +19,6 @@ export interface FileCardProps {
 }
 
 export type FileCardData = {
-	minimumCardPrice: number;
 	csvPolished: string;
 	records: WeightedCardRecord[];
 	allCardsPrice: number;

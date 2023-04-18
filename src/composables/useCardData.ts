@@ -4,7 +4,6 @@ import { FileCardData } from '../components/FileCard/FileCard.vue';
 
 export const useCardData = (csv: Ref<string>, minimumCardPrice: number) => {
 	const data: Ref<FileCardData> = ref<FileCardData>({
-		minimumCardPrice,
 		allCardsPrice: 0,
 		csvPolished: '',
 		fixedNames: {},
