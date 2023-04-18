@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { WeightedCardRecord } from '../../types';
 import CSVIcon from '../icons/CSVIcon.vue';
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import DivTable from '../DivTable/DivTable.vue';
 import BasePopup from '../BasePopup.vue';
 import FixedNamesList from './FixedNamesList/FixedNamesList.vue';
 import NotCardsList from './NotCardsList/NotCardsList.vue';
-import { command } from '../../command';
 
 export interface FileCardProps {
 	filename: string;
@@ -28,29 +27,14 @@ export type FileCardData = {
 	fixedNames: Record<string, string>;
 };
 
-const props = defineProps<FileCardProps>();
-const emit = defineEmits<{
+defineProps<FileCardProps>();
+defineEmits<{
 	(event: 'update:selected', e: InputEvent): void;
-	(event: 'minimum-price-updated', price: number): void;
 	(event: 'delete-me', id: string): void;
+	(event: 'update:minimumCardPrice', newPrice: number): void;
 }>();
 
 const nf = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
-
-const minimumChaosPrice = ref(50);
-watch(
-	() => minimumChaosPrice.value,
-	async val => {
-		if (!props.valid) return;
-		const price = await command('all_cards_price', {
-			csvString: props.data.csvPolished,
-			minimumCardPrice: val,
-		});
-
-		emit('minimum-price-updated', price);
-	},
-	{ immediate: true }
-);
 
 const tablePopup = ref<typeof BasePopup | null>(null);
 </script>
@@ -64,8 +48,17 @@ const tablePopup = ref<typeof BasePopup | null>(null);
 		<p class="filename" :class="{ 'filename--error': error }">{{ filename }}</p>
 		<CSVIcon class="icon" :width="96" :height="96" @click="tablePopup?.open()" />
 		<label class="slider-box" v-if="valid">
-			<span>{{ minimumChaosPrice }}</span>
-			<input class="slider" type="range" name="" id="" min="0" max="500" v-model.number="minimumChaosPrice" />
+			<span>{{ minimumCardPrice }}</span>
+			<input
+				class="slider"
+				type="range"
+				name=""
+				id=""
+				min="0"
+				max="500"
+				:value="minimumCardPrice"
+				@input="e => $emit('update:minimumCardPrice', (e.target as HTMLInputElement).value)"
+			/>
 		</label>
 		<div v-if="valid" class="total-price">
 			<p>{{ nf.format(data.allCardsPrice) }}</p>

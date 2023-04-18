@@ -7,7 +7,7 @@ import { useAutoAnimate } from './composables/useAutoAnimate';
 
 const filesStore = useFileCardsStore();
 const { fileCards: files, selectedFiles, mergedFile } = storeToRefs(filesStore);
-const { deleteFile, addCards, deleteAllFiles, merge, deleteMergedFile, downloadAll } = filesStore;
+const { deleteFile, addCards, deleteAllFiles, merge, deleteMergedFile, downloadAll, updateAllCardsPrice } = filesStore;
 
 const filesTemplateRef = ref<HTMLElement | null>(null);
 useAutoAnimate(filesTemplateRef);
@@ -27,10 +27,10 @@ const onDrop = (e: DragEvent) => {
 				<FileCard
 					v-for="file in files"
 					v-bind="file"
-					@update:selected="e => file.selected"
-					@minimum-price-updated="p => (file.data.allCardsPrice = p)"
 					@delete-me="deleteFile(file.id)"
 					v-model:selected="file.selected"
+					v-model:minimumCardPrice.number="file.minimumCardPrice"
+					@update:minimum-card-price="newMinPrice => updateAllCardsPrice(file.id, newMinPrice)"
 				/>
 			</div>
 		</Transition>
@@ -45,11 +45,10 @@ const onDrop = (e: DragEvent) => {
 			<FileCard
 				v-if="mergedFile"
 				v-bind="mergedFile"
-				:minimum-card-price="mergedFile.minimumCardPrice"
-				@update:selected="e => mergedFile!.selected"
-				@minimum-price-updated="p => (mergedFile!.data.allCardsPrice = p)"
 				@delete-me="deleteMergedFile"
 				v-model:selected="mergedFile.selected"
+				v-model:minimumCardPrice.number="mergedFile.minimumCardPrice"
+				@update:minimum-card-price="newMinPrice => updateAllCardsPrice(mergedFile!.id, newMinPrice)"
 			/>
 		</Transition>
 	</div>

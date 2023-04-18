@@ -27,8 +27,23 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 		selectedStrings(): string[] {
 			return this.selectedFiles.map(file => file.data.csvPolished);
 		},
+
+		getFileById: state => {
+			return (id: string) => [...state.fileCards, state.mergedFile].find(file => file?.id === id);
+		},
 	},
 	actions: {
+		async updateAllCardsPrice(id: string, newMinimumPrice: number) {
+			const file = this.getFileById(id);
+			if (!file) return;
+			const price = await command('all_cards_price', {
+				csvString: file.data.csvPolished,
+				minimumCardPrice: newMinimumPrice,
+			});
+
+			file.data.allCardsPrice = price;
+		},
+
 		downloadAll() {
 			this.validFiles.forEach(({ filename, href }) => downloadFile(filename, href));
 		},
