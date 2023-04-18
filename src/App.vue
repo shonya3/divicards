@@ -1,88 +1,50 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
-import { downloadFiles, csvFile, createFileCardProps, command } from './lib';
 import FileCard from './components/FileCard/FileCard.vue';
-import type { FileCardProps } from './components/FileCard/FileCard.vue';
-import autoAnimate from '@formkit/auto-animate';
+import { useFileCardsStore } from './stores/fileCards';
+import { storeToRefs } from 'pinia';
 
-const filesEl = ref<HTMLElement | null>(null);
-const mainContents = ref<FileCardProps[]>([]);
-const validContents = computed(() => mainContents.value.filter(({ valid }) => valid));
-const validSelectedContents = computed(() => mainContents.value.filter(({ valid, selected }) => valid && selected));
-const selectedContents = computed(() => mainContents.value.filter(({ selected }) => selected));
-const validSelectedStrings = computed(() => validSelectedContents.value.map(({ fileContent }) => fileContent.text));
-const mergedContents = ref<FileCardProps | null>(null);
-
-const updateMergeFile = async () => {
-	const mergedCsv = await command('merge_csv', { csvFileStrings: validSelectedStrings.value });
-	const file: File = csvFile(mergedCsv, 'merged.csv');
-	mergedContents.value = null;
-	const contents = await createFileCardProps(file);
-
-	// Cannot be selectable, `null` removes checkbox
-	contents.selected = null;
-	mergedContents.value = contents;
-};
+const filesStore = useFileCardsStore();
+const { fileCards: files, selectedFiles, mergedFile } = storeToRefs(filesStore);
+const { deleteFile, addCards, deleteAllFiles, merge, deleteMergedFile, downloadAll } = filesStore;
 
 const onDrop = (e: DragEvent) => {
-	e.preventDefault();
-	const files = e.dataTransfer?.files;
-	if (!files) return;
-	Array.from(files).forEach(async file => {
-		try {
-			const contents = await createFileCardProps(file);
-			mainContents.value.push(contents);
-		} catch (err) {
-			console.log('Error creating contents: ', err);
-		}
-	});
+	const dropFiles = e.dataTransfer?.files;
+	if (dropFiles) addCards(Array.from(dropFiles));
 };
-
-const onDelete = (id: string) => {
-	mainContents.value = mainContents.value.filter(contents => contents.id !== id);
-};
-
-onMounted(() => {
-	if (filesEl.value instanceof HTMLElement) {
-		autoAnimate(filesEl.value);
-	}
-});
 </script>
 
 <template>
-	<div @drop="onDrop" @dragenter="e => e.preventDefault()" @dragover="e => e.preventDefault()" class="drag">
+	<div @drop.prevent="onDrop" @dragenter="e => e.preventDefault()" @dragover="e => e.preventDefault()" class="drag">
 		<div class="drop">Drop files <span>Here!</span></div>
+
 		<Transition>
-			<div ref="filesEl" class="files" v-show="mainContents.length">
+			<div v-if="files.length" class="files" v-show="files.length">
 				<FileCard
-					v-for="contents in mainContents"
-					:key="contents.id"
-					v-bind="contents"
-					@update:selected="e => contents.selected"
-					@minimum-price-updated="p => (contents.allCardsPrice = p)"
-					@delete-me="onDelete"
-					v-model:selected="contents.selected"
+					v-for="file in files"
+					v-bind="file"
+					@update:selected="e => file.selected"
+					@minimum-price-updated="p => (file.data.allCardsPrice = p)"
+					@delete-me="deleteFile(file.id)"
+					v-model:selected="file.selected"
 				/>
 			</div>
 		</Transition>
 
-		<div v-if="mainContents.length > 0">
+		<div v-if="files.length > 0">
 			<h2>Select files you want to merge</h2>
-			<button class="btn" @click="downloadFiles(validContents.map(c => c.fileContent))">Download All</button>
-			<button :disabled="!validSelectedContents.length" class="btn" @click="updateMergeFile">Merge CSV</button>
-			<button class="btn" @click="mainContents = []">Clear all</button>
+			<button class="btn" @click="downloadAll">Download All</button>
+			<button :disabled="!selectedFiles.length" class="btn" @click="merge">Merge CSV</button>
+			<button class="btn" @click="deleteAllFiles">Clear all</button>
 		</div>
 		<Transition>
 			<FileCard
-				v-if="mergedContents"
-				v-bind="mergedContents"
-				v-model:selected="mergedContents.selected"
-				@delete-me="mergedContents = null"
-				@minimum-price-updated="
-					p => {
-						mergedContents && (mergedContents.allCardsPrice = p);
-					}
-				"
+				v-if="mergedFile"
+				v-bind="mergedFile"
+				:minimum-card-price="mergedFile.minimumCardPrice"
+				@update:selected="e => mergedFile!.selected"
+				@minimum-price-updated="p => (mergedFile!.data.allCardsPrice = p)"
+				@delete-me="deleteMergedFile"
+				v-model:selected="mergedFile.selected"
 			/>
 		</Transition>
 	</div>

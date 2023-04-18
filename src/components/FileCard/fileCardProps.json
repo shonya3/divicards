@@ -1,1544 +1,1891 @@
 {
-	"fixedNames": {},
-	"notCards": [],
-	"minimumCardPrice": 50,
-	"id": "b703a5bf-9a01-40f2-91b5-41498847aeea",
-	"fileContent": {
-		"text": "stackSize,name,calculated,total\n17,Merciless Armament,1.99,33.83\n173,The Penitent,1.0,173.0\n36,The Bones,1.0,36.0\n29,The Enthusiasts,2.0,58.0\n0,The Greatest Intentions,12.44,0.0\n6,The Sacrifice,20.0,120.0\n15,Pride of the First Ones,8.0,120.0\n51,The Traitor,2.0,102.0\n132,The Porcupine,1.88,248.16\n3,Beauty Through Death,13.61,40.829998\n21,Divine Justice,2.0,42.0\n16,The Road to Power,3.0,48.0\n153,The Surgeon,1.0,153.0\n91,The Formless Sea,1.26,114.659996\n293,The Journalist,1.0,293.0\n165,The Rabid Rhoa,1.0,165.0\n47,Sambodhi's Wisdom,1.0,47.0\n5,The Progeny of Lunaris,5.0,25.0\n2,Choking Guilt,428.09,856.18\n4,The Aspirant,10.0,40.0\n5,The Eternal War,6.22,31.099998\n88,Forbidden Power,1.0,88.0\n1376,Rain of Chaos,1.0,1376.0\n108,Azure Rage,1.0,108.0\n31,The Spoiled Prince,1.37,42.47\n450,The Catalyst,1.0,450.0\n212,The Master Artisan,1.0,212.0\n69,Death,2.0,138.0\n281,Vinia's Token,1.37,384.97\n19,Peaceful Moments,3.0,57.0\n46,The Landing,2.0,92.0\n49,The Primordial,1.0,49.0\n0,The Sustenance,6.0,0.0\n254,The Void,2.0,508.0\n56,The Deal,2.0,112.0\n127,The Valkyrie,2.0,254.0\n5,Altered Perception,10.0,50.0\n186,The Endurance,1.0,186.0\n121,The Jeweller's Boon,1.0,121.0\n220,The Adventuring Spirit,1.0,220.0\n1,A Familiar Call,7.0,7.0\n25,Haunting Shadows,4.28,107.00001\n237,The Demoness,1.0,237.0\n77,The Oath,1.0,77.0\n31,The Siren,2.0,62.0\n39,The Spark and the Flame,1.61,62.79\n51,The Card Sharp,2.0,102.0\n5,The White Knight,3.99,19.95\n2,Unrequited Love,5307.75,10615.5\n195,Gemcutter's Promise,1.0,195.0\n0,Love Through Ice,933.76,0.0\n146,The Union,1.0,146.0\n219,A Sea of Blue,2.0,438.0\n69,Heterochromia,1.0,69.0\n172,Hubris,1.0,172.0\n0,The Awakened,5.0,0.0\n121,The Watcher,1.0,121.0\n170,The Wolf,1.0,170.0\n2,The Fiend,1743.98,3487.96\n3,Wealth and Power,181.98,545.94\n1,The Astromancer,15.0,15.0\n35,Echoes of Love,2.0,70.0\n5,The Rabbit's Foot,7.0,35.0\n33,Lachrymal Necrosis,2.69,88.770004\n17,The Thaumaturgist,5.0,85.0\n31,The Wind,1.0,31.0\n9,Rebirth,3.0,27.0\n4,Succor of the Sinless,150.0,600.0\n13,Gemcutter's Mercy,17.24,224.12\n13,The Throne,4.0,52.0\n5,Draped in Dreams,5.0,25.0\n674,The King's Blade,1.0,674.0\n19,The Shepherd's Sandals,3.0,57.0\n30,Deathly Designs,3.0,90.0\n3,The Shieldbearer,758.25,2274.75\n268,Imperial Legacy,0.44,117.92\n293,The Arena Champion,1.0,293.0\n76,The Admirer,1.0,76.0\n27,The Jester,2.0,54.0\n32,Abandoned Wealth,5.0,160.0\n109,Blind Venture,1.0,109.0\n31,Azyran's Reward,4.0,124.0\n57,Buried Treasure,1.0,57.0\n234,The Chains that Bind,1.0,234.0\n10,The Life Thief,1.2,12.0\n183,The Tower,1.0,183.0\n80,The Easy Stroll,2.0,160.0\n52,The Encroaching Darkness,1.0,52.0\n0,The Apothecary,9553.95,0.0\n5,Remembrance,10.0,50.0\n331,The Hermit,1.0,331.0\n229,Assassin's Favour,1.0,229.0\n148,The Wolf's Shadow,1.0,148.0\n39,The Lord of Celebration,2.0,78.0\n2,The Demon,2858.14,5716.28\n16,Bijoux,5.0,80.0\n67,Dying Anguish,1.0,67.0\n27,The Craving,2.0,54.0\n28,Disdain,2.0,56.0\n9,Lethean Temptation,5.0,45.0\n15,Harmony of Souls,2.09,31.349998\n328,The Sword King's Salute,1.0,328.0\n446,Three Faces in the Dark,1.0,446.0\n0,The Iron Bard,0.0,0.0\n136,The Calling,1.0,136.0\n27,The Realm,1.0,27.0\n231,Boon of Justice,1.0,231.0\n5,Winter's Embrace,15.0,75.0\n278,Rain Tempter,1.0,278.0\n7,Dark Dreams,3.0,21.0\n0,Vile Power,0.0,0.0\n2,The Vast,9.25,18.5\n80,The Fox,1.0,80.0\n26,Baited Expectations,1.03,26.779999\n5,The Eye of Terror,8.0,40.0\n41,The Conduit,3.78,154.98\n33,Light and Truth,1.97,65.01\n28,The Professor,3.0,84.0\n125,Society's Remorse,1.0,125.0\n210,The Sigil,1.0,210.0\n255,The Warden,1.0,255.0\n412,The Gemcutter,1.0,412.0\n13,Bowyer's Dream,2.0,26.0\n16,Doryani's Epiphany,107.97,1727.52\n198,Lucky Connections,1.0,198.0\n5,The Gulf,25.0,125.0\n240,Turn the Other Cheek,1.0,240.0\n5,The World Eater,3.73,18.65\n0,Friendship,0.0,0.0\n80,The Deceiver,1.0,80.0\n11,The Queen,2.0,22.0\n165,The Battle Born,1.0,165.0\n175,The Inventor,1.97,344.75\n7,A Fate Worse Than Death,45.0,315.0\n101,The One With All,1.0,101.0\n101,The Wilted Rose,1.96,197.96\n95,The Scavenger,1.0,95.0\n14,Pride Before the Fall,2.0,28.0\n253,Thunderous Skies,1.0,253.0\n190,Time-Lost Relic,1.0,190.0\n276,Humility,1.0,276.0\n112,The Betrayal,1.17,131.04\n19,The Cacophony,2.0,38.0\n126,Coveted Possession,1.0,126.0\n108,Left to Fate,1.65,178.2\n25,Chasing Risk,4.0,100.0\n292,Prosperity,1.0,292.0\n49,Treasure Hunter,1.0,49.0\n40,The Celestial Justicar,1.13,45.2\n81,Lingering Remnants,1.0,81.0\n16,A Modest Request,10.0,160.0\n2,Prometheus' Armoury,3.0,6.0\n64,The Heroic Shot,2.0,128.0\n29,The King's Heart,2.0,58.0\n29,The Seeker,4.0,116.0\n122,Cursed Words,1.0,122.0\n21,The Chosen,10.0,210.0\n702,The Scholar,1.0,702.0\n226,The Wrath,1.0,226.0\n0,A Note in the Wind,0.0,0.0\n54,The Insatiable,1.0,54.0\n154,Cartographer's Delight,1.0,154.0\n40,The Wolven King's Bite,2.0,80.0\n18,The Avenger,2.97,53.46\n44,The Journey,2.0,88.0\n0,The Price of Devotion,5583.04,0.0\n1,Nook's Crown,7.92,7.92\n5,The Immortal,1137.38,5686.9\n2,The Leviathan,10.0,20.0\n104,Vanity,1.0,104.0\n0,The Valley of Steel Boxes,0.0,0.0\n33,A Dab of Ink,2.0,66.0\n9,The Endless Darkness,2.0,18.0\n286,The Sun,1.0,286.0\n12,Gift of Asenath,13.79,165.48\n225,The Web,1.0,225.0\n77,Tranquillity,1.0,77.0\n197,The Cache,1.0,197.0\n44,Cameria's Cut,1.0,44.0\n182,The Trial,1.0,182.0\n5,The Dragon's Heart,50.0,250.0\n126,The Eye of the Dragon,1.0,126.0\n3,The Strategist,30.0,90.0\n16,Council of Cats,3.0,48.0\n0,House of Mirrors,11373.75,0.0\n239,Her Mask,1.0,239.0\n564,Loyalty,1.0,564.0\n45,Demigod's Wager,2.0,90.0\n190,The Dragon,1.0,190.0\n80,The Fletcher,1.0,80.0\n159,The Garish Power,1.6,254.40001\n1,The One That Got Away,17.99,17.99\n173,The Gladiator,1.0,173.0\n290,The Opulent,1.0,290.0\n20,Brotherhood in Exile,3.74,74.8\n88,The Cataclysm,1.0,88.0\n17,The Brawny Battle Mage,2.48,42.16\n294,Doedre's Madness,1.0,294.0\n97,The Drunken Aristocrat,1.07,103.79001\n20,Terrible Secret of Space,3.0,60.0\n177,Shard of Fate,1.0,177.0\n105,The Hoarder,1.0,105.0\n77,The Pack Leader,1.0,77.0\n96,A Mother's Parting Gift,1.0,96.0\n713,Emperor's Luck,1.0,713.0\n2,Further Invention,5.0,10.0\n6,The Catch,5.0,30.0\n67,Broken Truce,1.0,67.0\n4,Dying Light,5.95,23.8\n8,Ambitious Obsession,3.0,24.0\n38,The Fox in the Brambles,1.11,42.18\n63,The Incantation,2.0,126.0\n41,The Side Quest,2.0,82.0\n28,The Dungeon Master,3.0,84.0\n25,The Soul,2.0,50.0\n100,The Blessing of Moosh,1.0,100.0\n11,Rebirth and Renewal,3.91,43.010002\n272,The Tireless Extractor,1.0,272.0\n124,Grave Knowledge,1.0,124.0\n37,The Bear Woman,2.0,74.0\n21,The Bargain,5.0,105.0\n10,The Tumbleweed,5.0,50.0\n160,The Skeleton,1.0,160.0\n237,The Visionary,1.0,237.0\n63,The Gentleman,1.0,63.0\n0,The Devastator,0.0,0.0\n4,Imperfect Memories,20.0,80.0\n3,Fateful Meeting,10.0,30.0\n52,The Last One Standing,1.19,61.880005\n119,Chaotic Disposition,5.0,595.0\n357,The Harvester,1.0,357.0\n5,The Undisputed,5.0,25.0\n72,The Poet,1.0,72.0\n0,Birth of the Three,0.0,0.0\n214,The Explorer,1.0,214.0\n918,The Lover,1.0,918.0\n142,The Body,1.0,142.0\n22,The Tinkerer's Table,1.58,34.760002\n19,The Academic,19.0,361.0\n56,The Golden Era,2.0,112.0\n74,The Wolf's Legacy,1.0,74.0\n28,Unchained,2.0,56.0\n0,Luck of the Vaal,0.0,0.0\n26,Something Dark,7.0,182.0\n175,The Stormcaller,1.0,175.0\n0,The Mad King,0.0,0.0\n35,The Offering,2.0,70.0\n3,The Hook,28.92,86.76\n68,Call to the First Ones,1.17,79.56\n63,Earth Drinker,1.0,63.0\n74,Dialla's Subjugation,2.0,148.0\n84,The Mercenary,1.0,84.0\n8,The Artist,28.0,224.0\n59,The Saint's Treasure,2.0,118.0\n19,Checkmate,2.97,56.43\n25,The Sephirot,130.0,3250.0\n186,The Summoner,1.0,186.0\n2,Void of the Elements,5.0,10.0\n101,The Ruthless Ceinture,1.0,101.0\n121,Acclimatisation,1.89,228.69\n25,The Pact,2.0,50.0\n7,Etched in Blood,4.77,33.39\n753,Destined to Crumble,1.0,753.0\n0,The Transformation,0.0,0.0\n255,Three Voices,1.0,255.0\n71,Atziri's Arsenal,2.0,142.0\n0,The Doctor,3033.0,0.0\n183,Volatile Power,1.0,183.0\n141,The Lich,1.0,141.0\n377,The Scarred Meadow,1.0,377.0\n12,Audacity,1.0,12.0\n23,Mawr Blaidd,5.0,115.0\n71,Emperor of Purity,2.0,142.0\n14,From Bone to Ashes,2.0,28.0\n44,The Magma Crab,2.0,88.0\n45,The Forward Gaze,2.18,98.100006\n16,The Polymath,5.0,80.0\n12,The Bitter Blossom,5.0,60.0\n170,The Survivalist,1.0,170.0\n49,Guardian's Challenge,2.0,98.0\n97,No Traces,1.0,97.0\n44,Immortal Resolve,2.0,88.0\n360,Rats,1.0,360.0\n44,Arrogance of the Vaal,2.98,131.12\n259,Glimmer of Hope,1.0,259.0\n150,Jack in the Box,1.0,150.0\n12,Misery in Darkness,3.0,36.0\n194,The Aesthete,1.0,194.0\n5,The Enforcer,7.0,35.0\n118,Might is Right,1.0,118.0\n192,Mitts,1.0,192.0\n282,The Blazing Fire,1.0,282.0\n37,More is Never Enough,1.99,73.63\n34,The Cursed King,1.0,34.0\n192,The Cartographer,1.12,215.04001\n6,Luminous Trove,45.0,270.0\n3,Perfection,3.28,9.84\n9,Home,20.0,180.0\n367,Lantador's Lost Love,1.0,367.0\n19,The Escape,5.0,95.0\n102,The Fool,2.0,204.0\n93,The Forsaken,1.0,93.0\n207,The Inoculated,2.0,414.0\n67,The Rite of Elements,1.0,67.0\n201,The Standoff,1.0,201.0\n119,The Surveyor,1.0,119.0\n6,The Hale Heart,3.0,18.0\n38,Boon of the First Ones,1.0,38.0\n5,Seven Years Bad Luck,348.8,1744.0\n68,The Fathomless Depths,1.0,68.0\n1,The Old Man,5.0,5.0\n27,The Twilight Moon,2.0,54.0\n16,The Deep Ones,2.0,32.0\n26,The Forgotten Treasure,5.0,130.0\n19,The Mind's Eyes,9.0,171.0\n332,The Witch,1.0,332.0\n46,Anarchy's Price,1.37,63.02\n126,The Wretched,2.0,252.0\n0,Blessing of God,0.0,0.0\n0,Treasures of the Vaal,0.0,0.0\n6,Burning Blood,3.31,19.86\n76,The Beast,1.0,76.0\n14,The Dreamer,3.0,42.0\n171,Last Hope,1.0,171.0\n9,Magnum Opus,20.0,180.0\n31,\"Brush, Paint and Palette\",4.05,125.55\n38,The Ethereal,2.0,76.0\n6,Eternal Bonds,40.0,240.0\n89,The Last Supper,1.0,89.0\n68,The Long Watch,1.0,68.0\n173,The Puzzle,2.0,346.0\n15,The Scout,5.0,75.0\n13,Alluring Bounty,10.0,130.0\n7,Darker Half,50.0,350.0\n33,The Breach,2.0,66.0\n251,Dark Temptation,1.0,251.0\n18,A Stone Perfected,5.0,90.0\n186,Alone in the Darkness,1.0,186.0\n10,Desperate Crusade,5.0,50.0\n44,The Patient,42.0,1848.0\n150,The Twins,1.0,150.0\n526,The Flora's Gift,1.0,526.0\n73,The Wolverine,1.73,126.29\n9,Dementophobia,5.0,45.0\n26,Reckless Ambition,1.47,38.22\n50,The Dark Mage,1.0,50.0\n88,The Dreamland,1.0,88.0\n7,The Enlightened,35.0,245.0\n35,Astral Protection,1.95,68.25\n157,The Mountain,1.0,157.0\n36,The Hunger,2.0,72.0\n64,Triskaidekaphobia,2.0,128.0\n560,The Metalsmith's Gift,1.0,560.0\n7,The Emptiness,3.0,21.0\n27,Hunter's Reward,2.0,54.0\n160,Struck by Lightning,1.0,160.0\n30,Monochrome,15.0,450.0\n34,The Eldritch Decay,4.0,136.0\n7,Desecrated Virtue,116.69,816.83\n34,The Whiteout,2.0,68.0\n91,Hope,1.67,151.97\n26,Silence and Frost,3.0,78.0\n153,The Lion,1.0,153.0\n4,Duality,7.0,28.0\n75,The Innocent,2.0,150.0\n71,The Archmage's Right Hand,2.0,142.0\n100,Scholar of the Seas,1.0,100.0\n226,The Lunaris Priestess,1.0,226.0\n34,The Unexpected Prize,2.0,68.0\n0,The Mayor,0.0,0.0\n4,The Fishmonger,4.59,18.36\n0,Akil's Prophecy,0.0,0.0\n217,The Army of Blood,1.0,217.0\n25,The Darkest Dream,2.0,50.0\n5,The Damned,15.0,75.0\n23,The Offspring,1.41,32.43\n3,Keeper's Corruption,4.0,12.0\n40,Parasitic Passengers,2.0,80.0\n19,Lucky Deck,2.0,38.0\n173,Boundless Realms,1.0,173.0\n61,The Lord in Black,2.0,122.0\n0,Squandered Prosperity,0.0,0.0\n144,Sambodhi's Vow,2.0,288.0\n80,Gift of the Gemling Queen,1.0,80.0\n4,The Price of Loyalty,100.0,400.0\n11,The Samurai's Eye,55.0,605.0\n4,The Destination,20.0,80.0\n175,The Risk,3.0,525.0\n11,The Long Con,8.0,88.0\n27,The Obscured,1.0,27.0\n5,Brother's Stash,55.5,277.5\n413,The Carrion Crow,1.0,413.0\n58,The Messenger,1.24,71.92\n12,The Nurse,363.96,4367.52\n25,Endless Night,2.0,50.0\n420,The Doppelganger,1.0,420.0\n79,Underground Forest,4.0,316.0\n80,Prejudice,2.0,160.0\n2,The Cheater,251.19,502.38\n89,The Coming Storm,1.0,89.0\n225,Hunter's Resolve,1.0,225.0\n13,The Price of Prescience,4.58,59.54\n101,The Feast,1.0,101.0\n62,The Price of Protection,2.0,124.0\n76,Lysah's Respite,1.0,76.0\n52,The Undaunted,3.0,156.0\n4,Deadly Joy,44.14,176.56\n18,Judging Voices,6.0,108.0\n96,The Dapper Prodigy,2.0,192.0\n2,The Hive of Knowledge,5.0,10.0\n4,Broken Promises,30.0,120.0\n25,The Tyrant,2.0,50.0\n196,Thirst for Knowledge,1.0,196.0\n44,The Warlord,2.0,88.0\n243,Lost Worlds,1.0,243.0\n6,The Celestial Stone,4.19,25.14\n29,Costly Curio,4.0,116.0\n12,The Shortcut,5.0,60.0\n13,The Brittle Emperor,2.0,26.0\n49,The Master,1.0,49.0\n157,The Gambler,1.0,157.0\n14,The Prince of Darkness,3.0,42.0\n34,Justified Ambition,5.65,192.1\n",
-		"name": "krolya_input.csv",
-		"href": "blob:http://localhost:5173/79f4d016-a174-457d-b0a1-05645692dd92"
-	},
-	"error": null,
-	"allCardsPrice": 44074.2578125,
-	"records": [
-		{
-			"calculated": 5,
-			"name": "The Progeny of Lunaris",
-			"realWeight": 26.606155395507812,
-			"stackSize": 5,
-			"total": 25
-		},
-		{ "calculated": 1, "name": "The Scarred Meadow", "realWeight": 17419.63671875, "stackSize": 377, "total": 377 },
-		{ "calculated": 0, "name": "The Transformation", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{
-			"calculated": 1.7100000381469727,
-			"name": "The Breach",
-			"realWeight": 451.12615966796875,
-			"stackSize": 33,
-			"total": 56.43000030517578
-		},
-		{ "calculated": 1, "name": "Lost Worlds", "realWeight": 9014.3935546875, "stackSize": 243, "total": 243 },
-		{ "calculated": 1, "name": "Lucky Connections", "realWeight": 6630.1728515625, "stackSize": 198, "total": 198 },
-		{ "calculated": 1, "name": "The Last Supper", "realWeight": 1998.076416015625, "stackSize": 89, "total": 89 },
-		{ "calculated": 1, "name": "The Offering", "realWeight": 492.7528381347656, "stackSize": 35, "total": 35 },
-		{ "calculated": 5, "name": "The Rabbit's Foot", "realWeight": 26.606155395507812, "stackSize": 5, "total": 25 },
-		{ "calculated": 1, "name": "The Surgeon", "realWeight": 4503.64599609375, "stackSize": 153, "total": 153 },
-		{
-			"calculated": 3.380000114440918,
-			"name": "Lethean Temptation",
-			"realWeight": 64.25262451171875,
-			"stackSize": 9,
-			"total": 30.420001983642578
-		},
-		{ "calculated": 5, "name": "The Eye of Terror", "realWeight": 26.606155395507812, "stackSize": 5, "total": 25 },
-		{
-			"calculated": 82.4800033569336,
-			"name": "The One That Got Away",
-			"realWeight": 2.3797266483306885,
-			"stackSize": 1,
-			"total": 82.4800033569336
-		},
-		{ "calculated": 0, "name": "Birth of the Three", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{
-			"calculated": 1,
-			"name": "Society's Remorse",
-			"realWeight": 3325.769287109375,
-			"stackSize": 125,
-			"total": 125
-		},
-		{ "calculated": 2695.5, "name": "The Doctor", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{
-			"calculated": 140,
-			"name": "Succor of the Sinless",
-			"realWeight": 19.037813186645508,
-			"stackSize": 4,
-			"total": 560
-		},
-		{
-			"calculated": 1.4500000476837158,
-			"name": "The Lord in Black",
-			"realWeight": 1133.7618408203125,
-			"stackSize": 61,
-			"total": 88.45000457763672
-		},
-		{ "calculated": 1, "name": "The Skeleton", "realWeight": 4816.228515625, "stackSize": 160, "total": 160 },
-		{ "calculated": 1, "name": "Turn the Other Cheek", "realWeight": 8847.9765625, "stackSize": 240, "total": 240 },
-		{
-			"calculated": 1,
-			"name": "The Lunaris Priestess",
-			"realWeight": 8085.18115234375,
-			"stackSize": 226,
-			"total": 226
-		},
-		{ "calculated": 1, "name": "The Admirer", "realWeight": 1576.6942138671875, "stackSize": 76, "total": 76 },
-		{ "calculated": 1, "name": "No Traces", "realWeight": 2273.446044921875, "stackSize": 97, "total": 97 },
-		{
-			"calculated": 5.559999942779541,
-			"name": "The Greatest Intentions",
-			"realWeight": 0,
-			"stackSize": 0,
-			"total": 0
-		},
-		{
-			"calculated": 1.7300000190734863,
-			"name": "The Undisputed",
-			"realWeight": 26.606155395507812,
-			"stackSize": 5,
-			"total": 8.649999618530273
-		},
-		{ "calculated": 4, "name": "Burning Blood", "realWeight": 34.974693298339844, "stackSize": 6, "total": 24 },
-		{
-			"calculated": 2.75,
-			"name": "Lachrymal Necrosis",
-			"realWeight": 451.12615966796875,
-			"stackSize": 33,
-			"total": 90.75
-		},
-		{ "calculated": 1, "name": "The Mountain", "realWeight": 4681.40869140625, "stackSize": 157, "total": 157 },
-		{
-			"calculated": 6.289999961853027,
-			"name": "The Fishmonger",
-			"realWeight": 19.037813186645508,
-			"stackSize": 4,
-			"total": 25.15999984741211
-		},
-		{ "calculated": 33, "name": "The Patient", "realWeight": 694.5541381835938, "stackSize": 44, "total": 1452 },
-		{ "calculated": 2, "name": "The Whiteout", "realWeight": 471.78643798828125, "stackSize": 34, "total": 68 },
-		{ "calculated": 3, "name": "Silence and Frost", "realWeight": 315.4911193847656, "stackSize": 26, "total": 78 },
-		{
-			"calculated": 1.399999976158142,
-			"name": "The Brittle Emperor",
-			"realWeight": 111.54295349121094,
-			"stackSize": 13,
-			"total": 18.19999885559082
-		},
-		{ "calculated": 1, "name": "Might is Right", "realWeight": 3050.35302734375, "stackSize": 118, "total": 118 },
-		{ "calculated": 2, "name": "Haunting Shadows", "realWeight": 297.4658203125, "stackSize": 25, "total": 50 },
-		{
-			"calculated": 3.5999999046325684,
-			"name": "The Shepherd's Sandals",
-			"realWeight": 197.08677673339844,
-			"stackSize": 19,
-			"total": 68.4000015258789
-		},
-		{ "calculated": 1, "name": "Tranquillity", "realWeight": 1607.915283203125, "stackSize": 77, "total": 77 },
-		{ "calculated": 1, "name": "The Gemcutter", "realWeight": 19900.91015625, "stackSize": 412, "total": 412 },
-		{
-			"calculated": 4,
-			"name": "The Eldritch Decay",
-			"realWeight": 471.78643798828125,
-			"stackSize": 34,
-			"total": 136
-		},
-		{
-			"calculated": 4.619999885559082,
-			"name": "Mawr Blaidd",
-			"realWeight": 262.4936828613281,
-			"stackSize": 23,
-			"total": 106.25999450683594
-		},
-		{
-			"calculated": 1,
-			"name": "The Adventuring Spirit",
-			"realWeight": 7765.35107421875,
-			"stackSize": 220,
-			"total": 220
-		},
-		{ "calculated": 5, "name": "The Escape", "realWeight": 197.08677673339844, "stackSize": 19, "total": 95 },
-		{
-			"calculated": 5,
-			"name": "Chaotic Disposition",
-			"realWeight": 3089.210693359375,
-			"stackSize": 119,
-			"total": 595
-		},
-		{
-			"calculated": 1.5800000429153442,
-			"name": "Parasitic Passengers",
-			"realWeight": 602.028564453125,
-			"stackSize": 40,
-			"total": 63.20000076293945
-		},
-		{ "calculated": 2, "name": "The King's Heart", "realWeight": 371.64141845703125, "stackSize": 29, "total": 58 },
-		{
-			"calculated": 1.1100000143051147,
-			"name": "The Wolven King's Bite",
-			"realWeight": 602.028564453125,
-			"stackSize": 40,
-			"total": 44.400001525878906
-		},
-		{
-			"calculated": 30.709999084472656,
-			"name": "Eternal Bonds",
-			"realWeight": 34.974693298339844,
-			"stackSize": 6,
-			"total": 184.25999450683594
-		},
-		{ "calculated": 1, "name": "The Inventor", "realWeight": 5509.14453125, "stackSize": 175, "total": 175 },
-		{
-			"calculated": 3,
-			"name": "The Celestial Stone",
-			"realWeight": 34.974693298339844,
-			"stackSize": 6,
-			"total": 18
-		},
-		{ "calculated": 1, "name": "Grave Knowledge", "realWeight": 3285.93994140625, "stackSize": 124, "total": 124 },
-		{
-			"calculated": 7.360000133514404,
-			"name": "Dying Light",
-			"realWeight": 19.037813186645508,
-			"stackSize": 4,
-			"total": 29.440000534057617
-		},
-		{ "calculated": 1, "name": "Disdain", "realWeight": 352.5852355957031, "stackSize": 28, "total": 28 },
-		{ "calculated": 1, "name": "Forbidden Power", "realWeight": 1964.4957275390625, "stackSize": 88, "total": 88 },
-		{ "calculated": 2, "name": "Death", "realWeight": 1363.95703125, "stackSize": 69, "total": 138 },
-		{
-			"calculated": 2,
-			"name": "Misery in Darkness",
-			"realWeight": 98.92337036132812,
-			"stackSize": 12,
-			"total": 24
-		},
-		{ "calculated": 1, "name": "The Blazing Fire", "realWeight": 11269.3984375, "stackSize": 282, "total": 282 },
-		{
-			"calculated": 5.980000019073486,
-			"name": "The Hive of Knowledge",
-			"realWeight": 6.7308831214904785,
-			"stackSize": 2,
-			"total": 11.960000038146973
-		},
-		{ "calculated": 1, "name": "The Messenger", "realWeight": 1051.16064453125, "stackSize": 58, "total": 58 },
-		{ "calculated": 1, "name": "The Wolf", "realWeight": 5274.732421875, "stackSize": 170, "total": 170 },
-		{ "calculated": 0, "name": "Friendship", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{ "calculated": 0, "name": "Squandered Prosperity", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{
-			"calculated": 1,
-			"name": "Cartographer's Delight",
-			"realWeight": 4547.87109375,
-			"stackSize": 154,
-			"total": 154
-		},
-		{ "calculated": 1, "name": "Broken Truce", "realWeight": 1305.08642578125, "stackSize": 67, "total": 67 },
-		{ "calculated": 1, "name": "The Beast", "realWeight": 1576.6942138671875, "stackSize": 76, "total": 76 },
-		{ "calculated": 3, "name": "The Hale Heart", "realWeight": 34.974693298339844, "stackSize": 6, "total": 18 },
-		{ "calculated": 1, "name": "The Dreamland", "realWeight": 1964.4957275390625, "stackSize": 88, "total": 88 },
-		{ "calculated": 1, "name": "The Doppelganger", "realWeight": 20483.353515625, "stackSize": 420, "total": 420 },
-		{ "calculated": 1, "name": "The Twins", "realWeight": 4371.8369140625, "stackSize": 150, "total": 150 },
-		{
-			"calculated": 5,
-			"name": "Rebirth and Renewal",
-			"realWeight": 86.81926727294922,
-			"stackSize": 11,
-			"total": 55
-		},
-		{ "calculated": 1, "name": "The Dark Mage", "realWeight": 841.3604125976562, "stackSize": 50, "total": 50 },
-		{ "calculated": 299.5, "name": "The Nurse", "realWeight": 98.92337036132812, "stackSize": 12, "total": 3594 },
-		{ "calculated": 1, "name": "The Warden", "realWeight": 9690.3017578125, "stackSize": 255, "total": 255 },
-		{ "calculated": 1, "name": "The Body", "realWeight": 4026.795654296875, "stackSize": 142, "total": 142 },
-		{
-			"calculated": 5,
-			"name": "The Price of Prescience",
-			"realWeight": 111.54295349121094,
-			"stackSize": 13,
-			"total": 65
-		},
-		{
-			"calculated": 1.809999942779541,
-			"name": "Deathly Designs",
-			"realWeight": 391.0290222167969,
-			"stackSize": 30,
-			"total": 54.29999923706055
-		},
-		{ "calculated": 0, "name": "The Iron Bard", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{ "calculated": 1, "name": "The Tyrant", "realWeight": 297.4658203125, "stackSize": 25, "total": 25 },
-		{
-			"calculated": 1,
-			"name": "The Eye of the Dragon",
-			"realWeight": 3365.75830078125,
-			"stackSize": 126,
-			"total": 126
-		},
-		{ "calculated": 1, "name": "The Stormcaller", "realWeight": 5509.14453125, "stackSize": 175, "total": 175 },
-		{ "calculated": 1, "name": "Rain Tempter", "realWeight": 11030.4755859375, "stackSize": 278, "total": 278 },
-		{ "calculated": 3, "name": "The Cartographer", "realWeight": 6331.095703125, "stackSize": 192, "total": 576 },
-		{
-			"calculated": 58.56999969482422,
-			"name": "The Dragon's Heart",
-			"realWeight": 26.606155395507812,
-			"stackSize": 5,
-			"total": 292.8500061035156
-		},
-		{
-			"calculated": 1,
-			"name": "The Tireless Extractor",
-			"realWeight": 10675.30859375,
-			"stackSize": 272,
-			"total": 272
-		},
-		{ "calculated": 1, "name": "The Calling", "realWeight": 3774.29150390625, "stackSize": 136, "total": 136 },
-		{ "calculated": 0, "name": "Blessing of God", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{
-			"calculated": 1.7400000095367432,
-			"name": "The Obscured",
-			"realWeight": 333.86639404296875,
-			"stackSize": 27,
-			"total": 46.97999954223633
-		},
-		{ "calculated": 2, "name": "Sambodhi's Wisdom", "realWeight": 766.7855224609375, "stackSize": 47, "total": 94 },
-		{ "calculated": 0, "name": "The Devastator", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{ "calculated": 1, "name": "Boundless Realms", "realWeight": 5414.97216796875, "stackSize": 173, "total": 173 },
-		{ "calculated": 1, "name": "The Gambler", "realWeight": 4681.40869140625, "stackSize": 157, "total": 157 },
-		{ "calculated": 2, "name": "The Magma Crab", "realWeight": 694.5541381835938, "stackSize": 44, "total": 88 },
-		{ "calculated": 1, "name": "The Visionary", "realWeight": 8682.595703125, "stackSize": 237, "total": 237 },
-		{ "calculated": 0, "name": "The Mayor", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{
-			"calculated": 4.619999885559082,
-			"name": "Audacity",
-			"realWeight": 98.92337036132812,
-			"stackSize": 12,
-			"total": 55.439998626708984
-		},
-		{ "calculated": 1, "name": "The Tower", "realWeight": 5891.19921875, "stackSize": 183, "total": 183 },
-		{
-			"calculated": 1,
-			"name": "A Mother's Parting Gift",
-			"realWeight": 2238.38037109375,
-			"stackSize": 96,
-			"total": 96
-		},
-		{
-			"calculated": 10,
-			"name": "Altered Perception",
-			"realWeight": 26.606155395507812,
-			"stackSize": 5,
-			"total": 50
-		},
-		{ "calculated": 30, "name": "Broken Promises", "realWeight": 19.037813186645508, "stackSize": 4, "total": 120 },
-		{ "calculated": 1, "name": "Rats", "realWeight": 16254.7705078125, "stackSize": 360, "total": 360 },
-		{ "calculated": 1, "name": "Scholar of the Seas", "realWeight": 2379.7265625, "stackSize": 100, "total": 100 },
-		{
-			"calculated": 2.9200000762939453,
-			"name": "Hunter's Reward",
-			"realWeight": 333.86639404296875,
-			"stackSize": 27,
-			"total": 78.84000396728516
-		},
-		{
-			"calculated": 2.930000066757202,
-			"name": "Rebirth",
-			"realWeight": 64.25262451171875,
-			"stackSize": 9,
-			"total": 26.3700008392334
-		},
-		{
-			"calculated": 1,
-			"name": "The Price of Protection",
-			"realWeight": 1161.755126953125,
-			"stackSize": 62,
-			"total": 62
-		},
-		{ "calculated": 1, "name": "Boon of Justice", "realWeight": 8354.97265625, "stackSize": 231, "total": 231 },
-		{ "calculated": 1, "name": "The Summoner", "realWeight": 6036.65771484375, "stackSize": 186, "total": 186 },
-		{ "calculated": 1, "name": "The Warlord", "realWeight": 694.5541381835938, "stackSize": 44, "total": 44 },
-		{ "calculated": 1, "name": "Reckless Ambition", "realWeight": 315.4911193847656, "stackSize": 26, "total": 26 },
-		{ "calculated": 1, "name": "The Wolf's Legacy", "realWeight": 1514.867431640625, "stackSize": 74, "total": 74 },
-		{ "calculated": 20, "name": "The Artist", "realWeight": 53.84706497192383, "stackSize": 8, "total": 160 },
-		{ "calculated": 1, "name": "The Gentleman", "realWeight": 1189.9752197265625, "stackSize": 63, "total": 63 },
-		{ "calculated": 1, "name": "A Sea of Blue", "realWeight": 7712.4658203125, "stackSize": 219, "total": 219 },
-		{ "calculated": 29, "name": "The Strategist", "realWeight": 12.365421295166016, "stackSize": 3, "total": 87 },
-		{ "calculated": 1, "name": "The Lover", "realWeight": 66189.8046875, "stackSize": 918, "total": 918 },
-		{
-			"calculated": 5,
-			"name": "A Stone Perfected",
-			"realWeight": 181.73385620117188,
-			"stackSize": 18,
-			"total": 90
-		},
-		{
-			"calculated": 110,
-			"name": "Doryani's Epiphany",
-			"realWeight": 152.30250549316406,
-			"stackSize": 16,
-			"total": 1760
-		},
-		{ "calculated": 20, "name": "The Destination", "realWeight": 19.037813186645508, "stackSize": 4, "total": 80 },
-		{ "calculated": 4, "name": "Checkmate", "realWeight": 197.08677673339844, "stackSize": 19, "total": 76 },
-		{ "calculated": 5, "name": "Azyran's Reward", "realWeight": 410.74249267578125, "stackSize": 31, "total": 155 },
-		{
-			"calculated": 2.130000114440918,
-			"name": "Etched in Blood",
-			"realWeight": 44.07315444946289,
-			"stackSize": 7,
-			"total": 14.910000801086426
-		},
-		{
-			"calculated": 6.199999809265137,
-			"name": "The Eternal War",
-			"realWeight": 26.606155395507812,
-			"stackSize": 5,
-			"total": 31
-		},
-		{
-			"calculated": 4.840000152587891,
-			"name": "The Emptiness",
-			"realWeight": 44.07315444946289,
-			"stackSize": 7,
-			"total": 33.880001068115234
-		},
-		{ "calculated": 2, "name": "The Soul", "realWeight": 297.4658203125, "stackSize": 25, "total": 50 },
-		{ "calculated": 2, "name": "The Wretched", "realWeight": 3365.75830078125, "stackSize": 126, "total": 252 },
-		{
-			"calculated": 1,
-			"name": "The Arena Champion",
-			"realWeight": 11935.1669921875,
-			"stackSize": 293,
-			"total": 293
-		},
-		{ "calculated": 40, "name": "The Enlightened", "realWeight": 44.07315444946289, "stackSize": 7, "total": 280 },
-		{ "calculated": 1, "name": "The Siren", "realWeight": 410.74249267578125, "stackSize": 31, "total": 31 },
-		{
-			"calculated": 0.9700000286102295,
-			"name": "The King's Blade",
-			"realWeight": 41640.59765625,
-			"stackSize": 674,
-			"total": 653.780029296875
-		},
-		{ "calculated": 5, "name": "Costly Curio", "realWeight": 371.64141845703125, "stackSize": 29, "total": 145 },
-		{
-			"calculated": 1.4500000476837158,
-			"name": "From Bone to Ashes",
-			"realWeight": 124.65770721435547,
-			"stackSize": 14,
-			"total": 20.30000114440918
-		},
-		{
-			"calculated": 2.9600000381469727,
-			"name": "The Celestial Justicar",
-			"realWeight": 602.028564453125,
-			"stackSize": 40,
-			"total": 118.4000015258789
-		},
-		{
-			"calculated": 2,
-			"name": "Baited Expectations",
-			"realWeight": 315.4911193847656,
-			"stackSize": 26,
-			"total": 52
-		},
-		{ "calculated": 15, "name": "The Astromancer", "realWeight": 2.3797266483306885, "stackSize": 1, "total": 15 },
-		{
-			"calculated": 3.0199999809265137,
-			"name": "The Forgotten Treasure",
-			"realWeight": 315.4911193847656,
-			"stackSize": 26,
-			"total": 78.5199966430664
-		},
-		{ "calculated": 2, "name": "Heterochromia", "realWeight": 1363.95703125, "stackSize": 69, "total": 138 },
-		{
-			"calculated": 3.2300000190734863,
-			"name": "A Dab of Ink",
-			"realWeight": 451.12615966796875,
-			"stackSize": 33,
-			"total": 106.59000396728516
-		},
-		{ "calculated": 1, "name": "The Garish Power", "realWeight": 4771.146484375, "stackSize": 159, "total": 159 },
-		{ "calculated": 1, "name": "The Journey", "realWeight": 694.5541381835938, "stackSize": 44, "total": 44 },
-		{ "calculated": 8, "name": "The Polymath", "realWeight": 152.30250549316406, "stackSize": 16, "total": 128 },
-		{
-			"calculated": 8.359999656677246,
-			"name": "A Modest Request",
-			"realWeight": 152.30250549316406,
-			"stackSize": 16,
-			"total": 133.75999450683594
-		},
-		{
-			"calculated": 114.04000091552734,
-			"name": "The Price of Loyalty",
-			"realWeight": 19.037813186645508,
-			"stackSize": 4,
-			"total": 456.1600036621094
-		},
-		{
-			"calculated": 1.2999999523162842,
-			"name": "The Conduit",
-			"realWeight": 624.7451782226562,
-			"stackSize": 41,
-			"total": 53.29999923706055
-		},
-		{
-			"calculated": 3,
-			"name": "The Dungeon Master",
-			"realWeight": 352.5852355957031,
-			"stackSize": 28,
-			"total": 84
-		},
-		{
-			"calculated": 5.039999961853027,
-			"name": "Duality",
-			"realWeight": 19.037813186645508,
-			"stackSize": 4,
-			"total": 20.15999984741211
-		},
-		{ "calculated": 1, "name": "The Fox", "realWeight": 1702.7939453125, "stackSize": 80, "total": 80 },
-		{ "calculated": 1, "name": "The Innocent", "realWeight": 1545.677734375, "stackSize": 75, "total": 75 },
-		{
-			"calculated": 1.3899999856948853,
-			"name": "The Ethereal",
-			"realWeight": 557.445556640625,
-			"stackSize": 38,
-			"total": 52.81999969482422
-		},
-		{
-			"calculated": 3,
-			"name": "The Prince of Darkness",
-			"realWeight": 124.65770721435547,
-			"stackSize": 14,
-			"total": 42
-		},
-		{
-			"calculated": 1.090000033378601,
-			"name": "The Craving",
-			"realWeight": 333.86639404296875,
-			"stackSize": 27,
-			"total": 29.43000030517578
-		},
-		{ "calculated": 1, "name": "The Dragon", "realWeight": 6232.43017578125, "stackSize": 190, "total": 190 },
-		{ "calculated": 1, "name": "The Coming Storm", "realWeight": 1998.076416015625, "stackSize": 89, "total": 89 },
-		{
-			"calculated": 1,
-			"name": "The Last One Standing",
-			"realWeight": 892.3436279296875,
-			"stackSize": 52,
-			"total": 52
-		},
-		{ "calculated": 5, "name": "Desperate Crusade", "realWeight": 75.25357055664062, "stackSize": 10, "total": 50 },
-		{ "calculated": 1, "name": "The Valkyrie", "realWeight": 3405.90576171875, "stackSize": 127, "total": 127 },
-		{ "calculated": 1, "name": "The Watcher", "realWeight": 3167.416015625, "stackSize": 121, "total": 121 },
-		{ "calculated": 1, "name": "The Witch", "realWeight": 14395.7451171875, "stackSize": 332, "total": 332 },
-		{ "calculated": 1, "name": "Vinia's Token", "realWeight": 11209.5078125, "stackSize": 281, "total": 281 },
-		{ "calculated": 1, "name": "Lucky Deck", "realWeight": 197.08677673339844, "stackSize": 19, "total": 19 },
-		{ "calculated": 0, "name": "Vile Power", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{ "calculated": 3, "name": "The Heroic Shot", "realWeight": 1218.4200439453125, "stackSize": 64, "total": 192 },
-		{
-			"calculated": 1,
-			"name": "The Sword King's Salute",
-			"realWeight": 14136.3701171875,
-			"stackSize": 328,
-			"total": 328
-		},
-		{
-			"calculated": 1,
-			"name": "The Wolf's Shadow",
-			"realWeight": 4284.69189453125,
-			"stackSize": 148,
-			"total": 148
-		},
-		{
-			"calculated": 1.9299999475479126,
-			"name": "Triskaidekaphobia",
-			"realWeight": 1218.4200439453125,
-			"stackSize": 64,
-			"total": 123.5199966430664
-		},
-		{ "calculated": 20, "name": "Home", "realWeight": 64.25262451171875, "stackSize": 9, "total": 180 },
-		{ "calculated": 1, "name": "Blind Venture", "realWeight": 2708.113037109375, "stackSize": 109, "total": 109 },
-		{ "calculated": 1, "name": "Prejudice", "realWeight": 1702.7939453125, "stackSize": 80, "total": 80 },
-		{
-			"calculated": 2,
-			"name": "Emperor of Purity",
-			"realWeight": 1423.687255859375,
-			"stackSize": 71,
-			"total": 142
-		},
-		{ "calculated": 1, "name": "Lysah's Respite", "realWeight": 1576.6942138671875, "stackSize": 76, "total": 76 },
-		{
-			"calculated": 4.150000095367432,
-			"name": "The Bargain",
-			"realWeight": 229.01080322265625,
-			"stackSize": 21,
-			"total": 87.1500015258789
-		},
-		{ "calculated": 1, "name": "Immortal Resolve", "realWeight": 694.5541381835938, "stackSize": 44, "total": 44 },
-		{ "calculated": 898.5, "name": "Love Through Ice", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{ "calculated": 1, "name": "Glimmer of Hope", "realWeight": 9919.201171875, "stackSize": 259, "total": 259 },
-		{
-			"calculated": 1.0499999523162842,
-			"name": "More is Never Enough",
-			"realWeight": 535.5864868164062,
-			"stackSize": 37,
-			"total": 38.849998474121094
-		},
-		{
-			"calculated": 2,
-			"name": "The Archmage's Right Hand",
-			"realWeight": 1423.687255859375,
-			"stackSize": 71,
-			"total": 142
-		},
-		{
-			"calculated": 1,
-			"name": "The Fathomless Depths",
-			"realWeight": 1334.41357421875,
-			"stackSize": 68,
-			"total": 68
-		},
-		{ "calculated": 1, "name": "The Forsaken", "realWeight": 2134.28076171875, "stackSize": 93, "total": 93 },
-		{ "calculated": 10, "name": "Monochrome", "realWeight": 391.0290222167969, "stackSize": 30, "total": 300 },
-		{ "calculated": 1, "name": "The Harvester", "realWeight": 16052.0078125, "stackSize": 357, "total": 357 },
-		{
-			"calculated": 1,
-			"name": "The Master Artisan",
-			"realWeight": 7345.66064453125,
-			"stackSize": 212,
-			"total": 212
-		},
-		{ "calculated": 1, "name": "The Opulent", "realWeight": 11752.33203125, "stackSize": 290, "total": 290 },
-		{
-			"calculated": 1.409999966621399,
-			"name": "The Road to Power",
-			"realWeight": 152.30250549316406,
-			"stackSize": 16,
-			"total": 22.559999465942383
-		},
-		{ "calculated": 3, "name": "The Catch", "realWeight": 34.974693298339844, "stackSize": 6, "total": 18 },
-		{ "calculated": 1, "name": "Cameria's Cut", "realWeight": 694.5541381835938, "stackSize": 44, "total": 44 },
-		{ "calculated": 9, "name": "The Scout", "realWeight": 138.2496337890625, "stackSize": 15, "total": 135 },
-		{ "calculated": 1, "name": "Hunter's Resolve", "realWeight": 8031.578125, "stackSize": 225, "total": 225 },
-		{
-			"calculated": 4.650000095367432,
-			"name": "Chasing Risk",
-			"realWeight": 297.4658203125,
-			"stackSize": 25,
-			"total": 116.25
-		},
-		{
-			"calculated": 956.0800170898438,
-			"name": "The Shieldbearer",
-			"realWeight": 12.365421295166016,
-			"stackSize": 3,
-			"total": 2868.239990234375
-		},
-		{ "calculated": 1, "name": "The Standoff", "realWeight": 6781.4287109375, "stackSize": 201, "total": 201 },
-		{
-			"calculated": 7.949999809265137,
-			"name": "The Vast",
-			"realWeight": 6.7308831214904785,
-			"stackSize": 2,
-			"total": 15.899999618530273
-		},
-		{ "calculated": 1, "name": "The Explorer", "realWeight": 7449.853515625, "stackSize": 214, "total": 214 },
-		{
-			"calculated": 2,
-			"name": "The Saint's Treasure",
-			"realWeight": 1078.462646484375,
-			"stackSize": 59,
-			"total": 118
-		},
-		{
-			"calculated": 6.449999809265137,
-			"name": "A Familiar Call",
-			"realWeight": 2.3797266483306885,
-			"stackSize": 1,
-			"total": 6.449999809265137
-		},
-		{
-			"calculated": 9.779999732971191,
-			"name": "The Chosen",
-			"realWeight": 229.01080322265625,
-			"stackSize": 21,
-			"total": 205.37998962402344
-		},
-		{
-			"calculated": 1.090000033378601,
-			"name": "The Unexpected Prize",
-			"realWeight": 471.78643798828125,
-			"stackSize": 34,
-			"total": 37.060001373291016
-		},
-		{ "calculated": 4, "name": "The Seeker", "realWeight": 371.64141845703125, "stackSize": 29, "total": 116 },
-		{ "calculated": 1, "name": "The Wind", "realWeight": 410.74249267578125, "stackSize": 31, "total": 31 },
-		{
-			"calculated": 1,
-			"name": "Three Faces in the Dark",
-			"realWeight": 22414.517578125,
-			"stackSize": 446,
-			"total": 446
-		},
-		{
-			"calculated": 4.440000057220459,
-			"name": "Underground Forest",
-			"realWeight": 1670.966552734375,
-			"stackSize": 79,
-			"total": 350.760009765625
-		},
-		{
-			"calculated": 0.41999998688697815,
-			"name": "Imperial Legacy",
-			"realWeight": 10440.69140625,
-			"stackSize": 268,
-			"total": 112.55999755859375
-		},
-		{
-			"calculated": 1,
-			"name": "Lingering Remnants",
-			"realWeight": 1734.8209228515625,
-			"stackSize": 81,
-			"total": 81
-		},
-		{ "calculated": 1, "name": "Mitts", "realWeight": 6331.095703125, "stackSize": 192, "total": 192 },
-		{ "calculated": 1, "name": "Left to Fate", "realWeight": 2670.93115234375, "stackSize": 108, "total": 108 },
-		{
-			"calculated": 359.3999938964844,
-			"name": "Seven Years Bad Luck",
-			"realWeight": 26.606155395507812,
-			"stackSize": 5,
-			"total": 1797
-		},
-		{
-			"calculated": 1,
-			"name": "The Spoiled Prince",
-			"realWeight": 410.74249267578125,
-			"stackSize": 31,
-			"total": 31
-		},
-		{ "calculated": 1, "name": "The Poet", "realWeight": 1453.870849609375, "stackSize": 72, "total": 72 },
-		{
-			"calculated": 4,
-			"name": "Brotherhood in Exile",
-			"realWeight": 212.8492431640625,
-			"stackSize": 20,
-			"total": 80
-		},
-		{
-			"calculated": 5,
-			"name": "The Thaumaturgist",
-			"realWeight": 166.80169677734375,
-			"stackSize": 17,
-			"total": 85
-		},
-		{ "calculated": 1, "name": "The Golden Era", "realWeight": 997.2616577148438, "stackSize": 56, "total": 56 },
-		{ "calculated": 1, "name": "The Deceiver", "realWeight": 1702.7939453125, "stackSize": 80, "total": 80 },
-		{
-			"calculated": 0.7300000190734863,
-			"name": "Lantador's Lost Love",
-			"realWeight": 16731.1640625,
-			"stackSize": 367,
-			"total": 267.9100036621094
-		},
-		{ "calculated": 1, "name": "The Fletcher", "realWeight": 1702.7939453125, "stackSize": 80, "total": 80 },
-		{
-			"calculated": 5,
-			"name": "Keeper's Corruption",
-			"realWeight": 12.365421295166016,
-			"stackSize": 3,
-			"total": 15
-		},
-		{ "calculated": 5, "name": "The Shortcut", "realWeight": 98.92337036132812, "stackSize": 12, "total": 60 },
-		{ "calculated": 30, "name": "Deadly Joy", "realWeight": 19.037813186645508, "stackSize": 4, "total": 120 },
-		{ "calculated": 1, "name": "Doedre's Madness", "realWeight": 11996.3212890625, "stackSize": 294, "total": 294 },
-		{ "calculated": 7, "name": "Something Dark", "realWeight": 315.4911193847656, "stackSize": 26, "total": 182 },
-		{
-			"calculated": 1.6699999570846558,
-			"name": "Sambodhi's Vow",
-			"realWeight": 4112.16796875,
-			"stackSize": 144,
-			"total": 240.47999572753906
-		},
-		{ "calculated": 5, "name": "Abandoned Wealth", "realWeight": 430.7765197753906, "stackSize": 32, "total": 160 },
-		{
-			"calculated": 1,
-			"name": "The Army of Blood",
-			"realWeight": 7607.05712890625,
-			"stackSize": 217,
-			"total": 217
-		},
-		{ "calculated": 1, "name": "The Formless Sea", "realWeight": 2065.804443359375, "stackSize": 91, "total": 91 },
-		{ "calculated": 5, "name": "Bijoux", "realWeight": 152.30250549316406, "stackSize": 16, "total": 80 },
-		{ "calculated": 1, "name": "Jack in the Box", "realWeight": 4371.8369140625, "stackSize": 150, "total": 150 },
-		{ "calculated": 10482.490234375, "name": "The Apothecary", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{ "calculated": 1, "name": "The Carrion Crow", "realWeight": 19973.40625, "stackSize": 413, "total": 413 },
-		{
-			"calculated": 2.180000066757202,
-			"name": "The Deep Ones",
-			"realWeight": 152.30250549316406,
-			"stackSize": 16,
-			"total": 34.880001068115234
-		},
-		{ "calculated": 35, "name": "The Hook", "realWeight": 12.365421295166016, "stackSize": 3, "total": 105 },
-		{
-			"calculated": 1,
-			"name": "The Jeweller's Boon",
-			"realWeight": 3167.416015625,
-			"stackSize": 121,
-			"total": 121
-		},
-		{
-			"calculated": 1.7400000095367432,
-			"name": "The Primordial",
-			"realWeight": 816.2462158203125,
-			"stackSize": 49,
-			"total": 85.26000213623047
-		},
-		{ "calculated": 5, "name": "Judging Voices", "realWeight": 181.73385620117188, "stackSize": 18, "total": 90 },
-		{ "calculated": 1, "name": "The Sun", "realWeight": 11510.021484375, "stackSize": 286, "total": 286 },
-		{ "calculated": 1, "name": "Three Voices", "realWeight": 9690.3017578125, "stackSize": 255, "total": 255 },
-		{
-			"calculated": 1,
-			"name": "Dialla's Subjugation",
-			"realWeight": 1514.867431640625,
-			"stackSize": 74,
-			"total": 74
-		},
-		{
-			"calculated": 3,
-			"name": "The Bitter Blossom",
-			"realWeight": 98.92337036132812,
-			"stackSize": 12,
-			"total": 36
-		},
-		{ "calculated": 1, "name": "Demigod's Wager", "realWeight": 718.3661499023438, "stackSize": 45, "total": 45 },
-		{ "calculated": 1, "name": "Humility", "realWeight": 10911.65625, "stackSize": 276, "total": 276 },
-		{
-			"calculated": 2,
-			"name": "The Blessing of Moosh",
-			"realWeight": 2379.7265625,
-			"stackSize": 100,
-			"total": 200
-		},
-		{ "calculated": 4, "name": "Perfection", "realWeight": 12.365421295166016, "stackSize": 3, "total": 12 },
-		{
-			"calculated": 3.109999895095825,
-			"name": "The Avenger",
-			"realWeight": 181.73385620117188,
-			"stackSize": 18,
-			"total": 55.97999954223633
-		},
-		{
-			"calculated": 0.9599999785423279,
-			"name": "The Chains that Bind",
-			"realWeight": 8518.259765625,
-			"stackSize": 234,
-			"total": 224.63999938964844
-		},
-		{ "calculated": 1, "name": "The Deal", "realWeight": 997.2616577148438, "stackSize": 56, "total": 56 },
-		{
-			"calculated": 1347.75,
-			"name": "The Immortal",
-			"realWeight": 26.606155395507812,
-			"stackSize": 5,
-			"total": 6738.75
-		},
-		{ "calculated": 1, "name": "The Cache", "realWeight": 6580.00830078125, "stackSize": 197, "total": 197 },
-		{
-			"calculated": 0.36000001430511475,
-			"name": "Further Invention",
-			"realWeight": 6.7308831214904785,
-			"stackSize": 2,
-			"total": 0.7200000286102295
-		},
-		{ "calculated": 1, "name": "The Rabid Rhoa", "realWeight": 5043.744140625, "stackSize": 165, "total": 165 },
-		{
-			"calculated": 3.390000104904175,
-			"name": "Prometheus' Armoury",
-			"realWeight": 6.7308831214904785,
-			"stackSize": 2,
-			"total": 6.78000020980835
-		},
-		{
-			"calculated": 5.989999771118164,
-			"name": "Remembrance",
-			"realWeight": 26.606155395507812,
-			"stackSize": 5,
-			"total": 29.94999885559082
-		},
-		{ "calculated": 1, "name": "The Penitent", "realWeight": 5414.97216796875, "stackSize": 173, "total": 173 },
-		{ "calculated": 1, "name": "The Pack Leader", "realWeight": 1607.915283203125, "stackSize": 77, "total": 77 },
-		{ "calculated": 1, "name": "The Card Sharp", "realWeight": 866.72705078125, "stackSize": 51, "total": 51 },
-		{ "calculated": 1, "name": "Last Hope", "realWeight": 5321.3427734375, "stackSize": 171, "total": 171 },
-		{ "calculated": 1, "name": "The Bear Woman", "realWeight": 535.5864868164062, "stackSize": 37, "total": 37 },
-		{
-			"calculated": 2,
-			"name": "Merciless Armament",
-			"realWeight": 166.80169677734375,
-			"stackSize": 17,
-			"total": 34
-		},
-		{
-			"calculated": 2.2699999809265137,
-			"name": "The Brawny Battle Mage",
-			"realWeight": 166.80169677734375,
-			"stackSize": 17,
-			"total": 38.59000015258789
-		},
-		{ "calculated": 127, "name": "The Sephirot", "realWeight": 297.4658203125, "stackSize": 25, "total": 3175 },
-		{ "calculated": 3, "name": "The Forward Gaze", "realWeight": 718.3661499023438, "stackSize": 45, "total": 135 },
-		{ "calculated": 1, "name": "The Cataclysm", "realWeight": 1964.4957275390625, "stackSize": 88, "total": 88 },
-		{
-			"calculated": 20,
-			"name": "Imperfect Memories",
-			"realWeight": 19.037813186645508,
-			"stackSize": 4,
-			"total": 80
-		},
-		{
-			"calculated": 1,
-			"name": "Alone in the Darkness",
-			"realWeight": 6036.65771484375,
-			"stackSize": 186,
-			"total": 186
-		},
-		{ "calculated": 1, "name": "The Hermit", "realWeight": 14330.7548828125, "stackSize": 331, "total": 331 },
-		{ "calculated": 1, "name": "The Long Watch", "realWeight": 1334.41357421875, "stackSize": 68, "total": 68 },
-		{
-			"calculated": 1,
-			"name": "Call to the First Ones",
-			"realWeight": 1334.41357421875,
-			"stackSize": 68,
-			"total": 68
-		},
-		{
-			"calculated": 4.570000171661377,
-			"name": "The Dreamer",
-			"realWeight": 124.65770721435547,
-			"stackSize": 14,
-			"total": 63.980003356933594
-		},
-		{ "calculated": 1, "name": "The Inoculated", "realWeight": 7087.3291015625, "stackSize": 207, "total": 207 },
-		{
-			"calculated": 17,
-			"name": "Gemcutter's Mercy",
-			"realWeight": 111.54295349121094,
-			"stackSize": 13,
-			"total": 221
-		},
-		{ "calculated": 2, "name": "The Bones", "realWeight": 514.02099609375, "stackSize": 36, "total": 72 },
-		{
-			"calculated": 2.309999942779541,
-			"name": "The Jester",
-			"realWeight": 333.86639404296875,
-			"stackSize": 27,
-			"total": 62.369998931884766
-		},
-		{
-			"calculated": 1.1399999856948853,
-			"name": "The Lich",
-			"realWeight": 3984.333984375,
-			"stackSize": 141,
-			"total": 160.74000549316406
-		},
-		{ "calculated": 1, "name": "Astral Protection", "realWeight": 492.7528381347656, "stackSize": 35, "total": 35 },
-		{
-			"calculated": 6.349999904632568,
-			"name": "Fateful Meeting",
-			"realWeight": 12.365421295166016,
-			"stackSize": 3,
-			"total": 19.049999237060547
-		},
-		{
-			"calculated": 50,
-			"name": "The Samurai's Eye",
-			"realWeight": 86.81926727294922,
-			"stackSize": 11,
-			"total": 550
-		},
-		{
-			"calculated": 1.909999966621399,
-			"name": "The Spark and the Flame",
-			"realWeight": 579.5941772460938,
-			"stackSize": 39,
-			"total": 74.48999786376953
-		},
-		{
-			"calculated": 1,
-			"name": "Destined to Crumble",
-			"realWeight": 49172.19140625,
-			"stackSize": 753,
-			"total": 753
-		},
-		{
-			"calculated": 25,
-			"name": "Beauty Through Death",
-			"realWeight": 12.365421295166016,
-			"stackSize": 3,
-			"total": 75
-		},
-		{ "calculated": 1, "name": "The Survivalist", "realWeight": 5274.732421875, "stackSize": 170, "total": 170 },
-		{
-			"calculated": 4.139999866485596,
-			"name": "The Throne",
-			"realWeight": 111.54295349121094,
-			"stackSize": 13,
-			"total": 53.81999969482422
-		},
-		{
-			"calculated": 1.0299999713897705,
-			"name": "Endless Night",
-			"realWeight": 297.4658203125,
-			"stackSize": 25,
-			"total": 25.75
-		},
-		{ "calculated": 2, "name": "Azure Rage", "realWeight": 2670.93115234375, "stackSize": 108, "total": 216 },
-		{ "calculated": 1, "name": "The Undaunted", "realWeight": 892.3436279296875, "stackSize": 52, "total": 52 },
-		{ "calculated": 1, "name": "Thunderous Skies", "realWeight": 9576.5224609375, "stackSize": 253, "total": 253 },
-		{
-			"calculated": 4.099999904632568,
-			"name": "The World Eater",
-			"realWeight": 26.606155395507812,
-			"stackSize": 5,
-			"total": 20.5
-		},
-		{ "calculated": 1, "name": "The Scholar", "realWeight": 44262.1796875, "stackSize": 702, "total": 702 },
-		{
-			"calculated": 1.2899999618530273,
-			"name": "The Traitor",
-			"realWeight": 866.72705078125,
-			"stackSize": 51,
-			"total": 65.79000091552734
-		},
-		{ "calculated": 3, "name": "The Void", "realWeight": 9633.3564453125, "stackSize": 254, "total": 762 },
-		{ "calculated": 4, "name": "The Cursed King", "realWeight": 471.78643798828125, "stackSize": 34, "total": 136 },
-		{ "calculated": 1, "name": "The Puzzle", "realWeight": 5414.97216796875, "stackSize": 173, "total": 173 },
-		{ "calculated": 1, "name": "The Realm", "realWeight": 333.86639404296875, "stackSize": 27, "total": 27 },
-		{ "calculated": 1, "name": "Dark Temptation", "realWeight": 9463.193359375, "stackSize": 251, "total": 251 },
-		{ "calculated": 15, "name": "Magnum Opus", "realWeight": 64.25262451171875, "stackSize": 9, "total": 135 },
-		{
-			"calculated": 1.690000057220459,
-			"name": "The Twilight Moon",
-			"realWeight": 333.86639404296875,
-			"stackSize": 27,
-			"total": 45.630001068115234
-		},
-		{ "calculated": 45, "name": "Luminous Trove", "realWeight": 34.974693298339844, "stackSize": 6, "total": 270 },
-		{
-			"calculated": 1.0099999904632568,
-			"name": "The Landing",
-			"realWeight": 742.4442749023438,
-			"stackSize": 46,
-			"total": 46.459999084472656
-		},
-		{
-			"calculated": 1,
-			"name": "The Ruthless Ceinture",
-			"realWeight": 2415.51171875,
-			"stackSize": 101,
-			"total": 101
-		},
-		{
-			"calculated": 1.9500000476837158,
-			"name": "Acclimatisation",
-			"realWeight": 3167.416015625,
-			"stackSize": 121,
-			"total": 235.95001220703125
-		},
-		{
-			"calculated": 10,
-			"name": "Alluring Bounty",
-			"realWeight": 111.54295349121094,
-			"stackSize": 13,
-			"total": 130
-		},
-		{ "calculated": 1, "name": "The Surveyor", "realWeight": 3089.210693359375, "stackSize": 119, "total": 119 },
-		{ "calculated": 1, "name": "The Web", "realWeight": 8031.578125, "stackSize": 225, "total": 225 },
-		{ "calculated": 3, "name": "The Insatiable", "realWeight": 944.3167114257812, "stackSize": 54, "total": 162 },
-		{ "calculated": 0, "name": "Luck of the Vaal", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{
-			"calculated": 7.110000133514404,
-			"name": "Nook's Crown",
-			"realWeight": 2.3797266483306885,
-			"stackSize": 1,
-			"total": 7.110000133514404
-		},
-		{
-			"calculated": 0.9900000095367432,
-			"name": "The Flora's Gift",
-			"realWeight": 28708.181640625,
-			"stackSize": 526,
-			"total": 520.739990234375
-		},
-		{
-			"calculated": 1,
-			"name": "The Drunken Aristocrat",
-			"realWeight": 2273.446044921875,
-			"stackSize": 97,
-			"total": 97
-		},
-		{
-			"calculated": 1,
-			"name": "Coveted Possession",
-			"realWeight": 3365.75830078125,
-			"stackSize": 126,
-			"total": 126
-		},
-		{ "calculated": 1, "name": "Loyalty", "realWeight": 31874.671875, "stackSize": 564, "total": 564 },
-		{
-			"calculated": 2822.47998046875,
-			"name": "The Demon",
-			"realWeight": 6.7308831214904785,
-			"stackSize": 2,
-			"total": 5644.9599609375
-		},
-		{
-			"calculated": 14.789999961853027,
-			"name": "The Leviathan",
-			"realWeight": 6.7308831214904785,
-			"stackSize": 2,
-			"total": 29.579999923706055
-		},
-		{
-			"calculated": 10,
-			"name": "The Mind's Eyes",
-			"realWeight": 197.08677673339844,
-			"stackSize": 19,
-			"total": 190
-		},
-		{
-			"calculated": 2.009999990463257,
-			"name": "The Offspring",
-			"realWeight": 262.4936828613281,
-			"stackSize": 23,
-			"total": 46.22999954223633
-		},
-		{
-			"calculated": 5658.89990234375,
-			"name": "Unrequited Love",
-			"realWeight": 6.7308831214904785,
-			"stackSize": 2,
-			"total": 11317.7998046875
-		},
-		{ "calculated": 1, "name": "Prosperity", "realWeight": 11874.1162109375, "stackSize": 292, "total": 292 },
-		{ "calculated": 1, "name": "Shard of Fate", "realWeight": 5603.85595703125, "stackSize": 177, "total": 177 },
-		{ "calculated": 1, "name": "Treasure Hunter", "realWeight": 816.2462158203125, "stackSize": 49, "total": 49 },
-		{
-			"calculated": 17.920000076293945,
-			"name": "The Old Man",
-			"realWeight": 2.3797266483306885,
-			"stackSize": 1,
-			"total": 17.920000076293945
-		},
-		{
-			"calculated": 7.960000038146973,
-			"name": "Draped in Dreams",
-			"realWeight": 26.606155395507812,
-			"stackSize": 5,
-			"total": 39.79999923706055
-		},
-		{
-			"calculated": 1.6100000143051147,
-			"name": "The Wilted Rose",
-			"realWeight": 2415.51171875,
-			"stackSize": 101,
-			"total": 162.61000061035156
-		},
-		{ "calculated": 1, "name": "The Battle Born", "realWeight": 5043.744140625, "stackSize": 165, "total": 165 },
-		{ "calculated": 1, "name": "Rain of Chaos", "realWeight": 121465.9921875, "stackSize": 1376, "total": 1376 },
-		{
-			"calculated": 3.25,
-			"name": "Dying Anguish",
-			"realWeight": 1305.08642578125,
-			"stackSize": 67,
-			"total": 217.75
-		},
-		{ "calculated": 3, "name": "Peaceful Moments", "realWeight": 197.08677673339844, "stackSize": 19, "total": 57 },
-		{
-			"calculated": 3.7300000190734863,
-			"name": "The Life Thief",
-			"realWeight": 75.25357055664062,
-			"stackSize": 10,
-			"total": 37.29999923706055
-		},
-		{
-			"calculated": 1.0299999713897705,
-			"name": "Echoes of Love",
-			"realWeight": 492.7528381347656,
-			"stackSize": 35,
-			"total": 36.04999923706055
-		},
-		{
-			"calculated": 2.2799999713897705,
-			"name": "Terrible Secret of Space",
-			"realWeight": 212.8492431640625,
-			"stackSize": 20,
-			"total": 45.599998474121094
-		},
-		{
-			"calculated": 1.8300000429153442,
-			"name": "The Incantation",
-			"realWeight": 1189.9752197265625,
-			"stackSize": 63,
-			"total": 115.29000091552734
-		},
-		{
-			"calculated": 1,
-			"name": "The Rite of Elements",
-			"realWeight": 1305.08642578125,
-			"stackSize": 67,
-			"total": 67
-		},
-		{ "calculated": 1, "name": "The Darkest Dream", "realWeight": 297.4658203125, "stackSize": 25, "total": 25 },
-		{ "calculated": 1, "name": "The Scavenger", "realWeight": 2203.496826171875, "stackSize": 95, "total": 95 },
-		{ "calculated": 1, "name": "Harmony of Souls", "realWeight": 138.2496337890625, "stackSize": 15, "total": 15 },
-		{
-			"calculated": 4.579999923706055,
-			"name": "The Enforcer",
-			"realWeight": 26.606155395507812,
-			"stackSize": 5,
-			"total": 22.899999618530273
-		},
-		{
-			"calculated": 2.759999990463257,
-			"name": "Arrogance of the Vaal",
-			"realWeight": 694.5541381835938,
-			"stackSize": 44,
-			"total": 121.44000244140625
-		},
-		{
-			"calculated": 4.190000057220459,
-			"name": "The Pact",
-			"realWeight": 297.4658203125,
-			"stackSize": 25,
-			"total": 104.75
-		},
-		{ "calculated": 1, "name": "The Wrath", "realWeight": 8085.18115234375, "stackSize": 226, "total": 226 },
-		{ "calculated": 0, "name": "The Mad King", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{
-			"calculated": 9,
-			"name": "Pride of the First Ones",
-			"realWeight": 138.2496337890625,
-			"stackSize": 15,
-			"total": 135
-		},
-		{ "calculated": 1, "name": "Cursed Words", "realWeight": 3206.7626953125, "stackSize": 122, "total": 122 },
-		{
-			"calculated": 2,
-			"name": "The Dapper Prodigy",
-			"realWeight": 2238.38037109375,
-			"stackSize": 96,
-			"total": 192
-		},
-		{
-			"calculated": 2.7899999618530273,
-			"name": "Dark Dreams",
-			"realWeight": 44.07315444946289,
-			"stackSize": 7,
-			"total": 19.529998779296875
-		},
-		{
-			"calculated": 3.9800000190734863,
-			"name": "Dementophobia",
-			"realWeight": 64.25262451171875,
-			"stackSize": 9,
-			"total": 35.81999969482422
-		},
-		{
-			"calculated": 1,
-			"name": "The Fox in the Brambles",
-			"realWeight": 557.445556640625,
-			"stackSize": 38,
-			"total": 38
-		},
-		{
-			"calculated": 1.600000023841858,
-			"name": "The Hunger",
-			"realWeight": 514.02099609375,
-			"stackSize": 36,
-			"total": 57.60000228881836
-		},
-		{ "calculated": 1, "name": "The Oath", "realWeight": 1607.915283203125, "stackSize": 77, "total": 77 },
-		{ "calculated": 1, "name": "The Porcupine", "realWeight": 3609.00927734375, "stackSize": 132, "total": 132 },
-		{ "calculated": 1, "name": "Vanity", "realWeight": 2523.928955078125, "stackSize": 104, "total": 104 },
-		{
-			"calculated": 117.26000213623047,
-			"name": "Desecrated Virtue",
-			"realWeight": 44.07315444946289,
-			"stackSize": 7,
-			"total": 820.8200073242188
-		},
-		{
-			"calculated": 22.979999542236328,
-			"name": "Darker Half",
-			"realWeight": 44.07315444946289,
-			"stackSize": 7,
-			"total": 160.86000061035156
-		},
-		{ "calculated": 1, "name": "The Journalist", "realWeight": 11935.1669921875, "stackSize": 293, "total": 293 },
-		{ "calculated": 1, "name": "The Risk", "realWeight": 5509.14453125, "stackSize": 175, "total": 175 },
-		{ "calculated": 0, "name": "A Note in the Wind", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{ "calculated": 1, "name": "Anarchy's Price", "realWeight": 742.4442749023438, "stackSize": 46, "total": 46 },
-		{ "calculated": 13178, "name": "House of Mirrors", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{ "calculated": 0, "name": "Akil's Prophecy", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{
-			"calculated": 2,
-			"name": "Pride Before the Fall",
-			"realWeight": 124.65770721435547,
-			"stackSize": 14,
-			"total": 28
-		},
-		{ "calculated": 13, "name": "The Aspirant", "realWeight": 19.037813186645508, "stackSize": 4, "total": 52 },
-		{ "calculated": 1, "name": "Earth Drinker", "realWeight": 1189.9752197265625, "stackSize": 63, "total": 63 },
-		{
-			"calculated": 1.9199999570846558,
-			"name": "The Queen",
-			"realWeight": 86.81926727294922,
-			"stackSize": 11,
-			"total": 21.119998931884766
-		},
-		{ "calculated": 1, "name": "The Master", "realWeight": 816.2462158203125, "stackSize": 49, "total": 49 },
-		{
-			"calculated": 518.6099853515625,
-			"name": "Choking Guilt",
-			"realWeight": 6.7308831214904785,
-			"stackSize": 2,
-			"total": 1037.219970703125
-		},
-		{
-			"calculated": 15.319999694824219,
-			"name": "The Academic",
-			"realWeight": 197.08677673339844,
-			"stackSize": 19,
-			"total": 291.0799865722656
-		},
-		{ "calculated": 15, "name": "Winter's Embrace", "realWeight": 26.606155395507812, "stackSize": 5, "total": 75 },
-		{ "calculated": 1, "name": "The Hoarder", "realWeight": 2560.419189453125, "stackSize": 105, "total": 105 },
-		{
-			"calculated": 1,
-			"name": "Gemcutter's Promise",
-			"realWeight": 6480.0595703125,
-			"stackSize": 195,
-			"total": 195
-		},
-		{
-			"calculated": 1,
-			"name": "The Tinkerer's Table",
-			"realWeight": 245.5619659423828,
-			"stackSize": 22,
-			"total": 22
-		},
-		{ "calculated": 2.380000114440918, "name": "The Awakened", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{
-			"calculated": 64.62000274658203,
-			"name": "Brother's Stash",
-			"realWeight": 26.606155395507812,
-			"stackSize": 5,
-			"total": 323.1000061035156
-		},
-		{
-			"calculated": 1.4500000476837158,
-			"name": "Light and Truth",
-			"realWeight": 451.12615966796875,
-			"stackSize": 33,
-			"total": 47.85000228881836
-		},
-		{ "calculated": 1, "name": "Time-Lost Relic", "realWeight": 6232.43017578125, "stackSize": 190, "total": 190 },
-		{
-			"calculated": 2,
-			"name": "Boon of the First Ones",
-			"realWeight": 557.445556640625,
-			"stackSize": 38,
-			"total": 76
-		},
-		{ "calculated": 1, "name": "The Catalyst", "realWeight": 22716.732421875, "stackSize": 450, "total": 450 },
-		{
-			"calculated": 1,
-			"name": "Thirst for Knowledge",
-			"realWeight": 6529.9697265625,
-			"stackSize": 196,
-			"total": 196
-		},
-		{
-			"calculated": 5.840000152587891,
-			"name": "Void of the Elements",
-			"realWeight": 6.7308831214904785,
-			"stackSize": 2,
-			"total": 11.680000305175781
-		},
-		{ "calculated": 1, "name": "Her Mask", "realWeight": 8792.7333984375, "stackSize": 239, "total": 239 },
-		{ "calculated": 5, "name": "The Tumbleweed", "realWeight": 75.25357055664062, "stackSize": 10, "total": 50 },
-		{ "calculated": 3, "name": "Council of Cats", "realWeight": 152.30250549316406, "stackSize": 16, "total": 48 },
-		{
-			"calculated": 1.9600000381469727,
-			"name": "The Enthusiasts",
-			"realWeight": 371.64141845703125,
-			"stackSize": 29,
-			"total": 56.84000015258789
-		},
-		{ "calculated": 1, "name": "The Gladiator", "realWeight": 5414.97216796875, "stackSize": 173, "total": 173 },
-		{ "calculated": 3, "name": "Divine Justice", "realWeight": 229.01080322265625, "stackSize": 21, "total": 63 },
-		{
-			"calculated": 44,
-			"name": "A Fate Worse Than Death",
-			"realWeight": 44.07315444946289,
-			"stackSize": 7,
-			"total": 308
-		},
-		{ "calculated": 16, "name": "The Damned", "realWeight": 26.606155395507812, "stackSize": 5, "total": 80 },
-		{ "calculated": 1, "name": "The Trial", "realWeight": 5842.97705078125, "stackSize": 182, "total": 182 },
-		{ "calculated": 9, "name": "The Long Con", "realWeight": 86.81926727294922, "stackSize": 11, "total": 99 },
-		{
-			"calculated": 3,
-			"name": "Justified Ambition",
-			"realWeight": 471.78643798828125,
-			"stackSize": 34,
-			"total": 102
-		},
-		{ "calculated": 0, "name": "The Valley of Steel Boxes", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{ "calculated": 1, "name": "The Endurance", "realWeight": 6036.65771484375, "stackSize": 186, "total": 186 },
-		{ "calculated": 0, "name": "Treasures of the Vaal", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{ "calculated": 2, "name": "Unchained", "realWeight": 352.5852355957031, "stackSize": 28, "total": 56 },
-		{
-			"calculated": 1,
-			"name": "Gift of the Gemling Queen",
-			"realWeight": 1702.7939453125,
-			"stackSize": 80,
-			"total": 80
-		},
-		{ "calculated": 1, "name": "Hubris", "realWeight": 5368.08935546875, "stackSize": 172, "total": 172 },
-		{ "calculated": 1, "name": "The Feast", "realWeight": 2415.51171875, "stackSize": 101, "total": 101 },
-		{ "calculated": 1, "name": "Volatile Power", "realWeight": 5891.19921875, "stackSize": 183, "total": 183 },
-		{ "calculated": 1, "name": "Emperor's Luck", "realWeight": 45306.58984375, "stackSize": 713, "total": 713 },
-		{
-			"calculated": 1,
-			"name": "Struck by Lightning",
-			"realWeight": 4816.228515625,
-			"stackSize": 160,
-			"total": 160
-		},
-		{ "calculated": 1, "name": "The Mercenary", "realWeight": 1832.08642578125, "stackSize": 84, "total": 84 },
-		{ "calculated": 1, "name": "The Wolverine", "realWeight": 1484.2645263671875, "stackSize": 73, "total": 73 },
-		{ "calculated": 1, "name": "Hope", "realWeight": 2065.804443359375, "stackSize": 91, "total": 91 },
-		{
-			"calculated": 1,
-			"name": "The Encroaching Darkness",
-			"realWeight": 892.3436279296875,
-			"stackSize": 52,
-			"total": 52
-		},
-		{
-			"calculated": 3,
-			"name": "Guardian's Challenge",
-			"realWeight": 816.2462158203125,
-			"stackSize": 49,
-			"total": 147
-		},
-		{ "calculated": 1, "name": "The Aesthete", "realWeight": 6430.2763671875, "stackSize": 194, "total": 194 },
-		{ "calculated": 2, "name": "The Easy Stroll", "realWeight": 1702.7939453125, "stackSize": 80, "total": 160 },
-		{
-			"calculated": 2,
-			"name": "The Endless Darkness",
-			"realWeight": 64.25262451171875,
-			"stackSize": 9,
-			"total": 18
-		},
-		{
-			"calculated": 1347.75,
-			"name": "The Fiend",
-			"realWeight": 6.7308831214904785,
-			"stackSize": 2,
-			"total": 2695.5
-		},
-		{
-			"calculated": 1.8600000143051147,
-			"name": "The Lord of Celebration",
-			"realWeight": 579.5941772460938,
-			"stackSize": 39,
-			"total": 72.54000091552734
-		},
-		{ "calculated": 1, "name": "The Lion", "realWeight": 4503.64599609375, "stackSize": 153, "total": 153 },
-		{ "calculated": 10, "name": "The Sacrifice", "realWeight": 34.974693298339844, "stackSize": 6, "total": 60 },
-		{
-			"calculated": 3.119999885559082,
-			"name": "The Side Quest",
-			"realWeight": 624.7451782226562,
-			"stackSize": 41,
-			"total": 127.91999816894531
-		},
-		{ "calculated": 1, "name": "The Sigil", "realWeight": 7241.958984375, "stackSize": 210, "total": 210 },
-		{ "calculated": 1, "name": "The Betrayal", "realWeight": 2820.681884765625, "stackSize": 112, "total": 112 },
-		{ "calculated": 5.75, "name": "The Sustenance", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{ "calculated": 1, "name": "The Union", "realWeight": 4198.13427734375, "stackSize": 146, "total": 146 },
-		{ "calculated": 1, "name": "The One With All", "realWeight": 2415.51171875, "stackSize": 101, "total": 101 },
-		{ "calculated": 5, "name": "The White Knight", "realWeight": 26.606155395507812, "stackSize": 5, "total": 25 },
-		{
-			"calculated": 2.190000057220459,
-			"name": "Bowyer's Dream",
-			"realWeight": 111.54295349121094,
-			"stackSize": 13,
-			"total": 28.470001220703125
-		},
-		{ "calculated": 1, "name": "The Demoness", "realWeight": 8682.595703125, "stackSize": 237, "total": 237 },
-		{ "calculated": 1, "name": "Buried Treasure", "realWeight": 1024.0928955078125, "stackSize": 57, "total": 57 },
-		{ "calculated": 10, "name": "Gift of Asenath", "realWeight": 98.92337036132812, "stackSize": 12, "total": 120 },
-		{ "calculated": 5870.2001953125, "name": "The Price of Devotion", "realWeight": 0, "stackSize": 0, "total": 0 },
-		{
-			"calculated": 149.6999969482422,
-			"name": "Wealth and Power",
-			"realWeight": 12.365421295166016,
-			"stackSize": 3,
-			"total": 449.0999755859375
-		},
-		{
-			"calculated": 4,
-			"name": "Ambitious Obsession",
-			"realWeight": 53.84706497192383,
-			"stackSize": 8,
-			"total": 32
-		},
-		{
-			"calculated": 2.9800000190734863,
-			"name": "The Cacophony",
-			"realWeight": 197.08677673339844,
-			"stackSize": 19,
-			"total": 56.619998931884766
-		},
-		{
-			"calculated": 2.6500000953674316,
-			"name": "Atziri's Arsenal",
-			"realWeight": 1423.687255859375,
-			"stackSize": 71,
-			"total": 188.15000915527344
-		},
-		{ "calculated": 1, "name": "Assassin's Favour", "realWeight": 8246.7021484375, "stackSize": 229, "total": 229 },
-		{
-			"calculated": 222.86000061035156,
-			"name": "The Cheater",
-			"realWeight": 6.7308831214904785,
-			"stackSize": 2,
-			"total": 445.7200012207031
-		},
-		{
-			"calculated": 3,
-			"name": "Brush, Paint and Palette",
-			"realWeight": 410.74249267578125,
-			"stackSize": 31,
-			"total": 93
-		},
-		{ "calculated": 3, "name": "The Professor", "realWeight": 352.5852355957031, "stackSize": 28, "total": 84 },
-		{ "calculated": 1, "name": "The Fool", "realWeight": 2451.474365234375, "stackSize": 102, "total": 102 },
-		{
-			"calculated": 1,
-			"name": "The Metalsmith's Gift",
-			"realWeight": 31536.181640625,
-			"stackSize": 560,
-			"total": 560
-		},
-		{
-			"calculated": 34.349998474121094,
-			"name": "The Gulf",
-			"realWeight": 26.606155395507812,
-			"stackSize": 5,
-			"total": 171.75
-		}
-	],
+	"id": "ee6cb18a-9dad-44d9-965e-0123565631a5",
+	"valid": true,
 	"selected": false,
-	"valid": true
+	"data": {
+		"allCardsPrice": 1526.8800048828125,
+		"csvPolished": "stackSize,name,calculated,total,realWeight\n12,Underground Forest,3.78,45.36,1601.6545\n16,The Coming Storm,1.0,16.0,2465.9087\n0,Divine Beauty,0.0,0.0,0.0\n0,The Wedding Gift,0.0,0.0,0.0\n0,A Dusty Memory,0.0,0.0,0.0\n5,Costly Curio,5.0,25.0,430.7765\n46,Prosperity,1.0,46.0,12020.811\n5,Dialla's Subjugation,2.0,10.0,430.7765\n7,Buried Treasure,2.0,14.0,713.5823\n5,The Bitter Blossom,5.0,25.0,430.7765\n0,The Destination,18.53,0.0,0.0\n8,\"Brush, Paint and Palette\",2.0,16.0,871.8304\n10,The Forsaken,1.0,10.0,1218.4199\n4,Treasure Hunter,1.31,5.24,308.2386\n28,Last Hope,1.92,53.76,5708.658\n0,Unrequited Love,6209.91,0.0,0.0\n2,The Tumbleweed,5.0,10.0,108.9788\n0,Soul Quenched,0.0,0.0,0.0\n3,The Avenger,5.0,15.0,200.20682\n21,Azure Rage,2.0,42.0,3707.8823\n16,Grave Knowledge,1.0,16.0,2465.9087\n0,Dementophobia,3.0,0.0,0.0\n9,Light and Truth,2.0,18.0,1040.3052\n7,The Cacophony,2.0,14.0,713.5823\n13,The Feast,1.15,14.95,1805.9762\n0,The Sustenance,4.99,0.0,0.0\n3,Alluring Bounty,5.0,15.0,200.20682\n45,Assassin's Favour,1.0,45.0,11630.967\n18,Blind Venture,1.0,18.0,2942.4275\n0,Choking Guilt,467.97,0.0,0.0\n16,Coveted Possession,1.67,26.72,2465.9087\n6,The Enthusiasts,5.0,30.0,566.2704\n17,The Rabid Rhoa,2.0,34.0,2700.663\n6,Something Dark,7.0,42.0,566.2704\n20,The Wretched,2.0,40.0,3446.212\n26,Lucky Connections,1.47,38.22,5108.072\n1,Dying Light,6.0,6.0,38.529823\n45,Glimmer of Hope,1.0,45.0,11630.967\n29,The Penitent,1.0,29.0,6017.194\n16,The Drunken Aristocrat,1.0,16.0,2465.9087\n20,Alone in the Darkness,1.0,20.0,3446.212\n24,Cursed Words,1.0,24.0,4530.163\n31,The Dragon,1.0,31.0,6650.2734\n0,Brother's Stash,38.8,0.0,0.0\n36,Struck by Lightning,1.0,36.0,8322.441\n6,The Master,1.92,11.5199995,566.2704\n11,The Cataclysm,2.0,22.0,1405.6786\n0,Lucky Deck,2.0,0.0,0.0\n3,The Price of Prescience,4.0,12.0,200.20682\n7,The Primordial,2.0,14.0,713.5823\n6,The Saint's Treasure,2.77,16.619999,566.2704\n62,Rats,1.0,62.0,18809.814\n21,Boundless Realms,1.0,21.0,3707.8823\n0,Deadly Joy,30.0,0.0,0.0\n0,Prometheus' Armoury,3.96,0.0,0.0\n35,Thunderous Skies,1.0,35.0,7978.0923\n29,The Battle Born,1.4,40.6,6017.194\n0,The Celestial Stone,3.0,0.0,0.0\n5,The Dreamer,4.99,24.949999,430.7765\n0,The Emptiness,5.0,0.0,0.0\n51,The Gemcutter,1.0,51.0,14033.057\n9,The Tyrant,3.19,28.710001,1040.3052\n15,The Rite of Elements,1.77,26.55,2238.3804\n25,The Union,1.38,34.5,4816.228\n16,The Hoarder,2.0,32.0,2465.9087\n2,The Tinkerer's Table,2.0,4.0,108.9788\n10,Tranquillity,2.0,20.0,1218.4199\n0,Friendship,0.0,0.0,0.0\n0,The One That Got Away,29.1,0.0,0.0\n22,The Wolf's Shadow,1.71,37.620003,3975.8594\n9,The Last One Standing,5.0,45.0,1040.3052\n0,Ever-Changing,0.0,0.0,0.0\n5,Demigod's Wager,2.0,10.0,430.7765\n0,Duality,16.05,0.0,0.0\n0,Eternal Bonds,10.0,0.0,0.0\n215,Rain of Chaos,1.0,215.0,121465.99\n0,The Apothecary,9827.37,0.0,0.0\n1,Home,7.76,7.76,38.529823\n0,Dark Dreams,4.41,0.0,0.0\n43,The Demoness,1.0,43.0,10864.249\n9,The Easy Stroll,2.2,19.800001,1040.3052\n2,The Eye of Terror,5.13,10.26,108.9788\n10,The Golden Era,2.58,25.8,1218.4199\n3,The Hale Heart,3.71,11.13,200.20682\n9,The Journey,1.0,9.0,1040.3052\n1,The Aspirant,10.0,10.0,38.529823\n21,The Cache,1.0,21.0,3707.8823\n8,The Mercenary,1.78,14.24,871.8304\n4,The Bones,2.0,8.0,308.2386\n2,The Artist,20.0,40.0,108.9788\n9,The Breach,2.89,26.01,1040.3052\n0,The Fiend,1061.38,0.0,0.0\n19,Lysah's Respite,2.0,38.0,3191.0046\n11,The Oath,1.0,11.0,1405.6786\n2,A Fate Worse Than Death,27.15,54.3,108.9788\n2,Draped in Dreams,3.0,6.0,108.9788\n9,The Beast,2.0,18.0,1040.3052\n21,The Formless Sea,2.0,42.0,3707.8823\n10,Hope,1.0,10.0,1218.4199\n6,The Lord of Celebration,2.91,17.460001,566.2704\n7,Anarchy's Price,1.0,7.0,713.5823\n38,The Army of Blood,1.0,38.0,9025.523\n0,The Damned,7.18,0.0,0.0\n15,The One With All,1.0,15.0,2238.3804\n44,The Scarred Meadow,2.0,88.0,11245.429\n13,Earth Drinker,2.0,26.0,1805.9762\n36,The Skeleton,2.0,72.0,8322.441\n3,Azyran's Reward,4.8,14.400001,200.20682\n27,Chaotic Disposition,5.0,135.0,5405.5845\n7,The Dark Mage,2.09,14.629999,713.5823\n2,The Rabbit's Foot,3.1,6.2,108.9788\n2,Doryani's Epiphany,20.16,40.32,108.9788\n13,Broken Truce,2.0,26.0,1805.9762\n17,No Traces,2.83,48.11,2700.663\n25,The Fool,1.0,25.0,4816.228\n23,The Surgeon,1.0,23.0,4249.998\n7,The Innocent,2.86,20.019999,713.5823\n39,The Visionary,1.0,39.0,9384.128\n29,Hubris,1.0,29.0,6017.194\n29,Jack in the Box,1.0,29.0,6017.194\n69,The Catalyst,1.0,69.0,22083.637\n8,Boon of the First Ones,1.75,14.0,871.8304\n15,The Ruthless Ceinture,1.0,15.0,2238.3804\n15,The Scavenger,1.48,22.2,2238.3804\n96,The Scholar,1.0,96.0,36241.305\n5,The Spark and the Flame,2.73,13.65,430.7765\n0,Wealth and Power,90.0,0.0,0.0\n11,The Deal,2.25,24.75,1405.6786\n6,The Lord in Black,2.0,12.0,566.2704\n6,Disdain,2.0,12.0,566.2704\n2,Gemcutter's Mercy,10.0,20.0,108.9788\n2,Audacity,3.0,6.0,108.9788\n13,Emperor of Purity,2.0,26.0,1805.9762\n7,Parasitic Passengers,3.0,21.0,713.5823\n0,Auspicious Ambitions,0.0,0.0,0.0\n4,Cameria's Cut,2.0,8.0,308.2386\n17,Shard of Fate,1.0,17.0,2700.663\n0,The Awakened,3.19,0.0,0.0\n0,House of Mirrors,13972.25,0.0,0.0\n16,The Puzzle,1.0,16.0,2465.9087\n0,Blessing of God,0.0,0.0,0.0\n23,The Garish Power,2.0,46.0,4249.998\n12,The Wilted Rose,2.0,24.0,1601.6545\n49,The Opulent,1.0,49.0,13215.729\n1,Luminous Trove,40.0,40.0,38.529823\n0,The Undisputed,8.07,0.0,0.0\n5,Imperfect Memories,8.5,42.5,430.7765\n0,The Leviathan,10.0,0.0,0.0\n37,Turn the Other Cheek,2.0,74.0,8671.606\n11,Prejudice,2.0,22.0,1405.6786\n2,The Wind,3.63,7.26,108.9788\n3,Burning Blood,2.84,8.5199995,200.20682\n6,The Dungeon Master,5.0,30.0,566.2704\n5,The Queen,4.15,20.75,430.7765\n21,The Surveyor,2.4,50.4,3707.8823\n2,From Bone to Ashes,2.0,4.0,108.9788\n10,Lingering Remnants,1.86,18.6,1218.4199\n8,The Sephirot,50.41,403.28,871.8304\n1,The Professor,5.0,5.0,38.529823\n2,Checkmate,2.32,4.64,108.9788\n13,Forbidden Power,1.0,13.0,1805.9762\n12,Sambodhi's Wisdom,2.0,24.0,1601.6545\n1,Succor of the Sinless,108.09,108.09,38.529823\n29,The Aesthete,1.0,29.0,6017.194\n0,The Demon,1597.56,0.0,0.0\n11,The Bear Woman,2.37,26.07,1405.6786\n48,The Hermit,1.0,48.0,12813.236\n2,Beauty Through Death,20.0,40.0,108.9788\n21,The Lich,2.0,42.0,3707.8823\n0,The Gulf,21.29,0.0,0.0\n1,Silence and Frost,4.0,4.0,38.529823\n20,The Betrayal,1.0,20.0,3446.212\n4,Lachrymal Necrosis,3.19,12.76,308.2386\n134,The Lover,1.0,134.0,59766.0\n35,The Master Artisan,1.0,35.0,7978.0923\n23,The Gladiator,1.99,45.77,4249.998\n9,The Fathomless Depths,1.0,9.0,1040.3052\n24,The Calling,1.81,43.44,4530.163\n1,Desecrated Virtue,110.76,110.76,38.529823\n0,Misery in Darkness,3.17,0.0,0.0\n0,The Price of Devotion,7430.22,0.0,0.0\n34,A Sea of Blue,1.0,34.0,7638.6284\n31,The Mountain,2.0,62.0,6650.2734\n0,Fateful Meeting,7.42,0.0,0.0\n51,Doedre's Madness,1.09,55.59,14033.057\n2,Remembrance,10.0,20.0,108.9788\n4,The Offering,2.07,8.28,308.2386\n6,The Darkest Dream,2.2,13.200001,566.2704\n0,The Shieldbearer,779.95,0.0,0.0\n8,More is Never Enough,1.0,8.0,871.8304\n0,Birth of the Three,0.0,0.0,0.0\n60,Lantador's Lost Love,1.0,60.0,17907.043\n4,The Bargain,5.0,20.0,308.2386\n8,A Dab of Ink,2.0,16.0,871.8304\n11,The Blessing of Moosh,2.7,29.7,1405.6786\n7,The Card Sharp,2.0,14.0,713.5823\n5,Monochrome,12.95,64.75,430.7765\n0,The Price of Loyalty,155.99,0.0,0.0\n1,The Progeny of Lunaris,5.0,5.0,38.529823\n1,Winter's Embrace,20.0,20.0,38.529823\n0,Man With Bear,0.0,0.0,0.0\n0,Squandered Prosperity,0.0,0.0,0.0\n26,The Trial,1.0,26.0,5108.072\n0,The Old Man,10.3,0.0,0.0\n2,The Academic,20.0,40.0,108.9788\n44,Imperial Legacy,0.91,40.04,11245.429\n0,A Chilling Wind,0.0,0.0,0.0\n4,Astral Protection,2.0,8.0,308.2386\n2,Haunting Shadows,3.0,6.0,108.9788\n0,Poisoned Faith,0.0,0.0,0.0\n54,Her Mask,1.0,54.0,15289.302\n3,Brotherhood in Exile,3.0,9.0,200.20682\n1,Harmony of Souls,2.05,2.05,38.529823\n0,The Return of the Rat,0.0,0.0,0.0\n0,Alivia's Grace,0.0,0.0,0.0\n26,The Inventor,1.4,36.399998,5108.072\n0,Divine Justice,3.63,0.0,0.0\n83,Loyalty,1.0,83.0,29134.941\n2,Merciless Armament,2.0,4.0,108.9788\n7,The Siren,1.24,8.68,713.5823\n1,Gift of Asenath,8.84,8.84,38.529823\n1,The Dragon's Heart,27.87,27.87,38.529823\n0,The Immortal,1294.52,0.0,0.0\n33,The Survivalist,1.0,33.0,7304.1196\n0,The Enforcer,4.2,0.0,0.0\n16,Gift of the Gemling Queen,2.0,32.0,2465.9087\n38,Humility,1.0,38.0,9025.523\n9,The Spoiled Prince,2.0,18.0,1040.3052\n9,Acclimatisation,1.97,17.73,1040.3052\n0,Love Through Ice,895.6,0.0,0.0\n5,The Twilight Moon,2.89,14.450001,430.7765\n4,The Forgotten Treasure,5.8,23.2,308.2386\n6,Abandoned Wealth,4.3,25.800001,566.2704\n22,The Valkyrie,2.0,44.0,3975.8594\n33,The Sigil,1.0,33.0,7304.1196\n0,Brother's Gift,0.0,0.0,0.0\n5,Mawr Blaidd,4.0,20.0,430.7765\n14,The Admirer,2.0,28.0,2018.3154\n8,The Warlord,2.0,16.0,871.8304\n0,Luck of the Vaal,0.0,0.0,0.0\n0,A Note in the Wind,0.0,0.0,0.0\n4,Bijoux,5.0,20.0,308.2386\n1,The Long Con,5.28,5.28,38.529823\n2,Chasing Risk,4.33,8.66,108.9788\n5,The Obscured,2.0,10.0,430.7765\n44,The Tireless Extractor,2.0,88.0,11245.429\n28,The Tower,1.0,28.0,5708.658\n9,Death,2.0,18.0,1040.3052\n31,The Web,1.0,31.0,6650.2734\n5,The Conduit,1.55,7.75,430.7765\n1,The Cheater,202.79,202.79,38.529823\n43,The Journalist,1.0,43.0,10864.249\n3,The Unexpected Prize,2.0,6.0,200.20682\n37,The Warden,1.23,45.510002,8671.606\n47,The Carrion Crow,1.0,47.0,12414.917\n11,Arrogance of the Vaal,3.0,33.0,1405.6786\n2,Bowyer's Dream,3.0,6.0,108.9788\n108,Destined to Crumble,1.0,108.0,43244.676\n7,The Cursed King,2.34,16.38,713.5823\n12,Scholar of the Seas,1.0,12.0,1601.6545\n4,The Hunger,2.0,8.0,308.2386\n5,Immortal Resolve,2.0,10.0,430.7765\n0,A Modest Request,6.45,0.0,0.0\n8,Reckless Ambition,2.0,16.0,871.8304\n0,The Doctor,2339.85,0.0,0.0\n1,The Enlightened,23.66,23.66,38.529823\n3,The Seeker,3.0,9.0,200.20682\n24,The Standoff,1.13,27.119999,4530.163\n5,The Wolven King's Bite,4.27,21.35,430.7765\n0,Vile Power,0.0,0.0,0.0\n0,The Mayor,0.0,0.0,0.0\n16,Might is Right,1.0,16.0,2465.9087\n3,The Eldritch Decay,3.57,10.71,200.20682\n3,The Fox in the Brambles,2.03,6.09,200.20682\n2,A Stone Perfected,5.0,10.0,108.9788\n25,The Gambler,1.0,25.0,4816.228\n54,The Witch,1.0,54.0,15289.302\n6,The Wolverine,2.0,12.0,566.2704\n0,The Sacrifice,8.33,0.0,0.0\n65,Three Faces in th... (15766 total length)",
+		"fixedNames": { "The Oppulent": "The Opulent" },
+		"minimumCardPrice": 50,
+		"notCards": ["The Iron Bard"],
+		"records": [
+			{
+				"calculated": 3.7799999713897705,
+				"name": "Underground Forest",
+				"realWeight": 1601.654541015625,
+				"stackSize": 12,
+				"total": 45.36000061035156
+			},
+			{
+				"calculated": 1,
+				"name": "The Coming Storm",
+				"realWeight": 2465.90869140625,
+				"stackSize": 16,
+				"total": 16
+			},
+			{ "calculated": 0, "name": "Divine Beauty", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 0, "name": "The Wedding Gift", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 0, "name": "A Dusty Memory", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 5, "name": "Costly Curio", "realWeight": 430.7764892578125, "stackSize": 5, "total": 25 },
+			{ "calculated": 1, "name": "Prosperity", "realWeight": 12020.810546875, "stackSize": 46, "total": 46 },
+			{
+				"calculated": 2,
+				"name": "Dialla's Subjugation",
+				"realWeight": 430.7764892578125,
+				"stackSize": 5,
+				"total": 10
+			},
+			{ "calculated": 2, "name": "Buried Treasure", "realWeight": 713.582275390625, "stackSize": 7, "total": 14 },
+			{
+				"calculated": 5,
+				"name": "The Bitter Blossom",
+				"realWeight": 430.7764892578125,
+				"stackSize": 5,
+				"total": 25
+			},
+			{
+				"calculated": 18.530000686645508,
+				"name": "The Destination",
+				"realWeight": 0,
+				"stackSize": 0,
+				"total": 0
+			},
+			{
+				"calculated": 2,
+				"name": "Brush, Paint and Palette",
+				"realWeight": 871.8303833007812,
+				"stackSize": 8,
+				"total": 16
+			},
+			{ "calculated": 1, "name": "The Forsaken", "realWeight": 1218.419921875, "stackSize": 10, "total": 10 },
+			{
+				"calculated": 1.309999942779541,
+				"name": "Treasure Hunter",
+				"realWeight": 308.23858642578125,
+				"stackSize": 4,
+				"total": 5.239999771118164
+			},
+			{
+				"calculated": 1.9199999570846558,
+				"name": "Last Hope",
+				"realWeight": 5708.658203125,
+				"stackSize": 28,
+				"total": 53.7599983215332
+			},
+			{ "calculated": 6209.91015625, "name": "Unrequited Love", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 5,
+				"name": "The Tumbleweed",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 10
+			},
+			{ "calculated": 0, "name": "Soul Quenched", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 5, "name": "The Avenger", "realWeight": 200.20681762695312, "stackSize": 3, "total": 15 },
+			{ "calculated": 2, "name": "Azure Rage", "realWeight": 3707.88232421875, "stackSize": 21, "total": 42 },
+			{
+				"calculated": 1,
+				"name": "Grave Knowledge",
+				"realWeight": 2465.90869140625,
+				"stackSize": 16,
+				"total": 16
+			},
+			{ "calculated": 3, "name": "Dementophobia", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 2, "name": "Light and Truth", "realWeight": 1040.30517578125, "stackSize": 9, "total": 18 },
+			{ "calculated": 2, "name": "The Cacophony", "realWeight": 713.582275390625, "stackSize": 7, "total": 14 },
+			{
+				"calculated": 1.149999976158142,
+				"name": "The Feast",
+				"realWeight": 1805.9761962890625,
+				"stackSize": 13,
+				"total": 14.949999809265137
+			},
+			{ "calculated": 4.989999771118164, "name": "The Sustenance", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 5,
+				"name": "Alluring Bounty",
+				"realWeight": 200.20681762695312,
+				"stackSize": 3,
+				"total": 15
+			},
+			{
+				"calculated": 1,
+				"name": "Assassin's Favour",
+				"realWeight": 11630.966796875,
+				"stackSize": 45,
+				"total": 45
+			},
+			{ "calculated": 1, "name": "Blind Venture", "realWeight": 2942.427490234375, "stackSize": 18, "total": 18 },
+			{ "calculated": 467.9700012207031, "name": "Choking Guilt", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 1.6699999570846558,
+				"name": "Coveted Possession",
+				"realWeight": 2465.90869140625,
+				"stackSize": 16,
+				"total": 26.719999313354492
+			},
+			{
+				"calculated": 5,
+				"name": "The Enthusiasts",
+				"realWeight": 566.2703857421875,
+				"stackSize": 6,
+				"total": 30
+			},
+			{ "calculated": 2, "name": "The Rabid Rhoa", "realWeight": 2700.6630859375, "stackSize": 17, "total": 34 },
+			{ "calculated": 7, "name": "Something Dark", "realWeight": 566.2703857421875, "stackSize": 6, "total": 42 },
+			{ "calculated": 2, "name": "The Wretched", "realWeight": 3446.2119140625, "stackSize": 20, "total": 40 },
+			{
+				"calculated": 1.4700000286102295,
+				"name": "Lucky Connections",
+				"realWeight": 5108.07177734375,
+				"stackSize": 26,
+				"total": 38.220001220703125
+			},
+			{ "calculated": 6, "name": "Dying Light", "realWeight": 38.529823303222656, "stackSize": 1, "total": 6 },
+			{ "calculated": 1, "name": "Glimmer of Hope", "realWeight": 11630.966796875, "stackSize": 45, "total": 45 },
+			{ "calculated": 1, "name": "The Penitent", "realWeight": 6017.19384765625, "stackSize": 29, "total": 29 },
+			{
+				"calculated": 1,
+				"name": "The Drunken Aristocrat",
+				"realWeight": 2465.90869140625,
+				"stackSize": 16,
+				"total": 16
+			},
+			{
+				"calculated": 1,
+				"name": "Alone in the Darkness",
+				"realWeight": 3446.2119140625,
+				"stackSize": 20,
+				"total": 20
+			},
+			{ "calculated": 1, "name": "Cursed Words", "realWeight": 4530.1630859375, "stackSize": 24, "total": 24 },
+			{ "calculated": 1, "name": "The Dragon", "realWeight": 6650.2734375, "stackSize": 31, "total": 31 },
+			{ "calculated": 38.79999923706055, "name": "Brother's Stash", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 1,
+				"name": "Struck by Lightning",
+				"realWeight": 8322.44140625,
+				"stackSize": 36,
+				"total": 36
+			},
+			{
+				"calculated": 1.9199999570846558,
+				"name": "The Master",
+				"realWeight": 566.2703857421875,
+				"stackSize": 6,
+				"total": 11.519999504089355
+			},
+			{
+				"calculated": 2,
+				"name": "The Cataclysm",
+				"realWeight": 1405.6785888671875,
+				"stackSize": 11,
+				"total": 22
+			},
+			{ "calculated": 2, "name": "Lucky Deck", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 4,
+				"name": "The Price of Prescience",
+				"realWeight": 200.20681762695312,
+				"stackSize": 3,
+				"total": 12
+			},
+			{ "calculated": 2, "name": "The Primordial", "realWeight": 713.582275390625, "stackSize": 7, "total": 14 },
+			{
+				"calculated": 2.7699999809265137,
+				"name": "The Saint's Treasure",
+				"realWeight": 566.2703857421875,
+				"stackSize": 6,
+				"total": 16.619998931884766
+			},
+			{ "calculated": 1, "name": "Rats", "realWeight": 18809.814453125, "stackSize": 62, "total": 62 },
+			{
+				"calculated": 1,
+				"name": "Boundless Realms",
+				"realWeight": 3707.88232421875,
+				"stackSize": 21,
+				"total": 21
+			},
+			{ "calculated": 30, "name": "Deadly Joy", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 3.9600000381469727,
+				"name": "Prometheus' Armoury",
+				"realWeight": 0,
+				"stackSize": 0,
+				"total": 0
+			},
+			{
+				"calculated": 1,
+				"name": "Thunderous Skies",
+				"realWeight": 7978.09228515625,
+				"stackSize": 35,
+				"total": 35
+			},
+			{
+				"calculated": 1.399999976158142,
+				"name": "The Battle Born",
+				"realWeight": 6017.19384765625,
+				"stackSize": 29,
+				"total": 40.599998474121094
+			},
+			{ "calculated": 3, "name": "The Celestial Stone", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 4.989999771118164,
+				"name": "The Dreamer",
+				"realWeight": 430.7764892578125,
+				"stackSize": 5,
+				"total": 24.94999885559082
+			},
+			{ "calculated": 5, "name": "The Emptiness", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 1, "name": "The Gemcutter", "realWeight": 14033.056640625, "stackSize": 51, "total": 51 },
+			{
+				"calculated": 3.190000057220459,
+				"name": "The Tyrant",
+				"realWeight": 1040.30517578125,
+				"stackSize": 9,
+				"total": 28.71000099182129
+			},
+			{
+				"calculated": 1.7699999809265137,
+				"name": "The Rite of Elements",
+				"realWeight": 2238.38037109375,
+				"stackSize": 15,
+				"total": 26.549999237060547
+			},
+			{
+				"calculated": 1.3799999952316284,
+				"name": "The Union",
+				"realWeight": 4816.22802734375,
+				"stackSize": 25,
+				"total": 34.5
+			},
+			{ "calculated": 2, "name": "The Hoarder", "realWeight": 2465.90869140625, "stackSize": 16, "total": 32 },
+			{
+				"calculated": 2,
+				"name": "The Tinkerer's Table",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 4
+			},
+			{ "calculated": 2, "name": "Tranquillity", "realWeight": 1218.419921875, "stackSize": 10, "total": 20 },
+			{ "calculated": 0, "name": "Friendship", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 29.100000381469727,
+				"name": "The One That Got Away",
+				"realWeight": 0,
+				"stackSize": 0,
+				"total": 0
+			},
+			{
+				"calculated": 1.7100000381469727,
+				"name": "The Wolf's Shadow",
+				"realWeight": 3975.859375,
+				"stackSize": 22,
+				"total": 37.62000274658203
+			},
+			{
+				"calculated": 5,
+				"name": "The Last One Standing",
+				"realWeight": 1040.30517578125,
+				"stackSize": 9,
+				"total": 45
+			},
+			{ "calculated": 0, "name": "Ever-Changing", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 2,
+				"name": "Demigod's Wager",
+				"realWeight": 430.7764892578125,
+				"stackSize": 5,
+				"total": 10
+			},
+			{ "calculated": 16.049999237060547, "name": "Duality", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 10, "name": "Eternal Bonds", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 1, "name": "Rain of Chaos", "realWeight": 121465.9921875, "stackSize": 215, "total": 215 },
+			{ "calculated": 9827.3701171875, "name": "The Apothecary", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 7.760000228881836,
+				"name": "Home",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 7.760000228881836
+			},
+			{ "calculated": 4.409999847412109, "name": "Dark Dreams", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 1, "name": "The Demoness", "realWeight": 10864.2490234375, "stackSize": 43, "total": 43 },
+			{
+				"calculated": 2.200000047683716,
+				"name": "The Easy Stroll",
+				"realWeight": 1040.30517578125,
+				"stackSize": 9,
+				"total": 19.80000114440918
+			},
+			{
+				"calculated": 5.130000114440918,
+				"name": "The Eye of Terror",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 10.260000228881836
+			},
+			{
+				"calculated": 2.5799999237060547,
+				"name": "The Golden Era",
+				"realWeight": 1218.419921875,
+				"stackSize": 10,
+				"total": 25.799999237060547
+			},
+			{
+				"calculated": 3.7100000381469727,
+				"name": "The Hale Heart",
+				"realWeight": 200.20681762695312,
+				"stackSize": 3,
+				"total": 11.130000114440918
+			},
+			{ "calculated": 1, "name": "The Journey", "realWeight": 1040.30517578125, "stackSize": 9, "total": 9 },
+			{ "calculated": 10, "name": "The Aspirant", "realWeight": 38.529823303222656, "stackSize": 1, "total": 10 },
+			{ "calculated": 1, "name": "The Cache", "realWeight": 3707.88232421875, "stackSize": 21, "total": 21 },
+			{
+				"calculated": 1.7799999713897705,
+				"name": "The Mercenary",
+				"realWeight": 871.8303833007812,
+				"stackSize": 8,
+				"total": 14.239999771118164
+			},
+			{ "calculated": 2, "name": "The Bones", "realWeight": 308.23858642578125, "stackSize": 4, "total": 8 },
+			{ "calculated": 20, "name": "The Artist", "realWeight": 108.97879791259766, "stackSize": 2, "total": 40 },
+			{
+				"calculated": 2.890000104904175,
+				"name": "The Breach",
+				"realWeight": 1040.30517578125,
+				"stackSize": 9,
+				"total": 26.010000228881836
+			},
+			{ "calculated": 1061.3800048828125, "name": "The Fiend", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 2,
+				"name": "Lysah's Respite",
+				"realWeight": 3191.004638671875,
+				"stackSize": 19,
+				"total": 38
+			},
+			{ "calculated": 1, "name": "The Oath", "realWeight": 1405.6785888671875, "stackSize": 11, "total": 11 },
+			{
+				"calculated": 27.149999618530273,
+				"name": "A Fate Worse Than Death",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 54.29999923706055
+			},
+			{
+				"calculated": 3,
+				"name": "Draped in Dreams",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 6
+			},
+			{ "calculated": 2, "name": "The Beast", "realWeight": 1040.30517578125, "stackSize": 9, "total": 18 },
+			{
+				"calculated": 2,
+				"name": "The Formless Sea",
+				"realWeight": 3707.88232421875,
+				"stackSize": 21,
+				"total": 42
+			},
+			{ "calculated": 1, "name": "Hope", "realWeight": 1218.419921875, "stackSize": 10, "total": 10 },
+			{
+				"calculated": 2.9100000858306885,
+				"name": "The Lord of Celebration",
+				"realWeight": 566.2703857421875,
+				"stackSize": 6,
+				"total": 17.46000099182129
+			},
+			{ "calculated": 1, "name": "Anarchy's Price", "realWeight": 713.582275390625, "stackSize": 7, "total": 7 },
+			{ "calculated": 1, "name": "The Army of Blood", "realWeight": 9025.5234375, "stackSize": 38, "total": 38 },
+			{ "calculated": 7.179999828338623, "name": "The Damned", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 1,
+				"name": "The One With All",
+				"realWeight": 2238.38037109375,
+				"stackSize": 15,
+				"total": 15
+			},
+			{
+				"calculated": 2,
+				"name": "The Scarred Meadow",
+				"realWeight": 11245.4287109375,
+				"stackSize": 44,
+				"total": 88
+			},
+			{
+				"calculated": 2,
+				"name": "Earth Drinker",
+				"realWeight": 1805.9761962890625,
+				"stackSize": 13,
+				"total": 26
+			},
+			{ "calculated": 2, "name": "The Skeleton", "realWeight": 8322.44140625, "stackSize": 36, "total": 72 },
+			{
+				"calculated": 4.800000190734863,
+				"name": "Azyran's Reward",
+				"realWeight": 200.20681762695312,
+				"stackSize": 3,
+				"total": 14.40000057220459
+			},
+			{
+				"calculated": 5,
+				"name": "Chaotic Disposition",
+				"realWeight": 5405.58447265625,
+				"stackSize": 27,
+				"total": 135
+			},
+			{
+				"calculated": 2.0899999141693115,
+				"name": "The Dark Mage",
+				"realWeight": 713.582275390625,
+				"stackSize": 7,
+				"total": 14.629999160766602
+			},
+			{
+				"calculated": 3.0999999046325684,
+				"name": "The Rabbit's Foot",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 6.199999809265137
+			},
+			{
+				"calculated": 20.15999984741211,
+				"name": "Doryani's Epiphany",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 40.31999969482422
+			},
+			{ "calculated": 2, "name": "Broken Truce", "realWeight": 1805.9761962890625, "stackSize": 13, "total": 26 },
+			{
+				"calculated": 2.8299999237060547,
+				"name": "No Traces",
+				"realWeight": 2700.6630859375,
+				"stackSize": 17,
+				"total": 48.11000061035156
+			},
+			{ "calculated": 1, "name": "The Fool", "realWeight": 4816.22802734375, "stackSize": 25, "total": 25 },
+			{ "calculated": 1, "name": "The Surgeon", "realWeight": 4249.998046875, "stackSize": 23, "total": 23 },
+			{
+				"calculated": 2.859999895095825,
+				"name": "The Innocent",
+				"realWeight": 713.582275390625,
+				"stackSize": 7,
+				"total": 20.01999855041504
+			},
+			{ "calculated": 1, "name": "The Visionary", "realWeight": 9384.1279296875, "stackSize": 39, "total": 39 },
+			{ "calculated": 1, "name": "Hubris", "realWeight": 6017.19384765625, "stackSize": 29, "total": 29 },
+			{
+				"calculated": 1,
+				"name": "Jack in the Box",
+				"realWeight": 6017.19384765625,
+				"stackSize": 29,
+				"total": 29
+			},
+			{ "calculated": 1, "name": "The Catalyst", "realWeight": 22083.63671875, "stackSize": 69, "total": 69 },
+			{
+				"calculated": 1.75,
+				"name": "Boon of the First Ones",
+				"realWeight": 871.8303833007812,
+				"stackSize": 8,
+				"total": 14
+			},
+			{
+				"calculated": 1,
+				"name": "The Ruthless Ceinture",
+				"realWeight": 2238.38037109375,
+				"stackSize": 15,
+				"total": 15
+			},
+			{
+				"calculated": 1.4800000190734863,
+				"name": "The Scavenger",
+				"realWeight": 2238.38037109375,
+				"stackSize": 15,
+				"total": 22.200000762939453
+			},
+			{ "calculated": 1, "name": "The Scholar", "realWeight": 36241.3046875, "stackSize": 96, "total": 96 },
+			{
+				"calculated": 2.7300000190734863,
+				"name": "The Spark and the Flame",
+				"realWeight": 430.7764892578125,
+				"stackSize": 5,
+				"total": 13.649999618530273
+			},
+			{ "calculated": 90, "name": "Wealth and Power", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 2.25,
+				"name": "The Deal",
+				"realWeight": 1405.6785888671875,
+				"stackSize": 11,
+				"total": 24.75
+			},
+			{
+				"calculated": 2,
+				"name": "The Lord in Black",
+				"realWeight": 566.2703857421875,
+				"stackSize": 6,
+				"total": 12
+			},
+			{ "calculated": 2, "name": "Disdain", "realWeight": 566.2703857421875, "stackSize": 6, "total": 12 },
+			{
+				"calculated": 10,
+				"name": "Gemcutter's Mercy",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 20
+			},
+			{ "calculated": 3, "name": "Audacity", "realWeight": 108.97879791259766, "stackSize": 2, "total": 6 },
+			{
+				"calculated": 2,
+				"name": "Emperor of Purity",
+				"realWeight": 1805.9761962890625,
+				"stackSize": 13,
+				"total": 26
+			},
+			{
+				"calculated": 3,
+				"name": "Parasitic Passengers",
+				"realWeight": 713.582275390625,
+				"stackSize": 7,
+				"total": 21
+			},
+			{ "calculated": 0, "name": "Auspicious Ambitions", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 2, "name": "Cameria's Cut", "realWeight": 308.23858642578125, "stackSize": 4, "total": 8 },
+			{ "calculated": 1, "name": "Shard of Fate", "realWeight": 2700.6630859375, "stackSize": 17, "total": 17 },
+			{ "calculated": 3.190000057220459, "name": "The Awakened", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 13972.25, "name": "House of Mirrors", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 1, "name": "The Puzzle", "realWeight": 2465.90869140625, "stackSize": 16, "total": 16 },
+			{ "calculated": 0, "name": "Blessing of God", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 2, "name": "The Garish Power", "realWeight": 4249.998046875, "stackSize": 23, "total": 46 },
+			{
+				"calculated": 2,
+				"name": "The Wilted Rose",
+				"realWeight": 1601.654541015625,
+				"stackSize": 12,
+				"total": 24
+			},
+			{ "calculated": 1, "name": "The Opulent", "realWeight": 13215.728515625, "stackSize": 49, "total": 49 },
+			{
+				"calculated": 40,
+				"name": "Luminous Trove",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 40
+			},
+			{ "calculated": 8.069999694824219, "name": "The Undisputed", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 8.5,
+				"name": "Imperfect Memories",
+				"realWeight": 430.7764892578125,
+				"stackSize": 5,
+				"total": 42.5
+			},
+			{ "calculated": 10, "name": "The Leviathan", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 2,
+				"name": "Turn the Other Cheek",
+				"realWeight": 8671.6064453125,
+				"stackSize": 37,
+				"total": 74
+			},
+			{ "calculated": 2, "name": "Prejudice", "realWeight": 1405.6785888671875, "stackSize": 11, "total": 22 },
+			{
+				"calculated": 3.630000114440918,
+				"name": "The Wind",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 7.260000228881836
+			},
+			{
+				"calculated": 2.8399999141693115,
+				"name": "Burning Blood",
+				"realWeight": 200.20681762695312,
+				"stackSize": 3,
+				"total": 8.519999504089355
+			},
+			{
+				"calculated": 5,
+				"name": "The Dungeon Master",
+				"realWeight": 566.2703857421875,
+				"stackSize": 6,
+				"total": 30
+			},
+			{
+				"calculated": 4.150000095367432,
+				"name": "The Queen",
+				"realWeight": 430.7764892578125,
+				"stackSize": 5,
+				"total": 20.75
+			},
+			{
+				"calculated": 2.4000000953674316,
+				"name": "The Surveyor",
+				"realWeight": 3707.88232421875,
+				"stackSize": 21,
+				"total": 50.400001525878906
+			},
+			{
+				"calculated": 2,
+				"name": "From Bone to Ashes",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 4
+			},
+			{
+				"calculated": 1.8600000143051147,
+				"name": "Lingering Remnants",
+				"realWeight": 1218.419921875,
+				"stackSize": 10,
+				"total": 18.600000381469727
+			},
+			{
+				"calculated": 50.40999984741211,
+				"name": "The Sephirot",
+				"realWeight": 871.8303833007812,
+				"stackSize": 8,
+				"total": 403.2799987792969
+			},
+			{ "calculated": 5, "name": "The Professor", "realWeight": 38.529823303222656, "stackSize": 1, "total": 5 },
+			{
+				"calculated": 2.319999933242798,
+				"name": "Checkmate",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 4.639999866485596
+			},
+			{
+				"calculated": 1,
+				"name": "Forbidden Power",
+				"realWeight": 1805.9761962890625,
+				"stackSize": 13,
+				"total": 13
+			},
+			{
+				"calculated": 2,
+				"name": "Sambodhi's Wisdom",
+				"realWeight": 1601.654541015625,
+				"stackSize": 12,
+				"total": 24
+			},
+			{
+				"calculated": 108.08999633789062,
+				"name": "Succor of the Sinless",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 108.08999633789062
+			},
+			{ "calculated": 1, "name": "The Aesthete", "realWeight": 6017.19384765625, "stackSize": 29, "total": 29 },
+			{ "calculated": 1597.56005859375, "name": "The Demon", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 2.369999885559082,
+				"name": "The Bear Woman",
+				"realWeight": 1405.6785888671875,
+				"stackSize": 11,
+				"total": 26.06999969482422
+			},
+			{ "calculated": 1, "name": "The Hermit", "realWeight": 12813.236328125, "stackSize": 48, "total": 48 },
+			{
+				"calculated": 20,
+				"name": "Beauty Through Death",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 40
+			},
+			{ "calculated": 2, "name": "The Lich", "realWeight": 3707.88232421875, "stackSize": 21, "total": 42 },
+			{ "calculated": 21.290000915527344, "name": "The Gulf", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 4,
+				"name": "Silence and Frost",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 4
+			},
+			{ "calculated": 1, "name": "The Betrayal", "realWeight": 3446.2119140625, "stackSize": 20, "total": 20 },
+			{
+				"calculated": 3.190000057220459,
+				"name": "Lachrymal Necrosis",
+				"realWeight": 308.23858642578125,
+				"stackSize": 4,
+				"total": 12.760000228881836
+			},
+			{ "calculated": 1, "name": "The Lover", "realWeight": 59766, "stackSize": 134, "total": 134 },
+			{
+				"calculated": 1,
+				"name": "The Master Artisan",
+				"realWeight": 7978.09228515625,
+				"stackSize": 35,
+				"total": 35
+			},
+			{
+				"calculated": 1.9900000095367432,
+				"name": "The Gladiator",
+				"realWeight": 4249.998046875,
+				"stackSize": 23,
+				"total": 45.77000045776367
+			},
+			{
+				"calculated": 1,
+				"name": "The Fathomless Depths",
+				"realWeight": 1040.30517578125,
+				"stackSize": 9,
+				"total": 9
+			},
+			{
+				"calculated": 1.809999942779541,
+				"name": "The Calling",
+				"realWeight": 4530.1630859375,
+				"stackSize": 24,
+				"total": 43.439998626708984
+			},
+			{
+				"calculated": 110.76000213623047,
+				"name": "Desecrated Virtue",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 110.76000213623047
+			},
+			{
+				"calculated": 3.1700000762939453,
+				"name": "Misery in Darkness",
+				"realWeight": 0,
+				"stackSize": 0,
+				"total": 0
+			},
+			{
+				"calculated": 7430.22021484375,
+				"name": "The Price of Devotion",
+				"realWeight": 0,
+				"stackSize": 0,
+				"total": 0
+			},
+			{ "calculated": 1, "name": "A Sea of Blue", "realWeight": 7638.62841796875, "stackSize": 34, "total": 34 },
+			{ "calculated": 2, "name": "The Mountain", "realWeight": 6650.2734375, "stackSize": 31, "total": 62 },
+			{ "calculated": 7.420000076293945, "name": "Fateful Meeting", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 1.090000033378601,
+				"name": "Doedre's Madness",
+				"realWeight": 14033.056640625,
+				"stackSize": 51,
+				"total": 55.59000015258789
+			},
+			{ "calculated": 10, "name": "Remembrance", "realWeight": 108.97879791259766, "stackSize": 2, "total": 20 },
+			{
+				"calculated": 2.069999933242798,
+				"name": "The Offering",
+				"realWeight": 308.23858642578125,
+				"stackSize": 4,
+				"total": 8.279999732971191
+			},
+			{
+				"calculated": 2.200000047683716,
+				"name": "The Darkest Dream",
+				"realWeight": 566.2703857421875,
+				"stackSize": 6,
+				"total": 13.200000762939453
+			},
+			{
+				"calculated": 779.9500122070312,
+				"name": "The Shieldbearer",
+				"realWeight": 0,
+				"stackSize": 0,
+				"total": 0
+			},
+			{
+				"calculated": 1,
+				"name": "More is Never Enough",
+				"realWeight": 871.8303833007812,
+				"stackSize": 8,
+				"total": 8
+			},
+			{ "calculated": 0, "name": "Birth of the Three", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 1,
+				"name": "Lantador's Lost Love",
+				"realWeight": 17907.04296875,
+				"stackSize": 60,
+				"total": 60
+			},
+			{ "calculated": 5, "name": "The Bargain", "realWeight": 308.23858642578125, "stackSize": 4, "total": 20 },
+			{ "calculated": 2, "name": "A Dab of Ink", "realWeight": 871.8303833007812, "stackSize": 8, "total": 16 },
+			{
+				"calculated": 2.700000047683716,
+				"name": "The Blessing of Moosh",
+				"realWeight": 1405.6785888671875,
+				"stackSize": 11,
+				"total": 29.700000762939453
+			},
+			{ "calculated": 2, "name": "The Card Sharp", "realWeight": 713.582275390625, "stackSize": 7, "total": 14 },
+			{
+				"calculated": 12.949999809265137,
+				"name": "Monochrome",
+				"realWeight": 430.7764892578125,
+				"stackSize": 5,
+				"total": 64.75
+			},
+			{
+				"calculated": 155.99000549316406,
+				"name": "The Price of Loyalty",
+				"realWeight": 0,
+				"stackSize": 0,
+				"total": 0
+			},
+			{
+				"calculated": 5,
+				"name": "The Progeny of Lunaris",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 5
+			},
+			{
+				"calculated": 20,
+				"name": "Winter's Embrace",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 20
+			},
+			{ "calculated": 0, "name": "Man With Bear", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 0, "name": "Squandered Prosperity", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 1, "name": "The Trial", "realWeight": 5108.07177734375, "stackSize": 26, "total": 26 },
+			{ "calculated": 10.300000190734863, "name": "The Old Man", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 20, "name": "The Academic", "realWeight": 108.97879791259766, "stackSize": 2, "total": 40 },
+			{
+				"calculated": 0.9100000262260437,
+				"name": "Imperial Legacy",
+				"realWeight": 11245.4287109375,
+				"stackSize": 44,
+				"total": 40.040000915527344
+			},
+			{ "calculated": 0, "name": "A Chilling Wind", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 2,
+				"name": "Astral Protection",
+				"realWeight": 308.23858642578125,
+				"stackSize": 4,
+				"total": 8
+			},
+			{
+				"calculated": 3,
+				"name": "Haunting Shadows",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 6
+			},
+			{ "calculated": 0, "name": "Poisoned Faith", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 1, "name": "Her Mask", "realWeight": 15289.3017578125, "stackSize": 54, "total": 54 },
+			{
+				"calculated": 3,
+				"name": "Brotherhood in Exile",
+				"realWeight": 200.20681762695312,
+				"stackSize": 3,
+				"total": 9
+			},
+			{
+				"calculated": 2.049999952316284,
+				"name": "Harmony of Souls",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 2.049999952316284
+			},
+			{ "calculated": 0, "name": "The Return of the Rat", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 0, "name": "Alivia's Grace", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 1.399999976158142,
+				"name": "The Inventor",
+				"realWeight": 5108.07177734375,
+				"stackSize": 26,
+				"total": 36.39999771118164
+			},
+			{ "calculated": 3.630000114440918, "name": "Divine Justice", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 1, "name": "Loyalty", "realWeight": 29134.94140625, "stackSize": 83, "total": 83 },
+			{
+				"calculated": 2,
+				"name": "Merciless Armament",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 4
+			},
+			{
+				"calculated": 1.2400000095367432,
+				"name": "The Siren",
+				"realWeight": 713.582275390625,
+				"stackSize": 7,
+				"total": 8.680000305175781
+			},
+			{
+				"calculated": 8.84000015258789,
+				"name": "Gift of Asenath",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 8.84000015258789
+			},
+			{
+				"calculated": 27.8700008392334,
+				"name": "The Dragon's Heart",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 27.8700008392334
+			},
+			{ "calculated": 1294.52001953125, "name": "The Immortal", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 1,
+				"name": "The Survivalist",
+				"realWeight": 7304.11962890625,
+				"stackSize": 33,
+				"total": 33
+			},
+			{ "calculated": 4.199999809265137, "name": "The Enforcer", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 2,
+				"name": "Gift of the Gemling Queen",
+				"realWeight": 2465.90869140625,
+				"stackSize": 16,
+				"total": 32
+			},
+			{ "calculated": 1, "name": "Humility", "realWeight": 9025.5234375, "stackSize": 38, "total": 38 },
+			{
+				"calculated": 2,
+				"name": "The Spoiled Prince",
+				"realWeight": 1040.30517578125,
+				"stackSize": 9,
+				"total": 18
+			},
+			{
+				"calculated": 1.9700000286102295,
+				"name": "Acclimatisation",
+				"realWeight": 1040.30517578125,
+				"stackSize": 9,
+				"total": 17.729999542236328
+			},
+			{
+				"calculated": 895.5999755859375,
+				"name": "Love Through Ice",
+				"realWeight": 0,
+				"stackSize": 0,
+				"total": 0
+			},
+			{
+				"calculated": 2.890000104904175,
+				"name": "The Twilight Moon",
+				"realWeight": 430.7764892578125,
+				"stackSize": 5,
+				"total": 14.450000762939453
+			},
+			{
+				"calculated": 5.800000190734863,
+				"name": "The Forgotten Treasure",
+				"realWeight": 308.23858642578125,
+				"stackSize": 4,
+				"total": 23.200000762939453
+			},
+			{
+				"calculated": 4.300000190734863,
+				"name": "Abandoned Wealth",
+				"realWeight": 566.2703857421875,
+				"stackSize": 6,
+				"total": 25.80000114440918
+			},
+			{ "calculated": 2, "name": "The Valkyrie", "realWeight": 3975.859375, "stackSize": 22, "total": 44 },
+			{ "calculated": 1, "name": "The Sigil", "realWeight": 7304.11962890625, "stackSize": 33, "total": 33 },
+			{ "calculated": 0, "name": "Brother's Gift", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 4, "name": "Mawr Blaidd", "realWeight": 430.7764892578125, "stackSize": 5, "total": 20 },
+			{ "calculated": 2, "name": "The Admirer", "realWeight": 2018.3154296875, "stackSize": 14, "total": 28 },
+			{ "calculated": 2, "name": "The Warlord", "realWeight": 871.8303833007812, "stackSize": 8, "total": 16 },
+			{ "calculated": 0, "name": "Luck of the Vaal", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 0, "name": "A Note in the Wind", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 5, "name": "Bijoux", "realWeight": 308.23858642578125, "stackSize": 4, "total": 20 },
+			{
+				"calculated": 5.28000020980835,
+				"name": "The Long Con",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 5.28000020980835
+			},
+			{
+				"calculated": 4.329999923706055,
+				"name": "Chasing Risk",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 8.65999984741211
+			},
+			{ "calculated": 2, "name": "The Obscured", "realWeight": 430.7764892578125, "stackSize": 5, "total": 10 },
+			{
+				"calculated": 2,
+				"name": "The Tireless Extractor",
+				"realWeight": 11245.4287109375,
+				"stackSize": 44,
+				"total": 88
+			},
+			{ "calculated": 1, "name": "The Tower", "realWeight": 5708.658203125, "stackSize": 28, "total": 28 },
+			{ "calculated": 2, "name": "Death", "realWeight": 1040.30517578125, "stackSize": 9, "total": 18 },
+			{ "calculated": 1, "name": "The Web", "realWeight": 6650.2734375, "stackSize": 31, "total": 31 },
+			{
+				"calculated": 1.5499999523162842,
+				"name": "The Conduit",
+				"realWeight": 430.7764892578125,
+				"stackSize": 5,
+				"total": 7.75
+			},
+			{
+				"calculated": 202.7899932861328,
+				"name": "The Cheater",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 202.7899932861328
+			},
+			{ "calculated": 1, "name": "The Journalist", "realWeight": 10864.2490234375, "stackSize": 43, "total": 43 },
+			{
+				"calculated": 2,
+				"name": "The Unexpected Prize",
+				"realWeight": 200.20681762695312,
+				"stackSize": 3,
+				"total": 6
+			},
+			{
+				"calculated": 1.2300000190734863,
+				"name": "The Warden",
+				"realWeight": 8671.6064453125,
+				"stackSize": 37,
+				"total": 45.51000213623047
+			},
+			{
+				"calculated": 1,
+				"name": "The Carrion Crow",
+				"realWeight": 12414.9169921875,
+				"stackSize": 47,
+				"total": 47
+			},
+			{
+				"calculated": 3,
+				"name": "Arrogance of the Vaal",
+				"realWeight": 1405.6785888671875,
+				"stackSize": 11,
+				"total": 33
+			},
+			{ "calculated": 3, "name": "Bowyer's Dream", "realWeight": 108.97879791259766, "stackSize": 2, "total": 6 },
+			{
+				"calculated": 1,
+				"name": "Destined to Crumble",
+				"realWeight": 43244.67578125,
+				"stackSize": 108,
+				"total": 108
+			},
+			{
+				"calculated": 2.3399999141693115,
+				"name": "The Cursed King",
+				"realWeight": 713.582275390625,
+				"stackSize": 7,
+				"total": 16.3799991607666
+			},
+			{
+				"calculated": 1,
+				"name": "Scholar of the Seas",
+				"realWeight": 1601.654541015625,
+				"stackSize": 12,
+				"total": 12
+			},
+			{ "calculated": 2, "name": "The Hunger", "realWeight": 308.23858642578125, "stackSize": 4, "total": 8 },
+			{
+				"calculated": 2,
+				"name": "Immortal Resolve",
+				"realWeight": 430.7764892578125,
+				"stackSize": 5,
+				"total": 10
+			},
+			{
+				"calculated": 6.449999809265137,
+				"name": "A Modest Request",
+				"realWeight": 0,
+				"stackSize": 0,
+				"total": 0
+			},
+			{
+				"calculated": 2,
+				"name": "Reckless Ambition",
+				"realWeight": 871.8303833007812,
+				"stackSize": 8,
+				"total": 16
+			},
+			{ "calculated": 2339.85009765625, "name": "The Doctor", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 23.65999984741211,
+				"name": "The Enlightened",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 23.65999984741211
+			},
+			{ "calculated": 3, "name": "The Seeker", "realWeight": 200.20681762695312, "stackSize": 3, "total": 9 },
+			{
+				"calculated": 1.1299999952316284,
+				"name": "The Standoff",
+				"realWeight": 4530.1630859375,
+				"stackSize": 24,
+				"total": 27.119998931884766
+			},
+			{
+				"calculated": 4.269999980926514,
+				"name": "The Wolven King's Bite",
+				"realWeight": 430.7764892578125,
+				"stackSize": 5,
+				"total": 21.350000381469727
+			},
+			{ "calculated": 0, "name": "Vile Power", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 0, "name": "The Mayor", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 1, "name": "Might is Right", "realWeight": 2465.90869140625, "stackSize": 16, "total": 16 },
+			{
+				"calculated": 3.569999933242798,
+				"name": "The Eldritch Decay",
+				"realWeight": 200.20681762695312,
+				"stackSize": 3,
+				"total": 10.710000038146973
+			},
+			{
+				"calculated": 2.0299999713897705,
+				"name": "The Fox in the Brambles",
+				"realWeight": 200.20681762695312,
+				"stackSize": 3,
+				"total": 6.090000152587891
+			},
+			{
+				"calculated": 5,
+				"name": "A Stone Perfected",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 10
+			},
+			{ "calculated": 1, "name": "The Gambler", "realWeight": 4816.22802734375, "stackSize": 25, "total": 25 },
+			{ "calculated": 1, "name": "The Witch", "realWeight": 15289.3017578125, "stackSize": 54, "total": 54 },
+			{ "calculated": 2, "name": "The Wolverine", "realWeight": 566.2703857421875, "stackSize": 6, "total": 12 },
+			{ "calculated": 8.329999923706055, "name": "The Sacrifice", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 3,
+				"name": "Three Faces in the Dark",
+				"realWeight": 20191.4296875,
+				"stackSize": 65,
+				"total": 195
+			},
+			{ "calculated": 0, "name": "The Mad King", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 2.4600000381469727,
+				"name": "The Side Quest",
+				"realWeight": 308.23858642578125,
+				"stackSize": 4,
+				"total": 9.84000015258789
+			},
+			{
+				"calculated": 1.559999942779541,
+				"name": "Society's Remorse",
+				"realWeight": 0,
+				"stackSize": 0,
+				"total": 0
+			},
+			{ "calculated": 2, "name": "Endless Night", "realWeight": 108.97879791259766, "stackSize": 2, "total": 4 },
+			{
+				"calculated": 4.260000228881836,
+				"name": "Peaceful Moments",
+				"realWeight": 308.23858642578125,
+				"stackSize": 4,
+				"total": 17.040000915527344
+			},
+			{
+				"calculated": 15.699999809265137,
+				"name": "The Astromancer",
+				"realWeight": 0,
+				"stackSize": 0,
+				"total": 0
+			},
+			{ "calculated": 1, "name": "The Blazing Fire", "realWeight": 9747.359375, "stackSize": 40, "total": 40 },
+			{ "calculated": 3, "name": "Heterochromia", "realWeight": 1218.419921875, "stackSize": 10, "total": 30 },
+			{ "calculated": 1, "name": "Rain Tempter", "realWeight": 12020.810546875, "stackSize": 46, "total": 46 },
+			{ "calculated": 0, "name": "Treasures of the Vaal", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 1, "name": "Vanity", "realWeight": 2018.3154296875, "stackSize": 14, "total": 14 },
+			{
+				"calculated": 2,
+				"name": "The Dapper Prodigy",
+				"realWeight": 2465.90869140625,
+				"stackSize": 16,
+				"total": 32
+			},
+			{
+				"calculated": 1.5,
+				"name": "Vinia's Token",
+				"realWeight": 9384.1279296875,
+				"stackSize": 39,
+				"total": 58.5
+			},
+			{
+				"calculated": 1,
+				"name": "Cartographer's Delight",
+				"realWeight": 3446.2119140625,
+				"stackSize": 20,
+				"total": 20
+			},
+			{ "calculated": 0, "name": "The Devastator", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 3.3499999046325684,
+				"name": "A Familiar Call",
+				"realWeight": 0,
+				"stackSize": 0,
+				"total": 0
+			},
+			{
+				"calculated": 2,
+				"name": "Dark Temptation",
+				"realWeight": 11245.4287109375,
+				"stackSize": 44,
+				"total": 88
+			},
+			{
+				"calculated": 0.4300000071525574,
+				"name": "Further Invention",
+				"realWeight": 0,
+				"stackSize": 0,
+				"total": 0
+			},
+			{ "calculated": 1, "name": "The Harvester", "realWeight": 15289.3017578125, "stackSize": 54, "total": 54 },
+			{ "calculated": 3, "name": "Keeper's Corruption", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 1.5700000524520874,
+				"name": "The Body",
+				"realWeight": 6331.095703125,
+				"stackSize": 30,
+				"total": 47.10000228881836
+			},
+			{
+				"calculated": 5,
+				"name": "The Mind's Eyes",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 5
+			},
+			{ "calculated": 36.54999923706055, "name": "The Vast", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 1.3799999952316284, "name": "Rebirth", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 5,
+				"name": "Council of Cats",
+				"realWeight": 200.20681762695312,
+				"stackSize": 3,
+				"total": 15
+			},
+			{ "calculated": 0, "name": "The Valley of Steel Boxes", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 2, "name": "The Traitor", "realWeight": 1405.6785888671875, "stackSize": 11, "total": 22 },
+			{ "calculated": 1, "name": "The Sun", "realWeight": 10115.1611328125, "stackSize": 41, "total": 41 },
+			{
+				"calculated": 2.890000104904175,
+				"name": "Baited Expectations",
+				"realWeight": 430.7764892578125,
+				"stackSize": 5,
+				"total": 14.450000762939453
+			},
+			{ "calculated": 1, "name": "The Inoculated", "realWeight": 7304.11962890625, "stackSize": 33, "total": 33 },
+			{
+				"calculated": 2.690000057220459,
+				"name": "The Celestial Justicar",
+				"realWeight": 566.2703857421875,
+				"stackSize": 6,
+				"total": 16.139999389648438
+			},
+			{ "calculated": 5, "name": "The Last Supper", "realWeight": 1218.419921875, "stackSize": 10, "total": 50 },
+			{
+				"calculated": 4.050000190734863,
+				"name": "The Archmage's Right Hand",
+				"realWeight": 1405.6785888671875,
+				"stackSize": 11,
+				"total": 44.55000305175781
+			},
+			{
+				"calculated": 12.520000457763672,
+				"name": "The Patient",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 25.040000915527344
+			},
+			{
+				"calculated": 1,
+				"name": "Hunter's Resolve",
+				"realWeight": 7638.62841796875,
+				"stackSize": 34,
+				"total": 34
+			},
+			{ "calculated": 5, "name": "The Offspring", "realWeight": 871.8303833007812, "stackSize": 8, "total": 40 },
+			{ "calculated": 10, "name": "Darker Half", "realWeight": 108.97879791259766, "stackSize": 2, "total": 20 },
+			{
+				"calculated": 2.619999885559082,
+				"name": "Hunter's Reward",
+				"realWeight": 308.23858642578125,
+				"stackSize": 4,
+				"total": 10.479999542236328
+			},
+			{ "calculated": 2, "name": "The Landing", "realWeight": 430.7764892578125, "stackSize": 5, "total": 10 },
+			{
+				"calculated": 4.989999771118164,
+				"name": "The Soul",
+				"realWeight": 430.7764892578125,
+				"stackSize": 5,
+				"total": 24.94999885559082
+			},
+			{
+				"calculated": 25.760000228881836,
+				"name": "The Strategist",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 25.760000228881836
+			},
+			{
+				"calculated": 389.9800109863281,
+				"name": "Seven Years Bad Luck",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 389.9800109863281
+			},
+			{ "calculated": 1, "name": "The Twins", "realWeight": 5405.58447265625, "stackSize": 27, "total": 27 },
+			{ "calculated": 3, "name": "The Whiteout", "realWeight": 430.7764892578125, "stackSize": 5, "total": 15 },
+			{ "calculated": 2, "name": "Sambodhi's Vow", "realWeight": 3446.2119140625, "stackSize": 20, "total": 40 },
+			{
+				"calculated": 3.9800000190734863,
+				"name": "The Greatest Intentions",
+				"realWeight": 0,
+				"stackSize": 0,
+				"total": 0
+			},
+			{
+				"calculated": 1,
+				"name": "Terrible Secret of Space",
+				"realWeight": 308.23858642578125,
+				"stackSize": 4,
+				"total": 4
+			},
+			{ "calculated": 0, "name": "Matryoshka", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 3.680000066757202,
+				"name": "The Brawny Battle Mage",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 3.680000066757202
+			},
+			{
+				"calculated": 2,
+				"name": "The Messenger",
+				"realWeight": 1405.6785888671875,
+				"stackSize": 11,
+				"total": 22
+			},
+			{ "calculated": 10, "name": "The World Eater", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 2,
+				"name": "Triskaidekaphobia",
+				"realWeight": 200.20681762695312,
+				"stackSize": 3,
+				"total": 6
+			},
+			{ "calculated": 1, "name": "The Wolf", "realWeight": 3975.859375, "stackSize": 22, "total": 22 },
+			{
+				"calculated": 5.300000190734863,
+				"name": "The White Knight",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 5.300000190734863
+			},
+			{
+				"calculated": 1,
+				"name": "Call to the First Ones",
+				"realWeight": 1218.419921875,
+				"stackSize": 10,
+				"total": 10
+			},
+			{
+				"calculated": 1.0399999618530273,
+				"name": "The Wrath",
+				"realWeight": 8322.44140625,
+				"stackSize": 36,
+				"total": 37.439998626708984
+			},
+			{
+				"calculated": 4.989999771118164,
+				"name": "Judging Voices",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 4.989999771118164
+			},
+			{ "calculated": 4.579999923706055, "name": "Etched in Blood", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 1.7400000095367432,
+				"name": "The Encroaching Darkness",
+				"realWeight": 713.582275390625,
+				"stackSize": 7,
+				"total": 12.180000305175781
+			},
+			{ "calculated": 1, "name": "Emperor's Luck", "realWeight": 49387.8359375, "stackSize": 118, "total": 118 },
+			{
+				"calculated": 1,
+				"name": "The Doppelganger",
+				"realWeight": 14447.8095703125,
+				"stackSize": 52,
+				"total": 52
+			},
+			{
+				"calculated": 4,
+				"name": "The Forward Gaze",
+				"realWeight": 566.2703857421875,
+				"stackSize": 6,
+				"total": 24
+			},
+			{
+				"calculated": 4,
+				"name": "Desperate Crusade",
+				"realWeight": 200.20681762695312,
+				"stackSize": 3,
+				"total": 12
+			},
+			{
+				"calculated": 2,
+				"name": "Gemcutter's Promise",
+				"realWeight": 7978.09228515625,
+				"stackSize": 35,
+				"total": 70
+			},
+			{
+				"calculated": 16.350000381469727,
+				"name": "Magnum Opus",
+				"realWeight": 200.20681762695312,
+				"stackSize": 3,
+				"total": 49.05000305175781
+			},
+			{
+				"calculated": 2.369999885559082,
+				"name": "The Gentleman",
+				"realWeight": 713.582275390625,
+				"stackSize": 7,
+				"total": 16.59000015258789
+			},
+			{ "calculated": 1, "name": "The Poet", "realWeight": 2700.6630859375, "stackSize": 17, "total": 17 },
+			{
+				"calculated": 5,
+				"name": "The Prince of Darkness",
+				"realWeight": 430.7764892578125,
+				"stackSize": 5,
+				"total": 25
+			},
+			{ "calculated": 5, "name": "The Scout", "realWeight": 566.2703857421875, "stackSize": 6, "total": 30 },
+			{ "calculated": 1, "name": "The Summoner", "realWeight": 4249.998046875, "stackSize": 23, "total": 23 },
+			{
+				"calculated": 9.539999961853027,
+				"name": "The Chosen",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 19.079999923706055
+			},
+			{
+				"calculated": 5,
+				"name": "The Thaumaturgist",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 5
+			},
+			{ "calculated": 1, "name": "Boon of Justice", "realWeight": 8671.6064453125, "stackSize": 37, "total": 37 },
+			{
+				"calculated": 1,
+				"name": "Thirst for Knowledge",
+				"realWeight": 7304.11962890625,
+				"stackSize": 33,
+				"total": 33
+			},
+			{
+				"calculated": 4.75,
+				"name": "Void of the Elements",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 4.75
+			},
+			{
+				"calculated": 2.3399999141693115,
+				"name": "The Magma Crab",
+				"realWeight": 200.20681762695312,
+				"stackSize": 3,
+				"total": 7.0199995040893555
+			},
+			{ "calculated": 2, "name": "The Jester", "realWeight": 308.23858642578125, "stackSize": 4, "total": 8 },
+			{
+				"calculated": 2.9200000762939453,
+				"name": "The Porcupine",
+				"realWeight": 1805.9761962890625,
+				"stackSize": 13,
+				"total": 37.959999084472656
+			},
+			{
+				"calculated": 1.5800000429153442,
+				"name": "The Incantation",
+				"realWeight": 1805.9761962890625,
+				"stackSize": 13,
+				"total": 20.540000915527344
+			},
+			{
+				"calculated": 1.6399999856948853,
+				"name": "The Craving",
+				"realWeight": 308.23858642578125,
+				"stackSize": 4,
+				"total": 6.559999942779541
+			},
+			{ "calculated": 2, "name": "The Ethereal", "realWeight": 308.23858642578125, "stackSize": 4, "total": 8 },
+			{ "calculated": 5.309999942779541, "name": "Nook's Crown", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 0, "name": "The Finishing Touch", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 3, "name": "Dying Anguish", "realWeight": 2238.38037109375, "stackSize": 15, "total": 45 },
+			{
+				"calculated": 2.809999942779541,
+				"name": "A Mother's Parting Gift",
+				"realWeight": 1805.9761962890625,
+				"stackSize": 13,
+				"total": 36.529998779296875
+			},
+			{
+				"calculated": 4.989999771118164,
+				"name": "The Brittle Emperor",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 4.989999771118164
+			},
+			{ "calculated": 2, "name": "Left to Fate", "realWeight": 5708.658203125, "stackSize": 28, "total": 56 },
+			{
+				"calculated": 1.6200000047683716,
+				"name": "Lost Worlds",
+				"realWeight": 7304.11962890625,
+				"stackSize": 33,
+				"total": 53.459999084472656
+			},
+			{ "calculated": 1, "name": "The Endurance", "realWeight": 4249.998046875, "stackSize": 23, "total": 23 },
+			{ "calculated": 5, "name": "The Escape", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 4.829999923706055,
+				"name": "The Hive of Knowledge",
+				"realWeight": 0,
+				"stackSize": 0,
+				"total": 0
+			},
+			{
+				"calculated": 2,
+				"name": "The King's Heart",
+				"realWeight": 713.582275390625,
+				"stackSize": 7,
+				"total": 14
+			},
+			{
+				"calculated": 2.630000114440918,
+				"name": "The Life Thief",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 2.630000114440918
+			},
+			{ "calculated": 1, "name": "The Realm", "realWeight": 1601.654541015625, "stackSize": 12, "total": 12 },
+			{ "calculated": 2, "name": "The Deep Ones", "realWeight": 200.20681762695312, "stackSize": 3, "total": 6 },
+			{
+				"calculated": 3.0199999809265137,
+				"name": "The Risk",
+				"realWeight": 3975.859375,
+				"stackSize": 22,
+				"total": 66.44000244140625
+			},
+			{ "calculated": 10, "name": "The Shortcut", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 1,
+				"name": "The Stormcaller",
+				"realWeight": 2465.90869140625,
+				"stackSize": 16,
+				"total": 16
+			},
+			{
+				"calculated": 2,
+				"name": "Atziri's Arsenal",
+				"realWeight": 1601.654541015625,
+				"stackSize": 12,
+				"total": 24
+			},
+			{
+				"calculated": 3.440000057220459,
+				"name": "Ambitious Obsession",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 6.880000114440918
+			},
+			{
+				"calculated": 10,
+				"name": "Pride of the First Ones",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 20
+			},
+			{
+				"calculated": 1,
+				"name": "The Sword King's Salute",
+				"realWeight": 9384.1279296875,
+				"stackSize": 39,
+				"total": 39
+			},
+			{ "calculated": 2, "name": "The Undaunted", "realWeight": 566.2703857421875, "stackSize": 6, "total": 12 },
+			{
+				"calculated": 1,
+				"name": "The Chains that Bind",
+				"realWeight": 6017.19384765625,
+				"stackSize": 29,
+				"total": 29
+			},
+			{
+				"calculated": 25,
+				"name": "Broken Promises",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 25
+			},
+			{ "calculated": 1, "name": "Three Voices", "realWeight": 9384.1279296875, "stackSize": 39, "total": 39 },
+			{
+				"calculated": 2.8399999141693115,
+				"name": "The Insatiable",
+				"realWeight": 1218.419921875,
+				"stackSize": 10,
+				"total": 28.399999618530273
+			},
+			{ "calculated": 2.809999942779541, "name": "The Eternal War", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 1, "name": "The Deceiver", "realWeight": 713.582275390625, "stackSize": 7, "total": 7 },
+			{ "calculated": 10, "name": "Altered Perception", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 0, "name": "The Insane Cat", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 1.440000057220459,
+				"name": "The Fletcher",
+				"realWeight": 2238.38037109375,
+				"stackSize": 15,
+				"total": 21.600000381469727
+			},
+			{
+				"calculated": 2.2699999809265137,
+				"name": "The Lion",
+				"realWeight": 2465.90869140625,
+				"stackSize": 16,
+				"total": 36.31999969482422
+			},
+			{
+				"calculated": 1.3600000143051147,
+				"name": "The Pack Leader",
+				"realWeight": 1405.6785888671875,
+				"stackSize": 11,
+				"total": 14.960000038146973
+			},
+			{
+				"calculated": 40,
+				"name": "The Samurai's Eye",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 40
+			},
+			{
+				"calculated": 2,
+				"name": "The Jeweller's Boon",
+				"realWeight": 2238.38037109375,
+				"stackSize": 15,
+				"total": 30
+			},
+			{
+				"calculated": 2,
+				"name": "The Price of Protection",
+				"realWeight": 1040.30517578125,
+				"stackSize": 9,
+				"total": 18
+			},
+			{
+				"calculated": 5,
+				"name": "The Shepherd's Sandals",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 10
+			},
+			{
+				"calculated": 2,
+				"name": "The Wolf's Legacy",
+				"realWeight": 1040.30517578125,
+				"stackSize": 9,
+				"total": 18
+			},
+			{
+				"calculated": 3,
+				"name": "The Road to Power",
+				"realWeight": 871.8303833007812,
+				"stackSize": 8,
+				"total": 24
+			},
+			{
+				"calculated": 1,
+				"name": "The Eye of the Dragon",
+				"realWeight": 4816.22802734375,
+				"stackSize": 25,
+				"total": 25
+			},
+			{
+				"calculated": 1,
+				"name": "The Metalsmith's Gift",
+				"realWeight": 27569.6953125,
+				"stackSize": 80,
+				"total": 80
+			},
+			{ "calculated": 0, "name": "Akil's Prophecy", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 2, "name": "The Fox", "realWeight": 1218.419921875, "stackSize": 10, "total": 20 },
+			{ "calculated": 5, "name": "The Catch", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 1,
+				"name": "The Arena Champion",
+				"realWeight": 14033.056640625,
+				"stackSize": 51,
+				"total": 51
+			},
+			{ "calculated": 2, "name": "The Explorer", "realWeight": 9384.1279296875, "stackSize": 39, "total": 78 },
+			{
+				"calculated": 1.7300000190734863,
+				"name": "Time-Lost Relic",
+				"realWeight": 9384.1279296875,
+				"stackSize": 39,
+				"total": 67.47000122070312
+			},
+			{ "calculated": 0, "name": "The Transformation", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 3,
+				"name": "Guardian's Challenge",
+				"realWeight": 2238.38037109375,
+				"stackSize": 15,
+				"total": 45
+			},
+			{
+				"calculated": 33.2599983215332,
+				"name": "The Hook",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 33.2599983215332
+			},
+			{
+				"calculated": 1.840000033378601,
+				"name": "The Long Watch",
+				"realWeight": 1405.6785888671875,
+				"stackSize": 11,
+				"total": 20.239999771118164
+			},
+			{
+				"calculated": 1,
+				"name": "The Lunaris Priestess",
+				"realWeight": 7304.11962890625,
+				"stackSize": 33,
+				"total": 33
+			},
+			{
+				"calculated": 3.930000066757202,
+				"name": "The Throne",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 7.860000133514404
+			},
+			{ "calculated": 0, "name": "The Rusted Bard", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 3,
+				"name": "Deathly Designs",
+				"realWeight": 430.7764892578125,
+				"stackSize": 5,
+				"total": 15
+			},
+			{
+				"calculated": 2,
+				"name": "Echoes of Love",
+				"realWeight": 1405.6785888671875,
+				"stackSize": 11,
+				"total": 22
+			},
+			{ "calculated": 5, "name": "Unchained", "realWeight": 308.23858642578125, "stackSize": 4, "total": 20 },
+			{
+				"calculated": 1,
+				"name": "The Flora's Gift",
+				"realWeight": 27054.384765625,
+				"stackSize": 79,
+				"total": 79
+			},
+			{ "calculated": 1, "name": "Mitts", "realWeight": 3707.88232421875, "stackSize": 21, "total": 21 },
+			{ "calculated": 7.010000228881836, "name": "Perfection", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 3, "name": "Rebirth and Renewal", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 3,
+				"name": "The Heroic Shot",
+				"realWeight": 2942.427490234375,
+				"stackSize": 18,
+				"total": 54
+			},
+			{
+				"calculated": 3,
+				"name": "Justified Ambition",
+				"realWeight": 308.23858642578125,
+				"stackSize": 4,
+				"total": 12
+			},
+			{
+				"calculated": 2.630000114440918,
+				"name": "Pride Before the Fall",
+				"realWeight": 200.20681762695312,
+				"stackSize": 3,
+				"total": 7.890000343322754
+			},
+			{
+				"calculated": 3,
+				"name": "The Cartographer",
+				"realWeight": 6017.19384765625,
+				"stackSize": 29,
+				"total": 87
+			},
+			{
+				"calculated": 1.2599999904632568,
+				"name": "Volatile Power",
+				"realWeight": 3975.859375,
+				"stackSize": 22,
+				"total": 27.719999313354492
+			},
+			{ "calculated": 5, "name": "Lethean Temptation", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{ "calculated": 2, "name": "The Dreamland", "realWeight": 2018.3154296875, "stackSize": 14, "total": 28 },
+			{ "calculated": 1, "name": "The King's Blade", "realWeight": 37953.3203125, "stackSize": 99, "total": 99 },
+			{
+				"calculated": 6.789999961853027,
+				"name": "The Polymath",
+				"realWeight": 38.529823303222656,
+				"stackSize": 1,
+				"total": 6.789999961853027
+			},
+			{
+				"calculated": 155.99000549316406,
+				"name": "The Nurse",
+				"realWeight": 108.97879791259766,
+				"stackSize": 2,
+				"total": 311.9800109863281
+			},
+			{ "calculated": 4.389999866485596, "name": "The Fishmonger", "realWeight": 0, "stackSize": 0, "total": 0 },
+			{
+				"calculated": 2.2699999809265137,
+				"name": "The Void",
+				"realWeight": 8322.44140625,
+				"stackSize": 36,
+				"total": 81.72000122070312
+			},
+			{
+				"calculated": 5.880000114440918,
+				"name": "The Endless Darkness",
+				"realWeight": 200.20681762695312,
+				"stackSize": 3,
+				"total": 17.639999389648438
+			},
+			{ "calculated": 1, "name": "The Watcher", "realWeight": 2465.90869140625, "stackSize": 16, "total": 16 },
+			{
+				"calculated": 1,
+				"name": "The Adventuring Spirit",
+				"realWeight": 6331.095703125,
+				"stackSize": 30,
+				"total": 30
+			},
+			{ "calculated": 2, "name": "The Pact", "realWeight": 38.529823303222656, "stackSize": 1, "total": 2 }
+		]
+	},
+	"filename": "example-1.csv",
+	"href": "blob:http://localhost:5173/7964fecb-f5af-4f2e-8710-14f712c731c9",
+	"error": "",
+	"isError": false,
+	"minimumCardPrice": 50
 }

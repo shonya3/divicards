@@ -1,9 +1,11 @@
+#![allow(unused)]
 #![cfg_attr(
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
 )]
 
 mod commands;
+mod file_card_data;
 mod prices;
 mod starter_map;
 
@@ -35,7 +37,8 @@ async fn main() {
             commands::update_prices,
             commands::give_record,
             commands::get_hashmap,
-            commands::weight_records_to_csv
+            commands::weight_records_to_csv,
+            commands::create_file_card_data,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

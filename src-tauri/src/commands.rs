@@ -1,3 +1,4 @@
+use crate::file_card_data::FileCardData;
 use crate::prices;
 use crate::starter_map;
 use std::collections::HashMap;
@@ -10,6 +11,7 @@ use lib::{
     },
 };
 use serde::Serialize;
+use tracing::instrument;
 
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -90,4 +92,12 @@ pub async fn weight_records_to_csv(records: Vec<Record>) -> Result<WeightedRecor
         records: weighted_records,
         csv,
     })
+}
+
+#[tauri::command]
+pub async fn create_file_card_data(
+    csv_string: &str,
+    minimum_card_price: Option<f32>,
+) -> Result<FileCardData, Error> {
+    FileCardData::create(csv_string, minimum_card_price).await
 }

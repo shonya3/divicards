@@ -1,25 +1,32 @@
 <script setup lang="ts">
-import { FileContents, CardRecord, WeightedCardRecord } from '../../types';
+import { WeightedCardRecord } from '../../types';
 import CSVIcon from '../icons/CSVIcon.vue';
 import { ref, watch } from 'vue';
 import DivTable from '../DivTable/DivTable.vue';
-import { command } from '../../lib';
 import BasePopup from '../BasePopup.vue';
 import FixedNamesList from './FixedNamesList/FixedNamesList.vue';
 import NotCardsList from './NotCardsList/NotCardsList.vue';
+import { command } from '../../command';
 
 export interface FileCardProps {
-	fileContent: FileContents;
+	filename: string;
+	href: string;
 	selected: boolean | null;
 	id: string;
 	valid: boolean;
 	error: string | null;
-	allCardsPrice: number;
 	minimumCardPrice: number;
+	data: FileCardData;
+}
+
+export type FileCardData = {
+	minimumCardPrice: number;
+	csvPolished: string;
 	records: WeightedCardRecord[];
+	allCardsPrice: number;
 	notCards: string[];
 	fixedNames: Record<string, string>;
-}
+};
 
 const props = defineProps<FileCardProps>();
 const emit = defineEmits<{
@@ -36,7 +43,7 @@ watch(
 	async val => {
 		if (!props.valid) return;
 		const price = await command('all_cards_price', {
-			csvString: props.fileContent.text,
+			csvString: props.data.csvPolished,
 			minimumCardPrice: val,
 		});
 
@@ -51,20 +58,20 @@ const tablePopup = ref<typeof BasePopup | null>(null);
 <template>
 	<div class="file" :class="{ 'file-error': error, 'file-selected': selected }">
 		<div class="minor-icons">
-			<fixed-names-list :fixed-names="fixedNames" />
-			<not-cards-list :not-cards="notCards"></not-cards-list>
+			<fixed-names-list :fixed-names="data.fixedNames" />
+			<not-cards-list :not-cards="data.notCards"></not-cards-list>
 		</div>
-		<p class="filename" :class="{ 'filename--error': error }">{{ fileContent.name }}</p>
+		<p class="filename" :class="{ 'filename--error': error }">{{ filename }}</p>
 		<CSVIcon class="icon" :width="96" :height="96" @click="tablePopup?.open()" />
 		<label class="slider-box" v-if="valid">
 			<span>{{ minimumChaosPrice }}</span>
 			<input class="slider" type="range" name="" id="" min="0" max="500" v-model.number="minimumChaosPrice" />
 		</label>
 		<div v-if="valid" class="total-price">
-			<p>{{ nf.format(allCardsPrice) }}</p>
+			<p>{{ nf.format(data.allCardsPrice) }}</p>
 			<img width="35" height="35" class="chaos-img" src="/chaos.png" alt="chaos" />
 		</div>
-		<a class="download" v-if="valid" :download="fileContent.name" :href="fileContent.href">Download</a>
+		<a class="download" v-if="valid" :download="filename" :href="href">Download</a>
 		<button @click="$emit('delete-me', id)" class="btn-delete">X</button>
 		<input
 			class="checkbox"
@@ -75,7 +82,7 @@ const tablePopup = ref<typeof BasePopup | null>(null);
 		/>
 
 		<base-popup ref="tablePopup">
-			<div-table v-if="valid" :records="records" />
+			<div-table v-if="valid" :records="data.records" />
 			<p v-else>{{ error }}</p>
 		</base-popup>
 	</div>
