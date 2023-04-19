@@ -6,13 +6,11 @@ import { useCreateFileCard } from '../composables/useCreateFileCard';
 import { command } from '../command';
 import { watch } from 'vue';
 
-type State = {
-	fileCards: FileCardProps[];
-	mergedFile: FileCardProps | null;
-};
-
 export const useFileCardsStore = defineStore('filecardsStore', {
-	state: (): State => ({
+	state: (): {
+		fileCards: FileCardProps[];
+		mergedFile: FileCardProps | null;
+	} => ({
 		fileCards: [],
 		mergedFile: null,
 	}),
