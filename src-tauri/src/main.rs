@@ -4,11 +4,7 @@
     windows_subsystem = "windows"
 )]
 
-mod commands;
-mod file_card_data;
-mod prices;
-mod starter_map;
-
+use lib::commands;
 #[cfg(debug_assertions)]
 use tauri::Manager;
 
@@ -16,7 +12,7 @@ use tauri::Manager;
 async fn main() {
     lib::dev::init_tracing();
     tracing::event!(tracing::Level::DEBUG, "app startup");
-    match prices::update_prices_data().await {
+    match lib::prices::update_prices_data().await {
         Ok(_) => tracing::event!(tracing::Level::DEBUG, "prices updated"),
         Err(err) => tracing::event!(tracing::Level::ERROR, "could not update prices {:?}", err),
     };

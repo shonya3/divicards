@@ -1,14 +1,10 @@
 use std::collections::HashMap;
 
-use lib::{
-    error::Error,
-    types::{
-        record,
-        weighted_record::{self, WeightedRecord},
-    },
-};
 use serde::Serialize;
-use tracing::instrument;
+use shared::{
+    error::Error,
+    types::{record, weighted_record::WeightedRecord},
+};
 
 use crate::starter_map;
 
@@ -34,7 +30,7 @@ impl FileCardData {
 
         let records = record::polish_records(records, map.clone())?;
         let records = record::weight_records(records);
-        let csv_polished = lib::types::weighted_record::write(&records)?;
+        let csv_polished = shared::types::weighted_record::write(&records)?;
         let all_cards_price =
             record::csv::string::all_cards_price(&csv_polished, minimum_card_price)?;
 

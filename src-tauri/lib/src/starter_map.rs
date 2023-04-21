@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use lib::{
+use shared::{
     error::Error,
     types::record::{self, Record},
 };

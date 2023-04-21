@@ -1,4 +1,4 @@
-use lib::{error::Error, types::record};
+use shared::{error::Error, types::record};
 
 pub async fn div_prices() -> Result<String, Error> {
     let path = prices_path();

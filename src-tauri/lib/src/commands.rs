@@ -1,17 +1,15 @@
-use crate::file_card_data::FileCardData;
-use crate::prices;
-use crate::starter_map;
 use std::collections::HashMap;
 
-use lib::{
+use serde::Serialize;
+use shared::{
     error::Error,
     types::{
         record::{self, Record},
         weighted_record::WeightedRecord,
     },
 };
-use serde::Serialize;
-use tracing::instrument;
+
+use crate::{file_card_data::FileCardData, prices, starter_map};
 
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -87,7 +85,7 @@ pub struct WeightedRecordCsv {
 #[tauri::command]
 pub async fn weight_records_to_csv(records: Vec<Record>) -> Result<WeightedRecordCsv, Error> {
     let weighted_records = record::weight_records(records);
-    let csv = lib::types::weighted_record::write(&weighted_records)?;
+    let csv = shared::types::weighted_record::write(&weighted_records)?;
     Ok(WeightedRecordCsv {
         records: weighted_records,
         csv,
