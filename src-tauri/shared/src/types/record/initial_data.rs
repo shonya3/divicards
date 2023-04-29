@@ -513,7 +513,7 @@ pub fn names_prices_from_json(string_json: &str) -> Vec<(String, f32)> {
 pub async fn fetch_div_prices() -> Result<String, Error> {
     let client = reqwest::Client::new();
     let url =
-        "https://poe.ninja/api/data/itemoverview?league=Kalandra&type=DivinationCard&language=en";
+        "https://poe.ninja/api/data/itemoverview?league=Crucible&type=DivinationCard&language=en";
     let json = client.get(url).send().await?.text().await?;
     Ok(json)
 }
