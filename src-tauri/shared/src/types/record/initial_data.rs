@@ -5,21 +5,19 @@ use crate::error::Error;
 use super::{NinjaRecord, Record};
 use std::collections::HashMap;
 
-pub const LEGACY_CARDS: [&'static str; 14] = [
+pub const LEGACY_CARDS: [&'static str; 12] = [
     "Friendship",
-    "Vile Power",
     "Squandered Prosperity",
     "Blessing of God",
     "The Devastator",
     "Luck of the Vaal",
-    "A Note in the Wind",
     "The Valley of Steel Boxes",
-    "Akil's Prophecy",
     "Birth of the Three",
     "The Mayor",
-    "The Transformation",
-    "The Mad King",
     "Treasures of the Vaal",
+    "The Bargain",
+    "The Long Watch",
+    "The Sustenance",
 ];
 
 pub const CARDS: [&'static str; 438] = [
