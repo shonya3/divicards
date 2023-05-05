@@ -15,13 +15,6 @@ export interface CommandList {
 		returnType: Promise<FileCardData>;
 	};
 
-	weight_records_to_csv: {
-		args: { records: CardRecord[] };
-		returnType: Promise<{
-			csv: string;
-			records: WeightedCardRecord[];
-		}>;
-	};
 	update_prices: {
 		args: {};
 		returnType: Promise<void>;
@@ -33,18 +26,7 @@ export interface CommandList {
 		};
 		returnType: Promise<string>;
 	};
-	read_polish_csv: {
-		args: {
-			/** Csv file as string */
-			csvString: string;
-		};
-		returnType: Promise<{
-			csv: string;
-			records: CardRecord[];
-			notCards: string[];
-			fixedNames: Record<string, string>;
-		}>;
-	};
+
 	all_cards_price: {
 		args: {
 			/** Csv file as string */

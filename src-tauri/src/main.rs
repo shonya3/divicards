@@ -27,13 +27,9 @@ async fn main() {
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
-            commands::read_polish_csv,
             commands::all_cards_price,
             commands::merge_csv,
             commands::update_prices,
-            commands::give_record,
-            commands::get_hashmap,
-            commands::weight_records_to_csv,
             commands::create_file_card_data,
         ])
         .run(tauri::generate_context!())
