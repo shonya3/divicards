@@ -56,7 +56,7 @@ const tablePopup = ref<typeof BasePopup | null>(null);
 				min="0"
 				max="500"
 				:value="minimumCardPrice"
-				@input="e => $emit('update:minimumCardPrice', (e.target as HTMLInputElement).value)"
+				@input="(e: InputEvent) => $emit('update:minimumCardPrice', (e.target as HTMLInputElement).value)"
 			/>
 		</label>
 		<div v-if="valid" class="total-price">
@@ -70,7 +70,7 @@ const tablePopup = ref<typeof BasePopup | null>(null);
 			v-if="valid && selected != null"
 			type="checkbox"
 			:checked="selected"
-			@change="e => $emit('update:selected', (e.target as HTMLInputElement).checked)"
+			@change="(e: InputEvent) => $emit('update:selected', (e.target as HTMLInputElement).checked)"
 		/>
 
 		<base-popup ref="tablePopup">

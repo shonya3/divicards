@@ -19,7 +19,12 @@ const onDrop = (e: DragEvent) => {
 </script>
 
 <template>
-	<div @drop.prevent="onDrop" @dragenter="e => e.preventDefault()" @dragover="e => e.preventDefault()" class="drag">
+	<div
+		@drop.prevent="onDrop"
+		@dragenter="(e: DragEvent) => e.preventDefault()"
+		@dragover="(e: DragEvent) => e.preventDefault()"
+		class="drag"
+	>
 		<div class="drop">Drop files <span>Here!</span></div>
 
 		<Transition>
