@@ -1,49 +1,49 @@
 <script setup lang="ts">
-import { SortState, Column, WeightedCardRecord } from '../../types';
+import { SortState, Column, DivinationCardRecord } from '../../types';
 import { ref, computed, onMounted, watch } from 'vue';
 import { orderBy } from './orderBy';
 import OrderTriangle from '../OrderTriangle/OrderTriangle.vue';
 
 export interface DivTableProps {
-	records: WeightedCardRecord[];
+	cards: DivinationCardRecord[];
 }
 
 const props = defineProps<DivTableProps>();
-const nf = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
+const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 const nameQuery = ref('');
 const minPrice = ref(0);
-const hideZeroTotal = ref(false);
+const hideZerosum = ref(false);
 
 const filteredRecords = computed(() => {
-	return props.records.slice().filter(({ name, calculated, total }) => {
-		if (hideZeroTotal.value) {
-			if (total == 0) return false;
+	return props.cards.slice().filter(({ name, price, sum }) => {
+		if (hideZerosum.value) {
+			if (sum == 0) return false;
 		}
 
 		return (
 			name.toLocaleLowerCase().includes(nameQuery.value.trim().toLocaleLowerCase()) &&
-			calculated >= minPrice.value
+			(price ?? 0) >= minPrice.value
 		);
 	});
 });
 const summary = computed(() => {
 	return filteredRecords.value.reduce(
-		({ stackSize, total }, current) => {
-			stackSize += current.stackSize;
-			total += current.total;
-			return { stackSize, total };
+		({ amount, sum }, current) => {
+			amount += current.amount;
+			sum += current.sum ?? 0;
+			return { amount, sum };
 		},
 		{
-			stackSize: 0,
-			total: 0,
+			amount: 0,
+			sum: 0,
 		}
 	);
 });
 const order = ref<SortState>({
 	activeColumn: 'price',
-	stackSize: 'asc',
+	amount: 'asc',
 	price: 'asc',
-	total: 'asc',
+	sum: 'asc',
 });
 
 watch(
@@ -58,7 +58,7 @@ const toggleOrder = (column: Column) => {
 };
 
 onMounted(() => {
-	toggleOrder('total');
+	toggleOrder('sum');
 });
 </script>
 
@@ -71,9 +71,9 @@ onMounted(() => {
 				>found
 				<span class="ch-6">{{ filteredRecords.length }} </span>
 				card names
-				<span class="ch-6">({{ summary.stackSize }}</span>
+				<span class="ch-6">({{ summary.amount }}</span>
 				cards,
-				<span class="ch-7">{{ nf.format(summary.total) }}</span>
+				<span class="ch-7">{{ format(summary.sum) }}</span>
 				<img width="20" height="20" class="chaos-img" src="/chaos.png" alt="chaos" />)</span
 			>
 			<label class="slider-box">
@@ -83,8 +83,8 @@ onMounted(() => {
 				<img width="20" height="20" class="chaos-img" src="/chaos.png" alt="chaos" />
 			</label>
 			<div style="display: flex; gap: 0.8rem">
-				<span>hide names with zero total</span>
-				<input type="checkbox" name="" id="" v-model="hideZeroTotal" />
+				<span>hide names with zero sum</span>
+				<input type="checkbox" name="" id="" v-model="hideZerosum" />
 			</div>
 			<!-- <div>download filtered file</div> -->
 		</header>
@@ -102,11 +102,11 @@ onMounted(() => {
 				<tr>
 					<th>&numero;</th>
 					<th>
-						<span class="column__name"> Stack Size </span>
+						<span class="column__name"> Amount </span>
 						<order-triangle
-							:active="order.activeColumn === 'stackSize'"
-							:order="order.stackSize"
-							@click="toggleOrder('stackSize')"
+							:active="order.activeColumn === 'amount'"
+							:order="order.amount"
+							@click="toggleOrder('amount')"
 						/>
 					</th>
 					<th>
@@ -121,11 +121,11 @@ onMounted(() => {
 						/>
 					</th>
 					<th>
-						<span class="column__name"> Total </span>
+						<span class="column__name"> Sum </span>
 						<order-triangle
-							:active="order.activeColumn === 'total'"
-							:order="order.total"
-							@click="toggleOrder('total')"
+							:active="order.activeColumn === 'sum'"
+							:order="order.sum"
+							@click="toggleOrder('sum')"
 						/>
 					</th>
 					<th>
@@ -135,22 +135,13 @@ onMounted(() => {
 			</thead>
 
 			<tbody>
-				<tr
-					class="columns"
-					v-for="({ stackSize, name, calculated, total, realWeight }, index) in filteredRecords"
-				>
+				<tr class="columns" v-for="({ amount, name, price, sum, weight }, index) in filteredRecords">
 					<td class="row">{{ index + 1 }}</td>
-					<td class="row">{{ stackSize }}</td>
+					<td class="row">{{ amount }}</td>
 					<td class="name-row">{{ name }}</td>
-					<td class="row">{{ nf.format(calculated) }}</td>
-					<td class="row">{{ nf.format(total) }}</td>
-					<td class="row">
-						{{
-							// ((70_000 * stackSize) / allStackSize) ** (3 / 2)
-							// nf.format(calcRecordRealWeight({ stackSize, name, calculated, total }))
-							nf.format(realWeight)
-						}}
-					</td>
+					<td class="row">{{ format(price ?? 0) }}</td>
+					<td class="row">{{ format(sum ?? 0) }}</td>
+					<td class="row">{{ format(weight) }}</td>
 				</tr>
 			</tbody>
 		</table>

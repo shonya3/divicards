@@ -1,14 +1,14 @@
+import { DivinationCardsSample } from './../types';
 import { Ref, computed, ref, unref, watch } from 'vue';
 import { command } from '../command';
-import { FileCardData } from '../components/FileCard/FileCard.vue';
 
 export const useCardData = (csv: Ref<string>, minimumCardPrice: number) => {
-	const data: Ref<FileCardData> = ref<FileCardData>({
-		allCardsPrice: 0,
-		csvPolished: '',
-		fixedNames: {},
+	const data: Ref<DivinationCardsSample> = ref<DivinationCardsSample>({
+		chaos: 0,
+		polished: '',
+		fixedNames: [],
 		notCards: [],
-		records: [],
+		cards: [],
 	});
 	const error = ref('');
 	const isError = computed(() => Boolean(error.value));
@@ -18,10 +18,13 @@ export const useCardData = (csv: Ref<string>, minimumCardPrice: number) => {
 		isReady.value = false;
 		error.value = '';
 		try {
-			data.value = await command('create_file_card_data', {
-				csvString: unref(csv),
-				minimumCardPrice,
-			});
+			// data.value = await command('create_file_card_data', {
+			// 	csvString: unref(csv),
+			// 	minimumCardPrice,
+			// });
+
+			data.value = await command('sample', { csv: unref(csv) });
+			// console.log({ sample });
 		} catch (err) {
 			error.value = err as string;
 		}

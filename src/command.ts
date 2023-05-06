@@ -1,38 +1,31 @@
 import { invoke } from '@tauri-apps/api';
-import { FileCardData } from './components/FileCard/FileCard.vue';
-import { CardRecord, WeightedCardRecord } from './types';
+import { DivinationCardsSample } from './types';
 
-export const command = <T extends keyof CommandList>(
+export const command = async <T extends keyof CommandList>(
 	cmd: T,
 	args: CommandList[T]['args']
-): CommandList[T]['returnType'] => {
-	return invoke(cmd, args) as CommandList[T]['returnType'];
+): Promise<CommandList[T]['returnType']> => {
+	return invoke(cmd, args) as Promise<CommandList[T]['returnType']>;
 };
 
 export interface CommandList {
-	create_file_card_data: {
-		args: { csvString: string; minimumCardPrice: number };
-		returnType: Promise<FileCardData>;
-	};
-
 	update_prices: {
 		args: {};
-		returnType: Promise<void>;
-	};
-	merge_csv: {
-		args: {
-			/** List of Csv files as strings */
-			csvFileStrings: string[];
-		};
-		returnType: Promise<string>;
+		returnType: void;
 	};
 
-	all_cards_price: {
-		args: {
-			/** Csv file as string */
-			csvString: string;
-			minimumCardPrice: number;
-		};
-		returnType: Promise<number>;
+	sample: {
+		args: { csv: string };
+		returnType: DivinationCardsSample;
+	};
+
+	chaos: {
+		args: { csv: string; min: number };
+		returnType: number;
+	};
+
+	merge: {
+		args: { samples: DivinationCardsSample[] };
+		returnType: DivinationCardsSample;
 	};
 }

@@ -4,7 +4,8 @@
     windows_subsystem = "windows"
 )]
 
-use lib::commands;
+use divi::League;
+use lib::{commands, paths, prices};
 #[cfg(debug_assertions)]
 use tauri::Manager;
 
@@ -12,10 +13,14 @@ use tauri::Manager;
 async fn main() {
     lib::dev::init_tracing();
     tracing::event!(tracing::Level::DEBUG, "app startup");
-    match lib::prices::update_prices_data().await {
-        Ok(_) => tracing::event!(tracing::Level::DEBUG, "prices updated"),
+    match prices::update(&paths::prices(), League::Crucible).await {
+        Ok(prices) => {
+            tracing::event!(tracing::Level::DEBUG, "prices updated");
+        }
         Err(err) => tracing::event!(tracing::Level::ERROR, "could not update prices {:?}", err),
     };
+
+    prices::prices(League::Crucible).await;
 
     tauri::Builder::default()
         .setup(|app| {
@@ -27,10 +32,9 @@ async fn main() {
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
-            commands::all_cards_price,
-            commands::merge_csv,
-            commands::update_prices,
-            commands::create_file_card_data,
+            commands::sample,
+            commands::chaos,
+            commands::merge
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

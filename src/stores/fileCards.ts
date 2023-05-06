@@ -5,6 +5,7 @@ import { csvFile } from '../lib';
 import { useCreateFileCard } from '../composables/useCreateFileCard';
 import { command } from '../command';
 import { watch } from 'vue';
+import { DivinationCardsSample } from '../types';
 
 export const useFileCardsStore = defineStore('filecardsStore', {
 	state: (): {
@@ -19,12 +20,16 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 			return this.fileCards.filter(file => file.selected && file.valid);
 		},
 
+		selectedSamples(): DivinationCardsSample[] {
+			return this.selectedFiles.map(({ sample }) => sample);
+		},
+
 		validFiles(): FileCardProps[] {
 			return this.fileCards.filter(file => file.valid);
 		},
 
 		selectedStrings(): string[] {
-			return this.selectedFiles.map(file => file.data.csvPolished);
+			return this.selectedFiles.map(file => String(file.sample.chaos));
 		},
 
 		getFileById: state => {
@@ -37,19 +42,17 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 		},
 
 		async merge() {
-			const mergedCsv = await command('merge_csv', { csvFileStrings: this.selectedStrings });
-			const file: File = csvFile(mergedCsv, 'merged.csv');
+			const sample = await command('merge', { samples: this.selectedSamples });
+			const file: File = csvFile(sample.polished, 'merged.csv');
 
-			const fileCard = useCreateFileCard(file, 50);
+			const fileCard = useCreateFileCard(file, 0);
 			watch(
 				() => fileCard.minimumCardPrice,
 				async val => {
-					const price = await command('all_cards_price', {
-						csvString: fileCard.data.csvPolished,
-						minimumCardPrice: val,
+					fileCard.sample.chaos = await command('chaos', {
+						csv: fileCard.sample.polished,
+						min: val,
 					});
-
-					fileCard.data.allCardsPrice = price;
 				}
 			);
 			// No point to select merged file, `null` makes it nonselectable by removing checkbox
@@ -70,18 +73,16 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 			this.fileCards = [];
 		},
 
-		addCards(files: File[], minimumCardPrice = 50): void {
+		addCards(files: File[], minimumCardPrice = 0): void {
 			for (const file of files) {
 				const fileCard = useCreateFileCard(file, minimumCardPrice);
 				watch(
 					() => fileCard.minimumCardPrice,
 					async val => {
-						const price = await command('all_cards_price', {
-							csvString: fileCard.data.csvPolished,
-							minimumCardPrice: val,
+						fileCard.sample.chaos = await command('chaos', {
+							csv: fileCard.sample.polished,
+							min: val,
 						});
-
-						fileCard.data.allCardsPrice = price;
 					}
 				);
 

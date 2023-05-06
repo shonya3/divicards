@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import DivTable from './DivTable.vue';
-import { dummyRecords } from './dummyRecords';
+import DivTable, { DivTableProps } from './DivTable.vue';
+import { divTableProps } from './dummy';
 
-const records = ref(dummyRecords);
+const props = ref<DivTableProps>(divTableProps);
 </script>
 
 <template>
 	<Story>
-		<DivTable :records="records" />
+		<DivTable v-bind="props" />
 	</Story>
 </template>
 

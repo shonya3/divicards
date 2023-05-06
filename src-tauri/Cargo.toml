@@ -24,6 +24,8 @@ tauri-build = { version = "1.2", features = [] }
 
 [dependencies]
 shared = {path="shared"}
+divi = {path = "../../divi"}
+
 
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }

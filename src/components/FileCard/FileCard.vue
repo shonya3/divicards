@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { WeightedCardRecord } from '../../types';
+import { DivinationCardsSample } from '../../types';
 import CSVIcon from '../icons/CSVIcon.vue';
 import { ref } from 'vue';
 import DivTable from '../DivTable/DivTable.vue';
@@ -15,16 +15,8 @@ export interface FileCardProps {
 	valid: boolean;
 	error: string | null;
 	minimumCardPrice: number;
-	data: FileCardData;
+	sample: DivinationCardsSample;
 }
-
-export type FileCardData = {
-	csvPolished: string;
-	records: WeightedCardRecord[];
-	allCardsPrice: number;
-	notCards: string[];
-	fixedNames: Record<string, string>;
-};
 
 defineProps<FileCardProps>();
 defineEmits<{
@@ -33,7 +25,7 @@ defineEmits<{
 	(event: 'update:minimumCardPrice', newPrice: number): void;
 }>();
 
-const nf = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
+const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 
 const tablePopup = ref<typeof BasePopup | null>(null);
 </script>
@@ -41,8 +33,8 @@ const tablePopup = ref<typeof BasePopup | null>(null);
 <template>
 	<div class="file" :class="{ 'file-error': error, 'file-selected': selected }">
 		<div class="minor-icons">
-			<fixed-names-list :fixed-names="data.fixedNames" />
-			<not-cards-list :not-cards="data.notCards"></not-cards-list>
+			<fixed-names-list :fixed-names="sample.fixedNames" />
+			<not-cards-list :not-cards="sample.notCards"></not-cards-list>
 		</div>
 		<p class="filename" :class="{ 'filename--error': error }">{{ filename }}</p>
 		<CSVIcon class="icon" :width="96" :height="96" @click="tablePopup?.open()" />
@@ -56,11 +48,11 @@ const tablePopup = ref<typeof BasePopup | null>(null);
 				min="0"
 				max="500"
 				:value="minimumCardPrice"
-				@input="(e: InputEvent) => $emit('update:minimumCardPrice', (e.target as HTMLInputElement).value)"
+				@input="(e) => $emit('update:minimumCardPrice', (e.target as HTMLInputElement).value)"
 			/>
 		</label>
 		<div v-if="valid" class="total-price">
-			<p>{{ nf.format(data.allCardsPrice) }}</p>
+			<p>{{ format(sample.chaos) }}</p>
 			<img width="35" height="35" class="chaos-img" src="/chaos.png" alt="chaos" />
 		</div>
 		<a class="download" v-if="valid" :download="filename" :href="href">Download</a>
@@ -70,11 +62,11 @@ const tablePopup = ref<typeof BasePopup | null>(null);
 			v-if="valid && selected != null"
 			type="checkbox"
 			:checked="selected"
-			@change="(e: InputEvent) => $emit('update:selected', (e.target as HTMLInputElement).checked)"
+			@change="(e) => $emit('update:selected', (e.target as HTMLInputElement).checked)"
 		/>
 
 		<base-popup ref="tablePopup">
-			<div-table v-if="valid" :records="data.records" />
+			<div-table v-if="valid" :cards="sample.cards" />
 			<p v-else>{{ error }}</p>
 		</base-popup>
 	</div>

@@ -1,40 +1,22 @@
-use shared::{error::Error, types::record};
+use crate::paths;
+use divi::{error::Error, League, Prices};
+use std::path::PathBuf;
 
-pub async fn div_prices() -> Result<String, Error> {
-    let path = prices_path();
-    let json = match std::fs::read_to_string(&path) {
-        Ok(json) => json,
+pub async fn prices(league: League) -> Prices {
+    let path = paths::prices();
+    match std::fs::read_to_string(&path) {
+        Ok(json) => serde_json::from_str(&json).unwrap(),
         Err(_) => {
-            let json = record::fetch_div_prices().await?;
-            std::fs::write(path, &json)?;
-            json
+            println!("Error reading file. Fetchin new one");
+            update(&path, league).await.unwrap()
         }
-    };
-
-    Ok(json)
-}
-
-pub async fn update_prices_data() -> Result<(), Error> {
-    let path = prices_path();
-
-    let json = record::fetch_div_prices().await?;
-    std::fs::write(path, &json)?;
-    Ok(())
-}
-
-fn get_appdata_dir() -> std::path::PathBuf {
-    let mut path = tauri::api::path::config_dir().unwrap();
-    path.push("divicards");
-
-    if !path.exists() {
-        std::fs::create_dir(&path).expect("Error on appdata dir creation");
     }
-
-    path
 }
 
-fn prices_path() -> std::path::PathBuf {
-    let mut path = get_appdata_dir();
-    path.push("div-prices.json");
-    path
+// TODO: add error types
+pub async fn update(path: &PathBuf, league: League) -> Result<Prices, Error> {
+    let prices = Prices::fetch(league).await?;
+    let json = serde_json::to_string(&prices).unwrap();
+    std::fs::write(path, &json).unwrap();
+    Ok(prices)
 }

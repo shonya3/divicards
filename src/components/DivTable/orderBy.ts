@@ -1,37 +1,37 @@
-import { Column, Order, CardRecord } from '../../types';
+import { Column, Order, DivinationCardRecord } from '../../types';
 
-export const byPrice = (order: Order, records: CardRecord[]) => {
-	return records.sort((a, b) => {
-		if (order === 'asc') return a.calculated - b.calculated;
-		if (order === 'desc') return b.calculated - a.calculated;
+export const byPrice = (order: Order, cards: DivinationCardRecord[]) => {
+	return cards.sort((a, b) => {
+		if (order === 'asc') return (a.price ?? 0) - (b.price ?? 0);
+		if (order === 'desc') return (b.price ?? 0) - (a.price ?? 0);
 		throw new Error('Invalid order');
 	});
 };
 
-export const byStackSize = (order: Order, records: CardRecord[]) => {
-	return records.sort((a, b) => {
-		if (order === 'asc') return a.stackSize - b.stackSize;
-		if (order === 'desc') return b.stackSize - a.stackSize;
+export const byAmount = (order: Order, cards: DivinationCardRecord[]) => {
+	return cards.sort((a, b) => {
+		if (order === 'asc') return a.amount - b.amount;
+		if (order === 'desc') return b.amount - a.amount;
 		throw new Error('invalid order');
 	});
 };
 
-export const byTotal = (order: Order, records: CardRecord[]) => {
-	return records.sort((a, b) => {
-		if (order === 'asc') return a.total - b.total;
-		if (order === 'desc') return b.total - a.total;
+export const bySum = (order: Order, cards: DivinationCardRecord[]) => {
+	return cards.sort((a, b) => {
+		if (order === 'asc') return (a.sum ?? 0) - (b.sum ?? 0);
+		if (order === 'desc') return (b.sum ?? 0) - (a.sum ?? 0);
 		throw new Error('invalid order');
 	});
 };
 
-export const orderBy = (column: Column, order: Order, records: CardRecord[]): CardRecord[] => {
+export const orderBy = (column: Column, order: Order, cards: DivinationCardRecord[]): DivinationCardRecord[] => {
 	switch (column) {
 		case 'price':
-			return byPrice(order, records);
-		case 'stackSize':
-			return byStackSize(order, records);
-		case 'total':
-			return byTotal(order, records);
+			return byPrice(order, cards);
+		case 'amount':
+			return byAmount(order, cards);
+		case 'sum':
+			return bySum(order, cards);
 		default:
 			throw new Error('Invalid column name');
 	}

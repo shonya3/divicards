@@ -15,7 +15,7 @@ export const useCreateFileCard = (file: File, minimumCardPrice = 50): FileCardPr
 		id,
 		valid,
 		selected,
-		data,
+		sample: data,
 		filename,
 		href,
 		error,
