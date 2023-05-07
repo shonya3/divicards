@@ -50,7 +50,7 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 				() => fileCard.minimumCardPrice,
 				async val => {
 					fileCard.sample.chaos = await command('chaos', {
-						csv: fileCard.sample.polished,
+						sample: fileCard.sample,
 						min: val,
 					});
 				}
@@ -80,7 +80,7 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 					() => fileCard.minimumCardPrice,
 					async val => {
 						fileCard.sample.chaos = await command('chaos', {
-							csv: fileCard.sample.polished,
+							sample: fileCard.sample,
 							min: val,
 						});
 					}

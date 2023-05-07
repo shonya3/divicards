@@ -1,31 +1,40 @@
 import { invoke } from '@tauri-apps/api';
 import { DivinationCardsSample } from './types';
 
-export const command = async <T extends keyof CommandList>(
-	cmd: T,
-	args: CommandList[T]['args']
-): Promise<CommandList[T]['returnType']> => {
-	return invoke(cmd, args) as Promise<CommandList[T]['returnType']>;
+export type CommandOptions = {
+	log: boolean;
 };
 
-export interface CommandList {
-	update_prices: {
-		args: {};
-		returnType: void;
-	};
+export const command = async <Cmd extends keyof Commands>(
+	cmd: Cmd,
+	args: Commands[Cmd]['args'],
+	options?: CommandOptions
+): Promise<Commands[Cmd]['returns']> => {
+	if (import.meta.env.DEV && !options) {
+		options = { log: true };
+	}
 
+	if (options?.log) {
+		const t0 = performance.now();
+		const res = (await invoke(cmd, args)) as Commands[Cmd]['returns'];
+		console.log(`${cmd}: ${new Intl.NumberFormat().format(performance.now() - t0)}ms`);
+		return res;
+	} else return invoke(cmd, args) as Promise<Commands[Cmd]['returns']>;
+};
+
+export interface Commands {
 	sample: {
 		args: { csv: string };
-		returnType: DivinationCardsSample;
+		returns: DivinationCardsSample;
 	};
 
 	chaos: {
-		args: { csv: string; min: number };
-		returnType: number;
+		args: { sample: DivinationCardsSample; min: number };
+		returns: number;
 	};
 
 	merge: {
 		args: { samples: DivinationCardsSample[] };
-		returnType: DivinationCardsSample;
+		returns: DivinationCardsSample;
 	};
 }
