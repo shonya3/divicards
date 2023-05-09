@@ -27,17 +27,18 @@ const filteredRecords = computed(() => {
 	});
 });
 const summary = computed(() => {
-	return filteredRecords.value.reduce(
-		({ amount, sum }, current) => {
-			amount += current.amount;
-			sum += current.sum ?? 0;
-			return { amount, sum };
-		},
-		{
-			amount: 0,
-			sum: 0,
-		}
-	);
+	let sum = 0;
+	let amount = 0;
+
+	for (const record of filteredRecords.value) {
+		sum += record.sum ?? 0;
+		amount += record.amount;
+	}
+
+	return {
+		amount,
+		sum,
+	};
 });
 const order = ref<SortState>({
 	activeColumn: 'price',
