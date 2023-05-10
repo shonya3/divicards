@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { SortState, Column, DivinationCardRecord } from '../../types';
+import { DivinationCardRecord, Order } from '../../types';
 import { ref, computed, onMounted, watch } from 'vue';
 import { orderBy } from './orderBy';
 import OrderTriangle from '../OrderTriangle/OrderTriangle.vue';
+import { SortState, Column } from './types';
 
 export interface DivTableProps {
 	cards: DivinationCardRecord[];

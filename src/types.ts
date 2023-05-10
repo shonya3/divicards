@@ -1,10 +1,4 @@
-export type DivCsvLine = [number, string, number | null, number | null];
-
 export type Order = 'asc' | 'desc';
-export type Column = 'price' | 'amount' | 'sum';
-export type SortState = {
-	[col in Column]: Order;
-} & { activeColumn: Column };
 
 export interface DivinationCardsSample {
 	cards: DivinationCardRecord[];

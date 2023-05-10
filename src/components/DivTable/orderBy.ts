@@ -1,4 +1,5 @@
-import { Column, Order, DivinationCardRecord } from '../../types';
+import { Order, DivinationCardRecord } from '../../types';
+import { Column } from './types';
 
 export const byPrice = (order: Order, cards: DivinationCardRecord[]) => {
 	return cards.sort((a, b) => {
