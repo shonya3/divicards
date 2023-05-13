@@ -1,4 +1,6 @@
 export type Order = 'asc' | 'desc';
+export type League = 'Crucible' | 'Standard';
+export type CsvExt = `${string}.csv`;
 
 export interface DivinationCardsSample {
 	cards: DivinationCardRecord[];

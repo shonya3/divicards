@@ -1,20 +1,33 @@
-use divi::{Csv, CsvString, DivinationCardsSample, Prices};
-use tauri::{Manager, State};
+use divi::{Csv, CsvString, DivinationCardsSample, League, Prices};
+use tauri::{command, AppHandle, Manager};
 
-#[tauri::command]
-pub fn sample(csv: String, prices: State<'_, Prices>) -> DivinationCardsSample {
-    DivinationCardsSample::create(Csv::CsvString(CsvString(csv)), prices.inner().clone())
+use crate::prices;
+
+#[command]
+pub async fn sample(csv: String, league: League) -> DivinationCardsSample {
+    DivinationCardsSample::create(
+        Csv::CsvString(CsvString(csv)),
+        prices::prices(&league).await,
+    )
 }
 
-#[tauri::command]
+#[command]
 pub async fn chaos(sample: Box<DivinationCardsSample>, min: Option<f32>) -> f32 {
     sample.as_ref().chaos(min)
 }
 
-#[tauri::command]
+#[command]
 pub async fn merge(
     samples: Vec<DivinationCardsSample>,
-    app_handle: tauri::AppHandle,
+    app_handle: AppHandle,
 ) -> DivinationCardsSample {
     DivinationCardsSample::merge(app_handle.state::<Prices>().inner().clone(), &samples)
+}
+
+#[command]
+pub async fn league(sample: Box<DivinationCardsSample>, league: League) -> DivinationCardsSample {
+    DivinationCardsSample::create(
+        Csv::CsvString(sample.polished),
+        prices::prices(&league).await,
+    )
 }

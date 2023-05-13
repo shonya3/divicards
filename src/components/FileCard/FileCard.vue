@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DivinationCardsSample } from '../../types';
+import { DivinationCardsSample, League } from '../../types';
 import CSVIcon from '../icons/CSVIcon.vue';
 import { ref } from 'vue';
 import DivTable from '../DivTable/DivTable.vue';
@@ -8,6 +8,7 @@ import FixedNamesList from './FixedNamesList/FixedNamesList.vue';
 import NotCardsList from './NotCardsList/NotCardsList.vue';
 
 export interface FileCardProps {
+	league: League;
 	filename: string;
 	href: string;
 	selected: boolean | null;
@@ -18,11 +19,13 @@ export interface FileCardProps {
 	sample: DivinationCardsSample;
 }
 
-defineProps<FileCardProps>();
+const props = defineProps<FileCardProps>();
+console.log({ fileCardProps: props });
 defineEmits<{
 	(event: 'update:selected', e: InputEvent): void;
-	(event: 'delete-me', id: string): void;
+	(event: 'delete', id: string): void;
 	(event: 'update:minimumCardPrice', newPrice: number): void;
+	(event: 'update:league', league: League): void;
 }>();
 
 const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
@@ -55,8 +58,21 @@ const tablePopup = ref<typeof BasePopup | null>(null);
 			<p>{{ format(sample.chaos) }}</p>
 			<img width="35" height="35" class="chaos-img" src="/chaos.png" alt="chaos" />
 		</div>
-		<a class="download" v-if="valid" :download="filename" :href="href">Download</a>
-		<button @click="$emit('delete-me', id)" class="btn-delete">X</button>
+
+		<div class="league">
+			<label :for="`league-${id}`">League</label>
+			<select
+				:id="`league-${id}`"
+				@change="e => $emit('update:league', (e.target as HTMLSelectElement).value)"
+				:value="league"
+			>
+				<option value="Crucible">Crucible</option>
+				<option value="Standard">Standard</option>
+			</select>
+		</div>
+
+		<a class="download" v-if="valid" :download="`${league}_${filename}`" :href="href">Download</a>
+		<button @click="$emit('delete', id)" class="btn-delete">X</button>
 		<input
 			class="checkbox"
 			v-if="valid && selected != null"
@@ -73,6 +89,11 @@ const tablePopup = ref<typeof BasePopup | null>(null);
 </template>
 
 <style scoped>
+.league {
+	display: flex;
+	gap: 0.4rem;
+}
+
 .minor-icons {
 	position: absolute;
 	top: 30%;
@@ -92,7 +113,7 @@ const tablePopup = ref<typeof BasePopup | null>(null);
 
 	width: 250px;
 	/* max-height: 320px; */
-	height: 320px;
+	min-height: 400px;
 
 	border: 2px solid black;
 	border-color: var(--border-color);

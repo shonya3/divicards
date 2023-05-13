@@ -1,10 +1,11 @@
 use std::path::PathBuf;
 
-pub fn prices() -> PathBuf {
-    let mut path = appdata();
-    path.push("prices.json");
-    path
+use divi::League;
+
+pub fn prices(league: &League) -> PathBuf {
+    appdata().join(format!("{}-prices.json", { league }))
 }
+
 pub fn appdata() -> PathBuf {
     let mut path = tauri::api::path::config_dir().unwrap();
     path.push("divicards");

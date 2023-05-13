@@ -32,9 +32,10 @@ const onDrop = (e: DragEvent) => {
 				<FileCard
 					v-for="file in files"
 					v-bind="file"
-					@delete-me="deleteFile(file.id)"
+					@delete="deleteFile(file.id)"
 					v-model:selected="file.selected"
 					v-model:minimumCardPrice.number="file.minimumCardPrice"
+					v-model:league="file.league"
 				/>
 			</div>
 		</Transition>
@@ -49,9 +50,10 @@ const onDrop = (e: DragEvent) => {
 			<FileCard
 				v-if="mergedFile"
 				v-bind="mergedFile"
-				@delete-me="deleteMergedFile"
+				@delete="deleteMergedFile"
 				v-model:selected="mergedFile.selected"
 				v-model:minimumCardPrice.number="mergedFile.minimumCardPrice"
+				v-model:league="mergedFile.league"
 			/>
 		</Transition>
 	</div>

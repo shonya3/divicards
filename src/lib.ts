@@ -1,4 +1,5 @@
-export const csvFile = (csv: string, name: `${string}.csv`): File => new File([csv], name, { type: 'text/csv' });
+import { CsvExt } from './types';
+export const csvFile = (csv: string, name: CsvExt): File => new File([csv], name, { type: 'text/csv' });
 
 export const createDownloadAnchor = (href: string, filename: string): HTMLAnchorElement => {
 	const a = document.createElement('a');
@@ -8,5 +9,6 @@ export const createDownloadAnchor = (href: string, filename: string): HTMLAnchor
 };
 
 export const downloadFile = (filename: string, href: string): void => {
+	console.log({ filename });
 	createDownloadAnchor(href, filename).click();
 };

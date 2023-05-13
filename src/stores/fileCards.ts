@@ -2,10 +2,9 @@ import { downloadFile } from './../lib';
 import { defineStore } from 'pinia';
 import { FileCardProps } from '../components/FileCard/FileCard.vue';
 import { csvFile } from '../lib';
-import { useCreateFileCard } from '../composables/useCreateFileCard';
+import { useFileCard } from '../composables/useFileCard';
 import { command } from '../command';
-import { watch } from 'vue';
-import { DivinationCardsSample } from '../types';
+import { DivinationCardsSample, League } from '../types';
 
 export const useFileCardsStore = defineStore('filecardsStore', {
 	state: (): {
@@ -18,6 +17,10 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 	getters: {
 		selectedFiles(): FileCardProps[] {
 			return this.fileCards.filter(file => file.selected && file.valid);
+		},
+
+		samples(): DivinationCardsSample[] {
+			return this.fileCards.map(f => f.sample);
 		},
 
 		selectedSamples(): DivinationCardsSample[] {
@@ -37,28 +40,26 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 		},
 	},
 	actions: {
-		downloadAll() {
-			this.validFiles.forEach(({ filename, href }) => downloadFile(filename, href));
+		addCards(files: File[], league: League = 'Crucible'): void {
+			for (const file of files) {
+				this.fileCards.push(useFileCard(file, league));
+			}
 		},
 
 		async merge() {
 			const sample = await command('merge', { samples: this.selectedSamples });
 			const file: File = csvFile(sample.polished, 'merged.csv');
 
-			const fileCard = useCreateFileCard(file, 0);
-			watch(
-				() => fileCard.minimumCardPrice,
-				async val => {
-					fileCard.sample.chaos = await command('chaos', {
-						sample: fileCard.sample,
-						min: val,
-					});
-				}
-			);
+			const fileCard = useFileCard(file, 'Crucible');
+
 			// No point to select merged file, `null` makes it nonselectable by removing checkbox
 			// maybe should refactor later
 			fileCard.selected = null;
 			this.mergedFile = fileCard;
+		},
+
+		downloadAll() {
+			this.validFiles.forEach(({ filename, href, league }) => downloadFile(`${league}_${filename}`, href));
 		},
 
 		deleteMergedFile() {
@@ -71,23 +72,6 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 
 		deleteAllFiles(): void {
 			this.fileCards = [];
-		},
-
-		addCards(files: File[], minimumCardPrice = 0): void {
-			for (const file of files) {
-				const fileCard = useCreateFileCard(file, minimumCardPrice);
-				watch(
-					() => fileCard.minimumCardPrice,
-					async val => {
-						fileCard.sample.chaos = await command('chaos', {
-							sample: fileCard.sample,
-							min: val,
-						});
-					}
-				);
-
-				this.fileCards.push(fileCard);
-			}
 		},
 	},
 });
