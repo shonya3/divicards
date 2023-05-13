@@ -9,6 +9,5 @@ export const createDownloadAnchor = (href: string, filename: string): HTMLAnchor
 };
 
 export const downloadFile = (filename: string, href: string): void => {
-	console.log({ filename });
 	createDownloadAnchor(href, filename).click();
 };
