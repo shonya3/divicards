@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DivinationCardsSample, League } from '../../types';
+import { CsvExt, DivinationCardsSample, League } from '../../types';
 import CSVIcon from '../icons/CSVIcon.vue';
 import { ref } from 'vue';
 import DivTable from '../DivTable/DivTable.vue';
@@ -9,7 +9,7 @@ import NotCardsList from './NotCardsList/NotCardsList.vue';
 
 export interface FileCardProps {
 	league: League;
-	filename: string;
+	filename: CsvExt;
 	href: string;
 	selected: boolean | null;
 	id: string;

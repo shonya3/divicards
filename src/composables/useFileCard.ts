@@ -29,7 +29,7 @@ export const useFileCard = (file: File, league: League): FileCardProps => {
 	watch(
 		() => props.sample.polished,
 		val => {
-			props.href = URL.createObjectURL(csvFile(val, props.filename as `${string}.csv`));
+			props.href = URL.createObjectURL(csvFile(val, props.filename));
 		}
 	);
 

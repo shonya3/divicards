@@ -1,9 +1,10 @@
 import { ref, watch } from 'vue';
-import { csvFile } from '../lib';
+import { CsvExt } from '../types';
 
 export const useCsvFile = (file: File) => {
+	const n: CsvExt = file.name.endsWith('.csv') ? (file.name as CsvExt) : `${file.name}.csv`;
 	const text = ref('');
-	const name = ref(file.name);
+	const name = ref<CsvExt>(n);
 	const href = ref(URL.createObjectURL(file));
 
 	const updateText = async () => {
