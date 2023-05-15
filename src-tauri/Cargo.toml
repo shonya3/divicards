@@ -39,8 +39,13 @@ tokio = { version = "1.27", features = ["full"] }
 tracing = { version = "0.1", features = ["log"] }
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 dotenv = "0.15"
-reqwest = { version = "0.11", features = ["json"] }
+reqwest = { version = "0.11", features = ["json", "rustls-tls"] }
 reqwest-retry = "0.2.2"
+
+axum = { version = "0.6.12", features = ["headers"] }
+oauth2 = "4.3"
+keyring = "2.0.2"
+open = "4.0.2"
 
 [features]
 # by default Tauri runs in production mode

@@ -5,7 +5,12 @@
 )]
 
 use divi::{League, Prices};
-use lib::{commands, paths, prices};
+use lib::{
+    commands,
+    discord::{self, DiscordProvider},
+    oauth::Persistent,
+    paths, prices,
+};
 use tauri::Manager;
 
 #[tokio::main]
@@ -37,7 +42,10 @@ async fn main() {
             commands::sample,
             commands::chaos,
             commands::merge,
-            commands::league
+            commands::league,
+            discord::discord_auth,
+            discord::discord_authenticated,
+            discord::discord_identity
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -1,5 +1,5 @@
 import { invoke } from '@tauri-apps/api';
-import { DivinationCardsSample, League } from './types';
+import { DivinationCardsSample, League, DiscordIdentity } from './types';
 
 export type CommandOptions = {
 	log: boolean;
@@ -10,6 +10,9 @@ export interface Commands {
 	chaos: (args: { sample: DivinationCardsSample; min: number }) => number;
 	merge: (args: { samples: DivinationCardsSample[] }) => DivinationCardsSample;
 	league: (args: { sample: DivinationCardsSample; league: League }) => DivinationCardsSample;
+	discord_auth: (args: {}) => void;
+	discord_identity: (args: {}) => DiscordIdentity;
+	discord_authenticated: (args: {}) => boolean;
 }
 
 export const command = async <Cmd extends keyof Commands>(

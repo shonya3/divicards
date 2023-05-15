@@ -22,3 +22,20 @@ export interface FixedName {
 	old: string;
 	fixed: string;
 }
+
+export interface DiscordIdentity {
+	id: string;
+	username: string;
+	global_name: string | null;
+	display_name: string | null;
+	avatar: string | null;
+	discriminator: string | null;
+	public_flags: number;
+	flags: number;
+	banner: string | null;
+	banner_color: string | null;
+	locale: string;
+	mfa_enabled: boolean;
+	premium_type: number;
+	avatar_decoration: string | null;
+}
