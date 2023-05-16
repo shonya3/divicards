@@ -46,6 +46,7 @@ axum = { version = "0.6.12", features = ["headers"] }
 oauth2 = "4.3"
 keyring = "2.0.2"
 open = "4.0.2"
+async-trait = "0.1.68"
 
 [features]
 # by default Tauri runs in production mode

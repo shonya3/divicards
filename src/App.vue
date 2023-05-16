@@ -2,8 +2,10 @@
 import FileCard from './components/FileCard/FileCard.vue';
 import { useFileCardsStore } from './stores/fileCards';
 import { storeToRefs } from 'pinia';
-import { ref } from 'vue';
+import { initCustomFormatter, ref } from 'vue';
 import { useAutoAnimate } from './composables/useAutoAnimate';
+import { useDiscordOAuthStore } from './stores/discordOAuth';
+import { command } from './command';
 
 const filesStore = useFileCardsStore();
 const { fileCards: files, selectedFiles, mergedFile } = storeToRefs(filesStore);
@@ -16,9 +18,22 @@ const onDrop = (e: DragEvent) => {
 	const dropFiles = e.dataTransfer?.files;
 	if (dropFiles) addCards(Array.from(dropFiles));
 };
+
+const { loggedIn, identity, name } = storeToRefs(useDiscordOAuthStore());
+const { login, logout, checkLoggedIn, init } = useDiscordOAuthStore();
+
+init();
 </script>
 
 <template>
+	<div v-if="loggedIn">
+		<p>{{ name }}</p>
+		<button @click="logout">Logout</button>
+	</div>
+	<div v-else>
+		<button @click="login">Login</button>
+	</div>
+
 	<div
 		@drop.prevent="onDrop"
 		@dragenter="(e: DragEvent) => e.preventDefault()"

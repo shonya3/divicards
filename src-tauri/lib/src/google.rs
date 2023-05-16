@@ -4,19 +4,19 @@ use crate::oauth::{AuthCodeResponse, OAuthProvider};
 use axum::{async_trait, extract::Query, response::Html, routing::get, Router};
 use keyring::Entry;
 use oauth2::{
-    basic::BasicClient, reqwest::async_http_client, CsrfToken, PkceCodeChallenge, RedirectUrl,
-    Scope, TokenResponse,
+    basic::BasicClient, reqwest::async_http_client, ClientSecret, CsrfToken, PkceCodeChallenge,
+    RedirectUrl, Scope, TokenResponse,
 };
 use serde::{Deserialize, Serialize};
 use tauri::command;
 use tokio::sync::mpsc;
 
 #[derive(Default)]
-pub struct DiscordProvider;
+pub struct GoogleProvider;
 
-impl DiscordProvider {
-    pub fn new() -> DiscordProvider {
-        DiscordProvider::default()
+impl GoogleProvider {
+    pub fn new() -> GoogleProvider {
+        GoogleProvider::default()
     }
 
     pub fn access_token_label() -> String {
@@ -37,11 +37,12 @@ impl DiscordProvider {
 }
 
 #[async_trait]
-impl OAuthProvider for DiscordProvider {
-    const PROVIDER_LABEL: &'static str = "discord";
-    const CLIENT_ID: &'static str = "1105146245221191872";
-    const AUTH_URL: &'static str = "https://discord.com/oauth2/authorize";
-    const TOKEN_URL: &'static str = "https://discord.com/api/oauth2/token";
+impl OAuthProvider for GoogleProvider {
+    const PROVIDER_LABEL: &'static str = "google";
+    const CLIENT_ID: &'static str =
+        "752206000922-1gpkcoplrjqpfgg8pr4sb4tnrlvauomp.apps.googleusercontent.com";
+    const AUTH_URL: &'static str = "https://accounts.google.com/o/oauth2/auth";
+    const TOKEN_URL: &'static str = "https://oauth2.googleapis.com/token";
 
     async fn oauth(&self) -> Result<String, String> {
         let (sender, mut receiver) = mpsc::channel::<AuthCodeResponse>(1);
@@ -50,10 +51,12 @@ impl OAuthProvider for DiscordProvider {
             RedirectUrl::new(format!("http://localhost:{}/callback", addr.port())).unwrap();
 
         let client = BasicClient::new(
-            DiscordProvider::client_id(),
-            None,
-            DiscordProvider::auth_url().unwrap(),
-            DiscordProvider::token_url().ok(),
+            GoogleProvider::client_id(),
+            Some(ClientSecret::new(
+                "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".to_string(),
+            )),
+            GoogleProvider::auth_url().unwrap(),
+            GoogleProvider::token_url().ok(),
         )
         .set_redirect_uri(redirect_url);
 
@@ -61,7 +64,7 @@ impl OAuthProvider for DiscordProvider {
 
         let (auth_url, csrf_token) = client
             .authorize_url(CsrfToken::new_random)
-            .add_scope(Scope::new("identify".to_string()))
+            .add_scope(Scope::new("profile".to_string()))
             .set_pkce_challenge(pkce_challenge)
             .url();
 
@@ -94,6 +97,8 @@ impl OAuthProvider for DiscordProvider {
         };
         tx.send(()).unwrap();
 
+        dbg!(&code);
+
         match csrf.secret() == csrf_token.secret() {
             true => println!("csrf is fine"),
             false => {
@@ -117,7 +122,10 @@ impl OAuthProvider for DiscordProvider {
                 dbg!(t);
                 Ok("got token".to_string())
             }
-            Err(_) => Err("no token".to_string()),
+            Err(err) => {
+                dbg!(err);
+                Err("no token".to_string())
+            }
         }
     }
 }
@@ -164,15 +172,15 @@ pub struct Identity {
 }
 
 #[command]
-pub async fn discord_auth() -> Result<String, String> {
-    // auth(DiscordProvider::default()).await
-    let result = DiscordProvider::new().oauth().await;
+pub async fn google_auth() -> Result<String, String> {
+    // auth(GoogleProvider::default()).await
+    let result = GoogleProvider::new().oauth().await;
     dbg!(result.clone());
     result
 }
 
 #[command]
-pub async fn discord_authenticated() -> bool {
+pub async fn google_authenticated() -> bool {
     match AccessTokenStorage::new().get() {
         Ok(_) => true,
         Err(_) => false,
@@ -180,16 +188,16 @@ pub async fn discord_authenticated() -> bool {
 }
 
 #[command]
-pub async fn discord_identity() -> Option<Identity> {
+pub async fn google_identity() -> Option<Identity> {
     let storage = AccessTokenStorage::new();
     match storage.get().ok() {
-        Some(token) => Some(DiscordProvider::identity(token).await),
+        Some(token) => Some(GoogleProvider::identity(token).await),
         None => None,
     }
 }
 
 #[command]
-pub fn discord_logout() {
+pub fn google_logout() {
     dbg!("logout");
     AccessTokenStorage::new().delete().unwrap()
 }
@@ -210,7 +218,7 @@ impl Default for AccessTokenStorage {
 }
 
 impl Persist for AccessTokenStorage {
-    const KEY_NAME: &'static str = "discord_access_token";
+    const KEY_NAME: &'static str = "google_access_token";
     fn get(&self) -> Result<String, keyring::Error> {
         self.0.get_password()
     }

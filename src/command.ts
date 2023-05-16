@@ -10,9 +10,11 @@ export interface Commands {
 	chaos: (args: { sample: DivinationCardsSample; min: number }) => number;
 	merge: (args: { samples: DivinationCardsSample[] }) => DivinationCardsSample;
 	league: (args: { sample: DivinationCardsSample; league: League }) => DivinationCardsSample;
-	discord_auth: (args: {}) => void;
+	discord_auth: (args: {}) => string;
 	discord_identity: (args: {}) => DiscordIdentity;
 	discord_authenticated: (args: {}) => boolean;
+    discord_logout: (args: {}) => void;
+    google_auth: (args: {}) => string;
 }
 
 export const command = async <Cmd extends keyof Commands>(
