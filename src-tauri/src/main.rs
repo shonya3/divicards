@@ -46,7 +46,8 @@ async fn main() {
             discord::discord_authenticated,
             discord::discord_identity,
             discord::discord_logout,
-            google::google_auth
+            google::google_auth,
+            google::google_identity
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

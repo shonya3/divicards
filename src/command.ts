@@ -1,5 +1,5 @@
 import { invoke } from '@tauri-apps/api';
-import { DivinationCardsSample, League, DiscordIdentity } from './types';
+import { DivinationCardsSample, League, DiscordIdentity, GoogleIdentity } from './types';
 
 export type CommandOptions = {
 	log: boolean;
@@ -13,8 +13,9 @@ export interface Commands {
 	discord_auth: (args: {}) => string;
 	discord_identity: (args: {}) => DiscordIdentity;
 	discord_authenticated: (args: {}) => boolean;
-    discord_logout: (args: {}) => void;
-    google_auth: (args: {}) => string;
+	discord_logout: (args: {}) => void;
+	google_auth: (args: {}) => string;
+	google_identity: (args: {}) => GoogleIdentity;
 }
 
 export const command = async <Cmd extends keyof Commands>(

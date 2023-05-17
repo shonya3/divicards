@@ -25,7 +25,7 @@ impl GoogleProvider {
 
     pub async fn identity(acces_token: String) -> Identity {
         reqwest::Client::new()
-            .get("https://discord.com/api/users/@me")
+            .get("https://www.googleapis.com/oauth2/v2/userinfo?alt=json")
             .header("authorization", format!("Bearer {}", { acces_token }))
             .send()
             .await
@@ -154,21 +154,11 @@ pub async fn route_handler(
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Identity {
-    pub id: String,
-    pub username: String,
-    pub global_name: Option<String>,
-    pub display_name: Option<String>,
-    pub avatar: Option<String>,
-    pub discriminator: Option<String>,
-    pub public_flags: usize,
-    pub flags: usize,
-    pub banner: Option<String>,
-    pub banner_color: Option<String>,
-    pub accent_color: Option<String>,
-    pub locale: String,
-    pub mfa_enabled: bool,
-    pub premium_type: usize,
-    pub avatar_decoration: Option<String>,
+    given_name: Option<String>,
+    name: Option<String>,
+    id: String,
+    picture: Option<String>,
+    locale: Option<String>,
 }
 
 #[command]
