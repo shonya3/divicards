@@ -45,7 +45,7 @@ impl OAuthProvider for DiscordProvider {
 
     async fn oauth(&self) -> Result<String, String> {
         let (sender, mut receiver) = mpsc::channel::<AuthCodeResponse>(1);
-        let addr = SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8080);
+        let addr = SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 50151);
         let redirect_url =
             RedirectUrl::new(format!("http://localhost:{}/callback", addr.port())).unwrap();
 
@@ -165,10 +165,7 @@ pub struct Identity {
 
 #[command]
 pub async fn discord_auth() -> Result<String, String> {
-    // auth(DiscordProvider::default()).await
-    let result = DiscordProvider::new().oauth().await;
-    dbg!(result.clone());
-    result
+    DiscordProvider::new().oauth().await
 }
 
 #[command]
