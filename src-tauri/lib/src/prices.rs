@@ -1,14 +1,36 @@
 use crate::paths;
 use divi::{error::Error, League, Prices};
+use std::{fs, path::Path};
+
+pub const DAY_AS_SECS: u64 = 86_400;
 
 pub async fn prices(league: &League) -> Prices {
     let path = paths::prices(&league);
-    match std::fs::read_to_string(&path) {
-        Ok(json) => serde_json::from_str(&json).unwrap(),
-        Err(_) => {
-            println!("Error reading file. Fetchin new one");
-            update(&league).await.unwrap()
-        }
+
+    match Path::new(&path).exists() {
+        true => match fs::metadata(&path) {
+            Ok(metadata) => match metadata.modified() {
+                Ok(time) => match time.elapsed().unwrap().as_secs() > DAY_AS_SECS {
+                    true => update(&league).await.unwrap(),
+                    false => match std::fs::read_to_string(&path) {
+                        Ok(json) => serde_json::from_str(&json).unwrap(),
+                        Err(err) => {
+                            dbg!(err);
+                            update(&league).await.unwrap()
+                        }
+                    },
+                },
+                Err(err) => {
+                    dbg!(err);
+                    update(&league).await.unwrap()
+                }
+            },
+            Err(err) => {
+                dbg!(err);
+                update(&league).await.unwrap()
+            }
+        },
+        false => update(&league).await.unwrap(),
     }
 }
 
