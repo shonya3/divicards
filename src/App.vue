@@ -19,20 +19,20 @@ const onDrop = (e: DragEvent) => {
 	if (dropFiles) addCards(Array.from(dropFiles));
 };
 
-const { loggedIn, identity, name } = storeToRefs(useDiscordOAuthStore());
-const { login, logout, checkLoggedIn, init } = useDiscordOAuthStore();
+// const { loggedIn, identity, name } = storeToRefs(useDiscordOAuthStore());
+// const { login, logout, checkLoggedIn, init } = useDiscordOAuthStore();
 
-init();
+// init();
 </script>
 
 <template>
-	<div v-if="loggedIn">
+	<!-- <div v-if="loggedIn">
 		<p>{{ name }}</p>
 		<button @click="logout">Logout</button>
 	</div>
 	<div v-else>
 		<button @click="login">Login</button>
-	</div>
+	</div> -->
 
 	<div
 		@drop.prevent="onDrop"
