@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CsvExt, DivinationCardsSample, League } from '../../types';
+import { CsvExt, DivinationCardsSample, League, leagues } from '../../types';
 import CSVIcon from '../icons/CSVIcon.vue';
 import { ref } from 'vue';
 import DivTable from '../DivTable/DivTable.vue';
@@ -66,12 +66,11 @@ const tablePopup = ref<typeof BasePopup | null>(null);
 				@change="e => $emit('update:league', (e.target as HTMLSelectElement).value)"
 				:value="league"
 			>
-				<option value="Crucible">Crucible</option>
-				<option value="Standard">Standard</option>
+				<option v-for="league in leagues" :value="league">{{ league }}</option>
 			</select>
 		</div>
 
-		<a class="download" v-if="valid" :download="`${league}_${filename}`" :href="href">Download</a>
+		<a class="download" v-if="valid" :download="filename" :href="href">Download</a>
 		<button @click="$emit('delete', id)" class="btn-delete">X</button>
 		<input
 			class="checkbox"
@@ -133,10 +132,10 @@ const tablePopup = ref<typeof BasePopup | null>(null);
 }
 
 .filename {
-	font-size: 1.5rem;
+	font-size: 1rem;
 	letter-spacing: -0.4px;
 	overflow: hidden;
-	max-height: 30px;
+	max-height: 60px;
 	max-width: 100%;
 }
 

@@ -1,6 +1,10 @@
 export type Order = 'asc' | 'desc';
-export type League = 'Crucible' | 'Standard';
+export type League = 'Crucible' | 'Standard' | 'Crucible-HC';
+export const leagues: Readonly<League[]> = Object.freeze(['Crucible', 'Standard', 'Crucible-HC']);
 export type CsvExt = `${string}.csv`;
+export const isCsvExt = (s: string): s is CsvExt => {
+	return s.endsWith('.csv');
+};
 
 export interface DivinationCardsSample {
 	cards: DivinationCardRecord[];
