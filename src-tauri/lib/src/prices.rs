@@ -1,5 +1,5 @@
 use crate::paths;
-use divi::{error::Error, League, Prices};
+use divi::{League, Prices};
 use std::{fs, path::Path};
 
 pub const DAY_AS_SECS: u64 = 86_400;
@@ -35,7 +35,7 @@ pub async fn prices(league: &League) -> Prices {
 }
 
 //TODO: add error types
-pub async fn update(league: &League) -> Result<Prices, Error> {
+pub async fn update(league: &League) -> Result<Prices, reqwest::Error> {
     let prices = Prices::fetch(league).await?;
     let json = serde_json::to_string(&prices).unwrap();
     std::fs::write(paths::prices(league), &json).unwrap();

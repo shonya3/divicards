@@ -2,9 +2,22 @@ import { computed, reactive, ref, watch } from 'vue';
 import { useSample } from './useSample';
 import { useCsvFile } from './useCsvFile';
 import { FileCardProps } from '../components/FileCard/FileCard.vue';
-import { League } from '../types';
+import { CsvExt, League, isCsvExt, leagues } from '../types';
 import { command } from '../command';
 import { csvFile } from '../lib';
+
+const prefixFilename = (name: string, league: League): CsvExt => {
+	const UNDERSCORE_GLUE = '_';
+	const res: CsvExt = isCsvExt(name) ? name : `${name}.csv`;
+
+	for (const old of leagues) {
+		if (res.startsWith(`${old}${UNDERSCORE_GLUE}`)) {
+			return res.replace(old, league) as CsvExt;
+		}
+	}
+
+	return `${league}${UNDERSCORE_GLUE}${res}`;
+};
 
 export const useFileCard = (file: File, league: League): FileCardProps => {
 	const { text: csv, name: filename, href } = useCsvFile(file);
@@ -18,7 +31,7 @@ export const useFileCard = (file: File, league: League): FileCardProps => {
 		valid,
 		selected,
 		sample: data,
-		filename,
+		filename: prefixFilename(filename.value, league),
 		href,
 		error,
 		isError,
@@ -47,6 +60,7 @@ export const useFileCard = (file: File, league: League): FileCardProps => {
 		() => props.league,
 		async val => {
 			props.sample = await command('league', { league: val, sample: props.sample });
+			props.filename = prefixFilename(props.filename, val);
 		}
 	);
 

@@ -59,7 +59,7 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 		},
 
 		downloadAll() {
-			this.validFiles.forEach(({ filename, href, league }) => downloadFile(`${league}_${filename}`, href));
+			this.validFiles.forEach(({ filename, href }) => downloadFile(filename, href));
 		},
 
 		deleteMergedFile() {
