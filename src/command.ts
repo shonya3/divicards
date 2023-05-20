@@ -1,36 +1,27 @@
 import { invoke } from '@tauri-apps/api';
 import { DivinationCardsSample, League, DiscordIdentity, GoogleIdentity } from './types';
 
-export type CommandOptions = {
-	log: boolean;
-};
-
 export interface Commands {
 	sample: (args: { csv: string; league: League }) => DivinationCardsSample;
 	chaos: (args: { sample: DivinationCardsSample; min: number }) => number;
 	merge: (args: { samples: DivinationCardsSample[] }) => DivinationCardsSample;
 	league: (args: { sample: DivinationCardsSample; league: League }) => DivinationCardsSample;
-	discord_auth: (args: {}) => string;
-	discord_identity: (args: {}) => DiscordIdentity;
-	discord_authenticated: (args: {}) => boolean;
-	discord_logout: (args: {}) => void;
-	google_auth: (args: {}) => string;
-	google_identity: (args: {}) => GoogleIdentity;
+	discord_auth: () => string;
+	discord_identity: () => DiscordIdentity;
+	discord_authenticated: () => boolean;
+	discord_logout: () => void;
+	google_auth: () => string;
+	google_identity: () => GoogleIdentity;
 }
 
-export const command = async <Cmd extends keyof Commands>(
-	cmd: Cmd,
-	args: Parameters<Commands[Cmd]>[0],
-	options?: CommandOptions
-): Promise<ReturnType<Commands[Cmd]>> => {
-	if (import.meta.env.DEV && !options) {
-		options = { log: true };
-	}
-
-	if (options?.log) {
+export const command = async <CommandName extends keyof Commands, Fn extends Commands[CommandName]>(
+	name: CommandName,
+	...args: Parameters<Fn>
+): Promise<ReturnType<Fn>> => {
+	if (import.meta.env.DEV) {
 		const t0 = performance.now();
-		const res = (await invoke(cmd, args)) as ReturnType<Commands[Cmd]>;
-		console.log(`${cmd}: ${new Intl.NumberFormat().format(performance.now() - t0)}ms`);
+		const res = (await invoke(name, ...args)) as ReturnType<Fn>;
+		console.log(`${name}: ${new Intl.NumberFormat().format(performance.now() - t0)}ms`);
 		return res;
-	} else return invoke(cmd, args) as Promise<ReturnType<Commands[Cmd]>>;
+	} else return invoke(name, ...args) as Promise<ReturnType<Fn>>;
 };
