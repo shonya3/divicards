@@ -14,6 +14,7 @@ export interface Commands {
 	google_identity: () => GoogleIdentity;
 }
 
+const { format } = new Intl.NumberFormat();
 export const command = async <CommandName extends keyof Commands, Fn extends Commands[CommandName]>(
 	name: CommandName,
 	...args: Parameters<Fn>
@@ -21,7 +22,7 @@ export const command = async <CommandName extends keyof Commands, Fn extends Com
 	if (import.meta.env.DEV) {
 		const t0 = performance.now();
 		const res = (await invoke(name, ...args)) as ReturnType<Fn>;
-		console.log(`${name}: ${new Intl.NumberFormat().format(performance.now() - t0)}ms`);
+		console.log(`${name}: ${format(performance.now() - t0)}ms`);
 		return res;
 	} else return invoke(name, ...args) as Promise<ReturnType<Fn>>;
 };
