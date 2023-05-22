@@ -58,7 +58,7 @@ const onDrop = (e: DragEvent) => {
 		<div v-if="files.length > 0">
 			<h2>Select files you want to merge</h2>
 			<button class="btn" @click="downloadAll">Download All</button>
-			<button :disabled="!selectedFiles.length" class="btn" @click="merge">Merge CSV</button>
+			<button :disabled="selectedFiles.length < 2" class="btn" @click="merge">Merge samples</button>
 			<button class="btn" @click="deleteAllFiles">Clear all</button>
 		</div>
 		<Transition>
