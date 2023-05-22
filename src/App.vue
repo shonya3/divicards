@@ -45,7 +45,7 @@ const onDrop = (e: DragEvent) => {
 			<div class="drop">Drop files <span>Here!</span></div>
 			<HelpTip>
 				<p>Excel, .csv or just .txt</p>
-				<p>Requirement: "name" and "amount" headers</p>
+				<p>Required headers: name and amount</p>
 				<img src="/simple.png" alt="" />
 			</HelpTip>
 		</div>
