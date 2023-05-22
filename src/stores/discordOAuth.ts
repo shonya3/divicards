@@ -29,7 +29,6 @@ export const useDiscordOAuthStore = defineStore('auth', {
 				this.identity = await this.getIdentity();
 				return message;
 			} catch (err) {
-				console.log(err);
 				return err as string;
 			}
 		},

@@ -1,27 +1,25 @@
 import { computed, reactive, ref, watch } from 'vue';
 import { useSample } from './useSample';
-import { useCsvFile } from './useCsvFile';
+import { useFile } from './useFile';
 import { FileCardProps } from '../components/FileCard/FileCard.vue';
-import { CsvExt, League, isCsvExt, leagues } from '../types';
+import { League, leagues } from '../types';
 import { command } from '../command';
-import { csvFile } from '../lib';
 
-const prefixFilename = (name: string, league: League): CsvExt => {
+const prefixFilename = (name: string, league: League): string => {
 	const UNDERSCORE_GLUE = '_';
-	const res: CsvExt = isCsvExt(name) ? name : `${name}.csv`;
 
 	for (const old of leagues) {
-		if (res.startsWith(`${old}${UNDERSCORE_GLUE}`)) {
-			return res.replace(old, league) as CsvExt;
+		if (name.startsWith(`${old}${UNDERSCORE_GLUE}`)) {
+			return name.replace(old, league);
 		}
 	}
 
-	return `${league}${UNDERSCORE_GLUE}${res}`;
+	return `${league}${UNDERSCORE_GLUE}${name}`;
 };
 
 export const useFileCard = (file: File, league: League): FileCardProps => {
-	const { text: csv, name: filename, href } = useCsvFile(file);
-	const { data, error, isError } = useSample(csv, league);
+	const { text: csv, name: filename, href } = useFile(file);
+	const { data, error, isError, isReady } = useSample(csv, league);
 	const selected = ref<boolean | null>(false);
 	const valid = computed(() => !Boolean(error.value));
 	const id = crypto.randomUUID();
@@ -31,18 +29,28 @@ export const useFileCard = (file: File, league: League): FileCardProps => {
 		valid,
 		selected,
 		sample: data,
-		filename: prefixFilename(filename.value, league),
+		filename,
 		href,
 		error,
 		isError,
 		minimumCardPrice: 0,
 		league,
+		isReady,
 	});
+
+	watch(
+		() => isReady.value,
+		val => {
+			if (!isError.value) {
+				props.filename = prefixFilename(filename.value, league);
+			}
+		}
+	);
 
 	watch(
 		() => props.sample.polished,
 		val => {
-			props.href = URL.createObjectURL(csvFile(val, props.filename));
+			props.href = URL.createObjectURL(new File([val], props.filename));
 		}
 	);
 

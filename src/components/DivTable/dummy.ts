@@ -1,4 +1,3 @@
-import { DivinationCardRecord } from '../../types';
 import { DivTableProps } from './DivTable.vue';
 
 import props from './DivTableProps.json' assert { type: 'json' };

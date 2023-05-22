@@ -1,7 +1,6 @@
-import { downloadFile } from './../lib';
+import { ACTIVE_LEAGUE, downloadFile } from './../lib';
 import { defineStore } from 'pinia';
 import { FileCardProps } from '../components/FileCard/FileCard.vue';
-import { csvFile } from '../lib';
 import { useFileCard } from '../composables/useFileCard';
 import { command } from '../command';
 import { DivinationCardsSample, League } from '../types';
@@ -40,7 +39,7 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 		},
 	},
 	actions: {
-		addCards(files: File[], league: League = 'Crucible'): void {
+		addCards(files: File[], league: League = ACTIVE_LEAGUE): void {
 			for (const file of files) {
 				this.fileCards.push(useFileCard(file, league));
 			}
@@ -48,9 +47,9 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 
 		async merge() {
 			const sample = await command('merge', { samples: this.selectedSamples });
-			const file: File = csvFile(sample.polished, 'merged.csv');
+			const file: File = new File([sample.polished], 'merged.csv');
 
-			const fileCard = useFileCard(file, 'Crucible');
+			const fileCard = useFileCard(file, ACTIVE_LEAGUE);
 
 			// No point to select merged file, `null` makes it nonselectable by removing checkbox
 			// maybe should refactor later

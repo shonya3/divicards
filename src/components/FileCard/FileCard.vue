@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { CsvExt, DivinationCardsSample, League, leagues } from '../../types';
-import CSVIcon from '../icons/CSVIcon.vue';
+import { DivinationCardsSample, League, leagues } from '../../types';
+import GridIcon from '../icons/GridIcon.vue';
 import { ref } from 'vue';
 import DivTable from '../DivTable/DivTable.vue';
 import BasePopup from '../BasePopup.vue';
@@ -9,7 +9,7 @@ import NotCardsList from './NotCardsList/NotCardsList.vue';
 
 export interface FileCardProps {
 	league: League;
-	filename: CsvExt;
+	filename: string;
 	href: string;
 	selected: boolean | null;
 	id: string;
@@ -17,6 +17,7 @@ export interface FileCardProps {
 	error: string | null;
 	minimumCardPrice: number;
 	sample: DivinationCardsSample;
+	isReady: boolean;
 }
 
 const props = defineProps<FileCardProps>();
@@ -35,57 +36,61 @@ const tablePopup = ref<typeof BasePopup | null>(null);
 
 <template>
 	<div class="file" :class="{ 'file-error': error, 'file-selected': selected }">
-		<div class="minor-icons">
-			<fixed-names-list :fixed-names="sample.fixedNames" />
-			<not-cards-list :not-cards="sample.notCards"></not-cards-list>
-		</div>
 		<p class="filename" :class="{ 'filename--error': error }">{{ filename }}</p>
-		<CSVIcon class="icon" :width="96" :height="96" @click="tablePopup?.open()" />
-		<label class="slider-box" v-if="valid">
-			<span>{{ minimumCardPrice }}</span>
-			<input
-				class="slider"
-				type="range"
-				name=""
-				id=""
-				min="0"
-				max="500"
-				:value="minimumCardPrice"
-				@input="(e) => $emit('update:minimumCardPrice', (e.target as HTMLInputElement).value)"
-			/>
-		</label>
-		<div v-if="valid" class="total-price">
-			<p>{{ format(sample.chaos) }}</p>
-			<img width="35" height="35" class="chaos-img" src="/chaos.png" alt="chaos" />
-		</div>
-
-		<div v-if="valid" class="league">
-			<label :for="`league-${id}`">League</label>
-			<select
-				:id="`league-${id}`"
-				@change="e => $emit('update:league', (e.target as HTMLSelectElement).value)"
-				:value="league"
-			>
-				<option v-for="league in leagues" :value="league">{{ league }}</option>
-			</select>
-		</div>
-
-		<a class="download" v-if="valid" :download="filename" :href="href">Download</a>
 		<button @click="$emit('delete', id)" class="btn-delete">X</button>
-		<input
-			class="checkbox"
-			v-if="valid && selected != null"
-			type="checkbox"
-			:checked="selected"
-			@change="(e) => $emit('update:selected', (e.target as HTMLInputElement).checked)"
-		/>
 
-		<p v-if="error">{{ error }}</p>
+		<template v-if="isReady">
+			<p v-if="error">{{ error }}</p>
+			<template v-else-if="!error">
+				<div class="minor-icons">
+					<fixed-names-list :fixed-names="sample.fixedNames" />
+					<not-cards-list :not-cards="sample.notCards"></not-cards-list>
+				</div>
+				<GridIcon class="icon" :width="96" :height="96" @click="tablePopup?.open()" />
+				<label class="slider-box" v-if="valid">
+					<span>{{ minimumCardPrice }}</span>
+					<input
+						class="slider"
+						type="range"
+						name=""
+						id=""
+						min="0"
+						max="500"
+						:value="minimumCardPrice"
+						@input="(e) => $emit('update:minimumCardPrice', (e.target as HTMLInputElement).value)"
+					/>
+				</label>
+				<div v-if="valid" class="total-price">
+					<p>{{ format(sample.chaos) }}</p>
+					<img width="35" height="35" class="chaos-img" src="/chaos.png" alt="chaos" />
+				</div>
 
-		<base-popup ref="tablePopup">
-			<div-table v-if="valid" :cards="sample.cards" />
-			<p v-else>{{ error }}</p>
-		</base-popup>
+				<div v-if="valid" class="league">
+					<label :for="`league-${id}`">League</label>
+					<select
+						:id="`league-${id}`"
+						@change="e => $emit('update:league', (e.target as HTMLSelectElement).value)"
+						:value="league"
+					>
+						<option v-for="league in leagues" :value="league">{{ league }}</option>
+					</select>
+				</div>
+
+				<a class="download" v-if="valid" :download="filename" :href="href">Download</a>
+				<input
+					class="checkbox"
+					v-if="valid && selected != null"
+					type="checkbox"
+					:checked="selected"
+					@change="(e) => $emit('update:selected', (e.target as HTMLInputElement).checked)"
+				/>
+
+				<base-popup ref="tablePopup">
+					<div-table v-if="valid" :cards="sample.cards" />
+					<p v-else>{{ error }}</p>
+				</base-popup>
+			</template>
+		</template>
 	</div>
 </template>
 

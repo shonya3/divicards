@@ -1,11 +1,11 @@
 {
-	"id": "5a6ce4d4-dac1-4983-9ae0-d25d6c6a1381",
+	"id": "a92df0d1-05bf-47af-ad82-75f1fce7611f",
 	"sample": {
 		"cards": [
 			{
 				"amount": 0,
 				"name": "Brother's Gift",
-				"price": 1165.3699951171875,
+				"price": 1140.4100341796875,
 				"sum": null,
 				"weight": 0
 			},
@@ -33,7 +33,7 @@
 			{
 				"amount": 0,
 				"name": "Matryoshka",
-				"price": 95,
+				"price": 89.4000015258789,
 				"sum": null,
 				"weight": 0
 			},
@@ -47,21 +47,21 @@
 			{
 				"amount": 0,
 				"name": "Alivia's Grace",
-				"price": 3.119999885559082,
+				"price": 1,
 				"sum": null,
 				"weight": 0
 			},
 			{
 				"amount": 0,
 				"name": "Auspicious Ambitions",
-				"price": 9,
+				"price": 10,
 				"sum": null,
 				"weight": 0
 			},
 			{
 				"amount": 0,
 				"name": "Divine Beauty",
-				"price": 120.19999694824219,
+				"price": 121.5999984741211,
 				"sum": null,
 				"weight": 0
 			},
@@ -75,7 +75,7 @@
 			{
 				"amount": 0,
 				"name": "Man With Bear",
-				"price": 5,
+				"price": 4,
 				"sum": null,
 				"weight": 0
 			},
@@ -89,7 +89,7 @@
 			{
 				"amount": 0,
 				"name": "The Insane Cat",
-				"price": 3473.699951171875,
+				"price": 3577.760009765625,
 				"sum": null,
 				"weight": 0
 			},
@@ -110,29 +110,29 @@
 			{
 				"amount": 33,
 				"name": "A Dab of Ink",
-				"price": 4,
-				"sum": 132,
+				"price": 2.5999999046325684,
+				"sum": 85.79999542236328,
 				"weight": 451.12615966796875
 			},
 			{
 				"amount": 1,
 				"name": "A Familiar Call",
-				"price": 8,
-				"sum": 8,
+				"price": 10,
+				"sum": 10,
 				"weight": 2.3797266483306885
 			},
 			{
 				"amount": 7,
 				"name": "A Fate Worse Than Death",
-				"price": 60,
-				"sum": 420,
+				"price": 67,
+				"sum": 469,
 				"weight": 44.07315444946289
 			},
 			{
 				"amount": 16,
 				"name": "A Modest Request",
-				"price": 7,
-				"sum": 112,
+				"price": 8,
+				"sum": 128,
 				"weight": 152.30250549316406
 			},
 			{
@@ -145,22 +145,22 @@
 			{
 				"amount": 219,
 				"name": "A Sea of Blue",
-				"price": 3.4000000953674316,
-				"sum": 744.6000366210938,
+				"price": 4,
+				"sum": 876,
 				"weight": 7712.4658203125
 			},
 			{
 				"amount": 18,
 				"name": "A Stone Perfected",
-				"price": 8,
-				"sum": 144,
+				"price": 7,
+				"sum": 126,
 				"weight": 181.73385620117188
 			},
 			{
 				"amount": 32,
 				"name": "Abandoned Wealth",
-				"price": 6,
-				"sum": 192,
+				"price": 7,
+				"sum": 224,
 				"weight": 430.7765197753906
 			},
 			{
@@ -180,8 +180,8 @@
 			{
 				"amount": 186,
 				"name": "Alone in the Darkness",
-				"price": 4,
-				"sum": 744,
+				"price": 2,
+				"sum": 372,
 				"weight": 6036.65771484375
 			},
 			{
@@ -201,8 +201,8 @@
 			{
 				"amount": 46,
 				"name": "Anarchy's Price",
-				"price": 4,
-				"sum": 184,
+				"price": 5,
+				"sum": 230,
 				"weight": 742.4442749023438
 			},
 			{
@@ -215,57 +215,57 @@
 			{
 				"amount": 229,
 				"name": "Assassin's Favour",
-				"price": 1.5099999904632568,
-				"sum": 345.7900085449219,
+				"price": 1,
+				"sum": 229,
 				"weight": 8246.7021484375
 			},
 			{
 				"amount": 35,
 				"name": "Astral Protection",
-				"price": 4.670000076293945,
-				"sum": 163.4499969482422,
+				"price": 4.599999904632568,
+				"sum": 161,
 				"weight": 492.7528381347656
 			},
 			{
 				"amount": 71,
 				"name": "Atziri's Arsenal",
-				"price": 4,
-				"sum": 284,
+				"price": 4.53000020980835,
+				"sum": 321.6300048828125,
 				"weight": 1423.687255859375
 			},
 			{
 				"amount": 12,
 				"name": "Audacity",
-				"price": 3.5999999046325684,
-				"sum": 43.19999694824219,
+				"price": 3,
+				"sum": 36,
 				"weight": 98.92337036132812
 			},
 			{
 				"amount": 108,
 				"name": "Azure Rage",
-				"price": 5,
-				"sum": 540,
+				"price": 4,
+				"sum": 432,
 				"weight": 2670.93115234375
 			},
 			{
 				"amount": 31,
 				"name": "Azyran's Reward",
-				"price": 5,
-				"sum": 155,
+				"price": 6.760000228881836,
+				"sum": 209.5600128173828,
 				"weight": 410.74249267578125
 			},
 			{
 				"amount": 26,
 				"name": "Baited Expectations",
-				"price": 5,
-				"sum": 130,
+				"price": 4,
+				"sum": 104,
 				"weight": 315.4911193847656
 			},
 			{
 				"amount": 3,
 				"name": "Beauty Through Death",
-				"price": 19,
-				"sum": 57,
+				"price": 15,
+				"sum": 45,
 				"weight": 12.365421295166016
 			},
 			{
@@ -285,22 +285,22 @@
 			{
 				"amount": 109,
 				"name": "Blind Venture",
-				"price": 5,
-				"sum": 545,
+				"price": 3.9100000858306885,
+				"sum": 426.19000244140625,
 				"weight": 2708.113037109375
 			},
 			{
 				"amount": 231,
 				"name": "Boon of Justice",
-				"price": 4.599999904632568,
-				"sum": 1062.5999755859375,
+				"price": 4,
+				"sum": 924,
 				"weight": 8354.97265625
 			},
 			{
 				"amount": 38,
 				"name": "Boon of the First Ones",
-				"price": 4.829999923706055,
-				"sum": 183.5399932861328,
+				"price": 4,
+				"sum": 152,
 				"weight": 557.445556640625
 			},
 			{
@@ -320,36 +320,36 @@
 			{
 				"amount": 4,
 				"name": "Broken Promises",
-				"price": 35,
-				"sum": 140,
+				"price": 42.400001525878906,
+				"sum": 169.60000610351562,
 				"weight": 19.037813186645508
 			},
 			{
 				"amount": 67,
 				"name": "Broken Truce",
-				"price": 5,
-				"sum": 335,
+				"price": 3,
+				"sum": 201,
 				"weight": 1305.08642578125
 			},
 			{
 				"amount": 20,
 				"name": "Brotherhood in Exile",
-				"price": 4.400000095367432,
-				"sum": 88,
+				"price": 5,
+				"sum": 100,
 				"weight": 212.8492431640625
 			},
 			{
 				"amount": 5,
 				"name": "Brother's Stash",
-				"price": 69.4000015258789,
-				"sum": 347,
+				"price": 69,
+				"sum": 345,
 				"weight": 26.606155395507812
 			},
 			{
 				"amount": 31,
 				"name": "Brush, Paint and Palette",
-				"price": 5,
-				"sum": 155,
+				"price": 6,
+				"sum": 186,
 				"weight": 410.74249267578125
 			},
 			{
@@ -369,15 +369,15 @@
 			{
 				"amount": 68,
 				"name": "Call to the First Ones",
-				"price": 5,
-				"sum": 340,
+				"price": 2.7200000286102295,
+				"sum": 184.9600067138672,
 				"weight": 1334.41357421875
 			},
 			{
 				"amount": 44,
 				"name": "Cameria's Cut",
-				"price": 5,
-				"sum": 220,
+				"price": 7,
+				"sum": 308,
 				"weight": 694.5541381835938
 			},
 			{
@@ -390,8 +390,8 @@
 			{
 				"amount": 119,
 				"name": "Chaotic Disposition",
-				"price": 10,
-				"sum": 1190,
+				"price": 8.399999618530273,
+				"sum": 999.5999755859375,
 				"weight": 3089.210693359375
 			},
 			{
@@ -411,8 +411,8 @@
 			{
 				"amount": 2,
 				"name": "Choking Guilt",
-				"price": 358.5799865722656,
-				"sum": 717.1599731445312,
+				"price": 351.55999755859375,
+				"sum": 703.1199951171875,
 				"weight": 6.7308831214904785
 			},
 			{
@@ -439,8 +439,8 @@
 			{
 				"amount": 122,
 				"name": "Cursed Words",
-				"price": 4.400000095367432,
-				"sum": 536.7999877929688,
+				"price": 3,
+				"sum": 366,
 				"weight": 3206.7626953125
 			},
 			{
@@ -453,15 +453,15 @@
 			{
 				"amount": 251,
 				"name": "Dark Temptation",
-				"price": 4.599999904632568,
-				"sum": 1154.5999755859375,
+				"price": 2.640000104904175,
+				"sum": 662.6400146484375,
 				"weight": 9463.193359375
 			},
 			{
 				"amount": 7,
 				"name": "Darker Half",
-				"price": 30,
-				"sum": 210,
+				"price": 35.209999084472656,
+				"sum": 246.47000122070312,
 				"weight": 44.07315444946289
 			},
 			{
@@ -474,8 +474,8 @@
 			{
 				"amount": 69,
 				"name": "Death",
-				"price": 5,
-				"sum": 345,
+				"price": 4,
+				"sum": 276,
 				"weight": 1363.95703125
 			},
 			{
@@ -488,8 +488,8 @@
 			{
 				"amount": 9,
 				"name": "Dementophobia",
-				"price": 7,
-				"sum": 63,
+				"price": 5,
+				"sum": 45,
 				"weight": 64.25262451171875
 			},
 			{
@@ -502,8 +502,8 @@
 			{
 				"amount": 7,
 				"name": "Desecrated Virtue",
-				"price": 90,
-				"sum": 630,
+				"price": 111,
+				"sum": 777,
 				"weight": 44.07315444946289
 			},
 			{
@@ -516,15 +516,15 @@
 			{
 				"amount": 753,
 				"name": "Destined to Crumble",
-				"price": 5,
-				"sum": 3765,
+				"price": 2.4700000286102295,
+				"sum": 1859.9100341796875,
 				"weight": 49172.19140625
 			},
 			{
 				"amount": 74,
 				"name": "Dialla's Subjugation",
-				"price": 4,
-				"sum": 296,
+				"price": 3,
+				"sum": 222,
 				"weight": 1514.867431640625
 			},
 			{
@@ -537,29 +537,29 @@
 			{
 				"amount": 21,
 				"name": "Divine Justice",
-				"price": 4.199999809265137,
-				"sum": 88.19999694824219,
+				"price": 4,
+				"sum": 84,
 				"weight": 229.01080322265625
 			},
 			{
 				"amount": 294,
 				"name": "Doedre's Madness",
-				"price": 1.909999966621399,
-				"sum": 561.5399780273438,
+				"price": 1.8899999856948853,
+				"sum": 555.6599731445312,
 				"weight": 11996.3212890625
 			},
 			{
 				"amount": 16,
 				"name": "Doryani's Epiphany",
-				"price": 101,
-				"sum": 1616,
+				"price": 120,
+				"sum": 1920,
 				"weight": 152.30250549316406
 			},
 			{
 				"amount": 5,
 				"name": "Draped in Dreams",
-				"price": 8,
-				"sum": 40,
+				"price": 9,
+				"sum": 45,
 				"weight": 26.606155395507812
 			},
 			{
@@ -593,22 +593,22 @@
 			{
 				"amount": 35,
 				"name": "Echoes of Love",
-				"price": 5,
-				"sum": 175,
+				"price": 3.200000047683716,
+				"sum": 112,
 				"weight": 492.7528381347656
 			},
 			{
 				"amount": 71,
 				"name": "Emperor of Purity",
-				"price": 4.599999904632568,
-				"sum": 326.6000061035156,
+				"price": 3,
+				"sum": 213,
 				"weight": 1423.687255859375
 			},
 			{
 				"amount": 713,
 				"name": "Emperor's Luck",
-				"price": 1.0199999809265137,
-				"sum": 727.260009765625,
+				"price": 1,
+				"sum": 713,
 				"weight": 45306.58984375
 			},
 			{
@@ -628,8 +628,8 @@
 			{
 				"amount": 6,
 				"name": "Eternal Bonds",
-				"price": 45,
-				"sum": 270,
+				"price": 48.779998779296875,
+				"sum": 292.67999267578125,
 				"weight": 34.974693298339844
 			},
 			{
@@ -642,8 +642,8 @@
 			{
 				"amount": 88,
 				"name": "Forbidden Power",
-				"price": 5,
-				"sum": 440,
+				"price": 4,
+				"sum": 352,
 				"weight": 1964.4957275390625
 			},
 			{
@@ -663,15 +663,15 @@
 			{
 				"amount": 13,
 				"name": "Gemcutter's Mercy",
-				"price": 35,
-				"sum": 455,
+				"price": 25,
+				"sum": 325,
 				"weight": 111.54295349121094
 			},
 			{
 				"amount": 195,
 				"name": "Gemcutter's Promise",
-				"price": 4,
-				"sum": 780,
+				"price": 2,
+				"sum": 390,
 				"weight": 6480.0595703125
 			},
 			{
@@ -691,15 +691,15 @@
 			{
 				"amount": 259,
 				"name": "Glimmer of Hope",
-				"price": 4,
-				"sum": 1036,
+				"price": 2.200000047683716,
+				"sum": 569.7999877929688,
 				"weight": 9919.201171875
 			},
 			{
 				"amount": 124,
 				"name": "Grave Knowledge",
-				"price": 5,
-				"sum": 620,
+				"price": 3,
+				"sum": 372,
 				"weight": 3285.93994140625
 			},
 			{
@@ -712,8 +712,8 @@
 			{
 				"amount": 15,
 				"name": "Harmony of Souls",
-				"price": 5,
-				"sum": 75,
+				"price": 4.980000019073486,
+				"sum": 74.69999694824219,
 				"weight": 138.2496337890625
 			},
 			{
@@ -726,8 +726,8 @@
 			{
 				"amount": 239,
 				"name": "Her Mask",
-				"price": 3.4000000953674316,
-				"sum": 812.6000366210938,
+				"price": 2,
+				"sum": 478,
 				"weight": 8792.7333984375
 			},
 			{
@@ -740,43 +740,43 @@
 			{
 				"amount": 9,
 				"name": "Home",
-				"price": 39,
-				"sum": 351,
+				"price": 23.399999618530273,
+				"sum": 210.59999084472656,
 				"weight": 64.25262451171875
 			},
 			{
 				"amount": 91,
 				"name": "Hope",
-				"price": 5,
-				"sum": 455,
+				"price": 4,
+				"sum": 364,
 				"weight": 2065.804443359375
 			},
 			{
 				"amount": 0,
 				"name": "House of Mirrors",
-				"price": 10757.2802734375,
+				"price": 13953.259765625,
 				"sum": null,
 				"weight": 0
 			},
 			{
 				"amount": 172,
 				"name": "Hubris",
-				"price": 4.400000095367432,
-				"sum": 756.7999877929688,
+				"price": 4,
+				"sum": 688,
 				"weight": 5368.08935546875
 			},
 			{
 				"amount": 276,
 				"name": "Humility",
-				"price": 2.069999933242798,
-				"sum": 571.3200073242188,
+				"price": 2,
+				"sum": 552,
 				"weight": 10911.65625
 			},
 			{
 				"amount": 225,
 				"name": "Hunter's Resolve",
-				"price": 3.940000057220459,
-				"sum": 886.5,
+				"price": 3,
+				"sum": 675,
 				"weight": 8031.578125
 			},
 			{
@@ -789,15 +789,15 @@
 			{
 				"amount": 44,
 				"name": "Immortal Resolve",
-				"price": 7,
-				"sum": 308,
+				"price": 8,
+				"sum": 352,
 				"weight": 694.5541381835938
 			},
 			{
 				"amount": 4,
 				"name": "Imperfect Memories",
-				"price": 45,
-				"sum": 180,
+				"price": 59,
+				"sum": 236,
 				"weight": 19.037813186645508
 			},
 			{
@@ -810,22 +810,22 @@
 			{
 				"amount": 150,
 				"name": "Jack in the Box",
-				"price": 5,
-				"sum": 750,
+				"price": 2,
+				"sum": 300,
 				"weight": 4371.8369140625
 			},
 			{
 				"amount": 18,
 				"name": "Judging Voices",
-				"price": 6.599999904632568,
-				"sum": 118.79999542236328,
+				"price": 5,
+				"sum": 90,
 				"weight": 181.73385620117188
 			},
 			{
 				"amount": 34,
 				"name": "Justified Ambition",
-				"price": 7,
-				"sum": 238,
+				"price": 8,
+				"sum": 272,
 				"weight": 471.78643798828125
 			},
 			{
@@ -838,15 +838,15 @@
 			{
 				"amount": 33,
 				"name": "Lachrymal Necrosis",
-				"price": 5,
-				"sum": 165,
+				"price": 4.96999979019165,
+				"sum": 164.00999450683594,
 				"weight": 451.12615966796875
 			},
 			{
 				"amount": 367,
 				"name": "Lantador's Lost Love",
-				"price": 1.3700000047683716,
-				"sum": 502.7900085449219,
+				"price": 2,
+				"sum": 734,
 				"weight": 16731.1640625
 			},
 			{
@@ -880,29 +880,29 @@
 			{
 				"amount": 81,
 				"name": "Lingering Remnants",
-				"price": 1.2999999523162842,
-				"sum": 105.29999542236328,
+				"price": 1.1799999475479126,
+				"sum": 95.57999420166016,
 				"weight": 1734.8209228515625
 			},
 			{
 				"amount": 243,
 				"name": "Lost Worlds",
-				"price": 5,
-				"sum": 1215,
+				"price": 3.2899999618530273,
+				"sum": 799.469970703125,
 				"weight": 9014.3935546875
 			},
 			{
 				"amount": 0,
 				"name": "Love Through Ice",
-				"price": 291.3399963378906,
+				"price": 290.69000244140625,
 				"sum": null,
 				"weight": 0
 			},
 			{
 				"amount": 564,
 				"name": "Loyalty",
-				"price": 5,
-				"sum": 2820,
+				"price": 2,
+				"sum": 1128,
 				"weight": 31874.671875
 			},
 			{
@@ -922,29 +922,29 @@
 			{
 				"amount": 6,
 				"name": "Luminous Trove",
-				"price": 39,
-				"sum": 234,
+				"price": 29,
+				"sum": 174,
 				"weight": 34.974693298339844
 			},
 			{
 				"amount": 76,
 				"name": "Lysah's Respite",
-				"price": 4,
-				"sum": 304,
+				"price": 4.599999904632568,
+				"sum": 349.6000061035156,
 				"weight": 1576.6942138671875
 			},
 			{
 				"amount": 9,
 				"name": "Magnum Opus",
-				"price": 20,
-				"sum": 180,
+				"price": 26,
+				"sum": 234,
 				"weight": 64.25262451171875
 			},
 			{
 				"amount": 23,
 				"name": "Mawr Blaidd",
-				"price": 9,
-				"sum": 207,
+				"price": 10,
+				"sum": 230,
 				"weight": 262.4936828613281
 			},
 			{
@@ -964,22 +964,22 @@
 			{
 				"amount": 12,
 				"name": "Misery in Darkness",
-				"price": 4.599999904632568,
-				"sum": 55.19999694824219,
+				"price": 5,
+				"sum": 60,
 				"weight": 98.92337036132812
 			},
 			{
 				"amount": 192,
 				"name": "Mitts",
-				"price": 4,
-				"sum": 768,
+				"price": 3.930000066757202,
+				"sum": 754.5599975585938,
 				"weight": 6331.095703125
 			},
 			{
 				"amount": 30,
 				"name": "Monochrome",
-				"price": 36.060001373291016,
-				"sum": 1081.800048828125,
+				"price": 42,
+				"sum": 1260,
 				"weight": 391.0290222167969
 			},
 			{
@@ -992,8 +992,8 @@
 			{
 				"amount": 97,
 				"name": "No Traces",
-				"price": 5,
-				"sum": 485,
+				"price": 4,
+				"sum": 388,
 				"weight": 2273.446044921875
 			},
 			{
@@ -1013,8 +1013,8 @@
 			{
 				"amount": 19,
 				"name": "Peaceful Moments",
-				"price": 6,
-				"sum": 114,
+				"price": 8,
+				"sum": 152,
 				"weight": 197.08677673339844
 			},
 			{
@@ -1041,43 +1041,43 @@
 			{
 				"amount": 15,
 				"name": "Pride of the First Ones",
-				"price": 5,
-				"sum": 75,
+				"price": 6,
+				"sum": 90,
 				"weight": 138.2496337890625
 			},
 			{
 				"amount": 2,
 				"name": "Prometheus' Armoury",
-				"price": 10,
-				"sum": 20,
+				"price": 12,
+				"sum": 24,
 				"weight": 6.7308831214904785
 			},
 			{
 				"amount": 292,
 				"name": "Prosperity",
-				"price": 5,
-				"sum": 1460,
+				"price": 2.200000047683716,
+				"sum": 642.4000244140625,
 				"weight": 11874.1162109375
 			},
 			{
 				"amount": 1376,
 				"name": "Rain of Chaos",
-				"price": 3,
-				"sum": 4128,
+				"price": 1,
+				"sum": 1376,
 				"weight": 121465.9921875
 			},
 			{
 				"amount": 278,
 				"name": "Rain Tempter",
-				"price": 5,
-				"sum": 1390,
+				"price": 3,
+				"sum": 834,
 				"weight": 11030.4755859375
 			},
 			{
 				"amount": 360,
 				"name": "Rats",
-				"price": 5,
-				"sum": 1800,
+				"price": 2,
+				"sum": 720,
 				"weight": 16254.7705078125
 			},
 			{
@@ -1090,22 +1090,22 @@
 			{
 				"amount": 11,
 				"name": "Rebirth and Renewal",
-				"price": 10,
-				"sum": 110,
+				"price": 9,
+				"sum": 99,
 				"weight": 86.81926727294922
 			},
 			{
 				"amount": 26,
 				"name": "Reckless Ambition",
-				"price": 5,
-				"sum": 130,
+				"price": 3.700000047683716,
+				"sum": 96.20000457763672,
 				"weight": 315.4911193847656
 			},
 			{
 				"amount": 5,
 				"name": "Remembrance",
-				"price": 10,
-				"sum": 50,
+				"price": 14,
+				"sum": 70,
 				"weight": 26.606155395507812
 			},
 			{
@@ -1118,29 +1118,29 @@
 			{
 				"amount": 47,
 				"name": "Sambodhi's Wisdom",
-				"price": 5,
-				"sum": 235,
+				"price": 4,
+				"sum": 188,
 				"weight": 766.7855224609375
 			},
 			{
 				"amount": 100,
 				"name": "Scholar of the Seas",
-				"price": 5,
-				"sum": 500,
+				"price": 4,
+				"sum": 400,
 				"weight": 2379.7265625
 			},
 			{
 				"amount": 5,
 				"name": "Seven Years Bad Luck",
-				"price": 276.4599914550781,
-				"sum": 1382.2999267578125,
+				"price": 357.7799987792969,
+				"sum": 1788.9000244140625,
 				"weight": 26.606155395507812
 			},
 			{
 				"amount": 177,
 				"name": "Shard of Fate",
-				"price": 4,
-				"sum": 708,
+				"price": 3,
+				"sum": 531,
 				"weight": 5603.85595703125
 			},
 			{
@@ -1167,8 +1167,8 @@
 			{
 				"amount": 160,
 				"name": "Struck by Lightning",
-				"price": 4,
-				"sum": 640,
+				"price": 3,
+				"sum": 480,
 				"weight": 4816.228515625
 			},
 			{
@@ -1181,42 +1181,42 @@
 			{
 				"amount": 20,
 				"name": "Terrible Secret of Space",
-				"price": 5,
-				"sum": 100,
+				"price": 4,
+				"sum": 80,
 				"weight": 212.8492431640625
 			},
 			{
 				"amount": 19,
 				"name": "The Academic",
-				"price": 6,
-				"sum": 114,
+				"price": 5,
+				"sum": 95,
 				"weight": 197.08677673339844
 			},
 			{
 				"amount": 76,
 				"name": "The Admirer",
-				"price": 4.739999771118164,
-				"sum": 360.239990234375,
+				"price": 3.680000066757202,
+				"sum": 279.67999267578125,
 				"weight": 1576.6942138671875
 			},
 			{
 				"amount": 220,
 				"name": "The Adventuring Spirit",
-				"price": 4,
-				"sum": 880,
+				"price": 2,
+				"sum": 440,
 				"weight": 7765.35107421875
 			},
 			{
 				"amount": 194,
 				"name": "The Aesthete",
-				"price": 5,
-				"sum": 970,
+				"price": 2,
+				"sum": 388,
 				"weight": 6430.2763671875
 			},
 			{
 				"amount": 0,
 				"name": "The Apothecary",
-				"price": 9412.6201171875,
+				"price": 9512.3701171875,
 				"sum": null,
 				"weight": 0
 			},
@@ -1230,29 +1230,29 @@
 			{
 				"amount": 293,
 				"name": "The Arena Champion",
-				"price": 3.3499999046325684,
-				"sum": 981.5499877929688,
+				"price": 3,
+				"sum": 879,
 				"weight": 11935.1669921875
 			},
 			{
 				"amount": 217,
 				"name": "The Army of Blood",
-				"price": 3.819999933242798,
-				"sum": 828.9400024414062,
+				"price": 2,
+				"sum": 434,
 				"weight": 7607.05712890625
 			},
 			{
 				"amount": 8,
 				"name": "The Artist",
-				"price": 48.08000183105469,
-				"sum": 384.6400146484375,
+				"price": 50,
+				"sum": 400,
 				"weight": 53.84706497192383
 			},
 			{
 				"amount": 4,
 				"name": "The Aspirant",
-				"price": 9,
-				"sum": 36,
+				"price": 10,
+				"sum": 40,
 				"weight": 19.037813186645508
 			},
 			{
@@ -1265,8 +1265,8 @@
 			{
 				"amount": 18,
 				"name": "The Avenger",
-				"price": 5,
-				"sum": 90,
+				"price": 4,
+				"sum": 72,
 				"weight": 181.73385620117188
 			},
 			{
@@ -1293,8 +1293,8 @@
 			{
 				"amount": 37,
 				"name": "The Bear Woman",
-				"price": 5,
-				"sum": 185,
+				"price": 4,
+				"sum": 148,
 				"weight": 535.5864868164062
 			},
 			{
@@ -1314,29 +1314,29 @@
 			{
 				"amount": 12,
 				"name": "The Bitter Blossom",
-				"price": 8,
-				"sum": 96,
+				"price": 10,
+				"sum": 120,
 				"weight": 98.92337036132812
 			},
 			{
 				"amount": 282,
 				"name": "The Blazing Fire",
-				"price": 1.600000023841858,
-				"sum": 451.20001220703125,
+				"price": 2,
+				"sum": 564,
 				"weight": 11269.3984375
 			},
 			{
 				"amount": 100,
 				"name": "The Blessing of Moosh",
-				"price": 5,
-				"sum": 500,
+				"price": 4,
+				"sum": 400,
 				"weight": 2379.7265625
 			},
 			{
 				"amount": 142,
 				"name": "The Body",
-				"price": 5,
-				"sum": 710,
+				"price": 3,
+				"sum": 426,
 				"weight": 4026.795654296875
 			},
 			{
@@ -1356,22 +1356,22 @@
 			{
 				"amount": 33,
 				"name": "The Breach",
-				"price": 5,
-				"sum": 165,
+				"price": 4,
+				"sum": 132,
 				"weight": 451.12615966796875
 			},
 			{
 				"amount": 13,
 				"name": "The Brittle Emperor",
-				"price": 4.599999904632568,
-				"sum": 59.79999923706055,
+				"price": 4,
+				"sum": 52,
 				"weight": 111.54295349121094
 			},
 			{
 				"amount": 197,
 				"name": "The Cache",
-				"price": 3.700000047683716,
-				"sum": 728.9000244140625,
+				"price": 2,
+				"sum": 394,
 				"weight": 6580.00830078125
 			},
 			{
@@ -1384,8 +1384,8 @@
 			{
 				"amount": 136,
 				"name": "The Calling",
-				"price": 3.440000057220459,
-				"sum": 467.8399963378906,
+				"price": 3.630000114440918,
+				"sum": 493.6800231933594,
 				"weight": 3774.29150390625
 			},
 			{
@@ -1398,29 +1398,29 @@
 			{
 				"amount": 413,
 				"name": "The Carrion Crow",
-				"price": 5,
-				"sum": 2065,
+				"price": 4,
+				"sum": 1652,
 				"weight": 19973.40625
 			},
 			{
 				"amount": 192,
 				"name": "The Cartographer",
-				"price": 5,
-				"sum": 960,
+				"price": 5.269999980926514,
+				"sum": 1011.8399658203125,
 				"weight": 6331.095703125
 			},
 			{
 				"amount": 88,
 				"name": "The Cataclysm",
-				"price": 4,
-				"sum": 352,
+				"price": 3,
+				"sum": 264,
 				"weight": 1964.4957275390625
 			},
 			{
 				"amount": 450,
 				"name": "The Catalyst",
-				"price": 5,
-				"sum": 2250,
+				"price": 3,
+				"sum": 1350,
 				"weight": 22716.732421875
 			},
 			{
@@ -1433,15 +1433,15 @@
 			{
 				"amount": 40,
 				"name": "The Celestial Justicar",
-				"price": 4,
-				"sum": 160,
+				"price": 3.869999885559082,
+				"sum": 154.79998779296875,
 				"weight": 602.028564453125
 			},
 			{
 				"amount": 6,
 				"name": "The Celestial Stone",
-				"price": 4.869999885559082,
-				"sum": 29.219999313354492,
+				"price": 5,
+				"sum": 30,
 				"weight": 34.974693298339844
 			},
 			{
@@ -1454,22 +1454,22 @@
 			{
 				"amount": 2,
 				"name": "The Cheater",
-				"price": 268.92999267578125,
-				"sum": 537.8599853515625,
+				"price": 268.3299865722656,
+				"sum": 536.6599731445312,
 				"weight": 6.7308831214904785
 			},
 			{
 				"amount": 21,
 				"name": "The Chosen",
-				"price": 110,
-				"sum": 2310,
+				"price": 134,
+				"sum": 2814,
 				"weight": 229.01080322265625
 			},
 			{
 				"amount": 89,
 				"name": "The Coming Storm",
-				"price": 5,
-				"sum": 445,
+				"price": 4,
+				"sum": 356,
 				"weight": 1998.076416015625
 			},
 			{
@@ -1482,8 +1482,8 @@
 			{
 				"amount": 27,
 				"name": "The Craving",
-				"price": 5,
-				"sum": 135,
+				"price": 7,
+				"sum": 189,
 				"weight": 333.86639404296875
 			},
 			{
@@ -1496,22 +1496,22 @@
 			{
 				"amount": 5,
 				"name": "The Damned",
-				"price": 11,
-				"sum": 55,
+				"price": 10,
+				"sum": 50,
 				"weight": 26.606155395507812
 			},
 			{
 				"amount": 96,
 				"name": "The Dapper Prodigy",
-				"price": 5,
-				"sum": 480,
+				"price": 3,
+				"sum": 288,
 				"weight": 2238.38037109375
 			},
 			{
 				"amount": 50,
 				"name": "The Dark Mage",
-				"price": 5,
-				"sum": 250,
+				"price": 4,
+				"sum": 200,
 				"weight": 841.3604125976562
 			},
 			{
@@ -1545,57 +1545,57 @@
 			{
 				"amount": 2,
 				"name": "The Demon",
-				"price": 3361.64990234375,
-				"sum": 6723.2998046875,
+				"price": 3130.5400390625,
+				"sum": 6261.080078125,
 				"weight": 6.7308831214904785
 			},
 			{
 				"amount": 237,
 				"name": "The Demoness",
-				"price": 5,
-				"sum": 1185,
+				"price": 3,
+				"sum": 711,
 				"weight": 8682.595703125
 			},
 			{
 				"amount": 4,
 				"name": "The Destination",
-				"price": 25,
-				"sum": 100,
+				"price": 20,
+				"sum": 80,
 				"weight": 19.037813186645508
 			},
 			{
 				"amount": 0,
 				"name": "The Doctor",
-				"price": 3765.050048828125,
+				"price": 3465.9599609375,
 				"sum": null,
 				"weight": 0
 			},
 			{
 				"amount": 420,
 				"name": "The Doppelganger",
-				"price": 4,
-				"sum": 1680,
+				"price": 2.5799999237060547,
+				"sum": 1083.5999755859375,
 				"weight": 20483.353515625
 			},
 			{
 				"amount": 190,
 				"name": "The Dragon",
-				"price": 5,
-				"sum": 950,
+				"price": 3,
+				"sum": 570,
 				"weight": 6232.43017578125
 			},
 			{
 				"amount": 5,
 				"name": "The Dragon's Heart",
-				"price": 53,
-				"sum": 265,
+				"price": 48.650001525878906,
+				"sum": 243.25,
 				"weight": 26.606155395507812
 			},
 			{
 				"amount": 14,
 				"name": "The Dreamer",
-				"price": 4,
-				"sum": 56,
+				"price": 5,
+				"sum": 70,
 				"weight": 124.65770721435547
 			},
 			{
@@ -1608,8 +1608,8 @@
 			{
 				"amount": 97,
 				"name": "The Drunken Aristocrat",
-				"price": 4.599999904632568,
-				"sum": 446.1999816894531,
+				"price": 4,
+				"sum": 388,
 				"weight": 2273.446044921875
 			},
 			{
@@ -1643,43 +1643,43 @@
 			{
 				"amount": 52,
 				"name": "The Encroaching Darkness",
-				"price": 3.5,
-				"sum": 182,
+				"price": 3,
+				"sum": 156,
 				"weight": 892.3436279296875
 			},
 			{
 				"amount": 9,
 				"name": "The Endless Darkness",
-				"price": 60,
-				"sum": 540,
+				"price": 64,
+				"sum": 576,
 				"weight": 64.25262451171875
 			},
 			{
 				"amount": 186,
 				"name": "The Endurance",
-				"price": 5,
-				"sum": 930,
+				"price": 4,
+				"sum": 744,
 				"weight": 6036.65771484375
 			},
 			{
 				"amount": 5,
 				"name": "The Enforcer",
-				"price": 5,
-				"sum": 25,
+				"price": 7.800000190734863,
+				"sum": 39,
 				"weight": 26.606155395507812
 			},
 			{
 				"amount": 7,
 				"name": "The Enlightened",
-				"price": 45,
-				"sum": 315,
+				"price": 42,
+				"sum": 294,
 				"weight": 44.07315444946289
 			},
 			{
 				"amount": 29,
 				"name": "The Enthusiasts",
-				"price": 5,
-				"sum": 145,
+				"price": 4,
+				"sum": 116,
 				"weight": 371.64141845703125
 			},
 			{
@@ -1692,8 +1692,8 @@
 			{
 				"amount": 5,
 				"name": "The Eternal War",
-				"price": 10,
-				"sum": 50,
+				"price": 13,
+				"sum": 65,
 				"weight": 26.606155395507812
 			},
 			{
@@ -1706,15 +1706,15 @@
 			{
 				"amount": 214,
 				"name": "The Explorer",
-				"price": 2.940000057220459,
-				"sum": 629.1600341796875,
+				"price": 3,
+				"sum": 642,
 				"weight": 7449.853515625
 			},
 			{
 				"amount": 5,
 				"name": "The Eye of Terror",
-				"price": 20,
-				"sum": 100,
+				"price": 30,
+				"sum": 150,
 				"weight": 26.606155395507812
 			},
 			{
@@ -1727,43 +1727,43 @@
 			{
 				"amount": 68,
 				"name": "The Fathomless Depths",
-				"price": 5,
-				"sum": 340,
+				"price": 4,
+				"sum": 272,
 				"weight": 1334.41357421875
 			},
 			{
 				"amount": 101,
 				"name": "The Feast",
-				"price": 5,
-				"sum": 505,
+				"price": 3,
+				"sum": 303,
 				"weight": 2415.51171875
 			},
 			{
 				"amount": 2,
 				"name": "The Fiend",
-				"price": 2465.2099609375,
-				"sum": 4930.419921875,
+				"price": 2346.1201171875,
+				"sum": 4692.240234375,
 				"weight": 6.7308831214904785
 			},
 			{
 				"amount": 4,
 				"name": "The Fishmonger",
-				"price": 5,
-				"sum": 20,
+				"price": 7,
+				"sum": 28,
 				"weight": 19.037813186645508
 			},
 			{
 				"amount": 80,
 				"name": "The Fletcher",
-				"price": 5,
-				"sum": 400,
+				"price": 4,
+				"sum": 320,
 				"weight": 1702.7939453125
 			},
 			{
 				"amount": 526,
 				"name": "The Flora's Gift",
-				"price": 1.6699999570846558,
-				"sum": 878.4199829101562,
+				"price": 2.700000047683716,
+				"sum": 1420.2000732421875,
 				"weight": 28708.181640625
 			},
 			{
@@ -1776,22 +1776,22 @@
 			{
 				"amount": 26,
 				"name": "The Forgotten Treasure",
-				"price": 5,
-				"sum": 130,
+				"price": 6.880000114440918,
+				"sum": 178.8800048828125,
 				"weight": 315.4911193847656
 			},
 			{
 				"amount": 91,
 				"name": "The Formless Sea",
-				"price": 5,
-				"sum": 455,
+				"price": 4,
+				"sum": 364,
 				"weight": 2065.804443359375
 			},
 			{
 				"amount": 93,
 				"name": "The Forsaken",
-				"price": 5,
-				"sum": 465,
+				"price": 4,
+				"sum": 372,
 				"weight": 2134.28076171875
 			},
 			{
@@ -1804,71 +1804,71 @@
 			{
 				"amount": 80,
 				"name": "The Fox",
-				"price": 5,
-				"sum": 400,
+				"price": 3,
+				"sum": 240,
 				"weight": 1702.7939453125
 			},
 			{
 				"amount": 38,
 				"name": "The Fox in the Brambles",
-				"price": 5,
-				"sum": 190,
+				"price": 4,
+				"sum": 152,
 				"weight": 557.445556640625
 			},
 			{
 				"amount": 157,
 				"name": "The Gambler",
-				"price": 1.850000023841858,
-				"sum": 290.45001220703125,
+				"price": 1,
+				"sum": 157,
 				"weight": 4681.40869140625
 			},
 			{
 				"amount": 159,
 				"name": "The Garish Power",
-				"price": 49,
-				"sum": 7791,
+				"price": 30,
+				"sum": 4770,
 				"weight": 4771.146484375
 			},
 			{
 				"amount": 412,
 				"name": "The Gemcutter",
-				"price": 4,
-				"sum": 1648,
+				"price": 2.4000000953674316,
+				"sum": 988.800048828125,
 				"weight": 19900.91015625
 			},
 			{
 				"amount": 63,
 				"name": "The Gentleman",
-				"price": 5,
-				"sum": 315,
+				"price": 4,
+				"sum": 252,
 				"weight": 1189.9752197265625
 			},
 			{
 				"amount": 173,
 				"name": "The Gladiator",
-				"price": 4,
-				"sum": 692,
+				"price": 4.760000228881836,
+				"sum": 823.4800415039062,
 				"weight": 5414.97216796875
 			},
 			{
 				"amount": 56,
 				"name": "The Golden Era",
-				"price": 5,
-				"sum": 280,
+				"price": 4,
+				"sum": 224,
 				"weight": 997.2616577148438
 			},
 			{
 				"amount": 0,
 				"name": "The Greatest Intentions",
-				"price": 17,
+				"price": 15,
 				"sum": null,
 				"weight": 0
 			},
 			{
 				"amount": 5,
 				"name": "The Gulf",
-				"price": 30,
-				"sum": 150,
+				"price": 29.799999237060547,
+				"sum": 149,
 				"weight": 26.606155395507812
 			},
 			{
@@ -1881,57 +1881,57 @@
 			{
 				"amount": 357,
 				"name": "The Harvester",
-				"price": 3.6700000762939453,
-				"sum": 1310.1900634765625,
+				"price": 2,
+				"sum": 714,
 				"weight": 16052.0078125
 			},
 			{
 				"amount": 331,
 				"name": "The Hermit",
-				"price": 4,
-				"sum": 1324,
+				"price": 2,
+				"sum": 662,
 				"weight": 14330.7548828125
 			},
 			{
 				"amount": 64,
 				"name": "The Heroic Shot",
-				"price": 5,
-				"sum": 320,
+				"price": 5.599999904632568,
+				"sum": 358.3999938964844,
 				"weight": 1218.4200439453125
 			},
 			{
 				"amount": 2,
 				"name": "The Hive of Knowledge",
-				"price": 5,
-				"sum": 10,
+				"price": 6.599999904632568,
+				"sum": 13.199999809265137,
 				"weight": 6.7308831214904785
 			},
 			{
 				"amount": 105,
 				"name": "The Hoarder",
-				"price": 4,
-				"sum": 420,
+				"price": 2.2699999809265137,
+				"sum": 238.34999084472656,
 				"weight": 2560.419189453125
 			},
 			{
 				"amount": 3,
 				"name": "The Hook",
-				"price": 15,
-				"sum": 45,
+				"price": 14,
+				"sum": 42,
 				"weight": 12.365421295166016
 			},
 			{
 				"amount": 36,
 				"name": "The Hunger",
-				"price": 7,
-				"sum": 252,
+				"price": 6,
+				"sum": 216,
 				"weight": 514.02099609375
 			},
 			{
 				"amount": 5,
 				"name": "The Immortal",
-				"price": 1120.550048828125,
-				"sum": 5602.75,
+				"price": 1475.8299560546875,
+				"sum": 7379.14990234375,
 				"weight": 26.606155395507812
 			},
 			{
@@ -1944,15 +1944,15 @@
 			{
 				"amount": 75,
 				"name": "The Innocent",
-				"price": 5,
-				"sum": 375,
+				"price": 4,
+				"sum": 300,
 				"weight": 1545.677734375
 			},
 			{
 				"amount": 207,
 				"name": "The Inoculated",
-				"price": 5,
-				"sum": 1035,
+				"price": 4,
+				"sum": 828,
 				"weight": 7087.3291015625
 			},
 			{
@@ -1965,15 +1965,15 @@
 			{
 				"amount": 175,
 				"name": "The Inventor",
-				"price": 4,
-				"sum": 700,
+				"price": 5,
+				"sum": 875,
 				"weight": 5509.14453125
 			},
 			{
 				"amount": 27,
 				"name": "The Jester",
-				"price": 5,
-				"sum": 135,
+				"price": 6,
+				"sum": 162,
 				"weight": 333.86639404296875
 			},
 			{
@@ -1986,8 +1986,8 @@
 			{
 				"amount": 293,
 				"name": "The Journalist",
-				"price": 4,
-				"sum": 1172,
+				"price": 3,
+				"sum": 879,
 				"weight": 11935.1669921875
 			},
 			{
@@ -2000,29 +2000,29 @@
 			{
 				"amount": 674,
 				"name": "The King's Blade",
-				"price": 3.5999999046325684,
-				"sum": 2426.39990234375,
+				"price": 2,
+				"sum": 1348,
 				"weight": 41640.59765625
 			},
 			{
 				"amount": 29,
 				"name": "The King's Heart",
-				"price": 5,
-				"sum": 145,
+				"price": 3,
+				"sum": 87,
 				"weight": 371.64141845703125
 			},
 			{
 				"amount": 46,
 				"name": "The Landing",
-				"price": 4.599999904632568,
-				"sum": 211.59999084472656,
+				"price": 4,
+				"sum": 184,
 				"weight": 742.4442749023438
 			},
 			{
 				"amount": 52,
 				"name": "The Last One Standing",
-				"price": 19,
-				"sum": 988,
+				"price": 18,
+				"sum": 936,
 				"weight": 892.3436279296875
 			},
 			{
@@ -2042,29 +2042,29 @@
 			{
 				"amount": 141,
 				"name": "The Lich",
-				"price": 5,
-				"sum": 705,
+				"price": 3,
+				"sum": 423,
 				"weight": 3984.333984375
 			},
 			{
 				"amount": 10,
 				"name": "The Life Thief",
-				"price": 4,
-				"sum": 40,
+				"price": 5,
+				"sum": 50,
 				"weight": 75.25357055664062
 			},
 			{
 				"amount": 153,
 				"name": "The Lion",
-				"price": 4,
-				"sum": 612,
+				"price": 3,
+				"sum": 459,
 				"weight": 4503.64599609375
 			},
 			{
 				"amount": 11,
 				"name": "The Long Con",
-				"price": 10,
-				"sum": 110,
+				"price": 9,
+				"sum": 99,
 				"weight": 86.81926727294922
 			},
 			{
@@ -2084,22 +2084,22 @@
 			{
 				"amount": 39,
 				"name": "The Lord of Celebration",
-				"price": 4,
-				"sum": 156,
+				"price": 5,
+				"sum": 195,
 				"weight": 579.5941772460938
 			},
 			{
 				"amount": 918,
 				"name": "The Lover",
-				"price": 2,
-				"sum": 1836,
+				"price": 1,
+				"sum": 918,
 				"weight": 66189.8046875
 			},
 			{
 				"amount": 226,
 				"name": "The Lunaris Priestess",
-				"price": 4,
-				"sum": 904,
+				"price": 5,
+				"sum": 1130,
 				"weight": 8085.18115234375
 			},
 			{
@@ -2112,22 +2112,22 @@
 			{
 				"amount": 49,
 				"name": "The Master",
-				"price": 5,
-				"sum": 245,
+				"price": 4,
+				"sum": 196,
 				"weight": 816.2462158203125
 			},
 			{
 				"amount": 212,
 				"name": "The Master Artisan",
-				"price": 5,
-				"sum": 1060,
+				"price": 3.200000047683716,
+				"sum": 678.4000244140625,
 				"weight": 7345.66064453125
 			},
 			{
 				"amount": 84,
 				"name": "The Mercenary",
-				"price": 5,
-				"sum": 420,
+				"price": 4,
+				"sum": 336,
 				"weight": 1832.08642578125
 			},
 			{
@@ -2140,29 +2140,29 @@
 			{
 				"amount": 560,
 				"name": "The Metalsmith's Gift",
-				"price": 4,
-				"sum": 2240,
+				"price": 3.4000000953674316,
+				"sum": 1904,
 				"weight": 31536.181640625
 			},
 			{
 				"amount": 19,
 				"name": "The Mind's Eyes",
-				"price": 5,
-				"sum": 95,
+				"price": 4,
+				"sum": 76,
 				"weight": 197.08677673339844
 			},
 			{
 				"amount": 157,
 				"name": "The Mountain",
-				"price": 4,
-				"sum": 628,
+				"price": 3,
+				"sum": 471,
 				"weight": 4681.40869140625
 			},
 			{
 				"amount": 12,
 				"name": "The Nurse",
-				"price": 426.7099914550781,
-				"sum": 5120.52001953125,
+				"price": 385.4700012207031,
+				"sum": 4625.64013671875,
 				"weight": 98.92337036132812
 			},
 			{
@@ -2182,85 +2182,85 @@
 			{
 				"amount": 35,
 				"name": "The Offering",
-				"price": 5,
-				"sum": 175,
+				"price": 4,
+				"sum": 140,
 				"weight": 492.7528381347656
 			},
 			{
 				"amount": 23,
 				"name": "The Offspring",
-				"price": 5,
-				"sum": 115,
+				"price": 3.4000000953674316,
+				"sum": 78.20000457763672,
 				"weight": 262.4936828613281
 			},
 			{
 				"amount": 1,
 				"name": "The Old Man",
-				"price": 8.65999984741211,
-				"sum": 8.65999984741211,
+				"price": 10,
+				"sum": 10,
 				"weight": 2.3797266483306885
 			},
 			{
 				"amount": 1,
 				"name": "The One That Got Away",
-				"price": 5.400000095367432,
-				"sum": 5.400000095367432,
+				"price": 8,
+				"sum": 8,
 				"weight": 2.3797266483306885
 			},
 			{
 				"amount": 101,
 				"name": "The One With All",
-				"price": 4,
-				"sum": 404,
+				"price": 2.0999999046325684,
+				"sum": 212.09999084472656,
 				"weight": 2415.51171875
 			},
 			{
 				"amount": 290,
 				"name": "The Opulent",
-				"price": 4,
-				"sum": 1160,
+				"price": 3,
+				"sum": 870,
 				"weight": 11752.33203125
 			},
 			{
 				"amount": 77,
 				"name": "The Pack Leader",
-				"price": 5,
-				"sum": 385,
+				"price": 4,
+				"sum": 308,
 				"weight": 1607.915283203125
 			},
 			{
 				"amount": 25,
 				"name": "The Pact",
-				"price": 4.599999904632568,
-				"sum": 115,
+				"price": 4,
+				"sum": 100,
 				"weight": 297.4658203125
 			},
 			{
 				"amount": 44,
 				"name": "The Patient",
-				"price": 48.08000183105469,
-				"sum": 2115.52001953125,
+				"price": 48,
+				"sum": 2112,
 				"weight": 694.5541381835938
 			},
 			{
 				"amount": 173,
 				"name": "The Penitent",
-				"price": 5,
-				"sum": 865,
+				"price": 3,
+				"sum": 519,
 				"weight": 5414.97216796875
 			},
 			{
 				"amount": 72,
 				"name": "The Poet",
-				"price": 5,
-				"sum": 360,
+				"price": 2.200000047683716,
+				"sum": 158.40000915527344,
 				"weight": 1453.870849609375
 			},
 			{
 				"amount": 16,
 				"name": "The Polymath",
-				"price": 5,
-				"sum": 80,
+				"price": 5.400000095367432,
+				"sum": 86.4000015258789,
 				"weight": 152.30250549316406
 			},
 			{
@@ -2273,15 +2273,15 @@
 			{
 				"amount": 0,
 				"name": "The Price of Devotion",
-				"price": 5602.75,
+				"price": 5813.85986328125,
 				"sum": null,
 				"weight": 0
 			},
 			{
 				"amount": 4,
 				"name": "The Price of Loyalty",
-				"price": 313.75,
-				"sum": 1255,
+				"price": 357.7799987792969,
+				"sum": 1431.1199951171875,
 				"weight": 19.037813186645508
 			},
 			{
@@ -2294,15 +2294,15 @@
 			{
 				"amount": 62,
 				"name": "The Price of Protection",
-				"price": 5,
-				"sum": 310,
+				"price": 3,
+				"sum": 186,
 				"weight": 1161.755126953125
 			},
 			{
 				"amount": 49,
 				"name": "The Primordial",
-				"price": 5,
-				"sum": 245,
+				"price": 7,
+				"sum": 343,
 				"weight": 816.2462158203125
 			},
 			{
@@ -2329,22 +2329,22 @@
 			{
 				"amount": 173,
 				"name": "The Puzzle",
-				"price": 5,
-				"sum": 865,
+				"price": 4.829999923706055,
+				"sum": 835.5899658203125,
 				"weight": 5414.97216796875
 			},
 			{
 				"amount": 11,
 				"name": "The Queen",
-				"price": 5,
-				"sum": 55,
+				"price": 4.590000152587891,
+				"sum": 50.4900016784668,
 				"weight": 86.81926727294922
 			},
 			{
 				"amount": 5,
 				"name": "The Rabbit's Foot",
-				"price": 39,
-				"sum": 195,
+				"price": 20,
+				"sum": 100,
 				"weight": 26.606155395507812
 			},
 			{
@@ -2357,15 +2357,15 @@
 			{
 				"amount": 27,
 				"name": "The Realm",
-				"price": 2.5999999046325684,
-				"sum": 70.19999694824219,
+				"price": 3,
+				"sum": 81,
 				"weight": 333.86639404296875
 			},
 			{
 				"amount": 175,
 				"name": "The Risk",
-				"price": 4.980000019073486,
-				"sum": 871.5,
+				"price": 4,
+				"sum": 700,
 				"weight": 5509.14453125
 			},
 			{
@@ -2385,57 +2385,57 @@
 			{
 				"amount": 101,
 				"name": "The Ruthless Ceinture",
-				"price": 4.599999904632568,
-				"sum": 464.5999755859375,
+				"price": 3,
+				"sum": 303,
 				"weight": 2415.51171875
 			},
 			{
 				"amount": 6,
 				"name": "The Sacrifice",
-				"price": 14,
-				"sum": 84,
+				"price": 19.399999618530273,
+				"sum": 116.39999389648438,
 				"weight": 34.974693298339844
 			},
 			{
 				"amount": 59,
 				"name": "The Saint's Treasure",
-				"price": 4,
-				"sum": 236,
+				"price": 3,
+				"sum": 177,
 				"weight": 1078.462646484375
 			},
 			{
 				"amount": 11,
 				"name": "The Samurai's Eye",
-				"price": 77,
-				"sum": 847,
+				"price": 69,
+				"sum": 759,
 				"weight": 86.81926727294922
 			},
 			{
 				"amount": 377,
 				"name": "The Scarred Meadow",
-				"price": 4,
-				"sum": 1508,
+				"price": 3,
+				"sum": 1131,
 				"weight": 17419.63671875
 			},
 			{
 				"amount": 95,
 				"name": "The Scavenger",
-				"price": 5,
-				"sum": 475,
+				"price": 4,
+				"sum": 380,
 				"weight": 2203.496826171875
 			},
 			{
 				"amount": 702,
 				"name": "The Scholar",
-				"price": 3,
-				"sum": 2106,
+				"price": 1.940000057220459,
+				"sum": 1361.8800048828125,
 				"weight": 44262.1796875
 			},
 			{
 				"amount": 15,
 				"name": "The Scout",
-				"price": 8,
-				"sum": 120,
+				"price": 10,
+				"sum": 150,
 				"weight": 138.2496337890625
 			},
 			{
@@ -2448,43 +2448,43 @@
 			{
 				"amount": 25,
 				"name": "The Sephirot",
-				"price": 186.30999755859375,
-				"sum": 4657.75,
+				"price": 194.55999755859375,
+				"sum": 4864,
 				"weight": 297.4658203125
 			},
 			{
 				"amount": 19,
 				"name": "The Shepherd's Sandals",
-				"price": 5,
-				"sum": 95,
+				"price": 4,
+				"sum": 76,
 				"weight": 197.08677673339844
 			},
 			{
 				"amount": 3,
 				"name": "The Shieldbearer",
-				"price": 380.989990234375,
-				"sum": 1142.969970703125,
+				"price": 514.2999877929688,
+				"sum": 1542.89990234375,
 				"weight": 12.365421295166016
 			},
 			{
 				"amount": 12,
 				"name": "The Shortcut",
-				"price": 10,
-				"sum": 120,
+				"price": 25,
+				"sum": 300,
 				"weight": 98.92337036132812
 			},
 			{
 				"amount": 41,
 				"name": "The Side Quest",
-				"price": 5,
-				"sum": 205,
+				"price": 4,
+				"sum": 164,
 				"weight": 624.7451782226562
 			},
 			{
 				"amount": 210,
 				"name": "The Sigil",
-				"price": 5,
-				"sum": 1050,
+				"price": 3.5299999713897705,
+				"sum": 741.2999877929688,
 				"weight": 7241.958984375
 			},
 			{
@@ -2497,22 +2497,22 @@
 			{
 				"amount": 160,
 				"name": "The Skeleton",
-				"price": 4,
-				"sum": 640,
+				"price": 3,
+				"sum": 480,
 				"weight": 4816.228515625
 			},
 			{
 				"amount": 25,
 				"name": "The Soul",
-				"price": 99.5999984741211,
-				"sum": 2490,
+				"price": 90,
+				"sum": 2250,
 				"weight": 297.4658203125
 			},
 			{
 				"amount": 39,
 				"name": "The Spark and the Flame",
-				"price": 5,
-				"sum": 195,
+				"price": 4,
+				"sum": 156,
 				"weight": 579.5941772460938
 			},
 			{
@@ -2525,43 +2525,43 @@
 			{
 				"amount": 201,
 				"name": "The Standoff",
-				"price": 3,
-				"sum": 603,
+				"price": 2,
+				"sum": 402,
 				"weight": 6781.4287109375
 			},
 			{
 				"amount": 175,
 				"name": "The Stormcaller",
-				"price": 4.010000228881836,
-				"sum": 701.7500610351562,
+				"price": 3,
+				"sum": 525,
 				"weight": 5509.14453125
 			},
 			{
 				"amount": 3,
 				"name": "The Strategist",
-				"price": 12.600000381469727,
-				"sum": 37.80000305175781,
+				"price": 10,
+				"sum": 30,
 				"weight": 12.365421295166016
 			},
 			{
 				"amount": 186,
 				"name": "The Summoner",
-				"price": 4,
-				"sum": 744,
+				"price": 3,
+				"sum": 558,
 				"weight": 6036.65771484375
 			},
 			{
 				"amount": 286,
 				"name": "The Sun",
-				"price": 4,
-				"sum": 1144,
+				"price": 3,
+				"sum": 858,
 				"weight": 11510.021484375
 			},
 			{
 				"amount": 153,
 				"name": "The Surgeon",
-				"price": 5,
-				"sum": 765,
+				"price": 4,
+				"sum": 612,
 				"weight": 4503.64599609375
 			},
 			{
@@ -2574,8 +2574,8 @@
 			{
 				"amount": 170,
 				"name": "The Survivalist",
-				"price": 5,
-				"sum": 850,
+				"price": 3.5999999046325684,
+				"sum": 612,
 				"weight": 5274.732421875
 			},
 			{
@@ -2588,8 +2588,8 @@
 			{
 				"amount": 328,
 				"name": "The Sword King's Salute",
-				"price": 3.309999942779541,
-				"sum": 1085.679931640625,
+				"price": 3,
+				"sum": 984,
 				"weight": 14136.3701171875
 			},
 			{
@@ -2609,22 +2609,22 @@
 			{
 				"amount": 22,
 				"name": "The Tinkerer's Table",
-				"price": 5,
-				"sum": 110,
+				"price": 4.400000095367432,
+				"sum": 96.80000305175781,
 				"weight": 245.5619659423828
 			},
 			{
 				"amount": 272,
 				"name": "The Tireless Extractor",
-				"price": 5,
-				"sum": 1360,
+				"price": 3,
+				"sum": 816,
 				"weight": 10675.30859375
 			},
 			{
 				"amount": 183,
 				"name": "The Tower",
-				"price": 4,
-				"sum": 732,
+				"price": 2,
+				"sum": 366,
 				"weight": 5891.19921875
 			},
 			{
@@ -2637,15 +2637,15 @@
 			{
 				"amount": 182,
 				"name": "The Trial",
-				"price": 4,
-				"sum": 728,
+				"price": 2,
+				"sum": 364,
 				"weight": 5842.97705078125
 			},
 			{
 				"amount": 10,
 				"name": "The Tumbleweed",
-				"price": 7,
-				"sum": 70,
+				"price": 10,
+				"sum": 100,
 				"weight": 75.25357055664062
 			},
 			{
@@ -2658,8 +2658,8 @@
 			{
 				"amount": 150,
 				"name": "The Twins",
-				"price": 4.599999904632568,
-				"sum": 690,
+				"price": 4,
+				"sum": 600,
 				"weight": 4371.8369140625
 			},
 			{
@@ -2679,29 +2679,29 @@
 			{
 				"amount": 5,
 				"name": "The Undisputed",
-				"price": 5,
-				"sum": 25,
+				"price": 7,
+				"sum": 35,
 				"weight": 26.606155395507812
 			},
 			{
 				"amount": 34,
 				"name": "The Unexpected Prize",
-				"price": 8,
-				"sum": 272,
+				"price": 9.989999771118164,
+				"sum": 339.6600036621094,
 				"weight": 471.78643798828125
 			},
 			{
 				"amount": 146,
 				"name": "The Union",
-				"price": 4.059999942779541,
-				"sum": 592.760009765625,
+				"price": 3,
+				"sum": 438,
 				"weight": 4198.13427734375
 			},
 			{
 				"amount": 127,
 				"name": "The Valkyrie",
-				"price": 4,
-				"sum": 508,
+				"price": 3,
+				"sum": 381,
 				"weight": 3405.90576171875
 			},
 			{
@@ -2714,22 +2714,22 @@
 			{
 				"amount": 237,
 				"name": "The Visionary",
-				"price": 4,
-				"sum": 948,
+				"price": 3,
+				"sum": 711,
 				"weight": 8682.595703125
 			},
 			{
 				"amount": 254,
 				"name": "The Void",
-				"price": 3.6700000762939453,
-				"sum": 932.1799926757812,
+				"price": 3,
+				"sum": 762,
 				"weight": 9633.3564453125
 			},
 			{
 				"amount": 255,
 				"name": "The Warden",
-				"price": 5,
-				"sum": 1275,
+				"price": 2.119999885559082,
+				"sum": 540.5999755859375,
 				"weight": 9690.3017578125
 			},
 			{
@@ -2742,15 +2742,15 @@
 			{
 				"amount": 121,
 				"name": "The Watcher",
-				"price": 4,
-				"sum": 484,
+				"price": 3.7300000190734863,
+				"sum": 451.33001708984375,
 				"weight": 3167.416015625
 			},
 			{
 				"amount": 225,
 				"name": "The Web",
-				"price": 4,
-				"sum": 900,
+				"price": 3.200000047683716,
+				"sum": 720,
 				"weight": 8031.578125
 			},
 			{
@@ -2763,8 +2763,8 @@
 			{
 				"amount": 34,
 				"name": "The Whiteout",
-				"price": 5,
-				"sum": 170,
+				"price": 4.599999904632568,
+				"sum": 156.39999389648438,
 				"weight": 471.78643798828125
 			},
 			{
@@ -2784,29 +2784,29 @@
 			{
 				"amount": 332,
 				"name": "The Witch",
-				"price": 4,
-				"sum": 1328,
+				"price": 3,
+				"sum": 996,
 				"weight": 14395.7451171875
 			},
 			{
 				"amount": 170,
 				"name": "The Wolf",
-				"price": 5,
-				"sum": 850,
+				"price": 3,
+				"sum": 510,
 				"weight": 5274.732421875
 			},
 			{
 				"amount": 74,
 				"name": "The Wolf's Legacy",
-				"price": 4.599999904632568,
-				"sum": 340.3999938964844,
+				"price": 5,
+				"sum": 370,
 				"weight": 1514.867431640625
 			},
 			{
 				"amount": 148,
 				"name": "The Wolf's Shadow",
-				"price": 5,
-				"sum": 740,
+				"price": 4,
+				"sum": 592,
 				"weight": 4284.69189453125
 			},
 			{
@@ -2826,8 +2826,8 @@
 			{
 				"amount": 5,
 				"name": "The World Eater",
-				"price": 10,
-				"sum": 50,
+				"price": 9,
+				"sum": 45,
 				"weight": 26.606155395507812
 			},
 			{
@@ -2840,22 +2840,22 @@
 			{
 				"amount": 126,
 				"name": "The Wretched",
-				"price": 4,
-				"sum": 504,
+				"price": 3,
+				"sum": 378,
 				"weight": 3365.75830078125
 			},
 			{
 				"amount": 196,
 				"name": "Thirst for Knowledge",
-				"price": 5,
-				"sum": 980,
+				"price": 3,
+				"sum": 588,
 				"weight": 6529.9697265625
 			},
 			{
 				"amount": 446,
 				"name": "Three Faces in the Dark",
-				"price": 4,
-				"sum": 1784,
+				"price": 2,
+				"sum": 892,
 				"weight": 22414.517578125
 			},
 			{
@@ -2875,8 +2875,8 @@
 			{
 				"amount": 190,
 				"name": "Time-Lost Relic",
-				"price": 4,
-				"sum": 760,
+				"price": 2.299999952316284,
+				"sum": 437,
 				"weight": 6232.43017578125
 			},
 			{
@@ -2889,15 +2889,15 @@
 			{
 				"amount": 49,
 				"name": "Treasure Hunter",
-				"price": 5,
-				"sum": 245,
+				"price": 4,
+				"sum": 196,
 				"weight": 816.2462158203125
 			},
 			{
 				"amount": 64,
 				"name": "Triskaidekaphobia",
-				"price": 5,
-				"sum": 320,
+				"price": 4,
+				"sum": 256,
 				"weight": 1218.4200439453125
 			},
 			{
@@ -2910,8 +2910,8 @@
 			{
 				"amount": 28,
 				"name": "Unchained",
-				"price": 5,
-				"sum": 140,
+				"price": 4,
+				"sum": 112,
 				"weight": 352.5852355957031
 			},
 			{
@@ -2924,50 +2924,50 @@
 			{
 				"amount": 2,
 				"name": "Unrequited Love",
-				"price": 5042.47998046875,
-				"sum": 10084.9599609375,
+				"price": 5143.02978515625,
+				"sum": 10286.0595703125,
 				"weight": 6.7308831214904785
 			},
 			{
 				"amount": 104,
 				"name": "Vanity",
-				"price": 4,
-				"sum": 416,
+				"price": 2,
+				"sum": 208,
 				"weight": 2523.928955078125
 			},
 			{
 				"amount": 281,
 				"name": "Vinia's Token",
-				"price": 5,
-				"sum": 1405,
+				"price": 4,
+				"sum": 1124,
 				"weight": 11209.5078125
 			},
 			{
 				"amount": 2,
 				"name": "Void of the Elements",
-				"price": 6,
-				"sum": 12,
+				"price": 7.400000095367432,
+				"sum": 14.800000190734863,
 				"weight": 6.7308831214904785
 			},
 			{
 				"amount": 183,
 				"name": "Volatile Power",
-				"price": 2,
-				"sum": 366,
+				"price": 2.2200000286102295,
+				"sum": 406.260009765625,
 				"weight": 5891.19921875
 			},
 			{
 				"amount": 3,
 				"name": "Wealth and Power",
-				"price": 180.3000030517578,
-				"sum": 540.9000244140625,
+				"price": 180,
+				"sum": 540,
 				"weight": 12.365421295166016
 			},
 			{
 				"amount": 5,
 				"name": "Winter's Embrace",
-				"price": 19,
-				"sum": 95,
+				"price": 20,
+				"sum": 100,
 				"weight": 26.606155395507812
 			},
 			{
@@ -2980,7 +2980,7 @@
 			{
 				"amount": 0,
 				"name": "Vile Power",
-				"price": 5,
+				"price": 4.400000095367432,
 				"sum": null,
 				"weight": 0
 			},
@@ -3008,7 +3008,7 @@
 			{
 				"amount": 0,
 				"name": "The Rusted Bard",
-				"price": 5,
+				"price": 8,
 				"sum": null,
 				"weight": 0
 			},
@@ -3022,7 +3022,7 @@
 			{
 				"amount": 0,
 				"name": "A Note in the Wind",
-				"price": 4,
+				"price": 3.4000000953674316,
 				"sum": null,
 				"weight": 0
 			},
@@ -3036,7 +3036,7 @@
 			{
 				"amount": 0,
 				"name": "Akil's Prophecy",
-				"price": 7,
+				"price": 10,
 				"sum": null,
 				"weight": 0
 			},
@@ -3057,7 +3057,7 @@
 			{
 				"amount": 0,
 				"name": "The Mad King",
-				"price": 5,
+				"price": 4,
 				"sum": null,
 				"weight": 0
 			},
@@ -3069,16 +3069,17 @@
 				"weight": 0
 			}
 		],
-		"chaos": 232418.375,
+		"chaos": 195943.671875,
 		"fixedNames": [],
 		"notCards": [],
-		"polished": "name,price,amount,sum,weight\nBrother's Gift,1165.37,0,,0.0\nSoul Quenched,4.0,0,,0.0\nPoisoned Faith,5.0,0,,0.0\nA Chilling Wind,5.0,0,,0.0\nMatryoshka,95.0,0,,0.0\nA Dusty Memory,5.0,0,,0.0\nAlivia's Grace,3.12,0,,0.0\nAuspicious Ambitions,9.0,0,,0.0\nDivine Beauty,120.2,0,,0.0\nEver-Changing,4.0,0,,0.0\nMan With Bear,5.0,0,,0.0\nThe Finishing Touch,5.0,0,,0.0\nThe Insane Cat,3473.7,0,,0.0\nThe Return of the Rat,5.0,0,,0.0\nThe Wedding Gift,7.0,0,,0.0\nA Dab of Ink,4.0,33,132.0,451.12616\nA Familiar Call,8.0,1,8.0,2.3797266\nA Fate Worse Than Death,60.0,7,420.0,44.073154\nA Modest Request,7.0,16,112.0,152.3025\nA Mother's Parting Gift,5.0,96,480.0,2238.3804\nA Sea of Blue,3.4,219,744.60004,7712.466\nA Stone Perfected,8.0,18,144.0,181.73386\nAbandoned Wealth,6.0,32,192.0,430.77652\nAcclimatisation,5.0,121,605.0,3167.416\nAlluring Bounty,15.0,13,195.0,111.54295\nAlone in the Darkness,4.0,186,744.0,6036.6577\nAltered Perception,6.0,5,30.0,26.606155\nAmbitious Obsession,4.0,8,32.0,53.847065\nAnarchy's Price,4.0,46,184.0,742.4443\nArrogance of the Vaal,4.0,44,176.0,694.55414\nAssassin's Favour,1.51,229,345.79,8246.702\nAstral Protection,4.67,35,163.45,492.75284\nAtziri's Arsenal,4.0,71,284.0,1423.6873\nAudacity,3.6,12,43.199997,98.92337\nAzure Rage,5.0,108,540.0,2670.9312\nAzyran's Reward,5.0,31,155.0,410.7425\nBaited Expectations,5.0,26,130.0,315.49112\nBeauty Through Death,19.0,3,57.0,12.365421\nBijoux,5.0,16,80.0,152.3025\nBirth of the Three,,0,,0.0\nBlind Venture,5.0,109,545.0,2708.113\nBoon of Justice,4.6,231,1062.6,8354.973\nBoon of the First Ones,4.83,38,183.54,557.44556\nBoundless Realms,4.0,173,692.0,5414.972\nBowyer's Dream,5.0,13,65.0,111.54295\nBroken Promises,35.0,4,140.0,19.037813\nBroken Truce,5.0,67,335.0,1305.0864\nBrotherhood in Exile,4.4,20,88.0,212.84924\nBrother's Stash,69.4,5,347.0,26.606155\n\"Brush, Paint and Palette\",5.0,31,155.0,410.7425\nBuried Treasure,5.0,57,285.0,1024.0929\nBurning Blood,5.0,6,30.0,34.974693\nCall to the First Ones,5.0,68,340.0,1334.4136\nCameria's Cut,5.0,44,220.0,694.55414\nCartographer's Delight,4.0,154,616.0,4547.871\nChaotic Disposition,10.0,119,1190.0,3089.2107\nChasing Risk,5.0,25,125.0,297.46582\nCheckmate,5.0,19,95.0,197.08678\nChoking Guilt,358.58,2,717.16,6.730883\nCostly Curio,5.0,29,145.0,371.64142\nCouncil of Cats,4.0,16,64.0,152.3025\nCoveted Possession,5.0,126,630.0,3365.7583\nCursed Words,4.4,122,536.8,3206.7627\nDark Dreams,5.0,7,35.0,44.073154\nDark Temptation,4.6,251,1154.6,9463.193\nDarker Half,30.0,7,210.0,44.073154\nDeadly Joy,9.0,4,36.0,19.037813\nDeath,5.0,69,345.0,1363.957\nDeathly Designs,5.0,30,150.0,391.02902\nDementophobia,7.0,9,63.0,64.252625\nDemigod's Wager,5.0,45,225.0,718.36615\nDesecrated Virtue,90.0,7,630.0,44.073154\nDesperate Crusade,4.0,10,40.0,75.25357\nDestined to Crumble,5.0,753,3765.0,49172.19\nDialla's Subjugation,4.0,74,296.0,1514.8674\nDisdain,5.0,28,140.0,352.58524\nDivine Justice,4.2,21,88.2,229.0108\nDoedre's Madness,1.91,294,561.54,11996.321\nDoryani's Epiphany,101.0,16,1616.0,152.3025\nDraped in Dreams,8.0,5,40.0,26.606155\nDuality,20.0,4,80.0,19.037813\nDying Anguish,4.0,67,268.0,1305.0864\nDying Light,5.0,4,20.0,19.037813\nEarth Drinker,5.0,63,315.0,1189.9752\nEchoes of Love,5.0,35,175.0,492.75284\nEmperor of Purity,4.6,71,326.6,1423.6873\nEmperor's Luck,1.02,713,727.26,45306.59\nEndless Night,5.0,25,125.0,297.46582\nEtched in Blood,5.0,7,35.0,44.073154\nEternal Bonds,45.0,6,270.0,34.974693\nFateful Meeting,8.0,3,24.0,12.365421\nForbidden Power,5.0,88,440.0,1964.4957\nFrom Bone to Ashes,5.0,14,70.0,124.65771\nFurther Invention,10.0,2,20.0,6.730883\nGemcutter's Mercy,35.0,13,455.0,111.54295\nGemcutter's Promise,4.0,195,780.0,6480.0596\nGift of Asenath,10.0,12,120.0,98.92337\nGift of the Gemling Queen,4.0,80,320.0,1702.794\nGlimmer of Hope,4.0,259,1036.0,9919.201\nGrave Knowledge,5.0,124,620.0,3285.94\nGuardian's Challenge,4.0,49,196.0,816.2462\nHarmony of Souls,5.0,15,75.0,138.24963\nHaunting Shadows,5.0,25,125.0,297.46582\nHer Mask,3.4,239,812.60004,8792.733\nHeterochromia,5.0,69,345.0,1363.957\nHome,39.0,9,351.0,64.252625\nHope,5.0,91,455.0,2065.8044\nHouse of Mirrors,10757.28,0,,0.0\nHubris,4.4,172,756.8,5368.0894\nHumility,2.07,276,571.32,10911.656\nHunter's Resolve,3.94,225,886.5,8031.578\nHunter's Reward,4.0,27,108.0,333.8664\nImmortal Resolve,7.0,44,308.0,694.55414\nImperfect Memories,45.0,4,180.0,19.037813\nImperial Legacy,1.0,268,268.0,10440.691\nJack in the Box,5.0,150,750.0,4371.837\nJudging Voices,6.6,18,118.799995,181.73386\nJustified Ambition,7.0,34,238.0,471.78644\nKeeper's Corruption,5.0,3,15.0,12.365421\nLachrymal Necrosis,5.0,33,165.0,451.12616\nLantador's Lost Love,1.37,367,502.79,16731.164\nLast Hope,5.0,171,855.0,5321.343\nLeft to Fate,5.0,108,540.0,2670.9312\nLethean Temptation,5.0,9,45.0,64.252625\nLight and Truth,5.0,33,165.0,451.12616\nLingering Remnants,1.3,81,105.299995,1734.8209\nLost Worlds,5.0,243,1215.0,9014.394\nLove Through Ice,291.34,0,,0.0\nLoyalty,5.0,564,2820.0,31874.672\nLucky Connections,5.0,198,990.0,6630.173\nLucky Deck,5.0,19,95.0,197.08678\nLuminous Trove,39.0,6,234.0,34.974693\nLysah's Respite,4.0,76,304.0,1576.6942\nMagnum Opus,20.0,9,180.0,64.252625\nMawr Blaidd,9.0,23,207.0,262.49368\nMerciless Armament,5.0,17,85.0,166.8017\nMight is Right,4.0,118,472.0,3050.353\nMisery in Darkness,4.6,12,55.199997,98.92337\nMitts,4.0,192,768.0,6331.0957\nMonochrome,36.06,30,1081.8,391.02902\nMore is Never Enough,4.0,37,148.0,535.5865\nNo Traces,5.0,97,485.0,2273.446\nNook's Crown,8.0,1,8.0,2.3797266\nParasitic Passengers,5.0,40,200.0,602.02856\nPeaceful Moments,6.0,19,114.0,197.08678\nPerfection,5.0,3,15.0,12.365421\nPrejudice,5.0,80,400.0,1702.794\nPride Before the Fall,5.0,14,70.0,124.65771\nPride of the First Ones,5.0,15,75.0,138.24963\nPrometheus' Armoury,10.0,2,20.0,6.730883\nProsperity,5.0,292,1460.0,11874.116\nRain of Chaos,3.0,1376,4128.0,121465.99\nRain Tempter,5.0,278,1390.0,11030.476\nRats,5.0,360,1800.0,16254.7705\nRebirth,4.0,9,36.0,64.252625\nRebirth and Renewal,10.0,11,110.0,86.81927\nReckless Ambition,5.0,26,130.0,315.49112\nRemembrance,10.0,5,50.0,26.606155\nSambodhi's Vow,5.0,144,720.0,4112.168\nSambodhi's Wisdom,5.0,47,235.0,766.7855\nScholar of the Seas,5.0,100,500.0,2379.7266\nSeven Years Bad Luck,276.46,5,1382.2999,26.606155\nShard of Fate,4.0,177,708.0,5603.856\nSilence and Frost,6.0,26,156.0,315.49112\nSociety's Remorse,5.0,125,625.0,3325.7693\nSomething Dark,10.0,26,260.0,315.49112\nStruck by Lightning,4.0,160,640.0,4816.2285\nSuccor of the Sinless,25.0,4,100.0,19.037813\nTerrible Secret of Space,5.0,20,100.0,212.84924\nThe Academic,6.0,19,114.0,197.08678\nThe Admirer,4.74,76,360.24,1576.6942\nThe Adventuring Spirit,4.0,220,880.0,7765.351\nThe Aesthete,5.0,194,970.0,6430.2764\nThe Apothecary,9412.62,0,,0.0\nThe Archmage's Right Hand,5.0,71,355.0,1423.6873\nThe Arena Champion,3.35,293,981.55,11935.167\nThe Army of Blood,3.82,217,828.94,7607.057\nThe Artist,48.08,8,384.64,53.847065\nThe Aspirant,9.0,4,36.0,19.037813\nThe Astromancer,10.0,1,10.0,2.3797266\nThe Avenger,5.0,18,90.0,181.73386\nThe Awakened,8.0,0,,0.0\nThe Bargain,,21,0.0,229.0108\nThe Battle Born,4.0,165,660.0,5043.744\nThe Bear Woman,5.0,37,185.0,535.5865\nThe Beast,5.0,76,380.0,1576.6942\nThe Betrayal,5.0,112,560.0,2820.682\nThe Bitter Blossom,8.0,12,96.0,98.92337\nThe Blazing Fire,1.6,282,451.2,11269.398\nThe Blessing of Moosh,5.0,100,500.0,2379.7266\nThe Body,5.0,142,710.0,4026.7957\nThe Bones,5.0,36,180.0,514.021\nThe Brawny Battle Mage,5.0,17,85.0,166.8017\nThe Breach,5.0,33,165.0,451.12616\nThe Brittle Emperor,4.6,13,59.8,111.54295\nThe Cache,3.7,197,728.9,6580.0083\nThe Cacophony,5.0,19,95.0,197.08678\nThe Calling,3.44,136,467.84,3774.2915\nThe Card Sharp,5.0,51,255.0,866.72705\nThe Carrion Crow,5.0,413,2065.0,19973.406\nThe Cartographer,5.0,192,960.0,6331.0957\nThe Cataclysm,4.0,88,352.0,1964.4957\nThe Catalyst,5.0,450,2250.0,22716.732\nThe Catch,5.0,6,30.0,34.974693\nThe Celestial Justicar,4.0,40,160.0,602.02856\nThe Celestial Stone,4.87,6,29.22,34.974693\nThe Chains that Bind,1.0,234,234.0,8518.26\nThe Cheater,268.93,2,537.86,6.730883\nThe Chosen,110.0,21,2310.0,229.0108\nThe Coming Storm,5.0,89,445.0,1998.0764\nThe Conduit,5.0,41,205.0,624.7452\nThe Craving,5.0,27,135.0,333.8664\nThe Cursed King,5.0,34,170.0,471.78644\nThe Damned,11.0,5,55.0,26.606155\nThe Dapper Prodigy,5.0,96,480.0,2238.3804\nThe Dark Mage,5.0,50,250.0,841.3604\nThe Darkest Dream,5.0,25,125.0,297.46582\nThe Deal,5.0,56,280.0,997.26166\nThe Deceiver,5.0,80,400.0,1702.794\nThe Deep Ones,5.0,16,80.0,152.3025\nThe Demon,3361.65,2,6723.3,6.730883\nThe Demoness,5.0,237,1185.0,8682.596\nThe Destination,25.0,4,100.0,19.037813\nThe Doctor,3765.05,0,,0.0\nThe Doppelganger,4.0,420,1680.0,20483.354\nThe Dragon,5.0,190,950.0,6232.43\nThe Dragon's Heart,53.0,5,265.0,26.606155\nThe Dreamer,4.0,14,56.0,124.65771\nThe Dreamland,5.0,88,440.0,1964.4957\nThe Drunken Aristocrat,4.6,97,446.19998,2273.446\nThe Dungeon Master,5.0,28,140.0,352.58524\nThe Easy Stroll,5.0,80,400.0,1702.794\nThe Eldritch Decay,10.0,34,340.0,471.78644\nThe Emptiness,5.0,7,35.0,44.073154\nThe Encroaching Darkness,3.5,52,182.0,892.3436\nThe Endless Darkness,60.0,9,540.0,64.252625\nThe Endurance,5.0,186,930.0,6036.6577\nThe Enforcer,5.0,5,25.0,26.606155\nThe Enlightened,45.0,7,315.0,44.073154\nThe Enthusiasts,5.0,29,145.0,371.64142\nThe Escape,5.0,19,95.0,197.08678\nThe Eternal War,10.0,5,50.0,26.606155\nThe Ethereal,5.0,38,190.0,557.44556\nThe Explorer,2.94,214,629.16003,7449.8535\nThe Eye of Terror,20.0,5,100.0,26.606155\nThe Eye of the Dragon,10.0,126,1260.0,3365.7583\nThe Fathomless Depths,5.0,68,340.0,1334.4136\nThe Feast,5.0,101,505.0,2415.5117\nThe Fiend,2465.21,2,4930.42,6.730883\nThe Fishmonger,5.0,4,20.0,19.037813\nThe Fletcher,5.0,80,400.0,1702.794\nThe Flora's Gift,1.67,526,878.42,28708.182\nThe Fool,5.0,102,510.0,2451.4744\nThe Forgotten Treasure,5.0,26,130.0,315.49112\nThe Formless Sea,5.0,91,455.0,2065.8044\nThe Forsaken,5.0,93,465.0,2134.2808\nThe Forward Gaze,4.0,45,180.0,718.36615\nThe Fox,5.0,80,400.0,1702.794\nThe Fox in the Brambles,5.0,38,190.0,557.44556\nThe Gambler,1.85,157,290.45,4681.4087\nThe Garish Power,49.0,159,7791.0,4771.1465\nThe Gemcutter,4.0,412,1648.0,19900.91\nThe Gentleman,5.0,63,315.0,1189.9752\nThe Gladiator,4.0,173,692.0,5414.972\nThe Golden Era,5.0,56,280.0,997.26166\nThe Greatest Intentions,17.0,0,,0.0\nThe Gulf,30.0,5,150.0,26.606155\nThe Hale Heart,5.0,6,30.0,34.974693\nThe Harvester,3.67,357,1310.1901,16052.008\nThe Hermit,4.0,331,1324.0,14330.755\nThe Heroic Shot,5.0,64,320.0,1218.42\nThe Hive of Knowledge,5.0,2,10.0,6.730883\nThe Hoarder,4.0,105,420.0,2560.4192\nThe Hook,15.0,3,45.0,12.365421\nThe Hunger,7.0,36,252.0,514.021\nThe Immortal,1120.55,5,5602.75,26.606155\nThe Incantation,5.0,63,315.0,1189.9752\nThe Innocent,5.0,75,375.0,1545.6777\nThe Inoculated,5.0,207,1035.0,7087.329\nThe Insatiable,5.0,54,270.0,944.3167\nThe Inventor,4.0,175,700.0,5509.1445\nThe Jester,5.0,27,135.0,333.8664\nThe Jeweller's Boon,7.0,121,847.0,3167.416\nThe Journalist,4.0,293,1172.0,11935.167\nThe Journey,5.0,44,220.0,694.55414\nThe King's Blade,3.6,674,2426.4,41640.598\nThe King's Heart,5.0,29,145.0,371.64142\nThe Landing,4.6,46,211.59999,742.4443\nThe Last One Standing,19.0,52,988.0,892.3436\nThe Last Supper,5.0,89,445.0,1998.0764\nThe Leviathan,6.0,2,12.0,6.730883\nThe Lich,5.0,141,705.0,3984.334\nThe Life Thief,4.0,10,40.0,75.25357\nThe Lion,4.0,153,612.0,4503.646\nThe Long Con,10.0,11,110.0,86.81927\nThe Long Watch,,68,0.0,1334.4136\nThe Lord in Black,5.0,61,305.0,1133.7618\nThe Lord of Celebration,4.0,39,156.0,579.5942\nThe Lover,2.0,918,1836.0,66189.805\nThe Lunaris Priestess,4.0,226,904.0,8085.181\nThe Magma Crab,4.0,44,176.0,694.55414\nThe Master,5.0,49,245.0,816.2462\nThe Master Artisan,5.0,212,1060.0,7345.6606\nThe Mercenary,5.0,84,420.0,1832.0864\nThe Messenger,4.0,58,232.0,1051.1606\nThe Metalsmith's Gift,4.0,560,2240.0,31536.182\nThe Mind's Eyes,5.0,19,95.0,197.08678\nThe Mountain,4.0,157,628.0,4681.4087\nThe Nurse,426.71,12,5120.52,98.92337\nThe Oath,5.0,77,385.0,1607.9153\nThe Obscured,5.0,27,135.0,333.8664\nThe Offering,5.0,35,175.0,492.75284\nThe Offspring,5.0,23,115.0,262.49368\nThe Old Man,8.66,1,8.66,2.3797266\nThe One That Got Away,5.4,1,5.4,2.3797266\nThe One With All,4.0,101,404.0,2415.5117\nThe Opulent,4.0,290,1160.0,11752.332\nThe Pack Leader,5.0,77,385.0,1607.9153\nThe Pact,4.6,25,115.0,297.46582\nThe Patient,48.08,44,2115.52,694.55414\nThe Penitent,5.0,173,865.0,5414.972\nThe Poet,5.0,72,360.0,1453.8708\nThe Polymath,5.0,16,80.0,152.3025\nThe Porcupine,3.0,132,396.0,3609.0093\nThe Price of Devotion,5602.75,0,,0.0\nThe Price of Loyalty,313.75,4,1255.0,19.037813\nThe Price of Prescience,5.0,13,65.0,111.54295\nThe Price of Protection,5.0,62,310.0,1161.7551\nThe Primordial,5.0,49,245.0,816.2462\nThe Prince of Darkness,4.0,14,56.0,124.65771\nThe Professor,5.0,28,140.0,352.58524\nThe Progeny of Lunaris,7.0,5,35.0,26.606155\nThe Puzzle,5.0,173,865.0,5414.972\nThe Queen,5.0,11,55.0,86.81927\nThe Rabbit's Foot,39.0,5,195.0,26.606155\nThe Rabid Rhoa,5.0,165,825.0,5043.744\nThe Realm,2.6,27,70.2,333.8664\nThe Risk,4.98,175,871.5,5509.1445\nThe Rite of Elements,5.0,67,335.0,1305.0864\nThe Road to Power,5.0,16,80.0,152.3025\nThe Ruthless Ceinture,4.6,101,464.59998,2415.5117\nThe Sacrifice,14.0,6,84.0,34.974693\nThe Saint's Treasure,4.0,59,236.0,1078.4626\nThe Samurai's Eye,77.0,11,847.0,86.81927\nThe Scarred Meadow,4.0,377,1508.0,17419.637\nThe Scavenger,5.0,95,475.0,2203.4968\nThe Scholar,3.0,702,2106.0,44262.18\nThe Scout,8.0,15,120.0,138.24963\nThe Seeker,5.0,29,145.0,371.64142\nThe Sephirot,186.31,25,4657.75,297.46582\nThe Shepherd's Sandals,5.0,19,95.0,197.08678\nThe Shieldbearer,380.99,3,1142.97,12.365421\nThe Shortcut,10.0,12,120.0,98.92337\nThe Side Quest,5.0,41,205.0,624.7452\nThe Sigil,5.0,210,1050.0,7241.959\nThe Siren,5.0,31,155.0,410.7425\nThe Skeleton,4.0,160,640.0,4816.2285\nThe Soul,99.6,25,2490.0,297.46582\nThe Spark and the Flame,5.0,39,195.0,579.5942\nThe Spoiled Prince,5.0,31,155.0,410.7425\nThe Standoff,3.0,201,603.0,6781.4287\nThe Stormcaller,4.01,175,701.75006,5509.1445\nThe Strategist,12.6,3,37.800003,12.365421\nThe Summoner,4.0,186,744.0,6036.6577\nThe Sun,4.0,286,1144.0,11510.021\nThe Surgeon,5.0,153,765.0,4503.646\nThe Surveyor,5.0,119,595.0,3089.2107\nThe Survivalist,5.0,170,850.0,5274.7324\nThe Sustenance,,0,,0.0\nThe Sword King's Salute,3.31,328,1085.6799,14136.37\nThe Thaumaturgist,5.0,17,85.0,166.8017\nThe Throne,5.0,13,65.0,111.54295\nThe Tinkerer's Table,5.0,22,110.0,245.56197\nThe Tireless Extractor,5.0,272,1360.0,10675.309\nThe Tower,4.0,183,732.0,5891.199\nThe Traitor,5.0,51,255.0,866.72705\nThe Trial,4.0,182,728.0,5842.977\nThe Tumbleweed,7.0,10,70.0,75.25357\nThe Twilight Moon,5.0,27,135.0,333.8664\nThe Twins,4.6,150,690.0,4371.837\nThe Tyrant,5.0,25,125.0,297.46582\nThe Undaunted,4.0,52,208.0,892.3436\nThe Undisputed,5.0,5,25.0,26.606155\nThe Unexpected Prize,8.0,34,272.0,471.78644\nThe Union,4.06,146,592.76,4198.1343\nThe Valkyrie,4.0,127,508.0,3405.9058\nThe Vast,8.0,2,16.0,6.730883\nThe Visionary,4.0,237,948.0,8682.596\nThe Void,3.67,254,932.18,9633.356\nThe Warden,5.0,255,1275.0,9690.302\nThe Warlord,5.0,44,220.0,694.55414\nThe Watcher,4.0,121,484.0,3167.416\nThe Web,4.0,225,900.0,8031.578\nThe White Knight,5.0,5,25.0,26.606155\nThe Whiteout,5.0,34,170.0,471.78644\nThe Wilted Rose,4.0,101,404.0,2415.5117\nThe Wind,5.0,31,155.0,410.7425\nThe Witch,4.0,332,1328.0,14395.745\nThe Wolf,5.0,170,850.0,5274.7324\nThe Wolf's Legacy,4.6,74,340.4,1514.8674\nThe Wolf's Shadow,5.0,148,740.0,4284.692\nThe Wolven King's Bite,5.0,40,200.0,602.02856\nThe Wolverine,5.0,73,365.0,1484.2645\nThe World Eater,10.0,5,50.0,26.606155\nThe Wrath,5.0,226,1130.0,8085.181\nThe Wretched,4.0,126,504.0,3365.7583\nThirst for Knowledge,5.0,196,980.0,6529.9697\nThree Faces in the Dark,4.0,446,1784.0,22414.518\nThree Voices,2.0,255,510.0,9690.302\nThunderous Skies,5.0,253,1265.0,9576.522\nTime-Lost Relic,4.0,190,760.0,6232.43\nTranquillity,8.0,77,616.0,1607.9153\nTreasure Hunter,5.0,49,245.0,816.2462\nTriskaidekaphobia,5.0,64,320.0,1218.42\nTurn the Other Cheek,10.0,240,2400.0,8847.977\nUnchained,5.0,28,140.0,352.58524\nUnderground Forest,10.0,79,790.0,1670.9666\nUnrequited Love,5042.48,2,10084.96,6.730883\nVanity,4.0,104,416.0,2523.929\nVinia's Token,5.0,281,1405.0,11209.508\nVoid of the Elements,6.0,2,12.0,6.730883\nVolatile Power,2.0,183,366.0,5891.199\nWealth and Power,180.3,3,540.9,12.365421\nWinter's Embrace,19.0,5,95.0,26.606155\nFriendship,,0,,0.0\nVile Power,5.0,0,,0.0\nSquandered Prosperity,,0,,0.0\nBlessing of God,,0,,0.0\nThe Devastator,,0,,0.0\nThe Rusted Bard,5.0,0,,0.0\nLuck of the Vaal,,0,,0.0\nA Note in the Wind,4.0,0,,0.0\nThe Valley of Steel Boxes,,0,,0.0\nAkil's Prophecy,7.0,0,,0.0\nThe Mayor,,0,,0.0\nThe Transformation,4.0,0,,0.0\nThe Mad King,5.0,0,,0.0\nTreasures of the Vaal,,0,,0.0\n"
+		"polished": "name,price,amount,sum,weight\nBrother's Gift,1140.41,0,,0.0\nSoul Quenched,4.0,0,,0.0\nPoisoned Faith,5.0,0,,0.0\nA Chilling Wind,5.0,0,,0.0\nMatryoshka,89.4,0,,0.0\nA Dusty Memory,5.0,0,,0.0\nAlivia's Grace,1.0,0,,0.0\nAuspicious Ambitions,10.0,0,,0.0\nDivine Beauty,121.6,0,,0.0\nEver-Changing,4.0,0,,0.0\nMan With Bear,4.0,0,,0.0\nThe Finishing Touch,5.0,0,,0.0\nThe Insane Cat,3577.76,0,,0.0\nThe Return of the Rat,5.0,0,,0.0\nThe Wedding Gift,7.0,0,,0.0\nA Dab of Ink,2.6,33,85.799995,451.12616\nA Familiar Call,10.0,1,10.0,2.3797266\nA Fate Worse Than Death,67.0,7,469.0,44.073154\nA Modest Request,8.0,16,128.0,152.3025\nA Mother's Parting Gift,5.0,96,480.0,2238.3804\nA Sea of Blue,4.0,219,876.0,7712.466\nA Stone Perfected,7.0,18,126.0,181.73386\nAbandoned Wealth,7.0,32,224.0,430.77652\nAcclimatisation,5.0,121,605.0,3167.416\nAlluring Bounty,15.0,13,195.0,111.54295\nAlone in the Darkness,2.0,186,372.0,6036.6577\nAltered Perception,6.0,5,30.0,26.606155\nAmbitious Obsession,4.0,8,32.0,53.847065\nAnarchy's Price,5.0,46,230.0,742.4443\nArrogance of the Vaal,4.0,44,176.0,694.55414\nAssassin's Favour,1.0,229,229.0,8246.702\nAstral Protection,4.6,35,161.0,492.75284\nAtziri's Arsenal,4.53,71,321.63,1423.6873\nAudacity,3.0,12,36.0,98.92337\nAzure Rage,4.0,108,432.0,2670.9312\nAzyran's Reward,6.76,31,209.56001,410.7425\nBaited Expectations,4.0,26,104.0,315.49112\nBeauty Through Death,15.0,3,45.0,12.365421\nBijoux,5.0,16,80.0,152.3025\nBirth of the Three,,0,,0.0\nBlind Venture,3.91,109,426.19,2708.113\nBoon of Justice,4.0,231,924.0,8354.973\nBoon of the First Ones,4.0,38,152.0,557.44556\nBoundless Realms,4.0,173,692.0,5414.972\nBowyer's Dream,5.0,13,65.0,111.54295\nBroken Promises,42.4,4,169.6,19.037813\nBroken Truce,3.0,67,201.0,1305.0864\nBrotherhood in Exile,5.0,20,100.0,212.84924\nBrother's Stash,69.0,5,345.0,26.606155\n\"Brush, Paint and Palette\",6.0,31,186.0,410.7425\nBuried Treasure,5.0,57,285.0,1024.0929\nBurning Blood,5.0,6,30.0,34.974693\nCall to the First Ones,2.72,68,184.96,1334.4136\nCameria's Cut,7.0,44,308.0,694.55414\nCartographer's Delight,4.0,154,616.0,4547.871\nChaotic Disposition,8.4,119,999.6,3089.2107\nChasing Risk,5.0,25,125.0,297.46582\nCheckmate,5.0,19,95.0,197.08678\nChoking Guilt,351.56,2,703.12,6.730883\nCostly Curio,5.0,29,145.0,371.64142\nCouncil of Cats,4.0,16,64.0,152.3025\nCoveted Possession,5.0,126,630.0,3365.7583\nCursed Words,3.0,122,366.0,3206.7627\nDark Dreams,5.0,7,35.0,44.073154\nDark Temptation,2.64,251,662.64,9463.193\nDarker Half,35.21,7,246.47,44.073154\nDeadly Joy,9.0,4,36.0,19.037813\nDeath,4.0,69,276.0,1363.957\nDeathly Designs,5.0,30,150.0,391.02902\nDementophobia,5.0,9,45.0,64.252625\nDemigod's Wager,5.0,45,225.0,718.36615\nDesecrated Virtue,111.0,7,777.0,44.073154\nDesperate Crusade,4.0,10,40.0,75.25357\nDestined to Crumble,2.47,753,1859.91,49172.19\nDialla's Subjugation,3.0,74,222.0,1514.8674\nDisdain,5.0,28,140.0,352.58524\nDivine Justice,4.0,21,84.0,229.0108\nDoedre's Madness,1.89,294,555.66,11996.321\nDoryani's Epiphany,120.0,16,1920.0,152.3025\nDraped in Dreams,9.0,5,45.0,26.606155\nDuality,20.0,4,80.0,19.037813\nDying Anguish,4.0,67,268.0,1305.0864\nDying Light,5.0,4,20.0,19.037813\nEarth Drinker,5.0,63,315.0,1189.9752\nEchoes of Love,3.2,35,112.0,492.75284\nEmperor of Purity,3.0,71,213.0,1423.6873\nEmperor's Luck,1.0,713,713.0,45306.59\nEndless Night,5.0,25,125.0,297.46582\nEtched in Blood,5.0,7,35.0,44.073154\nEternal Bonds,48.78,6,292.68,34.974693\nFateful Meeting,8.0,3,24.0,12.365421\nForbidden Power,4.0,88,352.0,1964.4957\nFrom Bone to Ashes,5.0,14,70.0,124.65771\nFurther Invention,10.0,2,20.0,6.730883\nGemcutter's Mercy,25.0,13,325.0,111.54295\nGemcutter's Promise,2.0,195,390.0,6480.0596\nGift of Asenath,10.0,12,120.0,98.92337\nGift of the Gemling Queen,4.0,80,320.0,1702.794\nGlimmer of Hope,2.2,259,569.8,9919.201\nGrave Knowledge,3.0,124,372.0,3285.94\nGuardian's Challenge,4.0,49,196.0,816.2462\nHarmony of Souls,4.98,15,74.7,138.24963\nHaunting Shadows,5.0,25,125.0,297.46582\nHer Mask,2.0,239,478.0,8792.733\nHeterochromia,5.0,69,345.0,1363.957\nHome,23.4,9,210.59999,64.252625\nHope,4.0,91,364.0,2065.8044\nHouse of Mirrors,13953.26,0,,0.0\nHubris,4.0,172,688.0,5368.0894\nHumility,2.0,276,552.0,10911.656\nHunter's Resolve,3.0,225,675.0,8031.578\nHunter's Reward,4.0,27,108.0,333.8664\nImmortal Resolve,8.0,44,352.0,694.55414\nImperfect Memories,59.0,4,236.0,19.037813\nImperial Legacy,1.0,268,268.0,10440.691\nJack in the Box,2.0,150,300.0,4371.837\nJudging Voices,5.0,18,90.0,181.73386\nJustified Ambition,8.0,34,272.0,471.78644\nKeeper's Corruption,5.0,3,15.0,12.365421\nLachrymal Necrosis,4.97,33,164.01,451.12616\nLantador's Lost Love,2.0,367,734.0,16731.164\nLast Hope,5.0,171,855.0,5321.343\nLeft to Fate,5.0,108,540.0,2670.9312\nLethean Temptation,5.0,9,45.0,64.252625\nLight and Truth,5.0,33,165.0,451.12616\nLingering Remnants,1.18,81,95.579994,1734.8209\nLost Worlds,3.29,243,799.47,9014.394\nLove Through Ice,290.69,0,,0.0\nLoyalty,2.0,564,1128.0,31874.672\nLucky Connections,5.0,198,990.0,6630.173\nLucky Deck,5.0,19,95.0,197.08678\nLuminous Trove,29.0,6,174.0,34.974693\nLysah's Respite,4.6,76,349.6,1576.6942\nMagnum Opus,26.0,9,234.0,64.252625\nMawr Blaidd,10.0,23,230.0,262.49368\nMerciless Armament,5.0,17,85.0,166.8017\nMight is Right,4.0,118,472.0,3050.353\nMisery in Darkness,5.0,12,60.0,98.92337\nMitts,3.93,192,754.56,6331.0957\nMonochrome,42.0,30,1260.0,391.02902\nMore is Never Enough,4.0,37,148.0,535.5865\nNo Traces,4.0,97,388.0,2273.446\nNook's Crown,8.0,1,8.0,2.3797266\nParasitic Passengers,5.0,40,200.0,602.02856\nPeaceful Moments,8.0,19,152.0,197.08678\nPerfection,5.0,3,15.0,12.365421\nPrejudice,5.0,80,400.0,1702.794\nPride Before the Fall,5.0,14,70.0,124.65771\nPride of the First Ones,6.0,15,90.0,138.24963\nPrometheus' Armoury,12.0,2,24.0,6.730883\nProsperity,2.2,292,642.4,11874.116\nRain of Chaos,1.0,1376,1376.0,121465.99\nRain Tempter,3.0,278,834.0,11030.476\nRats,2.0,360,720.0,16254.7705\nRebirth,4.0,9,36.0,64.252625\nRebirth and Renewal,9.0,11,99.0,86.81927\nReckless Ambition,3.7,26,96.200005,315.49112\nRemembrance,14.0,5,70.0,26.606155\nSambodhi's Vow,5.0,144,720.0,4112.168\nSambodhi's Wisdom,4.0,47,188.0,766.7855\nScholar of the Seas,4.0,100,400.0,2379.7266\nSeven Years Bad Luck,357.78,5,1788.9,26.606155\nShard of Fate,3.0,177,531.0,5603.856\nSilence and Frost,6.0,26,156.0,315.49112\nSociety's Remorse,5.0,125,625.0,3325.7693\nSomething Dark,10.0,26,260.0,315.49112\nStruck by Lightning,3.0,160,480.0,4816.2285\nSuccor of the Sinless,25.0,4,100.0,19.037813\nTerrible Secret of Space,4.0,20,80.0,212.84924\nThe Academic,5.0,19,95.0,197.08678\nThe Admirer,3.68,76,279.68,1576.6942\nThe Adventuring Spirit,2.0,220,440.0,7765.351\nThe Aesthete,2.0,194,388.0,6430.2764\nThe Apothecary,9512.37,0,,0.0\nThe Archmage's Right Hand,5.0,71,355.0,1423.6873\nThe Arena Champion,3.0,293,879.0,11935.167\nThe Army of Blood,2.0,217,434.0,7607.057\nThe Artist,50.0,8,400.0,53.847065\nThe Aspirant,10.0,4,40.0,19.037813\nThe Astromancer,10.0,1,10.0,2.3797266\nThe Avenger,4.0,18,72.0,181.73386\nThe Awakened,8.0,0,,0.0\nThe Bargain,,21,0.0,229.0108\nThe Battle Born,4.0,165,660.0,5043.744\nThe Bear Woman,4.0,37,148.0,535.5865\nThe Beast,5.0,76,380.0,1576.6942\nThe Betrayal,5.0,112,560.0,2820.682\nThe Bitter Blossom,10.0,12,120.0,98.92337\nThe Blazing Fire,2.0,282,564.0,11269.398\nThe Blessing of Moosh,4.0,100,400.0,2379.7266\nThe Body,3.0,142,426.0,4026.7957\nThe Bones,5.0,36,180.0,514.021\nThe Brawny Battle Mage,5.0,17,85.0,166.8017\nThe Breach,4.0,33,132.0,451.12616\nThe Brittle Emperor,4.0,13,52.0,111.54295\nThe Cache,2.0,197,394.0,6580.0083\nThe Cacophony,5.0,19,95.0,197.08678\nThe Calling,3.63,136,493.68002,3774.2915\nThe Card Sharp,5.0,51,255.0,866.72705\nThe Carrion Crow,4.0,413,1652.0,19973.406\nThe Cartographer,5.27,192,1011.83997,6331.0957\nThe Cataclysm,3.0,88,264.0,1964.4957\nThe Catalyst,3.0,450,1350.0,22716.732\nThe Catch,5.0,6,30.0,34.974693\nThe Celestial Justicar,3.87,40,154.79999,602.02856\nThe Celestial Stone,5.0,6,30.0,34.974693\nThe Chains that Bind,1.0,234,234.0,8518.26\nThe Cheater,268.33,2,536.66,6.730883\nThe Chosen,134.0,21,2814.0,229.0108\nThe Coming Storm,4.0,89,356.0,1998.0764\nThe Conduit,5.0,41,205.0,624.7452\nThe Craving,7.0,27,189.0,333.8664\nThe Cursed King,5.0,34,170.0,471.78644\nThe Damned,10.0,5,50.0,26.606155\nThe Dapper Prodigy,3.0,96,288.0,2238.3804\nThe Dark Mage,4.0,50,200.0,841.3604\nThe Darkest Dream,5.0,25,125.0,297.46582\nThe Deal,5.0,56,280.0,997.26166\nThe Deceiver,5.0,80,400.0,1702.794\nThe Deep Ones,5.0,16,80.0,152.3025\nThe Demon,3130.54,2,6261.08,6.730883\nThe Demoness,3.0,237,711.0,8682.596\nThe Destination,20.0,4,80.0,19.037813\nThe Doctor,3465.96,0,,0.0\nThe Doppelganger,2.58,420,1083.6,20483.354\nThe Dragon,3.0,190,570.0,6232.43\nThe Dragon's Heart,48.65,5,243.25,26.606155\nThe Dreamer,5.0,14,70.0,124.65771\nThe Dreamland,5.0,88,440.0,1964.4957\nThe Drunken Aristocrat,4.0,97,388.0,2273.446\nThe Dungeon Master,5.0,28,140.0,352.58524\nThe Easy Stroll,5.0,80,400.0,1702.794\nThe Eldritch Decay,10.0,34,340.0,471.78644\nThe Emptiness,5.0,7,35.0,44.073154\nThe Encroaching Darkness,3.0,52,156.0,892.3436\nThe Endless Darkness,64.0,9,576.0,64.252625\nThe Endurance,4.0,186,744.0,6036.6577\nThe Enforcer,7.8,5,39.0,26.606155\nThe Enlightened,42.0,7,294.0,44.073154\nThe Enthusiasts,4.0,29,116.0,371.64142\nThe Escape,5.0,19,95.0,197.08678\nThe Eternal War,13.0,5,65.0,26.606155\nThe Ethereal,5.0,38,190.0,557.44556\nThe Explorer,3.0,214,642.0,7449.8535\nThe Eye of Terror,30.0,5,150.0,26.606155\nThe Eye of the Dragon,10.0,126,1260.0,3365.7583\nThe Fathomless Depths,4.0,68,272.0,1334.4136\nThe Feast,3.0,101,303.0,2415.5117\nThe Fiend,2346.12,2,4692.24,6.730883\nThe Fishmonger,7.0,4,28.0,19.037813\nThe Fletcher,4.0,80,320.0,1702.794\nThe Flora's Gift,2.7,526,1420.2001,28708.182\nThe Fool,5.0,102,510.0,2451.4744\nThe Forgotten Treasure,6.88,26,178.88,315.49112\nThe Formless Sea,4.0,91,364.0,2065.8044\nThe Forsaken,4.0,93,372.0,2134.2808\nThe Forward Gaze,4.0,45,180.0,718.36615\nThe Fox,3.0,80,240.0,1702.794\nThe Fox in the Brambles,4.0,38,152.0,557.44556\nThe Gambler,1.0,157,157.0,4681.4087\nThe Garish Power,30.0,159,4770.0,4771.1465\nThe Gemcutter,2.4,412,988.80005,19900.91\nThe Gentleman,4.0,63,252.0,1189.9752\nThe Gladiator,4.76,173,823.48004,5414.972\nThe Golden Era,4.0,56,224.0,997.26166\nThe Greatest Intentions,15.0,0,,0.0\nThe Gulf,29.8,5,149.0,26.606155\nThe Hale Heart,5.0,6,30.0,34.974693\nThe Harvester,2.0,357,714.0,16052.008\nThe Hermit,2.0,331,662.0,14330.755\nThe Heroic Shot,5.6,64,358.4,1218.42\nThe Hive of Knowledge,6.6,2,13.2,6.730883\nThe Hoarder,2.27,105,238.34999,2560.4192\nThe Hook,14.0,3,42.0,12.365421\nThe Hunger,6.0,36,216.0,514.021\nThe Immortal,1475.83,5,7379.15,26.606155\nThe Incantation,5.0,63,315.0,1189.9752\nThe Innocent,4.0,75,300.0,1545.6777\nThe Inoculated,4.0,207,828.0,7087.329\nThe Insatiable,5.0,54,270.0,944.3167\nThe Inventor,5.0,175,875.0,5509.1445\nThe Jester,6.0,27,162.0,333.8664\nThe Jeweller's Boon,7.0,121,847.0,3167.416\nThe Journalist,3.0,293,879.0,11935.167\nThe Journey,5.0,44,220.0,694.55414\nThe King's Blade,2.0,674,1348.0,41640.598\nThe King's Heart,3.0,29,87.0,371.64142\nThe Landing,4.0,46,184.0,742.4443\nThe Last One Standing,18.0,52,936.0,892.3436\nThe Last Supper,5.0,89,445.0,1998.0764\nThe Leviathan,6.0,2,12.0,6.730883\nThe Lich,3.0,141,423.0,3984.334\nThe Life Thief,5.0,10,50.0,75.25357\nThe Lion,3.0,153,459.0,4503.646\nThe Long Con,9.0,11,99.0,86.81927\nThe Long Watch,,68,0.0,1334.4136\nThe Lord in Black,5.0,61,305.0,1133.7618\nThe Lord of Celebration,5.0,39,195.0,579.5942\nThe Lover,1.0,918,918.0,66189.805\nThe Lunaris Priestess,5.0,226,1130.0,8085.181\nThe Magma Crab,4.0,44,176.0,694.55414\nThe Master,4.0,49,196.0,816.2462\nThe Master Artisan,3.2,212,678.4,7345.6606\nThe Mercenary,4.0,84,336.0,1832.0864\nThe Messenger,4.0,58,232.0,1051.1606\nThe Metalsmith's Gift,3.4,560,1904.0,31536.182\nThe Mind's Eyes,4.0,19,76.0,197.08678\nThe Mountain,3.0,157,471.0,4681.4087\nThe Nurse,385.47,12,4625.64,98.92337\nThe Oath,5.0,77,385.0,1607.9153\nThe Obscured,5.0,27,135.0,333.8664\nThe Offering,4.0,35,140.0,492.75284\nThe Offspring,3.4,23,78.200005,262.49368\nThe Old Man,10.0,1,10.0,2.3797266\nThe One That Got Away,8.0,1,8.0,2.3797266\nThe One With All,2.1,101,212.09999,2415.5117\nThe Opulent,3.0,290,870.0,11752.332\nThe Pack Leader,4.0,77,308.0,1607.9153\nThe Pact,4.0,25,100.0,297.46582\nThe Patient,48.0,44,2112.0,694.55414\nThe Penitent,3.0,173,519.0,5414.972\nThe Poet,2.2,72,158.40001,1453.8708\nThe Polymath,5.4,16,86.4,152.3025\nThe Porcupine,3.0,132,396.0,3609.0093\nThe Price of Devotion,5813.86,0,,0.0\nThe Price of Loyalty,357.78,4,1431.12,19.037813\nThe Price of Prescience,5.0,13,65.0,111.54295\nThe Price of Protection,3.0,62,186.0,1161.7551\nThe Primordial,7.0,49,343.0,816.2462\nThe Prince of Darkness,4.0,14,56.0,124.65771\nThe Professor,5.0,28,140.0,352.58524\nThe Progeny of Lunaris,7.0,5,35.0,26.606155\nThe Puzzle,4.83,173,835.58997,5414.972\nThe Queen,4.59,11,50.49,86.81927\nThe Rabbit's Foot,20.0,5,100.0,26.606155\nThe Rabid Rhoa,5.0,165,825.0,5043.744\nThe Realm,3.0,27,81.0,333.8664\nThe Risk,4.0,175,700.0,5509.1445\nThe Rite of Elements,5.0,67,335.0,1305.0864\nThe Road to Power,5.0,16,80.0,152.3025\nThe Ruthless Ceinture,3.0,101,303.0,2415.5117\nThe Sacrifice,19.4,6,116.399994,34.974693\nThe Saint's Treasure,3.0,59,177.0,1078.4626\nThe Samurai's Eye,69.0,11,759.0,86.81927\nThe Scarred Meadow,3.0,377,1131.0,17419.637\nThe Scavenger,4.0,95,380.0,2203.4968\nThe Scholar,1.94,702,1361.88,44262.18\nThe Scout,10.0,15,150.0,138.24963\nThe Seeker,5.0,29,145.0,371.64142\nThe Sephirot,194.56,25,4864.0,297.46582\nThe Shepherd's Sandals,4.0,19,76.0,197.08678\nThe Shieldbearer,514.3,3,1542.8999,12.365421\nThe Shortcut,25.0,12,300.0,98.92337\nThe Side Quest,4.0,41,164.0,624.7452\nThe Sigil,3.53,210,741.3,7241.959\nThe Siren,5.0,31,155.0,410.7425\nThe Skeleton,3.0,160,480.0,4816.2285\nThe Soul,90.0,25,2250.0,297.46582\nThe Spark and the Flame,4.0,39,156.0,579.5942\nThe Spoiled Prince,5.0,31,155.0,410.7425\nThe Standoff,2.0,201,402.0,6781.4287\nThe Stormcaller,3.0,175,525.0,5509.1445\nThe Strategist,10.0,3,30.0,12.365421\nThe Summoner,3.0,186,558.0,6036.6577\nThe Sun,3.0,286,858.0,11510.021\nThe Surgeon,4.0,153,612.0,4503.646\nThe Surveyor,5.0,119,595.0,3089.2107\nThe Survivalist,3.6,170,612.0,5274.7324\nThe Sustenance,,0,,0.0\nThe Sword King's Salute,3.0,328,984.0,14136.37\nThe Thaumaturgist,5.0,17,85.0,166.8017\nThe Throne,5.0,13,65.0,111.54295\nThe Tinkerer's Table,4.4,22,96.8,245.56197\nThe Tireless Extractor,3.0,272,816.0,10675.309\nThe Tower,2.0,183,366.0,5891.199\nThe Traitor,5.0,51,255.0,866.72705\nThe Trial,2.0,182,364.0,5842.977\nThe Tumbleweed,10.0,10,100.0,75.25357\nThe Twilight Moon,5.0,27,135.0,333.8664\nThe Twins,4.0,150,600.0,4371.837\nThe Tyrant,5.0,25,125.0,297.46582\nThe Undaunted,4.0,52,208.0,892.3436\nThe Undisputed,7.0,5,35.0,26.606155\nThe Unexpected Prize,9.99,34,339.66,471.78644\nThe Union,3.0,146,438.0,4198.1343\nThe Valkyrie,3.0,127,381.0,3405.9058\nThe Vast,8.0,2,16.0,6.730883\nThe Visionary,3.0,237,711.0,8682.596\nThe Void,3.0,254,762.0,9633.356\nThe Warden,2.12,255,540.6,9690.302\nThe Warlord,5.0,44,220.0,694.55414\nThe Watcher,3.73,121,451.33002,3167.416\nThe Web,3.2,225,720.0,8031.578\nThe White Knight,5.0,5,25.0,26.606155\nThe Whiteout,4.6,34,156.4,471.78644\nThe Wilted Rose,4.0,101,404.0,2415.5117\nThe Wind,5.0,31,155.0,410.7425\nThe Witch,3.0,332,996.0,14395.745\nThe Wolf,3.0,170,510.0,5274.7324\nThe Wolf's Legacy,5.0,74,370.0,1514.8674\nThe Wolf's Shadow,4.0,148,592.0,4284.692\nThe Wolven King's Bite,5.0,40,200.0,602.02856\nThe Wolverine,5.0,73,365.0,1484.2645\nThe World Eater,9.0,5,45.0,26.606155\nThe Wrath,5.0,226,1130.0,8085.181\nThe Wretched,3.0,126,378.0,3365.7583\nThirst for Knowledge,3.0,196,588.0,6529.9697\nThree Faces in the Dark,2.0,446,892.0,22414.518\nThree Voices,2.0,255,510.0,9690.302\nThunderous Skies,5.0,253,1265.0,9576.522\nTime-Lost Relic,2.3,190,437.0,6232.43\nTranquillity,8.0,77,616.0,1607.9153\nTreasure Hunter,4.0,49,196.0,816.2462\nTriskaidekaphobia,4.0,64,256.0,1218.42\nTurn the Other Cheek,10.0,240,2400.0,8847.977\nUnchained,4.0,28,112.0,352.58524\nUnderground Forest,10.0,79,790.0,1670.9666\nUnrequited Love,5143.03,2,10286.06,6.730883\nVanity,2.0,104,208.0,2523.929\nVinia's Token,4.0,281,1124.0,11209.508\nVoid of the Elements,7.4,2,14.8,6.730883\nVolatile Power,2.22,183,406.26,5891.199\nWealth and Power,180.0,3,540.0,12.365421\nWinter's Embrace,20.0,5,100.0,26.606155\nFriendship,,0,,0.0\nVile Power,4.4,0,,0.0\nSquandered Prosperity,,0,,0.0\nBlessing of God,,0,,0.0\nThe Devastator,,0,,0.0\nThe Rusted Bard,8.0,0,,0.0\nLuck of the Vaal,,0,,0.0\nA Note in the Wind,3.4,0,,0.0\nThe Valley of Steel Boxes,,0,,0.0\nAkil's Prophecy,10.0,0,,0.0\nThe Mayor,,0,,0.0\nThe Transformation,4.0,0,,0.0\nThe Mad King,4.0,0,,0.0\nTreasures of the Vaal,,0,,0.0\n"
 	},
-	"filename": "example-2.csv",
-	"href": "blob:http://localhost:5173/8b7d87e2-cbf5-4e53-8a85-004dbf6d0306",
+	"filename": "Crucible_example-2.csv",
+	"href": "blob:http://localhost:5173/c7ef8283-1340-4b70-bcb0-89f7123c846c",
 	"error": "",
 	"minimumCardPrice": 0,
 	"league": "Crucible",
 	"selected": false,
-	"valid": true
+	"valid": true,
+	"isReady": true
 }

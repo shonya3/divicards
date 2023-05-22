@@ -22,6 +22,8 @@ export const useSample = (csv: Ref<string>, league: League) => {
 			data.value = await command('sample', { csv: unref(csv), league });
 		} catch (err) {
 			error.value = err as string;
+		} finally {
+			isReady.value = true;
 		}
 	};
 

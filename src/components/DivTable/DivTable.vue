@@ -18,7 +18,6 @@ const hideZerosum = ref(false);
 const filteredRecords = computed(() => {
 	return props.cards.slice().filter(({ name, price, sum }) => {
 		if (hideZerosum.value) {
-			console.log(sum);
 			if (sum === 0 || sum === null) return false;
 		}
 
