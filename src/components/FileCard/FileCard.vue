@@ -59,7 +59,7 @@ const tablePopup = ref<typeof BasePopup | null>(null);
 			<img width="35" height="35" class="chaos-img" src="/chaos.png" alt="chaos" />
 		</div>
 
-		<div class="league">
+		<div v-if="valid" class="league">
 			<label :for="`league-${id}`">League</label>
 			<select
 				:id="`league-${id}`"
@@ -79,6 +79,8 @@ const tablePopup = ref<typeof BasePopup | null>(null);
 			:checked="selected"
 			@change="(e) => $emit('update:selected', (e.target as HTMLInputElement).checked)"
 		/>
+
+		<p v-if="error">{{ error }}</p>
 
 		<base-popup ref="tablePopup">
 			<div-table v-if="valid" :cards="sample.cards" />

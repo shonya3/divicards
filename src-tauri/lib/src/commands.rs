@@ -4,7 +4,10 @@ use tauri::{command, AppHandle, Manager};
 use crate::prices;
 
 #[command]
-pub async fn sample(csv: String, league: League) -> DivinationCardsSample {
+pub async fn sample(
+    csv: String,
+    league: League,
+) -> Result<DivinationCardsSample, divi::error::MissingHeaders> {
     DivinationCardsSample::create(
         Csv::CsvString(CsvString(csv)),
         prices::prices(&league).await,
@@ -25,7 +28,10 @@ pub async fn merge(
 }
 
 #[command]
-pub async fn league(sample: Box<DivinationCardsSample>, league: League) -> DivinationCardsSample {
+pub async fn league(
+    sample: Box<DivinationCardsSample>,
+    league: League,
+) -> Result<DivinationCardsSample, divi::error::MissingHeaders> {
     DivinationCardsSample::create(
         Csv::CsvString(sample.polished),
         prices::prices(&league).await,
