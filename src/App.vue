@@ -6,6 +6,7 @@ import { initCustomFormatter, ref } from 'vue';
 import { useAutoAnimate } from './composables/useAutoAnimate';
 import { useDiscordOAuthStore } from './stores/discordOAuth';
 import { command } from './command';
+import HelpTip from './components/HelpTip.vue';
 
 const filesStore = useFileCardsStore();
 const { fileCards: files, selectedFiles, mergedFile } = storeToRefs(filesStore);
@@ -40,7 +41,14 @@ const onDrop = (e: DragEvent) => {
 		@dragover="(e: DragEvent) => e.preventDefault()"
 		class="drag"
 	>
-		<div class="drop">Drop files <span>Here!</span></div>
+		<div style="display: flex; gap: 1rem">
+			<div class="drop">Drop files <span>Here!</span></div>
+			<HelpTip>
+				<p>Excel, .csv or just .txt</p>
+				<p>Requirement: "name" and "amount" headers</p>
+				<img src="/simple.png" alt="" />
+			</HelpTip>
+		</div>
 
 		<Transition>
 			<div ref="filesTemplateRef" class="files" v-show="files.length">
