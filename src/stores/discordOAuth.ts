@@ -23,7 +23,7 @@ export const useDiscordOAuthStore = defineStore('auth', {
 				const loggedIn = await this.checkLoggedIn();
 				if (loggedIn) throw new Error('Already logged in');
 
-				const message = await command('discord_auth', {});
+				const message = await command('discord_auth');
 				this.loggedIn = true;
 
 				this.identity = await this.getIdentity();
@@ -35,16 +35,16 @@ export const useDiscordOAuthStore = defineStore('auth', {
 		},
 
 		async getIdentity(): Promise<DiscordIdentity> {
-			return command('discord_identity', {});
+			return command('discord_identity');
 		},
 
 		async logout(): Promise<void> {
-			await command('discord_logout', {});
+			await command('discord_logout');
 			this.loggedIn = false;
 		},
 
 		async checkLoggedIn(): Promise<boolean> {
-			return command('discord_authenticated', {});
+			return command('discord_authenticated');
 		},
 
 		async init() {
@@ -56,7 +56,3 @@ export const useDiscordOAuthStore = defineStore('auth', {
 		},
 	},
 });
-
-class D {
-	b() {}
-}
