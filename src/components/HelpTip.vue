@@ -6,7 +6,7 @@
 			<slot>
 				<p>Excel, .csv or just .txt</p>
 				<p>Requirement: "name" and "amount" headers</p>
-				<img src="/simple.png" alt="" />
+				<img src="/simple.png" alt="tip" />
 			</slot>
 		</div>
 	</div>
@@ -44,7 +44,7 @@
 	text-align: left;
 	background-color: #1e2021;
 	padding: 20px;
-	width: 300px;
+	min-width: 300px;
 	position: absolute;
 	border-radius: 3px;
 	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
@@ -52,6 +52,7 @@
 	color: #fff;
 	font-size: 1rem;
 	line-height: 1.4;
+	z-index: 2;
 }
 
 .help-tip p:before {
