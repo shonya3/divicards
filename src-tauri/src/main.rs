@@ -8,7 +8,7 @@ use divi::{League, Prices};
 use lib::{
     commands,
     discord::{self, DiscordProvider},
-    google, paths, prices,
+    google, paths, poe, prices,
 };
 use tauri::Manager;
 
@@ -47,7 +47,10 @@ async fn main() {
             discord::discord_identity,
             discord::discord_logout,
             google::google_auth,
-            google::google_identity
+            google::google_identity,
+            poe::poe_auth,
+            poe::poe_logout,
+            poe::poe_authenticated
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

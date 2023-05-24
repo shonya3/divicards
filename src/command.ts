@@ -12,6 +12,9 @@ export interface Commands {
 	discord_logout: () => void;
 	google_auth: () => string;
 	google_identity: () => GoogleIdentity;
+	poe_auth: () => string;
+	poe_authenticated: () => boolean;
+	poe_logout: () => void;
 }
 
 const { format } = new Intl.NumberFormat();

@@ -2,11 +2,10 @@
 import FileCard from './components/FileCard/FileCard.vue';
 import { useFileCardsStore } from './stores/fileCards';
 import { storeToRefs } from 'pinia';
-import { initCustomFormatter, ref } from 'vue';
+import { ref } from 'vue';
 import { useAutoAnimate } from './composables/useAutoAnimate';
-import { useDiscordOAuthStore } from './stores/discordOAuth';
-import { command } from './command';
 import HelpTip from './components/HelpTip.vue';
+import { usePoeOAuth2Store } from './stores/poeOAuth2Store';
 
 const filesStore = useFileCardsStore();
 const { fileCards: files, selectedFiles, mergedFile } = storeToRefs(filesStore);
@@ -20,20 +19,28 @@ const onDrop = (e: DragEvent) => {
 	if (dropFiles) addCards(Array.from(dropFiles));
 };
 
-// const { loggedIn, identity, name } = storeToRefs(useDiscordOAuthStore());
-// const { login, logout, checkLoggedIn, init } = useDiscordOAuthStore();
+const { loggedIn, name } = storeToRefs(usePoeOAuth2Store());
+const { login, logout, checkLoggedIn, init } = usePoeOAuth2Store();
 
-// init();
+const stashes = ref([]);
+
+init();
 </script>
 
 <template>
-	<!-- <div v-if="loggedIn">
+	<div v-if="loggedIn">
 		<p>{{ name }}</p>
+		<p>Logged in</p>
 		<button @click="logout">Logout</button>
 	</div>
 	<div v-else>
 		<button @click="login">Login</button>
-	</div> -->
+	</div>
+
+	<div v-if="loggedIn">
+		<pre>{{ stashes }}</pre>
+		<button>Stashes</button>
+	</div>
 
 	<div
 		@drop.prevent="onDrop"
