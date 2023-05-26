@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { DivinationCardsSample, League, leagues } from '../../types';
 import GridIcon from '../icons/GridIcon.vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import DivTable from '../DivTable/DivTable.vue';
 import BasePopup from '../BasePopup.vue';
 import FixedNamesList from './FixedNamesList/FixedNamesList.vue';
@@ -32,6 +32,8 @@ defineEmits<{
 const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 
 const tablePopup = ref<typeof BasePopup | null>(null);
+
+const allCardsAmount = computed(() => props.sample.cards.reduce((sum, { amount }) => (sum += amount), 0));
 </script>
 
 <template>
@@ -64,6 +66,7 @@ const tablePopup = ref<typeof BasePopup | null>(null);
 					<p>{{ format(sample.chaos) }}</p>
 					<img width="35" height="35" class="chaos-img" src="/chaos.png" alt="chaos" />
 				</div>
+				<div>cards amount: {{ allCardsAmount }}</div>
 
 				<div v-if="valid" class="league">
 					<label :for="`league-${id}`">League</label>

@@ -1,4 +1,4 @@
-use divi::{Csv, CsvString, DivinationCardsSample, League, Prices};
+use divi::{CardNameAmount, Csv, CsvString, DivinationCardsSample, League, Prices};
 use tauri::{command, AppHandle, Manager};
 
 use crate::prices;
@@ -10,6 +10,17 @@ pub async fn sample(
 ) -> Result<DivinationCardsSample, divi::error::MissingHeaders> {
     DivinationCardsSample::create(
         Csv::CsvString(CsvString(csv)),
+        prices::prices(&league).await,
+    )
+}
+
+#[command]
+pub async fn sample_cards(
+    cards: Vec<CardNameAmount>,
+    league: League,
+) -> Result<DivinationCardsSample, divi::error::MissingHeaders> {
+    DivinationCardsSample::create(
+        Csv::CardNameAmountList(cards),
         prices::prices(&league).await,
     )
 }

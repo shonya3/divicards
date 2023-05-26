@@ -42,6 +42,7 @@ async fn main() {
             commands::chaos,
             commands::merge,
             commands::league,
+            commands::sample_cards,
             discord::discord_auth,
             discord::discord_authenticated,
             discord::discord_identity,
@@ -50,7 +51,9 @@ async fn main() {
             google::google_identity,
             poe::poe_auth,
             poe::poe_logout,
-            poe::poe_authenticated
+            poe::poe_authenticated,
+            poe::stashes,
+            poe::stash
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

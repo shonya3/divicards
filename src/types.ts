@@ -47,3 +47,5 @@ export interface GoogleIdentity {
 	locale: string | null;
 	given_name: string;
 }
+
+export type CardNameAmount = Pick<DivinationCardRecord, 'name' | 'amount'>;

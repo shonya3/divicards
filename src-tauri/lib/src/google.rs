@@ -165,7 +165,6 @@ pub struct Identity {
 pub async fn google_auth() -> Result<String, String> {
     // auth(GoogleProvider::default()).await
     let result = GoogleProvider::new().oauth().await;
-    dbg!(result.clone());
     result
 }
 

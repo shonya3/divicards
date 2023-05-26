@@ -58,6 +58,7 @@ onUnmounted(() => {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	z-index: 3;
 }
 .backdrop {
 	opacity: 70%;
@@ -67,7 +68,7 @@ onUnmounted(() => {
 	left: 0;
 	position: absolute;
 
-	z-index: 2;
+	z-index: 3;
 }
 
 .popup_content {
@@ -84,6 +85,6 @@ onUnmounted(() => {
 	z-index: 10;
 	top: 0;
 
-	z-index: 3;
+	z-index: 4;
 }
 </style>

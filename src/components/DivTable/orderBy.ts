@@ -25,8 +25,18 @@ export const bySum = (order: Order, cards: DivinationCardRecord[]) => {
 	});
 };
 
+export const byName = (order: Order, cards: DivinationCardRecord[]) => {
+	return cards.sort((a, b) => {
+		if (order === 'asc') return a.name < b.name ? -1 : 1;
+		if (order === 'desc') return a.name > b.name ? -1 : 1;
+		throw new Error('invalid order');
+	});
+};
+
 export const orderBy = (column: Column, order: Order, cards: DivinationCardRecord[]): DivinationCardRecord[] => {
 	switch (column) {
+		case 'name':
+			return byName(order, cards);
 		case 'price':
 			return byPrice(order, cards);
 		case 'amount':

@@ -2,9 +2,12 @@ use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 
 use crate::oauth::{AuthCodeResponse, OAuthProvider};
 use axum::{async_trait, extract::Query, response::Html, routing::get, Router};
+use divi::League;
 use keyring::Entry;
 use oauth2::{basic::BasicClient, AccessToken, CsrfToken, PkceCodeChallenge, RedirectUrl, Scope};
+use reqwest::Client;
 use serde::{Deserialize, Serialize};
+use serde_json::Value;
 use tauri::command;
 use tokio::sync::mpsc;
 
@@ -27,6 +30,22 @@ pub fn poe_logout() {
     AccessTokenStorage::new().delete().unwrap()
 }
 
+#[command]
+pub async fn stashes(league: League) -> Value {
+    let val = PoeProvider::stashes(league).await;
+    // dbg!(&val);
+    val
+}
+
+#[command]
+pub async fn stash(league: League, stash_id: String, substash_id: Option<String>) -> Value {
+    let val = PoeProvider::stash(league, stash_id, substash_id).await;
+    // dbg!(&val);
+    val
+}
+
+pub const API_URL: &'static str = "https://api.pathofexile.com";
+
 #[derive(Default)]
 pub struct PoeProvider;
 
@@ -38,9 +57,53 @@ impl PoeProvider {
     pub fn access_token_label() -> String {
         format!("{}_access_token", { Self::PROVIDER_LABEL })
     }
-}
 
-impl PoeProvider {
+    async fn stash(league: League, stash_id: String, substash_id: Option<String>) -> Value {
+        let url = match substash_id {
+            Some(substash_id) => {
+                format!("{}/stash/{}/{}/{}", API_URL, league, stash_id, substash_id)
+            }
+            None => format!("{}/stash/{}/{}", API_URL, league, stash_id),
+        };
+
+        dbg!(&url);
+        Client::new()
+            .get(url)
+            .header(
+                "Authorization",
+                format!("Bearer {}", { AccessTokenStorage::new().get().unwrap() }),
+            )
+            .header(
+                "User-Agent",
+                "OAuth divicards/0.1.8 (contact: poeshonya3@gmail.com)",
+            )
+            .send()
+            .await
+            .unwrap()
+            .json::<Value>()
+            .await
+            .unwrap()
+    }
+
+    async fn stashes(league: League) -> Value {
+        Client::new()
+            .get(format!("{}/stash/{}", API_URL, league))
+            .header(
+                "Authorization",
+                format!("Bearer {}", { AccessTokenStorage::new().get().unwrap() }),
+            )
+            .header(
+                "User-Agent",
+                "OAuth divicards/0.1.8 (contact: poeshonya3@gmail.com)",
+            )
+            .send()
+            .await
+            .unwrap()
+            .json::<Value>()
+            .await
+            .unwrap()
+    }
+
     async fn fetch_token(
         code: &str,
         pkce_verifier: &str,

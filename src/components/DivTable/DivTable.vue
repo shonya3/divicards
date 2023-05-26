@@ -46,6 +46,7 @@ const order = ref<SortState>({
 	amount: 'asc',
 	price: 'asc',
 	sum: 'asc',
+	name: 'asc',
 });
 
 watch(
@@ -113,6 +114,11 @@ onMounted(() => {
 					</th>
 					<th>
 						<span class="column__name"> Name </span>
+						<order-triangle
+							:active="order.activeColumn === 'name'"
+							:order="order.name"
+							@click="toggleOrder('name')"
+						/>
 					</th>
 					<th>
 						<span class="column__name"> Price </span>

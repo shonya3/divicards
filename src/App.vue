@@ -4,12 +4,17 @@ import { useFileCardsStore } from './stores/fileCards';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 import { useAutoAnimate } from './composables/useAutoAnimate';
-import HelpTip from './components/HelpTip.vue';
 import { usePoeOAuth2Store } from './stores/poeOAuth2Store';
+import PoeAuth from './components/PoeAuth.vue';
+import StashesMainComponent from './components/stashes/StashesMainComponent.vue';
+import DropFilesMessage from './components/DropFilesMessage.vue';
 
 const filesStore = useFileCardsStore();
 const { fileCards: files, selectedFiles, mergedFile } = storeToRefs(filesStore);
 const { deleteFile, addCards, deleteAllFiles, merge, deleteMergedFile, downloadAll } = filesStore;
+
+const poeOAuthStore = usePoeOAuth2Store();
+const { loggedIn } = storeToRefs(poeOAuthStore);
 
 const filesTemplateRef = ref<HTMLElement | null>(null);
 useAutoAnimate(filesTemplateRef);
@@ -19,42 +24,35 @@ const onDrop = (e: DragEvent) => {
 	if (dropFiles) addCards(Array.from(dropFiles));
 };
 
-const { loggedIn, name } = storeToRefs(usePoeOAuth2Store());
-const { login, logout, checkLoggedIn, init } = usePoeOAuth2Store();
-
-const stashes = ref([]);
-
-init();
+const stashVisible = ref(false);
+const openStashWindow = () => {
+	if (loggedIn.value) {
+		stashVisible.value = true;
+	} else {
+		poeOAuthStore.login().then(() => {
+			if (loggedIn.value) {
+				stashVisible.value = true;
+			}
+		});
+	}
+};
 </script>
 
 <template>
-	<div v-if="loggedIn">
-		<p>{{ name }}</p>
-		<p>Logged in</p>
-		<button @click="logout">Logout</button>
-	</div>
-	<div v-else>
-		<button @click="login">Login</button>
-	</div>
-
-	<div v-if="loggedIn">
-		<pre>{{ stashes }}</pre>
-		<button>Stashes</button>
-	</div>
-
 	<div
 		@drop.prevent="onDrop"
 		@dragenter="(e: DragEvent) => e.preventDefault()"
 		@dragover="(e: DragEvent) => e.preventDefault()"
 		class="drag"
 	>
-		<div style="display: flex; gap: 1rem">
-			<div class="drop">Drop files <span>Here!</span></div>
-			<HelpTip>
-				<p>Excel, .csv or just .txt</p>
-				<p>Required headers: name and amount</p>
-				<img src="/simple.png" alt="" />
-			</HelpTip>
+		<header class="header">
+			<DropFilesMessage />
+			<button @click="openStashWindow()">Load from stash</button>
+			<PoeAuth />
+		</header>
+
+		<div v-if="loggedIn && stashVisible">
+			<StashesMainComponent @close="stashVisible = false" />
 		</div>
 
 		<Transition>
@@ -90,6 +88,12 @@ init();
 </template>
 
 <style scoped>
+.header {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 3rem;
+}
+
 .v-enter-active,
 .v-leave-active {
 	transition: opacity 0.5s ease;
@@ -112,10 +116,7 @@ init();
 .drag--active {
 	filter: hue-rotate(120deg);
 }
-.drop {
-	font-size: 3rem;
-	margin-bottom: 1rem;
-}
+
 .files {
 	display: flex;
 	flex-wrap: wrap;
@@ -126,10 +127,5 @@ init();
 	margin-left: 2rem;
 	padding: 0.4rem;
 	font-size: 1.4rem;
-}
-
-.drop > span {
-	color: deeppink;
-	font-weight: 700;
 }
 </style>

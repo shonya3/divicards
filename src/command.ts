@@ -1,8 +1,10 @@
 import { invoke } from '@tauri-apps/api';
-import { DivinationCardsSample, League, DiscordIdentity, GoogleIdentity } from './types';
+import { DivinationCardsSample, League, DiscordIdentity, GoogleIdentity, leagues, CardNameAmount } from './types';
+import { StashesResponseData, StashResponseData } from './poe/types';
 
 export interface Commands {
 	sample: (args: { csv: string; league: League }) => DivinationCardsSample;
+	sample_cards: (args: { cards: CardNameAmount[]; league: League }) => DivinationCardsSample;
 	chaos: (args: { sample: DivinationCardsSample; min: number }) => number;
 	merge: (args: { samples: DivinationCardsSample[] }) => DivinationCardsSample;
 	league: (args: { sample: DivinationCardsSample; league: League }) => DivinationCardsSample;
@@ -15,6 +17,8 @@ export interface Commands {
 	poe_auth: () => string;
 	poe_authenticated: () => boolean;
 	poe_logout: () => void;
+	stashes: (args: { league: League }) => StashesResponseData;
+	stash: (args: { league: League; stashId: string; subStashId?: string }) => StashResponseData;
 }
 
 const { format } = new Intl.NumberFormat();
