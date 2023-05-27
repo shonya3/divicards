@@ -43,7 +43,7 @@ impl OAuthProvider for DiscordProvider {
     const AUTH_URL: &'static str = "https://discord.com/oauth2/authorize";
     const TOKEN_URL: &'static str = "https://discord.com/api/oauth2/token";
 
-    async fn oauth(&self) -> Result<String, String> {
+    async fn oauth(&self, _: Option<String>) -> Result<String, String> {
         let (sender, mut receiver) = mpsc::channel::<AuthCodeResponse>(1);
         let addr = SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 50151);
         let redirect_url =
@@ -165,7 +165,7 @@ pub struct Identity {
 
 #[command]
 pub async fn discord_auth() -> Result<String, String> {
-    DiscordProvider::new().oauth().await
+    DiscordProvider::new().oauth(None).await
 }
 
 #[command]

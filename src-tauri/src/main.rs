@@ -30,6 +30,7 @@ async fn main() {
     tauri::Builder::default()
         .setup(|app| {
             app.manage(prices);
+            let v = app.config().package.version.clone().unwrap();
             #[cfg(debug_assertions)] // only include this code on debug builds
             {
                 let window = app.get_window("main").unwrap();
@@ -51,7 +52,6 @@ async fn main() {
             google::google_identity,
             poe::poe_auth,
             poe::poe_logout,
-            poe::poe_authenticated,
             poe::stashes,
             poe::stash
         ])

@@ -8,20 +8,14 @@ use oauth2::{basic::BasicClient, AccessToken, CsrfToken, PkceCodeChallenge, Redi
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
-use tauri::command;
+use tauri::{command, AppHandle};
 use tokio::sync::mpsc;
 
 #[command]
-pub async fn poe_auth() -> Result<String, String> {
-    PoeProvider::new().oauth().await
-}
-
-#[command]
-pub async fn poe_authenticated() -> bool {
-    match AccessTokenStorage::new().get() {
-        Ok(_) => true,
-        Err(_) => false,
-    }
+pub async fn poe_auth(app_handle: AppHandle) -> Result<String, String> {
+    PoeProvider::new()
+        .oauth(app_handle.config().package.version.clone())
+        .await
 }
 
 #[command]
@@ -31,17 +25,27 @@ pub fn poe_logout() {
 }
 
 #[command]
-pub async fn stashes(league: League) -> Value {
-    let val = PoeProvider::stashes(league).await;
+pub async fn stashes(league: League, app_handle: AppHandle) -> Value {
+    let val =
+        PoeProvider::stashes(league, app_handle.config().package.version.clone().unwrap()).await;
     // dbg!(&val);
     val
 }
 
 #[command]
-pub async fn stash(league: League, stash_id: String, substash_id: Option<String>) -> Value {
-    let val = PoeProvider::stash(league, stash_id, substash_id).await;
-    // dbg!(&val);
-    val
+pub async fn stash(
+    league: League,
+    stash_id: String,
+    substash_id: Option<String>,
+    app_handle: AppHandle,
+) -> Value {
+    PoeProvider::stash(
+        league,
+        stash_id,
+        substash_id,
+        app_handle.config().package.version.clone().unwrap(),
+    )
+    .await
 }
 
 pub const API_URL: &'static str = "https://api.pathofexile.com";
@@ -58,7 +62,12 @@ impl PoeProvider {
         format!("{}_access_token", { Self::PROVIDER_LABEL })
     }
 
-    async fn stash(league: League, stash_id: String, substash_id: Option<String>) -> Value {
+    async fn stash(
+        league: League,
+        stash_id: String,
+        substash_id: Option<String>,
+        version: String,
+    ) -> Value {
         let url = match substash_id {
             Some(substash_id) => {
                 format!("{}/stash/{}/{}/{}", API_URL, league, stash_id, substash_id)
@@ -75,7 +84,9 @@ impl PoeProvider {
             )
             .header(
                 "User-Agent",
-                "OAuth divicards/0.1.8 (contact: poeshonya3@gmail.com)",
+                format!("OAuth divicards/{} (contact: poeshonya3@gmail.com)", {
+                    version
+                }),
             )
             .send()
             .await
@@ -85,7 +96,7 @@ impl PoeProvider {
             .unwrap()
     }
 
-    async fn stashes(league: League) -> Value {
+    async fn stashes(league: League, version: String) -> Value {
         Client::new()
             .get(format!("{}/stash/{}", API_URL, league))
             .header(
@@ -94,7 +105,9 @@ impl PoeProvider {
             )
             .header(
                 "User-Agent",
-                "OAuth divicards/0.1.8 (contact: poeshonya3@gmail.com)",
+                format!("OAuth divicards/{} (contact: poeshonya3@gmail.com)", {
+                    version
+                }),
             )
             .send()
             .await
@@ -108,6 +121,7 @@ impl PoeProvider {
         code: &str,
         pkce_verifier: &str,
         redirect_uri: &str,
+        version: String,
     ) -> Result<TokenResponseData, String> {
         let payload = url::form_urlencoded::Serializer::new(String::new())
             .append_pair("client_id", "divicards")
@@ -127,7 +141,9 @@ impl PoeProvider {
             .header("Content-Type", "application/x-www-form-urlencoded")
             .header(
                 "User-Agent",
-                "OAuth divicards/0.1.8 (contact: poeshonya3@gmail.com)",
+                format!("OAuth divicards/{} (contact: poeshonya3@gmail.com)", {
+                    version
+                }),
             )
             .send()
             .await
@@ -155,7 +171,7 @@ impl OAuthProvider for PoeProvider {
     const AUTH_URL: &'static str = "https://www.pathofexile.com/oauth/authorize";
     const TOKEN_URL: &'static str = "https://www.pathofexile.com/oauth/token";
 
-    async fn oauth(&self) -> Result<String, String> {
+    async fn oauth(&self, version: Option<String>) -> Result<String, String> {
         let (sender, mut receiver) = mpsc::channel::<AuthCodeResponse>(1);
         let addr = SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 50151);
         let redirect_uri =
@@ -218,9 +234,14 @@ impl OAuthProvider for PoeProvider {
             username,
             access_token,
             ..
-        } = Self::fetch_token(code.secret(), pkce_verifier.secret(), &redirect_uri)
-            .await
-            .unwrap();
+        } = Self::fetch_token(
+            code.secret(),
+            pkce_verifier.secret(),
+            &redirect_uri,
+            version.unwrap(),
+        )
+        .await
+        .unwrap();
 
         AccessTokenStorage::new()
             .set(&access_token.secret())

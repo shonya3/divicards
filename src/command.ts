@@ -15,7 +15,6 @@ export interface Commands {
 	google_auth: () => string;
 	google_identity: () => GoogleIdentity;
 	poe_auth: () => string;
-	poe_authenticated: () => boolean;
 	poe_logout: () => void;
 	stashes: (args: { league: League }) => StashesResponseData;
 	stash: (args: { league: League; stashId: string; subStashId?: string }) => StashResponseData;

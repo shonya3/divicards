@@ -21,7 +21,7 @@ pub trait OAuthProvider {
         TokenUrl::new(Self::TOKEN_URL.to_string())
     }
 
-    async fn oauth(self: &Self) -> Result<String, String>;
+    async fn oauth(self: &Self, app_version: Option<String>) -> Result<String, String>;
 }
 
 #[derive(Debug, Serialize, Deserialize)]

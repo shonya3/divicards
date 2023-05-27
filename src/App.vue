@@ -51,7 +51,7 @@ const openStashWindow = () => {
 			<PoeAuth />
 		</header>
 
-		<div v-if="loggedIn && stashVisible">
+		<div v-show="loggedIn && stashVisible">
 			<StashesMainComponent @close="stashVisible = false" />
 		</div>
 
