@@ -69,6 +69,10 @@ export const useFileCard = (file: File, league: League): FileCardProps => {
 		async val => {
 			props.sample = await command('league', { league: val, sample: props.sample });
 			props.filename = prefixFilename(props.filename, val);
+			props.sample.chaos = await command('chaos', {
+				sample: props.sample,
+				min: props.minimumCardPrice,
+			});
 		}
 	);
 
