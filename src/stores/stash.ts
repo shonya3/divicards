@@ -10,8 +10,10 @@ export type StatefulStashTab = StashTab & { selected: boolean };
 export const useStashStore = defineStore('stashStore', {
 	state: (): {
 		stashes: StatefulStashTab[];
+		league: League;
 	} => ({
 		stashes: [],
+		league: ACTIVE_LEAGUE,
 	}),
 	getters: {
 		selectedTabs(): StatefulStashTab[] {

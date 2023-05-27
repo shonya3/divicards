@@ -222,13 +222,9 @@ impl OAuthProvider for PoeProvider {
         };
         tx.send(()).unwrap();
 
-        match csrf.secret() == csrf_token.secret() {
-            true => println!("csrf is fine"),
-            false => {
-                println!("csrf is not fine");
-                return Err("csrf is failed".to_string());
-            }
-        };
+        if csrf.secret() != csrf_token.secret() {
+            return Err(String::from("csrf is failed"));
+        }
 
         let TokenResponseData {
             username,

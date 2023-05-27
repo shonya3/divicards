@@ -8,10 +8,8 @@ import { ACTIVE_LEAGUE } from '../../lib';
 import { ref, watch } from 'vue';
 import HelpTip from '../HelpTip.vue';
 
-const league = ref<League>(ACTIVE_LEAGUE);
-
 const stashStore = useStashStore();
-const { stashes, selectedTabsIds } = storeToRefs(stashStore);
+const { stashes, selectedTabsIds, league } = storeToRefs(stashStore);
 const { fetchStashes, deleteTabs, unselectAllTabs } = stashStore;
 
 const { msg, fetchingStash, fetchStashesContents } = useLoadStash();
