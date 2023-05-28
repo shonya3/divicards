@@ -14,9 +14,22 @@ const { fetchStashes, deleteTabs, unselectAllTabs } = stashStore;
 
 const { msg, fetchingStash, fetchStashesContents } = useLoadStash();
 
+const selectEl = ref<HTMLSelectElement | null>(null);
+
 const onGetData = async () => {
 	fetchStashesContents(selectedTabsIds.value, league.value);
 	unselectAllTabs();
+};
+
+const noStashesMessage = ref('');
+
+const onStashes = async (league: League) => {
+	noStashesMessage.value = '';
+	await fetchStashes(league);
+	if (!stashes.value.length) {
+		noStashesMessage.value = 'No stashes here. Try to change the league';
+		selectEl.value?.focus();
+	}
 };
 
 defineEmits<{
@@ -25,7 +38,10 @@ defineEmits<{
 
 watch(
 	() => league.value,
-	() => deleteTabs()
+	() => {
+		deleteTabs();
+		noStashesMessage.value = '';
+	}
 );
 </script>
 
@@ -35,11 +51,11 @@ watch(
 			<div class="league-stashes">
 				<div class="league">
 					<label for="league">League</label>
-					<select id="league" v-model="league">
+					<select ref="selectEl" id="league" v-model="league">
 						<option v-for="league in leagues" :value="league">{{ league }}</option>
 					</select>
 				</div>
-				<button @click="fetchStashes(league)">Stashes</button>
+				<button @click="onStashes(league)">Stashes</button>
 				<HelpTip>
 					<p>Select tabs by clicking on them. Then click LOAD ITEMS button</p>
 				</HelpTip>
@@ -58,8 +74,9 @@ watch(
 		</div>
 
 		<p class="msg" :class="{ visible: fetchingStash }">{{ msg }}</p>
+		<p class="msg" :class="{ visible: noStashesMessage.length > 0 }">{{ noStashesMessage }}</p>
 
-		<TabBadgeGroup :stashes="stashes" :key="league" />
+		<TabBadgeGroup :stashes="stashes" :key="league" :league="league" />
 	</div>
 </template>
 

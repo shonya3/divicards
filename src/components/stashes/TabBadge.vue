@@ -46,11 +46,8 @@ const color = computed(() => `#${props.colour.padStart(6, '0')}`);
 	border: 1px solid #000;
 	overflow: clip;
 
-	/* max-width: 1rem; */
-
 	background-color: var(--badge-color);
 	position: relative;
-	/* mix-blend-mode: difference; */
 }
 
 .tab-badge:hover {
@@ -58,13 +55,11 @@ const color = computed(() => `#${props.colour.padStart(6, '0')}`);
 }
 .tab-badge:hover .name {
 	position: absolute;
-	/* overflow: initial; */
 }
 
 .name {
 	color: var(--badge-color);
 	mix-blend-mode: difference;
-	/* filter: invert(1) sepia(1); */
 	font-size: 0.9rem;
 }
 
@@ -83,6 +78,5 @@ input:checked {
 .tab-badge:has(.checkbox:checked) {
 	transform: scale(1.4);
 	z-index: 2;
-	/* filter: drop-shadow(0 0 2em #646cffaa) saturate(150); */
 }
 </style>

@@ -1,6 +1,7 @@
 export type Order = 'asc' | 'desc';
 export type League = 'Crucible' | 'Standard' | 'Crucible-HC';
 export const leagues = Object.freeze(['Crucible', 'Standard', 'Crucible-HC']) satisfies Readonly<League[]>;
+export const permanentLeagues: Readonly<League[]> = Object.freeze(['Standard']);
 
 export interface DivinationCardsSample {
 	cards: DivinationCardRecord[];
