@@ -5,7 +5,7 @@ import { ref, computed, watch } from 'vue';
 import { League } from '../../types';
 import { filter, shouldUnlockHideRemoveOnly, paginate } from './utils';
 const props = defineProps<{ stashes: StatefulStashTab[]; league: League }>();
-
+console.log(props);
 const shouldFilter = computed(() => props.stashes.length > 50);
 const withHideRemoveOnly = computed(() => shouldUnlockHideRemoveOnly(props.league, props.stashes));
 const hideRemoveOnly = ref(false);
