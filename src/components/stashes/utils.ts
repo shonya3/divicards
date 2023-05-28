@@ -25,7 +25,5 @@ export const filter = (
 };
 
 export const shouldUnlockHideRemoveOnly = (league: League, filteredStashes: StatefulStashTab[]) => {
-	const value = permanentLeagues.includes(league) && filteredStashes.some(({ name }) => name.includes(REMOVE_ONLY));
-	console.log({ value });
-	return value;
+	return permanentLeagues.includes(league) && filteredStashes.some(({ name }) => name.includes(REMOVE_ONLY));
 };
