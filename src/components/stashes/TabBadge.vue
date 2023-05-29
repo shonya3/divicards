@@ -7,6 +7,7 @@ const props = withDefaults(
 		name: string;
 		tabId: string;
 		selected: boolean;
+		index: number;
 	}>(),
 	{ selected: false }
 );
@@ -16,17 +17,18 @@ defineEmits<{
 }>();
 
 const color = computed(() => `#${props.colour.padStart(6, '0')}`);
+const id = computed(() => `tab-id-${props.tabId}`);
 </script>
 
 <template>
 	<div class="tab-badge">
-		<label :for="`tab-${tabId}`" class="name">{{ name }}</label>
+		<label :for="id" class="name">{{ name }}</label>
 		<input
 			@change="(e) => $emit('update:selected', (e.target as HTMLInputElement).checked)"
 			class="checkbox"
 			type="checkbox"
-			:name="`tab-${tabId}`"
-			:id="`tab-${tabId}`"
+			:name="id"
+			:id="id"
 			:checked="selected"
 		/>
 	</div>
@@ -34,6 +36,7 @@ const color = computed(() => `#${props.colour.padStart(6, '0')}`);
 
 <style scoped>
 .tab-badge {
+	--tab-index: v-bind(` '${index}' `);
 	--badge-color: v-bind(color);
 	width: 8rem;
 	height: 4rem;
@@ -48,35 +51,38 @@ const color = computed(() => `#${props.colour.padStart(6, '0')}`);
 
 	background-color: var(--badge-color);
 	position: relative;
-}
 
-.tab-badge:hover {
-	overflow: initial;
-}
-.tab-badge:hover .name {
-	position: absolute;
-}
+	&:has(.checkbox:checked) {
+		transform: scale(1.4);
+		z-index: 2;
+	}
 
-.name {
-	color: var(--badge-color);
-	mix-blend-mode: difference;
-	font-size: 0.9rem;
-}
+	&:after {
+		display: block;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		background-color: rgba(255, 255, 255, 0.3);
+		color: #000;
+		content: var(--tab-index);
+		width: 2.8rem;
+		text-align: center;
+		border-top-left-radius: 2rem;
+		font-size: 0.8rem;
+	}
 
-.checkbox {
-	position: absolute;
-	appearance: none;
-	height: 100%;
-	width: 100%;
-	cursor: pointer;
-}
+	.name {
+		color: var(--badge-color);
+		mix-blend-mode: difference;
+		font-size: 0.9rem;
+	}
 
-input:checked {
-	appearance: initial;
-}
-
-.tab-badge:has(.checkbox:checked) {
-	transform: scale(1.4);
-	z-index: 2;
+	.checkbox {
+		position: absolute;
+		appearance: none;
+		height: 100%;
+		width: 100%;
+		cursor: pointer;
+	}
 }
 </style>

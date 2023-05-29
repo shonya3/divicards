@@ -37,20 +37,21 @@ watch(
 				<button :disabled="page === 1" @click="page > 1 && page--">prev</button>
 				<input type="text" v-model.number="page" />
 				<button @click="page++">next</button>
-				<span>per page</span>
-				<input type="text" v-model.number="perPage" />
+				<label for="per-page">per page</label>
+				<input id="per-page" type="number" v-model.number="perPage" min="0" />
 			</div>
 			<div v-if="withHideRemoveOnly" class="hide-remove-only">
 				<label for="hide-remove-only">Hide remove-only</label>
-				<input type="checkbox" v-model="hideRemoveOnly" />
+				<input type="checkbox" id="hide-remove-only" v-model="hideRemoveOnly" />
 			</div>
 		</div>
 		<ul class="list">
-			<li v-for="(tab, index) in paginated">
+			<li v-for="tab in paginated">
 				<TabBadge
 					:colour="tab.metadata?.colour ?? '#fff'"
 					:name="tab.name"
 					:tab-id="tab.id"
+					:index="tab.index"
 					v-model:selected="tab.selected"
 				/>
 			</li>

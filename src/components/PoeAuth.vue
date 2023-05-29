@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia';
 import { usePoeOAuth2Store } from '../stores/poeOAuth2Store';
 withDefaults(
 	defineProps<{
-		logs: boolean;
+		logs?: boolean;
 	}>(),
 	{ logs: false }
 );

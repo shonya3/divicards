@@ -6,6 +6,11 @@ import DivTable from '../DivTable/DivTable.vue';
 import BasePopup from '../BasePopup.vue';
 import FixedNamesList from './FixedNamesList/FixedNamesList.vue';
 import NotCardsList from './NotCardsList/NotCardsList.vue';
+import LeagueSelect from '../LeagueSelect.vue';
+
+const league = defineModel<League>('league', { required: true });
+const minimumCardPrice = defineModel<number>('minimumCardPrice', { required: true });
+const selected = defineModel<boolean>('selected', { required: true });
 
 export interface FileCardProps {
 	league: League;
@@ -51,16 +56,7 @@ const allCardsAmount = computed(() => props.sample.cards.reduce((sum, { amount }
 				<GridIcon class="icon" :width="96" :height="96" @click="tablePopup?.open()" />
 				<label class="slider-box" v-if="valid">
 					<span>{{ minimumCardPrice }}</span>
-					<input
-						class="slider"
-						type="range"
-						name=""
-						id=""
-						min="0"
-						max="500"
-						:value="minimumCardPrice"
-						@input="(e) => $emit('update:minimumCardPrice', (e.target as HTMLInputElement).value)"
-					/>
+					<input class="slider" type="range" name="" id="" min="0" max="500" v-model="minimumCardPrice" />
 				</label>
 				<div v-if="valid" class="total-price">
 					<p>{{ format(sample.chaos) }}</p>
@@ -68,16 +64,7 @@ const allCardsAmount = computed(() => props.sample.cards.reduce((sum, { amount }
 				</div>
 				<div>cards amount: {{ allCardsAmount }}</div>
 
-				<div v-if="valid" class="league">
-					<label :for="`league-${id}`">League</label>
-					<select
-						:id="`league-${id}`"
-						@change="e => $emit('update:league', (e.target as HTMLSelectElement).value)"
-						:value="league"
-					>
-						<option v-for="league in leagues" :value="league">{{ league }}</option>
-					</select>
-				</div>
+				<LeagueSelect v-model="league" />
 
 				<a class="download" v-if="valid" :download="filename" :href="href">Download</a>
 				<input

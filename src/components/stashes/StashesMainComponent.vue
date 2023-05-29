@@ -2,11 +2,11 @@
 import TabBadgeGroup from './TabBadgeGroup.vue';
 import { useStashStore } from '../../stores/stash';
 import { useLoadStash } from '../../poe/useLoadStash';
-import { League, leagues } from '../../types';
+import { League } from '../../types';
 import { storeToRefs } from 'pinia';
-import { ACTIVE_LEAGUE } from '../../lib';
 import { ref, watch } from 'vue';
 import HelpTip from '../HelpTip.vue';
+import LeagueSelect from '../LeagueSelect.vue';
 
 const stashStore = useStashStore();
 const { stashes, selectedTabsIds, league } = storeToRefs(stashStore);
@@ -49,12 +49,7 @@ watch(
 	<div class="main-stashes-component">
 		<div class="controls">
 			<div class="league-stashes">
-				<div class="league">
-					<label for="league">League</label>
-					<select ref="selectEl" id="league" v-model="league">
-						<option v-for="league in leagues" :value="league">{{ league }}</option>
-					</select>
-				</div>
+				<LeagueSelect v-model="league" />
 				<button @click="onStashes(league)">Stashes</button>
 				<HelpTip>
 					<p>Select tabs by clicking on them. Then click LOAD ITEMS button</p>
