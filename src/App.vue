@@ -108,6 +108,7 @@ const openStashWindow = () => {
 	height: 100vh;
 	position: relative;
 	padding: 1rem;
+	min-width: 800px;
 
 	display: flex;
 	flex-direction: column;
