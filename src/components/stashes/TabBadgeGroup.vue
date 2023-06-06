@@ -15,6 +15,7 @@ const perPage = ref(50);
 
 const filtered = computed(() => filter(props.stashes, nameQuery.value, shouldFilter.value, hideRemoveOnly.value));
 const paginated = computed(() => paginate(filtered.value, page.value, perPage.value));
+const tabsTotal = computed(() => props.stashes.length);
 
 watch(
 	() => [nameQuery.value, perPage.value, hideRemoveOnly.value],
@@ -43,6 +44,9 @@ watch(
 			<div v-if="withHideRemoveOnly" class="hide-remove-only">
 				<label for="hide-remove-only">Hide remove-only</label>
 				<input type="checkbox" id="hide-remove-only" v-model="hideRemoveOnly" />
+			</div>
+			<div class="tabs-total">
+				<span>{{ tabsTotal }}</span> stash tabs
 			</div>
 		</div>
 		<ul class="list">
@@ -84,6 +88,12 @@ watch(
 	display: flex;
 	align-items: center;
 	gap: 0.2rem;
+}
+
+.tabs-total {
+	> span {
+		color: yellow;
+	}
 }
 
 .list {
