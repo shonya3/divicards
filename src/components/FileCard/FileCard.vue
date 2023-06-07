@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { DivinationCardsSample, League, leagues } from '../../types';
+import { DivinationCardsSample, League, leagues, DivinationCardRecord } from '../../types';
 import GridIcon from '../icons/GridIcon.vue';
-import { ref, computed } from 'vue';
+import { ref, computed, Ref, ComputedRef } from 'vue';
 import DivTable from '../DivTable/DivTable.vue';
 import BasePopup from '../BasePopup.vue';
 import FixedNamesList from './FixedNamesList/FixedNamesList.vue';
 import NotCardsList from './NotCardsList/NotCardsList.vue';
 import LeagueSelect from '../LeagueSelect.vue';
+import { A } from '@tauri-apps/api/path-c062430b';
 
 const league = defineModel<League>('league', { required: true });
 const minimumCardPrice = defineModel<number>('minimumCardPrice', { required: true });
@@ -38,7 +39,25 @@ const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 
 const tablePopup = ref<typeof BasePopup | null>(null);
 
-const allCardsAmount = computed(() => props.sample.cards.reduce((sum, { amount }) => (sum += amount), 0));
+const filteredCards = computed(() => {
+	return props.sample.cards.filter(card => {
+		return (card.price ?? 0) >= props.minimumCardPrice;
+	});
+});
+const filteredSummary = computed(() => {
+	let value = 0;
+	let amount = 0;
+
+	for (const card of filteredCards.value) {
+		value += card.sum ?? 0;
+		amount += card.amount;
+	}
+
+	return {
+		amount,
+		value,
+	};
+});
 </script>
 
 <template>
@@ -59,10 +78,13 @@ const allCardsAmount = computed(() => props.sample.cards.reduce((sum, { amount }
 					<input class="slider" type="range" name="" id="" min="0" max="500" v-model="minimumCardPrice" />
 				</label>
 				<div v-if="valid" class="total-price">
-					<p>{{ format(sample.chaos) }}</p>
+					<p>{{ format(filteredSummary.value) }}</p>
 					<img width="35" height="35" class="chaos-img" src="/chaos.png" alt="chaos" />
 				</div>
-				<div>cards amount: {{ allCardsAmount }}</div>
+				<div class="cards-amount">
+					<p>{{ filteredSummary.amount }}</p>
+					<img width="35" height="35" src="/divination-card.png" alt="Divination card" />
+				</div>
 
 				<LeagueSelect v-model="league" />
 
@@ -181,7 +203,8 @@ const allCardsAmount = computed(() => props.sample.cards.reduce((sum, { amount }
 	bottom: 0;
 }
 
-.total-price {
+.total-price,
+.cards-amount {
 	display: flex;
 	justify-content: center;
 	align-items: center;

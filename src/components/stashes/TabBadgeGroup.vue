@@ -27,7 +27,7 @@ watch(
 
 <template>
 	<div class="tab-badge-group">
-		<div v-if="shouldFilter" style="display: flex; align-items: center; gap: 2rem">
+		<div v-if="shouldFilter" style="display: flex; flex-wrap: wrap; align-items: center; gap: 2rem">
 			<div>
 				<div class="filter" v-if="shouldFilter">
 					<label for="filter-stashes-by-name">Filter by name</label>

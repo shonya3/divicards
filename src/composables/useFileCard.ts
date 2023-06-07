@@ -54,15 +54,15 @@ export const useFileCard = (file: File, league: League): FileCardProps => {
 		}
 	);
 
-	watch(
-		() => props.minimumCardPrice,
-		async val => {
-			props.sample.chaos = await command('chaos', {
-				sample: props.sample,
-				min: val,
-			});
-		}
-	);
+	// watch(
+	// 	() => props.minimumCardPrice,
+	// 	async val => {
+	// 		props.sample.chaos = await command('chaos', {
+	// 			sample: props.sample,
+	// 			min: val,
+	// 		});
+	// 	}
+	// );
 
 	watch(
 		() => props.league,
