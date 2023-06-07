@@ -1,7 +1,33 @@
 export type Order = 'asc' | 'desc';
-export type League = 'Crucible' | 'Standard' | 'Crucible-HC';
-export const leagues = Object.freeze(['Crucible', 'Standard', 'Crucible-HC']) satisfies Readonly<League[]>;
-export const permanentLeagues: Readonly<League[]> = Object.freeze(['Standard']);
+export type League =
+	| 'Crucible'
+	| 'Standard'
+	| 'Crucible-HC'
+	| 'Hardcore'
+	| 'SSF Standard'
+	| 'SSF Hardcore'
+	| 'SSF Crucible'
+	| 'HC SSF Crucible';
+export const leagues = Object.freeze([
+	'Crucible',
+	'Standard',
+	'Crucible-HC',
+	'Hardcore',
+	'SSF Standard',
+	'SSF Hardcore',
+	'SSF Crucible',
+	'HC SSF Crucible',
+]) satisfies Readonly<League[]>;
+export type TradeLeague = 'Crucible' | 'Standard' | 'Crucible-HC' | 'Hardcore';
+export const tradeLeagues = Object.freeze(['Crucible', 'Standard', 'Crucible-HC', 'Hardcore']) satisfies Readonly<
+	TradeLeague[]
+>;
+
+export const permanentLeagues: Readonly<League[]> = Object.freeze(['Standard', 'Hardcore', 'SSF Standard']);
+
+export const isTradeLeague = (s: string): s is TradeLeague => {
+	return tradeLeagues.includes(s as TradeLeague);
+};
 
 export interface DivinationCardsSample {
 	cards: DivinationCardRecord[];

@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { League } from '../types';
+import { League, isTradeLeague } from '../types';
 import { StashTab } from './types';
 import { command } from '../command';
 import { cardsFromTab } from './cards';
@@ -23,7 +23,10 @@ export const useLoadStash = () => {
 					const { stash = [] } = await command('stash', { stashId, league });
 					const tab = stash as StashTab;
 					const cardsFromT = cardsFromTab(tab);
-					const sample = await command('sample_cards', { cards: cardsFromT, league: league });
+					const sample = await command('sample_cards', {
+						cards: cardsFromT,
+						league: isTradeLeague(league) ? league : 'Standard',
+					});
 					const file = new File([sample.polished], tab.name);
 					useFileCardsStore().addCards([file], league);
 					return stash as StashTab;

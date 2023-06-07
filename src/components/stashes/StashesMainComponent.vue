@@ -49,7 +49,7 @@ watch(
 	<div class="main-stashes-component">
 		<div class="controls">
 			<div class="league-stashes">
-				<LeagueSelect v-model="league" />
+				<LeagueSelect :trade="false" v-model="league" />
 				<button @click="onStashes(league)">Stashes</button>
 				<HelpTip>
 					<p>Select tabs by clicking on them. Then click LOAD ITEMS button</p>

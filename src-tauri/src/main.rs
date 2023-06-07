@@ -4,7 +4,7 @@
     windows_subsystem = "windows"
 )]
 
-use divi::{League, Prices};
+use divi::{Prices, TradeLeague};
 use lib::{
     commands,
     discord::{self, DiscordProvider},
@@ -16,7 +16,7 @@ use tauri::Manager;
 async fn main() {
     lib::dev::init_tracing();
     tracing::event!(tracing::Level::DEBUG, "app startup");
-    match prices::update(&League::Crucible).await {
+    match prices::update(&TradeLeague::Crucible).await {
         Ok(prices) => {
             tracing::event!(tracing::Level::DEBUG, "prices updated");
         }
@@ -25,7 +25,7 @@ async fn main() {
         }
     };
 
-    let prices = prices::prices(&League::Crucible).await;
+    let prices = prices::prices(&TradeLeague::Crucible).await;
 
     tauri::Builder::default()
         .setup(|app| {

@@ -97,6 +97,8 @@ impl PoeProvider {
     }
 
     async fn stashes(league: League, version: String) -> Value {
+        let url = format!("{}/stash/{}", API_URL, league);
+        dbg!(url);
         Client::new()
             .get(format!("{}/stash/{}", API_URL, league))
             .header(

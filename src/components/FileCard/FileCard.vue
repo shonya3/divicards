@@ -86,7 +86,7 @@ const filteredSummary = computed(() => {
 					<img width="35" height="35" src="/divination-card.png" alt="Divination card" />
 				</div>
 
-				<LeagueSelect v-model="league" />
+				<LeagueSelect :trade="true" v-model="league" />
 
 				<a class="download" v-if="valid" :download="filename" :href="href">Download</a>
 				<input

@@ -2,7 +2,7 @@ import { computed, reactive, ref, watch } from 'vue';
 import { useSample } from './useSample';
 import { useFile } from './useFile';
 import { FileCardProps } from '../components/FileCard/FileCard.vue';
-import { League, leagues } from '../types';
+import { League, TradeLeague, leagues } from '../types';
 import { command } from '../command';
 
 const prefixFilename = (name: string, league: League): string => {
@@ -17,7 +17,7 @@ const prefixFilename = (name: string, league: League): string => {
 	return `${league}${UNDERSCORE_GLUE}${name}`;
 };
 
-export const useFileCard = (file: File, league: League): FileCardProps => {
+export const useFileCard = (file: File, league: TradeLeague): FileCardProps => {
 	const { text: csv, name: filename, href } = useFile(file);
 	const { data, error, isError, isReady } = useSample(csv, league);
 	const selected = ref<boolean | null>(false);

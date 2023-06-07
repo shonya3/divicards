@@ -1,10 +1,18 @@
 import { invoke } from '@tauri-apps/api';
-import { DivinationCardsSample, League, DiscordIdentity, GoogleIdentity, leagues, CardNameAmount } from './types';
+import {
+	DivinationCardsSample,
+	League,
+	DiscordIdentity,
+	GoogleIdentity,
+	leagues,
+	CardNameAmount,
+	TradeLeague,
+} from './types';
 import { StashesResponseData, StashResponseData } from './poe/types';
 
 export interface Commands {
 	sample: (args: { csv: string; league: League }) => DivinationCardsSample;
-	sample_cards: (args: { cards: CardNameAmount[]; league: League }) => DivinationCardsSample;
+	sample_cards: (args: { cards: CardNameAmount[]; league: TradeLeague }) => DivinationCardsSample;
 	chaos: (args: { sample: DivinationCardsSample; min: number }) => number;
 	merge: (args: { samples: DivinationCardsSample[] }) => DivinationCardsSample;
 	league: (args: { sample: DivinationCardsSample; league: League }) => DivinationCardsSample;
