@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import { FileCardProps } from '../components/FileCard/FileCard.vue';
 import { useFileCard } from '../composables/useFileCard';
 import { command } from '../command';
-import { DivinationCardsSample, League, isTradeLeague } from '../types';
+import { DivinationCardsSample, League, isTradeLeague, TradeLeague } from '../types';
 
 export const useFileCardsStore = defineStore('filecardsStore', {
 	state: (): {
@@ -41,7 +41,7 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 	actions: {
 		addCards(files: File[], league: League = ACTIVE_LEAGUE): void {
 			for (const file of files) {
-				this.fileCards.push(useFileCard(file, isTradeLeague(league) ? league : 'Standard'));
+				this.fileCards.push(useFileCard(file, isTradeLeague(league) ? league : ACTIVE_LEAGUE));
 			}
 		},
 

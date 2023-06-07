@@ -7,7 +7,6 @@ import BasePopup from '../BasePopup.vue';
 import FixedNamesList from './FixedNamesList/FixedNamesList.vue';
 import NotCardsList from './NotCardsList/NotCardsList.vue';
 import LeagueSelect from '../LeagueSelect.vue';
-import { A } from '@tauri-apps/api/path-c062430b';
 
 const league = defineModel<League>('league', { required: true });
 const minimumCardPrice = defineModel<number>('minimumCardPrice', { required: true });

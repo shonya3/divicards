@@ -1,3 +1,4 @@
+import { ACTIVE_LEAGUE } from './../lib';
 import { ref } from 'vue';
 import { League, isTradeLeague } from '../types';
 import { StashTab } from './types';
@@ -25,10 +26,10 @@ export const useLoadStash = () => {
 					const cardsFromT = cardsFromTab(tab);
 					const sample = await command('sample_cards', {
 						cards: cardsFromT,
-						league: isTradeLeague(league) ? league : 'Standard',
+						league: isTradeLeague(league) ? league : ACTIVE_LEAGUE,
 					});
 					const file = new File([sample.polished], tab.name);
-					useFileCardsStore().addCards([file], league);
+					useFileCardsStore().addCards([file], isTradeLeague(league) ? league : ACTIVE_LEAGUE);
 					return stash as StashTab;
 				})
 			);
