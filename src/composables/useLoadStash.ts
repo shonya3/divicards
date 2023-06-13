@@ -9,6 +9,8 @@ import { cardsFromTab } from '../poe/cards';
 export const useLoadStash = () => {
 	const msg = ref('');
 	const fetchingStash = ref(false);
+	const countDown = ref(0);
+	let countdownTimer: ReturnType<typeof setInterval> | null = null;
 
 	const fetchStashesContents = async (ids: string[], league: League) => {
 		const tradeLeague = isTradeLeague(league) ? league : ACTIVE_LEAGUE;
@@ -34,6 +36,25 @@ export const useLoadStash = () => {
 			);
 			result.push(...r);
 			if (stashIds.length === 0) break;
+
+			// Countdown
+			if (countdownTimer) {
+				clearInterval(countdownTimer);
+				countdownTimer = null;
+			}
+			countDown.value = SLEEP_SECS;
+			countdownTimer = setInterval(() => {
+				if (countDown.value <= 0) {
+					if (countdownTimer) {
+						clearInterval(countdownTimer);
+						countdownTimer = null;
+					}
+				} else {
+					countDown.value--;
+					msg.value = `Loaded. Now ${countDown.value}s sleep`;
+				}
+			}, 1000);
+
 			msg.value = `Loaded. Now ${SLEEP_SECS}s sleep`;
 			await new Promise(r => setTimeout(r, SLEEP_SECS * 1000));
 		}
@@ -45,6 +66,7 @@ export const useLoadStash = () => {
 	};
 
 	return {
+		countDown,
 		msg,
 		fetchingStash,
 		fetchStashesContents,
