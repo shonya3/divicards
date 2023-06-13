@@ -39,9 +39,9 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 		},
 	},
 	actions: {
-		addCards(files: File[], league: League = ACTIVE_LEAGUE): void {
+		addCards(files: File[], league: TradeLeague = ACTIVE_LEAGUE): void {
 			for (const file of files) {
-				this.fileCards.push(useFileCard(file, isTradeLeague(league) ? league : ACTIVE_LEAGUE));
+				this.fileCards.push(useFileCard(file, league));
 			}
 		},
 

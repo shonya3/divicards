@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import TabBadgeGroup from './TabBadgeGroup.vue';
 import { useStashStore } from '../../stores/stash';
-import { useLoadStash } from '../../poe/useLoadStash';
 import { League } from '../../types';
 import { storeToRefs } from 'pinia';
 import { ref, watch } from 'vue';
 import HelpTip from '../HelpTip.vue';
 import LeagueSelect from '../LeagueSelect.vue';
+import { useLoadStash } from '../../composables/useLoadStash';
 
 const stashStore = useStashStore();
 const { stashes, selectedTabsIds, league } = storeToRefs(stashStore);

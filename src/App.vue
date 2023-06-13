@@ -79,7 +79,6 @@ const openStashWindow = () => {
 				v-if="mergedFile"
 				v-bind="mergedFile"
 				@delete="deleteMergedFile"
-				v-model:selected="mergedFile.selected"
 				v-model:minimumCardPrice.number="mergedFile.minimumCardPrice"
 				v-model:league="mergedFile.league"
 			/>
