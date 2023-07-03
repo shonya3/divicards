@@ -1,4 +1,4 @@
-use divi::{CardNameAmount, Csv, CsvString, DivinationCardsSample, Prices, TradeLeague};
+use divi::{CardNameAmount, CsvString, DivinationCardsSample, Prices, SampleData, TradeLeague};
 use tauri::{command, AppHandle, Manager};
 
 use crate::prices;
@@ -9,7 +9,7 @@ pub async fn sample(
     league: TradeLeague,
 ) -> Result<DivinationCardsSample, divi::error::MissingHeaders> {
     DivinationCardsSample::create(
-        Csv::CsvString(CsvString(csv)),
+        SampleData::CsvString(CsvString(csv)),
         prices::prices(&league).await,
     )
 }
@@ -20,7 +20,7 @@ pub async fn sample_cards(
     league: TradeLeague,
 ) -> Result<DivinationCardsSample, divi::error::MissingHeaders> {
     DivinationCardsSample::create(
-        Csv::CardNameAmountList(cards),
+        SampleData::CardNameAmountList(cards),
         prices::prices(&league).await,
     )
 }
@@ -44,7 +44,7 @@ pub async fn league(
     league: TradeLeague,
 ) -> Result<DivinationCardsSample, divi::error::MissingHeaders> {
     DivinationCardsSample::create(
-        Csv::CsvString(sample.polished),
+        SampleData::CsvString(sample.polished),
         prices::prices(&league).await,
     )
 }
