@@ -23,7 +23,6 @@ path = "lib/src/lib.rs"
 tauri-build = { version = "1.3", features = [] }
 
 [dependencies]
-shared = {path="shared"}
 divi = {path = "../../divi"}
 
 ntapi = "0.4.1"
