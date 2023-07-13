@@ -1,0 +1,370 @@
+[
+	{
+		"name": "Lingering Remnants",
+		"amount": 8
+	},
+	{
+		"name": "The Gemcutter",
+		"amount": 1
+	},
+	{
+		"name": "Shard of Fate",
+		"amount": 1
+	},
+	{
+		"name": "The Flora's Gift",
+		"amount": 2
+	},
+	{
+		"name": "The Coming Storm",
+		"amount": 2
+	},
+	{
+		"name": "The Gambler",
+		"amount": 5
+	},
+	{
+		"name": "The King's Blade",
+		"amount": 1
+	},
+	{
+		"name": "The Gambler",
+		"amount": 4
+	},
+	{
+		"name": "Her Mask",
+		"amount": 2
+	},
+	{
+		"name": "The Fletcher",
+		"amount": 2
+	},
+	{
+		"name": "The Cataclysm",
+		"amount": 1
+	},
+	{
+		"name": "The Realm",
+		"amount": 2
+	},
+	{
+		"name": "The Master Artisan",
+		"amount": 1
+	},
+	{
+		"name": "Mitts",
+		"amount": 1
+	},
+	{
+		"name": "The Battle Born",
+		"amount": 1
+	},
+	{
+		"name": "Soul Quenched",
+		"amount": 1
+	},
+	{
+		"name": "The Traitor",
+		"amount": 1
+	},
+	{
+		"name": "The Heroic Shot",
+		"amount": 1
+	},
+	{
+		"name": "Thirst for Knowledge",
+		"amount": 2
+	},
+	{
+		"name": "The Journey",
+		"amount": 1
+	},
+	{
+		"name": "The Obscured",
+		"amount": 1
+	},
+	{
+		"name": "Gift of the Gemling Queen",
+		"amount": 1
+	},
+	{
+		"name": "Home",
+		"amount": 1
+	},
+	{
+		"name": "Lysah's Respite",
+		"amount": 1
+	},
+	{
+		"name": "The Endurance",
+		"amount": 1
+	},
+	{
+		"name": "The Hoarder",
+		"amount": 2
+	},
+	{
+		"name": "The Stormcaller",
+		"amount": 1
+	},
+	{
+		"name": "The Penitent",
+		"amount": 1
+	},
+	{
+		"name": "The Skeleton",
+		"amount": 1
+	},
+	{
+		"name": "The Hermit",
+		"amount": 2
+	},
+	{
+		"name": "The Calling",
+		"amount": 2
+	},
+	{
+		"name": "Vinia's Token",
+		"amount": 3
+	},
+	{
+		"name": "The Inventor",
+		"amount": 1
+	},
+	{
+		"name": "The Arena Champion",
+		"amount": 1
+	},
+	{
+		"name": "The Rite of Elements",
+		"amount": 1
+	},
+	{
+		"name": "Prosperity",
+		"amount": 3
+	},
+	{
+		"name": "The Cache",
+		"amount": 3
+	},
+	{
+		"name": "Emperor's Luck",
+		"amount": 2
+	},
+	{
+		"name": "The Realm",
+		"amount": 5
+	},
+	{
+		"name": "The Web",
+		"amount": 1
+	},
+	{
+		"name": "The Carrion Crow",
+		"amount": 1
+	},
+	{
+		"name": "The Card Sharp",
+		"amount": 1
+	},
+	{
+		"name": "Humility",
+		"amount": 1
+	},
+	{
+		"name": "The Journalist",
+		"amount": 3
+	},
+	{
+		"name": "The Realm",
+		"amount": 5
+	},
+	{
+		"name": "The Lover",
+		"amount": 1
+	},
+	{
+		"name": "Volatile Power",
+		"amount": 2
+	},
+	{
+		"name": "Divine Beauty",
+		"amount": 2
+	},
+	{
+		"name": "Boon of Justice",
+		"amount": 2
+	},
+	{
+		"name": "Hunter's Resolve",
+		"amount": 1
+	},
+	{
+		"name": "The Sun",
+		"amount": 1
+	},
+	{
+		"name": "Alone in the Darkness",
+		"amount": 1
+	},
+	{
+		"name": "Grave Knowledge",
+		"amount": 2
+	},
+	{
+		"name": "The Scout",
+		"amount": 1
+	},
+	{
+		"name": "The Wrath",
+		"amount": 1
+	},
+	{
+		"name": "The Standoff",
+		"amount": 1
+	},
+	{
+		"name": "The Watcher",
+		"amount": 1
+	},
+	{
+		"name": "Dark Temptation",
+		"amount": 1
+	},
+	{
+		"name": "Lost Worlds",
+		"amount": 1
+	},
+	{
+		"name": "The Body",
+		"amount": 2
+	},
+	{
+		"name": "Rats",
+		"amount": 2
+	},
+	{
+		"name": "Three Voices",
+		"amount": 2
+	},
+	{
+		"name": "Lantador's Lost Love",
+		"amount": 1
+	},
+	{
+		"name": "Boundless Realms",
+		"amount": 1
+	},
+	{
+		"name": "The Encroaching Darkness",
+		"amount": 7
+	},
+	{
+		"name": "The Pack Leader",
+		"amount": 3
+	},
+	{
+		"name": "The Explorer",
+		"amount": 4
+	},
+	{
+		"name": "The Survivalist",
+		"amount": 2
+	},
+	{
+		"name": "Call to the First Ones",
+		"amount": 1
+	},
+	{
+		"name": "The Trial",
+		"amount": 6
+	},
+	{
+		"name": "A Sea of Blue",
+		"amount": 2
+	},
+	{
+		"name": "The Scholar",
+		"amount": 1
+	},
+	{
+		"name": "The Dragon",
+		"amount": 1
+	},
+	{
+		"name": "The Wretched",
+		"amount": 1
+	},
+	{
+		"name": "Time-Lost Relic",
+		"amount": 1
+	},
+	{
+		"name": "The Inoculated",
+		"amount": 1
+	},
+	{
+		"name": "Three Faces in the Dark",
+		"amount": 5
+	},
+	{
+		"name": "Assassin's Favour",
+		"amount": 4
+	},
+	{
+		"name": "The Wolf",
+		"amount": 3
+	},
+	{
+		"name": "Glimmer of Hope",
+		"amount": 4
+	},
+	{
+		"name": "The Aesthete",
+		"amount": 2
+	},
+	{
+		"name": "Loyalty",
+		"amount": 3
+	},
+	{
+		"name": "Rain of Chaos",
+		"amount": 5
+	},
+	{
+		"name": "The Tireless Extractor",
+		"amount": 2
+	},
+	{
+		"name": "The Lunaris Priestess",
+		"amount": 1
+	},
+	{
+		"name": "Hubris",
+		"amount": 2
+	},
+	{
+		"name": "The Gladiator",
+		"amount": 1
+	},
+	{
+		"name": "The Army of Blood",
+		"amount": 1
+	},
+	{
+		"name": "The Witch",
+		"amount": 2
+	},
+	{
+		"name": "The Fool",
+		"amount": 1
+	},
+	{
+		"name": "Struck by Lightning",
+		"amount": 1
+	},
+	{
+		"name": "The Scarred Meadow",
+		"amount": 3
+	}
+]
