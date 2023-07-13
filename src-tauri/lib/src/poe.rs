@@ -2,7 +2,7 @@ use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 
 use crate::oauth::{AuthCodeResponse, OAuthProvider};
 use axum::{async_trait, extract::Query, response::Html, routing::get, Router};
-use divi::League;
+use divi::league::League;
 use keyring::Entry;
 use oauth2::{basic::BasicClient, AccessToken, CsrfToken, PkceCodeChallenge, RedirectUrl, Scope};
 use reqwest::Client;
