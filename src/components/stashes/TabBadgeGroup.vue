@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import TabBadge from './TabBadge.vue';
 import { StatefulStashTab } from '../../stores/stash';
 import { ref, computed, watch } from 'vue';
 import { League } from '../../types';
