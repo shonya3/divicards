@@ -5,20 +5,20 @@ import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 import { useAutoAnimate } from './composables/useAutoAnimate';
 import { usePoeOAuth2Store } from './stores/poeOAuth2Store';
-import PoeAuth from './components/PoeAuth.vue';
 import StashesMainComponent from './components/stashes/StashesMainComponent.vue';
 import { DropFilesMessageElement } from './components/wc/drop-files-message';
 import { LeagueSelectElement } from './components/wc/league-select';
 DropFilesMessageElement.define();
 LeagueSelectElement.define();
-import LeagueSelect from './components/LeagueSelect.vue';
+PoeAuthElement.define();
+import { PoeAuthElement } from './components/wc/poe-auth';
 
 const filesStore = useFileCardsStore();
 const { fileCards: files, selectedFiles, mergedFile } = storeToRefs(filesStore);
 const { deleteFile, addCards, deleteAllFiles, merge, deleteMergedFile, downloadAll } = filesStore;
 
 const poeOAuthStore = usePoeOAuth2Store();
-const { loggedIn } = storeToRefs(poeOAuthStore);
+const { loggedIn, name } = storeToRefs(poeOAuthStore);
 
 const filesTemplateRef = ref<HTMLElement | null>(null);
 useAutoAnimate(filesTemplateRef);
@@ -56,7 +56,12 @@ const onLeagueChange = (e: CustomEvent<string>) => {
 		<header class="header">
 			<wc-drop-files-message></wc-drop-files-message>
 			<button @click="openStashWindow()">Load from stash</button>
-			<PoeAuth />
+			<wc-poe-auth
+				@login="poeOAuthStore.login"
+				@logout="poeOAuthStore.logout"
+				:name="name"
+				:loggedIn="loggedIn"
+			></wc-poe-auth>
 		</header>
 
 		<!-- <wc-league-select @league-change="onLeagueChange"></wc-league-select> -->
