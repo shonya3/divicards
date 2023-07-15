@@ -8,10 +8,13 @@ import { usePoeOAuth2Store } from './stores/poeOAuth2Store';
 import StashesMainComponent from './components/stashes/StashesMainComponent.vue';
 import { DropFilesMessageElement } from './components/wc/drop-files-message';
 import { LeagueSelectElement } from './components/wc/league-select';
+import { PoeAuthElement } from './components/wc/poe-auth';
+import { TabBadgeElement } from './components/wc/stashes/tab-badge';
 DropFilesMessageElement.define();
 LeagueSelectElement.define();
 PoeAuthElement.define();
-import { PoeAuthElement } from './components/wc/poe-auth';
+
+TabBadgeElement.define();
 
 const filesStore = useFileCardsStore();
 const { fileCards: files, selectedFiles, mergedFile } = storeToRefs(filesStore);
@@ -40,10 +43,6 @@ const openStashWindow = () => {
 		});
 	}
 };
-
-const onLeagueChange = (e: CustomEvent<string>) => {
-	console.log(e);
-};
 </script>
 
 <template>
@@ -63,9 +62,6 @@ const onLeagueChange = (e: CustomEvent<string>) => {
 				:loggedIn="loggedIn"
 			></wc-poe-auth>
 		</header>
-
-		<!-- <wc-league-select @league-change="onLeagueChange"></wc-league-select> -->
-		<!-- <LeagueSelect></LeagueSelect> -->
 
 		<div v-show="loggedIn && stashVisible">
 			<StashesMainComponent @close="stashVisible = false" />

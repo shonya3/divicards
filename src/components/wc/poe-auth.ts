@@ -32,9 +32,8 @@ export class PoeAuthElement extends BaseElement {
 	@property({ reflect: true }) name: string = '';
 	@property({ type: Boolean, reflect: true }) loggedIn: boolean = false;
 	render() {
-		console.log({ loggedIn: this.loggedIn });
-		const logoutButton = html`<button @click=${this.#emitLogoutClicked}>Logout</button>`;
-		const loginButton = html`<button @click=${this.#emitLoginClicked}>Login</button>`;
+		const logoutButton = html`<button @click=${this.#emitLogout}>Logout</button>`;
+		const loginButton = html`<button @click=${this.#emitLogin}>Login</button>`;
 
 		const template = this.loggedIn
 			? html`<div class="logged-in">
@@ -46,11 +45,11 @@ export class PoeAuthElement extends BaseElement {
 		return html`<div class="poe-auth">${template}</div>`;
 	}
 
-	#emitLoginClicked() {
+	#emitLogin() {
 		this.emit('login');
 	}
 
-	#emitLogoutClicked() {
+	#emitLogout() {
 		this.emit('logout');
 	}
 }

@@ -4,6 +4,8 @@ import { StatefulStashTab } from '../../stores/stash';
 import { ref, computed, watch } from 'vue';
 import { League } from '../../types';
 import { filter, shouldUnlockHideRemoveOnly, paginate } from './utils';
+import { TabBadgeElement } from '../wc/stashes/tab-badge';
+TabBadgeElement.define();
 const props = defineProps<{ stashes: StatefulStashTab[]; league: League }>();
 const shouldFilter = computed(() => props.stashes.length > 50);
 const withHideRemoveOnly = computed(() => shouldUnlockHideRemoveOnly(props.league, props.stashes));
@@ -51,13 +53,14 @@ watch(
 		</div>
 		<ul class="list">
 			<li v-for="tab in paginated">
-				<TabBadge
+				<wc-tab-badge
 					:colour="tab.metadata?.colour ?? '#fff'"
 					:name="tab.name"
 					:tab-id="tab.id"
 					:index="tab.index"
-					v-model:selected="tab.selected"
-				/>
+					:selected="tab.selected"
+					@selected-changed="(e: CustomEvent<boolean>) => tab.selected = e.detail"
+				></wc-tab-badge>
 			</li>
 		</ul>
 	</div>

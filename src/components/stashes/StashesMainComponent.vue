@@ -48,7 +48,6 @@ watch(
 </script>
 
 <template>
-	{{ league }}
 	<div class="main-stashes-component">
 		<div class="controls">
 			<div class="league-stashes">
