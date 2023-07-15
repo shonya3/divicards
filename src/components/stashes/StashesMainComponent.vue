@@ -4,9 +4,11 @@ import { useStashStore } from '../../stores/stash';
 import { League } from '../../types';
 import { storeToRefs } from 'pinia';
 import { ref, watch } from 'vue';
-import HelpTip from '../HelpTip.vue';
-import LeagueSelect from '../LeagueSelect.vue';
 import { useLoadStash } from '../../composables/useLoadStash';
+import { HelpTipElement } from '../wc/help-tip';
+import { LeagueSelectElement } from '../wc/league-select';
+HelpTipElement.define();
+LeagueSelectElement.define();
 
 const stashStore = useStashStore();
 const { stashes, selectedTabsIds, league } = storeToRefs(stashStore);
@@ -46,14 +48,18 @@ watch(
 </script>
 
 <template>
+	{{ league }}
 	<div class="main-stashes-component">
 		<div class="controls">
 			<div class="league-stashes">
-				<LeagueSelect :trade="false" v-model="league" />
+				<wc-league-select
+					:league="league"
+					@league-change="(e: CustomEvent<League>) => (league = e.detail)"
+				></wc-league-select>
 				<button @click="onStashes(league)">Stashes</button>
-				<HelpTip>
+				<wc-help-tip>
 					<p>Select tabs by clicking on them. Then click LOAD ITEMS button</p>
-				</HelpTip>
+				</wc-help-tip>
 			</div>
 
 			<button

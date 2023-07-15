@@ -6,7 +6,8 @@ import DivTable from '../DivTable/DivTable.vue';
 import BasePopup from '../BasePopup.vue';
 import FixedNamesList from './FixedNamesList/FixedNamesList.vue';
 import NotCardsList from './NotCardsList/NotCardsList.vue';
-import LeagueSelect from '../LeagueSelect.vue';
+import { LeagueSelectElement } from '../wc/league-select';
+LeagueSelectElement.define();
 
 const league = defineModel<League>('league', { required: true });
 const minimumCardPrice = defineModel<number>('minimumCardPrice', { required: true });
@@ -85,7 +86,11 @@ const filteredSummary = computed(() => {
 					<img width="35" height="35" src="/divination-card.png" alt="Divination card" />
 				</div>
 
-				<LeagueSelect :trade="true" v-model="league" />
+				<wc-league-select
+					trade
+					:league="league"
+					@league-change="(e: CustomEvent<League>) => league = e.detail"
+				></wc-league-select>
 
 				<a class="download" v-if="valid" :download="filename" :href="href">Download</a>
 				<input
