@@ -9,6 +9,13 @@ export default defineConfig({
 			script: {
 				defineModel: true,
 			},
+			template: {
+				compilerOptions: {
+					isCustomElement(tag: string) {
+						return tag.startsWith('wc');
+					},
+				},
+			},
 		}),
 		VueDevTools(),
 	],

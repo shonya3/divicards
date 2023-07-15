@@ -7,7 +7,8 @@ import { useAutoAnimate } from './composables/useAutoAnimate';
 import { usePoeOAuth2Store } from './stores/poeOAuth2Store';
 import PoeAuth from './components/PoeAuth.vue';
 import StashesMainComponent from './components/stashes/StashesMainComponent.vue';
-import DropFilesMessage from './components/DropFilesMessage.vue';
+import { DropFilesMessageElement } from './components/wc/drop-files-message';
+DropFilesMessageElement.define();
 
 const filesStore = useFileCardsStore();
 const { fileCards: files, selectedFiles, mergedFile } = storeToRefs(filesStore);
@@ -46,7 +47,7 @@ const openStashWindow = () => {
 		class="drag"
 	>
 		<header class="header">
-			<DropFilesMessage />
+			<wc-drop-files-message></wc-drop-files-message>
 			<button @click="openStashWindow()">Load from stash</button>
 			<PoeAuth />
 		</header>

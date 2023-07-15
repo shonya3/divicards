@@ -76,7 +76,7 @@ impl PoeProvider {
         };
 
         dbg!(&url);
-        Client::new()
+        let response = Client::new()
             .get(url)
             .header(
                 "Authorization",
@@ -90,10 +90,18 @@ impl PoeProvider {
             )
             .send()
             .await
-            .unwrap()
-            .json::<Value>()
-            .await
-            .unwrap()
+            .unwrap();
+
+        let headers = &response.headers();
+        let limit_account_header = headers.get("x-rate-limit-account").unwrap();
+        let limit_account_state_header = headers.get("x-rate-limit-account-state").unwrap();
+
+        println!(
+            "x-rate-limit-account: {:?}, x-rate-limit-account-state: {:?}",
+            limit_account_header, limit_account_state_header
+        );
+
+        response.json::<Value>().await.unwrap()
     }
 
     async fn stashes(league: League, version: String) -> Value {
