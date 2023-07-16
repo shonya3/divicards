@@ -7,7 +7,9 @@ import BasePopup from '../BasePopup.vue';
 import FixedNamesList from './FixedNamesList/FixedNamesList.vue';
 import NotCardsList from './NotCardsList/NotCardsList.vue';
 import { LeagueSelectElement } from '../wc/league-select';
+import { DivTableElement } from '../wc/div-table/div-table';
 LeagueSelectElement.define();
+DivTableElement.define();
 
 const league = defineModel<League>('league', { required: true });
 const minimumCardPrice = defineModel<number>('minimumCardPrice', { required: true });
@@ -102,7 +104,7 @@ const filteredSummary = computed(() => {
 				/>
 
 				<base-popup ref="tablePopup">
-					<div-table v-if="valid" :cards="sample.cards" />
+					<template v-if="valid"> <wc-div-table .cards="sample.cards"></wc-div-table></template>
 					<p v-else>{{ error }}</p>
 				</base-popup>
 			</template>

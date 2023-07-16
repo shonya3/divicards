@@ -1,4 +1,4 @@
-import { Order } from '../../types';
+import { Order } from '../../../types';
 
 export type Column = 'price' | 'amount' | 'sum' | 'name';
 export type SortState = {

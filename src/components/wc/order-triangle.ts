@@ -39,7 +39,7 @@ const styles = css`
 
 export class OrderTriangleElement extends BaseElement {
 	static htmlTag = 'wc-order-triangle';
-	static styles = [styles];
+	static styles = [this.baseStyles, styles];
 
 	@property({ reflect: true }) size: `${number}${CssSize}` = '16px';
 	@property({ reflect: true }) order: Order = 'asc';
