@@ -2,8 +2,9 @@
 import { DivinationCardRecord, Order } from '../../types';
 import { ref, computed, onMounted, watch } from 'vue';
 import { orderBy } from './orderBy';
-import OrderTriangle from '../OrderTriangle/OrderTriangle.vue';
 import { SortState, Column } from './types';
+import { OrderTriangleElement } from '../wc/order-triangle';
+OrderTriangleElement.define();
 
 export interface DivTableProps {
 	cards: DivinationCardRecord[];
@@ -106,15 +107,15 @@ onMounted(() => {
 					<th>&numero;</th>
 					<th>
 						<span class="column__name"> Amount </span>
-						<order-triangle
+						<wc-order-triangle
 							:active="order.activeColumn === 'amount'"
 							:order="order.amount"
 							@click="toggleOrder('amount')"
-						/>
+						></wc-order-triangle>
 					</th>
 					<th>
 						<span class="column__name"> Name </span>
-						<order-triangle
+						<wc-order-triangle
 							:active="order.activeColumn === 'name'"
 							:order="order.name"
 							@click="toggleOrder('name')"
@@ -122,7 +123,7 @@ onMounted(() => {
 					</th>
 					<th>
 						<span class="column__name"> Price </span>
-						<order-triangle
+						<wc-order-triangle
 							:active="order.activeColumn === 'price'"
 							:order="order.price"
 							@click="toggleOrder('price')"
@@ -130,7 +131,7 @@ onMounted(() => {
 					</th>
 					<th>
 						<span class="column__name"> Sum </span>
-						<order-triangle
+						<wc-order-triangle
 							:active="order.activeColumn === 'sum'"
 							:order="order.sum"
 							@click="toggleOrder('sum')"
