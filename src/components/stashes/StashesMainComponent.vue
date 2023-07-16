@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import TabBadgeGroup from './TabBadgeGroup.vue';
 import { useStashStore } from '../../stores/stash';
 import { League } from '../../types';
 import { storeToRefs } from 'pinia';
@@ -7,8 +6,11 @@ import { ref, watch } from 'vue';
 import { useLoadStash } from '../../composables/useLoadStash';
 import { HelpTipElement } from '../wc/help-tip';
 import { LeagueSelectElement } from '../wc/league-select';
+import { TabBadgeGroupElement } from '../wc/stashes/tab-badge-group';
+import { TabSelectEvent } from '../wc/stashes/tab-badge';
 HelpTipElement.define();
 LeagueSelectElement.define();
+TabBadgeGroupElement.define();
 
 const stashStore = useStashStore();
 const { stashes, selectedTabsIds, league } = storeToRefs(stashStore);
@@ -18,21 +20,7 @@ const { msg, fetchingStash, fetchStashesContents } = useLoadStash();
 
 const selectEl = ref<HTMLSelectElement | null>(null);
 
-const onGetData = async () => {
-	fetchStashesContents(selectedTabsIds.value, league.value);
-	unselectAllTabs();
-};
-
 const noStashesMessage = ref('');
-
-const onStashes = async (league: League) => {
-	noStashesMessage.value = '';
-	await fetchStashes(league);
-	if (!stashes.value.length) {
-		noStashesMessage.value = 'No stashes here. Try to change the league';
-		selectEl.value?.focus();
-	}
-};
 
 defineEmits<{
 	(event: 'close'): void;
@@ -45,6 +33,33 @@ watch(
 		noStashesMessage.value = '';
 	}
 );
+
+const onStashes = async (league: League) => {
+	noStashesMessage.value = '';
+	await fetchStashes(league);
+	if (!stashes.value.length) {
+		noStashesMessage.value = 'No stashes here. Try to change the league';
+		selectEl.value?.focus();
+	}
+};
+
+const onGetData = async () => {
+	fetchStashesContents(selectedTabsIds.value, league.value);
+	unselectAllTabs();
+	stashStore.stashes = Array.from(stashStore.stashes);
+};
+
+const onTabSelected = (e: TabSelectEvent) => {
+	const { tabId, selected } = e.detail;
+	const tab = stashes.value.find(t => t.id === tabId);
+
+	console.log({ tabId, selected, e, tab });
+
+	if (tab) {
+		tab.selected = selected;
+		stashes.value = Array.from(stashes.value);
+	}
+};
 </script>
 
 <template>
@@ -76,7 +91,12 @@ watch(
 		<p class="msg" :class="{ visible: fetchingStash }">{{ msg }}</p>
 		<p class="msg" :class="{ visible: noStashesMessage.length > 0 }">{{ noStashesMessage }}</p>
 
-		<TabBadgeGroup :stashes="stashes" :key="league" :league="league" />
+		<wc-tab-badge-group
+			@tab-select="onTabSelected"
+			:stashes="stashes"
+			:key="league"
+			:league="league"
+		></wc-tab-badge-group>
 	</div>
 </template>
 

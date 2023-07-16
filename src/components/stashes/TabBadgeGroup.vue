@@ -3,7 +3,7 @@ import { StatefulStashTab } from '../../stores/stash';
 import { ref, computed, watch } from 'vue';
 import { League } from '../../types';
 import { filter, shouldUnlockHideRemoveOnly, paginate } from './utils';
-import { TabBadgeElement } from '../wc/stashes/tab-badge';
+import { TabBadgeElement, TabSelectEvent } from '../wc/stashes/tab-badge';
 TabBadgeElement.define();
 const props = defineProps<{ stashes: StatefulStashTab[]; league: League }>();
 const shouldFilter = computed(() => props.stashes.length > 50);
@@ -24,6 +24,14 @@ watch(
 		page.value = 1;
 	}
 );
+
+const emit = defineEmits<{
+	(event: 'tab-select', e: TabSelectEvent): void;
+}>();
+
+const onTabSelect = (e: TabSelectEvent) => {
+	emit('tab-select', e);
+};
 </script>
 
 <template>
@@ -55,10 +63,10 @@ watch(
 				<wc-tab-badge
 					:colour="tab.metadata?.colour ?? '#fff'"
 					:name="tab.name"
-					:tab-id="tab.id"
+					:tabId="tab.id"
 					:index="tab.index"
 					:selected="tab.selected"
-					@selected-changed="(e: CustomEvent<boolean>) => tab.selected = e.detail"
+					@tab-select="onTabSelect"
 				></wc-tab-badge>
 			</li>
 		</ul>

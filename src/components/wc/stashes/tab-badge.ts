@@ -75,6 +75,10 @@ export class TabBadgeElement extends BaseElement {
 		return `#${this.colour.padStart(6, '0')}`;
 	}
 
+	get checked(): boolean {
+		return this.checkbox.checked;
+	}
+
 	render() {
 		const cssProps = styleMap({
 			'--badge-color': `${this.color}`,
@@ -84,16 +88,22 @@ export class TabBadgeElement extends BaseElement {
 		return html`<div class="tab-badge" style=${cssProps}>
 			<label for=${this.tabId} class="name">${this.name}</label>
 			<input
-				@change=${this.#emitSelectedChanged}
+				@change=${this.#emitTabSelect}
 				class="checkbox"
 				type="checkbox"
-				id=${this.tabId}
+				.tabId=${this.tabId}
 				.checked=${this.selected}
 			/>
 		</div>`;
 	}
 
-	#emitSelectedChanged() {
-		this.emit('selected-changed', this.checkbox.checked);
+	#emitTabSelect() {
+		const detail = {
+			tabId: this.tabId,
+			selected: this.checked,
+		};
+		this.emit('tab-select', detail);
 	}
 }
+
+export type TabSelectEvent = CustomEvent<{ tabId: string; selected: boolean }>;
