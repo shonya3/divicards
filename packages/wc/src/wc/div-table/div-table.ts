@@ -140,11 +140,7 @@ export class DivTableElement extends BaseElement {
 	}
 
 	render() {
-		return html`${this.dbg()}${this.header()}${this.table()}`;
-	}
-
-	dbg() {
-		return html`<pre>order: ${JSON.stringify(this.order, null, 2)}</pre>`;
+		return html`${this.header()}${this.table()}`;
 	}
 
 	#onNameQueryInput(e: InputEvent) {

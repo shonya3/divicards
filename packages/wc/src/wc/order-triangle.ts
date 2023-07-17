@@ -12,15 +12,15 @@ declare global {
 }
 
 type CssSize = 'px' | 'rem';
+export type Size = `${number}${CssSize}`;
 
 const styles = css`
 	.order {
 		color: var(--color);
-		background-color: var(--bg-color);
 		width: v-bind(size);
 		height: v-bind(size);
 		clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
-		background-color: var(--color);
+		background-color: var(--color, rgba(255, 255, 255, 0.87));
 		border-radius: 16px;
 
 		transition: 300ms;
@@ -41,7 +41,7 @@ export class OrderTriangleElement extends BaseElement {
 	static htmlTag = 'wc-order-triangle';
 	static styles = [this.baseStyles, styles];
 
-	@property({ reflect: true }) size: `${number}${CssSize}` = '16px';
+	@property({ reflect: true }) size: Size = '16px';
 	@property({ reflect: true }) order: Order = 'asc';
 	@property({ type: Boolean }) active = false;
 

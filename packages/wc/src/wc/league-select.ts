@@ -1,5 +1,5 @@
 import { BaseElement } from './base-element';
-import { css, html } from 'lit';
+import { PropertyValueMap, css, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { League, tradeLeagues, leagues as allLeagues } from '@divicards/shared/types';
@@ -42,7 +42,12 @@ export class LeagueSelectElement extends BaseElement {
 		</div>`;
 	}
 
+	protected firstUpdated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		this.select.value = this.league;
+	}
+
 	#emitLeagueChange() {
+		this.league = this.select.value as League;
 		this.emit('league-change', this.select.value);
 	}
 }

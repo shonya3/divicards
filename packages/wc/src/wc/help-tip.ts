@@ -8,6 +8,9 @@ declare global {
 }
 
 const styles = css`
+	:host {
+		display: inline-block;
+	}
 	.help-tip {
 		position: relative;
 		text-align: center;
@@ -96,6 +99,10 @@ const styles = css`
 	}
 `;
 
+/**
+ * @summary A questionmark logo with hoverable tip content
+ * @slot  The tip's main content
+ */
 export class HelpTipElement extends BaseElement {
 	static override htmlTag: string = 'wc-help-tip';
 	static override styles = styles;

@@ -63,9 +63,9 @@ const styles = css`
 export class TabBadgeElement extends BaseElement {
 	static htmlTag = 'wc-tab-badge';
 	static styles = [this.baseStyles, styles];
-	@property({ reflect: true }) colour: string = '#FF0000';
-	@property({ reflect: true }) name = 'Tab';
-	@property({ reflect: true }) tabId: string = '1';
+	@property({ reflect: true }) colour: string = '7c5436';
+	@property({ reflect: true }) name = 'Heist';
+	@property({ reflect: true }) tabId: string = 'e07f5f2946';
 	@property({ type: Boolean, reflect: true }) selected = false;
 	@property({ type: Number, reflect: true }) index: number = 0;
 
