@@ -1,6 +1,6 @@
 import { html, css } from 'lit';
 import { BaseElement } from '../base-element';
-import { property, state, query } from 'lit-element/decorators.js';
+import { property, state, query } from 'lit/decorators.js';
 import { DivinationCardRecord } from '../../../types';
 import { OrderTriangleElement } from '../order-triangle';
 import { orderBy } from './orderBy';
@@ -193,7 +193,7 @@ export class DivTableElement extends BaseElement {
 					id="min-price-slider"
 					min="0"
 					max="500"
-					.value=${this.minPrice}
+					.value=${String(this.minPrice)}
 					@input=${this.#onMinPriceSlider}
 				/>
 				<span class="ch-3">${this.minPrice}</span>
@@ -205,7 +205,7 @@ export class DivTableElement extends BaseElement {
 					type="checkbox"
 					name=""
 					id="hide-zero-sum-checkbox"
-					.value=${this.hideZeroSum}
+					.checked=${this.hideZeroSum}
 					@change=${this.#onHideZeroCheckbox}
 				/>
 			</div>

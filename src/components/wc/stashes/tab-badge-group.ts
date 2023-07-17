@@ -1,6 +1,6 @@
 import { html, css, nothing } from 'lit';
 import { BaseElement } from '../base-element';
-import { property, state, query } from 'lit-element/decorators.js';
+import { property, state, query } from 'lit/decorators.js';
 import { StatefulStashTab } from '../../../stores/stash';
 import { League, permanentLeagues } from '../../../types';
 import { ACTIVE_LEAGUE } from '../../../lib';
@@ -139,7 +139,7 @@ export class TabBadgeGroupElement extends BaseElement {
 						type="checkbox"
 						id="hide-remove-only"
 						v-model="hideRemoveOnly"
-						.value=${this.hideRemoveOnly}
+						.checked=${this.hideRemoveOnly}
 						@change=${() => (this.hideRemoveOnly = this.checkbox.checked)}
 					/>
 			  </div>`
@@ -160,14 +160,14 @@ export class TabBadgeGroupElement extends BaseElement {
 					</div>
 					<div class="page-controls" v-if="shouldFilter">
 						<button ?disabled=${this.page === 1} @click=${this.decreasePage}>prev</button>
-						<input id="page" type="text" .value=${this.page} @input=${this.#onPageInput} />
+						<input id="page" type="text" .value=${String(this.page)} @input=${this.#onPageInput} />
 						<button @click=${this.increasePage}>next</button>
 						<label for="per-page">per page</label>
 						<input
 							id="per-page"
 							type="number"
 							min="0"
-							.value=${this.perPage}
+							.value=${String(this.perPage)}
 							@input=${this.#onPerPageInput}
 						/>
 					</div>

@@ -1,6 +1,6 @@
 import { html, css } from 'lit';
 import { BaseElement } from '../base-element';
-import { property, query } from 'lit-element/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 
 declare global {

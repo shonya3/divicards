@@ -1,6 +1,6 @@
 import { BaseElement } from './base-element';
 import { css, html } from 'lit';
-import { property, query } from 'lit-element/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { leagues as allLeagues, tradeLeagues, League } from '../../types';
 import { ACTIVE_LEAGUE } from '../../lib';
 

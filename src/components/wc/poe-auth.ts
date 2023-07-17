@@ -1,6 +1,6 @@
 import { html, css } from 'lit';
 import { BaseElement } from './base-element';
-import { property } from 'lit-element/decorators.js';
+import { property } from 'lit/decorators.js';
 
 declare global {
 	interface HTMLElementTagNameMap {

@@ -1,6 +1,6 @@
 import { html, css, PropertyValueMap } from 'lit';
 import { BaseElement } from './base-element';
-import { property } from 'lit-element/decorators.js';
+import { property } from 'lit/decorators.js';
 import { Order } from '../../types';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
