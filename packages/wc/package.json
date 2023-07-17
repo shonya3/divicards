@@ -1,0 +1,29 @@
+{
+  "name": "@divicards/wc",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "7.0.27",
+    "@storybook/addon-links": "7.0.27",
+    "@storybook/blocks": "7.0.27",
+    "@storybook/web-components": "7.0.27",
+    "@storybook/web-components-vite": "7.0.27",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "storybook": "7.0.27",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.4"
+  },
+  "dependencies": {
+    "@divicards/shared": "workspace:^",
+    "lit": "^2.7.6"
+  }
+}
