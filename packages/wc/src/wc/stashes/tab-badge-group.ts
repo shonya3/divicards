@@ -15,6 +15,9 @@ declare global {
 const REMOVE_ONLY = '(Remove-only)';
 
 const styles = css`
+	:host {
+		display: inline-block;
+	}
 	.tab-badge-group {
 		display: grid;
 		gap: 1rem;
@@ -192,7 +195,7 @@ export class TabBadgeGroupElement extends BaseElement {
 			})}
 		</ul>`;
 
-		return html`${filtersSection} ${paginatedTabs} `;
+		return html`<div class="tab-badge-group">${filtersSection} ${paginatedTabs}</div>`;
 	}
 
 	decreasePage() {

@@ -12,7 +12,7 @@ export default {
 	},
 	argTypes: {
 		order: {
-			options: ['asc', 'desc'],
+			options: ['asc', 'desc', 'unordered'],
 			control: { type: 'radio' },
 			size: { type: 'text' },
 		},

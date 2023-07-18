@@ -29,7 +29,7 @@ export class LeagueSelectElement extends BaseElement {
 		return this.select.value;
 	}
 
-	override render() {
+	render() {
 		const leagues = this.trade ? tradeLeagues : allLeagues;
 
 		const options = html`${leagues.map(league => html`<option .value=${league}>${league}</option>`)}`;
@@ -42,12 +42,13 @@ export class LeagueSelectElement extends BaseElement {
 		</div>`;
 	}
 
-	protected firstUpdated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+	firstUpdated() {
 		this.select.value = this.league;
 	}
 
-	#emitLeagueChange() {
+	async #emitLeagueChange() {
 		this.league = this.select.value as League;
-		this.emit('league-change', this.select.value);
+		await this.updateComplete;
+		this.emit('league-change', this.league);
 	}
 }

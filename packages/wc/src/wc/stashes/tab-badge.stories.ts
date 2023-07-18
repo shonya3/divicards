@@ -9,6 +9,6 @@ export default {
 export const Default = {
 	render(d: { color: string; name: string; tabId: string; selected: boolean; index: number }) {
 		TabBadgeElement.define();
-		return html`<wc-tab-badge tabId="e07f5f2946" colour="7c5436"></wc-tab-badge>`;
+		return html`<wc-tab-badge tabId="e07f5f2946" colour="7c5436" index="5"></wc-tab-badge>`;
 	},
 };
