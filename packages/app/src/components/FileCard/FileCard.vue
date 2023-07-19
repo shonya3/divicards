@@ -3,14 +3,15 @@ import { DivinationCardsSample, League } from '@divicards/shared/types';
 import GridIcon from '../icons/GridIcon.vue';
 import { ref, computed, Ref, ComputedRef } from 'vue';
 import BasePopup from '../BasePopup.vue';
-import FixedNamesList from './FixedNamesList/FixedNamesList.vue';
 import NotCardsList from './NotCardsList/NotCardsList.vue';
 import { LeagueSelectElement } from '@divicards/wc/src/wc/league-select';
 import { DivTableElement } from '@divicards/wc/src/wc/div-table/div-table';
 import { BasePopupElement } from '@divicards/wc/src/wc/base-popup';
+import { FixedNamesElement } from '@divicards/wc/src/wc/file-card/fixed-names/fixed-names';
 LeagueSelectElement.define();
 DivTableElement.define();
 BasePopupElement.define();
+FixedNamesElement.define();
 
 const league = defineModel<League>('league', { required: true });
 const minimumCardPrice = defineModel<number>('minimumCardPrice', { required: true });
@@ -72,7 +73,7 @@ const filteredSummary = computed(() => {
 			<p v-if="error">{{ error }}</p>
 			<template v-else-if="!error">
 				<div class="minor-icons">
-					<fixed-names-list :fixed-names="sample.fixedNames" />
+					<wc-fixed-names :fixedNames="sample.fixedNames"></wc-fixed-names>
 					<not-cards-list :not-cards="sample.notCards"></not-cards-list>
 				</div>
 				<GridIcon class="icon" :width="96" :height="96" @click="tablePopup?.open()" />
