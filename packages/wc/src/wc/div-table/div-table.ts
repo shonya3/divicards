@@ -57,9 +57,6 @@ const styles = css`
 		white-space: nowrap;
 	}
 
-	table {
-	}
-
 	th {
 		gap: 0.5rem;
 		display: flex;

@@ -5,7 +5,7 @@ import { fixedNames } from './data';
 import { FixedName } from '@divicards/shared/types';
 
 export default {
-	title: 'Elements/file-card/fixed-names-list',
+	title: 'Elements/file-card/fixed-names',
 	args: {
 		fixedNames,
 	},

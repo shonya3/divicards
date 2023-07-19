@@ -25,7 +25,6 @@ export class FixedNamesElement extends BaseElement {
 		css`
 			.fixed-names-list {
 				margin-top: 2rem;
-				/* max-width: 400px; */
 			}
 
 			.list-item {
@@ -37,7 +36,6 @@ export class FixedNamesElement extends BaseElement {
 			.input-name {
 				overflow-x: hidden;
 				width: 200px;
-				/* background-color: red; */
 				opacity: 60%;
 			}
 		`,
