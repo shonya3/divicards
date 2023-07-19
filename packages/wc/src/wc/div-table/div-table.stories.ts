@@ -1,8 +1,8 @@
 import { Meta } from '@storybook/web-components';
 import { DivTableElement } from './div-table';
-import { divTableProps } from './dummy';
+import { divTableProps } from './div-table.props';
 import { html } from 'lit';
-import { cards } from './dummy';
+import { cards } from './div-table.props';
 
 export default {
 	title: 'Elements/div-table',

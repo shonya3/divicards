@@ -6,7 +6,9 @@
 	"type": "module",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"tauri": "cd packages/app && pnpm tauri"
+		"tauri": "cd packages/app && pnpm tauri",
+		"wc:dev": "cd packages/wc && pnpm dev",
+		"wc:storybook": "cd packages/wc && pnpm storybook"
 	},
 	"keywords": [],
 	"author": "",

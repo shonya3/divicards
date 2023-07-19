@@ -16,12 +16,14 @@ export type Size = `${number}${CssSize}`;
 
 const styles = css`
 	:host {
-		display: inline-block;
+		display: block;
+		height: var(--size, 1rem);
+		width: var(--size, 1rem);
 	}
 	.order {
 		color: var(--color);
-		width: var(--size, 1rem);
-		height: var(--size, 1rem);
+		height: 100%;
+		width: 100%;
 		clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
 		background-color: var(--color, rgba(255, 255, 255, 0.87));
 		border-radius: 16px;

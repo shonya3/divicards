@@ -16,19 +16,7 @@ const styles = css`
 	:host {
 		display: block;
 	}
-	.ch-3 {
-		/* display: block; */
-		text-align: center;
-		min-width: 3ch;
-	}
-	.ch-6 {
-		text-align: center;
-		min-width: 6ch;
-	}
-	.ch-7 {
-		text-align: center;
-		min-width: 7ch;
-	}
+
 	.slider-box {
 		display: flex;
 		justify-content: center;
@@ -43,17 +31,11 @@ const styles = css`
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;
-		/* --col-name-width: 650px; */
-		/* --col-width: calc((100% - var(--col-name-width)) / 4); */
 		height: 100%;
 		max-width: 1200px;
 
 		color: var(--color);
 		background-color: var(--bg-color);
-	}
-
-	.table {
-		width: 100%;
 	}
 
 	.header {
@@ -63,25 +45,47 @@ const styles = css`
 		flex-wrap: wrap;
 	}
 
+	.column-name {
+		overflow-x: hidden;
+		white-space: nowrap;
+	}
+
+	th {
+		gap: 0.5rem;
+		display: flex;
+		align-items: center;
+	}
+
+	tbody > tr:first-of-type {
+		margin-top: 0.25rem;
+	}
+
 	tr {
 		display: grid;
 		grid-template-columns: 0.5fr 1.2fr 3fr 1fr 1fr 1fr;
 	}
 
-	.table > thead > tr > th {
-		display: flex;
-		gap: 0.5rem;
+	.ch-3 {
+		/* display: block; */
+		text-align: center;
+		min-width: 3ch;
 	}
-
-	.column__name {
-		overflow-x: hidden;
-		white-space: nowrap;
-		/* font-size: 18px; */
-		/* min-width: 50px; */
+	.ch-6 {
+		text-align: center;
+		min-width: 6ch;
+	}
+	.ch-7 {
+		text-align: center;
+		min-width: 7ch;
 	}
 `;
 
 const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
+
+export interface Events {
+	'min-price-changed': number;
+	'column-order-changed': { column: Column; order: Order };
+}
 
 export class DivTableElement extends BaseElement {
 	static define(tag = 'wc-div-table'): void {
@@ -95,8 +99,8 @@ export class DivTableElement extends BaseElement {
 
 	@property({ type: Array }) cards: Readonly<DivinationCardRecord[]> = [];
 	@property({ reflect: true, type: Number, attribute: 'min-price' }) minPrice: number = 0;
-	@property({ reflect: true, attribute: 'active-column' }) activeColumn: Column = 'sum';
-	@property({ reflect: true, attribute: 'active-column-order' }) activeColumnOrder: Order = 'desc';
+	@property({ reflect: true, attribute: 'column' }) column: Column = 'sum';
+	@property({ reflect: true, attribute: 'order' }) order: Order = 'desc';
 
 	@state() protected _cards: DivinationCardRecord[] = [];
 	@state() nameQuery = '';
@@ -109,24 +113,23 @@ export class DivTableElement extends BaseElement {
 			this._cards = Array.from(this.cards);
 		}
 
-		const needsToOrder =
-			map.has('activeColumn') || map.has('minPrice') || map.has('nameQuery') || map.has('activeColumnOrder');
+		const needsToOrder = map.has('column') || map.has('minPrice') || map.has('nameQuery') || map.has('order');
 		if (needsToOrder) {
-			this._cards = toOrderedBy(this._cards, this.activeColumn, this.activeColumnOrder);
+			this._cards = toOrderedBy(this._cards, this.column, this.order);
 		}
 	}
 
 	toggleOrder(newActivecolumn: Column) {
-		if (this.activeColumn === newActivecolumn) {
-			this.activeColumnOrder = this.activeColumnOrder === 'asc' ? 'desc' : 'asc';
+		if (this.column === newActivecolumn) {
+			this.order = this.order === 'asc' ? 'desc' : 'asc';
 		}
 		// if column is unordered
 		else {
 			// if by name, start from A. Otherwise, start from the bigger values
-			this.activeColumnOrder = newActivecolumn === 'name' ? 'asc' : 'desc';
+			this.order = newActivecolumn === 'name' ? 'asc' : 'desc';
 		}
 
-		this.activeColumn = newActivecolumn;
+		this.column = newActivecolumn;
 	}
 
 	get filteredRecords(): DivinationCardRecord[] {
@@ -151,10 +154,6 @@ export class DivTableElement extends BaseElement {
 		return { amount, sum };
 	}
 
-	render() {
-		return html`<div class="table-container">${this.header()}${this.table()}</div>`;
-	}
-
 	#onNameQueryInput(e: InputEvent) {
 		const target = e.composedPath()[0];
 		if (target instanceof HTMLInputElement) {
@@ -170,10 +169,23 @@ export class DivTableElement extends BaseElement {
 		const target = e.composedPath()[0];
 		if (target instanceof HTMLInputElement) {
 			this.minPrice = Number(target.value);
+			this.emit<Events['min-price-changed']>('min-price-changed', this.minPrice);
 		}
 	}
 
-	header() {
+	#onOrderTriangleClicked(newActiveColumn: Column) {
+		this.toggleOrder(newActiveColumn);
+		this.emit<Events['column-order-changed']>('column-order-changed', {
+			column: this.column,
+			order: this.order,
+		});
+	}
+
+	protected render() {
+		return html`<div class="table-container">${this.header()}${this.table()}</div>`;
+	}
+
+	protected header() {
 		return html`<header class="header">
 			<label for="filter-card-name">Enter name</label>
 			<input
@@ -221,7 +233,7 @@ export class DivTableElement extends BaseElement {
 		</header>`;
 	}
 
-	table() {
+	protected table() {
 		return html`<table class="table">
 			<colgroup>
 				<col span="1" class="col" />
@@ -238,50 +250,50 @@ export class DivTableElement extends BaseElement {
 		</table>`;
 	}
 
-	thead() {
+	protected thead() {
 		return html`<thead>
 			<tr>
 				<th>&numero;</th>
 				<th>
-					<span class="column__name"> Amount </span>
+					<span class="column-name"> Amount </span>
 					<wc-order-triangle
-						?active=${this.activeColumn === 'amount'}
-						order=${this.activeColumn === 'amount' ? this.activeColumnOrder : 'unordered'}
-						@click=${() => this.toggleOrder('amount')}
+						?active=${this.column === 'amount'}
+						order=${this.column === 'amount' ? this.order : 'unordered'}
+						@click=${() => this.#onOrderTriangleClicked('amount')}
 					></wc-order-triangle>
 				</th>
 				<th>
-					<span class="column__name"> Name </span>
+					<span class="column-name"> Name </span>
 					<wc-order-triangle
-						?active=${this.activeColumn === 'name'}
-						order=${this.activeColumn === 'name' ? this.activeColumnOrder : 'unordered'}
-						@click=${() => this.toggleOrder('name')}
+						?active=${this.column === 'name'}
+						order=${this.column === 'name' ? this.order : 'unordered'}
+						@click=${() => this.#onOrderTriangleClicked('name')}
 					></wc-order-triangle>
 				</th>
 				<th>
-					<span class="column__name"> Price </span>
+					<span class="column-name"> Price </span>
 					<wc-order-triangle
-						?active=${this.activeColumn === 'price'}
-						order=${this.activeColumn === 'price' ? this.activeColumnOrder : 'unordered'}
-						@click=${() => this.toggleOrder('price')}
+						?active=${this.column === 'price'}
+						order=${this.column === 'price' ? this.order : 'unordered'}
+						@click=${() => this.#onOrderTriangleClicked('price')}
 					></wc-order-triangle>
 				</th>
 				<th>
-					<span class="column__name"> Sum </span>
+					<span class="column-name"> Sum </span>
 					<wc-order-triangle
-						?active=${this.activeColumn === 'sum'}
-						order=${this.activeColumn === 'sum' ? this.activeColumnOrder : 'unordered'}
-						@click=${() => this.toggleOrder('sum')}
+						?active=${this.column === 'sum'}
+						order=${this.column === 'sum' ? this.order : 'unordered'}
+						@click=${() => this.#onOrderTriangleClicked('sum')}
 					></wc-order-triangle>
 				</th>
 				<th>
-					<span class="column__name"> Weight </span>
+					<span class="column-name"> Weight </span>
 				</th>
 			</tr>
 		</thead>`;
 	}
 
-	rows() {
+	protected rows() {
 		return this.filteredRecords.map(({ amount, name, price, sum, weight }, index) => {
 			return html`<tr>
 				<td class="row">${index + 1}</td>

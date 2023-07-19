@@ -70,7 +70,7 @@ export class BaseElement extends LitElement {
 		}
 	}
 
-	emit<T>(eventName: string, detail?: T, options = { bubbles: true, composed: true }) {
+	emit<T>(eventName: string, detail?: T, options: EventInit = { bubbles: true, composed: true }) {
 		const event = new CustomEvent<T>(eventName, { detail, ...options });
 		this.dispatchEvent(event);
 	}
