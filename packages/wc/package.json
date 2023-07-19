@@ -1,29 +1,41 @@
 {
-  "name": "@divicards/wc",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
-  },
-  "devDependencies": {
-    "@storybook/addon-essentials": "7.0.27",
-    "@storybook/addon-links": "7.0.27",
-    "@storybook/blocks": "7.0.27",
-    "@storybook/web-components": "7.0.27",
-    "@storybook/web-components-vite": "7.0.27",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "storybook": "7.0.27",
-    "typescript": "^5.1.6",
-    "vite": "^4.4.4"
-  },
-  "dependencies": {
-    "@divicards/shared": "workspace:^",
-    "lit": "^2.7.6"
-  }
+	"name": "@divicards/wc",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"preview": "vite preview",
+		"storybook": "storybook dev -p 6006",
+		"build-storybook": "storybook build",
+		"test": "web-test-runner --node-resolve",
+		"test:watch": "web-test-runner --watch --group default"
+	},
+	"devDependencies": {
+		"@esm-bundle/chai": "4.3.4-fix.0",
+		"@open-wc/testing": "3.0.0-next.5",
+		"@storybook/addon-essentials": "7.0.27",
+		"@storybook/addon-links": "7.0.27",
+		"@storybook/blocks": "7.0.27",
+		"@storybook/web-components": "7.0.27",
+		"@storybook/web-components-vite": "7.0.27",
+		"@types/mocha": "^10.0.1",
+		"@types/sinon": "^10.0.15",
+		"@web/test-runner": "^0.17.0",
+		"@web/test-runner-commands": "^0.8.0",
+		"globby": "^13.2.2",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"sinon": "^15.2.0",
+		"storybook": "7.0.27",
+		"typescript": "^5.1.6",
+		"vite": "^4.4.4"
+	},
+	"dependencies": {
+		"@divicards/shared": "workspace:^",
+		"@web/dev-server-esbuild": "^0.4.1",
+		"@web/test-runner-playwright": "^0.10.1",
+		"lit": "^2.7.6"
+	}
 }
