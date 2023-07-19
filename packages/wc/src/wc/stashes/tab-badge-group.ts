@@ -85,6 +85,14 @@ const shouldUnlockHideRemoveOnly = (league: League, stashes: StatefulStashTab[])
 	return permanentLeagues.includes(league) && stashes.some(({ name }) => name.includes(REMOVE_ONLY));
 };
 
+export interface Events {
+	'name-query-changed': string;
+	'per-page-changed': number;
+	'page-changed': number;
+	/**  event from TabBadgeElement */
+	'tab-select': { tabId: TabBadgeElement['tabId']; selected: boolean };
+}
+
 export class TabBadgeGroupElement extends BaseElement {
 	static define(tag = 'wc-tab-badge-group') {
 		if (!customElements.get(tag)) {
@@ -97,7 +105,6 @@ export class TabBadgeGroupElement extends BaseElement {
 
 	@property({ type: Array }) stashes: StatefulStashTab[] = [];
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
-
 	@property({ type: Number, reflect: true }) perPage = 50;
 	@property({ type: Number, reflect: true }) page = 1;
 	@property() nameQuery = '';
@@ -128,10 +135,25 @@ export class TabBadgeGroupElement extends BaseElement {
 		return this.stashes.length;
 	}
 
-	updated(changed: Map<string, unknown>) {
+	willUpdate(changed: Map<string, unknown>) {
 		if (changed.has('nameQuery') || changed.has('hideRemoveOnly') || changed.has('perPage')) {
 			this.page = 1;
 		}
+	}
+
+	#onPageInput() {
+		this.page = Number(this.pageInput.value);
+		this.emit<Events['page-changed']>('page-changed', this.page);
+	}
+
+	#onPerPageInput() {
+		this.perPage = Number(this.perPageInput.value);
+		this.emit<Events['per-page-changed']>('per-page-changed', this.perPage);
+	}
+
+	#onNameQueryInput() {
+		this.nameQuery = this.nameQueryInput.value;
+		this.emit<Events['name-query-changed']>('name-query-changed', this.nameQuery);
 	}
 
 	render() {
@@ -206,17 +228,5 @@ export class TabBadgeGroupElement extends BaseElement {
 
 	increasePage() {
 		this.page++;
-	}
-
-	#onPageInput() {
-		this.page = Number(this.pageInput.value);
-	}
-
-	#onPerPageInput() {
-		this.perPage = Number(this.perPageInput.value);
-	}
-
-	#onNameQueryInput() {
-		this.nameQuery = this.nameQueryInput.value;
 	}
 }

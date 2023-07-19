@@ -60,6 +60,10 @@ const styles = css`
 	}
 `;
 
+export interface Events {
+	'tab-select': { tabId: TabBadgeElement['tabId']; selected: boolean };
+}
+
 export class TabBadgeElement extends BaseElement {
 	static htmlTag = 'wc-tab-badge';
 	static styles = [this.baseStyles, styles];
@@ -75,10 +79,6 @@ export class TabBadgeElement extends BaseElement {
 		return `#${this.colour.padStart(6, '0')}`;
 	}
 
-	get checked(): boolean {
-		return this.checkbox.checked;
-	}
-
 	render() {
 		const cssProps = styleMap({
 			'--badge-color': `${this.color}`,
@@ -88,7 +88,7 @@ export class TabBadgeElement extends BaseElement {
 		return html`<div class="tab-badge" style=${cssProps}>
 			<label for=${this.tabId} class="name">${this.name}</label>
 			<input
-				@change=${this.#emitTabSelect}
+				@change=${this.#onCheckbox}
 				class="checkbox"
 				type="checkbox"
 				.tabId=${this.tabId}
@@ -97,12 +97,13 @@ export class TabBadgeElement extends BaseElement {
 		</div>`;
 	}
 
-	#emitTabSelect() {
-		const detail = {
+	#onCheckbox() {
+		this.selected = this.checkbox.checked;
+
+		this.emit<Events['tab-select']>('tab-select', {
 			tabId: this.tabId,
-			selected: this.checked,
-		};
-		this.emit('tab-select', detail);
+			selected: this.selected,
+		});
 	}
 }
 
