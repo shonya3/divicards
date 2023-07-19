@@ -4,6 +4,8 @@ import ArrowRight from '../../icons/ArrowRight.vue';
 import FixedIcon from './FixedIcon.vue';
 import { ref } from 'vue';
 import { FixedName } from '@divicards/shared/types';
+import { BasePopupElement } from '@divicards/wc/src/wc/base-popup';
+BasePopupElement.define();
 
 const fixedNamesPopup = ref<typeof BasePopup | null>(null);
 
@@ -14,7 +16,7 @@ defineProps<{
 
 <template>
 	<FixedIcon v-if="fixedNames.length" @click="fixedNamesPopup?.open()" :width="24" :height="24" />
-	<BasePopup ref="fixedNamesPopup">
+	<wc-base-popup ref="fixedNamesPopup">
 		<div class="fixed-names">
 			<h2>Automatically fixed typos</h2>
 			<ul class="fixed-names-list">
@@ -25,7 +27,7 @@ defineProps<{
 				</li>
 			</ul>
 		</div>
-	</BasePopup>
+	</wc-base-popup>
 </template>
 
 <style scoped>

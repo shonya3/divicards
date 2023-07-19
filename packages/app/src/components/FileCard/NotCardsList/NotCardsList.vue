@@ -2,6 +2,8 @@
 import BasePopup from '../../BasePopup.vue';
 import WarningIcon from './WarningIcon.vue';
 import { ref } from 'vue';
+import { BasePopupElement } from '@divicards/wc/src/wc/base-popup';
+BasePopupElement.define();
 
 const notCardPopup = ref<typeof BasePopup | null>(null);
 
@@ -12,14 +14,14 @@ defineProps<{
 
 <template>
 	<WarningIcon v-if="Object.keys(notCards).length" @click="notCardPopup?.open()" :width="24" :height="24" />
-	<BasePopup ref="notCardPopup">
+	<wc-base-popup ref="notCardPopup">
 		<div class="fixed-names">
 			<h2>Probably not cards</h2>
 			<ul class="list">
 				<li v-for="(notCard, i) in notCards">{{ notCard }}</li>
 			</ul>
 		</div>
-	</BasePopup>
+	</wc-base-popup>
 </template>
 
 <style scoped>

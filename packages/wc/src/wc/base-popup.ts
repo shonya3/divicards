@@ -1,6 +1,6 @@
 import { html, css } from 'lit';
 import { BaseElement } from './base-element';
-import { query } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -8,80 +8,64 @@ declare global {
 	}
 }
 
-// const styles = css`
-// 	@keyframes blur-in {
-// 		from {
-// 			backdrop-filter: blur(0px) brightness(100%);
-// 		}
-// 		to {
-// 			backdrop-filter: blur(3px) brightness(40%);
-// 		}
-// 	}
-
-// 	.popup {
-// 		/* backdrop-filter: brightness(40%) blur(3px); */
-// 		animation: blur-in 200ms forwards;
-
-// 		position: absolute;
-// 		top: 0;
-// 		left: 0;
-// 		width: 100%;
-// 		height: 100%;
-// 		display: flex;
-// 		justify-content: center;
-// 		align-items: center;
-// 		z-index: 3;
-// 	}
-// 	.backdrop {
-// 		opacity: 70%;
-// 		width: 100%;
-// 		height: 100%;
-// 		top: 0;
-// 		left: 0;
-// 		position: absolute;
-
-// 		z-index: 3;
-// 	}
-
-// 	.popup_content {
-// 		color: var(--color);
-// 		background-color: var(--bg-color);
-// 		width: min(95%, 1200px);
-// 		padding: 5rem;
-
-// 		overflow-y: scroll;
-// 		height: 90vh;
-
-// 		/* background-color: #fff; */
-// 		border-radius: 4px;
-// 		z-index: 10;
-// 		top: 0;
-
-// 		z-index: 4;
-// 	}
-// `;
-
 const styles = css`
 	:host {
 		display: block;
 	}
-	.popup_content {
-		margin-inline: auto;
-		display: block;
-		color: var(--color);
-		background-color: var(--bg-color);
+
+	dialog {
+		animation: fade-in 2000ms forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	}
+
+	dialog:modal {
+		margin: auto;
+		border: none;
 		width: min(95%, 1200px);
-		padding: 5rem;
+		border-radius: 10px;
+	}
 
-		overflow-y: scroll;
-		height: 90vh;
+	dialog::backdrop {
+		background-color: darkorange;
+		background-image: linear-gradient(130deg, #ff7a18, #af002d 41.07%, #319197 76.05%);
+		filter: blur(0px);
+		animation: blur-in 2000ms forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	}
 
-		/* background-color: #fff; */
-		border-radius: 4px;
-		z-index: 10;
+	dialog::slotted(*) {
+		margin-inline: auto;
+		padding: 0.8rem;
+		padding-top: 1.6rem;
+	}
+
+	@media (min-width: 800px) {
+		::slotted(*) {
+			padding-inline: 2rem;
+		}
+	}
+
+	@keyframes blur-in {
+		from {
+			filter: blur(0px) brightness(0);
+		}
+		to {
+			filter: blur(10px) brightness(40%);
+		}
+	}
+
+	@keyframes fade-in {
+		from {
+			filter: brightness(0);
+		}
+		to {
+			filter: brightness(100%);
+		}
+	}
+
+	.btn-close {
+		position: fixed;
 		top: 0;
-
-		z-index: 4;
+		right: 0;
+		z-index: 3;
 	}
 `;
 
@@ -92,11 +76,14 @@ export class BasePopupElement extends BaseElement {
 	@query('dialog') dialog!: HTMLDialogElement;
 
 	render() {
-		return html`<dialog class="popup">
-			<div class="popup_content">
-				<slot></slot>
-			</div>
-		</dialog>`;
+		return html`<dialog>
+			<slot></slot>
+			<button @click=${() => this.dialog.close()} class="btn-close">X</button>
+		</dialog> `;
+	}
+
+	open() {
+		return this.dialog.showModal();
 	}
 
 	show() {
@@ -109,12 +96,10 @@ export class BasePopupElement extends BaseElement {
 
 	connectedCallback(): void {
 		super.connectedCallback();
-		window.addEventListener('keydown', this.#onEscapePressed.bind(this));
 	}
 
 	disconnectedCallback(): void {
 		super.disconnectedCallback();
-		window.addEventListener('keydown', this.#onEscapePressed.bind(this));
 	}
 
 	#onEscapePressed(e: KeyboardEvent) {

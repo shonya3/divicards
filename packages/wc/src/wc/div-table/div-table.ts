@@ -15,6 +15,8 @@ declare global {
 const styles = css`
 	:host {
 		display: block;
+		max-width: 1200px;
+		min-height: 100vh;
 	}
 
 	.slider-box {
@@ -30,7 +32,6 @@ const styles = css`
 	.table-container {
 		display: flex;
 		flex-direction: column;
-		gap: 2rem;
 		height: 100%;
 		max-width: 1200px;
 
@@ -39,15 +40,24 @@ const styles = css`
 	}
 
 	.header {
+		position: sticky;
+		top: 0;
 		display: flex;
 		gap: 1rem;
 		align-items: center;
 		flex-wrap: wrap;
+		z-index: 2;
+		background-color: var(--bg-color);
+		padding-top: 20px;
+		padding-bottom: 20px;
 	}
 
 	.column-name {
 		overflow-x: hidden;
 		white-space: nowrap;
+	}
+
+	table {
 	}
 
 	th {
@@ -220,7 +230,7 @@ export class DivTableElement extends BaseElement {
 				<img width="20" height="20" class="chaos-img" src="/chaos.png" alt="chaos" />
 			</label>
 			<div style="display: flex; gap: 0.8rem">
-				<label for="hide-zero-sum-checkbox">hide names with zero sum</label>
+				<label for="hide-zero-sum-checkbox">hide nullish rows</label>
 				<input
 					type="checkbox"
 					name=""

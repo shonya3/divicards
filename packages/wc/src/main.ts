@@ -1,17 +1,17 @@
-import { DivinationCardRecord } from '@divicards/shared/types';
+import { BasePopupElement } from './wc/base-popup';
 import { DivTableElement } from './wc/div-table/div-table';
 import { cards } from './wc/div-table/div-table.props';
-import { OrderTriangleElement } from './wc/order-triangle';
-OrderTriangleElement.define();
 DivTableElement.define();
+BasePopupElement.define();
 
 const table = document.querySelector('wc-div-table')!;
 table.cards = cards;
 
-table.addEventListener('column-order-changed', e => {
-	console.log(e.type, e.detail);
-});
+const popup = document.querySelector('wc-base-popup')!;
+const button = document.querySelector('button');
 
-table.addEventListener('min-price-changed', e => {
-	console.log(e.type, e.detail);
+await popup.updateComplete;
+popup.dialog.showModal();
+button?.addEventListener('click', () => {
+	popup.dialog.showModal();
 });

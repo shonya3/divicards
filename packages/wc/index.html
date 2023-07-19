@@ -11,9 +11,15 @@
 				color-scheme: dark;
 				background-color: #242424;
 			}
+			body {
+				min-height: 100vh;
+			}
 		</style>
 	</head>
 	<body>
-		<wc-div-table></wc-div-table>
+		<button>Open popup</button>
+		<wc-base-popup>
+			<wc-div-table></wc-div-table>
+		</wc-base-popup>
 	</body>
 </html>

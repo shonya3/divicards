@@ -7,8 +7,10 @@ import FixedNamesList from './FixedNamesList/FixedNamesList.vue';
 import NotCardsList from './NotCardsList/NotCardsList.vue';
 import { LeagueSelectElement } from '@divicards/wc/src/wc/league-select';
 import { DivTableElement } from '@divicards/wc/src/wc/div-table/div-table';
+import { BasePopupElement } from '@divicards/wc/src/wc/base-popup';
 LeagueSelectElement.define();
 DivTableElement.define();
+BasePopupElement.define();
 
 const league = defineModel<League>('league', { required: true });
 const minimumCardPrice = defineModel<number>('minimumCardPrice', { required: true });
@@ -102,10 +104,10 @@ const filteredSummary = computed(() => {
 					@change="(e) => $emit('update:selected', (e.target as HTMLInputElement).checked)"
 				/>
 
-				<base-popup ref="tablePopup">
+				<wc-base-popup ref="tablePopup">
 					<template v-if="valid"> <wc-div-table .cards="sample.cards"></wc-div-table></template>
 					<p v-else>{{ error }}</p>
-				</base-popup>
+				</wc-base-popup>
 			</template>
 		</template>
 	</div>
