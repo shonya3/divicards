@@ -8,6 +8,7 @@ import { NotCardsElement } from './not-cards/not-cards';
 import { DivinationCardsSample, League, TradeLeague, isTradeLeague } from '@divicards/shared/types';
 import { property, query } from 'lit/decorators.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
+import { TabBadgeElement } from '../stashes/tab-badge';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -34,6 +35,10 @@ const styles = css`
 		gap: 0.4rem;
 	}
 
+	p {
+		margin: 0;
+	}
+
 	.minor-icons {
 		position: absolute;
 		top: 30%;
@@ -53,7 +58,7 @@ const styles = css`
 
 		width: 250px;
 		/* max-height: 320px; */
-		min-height: 400px;
+		height: 450px;
 
 		border: 2px solid black;
 		border-color: var(--border-color);
@@ -137,15 +142,18 @@ const styles = css`
 		display: block;
 		cursor: pointer;
 		width: 96px;
+		height: 96px;
+		padding: 0;
+		margin: 0;
 	}
 `;
 
 const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 
 export interface Events {
-	'update#selected': FileCardElement['selected'];
-	'update#league': FileCardElement['league'];
-	'update#minimumCardPrice': FileCardElement['minimumCardPrice'];
+	'upd:selected': FileCardElement['selected'];
+	'upd:league': FileCardElement['league'];
+	'upd:minimumCardPrice': FileCardElement['minimumCardPrice'];
 	delete: FileCardElement['uuid'];
 }
 
@@ -207,8 +215,7 @@ export class FileCardElement extends BaseElement {
 	#onSelectedClicked() {
 		if (this.selected === null) return;
 		this.selected = this.selectedCheckbox.checked;
-		this.emit<Events['update#selected']>('update#selected', this.selected);
-		this.emit<Events['update#selected']>('update-selected', this.selected);
+		this.emit<Events['upd:selected']>('upd:selected', this.selected);
 	}
 
 	#onLeagueSelected(e: CustomEvent<League>) {
@@ -228,7 +235,7 @@ export class FileCardElement extends BaseElement {
 		const target = e.composedPath()[0];
 		if (target instanceof HTMLInputElement && target.matches('#minimum-card-price-slider')) {
 			this.minimumCardPrice = Number(target.value);
-			this.emit<Events['update#minimumCardPrice']>('update#minimumCardPrice', this.minimumCardPrice);
+			this.emit<Events['upd:minimumCardPrice']>('upd:minimumCardPrice', this.minimumCardPrice);
 		}
 	}
 
@@ -277,7 +284,7 @@ export class FileCardElement extends BaseElement {
 								<wc-league-select
 									trade
 									.league=${this.league}
-									@update#league=${this.#onLeagueSelected}
+									@upd:league=${this.#onLeagueSelected}
 								></wc-league-select>
 
 								<a class="download" .download=${this.filename} .href=${this.href}>Download</a>

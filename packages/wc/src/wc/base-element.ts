@@ -1,12 +1,6 @@
 import { LitElement, css } from 'lit';
 
 const baseStyles = css`
-	* {
-		padding: 0;
-		margin: 0;
-		box-sizing: border-box;
-	}
-
 	:host {
 		--bg-color: #242424;
 		--color: rgba(255, 255, 255, 0.87);
@@ -70,7 +64,7 @@ export class BaseElement extends LitElement {
 		}
 	}
 
-	emit<T>(eventName: string, detail?: T, options: EventInit = { bubbles: true, composed: true }) {
+	emit<T>(eventName: string, detail?: T, options: EventInit = { bubbles: true, composed: true, cancelable: true }) {
 		const event = new CustomEvent<T>(eventName, { detail, ...options });
 		this.dispatchEvent(event);
 	}

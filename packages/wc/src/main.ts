@@ -1,43 +1,15 @@
-// import { BasePopupElement } from './wc/base-popup';
-// import { DivTableElement } from './wc/div-table/div-table';
-// import { cards } from './wc/div-table/div-table.props';
-// DivTableElement.define();
-// BasePopupElement.define();
+import { html, render } from 'lit';
+import { stashes } from './wc/stashes/data';
+import { TabBadgeGroupElement } from './wc/stashes/tab-badge-group';
+import { StashesViewElement } from './wc/stashes/stashes-view';
 
-import { fileCardProps } from './wc/file-card/data';
-import { FileCardElement } from './wc/file-card/file-card';
+TabBadgeGroupElement.define();
+StashesViewElement.define();
 
-// const table = document.querySelector('wc-div-table')!;
-// table.cards = cards;
+const group = html`<wc-stashes-view .stashes=${stashes} league="Standard"></wc-stashes-view>`;
+render(group, document.body);
 
-// const popup = document.querySelector('wc-base-popup')!;
-// const button = document.querySelector('button');
-
-// await popup.updateComplete;
-// popup.dialog.showModal();
-// button?.addEventListener('click', () => {
-// 	popup.dialog.showModal();
+await new Promise(r => setTimeout(r, 10));
+// document.querySelector('wc-tab-badge-group')!.addEventListener('upd:selectedTabs', e => {
+// 	console.log(e.detail);
 // });
-
-FileCardElement.define();
-
-const fileCard = document.querySelector('wc-file-card')!;
-Object.assign(fileCard, { ...fileCardProps });
-fileCard.league = 'Hardcore';
-await fileCard.updateComplete;
-document.addEventListener('update:selected', e => {
-	console.log(e);
-});
-
-fileCard.selectedCheckbox.click();
-fileCard.addEventListener('league-change', e => {
-	console.log('league-change', e);
-});
-
-fileCard.addEventListener('update:minimumCardPrice', e => {
-	console.log('update:minimumCardPrice', e);
-});
-
-setTimeout(() => {
-	fileCard.leagueSelect.focus();
-}, 500);

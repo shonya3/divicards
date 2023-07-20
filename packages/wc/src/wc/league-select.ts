@@ -18,7 +18,7 @@ const styles = css`
 `;
 
 export interface Events {
-	'update#league': League;
+	'upd:league': League;
 }
 
 export class LeagueSelectElement extends BaseElement {
@@ -57,6 +57,6 @@ export class LeagueSelectElement extends BaseElement {
 	async #emitLeagueChange() {
 		this.league = this.select.value as League;
 		await this.updateComplete;
-		this.emit<Events['update#league']>('update#league', this.league);
+		this.emit<Events['upd:league']>('upd:league', this.league);
 	}
 }

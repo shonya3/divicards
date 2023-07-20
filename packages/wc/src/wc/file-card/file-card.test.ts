@@ -17,20 +17,20 @@ describe('<wc-file-card>', () => {
 		expect(el).to.exist;
 	});
 
-	it('emits update#selected on checkbox', async () => {
+	it('emits upd:selected on checkbox', async () => {
 		await el.updateComplete;
 		const checkboxSpy = sinon.spy();
-		el.addEventListener('update#selected', checkboxSpy);
+		el.addEventListener('upd:selected', checkboxSpy);
 		el.selectedCheckbox.click();
 		await el.updateComplete;
 
 		expect(checkboxSpy).to.be.calledOnce;
 	});
 
-	it('emits update#league on selecting league', async () => {
+	it('emits upd:league on selecting league', async () => {
 		await el.updateComplete;
 		const spy = sinon.spy();
-		el.addEventListener('update#league', spy);
+		el.addEventListener('upd:league', spy);
 
 		el.leagueSelect.focus();
 		await sendKeys({ press: 'ArrowDown' });
@@ -58,10 +58,10 @@ describe('<wc-file-card>', () => {
 		expect(event.detail).to.be.equal(el.uuid);
 	});
 
-	it('emits update#minimumCardPrice on slider', async () => {
+	it('emits upd:minimumCardPrice on slider', async () => {
 		await el.updateComplete;
 		const spy = sinon.spy();
-		el.addEventListener('update#minimumCardPrice', spy);
+		el.addEventListener('upd:minimumCardPrice', spy);
 		el.priceSlider.focus();
 		await sendKeys({ press: 'ArrowRight' });
 		await el.updateComplete;

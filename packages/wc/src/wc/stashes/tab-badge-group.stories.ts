@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { TabBadgeGroupElement } from './tab-badge-group';
-import { league, stashes } from './dummy';
+import { league, stashes } from './data';
 
 export default {
 	title: 'Elements/stashes/tab-badge-group',

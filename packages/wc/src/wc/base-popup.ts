@@ -11,24 +11,27 @@ declare global {
 const styles = css`
 	:host {
 		display: block;
+		width: min(95%, 1220px);
 	}
 
 	dialog {
-		animation: fade-in 2000ms forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		margin: 0;
+		padding: 0;
 	}
 
 	dialog:modal {
 		margin: auto;
 		border: none;
-		width: min(95%, 1200px);
 		border-radius: 10px;
+		animation: content-fade-in 800ms forwards ease-out;
 	}
 
 	dialog::backdrop {
 		background-color: darkorange;
 		background-image: linear-gradient(130deg, #ff7a18, #af002d 41.07%, #319197 76.05%);
 		filter: blur(0px);
-		animation: blur-in 2000ms forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		animation: backdrop-fade-in 800ms forwards ease-out;
+		backdrop-filter: blur(20px);
 	}
 
 	dialog::slotted(*) {
@@ -43,28 +46,30 @@ const styles = css`
 		}
 	}
 
-	@keyframes blur-in {
+	@keyframes backdrop-fade-in {
 		from {
-			filter: blur(0px) brightness(0);
+			filter: brightness(0%);
+			opacity: 10%;
 		}
 		to {
-			filter: blur(10px) brightness(40%);
+			filter: brightness(60%);
+			opacity: 90%;
 		}
 	}
 
-	@keyframes fade-in {
+	@keyframes content-fade-in {
 		from {
-			filter: brightness(0);
+			opacity: 0%;
 		}
 		to {
-			filter: brightness(100%);
+			opacity: 100%;
 		}
 	}
 
 	.btn-close {
 		position: fixed;
-		top: 0;
-		right: 0;
+		top: 1rem;
+		right: 1rem;
 		z-index: 3;
 	}
 `;

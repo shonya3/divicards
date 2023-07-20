@@ -10,7 +10,13 @@ import { LeagueSelectElement } from '@divicards/wc/src/wc/league-select';
 import { PoeAuthElement } from '@divicards/wc/src/wc/poe-auth';
 import { TabBadgeElement } from '@divicards/wc/src/wc/stashes/tab-badge';
 import { FileCardElement, FileCardProps } from '@divicards/wc/src/wc/file-card/file-card';
-import { League } from '@divicards/shared/types';
+import { League, isTradeLeague } from '@divicards/shared/types';
+import { StashesViewElement } from '../../wc/src/wc/stashes/stashes-view';
+import { StashTab } from '@divicards/shared/poe.types';
+import { command } from './command';
+import { cardsFromTab } from './poe/cards';
+import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
+StashesViewElement.define();
 DropFilesMessageElement.define();
 LeagueSelectElement.define();
 PoeAuthElement.define();
@@ -67,6 +73,19 @@ const onUpdateMergedLeague = (e: CustomEvent<League>) => {
 	if (!filesStore.mergedFile) return;
 	filesStore.mergedFile.league = e.detail;
 };
+
+const onTabData = async (e: CustomEvent<{ league: League; tab: StashTab }>) => {
+	const { league, tab } = e.detail;
+	const tradeLeague = isTradeLeague(league) ? league : ACTIVE_LEAGUE;
+	console.log('tab-data from App.vue', tab);
+
+	const sample = await command('sample_cards', {
+		cards: cardsFromTab(tab),
+		league: tradeLeague,
+	});
+	const file = new File([sample.polished], `${tab.name}.csv`);
+	filesStore.addCards([file], tradeLeague);
+};
 </script>
 
 <template>
@@ -88,7 +107,7 @@ const onUpdateMergedLeague = (e: CustomEvent<League>) => {
 		</header>
 
 		<div v-show="loggedIn && stashVisible">
-			<StashesMainComponent @close="stashVisible = false" />
+			<wc-stashes-view @tab-data="onTabData" @close="stashVisible = false"></wc-stashes-view>
 		</div>
 
 		<Transition>
@@ -97,9 +116,9 @@ const onUpdateMergedLeague = (e: CustomEvent<League>) => {
 					v-for="fileCardProps in files"
 					v-bind="fileCardProps"
 					@delete="(e: CustomEvent<string>) => deleteFile(e.detail)"
-					@update#league="(e: CustomEvent<League>) => onUpdateLeague(e, fileCardProps)"
-					@update#selected="(e: CustomEvent<boolean>) => onUpdateSelected(e, fileCardProps)"
-					@update#minimumCardPrice="(e: CustomEvent<number>) => onUpdateMinimumPrice(e, fileCardProps)"
+					@upd:league="(e: CustomEvent<League>) => onUpdateLeague(e, fileCardProps)"
+					@upd:selected="(e: CustomEvent<boolean>) => onUpdateSelected(e, fileCardProps)"
+					@upd:minimumCardPrice="(e: CustomEvent<number>) => onUpdateMinimumPrice(e, fileCardProps)"
 				></wc-file-card>
 			</div>
 		</Transition>
@@ -115,8 +134,8 @@ const onUpdateMergedLeague = (e: CustomEvent<League>) => {
 				v-if="mergedFile"
 				v-bind="mergedFile"
 				@delete="deleteMergedFile"
-				@update#minimumCardPrice="onUpdateMergedMinimumPrice"
-				@update#league="onUpdateMergedLeague"
+				@upd:minimumCardPrice="onUpdateMergedMinimumPrice"
+				@upd:league="onUpdateMergedLeague"
 			></wc-file-card>
 		</Transition>
 	</div>

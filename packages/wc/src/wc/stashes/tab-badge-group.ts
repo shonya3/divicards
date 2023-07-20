@@ -2,7 +2,7 @@ import { html, css, nothing } from 'lit';
 import { BaseElement } from '../base-element';
 import { property, state, query } from 'lit/decorators.js';
 import { TabBadgeElement } from './tab-badge';
-import { StatefulStashTab } from '@divicards/shared/poe.types';
+import { StashTab } from '@divicards/shared/poe.types';
 import { League, permanentLeagues } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 
@@ -59,12 +59,7 @@ const styles = css`
 	}
 `;
 
-const filter = (
-	stashes: StatefulStashTab[],
-	nameQuery: string,
-	shouldFilter: boolean,
-	hideRemoveOnly: boolean
-): StatefulStashTab[] => {
+const filter = (stashes: StashTab[], nameQuery: string, shouldFilter: boolean, hideRemoveOnly: boolean): StashTab[] => {
 	if (!shouldFilter) return stashes;
 
 	return stashes.filter(({ name }) => {
@@ -75,21 +70,23 @@ const filter = (
 	});
 };
 
-const paginate = (stashes: StatefulStashTab[], page: number, perPage: number) => {
+const paginate = (stashes: StashTab[], page: number, perPage: number) => {
 	const start = (page - 1) * perPage;
 	const end = start + perPage;
 	return stashes.slice(start, end);
 };
 
-const shouldUnlockHideRemoveOnly = (league: League, stashes: StatefulStashTab[]) => {
+const shouldUnlockHideRemoveOnly = (league: League, stashes: StashTab[]) => {
 	return permanentLeagues.includes(league) && stashes.some(({ name }) => name.includes(REMOVE_ONLY));
 };
 
 export interface Events {
-	'name-query-changed': string;
-	'per-page-changed': number;
-	'page-changed': number;
-	/**  event from TabBadgeElement */
+	'upd:nameQuery': string;
+	'upd:PerPage': number;
+	'upd:page': number;
+	'upd:selectedTabs': Set<TabBadgeElement['tabId']>;
+
+	/**  Event from TabBadgeElement */
 	'tab-select': { tabId: TabBadgeElement['tabId']; selected: boolean };
 }
 
@@ -103,11 +100,12 @@ export class TabBadgeGroupElement extends BaseElement {
 	static htmlTag = 'wc-tab-badge-group';
 	static styles = [this.baseStyles, styles];
 
-	@property({ type: Array }) stashes: StatefulStashTab[] = [];
+	@property({ type: Array }) stashes: StashTab[] = [];
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
 	@property({ type: Number, reflect: true }) perPage = 50;
 	@property({ type: Number, reflect: true }) page = 1;
 	@property() nameQuery = '';
+	@property({ attribute: false }) selectedTabs: Set<TabBadgeElement['tabId']> = new Set();
 
 	@state() hideRemoveOnly = false;
 
@@ -115,6 +113,13 @@ export class TabBadgeGroupElement extends BaseElement {
 	@query('input#per-page') perPageInput!: HTMLInputElement;
 	@query('input#page') pageInput!: HTMLInputElement;
 	@query('input#filter-stashes-by-name') nameQueryInput!: HTMLInputElement;
+
+	constructor() {
+		super();
+		this.addEventListener('tab-select', e => {
+			this.#onTabSelect(e as CustomEvent<Events['tab-select']>);
+		});
+	}
 	get shouldFilter() {
 		return this.stashes.length > 50;
 	}
@@ -143,17 +148,24 @@ export class TabBadgeGroupElement extends BaseElement {
 
 	#onPageInput() {
 		this.page = Number(this.pageInput.value);
-		this.emit<Events['page-changed']>('page-changed', this.page);
+		this.emit<Events['upd:page']>('upd:page', this.page);
 	}
 
 	#onPerPageInput() {
 		this.perPage = Number(this.perPageInput.value);
-		this.emit<Events['per-page-changed']>('per-page-changed', this.perPage);
+		this.emit<Events['upd:PerPage']>('upd:PerPage', this.perPage);
 	}
 
 	#onNameQueryInput() {
 		this.nameQuery = this.nameQueryInput.value;
-		this.emit<Events['name-query-changed']>('name-query-changed', this.nameQuery);
+		this.emit<Events['upd:nameQuery']>('upd:nameQuery', this.nameQuery);
+	}
+
+	#onTabSelect(e: CustomEvent<Events['tab-select']>) {
+		const { selected, tabId } = e.detail;
+		selected ? this.selectedTabs.add(tabId) : this.selectedTabs.delete(tabId);
+		this.selectedTabs = new Set(this.selectedTabs);
+		this.emit<Events['upd:selectedTabs']>('upd:selectedTabs', this.selectedTabs);
 	}
 
 	render() {
@@ -203,7 +215,11 @@ export class TabBadgeGroupElement extends BaseElement {
 			  </div>`
 			: nothing;
 
-		const paginatedTabs = html`<ul class="list">
+		return html`<div class="tab-badge-group">${filtersSection} ${this.paginatedTabs()}</div>`;
+	}
+
+	protected paginatedTabs() {
+		return html`<ul class="list">
 			${this.paginated.map(tab => {
 				return html`<li>
 					<wc-tab-badge
@@ -211,13 +227,11 @@ export class TabBadgeGroupElement extends BaseElement {
 						name=${tab.name}
 						.tabId=${tab.id}
 						index=${tab.index}
-						.selected=${tab.selected}
+						.selected=${this.selectedTabs.has(tab.id)}
 					></wc-tab-badge>
 				</li>`;
 			})}
 		</ul>`;
-
-		return html`<div class="tab-badge-group">${filtersSection} ${paginatedTabs}</div>`;
 	}
 
 	decreasePage() {

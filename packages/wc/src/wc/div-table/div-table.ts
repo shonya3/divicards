@@ -15,7 +15,7 @@ declare global {
 const styles = css`
 	:host {
 		display: block;
-		max-width: 1200px;
+		max-width: 1220px;
 		min-height: 100vh;
 	}
 
@@ -33,7 +33,7 @@ const styles = css`
 		display: flex;
 		flex-direction: column;
 		height: 100%;
-		max-width: 1200px;
+		max-width: 1220px;
 
 		color: var(--color);
 		background-color: var(--bg-color);
