@@ -36,7 +36,7 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 		},
 
 		getFileById: state => {
-			return (id: string) => [...state.fileCards, state.mergedFile].find(file => file?.id === id);
+			return (id: string) => [...state.fileCards, state.mergedFile].find(file => file?.uuid === id);
 		},
 	},
 	actions: {
