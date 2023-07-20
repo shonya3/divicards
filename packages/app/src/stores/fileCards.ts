@@ -1,10 +1,10 @@
 import { downloadFile } from './../lib';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { defineStore } from 'pinia';
-import { FileCardProps } from '../components/FileCard/FileCard.vue';
 import { useFileCard } from '../composables/useFileCard';
 import { command } from '../command';
 import { DivinationCardsSample, TradeLeague } from '@divicards/shared/types';
+import { FileCardProps } from '@divicards/wc/src/wc/file-card/file-card';
 
 export const useFileCardsStore = defineStore('filecardsStore', {
 	state: (): {
@@ -67,7 +67,7 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 		},
 
 		deleteFile(id: string): void {
-			this.fileCards = this.fileCards.filter(file => file.id !== id);
+			this.fileCards = this.fileCards.filter(file => file.uuid !== id);
 		},
 
 		deleteAllFiles(): void {

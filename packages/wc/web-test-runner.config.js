@@ -17,6 +17,7 @@ export default {
 		esbuildPlugin({
 			ts: true,
 			target: 'es2020',
+			json: true,
 		}),
 	],
 	browsers: [

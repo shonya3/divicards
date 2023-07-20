@@ -1,9 +1,9 @@
 import { computed, reactive, ref, watch } from 'vue';
 import { useSample } from './useSample';
 import { useFile } from './useFile';
-import { FileCardProps } from '../components/FileCard/FileCard.vue';
 import { League, TradeLeague, leagues } from '@divicards/shared/types';
 import { command } from '../command';
+import { FileCardProps } from '@divicards/wc/src/wc/file-card/file-card';
 
 const prefixFilename = (name: string, league: League): string => {
 	const UNDERSCORE_GLUE = '_';
@@ -22,10 +22,10 @@ export const useFileCard = (file: File, league: TradeLeague): FileCardProps => {
 	const { data, error, isError, isReady } = useSample(csv, league);
 	const selected = ref<boolean | null>(false);
 	const valid = computed(() => !Boolean(error.value));
-	const id = crypto.randomUUID();
+	const uuid = crypto.randomUUID();
 
 	const props = reactive({
-		id,
+		uuid,
 		valid,
 		selected,
 		sample: data,

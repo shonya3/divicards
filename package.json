@@ -9,7 +9,8 @@
 		"tauri": "cd packages/app && pnpm tauri",
 		"wc:dev": "cd packages/wc && pnpm dev",
 		"wc:storybook": "cd packages/wc && pnpm storybook",
-		"wc:test:watch": "cd packages/wc && pnpm web-test-runner --watch --group default"
+		"wc:test:watch": "cd packages/wc && pnpm web-test-runner --watch --group default",
+		"wc:test:watch:group": "cd packages/wc && pnpm web-test-runner --watch --group"
 	},
 	"keywords": [],
 	"author": "",

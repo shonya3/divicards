@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import FileCard from './components/FileCard/FileCard.vue';
 import { useFileCardsStore } from './stores/fileCards';
 import { storeToRefs } from 'pinia';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useAutoAnimate } from './composables/useAutoAnimate';
 import { usePoeOAuth2Store } from './stores/poeOAuth2Store';
 import StashesMainComponent from './components/stashes/StashesMainComponent.vue';
@@ -10,9 +9,12 @@ import { DropFilesMessageElement } from '@divicards/wc/src/wc/drop-files-message
 import { LeagueSelectElement } from '@divicards/wc/src/wc/league-select';
 import { PoeAuthElement } from '@divicards/wc/src/wc/poe-auth';
 import { TabBadgeElement } from '@divicards/wc/src/wc/stashes/tab-badge';
+import { FileCardElement, FileCardProps } from '@divicards/wc/src/wc/file-card/file-card';
+import { League } from '@divicards/shared/types';
 DropFilesMessageElement.define();
 LeagueSelectElement.define();
 PoeAuthElement.define();
+FileCardElement.define();
 
 TabBadgeElement.define();
 
@@ -43,6 +45,28 @@ const openStashWindow = () => {
 		});
 	}
 };
+
+const onUpdateSelected = (e: CustomEvent<boolean>, fileCard: FileCardProps) => {
+	fileCard.selected = e.detail;
+};
+
+const onUpdateLeague = (e: CustomEvent<League>, fileCard: FileCardProps) => {
+	fileCard.league = e.detail;
+};
+
+const onUpdateMinimumPrice = (e: CustomEvent<number>, fileCard: FileCardProps) => {
+	fileCard.minimumCardPrice = e.detail;
+};
+
+const onUpdateMergedMinimumPrice = (e: CustomEvent<number>) => {
+	if (!filesStore.mergedFile) return;
+	filesStore.mergedFile.minimumCardPrice = e.detail;
+};
+
+const onUpdateMergedLeague = (e: CustomEvent<League>) => {
+	if (!filesStore.mergedFile) return;
+	filesStore.mergedFile.league = e.detail;
+};
 </script>
 
 <template>
@@ -69,14 +93,14 @@ const openStashWindow = () => {
 
 		<Transition>
 			<div ref="filesTemplateRef" class="files" v-show="files.length">
-				<FileCard
-					v-for="file in files"
-					v-bind="file"
-					@delete="deleteFile(file.id)"
-					v-model:selected="file.selected"
-					v-model:minimumCardPrice.number="file.minimumCardPrice"
-					v-model:league="file.league"
-				/>
+				<wc-file-card
+					v-for="fileCardProps in files"
+					v-bind="fileCardProps"
+					@delete="(e: CustomEvent<string>) => deleteFile(e.detail)"
+					@update#league="(e: CustomEvent<League>) => onUpdateLeague(e, fileCardProps)"
+					@update#selected="(e: CustomEvent<boolean>) => onUpdateSelected(e, fileCardProps)"
+					@update#minimumCardPrice="(e: CustomEvent<number>) => onUpdateMinimumPrice(e, fileCardProps)"
+				></wc-file-card>
 			</div>
 		</Transition>
 
@@ -87,13 +111,13 @@ const openStashWindow = () => {
 			<button class="btn" @click="deleteAllFiles">Clear all</button>
 		</div>
 		<Transition>
-			<FileCard
+			<wc-file-card
 				v-if="mergedFile"
 				v-bind="mergedFile"
 				@delete="deleteMergedFile"
-				v-model:minimumCardPrice.number="mergedFile.minimumCardPrice"
-				v-model:league="mergedFile.league"
-			/>
+				@update#minimumCardPrice="onUpdateMergedMinimumPrice"
+				@update#league="onUpdateMergedLeague"
+			></wc-file-card>
 		</Transition>
 	</div>
 </template>

@@ -17,6 +17,10 @@ const styles = css`
 	}
 `;
 
+export interface Events {
+	'update#league': League;
+}
+
 export class LeagueSelectElement extends BaseElement {
 	static override htmlTag: string = 'wc-league-select';
 	static override styles = styles;
@@ -27,6 +31,10 @@ export class LeagueSelectElement extends BaseElement {
 
 	get value() {
 		return this.select.value;
+	}
+
+	focus() {
+		this.select.focus();
 	}
 
 	render() {
@@ -49,6 +57,6 @@ export class LeagueSelectElement extends BaseElement {
 	async #emitLeagueChange() {
 		this.league = this.select.value as League;
 		await this.updateComplete;
-		this.emit('league-change', this.league);
+		this.emit<Events['update#league']>('update#league', this.league);
 	}
 }
