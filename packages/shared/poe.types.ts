@@ -129,5 +129,3 @@ export interface ISocketedItem {
 	secDescrText: string;
 	socket: number;
 }
-
-export type StatefulStashTab = StashTab & { selected: boolean };

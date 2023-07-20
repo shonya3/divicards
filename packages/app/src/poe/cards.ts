@@ -1,6 +1,5 @@
 import { StashTab, IItem } from '@divicards/shared/poe.types';
-import { command } from '../command';
-import { CardNameAmount, DivinationCardsSample, League } from '@divicards/shared/types';
+import { CardNameAmount } from '@divicards/shared/types';
 export const isCard = (name: string): boolean => {
 	return cards.includes(name);
 };
@@ -26,45 +25,6 @@ export const cardsFromTab = (tab: StashTab): CardNameAmount[] => {
 	}
 
 	return cards;
-};
-
-export const toCsv = (cards: CardNameAmount[]) => {
-	const lines: string[] = ['name,amount'];
-
-	let allCardsAmount = 0;
-
-	for (const { name, amount } of cards) {
-		allCardsAmount += amount;
-		lines.push(`${name},${amount}`);
-	}
-
-	const csv = lines.join('\r\n');
-
-	console.log({ csv, cards, allCardsAmount });
-	return { allCardsAmount, csv };
-};
-
-export const mergeStashTabs = async (tabs: StashTab[], league: League) => {
-	const promises: Promise<DivinationCardsSample>[] = [];
-	const amounts = [];
-	for (const tab of tabs) {
-		const cards = cardsFromTab(tab);
-		const { csv, allCardsAmount } = toCsv(cards);
-		amounts.push(allCardsAmount);
-		promises.push(
-			command('sample', {
-				csv,
-				league,
-			})
-		);
-	}
-	const samples = await Promise.all(promises);
-	const merged = await command('merge', { samples });
-
-	return {
-		merged,
-		amounts,
-	};
 };
 
 export const cards = [

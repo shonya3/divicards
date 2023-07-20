@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { useFileCardsStore } from './stores/fileCards';
-import { storeToRefs } from 'pinia';
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import { useAutoAnimate } from './composables/useAutoAnimate';
 import { usePoeOAuth2Store } from './stores/poeOAuth2Store';
-import StashesMainComponent from './components/stashes/StashesMainComponent.vue';
 import { DropFilesMessageElement } from '@divicards/wc/src/wc/drop-files-message';
 import { LeagueSelectElement } from '@divicards/wc/src/wc/league-select';
 import { PoeAuthElement } from '@divicards/wc/src/wc/poe-auth';
@@ -21,31 +19,26 @@ DropFilesMessageElement.define();
 LeagueSelectElement.define();
 PoeAuthElement.define();
 FileCardElement.define();
-
 TabBadgeElement.define();
 
 const filesStore = useFileCardsStore();
-const { fileCards: files, selectedFiles, mergedFile } = storeToRefs(filesStore);
-const { deleteFile, addCards, deleteAllFiles, merge, deleteMergedFile, downloadAll } = filesStore;
+const authStore = usePoeOAuth2Store();
 
-const poeOAuthStore = usePoeOAuth2Store();
-const { loggedIn, name } = storeToRefs(poeOAuthStore);
-
+const stashVisible = ref(false);
 const filesTemplateRef = ref<HTMLElement | null>(null);
 useAutoAnimate(filesTemplateRef);
 
 const onDrop = (e: DragEvent) => {
 	const dropFiles = e.dataTransfer?.files;
-	if (dropFiles) addCards(Array.from(dropFiles));
+	if (dropFiles) filesStore.addCards(Array.from(dropFiles));
 };
 
-const stashVisible = ref(false);
 const openStashWindow = () => {
-	if (loggedIn.value) {
+	if (authStore.loggedIn) {
 		stashVisible.value = true;
 	} else {
-		poeOAuthStore.login().then(() => {
-			if (loggedIn.value) {
+		authStore.login().then(() => {
+			if (authStore.loggedIn) {
 				stashVisible.value = true;
 			}
 		});
@@ -99,23 +92,23 @@ const onTabData = async (e: CustomEvent<{ league: League; tab: StashTab }>) => {
 			<wc-drop-files-message></wc-drop-files-message>
 			<button @click="openStashWindow()">Load from stash</button>
 			<wc-poe-auth
-				@login="poeOAuthStore.login"
-				@logout="poeOAuthStore.logout"
-				:name="name"
-				:loggedIn="loggedIn"
+				@login="authStore.login"
+				@logout="authStore.logout"
+				:name="authStore.name"
+				:loggedIn="authStore.loggedIn"
 			></wc-poe-auth>
 		</header>
 
-		<div v-show="loggedIn && stashVisible">
+		<div v-show="authStore.loggedIn && stashVisible">
 			<wc-stashes-view @tab-data="onTabData" @close="stashVisible = false"></wc-stashes-view>
 		</div>
 
 		<Transition>
-			<div ref="filesTemplateRef" class="files" v-show="files.length">
+			<div ref="filesTemplateRef" class="files" v-show="filesStore.fileCards.length">
 				<wc-file-card
-					v-for="fileCardProps in files"
+					v-for="fileCardProps in filesStore.fileCards"
 					v-bind="fileCardProps"
-					@delete="(e: CustomEvent<string>) => deleteFile(e.detail)"
+					@delete="(e: CustomEvent<string>) => filesStore.deleteFile(e.detail)"
 					@upd:league="(e: CustomEvent<League>) => onUpdateLeague(e, fileCardProps)"
 					@upd:selected="(e: CustomEvent<boolean>) => onUpdateSelected(e, fileCardProps)"
 					@upd:minimumCardPrice="(e: CustomEvent<number>) => onUpdateMinimumPrice(e, fileCardProps)"
@@ -123,17 +116,19 @@ const onTabData = async (e: CustomEvent<{ league: League; tab: StashTab }>) => {
 			</div>
 		</Transition>
 
-		<div v-if="files.length > 0">
+		<div v-if="filesStore.fileCards.length > 0">
 			<h2>Select files you want to merge</h2>
-			<button class="btn" @click="downloadAll">Download All</button>
-			<button :disabled="selectedFiles.length < 2" class="btn" @click="merge">Merge samples</button>
-			<button class="btn" @click="deleteAllFiles">Clear all</button>
+			<button class="btn" @click="filesStore.downloadAll">Download All</button>
+			<button :disabled="filesStore.selectedFiles.length < 2" class="btn" @click="filesStore.merge">
+				Merge samples
+			</button>
+			<button class="btn" @click="filesStore.deleteAllFiles">Clear all</button>
 		</div>
 		<Transition>
 			<wc-file-card
-				v-if="mergedFile"
-				v-bind="mergedFile"
-				@delete="deleteMergedFile"
+				v-if="filesStore.mergedFile"
+				v-bind="filesStore.mergedFile"
+				@delete="filesStore.deleteMergedFile"
 				@upd:minimumCardPrice="onUpdateMergedMinimumPrice"
 				@upd:league="onUpdateMergedLeague"
 			></wc-file-card>
