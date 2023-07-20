@@ -5,7 +5,7 @@ import {
 	filename,
 	href,
 	selected,
-	id,
+	uuid,
 	valid,
 	error,
 	minimumCardPrice,
@@ -30,7 +30,7 @@ export const Default = {
 			filename=${filename}
 			href=${href}
 			?selected=${selected}
-			uuid=${id}
+			uuid=${uuid}
 			?valid=${valid}
 			.error=${error}
 			minimum-card-price=${minimumCardPrice}
