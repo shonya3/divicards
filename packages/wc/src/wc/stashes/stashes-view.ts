@@ -1,5 +1,5 @@
 import { stashes as loadStashes } from './../../../../app/src/poe/api';
-import { html, css } from 'lit';
+import { html, css, PropertyValueMap, PropertyValues } from 'lit';
 import { BaseElement } from '../base-element';
 import { HelpTipElement } from '../help-tip';
 import { TabBadgeElement } from './tab-badge';
@@ -100,6 +100,7 @@ export class StashesViewElement extends BaseElement {
 
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
 
+	#countdownTimer: ReturnType<typeof setInterval> | null = null;
 	@state() selectedTabs: Set<string> = new Set();
 	@state() stashes: StashTab[] = [];
 	@state() noStashesMessage: string = '';
@@ -107,7 +108,11 @@ export class StashesViewElement extends BaseElement {
 	@state() fetchingStash: boolean = false;
 	@state() countdown = 0;
 
-	#countdownTimer: ReturnType<typeof setInterval> | null = null;
+	protected willUpdate(map: PropertyValues<this>): void {
+		if (map.has('league')) {
+			this.stashes = [];
+		}
+	}
 
 	async #onLoadItemsClicked() {
 		console.log('#onGetData: TODO');
@@ -167,9 +172,8 @@ export class StashesViewElement extends BaseElement {
 			<p class=${classMap({ visible: this.noStashesMessage.length > 0, msg: true })}>${this.noStashesMessage}</p>
 
 			<wc-tab-badge-group
+				league=${this.league}
 				.stashes=${this.stashes}
-				:key="league"
-				.league=${this.league}
 				.selectedTabs=${this.selectedTabs}
 				@upd:selectedTabs=${this.#onUpdSelectedTabs}
 			></wc-tab-badge-group>
