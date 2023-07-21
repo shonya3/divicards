@@ -9,10 +9,10 @@ import { PoeAuthElement } from '@divicards/wc/src/wc/poe-auth';
 import { TabBadgeElement } from '@divicards/wc/src/wc/stashes/tab-badge';
 import { FileCardElement, FileCardProps } from '@divicards/wc/src/wc/file-card/file-card';
 import { League, isTradeLeague } from '@divicards/shared/types';
-import { StashesViewElement } from '../../wc/src/wc/stashes/stashes-view';
+import { StashesViewElement } from '@divicards/wc/src/wc/stashes/stashes-view';
 import { StashTab } from '@divicards/shared/poe.types';
 import { command } from './command';
-import { cardsFromTab } from './poe/cards';
+import { cardsFromTab } from './cards';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 StashesViewElement.define();
 DropFilesMessageElement.define();
@@ -70,7 +70,6 @@ const onUpdateMergedLeague = (e: CustomEvent<League>) => {
 const onTabData = async (e: CustomEvent<{ league: League; tab: StashTab }>) => {
 	const { league, tab } = e.detail;
 	const tradeLeague = isTradeLeague(league) ? league : ACTIVE_LEAGUE;
-	console.log('tab-data from App.vue', tab);
 
 	const sample = await command('sample_cards', {
 		cards: cardsFromTab(tab),
@@ -179,3 +178,4 @@ const onTabData = async (e: CustomEvent<{ league: League; tab: StashTab }>) => {
 	font-size: 1.4rem;
 }
 </style>
+./cards

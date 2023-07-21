@@ -1,16 +1,15 @@
-import { stashes as loadStashes } from './../../../../app/src/poe/api';
+import { IStashLoader, StashLoader } from '@divicards/shared/StashLoader';
 import { html, css, PropertyValueMap, PropertyValues } from 'lit';
 import { BaseElement } from '../base-element';
 import { HelpTipElement } from '../help-tip';
 import { TabBadgeElement } from './tab-badge';
 import { LeagueSelectElement } from '../league-select';
-import { property, state } from 'lit/decorators.js';
+import { property, state, query } from 'lit/decorators.js';
 import { StashTab } from '@divicards/shared/poe.types';
 import { League } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { TabBadgeGroupElement } from './tab-badge-group';
 import { classMap } from 'lit/directives/class-map.js';
-import { command } from '../../../../app/src/command';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -106,7 +105,11 @@ export class StashesViewElement extends BaseElement {
 	@state() noStashesMessage: string = '';
 	@state() msg: string = '';
 	@state() fetchingStash: boolean = false;
-	@state() countdown = 0;
+	@state() countdown: number = 0;
+	@state() stashLoader: IStashLoader = new StashLoader();
+
+	@query('button#stashes-btn') stashesButton!: HTMLButtonElement;
+	@query('button#get-data-btn') getDataButton!: HTMLButtonElement;
 
 	protected willUpdate(map: PropertyValues<this>): void {
 		if (map.has('league')) {
@@ -115,10 +118,8 @@ export class StashesViewElement extends BaseElement {
 	}
 
 	async #onLoadItemsClicked() {
-		console.log('#onGetData: TODO');
 		await this.fetchStashesContents(Array.from(this.selectedTabs), this.league);
 		this.selectedTabs = new Set();
-		console.log(this.selectedTabs);
 	}
 
 	#onCloseClicked() {
@@ -126,10 +127,9 @@ export class StashesViewElement extends BaseElement {
 	}
 
 	async #onLoadStashesList() {
-		// onStashes(league)
 		this.noStashesMessage = '';
-		this.stashes = await loadStashes(this.league);
-		console.log(this.stashes);
+		this.stashes = await this.stashLoader.tabs(this.league);
+		this.stashes;
 		if (!this.stashes.length) {
 			this.noStashesMessage = 'No stashes here. Try to change the league';
 		}
@@ -142,22 +142,21 @@ export class StashesViewElement extends BaseElement {
 	#onUpdSelectedTabs(e: CustomEvent<Events['upd:selectedTabs']>) {
 		const set = (e as CustomEvent<Events['upd:selectedTabs']>).detail;
 		this.selectedTabs = new Set(set);
-		console.log(this.selectedTabs);
 	}
 
 	render() {
-		console.log(this.selectedTabs.size);
 		return html`<div class="main-stashes-component">
 			<div class="controls">
 				<div class="league-stashes">
 					<wc-league-select :league="league" @upd:league=${this.#onLeagueSelected}></wc-league-select>
-					<button @click=${this.#onLoadStashesList}>Stashes</button>
+					<button id="stashes-btn" @click=${this.#onLoadStashesList}>Stashes</button>
 					<wc-help-tip>
 						<p>Select tabs by clicking on them. Then click LOAD ITEMS button</p>
 					</wc-help-tip>
 				</div>
 
 				<button
+					id="get-data-btn"
 					class=${classMap({ 'not-visible': this.selectedTabs.size === 0, 'btn-load-items': true })}
 					.disabled=${this.selectedTabs.size === 0 || this.fetchingStash}
 					@click=${this.#onLoadItemsClicked}
@@ -192,7 +191,7 @@ export class StashesViewElement extends BaseElement {
 			this.msg = `${new Date().toLocaleTimeString('ru')}: Loading ${chunkIds.length} tabs data`;
 			const r = await Promise.all(
 				chunkIds.map(async stashId => {
-					const { stash: tab } = await command('stash', { stashId, league });
+					const tab = await this.stashLoader.tab(stashId, league);
 					this.emit<Events['tab-data']>('tab-data', { tab, league });
 					this.selectedTabs.delete(tab.id);
 					this.selectedTabs = new Set(this.selectedTabs);
