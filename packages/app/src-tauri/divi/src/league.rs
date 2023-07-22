@@ -2,7 +2,7 @@ use std::fmt::Display;
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub enum League {
     Crucible,
     Standard,
@@ -17,6 +17,12 @@ pub enum League {
     SSFCrucible,
     #[serde(alias = "HC SSF Crucible")]
     SSFHCCrucible,
+}
+
+impl Default for League {
+    fn default() -> Self {
+        League::Crucible
+    }
 }
 
 impl Display for League {
@@ -34,7 +40,7 @@ impl Display for League {
     }
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub enum TradeLeague {
     Crucible,
     Standard,
@@ -51,5 +57,10 @@ impl Display for TradeLeague {
             TradeLeague::HardcoreCrucible => write!(f, "Hardcore Crucible"),
             TradeLeague::Hardcore => write!(f, "Hardcore"),
         }
+    }
+}
+impl Default for TradeLeague {
+    fn default() -> Self {
+        TradeLeague::Crucible
     }
 }

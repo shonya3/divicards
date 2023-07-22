@@ -5,10 +5,9 @@ import { DivTableElement } from '../div-table/div-table';
 import { BasePopupElement } from '../base-popup';
 import { FixedNamesElement } from './fixed-names/fixed-names';
 import { NotCardsElement } from './not-cards/not-cards';
-import { DivinationCardsSample, League, TradeLeague, isTradeLeague } from '@divicards/shared/types';
+import { DivinationCardsSample, League, Result, TradeLeague, isTradeLeague } from '@divicards/shared/types';
 import { property, query } from 'lit/decorators.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
-import { TabBadgeElement } from '../stashes/tab-badge';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -22,11 +21,8 @@ export interface FileCardProps {
 	href: string;
 	selected: boolean | null;
 	uuid: string;
-	valid: boolean;
-	error: string | null;
 	minimumCardPrice: number;
-	sample: DivinationCardsSample;
-	isReady: boolean;
+	sample: Result<DivinationCardsSample>;
 }
 
 const styles = css`
@@ -176,11 +172,8 @@ export class FileCardElement extends BaseElement {
 	@property({ reflect: true }) href: string = 'NO HREF';
 	@property({ type: Boolean, reflect: true }) selected: boolean | null = false;
 	@property({ reflect: true }) uuid: string = 'NO ID';
-	@property({ reflect: true, type: Boolean }) valid: boolean = true;
-	@property({ reflect: true }) error: string | null = null;
 	@property({ type: Number, reflect: true, attribute: 'minimum-card-price' }) minimumCardPrice: number = 0;
-	@property({ type: Object }) sample!: DivinationCardsSample;
-	@property({ type: Boolean, attribute: 'is-ready', reflect: true }) isReady: boolean = false;
+	@property({ type: Object }) sample: Result<DivinationCardsSample> = { type: 'err', error: 'No sample data' };
 
 	@query('wc-base-popup#table-popup') tablePopup!: BasePopupElement;
 	@query('input#selected-checkbox') selectedCheckbox!: HTMLInputElement;
@@ -188,9 +181,11 @@ export class FileCardElement extends BaseElement {
 	@query('#minimum-card-price-slider') priceSlider!: HTMLInputElement;
 
 	get filteredCards() {
-		return this.sample.cards.filter(card => {
-			return (card.price ?? 0) >= this.minimumCardPrice;
-		});
+		if (this.sample.type === 'ok') {
+			return this.sample.data.cards.filter(card => {
+				return (card.price ?? 0) >= this.minimumCardPrice;
+			});
+		} else return [];
 	}
 
 	get filteredSummary() {
@@ -243,70 +238,68 @@ export class FileCardElement extends BaseElement {
 		return html`<div class="file" :class="{ 'file-error': error, 'file-selected': selected }">
 			<p class="filename" :class="{ 'filename--error': error }">${this.filename}</p>
 			<button @click=${this.#onBtnDeleteClicked} id="btn-delete" class="btn-delete">X</button>
-
-			${this.isReady
-				? html`${this.error
-						? html`<p>${this.error}</p>`
-						: html`<div class="minor-icons">
-									${this.sample.fixedNames.length > 0
-										? html`<wc-fixed-names .fixedNames=${this.sample.fixedNames}></wc-fixed-names>`
-										: nothing}
-									${this.sample.notCards.length > 0
-										? html`<wc-not-cards .notCards=${this.sample.notCards}></wc-not-cards>`
-										: nothing}
-								</div>
-								${this.gridIcon()}
-
-								<label class="slider-box">
-									<span>${this.minimumCardPrice}</span>
-									<input
-										id="minimum-card-price-slider"
-										class="slider"
-										type="range"
-										name=""
-										id=""
-										min="0"
-										max="500"
-										.value=${this.minimumCardPrice}
-										@input=${this.#onMinPriceSlider}
-									/>
-								</label>
-
-								<div class="total-price">
-									<p>${format(this.filteredSummary.value)}</p>
-									<img width="35" height="35" class="chaos-img" src="/chaos.png" alt="chaos" />
-								</div>
-								<div class="cards-amount">
-									<p>${this.filteredSummary.amount}</p>
-									<img width="35" height="35" src="/divination-card.png" alt="Divination card" />
-								</div>
-
-								<wc-league-select
-									trade
-									.league=${this.league}
-									@upd:league=${this.#onLeagueSelected}
-								></wc-league-select>
-
-								<a class="download" .download=${this.filename} .href=${this.href}>Download</a>
-
-								${this.selected === null
-									? nothing
-									: html`<input
-											class="checkbox"
-											v-if="valid && selected != null"
-											type="checkbox"
-											:checked="selected"
-											id="selected-checkbox"
-											@change=${this.#onSelectedClicked}
-									  />`}
-
-								<wc-base-popup id="table-popup">
-									${this.error
-										? html`<p>${this.error}</p>`
-										: html`<wc-div-table .cards=${this.sample.cards}></wc-div-table>`}
-								</wc-base-popup>`}`
-				: nothing}
+			${this.chunk()}
 		</div>`;
+	}
+
+	chunk() {
+		return html`${this.sample.type === 'err'
+			? html`<p>${this.sample.error}</p>`
+			: html`<div class="minor-icons">
+						${this.sample.data.fixedNames.length > 0
+							? html`<wc-fixed-names .fixedNames=${this.sample.data.fixedNames}></wc-fixed-names>`
+							: nothing}
+						${this.sample.data.notCards.length > 0
+							? html`<wc-not-cards .notCards=${this.sample.data.notCards}></wc-not-cards>`
+							: nothing}
+					</div>
+					${this.gridIcon()}
+
+					<label class="slider-box">
+						<span>${this.minimumCardPrice}</span>
+						<input
+							id="minimum-card-price-slider"
+							class="slider"
+							type="range"
+							name=""
+							id=""
+							min="0"
+							max="500"
+							.value=${this.minimumCardPrice}
+							@input=${this.#onMinPriceSlider}
+						/>
+					</label>
+
+					<div class="total-price">
+						<p>${format(this.filteredSummary.value)}</p>
+						<img width="35" height="35" class="chaos-img" src="/chaos.png" alt="chaos" />
+					</div>
+					<div class="cards-amount">
+						<p>${this.filteredSummary.amount}</p>
+						<img width="35" height="35" src="/divination-card.png" alt="Divination card" />
+					</div>
+
+					<wc-league-select
+						trade
+						.league=${this.league}
+						@upd:league=${this.#onLeagueSelected}
+					></wc-league-select>
+
+					<a class="download" .download=${this.filename} .href=${this.href}>Download</a>
+
+					${this.selected === null
+						? nothing
+						: html`<input
+								class="checkbox"
+								type="checkbox"
+								:checked="selected"
+								id="selected-checkbox"
+								@change=${this.#onSelectedClicked}
+						  />`}
+
+					<wc-base-popup id="table-popup">
+						<wc-div-table .cards=${this.sample.data.cards}></wc-div-table>
+					</wc-base-popup>`}`;
 	}
 
 	protected gridIcon() {

@@ -76,3 +76,6 @@ export interface GoogleIdentity {
 }
 
 export type CardNameAmount = Pick<DivinationCardRecord, 'name' | 'amount'>;
+export type Ok<T> = { type: 'ok'; data: T };
+export type Err<E = string> = { type: 'err'; error: E };
+export type Result<T, E = string> = Ok<T> | Err<E>;

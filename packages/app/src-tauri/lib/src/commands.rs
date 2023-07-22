@@ -1,28 +1,25 @@
 use divi::{CardNameAmount, CsvString, DivinationCardsSample, Prices, SampleData, TradeLeague};
 use tauri::{command, AppHandle, Manager};
 
-use crate::prices;
+use crate::{js_result::JSResult, prices};
 
 #[command]
-pub async fn sample(
-    csv: String,
-    league: TradeLeague,
-) -> Result<DivinationCardsSample, divi::error::MissingHeaders> {
-    DivinationCardsSample::create(
+pub async fn sample(csv: String, league: TradeLeague) -> JSResult<DivinationCardsSample> {
+    JSResult::from(DivinationCardsSample::create(
         SampleData::CsvString(CsvString(csv)),
         prices::prices(&league).await,
-    )
+    ))
 }
 
 #[command]
 pub async fn sample_cards(
     cards: Vec<CardNameAmount>,
     league: TradeLeague,
-) -> Result<DivinationCardsSample, divi::error::MissingHeaders> {
-    DivinationCardsSample::create(
+) -> JSResult<DivinationCardsSample> {
+    JSResult::from(DivinationCardsSample::create(
         SampleData::CardNameAmountList(cards),
         prices::prices(&league).await,
-    )
+    ))
 }
 
 #[command]
@@ -42,9 +39,9 @@ pub async fn merge(
 pub async fn league(
     sample: Box<DivinationCardsSample>,
     league: TradeLeague,
-) -> Result<DivinationCardsSample, divi::error::MissingHeaders> {
-    DivinationCardsSample::create(
+) -> JSResult<DivinationCardsSample> {
+    JSResult::from(DivinationCardsSample::create(
         SampleData::CsvString(sample.polished),
         prices::prices(&league).await,
-    )
+    ))
 }

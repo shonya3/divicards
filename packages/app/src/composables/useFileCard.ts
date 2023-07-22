@@ -1,6 +1,4 @@
-import { computed, reactive, ref, watch } from 'vue';
-import { useSample } from './useSample';
-import { useFile } from './useFile';
+import { computed, reactive, watch } from 'vue';
 import { League, TradeLeague, leagues } from '@divicards/shared/types';
 import { command } from '../command';
 import { FileCardProps } from '@divicards/wc/src/wc/file-card/file-card';
@@ -17,64 +15,45 @@ const prefixFilename = (name: string, league: League): string => {
 	return `${league}${UNDERSCORE_GLUE}${name}`;
 };
 
-export const useFileCard = (file: File, league: TradeLeague): FileCardProps => {
-	const { text: csv, name: filename, href } = useFile(file);
-	const { data, error, isError, isReady } = useSample(csv, league);
-	const selected = ref<boolean | null>(false);
-	const valid = computed(() => !Boolean(error.value));
-	const uuid = crypto.randomUUID();
-
-	const props = reactive({
-		uuid,
-		valid,
-		selected,
-		sample: data,
-		filename,
-		href,
-		error,
-		isError,
-		minimumCardPrice: 0,
-		league,
-		isReady,
-	});
-
-	watch(
-		() => isReady.value,
-		val => {
-			if (!isError.value) {
-				props.filename = prefixFilename(filename.value, league);
-			}
-		}
-	);
-
-	watch(
-		() => props.sample.polished,
-		val => {
-			props.href = URL.createObjectURL(new File([val], props.filename));
-		}
-	);
-
-	// watch(
-	// 	() => props.minimumCardPrice,
-	// 	async val => {
-	// 		props.sample.chaos = await command('chaos', {
-	// 			sample: props.sample,
-	// 			min: val,
-	// 		});
-	// 	}
-	// );
+export const useFileCard = async (file: File, league: TradeLeague): Promise<FileCardProps> => {
+	const fileCard = await createFileCard(file, league);
+	const props = reactive<FileCardProps>(fileCard);
 
 	watch(
 		() => props.league,
 		async val => {
-			props.sample = await command('league', { league: val, sample: props.sample });
+			if (props.sample.type !== 'ok') return;
+			props.sample = await command('league', { league: val, sample: props.sample.data });
+			if (props.sample.type !== 'ok') return;
+			props.href = URL.createObjectURL(new File([props.sample.data.polished], props.filename));
 			props.filename = prefixFilename(props.filename, val);
-			props.sample.chaos = await command('chaos', {
-				sample: props.sample,
-				min: props.minimumCardPrice,
-			});
 		}
 	);
 
 	return props;
+};
+
+const createFileCard = async (csvSource: File, league: TradeLeague): Promise<FileCardProps> => {
+	const csv = typeof csvSource === 'string' ? csvSource : await csvSource.text();
+	let href: string;
+	if (typeof csvSource === 'string') {
+		throw new Error('TODO csvSource as string');
+	} else {
+		href = URL.createObjectURL(csvSource);
+	}
+	const uuid = crypto.randomUUID();
+	const sample = await command('sample', { csv, league });
+	const filename = prefixFilename(csvSource.name, league);
+
+	const fileCard = {
+		uuid,
+		league,
+		filename,
+		sample,
+		selected: false,
+		href,
+		minimumCardPrice: 0,
+	};
+
+	return fileCard;
 };

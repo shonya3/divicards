@@ -75,7 +75,10 @@ const onTabData = async (e: CustomEvent<{ league: League; tab: StashTab }>) => {
 		cards: cardsFromTab(tab),
 		league: tradeLeague,
 	});
-	const file = new File([sample.polished], `${tab.name}.csv`);
+
+	const polished = sample.type === 'ok' ? sample.data.polished : 'no data';
+
+	const file = new File([polished], `${tab.name}.csv`);
 	filesStore.addCards([file], tradeLeague);
 };
 </script>

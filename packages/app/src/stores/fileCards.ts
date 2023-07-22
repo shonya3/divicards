@@ -3,7 +3,7 @@ import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { defineStore } from 'pinia';
 import { useFileCard } from '../composables/useFileCard';
 import { command } from '../command';
-import { DivinationCardsSample, TradeLeague } from '@divicards/shared/types';
+import { DivinationCardsSample, Result, TradeLeague } from '@divicards/shared/types';
 import { FileCardProps } from '@divicards/wc/src/wc/file-card/file-card';
 
 export const useFileCardsStore = defineStore('filecardsStore', {
@@ -16,23 +16,35 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 	}),
 	getters: {
 		selectedFiles(): FileCardProps[] {
-			return this.fileCards.filter(file => file.selected && file.valid);
+			return this.fileCards.filter(file => file.selected && file.sample.type === 'ok');
 		},
 
-		samples(): DivinationCardsSample[] {
+		samples(): Result<DivinationCardsSample>[] {
 			return this.fileCards.map(f => f.sample);
 		},
 
 		selectedSamples(): DivinationCardsSample[] {
-			return this.selectedFiles.map(({ sample }) => sample);
+			const selectedSamples: DivinationCardsSample[] = [];
+			for (const file of this.selectedFiles) {
+				if (file.sample.type === 'ok' && file.selected === true) {
+					selectedSamples.push(file.sample.data);
+				}
+			}
+			return selectedSamples;
 		},
 
 		validFiles(): FileCardProps[] {
-			return this.fileCards.filter(file => file.valid);
+			return this.fileCards.filter(file => file.sample.type === 'ok');
 		},
 
 		selectedStrings(): string[] {
-			return this.selectedFiles.map(file => String(file.sample.chaos));
+			const strings: string[] = [];
+			for (const file of this.selectedFiles) {
+				if (file.sample.type === 'ok' && file.selected === true) {
+					strings.push(String(file.sample.data.chaos));
+				}
+			}
+			return strings;
 		},
 
 		getFileById: state => {
@@ -40,9 +52,9 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 		},
 	},
 	actions: {
-		addCards(files: File[], league: TradeLeague = ACTIVE_LEAGUE): void {
+		async addCards(files: File[], league: TradeLeague = ACTIVE_LEAGUE): Promise<void> {
 			for (const file of files) {
-				this.fileCards.push(useFileCard(file, league));
+				this.fileCards.push(await useFileCard(file, league));
 			}
 		},
 
@@ -50,7 +62,7 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 			const sample = await command('merge', { samples: this.selectedSamples });
 			const file: File = new File([sample.polished], 'merged.csv');
 
-			const fileCard = useFileCard(file, ACTIVE_LEAGUE);
+			const fileCard = await useFileCard(file, ACTIVE_LEAGUE);
 
 			// No point to select merged file, `null` makes it nonselectable by removing checkbox
 			// maybe should refactor later

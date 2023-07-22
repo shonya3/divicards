@@ -6,15 +6,16 @@ import {
 	GoogleIdentity,
 	CardNameAmount,
 	TradeLeague,
+	Result,
 } from '@divicards/shared/types';
 import { StashesResponseData, StashResponseData } from '@divicards/shared/poe.types';
 
 export interface Commands {
-	sample: (args: { csv: string; league: League }) => DivinationCardsSample;
-	sample_cards: (args: { cards: CardNameAmount[]; league: TradeLeague }) => DivinationCardsSample;
+	sample: (args: { csv: string; league: TradeLeague }) => Result<DivinationCardsSample>;
+	sample_cards: (args: { cards: CardNameAmount[]; league: TradeLeague }) => Result<DivinationCardsSample>;
 	chaos: (args: { sample: DivinationCardsSample; min: number }) => number;
 	merge: (args: { samples: DivinationCardsSample[] }) => DivinationCardsSample;
-	league: (args: { sample: DivinationCardsSample; league: League }) => DivinationCardsSample;
+	league: (args: { sample: DivinationCardsSample; league: League }) => Result<DivinationCardsSample>;
 	discord_auth: () => string;
 	discord_identity: () => DiscordIdentity;
 	discord_authenticated: () => boolean;
