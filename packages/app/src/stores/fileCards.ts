@@ -60,7 +60,7 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 
 		async merge() {
 			const sample = await command('merge', { samples: this.selectedSamples });
-			const file: File = new File([sample.polished], 'merged.csv');
+			const file: File = new File([sample.csv], 'merged.csv');
 
 			const fileCard = await useFileCard(file, ACTIVE_LEAGUE);
 

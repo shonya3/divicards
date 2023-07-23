@@ -1,4 +1,4 @@
-use divi::{CardNameAmount, CsvString, DivinationCardsSample, Prices, SampleData, TradeLeague};
+use divi::{sample::DivinationCardsSample, CardNameAmount, Prices, SampleData, TradeLeague};
 use tauri::{command, AppHandle, Manager};
 
 use crate::{js_result::JSResult, prices};
@@ -6,7 +6,7 @@ use crate::{js_result::JSResult, prices};
 #[command]
 pub async fn sample(csv: String, league: TradeLeague) -> JSResult<DivinationCardsSample> {
     JSResult::from(DivinationCardsSample::create(
-        SampleData::CsvString(CsvString(csv)),
+        SampleData::CsvString(csv),
         prices::prices(&league).await,
     ))
 }
@@ -41,7 +41,7 @@ pub async fn league(
     league: TradeLeague,
 ) -> JSResult<DivinationCardsSample> {
     JSResult::from(DivinationCardsSample::create(
-        SampleData::CsvString(sample.polished),
+        SampleData::CsvString(sample.csv),
         prices::prices(&league).await,
     ))
 }

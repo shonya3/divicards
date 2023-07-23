@@ -34,7 +34,7 @@ export interface DivinationCardsSample {
 	notCards: string[];
 	fixedNames: FixedName[];
 	chaos: number;
-	polished: string;
+	csv: string;
 }
 
 export interface DivinationCardRecord {

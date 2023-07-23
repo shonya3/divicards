@@ -25,7 +25,7 @@ export const useFileCard = async (file: File, league: TradeLeague): Promise<File
 			if (props.sample.type !== 'ok') return;
 			props.sample = await command('league', { league: val, sample: props.sample.data });
 			if (props.sample.type !== 'ok') return;
-			props.href = URL.createObjectURL(new File([props.sample.data.polished], props.filename));
+			props.href = URL.createObjectURL(new File([props.sample.data.csv], props.filename));
 			props.filename = prefixFilename(props.filename, val);
 		}
 	);
