@@ -33,7 +33,6 @@ export interface DivinationCardsSample {
 	cards: DivinationCardRecord[];
 	notCards: string[];
 	fixedNames: FixedName[];
-	chaos: number;
 	csv: string;
 }
 

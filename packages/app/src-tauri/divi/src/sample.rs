@@ -15,7 +15,6 @@ pub struct DivinationCardsSample {
     pub not_cards: Vec<String>,
     pub fixed_names: Vec<FixedCardName>,
     pub csv: String,
-    pub chaos: Option<f32>,
 }
 
 impl DivinationCardsSample {
@@ -31,7 +30,6 @@ impl DivinationCardsSample {
             not_cards,
             fixed_names,
             csv,
-            chaos,
         }
     }
 
@@ -43,30 +41,13 @@ impl DivinationCardsSample {
         self.cards.iter().find(|c| c.name == card)
     }
 
-    pub fn chaos(&self, min: Option<f32>) -> f32 {
-        self.cards
-            .iter()
-            .map(
-                |card| match card.price.unwrap_or_default() >= min.unwrap_or_default() {
-                    true => card.price.unwrap_or_default() * card.amount as f32,
-                    false => 0.0,
-                },
-            )
-            .sum::<f32>()
-    }
-
-    pub fn write_sum(&mut self) -> &mut Self {
-        self.chaos = Some(self.chaos(None));
-        self
-    }
-
     pub fn create(
         source: SampleData,
         prices: Prices,
     ) -> Result<DivinationCardsSample, MissingHeaders> {
         let mut sample = DivinationCardsSample::default();
         let mut sample = sample.price(prices).parse_data(source)?;
-        let sample = sample.write_sum().write_weight().write_csv().to_owned();
+        let sample = sample.write_weight().write_csv().to_owned();
 
         Ok(sample)
     }
@@ -83,7 +64,7 @@ impl DivinationCardsSample {
             merged.card_mut(name).unwrap().amount(sum);
         }
 
-        merged.write_weight().write_sum().write_csv();
+        merged.write_weight().write_csv();
         merged
     }
 
@@ -151,7 +132,6 @@ impl DivinationCardsSample {
             not_cards: Default::default(),
             fixed_names: Default::default(),
             csv: String::new(),
-            chaos: None,
         }
     }
 
@@ -256,7 +236,6 @@ impl Default for DivinationCardsSample {
             fixed_names: vec![],
             not_cards: vec![],
             csv: String::new(),
-            chaos: None,
         }
     }
 }

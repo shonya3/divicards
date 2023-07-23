@@ -23,11 +23,6 @@ pub async fn sample_cards(
 }
 
 #[command]
-pub async fn chaos(sample: Box<DivinationCardsSample>, min: Option<f32>) -> f32 {
-    sample.as_ref().chaos(min)
-}
-
-#[command]
 pub async fn merge(
     samples: Vec<DivinationCardsSample>,
     app_handle: AppHandle,

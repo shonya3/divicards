@@ -37,16 +37,6 @@ export const useFileCardsStore = defineStore('filecardsStore', {
 			return this.fileCards.filter(file => file.sample.type === 'ok');
 		},
 
-		selectedStrings(): string[] {
-			const strings: string[] = [];
-			for (const file of this.selectedFiles) {
-				if (file.sample.type === 'ok' && file.selected === true) {
-					strings.push(String(file.sample.data.chaos));
-				}
-			}
-			return strings;
-		},
-
 		getFileById: state => {
 			return (id: string) => [...state.fileCards, state.mergedFile].find(file => file?.uuid === id);
 		},

@@ -40,7 +40,6 @@ async fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             commands::sample,
-            commands::chaos,
             commands::merge,
             commands::league,
             commands::sample_cards,

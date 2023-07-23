@@ -13,7 +13,6 @@ import { StashesResponseData, StashResponseData } from '@divicards/shared/poe.ty
 export interface Commands {
 	sample: (args: { csv: string; league: TradeLeague }) => Result<DivinationCardsSample>;
 	sample_cards: (args: { cards: CardNameAmount[]; league: TradeLeague }) => Result<DivinationCardsSample>;
-	chaos: (args: { sample: DivinationCardsSample; min: number }) => number;
 	merge: (args: { samples: DivinationCardsSample[] }) => DivinationCardsSample;
 	league: (args: { sample: DivinationCardsSample; league: League }) => Result<DivinationCardsSample>;
 	discord_auth: () => string;
