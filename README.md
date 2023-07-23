@@ -10,8 +10,10 @@ Install the latest release (https://github.com/shonya3/divicards/releases)
 
 -   [Tauri](https://tauri.app/)
 
--   Vue3
+-   Web Components with [Lit](https://lit.dev)
+
+-   [Vue3](https://vuejs.org/)
 
 ## Recommended IDE Setup
 
--   [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+-   [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) + [Lit](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin)

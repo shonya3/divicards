@@ -55,7 +55,7 @@ impl DivinationCardsSample {
             .sum::<f32>()
     }
 
-    pub fn sum(&mut self) -> &mut Self {
+    pub fn write_sum(&mut self) -> &mut Self {
         self.chaos = Some(self.chaos(None));
         self
     }
@@ -66,7 +66,7 @@ impl DivinationCardsSample {
     ) -> Result<DivinationCardsSample, MissingHeaders> {
         let mut sample = DivinationCardsSample::default();
         let mut sample = sample.price(prices).parse_data(source)?;
-        let sample = sample.sum().weight().csv().to_owned();
+        let sample = sample.write_sum().write_weight().write_csv().to_owned();
 
         Ok(sample)
     }
@@ -83,7 +83,7 @@ impl DivinationCardsSample {
             merged.card_mut(name).unwrap().amount(sum);
         }
 
-        merged.weight().sum().csv();
+        merged.write_weight().write_sum().write_csv();
         merged
     }
 
@@ -96,7 +96,7 @@ impl DivinationCardsSample {
         RAIN_OF_CHAOS_WEIGHT / rain_of_chaos.local_weight(self.size())
     }
 
-    pub fn weight(&mut self) -> &mut Self {
+    pub fn write_weight(&mut self) -> &mut Self {
         let sample_size = self.size();
         let sample_weight = self.sample_weight();
 
@@ -123,7 +123,7 @@ impl DivinationCardsSample {
         self
     }
 
-    pub fn csv(&mut self) -> &mut Self {
+    pub fn write_csv(&mut self) -> &mut Self {
         let mut writer = csv::Writer::from_writer(vec![]);
         for card in self.cards.clone() {
             writer.serialize(card).unwrap();
