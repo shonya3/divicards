@@ -8,6 +8,7 @@ import { NotCardsElement } from './not-cards/not-cards';
 import { DivinationCardsSample, League, Result, TradeLeague, isTradeLeague } from '@divicards/shared/types';
 import { property, query } from 'lit/decorators.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
+const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -18,133 +19,11 @@ declare global {
 export interface FileCardProps {
 	league: League;
 	filename: string;
-	href: string;
 	selected: boolean | null;
 	uuid: string;
 	minimumCardPrice: number;
 	sample: Result<DivinationCardsSample>;
 }
-
-const styles = css`
-	.league {
-		display: flex;
-		gap: 0.4rem;
-	}
-
-	p {
-		margin: 0;
-	}
-
-	.minor-icons {
-		position: absolute;
-		top: 30%;
-		left: 20px;
-	}
-	.file {
-		position: relative;
-		padding: 1rem;
-		padding-block: 1.4rem;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		gap: 1rem;
-		width: fit-content;
-		box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-
-		width: 250px;
-		/* max-height: 320px; */
-		height: 450px;
-
-		border: 2px solid black;
-		border-color: var(--border-color);
-		transition: 0.2s border-color;
-	}
-
-	.icon {
-		cursor: pointer;
-	}
-
-	.file-error {
-		border-color: red;
-	}
-
-	.file-selected {
-		border-color: green;
-	}
-
-	.filename {
-		font-size: 1rem;
-		letter-spacing: -0.4px;
-		overflow: hidden;
-		max-height: 60px;
-		max-width: 100%;
-	}
-
-	.filename:hover {
-		overflow: visible;
-		/* position: absolute; */
-	}
-
-	.filename--error {
-		color: red;
-	}
-
-	.slider-box {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-	.btn-delete {
-		position: absolute;
-		top: 0;
-		right: 0;
-		/* transform: translate(-50%, 50%); */
-		padding: 0.2rem;
-		border: none;
-		background-color: transparent;
-		cursor: pointer;
-	}
-
-	.checkbox {
-		background-color: red;
-		padding: 1rem;
-		transform: scale(2);
-		accent-color: green;
-		cursor: pointer;
-
-		position: absolute;
-		bottom: 0;
-		right: 0;
-		transform: translate(15%, 15%) scale(2);
-	}
-
-	.download {
-		/* position: absolute; */
-		bottom: 0;
-	}
-
-	.total-price,
-	.cards-amount {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		font-size: 2rem;
-	}
-
-	.grid-icon {
-		display: block;
-		cursor: pointer;
-		width: 96px;
-		height: 96px;
-		padding: 0;
-		margin: 0;
-	}
-`;
-
-const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 
 export interface Events {
 	'upd:selected': FileCardElement['selected'];
@@ -165,11 +44,9 @@ export class FileCardElement extends BaseElement {
 		}
 	}
 	static htmlTag = 'wc-file-card';
-	static styles = [this.baseStyles, styles];
 
 	@property({ reflect: true }) league: TradeLeague = ACTIVE_LEAGUE;
 	@property({ reflect: true }) filename: string = 'NO FILE NAME';
-	@property({ reflect: true }) href: string = 'NO HREF';
 	@property({ type: Boolean, reflect: true }) selected: boolean | null = false;
 	@property({ reflect: true }) uuid: string = 'NO ID';
 	@property({ type: Number, reflect: true, attribute: 'minimum-card-price' }) minimumCardPrice: number = 0;
@@ -242,6 +119,11 @@ export class FileCardElement extends BaseElement {
 		</div>`;
 	}
 
+	get urlObject() {
+		if (this.sample.type === 'err') throw new Error('Cannot download erroneus file');
+		return URL.createObjectURL(new File([this.sample.data.csv], this.filename));
+	}
+
 	chunk() {
 		return html`${this.sample.type === 'err'
 			? html`<p>${this.sample.error}</p>`
@@ -254,7 +136,6 @@ export class FileCardElement extends BaseElement {
 							: nothing}
 					</div>
 					${this.gridIcon()}
-
 					<label class="slider-box">
 						<span>${this.minimumCardPrice}</span>
 						<input
@@ -285,7 +166,7 @@ export class FileCardElement extends BaseElement {
 						@upd:league=${this.#onLeagueSelected}
 					></wc-league-select>
 
-					<a class="download" .download=${this.filename} .href=${this.href}>Download</a>
+					<a class="download" .download=${this.filename} .href=${this.urlObject}>Download</a>
 
 					${this.selected === null
 						? nothing
@@ -315,4 +196,126 @@ export class FileCardElement extends BaseElement {
 			/>
 		</svg>`;
 	}
+
+	static styles = [
+		this.baseStyles,
+		css`
+			.league {
+				display: flex;
+				gap: 0.4rem;
+			}
+
+			p {
+				margin: 0;
+			}
+
+			.minor-icons {
+				position: absolute;
+				top: 30%;
+				left: 20px;
+			}
+			.file {
+				position: relative;
+				padding: 1rem;
+				padding-block: 1.4rem;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				gap: 1rem;
+				width: fit-content;
+				box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+
+				width: 250px;
+				/* max-height: 320px; */
+				height: 450px;
+
+				border: 2px solid black;
+				border-color: var(--border-color);
+				transition: 0.2s border-color;
+			}
+
+			.icon {
+				cursor: pointer;
+			}
+
+			.file-error {
+				border-color: red;
+			}
+
+			.file-selected {
+				border-color: green;
+			}
+
+			.filename {
+				font-size: 1rem;
+				letter-spacing: -0.4px;
+				overflow: hidden;
+				max-height: 60px;
+				max-width: 100%;
+			}
+
+			.filename:hover {
+				overflow: visible;
+				/* position: absolute; */
+			}
+
+			.filename--error {
+				color: red;
+			}
+
+			.slider-box {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 0.5rem;
+			}
+
+			.btn-delete {
+				position: absolute;
+				top: 0;
+				right: 0;
+				/* transform: translate(-50%, 50%); */
+				padding: 0.2rem;
+				border: none;
+				background-color: transparent;
+				cursor: pointer;
+			}
+
+			.checkbox {
+				background-color: red;
+				padding: 1rem;
+				transform: scale(2);
+				accent-color: green;
+				cursor: pointer;
+
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				transform: translate(15%, 15%) scale(2);
+			}
+
+			.download {
+				/* position: absolute; */
+				bottom: 0;
+			}
+
+			.total-price,
+			.cards-amount {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 2rem;
+			}
+
+			.grid-icon {
+				display: block;
+				cursor: pointer;
+				width: 96px;
+				height: 96px;
+				padding: 0;
+				margin: 0;
+			}
+		`,
+	];
 }

@@ -7,13 +7,10 @@ import { DropFilesMessageElement } from '@divicards/wc/src/wc/drop-files-message
 import { LeagueSelectElement } from '@divicards/wc/src/wc/league-select';
 import { PoeAuthElement } from '@divicards/wc/src/wc/poe-auth';
 import { TabBadgeElement } from '@divicards/wc/src/wc/stashes/tab-badge';
-import { FileCardElement, FileCardProps } from '@divicards/wc/src/wc/file-card/file-card';
-import { League, isTradeLeague } from '@divicards/shared/types';
+import { FileCardElement } from '@divicards/wc/src/wc/file-card/file-card';
+import { League } from '@divicards/shared/types';
 import { StashesViewElement } from '@divicards/wc/src/wc/stashes/stashes-view';
 import { StashTab } from '@divicards/shared/poe.types';
-import { command } from './command';
-import { cardsFromTab } from './cards';
-import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 StashesViewElement.define();
 DropFilesMessageElement.define();
 LeagueSelectElement.define();
@@ -21,65 +18,37 @@ PoeAuthElement.define();
 FileCardElement.define();
 TabBadgeElement.define();
 
-const filesStore = useFileCardsStore();
+const fileCardsStore = useFileCardsStore();
 const authStore = usePoeOAuth2Store();
 
 const stashVisible = ref(false);
 const filesTemplateRef = ref<HTMLElement | null>(null);
 useAutoAnimate(filesTemplateRef);
 
-const onDrop = (e: DragEvent) => {
-	const dropFiles = e.dataTransfer?.files;
-	if (dropFiles) filesStore.addCards(Array.from(dropFiles));
-};
-
-const openStashWindow = () => {
-	if (authStore.loggedIn) {
-		stashVisible.value = true;
-	} else {
-		authStore.login().then(() => {
-			if (authStore.loggedIn) {
-				stashVisible.value = true;
-			}
-		});
+const onDrop = async (e: DragEvent) => {
+	for (const file of Array.from(e.dataTransfer?.files ?? [])) {
+		fileCardsStore.addFromFile(file);
 	}
 };
 
-const onUpdateSelected = (e: CustomEvent<boolean>, fileCard: FileCardProps) => {
-	fileCard.selected = e.detail;
-};
-
-const onUpdateLeague = (e: CustomEvent<League>, fileCard: FileCardProps) => {
-	fileCard.league = e.detail;
-};
-
-const onUpdateMinimumPrice = (e: CustomEvent<number>, fileCard: FileCardProps) => {
-	fileCard.minimumCardPrice = e.detail;
-};
-
 const onUpdateMergedMinimumPrice = (e: CustomEvent<number>) => {
-	if (!filesStore.mergedFile) return;
-	filesStore.mergedFile.minimumCardPrice = e.detail;
+	if (!fileCardsStore.mergedFile) return;
+	fileCardsStore.mergedFile.minimumCardPrice = e.detail;
 };
 
-const onUpdateMergedLeague = (e: CustomEvent<League>) => {
-	if (!filesStore.mergedFile) return;
-	filesStore.mergedFile.league = e.detail;
-};
-
-const onTabData = async (e: CustomEvent<{ league: League; tab: StashTab }>) => {
-	const { league, tab } = e.detail;
-	const tradeLeague = isTradeLeague(league) ? league : ACTIVE_LEAGUE;
-
-	const sample = await command('sample_cards', {
-		cards: cardsFromTab(tab),
-		league: tradeLeague,
-	});
-
-	const polished = sample.type === 'ok' ? sample.data.csv : 'no data';
-
-	const file = new File([polished], `${tab.name}.csv`);
-	filesStore.addCards([file], tradeLeague);
+const openStashWindow = async () => {
+	if (authStore.loggedIn) {
+		stashVisible.value = true;
+	} else {
+		try {
+			await authStore.login();
+			if (authStore.loggedIn) {
+				stashVisible.value = true;
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	}
 };
 </script>
 
@@ -102,37 +71,43 @@ const onTabData = async (e: CustomEvent<{ league: League; tab: StashTab }>) => {
 		</header>
 
 		<div v-show="authStore.loggedIn && stashVisible">
-			<wc-stashes-view @tab-data="onTabData" @close="stashVisible = false"></wc-stashes-view>
+			<wc-stashes-view
+				@tab-data="
+					async (e: CustomEvent<{ league: League; tab: StashTab }>) =>
+						fileCardsStore.addFromTab(e.detail.league, e.detail.tab)
+				"
+				@close="stashVisible = false"
+			></wc-stashes-view>
 		</div>
 
 		<Transition>
-			<div ref="filesTemplateRef" class="files" v-show="filesStore.fileCards.length">
+			<div ref="filesTemplateRef" class="files" v-show="fileCardsStore.fileCards.length">
 				<wc-file-card
-					v-for="fileCardProps in filesStore.fileCards"
-					v-bind="fileCardProps"
-					@delete="(e: CustomEvent<string>) => filesStore.deleteFile(e.detail)"
-					@upd:league="(e: CustomEvent<League>) => onUpdateLeague(e, fileCardProps)"
-					@upd:selected="(e: CustomEvent<boolean>) => onUpdateSelected(e, fileCardProps)"
-					@upd:minimumCardPrice="(e: CustomEvent<number>) => onUpdateMinimumPrice(e, fileCardProps)"
+					v-for="fileCard in fileCardsStore.fileCards"
+					v-bind="fileCard"
+					@delete="(e: CustomEvent<string>) => fileCardsStore.deleteFile(e.detail)"
+					@upd:league="(e: CustomEvent<League>) => fileCardsStore.replaceFileCard(e.detail, fileCard)"
+					@upd:selected="(e: CustomEvent<boolean>) => fileCard.selected = e.detail"
+					@upd:minimumCardPrice="(e: CustomEvent<number>) => fileCard.minimumCardPrice = e.detail"
 				></wc-file-card>
 			</div>
 		</Transition>
 
-		<div v-if="filesStore.fileCards.length > 0">
+		<div v-if="fileCardsStore.fileCards.length > 0">
 			<h2>Select files you want to merge</h2>
-			<button class="btn" @click="filesStore.downloadAll">Download All</button>
-			<button :disabled="filesStore.selectedFiles.length < 2" class="btn" @click="filesStore.merge">
+			<button class="btn" @click="fileCardsStore.downloadAll">Download All</button>
+			<button :disabled="fileCardsStore.selectedFiles.length < 2" class="btn" @click="fileCardsStore.merge">
 				Merge samples
 			</button>
-			<button class="btn" @click="filesStore.deleteAllFiles">Clear all</button>
+			<button class="btn" @click="fileCardsStore.deleteAllFiles">Clear all</button>
 		</div>
 		<Transition>
 			<wc-file-card
-				v-if="filesStore.mergedFile"
-				v-bind="filesStore.mergedFile"
-				@delete="filesStore.deleteMergedFile"
+				v-if="fileCardsStore.mergedFile"
+				v-bind="fileCardsStore.mergedFile"
+				@delete="fileCardsStore.deleteMergedFile"
 				@upd:minimumCardPrice="onUpdateMergedMinimumPrice"
-				@upd:league="onUpdateMergedLeague"
+				@upd:league="(e: CustomEvent<League>) => fileCardsStore.replaceMerged(e.detail)"
 			></wc-file-card>
 		</Transition>
 	</div>
