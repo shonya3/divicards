@@ -31,11 +31,6 @@ const onDrop = async (e: DragEvent) => {
 	}
 };
 
-const onUpdateMergedMinimumPrice = (e: CustomEvent<number>) => {
-	if (!fileCardsStore.mergedFile) return;
-	fileCardsStore.mergedFile.minimumCardPrice = e.detail;
-};
-
 const openStashWindow = async () => {
 	if (authStore.loggedIn) {
 		stashVisible.value = true;
@@ -106,7 +101,7 @@ const openStashWindow = async () => {
 				v-if="fileCardsStore.mergedFile"
 				v-bind="fileCardsStore.mergedFile"
 				@delete="fileCardsStore.deleteMergedFile"
-				@upd:minimumCardPrice="onUpdateMergedMinimumPrice"
+				@upd:minimumCardPrice="(e: CustomEvent<number>) => fileCardsStore.mergedFile && (fileCardsStore.mergedFile.minimumCardPrice = e.detail)"
 				@upd:league="(e: CustomEvent<League>) => fileCardsStore.replaceMerged(e.detail)"
 			></wc-file-card>
 		</Transition>
