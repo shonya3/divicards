@@ -151,4 +151,3 @@ const openStashWindow = async () => {
 	font-size: 1.4rem;
 }
 </style>
-./cards
