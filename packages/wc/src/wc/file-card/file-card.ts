@@ -8,6 +8,7 @@ import { NotCardsElement } from './not-cards/not-cards';
 import { DivinationCardsSample, League, Result, TradeLeague, isTradeLeague } from '@divicards/shared/types';
 import { property, query } from 'lit/decorators.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
+import { classMap } from 'lit/directives/class-map.js';
 const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 
 declare global {
@@ -112,8 +113,14 @@ export class FileCardElement extends BaseElement {
 	}
 
 	render() {
-		return html`<div class="file" :class="{ 'file-error': error, 'file-selected': selected }">
-			<p class="filename" :class="{ 'filename--error': error }">${this.filename}</p>
+		return html`<div
+			class=${classMap({
+				file: true,
+				'file-error': this.sample.type === 'err',
+				'file-selected': Boolean(this.selected),
+			})}
+		>
+			<p class=${classMap({ filename: true, 'filename--error': this.sample.type === 'err' })}>${this.filename}</p>
 			<button @click=${this.#onBtnDeleteClicked} id="btn-delete" class="btn-delete">X</button>
 			${this.chunk()}
 		</div>`;

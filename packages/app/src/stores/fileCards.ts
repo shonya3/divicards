@@ -1,6 +1,5 @@
 import { ACTIVE_LEAGUE, downloadText } from '@divicards/shared/lib';
 import { defineStore } from 'pinia';
-// import { useFileCard } from '../composables/useFileCard';
 import { command } from '../command';
 import { DivinationCardsSample, League, Result, TradeLeague, isTradeLeague, leagues } from '@divicards/shared/types';
 import { FileCardProps } from '@divicards/wc/src/wc/file-card/file-card';
@@ -19,20 +18,17 @@ const prefixFilename = (name: string, league: League): string => {
 	return `${league}${UNDERSCORE_GLUE}${name}`;
 };
 
-export const createFileCard = async (filename: string, csv: string, league: TradeLeague): Promise<FileCardProps> => {
-	const uuid = crypto.randomUUID();
+export const createFileCard = async (name: string, csv: string, league: TradeLeague): Promise<FileCardProps> => {
 	const sample = await command('sample', { csv, league });
 
-	const fileCard = {
-		uuid,
+	return {
+		uuid: crypto.randomUUID(),
+		filename: sample.type === 'ok' ? prefixFilename(name, league) : name,
 		league,
-		filename: prefixFilename(filename, league),
 		sample,
 		selected: false,
 		minimumCardPrice: 0,
 	};
-
-	return fileCard;
 };
 
 export const useFileCardsStore = defineStore('this', {
