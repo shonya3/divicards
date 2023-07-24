@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { useFileCardsStore } from './stores/fileCards';
 import { ref } from 'vue';
-import { useAutoAnimate } from './composables/useAutoAnimate';
+
+import { useFileCardsStore } from './stores/fileCards';
 import { usePoeOAuth2Store } from './stores/poeOAuth2Store';
+import { useAutoAnimate } from './composables/useAutoAnimate';
+
 import { DropFilesMessageElement } from '@divicards/wc/src/wc/drop-files-message';
-import { LeagueSelectElement } from '@divicards/wc/src/wc/league-select';
 import { PoeAuthElement } from '@divicards/wc/src/wc/poe-auth';
-import { TabBadgeElement } from '@divicards/wc/src/wc/stashes/tab-badge';
-import { FileCardElement } from '@divicards/wc/src/wc/file-card/file-card';
-import { League } from '@divicards/shared/types';
 import { StashesViewElement } from '@divicards/wc/src/wc/stashes/stashes-view';
-import { StashTab } from '@divicards/shared/poe.types';
+import { FileCardElement } from '@divicards/wc/src/wc/file-card/file-card';
+
+import type { League } from '@divicards/shared/types';
+import type { StashTab } from '@divicards/shared/poe.types';
+
 StashesViewElement.define();
 DropFilesMessageElement.define();
-LeagueSelectElement.define();
 PoeAuthElement.define();
 FileCardElement.define();
-TabBadgeElement.define();
 
 const fileCardsStore = useFileCardsStore();
 const authStore = usePoeOAuth2Store();
