@@ -31,7 +31,7 @@ export const createFileCard = async (name: string, csv: string, league: TradeLea
 	};
 };
 
-export const useFileCardsStore = defineStore('this', {
+export const useFileCardsStore = defineStore('fileCards', {
 	state: (): {
 		fileCards: FileCardProps[];
 		mergedFile: FileCardProps | null;
