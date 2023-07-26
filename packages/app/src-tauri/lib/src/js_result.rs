@@ -34,14 +34,18 @@ mod test {
 
     use crate::js_result::JSResult;
 
-    use divi::{sample::DivinationCardsSample, Prices};
+    use divi::{
+        league::TradeLeague,
+        prices::Prices,
+        sample::{DivinationCardsSample, SampleData},
+    };
 
     #[tokio::test]
     async fn jsres() {
         let csv = read_to_string("./divi/example-2.csv").unwrap();
         let sample = DivinationCardsSample::create(
-            divi::SampleData::CsvString(csv),
-            Prices::fetch(&divi::TradeLeague::Crucible).await.unwrap(),
+            SampleData::CsvString(csv),
+            Prices::fetch(&TradeLeague::Crucible).await.unwrap(),
         );
 
         let js_result = JSResult::from(sample);
@@ -55,8 +59,8 @@ mod test {
     async fn jsres_err() {
         let csv = String::from("not a valid csv lol");
         let sample = DivinationCardsSample::create(
-            divi::SampleData::CsvString(csv),
-            Prices::fetch(&divi::TradeLeague::Crucible).await.unwrap(),
+            SampleData::CsvString(csv),
+            Prices::fetch(&TradeLeague::Crucible).await.unwrap(),
         );
 
         let js_result = JSResult::from(sample);

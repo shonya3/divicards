@@ -1,6 +1,6 @@
 use std::path::PathBuf;
 
-use divi::TradeLeague;
+use divi::league::TradeLeague;
 
 pub fn prices(league: &TradeLeague) -> PathBuf {
     appdata().join(format!("{}-prices.json", { league }))

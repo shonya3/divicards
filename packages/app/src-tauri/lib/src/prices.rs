@@ -1,5 +1,5 @@
 use crate::paths;
-use divi::{Prices, TradeLeague};
+use divi::{league::TradeLeague, prices::Prices};
 use std::{fs, path::Path};
 
 pub const DAY_AS_SECS: u64 = 86_400;

@@ -2,8 +2,6 @@ use std::fmt::Display;
 
 use serde::{Deserialize, Serialize};
 
-use crate::Prices;
-
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub enum League {
     Crucible,

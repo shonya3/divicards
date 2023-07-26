@@ -4,7 +4,7 @@
     windows_subsystem = "windows"
 )]
 
-use divi::{Prices, TradeLeague};
+use divi::league::TradeLeague;
 use lib::{
     commands,
     discord::{self, DiscordProvider},

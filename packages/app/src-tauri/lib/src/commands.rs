@@ -1,4 +1,8 @@
-use divi::{sample::DivinationCardsSample, CardNameAmount, Prices, SampleData, TradeLeague};
+use divi::{
+    league::TradeLeague,
+    prices::Prices,
+    sample::{CardNameAmount, DivinationCardsSample, SampleData},
+};
 use tauri::{command, AppHandle, Manager};
 
 use crate::{js_result::JSResult, prices};
