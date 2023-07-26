@@ -1,10 +1,5 @@
 use std::fmt::Display;
 
-use reqwest::Request;
-use serde::Serialize;
-
-use crate::CARDS;
-
 #[derive(Debug)]
 pub struct MissingHeaders;
 

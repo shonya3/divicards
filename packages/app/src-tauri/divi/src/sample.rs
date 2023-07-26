@@ -1,15 +1,14 @@
-use csv::{Reader, ReaderBuilder, Trim};
+use csv::{ReaderBuilder, Trim};
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    card_record::DivinationCardRecord,
+    card_record::{DivinationCardRecord, FixedCardName},
     cards::Cards,
-    consts::{CARDS, CARDS_N, RAIN_OF_CHAOS_WEIGHT},
+    consts::{CARDS, RAIN_OF_CHAOS_WEIGHT},
     error::MissingHeaders,
     prices::Prices,
-    DivinationCard, FixedCardName,
+    IsCard,
 };
-use serde_big_array::BigArray;
 
 #[derive(Debug, Serialize, Deserialize, Clone, Default)]
 #[serde(rename_all = "camelCase")]
@@ -26,7 +25,6 @@ impl DivinationCardsSample {
         not_cards: Vec<String>,
         fixed_names: Vec<FixedCardName>,
         csv: String,
-        chaos: Option<f32>,
     ) -> DivinationCardsSample {
         DivinationCardsSample {
             cards,
@@ -49,7 +47,7 @@ impl DivinationCardsSample {
         prices: Prices,
     ) -> Result<DivinationCardsSample, MissingHeaders> {
         let mut sample = DivinationCardsSample::default();
-        let mut sample = sample.price(prices).parse_data(source)?;
+        let sample = sample.price(prices).parse_data(source)?;
         let sample = sample.write_weight().write_csv().to_owned();
 
         Ok(sample)
@@ -125,13 +123,13 @@ impl DivinationCardsSample {
     }
 
     pub fn remove_lines_before_headers(s: &str) -> Result<String, MissingHeaders> {
-        match s.lines().enumerate().into_iter().find(|(index, line)| {
+        match s.lines().enumerate().into_iter().find(|(_index, line)| {
             line.contains("name")
                 && ["amount", "stackSize"]
                     .iter()
                     .any(|variant| line.contains(variant))
         }) {
-            Some((index, line)) => Ok(s
+            Some((index, _line)) => Ok(s
                 .lines()
                 .into_iter()
                 .skip(index)
@@ -176,8 +174,6 @@ impl DivinationCardsSample {
                 let sum: i32 = vec.iter().map(|card| card.amount).sum();
                 println!("card total amount: {}", sum);
 
-                let names: Vec<String> = vec.clone().into_iter().map(|card| card.name).collect();
-
                 for CardNameAmount { name, amount } in vec.clone() {
                     let mut record = DivinationCardRecord {
                         name,
@@ -189,14 +185,12 @@ impl DivinationCardsSample {
 
                     match &record.is_card() {
                         true => {
-                            // self.card_mut(&record.name).unwrap().amount(record.amount);
                             let mut_card = self.card_mut(&record.name).unwrap();
                             mut_card.set_amount(mut_card.amount + record.amount);
                         }
 
                         false => match record.fix_name() {
                             Some(fixed) => {
-                                // self.card_mut(&record.name).unwrap().amount(record.amount);
                                 let mut_card = self.card_mut(&record.name).unwrap();
                                 mut_card.set_amount(mut_card.amount + record.amount);
                                 self.fixed_names.push(fixed);
@@ -227,7 +221,7 @@ pub enum SampleData {
 #[cfg(test)]
 mod tests {
 
-    use crate::league::TradeLeague;
+    use crate::{league::TradeLeague, IsCard};
 
     use super::*;
 
@@ -256,10 +250,6 @@ Encroaching Darkness,5\r\nThe Endless Darkness,1\r\nThe Endurance,19\r\nThe Enfo
 
         assert_eq!(trimmed.lines().next().unwrap(), "name,stackSize");
     }
-
-    use serde_json::Value;
-
-    use super::*;
 
     #[test]
     fn is_card() {

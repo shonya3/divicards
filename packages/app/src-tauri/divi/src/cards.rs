@@ -80,12 +80,4 @@ impl DerefMut for Cards {
     }
 }
 
-mod tests {
-    use std::collections::HashMap;
-
-    #[test]
-    fn t() {
-        let cards: HashMap<String, String> = HashMap::new();
-        let doctor = cards.get(&String::from("all"));
-    }
-}
+mod tests {}

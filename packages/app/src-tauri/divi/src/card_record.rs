@@ -4,8 +4,23 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     consts::{CARDS, CONDENSE_FACTOR, LEGACY_CARDS},
-    DivinationCard, FixedCardName,
+    IsCard,
 };
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct FixedCardName {
+    pub old: String,
+    pub fixed: String,
+}
+
+impl FixedCardName {
+    pub fn new(old: &str, fixed: &str) -> FixedCardName {
+        FixedCardName {
+            old: String::from(old),
+            fixed: String::from(fixed),
+        }
+    }
+}
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct DivinationCardRecord {
@@ -107,7 +122,7 @@ impl Default for DivinationCardRecord {
     }
 }
 
-impl DivinationCard for DivinationCardRecord {
+impl IsCard for DivinationCardRecord {
     fn is_card(&self) -> bool {
         CARDS.contains(&self.name.as_str())
     }
@@ -119,10 +134,6 @@ impl DivinationCard for DivinationCardRecord {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
-
-    use serde_json::Value;
-
     use super::*;
 
     #[test]
