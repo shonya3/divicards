@@ -38,11 +38,7 @@ impl DivinationCardsSample {
         source: SampleData,
         prices: Prices,
     ) -> Result<DivinationCardsSample, MissingHeaders> {
-        let mut sample = DivinationCardsSample::default();
-        let sample = sample.price(prices).parse_data(source)?;
-        let sample = sample.write_weight().write_csv().to_owned();
-
-        Ok(sample)
+        DivinationCardsSample::from_prices(prices).parse_data(source)
     }
 
     pub fn merge(prices: Prices, samples: &[DivinationCardsSample]) -> DivinationCardsSample {
@@ -57,59 +53,19 @@ impl DivinationCardsSample {
             merged.cards.get_mut(name).unwrap().set_amount(sum);
         }
 
-        merged.write_weight().write_csv();
-        merged
+        merged.get_sample_ready()
     }
 
-    pub fn size(&self) -> i32 {
+    pub fn total_cards_amount(&self) -> i32 {
         self.cards.iter().map(|r| r.amount).sum()
     }
 
-    pub fn sample_weight(&self) -> f32 {
-        let rain_of_chaos = self
-            .cards
-            .get("Rain of Chaos")
-            .expect("no rain of chaos card");
-        RAIN_OF_CHAOS_WEIGHT / rain_of_chaos.local_weight(self.size())
+    pub fn update_prices(self, prices: Prices) -> DivinationCardsSample {
+        // safe to unwrap, because .csv field is already parsed
+        DivinationCardsSample::create(SampleData::CsvString(self.csv), prices).unwrap()
     }
 
-    pub fn update_prices(self, prices: Prices) -> Result<DivinationCardsSample, MissingHeaders> {
-        DivinationCardsSample::create(SampleData::CsvString(self.csv), prices)
-    }
-
-    fn price(&mut self, prices: Prices) -> &mut Self {
-        for card in &mut self.cards.iter_mut() {
-            let price = prices
-                .0
-                .iter()
-                .find(|div_card_price| div_card_price.name == card.name)
-                .and_then(|v| v.price);
-            card.price = price;
-        }
-        self
-    }
-
-    fn write_weight(&mut self) -> &mut Self {
-        let sample_size = self.size();
-        let sample_weight = self.sample_weight();
-
-        for card in &mut self.cards.iter_mut() {
-            card.weight(sample_weight, sample_size);
-        }
-
-        self
-    }
-
-    fn write_csv(&mut self) -> &mut Self {
-        let mut writer = csv::Writer::from_writer(vec![]);
-        for card in self.cards.iter().clone() {
-            writer.serialize(card).unwrap();
-        }
-        self.csv = String::from_utf8(writer.into_inner().expect("Error with csv serialize"))
-            .expect("Error");
-        self
-    }
-
+    /// Consumes Prices structure to set prices for Cards
     fn from_prices(prices: Prices) -> Self {
         DivinationCardsSample {
             cards: prices.into(),
@@ -117,25 +73,9 @@ impl DivinationCardsSample {
         }
     }
 
-    fn remove_lines_before_headers(s: &str) -> Result<String, MissingHeaders> {
-        match s.lines().enumerate().into_iter().find(|(_index, line)| {
-            line.contains("name")
-                && ["amount", "stackSize"]
-                    .iter()
-                    .any(|variant| line.contains(variant))
-        }) {
-            Some((index, _line)) => Ok(s
-                .lines()
-                .into_iter()
-                .skip(index)
-                .collect::<Vec<&str>>()
-                .join("\r\n")),
-            None => Err(MissingHeaders),
-        }
-    }
-
-    fn parse_data(&mut self, source: SampleData) -> Result<&mut Self, MissingHeaders> {
-        match source {
+    /// Reads the source, sets amounts of cards, fills not_cards and fixed_names. Then gets sample ready by writing weights and polished csv.
+    fn parse_data(&mut self, source: SampleData) -> Result<Self, MissingHeaders> {
+        let sample = match source {
             SampleData::CsvString(s) => {
                 let data = Self::remove_lines_before_headers(&s)?;
                 let mut rdr = ReaderBuilder::new()
@@ -197,7 +137,63 @@ impl DivinationCardsSample {
 
                 Ok(self)
             }
+        }?;
+        Ok(sample.get_sample_ready())
+    }
+
+    /// Preparsing helper
+    fn remove_lines_before_headers(s: &str) -> Result<String, MissingHeaders> {
+        match s.lines().enumerate().into_iter().find(|(_index, line)| {
+            line.contains("name")
+                && ["amount", "stackSize"]
+                    .iter()
+                    .any(|variant| line.contains(variant))
+        }) {
+            Some((index, _line)) => Ok(s
+                .lines()
+                .into_iter()
+                .skip(index)
+                .collect::<Vec<&str>>()
+                .join("\r\n")),
+            None => Err(MissingHeaders),
         }
+    }
+
+    /// Writes weights for cards and writes final csv - write_weight and write_csv in one function
+    fn get_sample_ready(&mut self) -> Self {
+        self.write_weight().write_csv().to_owned()
+    }
+
+    /// Helper function for write_weight
+    fn sample_weight(&self) -> f32 {
+        let rain_of_chaos = self
+            .cards
+            .get("Rain of Chaos")
+            .expect("no rain of chaos card");
+        RAIN_OF_CHAOS_WEIGHT / rain_of_chaos.local_weight(self.total_cards_amount())
+    }
+
+    /// (After parsing) Calculates special weight for each card and mutates it. Runs at the end of parsing.
+    fn write_weight(&mut self) -> &mut Self {
+        let sample_size = self.total_cards_amount();
+        let sample_weight = self.sample_weight();
+
+        for card in &mut self.cards.iter_mut() {
+            card.set_weight(sample_weight, sample_size);
+        }
+
+        self
+    }
+
+    /// (After weight) Sets .csv field. Must be used when everything is set and ready.
+    fn write_csv(&mut self) -> &mut Self {
+        let mut writer = csv::Writer::from_writer(vec![]);
+        for card in self.cards.iter().clone() {
+            writer.serialize(card).unwrap();
+        }
+        self.csv = String::from_utf8(writer.into_inner().expect("Error with csv serialize"))
+            .expect("Error");
+        self
     }
 }
 
