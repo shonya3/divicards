@@ -34,17 +34,14 @@ export interface Events {
 }
 
 export class FileCardElement extends BaseElement {
-	static define(tag = 'wc-file-card') {
-		if (!customElements.get(tag)) {
-			customElements.define(tag, FileCardElement);
-			LeagueSelectElement.define();
-			DivTableElement.define();
-			BasePopupElement.define();
-			FixedNamesElement.define();
-			NotCardsElement.define();
-		}
-	}
-	static htmlTag = 'wc-file-card';
+	static override defineList = [
+		LeagueSelectElement,
+		DivTableElement,
+		BasePopupElement,
+		FixedNamesElement,
+		NotCardsElement,
+	];
+	static override tag = 'wc-file-card';
 
 	@property({ reflect: true }) league: TradeLeague = ACTIVE_LEAGUE;
 	@property({ reflect: true }) filename: string = 'NO FILE NAME';
@@ -112,7 +109,7 @@ export class FileCardElement extends BaseElement {
 		}
 	}
 
-	render() {
+	protected override render() {
 		return html`<div
 			class=${classMap({
 				file: true,
@@ -131,7 +128,7 @@ export class FileCardElement extends BaseElement {
 		return URL.createObjectURL(new File([this.sample.data.csv], this.filename));
 	}
 
-	chunk() {
+	protected chunk() {
 		return html`${this.sample.type === 'err'
 			? html`<p>${this.sample.error}</p>`
 			: html`<div class="minor-icons">
@@ -204,7 +201,7 @@ export class FileCardElement extends BaseElement {
 		</svg>`;
 	}
 
-	static styles = [
+	static override styles = [
 		this.baseStyles,
 		css`
 			.league {

@@ -12,15 +12,9 @@ declare global {
 }
 
 export class FixedNamesElement extends BaseElement {
-	static define(tag = 'wc-fixed-names') {
-		if (!customElements.get(tag)) {
-			customElements.define(tag, FixedNamesElement);
-			BasePopupElement.define();
-			FixedIconElement.define();
-		}
-	}
-	static htmlTag = 'wc-fixed-names';
-	static styles = [
+	static override defineList = [BasePopupElement, FixedIconElement];
+	static override tag = 'wc-fixed-names';
+	static override styles = [
 		this.baseStyles,
 		css`
 			.fixed-names-list {
@@ -51,7 +45,7 @@ export class FixedNamesElement extends BaseElement {
 		this.popup.open();
 	}
 
-	protected render() {
+	protected override render() {
 		return html`<wc-fixed-icon
 				@click=${this.#onIconClicked}
 				width=${this.width}

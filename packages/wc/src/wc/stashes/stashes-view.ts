@@ -17,54 +17,6 @@ declare global {
 	}
 }
 
-const styles = css`
-	.main-stashes-component {
-		position: relative;
-		padding: 1rem;
-		border: 2px solid #000;
-		border-radius: 0.25rem;
-	}
-
-	.btn-load-items {
-		border: 2px solid transparent;
-		text-transform: uppercase;
-	}
-
-	.btn-load-items:not(:disabled) {
-		transform: scale(1.25);
-		border-color: purple;
-	}
-
-	.league-stashes {
-		max-width: max-content;
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-	}
-
-	.msg {
-		font-size: 2rem;
-		max-width: max-content;
-		margin-inline: auto;
-		margin-top: 1rem;
-		visibility: hidden;
-		min-height: 2rem;
-	}
-
-	.visible {
-		visibility: visible;
-	}
-
-	.not-visible {
-		visibility: hidden;
-	}
-
-	.controls {
-		display: flex;
-		justify-content: space-between;
-	}
-`;
-
 export class Events {
 	'close': void;
 	// ---
@@ -89,17 +41,9 @@ export interface StashesViewProps {
 }
 
 export class StashesViewElement extends BaseElement {
-	static define(tag = this.htmlTag) {
-		if (!customElements.get(tag)) {
-			customElements.define(tag, StashesViewElement);
-			HelpTipElement.define();
-			LeagueSelectElement.define();
-			TabBadgeElement.define();
-			TabBadgeGroupElement.define();
-		}
-	}
-	static htmlTag = 'wc-stashes-view';
-	static styles = [this.baseStyles, styles];
+	static override defineList = [HelpTipElement, LeagueSelectElement, TabBadgeElement, TabBadgeGroupElement];
+	static override tag = 'wc-stashes-view';
+	static override styles = [this.baseStyles, styles()];
 
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
 
@@ -233,4 +177,54 @@ export class StashesViewElement extends BaseElement {
 
 		return result;
 	}
+}
+
+function styles() {
+	return css`
+		.main-stashes-component {
+			position: relative;
+			padding: 1rem;
+			border: 2px solid #000;
+			border-radius: 0.25rem;
+		}
+
+		.btn-load-items {
+			border: 2px solid transparent;
+			text-transform: uppercase;
+		}
+
+		.btn-load-items:not(:disabled) {
+			transform: scale(1.25);
+			border-color: purple;
+		}
+
+		.league-stashes {
+			max-width: max-content;
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+		}
+
+		.msg {
+			font-size: 2rem;
+			max-width: max-content;
+			margin-inline: auto;
+			margin-top: 1rem;
+			visibility: hidden;
+			min-height: 2rem;
+		}
+
+		.visible {
+			visibility: visible;
+		}
+
+		.not-visible {
+			visibility: hidden;
+		}
+
+		.controls {
+			display: flex;
+			justify-content: space-between;
+		}
+	`;
 }

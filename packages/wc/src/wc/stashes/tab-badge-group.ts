@@ -14,51 +14,6 @@ declare global {
 
 const REMOVE_ONLY = '(Remove-only)';
 
-const styles = css`
-	:host {
-		display: inline-block;
-	}
-	.tab-badge-group {
-		display: grid;
-		gap: 1rem;
-	}
-	.filter {
-		display: flex;
-		gap: 0.4rem;
-	}
-
-	.page-controls {
-		display: flex;
-		gap: 0.4rem;
-		align-items: center;
-	}
-
-	.page-controls > input {
-		width: 5ch;
-		text-align: center;
-	}
-
-	.hide-remove-only {
-		display: flex;
-		align-items: center;
-		gap: 0.2rem;
-	}
-
-	.tabs-total {
-		> span {
-			color: yellow;
-		}
-	}
-
-	.list {
-		display: flex;
-		flex-wrap: wrap;
-		list-style: none;
-		gap: 5px;
-		margin-inline: 1rem;
-	}
-`;
-
 const filter = (stashes: StashTab[], nameQuery: string, shouldFilter: boolean, hideRemoveOnly: boolean): StashTab[] => {
 	if (!shouldFilter) return stashes;
 
@@ -91,14 +46,9 @@ export interface Events {
 }
 
 export class TabBadgeGroupElement extends BaseElement {
-	static define(tag = 'wc-tab-badge-group') {
-		if (!customElements.get(tag)) {
-			customElements.define(tag, TabBadgeGroupElement);
-			TabBadgeElement.define();
-		}
-	}
-	static htmlTag = 'wc-tab-badge-group';
-	static styles = [this.baseStyles, styles];
+	static override defineList = [TabBadgeElement];
+	static override tag = 'wc-tab-badge-group';
+	static override styles = [this.baseStyles, styles()];
 
 	@property({ type: Array }) stashes: StashTab[] = [];
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
@@ -168,7 +118,7 @@ export class TabBadgeGroupElement extends BaseElement {
 		this.emit<Events['upd:selectedTabs']>('upd:selectedTabs', this.selectedTabs);
 	}
 
-	render() {
+	protected override render() {
 		const ifWithHideRemoveOnly = this.withHideRemoveOnly
 			? html` <div class="hide-remove-only">
 					<label for="hide-remove-only">Hide remove-only</label>
@@ -243,4 +193,51 @@ export class TabBadgeGroupElement extends BaseElement {
 	increasePage() {
 		this.page++;
 	}
+}
+
+function styles() {
+	return css`
+		:host {
+			display: inline-block;
+		}
+		.tab-badge-group {
+			display: grid;
+			gap: 1rem;
+		}
+		.filter {
+			display: flex;
+			gap: 0.4rem;
+		}
+
+		.page-controls {
+			display: flex;
+			gap: 0.4rem;
+			align-items: center;
+		}
+
+		.page-controls > input {
+			width: 5ch;
+			text-align: center;
+		}
+
+		.hide-remove-only {
+			display: flex;
+			align-items: center;
+			gap: 0.2rem;
+		}
+
+		.tabs-total {
+			> span {
+				color: yellow;
+			}
+		}
+
+		.list {
+			display: flex;
+			flex-wrap: wrap;
+			list-style: none;
+			gap: 5px;
+			margin-inline: 1rem;
+		}
+	`;
 }

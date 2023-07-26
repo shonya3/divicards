@@ -9,8 +9,8 @@ declare global {
 }
 
 export class FixedIconElement extends BaseElement {
-	static htmlTag = 'wc-fixed-icon';
-	static styles = [
+	static override tag = 'wc-fixed-icon';
+	static override styles = [
 		this.baseStyles,
 		css`
 			svg {
@@ -22,7 +22,7 @@ export class FixedIconElement extends BaseElement {
 	@property({ reflect: true, type: Number }) width = 32;
 	@property({ reflect: true, type: Number }) height = 32;
 
-	render() {
+	protected override render() {
 		return html`<svg width=${this.width} height=${this.height} viewBox="0 0 24 24">
 			<path
 				fill="currentColor"

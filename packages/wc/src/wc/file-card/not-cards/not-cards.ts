@@ -9,46 +9,15 @@ declare global {
 	}
 }
 
-const styles = css`
-	.fixed-names-list {
-		margin-top: 2rem;
-	}
-
-	.list-item {
-		display: flex;
-		align-items: center;
-		gap: 20px;
-	}
-
-	.input-name {
-		overflow-x: hidden;
-		width: 200px;
-		opacity: 60%;
-	}
-
-	.list {
-		margin-top: 1rem;
-	}
-
-	svg {
-		cursor: pointer;
-	}
-`;
-
 export class NotCardsElement extends BaseElement {
-	static define(tag = 'wc-not-cards') {
-		if (!customElements.get(tag)) {
-			customElements.define(tag, NotCardsElement);
-			BasePopupElement.define();
-		}
-	}
-	static htmlTag = 'wc-not-cards';
-	static styles = [this.baseStyles, styles];
+	static override defineList = [BasePopupElement];
+	static override tag = 'wc-not-cards';
+	static override styles = [this.baseStyles, styles()];
 
 	@property({ type: Array }) notCards: string[] = [];
 	@query('wc-base-popup') popup!: BasePopupElement;
 
-	protected render() {
+	protected override render() {
 		return html`
 			${this.warningIcon()}
 			<wc-base-popup>
@@ -84,4 +53,32 @@ export class NotCardsElement extends BaseElement {
 			/>
 		</svg>`;
 	}
+}
+
+function styles() {
+	return css`
+		.fixed-names-list {
+			margin-top: 2rem;
+		}
+
+		.list-item {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+		}
+
+		.input-name {
+			overflow-x: hidden;
+			width: 200px;
+			opacity: 60%;
+		}
+
+		.list {
+			margin-top: 1rem;
+		}
+
+		svg {
+			cursor: pointer;
+		}
+	`;
 }

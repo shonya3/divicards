@@ -22,8 +22,8 @@ export interface Events {
 }
 
 export class LeagueSelectElement extends BaseElement {
-	static override htmlTag: string = 'wc-league-select';
-	static override styles = styles;
+	static override tag = 'wc-league-select';
+	static override styles = [this.baseStyles, styles];
 
 	@property({ type: Boolean, reflect: true }) trade = false;
 	@property({ type: String, reflect: true }) league: League = ACTIVE_LEAGUE;
@@ -37,7 +37,7 @@ export class LeagueSelectElement extends BaseElement {
 		this.select.focus();
 	}
 
-	render() {
+	protected override render() {
 		const leagues = this.trade ? tradeLeagues : allLeagues;
 
 		const options = html`${leagues.map(league => html`<option .value=${league}>${league}</option>`)}`;
@@ -50,7 +50,7 @@ export class LeagueSelectElement extends BaseElement {
 		</div>`;
 	}
 
-	firstUpdated() {
+	override firstUpdated() {
 		this.select.value = this.league;
 	}
 

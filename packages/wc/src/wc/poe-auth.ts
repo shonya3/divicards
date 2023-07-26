@@ -8,30 +8,13 @@ declare global {
 	}
 }
 
-const styles = css`
-	.poe-auth {
-		position: relative;
-	}
-	.logged-in {
-		display: flex;
-		align-items: center;
-		justify-self: center;
-		gap: 1rem;
-	}
-
-	.logs {
-		opacity: 0.6;
-		font-size: 80%;
-	}
-`;
-
 export class PoeAuthElement extends BaseElement {
-	static htmlTag = 'wc-poe-auth';
-	static styles = [styles, this.baseStyles];
+	static override tag = 'wc-poe-auth';
+	static override styles = [this.baseStyles, styles()];
 
 	@property({ reflect: true }) name: string = '';
 	@property({ type: Boolean, reflect: true }) loggedIn: boolean = false;
-	render() {
+	protected override render() {
 		const logoutButton = html`<button @click=${this.#emitLogout}>Logout</button>`;
 		const loginButton = html`<button @click=${this.#emitLogin}>Login</button>`;
 
@@ -52,4 +35,23 @@ export class PoeAuthElement extends BaseElement {
 	#emitLogout() {
 		this.emit('logout');
 	}
+}
+
+function styles() {
+	return css`
+		.poe-auth {
+			position: relative;
+		}
+		.logged-in {
+			display: flex;
+			align-items: center;
+			justify-self: center;
+			gap: 1rem;
+		}
+
+		.logs {
+			opacity: 0.6;
+			font-size: 80%;
+		}
+	`;
 }

@@ -27,15 +27,10 @@ const styles = css`
  * @summary Message to drop files for main app screen
  */
 export class DropFilesMessageElement extends BaseElement {
-	static define(tag = this.htmlTag) {
-		if (!customElements.get(tag)) {
-			customElements.define(tag, DropFilesMessageElement);
-			HelpTipElement.define();
-		}
-	}
-	static htmlTag: string = 'wc-drop-files-message';
-	static styles = styles;
-	render() {
+	static override defineList = [HelpTipElement];
+	static override tag: string = 'wc-drop-files-message';
+	static override styles = [this.baseStyles, styles];
+	protected override render() {
 		return html`<div style="display: flex; gap: 1rem">
 			<div class="drop">Drop files <span>Here!</span></div>
 			<wc-help-tip>

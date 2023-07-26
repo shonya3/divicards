@@ -3,7 +3,7 @@ import { BaseElement } from '../base-element';
 import { property, state, query } from 'lit/decorators.js';
 import { OrderTriangleElement } from '../order-triangle';
 import { toOrderedBy } from './toOrderedBy';
-import { Column, SortState } from './types';
+import { Column } from './types';
 import { DivinationCardRecord, Order } from '@divicards/shared/types';
 
 declare global {
@@ -11,81 +11,6 @@ declare global {
 		'wc-div-table': DivTableElement;
 	}
 }
-
-const styles = css`
-	:host {
-		display: block;
-		max-width: 1220px;
-		min-height: 100vh;
-	}
-
-	.slider-box {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		gap: 0.5rem;
-	}
-	.stats {
-		display: flex;
-		align-items: center;
-	}
-	.table-container {
-		display: flex;
-		flex-direction: column;
-		height: 100%;
-		max-width: 1220px;
-
-		color: var(--color);
-		background-color: var(--bg-color);
-	}
-
-	.header {
-		position: sticky;
-		top: 0;
-		display: flex;
-		gap: 1rem;
-		align-items: center;
-		flex-wrap: wrap;
-		z-index: 2;
-		background-color: var(--bg-color);
-		padding-top: 20px;
-		padding-bottom: 20px;
-	}
-
-	.column-name {
-		overflow-x: hidden;
-		white-space: nowrap;
-	}
-
-	th {
-		gap: 0.5rem;
-		display: flex;
-		align-items: center;
-	}
-
-	tbody > tr:first-of-type {
-		margin-top: 0.25rem;
-	}
-
-	tr {
-		display: grid;
-		grid-template-columns: 0.5fr 1.2fr 3fr 1fr 1fr 1fr;
-	}
-
-	.ch-3 {
-		/* display: block; */
-		text-align: center;
-		min-width: 3ch;
-	}
-	.ch-6 {
-		text-align: center;
-		min-width: 6ch;
-	}
-	.ch-7 {
-		text-align: center;
-		min-width: 7ch;
-	}
-`;
 
 const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 
@@ -95,14 +20,9 @@ export interface Events {
 }
 
 export class DivTableElement extends BaseElement {
-	static define(tag = 'wc-div-table'): void {
-		if (!customElements.get(tag)) {
-			customElements.define(tag, DivTableElement);
-			OrderTriangleElement.define();
-		}
-	}
-	static htmlTag = 'wc-div-table';
-	static styles = [this.baseStyles, styles];
+	static defineList = [OrderTriangleElement];
+	static override tag = 'wc-div-table';
+	static override styles = [this.baseStyles, styles()];
 
 	@property({ type: Array }) cards: Readonly<DivinationCardRecord[]> = [];
 	@property({ reflect: true, type: Number, attribute: 'min-price' }) minPrice: number = 0;
@@ -115,7 +35,7 @@ export class DivTableElement extends BaseElement {
 
 	@query('input#hide-zero-sum-checkbox') checkboxHideZeroSum!: HTMLInputElement;
 
-	willUpdate(map: PropertyValues<this>) {
+	override willUpdate(map: PropertyValues<this>) {
 		if (map.has('cards')) {
 			this._cards = Array.from(this.cards);
 		}
@@ -188,7 +108,7 @@ export class DivTableElement extends BaseElement {
 		});
 	}
 
-	protected render() {
+	protected override render() {
 		return html`<div class="table-container">${this.header()}${this.table()}</div>`;
 	}
 
@@ -312,4 +232,81 @@ export class DivTableElement extends BaseElement {
 			</tr>`;
 		});
 	}
+}
+
+function styles() {
+	return css`
+		:host {
+			display: block;
+			max-width: 1220px;
+			min-height: 100vh;
+		}
+
+		.slider-box {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 0.5rem;
+		}
+		.stats {
+			display: flex;
+			align-items: center;
+		}
+		.table-container {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+			max-width: 1220px;
+
+			color: var(--color);
+			background-color: var(--bg-color);
+		}
+
+		.header {
+			position: sticky;
+			top: 0;
+			display: flex;
+			gap: 1rem;
+			align-items: center;
+			flex-wrap: wrap;
+			z-index: 2;
+			background-color: var(--bg-color);
+			padding-top: 20px;
+			padding-bottom: 20px;
+		}
+
+		.column-name {
+			overflow-x: hidden;
+			white-space: nowrap;
+		}
+
+		th {
+			gap: 0.5rem;
+			display: flex;
+			align-items: center;
+		}
+
+		tbody > tr:first-of-type {
+			margin-top: 0.25rem;
+		}
+
+		tr {
+			display: grid;
+			grid-template-columns: 0.5fr 1.2fr 3fr 1fr 1fr 1fr;
+		}
+
+		.ch-3 {
+			/* display: block; */
+			text-align: center;
+			min-width: 3ch;
+		}
+		.ch-6 {
+			text-align: center;
+			min-width: 6ch;
+		}
+		.ch-7 {
+			text-align: center;
+			min-width: 7ch;
+		}
+	`;
 }
