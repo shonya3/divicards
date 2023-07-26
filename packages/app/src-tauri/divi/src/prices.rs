@@ -23,7 +23,13 @@ impl Prices {
 }
 impl Default for Prices {
     fn default() -> Self {
-        let prices: [DivinationCardPrice; CARDS_N] = CARDS
+        CARDS.into()
+    }
+}
+
+impl From<[&'static str; CARDS_N]> for Prices {
+    fn from(arr: [&'static str; CARDS_N]) -> Self {
+        let prices: [DivinationCardPrice; CARDS_N] = arr
             .into_iter()
             .map(|name| DivinationCardPrice {
                 name: name.to_string(),

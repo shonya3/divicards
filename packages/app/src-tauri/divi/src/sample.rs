@@ -34,14 +34,6 @@ impl DivinationCardsSample {
         }
     }
 
-    pub fn card_mut(&mut self, card: &str) -> Option<&mut DivinationCardRecord> {
-        self.cards.iter_mut().find(|c| c.name == card)
-    }
-
-    pub fn card(&self, card: &str) -> Option<&DivinationCardRecord> {
-        self.cards.iter().find(|c| c.name == card)
-    }
-
     pub fn create(
         source: SampleData,
         prices: Prices,
@@ -74,26 +66,18 @@ impl DivinationCardsSample {
     }
 
     pub fn sample_weight(&self) -> f32 {
-        let rain_of_chaos = self.card("Rain of Chaos").expect("no rain of chaos card");
+        let rain_of_chaos = self
+            .cards
+            .get("Rain of Chaos")
+            .expect("no rain of chaos card");
         RAIN_OF_CHAOS_WEIGHT / rain_of_chaos.local_weight(self.size())
-    }
-
-    pub fn write_weight(&mut self) -> &mut Self {
-        let sample_size = self.size();
-        let sample_weight = self.sample_weight();
-
-        for card in &mut self.cards.iter_mut() {
-            card.weight(sample_weight, sample_size);
-        }
-
-        self
     }
 
     pub fn update_prices(self, prices: Prices) -> Result<DivinationCardsSample, MissingHeaders> {
         DivinationCardsSample::create(SampleData::CsvString(self.csv), prices)
     }
 
-    pub fn price(&mut self, prices: Prices) -> &mut Self {
+    fn price(&mut self, prices: Prices) -> &mut Self {
         for card in &mut self.cards.iter_mut() {
             let price = prices
                 .0
@@ -105,7 +89,18 @@ impl DivinationCardsSample {
         self
     }
 
-    pub fn write_csv(&mut self) -> &mut Self {
+    fn write_weight(&mut self) -> &mut Self {
+        let sample_size = self.size();
+        let sample_weight = self.sample_weight();
+
+        for card in &mut self.cards.iter_mut() {
+            card.weight(sample_weight, sample_size);
+        }
+
+        self
+    }
+
+    fn write_csv(&mut self) -> &mut Self {
         let mut writer = csv::Writer::from_writer(vec![]);
         for card in self.cards.iter().clone() {
             writer.serialize(card).unwrap();
@@ -115,14 +110,14 @@ impl DivinationCardsSample {
         self
     }
 
-    pub fn from_prices(prices: Prices) -> Self {
+    fn from_prices(prices: Prices) -> Self {
         DivinationCardsSample {
             cards: prices.into(),
             ..Default::default()
         }
     }
 
-    pub fn remove_lines_before_headers(s: &str) -> Result<String, MissingHeaders> {
+    fn remove_lines_before_headers(s: &str) -> Result<String, MissingHeaders> {
         match s.lines().enumerate().into_iter().find(|(_index, line)| {
             line.contains("name")
                 && ["amount", "stackSize"]
@@ -139,7 +134,7 @@ impl DivinationCardsSample {
         }
     }
 
-    pub fn parse_data(&mut self, source: SampleData) -> Result<&mut Self, MissingHeaders> {
+    fn parse_data(&mut self, source: SampleData) -> Result<&mut Self, MissingHeaders> {
         match source {
             SampleData::CsvString(s) => {
                 let data = Self::remove_lines_before_headers(&s)?;
@@ -151,13 +146,13 @@ impl DivinationCardsSample {
                     if let Ok(mut record) = result {
                         match &record.is_card() {
                             true => {
-                                let mut_card = self.card_mut(&record.name).unwrap();
+                                let mut_card = self.cards.get_mut(&record.name).unwrap();
                                 mut_card.set_amount(mut_card.amount + record.amount);
                             }
                             false => match record.fix_name() {
                                 Some(fixed) => {
                                     // self.card_mut(&record.name).unwrap().amount(record.amount);
-                                    let mut_card = self.card_mut(&record.name).unwrap();
+                                    let mut_card = self.cards.get_mut(&record.name).unwrap();
                                     mut_card.set_amount(mut_card.amount + record.amount);
                                     self.fixed_names.push(fixed);
                                 }
@@ -185,13 +180,13 @@ impl DivinationCardsSample {
 
                     match &record.is_card() {
                         true => {
-                            let mut_card = self.card_mut(&record.name).unwrap();
+                            let mut_card = self.cards.get_mut(&record.name).unwrap();
                             mut_card.set_amount(mut_card.amount + record.amount);
                         }
 
                         false => match record.fix_name() {
                             Some(fixed) => {
-                                let mut_card = self.card_mut(&record.name).unwrap();
+                                let mut_card = self.cards.get_mut(&record.name).unwrap();
                                 mut_card.set_amount(mut_card.amount + record.amount);
                                 self.fixed_names.push(fixed);
                             }

@@ -34,17 +34,7 @@ impl Cards {
 
 impl Default for Cards {
     fn default() -> Self {
-        Self(
-            CARDS
-                .into_iter()
-                .map(|s| DivinationCardRecord {
-                    name: s.to_string(),
-                    ..Default::default()
-                })
-                .collect::<Vec<DivinationCardRecord>>()
-                .try_into()
-                .unwrap(),
-        )
+        CARDS.into()
     }
 }
 
@@ -57,6 +47,21 @@ impl From<Prices> for Cards {
                 .map(|DivinationCardPrice { name, price }| DivinationCardRecord {
                     name,
                     price,
+                    ..Default::default()
+                })
+                .collect::<Vec<DivinationCardRecord>>()
+                .try_into()
+                .unwrap(),
+        )
+    }
+}
+
+impl From<[&'static str; CARDS_N]> for Cards {
+    fn from(arr: [&'static str; CARDS_N]) -> Self {
+        Self(
+            arr.into_iter()
+                .map(|s| DivinationCardRecord {
+                    name: s.to_string(),
                     ..Default::default()
                 })
                 .collect::<Vec<DivinationCardRecord>>()
