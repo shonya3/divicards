@@ -1,7 +1,13 @@
 import { LitElement, css } from 'lit';
 
 export class BaseElement extends LitElement {
+	/**
+	 * Necessary field to implement for each class. It is used to define the element.
+	 */
 	static tag: string;
+	/**
+	 * list of classes of custom elements needed for this element.
+	 */
 	static defineList: (typeof BaseElement)[] = [];
 	static baseStyles = baseStyles();
 	static define(tag = this.tag) {
