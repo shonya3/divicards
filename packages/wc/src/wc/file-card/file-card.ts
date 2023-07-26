@@ -180,7 +180,7 @@ export class FileCardElement extends BaseElement {
 						: html`<input
 								class="checkbox"
 								type="checkbox"
-								:checked="selected"
+								.checked=${this.selected}
 								id="selected-checkbox"
 								@change=${this.#onSelectedClicked}
 						  />`}

@@ -84,6 +84,10 @@ export class Events {
 	'tab-select': { tabId: TabBadgeElement['tabId']; selected: boolean };
 }
 
+export interface StashesViewProps {
+	league?: League;
+}
+
 export class StashesViewElement extends BaseElement {
 	static define(tag = this.htmlTag) {
 		if (!customElements.get(tag)) {
@@ -148,7 +152,7 @@ export class StashesViewElement extends BaseElement {
 		return html`<div class="main-stashes-component">
 			<div class="controls">
 				<div class="league-stashes">
-					<wc-league-select :league="league" @upd:league=${this.#onLeagueSelected}></wc-league-select>
+					<wc-league-select .league=${this.league} @upd:league=${this.#onLeagueSelected}></wc-league-select>
 					<button id="stashes-btn" @click=${this.#onLoadStashesList}>Stashes</button>
 					<wc-help-tip>
 						<p>Select tabs by clicking on them. Then click LOAD ITEMS button</p>

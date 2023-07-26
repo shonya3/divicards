@@ -45,9 +45,6 @@ importers:
       '@vitejs/plugin-vue':
         specifier: ^4.2.3
         version: 4.2.3(vite@4.3.9)(vue@3.3.4)
-      histoire:
-        specifier: ^0.16.1
-        version: 0.16.1(vite@4.3.9)
       typescript:
         specifier: ^5.0.4
         version: 5.0.4

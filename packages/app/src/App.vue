@@ -7,16 +7,12 @@ import { useAutoAnimate } from './composables/useAutoAnimate';
 
 import { DropFilesMessageElement } from '@divicards/wc/src/wc/drop-files-message';
 import { PoeAuthElement } from '@divicards/wc/src/wc/poe-auth';
-import { StashesViewElement } from '@divicards/wc/src/wc/stashes/stashes-view';
-import { FileCardElement } from '@divicards/wc/src/wc/file-card/file-card';
 
-import type { League } from '@divicards/shared/types';
-import type { StashTab } from '@divicards/shared/poe.types';
+import FileCard from './components/FileCard.vue';
+import StashesView from './components/StashesView.vue';
 
-StashesViewElement.define();
 DropFilesMessageElement.define();
 PoeAuthElement.define();
-FileCardElement.define();
 
 const fileCardsStore = useFileCardsStore();
 const authStore = usePoeOAuth2Store();
@@ -66,25 +62,19 @@ const openStashWindow = async () => {
 		</header>
 
 		<div v-show="authStore.loggedIn && stashVisible">
-			<wc-stashes-view
-				@tab-data="
-					async (e: CustomEvent<{ league: League; tab: StashTab }>) =>
-						fileCardsStore.addFromTab(e.detail.league, e.detail.tab)
-				"
-				@close="stashVisible = false"
-			></wc-stashes-view>
+			<StashesView @tab-tada="fileCardsStore.addFromTab" @close="stashVisible = false" />
 		</div>
 
 		<Transition>
 			<div ref="filesTemplateRef" class="files" v-show="fileCardsStore.fileCards.length">
-				<wc-file-card
+				<FileCard
 					v-for="fileCard in fileCardsStore.fileCards"
 					v-bind="fileCard"
-					@delete="(e: CustomEvent<string>) => fileCardsStore.deleteFile(e.detail)"
-					@upd:league="(e: CustomEvent<League>) => fileCardsStore.replaceFileCard(e.detail, fileCard)"
-					@upd:selected="(e: CustomEvent<boolean>) => fileCard.selected = e.detail"
-					@upd:minimumCardPrice="(e: CustomEvent<number>) => fileCard.minimumCardPrice = e.detail"
-				></wc-file-card>
+					@delete="fileCardsStore.deleteFile"
+					v-model:selected="fileCard.selected"
+					v-model:minimum-card-price="fileCard.minimumCardPrice"
+					@update:league="league => fileCardsStore.replaceFileCard(league, fileCard)"
+				/>
 			</div>
 		</Transition>
 
@@ -97,13 +87,15 @@ const openStashWindow = async () => {
 			<button class="btn" @click="fileCardsStore.deleteAllFiles">Clear all</button>
 		</div>
 		<Transition>
-			<wc-file-card
+			<FileCard
 				v-if="fileCardsStore.mergedFile"
 				v-bind="fileCardsStore.mergedFile"
 				@delete="fileCardsStore.deleteMergedFile"
-				@upd:minimumCardPrice="(e: CustomEvent<number>) => fileCardsStore.mergedFile && (fileCardsStore.mergedFile.minimumCardPrice = e.detail)"
-				@upd:league="(e: CustomEvent<League>) => fileCardsStore.replaceMerged(e.detail)"
-			></wc-file-card>
+				@update:minimum-card-price="
+					price => fileCardsStore.mergedFile && (fileCardsStore.mergedFile.minimumCardPrice = price)
+				"
+				@update:league="fileCardsStore.replaceMerged"
+			/>
 		</Transition>
 	</div>
 </template>
