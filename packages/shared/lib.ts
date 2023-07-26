@@ -1,5 +1,5 @@
 export const ACTIVE_LEAGUE = 'Crucible';
-export const downloadText = (filename: string, text: string) => {
+export const downloadText = (filename: string, text: string = 'empty') => {
 	const file = new File([text], filename);
 	const a = document.createElement('a');
 	a.download = filename;

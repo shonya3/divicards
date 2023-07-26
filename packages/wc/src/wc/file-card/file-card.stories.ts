@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/web-components';
 import { FileCardElement } from './file-card';
-import { league, filename, href, selected, uuid, minimumCardPrice, sample, fileCardProps } from './data';
+import { league, filename, selected, uuid, minimumCardPrice, sample, fileCardProps } from './data';
 import { html } from 'lit';
 
 export default {
@@ -16,7 +16,6 @@ export const Default = {
 		return html`<wc-file-card
 			league=${league}
 			filename=${filename}
-			href=${href}
 			?selected=${selected}
 			uuid=${uuid}
 			minimum-card-price=${minimumCardPrice}

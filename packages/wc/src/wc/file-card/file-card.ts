@@ -125,7 +125,7 @@ export class FileCardElement extends BaseElement {
 
 	get urlObject() {
 		if (this.sample.type === 'err') throw new Error('Cannot download erroneus file');
-		return URL.createObjectURL(new File([this.sample.data.csv], this.filename));
+		return URL.createObjectURL(new File([this.sample.data.csv ?? ''], this.filename));
 	}
 
 	protected chunk() {
