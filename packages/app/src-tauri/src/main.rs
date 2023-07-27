@@ -4,11 +4,15 @@
     windows_subsystem = "windows"
 )]
 
+use std::collections::HashMap;
+use tokio::sync::Mutex;
+
 use divi::league::TradeLeague;
 use lib::{
     commands,
     discord::{self, DiscordProvider},
-    google, paths, poe, prices,
+    google, paths, poe,
+    prices::{self, AppCardPrices},
 };
 use tauri::Manager;
 
@@ -16,20 +20,12 @@ use tauri::Manager;
 async fn main() {
     lib::dev::init_tracing();
     tracing::event!(tracing::Level::DEBUG, "app startup");
-    match prices::update(&TradeLeague::Crucible).await {
-        Ok(prices) => {
-            tracing::event!(tracing::Level::DEBUG, "prices updated");
-        }
-        Err(err) => {
-            tracing::event!(tracing::Level::ERROR, "could not update prices {:?}", err);
-        }
-    };
 
-    let prices = prices::prices(&TradeLeague::Crucible).await;
+    let app_prices = Mutex::new(AppCardPrices::new(paths::appdata(), HashMap::new()));
 
     tauri::Builder::default()
         .setup(|app| {
-            app.manage(prices);
+            app.manage(app_prices);
             let v = app.config().package.version.clone().unwrap();
             #[cfg(debug_assertions)] // only include this code on debug builds
             {

@@ -40,13 +40,10 @@ mod test {
         sample::{DivinationCardsSample, SampleData},
     };
 
-    #[tokio::test]
-    async fn jsres() {
+    #[test]
+    fn jsres() {
         let csv = read_to_string("./divi/example-2.csv").unwrap();
-        let sample = DivinationCardsSample::create(
-            SampleData::CsvString(csv),
-            Prices::fetch(&TradeLeague::Crucible).await.unwrap(),
-        );
+        let sample = DivinationCardsSample::create(SampleData::CsvString(csv), None);
 
         let js_result = JSResult::from(sample);
         let json = serde_json::to_string(&js_result).unwrap();
@@ -55,13 +52,10 @@ mod test {
         file.write_all(&json.as_bytes()).unwrap();
     }
 
-    #[tokio::test]
-    async fn jsres_err() {
+    #[test]
+    fn jsres_err() {
         let csv = String::from("not a valid csv lol");
-        let sample = DivinationCardsSample::create(
-            SampleData::CsvString(csv),
-            Prices::fetch(&TradeLeague::Crucible).await.unwrap(),
-        );
+        let sample = DivinationCardsSample::create(SampleData::CsvString(csv), None);
 
         let js_result = JSResult::from(sample);
         let json = serde_json::to_string(&js_result).unwrap();

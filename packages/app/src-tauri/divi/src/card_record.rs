@@ -48,7 +48,7 @@ impl DivinationCardRecord {
         Some(self.price.unwrap_or_default() * self.amount as f32)
     }
 
-    pub fn set_amount(&mut self, amount: i32) -> &mut Self {
+    pub fn set_amount_and_sum(&mut self, amount: i32) -> &mut Self {
         self.amount = amount;
         self.sum = self.sum();
         self

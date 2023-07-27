@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 use crate::{
     card_record::{DivinationCardRecord, FixedCardName},
     cards::Cards,
-    consts::{CARDS, RAIN_OF_CHAOS_WEIGHT},
+    consts::RAIN_OF_CHAOS_WEIGHT,
     error::MissingHeaders,
     prices::Prices,
     IsCard,
@@ -36,21 +36,23 @@ impl DivinationCardsSample {
 
     pub fn create(
         source: SampleData,
-        prices: Prices,
+        prices: Option<Prices>,
     ) -> Result<DivinationCardsSample, MissingHeaders> {
         DivinationCardsSample::from_prices(prices).parse_data(source)
     }
 
-    pub fn merge(prices: Prices, samples: &[DivinationCardsSample]) -> DivinationCardsSample {
+    pub fn merge(
+        prices: Option<Prices>,
+        samples: &[DivinationCardsSample],
+    ) -> DivinationCardsSample {
         let mut merged = DivinationCardsSample::from_prices(prices);
 
-        for name in CARDS {
-            let sum = samples
+        for card in merged.cards.iter_mut() {
+            let amount = samples
                 .iter()
-                .map(|sample| sample.cards.get(&name).unwrap().amount)
+                .map(|sample| sample.cards.get(&card.name).unwrap().amount)
                 .sum::<i32>();
-
-            merged.cards.get_mut(name).unwrap().set_amount(sum);
+            card.set_amount_and_sum(amount);
         }
 
         merged.get_sample_ready()
@@ -62,13 +64,13 @@ impl DivinationCardsSample {
 
     pub fn update_prices(self, prices: Prices) -> DivinationCardsSample {
         // safe to unwrap, because .csv field is already parsed
-        DivinationCardsSample::create(SampleData::CsvString(self.csv), prices).unwrap()
+        DivinationCardsSample::create(SampleData::CsvString(self.csv), Some(prices)).unwrap()
     }
 
     /// Consumes Prices structure to set prices for Cards
-    fn from_prices(prices: Prices) -> Self {
+    fn from_prices(prices: Option<Prices>) -> Self {
         DivinationCardsSample {
-            cards: prices.into(),
+            cards: prices.unwrap_or_default().into(),
             ..Default::default()
         }
     }
@@ -87,13 +89,13 @@ impl DivinationCardsSample {
                         match &record.is_card() {
                             true => {
                                 let mut_card = self.cards.get_mut(&record.name).unwrap();
-                                mut_card.set_amount(mut_card.amount + record.amount);
+                                mut_card.set_amount_and_sum(mut_card.amount + record.amount);
                             }
                             false => match record.fix_name() {
                                 Some(fixed) => {
                                     // self.card_mut(&record.name).unwrap().amount(record.amount);
                                     let mut_card = self.cards.get_mut(&record.name).unwrap();
-                                    mut_card.set_amount(mut_card.amount + record.amount);
+                                    mut_card.set_amount_and_sum(mut_card.amount + record.amount);
                                     self.fixed_names.push(fixed);
                                 }
                                 None => self.not_cards.push(record.name),
@@ -106,10 +108,7 @@ impl DivinationCardsSample {
                 Ok(self)
             }
             SampleData::CardNameAmountList(vec) => {
-                let sum: i32 = vec.iter().map(|card| card.amount).sum();
-                println!("card total amount: {}", sum);
-
-                for CardNameAmount { name, amount } in vec.clone() {
+                for CardNameAmount { name, amount } in vec {
                     let mut record = DivinationCardRecord {
                         name,
                         price: None,
@@ -121,13 +120,13 @@ impl DivinationCardsSample {
                     match &record.is_card() {
                         true => {
                             let mut_card = self.cards.get_mut(&record.name).unwrap();
-                            mut_card.set_amount(mut_card.amount + record.amount);
+                            mut_card.set_amount_and_sum(mut_card.amount + record.amount);
                         }
 
                         false => match record.fix_name() {
                             Some(fixed) => {
                                 let mut_card = self.cards.get_mut(&record.name).unwrap();
-                                mut_card.set_amount(mut_card.amount + record.amount);
+                                mut_card.set_amount_and_sum(mut_card.amount + record.amount);
                                 self.fixed_names.push(fixed);
                             }
                             None => self.not_cards.push(record.name),
@@ -224,7 +223,7 @@ mod tests {
         assert_eq!(cards_total_amount, 181);
         let sample = DivinationCardsSample::create(
             SampleData::CardNameAmountList(vec),
-            Prices::fetch(&TradeLeague::HardcoreCrucible).await.unwrap(),
+            Some(Prices::fetch(&TradeLeague::HardcoreCrucible).await.unwrap()),
         )
         .unwrap();
 
@@ -261,13 +260,16 @@ Encroaching Darkness,5\r\nThe Endless Darkness,1\r\nThe Endurance,19\r\nThe Enfo
         let csv3 = std::fs::read_to_string("example-3.csv").unwrap();
 
         let s1 =
-            DivinationCardsSample::create(SampleData::CsvString(csv1), Prices::default()).unwrap();
+            DivinationCardsSample::create(SampleData::CsvString(csv1), Some(Prices::default()))
+                .unwrap();
         let s2 =
-            DivinationCardsSample::create(SampleData::CsvString(csv2), Prices::default()).unwrap();
+            DivinationCardsSample::create(SampleData::CsvString(csv2), Some(Prices::default()))
+                .unwrap();
         let s3 =
-            DivinationCardsSample::create(SampleData::CsvString(csv3), Prices::default()).unwrap();
+            DivinationCardsSample::create(SampleData::CsvString(csv3), Some(Prices::default()))
+                .unwrap();
 
-        let s = DivinationCardsSample::merge(Prices::default(), &[s1, s2, s3]);
+        let s = DivinationCardsSample::merge(Some(Prices::default()), &[s1, s2, s3]);
         let rain_of_chaos = s
             .cards
             .iter()
