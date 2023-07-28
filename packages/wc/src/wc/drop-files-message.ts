@@ -14,7 +14,6 @@ const styles = css`
 	}
 	.drop {
 		font-size: 3rem;
-		margin-bottom: 1rem;
 	}
 
 	.drop > span {

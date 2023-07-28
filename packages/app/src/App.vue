@@ -104,6 +104,7 @@ const openStashWindow = async () => {
 .header {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	margin-bottom: 3rem;
 }
 
