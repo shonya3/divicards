@@ -2,10 +2,9 @@ use tokio::sync::Mutex;
 
 use divi::{
     league::TradeLeague,
-    prices::Prices,
     sample::{CardNameAmount, DivinationCardsSample, SampleData},
 };
-use tauri::{command, AppHandle, Manager, State};
+use tauri::{command, State};
 
 use crate::{js_result::JSResult, prices::AppCardPrices};
 
@@ -40,9 +39,11 @@ pub async fn sample_cards(
 #[command]
 pub async fn merge(
     samples: Vec<DivinationCardsSample>,
-    app_handle: AppHandle,
-) -> DivinationCardsSample {
-    DivinationCardsSample::merge(Some(app_handle.state::<Prices>().inner().clone()), &samples)
+    state: State<'_, Mutex<AppCardPrices>>,
+) -> Result<DivinationCardsSample, ()> {
+    let mut guard = state.lock().await;
+    let prices = guard.get_or_update(&TradeLeague::default()).await;
+    Ok(DivinationCardsSample::merge(Some(prices), &samples))
 }
 
 #[command]
