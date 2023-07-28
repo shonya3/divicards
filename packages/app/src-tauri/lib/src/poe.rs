@@ -1,22 +1,145 @@
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 
-use crate::oauth::{AuthCodeResponse, OAuthProvider};
-use axum::{async_trait, extract::Query, response::Html, routing::get, Router};
+use crate::oauth::AuthCodeResponse;
+use axum::{extract::Query, response::Html, routing::get, Router};
 use divi::league::League;
 use keyring::Entry;
-use oauth2::{basic::BasicClient, AccessToken, CsrfToken, PkceCodeChallenge, RedirectUrl, Scope};
+use oauth2::{
+    basic::BasicClient, AccessToken, AuthUrl, ClientId, CsrfToken, PkceCodeChallenge, RedirectUrl,
+    Scope, TokenUrl,
+};
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
-use tauri::{command, AppHandle};
+use tauri::{command, AppHandle, Window};
 use tokio::sync::mpsc;
 
+const PROVIDER_LABEL: &'static str = "poe";
+const CLIENT_ID: &'static str = "divicards";
+const AUTH_URL: &'static str = "https://www.pathofexile.com/oauth/authorize";
+const TOKEN_URL: &'static str = "https://www.pathofexile.com/oauth/token";
+
 #[command]
-pub async fn poe_auth(app_handle: AppHandle) -> Result<String, String> {
-    PoeProvider::new()
-        .oauth(app_handle.config().package.version.clone())
-        .await
+pub async fn poe_auth(app_handle: AppHandle, window: Window) -> Result<String, String> {
+    let (sender, mut receiver) = mpsc::channel::<AuthCodeResponse>(1);
+    let addr = SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 50151);
+    let redirect_uri =
+        RedirectUrl::new(format!("http://localhost:{}/callback", addr.port())).unwrap();
+
+    let client = BasicClient::new(
+        ClientId::new(CLIENT_ID.into()),
+        None,
+        AuthUrl::new(AUTH_URL.into()).unwrap(),
+        TokenUrl::new(TOKEN_URL.into()).ok(),
+    )
+    .set_redirect_uri(redirect_uri.clone());
+
+    let (pkce_challenge, pkce_verifier) = PkceCodeChallenge::new_random_sha256();
+
+    let (auth_url, csrf_token) = client
+        .authorize_url(CsrfToken::new_random)
+        .add_scope(Scope::new("account:stashes".to_string()))
+        .set_pkce_challenge(pkce_challenge)
+        .url();
+
+    let app = Router::new().route(
+        "/callback",
+        get(move |query: Query<AuthCodeResponse>| route_handler(query, sender)),
+    );
+
+    let (tx, rx) = tokio::sync::oneshot::channel::<()>();
+    let server = axum::Server::bind(&addr)
+        .serve(app.into_make_service())
+        .with_graceful_shutdown(async {
+            rx.await.ok();
+            println!("shutdown");
+        });
+
+    tokio::spawn(async move {
+        server.await.unwrap();
+    });
+
+    open::that(auth_url.to_string()).unwrap();
+    dbg!(auth_url.to_string());
+    let auth_url_string = auth_url.to_string();
+    window.emit("auth-url", auth_url_string).unwrap();
+
+    let AuthCodeResponse { code, csrf } = match receiver.recv().await {
+        Some(params) => params,
+        None => {
+            dbg!("Could not get auth code response");
+            tx.send(()).unwrap();
+            panic!("No auth code");
+        }
+    };
+    tx.send(()).unwrap();
+
+    if csrf.secret() != csrf_token.secret() {
+        return Err(String::from("csrf is failed"));
+    }
+
+    let TokenResponseData {
+        username,
+        access_token,
+        ..
+    } = fetch_token(
+        code.secret(),
+        pkce_verifier.secret(),
+        &redirect_uri,
+        app_handle.config().package.version.clone().unwrap(),
+    )
+    .await
+    .unwrap();
+
+    AccessTokenStorage::new()
+        .set(&access_token.secret())
+        .unwrap();
+
+    Ok(username)
 }
+
+async fn fetch_token(
+    code: &str,
+    pkce_verifier: &str,
+    redirect_uri: &str,
+    version: String,
+) -> Result<TokenResponseData, String> {
+    let payload = url::form_urlencoded::Serializer::new(String::new())
+        .append_pair("client_id", "divicards")
+        .append_pair("grant_type", "authorization_code")
+        .append_pair("code", code)
+        .append_pair("redirect_uri", redirect_uri)
+        .append_pair("scope", "account:stashes")
+        .append_pair("code_verifier", pkce_verifier)
+        .finish();
+
+    dbg!(&payload);
+
+    let client = reqwest::Client::new();
+    Ok(client
+        .post(TOKEN_URL)
+        .body(payload)
+        .header("Content-Type", "application/x-www-form-urlencoded")
+        .header(
+            "User-Agent",
+            format!("OAuth divicards/{} (contact: poeshonya3@gmail.com)", {
+                version
+            }),
+        )
+        .send()
+        .await
+        .unwrap()
+        .json::<TokenResponseData>()
+        .await
+        .unwrap())
+}
+
+// #[command]
+// pub async fn poe_auth(app_handle: AppHandle) -> Result<String, String> {
+//     PoeProvider::new()
+//         .oauth(app_handle.config().package.version.clone())
+//         .await
+// }
 
 #[command]
 pub fn poe_logout() {
@@ -59,7 +182,7 @@ impl PoeProvider {
     }
 
     pub fn access_token_label() -> String {
-        format!("{}_access_token", { Self::PROVIDER_LABEL })
+        format!("{}_access_token", { PROVIDER_LABEL })
     }
 
     async fn stash(
@@ -126,42 +249,6 @@ impl PoeProvider {
             .await
             .unwrap()
     }
-
-    async fn fetch_token(
-        code: &str,
-        pkce_verifier: &str,
-        redirect_uri: &str,
-        version: String,
-    ) -> Result<TokenResponseData, String> {
-        let payload = url::form_urlencoded::Serializer::new(String::new())
-            .append_pair("client_id", "divicards")
-            .append_pair("grant_type", "authorization_code")
-            .append_pair("code", code)
-            .append_pair("redirect_uri", redirect_uri)
-            .append_pair("scope", "account:stashes")
-            .append_pair("code_verifier", pkce_verifier)
-            .finish();
-
-        dbg!(&payload);
-
-        let client = reqwest::Client::new();
-        Ok(client
-            .post(PoeProvider::TOKEN_URL)
-            .body(payload)
-            .header("Content-Type", "application/x-www-form-urlencoded")
-            .header(
-                "User-Agent",
-                format!("OAuth divicards/{} (contact: poeshonya3@gmail.com)", {
-                    version
-                }),
-            )
-            .send()
-            .await
-            .unwrap()
-            .json::<TokenResponseData>()
-            .await
-            .unwrap())
-    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -174,88 +261,93 @@ struct TokenResponseData {
     username: String,
 }
 
-#[async_trait]
-impl OAuthProvider for PoeProvider {
-    const PROVIDER_LABEL: &'static str = "poe";
-    const CLIENT_ID: &'static str = "divicards";
-    const AUTH_URL: &'static str = "https://www.pathofexile.com/oauth/authorize";
-    const TOKEN_URL: &'static str = "https://www.pathofexile.com/oauth/token";
+// #[async_trait]
+// impl OAuthProvider for PoeProvider {
+//     const PROVIDER_LABEL: &'static str = "poe";
+//     const CLIENT_ID: &'static str = "divicards";
+//     const AUTH_URL: &'static str = "https://www.pathofexile.com/oauth/authorize";
+//     const TOKEN_URL: &'static str = "https://www.pathofexile.com/oauth/token";
 
-    async fn oauth(&self, version: Option<String>) -> Result<String, String> {
-        let (sender, mut receiver) = mpsc::channel::<AuthCodeResponse>(1);
-        let addr = SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 50151);
-        let redirect_uri =
-            RedirectUrl::new(format!("http://localhost:{}/callback", addr.port())).unwrap();
+//     async fn oauth(
+//         &self,
+//         version: Option<String>,
+//         tx: tokio::sync::oneshot::Sender<String>,
+//     ) -> Result<String, String> {
+//         let (sender, mut receiver) = mpsc::channel::<AuthCodeResponse>(1);
+//         let addr = SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 50151);
+//         let redirect_uri =
+//             RedirectUrl::new(format!("http://localhost:{}/callback", addr.port())).unwrap();
 
-        let client = BasicClient::new(
-            PoeProvider::client_id(),
-            None,
-            PoeProvider::auth_url().unwrap(),
-            PoeProvider::token_url().ok(),
-        )
-        .set_redirect_uri(redirect_uri.clone());
+//         let client = BasicClient::new(
+//             PoeProvider::client_id(),
+//             None,
+//             PoeProvider::auth_url().unwrap(),
+//             PoeProvider::token_url().ok(),
+//         )
+//         .set_redirect_uri(redirect_uri.clone());
 
-        let (pkce_challenge, pkce_verifier) = PkceCodeChallenge::new_random_sha256();
+//         let (pkce_challenge, pkce_verifier) = PkceCodeChallenge::new_random_sha256();
 
-        let (auth_url, csrf_token) = client
-            .authorize_url(CsrfToken::new_random)
-            .add_scope(Scope::new("account:stashes".to_string()))
-            .set_pkce_challenge(pkce_challenge)
-            .url();
+//         let (auth_url, csrf_token) = client
+//             .authorize_url(CsrfToken::new_random)
+//             .add_scope(Scope::new("account:stashes".to_string()))
+//             .set_pkce_challenge(pkce_challenge)
+//             .url();
 
-        let app = Router::new().route(
-            "/callback",
-            get(move |query: Query<AuthCodeResponse>| route_handler(query, sender)),
-        );
+//         let app = Router::new().route(
+//             "/callback",
+//             get(move |query: Query<AuthCodeResponse>| route_handler(query, sender)),
+//         );
 
-        let (tx, rx) = tokio::sync::oneshot::channel::<()>();
-        let server = axum::Server::bind(&addr)
-            .serve(app.into_make_service())
-            .with_graceful_shutdown(async {
-                rx.await.ok();
-                println!("shutdown");
-            });
+//         let (tx, rx) = tokio::sync::oneshot::channel::<()>();
+//         let server = axum::Server::bind(&addr)
+//             .serve(app.into_make_service())
+//             .with_graceful_shutdown(async {
+//                 rx.await.ok();
+//                 println!("shutdown");
+//             });
 
-        tokio::spawn(async move {
-            server.await.unwrap();
-        });
+//         tokio::spawn(async move {
+//             server.await.unwrap();
+//         });
 
-        open::that(auth_url.to_string()).unwrap();
+//         open::that(auth_url.to_string()).unwrap();
+//         dbg!(auth_url.to_string());
 
-        let AuthCodeResponse { code, csrf } = match receiver.recv().await {
-            Some(params) => params,
-            None => {
-                dbg!("Could not get auth code response");
-                tx.send(()).unwrap();
-                panic!("No auth code");
-            }
-        };
-        tx.send(()).unwrap();
+//         let AuthCodeResponse { code, csrf } = match receiver.recv().await {
+//             Some(params) => params,
+//             None => {
+//                 dbg!("Could not get auth code response");
+//                 tx.send(()).unwrap();
+//                 panic!("No auth code");
+//             }
+//         };
+//         tx.send(()).unwrap();
 
-        if csrf.secret() != csrf_token.secret() {
-            return Err(String::from("csrf is failed"));
-        }
+//         if csrf.secret() != csrf_token.secret() {
+//             return Err(String::from("csrf is failed"));
+//         }
 
-        let TokenResponseData {
-            username,
-            access_token,
-            ..
-        } = Self::fetch_token(
-            code.secret(),
-            pkce_verifier.secret(),
-            &redirect_uri,
-            version.unwrap(),
-        )
-        .await
-        .unwrap();
+//         let TokenResponseData {
+//             username,
+//             access_token,
+//             ..
+//         } = Self::fetch_token(
+//             code.secret(),
+//             pkce_verifier.secret(),
+//             &redirect_uri,
+//             version.unwrap(),
+//         )
+//         .await
+//         .unwrap();
 
-        AccessTokenStorage::new()
-            .set(&access_token.secret())
-            .unwrap();
+//         AccessTokenStorage::new()
+//             .set(&access_token.secret())
+//             .unwrap();
 
-        Ok(username)
-    }
-}
+//         Ok(username)
+//     }
+// }
 
 pub async fn route_handler(
     query: Query<AuthCodeResponse>,

@@ -22,6 +22,7 @@ async fn main() {
     tracing::event!(tracing::Level::DEBUG, "app startup");
 
     let app_prices = Mutex::new(AppCardPrices::new(paths::appdata(), HashMap::new()));
+    let auth_link = Mutex::new(String::new());
 
     tauri::Builder::default()
         .setup(|app| {
@@ -35,6 +36,7 @@ async fn main() {
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
+            commands::open_url,
             commands::sample,
             commands::merge,
             commands::league,

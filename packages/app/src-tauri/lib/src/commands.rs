@@ -7,10 +7,7 @@ use divi::{
 };
 use tauri::{command, AppHandle, Manager, State};
 
-use crate::{
-    js_result::JSResult,
-    prices::{self, AppCardPrices},
-};
+use crate::{js_result::JSResult, prices::AppCardPrices};
 
 #[command]
 pub async fn sample(
@@ -60,4 +57,9 @@ pub async fn league(
         SampleData::CsvString(sample.csv),
         Some(prices),
     )))
+}
+
+#[command]
+pub async fn open_url(url: String) {
+    open::that(url).unwrap();
 }

@@ -11,6 +11,7 @@ import {
 import { StashesResponseData, StashResponseData } from '@divicards/shared/poe.types';
 
 export interface Commands {
+	open_url: (args: { url: string }) => void;
 	sample: (args: { csv: string; league: TradeLeague }) => Result<DivinationCardsSample>;
 	sample_cards: (args: { cards: CardNameAmount[]; league: TradeLeague }) => Result<DivinationCardsSample>;
 	merge: (args: { samples: DivinationCardsSample[] }) => DivinationCardsSample;

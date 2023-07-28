@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { command } from '../command';
 import { ref, watch, Ref, computed } from 'vue';
+import { listen } from '@tauri-apps/api/event';
 
 const TEN_HOURS_AS_MILLIS = 10 * 3600 * 1000;
 const EXPIRES_IN_MILLIS = TEN_HOURS_AS_MILLIS;
@@ -94,9 +95,13 @@ export const usePoeOAuth2Store = defineStore('auth', {
 	state: (): {
 		name: Ref<string>;
 		expiration: Ref<Date | null>;
+		loggingIn: boolean;
+		auth_url: string | null;
 	} => ({
 		name: useName(),
 		expiration: expirationDate,
+		loggingIn: false,
+		auth_url: null,
 	}),
 
 	getters: {
@@ -112,13 +117,32 @@ export const usePoeOAuth2Store = defineStore('auth', {
 	},
 	actions: {
 		async login(): Promise<void> {
-			try {
-				if (this.loggedIn) throw new Error('Already logged in');
+			if (this.loggingIn) {
+				console.log('Already logging in');
+				if (!this.auth_url) return;
+				await command('open_url', { url: this.auth_url });
+				return;
+			}
+			if (this.loggedIn) {
+				console.log('Already logged in');
+				return;
+			}
 
+			this.loggingIn = true;
+			const unlisten = await listen('auth-url', e => {
+				if (typeof e.payload === 'string') {
+					this.auth_url = e.payload;
+				}
+			});
+
+			try {
 				this.name = await command('poe_auth');
 				setExpiration(EXPIRES_IN_MILLIS);
 			} catch (err) {
 				console.log(err);
+			} finally {
+				this.loggingIn = false;
+				unlisten();
 			}
 		},
 
