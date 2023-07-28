@@ -144,7 +144,11 @@ async fn fetch_token(
 #[command]
 pub fn poe_logout() {
     dbg!("logout");
-    AccessTokenStorage::new().delete().unwrap()
+
+    match AccessTokenStorage::new().delete() {
+        Ok(_) => {}
+        Err(_) => {}
+    }
 }
 
 #[command]

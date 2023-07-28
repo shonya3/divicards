@@ -68,7 +68,8 @@ export const useFileCardsStore = defineStore('fileCards', {
 	},
 	actions: {
 		async addCard(filename: string, csv: string, league: TradeLeague = ACTIVE_LEAGUE): Promise<void> {
-			this.fileCards.push(await createFileCard(filename, csv, league));
+			const fileCard = await createFileCard(filename, csv, league);
+			this.fileCards.push(fileCard);
 		},
 
 		async merge() {
@@ -112,7 +113,7 @@ export const useFileCardsStore = defineStore('fileCards', {
 			}
 		},
 
-		async addFromTab(league: League, tab: StashTab) {
+		async addFromTab(tab: StashTab, league: League) {
 			const tradeLeague = isTradeLeague(league) ? league : ACTIVE_LEAGUE;
 
 			const sample = await command('sample_cards', {

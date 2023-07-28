@@ -63,7 +63,8 @@
 				"resizable": true,
 				"title": "Divicards",
 				"width": 1400,
-				"fileDropEnabled": false
+				"fileDropEnabled": false,
+				"theme": "Dark"
 			}
 		]
 	}
