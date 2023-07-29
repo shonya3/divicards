@@ -142,6 +142,7 @@ export const usePoeOAuth2Store = defineStore('auth', {
 				console.log(err);
 			} finally {
 				this.loggingIn = false;
+				this.auth_url = null;
 				unlisten();
 			}
 		},
