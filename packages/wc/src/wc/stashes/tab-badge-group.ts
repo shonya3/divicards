@@ -12,7 +12,7 @@ declare global {
 	}
 }
 
-const REMOVE_ONLY = '(Remove-only)';
+export const REMOVE_ONLY = '(Remove-only)';
 
 const filter = (stashes: StashTab[], nameQuery: string, shouldFilter: boolean, hideRemoveOnly: boolean): StashTab[] => {
 	if (!shouldFilter) return stashes;
@@ -46,7 +46,9 @@ export interface Events {
 }
 
 export class TabBadgeGroupElement extends BaseElement {
-	static override defineList = [TabBadgeElement];
+	static override get defineList() {
+		return [TabBadgeElement];
+	}
 	static override tag = 'wc-tab-badge-group';
 	static override styles = [this.baseStyles, styles()];
 

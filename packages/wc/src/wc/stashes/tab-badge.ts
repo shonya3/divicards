@@ -2,6 +2,7 @@ import { html, css } from 'lit';
 import { BaseElement } from '../base-element';
 import { property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
+import { REMOVE_ONLY } from './tab-badge-group';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -28,6 +29,17 @@ export class TabBadgeElement extends BaseElement {
 		return `#${this.colour.padStart(6, '0')}`;
 	}
 
+	protected nameLabel() {
+		const removeOnly = this.name.includes(REMOVE_ONLY);
+
+		if (removeOnly) {
+			const [name] = this.name.split(REMOVE_ONLY);
+			return html`<label for=${this.tabId} class="name">${name}<span class="remove-only">(R)</span></label>`;
+		}
+
+		return html`<label for=${this.tabId} class="name">${this.name}</label>`;
+	}
+
 	protected override render() {
 		const cssProps = styleMap({
 			'--badge-color': `${this.color}`,
@@ -35,7 +47,7 @@ export class TabBadgeElement extends BaseElement {
 		});
 
 		return html`<div class="tab-badge" style=${cssProps}>
-			<label for=${this.tabId} class="name">${this.name}</label>
+			${this.nameLabel()}
 			<input
 				@change=${this.#onCheckbox}
 				class="checkbox"
@@ -61,13 +73,13 @@ function styles() {
 	return css`
 		.tab-badge {
 			width: 8rem;
-			height: 4rem;
+			height: 4em;
 			aspect-ratio: 1;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 
-			border-radius: 2rem;
+			border-radius: 8px;
 			border: 1px solid #000;
 			overflow: clip;
 
@@ -75,11 +87,11 @@ function styles() {
 			position: relative;
 
 			&:has(.checkbox:checked) {
-				transform: scale(1.4);
+				transform: scale(1.3);
 				z-index: 2;
 			}
 
-			&:after {
+			&::after {
 				display: block;
 				position: absolute;
 				bottom: 0;
@@ -95,8 +107,13 @@ function styles() {
 
 			.name {
 				color: var(--badge-color);
-				mix-blend-mode: difference;
-				font-size: 0.9rem;
+				font-size: 1.2rem;
+				color: #000;
+				position: relative;
+
+				.remove-only {
+					font-size: 60%;
+				}
 			}
 
 			.checkbox {
