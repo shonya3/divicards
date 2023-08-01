@@ -71,18 +71,4 @@ impl From<[&'static str; CARDS_N]> for Cards {
     }
 }
 
-impl Deref for Cards {
-    type Target = [DivinationCardRecord; CARDS_N];
-
-    fn deref(&self) -> &Self::Target {
-        &self.0
-    }
-}
-
-impl DerefMut for Cards {
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        &mut self.0
-    }
-}
-
 mod tests {}
