@@ -36,20 +36,13 @@ async fn main() {
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
-            commands::open_url,
             commands::sample,
             commands::merge,
-            commands::league,
-            discord::discord_auth,
-            discord::discord_authenticated,
-            discord::discord_identity,
-            discord::discord_logout,
-            google::google_auth,
-            google::google_identity,
+            commands::open_url,
             poe::poe_auth,
             poe::poe_logout,
+            poe::stash,
             poe::stashes,
-            poe::stash
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

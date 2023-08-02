@@ -132,7 +132,7 @@ export const useFileCardsStore = defineStore('fileCards', {
 			if (index === -1) return;
 			if (oldFileCard.sample.type === 'err') return;
 
-			const newSample = await command('league', { league, sample: oldFileCard.sample.data });
+			const newSample = await command('sample', { league, data: oldFileCard.sample.data.csv });
 			const data = newSample.type === 'ok' ? newSample.data.csv : newSample.error;
 			const newFileCard = await createFileCard(oldFileCard.filename, data, league);
 			this.fileCards[index] = newFileCard;
@@ -143,7 +143,7 @@ export const useFileCardsStore = defineStore('fileCards', {
 			const merged = this.mergedFile;
 			if (!merged || merged.sample.type === 'err') return;
 			if (!isTradeLeague(league)) return;
-			const newSample = await command('league', { league, sample: merged.sample.data });
+			const newSample = await command('sample', { league, data: merged.sample.data.csv });
 			const data = newSample.type === 'ok' ? newSample.data.csv : newSample.error;
 			this.mergedFile = await createFileCard(merged.filename, data, league);
 		},

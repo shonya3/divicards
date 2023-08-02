@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 
 import { useFileCardsStore } from './stores/fileCards';
-import { usePoeOAuth2Store } from './stores/poeOAuth2Store';
+import { useAuthStore } from './stores/auth';
 import { useAutoAnimate } from './composables/useAutoAnimate';
 
 import { DropFilesMessageElement } from '@divicards/wc/src/wc/drop-files-message';
@@ -15,7 +15,7 @@ DropFilesMessageElement.define();
 PoeAuthElement.define();
 
 const fileCardsStore = useFileCardsStore();
-const authStore = usePoeOAuth2Store();
+const authStore = useAuthStore();
 
 const stashVisible = ref(false);
 const filesTemplateRef = ref<HTMLElement | null>(null);
@@ -144,3 +144,4 @@ const openStashWindow = async () => {
 	font-size: 1.4rem;
 }
 </style>
+./stores/poeAuth ./stores/auth

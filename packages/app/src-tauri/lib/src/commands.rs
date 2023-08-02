@@ -36,20 +36,6 @@ pub async fn merge(
 }
 
 #[command]
-pub async fn league(
-    sample: Box<DivinationCardsSample>,
-    league: TradeLeague,
-    state: State<'_, Mutex<AppCardPrices>>,
-) -> Result<JSResult<DivinationCardsSample>, ()> {
-    let mut guard = state.lock().await;
-    let prices = guard.get_or_update(&league).await;
-    Ok(JSResult::from(DivinationCardsSample::create(
-        SampleData::Csv(sample.csv),
-        Some(prices),
-    )))
-}
-
-#[command]
 pub async fn open_url(url: String) {
     open::that(url).unwrap();
 }

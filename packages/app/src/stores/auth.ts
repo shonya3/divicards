@@ -91,7 +91,7 @@ export const useExpirationDate = (log = false) => {
 
 const { expirationDate, loggedIn, setExpiration, timeLeft, log } = useExpirationDate();
 
-export const usePoeOAuth2Store = defineStore('auth', {
+export const useAuthStore = defineStore('auth', {
 	state: (): {
 		name: Ref<string>;
 		expiration: Ref<Date | null>;
