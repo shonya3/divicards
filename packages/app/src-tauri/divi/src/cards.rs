@@ -1,7 +1,4 @@
-use std::{
-    ops::{Deref, DerefMut},
-    slice::{Iter, IterMut},
-};
+use std::slice::{Iter, IterMut};
 
 use crate::{
     card_record::DivinationCardRecord,
@@ -11,7 +8,7 @@ use crate::{
 use serde::{Deserialize, Serialize};
 use serde_big_array::BigArray;
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub struct Cards(#[serde(with = "BigArray")] pub [DivinationCardRecord; CARDS_N]);
 
 impl Cards {
@@ -21,6 +18,20 @@ impl Cards {
 
     pub fn get_mut(&mut self, name: &str) -> Option<&mut DivinationCardRecord> {
         self.0.iter_mut().find(|c| c.name == name)
+    }
+
+    /// Use only with trusted card name(item of CARDS const). Otherwise, use get
+    ///  # Panics
+    /// If name is not a member of CARDS
+    pub fn get_card(&self, name: &str) -> &DivinationCardRecord {
+        self.get(name).unwrap()
+    }
+
+    /// Use only with trusted card name(item of CARDS const). Otherwise, use get_mut
+    /// # Panics
+    /// If name is not a member of CARDS
+    pub fn get_card_mut(&mut self, name: &str) -> &mut DivinationCardRecord {
+        self.get_mut(name).unwrap()
     }
 
     pub fn iter(&self) -> Iter<'_, DivinationCardRecord> {
@@ -70,5 +81,3 @@ impl From<[&'static str; CARDS_N]> for Cards {
         )
     }
 }
-
-mod tests {}

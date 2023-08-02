@@ -7,7 +7,7 @@ use crate::{
     IsCard,
 };
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
 pub struct FixedCardName {
     pub old: String,
     pub fixed: String,
@@ -22,13 +22,13 @@ impl FixedCardName {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Default)]
 pub struct DivinationCardRecord {
     pub name: String,
-    #[serde(alias = "calculated")]
-    pub price: Option<f32>,
     #[serde(alias = "stackSize")]
     pub amount: i32,
+    #[serde(alias = "calculated")]
+    pub price: Option<f32>,
     pub sum: Option<f32>,
     pub weight: Option<f32>,
 }
@@ -106,18 +106,6 @@ impl DivinationCardRecord {
                     false => None,
                 }
             }
-        }
-    }
-}
-
-impl Default for DivinationCardRecord {
-    fn default() -> Self {
-        Self {
-            name: String::from("Rain Of Chaos"),
-            price: None,
-            amount: 0,
-            weight: None,
-            sum: None,
         }
     }
 }
