@@ -5,12 +5,12 @@ use crate::{
     card_record::{DivinationCardRecord, FixedCardName},
     cards::Cards,
     consts::RAIN_OF_CHAOS_WEIGHT,
-    error::MissingHeaders,
+    error::Error,
     prices::Prices,
     IsCard,
 };
 
-#[derive(Debug, Serialize, Deserialize, Clone, Default)]
+#[derive(Debug, Serialize, Deserialize, Clone, Default, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct DivinationCardsSample {
     pub cards: Cards,
@@ -37,7 +37,7 @@ impl DivinationCardsSample {
     pub fn create(
         source: SampleData,
         prices: Option<Prices>,
-    ) -> Result<DivinationCardsSample, MissingHeaders> {
+    ) -> Result<DivinationCardsSample, Error> {
         DivinationCardsSample::from_prices(prices).parse_data(source)
     }
 
@@ -50,7 +50,7 @@ impl DivinationCardsSample {
         for card in merged.cards.iter_mut() {
             let amount = samples
                 .iter()
-                .map(|sample| sample.cards.get(&card.name).unwrap().amount)
+                .map(|sample| sample.cards.get_card(&card.name).amount)
                 .sum::<i32>();
             card.set_amount_and_sum(amount);
         }
@@ -76,7 +76,7 @@ impl DivinationCardsSample {
     }
 
     /// Reads the source, sets amounts of cards, fills not_cards and fixed_names. Then gets sample ready by writing weights and polished csv.
-    fn parse_data(&mut self, source: SampleData) -> Result<Self, MissingHeaders> {
+    fn parse_data(&mut self, source: SampleData) -> Result<Self, Error> {
         let sample = match source {
             SampleData::CsvString(s) => {
                 let data = Self::remove_lines_before_headers(&s)?;
@@ -88,13 +88,12 @@ impl DivinationCardsSample {
                     if let Ok(mut record) = result {
                         match &record.is_card() {
                             true => {
-                                let mut_card = self.cards.get_mut(&record.name).unwrap();
+                                let mut_card = self.cards.get_card_mut(&record.name);
                                 mut_card.set_amount_and_sum(mut_card.amount + record.amount);
                             }
                             false => match record.fix_name() {
                                 Some(fixed) => {
-                                    // self.card_mut(&record.name).unwrap().amount(record.amount);
-                                    let mut_card = self.cards.get_mut(&record.name).unwrap();
+                                    let mut_card = self.cards.get_card_mut(&record.name);
                                     mut_card.set_amount_and_sum(mut_card.amount + record.amount);
                                     self.fixed_names.push(fixed);
                                 }
@@ -105,7 +104,7 @@ impl DivinationCardsSample {
                         println!("{:?}", result.err());
                     }
                 }
-                Ok(self)
+                Ok::<&mut DivinationCardsSample, Error>(self)
             }
             SampleData::CardNameAmountList(vec) => {
                 for CardNameAmount { name, amount } in vec {
@@ -119,13 +118,13 @@ impl DivinationCardsSample {
 
                     match &record.is_card() {
                         true => {
-                            let mut_card = self.cards.get_mut(&record.name).unwrap();
+                            let mut_card = self.cards.get_card_mut(&record.name);
                             mut_card.set_amount_and_sum(mut_card.amount + record.amount);
                         }
 
                         false => match record.fix_name() {
                             Some(fixed) => {
-                                let mut_card = self.cards.get_mut(&record.name).unwrap();
+                                let mut_card = self.cards.get_card_mut(&record.name);
                                 mut_card.set_amount_and_sum(mut_card.amount + record.amount);
                                 self.fixed_names.push(fixed);
                             }
@@ -141,7 +140,7 @@ impl DivinationCardsSample {
     }
 
     /// Preparsing helper
-    fn remove_lines_before_headers(s: &str) -> Result<String, MissingHeaders> {
+    fn remove_lines_before_headers(s: &str) -> Result<String, Error> {
         match s.lines().enumerate().into_iter().find(|(_index, line)| {
             line.contains("name")
                 && ["amount", "stackSize"]
@@ -154,7 +153,7 @@ impl DivinationCardsSample {
                 .skip(index)
                 .collect::<Vec<&str>>()
                 .join("\r\n")),
-            None => Err(MissingHeaders),
+            None => Err(Error::MissingHeaders),
         }
     }
 
