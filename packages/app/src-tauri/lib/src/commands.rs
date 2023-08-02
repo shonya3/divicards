@@ -2,7 +2,7 @@ use tokio::sync::Mutex;
 
 use divi::{
     league::TradeLeague,
-    sample::{CardNameAmount, DivinationCardsSample, SampleData},
+    sample::{DivinationCardsSample, SampleData},
 };
 use tauri::{command, State};
 
@@ -10,30 +10,19 @@ use crate::{js_result::JSResult, prices::AppCardPrices};
 
 #[command]
 pub async fn sample(
-    csv: String,
-    league: TradeLeague,
+    data: SampleData,
+    league: Option<TradeLeague>,
     state: State<'_, Mutex<AppCardPrices>>,
 ) -> Result<JSResult<DivinationCardsSample>, ()> {
-    let mut guard = state.lock().await;
-    let prices = guard.get_or_update(&league).await;
-    Ok(JSResult::from(DivinationCardsSample::create(
-        SampleData::CsvString(csv),
-        Some(prices),
-    )))
-}
+    let prices = match league {
+        Some(league) => {
+            let mut guard = state.lock().await;
+            Some(guard.get_or_update(&league).await)
+        }
+        None => None,
+    };
 
-#[command]
-pub async fn sample_cards(
-    cards: Vec<CardNameAmount>,
-    league: TradeLeague,
-    state: State<'_, Mutex<AppCardPrices>>,
-) -> Result<JSResult<DivinationCardsSample>, ()> {
-    let mut guard = state.lock().await;
-    let prices = guard.get_or_update(&league).await;
-    Ok(JSResult::from(DivinationCardsSample::create(
-        SampleData::CardNameAmountList(cards),
-        Some(prices),
-    )))
+    Ok(JSResult::from(DivinationCardsSample::create(data, prices)))
 }
 
 #[command]
@@ -55,7 +44,7 @@ pub async fn league(
     let mut guard = state.lock().await;
     let prices = guard.get_or_update(&league).await;
     Ok(JSResult::from(DivinationCardsSample::create(
-        SampleData::CsvString(sample.csv),
+        SampleData::Csv(sample.csv),
         Some(prices),
     )))
 }

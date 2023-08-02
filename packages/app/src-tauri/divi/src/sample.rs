@@ -64,7 +64,7 @@ impl DivinationCardsSample {
 
     pub fn update_prices(self, prices: Prices) -> DivinationCardsSample {
         // safe to unwrap, because .csv field is already parsed
-        DivinationCardsSample::create(SampleData::CsvString(self.csv), Some(prices)).unwrap()
+        DivinationCardsSample::create(SampleData::Csv(self.csv), Some(prices)).unwrap()
     }
 
     /// Consumes Prices structure to set prices for Cards
@@ -78,7 +78,7 @@ impl DivinationCardsSample {
     /// Reads the source, sets amounts of cards, fills not_cards and fixed_names. Then gets sample ready by writing weights and polished csv.
     fn parse_data(&mut self, source: SampleData) -> Result<Self, Error> {
         let sample = match source {
-            SampleData::CsvString(s) => {
+            SampleData::Csv(s) => {
                 let data = Self::remove_lines_before_headers(&s)?;
                 let mut rdr = ReaderBuilder::new()
                     .trim(Trim::All)
@@ -202,8 +202,9 @@ pub struct CardNameAmount {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
 pub enum SampleData {
-    CsvString(String),
+    Csv(String),
     CardNameAmountList(Vec<CardNameAmount>),
 }
 
@@ -259,14 +260,11 @@ Encroaching Darkness,5\r\nThe Endless Darkness,1\r\nThe Endurance,19\r\nThe Enfo
         let csv3 = std::fs::read_to_string("example-3.csv").unwrap();
 
         let s1 =
-            DivinationCardsSample::create(SampleData::CsvString(csv1), Some(Prices::default()))
-                .unwrap();
+            DivinationCardsSample::create(SampleData::Csv(csv1), Some(Prices::default())).unwrap();
         let s2 =
-            DivinationCardsSample::create(SampleData::CsvString(csv2), Some(Prices::default()))
-                .unwrap();
+            DivinationCardsSample::create(SampleData::Csv(csv2), Some(Prices::default())).unwrap();
         let s3 =
-            DivinationCardsSample::create(SampleData::CsvString(csv3), Some(Prices::default()))
-                .unwrap();
+            DivinationCardsSample::create(SampleData::Csv(csv3), Some(Prices::default())).unwrap();
 
         let s = DivinationCardsSample::merge(Some(Prices::default()), &[s1, s2, s3]);
         let rain_of_chaos = s

@@ -19,7 +19,7 @@ const prefixFilename = (name: string, league: League): string => {
 };
 
 export const createFileCard = async (name: string, csv: string, league: TradeLeague): Promise<FileCardProps> => {
-	const sample = await command('sample', { csv, league });
+	const sample = await command('sample', { data: csv, league });
 
 	return {
 		uuid: crypto.randomUUID(),
@@ -116,8 +116,8 @@ export const useFileCardsStore = defineStore('fileCards', {
 		async addFromTab(tab: StashTab, league: League) {
 			const tradeLeague = isTradeLeague(league) ? league : ACTIVE_LEAGUE;
 
-			const sample = await command('sample_cards', {
-				cards: cardsFromTab(tab),
+			const sample = await command('sample', {
+				data: cardsFromTab(tab),
 				league: tradeLeague,
 			});
 

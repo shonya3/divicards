@@ -43,7 +43,7 @@ mod test {
     #[test]
     fn jsres() {
         let csv = read_to_string("./divi/example-2.csv").unwrap();
-        let sample = DivinationCardsSample::create(SampleData::CsvString(csv), None);
+        let sample = DivinationCardsSample::create(SampleData::Csv(csv), None);
 
         let js_result = JSResult::from(sample);
         let json = serde_json::to_string(&js_result).unwrap();
@@ -55,7 +55,7 @@ mod test {
     #[test]
     fn jsres_err() {
         let csv = String::from("not a valid csv lol");
-        let sample = DivinationCardsSample::create(SampleData::CsvString(csv), None);
+        let sample = DivinationCardsSample::create(SampleData::Csv(csv), None);
 
         let js_result = JSResult::from(sample);
         let json = serde_json::to_string(&js_result).unwrap();

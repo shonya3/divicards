@@ -40,7 +40,6 @@ async fn main() {
             commands::sample,
             commands::merge,
             commands::league,
-            commands::sample_cards,
             discord::discord_auth,
             discord::discord_authenticated,
             discord::discord_identity,
