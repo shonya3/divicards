@@ -36,11 +36,8 @@ export class DivTableElement extends BaseElement {
 	@query('input#hide-zero-sum-checkbox') checkboxHideZeroSum!: HTMLInputElement;
 
 	override willUpdate(map: PropertyValues<this>) {
-		const needToInitState = map.has('cards') && this._cards.length === 0 && this.cards.length > 0;
-		if (needToInitState) {
-			if (this._cards.length === 0 && this.cards.length > 0) {
-				this._cards = Array.from(this.cards);
-			}
+		if (map.has('cards')) {
+			this._cards = Array.from(this.cards);
 		}
 
 		const needToOrder =
