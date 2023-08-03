@@ -14,6 +14,7 @@ use serde_json::Value;
 use tauri::{command, AppHandle, Window};
 use tokio::sync::mpsc;
 
+pub const API_URL: &'static str = "https://api.pathofexile.com";
 const PROVIDER_LABEL: &'static str = "poe";
 const CLIENT_ID: &'static str = "divicards";
 const AUTH_URL: &'static str = "https://www.pathofexile.com/oauth/authorize";
@@ -174,8 +175,6 @@ pub async fn stash(
     )
     .await
 }
-
-pub const API_URL: &'static str = "https://api.pathofexile.com";
 
 #[derive(Default)]
 pub struct PoeProvider;

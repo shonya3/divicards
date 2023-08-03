@@ -55,11 +55,17 @@ impl From<Prices> for Cards {
             prices
                 .0
                 .into_iter()
-                .map(|DivinationCardPrice { name, price }| DivinationCardRecord {
-                    name,
-                    price,
-                    ..Default::default()
-                })
+                .map(
+                    |DivinationCardPrice {
+                         name,
+                         price,
+                         sparkline,
+                     }| DivinationCardRecord {
+                        name,
+                        price,
+                        ..Default::default()
+                    },
+                )
                 .collect::<Vec<DivinationCardRecord>>()
                 .try_into()
                 .unwrap(),
