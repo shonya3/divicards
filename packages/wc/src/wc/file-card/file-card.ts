@@ -54,6 +54,7 @@ export class FileCardElement extends BaseElement {
 	@query('input#selected-checkbox') selectedCheckbox!: HTMLInputElement;
 	@query('wc-league-select') leagueSelect!: LeagueSelectElement;
 	@query('#minimum-card-price-slider') priceSlider!: HTMLInputElement;
+	@query('wc-div-table') table!: DivTableElement;
 
 	get filteredCards() {
 		if (this.sample.type === 'ok') {

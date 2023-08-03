@@ -3,6 +3,7 @@ import sinon from 'sinon';
 import { FileCardElement } from './file-card';
 import { fileCardProps } from './data';
 import { sendKeys } from '@web/test-runner-commands';
+import type { FileCardProps } from './file-card';
 
 describe('<wc-file-card>', () => {
 	let el: FileCardElement;
@@ -69,5 +70,33 @@ describe('<wc-file-card>', () => {
 		const event = spy.args[0][0];
 		expect(spy).to.be.calledOnce;
 		expect(event.detail).to.be.equal(el.minimumCardPrice);
+	});
+
+	it('table cards get updated when filecard cards get updated', async () => {
+		await el.updateComplete;
+		const newProps: FileCardProps = {
+			league: 'Standard',
+			filename: 'Standard.csv',
+			selected: false,
+			uuid: '2',
+			minimumCardPrice: 0,
+			sample: {
+				type: 'ok',
+				data: {
+					cards: [{ name: 'Rain of Chaos', price: 1, amount: 1, sum: 1, weight: 0 }],
+					notCards: [],
+					fixedNames: [],
+					csv: '',
+				},
+			},
+		};
+
+		Object.assign(el, { ...newProps });
+
+		await el.updateComplete;
+		expect(el.table.cards.length).to.be.equal(1);
+		expect(el.table.cards[0].name).to.be.equal('Rain of Chaos');
+		expect(el.table.filteredRecords.length).to.be.equal(1);
+		expect(el.table.filteredRecords[0].name).to.be.equal('Rain of Chaos');
 	});
 });
