@@ -37,7 +37,16 @@ impl AppCardPrices {
                         .insert(league.to_owned(), prices.clone());
                     prices
                 }
-                false => self.fetch_and_update(league).await.unwrap(),
+                false => {
+                    dbg!("get_or_update. false branch of up_to_date");
+                    match self.fetch_and_update(league).await {
+                        Ok(prices) => prices,
+                        Err(err) => {
+                            dbg!(err);
+                            Prices::default()
+                        }
+                    }
+                }
             },
         }
     }
@@ -47,9 +56,28 @@ impl AppCardPrices {
     }
 
     async fn fetch_and_update(&mut self, league: &TradeLeague) -> Result<Prices, reqwest::Error> {
-        let prices = Prices::fetch(league).await?;
-        let json = serde_json::to_string(&prices).unwrap();
+        dbg!("fetch_and_update: start before fetching prices");
+        let prices = match Prices::fetch(league).await {
+            Ok(prices) => prices,
+            Err(err) => {
+                dbg!("could not fetch prices", err);
+                Prices::default()
+            }
+        };
+        dbg!("fetch_and_update: fetched. Serializing to json");
+        let json = match serde_json::to_string(&prices) {
+            Ok(json) => json,
+            Err(err) => {
+                dbg!(err);
+                String::default()
+            }
+        };
+
+        dbg!("fetch_and_update: Serialized. Next write to file");
+
         std::fs::write(self.league_path(league), &json).unwrap();
+
+        dbg!("fetch_and_update: wrote to file");
         self.prices_by_league
             .insert(league.to_owned(), prices.clone());
 
@@ -59,13 +87,17 @@ impl AppCardPrices {
     fn read_from_file(&self, league: &TradeLeague) -> Option<Prices> {
         match std::fs::read_to_string(self.league_path(league)) {
             Ok(json) => serde_json::from_str(&json).unwrap(),
-            Err(_) => None,
+            Err(_) => {
+                dbg!("No file");
+                None
+            }
         }
     }
 
     fn up_to_date(&self, league: &TradeLeague) -> bool {
         let path = self.league_path(league);
         let exists = path.try_exists().unwrap();
+        dbg!("up_to_date:before match", exists);
         match exists {
             true => match fs::metadata(&path) {
                 Ok(metadata) => match metadata.modified() {
