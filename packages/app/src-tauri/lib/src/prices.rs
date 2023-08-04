@@ -1,6 +1,6 @@
 #![allow(unused)]
 
-use crate::paths;
+use crate::{error::Error, paths};
 use divi::{league::TradeLeague, prices::Prices};
 use serde::{Deserialize, Serialize};
 use std::{
@@ -8,6 +8,7 @@ use std::{
     fs,
     path::{Path, PathBuf},
 };
+use tracing::{debug, instrument};
 
 pub const DAY_AS_SECS: u64 = 86_400;
 
@@ -27,6 +28,7 @@ impl AppCardPrices {
         }
     }
 
+    #[instrument(skip(self))]
     pub async fn get_or_update(&mut self, league: &TradeLeague) -> Prices {
         match self.prices_by_league.get(league) {
             Some(prices) => prices.to_owned(),
@@ -55,29 +57,17 @@ impl AppCardPrices {
         self.dir.join(format!("{}-prices.json", { league }))
     }
 
-    async fn fetch_and_update(&mut self, league: &TradeLeague) -> Result<Prices, reqwest::Error> {
-        dbg!("fetch_and_update: start before fetching prices");
-        let prices = match Prices::fetch(league).await {
-            Ok(prices) => prices,
-            Err(err) => {
-                dbg!("could not fetch prices", err);
-                Prices::default()
-            }
-        };
-        dbg!("fetch_and_update: fetched. Serializing to json");
-        let json = match serde_json::to_string(&prices) {
-            Ok(json) => json,
-            Err(err) => {
-                dbg!(err);
-                String::default()
-            }
-        };
+    #[instrument(skip(self))]
+    async fn fetch_and_update(&mut self, league: &TradeLeague) -> Result<Prices, Error> {
+        let prices = Prices::fetch(league).await?;
+        debug!("fetch_and_update: fetched. Serializing to json");
+        let json = serde_json::to_string(&prices)?;
 
-        dbg!("fetch_and_update: Serialized. Next write to file");
+        debug!("fetch_and_update: Serialized. Next write to file");
 
         std::fs::write(self.league_path(league), &json).unwrap();
 
-        dbg!("fetch_and_update: wrote to file");
+        debug!("fetch_and_update: wrote to file");
         self.prices_by_league
             .insert(league.to_owned(), prices.clone());
 
