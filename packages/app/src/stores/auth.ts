@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { command } from '../command';
 import { ref, watch, Ref, computed } from 'vue';
-import { listen } from '@tauri-apps/api/event';
+import { addRustListener } from '../event';
 
 const TEN_HOURS_AS_MILLIS = 10 * 3600 * 1000;
 const EXPIRES_IN_MILLIS = TEN_HOURS_AS_MILLIS;
@@ -129,10 +129,9 @@ export const useAuthStore = defineStore('auth', {
 			}
 
 			this.loggingIn = true;
-			const unlisten = await listen('auth-url', e => {
-				if (typeof e.payload === 'string') {
-					this.auth_url = e.payload;
-				}
+
+			const unlisten = await addRustListener('auth-url', e => {
+				this.auth_url = e.payload.url;
 			});
 
 			try {

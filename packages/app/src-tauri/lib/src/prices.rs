@@ -1,13 +1,12 @@
-#![allow(unused)]
-
-use crate::{error::Error, paths};
+use crate::{
+    error::Error,
+    event::{Event, ToastVariant},
+    paths,
+};
 use divi::{league::TradeLeague, prices::Prices};
 use serde::{Deserialize, Serialize};
-use std::{
-    collections::HashMap,
-    fs,
-    path::{Path, PathBuf},
-};
+use std::{collections::HashMap, fs, path::PathBuf};
+use tauri::Window;
 use tracing::{debug, instrument};
 
 pub const DAY_AS_SECS: u64 = 86_400;
@@ -28,8 +27,8 @@ impl AppCardPrices {
         }
     }
 
-    #[instrument(skip(self))]
-    pub async fn get_or_update(&mut self, league: &TradeLeague) -> Prices {
+    #[instrument(skip(self, window))]
+    pub async fn get_or_update(&mut self, league: &TradeLeague, window: &Window) -> Prices {
         match self.prices_by_league.get(league) {
             Some(prices) => prices.to_owned(),
             None => match self.up_to_date(league) {
@@ -41,7 +40,7 @@ impl AppCardPrices {
                 }
                 false => {
                     dbg!("get_or_update. false branch of up_to_date");
-                    match self.fetch_and_update(league).await {
+                    match self.fetch_and_update(league, window).await {
                         Ok(prices) => prices,
                         Err(err) => {
                             dbg!(err);
@@ -57,8 +56,12 @@ impl AppCardPrices {
         self.dir.join(format!("{}-prices.json", { league }))
     }
 
-    #[instrument(skip(self))]
-    async fn fetch_and_update(&mut self, league: &TradeLeague) -> Result<Prices, Error> {
+    #[instrument(skip(self, window))]
+    async fn fetch_and_update(
+        &mut self,
+        league: &TradeLeague,
+        window: &Window,
+    ) -> Result<Prices, Error> {
         let prices = Prices::fetch(league).await?;
         debug!("fetch_and_update: fetched. Serializing to json");
         let json = serde_json::to_string(&prices)?;
@@ -70,6 +73,12 @@ impl AppCardPrices {
         debug!("fetch_and_update: wrote to file");
         self.prices_by_league
             .insert(league.to_owned(), prices.clone());
+
+        Event::Toast {
+            variant: ToastVariant::Neutral,
+            message: format!("Prices for {league} league have been updated"),
+        }
+        .emit(&window);
 
         Ok(prices)
     }

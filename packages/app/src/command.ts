@@ -15,14 +15,16 @@ export interface Commands {
 }
 
 const { format } = new Intl.NumberFormat();
+
+const debug = false;
 export const command = async <CommandName extends keyof Commands, Fn extends Commands[CommandName]>(
 	name: CommandName,
 	...args: Parameters<Fn>
 ): Promise<ReturnType<Fn>> => {
-	if (import.meta.env.DEV) {
+	if (debug) {
 		const t0 = performance.now();
 		const res = (await invoke(name, ...args)) as ReturnType<Fn>;
-		// console.log(`${name}: ${format(performance.now() - t0)}ms`);
+		console.log(`${name}: ${format(performance.now() - t0)}ms`);
 		return res;
 	} else return invoke(name, ...args) as Promise<ReturnType<Fn>>;
 };

@@ -1,6 +1,6 @@
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 
-use crate::oauth::AuthCodeResponse;
+use crate::{event::Event, oauth::AuthCodeResponse};
 use axum::{extract::Query, response::Html, routing::get, Router};
 use divi::league::League;
 use keyring::Entry;
@@ -64,6 +64,11 @@ pub async fn poe_auth(app_handle: AppHandle, window: Window) -> Result<String, S
     dbg!(auth_url.to_string());
     let auth_url_string = auth_url.to_string();
     window.emit("auth-url", auth_url_string).unwrap();
+
+    Event::AuthUrl {
+        url: auth_url.to_string(),
+    }
+    .emit(&window);
 
     let AuthCodeResponse { code, csrf } = match receiver.recv().await {
         Some(params) => params,

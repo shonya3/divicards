@@ -1,8 +1,8 @@
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
 
 use crate::{
     consts::{CARDS, CARDS_N},
+    error::Error,
     league::TradeLeague,
 };
 use serde_big_array::BigArray;
@@ -24,7 +24,7 @@ pub struct DivinationCardPrice {
 #[serde(transparent)]
 pub struct Prices(#[serde(with = "BigArray")] pub [DivinationCardPrice; CARDS_N]);
 impl Prices {
-    pub async fn fetch(league: &TradeLeague) -> Result<Prices, reqwest::Error> {
+    pub async fn fetch(league: &TradeLeague) -> Result<Prices, Error> {
         #[derive(Deserialize, Debug, Serialize)]
         struct PriceData {
             lines: Vec<DivinationCardPrice>,
@@ -33,7 +33,7 @@ impl Prices {
         let client = reqwest::Client::new();
         let url = format!("https://poe.ninja/api/data/itemoverview?league={league}&type=DivinationCard&language=en");
         let json = client.get(url).send().await?.text().await?;
-        std::fs::write("ninja.json", &json).unwrap();
+        // std::fs::write("ninja.json", &json).unwrap();
         let data = serde_json::from_str::<PriceData>(&json).unwrap();
         Ok(Prices::from(data.lines))
     }

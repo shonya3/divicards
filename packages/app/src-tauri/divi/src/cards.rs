@@ -59,7 +59,7 @@ impl From<Prices> for Cards {
                     |DivinationCardPrice {
                          name,
                          price,
-                         sparkline,
+                         sparkline: _,
                      }| DivinationCardRecord {
                         name,
                         price,
