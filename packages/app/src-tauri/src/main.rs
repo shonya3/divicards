@@ -39,8 +39,8 @@ async fn main() {
             commands::sample,
             commands::merge,
             commands::open_url,
-            poe::poe_auth,
-            poe::poe_logout,
+            poe::auth::poe_auth,
+            poe::auth::poe_logout,
             poe::stash,
             poe::stashes,
         ])

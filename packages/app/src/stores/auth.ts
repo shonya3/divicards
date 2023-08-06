@@ -137,8 +137,6 @@ export const useAuthStore = defineStore('auth', {
 			try {
 				this.name = await command('poe_auth');
 				setExpiration(EXPIRES_IN_MILLIS);
-			} catch (err) {
-				console.log(err);
 			} finally {
 				this.loggingIn = false;
 				this.auth_url = null;

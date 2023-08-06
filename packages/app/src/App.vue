@@ -28,18 +28,11 @@ const onDrop = async (e: DragEvent) => {
 };
 
 const openStashWindow = async () => {
-	if (authStore.loggedIn) {
-		stashVisible.value = true;
-	} else {
-		try {
-			await authStore.login();
-			if (authStore.loggedIn) {
-				stashVisible.value = true;
-			}
-		} catch (err) {
-			console.log(err);
-		}
+	if (!authStore.loggedIn) {
+		await authStore.login();
 	}
+
+	stashVisible.value = true;
 };
 </script>
 
