@@ -1,17 +1,31 @@
 use std::fmt::Display;
 
-use serde::Serialize;
+use crate::poe::error::AuthError;
+use serde::{ser::SerializeStruct, Deserialize, Serialize};
 
 #[derive(Debug)]
 pub enum Error {
     HttpError(reqwest::Error),
     SerdeError(serde_json::Error),
     DiviError(divi::error::Error),
+    AuthError(AuthError),
+}
+
+impl Error {
+    pub fn kind(&self) -> &'static str {
+        match self {
+            Error::HttpError(_) => "httpError",
+            Error::SerdeError(_) => "serdeError",
+            Error::DiviError(_) => "diviError",
+            Error::AuthError(_) => "authError",
+        }
+    }
 }
 
 impl Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
+            Error::AuthError(err) => err.fmt(f),
             Error::HttpError(err) => err.fmt(f),
             Error::SerdeError(err) => err.fmt(f),
             Error::DiviError(err) => err.fmt(f),
@@ -24,7 +38,16 @@ impl Serialize for Error {
     where
         S: serde::Serializer,
     {
-        serializer.serialize_str(self.to_string().as_str())
+        match self {
+            Error::AuthError(err) => err.serialize(serializer),
+            _ => {
+                let mut err = serializer.serialize_struct("Error", 2)?;
+                err.serialize_field("message", self.to_string().as_str())?;
+                err.serialize_field("kind", self.kind())?;
+                err.serialize_field("appErrorFromTauri", &true)?;
+                err.end()
+            }
+        }
     }
 }
 

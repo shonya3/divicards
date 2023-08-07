@@ -1,6 +1,7 @@
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 
-use crate::event::Event;
+use super::error::AuthError;
+use crate::{error::Error, event::Event};
 
 use super::{AccessTokenStorage, Persist, AUTH_URL, CLIENT_ID, TOKEN_URL};
 use axum::{extract::Query, response::Html, routing::get, Router};
@@ -14,7 +15,7 @@ use tokio::sync::mpsc;
 use tracing::debug;
 
 #[command]
-pub async fn poe_auth(app_handle: AppHandle, window: Window) -> Result<String, String> {
+pub async fn poe_auth(app_handle: AppHandle, window: Window) -> Result<String, Error> {
     let (sender, mut receiver) = mpsc::channel::<AuthResponse>(1);
     let addr = SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 50151);
     let redirect_uri =
@@ -67,13 +68,13 @@ pub async fn poe_auth(app_handle: AppHandle, window: Window) -> Result<String, S
     tx.send(()).unwrap();
 
     let Some(response) = res else {
-        return Err(String::from("Error during authorization. Try again."));
+        return Err(Error::AuthError(AuthError::Failed))
     };
 
     match response {
         AuthResponse::Code { code, csrf } => {
             if csrf.secret() != csrf_token.secret() {
-                return Err(String::from("csrf is failed"));
+                return Err(Error::AuthError(AuthError::Failed));
             }
 
             let TokenResponseData {
@@ -98,7 +99,13 @@ pub async fn poe_auth(app_handle: AppHandle, window: Window) -> Result<String, S
         AuthResponse::Error {
             error,
             error_description,
-        } => Err(format!("Error: {error}. Description: {error_description}")),
+        } => match error.as_ref() {
+            "access_denied" => Err(Error::AuthError(AuthError::UserDenied)),
+            _ => Err(Error::AuthError(AuthError::OtherWithDescription {
+                error,
+                error_description,
+            })),
+        },
     }
 }
 
