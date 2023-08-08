@@ -1,6 +1,6 @@
 import { ACTIVE_LEAGUE, downloadText } from '@divicards/shared/lib';
 import { defineStore } from 'pinia';
-import { command } from '../command';
+import { SampleData, command } from '../command';
 import { DivinationCardsSample, League, Result, TradeLeague, isTradeLeague, leagues } from '@divicards/shared/types';
 import { FileCardProps } from '@divicards/wc/src/wc/file-card/file-card';
 import { StashTab } from '@divicards/shared/poe.types';
@@ -18,8 +18,12 @@ const prefixFilename = (name: string, league: League): string => {
 	return `${league}${UNDERSCORE_GLUE}${name}`;
 };
 
-export const createFileCard = async (name: string, csv: string, league: TradeLeague): Promise<FileCardProps> => {
-	const sample = await command('sample', { data: csv, league });
+export const createFileCard = async (
+	name: string,
+	sampleData: SampleData,
+	league: TradeLeague
+): Promise<FileCardProps> => {
+	const sample = await command('sample', { data: sampleData, league });
 
 	return {
 		uuid: crypto.randomUUID(),
@@ -67,8 +71,8 @@ export const useFileCardsStore = defineStore('fileCards', {
 		},
 	},
 	actions: {
-		async addCard(filename: string, csv: string, league: TradeLeague = ACTIVE_LEAGUE): Promise<void> {
-			const fileCard = await createFileCard(filename, csv, league);
+		async addCard(filename: string, sampleData: SampleData, league: TradeLeague = ACTIVE_LEAGUE): Promise<void> {
+			const fileCard = await createFileCard(filename, sampleData, league);
 			this.fileCards.push(fileCard);
 		},
 
@@ -115,14 +119,7 @@ export const useFileCardsStore = defineStore('fileCards', {
 
 		async addFromTab(tab: StashTab, league: League) {
 			const tradeLeague = isTradeLeague(league) ? league : ACTIVE_LEAGUE;
-
-			const sample = await command('sample', {
-				data: cardsFromTab(tab),
-				league: tradeLeague,
-			});
-
-			const data = sample.type === 'ok' ? sample.data.csv : sample.error;
-			this.addCard(`${tab.name}.csv`, data, tradeLeague);
+			this.addCard(`${tab.name}.csv`, cardsFromTab(tab), tradeLeague);
 		},
 
 		async replaceFileCard(league: League, oldFileCard: FileCardProps) {
@@ -131,21 +128,14 @@ export const useFileCardsStore = defineStore('fileCards', {
 			const index = this.fileCards.findIndex(file => file.uuid === oldFileCard.uuid);
 			if (index === -1) return;
 			if (oldFileCard.sample.type === 'err') return;
-
-			const newSample = await command('sample', { league, data: oldFileCard.sample.data.csv });
-			const data = newSample.type === 'ok' ? newSample.data.csv : newSample.error;
-			const newFileCard = await createFileCard(oldFileCard.filename, data, league);
-			this.fileCards[index] = newFileCard;
-			this.fileCards = Array.from(this.fileCards);
+			this.fileCards[index] = await createFileCard(oldFileCard.filename, oldFileCard.sample.data.csv, league);
 		},
 
 		async replaceMerged(league: League) {
 			const merged = this.mergedFile;
 			if (!merged || merged.sample.type === 'err') return;
 			if (!isTradeLeague(league)) return;
-			const newSample = await command('sample', { league, data: merged.sample.data.csv });
-			const data = newSample.type === 'ok' ? newSample.data.csv : newSample.error;
-			this.mergedFile = await createFileCard(merged.filename, data, league);
+			this.mergedFile = await createFileCard(merged.filename, merged.sample.data.csv, league);
 		},
 	},
 });
