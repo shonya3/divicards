@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use tauri::Window;
+use tracing::instrument;
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 #[serde(tag = "type")]
@@ -16,6 +17,7 @@ pub enum Event {
 }
 
 impl Event {
+    #[instrument(skip(window))]
     pub fn emit(&self, window: &Window) {
         window.emit(&self.name(), &self).unwrap();
     }

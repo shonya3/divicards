@@ -1,7 +1,7 @@
 use std::fmt::Display;
 
 use crate::poe::error::AuthError;
-use serde::{ser::SerializeStruct, Deserialize, Serialize};
+use serde::{ser::SerializeStruct, Serialize};
 
 #[derive(Debug)]
 pub enum Error {

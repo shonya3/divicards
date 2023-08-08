@@ -9,7 +9,9 @@ use std::{collections::HashMap, fs, path::PathBuf};
 use tauri::Window;
 use tracing::{debug, instrument};
 
-pub const DAY_AS_SECS: u64 = 86_400;
+pub const DAY_AS_SECS: f64 = 86_400.0;
+
+pub struct DaysOld(Option<f32>);
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AppCardPrices {
@@ -28,30 +30,80 @@ impl AppCardPrices {
     }
 
     #[instrument(skip(self, window))]
-    pub async fn get_or_update(&mut self, league: &TradeLeague, window: &Window) -> Prices {
+    pub async fn get_or_update_or_default(
+        &mut self,
+        league: &TradeLeague,
+        window: &Window,
+    ) -> Prices {
         match self.prices_by_league.get(league) {
             Some(prices) => prices.to_owned(),
-            None => match self.up_to_date(league) {
-                true => {
-                    let prices = self.read_from_file(league).unwrap();
-                    self.prices_by_league
-                        .insert(league.to_owned(), prices.clone());
-                    prices
-                }
-                false => {
-                    dbg!("get_or_update. false branch of up_to_date");
-                    match self.fetch_and_update(league, window).await {
-                        Ok(prices) => prices,
-                        Err(err) => {
-                            dbg!(err);
-                            Prices::default()
+            None => {
+                debug!("No prices for league {league} in memory. Checking if file exists");
+                match self.league_file_exists(league) {
+                    true => {
+                        debug!("File exists. Check if it is up-to-date");
+                        match self.file_is_up_to_date(league) {
+                            true => {
+                                debug!("File is up-to-date. Save to memory and return");
+                                self.read_from_file_update_and_return(league)
+                            }
+                            false => {
+                                debug!("File is not up-to-date. Try to fetch new prices");
+                                match self.fetch_and_update(league, window).await {
+                                    Ok(prices) => prices,
+                                    Err(err) => {
+                                        debug!("Unable to fetch prices: {err}. Check if file is still usable");
+                                        match self.file_is_still_usable(league) {
+                                            true => {
+                                                debug!("File is still usable. Save to memory and return");
+                                                let days_old = format!(
+                                                    "{:.1}",
+                                                    self.file_days_old(league).unwrap()
+                                                );
+                                                let message = format!("Prices are not up-to-date, but still usable({days_old} days old). Unable to load new prices. So still usable is better than nothing.");
+                                                Event::Toast {
+                                                    variant: ToastVariant::Warning,
+                                                    message,
+                                                }
+                                                .emit(window);
+                                                self.read_from_file_update_and_return(league)
+                                            }
+                                            false => {
+                                                debug!("File is too old. Return default Prices with warning toast");
+                                                self.send_default_prices_with_toast_warning(
+                                                    league, window,
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    false => {
+                        debug!("File does not exist. Try to fetch new prices");
+                        match self.fetch_and_update(league, window).await {
+                            Ok(prices) => prices,
+                            Err(err) => {
+                                debug!("Unable to fetch prices: {err}. Return default Prices with warning toast");
+                                self.send_default_prices_with_toast_warning(league, window)
+                            }
                         }
                     }
                 }
-            },
+            }
         }
     }
 
+    #[instrument(skip(self))]
+    fn read_from_file_update_and_return(&mut self, league: &TradeLeague) -> Prices {
+        let prices = self.read_from_file(league).unwrap();
+        self.prices_by_league
+            .insert(league.to_owned(), prices.clone());
+        prices
+    }
+
+    #[instrument(skip(self))]
     pub fn league_path(&self, league: &TradeLeague) -> PathBuf {
         self.dir.join(format!("{}-prices.json", { league }))
     }
@@ -83,30 +135,69 @@ impl AppCardPrices {
         Ok(prices)
     }
 
+    #[instrument(skip(self))]
     fn read_from_file(&self, league: &TradeLeague) -> Option<Prices> {
         match std::fs::read_to_string(self.league_path(league)) {
             Ok(json) => serde_json::from_str(&json).unwrap(),
             Err(_) => {
-                dbg!("No file");
+                debug!("No file");
                 None
             }
         }
     }
 
-    fn up_to_date(&self, league: &TradeLeague) -> bool {
+    #[instrument(skip(self, window))]
+    fn send_default_prices_with_toast_warning(
+        &self,
+        league: &TradeLeague,
+        window: &Window,
+    ) -> Prices {
+        Event::Toast {
+            variant: ToastVariant::Warning,
+            message: String::from("Unable to load prices. Skip price-dependant calculations."),
+        }
+        .emit(&window);
+        Prices::default()
+    }
+
+    #[instrument(skip(self))]
+    fn file_is_up_to_date(&self, league: &TradeLeague) -> bool {
+        match self.file_days_old(league) {
+            Some(days_old) => days_old <= 1.0,
+            None => false,
+        }
+    }
+
+    #[instrument(skip(self))]
+    fn file_is_still_usable(&self, league: &TradeLeague) -> bool {
+        match self.file_days_old(league) {
+            Some(days_old) => days_old <= 7.0,
+            None => false,
+        }
+    }
+
+    #[instrument(skip(self))]
+    fn file_days_old(&self, league: &TradeLeague) -> Option<f32> {
         let path = self.league_path(league);
         let exists = path.try_exists().unwrap();
-        dbg!("up_to_date:before match", exists);
         match exists {
             true => match fs::metadata(&path) {
                 Ok(metadata) => match metadata.modified() {
-                    Ok(time) => time.elapsed().unwrap().as_secs() < DAY_AS_SECS,
-                    Err(_) => false,
+                    Ok(time) => {
+                        let days = (time.elapsed().unwrap().as_secs() as f64 / DAY_AS_SECS) as f32;
+                        Some(days)
+                    }
+                    Err(_) => None,
                 },
-                Err(_) => false,
+                Err(_) => None,
             },
-            false => false,
+            false => None,
         }
+    }
+
+    #[instrument(skip(self))]
+    fn league_file_exists(&self, league: &TradeLeague) -> bool {
+        self.league_path(league).try_exists().unwrap()
     }
 }
 

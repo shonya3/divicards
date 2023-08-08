@@ -10,7 +10,9 @@ import SlIcon from '@shoelace-style/shoelace/dist/components/icon/icon.component
 import { addRustListener } from './event';
 import { toast } from './toast';
 import { isTauriError } from './error';
+import { setBasePath } from '@shoelace-style/shoelace';
 
+setBasePath('/');
 SlAlrt.define('sl-alert');
 SlButton.define('sl-button');
 SlIcon.define('sl-icon');
@@ -38,5 +40,6 @@ app.config.errorHandler = err => {
 };
 
 addRustListener('toast', e => {
+	console.log(e);
 	toast(e.payload.variant, e.payload.message);
 });
