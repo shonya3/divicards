@@ -11,6 +11,7 @@ use tauri::Manager;
 
 #[tokio::main]
 async fn main() {
+    #[cfg(debug_assertions)]
     lib::dev::init_tracing();
     tracing::event!(tracing::Level::DEBUG, "app startup");
 

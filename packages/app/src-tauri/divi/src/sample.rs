@@ -34,6 +34,7 @@ impl DivinationCardsSample {
         }
     }
 
+    #[tracing::instrument(skip(source, prices))]
     pub fn create(
         source: SampleData,
         prices: Option<Prices>,
@@ -60,11 +61,6 @@ impl DivinationCardsSample {
 
     pub fn total_cards_amount(&self) -> i32 {
         self.cards.iter().map(|r| r.amount).sum()
-    }
-
-    pub fn update_prices(self, prices: Prices) -> DivinationCardsSample {
-        // safe to unwrap, because .csv field is already parsed
-        DivinationCardsSample::create(SampleData::Csv(self.csv), Some(prices)).unwrap()
     }
 
     /// Consumes Prices structure to set prices for Cards

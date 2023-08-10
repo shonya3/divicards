@@ -870,6 +870,7 @@ dependencies = [
  "serde_json",
  "strsim",
  "tokio",
+ "tracing",
  "urlencoding",
 ]
 
