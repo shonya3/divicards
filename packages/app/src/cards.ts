@@ -28,6 +28,8 @@ export const cardsFromTab = (tab: StashTab): CardNameAmount[] => {
 };
 
 export const cards = [
+	'Fire of Unknown Origin',
+	'The Fortunate',
 	`Brother's Gift`,
 	'Soul Quenched',
 	'Poisoned Faith',

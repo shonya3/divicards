@@ -16,9 +16,11 @@ pub const LEGACY_CARDS: [&'static str; LEGACY_CARDS_N] = [
     "The Sustenance",
 ];
 
-pub const CARDS_N: usize = 438;
+pub const CARDS_N: usize = 440;
 pub const LEGACY_CARDS_N: usize = 12;
 pub const CARDS: [&'static str; CARDS_N] = [
+    "Fire of Unknown Origin",
+    "The Fortunate",
     "Brother's Gift",
     "Soul Quenched",
     "Poisoned Faith",
