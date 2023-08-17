@@ -2,11 +2,14 @@ use std::fmt::Display;
 
 use serde::Serialize;
 
+use crate::league::TradeLeague;
+
 #[derive(Debug)]
 pub enum Error {
     HttpError(reqwest::Error),
     SerdeError(serde_json::Error),
     MissingHeaders,
+    NoPricesForLeagueOnNinja(TradeLeague),
 }
 
 impl Display for Error {
@@ -14,7 +17,10 @@ impl Display for Error {
         match self {
             Error::HttpError(err) => err.fmt(f),
             Error::SerdeError(err) => err.fmt(f),
-            Error::MissingHeaders => write!(f, "File should contain headers: name, amount"),
+            Error::MissingHeaders => write!(f, "File should contain headers: name, amount."),
+            Error::NoPricesForLeagueOnNinja(league) => {
+                write!(f, "Prices for {} league do not exist on poe.ninja.", league)
+            }
         }
     }
 }

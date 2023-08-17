@@ -66,7 +66,7 @@ impl DivinationCardsSample {
     /// Consumes Prices structure to set prices for Cards
     fn from_prices(prices: Option<Prices>) -> Self {
         DivinationCardsSample {
-            cards: prices.unwrap_or_default().into(),
+            cards: Cards::from(prices.unwrap_or_default()),
             ..Default::default()
         }
     }

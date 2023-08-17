@@ -29,7 +29,7 @@ impl AppCardPrices {
         }
     }
 
-    #[instrument(skip(self, window))]
+    // #[instrument(skip(self, window))]
     pub async fn get_or_update_or_default(
         &mut self,
         league: &TradeLeague,
@@ -71,7 +71,7 @@ impl AppCardPrices {
                                             false => {
                                                 debug!("File is too old. Return default Prices with warning toast");
                                                 self.send_default_prices_with_toast_warning(
-                                                    league, window,
+                                                    &err, league, window,
                                                 )
                                             }
                                         }
@@ -86,13 +86,28 @@ impl AppCardPrices {
                             Ok(prices) => prices,
                             Err(err) => {
                                 debug!("Unable to fetch prices: {err}. Return default Prices with warning toast");
-                                self.send_default_prices_with_toast_warning(league, window)
+                                self.send_default_prices_with_toast_warning(&err, league, window)
                             }
                         }
                     }
                 }
             }
         }
+    }
+
+    #[instrument(skip(self, window))]
+    fn send_default_prices_with_toast_warning(
+        &self,
+        err: &Error,
+        league: &TradeLeague,
+        window: &Window,
+    ) -> Prices {
+        Event::Toast {
+            variant: ToastVariant::Warning,
+            message: format!("{err} Unable to load prices for league {league}. Skip price-dependant calculations."),
+        }
+        .emit(&window);
+        Prices::default()
     }
 
     #[instrument(skip(self))]
@@ -144,20 +159,6 @@ impl AppCardPrices {
                 None
             }
         }
-    }
-
-    #[instrument(skip(self, window))]
-    fn send_default_prices_with_toast_warning(
-        &self,
-        league: &TradeLeague,
-        window: &Window,
-    ) -> Prices {
-        Event::Toast {
-            variant: ToastVariant::Warning,
-            message: String::from("Unable to load prices. Skip price-dependant calculations."),
-        }
-        .emit(&window);
-        Prices::default()
     }
 
     #[instrument(skip(self))]

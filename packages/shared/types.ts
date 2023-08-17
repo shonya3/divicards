@@ -3,7 +3,7 @@ export type Order = 'asc' | 'desc' | 'unordered';
 export const leagues = [
 	'Ancestor',
 	'Standard',
-	'Hardcore Ancestor',
+	'Ancestor-HC',
 	'Hardcore',
 	'SSF Standard',
 	'SSF Hardcore',

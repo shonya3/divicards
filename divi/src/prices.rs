@@ -35,7 +35,9 @@ impl Prices {
         let json = client.get(url).send().await?.text().await?;
         // std::fs::write("ninja.json", &json).unwrap();
         let data = serde_json::from_str::<PriceData>(&json).unwrap();
-        dbg!(&data);
+        if data.lines.len() == 0 {
+            return Err(Error::NoPricesForLeagueOnNinja(league.to_owned()));
+        }
         Ok(Prices::from(data.lines))
     }
 }
