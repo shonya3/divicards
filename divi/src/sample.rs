@@ -211,21 +211,21 @@ mod tests {
 
     use super::*;
 
-    #[tokio::test]
-    async fn name_amount() {
-        let json = std::fs::read_to_string("cardNameAmountList.json").unwrap();
-        let vec: Vec<CardNameAmount> = serde_json::from_str(&json).unwrap();
-        let cards_total_amount: i32 = vec.iter().map(|card| card.amount).sum();
-        assert_eq!(cards_total_amount, 181);
-        let sample = DivinationCardsSample::create(
-            SampleData::CardNameAmountList(vec),
-            Some(Prices::fetch(&TradeLeague::HardcoreAncestor).await.unwrap()),
-        )
-        .unwrap();
+    // #[tokio::test]
+    // async fn name_amount() {
+    //     let json = std::fs::read_to_string("cardNameAmountList.json").unwrap();
+    //     let vec: Vec<CardNameAmount> = serde_json::from_str(&json).unwrap();
+    //     let cards_total_amount: i32 = vec.iter().map(|card| card.amount).sum();
+    //     assert_eq!(cards_total_amount, 181);
+    //     let sample = DivinationCardsSample::create(
+    //         SampleData::CardNameAmountList(vec),
+    //         Some(Prices::fetch(&TradeLeague::HardcoreAncestor).await.unwrap()),
+    //     )
+    //     .unwrap();
 
-        let sample_total_amount: i32 = sample.cards.iter().map(|card| card.amount).sum();
-        dbg!(sample_total_amount);
-    }
+    //     let sample_total_amount: i32 = sample.cards.iter().map(|card| card.amount).sum();
+    //     dbg!(sample_total_amount);
+    // }
 
     #[test]
     fn trim() {

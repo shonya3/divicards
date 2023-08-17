@@ -80,6 +80,6 @@ impl From<Vec<DivinationCardPrice>> for Prices {
 
 #[tokio::test]
 async fn testfetch() {
-    let p = Prices::fetch(&TradeLeague::Ancestor).await.unwrap();
+    let p = Prices::fetch(&TradeLeague::Standard).await.unwrap();
     std::fs::write("p.json", serde_json::to_string(&p).unwrap()).unwrap();
 }

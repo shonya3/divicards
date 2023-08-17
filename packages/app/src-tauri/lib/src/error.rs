@@ -1,4 +1,4 @@
-use std::fmt::Display;
+use std::{fmt::Display, io};
 
 use crate::poe::error::AuthError;
 use serde::{ser::SerializeStruct, Serialize};
@@ -9,6 +9,7 @@ pub enum Error {
     SerdeError(serde_json::Error),
     DiviError(divi::error::Error),
     AuthError(AuthError),
+    IoError(io::Error),
 }
 
 impl Error {
@@ -18,6 +19,7 @@ impl Error {
             Error::SerdeError(_) => "serdeError",
             Error::DiviError(_) => "diviError",
             Error::AuthError(_) => "authError",
+            Error::IoError(_) => "ioError",
         }
     }
 }
@@ -29,6 +31,7 @@ impl Display for Error {
             Error::HttpError(err) => err.fmt(f),
             Error::SerdeError(err) => err.fmt(f),
             Error::DiviError(err) => err.fmt(f),
+            Error::IoError(err) => err.fmt(f),
         }
     }
 }
@@ -66,5 +69,11 @@ impl From<serde_json::Error> for Error {
 impl From<divi::error::Error> for Error {
     fn from(value: divi::error::Error) -> Self {
         Error::DiviError(value)
+    }
+}
+
+impl From<io::Error> for Error {
+    fn from(value: io::Error) -> Self {
+        Error::IoError(value)
     }
 }
