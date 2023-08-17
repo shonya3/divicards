@@ -35,6 +35,7 @@ impl Prices {
         let json = client.get(url).send().await?.text().await?;
         // std::fs::write("ninja.json", &json).unwrap();
         let data = serde_json::from_str::<PriceData>(&json).unwrap();
+        dbg!(&data);
         Ok(Prices::from(data.lines))
     }
 }
@@ -77,6 +78,6 @@ impl From<Vec<DivinationCardPrice>> for Prices {
 
 #[tokio::test]
 async fn testfetch() {
-    let p = Prices::fetch(&TradeLeague::Crucible).await.unwrap();
+    let p = Prices::fetch(&TradeLeague::Ancestor).await.unwrap();
     std::fs::write("p.json", serde_json::to_string(&p).unwrap()).unwrap();
 }

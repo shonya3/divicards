@@ -4,63 +4,63 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize, Clone, Hash, PartialEq, Eq)]
 pub enum League {
-    Crucible,
     Standard,
-    #[serde(alias = "Crucible-HC")]
-    HardcoreCrucible,
     Hardcore,
     #[serde(alias = "SSF Standard")]
     SSFStandard,
     #[serde(alias = "SSF Hardcore")]
     SSFHardcore,
-    #[serde(alias = "SSF Crucible")]
-    SSFCrucible,
-    #[serde(alias = "HC SSF Crucible")]
-    SSFHCCrucible,
+    Ancestor,
+    #[serde(alias = "Hardcore Ancestor")]
+    HardcoreAncestor,
+    #[serde(alias = "SSF Ancestor")]
+    SSFAncestor,
+    #[serde(alias = "HC SSF Ancestor")]
+    SSFHCAncestor,
 }
 
 impl Default for League {
     fn default() -> Self {
-        League::Crucible
+        League::Ancestor
     }
 }
 
 impl Display for League {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            League::Crucible => write!(f, "Crucible"),
             League::Standard => write!(f, "Standard"),
-            League::HardcoreCrucible => write!(f, "Hardcore Crucible"),
             League::Hardcore => write!(f, "Hardcore"),
             League::SSFStandard => write!(f, "Solo Self-Found"),
             League::SSFHardcore => write!(f, "Hardcore SSF"),
-            League::SSFCrucible => write!(f, "SSF Crucible"),
-            League::SSFHCCrucible => write!(f, "HC SSF Crucible"),
+            League::Ancestor => write!(f, "Ancestor"),
+            League::HardcoreAncestor => write!(f, "Hardcore Ancestor"),
+            League::SSFAncestor => write!(f, "SSF Ancestor"),
+            League::SSFHCAncestor => write!(f, "HC SSF Ancestor"),
         }
     }
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone, Hash, Eq, PartialEq)]
 pub enum TradeLeague {
-    Crucible,
     Standard,
-    #[serde(alias = "Crucible-HC")]
-    HardcoreCrucible,
     Hardcore,
+    Ancestor,
+    #[serde(alias = "Hardcore Ancestor", rename = "Hardcore Ancestor")]
+    HardcoreAncestor,
 }
 
 impl Display for TradeLeague {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            TradeLeague::Crucible => write!(f, "Crucible"),
             TradeLeague::Standard => write!(f, "Standard"),
-            TradeLeague::HardcoreCrucible => write!(f, "Hardcore Crucible"),
             TradeLeague::Hardcore => write!(f, "Hardcore"),
+            TradeLeague::Ancestor => write!(f, "Ancestor"),
+            TradeLeague::HardcoreAncestor => write!(f, "Hardcore Ancestor"),
         }
     }
 }
 impl Default for TradeLeague {
     fn default() -> Self {
-        TradeLeague::Crucible
+        TradeLeague::Ancestor
     }
 }

@@ -1,29 +1,20 @@
 export type Order = 'asc' | 'desc' | 'unordered';
-export type League =
-	| 'Crucible'
-	| 'Standard'
-	| 'Crucible-HC'
-	| 'Hardcore'
-	| 'SSF Standard'
-	| 'SSF Hardcore'
-	| 'SSF Crucible'
-	| 'HC SSF Crucible';
-export const leagues = Object.freeze([
-	'Crucible',
+
+export const leagues = [
+	'Ancestor',
 	'Standard',
-	'Crucible-HC',
+	'Hardcore Ancestor',
 	'Hardcore',
 	'SSF Standard',
 	'SSF Hardcore',
-	'SSF Crucible',
-	'HC SSF Crucible',
-]) satisfies Readonly<League[]>;
-export type TradeLeague = 'Crucible' | 'Standard' | 'Crucible-HC' | 'Hardcore';
-export const tradeLeagues = Object.freeze(['Crucible', 'Standard', 'Crucible-HC', 'Hardcore']) satisfies Readonly<
-	TradeLeague[]
->;
+	'SSF Ancestor',
+	'HC SSF Ancestor',
+] as const;
+export const tradeLeagues = ['Ancestor', 'Standard', 'Hardcore Ancestor', 'Hardcore'] as const;
+export const permanentLeagues: Readonly<League[]> = ['Standard', 'Hardcore', 'SSF Standard'] as const;
 
-export const permanentLeagues: Readonly<League[]> = Object.freeze(['Standard', 'Hardcore', 'SSF Standard']);
+export type League = (typeof leagues)[number];
+export type TradeLeague = (typeof tradeLeagues)[number];
 
 export const isTradeLeague = (s: string): s is TradeLeague => {
 	return tradeLeagues.includes(s as TradeLeague);

@@ -219,7 +219,7 @@ mod tests {
         assert_eq!(cards_total_amount, 181);
         let sample = DivinationCardsSample::create(
             SampleData::CardNameAmountList(vec),
-            Some(Prices::fetch(&TradeLeague::HardcoreCrucible).await.unwrap()),
+            Some(Prices::fetch(&TradeLeague::HardcoreAncestor).await.unwrap()),
         )
         .unwrap();
 
