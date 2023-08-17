@@ -3,7 +3,8 @@
 		"composite": true,
 		"module": "ESNext",
 		"moduleResolution": "Node",
-		"allowSyntheticDefaultImports": true
+		"allowSyntheticDefaultImports": true,
+		"target": "ESNext"
 	},
-	"include": ["vite.config.ts"]
+	"include": ["lib.ts", "poe.types.ts", "StashLoader.ts", "types.ts"]
 }
