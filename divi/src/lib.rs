@@ -26,7 +26,7 @@ pub trait IsCard {
 
 #[cfg(test)]
 mod tests {
-    use std::{fs, time::Instant};
+    use std::fs;
 
     use crate::{
         prices::Prices,

@@ -73,13 +73,13 @@ function styles() {
 	return css`
 		.tab-badge {
 			width: 8rem;
-			height: 4em;
+			height: 4rem;
 			aspect-ratio: 1;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 
-			border-radius: 8px;
+			border-radius: 2rem;
 			border: 1px solid #000;
 			overflow: clip;
 
@@ -107,7 +107,7 @@ function styles() {
 
 			.name {
 				color: var(--badge-color);
-				font-size: 1.2rem;
+				font-size: 0.9rem;
 				color: #000;
 				position: relative;
 
