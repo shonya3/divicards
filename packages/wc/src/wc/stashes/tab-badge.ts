@@ -34,7 +34,7 @@ export class TabBadgeElement extends BaseElement {
 
 		if (removeOnly) {
 			const [name] = this.name.split(REMOVE_ONLY);
-			return html`<label for=${this.tabId} class="name">${name}<span class="remove-only">(R)</span></label>`;
+			return html`<label for=${this.tabId} class="name">${name}<span class="remove-only">R</span></label>`;
 		}
 
 		return html`<label for=${this.tabId} class="name">${this.name}</label>`;
@@ -96,7 +96,7 @@ function styles() {
 				position: absolute;
 				bottom: 0;
 				right: 0;
-				background-color: rgba(255, 255, 255, 0.3);
+				background-color: rgba(255, 255, 255, 0.09);
 				color: #000;
 				content: var(--tab-index);
 				width: 2.8rem;
@@ -113,6 +113,7 @@ function styles() {
 
 				.remove-only {
 					font-size: 60%;
+					vertical-align: sub;
 				}
 			}
 
