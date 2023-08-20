@@ -13,6 +13,17 @@ pub const DAY_AS_SECS: f64 = 86_400.0;
 
 pub struct DaysOld(Option<f32>);
 
+async fn async_default_prices() -> Prices {
+    Prices::default()
+}
+
+pub enum Validity {
+    UpToDate,
+    StillUsable,
+    TooOld,
+    Invalid,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AppCardPrices {
     pub dir: PathBuf,
@@ -52,37 +63,39 @@ impl AppCardPrices {
                                     Err(err) => {
                                         debug!("Error reading file. Try to fetch prices");
 
-                                        match fs::remove_file(self.league_path(league)) {
-                                            Ok(_) => {
-                                                // Event::Toast {
-                                                //     variant: ToastVariant::Success,
-                                                //     message: format!(
-                                                //         "We deleted the prices file {}",
-                                                //         self.league_path(league).to_str().unwrap()
-                                                //     ),
-                                                // }
-                                                // .emit(&window);
+                                        async_default_prices().await
 
-                                                match Prices::fetch(league).await {
-                                                    Ok(prices) => prices,
-                                                    Err(err) => {
-                                                        // dbg!(err);
-                                                        Prices::default()
-                                                    }
-                                                }
+                                        // match fs::remove_file(self.league_path(league)) {
+                                        //     Ok(_) => {
+                                        //         // Event::Toast {
+                                        //         //     variant: ToastVariant::Success,
+                                        //         //     message: format!(
+                                        //         //         "We deleted the prices file {}",
+                                        //         //         self.league_path(league).to_str().unwrap()
+                                        //         //     ),
+                                        //         // }
+                                        //         // .emit(&window);
 
-                                                // Prices::default()
-                                            }
-                                            Err(err) => {
-                                                debug!("Unable to fetch prices: {err}. Return default Prices with warning toast");
-                                                self.send_default_prices_with_toast_warning(
-                                                    &Error::IoError(err),
-                                                    league,
-                                                    window,
-                                                );
-                                                Prices::default()
-                                            }
-                                        }
+                                        //         match Prices::fetch(league).await {
+                                        //             Ok(prices) => prices,
+                                        //             Err(err) => {
+                                        //                 // dbg!(err);
+                                        //                 Prices::default()
+                                        //             }
+                                        //         }
+
+                                        //         // Prices::default()
+                                        //     }
+                                        //     Err(err) => {
+                                        //         debug!("Unable to fetch prices: {err}. Return default Prices with warning toast");
+                                        //         self.send_default_prices_with_toast_warning(
+                                        //             &Error::IoError(err),
+                                        //             league,
+                                        //             window,
+                                        //         );
+                                        //         Prices::default()
+                                        //     }
+                                        // }
 
                                         // debug!("Unable to fetch prices: {err}. Return default Prices with warning toast");
                                         // self.send_default_prices_with_toast_warning(
