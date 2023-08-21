@@ -20,7 +20,7 @@ pub async fn sample(
     let prices = match league {
         Some(league) => {
             let mut guard = state.lock().await;
-            Some(guard.get_or_update_or_default(&league, &window).await)
+            Some(guard.get_price(&league, &window).await)
         }
         None => None,
     };
@@ -35,9 +35,7 @@ pub async fn merge(
     window: Window,
 ) -> Result<DivinationCardsSample, ()> {
     let mut guard = state.lock().await;
-    let prices = guard
-        .get_or_update_or_default(&TradeLeague::default(), &window)
-        .await;
+    let prices = guard.get_price(&TradeLeague::default(), &window).await;
     Ok(DivinationCardsSample::merge(Some(prices), &samples))
 }
 
