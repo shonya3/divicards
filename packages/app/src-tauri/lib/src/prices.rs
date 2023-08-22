@@ -1,6 +1,6 @@
 use crate::{
     error::Error,
-    event::{Event, ToastVariant},
+    event::{self, Event, ToastVariant},
     paths,
 };
 use divi::{league::TradeLeague, prices::Prices};
@@ -22,7 +22,7 @@ pub enum LeagueFileState {
 }
 
 impl AppCardPrices {
-    pub fn get_league_file_state(&self, league: &TradeLeague) -> LeagueFileState {
+    pub fn read_file(&self, league: &TradeLeague) -> LeagueFileState {
         if !self.league_file_exists(league) {
             return LeagueFileState::NoFile;
         }
@@ -53,7 +53,7 @@ impl AppCardPrices {
             return prices.to_owned();
         }
 
-        match self.get_league_file_state(league) {
+        match self.read_file(league) {
             LeagueFileState::UpToDate(prices) => prices,
             _ => self
                 .fetch_and_update(league, window)

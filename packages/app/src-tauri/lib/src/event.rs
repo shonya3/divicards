@@ -2,6 +2,10 @@ use serde::{Deserialize, Serialize};
 use tauri::Window;
 use tracing::instrument;
 
+pub fn toast(variant: ToastVariant, message: String, window: &Window) {
+    Event::Toast { variant, message }.emit(window)
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 #[serde(tag = "type")]
 pub enum Event {
