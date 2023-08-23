@@ -58,13 +58,8 @@ impl AppCardPrices {
             _ => self
                 .fetch_and_update(league, window)
                 .await
-                .unwrap_or_else(|_| {
-                    Event::Toast {
-                        variant: ToastVariant::Warning,
-                        message: format!("Unable to load prices for league {league}. Skip price-dependant calculations."),
-                    }
-                    .emit(&window);
-                    Prices::default()
+                .unwrap_or_else(|err| {
+                    self.send_default_prices_with_toast_warning(&err, league, window)
                 }),
         }
     }
