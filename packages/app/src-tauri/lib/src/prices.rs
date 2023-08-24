@@ -1,6 +1,6 @@
 use crate::{
     error::Error,
-    event::{self, Event, ToastVariant},
+    event::{Event, ToastVariant},
     paths,
 };
 use divi::{league::TradeLeague, prices::Prices};
@@ -22,6 +22,49 @@ pub enum LeagueFileState {
 }
 
 impl AppCardPrices {
+    pub async fn get_price(&mut self, league: &TradeLeague, window: &Window) -> Prices {
+        if let Some(prices) = self.prices_by_league.get(league) {
+            return prices.to_owned();
+        } else {
+            match Prices::fetch(league).await {
+                Ok(prices) => {
+                    self.prices_by_league
+                        .insert(league.to_owned(), prices.clone());
+
+                    Event::Toast {
+                        variant: ToastVariant::Neutral,
+                        message: format!("Prices for {league} league have been updated"),
+                    }
+                    .emit(&window);
+
+                    prices
+                }
+                Err(err) => self.send_default_prices_with_toast_warning(
+                    &Error::DiviError(err),
+                    league,
+                    window,
+                ),
+            }
+        }
+    }
+
+    /// Crashes in pnpm tauri dev --release mode. Works in debug mode.
+    // pub async fn get_price(&mut self, league: &TradeLeague, window: &Window) -> Prices {
+    //     if let Some(prices) = self.prices_by_league.get(league) {
+    //         return prices.to_owned();
+    //     }
+
+    //     match self.read_file(league) {
+    //         LeagueFileState::UpToDate(prices) => prices,
+    //         _ => self
+    //             .fetch_and_update(league, window)
+    //             .await
+    //             .unwrap_or_else(|err| {
+    //                 self.send_default_prices_with_toast_warning(&err, league, window)
+    //             }),
+    //     }
+    // }
+
     pub fn read_file(&self, league: &TradeLeague) -> LeagueFileState {
         if !self.league_file_exists(league) {
             return LeagueFileState::NoFile;
@@ -46,22 +89,6 @@ impl AppCardPrices {
         let json = std::fs::read_to_string(self.league_path(league))?;
         let prices = serde_json::from_str::<Prices>(&json)?;
         Ok(prices)
-    }
-
-    pub async fn get_price(&mut self, league: &TradeLeague, window: &Window) -> Prices {
-        if let Some(prices) = self.prices_by_league.get(league) {
-            return prices.to_owned();
-        }
-
-        match self.read_file(league) {
-            LeagueFileState::UpToDate(prices) => prices,
-            _ => self
-                .fetch_and_update(league, window)
-                .await
-                .unwrap_or_else(|err| {
-                    self.send_default_prices_with_toast_warning(&err, league, window)
-                }),
-        }
     }
 }
 
