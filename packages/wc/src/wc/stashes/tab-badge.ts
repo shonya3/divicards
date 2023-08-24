@@ -11,7 +11,7 @@ declare global {
 }
 
 export interface Events {
-	'tab-select': { tabId: TabBadgeElement['tabId']; selected: boolean };
+	'tab-select': { tabId: TabBadgeElement['tabId']; name: TabBadgeElement['name']; selected: boolean };
 }
 
 export class TabBadgeElement extends BaseElement {
@@ -64,6 +64,7 @@ export class TabBadgeElement extends BaseElement {
 		this.emit<Events['tab-select']>('tab-select', {
 			tabId: this.tabId,
 			selected: this.selected,
+			name: this.name,
 		});
 	}
 }

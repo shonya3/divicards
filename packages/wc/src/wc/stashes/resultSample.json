@@ -1,0 +1,3090 @@
+{
+	"data": {
+		"cards": [
+			{
+				"amount": 0,
+				"name": "Fire of Unknown Origin",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Fortunate",
+				"price": 15,
+				"sum": 15,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "Brother's Gift",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Soul Quenched",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Poisoned Faith",
+				"price": 20,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "A Chilling Wind",
+				"price": 25,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Matryoshka",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "A Dusty Memory",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "Alivia's Grace",
+				"price": 2,
+				"sum": 2,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "Auspicious Ambitions",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Divine Beauty",
+				"price": 62.400001525878906,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Ever-Changing",
+				"price": 2.200000047683716,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Man With Bear",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Finishing Touch",
+				"price": 1,
+				"sum": 1,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The Insane Cat",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Return of the Rat",
+				"price": 7,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Wedding Gift",
+				"price": 117.5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "A Dab of Ink",
+				"price": 9,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "A Familiar Call",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "A Fate Worse Than Death",
+				"price": 10,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "A Modest Request",
+				"price": 10,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "A Mother's Parting Gift",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "A Sea of Blue",
+				"price": 1.399999976158142,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "A Stone Perfected",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Abandoned Wealth",
+				"price": 6.599999904632568,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Acclimatisation",
+				"price": 1.399999976158142,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Alluring Bounty",
+				"price": 16.920000076293945,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Alone in the Darkness",
+				"price": 2.200000047683716,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Altered Perception",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Ambitious Obsession",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Anarchy's Price",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Arrogance of the Vaal",
+				"price": 4.400000095367432,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Assassin's Favour",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Astral Protection",
+				"price": 4,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Atziri's Arsenal",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Audacity",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Azure Rage",
+				"price": 2.200000047683716,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Azyran's Reward",
+				"price": 18.399999618530273,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Baited Expectations",
+				"price": 4,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Beauty Through Death",
+				"price": 60,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Bijoux",
+				"price": 12.399999618530273,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Birth of the Three",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Blind Venture",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Boon of Justice",
+				"price": 1.600000023841858,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Boon of the First Ones",
+				"price": 2.200000047683716,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Boundless Realms",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Bowyer's Dream",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Broken Promises",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Broken Truce",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Brotherhood in Exile",
+				"price": 8,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Brother's Stash",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Brush, Paint and Palette",
+				"price": 8,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Buried Treasure",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Burning Blood",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Call to the First Ones",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "Cameria's Cut",
+				"price": 1,
+				"sum": 1,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "Cartographer's Delight",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Chaotic Disposition",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Chasing Risk",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Checkmate",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Choking Guilt",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Costly Curio",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Council of Cats",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Coveted Possession",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "Cursed Words",
+				"price": 1,
+				"sum": 1,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "Dark Dreams",
+				"price": 8,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "Dark Temptation",
+				"price": 2,
+				"sum": 2,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "Darker Half",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Deadly Joy",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Death",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Deathly Designs",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Dementophobia",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Demigod's Wager",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Desecrated Virtue",
+				"price": 45,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Desperate Crusade",
+				"price": 17,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Destined to Crumble",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Dialla's Subjugation",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Disdain",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Divine Justice",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Doedre's Madness",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Doryani's Epiphany",
+				"price": 70.80000305175781,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Draped in Dreams",
+				"price": 20,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Duality",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Dying Anguish",
+				"price": 3.4000000953674316,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Dying Light",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Earth Drinker",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Echoes of Love",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Emperor of Purity",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Emperor's Luck",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Endless Night",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Etched in Blood",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Eternal Bonds",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Fateful Meeting",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Forbidden Power",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "From Bone to Ashes",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Further Invention",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Gemcutter's Mercy",
+				"price": 40,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Gemcutter's Promise",
+				"price": 1.600000023841858,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Gift of Asenath",
+				"price": 20,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Gift of the Gemling Queen",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Glimmer of Hope",
+				"price": 1.399999976158142,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Grave Knowledge",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Guardian's Challenge",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Harmony of Souls",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Haunting Shadows",
+				"price": 17,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Her Mask",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Heterochromia",
+				"price": 3.4000000953674316,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Home",
+				"price": 55,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Hope",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "House of Mirrors",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Hubris",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Humility",
+				"price": 2.299999952316284,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Hunter's Resolve",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Hunter's Reward",
+				"price": 6,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Immortal Resolve",
+				"price": 4,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Imperfect Memories",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Imperial Legacy",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 2,
+				"name": "Jack in the Box",
+				"price": 1,
+				"sum": 2,
+				"weight": 121465.9921875
+			},
+			{
+				"amount": 0,
+				"name": "Judging Voices",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Justified Ambition",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Keeper's Corruption",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Lachrymal Necrosis",
+				"price": 6.599999904632568,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 3,
+				"name": "Lantador's Lost Love",
+				"price": 1,
+				"sum": 3,
+				"weight": 223147.28125
+			},
+			{
+				"amount": 0,
+				"name": "Last Hope",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Left to Fate",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Lethean Temptation",
+				"price": 14,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Light and Truth",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Lingering Remnants",
+				"price": 2.799999952316284,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Lost Worlds",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Love Through Ice",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "Loyalty",
+				"price": 1,
+				"sum": 1,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "Lucky Connections",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Lucky Deck",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Luminous Trove",
+				"price": 10,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Lysah's Respite",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Magnum Opus",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Mawr Blaidd",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Merciless Armament",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Might is Right",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Misery in Darkness",
+				"price": 9,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "Mitts",
+				"price": 1,
+				"sum": 1,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "Monochrome",
+				"price": 15,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "More is Never Enough",
+				"price": 1.600000023841858,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "No Traces",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Nook's Crown",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Parasitic Passengers",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Peaceful Moments",
+				"price": 13.800000190734863,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Perfection",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Prejudice",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Pride Before the Fall",
+				"price": 10,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Pride of the First Ones",
+				"price": 33.79999923706055,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Prometheus' Armoury",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 2,
+				"name": "Prosperity",
+				"price": 1,
+				"sum": 2,
+				"weight": 121465.9921875
+			},
+			{
+				"amount": 2,
+				"name": "Rain of Chaos",
+				"price": 1,
+				"sum": 2,
+				"weight": 121465.9921875
+			},
+			{
+				"amount": 0,
+				"name": "Rain Tempter",
+				"price": 1.7999999523162842,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 2,
+				"name": "Rats",
+				"price": 1.7999999523162842,
+				"sum": 3.5999999046325684,
+				"weight": 121465.9921875
+			},
+			{
+				"amount": 0,
+				"name": "Rebirth",
+				"price": 1.399999976158142,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Rebirth and Renewal",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Reckless Ambition",
+				"price": 3.200000047683716,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Remembrance",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Sambodhi's Vow",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Sambodhi's Wisdom",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Scholar of the Seas",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Seven Years Bad Luck",
+				"price": 20,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Shard of Fate",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Silence and Frost",
+				"price": 12,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Society's Remorse",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Something Dark",
+				"price": 6,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Struck by Lightning",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Succor of the Sinless",
+				"price": 80,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Terrible Secret of Space",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Academic",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Admirer",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Adventuring Spirit",
+				"price": 1.1399999856948853,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Aesthete",
+				"price": 1,
+				"sum": 1,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The Apothecary",
+				"price": 4700,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Archmage's Right Hand",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Arena Champion",
+				"price": 2,
+				"sum": 2,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 4,
+				"name": "The Army of Blood",
+				"price": 1,
+				"sum": 4,
+				"weight": 343557.71875
+			},
+			{
+				"amount": 0,
+				"name": "The Artist",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Aspirant",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Astromancer",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Avenger",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Awakened",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Bargain",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Battle Born",
+				"price": 1,
+				"sum": 1,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The Bear Woman",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Beast",
+				"price": 2,
+				"sum": 2,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The Betrayal",
+				"price": 2.5999999046325684,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Bitter Blossom",
+				"price": 5.400000095367432,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Blazing Fire",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Blessing of Moosh",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Body",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 2,
+				"name": "The Bones",
+				"price": 13.800000190734863,
+				"sum": 27.600000381469727,
+				"weight": 121465.9921875
+			},
+			{
+				"amount": 0,
+				"name": "The Brawny Battle Mage",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Breach",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Brittle Emperor",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Cache",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Cacophony",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Calling",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Card Sharp",
+				"price": null,
+				"sum": 0,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 2,
+				"name": "The Carrion Crow",
+				"price": 1,
+				"sum": 2,
+				"weight": 121465.9921875
+			},
+			{
+				"amount": 0,
+				"name": "The Cartographer",
+				"price": 1.7999999523162842,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Cataclysm",
+				"price": 4,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Catalyst",
+				"price": 1,
+				"sum": 1,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The Catch",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Celestial Justicar",
+				"price": 10,
+				"sum": 10,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The Celestial Stone",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 5,
+				"name": "The Chains that Bind",
+				"price": 3,
+				"sum": 15,
+				"weight": 480136.4375
+			},
+			{
+				"amount": 0,
+				"name": "The Cheater",
+				"price": 235,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Chosen",
+				"price": 78,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Coming Storm",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Conduit",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Craving",
+				"price": 15,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Cursed King",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Damned",
+				"price": 20,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Dapper Prodigy",
+				"price": 7,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Dark Mage",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Darkest Dream",
+				"price": 70,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Deal",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Deceiver",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Deep Ones",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Demon",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Demoness",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Destination",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Doctor",
+				"price": 705,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Doppelganger",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Dragon",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Dragon's Heart",
+				"price": 117.5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Dreamer",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Dreamland",
+				"price": 3.200000047683716,
+				"sum": 3.200000047683716,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The Drunken Aristocrat",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Dungeon Master",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Easy Stroll",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Eldritch Decay",
+				"price": 17,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Emptiness",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Encroaching Darkness",
+				"price": 1.7999999523162842,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Endless Darkness",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Endurance",
+				"price": 1,
+				"sum": 1,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The Enforcer",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Enlightened",
+				"price": 55,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Enthusiasts",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Escape",
+				"price": 22.600000381469727,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Eternal War",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Ethereal",
+				"price": 4,
+				"sum": 4,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 1,
+				"name": "The Explorer",
+				"price": 1,
+				"sum": 1,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The Eye of Terror",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Eye of the Dragon",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Fathomless Depths",
+				"price": 2,
+				"sum": 2,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The Feast",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Fiend",
+				"price": 270.25,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Fishmonger",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Fletcher",
+				"price": 1,
+				"sum": 1,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 1,
+				"name": "The Flora's Gift",
+				"price": 1,
+				"sum": 1,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The Fool",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Forgotten Treasure",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Formless Sea",
+				"price": 1.7999999523162842,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Forsaken",
+				"price": 3,
+				"sum": 3,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The Forward Gaze",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Fox",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Fox in the Brambles",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 2,
+				"name": "The Gambler",
+				"price": 1,
+				"sum": 2,
+				"weight": 121465.9921875
+			},
+			{
+				"amount": 0,
+				"name": "The Garish Power",
+				"price": 35,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Gemcutter",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Gentleman",
+				"price": 1.7999999523162842,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 2,
+				"name": "The Gladiator",
+				"price": 1,
+				"sum": 2,
+				"weight": 121465.9921875
+			},
+			{
+				"amount": 0,
+				"name": "The Golden Era",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Greatest Intentions",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Gulf",
+				"price": 20,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Hale Heart",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Harvester",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Hermit",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Heroic Shot",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Hive of Knowledge",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Hoarder",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Hook",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Hunger",
+				"price": 50,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Immortal",
+				"price": 117.5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Incantation",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Innocent",
+				"price": 1.7999999523162842,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Inoculated",
+				"price": 1.399999976158142,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Insatiable",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Inventor",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Jester",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Jeweller's Boon",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 2,
+				"name": "The Journalist",
+				"price": 1,
+				"sum": 2,
+				"weight": 121465.9921875
+			},
+			{
+				"amount": 0,
+				"name": "The Journey",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The King's Blade",
+				"price": 1,
+				"sum": 1,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The King's Heart",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Landing",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Last One Standing",
+				"price": 63.5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Last Supper",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Leviathan",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Lich",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Life Thief",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Lion",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Long Con",
+				"price": 70,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Long Watch",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Lord in Black",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Lord of Celebration",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Lover",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Lunaris Priestess",
+				"price": 1,
+				"sum": 1,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The Magma Crab",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Master",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 3,
+				"name": "The Master Artisan",
+				"price": 1,
+				"sum": 3,
+				"weight": 223147.28125
+			},
+			{
+				"amount": 0,
+				"name": "The Mercenary",
+				"price": 2.200000047683716,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Messenger",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Metalsmith's Gift",
+				"price": 1,
+				"sum": 1,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The Mind's Eyes",
+				"price": 50,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Mountain",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Nurse",
+				"price": 25,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Oath",
+				"price": 1.600000023841858,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Obscured",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Offering",
+				"price": 6,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Offspring",
+				"price": 4.599999904632568,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Old Man",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The One That Got Away",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The One With All",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Opulent",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Pack Leader",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Pact",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Patient",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 2,
+				"name": "The Penitent",
+				"price": 2,
+				"sum": 4,
+				"weight": 121465.9921875
+			},
+			{
+				"amount": 1,
+				"name": "The Poet",
+				"price": 3,
+				"sum": 3,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The Polymath",
+				"price": 20,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Porcupine",
+				"price": 13,
+				"sum": 13,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The Price of Devotion",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Price of Loyalty",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Price of Prescience",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Price of Protection",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Primordial",
+				"price": 8,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Prince of Darkness",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Professor",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Progeny of Lunaris",
+				"price": 81,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Puzzle",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Queen",
+				"price": 10,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Rabbit's Foot",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Rabid Rhoa",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Realm",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Risk",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Rite of Elements",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Road to Power",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Ruthless Ceinture",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Sacrifice",
+				"price": 45,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Saint's Treasure",
+				"price": 4,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Samurai's Eye",
+				"price": 80,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 5,
+				"name": "The Scarred Meadow",
+				"price": 1,
+				"sum": 5,
+				"weight": 480136.4375
+			},
+			{
+				"amount": 0,
+				"name": "The Scavenger",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Scholar",
+				"price": 1,
+				"sum": 1,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The Scout",
+				"price": 11,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Seeker",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Sephirot",
+				"price": 94,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Shepherd's Sandals",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Shieldbearer",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Shortcut",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Side Quest",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Sigil",
+				"price": 1.600000023841858,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Siren",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Skeleton",
+				"price": 2.2699999809265137,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Soul",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Spark and the Flame",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Spoiled Prince",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Standoff",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Stormcaller",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Strategist",
+				"price": 14,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Summoner",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 3,
+				"name": "The Sun",
+				"price": 2,
+				"sum": 6,
+				"weight": 223147.28125
+			},
+			{
+				"amount": 0,
+				"name": "The Surgeon",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Surveyor",
+				"price": 1.7999999523162842,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 2,
+				"name": "The Survivalist",
+				"price": 1,
+				"sum": 2,
+				"weight": 121465.9921875
+			},
+			{
+				"amount": 0,
+				"name": "The Sustenance",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 2,
+				"name": "The Sword King's Salute",
+				"price": 1,
+				"sum": 2,
+				"weight": 121465.9921875
+			},
+			{
+				"amount": 0,
+				"name": "The Thaumaturgist",
+				"price": 7.599999904632568,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Throne",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Tinkerer's Table",
+				"price": 2.4000000953674316,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Tireless Extractor",
+				"price": 2,
+				"sum": 2,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The Tower",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Traitor",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 6,
+				"name": "The Trial",
+				"price": 1.600000023841858,
+				"sum": 9.600000381469727,
+				"weight": 631155.8125
+			},
+			{
+				"amount": 0,
+				"name": "The Tumbleweed",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Twilight Moon",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Twins",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Tyrant",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Undaunted",
+				"price": 2.200000047683716,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Undisputed",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Unexpected Prize",
+				"price": 10,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Union",
+				"price": 1,
+				"sum": 1,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The Valkyrie",
+				"price": 3,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Vast",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Visionary",
+				"price": 1.600000023841858,
+				"sum": 1.600000023841858,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The Void",
+				"price": 2.5999999046325684,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 2,
+				"name": "The Warden",
+				"price": 1,
+				"sum": 2,
+				"weight": 121465.9921875
+			},
+			{
+				"amount": 0,
+				"name": "The Warlord",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Watcher",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "The Web",
+				"price": 3,
+				"sum": 3,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "The White Knight",
+				"price": 8.600000381469727,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Whiteout",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Wilted Rose",
+				"price": 4,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Wind",
+				"price": 4,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Witch",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 2,
+				"name": "The Wolf",
+				"price": 2,
+				"sum": 4,
+				"weight": 121465.9921875
+			},
+			{
+				"amount": 0,
+				"name": "The Wolf's Legacy",
+				"price": 2,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Wolf's Shadow",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Wolven King's Bite",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Wolverine",
+				"price": 1.600000023841858,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The World Eater",
+				"price": 10,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Wrath",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Wretched",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "Thirst for Knowledge",
+				"price": 1.2000000476837158,
+				"sum": 1.2000000476837158,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 1,
+				"name": "Three Faces in the Dark",
+				"price": 1,
+				"sum": 1,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 0,
+				"name": "Three Voices",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 2,
+				"name": "Thunderous Skies",
+				"price": 1,
+				"sum": 2,
+				"weight": 121465.9921875
+			},
+			{
+				"amount": 2,
+				"name": "Time-Lost Relic",
+				"price": 1.399999976158142,
+				"sum": 2.799999952316284,
+				"weight": 121465.9921875
+			},
+			{
+				"amount": 0,
+				"name": "Tranquillity",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Treasure Hunter",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Triskaidekaphobia",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Turn the Other Cheek",
+				"price": 5,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Unchained",
+				"price": 4,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Underground Forest",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Unrequited Love",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 1,
+				"name": "Vanity",
+				"price": 3,
+				"sum": 3,
+				"weight": 42944.71484375
+			},
+			{
+				"amount": 2,
+				"name": "Vinia's Token",
+				"price": 2,
+				"sum": 4,
+				"weight": 121465.9921875
+			},
+			{
+				"amount": 0,
+				"name": "Void of the Elements",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Volatile Power",
+				"price": 1,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Wealth and Power",
+				"price": 75.19999694824219,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Winter's Embrace",
+				"price": 10,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Friendship",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Vile Power",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Squandered Prosperity",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Blessing of God",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Devastator",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Rusted Bard",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Luck of the Vaal",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "A Note in the Wind",
+				"price": 4,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Valley of Steel Boxes",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Akil's Prophecy",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Mayor",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Transformation",
+				"price": 3.200000047683716,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "The Mad King",
+				"price": 2.5999999046325684,
+				"sum": null,
+				"weight": 0
+			},
+			{
+				"amount": 0,
+				"name": "Treasures of the Vaal",
+				"price": null,
+				"sum": null,
+				"weight": 0
+			}
+		],
+		"csv": "name,amount,price,sum,weight\nFire of Unknown Origin,0,,,0.0\nThe Fortunate,1,15.0,15.0,42944.715\nBrother's Gift,0,,,0.0\nSoul Quenched,0,2.0,,0.0\nPoisoned Faith,0,20.0,,0.0\nA Chilling Wind,0,25.0,,0.0\nMatryoshka,0,,,0.0\nA Dusty Memory,0,,,0.0\nAlivia's Grace,1,2.0,2.0,42944.715\nAuspicious Ambitions,0,,,0.0\nDivine Beauty,0,62.4,,0.0\nEver-Changing,0,2.2,,0.0\nMan With Bear,0,,,0.0\nThe Finishing Touch,1,1.0,1.0,42944.715\nThe Insane Cat,0,,,0.0\nThe Return of the Rat,0,7.0,,0.0\nThe Wedding Gift,0,117.5,,0.0\nA Dab of Ink,0,9.0,,0.0\nA Familiar Call,0,,,0.0\nA Fate Worse Than Death,0,10.0,,0.0\nA Modest Request,0,10.0,,0.0\nA Mother's Parting Gift,0,1.0,,0.0\nA Sea of Blue,0,1.4,,0.0\nA Stone Perfected,0,5.0,,0.0\nAbandoned Wealth,0,6.6,,0.0\nAcclimatisation,0,1.4,,0.0\nAlluring Bounty,0,16.92,,0.0\nAlone in the Darkness,0,2.2,,0.0\nAltered Perception,0,,,0.0\nAmbitious Obsession,0,,,0.0\nAnarchy's Price,0,,,0.0\nArrogance of the Vaal,0,4.4,,0.0\nAssassin's Favour,0,1.0,,0.0\nAstral Protection,0,4.0,,0.0\nAtziri's Arsenal,0,,,0.0\nAudacity,0,,,0.0\nAzure Rage,0,2.2,,0.0\nAzyran's Reward,0,18.4,,0.0\nBaited Expectations,0,4.0,,0.0\nBeauty Through Death,0,60.0,,0.0\nBijoux,0,12.4,,0.0\nBirth of the Three,0,,,0.0\nBlind Venture,0,1.0,,0.0\nBoon of Justice,0,1.6,,0.0\nBoon of the First Ones,0,2.2,,0.0\nBoundless Realms,0,1.0,,0.0\nBowyer's Dream,0,5.0,,0.0\nBroken Promises,0,,,0.0\nBroken Truce,0,3.0,,0.0\nBrotherhood in Exile,0,8.0,,0.0\nBrother's Stash,0,,,0.0\n\"Brush, Paint and Palette\",0,8.0,,0.0\nBuried Treasure,0,3.0,,0.0\nBurning Blood,0,,,0.0\nCall to the First Ones,0,,,0.0\nCameria's Cut,1,1.0,1.0,42944.715\nCartographer's Delight,0,,,0.0\nChaotic Disposition,0,5.0,,0.0\nChasing Risk,0,,,0.0\nCheckmate,0,,,0.0\nChoking Guilt,0,,,0.0\nCostly Curio,0,,,0.0\nCouncil of Cats,0,5.0,,0.0\nCoveted Possession,0,1.0,,0.0\nCursed Words,1,1.0,1.0,42944.715\nDark Dreams,0,8.0,,0.0\nDark Temptation,1,2.0,2.0,42944.715\nDarker Half,0,,,0.0\nDeadly Joy,0,,,0.0\nDeath,0,3.0,,0.0\nDeathly Designs,0,5.0,,0.0\nDementophobia,0,,,0.0\nDemigod's Wager,0,3.0,,0.0\nDesecrated Virtue,0,45.0,,0.0\nDesperate Crusade,0,17.0,,0.0\nDestined to Crumble,0,2.0,,0.0\nDialla's Subjugation,0,1.0,,0.0\nDisdain,0,2.0,,0.0\nDivine Justice,0,,,0.0\nDoedre's Madness,0,1.0,,0.0\nDoryani's Epiphany,0,70.8,,0.0\nDraped in Dreams,0,20.0,,0.0\nDuality,0,,,0.0\nDying Anguish,0,3.4,,0.0\nDying Light,0,,,0.0\nEarth Drinker,0,1.0,,0.0\nEchoes of Love,0,,,0.0\nEmperor of Purity,0,5.0,,0.0\nEmperor's Luck,0,1.0,,0.0\nEndless Night,0,5.0,,0.0\nEtched in Blood,0,,,0.0\nEternal Bonds,0,,,0.0\nFateful Meeting,0,,,0.0\nForbidden Power,0,1.0,,0.0\nFrom Bone to Ashes,0,,,0.0\nFurther Invention,0,,,0.0\nGemcutter's Mercy,0,40.0,,0.0\nGemcutter's Promise,0,1.6,,0.0\nGift of Asenath,0,20.0,,0.0\nGift of the Gemling Queen,0,2.0,,0.0\nGlimmer of Hope,0,1.4,,0.0\nGrave Knowledge,0,1.0,,0.0\nGuardian's Challenge,0,3.0,,0.0\nHarmony of Souls,0,,,0.0\nHaunting Shadows,0,17.0,,0.0\nHer Mask,0,1.0,,0.0\nHeterochromia,0,3.4,,0.0\nHome,0,55.0,,0.0\nHope,0,2.0,,0.0\nHouse of Mirrors,0,,,0.0\nHubris,0,1.0,,0.0\nHumility,0,2.3,,0.0\nHunter's Resolve,0,1.0,,0.0\nHunter's Reward,0,6.0,,0.0\nImmortal Resolve,0,4.0,,0.0\nImperfect Memories,0,,,0.0\nImperial Legacy,0,2.0,,0.0\nJack in the Box,2,1.0,2.0,121465.99\nJudging Voices,0,,,0.0\nJustified Ambition,0,5.0,,0.0\nKeeper's Corruption,0,,,0.0\nLachrymal Necrosis,0,6.6,,0.0\nLantador's Lost Love,3,1.0,3.0,223147.28\nLast Hope,0,2.0,,0.0\nLeft to Fate,0,,,0.0\nLethean Temptation,0,14.0,,0.0\nLight and Truth,0,,,0.0\nLingering Remnants,0,2.8,,0.0\nLost Worlds,0,3.0,,0.0\nLove Through Ice,0,,,0.0\nLoyalty,1,1.0,1.0,42944.715\nLucky Connections,0,1.0,,0.0\nLucky Deck,0,,,0.0\nLuminous Trove,0,10.0,,0.0\nLysah's Respite,0,2.0,,0.0\nMagnum Opus,0,,,0.0\nMawr Blaidd,0,2.0,,0.0\nMerciless Armament,0,,,0.0\nMight is Right,0,2.0,,0.0\nMisery in Darkness,0,9.0,,0.0\nMitts,1,1.0,1.0,42944.715\nMonochrome,0,15.0,,0.0\nMore is Never Enough,0,1.6,,0.0\nNo Traces,0,3.0,,0.0\nNook's Crown,0,,,0.0\nParasitic Passengers,0,,,0.0\nPeaceful Moments,0,13.8,,0.0\nPerfection,0,,,0.0\nPrejudice,0,2.0,,0.0\nPride Before the Fall,0,10.0,,0.0\nPride of the First Ones,0,33.8,,0.0\nPrometheus' Armoury,0,,,0.0\nProsperity,2,1.0,2.0,121465.99\nRain of Chaos,2,1.0,2.0,121465.99\nRain Tempter,0,1.8,,0.0\nRats,2,1.8,3.6,121465.99\nRebirth,0,1.4,,0.0\nRebirth and Renewal,0,,,0.0\nReckless Ambition,0,3.2,,0.0\nRemembrance,0,,,0.0\nSambodhi's Vow,0,2.0,,0.0\nSambodhi's Wisdom,0,,,0.0\nScholar of the Seas,0,2.0,,0.0\nSeven Years Bad Luck,0,20.0,,0.0\nShard of Fate,0,2.0,,0.0\nSilence and Frost,0,12.0,,0.0\nSociety's Remorse,0,1.0,,0.0\nSomething Dark,0,6.0,,0.0\nStruck by Lightning,0,1.0,,0.0\nSuccor of the Sinless,0,80.0,,0.0\nTerrible Secret of Space,0,3.0,,0.0\nThe Academic,0,5.0,,0.0\nThe Admirer,0,3.0,,0.0\nThe Adventuring Spirit,0,1.14,,0.0\nThe Aesthete,1,1.0,1.0,42944.715\nThe Apothecary,0,4700.0,,0.0\nThe Archmage's Right Hand,0,,,0.0\nThe Arena Champion,1,2.0,2.0,42944.715\nThe Army of Blood,4,1.0,4.0,343557.72\nThe Artist,0,,,0.0\nThe Aspirant,0,,,0.0\nThe Astromancer,0,,,0.0\nThe Avenger,0,5.0,,0.0\nThe Awakened,0,,,0.0\nThe Bargain,0,,,0.0\nThe Battle Born,1,1.0,1.0,42944.715\nThe Bear Woman,0,,,0.0\nThe Beast,1,2.0,2.0,42944.715\nThe Betrayal,0,2.6,,0.0\nThe Bitter Blossom,0,5.4,,0.0\nThe Blazing Fire,0,1.0,,0.0\nThe Blessing of Moosh,0,3.0,,0.0\nThe Body,0,2.0,,0.0\nThe Bones,2,13.8,27.6,121465.99\nThe Brawny Battle Mage,0,,,0.0\nThe Breach,0,,,0.0\nThe Brittle Emperor,0,,,0.0\nThe Cache,0,3.0,,0.0\nThe Cacophony,0,,,0.0\nThe Calling,0,2.0,,0.0\nThe Card Sharp,1,,0.0,42944.715\nThe Carrion Crow,2,1.0,2.0,121465.99\nThe Cartographer,0,1.8,,0.0\nThe Cataclysm,0,4.0,,0.0\nThe Catalyst,1,1.0,1.0,42944.715\nThe Catch,0,,,0.0\nThe Celestial Justicar,1,10.0,10.0,42944.715\nThe Celestial Stone,0,,,0.0\nThe Chains that Bind,5,3.0,15.0,480136.44\nThe Cheater,0,235.0,,0.0\nThe Chosen,0,78.0,,0.0\nThe Coming Storm,0,5.0,,0.0\nThe Conduit,0,,,0.0\nThe Craving,0,15.0,,0.0\nThe Cursed King,0,,,0.0\nThe Damned,0,20.0,,0.0\nThe Dapper Prodigy,0,7.0,,0.0\nThe Dark Mage,0,3.0,,0.0\nThe Darkest Dream,0,70.0,,0.0\nThe Deal,0,,,0.0\nThe Deceiver,0,,,0.0\nThe Deep Ones,0,,,0.0\nThe Demon,0,,,0.0\nThe Demoness,0,2.0,,0.0\nThe Destination,0,,,0.0\nThe Doctor,0,705.0,,0.0\nThe Doppelganger,0,1.0,,0.0\nThe Dragon,0,2.0,,0.0\nThe Dragon's Heart,0,117.5,,0.0\nThe Dreamer,0,,,0.0\nThe Dreamland,1,3.2,3.2,42944.715\nThe Drunken Aristocrat,0,2.0,,0.0\nThe Dungeon Master,0,5.0,,0.0\nThe Easy Stroll,0,5.0,,0.0\nThe Eldritch Decay,0,17.0,,0.0\nThe Emptiness,0,,,0.0\nThe Encroaching Darkness,0,1.8,,0.0\nThe Endless Darkness,0,,,0.0\nThe Endurance,1,1.0,1.0,42944.715\nThe Enforcer,0,,,0.0\nThe Enlightened,0,55.0,,0.0\nThe Enthusiasts,0,5.0,,0.0\nThe Escape,0,22.6,,0.0\nThe Eternal War,0,,,0.0\nThe Ethereal,1,4.0,4.0,42944.715\nThe Explorer,1,1.0,1.0,42944.715\nThe Eye of Terror,0,,,0.0\nThe Eye of the Dragon,0,5.0,,0.0\nThe Fathomless Depths,1,2.0,2.0,42944.715\nThe Feast,0,1.0,,0.0\nThe Fiend,0,270.25,,0.0\nThe Fishmonger,0,,,0.0\nThe Fletcher,1,1.0,1.0,42944.715\nThe Flora's Gift,1,1.0,1.0,42944.715\nThe Fool,0,1.0,,0.0\nThe Forgotten Treasure,0,,,0.0\nThe Formless Sea,0,1.8,,0.0\nThe Forsaken,1,3.0,3.0,42944.715\nThe Forward Gaze,0,3.0,,0.0\nThe Fox,0,2.0,,0.0\nThe Fox in the Brambles,0,3.0,,0.0\nThe Gambler,2,1.0,2.0,121465.99\nThe Garish Power,0,35.0,,0.0\nThe Gemcutter,0,1.0,,0.0\nThe Gentleman,0,1.8,,0.0\nThe Gladiator,2,1.0,2.0,121465.99\nThe Golden Era,0,,,0.0\nThe Greatest Intentions,0,,,0.0\nThe Gulf,0,20.0,,0.0\nThe Hale Heart,0,,,0.0\nThe Harvester,0,1.0,,0.0\nThe Hermit,0,1.0,,0.0\nThe Heroic Shot,0,,,0.0\nThe Hive of Knowledge,0,,,0.0\nThe Hoarder,0,2.0,,0.0\nThe Hook,0,,,0.0\nThe Hunger,0,50.0,,0.0\nThe Immortal,0,117.5,,0.0\nThe Incantation,0,,,0.0\nThe Innocent,0,1.8,,0.0\nThe Inoculated,0,1.4,,0.0\nThe Insatiable,0,2.0,,0.0\nThe Inventor,0,1.0,,0.0\nThe Jester,0,,,0.0\nThe Jeweller's Boon,0,3.0,,0.0\nThe Journalist,2,1.0,2.0,121465.99\nThe Journey,0,,,0.0\nThe King's Blade,1,1.0,1.0,42944.715\nThe King's Heart,0,3.0,,0.0\nThe Landing,0,2.0,,0.0\nThe Last One Standing,0,63.5,,0.0\nThe Last Supper,0,,,0.0\nThe Leviathan,0,,,0.0\nThe Lich,0,,,0.0\nThe Life Thief,0,,,0.0\nThe Lion,0,2.0,,0.0\nThe Long Con,0,70.0,,0.0\nThe Long Watch,0,,,0.0\nThe Lord in Black,0,,,0.0\nThe Lord of Celebration,0,,,0.0\nThe Lover,0,1.0,,0.0\nThe Lunaris Priestess,1,1.0,1.0,42944.715\nThe Magma Crab,0,3.0,,0.0\nThe Master,0,2.0,,0.0\nThe Master Artisan,3,1.0,3.0,223147.28\nThe Mercenary,0,2.2,,0.0\nThe Messenger,0,3.0,,0.0\nThe Metalsmith's Gift,1,1.0,1.0,42944.715\nThe Mind's Eyes,0,50.0,,0.0\nThe Mountain,0,1.0,,0.0\nThe Nurse,0,25.0,,0.0\nThe Oath,0,1.6,,0.0\nThe Obscured,0,,,0.0\nThe Offering,0,6.0,,0.0\nThe Offspring,0,4.6,,0.0\nThe Old Man,0,,,0.0\nThe One That Got Away,0,,,0.0\nThe One With All,0,2.0,,0.0\nThe Opulent,0,2.0,,0.0\nThe Pack Leader,0,2.0,,0.0\nThe Pact,0,5.0,,0.0\nThe Patient,0,5.0,,0.0\nThe Penitent,2,2.0,4.0,121465.99\nThe Poet,1,3.0,3.0,42944.715\nThe Polymath,0,20.0,,0.0\nThe Porcupine,1,13.0,13.0,42944.715\nThe Price of Devotion,0,,,0.0\nThe Price of Loyalty,0,,,0.0\nThe Price of Prescience,0,,,0.0\nThe Price of Protection,0,,,0.0\nThe Primordial,0,8.0,,0.0\nThe Prince of Darkness,0,5.0,,0.0\nThe Professor,0,,,0.0\nThe Progeny of Lunaris,0,81.0,,0.0\nThe Puzzle,0,2.0,,0.0\nThe Queen,0,10.0,,0.0\nThe Rabbit's Foot,0,,,0.0\nThe Rabid Rhoa,0,3.0,,0.0\nThe Realm,0,1.0,,0.0\nThe Risk,0,2.0,,0.0\nThe Rite of Elements,0,2.0,,0.0\nThe Road to Power,0,,,0.0\nThe Ruthless Ceinture,0,,,0.0\nThe Sacrifice,0,45.0,,0.0\nThe Saint's Treasure,0,4.0,,0.0\nThe Samurai's Eye,0,80.0,,0.0\nThe Scarred Meadow,5,1.0,5.0,480136.44\nThe Scavenger,0,2.0,,0.0\nThe Scholar,1,1.0,1.0,42944.715\nThe Scout,0,11.0,,0.0\nThe Seeker,0,,,0.0\nThe Sephirot,0,94.0,,0.0\nThe Shepherd's Sandals,0,,,0.0\nThe Shieldbearer,0,,,0.0\nThe Shortcut,0,,,0.0\nThe Side Quest,0,,,0.0\nThe Sigil,0,1.6,,0.0\nThe Siren,0,,,0.0\nThe Skeleton,0,2.27,,0.0\nThe Soul,0,,,0.0\nThe Spark and the Flame,0,5.0,,0.0\nThe Spoiled Prince,0,,,0.0\nThe Standoff,0,1.0,,0.0\nThe Stormcaller,0,1.0,,0.0\nThe Strategist,0,14.0,,0.0\nThe Summoner,0,1.0,,0.0\nThe Sun,3,2.0,6.0,223147.28\nThe Surgeon,0,,,0.0\nThe Surveyor,0,1.8,,0.0\nThe Survivalist,2,1.0,2.0,121465.99\nThe Sustenance,0,,,0.0\nThe Sword King's Salute,2,1.0,2.0,121465.99\nThe Thaumaturgist,0,7.6,,0.0\nThe Throne,0,,,0.0\nThe Tinkerer's Table,0,2.4,,0.0\nThe Tireless Extractor,1,2.0,2.0,42944.715\nThe Tower,0,1.0,,0.0\nThe Traitor,0,3.0,,0.0\nThe Trial,6,1.6,9.6,631155.8\nThe Tumbleweed,0,,,0.0\nThe Twilight Moon,0,5.0,,0.0\nThe Twins,0,,,0.0\nThe Tyrant,0,,,0.0\nThe Undaunted,0,2.2,,0.0\nThe Undisputed,0,,,0.0\nThe Unexpected Prize,0,10.0,,0.0\nThe Union,1,1.0,1.0,42944.715\nThe Valkyrie,0,3.0,,0.0\nThe Vast,0,,,0.0\nThe Visionary,1,1.6,1.6,42944.715\nThe Void,0,2.6,,0.0\nThe Warden,2,1.0,2.0,121465.99\nThe Warlord,0,2.0,,0.0\nThe Watcher,0,2.0,,0.0\nThe Web,1,3.0,3.0,42944.715\nThe White Knight,0,8.6,,0.0\nThe Whiteout,0,2.0,,0.0\nThe Wilted Rose,0,4.0,,0.0\nThe Wind,0,4.0,,0.0\nThe Witch,0,1.0,,0.0\nThe Wolf,2,2.0,4.0,121465.99\nThe Wolf's Legacy,0,2.0,,0.0\nThe Wolf's Shadow,0,,,0.0\nThe Wolven King's Bite,0,5.0,,0.0\nThe Wolverine,0,1.6,,0.0\nThe World Eater,0,10.0,,0.0\nThe Wrath,0,1.0,,0.0\nThe Wretched,0,1.0,,0.0\nThirst for Knowledge,1,1.2,1.2,42944.715\nThree Faces in the Dark,1,1.0,1.0,42944.715\nThree Voices,0,1.0,,0.0\nThunderous Skies,2,1.0,2.0,121465.99\nTime-Lost Relic,2,1.4,2.8,121465.99\nTranquillity,0,,,0.0\nTreasure Hunter,0,5.0,,0.0\nTriskaidekaphobia,0,,,0.0\nTurn the Other Cheek,0,5.0,,0.0\nUnchained,0,4.0,,0.0\nUnderground Forest,0,,,0.0\nUnrequited Love,0,,,0.0\nVanity,1,3.0,3.0,42944.715\nVinia's Token,2,2.0,4.0,121465.99\nVoid of the Elements,0,,,0.0\nVolatile Power,0,1.0,,0.0\nWealth and Power,0,75.2,,0.0\nWinter's Embrace,0,10.0,,0.0\nFriendship,0,,,0.0\nVile Power,0,,,0.0\nSquandered Prosperity,0,,,0.0\nBlessing of God,0,,,0.0\nThe Devastator,0,,,0.0\nThe Rusted Bard,0,,,0.0\nLuck of the Vaal,0,,,0.0\nA Note in the Wind,0,4.0,,0.0\nThe Valley of Steel Boxes,0,,,0.0\nAkil's Prophecy,0,,,0.0\nThe Mayor,0,,,0.0\nThe Transformation,0,3.2,,0.0\nThe Mad King,0,2.6,,0.0\nTreasures of the Vaal,0,,,0.0\n",
+		"fixedNames": [],
+		"notCards": []
+	},
+	"type": "ok"
+}

@@ -207,7 +207,7 @@ pub enum SampleData {
 #[cfg(test)]
 mod tests {
 
-    use crate::{league::TradeLeague, IsCard};
+    use crate::IsCard;
 
     use super::*;
 

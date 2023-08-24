@@ -55,7 +55,7 @@ const openStashWindow = async () => {
 		</header>
 
 		<div v-show="authStore.loggedIn && stashVisible">
-			<StashesView @tab-tada="fileCardsStore.addFromTab" @close="stashVisible = false" />
+			<StashesView @sample-from-tab="fileCardsStore.sampleFromTab" @close="stashVisible = false" />
 		</div>
 
 		<Transition>

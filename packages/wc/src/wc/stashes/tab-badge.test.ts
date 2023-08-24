@@ -18,11 +18,12 @@ describe('<wc-tab-badge>', () => {
 		const tabSelectSpy = sinon.spy();
 		el.addEventListener('tab-select', tabSelectSpy);
 		el.tabId = 'Test id';
+		el.name = 'Heist';
 		el.selected = false;
 		el.checkbox.click();
 		await el.updateComplete;
 
 		expect(tabSelectSpy).to.have.been.calledOnce;
-		expect(tabSelectSpy.args[0][0].detail).to.deep.equal({ tabId: 'Test id', selected: true });
+		expect(tabSelectSpy.args[0][0].detail).to.deep.equal({ tabId: 'Test id', selected: true, name: 'Heist' });
 	});
 });

@@ -19,6 +19,21 @@ pub enum League {
     SSFHCAncestor,
 }
 
+impl League {
+    pub fn is_trade(&self) -> bool {
+        match self {
+            League::Standard => true,
+            League::Hardcore => true,
+            League::SSFStandard => false,
+            League::SSFHardcore => false,
+            League::Ancestor => true,
+            League::HardcoreAncestor => true,
+            League::SSFAncestor => false,
+            League::SSFHCAncestor => false,
+        }
+    }
+}
+
 impl Default for League {
     fn default() -> Self {
         League::Ancestor
@@ -62,5 +77,24 @@ impl Display for TradeLeague {
 impl Default for TradeLeague {
     fn default() -> Self {
         TradeLeague::Ancestor
+    }
+}
+
+impl TryFrom<League> for TradeLeague {
+    type Error = &'static str;
+
+    fn try_from(value: League) -> Result<Self, Self::Error> {
+        let msg = "This league is not a trade league";
+
+        match value {
+            League::Standard => Ok(TradeLeague::Standard),
+            League::Hardcore => Ok(TradeLeague::Hardcore),
+            League::SSFStandard => Err(msg),
+            League::SSFHardcore => Err(msg),
+            League::Ancestor => Ok(TradeLeague::Ancestor),
+            League::HardcoreAncestor => Ok(TradeLeague::HardcoreAncestor),
+            League::SSFAncestor => Err(msg),
+            League::SSFHCAncestor => Err(msg),
+        }
     }
 }

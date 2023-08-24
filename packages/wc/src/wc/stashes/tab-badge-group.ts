@@ -39,10 +39,10 @@ export interface Events {
 	'upd:nameQuery': string;
 	'upd:PerPage': number;
 	'upd:page': number;
-	'upd:selectedTabs': Set<TabBadgeElement['tabId']>;
+	'upd:selectedTabs': Map<TabBadgeElement['tabId'], { id: TabBadgeElement['tabId']; name: TabBadgeElement['name'] }>;
 
 	/**  Event from TabBadgeElement */
-	'tab-select': { tabId: TabBadgeElement['tabId']; selected: boolean };
+	'tab-select': { tabId: TabBadgeElement['tabId']; name: TabBadgeElement['name']; selected: boolean };
 }
 
 export class TabBadgeGroupElement extends BaseElement {
@@ -57,7 +57,10 @@ export class TabBadgeGroupElement extends BaseElement {
 	@property({ type: Number, reflect: true }) perPage = 50;
 	@property({ type: Number, reflect: true }) page = 1;
 	@property() nameQuery = '';
-	@property({ attribute: false }) selectedTabs: Set<TabBadgeElement['tabId']> = new Set();
+	@property({ attribute: false }) selectedTabs: Map<
+		TabBadgeElement['tabId'],
+		{ id: TabBadgeElement['tabId']; name: TabBadgeElement['name'] }
+	> = new Map();
 
 	@state() hideRemoveOnly = false;
 
@@ -114,9 +117,9 @@ export class TabBadgeGroupElement extends BaseElement {
 	}
 
 	#onTabSelect(e: CustomEvent<Events['tab-select']>) {
-		const { selected, tabId } = e.detail;
-		selected ? this.selectedTabs.add(tabId) : this.selectedTabs.delete(tabId);
-		this.selectedTabs = new Set(this.selectedTabs);
+		const { selected, tabId, name } = e.detail;
+		selected ? this.selectedTabs.set(tabId, { id: tabId, name }) : this.selectedTabs.delete(tabId);
+		this.selectedTabs = new Map(this.selectedTabs);
 		this.emit<Events['upd:selectedTabs']>('upd:selectedTabs', this.selectedTabs);
 	}
 

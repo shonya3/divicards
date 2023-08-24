@@ -1,12 +1,28 @@
 pub mod auth;
 pub mod error;
+pub mod types;
 
-use divi::league::League;
+use divi::{
+    league::{League, TradeLeague},
+    prices::Prices,
+    sample::{DivinationCardsSample, SampleData},
+};
 
 use keyring::Entry;
 use reqwest::Client;
+use serde::Deserialize;
 use serde_json::Value;
-use tauri::{command, AppHandle};
+use tauri::{command, AppHandle, State, Window};
+use tokio::sync::Mutex;
+
+use crate::{
+    error::Error,
+    event::{Event, ToastVariant},
+    js_result::JSResult,
+    prices::AppCardPrices,
+};
+
+use self::types::TabWithItems;
 
 pub const API_URL: &'static str = "https://api.pathofexile.com";
 const PROVIDER_LABEL: &'static str = "poe";
@@ -15,27 +31,54 @@ const AUTH_URL: &'static str = "https://www.pathofexile.com/oauth/authorize";
 const TOKEN_URL: &'static str = "https://www.pathofexile.com/oauth/token";
 
 #[command]
+pub async fn sample_from_tab(
+    league: League,
+    stash_id: String,
+    substash_id: Option<String>,
+    app_handle: AppHandle,
+    state: State<'_, Mutex<AppCardPrices>>,
+    window: Window,
+) -> Result<JSResult<DivinationCardsSample>, ()> {
+    let tab = PoeProvider::tab_with_items(
+        &league,
+        stash_id,
+        substash_id,
+        app_handle.config().package.version.clone().unwrap(),
+    )
+    .await;
+
+    let tab = match tab {
+        Ok(tab) => tab,
+        Err(err) => {
+            Event::Toast {
+                variant: ToastVariant::Danger,
+                message: format!("{}", err),
+            }
+            .emit(&window);
+            return Err(());
+        }
+    };
+
+    let prices = match TradeLeague::try_from(league) {
+        Ok(league) => {
+            let mut guard = state.lock().await;
+            guard.get_price(&league, &window).await
+        }
+        Err(_) => Prices::default(),
+    };
+
+    Ok(JSResult::from(DivinationCardsSample::create(
+        SampleData::from(tab),
+        Some(prices),
+    )))
+}
+
+#[command]
 pub async fn stashes(league: League, app_handle: AppHandle) -> Value {
     let val =
         PoeProvider::stashes(league, app_handle.config().package.version.clone().unwrap()).await;
     // dbg!(&val);
     val
-}
-
-#[command]
-pub async fn stash(
-    league: League,
-    stash_id: String,
-    substash_id: Option<String>,
-    app_handle: AppHandle,
-) -> Value {
-    PoeProvider::stash(
-        league,
-        stash_id,
-        substash_id,
-        app_handle.config().package.version.clone().unwrap(),
-    )
-    .await
 }
 
 #[derive(Default)]
@@ -50,12 +93,12 @@ impl PoeProvider {
         format!("{}_access_token", { PROVIDER_LABEL })
     }
 
-    async fn stash(
-        league: League,
+    async fn tab_with_items(
+        league: &League,
         stash_id: String,
         substash_id: Option<String>,
         version: String,
-    ) -> Value {
+    ) -> Result<TabWithItems, Error> {
         let url = match substash_id {
             Some(substash_id) => {
                 format!("{}/stash/{}/{}/{}", API_URL, league, stash_id, substash_id)
@@ -89,7 +132,13 @@ impl PoeProvider {
             limit_account_header, limit_account_state_header
         );
 
-        response.json::<Value>().await.unwrap()
+        #[derive(Deserialize)]
+        struct ResponseShape {
+            stash: TabWithItems,
+        }
+
+        let response_shape = response.json::<ResponseShape>().await?;
+        Ok(response_shape.stash)
     }
 
     async fn stashes(league: League, version: String) -> Value {

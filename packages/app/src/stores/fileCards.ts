@@ -4,7 +4,6 @@ import { SampleData, command } from '../command';
 import { DivinationCardsSample, League, Result, TradeLeague, isTradeLeague, leagues } from '@divicards/shared/types';
 import { FileCardProps } from '@divicards/wc/src/wc/file-card/file-card';
 import { StashTab } from '@divicards/shared/poe.types';
-import { cardsFromTab } from '../cards';
 
 const prefixFilename = (name: string, league: League): string => {
 	const UNDERSCORE_GLUE = '_';
@@ -25,6 +24,21 @@ export const createFileCard = async (
 ): Promise<FileCardProps> => {
 	const sample = await command('sample', { data: sampleData, league });
 
+	return {
+		uuid: crypto.randomUUID(),
+		filename: sample.type === 'ok' ? prefixFilename(name, league) : name,
+		league,
+		sample,
+		selected: false,
+		minimumCardPrice: 0,
+	};
+};
+
+export const createFileCardFromSample = (
+	name: string,
+	sample: Result<DivinationCardsSample>,
+	league: TradeLeague
+): FileCardProps => {
 	return {
 		uuid: crypto.randomUUID(),
 		filename: sample.type === 'ok' ? prefixFilename(name, league) : name,
@@ -119,7 +133,16 @@ export const useFileCardsStore = defineStore('fileCards', {
 
 		async addFromTab(tab: StashTab, league: League) {
 			const tradeLeague = isTradeLeague(league) ? league : ACTIVE_LEAGUE;
-			this.addCard(`${tab.name}.csv`, cardsFromTab(tab), tradeLeague);
+			const sample = await command('sample_from_tab', { league, stashId: tab.id });
+			const fileCard = createFileCardFromSample(tab.name, sample, tradeLeague);
+			this.fileCards.push(fileCard);
+			console.log(sample);
+			console.log(this.fileCards.at(-1));
+		},
+
+		async sampleFromTab(sample: Result<DivinationCardsSample>, league: League, name: string) {
+			const fileCard = createFileCardFromSample(name, sample, league as TradeLeague);
+			this.fileCards.push(fileCard);
 		},
 
 		async replaceFileCard(league: League, oldFileCard: FileCardProps) {

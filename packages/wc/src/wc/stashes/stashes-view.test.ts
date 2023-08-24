@@ -14,10 +14,10 @@ describe('<wc-tab-badge-group>', async () => {
 		expect(el).to.exist;
 	});
 
-	it('should emit tab-data', async () => {
+	it('should emit sample-from-tab', async () => {
 		await el.updateComplete;
 		const spy = sinon.spy();
-		el.addEventListener('tab-data', spy);
+		el.addEventListener('sample-from-tab', spy);
 		el.stashesButton.click();
 		await el.updateComplete;
 

@@ -6,7 +6,7 @@ import { TabBadgeElement } from './tab-badge';
 import { LeagueSelectElement } from '../league-select';
 import { property, state, query } from 'lit/decorators.js';
 import { StashTab } from '@divicards/shared/poe.types';
-import { League } from '@divicards/shared/types';
+import { DivinationCardsSample, League, Result } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { TabBadgeGroupElement } from './tab-badge-group';
 import { classMap } from 'lit/directives/class-map.js';
@@ -21,7 +21,7 @@ export class Events {
 	'close': void;
 	// ---
 	/** from tab-badge-group */
-	'upd:selectedTabs': Set<TabBadgeElement['tabId']>;
+	'upd:selectedTabs': Map<TabBadgeElement['tabId'], { id: TabBadgeElement['tabId']; name: TabBadgeElement['name'] }>;
 	/** from tab-badge-group */
 	'upd:nameQuery': string;
 	/** from tab-badge-group */
@@ -29,11 +29,11 @@ export class Events {
 	/** from tab-badge-group */
 	'upd:page': number;
 
-	'tab-data': { tab: StashTab; league: League };
+	'sample-from-tab': { sample: Result<DivinationCardsSample>; league: League; name: TabBadgeElement['name'] };
 
 	// ---
 	/**  event from TabBadgeElement */
-	'tab-select': { tabId: TabBadgeElement['tabId']; selected: boolean };
+	'tab-select': { tabId: TabBadgeElement['tabId']; name: TabBadgeElement['name']; selected: boolean };
 }
 
 export interface StashesViewProps {
@@ -48,7 +48,10 @@ export class StashesViewElement extends BaseElement {
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
 
 	#countdownTimer: ReturnType<typeof setInterval> | null = null;
-	@state() selectedTabs: Set<string> = new Set();
+	@state() selectedTabs: Map<
+		TabBadgeElement['tabId'],
+		{ id: TabBadgeElement['tabId']; name: TabBadgeElement['name'] }
+	> = new Map();
 	@state() stashes: StashTab[] = [];
 	@state() noStashesMessage: string = '';
 	@state() msg: string = '';
@@ -66,8 +69,8 @@ export class StashesViewElement extends BaseElement {
 	}
 
 	async #onLoadItemsClicked() {
-		await this.fetchStashesContents(Array.from(this.selectedTabs), this.league);
-		this.selectedTabs = new Set();
+		await this.fetchStashesContents(Array.from(this.selectedTabs.values()), this.league);
+		this.selectedTabs = new Map();
 	}
 
 	#onCloseClicked() {
@@ -88,8 +91,8 @@ export class StashesViewElement extends BaseElement {
 	}
 
 	#onUpdSelectedTabs(e: CustomEvent<Events['upd:selectedTabs']>) {
-		const set = (e as CustomEvent<Events['upd:selectedTabs']>).detail;
-		this.selectedTabs = new Set(set);
+		const map = (e as CustomEvent<Events['upd:selectedTabs']>).detail;
+		this.selectedTabs = new Map(map);
 	}
 
 	render() {
@@ -127,28 +130,25 @@ export class StashesViewElement extends BaseElement {
 		</div>`;
 	}
 
-	async fetchStashesContents(ids: string[], league: League) {
+	async fetchStashesContents(tabs: { id: TabBadgeElement['id']; name: TabBadgeElement['name'] }[], league: League) {
 		// const tradeLeague = isTradeLeague(league) ? league : ACTIVE_LEAGUE;
 		const SLEEP_SECS = 10;
 		const LOAD_AT_ONE_ITERATION = 5;
-		const stashIds = ids.slice();
-		const result: StashTab[] = [];
+		// const stashIds = ids.slice();
+		const tabsCopy = tabs.slice();
 		this.fetchingStash = true;
-		while (stashIds.length > 0) {
-			const chunkIds = stashIds.splice(0, LOAD_AT_ONE_ITERATION);
-			this.msg = `${new Date().toLocaleTimeString('ru')}: Loading ${chunkIds.length} tabs data`;
-			const r = await Promise.all(
-				chunkIds.map(async stashId => {
-					const tab = await this.stashLoader.tab(stashId, league);
-					this.emit<Events['tab-data']>('tab-data', { tab, league });
-					this.selectedTabs.delete(tab.id);
-					this.selectedTabs = new Set(this.selectedTabs);
-
-					return tab;
+		while (tabsCopy.length > 0) {
+			const chunkTabs = tabsCopy.splice(0, LOAD_AT_ONE_ITERATION);
+			this.msg = `${new Date().toLocaleTimeString('ru')}: Loading ${chunkTabs.length} tabs data`;
+			await Promise.all(
+				chunkTabs.map(async ({ id, name }) => {
+					const sample = await this.stashLoader.sampleFromTab(id, league);
+					this.emit<Events['sample-from-tab']>('sample-from-tab', { sample, league, name });
+					this.selectedTabs.delete(id);
+					this.selectedTabs = new Map(this.selectedTabs);
 				})
 			);
-			result.push(...r);
-			if (stashIds.length === 0) break;
+			if (tabsCopy.length === 0) break;
 
 			// Countdown
 			if (this.#countdownTimer) {
@@ -174,8 +174,6 @@ export class StashesViewElement extends BaseElement {
 
 		this.fetchingStash = false;
 		this.msg = '';
-
-		return result;
 	}
 }
 

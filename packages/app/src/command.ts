@@ -10,8 +10,8 @@ export interface Commands {
 	open_url: (args: { url: string }) => void;
 	poe_auth: () => string;
 	poe_logout: () => void;
-	stash: (args: { league: League; stashId: string; subStashId?: string }) => StashResponseData;
 	stashes: (args: { league: League }) => StashesResponseData;
+	sample_from_tab: (args: { league: League; stashId: string; subStashId?: string }) => Result<DivinationCardsSample>;
 }
 
 const { format } = new Intl.NumberFormat();
