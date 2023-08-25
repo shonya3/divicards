@@ -33,7 +33,6 @@ impl Prices {
         let client = reqwest::Client::new();
         let url = format!("https://poe.ninja/api/data/itemoverview?league={league}&type=DivinationCard&language=en");
         let json = client.get(url).send().await?.text().await?;
-        // std::fs::write("ninja.json", &json).unwrap();
         let data = serde_json::from_str::<PriceData>(&json).unwrap();
         if data.lines.len() == 0 {
             return Err(Error::NoPricesForLeagueOnNinja(league.to_owned()));
@@ -78,8 +77,8 @@ impl From<Vec<DivinationCardPrice>> for Prices {
     }
 }
 
-#[tokio::test]
-async fn testfetch() {
-    let p = Prices::fetch(&TradeLeague::Standard).await.unwrap();
-    std::fs::write("p.json", serde_json::to_string(&p).unwrap()).unwrap();
-}
+// #[tokio::test]
+// async fn testfetch() {
+//     let p = Prices::fetch(&TradeLeague::Standard).await.unwrap();
+//     std::fs::write("p.json", serde_json::to_string(&p).unwrap()).unwrap();
+// }
