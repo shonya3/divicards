@@ -7,7 +7,7 @@ use divi::{
 use tauri::{command, State, Window};
 use tracing::instrument;
 
-use crate::{js_result::JSResult, prices::AppCardPrices};
+use crate::{error::Error, prices::AppCardPrices};
 
 #[command]
 #[instrument(skip(data, state, window))]
@@ -16,7 +16,7 @@ pub async fn sample(
     league: Option<TradeLeague>,
     state: State<'_, Mutex<AppCardPrices>>,
     window: Window,
-) -> Result<JSResult<DivinationCardsSample>, ()> {
+) -> Result<DivinationCardsSample, Error> {
     let prices = match league {
         Some(league) => {
             let mut guard = state.lock().await;
@@ -25,7 +25,8 @@ pub async fn sample(
         None => None,
     };
 
-    Ok(JSResult::from(DivinationCardsSample::create(data, prices)))
+    let sample = DivinationCardsSample::create(data, prices)?;
+    Ok(sample)
 }
 
 #[command]
@@ -33,7 +34,7 @@ pub async fn merge(
     samples: Vec<DivinationCardsSample>,
     state: State<'_, Mutex<AppCardPrices>>,
     window: Window,
-) -> Result<DivinationCardsSample, ()> {
+) -> Result<DivinationCardsSample, Error> {
     let mut guard = state.lock().await;
     let prices = guard.get_price(&TradeLeague::default(), &window).await;
     Ok(DivinationCardsSample::merge(Some(prices), &samples))

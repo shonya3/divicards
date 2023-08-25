@@ -15,7 +15,7 @@ use serde_json::Value;
 use tauri::{command, AppHandle, State, Window};
 use tokio::sync::Mutex;
 
-use crate::{error::Error, js_result::JSResult, prices::AppCardPrices};
+use crate::{error::Error, prices::AppCardPrices};
 
 use self::types::TabWithItems;
 
@@ -33,7 +33,7 @@ pub async fn sample_from_tab(
     app_handle: AppHandle,
     state: State<'_, Mutex<AppCardPrices>>,
     window: Window,
-) -> Result<JSResult<DivinationCardsSample>, Error> {
+) -> Result<DivinationCardsSample, Error> {
     let tab = PoeProvider::tab_with_items(
         &league,
         stash_id,
@@ -50,10 +50,8 @@ pub async fn sample_from_tab(
         Err(_) => Prices::default(),
     };
 
-    Ok(JSResult::from(DivinationCardsSample::create(
-        SampleData::from(tab),
-        Some(prices),
-    )))
+    let sample = DivinationCardsSample::create(SampleData::from(tab), Some(prices))?;
+    Ok(sample)
 }
 
 #[command]

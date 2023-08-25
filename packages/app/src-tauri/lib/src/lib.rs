@@ -4,7 +4,6 @@ pub mod discord;
 pub mod error;
 pub mod event;
 pub mod google;
-pub mod js_result;
 pub mod oauth;
 pub mod paths;
 pub mod poe;

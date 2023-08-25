@@ -6,7 +6,7 @@ import { TabBadgeElement } from './tab-badge';
 import { LeagueSelectElement } from '../league-select';
 import { property, state, query } from 'lit/decorators.js';
 import { StashTab } from '@divicards/shared/poe.types';
-import { DivinationCardsSample, League, Result } from '@divicards/shared/types';
+import { DivinationCardsSample, League } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { TabBadgeGroupElement } from './tab-badge-group';
 import { classMap } from 'lit/directives/class-map.js';
@@ -29,7 +29,7 @@ export class Events {
 	/** from tab-badge-group */
 	'upd:page': number;
 
-	'sample-from-tab': { sample: Result<DivinationCardsSample>; league: League; name: TabBadgeElement['name'] };
+	'sample-from-tab': { sample: DivinationCardsSample; league: League; name: TabBadgeElement['name'] };
 
 	// ---
 	/**  event from TabBadgeElement */

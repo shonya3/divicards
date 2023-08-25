@@ -1,7 +1,7 @@
 import { ACTIVE_LEAGUE, downloadText } from '@divicards/shared/lib';
 import { defineStore } from 'pinia';
 import { SampleData, command } from '../command';
-import { DivinationCardsSample, League, Result, TradeLeague, isTradeLeague, leagues } from '@divicards/shared/types';
+import { DivinationCardsSample, League, TradeLeague, isTradeLeague, leagues } from '@divicards/shared/types';
 import { FileCardProps } from '@divicards/wc/src/wc/file-card/file-card';
 import { StashTab } from '@divicards/shared/poe.types';
 
@@ -26,7 +26,7 @@ export const createFileCard = async (
 
 	return {
 		uuid: crypto.randomUUID(),
-		filename: sample.type === 'ok' ? prefixFilename(name, league) : name,
+		filename: prefixFilename(name, league),
 		league,
 		sample,
 		selected: false,
@@ -36,12 +36,12 @@ export const createFileCard = async (
 
 export const createFileCardFromSample = (
 	name: string,
-	sample: Result<DivinationCardsSample>,
+	sample: DivinationCardsSample,
 	league: TradeLeague
 ): FileCardProps => {
 	return {
 		uuid: crypto.randomUUID(),
-		filename: sample.type === 'ok' ? prefixFilename(name, league) : name,
+		filename: prefixFilename(name, league),
 		league,
 		sample,
 		selected: false,
@@ -59,25 +59,21 @@ export const useFileCardsStore = defineStore('fileCards', {
 	}),
 	getters: {
 		selectedFiles(): FileCardProps[] {
-			return this.fileCards.filter(file => file.selected && file.sample.type === 'ok');
+			return this.fileCards.filter(file => file.selected);
 		},
 
-		samples(): Result<DivinationCardsSample>[] {
+		samples(): DivinationCardsSample[] {
 			return this.fileCards.map(f => f.sample);
 		},
 
 		selectedSamples(): DivinationCardsSample[] {
 			const selectedSamples: DivinationCardsSample[] = [];
 			for (const file of this.selectedFiles) {
-				if (file.sample.type === 'ok' && file.selected === true) {
-					selectedSamples.push(file.sample.data);
+				if (file.selected === true) {
+					selectedSamples.push(file.sample);
 				}
 			}
 			return selectedSamples;
-		},
-
-		validFiles(): FileCardProps[] {
-			return this.fileCards.filter(file => file.sample.type === 'ok');
 		},
 
 		getFileById: state => {
@@ -102,9 +98,7 @@ export const useFileCardsStore = defineStore('fileCards', {
 
 		downloadAll() {
 			for (const file of this.fileCards) {
-				if (file.sample.type === 'ok') {
-					downloadText(file.filename, file.sample.data.csv);
-				}
+				downloadText(file.filename, file.sample.csv);
 			}
 		},
 
@@ -140,7 +134,7 @@ export const useFileCardsStore = defineStore('fileCards', {
 			console.log(this.fileCards.at(-1));
 		},
 
-		async sampleFromTab(sample: Result<DivinationCardsSample>, league: League, name: string) {
+		async sampleFromTab(sample: DivinationCardsSample, league: League, name: string) {
 			const fileCard = createFileCardFromSample(name, sample, league as TradeLeague);
 			this.fileCards.push(fileCard);
 		},
@@ -150,15 +144,13 @@ export const useFileCardsStore = defineStore('fileCards', {
 
 			const index = this.fileCards.findIndex(file => file.uuid === oldFileCard.uuid);
 			if (index === -1) return;
-			if (oldFileCard.sample.type === 'err') return;
-			this.fileCards[index] = await createFileCard(oldFileCard.filename, oldFileCard.sample.data.csv, league);
+			this.fileCards[index] = await createFileCard(oldFileCard.filename, oldFileCard.sample.csv, league);
 		},
 
 		async replaceMerged(league: League) {
-			const merged = this.mergedFile;
-			if (!merged || merged.sample.type === 'err') return;
-			if (!isTradeLeague(league)) return;
-			this.mergedFile = await createFileCard(merged.filename, merged.sample.data.csv, league);
+			if (this.mergedFile && isTradeLeague(league)) {
+				this.mergedFile = await createFileCard(this.mergedFile.filename, this.mergedFile.sample.csv, league);
+			}
 		},
 	},
 });

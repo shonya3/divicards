@@ -2,14 +2,13 @@
 import { StashesViewElement, Events } from '@divicards/wc/src/wc/stashes/stashes-view';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import type { StashesViewProps } from '@divicards/wc/src/wc/stashes/stashes-view';
-import type { DivinationCardsSample, League, Result } from '@divicards/shared/types';
-import type { StashTab } from '@divicards/shared/poe.types';
+import type { DivinationCardsSample, League } from '@divicards/shared/types';
 StashesViewElement.define();
 withDefaults(defineProps<StashesViewProps>(), { league: ACTIVE_LEAGUE });
 const emit = defineEmits<{
 	close: [];
 	'update:selectedTabs': [Set<string>];
-	'sample-from-tab': [Result<DivinationCardsSample>, League, string];
+	'sample-from-tab': [DivinationCardsSample, League, string];
 }>();
 
 const onUpdSelectedTabs = (e: CustomEvent<Set<string>>) => {

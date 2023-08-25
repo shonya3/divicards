@@ -1,14 +1,14 @@
 import { command } from '../app/src/command';
 import { StashTab } from './poe.types';
-import { DivinationCardsSample, League, Result } from './types';
+import { DivinationCardsSample, League } from './types';
 
 export interface IStashLoader {
 	tabs(league: League): Promise<StashTab[]>;
-	sampleFromTab(tabId: StashTab['id'], league: League): Promise<Result<DivinationCardsSample>>;
+	sampleFromTab(tabId: StashTab['id'], league: League): Promise<DivinationCardsSample>;
 }
 
 export class StashLoader implements IStashLoader {
-	sampleFromTab(tabId: string, league: League): Promise<Result<DivinationCardsSample>> {
+	sampleFromTab(tabId: string, league: League): Promise<DivinationCardsSample> {
 		return command('sample_from_tab', { league, stashId: tabId });
 	}
 

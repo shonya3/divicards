@@ -5,7 +5,7 @@ import { DivTableElement } from '../div-table/div-table';
 import { BasePopupElement } from '../base-popup';
 import { FixedNamesElement } from './fixed-names/fixed-names';
 import { NotCardsElement } from './not-cards/not-cards';
-import { DivinationCardsSample, League, Result, TradeLeague, isTradeLeague } from '@divicards/shared/types';
+import { DivinationCardsSample, League, TradeLeague, isTradeLeague } from '@divicards/shared/types';
 import { property, query } from 'lit/decorators.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { classMap } from 'lit/directives/class-map.js';
@@ -23,7 +23,7 @@ export interface FileCardProps {
 	selected: boolean | null;
 	uuid: string;
 	minimumCardPrice: number;
-	sample: Result<DivinationCardsSample>;
+	sample: DivinationCardsSample;
 }
 
 export interface Events {
@@ -48,7 +48,7 @@ export class FileCardElement extends BaseElement {
 	@property({ type: Boolean, reflect: true }) selected: boolean | null = false;
 	@property({ reflect: true }) uuid: string = 'NO ID';
 	@property({ type: Number, reflect: true, attribute: 'minimum-card-price' }) minimumCardPrice: number = 0;
-	@property({ type: Object }) sample: Result<DivinationCardsSample> = { type: 'err', error: 'No sample data' };
+	@property({ type: Object }) sample: DivinationCardsSample = { csv: '', notCards: [], fixedNames: [], cards: [] };
 
 	@query('wc-base-popup#table-popup') tablePopup!: BasePopupElement;
 	@query('input#selected-checkbox') selectedCheckbox!: HTMLInputElement;
@@ -57,11 +57,9 @@ export class FileCardElement extends BaseElement {
 	@query('wc-div-table') table!: DivTableElement;
 
 	get filteredCards() {
-		if (this.sample.type === 'ok') {
-			return this.sample.data.cards.filter(card => {
-				return (card.price ?? 0) >= this.minimumCardPrice;
-			});
-		} else return [];
+		return this.sample.cards.filter(card => {
+			return (card.price ?? 0) >= this.minimumCardPrice;
+		});
 	}
 
 	get filteredSummary() {
@@ -114,78 +112,70 @@ export class FileCardElement extends BaseElement {
 		return html`<div
 			class=${classMap({
 				file: true,
-				'file-error': this.sample.type === 'err',
 				'file-selected': Boolean(this.selected),
 			})}
 		>
-			<p class=${classMap({ filename: true, 'filename--error': this.sample.type === 'err' })}>${this.filename}</p>
+			<p class="filename">${this.filename}</p>
 			<button @click=${this.#onBtnDeleteClicked} id="btn-delete" class="btn-delete">X</button>
 			${this.chunk()}
 		</div>`;
 	}
 
 	get urlObject() {
-		if (this.sample.type === 'err') throw new Error('Cannot download erroneus file');
-		return URL.createObjectURL(new File([this.sample.data.csv ?? ''], this.filename));
+		return URL.createObjectURL(new File([this.sample.csv ?? ''], this.filename));
 	}
 
 	protected chunk() {
-		return html`${this.sample.type === 'err'
-			? html`<p>${this.sample.error}</p>`
-			: html`<div class="minor-icons">
-						${this.sample.data.fixedNames.length > 0
-							? html`<wc-fixed-names .fixedNames=${this.sample.data.fixedNames}></wc-fixed-names>`
-							: nothing}
-						${this.sample.data.notCards.length > 0
-							? html`<wc-not-cards .notCards=${this.sample.data.notCards}></wc-not-cards>`
-							: nothing}
-					</div>
-					${this.gridIcon()}
-					<label class="slider-box">
-						<span>${this.minimumCardPrice}</span>
-						<input
-							id="minimum-card-price-slider"
-							class="slider"
-							type="range"
-							name=""
-							id=""
-							min="0"
-							max="500"
-							.value=${this.minimumCardPrice}
-							@input=${this.#onMinPriceSlider}
-						/>
-					</label>
+		return html`<div class="minor-icons">
+				${this.sample.fixedNames.length > 0
+					? html`<wc-fixed-names .fixedNames=${this.sample.fixedNames}></wc-fixed-names>`
+					: nothing}
+				${this.sample.notCards.length > 0
+					? html`<wc-not-cards .notCards=${this.sample.notCards}></wc-not-cards>`
+					: nothing}
+			</div>
+			${this.gridIcon()}
+			<label class="slider-box">
+				<span>${this.minimumCardPrice}</span>
+				<input
+					id="minimum-card-price-slider"
+					class="slider"
+					type="range"
+					name=""
+					id=""
+					min="0"
+					max="500"
+					.value=${this.minimumCardPrice}
+					@input=${this.#onMinPriceSlider}
+				/>
+			</label>
 
-					<div class="total-price">
-						<p>${format(this.filteredSummary.value)}</p>
-						<img width="35" height="35" class="chaos-img" src="/chaos.png" alt="chaos" />
-					</div>
-					<div class="cards-amount">
-						<p>${this.filteredSummary.amount}</p>
-						<img width="35" height="35" src="/divination-card.png" alt="Divination card" />
-					</div>
+			<div class="total-price">
+				<p>${format(this.filteredSummary.value)}</p>
+				<img width="35" height="35" class="chaos-img" src="/chaos.png" alt="chaos" />
+			</div>
+			<div class="cards-amount">
+				<p>${this.filteredSummary.amount}</p>
+				<img width="35" height="35" src="/divination-card.png" alt="Divination card" />
+			</div>
 
-					<wc-league-select
-						trade
-						.league=${this.league}
-						@upd:league=${this.#onLeagueSelected}
-					></wc-league-select>
+			<wc-league-select trade .league=${this.league} @upd:league=${this.#onLeagueSelected}></wc-league-select>
 
-					<a class="download" .download=${this.filename} .href=${this.urlObject}>Download</a>
+			<a class="download" .download=${this.filename} .href=${this.urlObject}>Download</a>
 
-					${this.selected === null
-						? nothing
-						: html`<input
-								class="checkbox"
-								type="checkbox"
-								.checked=${this.selected}
-								id="selected-checkbox"
-								@change=${this.#onSelectedClicked}
-						  />`}
+			${this.selected === null
+				? nothing
+				: html`<input
+						class="checkbox"
+						type="checkbox"
+						.checked=${this.selected}
+						id="selected-checkbox"
+						@change=${this.#onSelectedClicked}
+				  />`}
 
-					<wc-base-popup id="table-popup">
-						<wc-div-table .cards=${this.sample.data.cards}></wc-div-table>
-					</wc-base-popup>`}`;
+			<wc-base-popup id="table-popup">
+				<wc-div-table .cards=${this.sample.cards}> </wc-div-table>
+			</wc-base-popup>`;
 	}
 
 	protected gridIcon() {
@@ -263,10 +253,6 @@ export class FileCardElement extends BaseElement {
 			.filename:hover {
 				overflow: visible;
 				/* position: absolute; */
-			}
-
-			.filename--error {
-				color: red;
 			}
 
 			.slider-box {

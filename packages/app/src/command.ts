@@ -1,17 +1,17 @@
 import { invoke } from '@tauri-apps/api';
-import { DivinationCardsSample, League, CardNameAmount, TradeLeague, Result } from '@divicards/shared/types';
+import { DivinationCardsSample, League, CardNameAmount, TradeLeague } from '@divicards/shared/types';
 import { StashesResponseData, StashResponseData } from '@divicards/shared/poe.types';
 
 export type SampleData = string | CardNameAmount[];
 
 export interface Commands {
-	sample: (args: { data: SampleData; league: TradeLeague | null }) => Result<DivinationCardsSample>;
+	sample: (args: { data: SampleData; league: TradeLeague | null }) => DivinationCardsSample;
 	merge: (args: { samples: DivinationCardsSample[] }) => DivinationCardsSample;
 	open_url: (args: { url: string }) => void;
 	poe_auth: () => string;
 	poe_logout: () => void;
 	stashes: (args: { league: League }) => StashesResponseData;
-	sample_from_tab: (args: { league: League; stashId: string; subStashId?: string }) => Result<DivinationCardsSample>;
+	sample_from_tab: (args: { league: League; stashId: string; subStashId?: string }) => DivinationCardsSample;
 }
 
 const { format } = new Intl.NumberFormat();
