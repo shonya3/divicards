@@ -59,10 +59,6 @@ impl DivinationCardsSample {
         merged.get_sample_ready()
     }
 
-    pub fn total_cards_amount(&self) -> i32 {
-        self.cards.iter().map(|r| r.amount).sum()
-    }
-
     /// Consumes Prices structure to set prices for Cards
     fn from_prices(prices: Option<Prices>) -> Self {
         DivinationCardsSample {
@@ -164,16 +160,15 @@ impl DivinationCardsSample {
             .cards
             .get("Rain of Chaos")
             .expect("no rain of chaos card");
-        RAIN_OF_CHAOS_WEIGHT / rain_of_chaos.local_weight(self.total_cards_amount())
+        RAIN_OF_CHAOS_WEIGHT / rain_of_chaos.amount as f32
     }
 
     /// (After parsing) Calculates special weight for each card and mutates it. Runs at the end of parsing.
     fn write_weight(&mut self) -> &mut Self {
-        let sample_size = self.total_cards_amount();
         let sample_weight = self.sample_weight();
 
         for card in &mut self.cards.iter_mut() {
-            card.set_weight(sample_weight, sample_size);
+            card.set_weight(sample_weight);
         }
 
         self

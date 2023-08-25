@@ -54,13 +54,8 @@ impl DivinationCardRecord {
         self
     }
 
-    pub fn local_weight(&self, sample_size: i32) -> f32 {
-        self.amount as f32 / sample_size as f32
-    }
-
-    pub fn set_weight(&mut self, weight_sample: f32, sample_size: i32) -> &mut Self {
-        self.weight =
-            Some((weight_sample * self.local_weight(sample_size)).powf(1.0 / CONDENSE_FACTOR));
+    pub fn set_weight(&mut self, weight_sample: f32) -> &mut Self {
+        self.weight = Some((weight_sample * self.amount as f32).powf(1.0 / CONDENSE_FACTOR));
         self
     }
 

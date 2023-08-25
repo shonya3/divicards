@@ -45,7 +45,7 @@ impl Cards {
 
 impl Default for Cards {
     fn default() -> Self {
-        CARDS.into()
+        Cards::from(CARDS)
     }
 }
 
