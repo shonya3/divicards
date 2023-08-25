@@ -33,8 +33,8 @@ async fn main() {
             commands::open_url,
             poe::auth::poe_auth,
             poe::auth::poe_logout,
-            poe::stashes,
-            poe::sample_from_tab
+            poe::stash::stashes,
+            poe::stash::sample_from_tab
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
