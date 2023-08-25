@@ -15,12 +15,7 @@ use serde_json::Value;
 use tauri::{command, AppHandle, State, Window};
 use tokio::sync::Mutex;
 
-use crate::{
-    error::Error,
-    event::{Event, ToastVariant},
-    js_result::JSResult,
-    prices::AppCardPrices,
-};
+use crate::{error::Error, js_result::JSResult, prices::AppCardPrices};
 
 use self::types::TabWithItems;
 
@@ -38,26 +33,14 @@ pub async fn sample_from_tab(
     app_handle: AppHandle,
     state: State<'_, Mutex<AppCardPrices>>,
     window: Window,
-) -> Result<JSResult<DivinationCardsSample>, ()> {
+) -> Result<JSResult<DivinationCardsSample>, Error> {
     let tab = PoeProvider::tab_with_items(
         &league,
         stash_id,
         substash_id,
         app_handle.config().package.version.clone().unwrap(),
     )
-    .await;
-
-    let tab = match tab {
-        Ok(tab) => tab,
-        Err(err) => {
-            Event::Toast {
-                variant: ToastVariant::Danger,
-                message: format!("{}", err),
-            }
-            .emit(&window);
-            return Err(());
-        }
-    };
+    .await?;
 
     let prices = match TradeLeague::try_from(league) {
         Ok(league) => {
@@ -74,11 +57,8 @@ pub async fn sample_from_tab(
 }
 
 #[command]
-pub async fn stashes(league: League, app_handle: AppHandle) -> Value {
-    let val =
-        PoeProvider::stashes(league, app_handle.config().package.version.clone().unwrap()).await;
-    // dbg!(&val);
-    val
+pub async fn stashes(league: League, app_handle: AppHandle) -> Result<Value, Error> {
+    PoeProvider::stashes(league, app_handle.config().package.version.clone().unwrap()).await
 }
 
 #[derive(Default)]
@@ -120,17 +100,18 @@ impl PoeProvider {
                 }),
             )
             .send()
-            .await
-            .unwrap();
+            .await?;
 
         let headers = &response.headers();
-        let limit_account_header = headers.get("x-rate-limit-account").unwrap();
-        let limit_account_state_header = headers.get("x-rate-limit-account-state").unwrap();
 
-        println!(
-            "x-rate-limit-account: {:?}, x-rate-limit-account-state: {:?}",
-            limit_account_header, limit_account_state_header
-        );
+        if let Some(limit_account_header) = headers.get("x-rate-limit-account") {
+            if let Some(limit_account_state_header) = headers.get("x-rate-limit-account-state") {
+                println!(
+                    "x-rate-limit-account: {:?}, x-rate-limit-account-state: {:?}",
+                    limit_account_header, limit_account_state_header
+                );
+            };
+        };
 
         #[derive(Deserialize)]
         struct ResponseShape {
@@ -141,10 +122,10 @@ impl PoeProvider {
         Ok(response_shape.stash)
     }
 
-    async fn stashes(league: League, version: String) -> Value {
+    async fn stashes(league: League, version: String) -> Result<Value, Error> {
         let url = format!("{}/stash/{}", API_URL, league);
         dbg!(url);
-        Client::new()
+        let response = Client::new()
             .get(format!("{}/stash/{}", API_URL, league))
             .header(
                 "Authorization",
@@ -157,11 +138,9 @@ impl PoeProvider {
                 }),
             )
             .send()
-            .await
-            .unwrap()
-            .json::<Value>()
-            .await
-            .unwrap()
+            .await?;
+        let value = response.json::<Value>().await?;
+        Ok(value)
     }
 }
 

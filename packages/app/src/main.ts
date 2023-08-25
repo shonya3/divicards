@@ -9,7 +9,7 @@ import SlButton from '@shoelace-style/shoelace/dist/components/button/button.com
 import SlIcon from '@shoelace-style/shoelace/dist/components/icon/icon.component.js';
 import { addRustListener } from './event';
 import { toast } from './toast';
-import { isTauriError } from './error';
+import { handleError } from './error';
 import { setBasePath } from '@shoelace-style/shoelace';
 
 setBasePath('/');
@@ -23,23 +23,8 @@ const app = createApp(App);
 app.use(pinia);
 app.mount('#app');
 
-app.config.errorHandler = err => {
-	console.log('from Vue error handler', err);
-	if (isTauriError(err)) {
-		console.log('We here');
-		if (err.kind === 'authError') {
-			if (err.authError === 'userDenied') {
-				toast('neutral', err.message);
-			} else toast('danger', err.message);
-		} else toast('danger', err.message);
-	} else if (typeof err === 'string') {
-		toast('danger', err);
-	} else if (err instanceof Error) {
-		toast('danger', err.message);
-	}
-};
-
+window.addEventListener('unhandledrejection', event => handleError(event.reason));
+app.config.errorHandler = handleError;
 addRustListener('toast', e => {
-	console.log(e);
 	toast(e.payload.variant, e.payload.message);
 });

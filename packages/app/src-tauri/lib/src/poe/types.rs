@@ -52,7 +52,7 @@ impl From<TabWithItems> for SampleData {
         let cards: Vec<CardNameAmount> = tab
             .items
             .into_iter()
-            .filter(|item| item.is_card())
+            .filter(|item| item.is_card() || item.base_type == "Fire Of Unknown Origin")
             .map(|item| CardNameAmount {
                 name: item.base_type,
                 amount: item.stack_size.unwrap_or_default(),
