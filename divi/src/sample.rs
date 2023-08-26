@@ -1,10 +1,11 @@
+use std::collections::HashMap;
+
 use csv::{ReaderBuilder, Trim};
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    card_record::{DivinationCardRecord, FixedCardName},
     cards::Cards,
-    consts::RAIN_OF_CHAOS_WEIGHT,
+    consts::{CARDS, RAIN_OF_CHAOS_WEIGHT},
     error::Error,
     prices::Prices,
     IsCard,
@@ -39,7 +40,10 @@ impl DivinationCardsSample {
         source: SampleData,
         prices: Option<Prices>,
     ) -> Result<DivinationCardsSample, Error> {
-        DivinationCardsSample::from_prices(prices).parse_data(source)
+        let mut sample = DivinationCardsSample::from_prices(prices);
+        let parsed = sample.parse_data(source)?;
+        parsed.get_sample_ready();
+        Ok(sample)
     }
 
     pub fn merge(
@@ -56,7 +60,8 @@ impl DivinationCardsSample {
             card.set_amount_and_sum(amount);
         }
 
-        merged.get_sample_ready()
+        merged.get_sample_ready();
+        merged
     }
 
     /// Consumes Prices structure to set prices for Cards
@@ -67,71 +72,7 @@ impl DivinationCardsSample {
         }
     }
 
-    /// Reads the source, sets amounts of cards, fills not_cards and fixed_names. Then gets sample ready by writing weights and polished csv.
-    fn parse_data(&mut self, source: SampleData) -> Result<Self, Error> {
-        let sample = match source {
-            SampleData::Csv(s) => {
-                let data = Self::remove_lines_before_headers(&s)?;
-                let mut rdr = ReaderBuilder::new()
-                    .trim(Trim::All)
-                    .from_reader(data.as_bytes());
-
-                for result in rdr.deserialize::<DivinationCardRecord>() {
-                    if let Ok(mut record) = result {
-                        match &record.is_card() {
-                            true => {
-                                let mut_card = self.cards.get_card_mut(&record.name);
-                                mut_card.set_amount_and_sum(mut_card.amount + record.amount);
-                            }
-                            false => match record.fix_name() {
-                                Some(fixed) => {
-                                    let mut_card = self.cards.get_card_mut(&record.name);
-                                    mut_card.set_amount_and_sum(mut_card.amount + record.amount);
-                                    self.fixed_names.push(fixed);
-                                }
-                                None => self.not_cards.push(record.name),
-                            },
-                        }
-                    } else {
-                        println!("{:?}", result.err());
-                    }
-                }
-                Ok::<&mut DivinationCardsSample, Error>(self)
-            }
-            SampleData::CardNameAmountList(vec) => {
-                for CardNameAmount { name, amount } in vec {
-                    let mut record = DivinationCardRecord {
-                        name,
-                        price: None,
-                        amount,
-                        sum: None,
-                        weight: None,
-                    };
-
-                    match &record.is_card() {
-                        true => {
-                            let mut_card = self.cards.get_card_mut(&record.name);
-                            mut_card.set_amount_and_sum(mut_card.amount + record.amount);
-                        }
-
-                        false => match record.fix_name() {
-                            Some(fixed) => {
-                                let mut_card = self.cards.get_card_mut(&record.name);
-                                mut_card.set_amount_and_sum(mut_card.amount + record.amount);
-                                self.fixed_names.push(fixed);
-                            }
-                            None => self.not_cards.push(record.name),
-                        },
-                    }
-                }
-
-                Ok(self)
-            }
-        }?;
-        Ok(sample.get_sample_ready())
-    }
-
-    /// Preparsing helper
+    /// Parsing helper. Uses for CSV data
     fn remove_lines_before_headers(s: &str) -> Result<String, Error> {
         match s.lines().enumerate().into_iter().find(|(_index, line)| {
             line.contains("name")
@@ -149,13 +90,60 @@ impl DivinationCardsSample {
         }
     }
 
+    /// Reads the source to extract an amount of cards for each name
+    fn parse_data(&mut self, source: SampleData) -> Result<&mut Self, Error> {
+        match source {
+            SampleData::Csv(s) => {
+                let data = Self::remove_lines_before_headers(&s)?;
+                let mut rdr = ReaderBuilder::new()
+                    .trim(Trim::All)
+                    .from_reader(data.as_bytes());
+
+                for result in rdr.deserialize::<CardNameAmount>() {
+                    match result {
+                        Ok(card_name_amount) => self.extract_amount(card_name_amount),
+                        Err(err) => println!("{:?}", err),
+                    }
+                }
+                Ok(self)
+            }
+            SampleData::CardNameAmountList(vec) => {
+                for card_name_amount in vec {
+                    self.extract_amount(card_name_amount)
+                }
+                Ok(self)
+            }
+        }
+    }
+
+    /// The part of parsing data process. Extracts amount from individual name-amount source. If name is not card, tries to fix the name
+    /// and pushes to fixed_names or to not_cards if fails.
+    fn extract_amount(&mut self, CardNameAmount { name, amount }: CardNameAmount) {
+        if name.as_str().is_card() {
+            let mut_card = self.cards.get_card_mut(&name);
+            mut_card.set_amount_and_sum(mut_card.amount + amount);
+        } else {
+            match fix_name(&name) {
+                Some(fixed) => {
+                    self.fixed_names.push(FixedCardName {
+                        old: name,
+                        fixed: fixed.clone(),
+                    });
+                    let mut_card = self.cards.get_card_mut(&fixed);
+                    mut_card.set_amount_and_sum(mut_card.amount + amount);
+                }
+                None => self.not_cards.push(name),
+            }
+        }
+    }
+
     /// Writes weights for cards and writes final csv - write_weight and write_csv in one function
-    fn get_sample_ready(&mut self) -> Self {
-        self.write_weight().write_csv().to_owned()
+    fn get_sample_ready(&mut self) -> &mut Self {
+        self.write_weight().write_csv()
     }
 
     /// Helper function for write_weight
-    fn sample_weight(&self) -> f32 {
+    fn weight_multiplier(&self) -> f32 {
         let rain_of_chaos = self
             .cards
             .get("Rain of Chaos")
@@ -165,10 +153,10 @@ impl DivinationCardsSample {
 
     /// (After parsing) Calculates special weight for each card and mutates it. Runs at the end of parsing.
     fn write_weight(&mut self) -> &mut Self {
-        let sample_weight = self.sample_weight();
+        let weight_multiplier = self.weight_multiplier();
 
-        for card in &mut self.cards.iter_mut() {
-            card.set_weight(sample_weight);
+        for card in self.cards.iter_mut() {
+            card.set_weight(weight_multiplier);
         }
 
         self
@@ -186,9 +174,60 @@ impl DivinationCardsSample {
     }
 }
 
+pub fn fix_name(name: &str) -> Option<String> {
+    if name.is_card() {
+        return None;
+    }
+
+    let (most_similar, score) = most_similar_card(name);
+
+    match score >= 0.75 {
+        true => Some(most_similar),
+        false => {
+            // Try to prefix name with "The" - a lot of cards start with "The"
+            let (most_similar, score) = most_similar_card(&format!("The {name}"));
+            match score >= 0.75 {
+                true => Some(most_similar),
+                false => None,
+            }
+        }
+    }
+}
+
+fn most_similar_card(name: &str) -> (String, f64) {
+    let mut similarity_map = HashMap::<String, f64>::new();
+    for card in CARDS {
+        let similarity = strsim::normalized_damerau_levenshtein(&name, card);
+        similarity_map.insert(card.to_string(), similarity);
+    }
+
+    let most_similar = similarity_map
+        .iter()
+        .max_by(|a, b| a.1.partial_cmp(b.1).unwrap())
+        .unwrap();
+
+    (most_similar.0.to_owned(), most_similar.1.to_owned())
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
+pub struct FixedCardName {
+    pub old: String,
+    pub fixed: String,
+}
+
+impl FixedCardName {
+    pub fn new(old: &str, fixed: &str) -> FixedCardName {
+        FixedCardName {
+            old: String::from(old),
+            fixed: String::from(fixed),
+        }
+    }
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CardNameAmount {
     pub name: String,
+    #[serde(alias = "stackSize")]
     pub amount: i32,
 }
 
@@ -202,25 +241,7 @@ pub enum SampleData {
 #[cfg(test)]
 mod tests {
 
-    use crate::IsCard;
-
     use super::*;
-
-    // #[tokio::test]
-    // async fn name_amount() {
-    //     let json = std::fs::read_to_string("cardNameAmountList.json").unwrap();
-    //     let vec: Vec<CardNameAmount> = serde_json::from_str(&json).unwrap();
-    //     let cards_total_amount: i32 = vec.iter().map(|card| card.amount).sum();
-    //     assert_eq!(cards_total_amount, 181);
-    //     let sample = DivinationCardsSample::create(
-    //         SampleData::CardNameAmountList(vec),
-    //         Some(Prices::fetch(&TradeLeague::HardcoreAncestor).await.unwrap()),
-    //     )
-    //     .unwrap();
-
-    //     let sample_total_amount: i32 = sample.cards.iter().map(|card| card.amount).sum();
-    //     dbg!(sample_total_amount);
-    // }
 
     #[test]
     fn trim() {
@@ -230,18 +251,6 @@ Encroaching Darkness,5\r\nThe Endless Darkness,1\r\nThe Endurance,19\r\nThe Enfo
         let trimmed = super::DivinationCardsSample::remove_lines_before_headers(s).unwrap();
 
         assert_eq!(trimmed.lines().next().unwrap(), "name,stackSize");
-    }
-
-    #[test]
-    fn is_card() {
-        let record = DivinationCardRecord::new("Rain of Chaos", None, None);
-        assert_eq!(record.is_card(), true);
-    }
-
-    #[test]
-    fn is_legacy_card() {
-        let record = DivinationCardRecord::new("Friendship", None, None);
-        assert_eq!(record.is_legacy_card(), true);
     }
 
     #[test]

@@ -1,5 +1,3 @@
-// #![allow(unused)]
-
 use consts::{CARDS, LEGACY_CARDS};
 pub mod card_record;
 pub mod cards;

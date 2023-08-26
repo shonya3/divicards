@@ -8,6 +8,7 @@ use crate::{
 use serde::{Deserialize, Serialize};
 use serde_big_array::BigArray;
 
+/// Holds an array of cards with length equal to number of all divination cards(For example, 440 in 2.23 patch)
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub struct Cards(#[serde(with = "BigArray")] pub [DivinationCardRecord; CARDS_N]);
 

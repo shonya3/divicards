@@ -20,6 +20,7 @@ pub struct DivinationCardPrice {
     pub sparkline: Sparkline,
 }
 
+/// Holds an array of card prices with length equal to number of all divination cards(For example, 440 in 2.23 patch)
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(transparent)]
 pub struct Prices(#[serde(with = "BigArray")] pub [DivinationCardPrice; CARDS_N]);

@@ -1,26 +1,9 @@
-use std::collections::HashMap;
-
 use serde::{Deserialize, Serialize};
 
 use crate::{
     consts::{CARDS, CONDENSE_FACTOR, LEGACY_CARDS},
     IsCard,
 };
-
-#[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
-pub struct FixedCardName {
-    pub old: String,
-    pub fixed: String,
-}
-
-impl FixedCardName {
-    pub fn new(old: &str, fixed: &str) -> FixedCardName {
-        FixedCardName {
-            old: String::from(old),
-            fixed: String::from(fixed),
-        }
-    }
-}
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Default)]
 pub struct DivinationCardRecord {
@@ -54,54 +37,9 @@ impl DivinationCardRecord {
         self
     }
 
-    pub fn set_weight(&mut self, weight_sample: f32) -> &mut Self {
-        self.weight = Some((weight_sample * self.amount as f32).powf(1.0 / CONDENSE_FACTOR));
+    pub fn set_weight(&mut self, weight_multiplier: f32) -> &mut Self {
+        self.weight = Some((weight_multiplier * self.amount as f32).powf(1.0 / CONDENSE_FACTOR));
         self
-    }
-
-    fn most_similar_card(name: &str) -> (String, f64) {
-        let mut similarity_map = HashMap::<String, f64>::new();
-        for card in CARDS {
-            let similarity = strsim::normalized_damerau_levenshtein(&name, card);
-            similarity_map.insert(card.to_string(), similarity);
-        }
-
-        let most_similar = similarity_map
-            .iter()
-            .max_by(|a, b| a.1.partial_cmp(b.1).unwrap())
-            .unwrap();
-
-        (most_similar.0.to_owned(), most_similar.1.to_owned())
-    }
-
-    pub fn fix_name(&mut self) -> Option<FixedCardName> {
-        match self.is_card() {
-            true => None,
-            false => self.fix_name_unchecked(),
-        }
-    }
-
-    pub fn fix_name_unchecked(&mut self) -> Option<FixedCardName> {
-        let (similar, score) = Self::most_similar_card(&self.name);
-        match score >= 0.75 {
-            true => {
-                let fixed_name = FixedCardName::new(&self.name, &similar);
-                self.name = similar;
-                Some(fixed_name)
-            }
-            false => {
-                let the_name = format!("The {}", &self.name);
-                let (similar, score) = Self::most_similar_card(&the_name);
-                match score >= 0.75 {
-                    true => {
-                        let fixed_name = FixedCardName::new(&self.name, &similar);
-                        self.name = similar;
-                        Some(fixed_name)
-                    }
-                    false => None,
-                }
-            }
-        }
     }
 }
 
