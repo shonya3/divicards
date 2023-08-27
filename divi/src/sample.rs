@@ -56,7 +56,7 @@ impl DivinationCardsSample {
             let amount = samples
                 .iter()
                 .map(|sample| sample.cards.get_card(&card.name).amount)
-                .sum::<i32>();
+                .sum::<u32>();
             card.set_amount_and_sum(amount);
         }
 
@@ -228,7 +228,7 @@ impl FixedCardName {
 pub struct CardNameAmount {
     pub name: String,
     #[serde(alias = "stackSize")]
-    pub amount: i32,
+    pub amount: u32,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

@@ -29,10 +29,10 @@ export interface DivinationCardsSample {
 
 export interface DivinationCardRecord {
 	name: string;
-	price: number | null;
 	amount: number;
+	price: number | null;
 	sum: number | null;
-	weight: number;
+	weight: number | null;
 }
 
 export interface FixedName {

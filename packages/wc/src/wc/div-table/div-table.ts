@@ -229,7 +229,7 @@ export class DivTableElement extends BaseElement {
 				<td class="name-row">${name}</td>
 				<td class="row">${format(price ?? 0)}</td>
 				<td class="row">${format(sum ?? 0)}</td>
-				<td class="row">${format(weight)}</td>
+				<td class="row">${format(weight ?? 0)}</td>
 			</tr>`;
 		});
 	}

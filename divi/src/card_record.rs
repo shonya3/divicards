@@ -9,7 +9,7 @@ use crate::{
 pub struct DivinationCardRecord {
     pub name: String,
     #[serde(alias = "stackSize")]
-    pub amount: i32,
+    pub amount: u32,
     #[serde(alias = "calculated")]
     pub price: Option<f32>,
     pub sum: Option<f32>,
@@ -17,12 +17,12 @@ pub struct DivinationCardRecord {
 }
 
 impl DivinationCardRecord {
-    pub fn new(name: &str, price: Option<f32>, amount: Option<i32>) -> DivinationCardRecord {
+    pub fn new(name: &str, amount: u32, price: Option<f32>) -> DivinationCardRecord {
         DivinationCardRecord {
             name: name.to_string(),
             price,
-            amount: amount.unwrap_or_default(),
-            sum: Some(price.unwrap_or_default() * amount.unwrap_or_default() as f32),
+            amount,
+            sum: Some(price.unwrap_or_default() * amount as f32),
             weight: None,
         }
     }
@@ -31,7 +31,7 @@ impl DivinationCardRecord {
         Some(self.price.unwrap_or_default() * self.amount as f32)
     }
 
-    pub fn set_amount_and_sum(&mut self, amount: i32) -> &mut Self {
+    pub fn set_amount_and_sum(&mut self, amount: u32) -> &mut Self {
         self.amount = amount;
         self.sum = self.sum();
         self
@@ -59,13 +59,13 @@ mod tests {
 
     #[test]
     fn is_card() {
-        let record = DivinationCardRecord::new("Rain of Chaos", None, None);
+        let record = DivinationCardRecord::new("Rain of Chaos", 1, None);
         assert_eq!(record.is_card(), true);
     }
 
     #[test]
     fn is_legacy_card() {
-        let record = DivinationCardRecord::new("Friendship", None, None);
+        let record = DivinationCardRecord::new("Friendship", 1, None);
         assert_eq!(record.is_legacy_card(), true);
     }
 }

@@ -24,7 +24,7 @@ pub enum StashType {
 #[serde(rename_all = "camelCase")]
 pub struct Item {
     pub base_type: String,
-    pub stack_size: Option<i32>,
+    pub stack_size: Option<u32>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
