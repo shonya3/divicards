@@ -17,9 +17,9 @@ pub struct DivinationCardRecord {
 }
 
 impl DivinationCardRecord {
-    pub fn new(name: &str, amount: u32, price: Option<f32>) -> DivinationCardRecord {
+    pub fn new(name: String, amount: u32, price: Option<f32>) -> DivinationCardRecord {
         DivinationCardRecord {
-            name: name.to_string(),
+            name,
             price,
             amount,
             sum: Some(price.unwrap_or_default() * amount as f32),
@@ -59,13 +59,13 @@ mod tests {
 
     #[test]
     fn is_card() {
-        let record = DivinationCardRecord::new("Rain of Chaos", 1, None);
+        let record = DivinationCardRecord::new("Rain of Chaos".to_string(), 1, None);
         assert_eq!(record.is_card(), true);
     }
 
     #[test]
     fn is_legacy_card() {
-        let record = DivinationCardRecord::new("Friendship", 1, None);
+        let record = DivinationCardRecord::new("Friendship".to_string(), 1, None);
         assert_eq!(record.is_legacy_card(), true);
     }
 }
