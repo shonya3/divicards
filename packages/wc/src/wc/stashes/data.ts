@@ -2,8 +2,8 @@ import { DivinationCardsSample, League } from '@divicards/shared/types';
 import { StashTab } from '@divicards/shared/poe.types';
 import { IStashLoader } from '@divicards/shared/StashLoader';
 
-import stashesData from './stashes.json' assert { type: 'json' };
-import sampleData from './sample.json' assert { type: 'json' };
+import stashesData from './json/stashes.json' assert { type: 'json' };
+import sampleData from './json/sample.json' assert { type: 'json' };
 
 export const stashes: StashTab[] = stashesData;
 export const league: League = 'Standard';

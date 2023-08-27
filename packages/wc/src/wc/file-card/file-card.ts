@@ -145,7 +145,7 @@ export class FileCardElement extends BaseElement {
 					id=""
 					min="0"
 					max="500"
-					.value=${this.minimumCardPrice}
+					.value=${String(this.minimumCardPrice)}
 					@input=${this.#onMinPriceSlider}
 				/>
 			</label>
