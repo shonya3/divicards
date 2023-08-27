@@ -20,7 +20,7 @@ pub struct DivinationCardPrice {
     pub sparkline: Sparkline,
 }
 
-/// Holds an array of card prices with length equal to number of all divination cards(For example, 440 in 2.23 patch)
+/// Holds an array of card prices with length equal to the number of all divination cards(For example, 440 in 3.23 patch)
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(transparent)]
 pub struct Prices(#[serde(with = "BigArray")] pub [DivinationCardPrice; CARDS_N]);
@@ -34,7 +34,7 @@ impl Prices {
         let client = reqwest::Client::new();
         let url = format!("https://poe.ninja/api/data/itemoverview?league={league}&type=DivinationCard&language=en");
         let json = client.get(url).send().await?.text().await?;
-        let data = serde_json::from_str::<PriceData>(&json).unwrap();
+        let data = serde_json::from_str::<PriceData>(&json)?;
         if data.lines.len() == 0 {
             return Err(Error::NoPricesForLeagueOnNinja(league.to_owned()));
         }
