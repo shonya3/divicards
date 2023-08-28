@@ -55,6 +55,17 @@ impl Display for League {
     }
 }
 
+impl From<TradeLeague> for League {
+    fn from(value: TradeLeague) -> Self {
+        match value {
+            TradeLeague::Standard => League::Standard,
+            TradeLeague::Hardcore => League::Hardcore,
+            TradeLeague::Ancestor => League::Ancestor,
+            TradeLeague::HardcoreAncestor => League::HardcoreAncestor,
+        }
+    }
+}
+
 #[derive(Debug, Serialize, Deserialize, Clone, Hash, Eq, PartialEq)]
 pub enum TradeLeague {
     Standard,
