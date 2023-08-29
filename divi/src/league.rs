@@ -21,15 +21,9 @@ pub enum League {
 
 impl League {
     pub fn is_trade(&self) -> bool {
-        match self {
-            League::Standard => true,
-            League::Hardcore => true,
-            League::SSFStandard => false,
-            League::SSFHardcore => false,
-            League::Ancestor => true,
-            League::HardcoreAncestor => true,
-            League::SSFAncestor => false,
-            League::SSFHCAncestor => false,
+        match TradeLeague::try_from(self.to_owned()) {
+            Ok(_) => true,
+            Err(_) => false,
         }
     }
 }

@@ -256,18 +256,17 @@ Encroaching Darkness,5\r\nThe Endless Darkness,1\r\nThe Endurance,19\r\nThe Enfo
 
     #[test]
     fn merge() {
-        let csv1 = std::fs::read_to_string("example-1.csv").unwrap();
-        let csv2 = std::fs::read_to_string("example-2.csv").unwrap();
-        let csv3 = std::fs::read_to_string("example-3.csv").unwrap();
+        use std::fs::read_to_string;
 
-        let s1 =
-            DivinationCardsSample::create(SampleData::Csv(csv1), Some(Prices::default())).unwrap();
-        let s2 =
-            DivinationCardsSample::create(SampleData::Csv(csv2), Some(Prices::default())).unwrap();
-        let s3 =
-            DivinationCardsSample::create(SampleData::Csv(csv3), Some(Prices::default())).unwrap();
+        let csv1 = read_to_string("example-1.csv").unwrap();
+        let csv2 = read_to_string("example-2.csv").unwrap();
+        let csv3 = read_to_string("example-3.csv").unwrap();
 
-        let s = DivinationCardsSample::merge(Some(Prices::default()), &[s1, s2, s3]);
+        let s1 = DivinationCardsSample::create(SampleData::Csv(csv1), None).unwrap();
+        let s2 = DivinationCardsSample::create(SampleData::Csv(csv2), None).unwrap();
+        let s3 = DivinationCardsSample::create(SampleData::Csv(csv3), None).unwrap();
+
+        let s = DivinationCardsSample::merge(None, &[s1, s2, s3]);
         let rain_of_chaos = s
             .cards
             .iter()
