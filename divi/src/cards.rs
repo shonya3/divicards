@@ -3,7 +3,7 @@ use std::slice::{Iter, IterMut};
 use crate::{
     card_record::DivinationCardRecord,
     consts::{CARDS, CARDS_N},
-    prices::{DivinationCardPrice, Prices},
+    prices::Prices,
 };
 use serde::{Deserialize, Serialize};
 use serde_big_array::BigArray;
@@ -56,17 +56,7 @@ impl From<Prices> for Cards {
             prices
                 .0
                 .into_iter()
-                .map(
-                    |DivinationCardPrice {
-                         name,
-                         price,
-                         sparkline: _,
-                     }| DivinationCardRecord {
-                        name,
-                        price,
-                        ..Default::default()
-                    },
-                )
+                .map(|p| DivinationCardRecord::new(p.name, 0, p.price))
                 .collect::<Vec<DivinationCardRecord>>()
                 .try_into()
                 .unwrap(),
@@ -78,10 +68,7 @@ impl From<[&'static str; CARDS_N]> for Cards {
     fn from(arr: [&'static str; CARDS_N]) -> Self {
         Self(
             arr.into_iter()
-                .map(|s| DivinationCardRecord {
-                    name: s.to_string(),
-                    ..Default::default()
-                })
+                .map(|name| DivinationCardRecord::new(String::from(name), 0, None))
                 .collect::<Vec<DivinationCardRecord>>()
                 .try_into()
                 .unwrap(),

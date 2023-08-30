@@ -35,6 +35,36 @@ impl DivinationCardsSample {
         }
     }
 
+    /// Create a new sample.
+    /// # Examples
+    /// ```
+    /// # use divi::sample::{DivinationCardsSample, SampleData, CardNameAmount};
+    /// # use divi::prices::Prices;
+    /// # fn main() -> Result<(), divi::error::Error> {
+    ///     // create sample from csv
+    ///     let sample = DivinationCardsSample::create(
+    ///         SampleData::Csv(String::from("name,amount\rRain of Chaos,2\rThe Doctor,1")),
+    ///         None,
+    ///     )?;
+    /// #    Ok(())
+    /// # }
+    /// ```
+    ///
+    /// ```
+    /// # use divi::sample::{DivinationCardsSample, SampleData, CardNameAmount};
+    /// # use divi::prices::Prices;
+    /// # fn main() -> Result<(), divi::error::Error> {
+    ///     // create sample from name-amount list
+    ///    let sample = DivinationCardsSample::create(
+    ///        SampleData::CardNameAmountList(vec![
+    ///             CardNameAmount::new(String::from("Rain of Chaos"), 25),
+    ///             CardNameAmount::new(String::from("The Doctor"), 1),
+    ///        ]),
+    ///        Some(Prices::default()),
+    ///    )?;
+    /// #    Ok(())
+    /// # }
+    /// ```
     #[tracing::instrument(skip(source, prices))]
     pub fn create(
         source: SampleData,
@@ -46,6 +76,22 @@ impl DivinationCardsSample {
         Ok(sample)
     }
 
+    /// Merge samples into one sample
+    /// # Examples
+    /// ```
+    ///# use divi::sample::{CardNameAmount, DivinationCardsSample, SampleData};
+    ///# fn main() -> Result<(), divi::error::Error> {
+    ///     let s1 = DivinationCardsSample::create(
+    ///         SampleData::Csv(String::from("name,amount\rRain of Chaos,30")),
+    ///         None,
+    ///     )?;
+    ///     let vec: Vec<CardNameAmount> = vec![CardNameAmount::new(String::from("Rain of Caos"), 25)];
+    ///     let s2 = DivinationCardsSample::create(SampleData::CardNameAmountList(vec), None)?;
+    ///     let merged = DivinationCardsSample::merge(None, &[s1, s2]);
+    ///     assert_eq!(merged.cards.get_card("Rain of Chaos").amount, 55);
+    ///#     Ok(())
+    ///# }
+    /// ```
     pub fn merge(
         prices: Option<Prices>,
         samples: &[DivinationCardsSample],
@@ -90,7 +136,7 @@ impl DivinationCardsSample {
         }
     }
 
-    /// Reads the source to extract an amount of cards for each name
+    /// Reads the source to extract an amount of cards for each card name
     fn parse_data(&mut self, source: SampleData) -> Result<&mut Self, Error> {
         match source {
             SampleData::Csv(s) => {
@@ -230,6 +276,12 @@ pub struct CardNameAmount {
     pub name: String,
     #[serde(alias = "stackSize")]
     pub amount: u32,
+}
+
+impl CardNameAmount {
+    pub const fn new(name: String, amount: u32) -> CardNameAmount {
+        CardNameAmount { name, amount }
+    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

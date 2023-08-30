@@ -1,5 +1,6 @@
 [workspace]
 members = [
     "packages/app/src-tauri",
-    "divi"
+    "divi",
+    "divi/examples/*"
 ]
