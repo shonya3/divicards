@@ -10,6 +10,7 @@ pub enum Error {
     DiviError(divi::error::Error),
     AuthError(AuthError),
     IoError(io::Error),
+    RetryAfter(String),
 }
 
 impl Error {
@@ -20,6 +21,7 @@ impl Error {
             Error::DiviError(_) => "diviError",
             Error::AuthError(_) => "authError",
             Error::IoError(_) => "ioError",
+            Error::RetryAfter(_) => "retryAfterError",
         }
     }
 }
@@ -32,6 +34,9 @@ impl Display for Error {
             Error::SerdeError(err) => err.fmt(f),
             Error::DiviError(err) => err.fmt(f),
             Error::IoError(err) => err.fmt(f),
+            Error::RetryAfter(secs) => {
+                write!(f, "You have reached the limit, retry after {secs} seconds")
+            }
         }
     }
 }

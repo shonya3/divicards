@@ -122,7 +122,7 @@ export class StashesViewElement extends BaseElement {
 				<button @click=${this.#onCloseClicked} class="btn-close">Close</button>
 			</div>
 
-			<p class=${classMap({ visible: this.fetchingStash, msg: true })}>${this.msg}</p>
+			<p class=${classMap({ visible: this.msg.length > 0, msg: true })}>${this.msg}</p>
 			<p class=${classMap({ visible: this.noStashesMessage.length > 0, msg: true })}>${this.noStashesMessage}</p>
 
 			<wc-tab-badge-group
@@ -144,17 +144,30 @@ export class StashesViewElement extends BaseElement {
 		while (tabsCopy.length > 0) {
 			const chunkTabs = tabsCopy.splice(0, LOAD_AT_ONE_ITERATION);
 			this.msg = `${new Date().toLocaleTimeString('ru')}: Loading ${chunkTabs.length} tabs data`;
-			await Promise.all(
-				chunkTabs.map(async ({ id, name }) => {
-					if (!this.stashLoader) {
-						throw new Error('No stash loader');
+			try {
+				await Promise.all(
+					chunkTabs.map(async ({ id, name }) => {
+						if (!this.stashLoader) {
+							throw new Error('No stash loader');
+						}
+						const sample = await this.stashLoader.sampleFromTab(id, league);
+						this.emit<Events['sample-from-tab']>('sample-from-tab', { sample, league, name });
+						this.selectedTabs.delete(id);
+						this.selectedTabs = new Map(this.selectedTabs);
+					})
+				);
+			} catch (err) {
+				if (typeof err === 'object' && err !== null && 'message' in err) {
+					if (typeof err.message === 'string') {
+						this.msg = err.message;
 					}
-					const sample = await this.stashLoader.sampleFromTab(id, league);
-					this.emit<Events['sample-from-tab']>('sample-from-tab', { sample, league, name });
-					this.selectedTabs.delete(id);
-					this.selectedTabs = new Map(this.selectedTabs);
-				})
-			);
+				}
+				this.fetchingStash = false;
+
+				this.countdown = 0;
+				this.selectedTabs = new Map();
+				throw err;
+			}
 			if (tabsCopy.length === 0) break;
 
 			// Countdown
@@ -178,6 +191,8 @@ export class StashesViewElement extends BaseElement {
 			this.msg = `Loaded. Now ${SLEEP_SECS}s sleep`;
 			await new Promise(r => setTimeout(r, SLEEP_SECS * 1000));
 		}
+
+		console.log('here');
 
 		this.fetchingStash = false;
 		this.msg = '';

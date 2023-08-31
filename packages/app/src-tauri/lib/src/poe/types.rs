@@ -30,9 +30,9 @@ pub struct Item {
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct TabNoItems {}
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default)]
 pub struct TabWithItems {
-    pub items: Vec<Item>,
+    pub items: Option<Vec<Item>>,
     #[serde(rename = "type")]
     pub kind: Option<StashType>,
 }
@@ -51,6 +51,7 @@ impl From<TabWithItems> for SampleData {
     fn from(tab: TabWithItems) -> Self {
         let cards: Vec<CardNameAmount> = tab
             .items
+            .unwrap_or_default()
             .into_iter()
             .filter(|item| item.is_card() || item.base_type == "Fire Of Unknown Origin")
             .map(|item| CardNameAmount {

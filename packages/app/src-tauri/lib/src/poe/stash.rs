@@ -85,6 +85,15 @@ impl StashAPI {
 
         let headers = &response.headers();
 
+        for header in headers.iter() {
+            println!("{header:?}");
+        }
+
+        if let Some(s) = headers.get("retry-after") {
+            let s = s.to_str().unwrap().to_owned();
+            return Err(Error::RetryAfter(s));
+        }
+
         if let Some(limit_account_header) = headers.get("x-rate-limit-account") {
             if let Some(limit_account_state_header) = headers.get("x-rate-limit-account-state") {
                 println!(
