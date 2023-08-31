@@ -1,6 +1,6 @@
 import { invoke } from '@tauri-apps/api';
 import { DivinationCardsSample, League, CardNameAmount, TradeLeague } from '@divicards/shared/types';
-import { StashesResponseData, StashResponseData } from '@divicards/shared/poe.types';
+import { StashesResponseData } from '@divicards/shared/poe.types';
 
 export type SampleData = string | CardNameAmount[];
 

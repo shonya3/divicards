@@ -2,7 +2,7 @@ import { html, css, nothing } from 'lit';
 import { BaseElement } from '../base-element';
 import { property, state, query } from 'lit/decorators.js';
 import { TabBadgeElement } from './tab-badge';
-import { StashTab } from '@divicards/shared/poe.types';
+import { NoItemsTab } from '@divicards/shared/poe.types';
 import { League, permanentLeagues } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 
@@ -14,7 +14,12 @@ declare global {
 
 export const REMOVE_ONLY = '(Remove-only)';
 
-const filter = (stashes: StashTab[], nameQuery: string, shouldFilter: boolean, hideRemoveOnly: boolean): StashTab[] => {
+const filter = (
+	stashes: NoItemsTab[],
+	nameQuery: string,
+	shouldFilter: boolean,
+	hideRemoveOnly: boolean
+): NoItemsTab[] => {
 	if (!shouldFilter) return stashes;
 
 	return stashes.filter(({ name }) => {
@@ -25,13 +30,13 @@ const filter = (stashes: StashTab[], nameQuery: string, shouldFilter: boolean, h
 	});
 };
 
-const paginate = (stashes: StashTab[], page: number, perPage: number) => {
+const paginate = (stashes: NoItemsTab[], page: number, perPage: number) => {
 	const start = (page - 1) * perPage;
 	const end = start + perPage;
 	return stashes.slice(start, end);
 };
 
-const shouldUnlockHideRemoveOnly = (league: League, stashes: StashTab[]) => {
+const shouldUnlockHideRemoveOnly = (league: League, stashes: NoItemsTab[]) => {
 	return permanentLeagues.includes(league) && stashes.some(({ name }) => name.includes(REMOVE_ONLY));
 };
 
@@ -52,7 +57,7 @@ export class TabBadgeGroupElement extends BaseElement {
 	static override tag = 'wc-tab-badge-group';
 	static override styles = [this.baseStyles, styles()];
 
-	@property({ type: Array }) stashes: StashTab[] = [];
+	@property({ type: Array }) stashes: NoItemsTab[] = [];
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
 	@property({ type: Number, reflect: true }) perPage = 50;
 	@property({ type: Number, reflect: true }) page = 1;

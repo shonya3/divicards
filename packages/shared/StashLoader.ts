@@ -1,10 +1,10 @@
 import { command } from '../app/src/command';
-import { StashTab } from './poe.types';
+import { NoItemsTab } from './poe.types';
 import { DivinationCardsSample, League } from './types';
 
 export interface IStashLoader {
-	tabs(league: League): Promise<StashTab[]>;
-	sampleFromTab(tabId: StashTab['id'], league: League): Promise<DivinationCardsSample>;
+	tabs(league: League): Promise<NoItemsTab[]>;
+	sampleFromTab(tabId: string, league: League): Promise<DivinationCardsSample>;
 }
 
 export class StashLoader implements IStashLoader {
@@ -12,13 +12,13 @@ export class StashLoader implements IStashLoader {
 		return command('sample_from_tab', { league, stashId: tabId });
 	}
 
-	async tabs(league: League): Promise<StashTab[]> {
+	async tabs(league: League): Promise<NoItemsTab[]> {
 		const { stashes = [] } = await command('stashes', { league });
 		return this.#flattenStashes(stashes);
 	}
 
-	#flattenStashes(tabs: StashTab[]): StashTab[] {
-		const flat: StashTab[] = [];
+	#flattenStashes(tabs: NoItemsTab[]): NoItemsTab[] {
+		const flat: NoItemsTab[] = [];
 
 		for (const tab of tabs) {
 			if (tab.type !== 'Folder') {

@@ -1,13 +1,16 @@
-export interface StashTab {
+export interface TabWithItems extends NoItemsTab {
+	items: IItem[];
+}
+
+export interface NoItemsTab {
 	id: string;
 	index: number;
 	name: string;
 	type: StashType;
 	folder?: string;
 	metadata?: Metadata;
-	children?: StashTab[];
+	children?: NoItemsTab[];
 	parent?: string;
-	items?: IItem[];
 }
 
 export type StashType =
@@ -33,11 +36,7 @@ export interface Metadata {
 }
 
 export interface StashesResponseData {
-	stashes: StashTab[];
-}
-
-export interface StashResponseData {
-	stash: StashTab;
+	stashes: NoItemsTab[];
 }
 
 export interface IProperty {

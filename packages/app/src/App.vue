@@ -51,13 +51,13 @@ const openStashWindow = async () => {
 		</div>
 
 		<Transition>
-			<div ref="filesTemplateRef" class="files" v-show="sampleStore.sampleCards.length">
+			<div ref="filesTemplateRef" class="samples" v-show="sampleStore.sampleCards.length">
 				<SampleCard
 					v-for="fileCard in sampleStore.sampleCards"
 					v-bind="fileCard"
 					@delete="sampleStore.deleteFile"
 					v-model:selected="fileCard.selected"
-					v-model:minimum-card-price="fileCard.minimumCardPrice"
+					v-model:minimumCardPrice="fileCard.minimumCardPrice"
 					@update:league="league => sampleStore.replaceFileCard(league, fileCard)"
 				/>
 			</div>
@@ -66,19 +66,17 @@ const openStashWindow = async () => {
 		<div v-if="sampleStore.sampleCards.length > 0">
 			<h2>Select files you want to merge</h2>
 			<button class="btn" @click="sampleStore.downloadAll">Download All</button>
-			<button :disabled="sampleStore.selectedFiles.length < 2" class="btn" @click="sampleStore.merge">
+			<button :disabled="sampleStore.selectedSampleCards.length < 2" class="btn" @click="sampleStore.merge">
 				Merge samples
 			</button>
 			<button class="btn" @click="sampleStore.deleteAllFiles">Clear all</button>
 		</div>
 		<Transition>
 			<SampleCard
-				v-if="sampleStore.mergedFile"
-				v-bind="sampleStore.mergedFile"
-				@delete="sampleStore.deleteMergedFile"
-				@update:minimum-card-price="
-					price => sampleStore.mergedFile && (sampleStore.mergedFile.minimumCardPrice = price)
-				"
+				v-if="sampleStore.merged"
+				v-bind="sampleStore.merged"
+				@delete="sampleStore.deleteMerged"
+				@update:minimumCardPrice="price => sampleStore.merged && (sampleStore.merged.minimumCardPrice = price)"
 				@update:league="sampleStore.replaceMerged"
 			/>
 		</Transition>
@@ -117,7 +115,7 @@ const openStashWindow = async () => {
 	filter: hue-rotate(120deg);
 }
 
-.files {
+.samples {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 2rem;
@@ -129,4 +127,3 @@ const openStashWindow = async () => {
 	font-size: 1.4rem;
 }
 </style>
-./stores/poeAuth ./stores/auth ./stores/sampleCards ./stores/sample

@@ -1,11 +1,11 @@
 import { IStashLoader, StashLoader } from '@divicards/shared/StashLoader';
-import { html, css, PropertyValueMap, PropertyValues } from 'lit';
+import { html, css, PropertyValues } from 'lit';
 import { BaseElement } from '../base-element';
 import { HelpTipElement } from '../help-tip';
 import { TabBadgeElement } from './tab-badge';
 import { LeagueSelectElement } from '../league-select';
 import { property, state, query } from 'lit/decorators.js';
-import { StashTab } from '@divicards/shared/poe.types';
+import { NoItemsTab } from '@divicards/shared/poe.types';
 import { DivinationCardsSample, League } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { TabBadgeGroupElement } from './tab-badge-group';
@@ -52,7 +52,7 @@ export class StashesViewElement extends BaseElement {
 		TabBadgeElement['tabId'],
 		{ id: TabBadgeElement['tabId']; name: TabBadgeElement['name'] }
 	> = new Map();
-	@state() stashes: StashTab[] = [];
+	@state() stashes: NoItemsTab[] = [];
 	@state() noStashesMessage: string = '';
 	@state() msg: string = '';
 	@state() fetchingStash: boolean = false;
