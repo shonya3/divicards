@@ -17,8 +17,8 @@ const sampleStore = useSampleStore();
 const authStore = useAuthStore();
 
 const stashVisible = ref(false);
-const filesTemplateRef = ref<HTMLElement | null>(null);
-useAutoAnimate(filesTemplateRef);
+const samplesContainerRef = ref<HTMLElement | null>(null);
+useAutoAnimate(samplesContainerRef);
 
 const openStashWindow = async () => {
 	if (!authStore.loggedIn) {
