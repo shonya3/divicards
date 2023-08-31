@@ -6,5 +6,5 @@
 		"allowSyntheticDefaultImports": true,
 		"target": "ESNext"
 	},
-	"include": ["lib.ts", "poe.types.ts", "StashLoader.ts", "types.ts"]
+	"include": ["lib.ts", "poe.types.ts", "IStashLoader.ts", "types.ts"]
 }

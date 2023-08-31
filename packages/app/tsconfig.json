@@ -20,7 +20,7 @@
 		"src/**/*.tsx",
 		"src/**/*.vue",
 		"../shared/poe.types.ts",
-		"../shared/StashLoader.ts"
+		"../shared/IStashLoader.ts"
 	],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

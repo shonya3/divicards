@@ -1,6 +1,6 @@
 import { DivinationCardsSample, League } from '@divicards/shared/types';
 import { NoItemsTab } from '@divicards/shared/poe.types';
-import { IStashLoader } from '@divicards/shared/StashLoader';
+import { IStashLoader } from '@divicards/shared/IStashLoader';
 
 import stashesData from './json/stashes.json' assert { type: 'json' };
 import sampleData from './json/sample.json' assert { type: 'json' };

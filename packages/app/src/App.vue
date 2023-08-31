@@ -9,6 +9,7 @@ import SampleCard from './components/SampleCard.vue';
 import StashesView from './components/StashesView.vue';
 import { DropFilesMessageElement } from '@divicards/wc/src/wc/drop-files-message';
 import { PoeAuthElement } from '@divicards/wc/src/wc/poe-auth';
+import { StashLoader } from './StashLoader';
 DropFilesMessageElement.define();
 PoeAuthElement.define();
 
@@ -47,7 +48,11 @@ const openStashWindow = async () => {
 		</header>
 
 		<div v-show="authStore.loggedIn && stashVisible">
-			<StashesView @sample-from-tab="sampleStore.addSample" @close="stashVisible = false" />
+			<StashesView
+				:stashLoader="new StashLoader()"
+				@sample-from-tab="sampleStore.addSample"
+				@close="stashVisible = false"
+			/>
 		</div>
 
 		<Transition>

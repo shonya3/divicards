@@ -1,4 +1,4 @@
-import { IStashLoader, StashLoader } from '@divicards/shared/StashLoader';
+import { IStashLoader } from '@divicards/shared/IStashLoader';
 import { html, css, PropertyValues } from 'lit';
 import { BaseElement } from '../base-element';
 import { HelpTipElement } from '../help-tip';
@@ -38,6 +38,7 @@ export class Events {
 
 export interface StashesViewProps {
 	league?: League;
+	stashLoader: IStashLoader;
 }
 
 export class StashesViewElement extends BaseElement {
@@ -57,7 +58,7 @@ export class StashesViewElement extends BaseElement {
 	@state() msg: string = '';
 	@state() fetchingStash: boolean = false;
 	@state() countdown: number = 0;
-	@state() stashLoader: IStashLoader = new StashLoader();
+	@state() stashLoader!: IStashLoader;
 
 	@query('button#stashes-btn') stashesButton!: HTMLButtonElement;
 	@query('button#get-data-btn') getDataButton!: HTMLButtonElement;
@@ -78,6 +79,9 @@ export class StashesViewElement extends BaseElement {
 	}
 
 	async #onLoadStashesList() {
+		if (!this.stashLoader) {
+			throw new Error('No stash loader');
+		}
 		this.noStashesMessage = '';
 		this.stashes = await this.stashLoader.tabs(this.league);
 		this.stashes;
@@ -142,6 +146,9 @@ export class StashesViewElement extends BaseElement {
 			this.msg = `${new Date().toLocaleTimeString('ru')}: Loading ${chunkTabs.length} tabs data`;
 			await Promise.all(
 				chunkTabs.map(async ({ id, name }) => {
+					if (!this.stashLoader) {
+						throw new Error('No stash loader');
+					}
 					const sample = await this.stashLoader.sampleFromTab(id, league);
 					this.emit<Events['sample-from-tab']>('sample-from-tab', { sample, league, name });
 					this.selectedTabs.delete(id);

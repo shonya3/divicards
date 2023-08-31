@@ -35,10 +35,6 @@ export interface Metadata {
 	};
 }
 
-export interface StashesResponseData {
-	stashes: NoItemsTab[];
-}
-
 export interface IProperty {
 	name: string;
 	values: Array<Array<string>>;

@@ -16,7 +16,6 @@ const onUpdSelectedTabs = (e: CustomEvent<Set<string>>) => {
 };
 
 const onSampleFromTab = (e: CustomEvent<Events['sample-from-tab']>) => {
-	console.log(e);
 	emit('sample-from-tab', e.detail.name, e.detail.sample, e.detail.league);
 };
 </script>
@@ -24,6 +23,7 @@ const onSampleFromTab = (e: CustomEvent<Events['sample-from-tab']>) => {
 <template>
 	<wc-stashes-view
 		:league="league"
+		:stashLoader="stashLoader"
 		@close="$emit('close')"
 		@upd:selectedTabs="onUpdSelectedTabs"
 		@sample-from-tab="onSampleFromTab"
