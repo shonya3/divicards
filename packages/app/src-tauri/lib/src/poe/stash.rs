@@ -3,6 +3,7 @@ use serde::Deserialize;
 use serde_json::Value;
 use tauri::{command, AppHandle, State, Window};
 use tokio::sync::Mutex;
+use tracing::instrument;
 
 use crate::{
     error::Error,
@@ -16,6 +17,7 @@ use divi::{
     sample::{DivinationCardsSample, SampleData},
 };
 
+#[instrument(skip(app_handle, state, window))]
 #[command]
 pub async fn sample_from_tab(
     league: League,
@@ -45,6 +47,7 @@ pub async fn sample_from_tab(
     Ok(sample)
 }
 
+#[instrument(skip(app_handle))]
 #[command]
 pub async fn stashes(league: League, app_handle: AppHandle) -> Result<Value, Error> {
     StashAPI::stashes(league, app_handle.config().package.version.clone().unwrap()).await
@@ -107,7 +110,6 @@ impl StashAPI {
 
     async fn stashes(league: League, version: String) -> Result<Value, Error> {
         let url = format!("{}/stash/{}", API_URL, league);
-        dbg!(url);
         let response = Client::new()
             .get(format!("{}/stash/{}", API_URL, league))
             .header(
