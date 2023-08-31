@@ -3,7 +3,6 @@ import { defineStore } from 'pinia';
 import { SampleData, command } from '../command';
 import { DivinationCardsSample, League, TradeLeague, isTradeLeague, leagues } from '@divicards/shared/types';
 import { FileCardProps } from '@divicards/wc/src/wc/file-card/file-card';
-import { StashTab } from '@divicards/shared/poe.types';
 
 const prefixFilename = (name: string, league: League): string => {
 	const UNDERSCORE_GLUE = '_';
@@ -49,41 +48,36 @@ export const createFileCardFromSample = (
 	};
 };
 
-export const useFileCardsStore = defineStore('fileCards', {
+export const useSampleStore = defineStore('sampleCards', {
 	state: (): {
-		fileCards: FileCardProps[];
+		sampleCards: FileCardProps[];
 		mergedFile: FileCardProps | null;
 	} => ({
-		fileCards: [],
+		sampleCards: [],
 		mergedFile: null,
 	}),
 	getters: {
-		selectedFiles(): FileCardProps[] {
-			return this.fileCards.filter(file => file.selected);
+		samples(): DivinationCardsSample[] {
+			return this.sampleCards.map(f => f.sample);
 		},
 
-		samples(): DivinationCardsSample[] {
-			return this.fileCards.map(f => f.sample);
+		selectedFiles(): FileCardProps[] {
+			return this.sampleCards.filter(file => file.selected);
 		},
 
 		selectedSamples(): DivinationCardsSample[] {
-			const selectedSamples: DivinationCardsSample[] = [];
-			for (const file of this.selectedFiles) {
-				if (file.selected === true) {
-					selectedSamples.push(file.sample);
-				}
-			}
-			return selectedSamples;
-		},
-
-		getFileById: state => {
-			return (id: string) => [...state.fileCards, state.mergedFile].find(file => file?.uuid === id);
+			return this.selectedFiles.map(f => f.sample);
 		},
 	},
 	actions: {
+		fileById(id: string): FileCardProps | null {
+			if (this.mergedFile && this.mergedFile.uuid === id) return this.mergedFile;
+			return this.sampleCards.find(f => f.uuid === id) ?? null;
+		},
+
 		async addCard(filename: string, sampleData: SampleData, league: TradeLeague = ACTIVE_LEAGUE): Promise<void> {
 			const fileCard = await createFileCard(filename, sampleData, league);
-			this.fileCards.push(fileCard);
+			this.sampleCards.push(fileCard);
 		},
 
 		async merge() {
@@ -97,7 +91,7 @@ export const useFileCardsStore = defineStore('fileCards', {
 		},
 
 		downloadAll() {
-			for (const file of this.fileCards) {
+			for (const file of this.sampleCards) {
 				downloadText(file.filename, file.sample.csv);
 			}
 		},
@@ -107,44 +101,34 @@ export const useFileCardsStore = defineStore('fileCards', {
 		},
 
 		deleteFile(id: string): void {
-			this.fileCards = this.fileCards.filter(file => file.uuid !== id);
+			this.sampleCards = this.sampleCards.filter(file => file.uuid !== id);
 		},
 
 		deleteAllFiles(): void {
-			this.fileCards = [];
+			this.sampleCards = [];
 		},
 
 		async addFromFile(file: File) {
-			try {
-				const text = await file.text();
-				this.addCard(file.name, text, ACTIVE_LEAGUE);
-			} catch (err) {
-				if (typeof err === 'string') {
-					this.addCard('error', err, ACTIVE_LEAGUE);
-				}
-			}
+			const text = await file.text();
+			this.addCard(file.name, text, ACTIVE_LEAGUE);
 		},
 
-		async addFromTab(tab: StashTab, league: League) {
-			const tradeLeague = isTradeLeague(league) ? league : ACTIVE_LEAGUE;
-			const sample = await command('sample_from_tab', { league, stashId: tab.id });
-			const fileCard = createFileCardFromSample(tab.name, sample, tradeLeague);
-			this.fileCards.push(fileCard);
+		async addFromDragAndDrop(e: DragEvent) {
+			return Promise.allSettled(Array.from(e.dataTransfer?.files ?? []).map(f => this.addFromFile(f)));
+		},
+
+		async addSample(name: string, sample: DivinationCardsSample, league: League) {
 			console.log(sample);
-			console.log(this.fileCards.at(-1));
-		},
-
-		async sampleFromTab(sample: DivinationCardsSample, league: League, name: string) {
-			const fileCard = createFileCardFromSample(name, sample, league as TradeLeague);
-			this.fileCards.push(fileCard);
+			const fileCard = createFileCardFromSample(name, sample, isTradeLeague(league) ? league : ACTIVE_LEAGUE);
+			this.sampleCards.push(fileCard);
 		},
 
 		async replaceFileCard(league: League, oldFileCard: FileCardProps) {
 			if (!isTradeLeague(league)) return;
 
-			const index = this.fileCards.findIndex(file => file.uuid === oldFileCard.uuid);
+			const index = this.sampleCards.findIndex(file => file.uuid === oldFileCard.uuid);
 			if (index === -1) return;
-			this.fileCards[index] = await createFileCard(oldFileCard.filename, oldFileCard.sample.csv, league);
+			this.sampleCards[index] = await createFileCard(oldFileCard.filename, oldFileCard.sample.csv, league);
 		},
 
 		async replaceMerged(league: League) {

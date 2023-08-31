@@ -8,7 +8,7 @@ withDefaults(defineProps<StashesViewProps>(), { league: ACTIVE_LEAGUE });
 const emit = defineEmits<{
 	close: [];
 	'update:selectedTabs': [Set<string>];
-	'sample-from-tab': [DivinationCardsSample, League, string];
+	'sample-from-tab': [string, DivinationCardsSample, League];
 }>();
 
 const onUpdSelectedTabs = (e: CustomEvent<Set<string>>) => {
@@ -17,7 +17,7 @@ const onUpdSelectedTabs = (e: CustomEvent<Set<string>>) => {
 
 const onSampleFromTab = (e: CustomEvent<Events['sample-from-tab']>) => {
 	console.log(e);
-	emit('sample-from-tab', e.detail.sample, e.detail.league, e.detail.name);
+	emit('sample-from-tab', e.detail.name, e.detail.sample, e.detail.league);
 };
 </script>
 

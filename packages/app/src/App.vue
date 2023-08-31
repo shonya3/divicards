@@ -1,31 +1,23 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import { useFileCardsStore } from './stores/fileCards';
+import { useSampleStore } from './stores/sample';
 import { useAuthStore } from './stores/auth';
 import { useAutoAnimate } from './composables/useAutoAnimate';
 
+import SampleCard from './components/SampleCard.vue';
+import StashesView from './components/StashesView.vue';
 import { DropFilesMessageElement } from '@divicards/wc/src/wc/drop-files-message';
 import { PoeAuthElement } from '@divicards/wc/src/wc/poe-auth';
-
-import FileCard from './components/FileCard.vue';
-import StashesView from './components/StashesView.vue';
-
 DropFilesMessageElement.define();
 PoeAuthElement.define();
 
-const fileCardsStore = useFileCardsStore();
+const sampleStore = useSampleStore();
 const authStore = useAuthStore();
 
 const stashVisible = ref(false);
 const filesTemplateRef = ref<HTMLElement | null>(null);
 useAutoAnimate(filesTemplateRef);
-
-const onDrop = async (e: DragEvent) => {
-	for (const file of Array.from(e.dataTransfer?.files ?? [])) {
-		fileCardsStore.addFromFile(file);
-	}
-};
 
 const openStashWindow = async () => {
 	if (!authStore.loggedIn) {
@@ -38,7 +30,7 @@ const openStashWindow = async () => {
 
 <template>
 	<div
-		@drop.prevent="onDrop"
+		@drop.prevent="sampleStore.addFromDragAndDrop"
 		@dragenter="(e: DragEvent) => e.preventDefault()"
 		@dragover="(e: DragEvent) => e.preventDefault()"
 		class="drag"
@@ -55,39 +47,39 @@ const openStashWindow = async () => {
 		</header>
 
 		<div v-show="authStore.loggedIn && stashVisible">
-			<StashesView @sample-from-tab="fileCardsStore.sampleFromTab" @close="stashVisible = false" />
+			<StashesView @sample-from-tab="sampleStore.addSample" @close="stashVisible = false" />
 		</div>
 
 		<Transition>
-			<div ref="filesTemplateRef" class="files" v-show="fileCardsStore.fileCards.length">
-				<FileCard
-					v-for="fileCard in fileCardsStore.fileCards"
+			<div ref="filesTemplateRef" class="files" v-show="sampleStore.sampleCards.length">
+				<SampleCard
+					v-for="fileCard in sampleStore.sampleCards"
 					v-bind="fileCard"
-					@delete="fileCardsStore.deleteFile"
+					@delete="sampleStore.deleteFile"
 					v-model:selected="fileCard.selected"
 					v-model:minimum-card-price="fileCard.minimumCardPrice"
-					@update:league="league => fileCardsStore.replaceFileCard(league, fileCard)"
+					@update:league="league => sampleStore.replaceFileCard(league, fileCard)"
 				/>
 			</div>
 		</Transition>
 
-		<div v-if="fileCardsStore.fileCards.length > 0">
+		<div v-if="sampleStore.sampleCards.length > 0">
 			<h2>Select files you want to merge</h2>
-			<button class="btn" @click="fileCardsStore.downloadAll">Download All</button>
-			<button :disabled="fileCardsStore.selectedFiles.length < 2" class="btn" @click="fileCardsStore.merge">
+			<button class="btn" @click="sampleStore.downloadAll">Download All</button>
+			<button :disabled="sampleStore.selectedFiles.length < 2" class="btn" @click="sampleStore.merge">
 				Merge samples
 			</button>
-			<button class="btn" @click="fileCardsStore.deleteAllFiles">Clear all</button>
+			<button class="btn" @click="sampleStore.deleteAllFiles">Clear all</button>
 		</div>
 		<Transition>
-			<FileCard
-				v-if="fileCardsStore.mergedFile"
-				v-bind="fileCardsStore.mergedFile"
-				@delete="fileCardsStore.deleteMergedFile"
+			<SampleCard
+				v-if="sampleStore.mergedFile"
+				v-bind="sampleStore.mergedFile"
+				@delete="sampleStore.deleteMergedFile"
 				@update:minimum-card-price="
-					price => fileCardsStore.mergedFile && (fileCardsStore.mergedFile.minimumCardPrice = price)
+					price => sampleStore.mergedFile && (sampleStore.mergedFile.minimumCardPrice = price)
 				"
-				@update:league="fileCardsStore.replaceMerged"
+				@update:league="sampleStore.replaceMerged"
 			/>
 		</Transition>
 	</div>
@@ -137,4 +129,4 @@ const openStashWindow = async () => {
 	font-size: 1.4rem;
 }
 </style>
-./stores/poeAuth ./stores/auth
+./stores/poeAuth ./stores/auth ./stores/sampleCards ./stores/sample
