@@ -111,7 +111,7 @@ impl StashAPI {
     async fn stashes(league: League, version: String) -> Result<Value, Error> {
         let url = format!("{}/stash/{}", API_URL, league);
         let response = Client::new()
-            .get(format!("{}/stash/{}", API_URL, league))
+            .get(url)
             .header(
                 "Authorization",
                 format!("Bearer {}", { AccessTokenStorage::new().get().unwrap() }),

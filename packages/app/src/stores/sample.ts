@@ -22,6 +22,7 @@ export const createSampleCard = async (
 	league: TradeLeague
 ): Promise<FileCardProps> => {
 	const sample = await command('sample', { data: sampleData, league });
+	console.log(sample);
 
 	return {
 		uuid: crypto.randomUUID(),

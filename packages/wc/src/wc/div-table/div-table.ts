@@ -227,7 +227,7 @@ export class DivTableElement extends BaseElement {
 				<td class="row">${index + 1}</td>
 				<td class="row">${amount}</td>
 				<td class="name-row">${name}</td>
-				<td class="row">${format(price ?? 0)}</td>
+				<td class="row">${price === null ? 'no price' : format(price)}</td>
 				<td class="row">${format(sum ?? 0)}</td>
 				<td class="row">${format(weight ?? 0)}</td>
 			</tr>`;
