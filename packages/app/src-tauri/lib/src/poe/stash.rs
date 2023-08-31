@@ -1,7 +1,7 @@
 use reqwest::Client;
 use serde::Deserialize;
 use serde_json::Value;
-use tauri::{command, AppHandle, State, Window};
+use tauri::{command, State, Window};
 use tokio::sync::Mutex;
 use tracing::instrument;
 
@@ -9,6 +9,7 @@ use crate::{
     error::Error,
     poe::{types::TabWithItems, AccessTokenStorage, Persist, API_URL, PROVIDER_LABEL},
     prices::AppCardPrices,
+    version::AppVersion,
 };
 
 use divi::{
@@ -17,27 +18,21 @@ use divi::{
     sample::{DivinationCardsSample, SampleData},
 };
 
-#[instrument(skip(app_handle, state, window))]
+#[instrument(skip(prices, window))]
 #[command]
 pub async fn sample_from_tab(
     league: League,
     stash_id: String,
     substash_id: Option<String>,
-    app_handle: AppHandle,
-    state: State<'_, Mutex<AppCardPrices>>,
+    prices: State<'_, Mutex<AppCardPrices>>,
+    version: State<'_, AppVersion>,
     window: Window,
 ) -> Result<DivinationCardsSample, Error> {
-    let tab = StashAPI::tab_with_items(
-        &league,
-        stash_id,
-        substash_id,
-        app_handle.config().package.version.clone().unwrap(),
-    )
-    .await?;
+    let tab = StashAPI::tab_with_items(&league, stash_id, substash_id, version.inner()).await?;
 
     let prices = match TradeLeague::try_from(league) {
         Ok(league) => {
-            let mut guard = state.lock().await;
+            let mut guard = prices.lock().await;
             guard.get_price(&league, &window).await
         }
         Err(_) => Prices::default(),
@@ -47,10 +42,10 @@ pub async fn sample_from_tab(
     Ok(sample)
 }
 
-#[instrument(skip(app_handle))]
+#[instrument]
 #[command]
-pub async fn stashes(league: League, app_handle: AppHandle) -> Result<Value, Error> {
-    StashAPI::stashes(league, app_handle.config().package.version.clone().unwrap()).await
+pub async fn stashes(league: League, version: State<'_, AppVersion>) -> Result<Value, Error> {
+    StashAPI::stashes(league, version.inner()).await
 }
 
 pub fn access_token_label() -> String {
@@ -63,7 +58,7 @@ impl StashAPI {
         league: &League,
         stash_id: String,
         substash_id: Option<String>,
-        version: String,
+        version: &AppVersion,
     ) -> Result<TabWithItems, Error> {
         let url = match substash_id {
             Some(substash_id) => {
@@ -108,7 +103,7 @@ impl StashAPI {
         Ok(response_shape.stash)
     }
 
-    async fn stashes(league: League, version: String) -> Result<Value, Error> {
+    async fn stashes(league: League, version: &AppVersion) -> Result<Value, Error> {
         let url = format!("{}/stash/{}", API_URL, league);
         let response = Client::new()
             .get(url)

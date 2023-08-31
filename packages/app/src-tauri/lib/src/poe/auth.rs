@@ -1,7 +1,7 @@
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 
 use super::error::AuthError;
-use crate::{error::Error, event::Event};
+use crate::{error::Error, event::Event, version::AppVersion};
 
 use super::{AccessTokenStorage, Persist, AUTH_URL, CLIENT_ID, TOKEN_URL};
 use axum::{extract::Query, response::Html, routing::get, Router};
@@ -10,12 +10,12 @@ use oauth2::{
     PkceCodeChallenge, RedirectUrl, Scope, TokenUrl,
 };
 use serde::{Deserialize, Serialize};
-use tauri::{command, AppHandle, Window};
+use tauri::{command, State, Window};
 use tokio::sync::mpsc;
 use tracing::debug;
 
 #[command]
-pub async fn poe_auth(app_handle: AppHandle, window: Window) -> Result<String, Error> {
+pub async fn poe_auth(version: State<'_, AppVersion>, window: Window) -> Result<String, Error> {
     let (sender, mut receiver) = mpsc::channel::<AuthResponse>(1);
     let addr = SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 50151);
     let redirect_uri =
@@ -85,7 +85,7 @@ pub async fn poe_auth(app_handle: AppHandle, window: Window) -> Result<String, E
                 code.secret(),
                 pkce_verifier.secret(),
                 &redirect_uri,
-                app_handle.config().package.version.clone().unwrap(),
+                version.inner(),
             )
             .await
             .unwrap();
@@ -137,7 +137,7 @@ async fn fetch_token(
     code: &str,
     pkce_verifier: &str,
     redirect_uri: &str,
-    version: String,
+    version: &AppVersion,
 ) -> Result<TokenResponseData, String> {
     let payload = url::form_urlencoded::Serializer::new(String::new())
         .append_pair("client_id", "divicards")

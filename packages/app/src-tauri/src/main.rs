@@ -6,7 +6,7 @@
 use std::collections::HashMap;
 use tokio::sync::Mutex;
 
-use lib::{commands, paths, poe, prices::AppCardPrices};
+use lib::{commands, paths, poe, prices::AppCardPrices, version::AppVersion};
 use tauri::Manager;
 
 #[tokio::main]
@@ -19,7 +19,9 @@ async fn main() {
 
     tauri::Builder::default()
         .setup(|app| {
+            let app_version = AppVersion(app.config().package.version.clone().unwrap());
             app.manage(app_prices);
+            app.manage(app_version);
             #[cfg(debug_assertions)] // only include this code on debug builds
             {
                 let window = app.get_window("main").unwrap();
