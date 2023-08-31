@@ -40,29 +40,4 @@ export interface FixedName {
 	fixed: string;
 }
 
-export interface DiscordIdentity {
-	id: string;
-	username: string;
-	global_name: string | null;
-	display_name: string | null;
-	avatar: string | null;
-	discriminator: string | null;
-	public_flags: number;
-	flags: number;
-	banner: string | null;
-	banner_color: string | null;
-	locale: string;
-	mfa_enabled: boolean;
-	premium_type: number;
-	avatar_decoration: string | null;
-}
-
-export interface GoogleIdentity {
-	name: string;
-	id: string;
-	picture: string | null;
-	locale: string | null;
-	given_name: string;
-}
-
 export type CardNameAmount = Pick<DivinationCardRecord, 'name' | 'amount'>;

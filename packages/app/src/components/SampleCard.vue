@@ -35,5 +35,3 @@ const onDelete = (e: CustomEvent<Events['delete']>) => {
 		@delete="onDelete"
 	></wc-file-card>
 </template>
-
-<style scoped></style>

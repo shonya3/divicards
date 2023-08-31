@@ -29,5 +29,3 @@ const onSampleFromTab = (e: CustomEvent<Events['sample-from-tab']>) => {
 		@sample-from-tab="onSampleFromTab"
 	></wc-stashes-view>
 </template>
-
-<style scoped></style>
