@@ -4,6 +4,7 @@ use csv::{ReaderBuilder, Trim};
 use serde::{Deserialize, Serialize};
 
 use crate::{
+    card_record::DivinationCardRecord,
     cards::Cards,
     consts::{CARDS, RAIN_OF_CHAOS_WEIGHT},
     error::Error,
@@ -110,6 +111,12 @@ impl DivinationCardsSample {
         merged
     }
 
+    pub fn print_not_nullish(&self) {
+        let sample = self.to_owned();
+        let not_nullish = NotNullishSample::from(sample);
+        println!("{:?}", not_nullish);
+    }
+
     /// Consumes Prices structure to set prices for Cards
     fn from_prices(prices: Option<Prices>) -> Self {
         DivinationCardsSample {
@@ -211,7 +218,7 @@ impl DivinationCardsSample {
     /// (After weight) Sets .csv field. Must be used when everything is set and ready.
     fn write_csv(&mut self) -> &mut Self {
         let mut writer = csv::Writer::from_writer(vec![]);
-        for card in self.cards.iter().clone() {
+        for card in self.cards.iter() {
             writer.serialize(card).unwrap();
         }
         self.csv = String::from_utf8(writer.into_inner().expect("Error with csv serialize"))
@@ -326,5 +333,35 @@ Encroaching Darkness,5\r\nThe Endless Darkness,1\r\nThe Endurance,19\r\nThe Enfo
             .unwrap();
 
         assert_eq!(rain_of_chaos.amount, 1779);
+    }
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone, Default, PartialEq)]
+#[serde(rename_all = "camelCase")]
+struct NotNullishSample {
+    cards: Vec<DivinationCardRecord>,
+    not_cards: Vec<String>,
+    fixed_names: Vec<FixedCardName>,
+    csv: String,
+}
+
+impl From<DivinationCardsSample> for NotNullishSample {
+    fn from(value: DivinationCardsSample) -> Self {
+        let cards = value.cards.into_not_nullish();
+
+        let mut writer = csv::Writer::from_writer(vec![]);
+        for card in cards.iter() {
+            writer.serialize(card).unwrap()
+        }
+
+        let csv = String::from_utf8(writer.into_inner().expect("Error with csv serialize"))
+            .expect("Error");
+
+        NotNullishSample {
+            cards,
+            not_cards: value.not_cards,
+            fixed_names: value.fixed_names,
+            csv,
+        }
     }
 }

@@ -1,4 +1,7 @@
-use std::slice::{Iter, IterMut};
+use std::{
+    array::IntoIter,
+    slice::{Iter, IterMut},
+};
 
 use crate::{
     card_record::DivinationCardRecord,
@@ -41,6 +44,14 @@ impl Cards {
 
     pub fn iter_mut(&mut self) -> IterMut<'_, DivinationCardRecord> {
         self.0.iter_mut()
+    }
+
+    pub fn into_iter(self) -> IntoIter<DivinationCardRecord, 440> {
+        self.0.into_iter()
+    }
+
+    pub fn into_not_nullish(self) -> Vec<DivinationCardRecord> {
+        self.into_iter().filter(|card| card.amount > 0).collect()
     }
 }
 
