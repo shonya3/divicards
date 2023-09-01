@@ -22,7 +22,7 @@ async fn main() {
             let app_version = AppVersion(app.config().package.version.clone().unwrap());
             app.manage(app_prices);
             app.manage(app_version);
-            #[cfg(debug_assertions)] // only include this code on debug builds
+            // #[cfg(debug_assertions)] // only include this code on debug builds
             {
                 let window = app.get_window("main").unwrap();
                 window.open_devtools();

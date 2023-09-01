@@ -85,9 +85,9 @@ impl StashAPI {
 
         let headers = &response.headers();
 
-        for header in headers.iter() {
-            println!("{header:?}");
-        }
+        // for header in headers.iter() {
+        //     println!("{header:?}");
+        // }
 
         if let Some(s) = headers.get("retry-after") {
             let s = s.to_str().unwrap().to_owned();

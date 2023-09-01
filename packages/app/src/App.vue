@@ -12,6 +12,7 @@ import { PoeAuthElement } from '@divicards/wc/src/wc/poe-auth';
 import { StashLoader } from './StashLoader';
 DropFilesMessageElement.define();
 PoeAuthElement.define();
+const stashLoader = new StashLoader();
 
 const sampleStore = useSampleStore();
 const authStore = useAuthStore();
@@ -49,7 +50,7 @@ const openStashWindow = async () => {
 
 		<div v-show="authStore.loggedIn && stashVisible">
 			<StashesView
-				:stashLoader="new StashLoader()"
+				:stashLoader="stashLoader"
 				@sample-from-tab="sampleStore.addSample"
 				@close="stashVisible = false"
 			/>

@@ -192,8 +192,6 @@ export class StashesViewElement extends BaseElement {
 			await new Promise(r => setTimeout(r, SLEEP_SECS * 1000));
 		}
 
-		console.log('here');
-
 		this.fetchingStash = false;
 		this.msg = '';
 	}
