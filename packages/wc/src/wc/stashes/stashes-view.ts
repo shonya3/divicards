@@ -11,6 +11,8 @@ import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { TabBadgeGroupElement } from './tab-badge-group';
 import { classMap } from 'lit/directives/class-map.js';
 
+const SECS_300 = 300 * 1000;
+
 declare global {
 	interface HTMLElementTagNameMap {
 		'wc-stashes-view': StashesViewElement;
@@ -59,6 +61,7 @@ export class StashesViewElement extends BaseElement {
 	@state() fetchingStash: boolean = false;
 	@state() countdown: number = 0;
 	@state() stashLoader!: IStashLoader;
+	@state() stashLoadsAvailable = 30;
 
 	@query('button#stashes-btn') stashesButton!: HTMLButtonElement;
 	@query('button#get-data-btn') getDataButton!: HTMLButtonElement;
@@ -66,12 +69,12 @@ export class StashesViewElement extends BaseElement {
 	protected willUpdate(map: PropertyValues<this>): void {
 		if (map.has('league')) {
 			this.stashes = [];
+			this.msg = '';
 		}
 	}
 
 	async #onLoadItemsClicked() {
-		await this.fetchStashesContents(Array.from(this.selectedTabs.values()), this.league);
-		this.selectedTabs = new Map();
+		await this.fetchStashesContents(this.league);
 	}
 
 	#onCloseClicked() {
@@ -108,12 +111,13 @@ export class StashesViewElement extends BaseElement {
 					<wc-help-tip>
 						<p>Select tabs by clicking on them. Then click LOAD ITEMS button</p>
 					</wc-help-tip>
+					<div>Loads available: ${this.stashLoadsAvailable}</div>
 				</div>
 
 				<button
 					id="get-data-btn"
 					class=${classMap({ 'not-visible': this.selectedTabs.size === 0, 'btn-load-items': true })}
-					.disabled=${this.selectedTabs.size === 0 || this.fetchingStash}
+					.disabled=${this.selectedTabs.size === 0 || this.fetchingStash || this.stashLoadsAvailable === 0}
 					@click=${this.#onLoadItemsClicked}
 				>
 					load items
@@ -122,8 +126,12 @@ export class StashesViewElement extends BaseElement {
 				<button @click=${this.#onCloseClicked} class="btn-close">Close</button>
 			</div>
 
-			<p class=${classMap({ visible: this.msg.length > 0, msg: true })}>${this.msg}</p>
-			<p class=${classMap({ visible: this.noStashesMessage.length > 0, msg: true })}>${this.noStashesMessage}</p>
+			<div class="messages">
+				<p class=${classMap({ visible: this.msg.length > 0, msg: true })}>${this.msg}</p>
+				<p class=${classMap({ visible: this.noStashesMessage.length > 0, msg: true })}>
+					${this.noStashesMessage}
+				</p>
+			</div>
 
 			<wc-tab-badge-group
 				league=${this.league}
@@ -134,15 +142,20 @@ export class StashesViewElement extends BaseElement {
 		</div>`;
 	}
 
-	async fetchStashesContents(tabs: { id: TabBadgeElement['id']; name: TabBadgeElement['name'] }[], league: League) {
-		// const tradeLeague = isTradeLeague(league) ? league : ACTIVE_LEAGUE;
+	async fetchStashesContents(league: League) {
 		const SLEEP_SECS = 10;
 		const LOAD_AT_ONE_ITERATION = 5;
-		// const stashIds = ids.slice();
-		const tabsCopy = tabs.slice();
 		this.fetchingStash = true;
-		while (tabsCopy.length > 0) {
-			const chunkTabs = tabsCopy.splice(0, LOAD_AT_ONE_ITERATION);
+		while (this.selectedTabs.size > 0) {
+			if (this.stashLoadsAvailable === 0) {
+				this.msg = 'Loads available: 0. Waiting for cooldown.';
+				await new Promise(r => setTimeout(r, 5000));
+				continue;
+			}
+			const chunkTabs = Array.from(this.selectedTabs.values()).splice(
+				0,
+				this.stashLoadsAvailable < 5 ? 1 : LOAD_AT_ONE_ITERATION
+			);
 			this.msg = `${new Date().toLocaleTimeString('ru')}: Loading ${chunkTabs.length} tabs data`;
 			try {
 				await Promise.all(
@@ -154,6 +167,10 @@ export class StashesViewElement extends BaseElement {
 						this.emit<Events['sample-from-tab']>('sample-from-tab', { sample, league, name });
 						this.selectedTabs.delete(id);
 						this.selectedTabs = new Map(this.selectedTabs);
+						this.stashLoadsAvailable--;
+						setTimeout(() => {
+							this.stashLoadsAvailable++;
+						}, SECS_300);
 					})
 				);
 			} catch (err) {
@@ -168,7 +185,7 @@ export class StashesViewElement extends BaseElement {
 				this.selectedTabs = new Map();
 				throw err;
 			}
-			if (tabsCopy.length === 0) break;
+			if (this.selectedTabs.size === 0) break;
 
 			// Countdown
 			if (this.#countdownTimer) {
@@ -223,13 +240,21 @@ function styles() {
 			gap: 1rem;
 		}
 
+		.messages {
+			position: relative;
+			height: 4rem;
+		}
+
 		.msg {
+			position: absolute;
 			font-size: 2rem;
 			max-width: max-content;
 			margin-inline: auto;
-			margin-top: 1rem;
 			visibility: hidden;
-			min-height: 2rem;
+			margin-block: 0;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
 		}
 
 		.visible {
