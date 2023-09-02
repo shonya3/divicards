@@ -41,7 +41,10 @@
 //!    let csv = r#"name,amount
 //!    The Doctor,2
 //!    Rain of Chaos,30"#;
+//!
 //!    let sample = DivinationCardsSample::create(SampleData::Csv(String::from(csv)), None)?;
+//!    println!("cards len: {}", sample.cards.0.len()); // 440
+//!
 //!    let sample = sample.into_not_nullish();
 //!    println!("cards len: {}", sample.cards.len()); // 2
 //!
