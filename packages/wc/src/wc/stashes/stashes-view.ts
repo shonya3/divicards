@@ -12,6 +12,10 @@ import { TabBadgeGroupElement } from './tab-badge-group';
 import { classMap } from 'lit/directives/class-map.js';
 
 const SECS_300 = 300 * 1000;
+const SECS_10 = 10 * 1000;
+const sleepSecs = async (secs: number): Promise<void> => {
+	return new Promise(r => setTimeout(r, secs * 1000));
+};
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -50,7 +54,6 @@ export class StashesViewElement extends BaseElement {
 
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
 
-	#countdownTimer: ReturnType<typeof setInterval> | null = null;
 	@state() selectedTabs: Map<
 		TabBadgeElement['tabId'],
 		{ id: TabBadgeElement['tabId']; name: TabBadgeElement['name'] }
@@ -59,9 +62,9 @@ export class StashesViewElement extends BaseElement {
 	@state() noStashesMessage: string = '';
 	@state() msg: string = '';
 	@state() fetchingStash: boolean = false;
-	@state() countdown: number = 0;
 	@state() stashLoader!: IStashLoader;
-	@state() stashLoadsAvailable = 30;
+	@state() private stashLoadsAvailable = 30;
+	@state() private availableInTenSeconds = 15;
 
 	@query('button#stashes-btn') stashesButton!: HTMLButtonElement;
 	@query('button#get-data-btn') getDataButton!: HTMLButtonElement;
@@ -74,7 +77,7 @@ export class StashesViewElement extends BaseElement {
 	}
 
 	async #onLoadItemsClicked() {
-		await this.fetchStashesContents(this.league);
+		await this.loadSelectedTabs(this.league);
 	}
 
 	#onCloseClicked() {
@@ -102,7 +105,7 @@ export class StashesViewElement extends BaseElement {
 		this.selectedTabs = new Map(map);
 	}
 
-	render() {
+	protected override render() {
 		return html`<div class="main-stashes-component">
 			<div class="controls">
 				<div class="league-stashes">
@@ -142,75 +145,69 @@ export class StashesViewElement extends BaseElement {
 		</div>`;
 	}
 
-	async fetchStashesContents(league: League) {
-		const SLEEP_SECS = 10;
-		const LOAD_AT_ONE_ITERATION = 5;
+	/**
+	 * For each tab, loads sample and emits it
+	 */
+	protected async loadSelectedTabs(league: League): Promise<void> {
 		this.fetchingStash = true;
 		while (this.selectedTabs.size > 0) {
-			if (this.stashLoadsAvailable === 0) {
-				this.msg = 'Loads available: 0. Waiting for cooldown.';
-				await new Promise(r => setTimeout(r, 5000));
-				continue;
-			}
-			const chunkTabs = Array.from(this.selectedTabs.values()).splice(
-				0,
-				this.stashLoadsAvailable < 5 ? 1 : LOAD_AT_ONE_ITERATION
-			);
-			this.msg = `${new Date().toLocaleTimeString('ru')}: Loading ${chunkTabs.length} tabs data`;
 			try {
-				await Promise.all(
-					chunkTabs.map(async ({ id, name }) => {
-						if (!this.stashLoader) {
-							throw new Error('No stash loader');
-						}
-						const sample = await this.stashLoader.sampleFromTab(id, league);
-						this.emit<Events['sample-from-tab']>('sample-from-tab', { sample, league, name });
-						this.selectedTabs.delete(id);
-						this.selectedTabs = new Map(this.selectedTabs);
-						this.stashLoadsAvailable--;
-						setTimeout(() => {
-							this.stashLoadsAvailable++;
-						}, SECS_300);
-					})
-				);
+				for (const { id, name } of this.selectedTabs.values()) {
+					if (this.stashLoadsAvailable === 0) {
+						this.msg = 'Loads available: 0. Waiting for cooldown.';
+						await sleepSecs(1);
+						continue;
+					}
+					if (this.availableInTenSeconds === 0) {
+						this.msg = 'Sleep for short cooldown';
+						await sleepSecs(0.5);
+						continue;
+					}
+					const sample = await this.#loadSample(id, name, league);
+					this.emit<Events['sample-from-tab']>('sample-from-tab', { name, sample, league });
+				}
 			} catch (err) {
-				if (typeof err === 'object' && err !== null && 'message' in err) {
-					if (typeof err.message === 'string') {
-						this.msg = err.message;
-					}
-				}
-				this.fetchingStash = false;
-
-				this.countdown = 0;
-				this.selectedTabs = new Map();
-				throw err;
+				this.#handleLoadTabError(err);
 			}
-			if (this.selectedTabs.size === 0) break;
-
-			// Countdown
-			if (this.#countdownTimer) {
-				clearInterval(this.#countdownTimer);
-				this.#countdownTimer = null;
-			}
-			this.countdown = SLEEP_SECS;
-			this.#countdownTimer = setInterval(() => {
-				if (this.countdown <= 0) {
-					if (this.#countdownTimer) {
-						clearInterval(this.#countdownTimer);
-						this.#countdownTimer = null;
-					}
-				} else {
-					this.countdown--;
-					this.msg = `Loaded. Now ${this.countdown}s sleep`;
-				}
-			}, 1000);
-
-			this.msg = `Loaded. Now ${SLEEP_SECS}s sleep`;
-			await new Promise(r => setTimeout(r, SLEEP_SECS * 1000));
 		}
 
 		this.fetchingStash = false;
 		this.msg = '';
+	}
+
+	async #loadSample(id: string, name: string, league: League): Promise<DivinationCardsSample> {
+		if (!this.stashLoader) {
+			throw new Error('No stash loader');
+		}
+
+		this.msg = '';
+
+		const sample = await this.stashLoader.sampleFromTab(id, league);
+		this.selectedTabs.delete(id);
+		this.selectedTabs = new Map(this.selectedTabs);
+
+		this.stashLoadsAvailable--;
+		setTimeout(() => {
+			this.stashLoadsAvailable++;
+		}, SECS_300);
+
+		this.availableInTenSeconds--;
+		setTimeout(() => {
+			this.availableInTenSeconds++;
+		}, SECS_10);
+
+		return sample;
+	}
+
+	async #handleLoadTabError(err: unknown): Promise<void> {
+		if (typeof err === 'object' && err !== null && 'message' in err) {
+			if (typeof err.message === 'string') {
+				this.msg = err.message;
+			}
+		}
+		this.fetchingStash = false;
+		this.selectedTabs = new Map();
+		throw err;
 	}
 }
 
