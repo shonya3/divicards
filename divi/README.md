@@ -57,7 +57,6 @@ fn main() -> Result<(), divi::error::Error> {
    let sample = DivinationCardsSample::create(SampleData::Csv(String::from(csv)), None)?;
    let sample = sample.into_not_nullish();
    println!("cards len: {}", sample.cards.len()); // 2
-   println!("{}", sample.csv);
 
    //name,amount,price,sum,weight
    //Rain of Chaos,30,,0.0,121465.99
