@@ -114,7 +114,11 @@ impl DivinationCardsSample {
     pub fn print_not_nullish(&self) {
         let sample = self.to_owned();
         let not_nullish = NotNullishSample::from(sample);
-        println!("{:?}", not_nullish);
+        println!("{}", not_nullish.csv);
+    }
+
+    pub fn into_not_nullish(self) -> NotNullishSample {
+        self.into()
     }
 
     /// Consumes Prices structure to set prices for Cards
@@ -338,11 +342,11 @@ Encroaching Darkness,5\r\nThe Endless Darkness,1\r\nThe Endurance,19\r\nThe Enfo
 
 #[derive(Debug, Serialize, Deserialize, Clone, Default, PartialEq)]
 #[serde(rename_all = "camelCase")]
-struct NotNullishSample {
-    cards: Vec<DivinationCardRecord>,
-    not_cards: Vec<String>,
-    fixed_names: Vec<FixedCardName>,
-    csv: String,
+pub struct NotNullishSample {
+    pub cards: Vec<DivinationCardRecord>,
+    pub not_cards: Vec<String>,
+    pub fixed_names: Vec<FixedCardName>,
+    pub csv: String,
 }
 
 impl From<DivinationCardsSample> for NotNullishSample {
