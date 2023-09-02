@@ -73,6 +73,7 @@ export class StashesViewElement extends BaseElement {
 		if (map.has('league')) {
 			this.stashes = [];
 			this.msg = '';
+			this.selectedTabs = new Map();
 		}
 	}
 
