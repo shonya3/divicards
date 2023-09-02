@@ -32,3 +32,5 @@ async fn main() -> Result<(), divi::error::Error> {
     Ok(())
 }
 ```
+
+Card records in [`DivinationCardsSample`] are stored inside [`Cards`] struct that provides strong types guarantees.
