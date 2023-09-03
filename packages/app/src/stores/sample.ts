@@ -81,8 +81,16 @@ export const useSampleStore = defineStore('sampleCards', {
 			this.sampleCards.push(sampleCard);
 		},
 
-		async mergeSelected() {
-			const sample = await command('merge', { samples: this.selectedSamples });
+		async mergeSelected(): Promise<void> {
+			this.merge(this.selectedSamples);
+		},
+
+		async mergeAll(): Promise<void> {
+			this.merge(this.samples);
+		},
+
+		async merge(samples: DivinationCardsSample[]): Promise<void> {
+			const sample = await command('merge', { samples });
 			const merged = createSampleCardFromSample('merged.csv', sample, ACTIVE_LEAGUE);
 
 			// No point to select merged file, `null` makes it nonselectable by removing checkbox
@@ -91,21 +99,13 @@ export const useSampleStore = defineStore('sampleCards', {
 			this.merged = merged;
 		},
 
-		async mergeAll() {
-			const sample = await command('merge', { samples: this.samples });
-			const merged = createSampleCardFromSample('merged.csv', sample, ACTIVE_LEAGUE);
-
-			merged.selected = null;
-			this.merged = merged;
-		},
-
-		downloadAll() {
+		downloadAll(): void {
 			for (const file of this.sampleCards) {
 				downloadText(file.filename, file.sample.csv);
 			}
 		},
 
-		deleteMerged() {
+		deleteMerged(): void {
 			this.merged = null;
 		},
 
@@ -122,17 +122,17 @@ export const useSampleStore = defineStore('sampleCards', {
 			this.addCard(file.name, text, ACTIVE_LEAGUE);
 		},
 
-		async addFromDragAndDrop(e: DragEvent) {
+		async addFromDragAndDrop(e: DragEvent): Promise<PromiseSettledResult<void>[]> {
 			return Promise.allSettled(Array.from(e.dataTransfer?.files ?? []).map(f => this.addFromFile(f)));
 		},
 
-		async addSample(name: string, sample: DivinationCardsSample, league: League) {
+		async addSample(name: string, sample: DivinationCardsSample, league: League): Promise<void> {
 			console.log(sample);
 			const sampleCard = createSampleCardFromSample(name, sample, isTradeLeague(league) ? league : ACTIVE_LEAGUE);
 			this.sampleCards.push(sampleCard);
 		},
 
-		async replaceFileCard(league: League, oldSampleCard: FileCardProps) {
+		async replaceFileCard(league: League, oldSampleCard: FileCardProps): Promise<void> {
 			if (!isTradeLeague(league)) return;
 
 			const index = this.sampleCards.findIndex(c => c.uuid === oldSampleCard.uuid);
@@ -140,7 +140,7 @@ export const useSampleStore = defineStore('sampleCards', {
 			this.sampleCards[index] = await createSampleCard(oldSampleCard.filename, oldSampleCard.sample.csv, league);
 		},
 
-		async replaceMerged(league: League) {
+		async replaceMerged(league: League): Promise<void> {
 			if (this.merged && isTradeLeague(league)) {
 				this.merged = await createSampleCard(this.merged.filename, this.merged.sample.csv, league);
 			}
