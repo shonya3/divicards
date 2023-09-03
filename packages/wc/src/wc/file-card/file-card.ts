@@ -5,6 +5,7 @@ import { DivTableElement } from '../div-table/div-table';
 import { BasePopupElement } from '../base-popup';
 import { FixedNamesElement } from './fixed-names/fixed-names';
 import { NotCardsElement } from './not-cards/not-cards';
+import { IconButtonElement } from '../icon-button/icon-button';
 import { DivinationCardsSample, League, TradeLeague, isTradeLeague } from '@divicards/shared/types';
 import { property, query } from 'lit/decorators.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
@@ -35,7 +36,14 @@ export interface Events {
 
 export class FileCardElement extends BaseElement {
 	static override get defineList() {
-		return [LeagueSelectElement, DivTableElement, BasePopupElement, FixedNamesElement, NotCardsElement];
+		return [
+			LeagueSelectElement,
+			DivTableElement,
+			BasePopupElement,
+			FixedNamesElement,
+			NotCardsElement,
+			IconButtonElement,
+		];
 	}
 	static override tag = 'wc-file-card';
 
@@ -112,7 +120,10 @@ export class FileCardElement extends BaseElement {
 			})}
 		>
 			<p class="filename">${this.filename}</p>
-			<button @click=${this.#onBtnDeleteClicked} id="btn-delete" class="btn-delete">X</button>
+
+			<wc-icon-button @click=${this.#onBtnDeleteClicked} id="btn-delete" class="btn-delete " name="close"
+				>Here</wc-icon-button
+			>
 			${this.chunk()}
 		</div>`;
 	}
@@ -190,6 +201,7 @@ export class FileCardElement extends BaseElement {
 
 	static override styles = [
 		this.baseStyles,
+		iconButtonStyles(),
 		css`
 			.league {
 				display: flex;
@@ -305,4 +317,60 @@ export class FileCardElement extends BaseElement {
 			}
 		`,
 	];
+}
+
+function iconButtonStyles() {
+	return css`
+		.icon-button {
+			/* Focus rings */
+			--sl-focus-ring-color: rgb(105, 208, 255);
+			--sl-focus-ring-style: solid;
+			--sl-focus-ring-width: 3px;
+			--sl-focus-ring: var(--sl-focus-ring-style) var(--sl-focus-ring-width) var(--sl-focus-ring-color);
+			--sl-focus-ring-offset: 1px;
+
+			display: inline-block;
+			color: rgb(142, 142, 154);
+
+			flex: 0 0 auto;
+			display: flex;
+			align-items: center;
+			background: none;
+			border: none;
+			border-radius: var(--sl-border-radius-medium);
+			font-size: inherit;
+			color: inherit;
+			padding: var(--sl-spacing-x-small);
+			cursor: pointer;
+			transition: var(--sl-transition-x-fast) color;
+			-webkit-appearance: none;
+		}
+
+		.icon-button:hover:not(.icon-button--disabled),
+		.icon-button:focus-visible:not(.icon-button--disabled) {
+			color: rgb(39, 186, 253);
+		}
+
+		.icon-button:active:not(.icon-button--disabled) {
+			color: rgb(105, 208, 255);
+		}
+
+		.icon-button:focus {
+			outline: none;
+		}
+
+		.icon-button--disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
+
+		.icon-button:focus-visible {
+			outline: var(--sl-focus-ring);
+			outline-offset: var(--sl-focus-ring-offset);
+		}
+
+		.icon-button__icon {
+			pointer-events: none;
+		}
+	`;
 }
