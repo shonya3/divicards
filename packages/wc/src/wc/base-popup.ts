@@ -32,21 +32,6 @@ export class BasePopupElement extends BaseElement {
 	hide() {
 		return this.dialog.close();
 	}
-
-	connectedCallback(): void {
-		super.connectedCallback();
-	}
-
-	disconnectedCallback(): void {
-		super.disconnectedCallback();
-	}
-
-	#onEscapePressed(e: KeyboardEvent) {
-		if (e.code === 'Escape') {
-			console.log(this);
-			this.hide();
-		}
-	}
 }
 
 function styles() {
