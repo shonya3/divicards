@@ -57,6 +57,32 @@ const openStashWindow = async () => {
 		</div>
 
 		<Transition>
+			<SampleCard
+				v-if="sampleStore.merged"
+				v-bind="sampleStore.merged"
+				@delete="sampleStore.deleteMerged"
+				@update:minimumCardPrice="price => sampleStore.merged && (sampleStore.merged.minimumCardPrice = price)"
+				@update:league="sampleStore.replaceMerged"
+			/>
+		</Transition>
+
+		<div v-if="sampleStore.sampleCards.length > 0">
+			<h2>Select files you want to merge</h2>
+			<button class="btn" @click="sampleStore.downloadAll">Download All</button>
+			<button :disabled="sampleStore.samples.length < 2" class="btn" @click="sampleStore.mergeAll">
+				Merge All
+			</button>
+			<button
+				:disabled="sampleStore.selectedSampleCards.length < 2"
+				class="btn"
+				@click="sampleStore.mergeSelected"
+			>
+				Merge selected
+			</button>
+			<button class="btn" @click="sampleStore.deleteAllFiles">Remove samples</button>
+		</div>
+
+		<Transition>
 			<div ref="filesTemplateRef" class="samples" v-show="sampleStore.sampleCards.length">
 				<SampleCard
 					v-for="fileCard in sampleStore.sampleCards"
@@ -67,24 +93,6 @@ const openStashWindow = async () => {
 					@update:league="league => sampleStore.replaceFileCard(league, fileCard)"
 				/>
 			</div>
-		</Transition>
-
-		<div v-if="sampleStore.sampleCards.length > 0">
-			<h2>Select files you want to merge</h2>
-			<button class="btn" @click="sampleStore.downloadAll">Download All</button>
-			<button :disabled="sampleStore.selectedSampleCards.length < 2" class="btn" @click="sampleStore.merge">
-				Merge samples
-			</button>
-			<button class="btn" @click="sampleStore.deleteAllFiles">Clear all</button>
-		</div>
-		<Transition>
-			<SampleCard
-				v-if="sampleStore.merged"
-				v-bind="sampleStore.merged"
-				@delete="sampleStore.deleteMerged"
-				@update:minimumCardPrice="price => sampleStore.merged && (sampleStore.merged.minimumCardPrice = price)"
-				@update:league="sampleStore.replaceMerged"
-			/>
 		</Transition>
 	</div>
 </template>

@@ -81,12 +81,20 @@ export const useSampleStore = defineStore('sampleCards', {
 			this.sampleCards.push(sampleCard);
 		},
 
-		async merge() {
+		async mergeSelected() {
 			const sample = await command('merge', { samples: this.selectedSamples });
-			const merged = await createSampleCard('merged.csv', sample.csv, ACTIVE_LEAGUE);
+			const merged = createSampleCardFromSample('merged.csv', sample, ACTIVE_LEAGUE);
 
 			// No point to select merged file, `null` makes it nonselectable by removing checkbox
 			// maybe should refactor later
+			merged.selected = null;
+			this.merged = merged;
+		},
+
+		async mergeAll() {
+			const sample = await command('merge', { samples: this.samples });
+			const merged = createSampleCardFromSample('merged.csv', sample, ACTIVE_LEAGUE);
+
 			merged.selected = null;
 			this.merged = merged;
 		},
