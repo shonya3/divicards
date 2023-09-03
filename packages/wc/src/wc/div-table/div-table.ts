@@ -20,7 +20,9 @@ export interface Events {
 }
 
 export class DivTableElement extends BaseElement {
-	static defineList = [OrderTriangleElement];
+	static override get defineList() {
+		return [OrderTriangleElement];
+	}
 	static override tag = 'wc-div-table';
 	static override styles = [this.baseStyles, styles()];
 

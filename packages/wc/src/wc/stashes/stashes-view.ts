@@ -48,7 +48,9 @@ export interface StashesViewProps {
 }
 
 export class StashesViewElement extends BaseElement {
-	static override defineList = [HelpTipElement, LeagueSelectElement, TabBadgeElement, TabBadgeGroupElement];
+	static override get defineList() {
+		return [HelpTipElement, LeagueSelectElement, TabBadgeElement, TabBadgeGroupElement];
+	}
 	static override tag = 'wc-stashes-view';
 	static override styles = [this.baseStyles, styles()];
 

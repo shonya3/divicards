@@ -12,7 +12,9 @@ declare global {
 }
 
 export class FixedNamesElement extends BaseElement {
-	static override defineList = [BasePopupElement, FixedIconElement];
+	static override get defineList() {
+		return [BasePopupElement, FixedIconElement];
+	}
 	static override tag = 'wc-fixed-names';
 	static override styles = [
 		this.baseStyles,

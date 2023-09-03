@@ -34,13 +34,9 @@ export interface Events {
 }
 
 export class FileCardElement extends BaseElement {
-	static override defineList = [
-		LeagueSelectElement,
-		DivTableElement,
-		BasePopupElement,
-		FixedNamesElement,
-		NotCardsElement,
-	];
+	static override get defineList() {
+		return [LeagueSelectElement, DivTableElement, BasePopupElement, FixedNamesElement, NotCardsElement];
+	}
 	static override tag = 'wc-file-card';
 
 	@property({ reflect: true }) league: TradeLeague = ACTIVE_LEAGUE;

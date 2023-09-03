@@ -10,7 +10,9 @@ declare global {
 }
 
 export class NotCardsElement extends BaseElement {
-	static override defineList = [BasePopupElement];
+	static override get defineList() {
+		return [BasePopupElement];
+	}
 	static override tag = 'wc-not-cards';
 	static override styles = [this.baseStyles, styles()];
 

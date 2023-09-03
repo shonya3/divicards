@@ -26,7 +26,9 @@ const styles = css`
  * @summary Message to drop files for main app screen
  */
 export class DropFilesMessageElement extends BaseElement {
-	static override defineList = [HelpTipElement];
+	static override get defineList() {
+		return [HelpTipElement];
+	}
 	static override tag: string = 'wc-drop-files-message';
 	static override styles = [this.baseStyles, styles];
 	protected override render() {
