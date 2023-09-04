@@ -20,6 +20,7 @@ pub enum StashType {
     Other,
 }
 
+/// Any item from stash tab
 #[derive(Serialize, Deserialize, Clone, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct Item {
@@ -27,9 +28,11 @@ pub struct Item {
     pub stack_size: Option<u32>,
 }
 
+/// Tab from /stashes poe api route, contains only metadata and not items
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct TabNoItems {}
 
+/// Tab from /stash poe api route, contains items field
 #[derive(Serialize, Deserialize, Clone, Debug, Default)]
 pub struct TabWithItems {
     pub items: Option<Vec<Item>>,
