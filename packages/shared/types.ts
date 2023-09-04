@@ -41,3 +41,10 @@ export interface FixedName {
 }
 
 export type CardNameAmount = Pick<DivinationCardRecord, 'name' | 'amount'>;
+export interface GoogleIdentity {
+	name: string;
+	id: string;
+	picture: string | null;
+	locale: string | null;
+	given_name: string;
+}

@@ -6,7 +6,7 @@
 use std::collections::HashMap;
 use tokio::sync::Mutex;
 
-use lib::{commands, paths, poe, prices::AppCardPrices, version::AppVersion};
+use lib::{commands, google, paths, poe, prices::AppCardPrices, version::AppVersion};
 use tauri::Manager;
 
 #[tokio::main]
@@ -36,7 +36,10 @@ async fn main() {
             poe::auth::poe_auth,
             poe::auth::poe_logout,
             poe::stash::stashes,
-            poe::stash::sample_from_tab
+            poe::stash::sample_from_tab,
+            google::auth::google_auth,
+            google::auth::google_logout,
+            google::auth::google_identity
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

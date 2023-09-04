@@ -10,12 +10,16 @@ import StashesView from './components/StashesView.vue';
 import { DropFilesMessageElement } from '@divicards/wc/src/wc/drop-files-message';
 import { PoeAuthElement } from '@divicards/wc/src/wc/poe-auth';
 import { StashLoader } from './StashLoader';
+import { useGoogleAuthStore } from './stores/googleAuth';
 DropFilesMessageElement.define();
 PoeAuthElement.define();
 const stashLoader = new StashLoader();
 
 const sampleStore = useSampleStore();
 const authStore = useAuthStore();
+const googleAuthStore = useGoogleAuthStore();
+
+googleAuthStore.login();
 
 const stashVisible = ref(false);
 const samplesContainerRef = ref<HTMLElement | null>(null);

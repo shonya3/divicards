@@ -1,10 +1,14 @@
 import { invoke } from '@tauri-apps/api';
-import { DivinationCardsSample, League, CardNameAmount, TradeLeague } from '@divicards/shared/types';
+import { DivinationCardsSample, League, CardNameAmount, TradeLeague, GoogleIdentity } from '@divicards/shared/types';
 import { NoItemsTab } from '@divicards/shared/poe.types';
 
 export type SampleData = string | CardNameAmount[];
 
 export interface Commands {
+	google_logout: () => void;
+	google_identity: () => GoogleIdentity;
+	google_auth: () => void;
+	old_google_auth: () => void;
 	sample: (args: { data: SampleData; league: TradeLeague | null }) => DivinationCardsSample;
 	merge: (args: { samples: DivinationCardsSample[] }) => DivinationCardsSample;
 	open_url: (args: { url: string }) => void;
