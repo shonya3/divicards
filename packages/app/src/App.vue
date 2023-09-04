@@ -66,7 +66,7 @@ const openStashWindow = async () => {
 			/>
 		</Transition>
 
-		<div v-if="sampleStore.sampleCards.length > 0">
+		<div v-if="sampleStore.sampleCards.length >= 2">
 			<h2>Select files you want to merge</h2>
 			<button class="btn" @click="sampleStore.downloadAll">Download All</button>
 			<button :disabled="sampleStore.samples.length < 2" class="btn" @click="sampleStore.mergeAll">
