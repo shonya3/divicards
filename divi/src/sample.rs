@@ -176,12 +176,9 @@ impl DivinationCardsSample {
     /// The part of parsing data process. Extracts  amount from individual name-amount source. If name is not card, tries to fix the name
     /// and pushes to fixed_names or to not_cards if fails.
     fn extract_amount(&mut self, source: CardNameAmount) {
-        if source.name.as_str().is_card() {
-            self.cards
-                .get_card_mut(&source.name)
-                .add_amount(source.amount);
-        } else {
-            match fix_name(&source.name) {
+        match self.cards.get_mut(&source.name) {
+            Some(card) => card.add_amount(source.amount),
+            None => match fix_name(&source.name) {
                 Some(fixed) => {
                     self.fixed_names.push(FixedCardName {
                         old: source.name.clone(),
@@ -190,7 +187,7 @@ impl DivinationCardsSample {
                     self.cards.get_card_mut(&fixed).add_amount(source.amount);
                 }
                 None => self.not_cards.push(source.name),
-            }
+            },
         }
     }
 

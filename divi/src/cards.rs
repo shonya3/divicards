@@ -46,7 +46,7 @@ impl Cards {
         self.0.iter_mut()
     }
 
-    pub fn into_iter(self) -> IntoIter<DivinationCardRecord, 440> {
+    pub fn into_iter(self) -> IntoIter<DivinationCardRecord, CARDS_N> {
         self.0.into_iter()
     }
 
