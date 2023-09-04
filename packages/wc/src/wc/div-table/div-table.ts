@@ -218,6 +218,11 @@ export class DivTableElement extends BaseElement {
 				</th>
 				<th>
 					<span class="column-name"> Weight </span>
+					<wc-order-triangle
+						?active=${this.column === 'weight'}
+						order=${this.column === 'weight' ? this.order : 'unordered'}
+						@click=${() => this.#onOrderTriangleClicked('weight')}
+					></wc-order-triangle>
 				</th>
 			</tr>
 		</thead>`;

@@ -33,6 +33,14 @@ export const byName = (order: Order, cards: readonly DivinationCardRecord[]) => 
 	});
 };
 
+export const byWeight = (order: Order, cards: readonly DivinationCardRecord[]) => {
+	return Array.from(cards).sort((a, b) => {
+		if (order === 'asc') return (a.weight ?? 0) - (b.weight ?? 0);
+		if (order === 'desc') return (b.weight ?? 0) - (a.weight ?? 0);
+		throw new Error('invalid order');
+	});
+};
+
 export const toOrderedBy = (
 	cards: readonly DivinationCardRecord[],
 	column: Column,
@@ -48,6 +56,8 @@ export const toOrderedBy = (
 			return byAmount(order, cards);
 		case 'sum':
 			return bySum(order, cards);
+		case 'weight':
+			return byWeight(order, cards);
 		default:
 			throw new Error('Invalid column name');
 	}
