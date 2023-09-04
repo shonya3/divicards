@@ -11,8 +11,10 @@ import { DropFilesMessageElement } from '@divicards/wc/src/wc/drop-files-message
 import { PoeAuthElement } from '@divicards/wc/src/wc/poe-auth';
 import { StashLoader } from './StashLoader';
 import { useGoogleAuthStore } from './stores/googleAuth';
+import { GoogleAuthElement } from '../../wc/src/wc/google-auth/poe-auth';
 DropFilesMessageElement.define();
 PoeAuthElement.define();
+GoogleAuthElement.define();
 const stashLoader = new StashLoader();
 
 const sampleStore = useSampleStore();
@@ -44,6 +46,13 @@ const openStashWindow = async () => {
 		<header class="header">
 			<wc-drop-files-message></wc-drop-files-message>
 			<button @click="openStashWindow()">Load from stash</button>
+			<wc-google-auth
+				@login="googleAuthStore.login"
+				@logout="googleAuthStore.logout"
+				:name="googleAuthStore.name"
+				:picture="googleAuthStore.picture"
+				:loggedIn="googleAuthStore.loggedIn"
+			></wc-google-auth>
 			<wc-poe-auth
 				@login="authStore.login"
 				@logout="authStore.logout"

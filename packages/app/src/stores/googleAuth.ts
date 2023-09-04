@@ -155,11 +155,8 @@ export const useGoogleAuthStore = defineStore('google-auth', {
 				await command('google_auth');
 				const identity = await command('google_identity');
 				console.log(identity);
-				// this.name = identity.given_name;
-				// this.picture = identity.picture ?? '';
-
-				// console.log('HERE');
-				// console.log({ name: this.name, picture: this.picture });
+				this.name = identity.given_name;
+				this.picture = identity.picture ?? '';
 
 				setExpiration(EXPIRES_IN_MILLIS);
 			} finally {

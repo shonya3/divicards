@@ -9,7 +9,6 @@ use oauth2::{
     PkceCodeChallenge, RedirectUrl, Scope, TokenUrl,
 };
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
 use tauri::{command, State, Window};
 use tokio::sync::mpsc;
 use tracing::debug;

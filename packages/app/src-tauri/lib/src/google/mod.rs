@@ -3,7 +3,7 @@ pub mod auth;
 use keyring::Entry;
 use serde::{Deserialize, Serialize};
 
-const PROVIDER_LABEL: &'static str = "google";
+// const PROVIDER_LABEL: &'static str = "google";
 const CLIENT_ID: &'static str =
     "752206000922-1gpkcoplrjqpfgg8pr4sb4tnrlvauomp.apps.googleusercontent.com";
 const AUTH_URL: &'static str = "https://accounts.google.com/o/oauth2/auth";
