@@ -27,19 +27,17 @@ impl DivinationCardRecord {
         }
     }
 
-    pub fn sum(&self) -> Option<f32> {
-        Some(self.price.unwrap_or_default() * self.amount as f32)
-    }
-
-    pub fn set_amount_and_sum(&mut self, amount: u32) -> &mut Self {
+    pub fn set_amount(&mut self, amount: u32) {
         self.amount = amount;
-        self.sum = self.sum();
-        self
+        self.sum = Some(self.amount as f32 * self.price.unwrap_or_default())
     }
 
-    pub fn set_weight(&mut self, weight_multiplier: f32) -> &mut Self {
+    pub fn add_amount(&mut self, amount: u32) {
+        self.set_amount(self.amount + amount);
+    }
+
+    pub fn set_weight(&mut self, weight_multiplier: f32) {
         self.weight = Some((weight_multiplier * self.amount as f32).powf(1.0 / CONDENSE_FACTOR));
-        self
     }
 }
 

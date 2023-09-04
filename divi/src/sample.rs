@@ -104,7 +104,7 @@ impl DivinationCardsSample {
                 .iter()
                 .map(|sample| sample.cards.get_card(&card.name).amount)
                 .sum::<u32>();
-            card.set_amount_and_sum(amount);
+            card.set_amount(amount);
         }
 
         merged.get_sample_ready();
@@ -177,8 +177,9 @@ impl DivinationCardsSample {
     /// and pushes to fixed_names or to not_cards if fails.
     fn extract_amount(&mut self, source: CardNameAmount) {
         if source.name.as_str().is_card() {
-            let mut_card = self.cards.get_card_mut(&source.name);
-            mut_card.set_amount_and_sum(mut_card.amount + source.amount);
+            self.cards
+                .get_card_mut(&source.name)
+                .add_amount(source.amount);
         } else {
             match fix_name(&source.name) {
                 Some(fixed) => {
@@ -186,8 +187,7 @@ impl DivinationCardsSample {
                         old: source.name.clone(),
                         fixed: fixed.clone(),
                     });
-                    let mut_card = self.cards.get_card_mut(&fixed);
-                    mut_card.set_amount_and_sum(mut_card.amount + source.amount);
+                    self.cards.get_card_mut(&fixed).add_amount(source.amount);
                 }
                 None => self.not_cards.push(source.name),
             }
