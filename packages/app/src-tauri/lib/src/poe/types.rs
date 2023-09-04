@@ -39,7 +39,9 @@ pub struct TabWithItems {
 
 impl IsCard for Item {
     fn is_card(&self) -> bool {
-        CARDS.contains(&self.base_type.as_str())
+        let name = self.base_type.as_str();
+        // Fire of Unknown Origin casing bug https://www.pathofexile.com/forum/view-thread/3411333
+        name == "Fire Of Unknown Origin" || CARDS.contains(&name)
     }
 
     fn is_legacy_card(&self) -> bool {
@@ -53,7 +55,7 @@ impl From<TabWithItems> for SampleData {
             .items
             .unwrap_or_default()
             .into_iter()
-            .filter(|item| item.is_card() || item.base_type == "Fire Of Unknown Origin")
+            .filter(|item| item.is_card())
             .map(|item| CardNameAmount {
                 name: item.base_type,
                 amount: item.stack_size.unwrap_or_default(),
