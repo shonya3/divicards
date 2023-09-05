@@ -3,7 +3,7 @@ import { command } from '../command';
 import { ref, watch, Ref, computed } from 'vue';
 import { addRustListener } from '../event';
 
-const ONE_HOUR_IN_MILLIS = 10 * 3600 * 1000;
+const ONE_HOUR_IN_MILLIS = 3600 * 1000;
 const EXPIRES_IN_MILLIS = ONE_HOUR_IN_MILLIS;
 
 const useName = () => {
@@ -172,5 +172,3 @@ export const useGoogleAuthStore = defineStore('google-auth', {
 		},
 	},
 });
-
-// const pic = 'https://lh3.googleusercontent.com/a/AAcHTtfIyfX3RQ7ek05hfrfIRdtJQ0RbGPBDr1MxCVMA2RGCaQ=s96-c
