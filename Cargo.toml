@@ -2,5 +2,6 @@
 members = [
     "packages/app/src-tauri",
     "divi",
+    "googlesheets",
     "divi/examples/*"
 ]
