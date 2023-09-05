@@ -1,7 +1,8 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, fmt::Display};
 
 use csv::{ReaderBuilder, Trim};
 use serde::{Deserialize, Serialize};
+use serde_json::Value;
 
 use crate::{
     card_record::DivinationCardRecord,
@@ -11,6 +12,7 @@ use crate::{
     prices::Prices,
     IsCard,
 };
+use googlesheets::Values;
 
 #[derive(Debug, Serialize, Deserialize, Clone, Default, PartialEq)]
 #[serde(rename_all = "camelCase")]
@@ -226,6 +228,56 @@ impl DivinationCardsSample {
             .expect("Error");
         self
     }
+
+    pub fn into_values(self, columns: &[Column]) -> Values {
+        let mut values = Values::new(vec![]);
+        let headers: Vec<Value> = columns
+            .into_iter()
+            .map(|c| Value::String(c.to_string()))
+            .collect();
+        values.0.push(headers);
+        for card in self.cards.iter() {
+            let mut vec: Vec<Value> = vec![];
+            for column in columns {
+                let value = match column {
+                    Column::Name => Value::String(card.name.to_string()),
+                    Column::Amount => Value::Number(card.amount.into()),
+                    Column::Weight => match card.weight {
+                        Some(w) => Value::Number((w as u32).into()),
+                        None => Value::Null,
+                    },
+                    Column::Price => match card.price {
+                        Some(p) => Value::Number((p as u32).into()),
+                        None => Value::Null,
+                    },
+                };
+                vec.push(value);
+            }
+            values.0.push(vec);
+        }
+
+        self.cards.into_iter().for_each(|card| {
+            let mut vec: Vec<Value> = vec![];
+            for column in columns {
+                let value = match column {
+                    Column::Name => Value::String(card.name.to_string()),
+                    Column::Amount => Value::Number(card.amount.into()),
+                    Column::Weight => match card.weight {
+                        Some(w) => Value::Number((w as u32).into()),
+                        None => Value::Null,
+                    },
+                    Column::Price => match card.price {
+                        Some(p) => Value::Number((p as u32).into()),
+                        None => Value::Null,
+                    },
+                };
+                vec.push(value);
+            }
+            values.0.push(vec);
+        });
+
+        values
+    }
 }
 
 pub fn fix_name(name: &str) -> Option<String> {
@@ -297,6 +349,25 @@ impl CardNameAmount {
 pub enum SampleData {
     Csv(String),
     CardNameAmountList(Vec<CardNameAmount>),
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum Column {
+    Name,
+    Amount,
+    Weight,
+    Price,
+}
+
+impl Display for Column {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Column::Name => write!(f, "name"),
+            Column::Amount => write!(f, "amount"),
+            Column::Weight => write!(f, "weight"),
+            Column::Price => write!(f, "price"),
+        }
+    }
 }
 
 #[cfg(test)]
