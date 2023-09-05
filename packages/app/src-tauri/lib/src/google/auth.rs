@@ -56,6 +56,9 @@ pub async fn google_auth(version: State<'_, AppVersion>, window: Window) -> Resu
     let (auth_url, csrf_token) = client
         .authorize_url(CsrfToken::new_random)
         .add_scope(Scope::new("profile".to_string()))
+        .add_scope(Scope::new(
+            "https://www.googleapis.com/auth/spreadsheets".to_string(),
+        ))
         // .add_scope(Scope::new("account:stashes".to_string()))
         .set_pkce_challenge(pkce_challenge)
         .url();
@@ -170,6 +173,7 @@ async fn fetch_token(
         .append_pair("redirect_uri", redirect_uri)
         // .append_pair("scope", "account:stashes")
         .append_pair("code_verifier", pkce_verifier)
+        .append_pair("scope", "https://www.googleapis.com/auth/spreadsheets")
         .finish();
 
     dbg!(&payload);

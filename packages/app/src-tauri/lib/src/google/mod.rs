@@ -20,7 +20,7 @@ impl AccessTokenStorage {
 
 impl Default for AccessTokenStorage {
     fn default() -> Self {
-        AccessTokenStorage(Entry::new("divicards", Self::KEY_NAME).unwrap())
+        AccessTokenStorage(Entry::new("divicards", "google_access_token").unwrap())
     }
 }
 

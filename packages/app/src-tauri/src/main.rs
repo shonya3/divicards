@@ -39,7 +39,7 @@ async fn main() {
             poe::stash::sample_from_tab,
             google::auth::google_auth,
             google::auth::google_logout,
-            google::auth::google_identity
+            google::auth::google_identity,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
