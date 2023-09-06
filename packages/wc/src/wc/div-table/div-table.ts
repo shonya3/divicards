@@ -2,9 +2,9 @@ import { html, css, PropertyValues } from 'lit';
 import { BaseElement } from '../base-element';
 import { property, state, query } from 'lit/decorators.js';
 import { OrderTriangleElement } from '../order-triangle';
-import { toOrderedBy } from './toOrderedBy';
-import { Column } from './types';
-import { DivinationCardRecord, Order } from '@divicards/shared/types';
+import { toOrderedBy } from '@divicards/shared/toOrderedBy';
+
+import { Column, DivinationCardRecord, Order } from '@divicards/shared/types';
 
 declare global {
 	interface HTMLElementTagNameMap {

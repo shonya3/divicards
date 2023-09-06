@@ -17,7 +17,7 @@ export class GoogleAuthElement extends BaseElement {
 	@property({ type: Boolean, reflect: true }) loggedIn: boolean = false;
 	protected override render() {
 		const logoutButton = html`<button @click=${this.#emitLogout}>Logout</button>`;
-		const loginButton = html`<button @click=${this.#emitLogin}>Login</button>`;
+		const loginButton = html`<button @click=${this.#emitLogin}>Login Sheets</button>`;
 
 		const template = this.loggedIn
 			? html`<div class="logged-in">

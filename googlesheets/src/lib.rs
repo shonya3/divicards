@@ -1,5 +1,4 @@
-use std::fmt::Display;
-
+use reqwest::Client;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
@@ -28,23 +27,33 @@ pub struct RangeRequestBody {
     pub values: Values,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub enum Column {
-    Name,
-    Amount,
-    Weight,
-    Price,
-}
+pub async fn create_sheet(
+    spreadsheet_id: String,
+    title: String,
+    access_token: String,
+) -> Result<Value, reqwest::Error> {
+    // let spredsheet_id = "1sDXpbG2bkqrOYScnvjMXTTg718dEc0LMDVHzllbAgmM";
+    let body = serde_json::to_string(&serde_json::json!({
+       "requests":[
+          {
+             "addSheet":{
+                "properties":{
+                   "title": title
+                }
+             }
 
-impl Display for Column {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Column::Name => write!(f, "name"),
-            Column::Amount => write!(f, "amount"),
-            Column::Weight => write!(f, "weight"),
-            Column::Price => write!(f, "price"),
-        }
-    }
-}
+          }
+       ]
+    }))
+    .unwrap();
+    let url = format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}:batchUpdate");
+    let response = Client::new()
+        .post(url)
+        .header("Authorization", format!("Bearer {}", { access_token }))
+        .body(body)
+        .send()
+        .await?;
+    let value: Value = response.json().await?;
 
-pub fn create_sheet(spreadsheet_id: String, sheet_name: String, values: Values) {}
+    Ok(value)
+}

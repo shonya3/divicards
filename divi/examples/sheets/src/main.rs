@@ -15,5 +15,21 @@ fn main() -> Result<(), divi::error::Error> {
     let json = serde_json::to_string(&values).unwrap();
     std::fs::write("values.json", json).unwrap();
 
+    let body = serde_json::to_string(&serde_json::json!({
+       "requests":[
+          {
+             "addSheet":{
+                "properties":{
+                   "sheetId":123456
+                }
+             }
+
+          }
+       ]
+    }))
+    .unwrap();
+
+    dbg!(body);
+
     Ok(())
 }

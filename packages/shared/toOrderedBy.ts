@@ -1,5 +1,4 @@
-import { DivinationCardRecord, Order } from '@divicards/shared/types';
-import { Column } from './types';
+import { DivinationCardRecord, Order } from './types';
 
 export const byPrice = (order: Order, cards: readonly DivinationCardRecord[]) => {
 	return Array.from(cards).sort((a, b) => {
@@ -43,7 +42,7 @@ export const byWeight = (order: Order, cards: readonly DivinationCardRecord[]) =
 
 export const toOrderedBy = (
 	cards: readonly DivinationCardRecord[],
-	column: Column,
+	column: 'price' | 'amount' | 'sum' | 'name' | 'weight',
 	order: Order
 ): DivinationCardRecord[] => {
 	if (order === 'unordered') return Array.from(cards);

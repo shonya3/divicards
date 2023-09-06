@@ -1,4 +1,5 @@
 pub mod auth;
+pub mod sheets;
 
 use keyring::Entry;
 use serde::{Deserialize, Serialize};

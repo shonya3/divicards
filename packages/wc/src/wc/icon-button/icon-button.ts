@@ -79,8 +79,6 @@ export class IconButtonElement extends BaseElement {
 	}
 
 	render() {
-		console.log(customElements.get('wc-icon-button'));
-		console.log('here');
 		/* eslint-disable lit/binding-positions, lit/no-invalid-html */
 		return html`
 			<button

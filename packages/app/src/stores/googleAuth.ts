@@ -36,6 +36,21 @@ const usePicture = () => {
 	return picture;
 };
 
+const useToken = () => {
+	const key = 'google-token';
+	const fromStorage = localStorage.getItem(key) ?? '';
+	const token = ref(fromStorage);
+
+	watch(
+		() => token.value,
+		token => {
+			localStorage.setItem(key, token);
+		}
+	);
+
+	return token;
+};
+
 export const useExpirationDate = (log = false) => {
 	const EXPIRATION_KEY = 'google-auth-expiration';
 	const item = localStorage.getItem(EXPIRATION_KEY);
@@ -108,12 +123,14 @@ const { expirationDate, loggedIn, setExpiration, timeLeft, log } = useExpiration
 
 export const useGoogleAuthStore = defineStore('google-auth', {
 	state: (): {
+		token: Ref<string>;
 		name: Ref<string>;
 		picture: Ref<string>;
 		expiration: Ref<Date | null>;
 		loggingIn: boolean;
 		auth_url: string | null;
 	} => ({
+		token: useToken(),
 		name: useName(),
 		picture: usePicture(),
 		expiration: expirationDate,
@@ -152,9 +169,8 @@ export const useGoogleAuthStore = defineStore('google-auth', {
 			});
 
 			try {
-				await command('google_auth');
+				this.token = await command('google_auth');
 				const identity = await command('google_identity');
-				console.log(identity);
 				this.name = identity.given_name;
 				this.picture = identity.picture ?? '';
 

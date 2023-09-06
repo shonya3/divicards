@@ -230,13 +230,19 @@ impl DivinationCardsSample {
     }
 
     pub fn into_values(self, columns: &[Column]) -> Values {
+        let mut sample = self;
+        sample
+            .cards
+            .0
+            .as_mut()
+            .sort_by(|a, b| b.amount.cmp(&a.amount));
         let mut values = Values::new(vec![]);
         let headers: Vec<Value> = columns
             .into_iter()
             .map(|c| Value::String(c.to_string()))
             .collect();
         values.0.push(headers);
-        for card in self.cards.iter() {
+        for card in sample.cards.iter() {
             let mut vec: Vec<Value> = vec![];
             for column in columns {
                 let value = match column {
@@ -256,7 +262,7 @@ impl DivinationCardsSample {
             values.0.push(vec);
         }
 
-        self.cards.into_iter().for_each(|card| {
+        sample.cards.into_iter().for_each(|card| {
             let mut vec: Vec<Value> = vec![];
             for column in columns {
                 let value = match column {

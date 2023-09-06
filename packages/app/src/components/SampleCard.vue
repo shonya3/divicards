@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { FileCardElement, FileCardProps, Events } from '@divicards/wc/src/wc/file-card/file-card';
+import { DivinationCardsSample } from '../../../shared/types';
 FileCardElement.define();
 const props = defineProps<FileCardProps>();
 const emit = defineEmits<{
@@ -7,6 +8,7 @@ const emit = defineEmits<{
 	'update:league': [FileCardElement['league']];
 	'update:minimumCardPrice': [FileCardElement['minimumCardPrice']];
 	delete: [FileCardElement['uuid']];
+	'google-sheets-clicked': [DivinationCardsSample];
 }>();
 
 const onUpdLeague = (e: CustomEvent<Events['upd:league']>) => {
@@ -24,11 +26,16 @@ const onUpdPrice = (e: CustomEvent<Events['upd:minimumCardPrice']>) => {
 const onDelete = (e: CustomEvent<Events['delete']>) => {
 	emit('delete', e.detail);
 };
+
+const onGoogleSheetsClicked = (e: CustomEvent<Events['google-sheets-clicked']>) => {
+	emit('google-sheets-clicked', e.detail);
+};
 </script>
 
 <template>
 	<wc-file-card
 		v-bind="props"
+		@google-sheets-clicked="onGoogleSheetsClicked"
 		@upd:league="onUpdLeague"
 		@upd:selected="onUpdSelected"
 		@upd:minimumCardPrice="onUpdPrice"

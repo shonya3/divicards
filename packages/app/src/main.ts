@@ -29,10 +29,3 @@ app.config.errorHandler = handleError;
 addRustListener('toast', e => {
 	toast(e.payload.variant, e.payload.message);
 });
-
-// await command('google_auth');
-// const r = await command('wip_identity');
-// console.log(r);
-
-const identity = await command('google_identity');
-console.log(identity);

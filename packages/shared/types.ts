@@ -1,4 +1,11 @@
 export type Order = 'asc' | 'desc' | 'unordered';
+export type Column = 'price' | 'amount' | 'sum' | 'name' | 'weight';
+export type TablePreferences = {
+	columns: Set<Column>;
+	orderedBy: Column;
+	order: Order;
+	cardsMustHaveAmount: boolean;
+};
 
 export const leagues = [
 	'Ancestor',

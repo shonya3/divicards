@@ -115,7 +115,7 @@ pub async fn google_auth(version: State<'_, AppVersion>, window: Window) -> Resu
             AccessTokenStorage::new()
                 .set(&token_data.access_token.secret())
                 .unwrap();
-            Ok(String::from("success"))
+            Ok(token_data.access_token.secret().to_owned())
 
             // Ok(username)
         }

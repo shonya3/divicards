@@ -7,21 +7,36 @@ import { useAutoAnimate } from './composables/useAutoAnimate';
 
 import SampleCard from './components/SampleCard.vue';
 import StashesView from './components/StashesView.vue';
+import ToGoogleSheets from './components/ToGoogleSheets.vue';
 import { DropFilesMessageElement } from '@divicards/wc/src/wc/drop-files-message';
 import { PoeAuthElement } from '@divicards/wc/src/wc/poe-auth';
 import { StashLoader } from './StashLoader';
 import { useGoogleAuthStore } from './stores/googleAuth';
 import { GoogleAuthElement } from '../../wc/src/wc/google-auth/poe-auth';
+import { command } from './command';
+import { SheetsApi, sampleIntoValues } from './sheets';
+import { BasePopupElement } from '../../wc/src/wc/base-popup';
+import { Props as SheetsProps } from '@divicards/wc/src/wc/to-google-sheets/to-google-sheets';
+import { DivinationCardsSample } from '../../shared/types';
+import { toast } from './toast';
+import { SheetsError } from './error';
+import { useSheets } from './composables/useSheets';
+BasePopupElement.define();
 DropFilesMessageElement.define();
 PoeAuthElement.define();
 GoogleAuthElement.define();
 const stashLoader = new StashLoader();
+const sheetsApi = new SheetsApi();
+
+const toSheetsSample = ref<DivinationCardsSample | null>(null);
+const sheetsError = ref<null | SheetsError>(null);
+const { spreadsheet, columns, order, orderedBy, cardsMustHaveAmount, sheetTitle } = useSheets();
+
+const sheetsPopupRef = ref<BasePopupElement | null>(null);
 
 const sampleStore = useSampleStore();
 const authStore = useAuthStore();
 const googleAuthStore = useGoogleAuthStore();
-
-googleAuthStore.login();
 
 const stashVisible = ref(false);
 const samplesContainerRef = ref<HTMLElement | null>(null);
@@ -33,6 +48,48 @@ const openStashWindow = async () => {
 	}
 
 	stashVisible.value = true;
+};
+
+const onGoogleSheetsClicked = (sample: DivinationCardsSample) => {
+	if (!sheetsPopupRef.value) return;
+	toSheetsSample.value = sample;
+	sheetsPopupRef.value.open();
+};
+
+const onSheetsSubmit = async ({
+	spreadsheetId,
+	sheetTitle,
+	order,
+	orderedBy,
+	columns,
+	cardsMustHaveAmount,
+}: SheetsProps) => {
+	if (!toSheetsSample.value) {
+		throw new Error('No sample to sheets');
+	}
+
+	if (!googleAuthStore.loggedIn) {
+		await googleAuthStore.login();
+	}
+
+	try {
+		const options = { cardsMustHaveAmount, order, orderedBy, columns };
+		console.log(options, toSheetsSample.value);
+
+		spreadsheet.value = spreadsheetId;
+
+		const newSheet = await sheetsApi.createSheet(spreadsheetId, sheetTitle, googleAuthStore.token);
+		const values = sampleIntoValues(toSheetsSample.value, options);
+		const result = await sheetsApi.writeValuesIntoSheet(spreadsheetId, sheetTitle, values, googleAuthStore.token);
+
+		toast('success', JSON.stringify(result));
+		sheetsPopupRef.value?.hide();
+		setTimeout(() => {
+			command('open_url', { url: sheetsApi.sheetUrl(spreadsheetId, newSheet.sheetId) });
+		}, 250);
+	} catch (err) {
+		sheetsError.value = err as SheetsError;
+	}
 };
 </script>
 
@@ -74,6 +131,7 @@ const openStashWindow = async () => {
 				v-if="sampleStore.merged"
 				v-bind="sampleStore.merged"
 				@delete="sampleStore.deleteMerged"
+				@google-sheets-clicked="onGoogleSheetsClicked(sampleStore.merged.sample)"
 				@update:minimumCardPrice="price => sampleStore.merged && (sampleStore.merged.minimumCardPrice = price)"
 				@update:league="sampleStore.replaceMerged"
 			/>
@@ -100,6 +158,7 @@ const openStashWindow = async () => {
 				<SampleCard
 					v-for="fileCard in sampleStore.sampleCards"
 					v-bind="fileCard"
+					@google-sheets-clicked="onGoogleSheetsClicked(fileCard.sample)"
 					@delete="sampleStore.deleteFile"
 					v-model:selected="fileCard.selected"
 					v-model:minimumCardPrice="fileCard.minimumCardPrice"
@@ -108,6 +167,19 @@ const openStashWindow = async () => {
 			</div>
 		</Transition>
 	</div>
+
+	<wc-base-popup ref="sheetsPopupRef">
+		<ToGoogleSheets
+			:error="sheetsError"
+			v-model:columns="columns"
+			v-model:order="order"
+			v-model:orderedBy="orderedBy"
+			v-model:cardsMustHaveAmount="cardsMustHaveAmount"
+			v-model:sheetTitle="sheetTitle"
+			:spreadsheet-id="spreadsheet"
+			@submit="onSheetsSubmit"
+		></ToGoogleSheets>
+	</wc-base-popup>
 </template>
 
 <style scoped>

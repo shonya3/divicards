@@ -20,6 +20,17 @@ export const isTauriError = (e: unknown): e is TauriError => {
 	return false;
 };
 
+export type SheetsError = {
+	error: { code: number; message: string; status: string };
+};
+
+export const isSheetsError = (e: unknown): e is SheetsError => {
+	if (typeof e === 'object' && e !== null && 'error' in e) {
+		return true;
+	}
+	return false;
+};
+
 export const handleError = (err: unknown) => {
 	if (isTauriError(err)) {
 		if (err.kind === 'authError') {
@@ -31,5 +42,9 @@ export const handleError = (err: unknown) => {
 		toast('danger', err);
 	} else if (err instanceof Error) {
 		toast('danger', err.message);
+	}
+
+	if (isSheetsError(err)) {
+		toast('warning', err.error.message);
 	}
 };

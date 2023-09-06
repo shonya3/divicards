@@ -3,11 +3,12 @@ import { DivinationCardsSample, League, CardNameAmount, TradeLeague, GoogleIdent
 import { NoItemsTab } from '@divicards/shared/poe.types';
 
 export type SampleData = string | CardNameAmount[];
+export type Values = Array<Array<string | number | null>>;
 
 export interface Commands {
 	google_logout: () => void;
 	google_identity: () => GoogleIdentity;
-	google_auth: () => void;
+	google_auth: () => string;
 	old_google_auth: () => void;
 	sample: (args: { data: SampleData; league: TradeLeague | null }) => DivinationCardsSample;
 	merge: (args: { samples: DivinationCardsSample[] }) => DivinationCardsSample;

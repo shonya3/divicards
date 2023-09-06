@@ -16,7 +16,7 @@ export class HelpTipElement extends BaseElement {
 	static override styles = [this.baseStyles, styles()];
 	override render() {
 		return html`<div class="help-tip">
-			<div class="tooltip">
+			<div part="tooltip" class="tooltip">
 				<slot> Your tip here </slot>
 			</div>
 		</div>`;
@@ -63,7 +63,6 @@ function styles() {
 			position: absolute;
 			border-radius: 3px;
 			box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-			right: -4px;
 			color: #fff;
 			font-size: 1rem;
 			line-height: 1.4;

@@ -53,6 +53,10 @@ impl Cards {
     pub fn into_not_nullish(self) -> Vec<DivinationCardRecord> {
         self.into_iter().filter(|card| card.amount > 0).collect()
     }
+
+    pub fn sort_by_amount(&mut self) {
+        self.0.as_mut().sort_by(|a, b| a.amount.cmp(&b.amount));
+    }
 }
 
 impl Default for Cards {
