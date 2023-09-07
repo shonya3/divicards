@@ -5,7 +5,7 @@ Desktop Application for Path of Exile divination cards
 ### Features
 
 -   Pulling your stash contents from GGG's API to create a list of divination cards you have in your tabs. You can select which tabs you want to export and can select several at once. This uses OAuth and does not rely on poesessid, login credentials, or any other information that could harm the user;
--   Export to google sheets
+-   Download the resulting spreadsheet locally or post it to Google Sheets with further formatting options
 -   Convert other table formats to the one used by Divicards. You can drag a file into it, and as long as it resembles a table with a list of names and amounts, it should work. It can auto-correct typos if the input table was created by hand and contains mistakes;
 -   Merge several tables into one;
 -   Automatically pull and calculate other useful information, such as prices according to the current poe.ninja rates, and weight estimates assuming you got the cards from stacked decks (it's difficult to get a large sample of generic cards from any other source);
