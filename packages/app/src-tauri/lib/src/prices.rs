@@ -70,7 +70,7 @@ impl AppCardPrices {
             return LeagueFileState::NoFile;
         }
 
-        let Ok(prices) =self.read_from_file(league) else {
+        let Ok(prices) = self.read_from_file(league) else {
             return LeagueFileState::Invalid;
         };
 

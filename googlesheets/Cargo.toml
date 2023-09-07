@@ -1,12 +1,12 @@
 [package]
 name = "googlesheets"
-version = "0.1.0"
-edition = "2021"
+version.workspace = true
+edition.workspace = true
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-reqwest = "0.11.20"
-serde = { version = "1.0.188", features = ["derive"] }
-serde_json = "1.0.105"
-tokio = { version = "1.32.0", features = ["full"] }
+reqwest.workspace = true
+serde_json.workspace = true
+tokio.workspace = true
+serde.workspace = true

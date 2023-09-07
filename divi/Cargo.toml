@@ -7,12 +7,13 @@ edition = "2021"
 
 [dependencies]
 googlesheets ={ path = "../googlesheets"}
+reqwest.workspace = true
+serde_json.workspace = true
+tracing.workspace = true
+tokio.workspace = true
+serde.workspace = true
+
 csv = "1.2.1"
-reqwest = "0.11.17"
-serde = { version = "1.0.160", features = ["derive"] }
 serde-big-array = "0.5.1"
-serde_json = "1.0.96"
 strsim = "0.10.0"
-tokio = { version = "1.28.0", features = ["full"] }
-tracing = "0.1.37"
 urlencoding = "2.1.2"
