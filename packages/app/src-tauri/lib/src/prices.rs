@@ -25,45 +25,30 @@ impl AppCardPrices {
     pub async fn get_price(&mut self, league: &TradeLeague, window: &Window) -> Prices {
         if let Some(prices) = self.prices_by_league.get(league) {
             return prices.to_owned();
-        } else {
-            match Prices::fetch(league).await {
-                Ok(prices) => {
-                    self.prices_by_league
-                        .insert(league.to_owned(), prices.clone());
+        }
 
-                    Event::Toast {
-                        variant: ToastVariant::Neutral,
-                        message: format!("Prices for {league} league have been updated"),
-                    }
-                    .emit(&window);
-
-                    prices
-                }
-                Err(err) => self.send_default_prices_with_toast_warning(
-                    &Error::DiviError(err),
-                    league,
-                    window,
-                ),
-            }
+        match self.read_file(league) {
+            LeagueFileState::UpToDate(prices) => prices,
+            LeagueFileState::StillUsable(prices, days_old) => self
+                .fetch_and_update(league, window)
+                .await
+                .unwrap_or_else(|_| {
+                       let message = format!("Prices are not up-to-date, but still usable({days_old:.1} days old). Unable to load new prices.");
+                        Event::Toast {
+                            variant: ToastVariant::Warning,
+                            message,
+                        }
+                        .emit(window);
+                        prices
+                }),
+            _ => self
+                .fetch_and_update(league, window)
+                .await
+                .unwrap_or_else(|err| {
+                    self.send_default_prices_with_toast_warning(&err, league, window)
+                }),
         }
     }
-
-    /// Crashes in pnpm tauri dev --release mode. Works in debug mode.
-    // pub async fn get_price(&mut self, league: &TradeLeague, window: &Window) -> Prices {
-    //     if let Some(prices) = self.prices_by_league.get(league) {
-    //         return prices.to_owned();
-    //     }
-
-    //     match self.read_file(league) {
-    //         LeagueFileState::UpToDate(prices) => prices,
-    //         _ => self
-    //             .fetch_and_update(league, window)
-    //             .await
-    //             .unwrap_or_else(|err| {
-    //                 self.send_default_prices_with_toast_warning(&err, league, window)
-    //             }),
-    //     }
-    // }
 
     pub fn read_file(&self, league: &TradeLeague) -> LeagueFileState {
         if !self.league_file_exists(league) {
@@ -226,154 +211,3 @@ impl Default for AppCardPrices {
         }
     }
 }
-
-// #[cfg(test)]
-// mod tests {
-//     use crate::prices::AppCardPrices;
-
-//     #[tokio::test]
-//     async fn appcards() {
-//         let mut prices = AppCardPrices::default();
-//         let prices = prices
-//             .get_or_update(&divi::league::TradeLeague::Crucible)
-//             .await;
-//         dbg!(prices);
-//     }
-// }
-
-// impl AppCardPrices {
-//     #[instrument(skip(self, window))]
-//     pub async fn get_or_update_or_default(
-//         &mut self,
-//         league: &TradeLeague,
-//         window: &Window,
-//     ) -> Prices {
-//         match self.prices_by_league.get(league) {
-//             Some(prices) => prices.to_owned(),
-//             None => {
-//                 debug!("No prices for league {league} in memory. Checking if file exists");
-//                 match self.league_file_exists(league) {
-//                     true => {
-//                         debug!("File exists. Check if it is up-to-date");
-//                         match self.file_is_up_to_date(league) {
-//                             true => {
-//                                 match self.read_from_file_update_and_return(league) {
-//                                     Ok(prices) => {
-//                                         debug!("File is up-to-date. Save to memory and return");
-//                                         prices
-//                                     }
-//                                     Err(err) => {
-//                                         debug!("Error reading file. Try to fetch prices");
-
-//                                         // async_default_prices().await
-//                                         Prices::default()
-
-//                                         // match fs::remove_file(self.league_path(league)) {
-//                                         //     Ok(_) => {
-//                                         //         // Event::Toast {
-//                                         //         //     variant: ToastVariant::Success,
-//                                         //         //     message: format!(
-//                                         //         //         "We deleted the prices file {}",
-//                                         //         //         self.league_path(league).to_str().unwrap()
-//                                         //         //     ),
-//                                         //         // }
-//                                         //         // .emit(&window);
-
-//                                         //         match Prices::fetch(league).await {
-//                                         //             Ok(prices) => prices,
-//                                         //             Err(err) => {
-//                                         //                 // dbg!(err);
-//                                         //                 Prices::default()
-//                                         //             }
-//                                         //         }
-
-//                                         //         // Prices::default()
-//                                         //     }
-//                                         //     Err(err) => {
-//                                         //         debug!("Unable to fetch prices: {err}. Return default Prices with warning toast");
-//                                         //         self.send_default_prices_with_toast_warning(
-//                                         //             &Error::IoError(err),
-//                                         //             league,
-//                                         //             window,
-//                                         //         );
-//                                         //         Prices::default()
-//                                         //     }
-//                                         // }
-
-//                                         // debug!("Unable to fetch prices: {err}. Return default Prices with warning toast");
-//                                         // self.send_default_prices_with_toast_warning(
-//                                         //     &err, league, window,
-//                                         // );
-//                                         // Prices::default()
-
-//                                         // match self.fetch_and_update(league, window).await {
-//                                         //     Ok(prices) => prices,
-//                                         //     Err(err) => {
-//                                         //         debug!("Unable to fetch prices: {err}. Return default Prices with warning toast");
-//                                         //         self.send_default_prices_with_toast_warning(
-//                                         //             &err, league, window,
-//                                         //         )
-//                                         //     }
-//                                         // }
-//                                     }
-//                                 }
-//                             }
-//                             false => {
-//                                 debug!("File is not up-to-date. Try to fetch new prices");
-//                                 match self.fetch_and_update(league, window).await {
-//                                     Ok(prices) => prices,
-//                                     Err(err) => {
-//                                         debug!("Unable to fetch prices: {err}. Check if file is still usable");
-//                                         match self.file_is_still_usable(league) {
-//                                             true => {
-//                                                 match self.read_from_file_update_and_return(league)
-//                                                 {
-//                                                     Ok(prices) => {
-//                                                         debug!("File is still usable. Save to memory and return");
-//                                                         let days_old = format!(
-//                                                             "{:.1}",
-//                                                             self.file_days_old(league).unwrap()
-//                                                         );
-//                                                         let message = format!("Prices are not up-to-date, but still usable({days_old} days old). Unable to load new prices. So still usable is better than nothing.");
-//                                                         Event::Toast {
-//                                                             variant: ToastVariant::Warning,
-//                                                             message,
-//                                                         }
-//                                                         .emit(window);
-//                                                         prices
-//                                                     }
-//                                                     Err(err) => {
-//                                                         debug!("Unable to fetch prices: {err}. Return default Prices with warning toast");
-//                                                         self.send_default_prices_with_toast_warning(
-//                                                             &err, league, window,
-//                                                         )
-//                                                     }
-//                                                 }
-//                                             }
-//                                             false => {
-//                                                 debug!("File is too old. Return default Prices with warning toast");
-//                                                 self.send_default_prices_with_toast_warning(
-//                                                     &err, league, window,
-//                                                 )
-//                                             }
-//                                         }
-//                                     }
-//                                 }
-//                             }
-//                         }
-//                     }
-//                     false => {
-//                         debug!("File does not exist. Try to fetch new prices");
-//                         match self.fetch_and_update(league, window).await {
-//                             Ok(prices) => prices,
-//                             Err(err) => {
-//                                 debug!("Unable to fetch prices: {err}. Return default Prices with warning toast");
-//                                 self.send_default_prices_with_toast_warning(&err, league, window)
-//                             }
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
