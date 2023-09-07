@@ -130,9 +130,10 @@ export const sampleIntoValues = (
 	const values: Values = [];
 
 	sample.cards = toOrderedBy(sample.cards, options.orderedBy, options.order);
+	const columnsArr = columnsToArray(options.columns);
 
 	const headers: string[] = [];
-	for (const column of options.columns.values()) {
+	for (const column of columnsArr) {
 		headers.push(column);
 	}
 	values.push(headers);
@@ -144,7 +145,7 @@ export const sampleIntoValues = (
 
 		const row = [];
 
-		for (const column of options.columns.values()) {
+		for (const column of columnsArr) {
 			row.push(card[column]);
 		}
 
@@ -152,4 +153,20 @@ export const sampleIntoValues = (
 	}
 
 	return values;
+};
+
+/**
+ * Convert columns to array to preserve the order of columns:
+ *
+ * name | amount | weight | price | sum
+ */
+const columnsToArray = (set: Set<Column>): Column[] => {
+	const arr: Column[] = [];
+	if (set.has('name')) arr.push('name');
+	if (set.has('amount')) arr.push('amount');
+	if (set.has('weight')) arr.push('weight');
+	if (set.has('price')) arr.push('price');
+	if (set.has('sum')) arr.push('sum');
+
+	return arr;
 };
