@@ -19,7 +19,7 @@ import { BasePopupElement } from '../../wc/src/wc/base-popup';
 import { Props as SheetsProps } from '@divicards/wc/src/wc/to-google-sheets/to-google-sheets';
 import { DivinationCardsSample } from '../../shared/types';
 import { toast } from './toast';
-import { SheetsError } from './error';
+import { SheetsError, isSheetsError } from './error';
 import { useSheets } from './composables/useSheets';
 BasePopupElement.define();
 DropFilesMessageElement.define();
@@ -73,22 +73,24 @@ const onSheetsSubmit = async ({
 	}
 
 	try {
-		const options = { cardsMustHaveAmount, order, orderedBy, columns };
-		console.log(options, toSheetsSample.value);
+		const { url } = await sheetsApi.createSheetWithSample(
+			spreadsheetId,
+			sheetTitle,
+			toSheetsSample.value,
+			googleAuthStore.token,
+			{ cardsMustHaveAmount, order, orderedBy, columns }
+		);
 
-		spreadsheet.value = spreadsheetId;
-
-		const newSheet = await sheetsApi.createSheet(spreadsheetId, sheetTitle, googleAuthStore.token);
-		const values = sampleIntoValues(toSheetsSample.value, options);
-		const result = await sheetsApi.writeValuesIntoSheet(spreadsheetId, sheetTitle, values, googleAuthStore.token);
-
-		toast('success', JSON.stringify(result));
+		toast('success', 'New sheet created successfully');
 		sheetsPopupRef.value?.hide();
-		setTimeout(() => {
-			command('open_url', { url: sheetsApi.sheetUrl(spreadsheetId, newSheet.sheetId) });
-		}, 250);
+		command('open_url', { url });
+
+		// save spreadshetId to LocalStorage
+		spreadsheet.value = spreadsheetId;
 	} catch (err) {
-		sheetsError.value = err as SheetsError;
+		if (isSheetsError(err)) {
+			sheetsError.value = err;
+		} else throw err;
 	}
 };
 </script>

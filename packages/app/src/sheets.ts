@@ -1,8 +1,12 @@
 import { Column, DivinationCardsSample, Order, TablePreferences } from '@divicards/shared/types';
-import { Values } from './command';
+
 import { toOrderedBy } from '@divicards/shared/toOrderedBy';
 import { isSheetsError } from './error';
 
+/**
+ * Array of arrays(rows) for google sheets data representation
+ */
+export type Values = Array<Array<string | number | null>>;
 type Reply = {
 	addSheet?: {
 		properties: {
@@ -34,8 +38,30 @@ type NewSheetResponse = {
 	};
 };
 
+type SendValuesResponse = {
+	spreadsheetId: string;
+	updatedCells: 802;
+	updatedColumns: 2;
+	updatedRange: string;
+	updatedRows: number;
+};
+
+type SendSampleResponse = {
+	url: string;
+	spreadsheetId: string;
+	updatedCells: 802;
+	updatedColumns: 2;
+	updatedRange: string;
+	updatedRows: number;
+};
+
 export class SheetsApi {
-	async writeValuesIntoSheet(spreadsheetId: string, title: string, values: Values, token: string): Promise<unknown> {
+	async writeValuesIntoSheet(
+		spreadsheetId: string,
+		title: string,
+		values: Values,
+		token: string
+	): Promise<SendValuesResponse> {
 		const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${title}?valueInputOption=RAW`;
 		const body = JSON.stringify({
 			range: title,
@@ -95,7 +121,7 @@ export class SheetsApi {
 		}
 	}
 
-	async createSheetAndWriteSample(
+	async createSheetWithSample(
 		spreadsheetId: string,
 		title: string,
 		sample: DivinationCardsSample,
@@ -106,11 +132,14 @@ export class SheetsApi {
 			order: 'desc',
 			cardsMustHaveAmount: false,
 		}
-	) {
-		const newSheet = await this.createSheet(spreadsheetId, title, token);
+	): Promise<SendSampleResponse> {
+		const { sheetId } = await this.createSheet(spreadsheetId, title, token);
 		const values = sampleIntoValues(sample, options);
-		const result = await this.writeValuesIntoSheet(spreadsheetId, title, values, token);
-		return result;
+		const sendValuesResponse = await this.writeValuesIntoSheet(spreadsheetId, title, values, token);
+		return {
+			...sendValuesResponse,
+			url: this.sheetUrl(spreadsheetId, sheetId),
+		};
 	}
 
 	sheetUrl(spreadsheetId: number | string, sheetId: number | string) {
@@ -118,6 +147,7 @@ export class SheetsApi {
 	}
 }
 
+/** Prepare the sample for google sheets */
 export const sampleIntoValues = (
 	sample: DivinationCardsSample,
 	options: TablePreferences = {
@@ -132,10 +162,7 @@ export const sampleIntoValues = (
 	sample.cards = toOrderedBy(sample.cards, options.orderedBy, options.order);
 	const columnsArr = columnsToArray(options.columns);
 
-	const headers: string[] = [];
-	for (const column of columnsArr) {
-		headers.push(column);
-	}
+	const headers = Array.from(columnsArr);
 	values.push(headers);
 
 	for (const card of sample.cards) {
