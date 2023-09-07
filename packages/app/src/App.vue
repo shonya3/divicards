@@ -14,7 +14,7 @@ import { StashLoader } from './StashLoader';
 import { useGoogleAuthStore } from './stores/googleAuth';
 import { GoogleAuthElement } from '../../wc/src/wc/google-auth/poe-auth';
 import { command } from './command';
-import { SheetsApi, sampleIntoValues } from './sheets';
+import { SheetsApi } from './sheets';
 import { BasePopupElement } from '../../wc/src/wc/base-popup';
 import { Props as SheetsProps } from '@divicards/wc/src/wc/to-google-sheets/to-google-sheets';
 import { DivinationCardsSample } from '../../shared/types';
