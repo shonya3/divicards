@@ -1,6 +1,6 @@
 use std::{
-    array::IntoIter,
     slice::{Iter, IterMut},
+    vec::IntoIter,
 };
 
 use crate::{
@@ -9,11 +9,10 @@ use crate::{
     prices::Prices,
 };
 use serde::{Deserialize, Serialize};
-use serde_big_array::BigArray;
 
 /// Holds an array of card records with length equal to the number of all divination cards(For example, 440 in 3.23 patch)
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
-pub struct Cards(#[serde(with = "BigArray")] pub [DivinationCardRecord; CARDS_N]);
+pub struct Cards(pub Vec<DivinationCardRecord>);
 
 impl Cards {
     pub fn get(&self, name: &str) -> Option<&DivinationCardRecord> {
@@ -46,7 +45,7 @@ impl Cards {
         self.0.iter_mut()
     }
 
-    pub fn into_iter(self) -> IntoIter<DivinationCardRecord, CARDS_N> {
+    pub fn into_iter(self) -> IntoIter<DivinationCardRecord> {
         self.0.into_iter()
     }
 
@@ -55,7 +54,7 @@ impl Cards {
     }
 
     pub fn sort_by_amount(&mut self) {
-        self.0.as_mut().sort_by(|a, b| a.amount.cmp(&b.amount));
+        self.0.sort_by(|a, b| a.amount.cmp(&b.amount));
     }
 }
 

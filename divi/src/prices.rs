@@ -5,7 +5,6 @@ use crate::{
     error::Error,
     league::TradeLeague,
 };
-use serde_big_array::BigArray;
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Default)]
 pub struct Sparkline {
@@ -23,7 +22,7 @@ pub struct DivinationCardPrice {
 /// Holds an array of card prices with length equal to the number of all divination cards(For example, 440 in 3.23 patch)
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(transparent)]
-pub struct Prices(#[serde(with = "BigArray")] pub [DivinationCardPrice; CARDS_N]);
+pub struct Prices(pub Vec<DivinationCardPrice>);
 impl Prices {
     pub async fn fetch(league: &TradeLeague) -> Result<Prices, Error> {
         #[derive(Deserialize, Debug, Serialize)]
@@ -50,16 +49,14 @@ impl Default for Prices {
 
 impl From<[&'static str; CARDS_N]> for Prices {
     fn from(arr: [&'static str; CARDS_N]) -> Self {
-        let prices: [DivinationCardPrice; CARDS_N] = arr
+        let prices = arr
             .into_iter()
             .map(|name| DivinationCardPrice {
                 name: name.to_string(),
                 price: Default::default(),
                 sparkline: Default::default(),
             })
-            .collect::<Vec<DivinationCardPrice>>()
-            .try_into()
-            .unwrap();
+            .collect::<Vec<DivinationCardPrice>>();
         Prices(prices)
     }
 }

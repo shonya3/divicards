@@ -231,11 +231,7 @@ impl DivinationCardsSample {
 
     pub fn into_values(self, columns: &[Column]) -> Values {
         let mut sample = self;
-        sample
-            .cards
-            .0
-            .as_mut()
-            .sort_by(|a, b| b.amount.cmp(&a.amount));
+        sample.cards.0.sort_by(|a, b| b.amount.cmp(&a.amount));
         let mut values = Values::new(vec![]);
         let headers: Vec<Value> = columns
             .into_iter()
