@@ -14,7 +14,7 @@ import { StashLoader } from './StashLoader';
 import { useGoogleAuthStore } from './stores/googleAuth';
 import { GoogleAuthElement } from '../../wc/src/wc/google-auth/poe-auth';
 import { command } from './command';
-import { SheetsApi } from './sheets';
+import { SheetsApi, sampleIntoValues } from './sheets';
 import { BasePopupElement } from '../../wc/src/wc/base-popup';
 import { Props as SheetsProps } from '@divicards/wc/src/wc/to-google-sheets/to-google-sheets';
 import { DivinationCardsSample } from '../../shared/types';
@@ -73,13 +73,12 @@ const onSheetsSubmit = async ({
 	}
 
 	try {
-		const { url } = await sheetsApi.createSheetWithSample(
+		const values = sampleIntoValues(toSheetsSample.value, { cardsMustHaveAmount, order, orderedBy, columns });
+		const url = await command('add_sheet_with_values', {
 			spreadsheetId,
-			sheetTitle,
-			toSheetsSample.value,
-			googleAuthStore.token,
-			{ cardsMustHaveAmount, order, orderedBy, columns }
-		);
+			title: sheetTitle,
+			values,
+		});
 
 		toast('success', 'New sheet created successfully');
 		sheetsPopupRef.value?.hide();
@@ -90,7 +89,9 @@ const onSheetsSubmit = async ({
 	} catch (err) {
 		if (isSheetsError(err)) {
 			sheetsError.value = err;
-		} else throw err;
+		} else {
+			console.log(err);
+		}
 	}
 };
 </script>

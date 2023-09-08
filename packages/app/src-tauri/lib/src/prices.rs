@@ -22,6 +22,7 @@ pub enum LeagueFileState {
 }
 
 impl AppCardPrices {
+    #[instrument(skip(self, window))]
     pub async fn get_price(&mut self, league: &TradeLeague, window: &Window) -> Prices {
         if let Some(prices) = self.prices_by_league.get(league) {
             return prices.to_owned();

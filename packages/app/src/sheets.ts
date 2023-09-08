@@ -3,58 +3,60 @@ import { Column, DivinationCardsSample, Order, TablePreferences } from '@divicar
 import { toOrderedBy } from '@divicards/shared/toOrderedBy';
 import { isSheetsError } from './error';
 
+export type Values<T = string | number | null> = Array<Array<T>>;
+
+/** Prepare the sample for google sheets */
+export const sampleIntoValues = (
+	sample: DivinationCardsSample,
+	options: TablePreferences = {
+		columns: new Set(['name', 'amount']),
+		orderedBy: 'amount',
+		order: 'desc',
+		cardsMustHaveAmount: false,
+	}
+): Values => {
+	const values: Values = [];
+
+	sample.cards = toOrderedBy(sample.cards, options.orderedBy, options.order);
+	const columnsArr = columnsToArray(options.columns);
+
+	const headers = Array.from(columnsArr);
+	values.push(headers);
+
+	for (const card of sample.cards) {
+		if (options.cardsMustHaveAmount && card.amount === 0) {
+			continue;
+		}
+
+		const row = [];
+
+		for (const column of columnsArr) {
+			row.push(card[column]);
+		}
+
+		values.push(row);
+	}
+
+	return values;
+};
+
 /**
- * Array of arrays(rows) for google sheets data representation
+ * Convert columns to array to preserve the order of columns:
+ *
+ * name | amount | weight | price | sum
  */
-export type Values = Array<Array<string | number | null>>;
-type Reply = {
-	addSheet?: {
-		properties: {
-			sheetId: number;
-			title: string;
-			index: number;
-			sheetType: 'GRID' | string;
-			GridProperties: {
-				columnCount: 26;
-				rowCount: 1000;
-			};
-		};
-	};
+const columnsToArray = (set: Set<Column>): Column[] => {
+	const arr: Column[] = [];
+	if (set.has('name')) arr.push('name');
+	if (set.has('amount')) arr.push('amount');
+	if (set.has('weight')) arr.push('weight');
+	if (set.has('price')) arr.push('price');
+	if (set.has('sum')) arr.push('sum');
+
+	return arr;
 };
 
-type BatchResponse = {
-	spreadsheetId: string;
-	replies: Reply[];
-};
-
-type NewSheetResponse = {
-	sheetId: number;
-	title: string;
-	index: number;
-	sheetType: 'GRID' | string;
-	GridProperties: {
-		columnCount: 26;
-		rowCount: 1000;
-	};
-};
-
-type SendValuesResponse = {
-	spreadsheetId: string;
-	updatedCells: 802;
-	updatedColumns: 2;
-	updatedRange: string;
-	updatedRows: number;
-};
-
-type SendSampleResponse = {
-	url: string;
-	spreadsheetId: string;
-	updatedCells: 802;
-	updatedColumns: 2;
-	updatedRange: string;
-	updatedRows: number;
-};
-
+// currently not using it. Using command("create_sheet_with_values", {...}) instead
 export class SheetsApi {
 	async writeValuesIntoSheet(
 		spreadsheetId: string,
@@ -147,53 +149,53 @@ export class SheetsApi {
 	}
 }
 
-/** Prepare the sample for google sheets */
-export const sampleIntoValues = (
-	sample: DivinationCardsSample,
-	options: TablePreferences = {
-		columns: new Set(['name', 'amount']),
-		orderedBy: 'amount',
-		order: 'desc',
-		cardsMustHaveAmount: false,
-	}
-): Values => {
-	const values: Values = [];
-
-	sample.cards = toOrderedBy(sample.cards, options.orderedBy, options.order);
-	const columnsArr = columnsToArray(options.columns);
-
-	const headers = Array.from(columnsArr);
-	values.push(headers);
-
-	for (const card of sample.cards) {
-		if (options.cardsMustHaveAmount && card.amount === 0) {
-			continue;
-		}
-
-		const row = [];
-
-		for (const column of columnsArr) {
-			row.push(card[column]);
-		}
-
-		values.push(row);
-	}
-
-	return values;
+/**
+ * Array of arrays(rows) for google sheets data representation
+ */
+type Reply = {
+	addSheet?: {
+		properties: {
+			sheetId: number;
+			title: string;
+			index: number;
+			sheetType: 'GRID' | string;
+			GridProperties: {
+				columnCount: 26;
+				rowCount: 1000;
+			};
+		};
+	};
 };
 
-/**
- * Convert columns to array to preserve the order of columns:
- *
- * name | amount | weight | price | sum
- */
-const columnsToArray = (set: Set<Column>): Column[] => {
-	const arr: Column[] = [];
-	if (set.has('name')) arr.push('name');
-	if (set.has('amount')) arr.push('amount');
-	if (set.has('weight')) arr.push('weight');
-	if (set.has('price')) arr.push('price');
-	if (set.has('sum')) arr.push('sum');
+type BatchResponse = {
+	spreadsheetId: string;
+	replies: Reply[];
+};
 
-	return arr;
+type NewSheetResponse = {
+	sheetId: number;
+	title: string;
+	index: number;
+	sheetType: 'GRID' | string;
+	GridProperties: {
+		columnCount: 26;
+		rowCount: 1000;
+	};
+};
+
+type SendValuesResponse = {
+	spreadsheetId: string;
+	updatedCells: 802;
+	updatedColumns: 2;
+	updatedRange: string;
+	updatedRows: number;
+};
+
+type SendSampleResponse = {
+	url: string;
+	spreadsheetId: string;
+	updatedCells: 802;
+	updatedColumns: 2;
+	updatedRange: string;
+	updatedRows: number;
 };

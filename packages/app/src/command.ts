@@ -1,10 +1,12 @@
 import { invoke } from '@tauri-apps/api';
 import { DivinationCardsSample, League, CardNameAmount, TradeLeague, GoogleIdentity } from '@divicards/shared/types';
 import { NoItemsTab } from '@divicards/shared/poe.types';
+import { Values } from './sheets';
 
 export type SampleData = string | CardNameAmount[];
 
 export interface Commands {
+	add_sheet_with_values: (args: { spreadsheetId: string; title: string; values: Values }) => string;
 	google_logout: () => void;
 	google_identity: () => GoogleIdentity;
 	google_auth: () => string;
