@@ -9,7 +9,7 @@ export interface Commands {
 	add_sheet_with_values: (args: { spreadsheetId: string; title: string; values: Values }) => string;
 	google_logout: () => void;
 	google_identity: () => GoogleIdentity;
-	google_auth: () => string;
+	google_auth: () => void;
 	old_google_auth: () => void;
 	sample: (args: { data: SampleData; league: TradeLeague | null }) => DivinationCardsSample;
 	merge: (args: { samples: DivinationCardsSample[] }) => DivinationCardsSample;

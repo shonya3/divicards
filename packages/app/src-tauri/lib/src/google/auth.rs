@@ -35,7 +35,7 @@ pub async fn identity(acces_token: String) -> Identity {
 }
 
 #[command]
-pub async fn google_auth(version: State<'_, AppVersion>, window: Window) -> Result<String, Error> {
+pub async fn google_auth(version: State<'_, AppVersion>, window: Window) -> Result<(), Error> {
     let (sender, mut receiver) = mpsc::channel::<AuthResponse>(1);
     let addr = SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8080);
     let redirect_uri =
@@ -115,7 +115,7 @@ pub async fn google_auth(version: State<'_, AppVersion>, window: Window) -> Resu
             AccessTokenStorage::new()
                 .set(&token_data.access_token.secret())
                 .unwrap();
-            Ok(token_data.access_token.secret().to_owned())
+            Ok(())
 
             // Ok(username)
         }
