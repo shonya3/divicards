@@ -46,9 +46,8 @@ use divi::{
 };
 
 fn main() -> Result<(), divi::error::Error> {
-    let csv = read_to_string("example-2.csv").unwrap();
-    let sample =
-        DivinationCardsSample::create(SampleData::Csv(String::from(csv)), Some(Prices::default()))?;
+    let csv = read_to_string("sample.csv").expect("Could not read sample.csv");
+    let sample = DivinationCardsSample::create(SampleData::Csv(csv), Some(Prices::default()))?;
 
     let preferences = TablePreferences {
         columns: vec![
