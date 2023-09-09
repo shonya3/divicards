@@ -1,17 +1,18 @@
-use std::fmt::Display;
+use std::fmt::{Debug, Display};
 
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
-use serde_json::{json, Value};
+use serde_json::json;
 
-use crate::Values;
+use crate::error::{Error, GoogleErrorResponse};
 
-pub async fn add_sheet_with_values(
+#[tracing::instrument(skip(values, token))]
+pub async fn add_sheet_with_values<T: Serialize + Debug>(
     spreadsheet_id: &str,
     title: &str,
-    values: Values,
+    values: Vec<Vec<T>>,
     token: &str,
-) -> Result<SheetUrl, reqwest::Error> {
+) -> Result<SheetUrl, Error> {
     let add_sheet_data = add_sheet(spreadsheet_id, title, &token).await?;
     let _ = write_values_into_sheet(spreadsheet_id, title, &token, values).await?;
 
@@ -21,22 +22,33 @@ pub async fn add_sheet_with_values(
     ))
 }
 
-pub async fn write_values_into_sheet(
+#[derive(Serialize, Deserialize, Debug, Clone)]
+#[serde(rename_all = "camelCase")]
+pub struct WriteValuesResponse {
+    spreadsheet_id: String,
+    updated_cells: Option<u32>,
+    updated_columns: Option<u32>,
+    updated_range: Option<String>,
+    updated_rows: Option<u32>,
+}
+
+pub async fn write_values_into_sheet<T>(
     spreadsheet_id: &str,
     title: &str,
     token: &str,
-    values: Values,
-) -> Result<Value, reqwest::Error> {
+    values: Vec<Vec<T>>,
+) -> Result<WriteValuesResponse, Error>
+where
+    T: Serialize + Debug,
+{
     let url = format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{title}?valueInputOption=RAW
 ");
 
-    let b = json!({
+    let body = serde_json::to_string(&json!({
       "range": title,
       "majorDimension": "ROWS",
       "values": values
-    });
-
-    let body = serde_json::to_string(&b).unwrap();
+    }))?;
 
     let response = Client::new()
         .put(url)
@@ -45,16 +57,16 @@ pub async fn write_values_into_sheet(
         .send()
         .await?;
 
-    let value: Value = response.json().await?;
-
-    Ok(value)
+    if response.status().as_u16() >= 400 {
+        let err_response: GoogleErrorResponse = response.json().await?;
+        Err(err_response.error.into())
+    } else {
+        let write_values: WriteValuesResponse = response.json().await?;
+        Ok(write_values)
+    }
 }
 
-pub async fn add_sheet(
-    spreadsheet_id: &str,
-    title: &str,
-    access_token: &str,
-) -> Result<AddSheet, reqwest::Error> {
+pub async fn add_sheet(spreadsheet_id: &str, title: &str, token: &str) -> Result<AddSheet, Error> {
     // let spredsheet_id = "1sDXpbG2bkqrOYScnvjMXTTg718dEc0LMDVHzllbAgmM";
     let body = serde_json::to_string(&serde_json::json!({
        "requests":[
@@ -72,14 +84,41 @@ pub async fn add_sheet(
     let url = format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}:batchUpdate");
     let response = Client::new()
         .post(url)
-        .header("Authorization", format!("Bearer {}", { access_token }))
+        .header("Authorization", format!("Bearer {}", { token }))
         .body(body)
         .send()
         .await?;
-    let response: BatchResponse = response.json().await?;
-    let add_sheet = response.replies[0].add_sheet.clone();
 
-    Ok(add_sheet)
+    if response.status().as_u16() >= 400 {
+        let err_response: GoogleErrorResponse = response.json().await?;
+        Err(err_response.error.into())
+    } else {
+        let response: BatchResponse = response.json().await?;
+        let add_sheet = response.replies[0].add_sheet.clone();
+
+        Ok(add_sheet)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    // use super::*;
+
+    // #[tokio::test]
+    // async fn test() {
+    //     let token = "";
+    //     let spreadsheet_id = "";
+    //     let title = "test";
+    //     let values: Values<&str> = Values(vec![vec!["name", "amount"], vec!["The Doctor", "2"]]);
+
+    //     let _add_sheet_response = add_sheet(spreadsheet_id, title, token).await.unwrap();
+    //     // let id = add_sheet_response.properties.sheet_id;
+
+    //     let r = write_values_into_sheet(spreadsheet_id, title, token, values)
+    //         .await
+    //         .unwrap();
+    //     dbg!(r);
+    // }
 }
 
 #[derive(Debug, Serialize, Deserialize, Default, Clone)]
@@ -114,7 +153,7 @@ pub struct AddSheetProperties {
 pub struct SheetId(u32);
 impl Display for SheetId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        self.0.fmt(f)
+        std::fmt::Display::fmt(&self.0, f)
     }
 }
 
@@ -172,4 +211,21 @@ pub struct GridProperties {
 // pub async fn create_spreadsheet() -> Result<Value, Error> {
 //     let token = AccessTokenStorage::new().get().unwrap();
 //     Ok(api_create_spreadsheet(token).await?)
+// }
+
+// #[derive(Debug, Serialize, Deserialize, Clone)]
+// pub struct A1Range(String);
+
+// #[derive(Debug, Serialize, Deserialize, Clone)]
+// pub enum Dimension {
+//     Rows,
+//     Columns,
+// }
+
+// #[derive(Debug, Serialize, Deserialize, Clone)]
+// #[serde(rename_all = "camelCase")]
+// pub struct RangeRequestBody {
+//     pub range: A1Range,
+//     pub major_dimension: Dimension,
+//     pub values: Values,
 // }

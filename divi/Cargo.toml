@@ -6,7 +6,6 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-googlesheets ={ path = "../googlesheets"}
 reqwest.workspace = true
 serde_json.workspace = true
 tracing.workspace = true

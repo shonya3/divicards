@@ -2,7 +2,6 @@ use std::{collections::HashMap, fmt::Display};
 
 use csv::{ReaderBuilder, Trim};
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
 
 use crate::{
     card_record::DivinationCardRecord,
@@ -12,7 +11,6 @@ use crate::{
     prices::Prices,
     IsCard,
 };
-use googlesheets::Values;
 
 #[derive(Debug, Serialize, Deserialize, Clone, Default, PartialEq)]
 #[serde(rename_all = "camelCase")]
@@ -113,14 +111,25 @@ impl DivinationCardsSample {
         merged
     }
 
-    pub fn print_not_nullish(&self) {
-        let sample = self.to_owned();
-        let not_nullish = NotNullishSample::from(sample);
-        println!("{}", not_nullish.csv);
+    pub fn remove_nullish_cards(&mut self) -> &mut Self {
+        let cards: Vec<DivinationCardRecord> = self
+            .cards
+            .clone()
+            .into_iter()
+            .filter(|c| c.amount > 0)
+            .collect();
+        self.cards = Cards(cards);
+
+        self
     }
 
-    pub fn into_not_nullish(self) -> NotNullishSample {
-        self.into()
+    pub fn into_not_nullish(mut self) -> Self {
+        let cards: Vec<DivinationCardRecord> =
+            self.cards.into_iter().filter(|c| c.amount > 0).collect();
+
+        self.cards = Cards(cards);
+
+        self
     }
 
     /// Consumes Prices structure to set prices for Cards
@@ -229,57 +238,115 @@ impl DivinationCardsSample {
         self
     }
 
-    pub fn into_values(self, columns: &[Column]) -> Values {
-        let mut sample = self;
-        sample.cards.0.sort_by(|a, b| b.amount.cmp(&a.amount));
-        let mut values = Values::new(vec![]);
-        let headers: Vec<Value> = columns
-            .into_iter()
-            .map(|c| Value::String(c.to_string()))
-            .collect();
-        values.0.push(headers);
-        for card in sample.cards.iter() {
-            let mut vec: Vec<Value> = vec![];
-            for column in columns {
-                let value = match column {
-                    Column::Name => Value::String(card.name.to_string()),
-                    Column::Amount => Value::Number(card.amount.into()),
-                    Column::Weight => match card.weight {
-                        Some(w) => Value::Number((w as u32).into()),
-                        None => Value::Null,
-                    },
-                    Column::Price => match card.price {
-                        Some(p) => Value::Number((p as u32).into()),
-                        None => Value::Null,
-                    },
-                };
-                vec.push(value);
-            }
-            values.0.push(vec);
+    pub fn into_values(
+        mut self,
+        preferences: Option<TablePreferences>,
+    ) -> Vec<Vec<CardSheetValue>> {
+        let preferences = preferences.unwrap_or_default();
+
+        if preferences.cards_must_have_amount {
+            self.remove_nullish_cards();
         }
 
-        sample.cards.into_iter().for_each(|card| {
-            let mut vec: Vec<Value> = vec![];
-            for column in columns {
+        self.cards
+            .order_by(preferences.ordered_by, preferences.order);
+
+        let columns = preserve_column_order(&preferences.columns);
+        let mut values = vec![vec![]];
+        let headers: Vec<CardSheetValue> = columns
+            .iter()
+            .map(|c| CardSheetValue::Name(c.to_string()))
+            .collect();
+        values.push(headers);
+        for card in self.cards.iter() {
+            let mut vec: Vec<CardSheetValue> = vec![];
+            for column in &columns {
                 let value = match column {
-                    Column::Name => Value::String(card.name.to_string()),
-                    Column::Amount => Value::Number(card.amount.into()),
-                    Column::Weight => match card.weight {
-                        Some(w) => Value::Number((w as u32).into()),
-                        None => Value::Null,
-                    },
-                    Column::Price => match card.price {
-                        Some(p) => Value::Number((p as u32).into()),
-                        None => Value::Null,
-                    },
+                    Column::Name => CardSheetValue::Name(card.name.clone()),
+                    Column::Amount => CardSheetValue::Amount(card.amount),
+                    Column::Weight => CardSheetValue::F32(card.weight),
+                    Column::Price => CardSheetValue::F32(card.price),
+                    Column::Sum => CardSheetValue::F32(card.sum),
                 };
                 vec.push(value);
             }
-            values.0.push(vec);
-        });
-
+            values.push(vec);
+        }
         values
     }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+#[serde(rename_all = "camelCase")]
+pub struct TablePreferences {
+    pub columns: Vec<Column>,
+    pub ordered_by: Column,
+    pub order: Order,
+    pub cards_must_have_amount: bool,
+}
+
+impl Default for TablePreferences {
+    fn default() -> Self {
+        Self {
+            columns: vec![Column::Name, Column::Amount],
+            ordered_by: Column::Amount,
+            order: Order::Desc,
+            cards_must_have_amount: false,
+        }
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+#[serde(rename_all = "camelCase")]
+pub enum Order {
+    Asc,
+    Desc,
+    Unordered,
+}
+
+impl Default for Order {
+    fn default() -> Self {
+        Order::Desc
+    }
+}
+
+/// name > amount > weight > price > sum
+fn preserve_column_order(columns: &[Column]) -> Vec<Column> {
+    let mut vec: Vec<Column> = vec![];
+    columns
+        .iter()
+        .find(|c| c == &&Column::Name)
+        .and_then(|_| Some(vec.push(Column::Name)));
+
+    columns
+        .iter()
+        .find(|c| c == &&Column::Amount)
+        .and_then(|_| Some(vec.push(Column::Amount)));
+
+    columns
+        .iter()
+        .find(|c| c == &&Column::Weight)
+        .and_then(|_| Some(vec.push(Column::Weight)));
+
+    columns
+        .iter()
+        .find(|c| c == &&Column::Price)
+        .and_then(|_| Some(vec.push(Column::Price)));
+
+    columns
+        .iter()
+        .find(|c| c == &&Column::Sum)
+        .and_then(|_| Some(vec.push(Column::Sum)));
+
+    vec
+}
+
+#[derive(Serialize, Clone, Debug, Deserialize)]
+#[serde(untagged)]
+pub enum CardSheetValue {
+    Name(String),
+    Amount(u32),
+    F32(Option<f32>),
 }
 
 pub fn fix_name(name: &str) -> Option<String> {
@@ -353,12 +420,20 @@ pub enum SampleData {
     CardNameAmountList(Vec<CardNameAmount>),
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[serde(rename_all = "camelCase")]
 pub enum Column {
     Name,
     Amount,
     Weight,
     Price,
+    Sum,
+}
+
+impl Default for Column {
+    fn default() -> Self {
+        Column::Amount
+    }
 }
 
 impl Display for Column {
@@ -368,6 +443,7 @@ impl Display for Column {
             Column::Amount => write!(f, "amount"),
             Column::Weight => write!(f, "weight"),
             Column::Price => write!(f, "price"),
+            Column::Sum => write!(f, "sum"),
         }
     }
 }
@@ -375,7 +451,70 @@ impl Display for Column {
 #[cfg(test)]
 mod tests {
 
+    use std::fs::{read_to_string, write};
+
+    use crate::league::TradeLeague;
+
     use super::*;
+
+    #[tokio::test]
+    async fn into_values() {
+        let csv = read_to_string("example-2.csv").unwrap();
+        let prices = Prices::fetch(&TradeLeague::Ancestor).await.unwrap();
+        let sample = DivinationCardsSample::create(SampleData::Csv(csv), Some(prices)).unwrap();
+        let values = sample.into_values(Some(TablePreferences {
+            columns: vec![
+                Column::Sum,
+                Column::Weight,
+                Column::Price,
+                Column::Amount,
+                Column::Name,
+            ],
+            ordered_by: Column::Name,
+            order: Order::Desc,
+            cards_must_have_amount: false,
+        }));
+        let json = serde_json::to_string(&values).unwrap();
+        write("values.json", &json).unwrap();
+    }
+    // let prices = Prices::fetch(&TradeLeague::Ancestor).await.unwrap();
+    // dbg!(sample.into_values(&[Column::Amount, Column::Name]));
+
+    #[test]
+    fn column_order() {
+        let columns = preserve_column_order(&[
+            Column::Amount,
+            Column::Sum,
+            Column::Weight,
+            Column::Price,
+            Column::Name,
+        ]);
+        assert_eq!(
+            columns,
+            [
+                Column::Name,
+                Column::Amount,
+                Column::Weight,
+                Column::Price,
+                Column::Sum,
+            ]
+        );
+    }
+
+    #[test]
+    fn into_values_2() {
+        let sample = DivinationCardsSample::create(
+            SampleData::Csv(String::from("name,amount\rRain of Chaos,1\rThe Doctor,1")),
+            None,
+        )
+        .unwrap();
+        let values = sample.into_values(Some(TablePreferences {
+            cards_must_have_amount: true,
+            ..Default::default()
+        }));
+        let json = serde_json::to_string(&values).unwrap();
+        write("values2.json", &json).unwrap();
+    }
 
     #[test]
     fn trim() {
@@ -407,35 +546,5 @@ Encroaching Darkness,5\r\nThe Endless Darkness,1\r\nThe Endurance,19\r\nThe Enfo
             .unwrap();
 
         assert_eq!(rain_of_chaos.amount, 1779);
-    }
-}
-
-#[derive(Debug, Serialize, Deserialize, Clone, Default, PartialEq)]
-#[serde(rename_all = "camelCase")]
-pub struct NotNullishSample {
-    pub cards: Vec<DivinationCardRecord>,
-    pub not_cards: Vec<String>,
-    pub fixed_names: Vec<FixedCardName>,
-    pub csv: String,
-}
-
-impl From<DivinationCardsSample> for NotNullishSample {
-    fn from(value: DivinationCardsSample) -> Self {
-        let cards = value.cards.into_not_nullish();
-
-        let mut writer = csv::Writer::from_writer(vec![]);
-        for card in cards.iter() {
-            writer.serialize(card).unwrap()
-        }
-
-        let csv = String::from_utf8(writer.into_inner().expect("Error with csv serialize"))
-            .expect("Error");
-
-        NotNullishSample {
-            cards,
-            not_cards: value.not_cards,
-            fixed_names: value.fixed_names,
-            csv,
-        }
     }
 }

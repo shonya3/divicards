@@ -33,38 +33,40 @@ async fn main() -> Result<(), divi::error::Error> {
 }
 ```
 
-Card records in [`DivinationCardsSample`] are stored inside [`Cards`] struct that provides strong types guarantees.
-It holds an array of card records with length equal to the number of all divination cards.
-
-```rust
-pub const CARDS_N: usize = 440;
-pub struct Cards(pub [DivinationCardRecord; CARDS_N]);
-```
-
-If you need to quickly strip all nullish records, transform [`DivinationCardsSample`] into [`NotNullishSample`]
-
-[`DivinationCardsSample`]: crate::sample::DivinationCardsSample
-[`Cards`]: crate::cards::Cards
-[`NotNullishSample`]: crate::sample::NotNullishSample
-
 ## Example
 
+Prepare the sample for sending to Google Sheets
+
 ```rust
+use std::fs::read_to_string;
+
+use divi::{
+    prices::Prices,
+    sample::{Column, DivinationCardsSample, Order, SampleData, TablePreferences},
+};
+
 fn main() -> Result<(), divi::error::Error> {
-   let csv = r#"name,amount
-   The Doctor,2
-   Rain of Chaos,30"#;
+    let csv = read_to_string("example-2.csv").unwrap();
+    let sample =
+        DivinationCardsSample::create(SampleData::Csv(String::from(csv)), Some(Prices::default()))?;
 
-   let sample = DivinationCardsSample::create(SampleData::Csv(String::from(csv)), None)?;
-   println!("cards len: {}", sample.cards.0.len()); // 440
+    let preferences = TablePreferences {
+        columns: vec![
+            Column::Name,
+            Column::Amount,
+            Column::Weight,
+            Column::Price,
+            Column::Sum,
+        ],
+        ordered_by: Column::Amount,
+        order: Order::Desc,
+        cards_must_have_amount: false,
+    };
 
-   let sample = sample.into_not_nullish();
-   println!("cards len: {}", sample.cards.len()); // 2
+    let values = sample.into_values(Some(preferences));
+    let json = serde_json::to_string(&values)?;
+    dbg!(json);
 
-   //name,amount,price,sum,weight
-   //Rain of Chaos,30,,0.0,121465.99
-   //The Doctor,2,,0.0,2090.8254
-   println!("{}", sample.csv);
-   Ok(())
+    Ok(())
 }
 ```

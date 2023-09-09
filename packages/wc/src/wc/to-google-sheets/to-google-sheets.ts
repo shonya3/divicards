@@ -3,7 +3,6 @@ import { BaseElement } from '../base-element';
 import { property, state, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { Column, Order, TablePreferences } from '@divicards/shared/types';
-import { SheetsError } from '../../../../app/src/error';
 import { HelpTipElement } from '../help-tip';
 
 const isColumn = (s: unknown): s is Column => {
@@ -23,7 +22,7 @@ export interface Props {
 	orderedBy: Column;
 	columns: Set<Column>;
 	cardsMustHaveAmount: boolean;
-	error: SheetsError | null;
+	error: string | null;
 }
 
 export interface Events {
@@ -50,7 +49,7 @@ export class ToGoogleSheetsElement extends BaseElement {
 	@property({ reflect: true }) orderedBy: Column = 'amount';
 	@property({ attribute: false }) columns: Set<Column> = new Set(['name', 'amount']);
 	@property({ type: Boolean }) cardsMustHaveAmount: boolean = false;
-	@property({ attribute: false }) error: SheetsError | null = null;
+	@property({ attribute: false }) error: string | null = null;
 	get tablePreferences(): TablePreferences {
 		return {
 			order: this.order,
@@ -291,7 +290,7 @@ export class ToGoogleSheetsElement extends BaseElement {
 						</div>
 					</fieldset>
 				</fieldset>
-				${this.error && html`<div id="error">${this.error.error.message}</div>`}
+				${this.error && html`<div id="error">${this.error}</div>`}
 				<button id="submit">Submit</button>
 			</form>
 		</div>`;

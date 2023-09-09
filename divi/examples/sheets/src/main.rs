@@ -2,7 +2,7 @@ use std::fs::read_to_string;
 
 use divi::{
     prices::Prices,
-    sample::{Column, DivinationCardsSample, SampleData},
+    sample::{Column, DivinationCardsSample, Order, SampleData, TablePreferences},
 };
 
 fn main() -> Result<(), divi::error::Error> {
@@ -10,26 +10,22 @@ fn main() -> Result<(), divi::error::Error> {
     let sample =
         DivinationCardsSample::create(SampleData::Csv(String::from(csv)), Some(Prices::default()))?;
 
-    let values = sample.into_values(&[Column::Name, Column::Amount]);
+    let preferences = TablePreferences {
+        columns: vec![
+            Column::Name,
+            Column::Amount,
+            Column::Weight,
+            Column::Price,
+            Column::Sum,
+        ],
+        ordered_by: Column::Amount,
+        order: Order::Desc,
+        cards_must_have_amount: false,
+    };
 
-    let json = serde_json::to_string(&values).unwrap();
-    std::fs::write("values.json", json).unwrap();
-
-    let body = serde_json::to_string(&serde_json::json!({
-       "requests":[
-          {
-             "addSheet":{
-                "properties":{
-                   "sheetId":123456
-                }
-             }
-
-          }
-       ]
-    }))
-    .unwrap();
-
-    dbg!(body);
+    let values = sample.into_values(Some(preferences));
+    let json = serde_json::to_string(&values)?;
+    dbg!(json);
 
     Ok(())
 }

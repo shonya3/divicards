@@ -11,6 +11,7 @@ pub enum Error {
     AuthError(AuthError),
     IoError(io::Error),
     RetryAfter(String),
+    GoogleError(googlesheets::error::Error),
 }
 
 impl Error {
@@ -22,6 +23,7 @@ impl Error {
             Error::AuthError(_) => "authError",
             Error::IoError(_) => "ioError",
             Error::RetryAfter(_) => "retryAfterError",
+            Error::GoogleError(_) => "googleError",
         }
     }
 }
@@ -37,6 +39,7 @@ impl Display for Error {
             Error::RetryAfter(secs) => {
                 write!(f, "You have reached the limit, retry after {secs} seconds")
             }
+            Error::GoogleError(err) => err.fmt(f),
         }
     }
 }
@@ -80,5 +83,11 @@ impl From<divi::error::Error> for Error {
 impl From<io::Error> for Error {
     fn from(value: io::Error) -> Self {
         Error::IoError(value)
+    }
+}
+
+impl From<googlesheets::error::Error> for Error {
+    fn from(value: googlesheets::error::Error) -> Self {
+        Error::GoogleError(value)
     }
 }

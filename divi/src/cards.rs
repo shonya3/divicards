@@ -7,6 +7,7 @@ use crate::{
     card_record::DivinationCardRecord,
     consts::{CARDS, CARDS_N},
     prices::Prices,
+    sample::{Column, Order},
 };
 use serde::{Deserialize, Serialize};
 
@@ -55,6 +56,49 @@ impl Cards {
 
     pub fn sort_by_amount(&mut self) {
         self.0.sort_by(|a, b| a.amount.cmp(&b.amount));
+    }
+
+    pub fn order_by(&mut self, ordered_by: Column, order: Order) {
+        let vec = &mut self.0;
+        match ordered_by {
+            Column::Name => match order {
+                Order::Asc => vec.sort_by(|a, b| a.name.cmp(&b.name)).to_owned(),
+                Order::Desc => vec.sort_by(|a, b| b.name.cmp(&a.name)).to_owned(),
+                Order::Unordered => {}
+            },
+            Column::Amount => match order {
+                Order::Asc => vec.sort_by(|a, b| a.amount.cmp(&b.amount)).to_owned(),
+                Order::Desc => vec.sort_by(|a, b| b.amount.cmp(&a.amount)).to_owned(),
+                Order::Unordered => {}
+            },
+            Column::Weight => match order {
+                Order::Asc => vec
+                    .sort_by(|a, b| a.weight.partial_cmp(&b.weight).unwrap())
+                    .to_owned(),
+                Order::Desc => vec
+                    .sort_by(|a, b| b.weight.partial_cmp(&a.weight).unwrap())
+                    .to_owned(),
+                Order::Unordered => {}
+            },
+            Column::Price => match order {
+                Order::Asc => vec
+                    .sort_by(|a, b| a.price.partial_cmp(&b.price).unwrap())
+                    .to_owned(),
+                Order::Desc => vec
+                    .sort_by(|a, b| b.price.partial_cmp(&a.price).unwrap())
+                    .to_owned(),
+                Order::Unordered => {}
+            },
+            Column::Sum => match order {
+                Order::Asc => vec
+                    .sort_by(|a, b| a.weight.partial_cmp(&b.weight).unwrap())
+                    .to_owned(),
+                Order::Desc => vec
+                    .sort_by(|a, b| b.weight.partial_cmp(&a.weight).unwrap())
+                    .to_owned(),
+                Order::Unordered => {}
+            },
+        }
     }
 }
 

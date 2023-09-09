@@ -879,7 +879,6 @@ name = "divi"
 version = "0.1.0"
 dependencies = [
  "csv 1.2.2",
- "googlesheets",
  "reqwest",
  "serde",
  "serde-big-array",
@@ -1437,6 +1436,7 @@ dependencies = [
  "serde",
  "serde_json",
  "tokio",
+ "tracing",
 ]
 
 [[package]]
@@ -3509,7 +3509,6 @@ name = "sheets"
 version = "0.1.0"
 dependencies = [
  "divi",
- "googlesheets",
  "serde_json",
 ]
 

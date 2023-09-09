@@ -40,7 +40,7 @@ async fn main() {
             google::auth::google_auth,
             google::auth::google_logout,
             google::auth::google_identity,
-            google::sheets::add_sheet_with_values
+            google::sheets::add_sheet_with_sample
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

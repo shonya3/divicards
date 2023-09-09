@@ -14,22 +14,20 @@ import { StashLoader } from './StashLoader';
 import { useGoogleAuthStore } from './stores/googleAuth';
 import { GoogleAuthElement } from '../../wc/src/wc/google-auth/poe-auth';
 import { command } from './command';
-import { SheetsApi, sampleIntoValues } from './sheets';
 import { BasePopupElement } from '../../wc/src/wc/base-popup';
 import { Props as SheetsProps } from '@divicards/wc/src/wc/to-google-sheets/to-google-sheets';
 import { DivinationCardsSample } from '../../shared/types';
 import { toast } from './toast';
-import { SheetsError, isSheetsError } from './error';
 import { useSheets } from './composables/useSheets';
+import { isTauriError } from './error';
 BasePopupElement.define();
 DropFilesMessageElement.define();
 PoeAuthElement.define();
 GoogleAuthElement.define();
 const stashLoader = new StashLoader();
-const sheetsApi = new SheetsApi();
 
 const toSheetsSample = ref<DivinationCardsSample | null>(null);
-const sheetsError = ref<null | SheetsError>(null);
+const sheetsError = ref<string | null>(null);
 const { spreadsheet, columns, order, orderedBy, cardsMustHaveAmount, sheetTitle } = useSheets();
 
 const sheetsPopupRef = ref<BasePopupElement | null>(null);
@@ -73,24 +71,31 @@ const onSheetsSubmit = async ({
 	}
 
 	try {
-		const values = sampleIntoValues(toSheetsSample.value, { cardsMustHaveAmount, order, orderedBy, columns });
-		const url = await command('add_sheet_with_values', {
+		const url = await command('add_sheet_with_sample', {
 			spreadsheetId,
 			title: sheetTitle,
-			values,
+			sample: toSheetsSample.value,
+			preferences: {
+				cardsMustHaveAmount,
+				order,
+				orderedBy,
+				columns: Array.from(columns),
+			},
 		});
 
 		toast('success', 'New sheet created successfully');
 		sheetsPopupRef.value?.hide();
 		command('open_url', { url });
 
-		// save spreadshetId to LocalStorage
+		// In the end,  save spreadshetId to LocalStorage
 		spreadsheet.value = spreadsheetId;
 	} catch (err) {
-		if (isSheetsError(err)) {
-			sheetsError.value = err;
+		if (isTauriError(err)) {
+			sheetsError.value = err.message;
 		} else {
 			console.log(err);
+			sheetsPopupRef.value?.hide();
+			throw err;
 		}
 	}
 };
