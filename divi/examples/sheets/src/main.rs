@@ -22,7 +22,7 @@ fn main() -> Result<(), divi::error::Error> {
         cards_must_have_amount: false,
     };
 
-    let values = sample.into_values(Some(preferences));
+    let values = sample.into_serde_values(Some(preferences));
     let json = serde_json::to_string(&values)?;
     dbg!(json);
 

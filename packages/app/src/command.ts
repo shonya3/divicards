@@ -13,10 +13,11 @@ import { NoItemsTab } from '@divicards/shared/poe.types';
 export type SampleData = string | CardNameAmount[];
 
 export interface Commands {
-	add_sheet_with_sample: (args: {
+	new_sheet_with_sample: (args: {
 		spreadsheetId: string;
 		title: string;
 		sample: DivinationCardsSample;
+		league: League;
 		preferences: Omit<TablePreferences, 'columns'> & { columns: Column[] };
 	}) => string;
 	google_logout: () => void;

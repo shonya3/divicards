@@ -33,7 +33,7 @@ export interface Events {
 	'upd:league': FileCardElement['league'];
 	'upd:minimumCardPrice': FileCardElement['minimumCardPrice'];
 	delete: FileCardElement['uuid'];
-	'google-sheets-clicked': DivinationCardsSample;
+	'google-sheets-clicked': { sample: DivinationCardsSample; league: League };
 }
 
 export class FileCardElement extends BaseElement {
@@ -85,7 +85,10 @@ export class FileCardElement extends BaseElement {
 	}
 
 	#onSheetsIconClicked() {
-		this.emit<Events['google-sheets-clicked']>('google-sheets-clicked', this.sample);
+		this.emit<Events['google-sheets-clicked']>('google-sheets-clicked', {
+			sample: this.sample,
+			league: this.league,
+		});
 	}
 
 	#onGridIconClicked() {

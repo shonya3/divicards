@@ -20,6 +20,7 @@ import { DivinationCardsSample } from '../../shared/types';
 import { toast } from './toast';
 import { useSheets } from './composables/useSheets';
 import { isTauriError } from './error';
+import { League } from '@divicards/shared/types';
 BasePopupElement.define();
 DropFilesMessageElement.define();
 PoeAuthElement.define();
@@ -27,6 +28,7 @@ GoogleAuthElement.define();
 const stashLoader = new StashLoader();
 
 const toSheetsSample = ref<DivinationCardsSample | null>(null);
+const toSheetsLeague = ref<League | null>(null);
 const sheetsError = ref<string | null>(null);
 const { spreadsheet, columns, order, orderedBy, cardsMustHaveAmount, sheetTitle } = useSheets();
 
@@ -48,9 +50,10 @@ const openStashWindow = async () => {
 	stashVisible.value = true;
 };
 
-const onGoogleSheetsClicked = (sample: DivinationCardsSample) => {
+const onGoogleSheetsClicked = (sample: DivinationCardsSample, league: League) => {
 	if (!sheetsPopupRef.value) return;
 	toSheetsSample.value = sample;
+	toSheetsLeague.value = league;
 	sheetsPopupRef.value.open();
 };
 
@@ -66,12 +69,16 @@ const onSheetsSubmit = async ({
 		throw new Error('No sample to sheets');
 	}
 
+	if (!toSheetsLeague.value) {
+		throw new Error('No league to sheets');
+	}
+
 	if (!googleAuthStore.loggedIn) {
 		await googleAuthStore.login();
 	}
 
 	try {
-		const url = await command('add_sheet_with_sample', {
+		const url = await command('new_sheet_with_sample', {
 			spreadsheetId,
 			title: sheetTitle,
 			sample: toSheetsSample.value,
@@ -81,6 +88,7 @@ const onSheetsSubmit = async ({
 				orderedBy,
 				columns: Array.from(columns),
 			},
+			league: toSheetsLeague.value,
 		});
 
 		toast('success', 'New sheet created successfully');
@@ -139,7 +147,7 @@ const onSheetsSubmit = async ({
 				v-if="sampleStore.merged"
 				v-bind="sampleStore.merged"
 				@delete="sampleStore.deleteMerged"
-				@google-sheets-clicked="onGoogleSheetsClicked(sampleStore.merged.sample)"
+				@google-sheets-clicked="onGoogleSheetsClicked"
 				@update:minimumCardPrice="price => sampleStore.merged && (sampleStore.merged.minimumCardPrice = price)"
 				@update:league="sampleStore.replaceMerged"
 			/>
@@ -166,7 +174,7 @@ const onSheetsSubmit = async ({
 				<SampleCard
 					v-for="fileCard in sampleStore.sampleCards"
 					v-bind="fileCard"
-					@google-sheets-clicked="onGoogleSheetsClicked(fileCard.sample)"
+					@google-sheets-clicked="onGoogleSheetsClicked"
 					@delete="sampleStore.deleteFile"
 					v-model:selected="fileCard.selected"
 					v-model:minimumCardPrice="fileCard.minimumCardPrice"

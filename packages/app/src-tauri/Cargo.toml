@@ -36,6 +36,7 @@ keyring = "2.0.3"
 open = "4.1.0"
 async-trait = "0.1.68"
 url = "2.3.1"
+chrono = { version = "0.4.30", features = ["serde"] }
 
 [features]
 # by default Tauri runs in production mode

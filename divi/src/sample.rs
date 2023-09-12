@@ -2,6 +2,7 @@ use std::{collections::HashMap, fmt::Display};
 
 use csv::{ReaderBuilder, Trim};
 use serde::{Deserialize, Serialize};
+use serde_json::{json, Value};
 
 use crate::{
     card_record::DivinationCardRecord,
@@ -238,10 +239,7 @@ impl DivinationCardsSample {
         self
     }
 
-    pub fn into_values(
-        mut self,
-        preferences: Option<TablePreferences>,
-    ) -> Vec<Vec<CardSheetValue>> {
+    pub fn into_serde_values(mut self, preferences: Option<TablePreferences>) -> Vec<Vec<Value>> {
         let preferences = preferences.unwrap_or_default();
 
         if preferences.cards_must_have_amount {
@@ -252,26 +250,25 @@ impl DivinationCardsSample {
             .order_by(preferences.ordered_by, preferences.order);
 
         let columns = preserve_column_order(&preferences.columns);
-        let mut values = vec![vec![]];
-        let headers: Vec<CardSheetValue> = columns
-            .iter()
-            .map(|c| CardSheetValue::Name(c.to_string()))
-            .collect();
+        let mut values: Vec<Vec<Value>> = vec![];
+        let headers: Vec<Value> = columns.iter().map(|c| json!(c)).collect();
         values.push(headers);
+
         for card in self.cards.iter() {
-            let mut vec: Vec<CardSheetValue> = vec![];
-            for column in &columns {
-                let value = match column {
-                    Column::Name => CardSheetValue::Name(card.name.clone()),
-                    Column::Amount => CardSheetValue::Amount(card.amount),
-                    Column::Weight => CardSheetValue::F32(card.weight),
-                    Column::Price => CardSheetValue::F32(card.price),
-                    Column::Sum => CardSheetValue::F32(card.sum),
-                };
-                vec.push(value);
-            }
-            values.push(vec);
+            values.push(
+                columns
+                    .iter()
+                    .map(|column| match column {
+                        Column::Name => json!(&card.name),
+                        Column::Amount => json!(card.amount),
+                        Column::Weight => json!(card.weight),
+                        Column::Price => json!(card.price),
+                        Column::Sum => json!(card.sum),
+                    })
+                    .collect::<Vec<Value>>(),
+            );
         }
+
         values
     }
 }
@@ -339,14 +336,6 @@ fn preserve_column_order(columns: &[Column]) -> Vec<Column> {
         .and_then(|_| Some(vec.push(Column::Sum)));
 
     vec
-}
-
-#[derive(Serialize, Clone, Debug, Deserialize)]
-#[serde(untagged)]
-pub enum CardSheetValue {
-    Name(String),
-    Amount(u32),
-    F32(Option<f32>),
 }
 
 pub fn fix_name(name: &str) -> Option<String> {
@@ -458,11 +447,11 @@ mod tests {
     use super::*;
 
     #[tokio::test]
-    async fn into_values() {
+    async fn into_serde_values() {
         let csv = read_to_string("example-2.csv").unwrap();
         let prices = Prices::fetch(&TradeLeague::Ancestor).await.unwrap();
         let sample = DivinationCardsSample::create(SampleData::Csv(csv), Some(prices)).unwrap();
-        let values = sample.into_values(Some(TablePreferences {
+        let values = sample.into_serde_values(Some(TablePreferences {
             columns: vec![
                 Column::Sum,
                 Column::Weight,
@@ -475,10 +464,8 @@ mod tests {
             cards_must_have_amount: false,
         }));
         let json = serde_json::to_string(&values).unwrap();
-        write("values.json", &json).unwrap();
+        write("serde-values.json", &json).unwrap();
     }
-    // let prices = Prices::fetch(&TradeLeague::Ancestor).await.unwrap();
-    // dbg!(sample.into_values(&[Column::Amount, Column::Name]));
 
     #[test]
     fn column_order() {
@@ -502,16 +489,18 @@ mod tests {
     }
 
     #[test]
-    fn into_values_2() {
+    fn into_serde_values_2() {
         let sample = DivinationCardsSample::create(
             SampleData::Csv(String::from("name,amount\rRain of Chaos,1\rThe Doctor,1")),
             None,
         )
         .unwrap();
-        let values = sample.into_values(Some(TablePreferences {
+        let values = sample.into_serde_values(Some(TablePreferences {
             cards_must_have_amount: true,
             ..Default::default()
         }));
+        dbg!(&values);
+        assert_eq!(values.len(), 3);
         let json = serde_json::to_string(&values).unwrap();
         write("values2.json", &json).unwrap();
     }
