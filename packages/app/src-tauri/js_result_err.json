@@ -1,1 +1,1 @@
-{"type":"err","error":"File should contain headers: name, amount."}
+{ "type": "err", "error": "File should contain headers: name, amount." }

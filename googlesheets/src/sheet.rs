@@ -64,7 +64,7 @@ pub async fn batch_update(
         let err_response: GoogleErrorResponse = response.json().await?;
         Err(err_response.error.into())
     } else {
-        let write_values: Value = response.json().await.unwrap();
+        let write_values: Value = response.json().await?;
         Ok(write_values)
     }
 }
@@ -127,23 +127,25 @@ pub async fn write_values_into_sheet(
 }
 
 pub async fn add_sheet(spreadsheet_id: &str, title: &str, token: &str) -> Result<AddSheet, Error> {
-    let body = serde_json::to_string(&serde_json::json!({
-       "requests":[
-          {
-             "addSheet":{
-                "properties":{
-                   "title": title
-                }
-             }
-          }
-       ]
-    }))
-    .unwrap();
-    let url = format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}:batchUpdate");
     let response = Client::new()
-        .post(url)
+        .post(format!(
+            "https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}:batchUpdate"
+        ))
         .header("Authorization", format!("Bearer {}", { token }))
-        .body(body)
+        .body(
+            json!({
+               "requests":[
+                  {
+                     "addSheet":{
+                        "properties":{
+                           "title": title
+                        }
+                     }
+                  }
+               ]
+            })
+            .to_string(),
+        )
         .send()
         .await?;
 
