@@ -1,7 +1,7 @@
 use chrono::Utc;
 use divi::{league::League, sample::DivinationCardsSample};
 use googlesheets::sheet::{Dimension, SheetUrl, ValueRange};
-use serde_json::json;
+use serde_json::{json, Value};
 use tracing::debug;
 
 use crate::{
@@ -46,4 +46,30 @@ pub async fn new_sheet_with_sample(
         spreadsheet_id,
         add_sheet_response.properties.sheet_id,
     ))
+}
+
+#[tauri::command]
+#[tracing::instrument]
+pub async fn read_batch(spreadsheet_id: &str, ranges: Vec<&str>) -> Result<Value, Error> {
+    let value = googlesheets::read_batch(
+        spreadsheet_id,
+        &ranges,
+        &AccessTokenStorage::new().get().unwrap(),
+    )
+    .await?;
+
+    Ok(value)
+}
+
+#[tauri::command]
+#[tracing::instrument]
+pub async fn read_sheet(spreadsheet_id: &str, range: &str) -> Result<ValueRange, Error> {
+    let value_range = googlesheets::read(
+        spreadsheet_id,
+        range,
+        &AccessTokenStorage::new().get().unwrap(),
+    )
+    .await?;
+
+    Ok(value_range)
 }

@@ -3,8 +3,58 @@ use std::fmt::{Debug, Display};
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
+use tracing::debug;
 
 use crate::error::{Error, GoogleErrorResponse};
+
+pub async fn read_batch(
+    spreadsheet_id: &str,
+    ranges: &[&str],
+    token: &str,
+) -> Result<Value, Error> {
+    let formatted_ranges = ranges
+        .iter()
+        .map(|range| format!("ranges={range}"))
+        .collect::<Vec<String>>()
+        .join("&");
+
+    let url =
+        format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values:batchGet?{formatted_ranges}");
+    debug!(url);
+    let response = Client::new()
+        .get(url)
+        .header("Authorization", format!("Bearer {token}"))
+        .send()
+        .await?;
+
+    if response.status().as_u16() >= 400 {
+        let err_response: GoogleErrorResponse = response.json().await?;
+        Err(err_response.error.into())
+    } else {
+        let value: Value = response.json().await?;
+        Ok(value)
+    }
+}
+
+pub async fn read(spreadsheet_id: &str, range: &str, token: &str) -> Result<ValueRange, Error> {
+    let url =
+        format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{range}");
+
+    dbg!(&url);
+    let response = Client::new()
+        .get(url)
+        .header("Authorization", format!("Bearer {token}"))
+        .send()
+        .await?;
+
+    if response.status().as_u16() >= 400 {
+        let err_response: GoogleErrorResponse = response.json().await?;
+        Err(err_response.error.into())
+    } else {
+        let value_range: ValueRange = response.json().await?;
+        Ok(value_range)
+    }
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub enum Dimension {
@@ -307,3 +357,6 @@ pub struct GridProperties {
 //     let value: Value = response.json().await?;
 //     Ok(value)
 // }
+
+#[allow(dead_code)]
+const SPREADSHEET_ID: &'static str = "1sDXpbG2bkqrOYScnvjMXTTg718dEc0LMDVHzllbAgmM";

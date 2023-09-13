@@ -11,8 +11,15 @@ import {
 import { NoItemsTab } from '@divicards/shared/poe.types';
 
 export type SampleData = string | CardNameAmount[];
+export type ValueRange = {
+	majorDimension: 'ROWS' | 'COLUMNS';
+	range: string;
+	values: Array<Array<string | number | null | undefined>>;
+};
 
 export interface Commands {
+	read_batch(args: { spreadsheetId: string; ranges: string[] }): unknown;
+	read_sheet(args: { spreadsheetId: string; range: string }): ValueRange;
 	new_sheet_with_sample: (args: {
 		spreadsheetId: string;
 		title: string;

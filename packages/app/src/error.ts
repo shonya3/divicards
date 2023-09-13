@@ -32,6 +32,7 @@ export const isSheetsError = (e: unknown): e is SheetsError => {
 };
 
 export const handleError = (err: unknown) => {
+	console.log(err);
 	if (isTauriError(err)) {
 		if (err.kind === 'authError') {
 			if (err.authError === 'userDenied') {
