@@ -4,7 +4,8 @@ members = [
     "packages/app/src-tauri",
     "divi",
     "googlesheets",
-    "divi/examples/*"
+    "divi/examples/*",
+    "scripts"
 ]
 
 [workspace.package]

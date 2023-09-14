@@ -65,11 +65,14 @@ const onSheetsSubmit = async ({
 	columns,
 	cardsMustHaveAmount,
 }: SheetsProps) => {
-	if (!toSheetsSample.value) {
+	const sample = toSheetsSample.value;
+	const league = toSheetsLeague.value;
+
+	if (!sample) {
 		throw new Error('No sample to sheets');
 	}
 
-	if (!toSheetsLeague.value) {
+	if (!league) {
 		throw new Error('No league to sheets');
 	}
 
@@ -81,14 +84,14 @@ const onSheetsSubmit = async ({
 		const url = await command('new_sheet_with_sample', {
 			spreadsheetId,
 			title: sheetTitle,
-			sample: toSheetsSample.value,
+			sample,
 			preferences: {
 				cardsMustHaveAmount,
 				order,
 				orderedBy,
 				columns: Array.from(columns),
 			},
-			league: toSheetsLeague.value,
+			league,
 		});
 
 		toast('success', 'New sheet created successfully');
