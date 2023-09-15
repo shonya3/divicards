@@ -8,8 +8,9 @@ use divi::{sample::fix_name, IsCard};
 use serde::{Deserialize, Serialize};
 
 use error::Error;
-use googlesheets::sheet::ValueRange;
 use serde_json::Value;
+
+use crate::scripts::read_original_table_sheet;
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 #[serde(rename_all = "camelCase")]
@@ -97,12 +98,6 @@ impl RemainingWork {
             Ok(remaining_work)
         }
     }
-}
-
-pub fn read_original_table_sheet() -> ValueRange {
-    let value_range: ValueRange =
-        serde_json::from_str(&std::fs::read_to_string("areas.json").unwrap()).unwrap();
-    value_range
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -193,9 +188,9 @@ pub fn parse_row(row: &[Value]) -> Result<CardDropRecord, Error> {
 }
 
 fn main() {
-    let vr = read_original_table_sheet();
+    let sheet = read_original_table_sheet("sheet.json").unwrap();
     let mut map: HashMap<String, Vec<CardDropRecord>> = HashMap::new();
-    for row in &vr.values[2..] {
+    for row in &sheet.values[2..] {
         let record = parse_row(row).unwrap();
         let r = map.entry(record.name.as_str().to_owned()).or_insert(vec![]);
         r.push(record);
@@ -234,16 +229,17 @@ mod tests {
 
     #[test]
     fn parses_table_without_errors() {
-        let vr = read_original_table_sheet();
-        for row in &vr.values[2..] {
+        let sheet = read_original_table_sheet("sheet.json").unwrap();
+        for row in &sheet.values[2..] {
             parse_row(row).unwrap();
         }
     }
 
     #[test]
     fn test_parse_greynote() {
+        let sheet = read_original_table_sheet("sheet.json").unwrap();
         let mut vec: Vec<Vec<Value>> = vec![];
-        for val in &read_original_table_sheet().values {
+        for val in &sheet.values {
             if let Err(_) = parse_greynote(&val[0]) {
                 vec.push(val.to_owned());
                 dbg!(val);
@@ -305,8 +301,9 @@ mod tests {
 
     #[test]
     fn test_parse_name() {
+        let sheet = read_original_table_sheet("sheet.json").unwrap();
         let mut vec: Vec<Vec<Value>> = vec![];
-        for val in &read_original_table_sheet().values[2..] {
+        for val in &sheet.values[2..] {
             if let Err(_) = super::parse_name(&val[1]) {
                 vec.push(val.to_owned());
             }
@@ -327,8 +324,9 @@ mod tests {
 
     #[test]
     fn test_parse_remaining_work() {
+        let sheet = read_original_table_sheet("sheet.json").unwrap();
         let mut vec: Vec<Vec<Value>> = vec![];
-        for val in &read_original_table_sheet().values[2..] {
+        for val in &sheet.values[2..] {
             if val.len() < 5 {
                 continue;
             }

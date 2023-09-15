@@ -1,8 +1,15 @@
+use std::path::Path;
+
 use googlesheets::sheet::ValueRange;
 use reqwest::Client;
 use serde_json::Value;
 
-use crate::{error::Error, parse_row, read_original_table_sheet, CardDropRecord};
+use crate::{error::Error, parse_row, CardDropRecord};
+
+pub fn read_original_table_sheet<P: AsRef<Path>>(path: P) -> Result<ValueRange, Error> {
+    let sheet: ValueRange = serde_json::from_str(&std::fs::read_to_string(path)?)?;
+    Ok(sheet)
+}
 
 pub async fn download_table_sheet() -> Result<ValueRange, Error> {
     dotenv::dotenv().ok();
@@ -13,13 +20,12 @@ pub async fn download_table_sheet() -> Result<ValueRange, Error> {
     Ok(value_range)
 }
 
-pub async fn write_table_sheet_json() -> Result<(), Error> {
-    let sheet = download_table_sheet().await?;
-    std::fs::write("table-source.json", serde_json::to_string_pretty(&sheet)?)?;
+pub fn write_table_sheet<P: AsRef<Path>>(path: P, sheet: &ValueRange) -> Result<(), Error> {
+    std::fs::write(path, serde_json::to_string_pretty(&sheet)?)?;
     Ok(())
 }
 
-pub fn write_notes() {
+pub fn write_notes<P: AsRef<Path>>(path: P, sheet: &ValueRange) -> Result<(), Error> {
     fn parse_notes(row: &[Value]) -> Result<String, Error> {
         if row.len() < 9 {
             return Err(Error::RowIsTooShort("Notes".to_string(), 9));
@@ -29,19 +35,19 @@ pub fn write_notes() {
     }
 
     let mut vec: Vec<String> = vec![];
-    for row in &read_original_table_sheet().values {
+    for row in &sheet.values {
         if let Ok(notes) = parse_notes(&row) {
             vec.push(notes);
         }
     }
 
-    std::fs::write("notes.json", serde_json::to_string_pretty(&vec).unwrap()).unwrap();
+    std::fs::write(path, serde_json::to_string_pretty(&vec)?)?;
+    Ok(())
 }
 
-pub fn write_hypothesis_tags() {
+pub fn write_hypothesis_tags<P: AsRef<Path>>(path: P, sheet: &ValueRange) -> Result<(), Error> {
     let mut tags: Vec<&str> = vec![];
-    let vr = read_original_table_sheet();
-    for row in &vr.values[2..] {
+    for row in &sheet.values[2..] {
         if row.len() < 3 {
             continue;
         }
@@ -55,42 +61,51 @@ pub fn write_hypothesis_tags() {
         }
 
         tags.push(s);
-
-        println!("{}", s);
     }
 
-    let s = serde_json::to_string(&tags).unwrap();
-    std::fs::write("tags.json", s).unwrap();
+    let s = serde_json::to_string_pretty(&tags)?;
+    std::fs::write(path, s)?;
+
+    Ok(())
 }
 
-pub fn test_parse_table() {
-    pub fn parse_table(values: &[Vec<Value>]) -> Result<Vec<CardDropRecord>, Error> {
-        let mut records: Vec<CardDropRecord> = Vec::new();
-        for row in values {
-            match parse_row(row) {
-                Ok(record) => records.push(record),
-                Err(err) => {
-                    println!("{err}");
-                }
-            }
-        }
-
-        Ok(records)
+pub fn parse_table(values: &[Vec<Value>]) -> Result<Vec<CardDropRecord>, Error> {
+    let mut records: Vec<CardDropRecord> = Vec::new();
+    for row in values {
+        let record = parse_row(row)?;
+        records.push(record);
     }
 
-    let vr = read_original_table_sheet();
-    let table = parse_table(&vr.values[2..]).unwrap();
-    let json = serde_json::to_string_pretty(&table).unwrap();
-    std::fs::write("parsed-table.json", &json).unwrap();
+    Ok(records)
+}
 
+pub fn write_parsed_table<P: AsRef<Path>>(path: P, table: &[CardDropRecord]) -> Result<(), Error> {
+    let json = serde_json::to_string_pretty(&table)?;
+    std::fs::write(path, &json)?;
+
+    Ok(())
+}
+
+pub fn write_drops_from<P: AsRef<Path>>(path: P, table: &[CardDropRecord]) -> Result<(), Error> {
     let drops_from: Vec<Option<String>> = table
         .iter()
         .map(|record| record.drops_from.to_owned())
         .collect();
 
-    std::fs::write(
-        "drops-from.json",
-        serde_json::to_string(&drops_from).unwrap(),
-    )
-    .unwrap();
+    std::fs::write(path, serde_json::to_string_pretty(&drops_from)?)?;
+    Ok(())
+}
+
+#[tokio::test]
+pub async fn update_all_jsons() {
+    let sheet = download_table_sheet()
+        .await
+        .expect("Download table sheet error");
+    write_hypothesis_tags("hypothesis-tags.json", &sheet).expect("Write hypothesis tags error");
+    write_notes("notes.json", &sheet).expect("Write notes error");
+    write_table_sheet("sheet.json", &sheet).expect("Write  sheet error");
+
+    let table = parse_table(&sheet.values[2..]).expect("Could not parse the table");
+    write_parsed_table("parsed-table.json", &table).expect("Write parsed table error");
+    write_drops_from("drops-from.json", &table).expect("Write drops-from error");
 }
