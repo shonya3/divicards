@@ -1,61 +1,15 @@
 mod comments;
 pub mod error;
+pub mod scripts;
+
+use std::collections::HashMap;
 
 use divi::{sample::fix_name, IsCard};
 use serde::{Deserialize, Serialize};
 
 use error::Error;
 use googlesheets::sheet::ValueRange;
-use reqwest::Client;
 use serde_json::Value;
-
-pub fn deserialize_table(table: ValueRange) {
-    for row in &table.values {
-        let len = row.len();
-
-        if len == 0 {
-            continue;
-        }
-
-        let Some(name) = row.get(1) else {
-            continue;
-        };
-        let name = name.to_string();
-        if !name.as_str().is_card() {
-            continue;
-        }
-    }
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
-#[serde(rename_all = "camelCase")]
-pub enum Confidence {
-    #[serde(alias = "none")]
-    None,
-    #[serde(alias = "Low", alias = "low")]
-    Low,
-    #[serde(alias = "OK", alias = "ok")]
-    Ok,
-    #[serde(alias = "DONE", alias = "Done")]
-    Done,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
-#[serde(rename_all = "camelCase")]
-pub enum RemainingWork {
-    #[serde(alias = "confirm")]
-    Confirm,
-    #[serde(alias = "unclear hypothesis")]
-    UnclearHypothesis,
-    #[serde(alias = "no hypothesis")]
-    NoHypothesis,
-    #[serde(alias = "story only")]
-    StoryOnly,
-    #[serde(alias = "legacy tag")]
-    LegacyTag,
-    #[serde(alias = "open ended")]
-    OpenEnded,
-}
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 #[serde(rename_all = "camelCase")]
@@ -80,50 +34,75 @@ pub enum GreyNote {
     Vendor,
 }
 
-pub async fn download_areas_sheet() -> Result<ValueRange, Error> {
-    dotenv::dotenv().ok();
-    let api_key = std::env::var("GOOGLE_API_KEY").expect("No google api key");
-
-    let url = format!("https://sheets.googleapis.com/v4/spreadsheets/1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU/values/Cards_and_Hypotheses?key={api_key}");
-    let value_range: ValueRange = Client::new().get(url).send().await?.json().await?;
-    Ok(value_range)
+impl GreyNote {
+    pub fn parse(val: &Value) -> Result<Option<Self>, Error> {
+        let Some(s) = val.as_str() else {
+            return Ok(None);
+        };
+        if s.is_empty() || s == "n/a" {
+            return Ok(None);
+        } else {
+            let greynote = serde_json::from_str(&val.to_string())?;
+            Ok(greynote)
+        }
+    }
 }
 
-pub async fn update_areas_sheet() -> Result<(), Error> {
-    let sheet = download_areas_sheet().await?;
-    std::fs::write("areas.json", serde_json::to_string_pretty(&sheet)?)?;
-    Ok(())
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub enum Confidence {
+    #[serde(alias = "none")]
+    None,
+    #[serde(alias = "Low", alias = "low")]
+    Low,
+    #[serde(alias = "OK", alias = "ok")]
+    Ok,
+    #[serde(alias = "DONE", alias = "Done")]
+    Done,
 }
 
-pub fn read_areas_file() -> ValueRange {
+impl Confidence {
+    pub fn parse(val: &Value) -> Result<Self, Error> {
+        let conf: Confidence = serde_json::from_str(&val.to_string())?;
+        Ok(conf)
+    }
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub enum RemainingWork {
+    #[serde(alias = "confirm")]
+    Confirm,
+    #[serde(alias = "unclear hypothesis")]
+    UnclearHypothesis,
+    #[serde(alias = "no hypothesis")]
+    NoHypothesis,
+    #[serde(alias = "story only")]
+    StoryOnly,
+    #[serde(alias = "legacy tag")]
+    LegacyTag,
+    #[serde(alias = "open ended")]
+    OpenEnded,
+}
+
+impl RemainingWork {
+    pub fn parse(val: &Value) -> Result<Option<Self>, Error> {
+        let Some(s) = val.as_str() else {
+            return Ok(None);
+        };
+        if s.is_empty() || s == "n/a" {
+            return Ok(None);
+        } else {
+            let remaining_work = serde_json::from_str(&val.to_string())?;
+            Ok(remaining_work)
+        }
+    }
+}
+
+pub fn read_original_table_sheet() -> ValueRange {
     let value_range: ValueRange =
         serde_json::from_str(&std::fs::read_to_string("areas.json").unwrap()).unwrap();
     value_range
-}
-
-#[tokio::main]
-async fn main() {
-    // let mut vec: Vec<Vec<Value>> = vec![];
-    // let mut i = 0;
-    // for val in &read_areas_file().values[2..] {
-    //     if val.len() == 5 {
-    //         dbg!(val);
-    //         continue;
-    //     }
-
-    //     let second_column_contents = val[1].as_str().unwrap();
-    //     let name = match second_column_contents.is_card() {
-    //         true => second_column_contents.to_string(),
-    //         false => match fix_name(second_column_contents) {
-    //             Some(s) => s,
-    //             None => panic!("Could not parse name {second_column_contents}"),
-    //         },
-    //     };
-    // }
-
-    // let g = serde_json::to_string(&GreyNote::Delirium).unwrap();
-
-    // write("short.json", serde_json::to_string(&vec).unwrap()).unwrap();
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -138,6 +117,10 @@ pub enum DropSource {
     Delirium,
     Vendor,
     Strongbox,
+}
+
+pub fn parse_greynote(val: &Value) -> Result<Option<GreyNote>, Error> {
+    GreyNote::parse(val)
 }
 
 pub fn parse_name(val: &Value) -> Result<String, Error> {
@@ -155,37 +138,70 @@ pub fn parse_name(val: &Value) -> Result<String, Error> {
 }
 
 pub fn parse_confidence(val: &Value) -> Result<Confidence, Error> {
-    let conf: Confidence = serde_json::from_str(&val.to_string())?;
-    Ok(conf)
-}
-
-// pub fn parse_greynote(val: &Value) -> Result<GreyNote, Error> {
-//     let conf: GreyNote = serde_json::from_str(&val.to_string())?;
-//     Ok(conf)
-// }
-
-pub fn parse_greynote(val: &Value) -> Result<Option<GreyNote>, Error> {
-    let Some(s) = val.as_str() else {
-        return Ok(None);
-    };
-    if s.is_empty() || s == "n/a" {
-        return Ok(None);
-    } else {
-        let greynote = serde_json::from_str(&val.to_string())?;
-        Ok(greynote)
-    }
+    Confidence::parse(val)
 }
 
 pub fn parse_remaining_work(val: &Value) -> Result<Option<RemainingWork>, Error> {
-    let Some(s) = val.as_str() else {
-        return Ok(None);
-    };
+    RemainingWork::parse(val)
+}
+
+pub fn parse_string_cell(val: &Value) -> Option<String> {
+    let Some(s) = val.as_str() else { return None };
     if s.is_empty() || s == "n/a" {
-        return Ok(None);
+        return None;
     } else {
-        let remaining_work = serde_json::from_str(&val.to_string())?;
-        Ok(remaining_work)
+        return Some(s.to_string());
     }
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+#[serde(rename_all = "camelCase")]
+pub struct CardDropRecord {
+    pub greynote: Option<GreyNote>,
+    pub name: String,
+    pub hypothesis: Option<String>,
+    pub confidence: Confidence,
+    pub remaining_work: Option<RemainingWork>,
+    pub drops_from: Option<String>,
+    pub wiki_disagreements: Option<String>,
+    pub sources_with_tag_but_not_on_wiki: Option<String>,
+    pub notes: Option<String>,
+}
+
+pub fn parse_row(row: &[Value]) -> Result<CardDropRecord, Error> {
+    let greynote = parse_greynote(&row[0])?;
+    let name = parse_name(&row[1])?;
+    let hypothesis = parse_string_cell(&row[2]);
+    let confidence = parse_confidence(&row[3])?;
+    let remaining_work = parse_remaining_work(&row[4])?;
+    let drops_from = row.get(5).map(|val| parse_string_cell(val)).flatten();
+    let wiki_disagreements = row.get(6).map(|val| parse_string_cell(val)).flatten();
+    let sources_with_tag_but_not_on_wiki = row.get(7).map(|val| parse_string_cell(val)).flatten();
+    let notes = row.get(8).map(|val| parse_string_cell(val)).flatten();
+
+    Ok(CardDropRecord {
+        greynote,
+        name,
+        hypothesis,
+        confidence,
+        remaining_work,
+        drops_from,
+        wiki_disagreements,
+        sources_with_tag_but_not_on_wiki,
+        notes,
+    })
+}
+
+fn main() {
+    let vr = read_original_table_sheet();
+    let mut map: HashMap<String, Vec<CardDropRecord>> = HashMap::new();
+    for row in &vr.values[2..] {
+        let record = parse_row(row).unwrap();
+        let r = map.entry(record.name.as_str().to_owned()).or_insert(vec![]);
+        r.push(record);
+    }
+
+    dbg!(map.keys().len());
 }
 
 // pub fn parse_map_source(row: &[Value]) -> Result<DropSource, Error> {
@@ -208,14 +224,6 @@ pub fn parse_remaining_work(val: &Value) -> Result<Option<RemainingWork>, Error>
 //     // }
 // }
 
-pub fn parse_notes(row: &[Value]) -> Result<String, Error> {
-    if row.len() < 9 {
-        return Err(Error::RowIsTooShort("Notes".to_string(), 9));
-    };
-
-    Ok(row[8].to_string())
-}
-
 #[cfg(test)]
 mod tests {
     use serde_json::json;
@@ -225,86 +233,17 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_parse_notes() {
-        let mut vec: Vec<String> = vec![];
-        for row in &read_areas_file().values {
-            if let Ok(notes) = parse_notes(&row) {
-                vec.push(notes);
-            }
+    fn parses_table_without_errors() {
+        let vr = read_original_table_sheet();
+        for row in &vr.values[2..] {
+            parse_row(row).unwrap();
         }
-
-        std::fs::write("notes.json", serde_json::to_string_pretty(&vec).unwrap()).unwrap();
-    }
-
-    #[test]
-    fn test_parse_remaining_work() {
-        let mut vec: Vec<Vec<Value>> = vec![];
-        for val in &read_areas_file().values[2..] {
-            if val.len() < 5 {
-                continue;
-            }
-            if let Err(_) = parse_remaining_work(&val[4]) {
-                vec.push(val.to_owned());
-            }
-        }
-        assert_eq!(vec.len(), 0);
-
-        assert_eq!(
-            Some(RemainingWork::Confirm),
-            parse_remaining_work(&json!("confirm")).unwrap()
-        );
-        assert_eq!(
-            Some(RemainingWork::UnclearHypothesis),
-            parse_remaining_work(&json!("unclear hypothesis")).unwrap()
-        );
-        assert_eq!(
-            Some(RemainingWork::NoHypothesis),
-            parse_remaining_work(&json!("no hypothesis")).unwrap()
-        );
-        assert_eq!(
-            Some(RemainingWork::StoryOnly),
-            parse_remaining_work(&json!("story only")).unwrap()
-        );
-        assert_eq!(None, parse_remaining_work(&json!("n/a")).unwrap());
-        assert_eq!(
-            Some(RemainingWork::LegacyTag),
-            parse_remaining_work(&json!("legacy tag")).unwrap()
-        );
-
-        assert_eq!(
-            Some(RemainingWork::OpenEnded),
-            parse_remaining_work(&json!("open ended")).unwrap()
-        );
-
-        assert_eq!(None, parse_remaining_work(&json!("")).unwrap());
-    }
-
-    #[test]
-    fn test_parse_name() {
-        let mut vec: Vec<Vec<Value>> = vec![];
-        for val in &read_areas_file().values[2..] {
-            if let Err(_) = super::parse_name(&val[1]) {
-                vec.push(val.to_owned());
-            }
-        }
-
-        assert_eq!(vec.len(), 0);
-    }
-
-    #[test]
-    fn test_parse_confidence() {
-        assert_eq!(Confidence::Done, parse_confidence(&json!("DONE")).unwrap());
-        assert_eq!(Confidence::Low, parse_confidence(&json!("Low")).unwrap());
-        assert_eq!(Confidence::Low, parse_confidence(&json!("low")).unwrap());
-        assert_eq!(Confidence::None, parse_confidence(&json!("none")).unwrap());
-        assert_eq!(Confidence::Ok, parse_confidence(&json!("OK")).unwrap());
-        assert_eq!(Confidence::Ok, parse_confidence(&json!("ok")).unwrap());
     }
 
     #[test]
     fn test_parse_greynote() {
         let mut vec: Vec<Vec<Value>> = vec![];
-        for val in &read_areas_file().values {
+        for val in &read_original_table_sheet().values {
             if let Err(_) = parse_greynote(&val[0]) {
                 vec.push(val.to_owned());
                 dbg!(val);
@@ -363,127 +302,69 @@ mod tests {
         assert_eq!(None, parse_greynote(&json!("")).unwrap());
         assert_eq!(None, parse_greynote(&json!("n/a")).unwrap());
     }
-}
 
-// #[test]
-// fn test_parse_table() {
-//     let vr = read_areas_file();
-//     for row in &vr.values {
-//         parse_row(&row);
-//     }
-// }
-
-#[test]
-fn write_hypothesis_tags() {
-    let mut tags: Vec<&str> = vec![];
-    let vr = read_areas_file();
-    for row in &vr.values[2..] {
-        if row.len() < 3 {
-            continue;
-        }
-
-        let Some(s) = row[2].as_str() else {
-            continue;
-        };
-
-        if s.is_empty() {
-            continue;
-        }
-
-        tags.push(s);
-
-        println!("{}", s);
-    }
-
-    let s = serde_json::to_string(&tags).unwrap();
-    std::fs::write("tags.json", s).unwrap();
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
-#[serde(untagged)]
-pub enum StringCell {
-    String(String),
-    Empty,
-}
-
-#[derive(Debug, Serialize, Deserialize, Clone)]
-#[serde(rename_all = "camelCase")]
-pub struct CardDropRecord {
-    pub greynote: Option<GreyNote>,
-    pub name: String,
-    pub hypothesis: Option<String>,
-    pub confidence: Confidence,
-    pub remaining_work: Option<RemainingWork>,
-    pub drops_from: Option<String>,
-    pub wiki_disagreements: Option<String>,
-    pub sources_with_tag_but_not_on_wiki: Option<String>,
-    pub notes: Option<String>,
-}
-
-pub fn parse_row(row: &[Value]) -> Result<CardDropRecord, Error> {
-    let greynote = parse_greynote(&row[0])?;
-    let name = parse_name(&row[1])?;
-    let hypothesis = parse_string_cell(&row[2]);
-    let confidence = parse_confidence(&row[3])?;
-    let remaining_work = parse_remaining_work(&row[4])?;
-    let drops_from = row.get(5).map(|val| parse_string_cell(val)).flatten();
-    let wiki_disagreements = row.get(6).map(|val| parse_string_cell(val)).flatten();
-    let sources_with_tag_but_not_on_wiki = row.get(7).map(|val| parse_string_cell(val)).flatten();
-    let notes = row.get(8).map(|val| parse_string_cell(val)).flatten();
-
-    Ok(CardDropRecord {
-        greynote,
-        name,
-        hypothesis,
-        confidence,
-        remaining_work,
-        drops_from,
-        wiki_disagreements,
-        sources_with_tag_but_not_on_wiki,
-        notes,
-    })
-}
-
-#[test]
-fn test_parse_table() {
-    let vr = read_areas_file();
-    let table = parse_table(&vr.values[2..]).unwrap();
-    let json = serde_json::to_string_pretty(&table).unwrap();
-    std::fs::write("parsed-table.json", &json).unwrap();
-
-    let drops_from: Vec<Option<String>> = table
-        .iter()
-        .map(|record| record.drops_from.to_owned())
-        .collect();
-
-    std::fs::write(
-        "drops-from.json",
-        serde_json::to_string(&drops_from).unwrap(),
-    )
-    .unwrap();
-
-    // let a = parse_table(&vr.values[2..]).unwrap();
-}
-
-pub fn parse_table(values: &[Vec<Value>]) -> Result<Vec<CardDropRecord>, Error> {
-    let mut records: Vec<CardDropRecord> = Vec::new();
-    for row in values {
-        match parse_row(row) {
-            Ok(record) => records.push(record),
-            Err(err) => {
-                println!("{err}");
+    #[test]
+    fn test_parse_name() {
+        let mut vec: Vec<Vec<Value>> = vec![];
+        for val in &read_original_table_sheet().values[2..] {
+            if let Err(_) = super::parse_name(&val[1]) {
+                vec.push(val.to_owned());
             }
         }
+
+        assert_eq!(vec.len(), 0);
     }
 
-    Ok(records)
-}
+    #[test]
+    fn test_parse_confidence() {
+        assert_eq!(Confidence::Done, parse_confidence(&json!("DONE")).unwrap());
+        assert_eq!(Confidence::Low, parse_confidence(&json!("Low")).unwrap());
+        assert_eq!(Confidence::Low, parse_confidence(&json!("low")).unwrap());
+        assert_eq!(Confidence::None, parse_confidence(&json!("none")).unwrap());
+        assert_eq!(Confidence::Ok, parse_confidence(&json!("OK")).unwrap());
+        assert_eq!(Confidence::Ok, parse_confidence(&json!("ok")).unwrap());
+    }
 
-pub fn parse_string_cell(val: &Value) -> Option<String> {
-    let Some(s) = val.as_str() else { return None };
-    if s.is_empty() || s == "n/a" {
-        return None;
-    } else {
-        return Some(s.to_string());
+    #[test]
+    fn test_parse_remaining_work() {
+        let mut vec: Vec<Vec<Value>> = vec![];
+        for val in &read_original_table_sheet().values[2..] {
+            if val.len() < 5 {
+                continue;
+            }
+            if let Err(_) = parse_remaining_work(&val[4]) {
+                vec.push(val.to_owned());
+            }
+        }
+        assert_eq!(vec.len(), 0);
+
+        assert_eq!(
+            Some(RemainingWork::Confirm),
+            parse_remaining_work(&json!("confirm")).unwrap()
+        );
+        assert_eq!(
+            Some(RemainingWork::UnclearHypothesis),
+            parse_remaining_work(&json!("unclear hypothesis")).unwrap()
+        );
+        assert_eq!(
+            Some(RemainingWork::NoHypothesis),
+            parse_remaining_work(&json!("no hypothesis")).unwrap()
+        );
+        assert_eq!(
+            Some(RemainingWork::StoryOnly),
+            parse_remaining_work(&json!("story only")).unwrap()
+        );
+        assert_eq!(None, parse_remaining_work(&json!("n/a")).unwrap());
+        assert_eq!(
+            Some(RemainingWork::LegacyTag),
+            parse_remaining_work(&json!("legacy tag")).unwrap()
+        );
+
+        assert_eq!(
+            Some(RemainingWork::OpenEnded),
+            parse_remaining_work(&json!("open ended")).unwrap()
+        );
+
+        assert_eq!(None, parse_remaining_work(&json!("")).unwrap());
     }
 }
