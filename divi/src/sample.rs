@@ -1,6 +1,7 @@
-use std::{collections::HashMap, fmt::Display};
+use std::{collections::HashMap, fmt::Display, iter::zip};
 
 use csv::{ReaderBuilder, Trim};
+use googlesheets::sheet::{ReadBatchResponse, ValueRange};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 
@@ -535,5 +536,25 @@ Encroaching Darkness,5\r\nThe Endless Darkness,1\r\nThe Endurance,19\r\nThe Enfo
             .unwrap();
 
         assert_eq!(rain_of_chaos.amount, 1779);
+    }
+}
+
+impl TryFrom<ReadBatchResponse> for SampleData {
+    type Error = crate::error::Error;
+
+    fn try_from(response: ReadBatchResponse) -> Result<Self, Self::Error> {
+        let names = response.value_ranges[0].values.clone();
+        let amounts = response.value_ranges[1].values.clone();
+
+        let v = zip(names, amounts)
+            .into_iter()
+            .map(|(name, amount)| {
+                let name: String = serde_json::from_str(&name[0].to_string())?;
+                let amount: u32 =
+                    serde_json::from_str::<String>(&amount[0].to_string())?.parse::<u32>()?;
+                Ok(CardNameAmount { name, amount })
+            })
+            .collect::<Result<Vec<CardNameAmount>, Error>>()?;
+        Ok(SampleData::CardNameAmountList(v))
     }
 }

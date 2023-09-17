@@ -1,4 +1,4 @@
-use std::fmt::Display;
+use std::{fmt::Display, num::ParseIntError};
 
 use serde::Serialize;
 
@@ -10,6 +10,7 @@ pub enum Error {
     SerdeError(serde_json::Error),
     MissingHeaders,
     NoPricesForLeagueOnNinja(TradeLeague),
+    ParseIntError(ParseIntError),
 }
 
 impl Display for Error {
@@ -21,6 +22,7 @@ impl Display for Error {
             Error::NoPricesForLeagueOnNinja(league) => {
                 write!(f, "Prices for {} league do not exist on poe.ninja.", league)
             }
+            Error::ParseIntError(err) => err.fmt(f),
         }
     }
 }
@@ -43,5 +45,11 @@ impl From<reqwest::Error> for Error {
 impl From<serde_json::Error> for Error {
     fn from(value: serde_json::Error) -> Self {
         Error::SerdeError(value)
+    }
+}
+
+impl From<ParseIntError> for Error {
+    fn from(value: ParseIntError) -> Self {
+        Error::ParseIntError(value)
     }
 }
