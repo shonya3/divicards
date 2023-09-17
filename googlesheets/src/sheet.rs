@@ -7,45 +7,90 @@ use tracing::debug;
 
 use crate::error::{Error, GoogleErrorResponse};
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum Credential {
+    AccessToken(String),
+    ApiKey(String),
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ReadBatchResponse {
+    pub spreadsheet_id: String,
+    pub value_ranges: Vec<ValueRange>,
+}
+
 pub async fn read_batch(
     spreadsheet_id: &str,
     ranges: &[&str],
-    token: &str,
-) -> Result<Value, Error> {
+    credential: Credential,
+) -> Result<ReadBatchResponse, Error> {
     let formatted_ranges = ranges
         .iter()
         .map(|range| format!("ranges={range}"))
         .collect::<Vec<String>>()
         .join("&");
 
-    let url =
+    let response = match credential {
+        Credential::AccessToken(token) => {
+            let url =
         format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values:batchGet?{formatted_ranges}");
-    debug!(url);
-    let response = Client::new()
-        .get(url)
-        .header("Authorization", format!("Bearer {token}"))
-        .send()
-        .await?;
+            debug!(url);
+            let response = Client::new()
+                .get(url)
+                .header("Authorization", format!("Bearer {token}"))
+                .send()
+                .await?;
+            response
+        }
+        Credential::ApiKey(api_key) => {
+            dbg!(&api_key);
+            let url =
+        format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values:batchGet?{formatted_ranges}&key={api_key}");
+            debug!(url);
+            let response = Client::new().get(url).send().await?;
+            response
+        }
+    };
 
     if response.status().as_u16() >= 400 {
         let err_response: GoogleErrorResponse = response.json().await?;
         Err(err_response.error.into())
     } else {
-        let value: Value = response.json().await?;
+        let value: ReadBatchResponse = response.json().await?;
         Ok(value)
     }
 }
 
-pub async fn read(spreadsheet_id: &str, range: &str, token: &str) -> Result<ValueRange, Error> {
-    let url =
-        format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{range}");
+pub async fn read(
+    spreadsheet_id: &str,
+    range: &str,
+    credential: Credential,
+) -> Result<ValueRange, Error> {
+    let response = match credential {
+        Credential::AccessToken(token) => {
+            let url = format!(
+                "https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{range}"
+            );
 
-    dbg!(&url);
-    let response = Client::new()
-        .get(url)
-        .header("Authorization", format!("Bearer {token}"))
-        .send()
-        .await?;
+            dbg!(&url);
+            let response = Client::new()
+                .get(url)
+                .header("Authorization", format!("Bearer {token}"))
+                .send()
+                .await?;
+            response
+        }
+        Credential::ApiKey(api_key) => {
+            let url = format!(
+                "https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{range}?key={api_key}"
+            );
+
+            dbg!(&url);
+            let response = Client::new().get(url).send().await?;
+            response
+        }
+    };
 
     if response.status().as_u16() >= 400 {
         let err_response: GoogleErrorResponse = response.json().await?;
@@ -56,7 +101,7 @@ pub async fn read(spreadsheet_id: &str, range: &str, token: &str) -> Result<Valu
     }
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub enum Dimension {
     #[serde(rename = "ROWS")]
     Rows,
@@ -70,7 +115,7 @@ impl Default for Dimension {
     }
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct ValueRange {
     #[serde(rename = "majorDimension")]
     pub dimension: Dimension,
