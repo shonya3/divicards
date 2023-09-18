@@ -1,7 +1,7 @@
 use std::{collections::HashMap, fmt::Display, iter::zip};
 
 use csv::{ReaderBuilder, Trim};
-use googlesheets::sheet::{ReadBatchResponse, ValueRange};
+use googlesheets::sheet::ReadBatchResponse;
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 

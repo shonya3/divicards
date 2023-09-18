@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use serde_json::Value;
 
 use crate::{
     consts::{CARDS, CARDS_N},
@@ -80,3 +81,69 @@ impl From<Vec<DivinationCardPrice>> for Prices {
 //     let p = Prices::fetch(&TradeLeague::Standard).await.unwrap();
 //     std::fs::write("p.json", serde_json::to_string(&p).unwrap()).unwrap();
 // }
+
+impl From<Vec<NinjaCardData>> for Prices {
+    fn from(vec: Vec<NinjaCardData>) -> Self {
+        Prices(
+            vec.into_iter()
+                .map(|data| DivinationCardPrice {
+                    name: data.name,
+                    price: data.chaos_value,
+                    sparkline: data.sparkline,
+                })
+                .collect(),
+        )
+    }
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct NinjaCardData {
+    pub id: usize,
+    pub name: String,
+    pub icon: String,
+    pub stack_size: Option<usize>,
+    pub art_filename: String,
+    pub item_class: usize,
+    pub sparkline: Sparkline,
+    pub low_confidence_sparkline: Sparkline,
+    pub implicit_modifiers: Vec<Value>,
+    pub explicit_modifiers: Vec<Value>,
+    pub flavour_text: String,
+    pub chaos_value: Option<f32>,
+    pub exalted_value: Option<f32>,
+    pub divine_value: Option<f32>,
+    pub count: usize,
+    pub details_id: String,
+    pub trade_info: Vec<Value>,
+    pub listing_count: usize,
+}
+
+impl NinjaCardData {
+    pub async fn fetch(league: &TradeLeague) -> Result<Vec<NinjaCardData>, Error> {
+        #[derive(Deserialize, Debug, Serialize)]
+        struct PriceData {
+            lines: Vec<NinjaCardData>,
+        }
+
+        let client = reqwest::Client::new();
+        let url = format!("https://poe.ninja/api/data/itemoverview?league={league}&type=DivinationCard&language=en");
+        let json = client.get(url).send().await?.text().await?;
+        let data = serde_json::from_str::<PriceData>(&json)?;
+        if data.lines.len() == 0 {
+            return Err(Error::NoPricesForLeagueOnNinja(league.to_owned()));
+        }
+        Ok(data.lines)
+    }
+}
+
+#[test]
+pub fn fetch_ninja() {
+    let data: Vec<NinjaCardData> =
+        serde_json::from_str(&std::fs::read_to_string("ninja-data.json").unwrap()).unwrap();
+    for card in data.iter() {
+        if card.stack_size.is_none() {
+            dbg!(&card.name);
+        }
+    }
+}
