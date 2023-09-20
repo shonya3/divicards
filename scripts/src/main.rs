@@ -500,3 +500,21 @@ pub fn temp_main() {
     }
     // std::fs::write("map.json", &serde_json::to_string_pretty(&map).unwrap()).unwrap();
 }
+
+pub fn write_sized_rewards() {
+    let vec: Vec<NinjaCardData> =
+        serde_json::from_str(&std::fs::read_to_string("ninja-data.json").unwrap()).unwrap();
+    let mut with_size: Vec<String> = Vec::new();
+    for card_data in vec {
+        let reward = &card_data.explicit_modifiers[0].text;
+        if reward.contains("<size:") {
+            with_size.push(reward.clone());
+        }
+    }
+
+    std::fs::write(
+        "rewards-with-size.json",
+        serde_json::to_string(&with_size).unwrap(),
+    )
+    .unwrap();
+}
