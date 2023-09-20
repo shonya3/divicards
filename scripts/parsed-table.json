@@ -2,7 +2,7 @@
   {
     "greynote": null,
     "name": "A Dab of Ink",
-    "hypothesis": "library_area",
+    "tagHypothesis": "library_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Academy, Museum, Scriptorium",
@@ -13,7 +13,7 @@
   {
     "greynote": "monsterSpecific",
     "name": "A Familiar Call",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Guardian of the Chimera",
@@ -24,7 +24,7 @@
   {
     "greynote": null,
     "name": "A Fate Worse Than Death",
-    "hypothesis": "elderslayer",
+    "tagHypothesis": "elderslayer",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Baran, The Crusader; Veritania, The Redeemer; Al-Hezmin, The Hunter; Drox, The Warlord; Sirus, Awakener of Worlds",
@@ -35,7 +35,7 @@
   {
     "greynote": null,
     "name": "A Modest Request",
-    "hypothesis": "dominus_monster_map",
+    "tagHypothesis": "dominus_monster_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Hallowed Husk; The High Templar",
@@ -46,7 +46,7 @@
   {
     "greynote": null,
     "name": "A Modest Request",
-    "hypothesis": "malachai_boss_map",
+    "tagHypothesis": "malachai_boss_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Nightmare's Omen; Eater of Souls",
@@ -57,7 +57,7 @@
   {
     "greynote": "story",
     "name": "A Mother's Parting Gift",
-    "hypothesis": "garden_area",
+    "tagHypothesis": "garden_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The High Gardens, The Imperial Gardens",
@@ -68,7 +68,7 @@
   {
     "greynote": null,
     "name": "A Note in the Wind",
-    "hypothesis": "desert_area",
+    "tagHypothesis": "desert_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Dry Sea, Dunes, Desert Spring, Desert, The Oasis",
@@ -79,7 +79,7 @@
   {
     "greynote": null,
     "name": "A Note in the Wind",
-    "hypothesis": "desert_map_area",
+    "tagHypothesis": "desert_map_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Dry Sea, Dunes, Desert Spring, Desert",
@@ -90,7 +90,7 @@
   {
     "greynote": null,
     "name": "A Sea of Blue",
-    "hypothesis": "crystalline_area",
+    "tagHypothesis": "crystalline_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Crystal Ore, Mineral Pools, Primordial Blocks, Grotto",
@@ -101,7 +101,7 @@
   {
     "greynote": null,
     "name": "A Stone Perfected",
-    "hypothesis": "golem_boss_area",
+    "tagHypothesis": "golem_boss_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Coves, Flooded Mine, Grotto, Vault, Waterways, Wharf, Peninsula, Geode",
@@ -112,7 +112,7 @@
   {
     "greynote": "chestObject",
     "name": "Abandoned Wealth",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Mao Kun",
@@ -123,7 +123,7 @@
   {
     "greynote": null,
     "name": "Acclimatisation",
-    "hypothesis": "desert_map_area",
+    "tagHypothesis": "desert_map_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Desert Spring, Dunes, Dry Sea, Desert",
@@ -134,7 +134,7 @@
   {
     "greynote": null,
     "name": "Akil's Prophecy",
-    "hypothesis": "vaal_architect_incursion",
+    "tagHypothesis": "vaal_architect_incursion",
     "confidence": "ok",
     "remainingWork": null,
     "dropsFrom": "All Incursion Architects in Alva missions/Alva's Memory",
@@ -145,7 +145,7 @@
   {
     "greynote": null,
     "name": "Akil's Prophecy",
-    "hypothesis": "vaal_architect_temple",
+    "tagHypothesis": "vaal_architect_temple",
     "confidence": "low",
     "remainingWork": "confirm",
     "dropsFrom": null,
@@ -156,7 +156,7 @@
   {
     "greynote": null,
     "name": "Alluring Bounty",
-    "hypothesis": "atziri_area",
+    "tagHypothesis": "atziri_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Apex of Sacrifice, The Alluring Abyss",
@@ -167,7 +167,7 @@
   {
     "greynote": "chestObject",
     "name": "Alone in the Darkness",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -178,7 +178,7 @@
   {
     "greynote": "monsterSpecific",
     "name": "Altered Perception",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Uhtred, Covetous Traitor",
@@ -189,7 +189,7 @@
   {
     "greynote": null,
     "name": "Ambitious Obsession",
-    "hypothesis": "god_boss_map_area",
+    "tagHypothesis": "god_boss_map_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Ara, Sister of Light;\nArmala, the Widow;\nDrek, Apex Hunter;\nErebix, Light's Bane;\nGorulis, Will-Thief;\nKhor, Sister of Shadows;\nMephod, the Earth Scorcher;\nNassar, Lion of the Seas;\nStalker of the Endless Dunes;\nTahsin, Warmaker;\nTerror of the Infinite Drifts;\nVarhesh, Shimmering Aberration",
@@ -200,7 +200,7 @@
   {
     "greynote": null,
     "name": "Anarchy's Price",
-    "hypothesis": "rogue_exile",
+    "tagHypothesis": "rogue_exile",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "All Rogue Exiles",
@@ -211,7 +211,7 @@
   {
     "greynote": null,
     "name": "Arrogance of the Vaal",
-    "hypothesis": "ruined_vaal_city_area",
+    "tagHypothesis": "ruined_vaal_city_area",
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Ancient City, Sunken City",
@@ -222,7 +222,7 @@
   {
     "greynote": null,
     "name": "Assassin's Favour",
-    "hypothesis": "marketplace_area",
+    "tagHypothesis": "marketplace_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Alleyways, Arcade, Bazaar, Port, The Marketplace, The Quay",
@@ -233,7 +233,7 @@
   {
     "greynote": null,
     "name": "Atziri's Arsenal",
-    "hypothesis": "vaults_of_atziri",
+    "tagHypothesis": "vaults_of_atziri",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Vaults of Atziri",
@@ -244,7 +244,7 @@
   {
     "greynote": null,
     "name": "Audacity",
-    "hypothesis": "atziri_area",
+    "tagHypothesis": "atziri_area",
     "confidence": "low",
     "remainingWork": "confirm",
     "dropsFrom": "The Apex of Sacrifice",
@@ -255,7 +255,7 @@
   {
     "greynote": null,
     "name": "Azyran's Reward",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "none",
     "remainingWork": "noHypothesis",
     "dropsFrom": "Stagnation, Laboratory, Relic Chambers",
@@ -266,7 +266,7 @@
   {
     "greynote": null,
     "name": "Baited Expectations",
-    "hypothesis": "desert_map_area",
+    "tagHypothesis": "desert_map_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Desert Spring, Dry Sea, Dunes, Desert",
@@ -277,7 +277,7 @@
   {
     "greynote": "monsterSpecific",
     "name": "Beauty Through Death",
-    "hypothesis": "\"DemonBoss#Map\" boss",
+    "tagHypothesis": "\"DemonBoss#Map\" boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "K'aj Q'ura; K'aj Y'ara'az; K'aj A'alai (Vaal Temple Trio)",
@@ -288,7 +288,7 @@
   {
     "greynote": null,
     "name": "Bijoux",
-    "hypothesis": "mine_area",
+    "tagHypothesis": "mine_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Flooded Mine, Crystal Ore, Dig, Excavation, Grotto, Geode",
@@ -299,7 +299,7 @@
   {
     "greynote": "disabled",
     "name": "Birth of the Three",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -310,7 +310,7 @@
   {
     "greynote": "disabled",
     "name": "Blessing of God",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -321,7 +321,7 @@
   {
     "greynote": null,
     "name": "Blind Venture",
-    "hypothesis": "relic_area",
+    "tagHypothesis": "relic_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Museum, Relic Chambers, The Reliquary (Act 5/10)",
@@ -332,7 +332,7 @@
   {
     "greynote": null,
     "name": "Boon of Justice",
-    "hypothesis": "labyrinth_tileset_area",
+    "tagHypothesis": "labyrinth_tileset_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Chateau, Orchard, Plaza, Conservatory",
@@ -343,7 +343,7 @@
   {
     "greynote": "areaSpecific",
     "name": "Boon of the First Ones",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Pit of the Chimera",
@@ -354,7 +354,7 @@
   {
     "greynote": null,
     "name": "Boundless Realms",
-    "hypothesis": "solaris_area",
+    "tagHypothesis": "solaris_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Temple, The Twilight Temple, The Solaris Temple 1/2 (A8), Cold River, The Harbour Bridge",
@@ -365,7 +365,7 @@
   {
     "greynote": null,
     "name": "Bowyer's Dream",
-    "hypothesis": "archer_boss",
+    "tagHypothesis": "archer_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Lord of the Ashen Arrow; Steelpoint the Avenger; Mirage of Bones; Stonebeak, Battle Fowl",
@@ -376,7 +376,7 @@
   {
     "greynote": "monsterSpecific",
     "name": "Broken Promises",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "ok",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Tolman, the Exhumer; Eater of Souls",
@@ -387,7 +387,7 @@
   {
     "greynote": null,
     "name": "Brother's Stash",
-    "hypothesis": "graveyard_area",
+    "tagHypothesis": "graveyard_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Cemetery, Graveyard, Grave Trough",
@@ -398,7 +398,7 @@
   {
     "greynote": null,
     "name": "Brotherhood in Exile",
-    "hypothesis": "labyrinth_tileset_area",
+    "tagHypothesis": "labyrinth_tileset_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Chateau, Orchard, Plaza, Conservatory",
@@ -409,7 +409,7 @@
   {
     "greynote": null,
     "name": "Brush, Paint and Palette",
-    "hypothesis": "doedre_monster_map",
+    "tagHypothesis": "doedre_monster_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Portentia, the Foul; Doedre the Defiler; Headmistress Braeta; Erythrophagia",
@@ -420,7 +420,7 @@
   {
     "greynote": null,
     "name": "Buried Treasure",
-    "hypothesis": "mine_area",
+    "tagHypothesis": "mine_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Crystal Ore, Dig, Excavation, Flooded Mine, Geode, Grotto",
@@ -431,7 +431,7 @@
   {
     "greynote": null,
     "name": "Burning Blood",
-    "hypothesis": "fire_prison_area",
+    "tagHypothesis": "fire_prison_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Forge of the Phoenix, Lava Chamber",
@@ -442,7 +442,7 @@
   {
     "greynote": null,
     "name": "Call to the First Ones",
-    "hypothesis": "dark_forest_area",
+    "tagHypothesis": "dark_forest_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Dark Forest, Bramble Valley, Forbidden Woods, The Northern Forest (A7)",
@@ -453,7 +453,7 @@
   {
     "greynote": null,
     "name": "Call to the First Ones",
-    "hypothesis": "thicket_area",
+    "tagHypothesis": "thicket_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Thicket, The Dread Thicket (A7)",
@@ -464,7 +464,7 @@
   {
     "greynote": null,
     "name": "Cameria's Cut",
-    "hypothesis": "betrayal_cameria",
+    "tagHypothesis": "betrayal_cameria",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Cameria the Coldblooded",
@@ -475,7 +475,7 @@
   {
     "greynote": "story",
     "name": "Cartographer's Delight",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "none",
     "remainingWork": "noHypothesis",
     "dropsFrom": null,
@@ -486,7 +486,7 @@
   {
     "greynote": "areaSpecific",
     "name": "Chaotic Disposition",
-    "hypothesis": "Poorjoy's Asylum (no tags)",
+    "tagHypothesis": "Poorjoy's Asylum (no tags)",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Poorjoy's Asylum",
@@ -497,7 +497,7 @@
   {
     "greynote": null,
     "name": "Chasing Risk",
-    "hypothesis": "incursion_temple_boss",
+    "tagHypothesis": "incursion_temple_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Vaal Omnitect",
@@ -508,7 +508,7 @@
   {
     "greynote": null,
     "name": "Costly Curio",
-    "hypothesis": "relic_area",
+    "tagHypothesis": "relic_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Reliquary, Museum",
@@ -519,7 +519,7 @@
   {
     "greynote": null,
     "name": "Council of Cats",
-    "hypothesis": "hunter_conqueror_boss",
+    "tagHypothesis": "hunter_conqueror_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Al-Hezmin, The Hunter",
@@ -530,7 +530,7 @@
   {
     "greynote": null,
     "name": "Coveted Possession",
-    "hypothesis": "catacomb_area",
+    "tagHypothesis": "catacomb_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Bone Crypt, The Catacombs, The Ossuary (Act 5), The Ossuary (Act 10)",
@@ -541,7 +541,7 @@
   {
     "greynote": null,
     "name": "Cursed Words",
-    "hypothesis": "graveyard_area",
+    "tagHypothesis": "graveyard_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Graveyard, Cemetery, Grave Trough",
@@ -552,7 +552,7 @@
   {
     "greynote": null,
     "name": "Dark Dreams",
-    "hypothesis": "necromancer_exile",
+    "tagHypothesis": "necromancer_exile",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Minara Anemina",
@@ -563,7 +563,7 @@
   {
     "greynote": "chestObject",
     "name": "Dark Temptation",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -574,7 +574,7 @@
   {
     "greynote": "delirium",
     "name": "Darker Half",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -585,10 +585,10 @@
   {
     "greynote": "areaSpecific",
     "name": "Deadly Joy",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": null,
+    "dropsFrom": "Poorjoy's Asylum",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Seems to be specific Poorjoy's Asylum. Unique Maps can have Area-specific drops."
@@ -596,7 +596,7 @@
   {
     "greynote": null,
     "name": "Death",
-    "hypothesis": "fetid_area",
+    "tagHypothesis": "fetid_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Bog, Marshes, Mud Geyser",
@@ -607,7 +607,7 @@
   {
     "greynote": null,
     "name": "Deathly Designs",
-    "hypothesis": "trap_exile",
+    "tagHypothesis": "trap_exile",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Ash Lessard",
@@ -618,7 +618,7 @@
   {
     "greynote": null,
     "name": "Dementophobia",
-    "hypothesis": "cortex_boss",
+    "tagHypothesis": "cortex_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Venarius",
@@ -629,7 +629,7 @@
   {
     "greynote": null,
     "name": "Dementophobia",
-    "hypothesis": "crusader_conqueror_boss",
+    "tagHypothesis": "crusader_conqueror_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Baran, The Crusader",
@@ -640,7 +640,7 @@
   {
     "greynote": null,
     "name": "Dementophobia",
-    "hypothesis": "hunter_conqueror_boss",
+    "tagHypothesis": "hunter_conqueror_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Al-Hezmin, The Hunter",
@@ -651,7 +651,7 @@
   {
     "greynote": null,
     "name": "Dementophobia",
-    "hypothesis": "redeemer_conqueror_boss",
+    "tagHypothesis": "redeemer_conqueror_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Veritania, The Redeemer",
@@ -662,7 +662,7 @@
   {
     "greynote": null,
     "name": "Dementophobia",
-    "hypothesis": "warlord_conqueror_boss",
+    "tagHypothesis": "warlord_conqueror_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Drox, The Warlord",
@@ -673,7 +673,7 @@
   {
     "greynote": null,
     "name": "Demigod's Wager",
-    "hypothesis": "innocence_map",
+    "tagHypothesis": "innocence_map",
     "confidence": "ok",
     "remainingWork": "storyOnly",
     "dropsFrom": "The Cleansing Light",
@@ -684,7 +684,7 @@
   {
     "greynote": null,
     "name": "Desecrated Virtue",
-    "hypothesis": "delve_protovaal_boss",
+    "tagHypothesis": "delve_protovaal_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Aul, the Crystal King",
@@ -695,7 +695,7 @@
   {
     "greynote": null,
     "name": "Desperate Crusade",
-    "hypothesis": "innocence_map + ?",
+    "tagHypothesis": "innocence_map + ?",
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Basilica, Residence",
@@ -706,7 +706,7 @@
   {
     "greynote": null,
     "name": "Destined to Crumble",
-    "hypothesis": "library_area",
+    "tagHypothesis": "library_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Academy, Museum, Scriptorium",
@@ -717,7 +717,7 @@
   {
     "greynote": null,
     "name": "Dialla's Subjugation",
-    "hypothesis": "solaris_area",
+    "tagHypothesis": "solaris_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Temple, The Twilight Temple, Cold River, The Solaris Temple Level 1 (Act 8); The Harbour Bridge, The Solaris Temple Level 2 (Act 8)",
@@ -728,7 +728,7 @@
   {
     "greynote": "chestObject",
     "name": "Disdain",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -739,7 +739,7 @@
   {
     "greynote": "chestObject",
     "name": "Divine Justice",
-    "hypothesis": "Armourer's Strongbox",
+    "tagHypothesis": "Armourer's Strongbox",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -750,7 +750,7 @@
   {
     "greynote": null,
     "name": "Doedre's Madness",
-    "hypothesis": "doedre_monster_map",
+    "tagHypothesis": "doedre_monster_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Prodigy of Hexes; Erythrophagia; Headmistress Braeta; Portentia, the Foul; Doedre the Defiler",
@@ -761,7 +761,7 @@
   {
     "greynote": null,
     "name": "Draped in Dreams",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "none",
     "remainingWork": "noHypothesis",
     "dropsFrom": null,
@@ -772,7 +772,7 @@
   {
     "greynote": null,
     "name": "Duality",
-    "hypothesis": "vaal_architect_temple",
+    "tagHypothesis": "vaal_architect_temple",
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": null,
@@ -783,7 +783,7 @@
   {
     "greynote": null,
     "name": "Dying Anguish",
-    "hypothesis": "urban_sarn_area",
+    "tagHypothesis": "urban_sarn_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Arsenal, Colonnade, Ghetto, Port, Promenade, Precinct",
@@ -792,20 +792,20 @@
     "notes": "Divcord: Precinct verified by fal"
   },
   {
-    "greynote": "monsterSpecific",
+    "greynote": "areaSpecific",
     "name": "Dying Light",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": null,
+    "dropsFrom": "Maven's Invitation: The Feared",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
-    "notes": "The Shaper"
+    "notes": "Confirmed to drop in the Feared. Unclear if tied to one of the bosses or not"
   },
   {
     "greynote": null,
     "name": "Earth Drinker",
-    "hypothesis": "desert_area",
+    "tagHypothesis": "desert_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Desert, Desert Spring, Dunes, Dry Sea, The Foothills, The Oasis, The Vastiri Desert, Pillars of Arun",
@@ -816,7 +816,7 @@
   {
     "greynote": null,
     "name": "Echoes of Love",
-    "hypothesis": "chamber_of_sins_area",
+    "tagHypothesis": "chamber_of_sins_area",
     "confidence": "ok",
     "remainingWork": "storyOnly",
     "dropsFrom": "Overgrown Ruin, Overgrown Shrine",
@@ -827,7 +827,7 @@
   {
     "greynote": null,
     "name": "Echoes of Love",
-    "hypothesis": "maligaro_area",
+    "tagHypothesis": "maligaro_area",
     "confidence": "ok",
     "remainingWork": "storyOnly",
     "dropsFrom": "Overgrown Shrine, Core, Museum",
@@ -838,7 +838,7 @@
   {
     "greynote": null,
     "name": "Emperor of Purity",
-    "hypothesis": "chamber_of_sins_area",
+    "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Overgrown Ruin, Overgrown Shrine, The Chamber of Sins Level 1/2 (Act 7)",
@@ -849,7 +849,7 @@
   {
     "greynote": null,
     "name": "Emperor's Luck",
-    "hypothesis": "garden_area",
+    "tagHypothesis": "garden_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Courtyard, Orchard, Terrace, Gardens, The Imperial Gardens, The High Gardens",
@@ -860,7 +860,7 @@
   {
     "greynote": null,
     "name": "Etched in Blood",
-    "hypothesis": "rigwald_area + boss only",
+    "tagHypothesis": "rigwald_area + boss only",
     "confidence": "low",
     "remainingWork": "confirm",
     "dropsFrom": "The Cursed King",
@@ -871,7 +871,7 @@
   {
     "greynote": "chestObject",
     "name": "Eternal Bonds",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -882,7 +882,7 @@
   {
     "greynote": null,
     "name": "Fateful Meeting",
-    "hypothesis": "vaal_flesh_merchant",
+    "tagHypothesis": "vaal_flesh_merchant",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Vaal Flesh Merchant",
@@ -893,7 +893,7 @@
   {
     "greynote": null,
     "name": "Forbidden Power",
-    "hypothesis": "solaris_boss_map",
+    "tagHypothesis": "solaris_boss_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Helial, the Day Unending; Ara, Sister of Light; Jorus, Sky's Edge; Opid, Helial's Herald",
@@ -904,7 +904,7 @@
   {
     "greynote": "story",
     "name": "Forbidden Power",
-    "hypothesis": "solaris_boss_story",
+    "tagHypothesis": "solaris_boss_story",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Dawn, Harbinger of Solaris; Solaris, Eternal Sun",
@@ -915,7 +915,7 @@
   {
     "greynote": "disabled",
     "name": "Friendship",
-    "hypothesis": "argus_labyrinth",
+    "tagHypothesis": "argus_labyrinth",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Argus",
@@ -926,7 +926,7 @@
   {
     "greynote": null,
     "name": "From Bone to Ashes",
-    "hypothesis": "karui_map",
+    "tagHypothesis": "karui_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Strand, Caldera, Shore, Lava Lake, Coves, Estuary, Volcano",
@@ -937,7 +937,7 @@
   {
     "greynote": null,
     "name": "Further Invention",
-    "hypothesis": "inventing_area",
+    "tagHypothesis": "inventing_area",
     "confidence": "ok",
     "remainingWork": "confirm",
     "dropsFrom": "Vault, Foundry",
@@ -948,7 +948,7 @@
   {
     "greynote": null,
     "name": "Gemcutter's Promise",
-    "hypothesis": "lunaris_outer_area",
+    "tagHypothesis": "lunaris_outer_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Colonnade, Promenade, The Ebony Barracks, The Lunaris Concourse",
@@ -959,7 +959,7 @@
   {
     "greynote": null,
     "name": "Gift of Asenath",
-    "hypothesis": "mine_area",
+    "tagHypothesis": "mine_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Dig, Grotto, Geode, Crystal Ore, Flooded Mine, Excavation",
@@ -970,7 +970,7 @@
   {
     "greynote": null,
     "name": "Gift of the Gemling Queen",
-    "hypothesis": "mine_area",
+    "tagHypothesis": "mine_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Crystal Ore, Dig, Excavation, Flooded Mine, Geode, Grotto",
@@ -981,7 +981,7 @@
   {
     "greynote": null,
     "name": "Glimmer of Hope",
-    "hypothesis": "flooded_area",
+    "tagHypothesis": "flooded_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Flooded Mine, Mineral Pools, Underground Sea, The Cavern of Anger (Act 6)",
@@ -992,7 +992,7 @@
   {
     "greynote": null,
     "name": "Grave Knowledge",
-    "hypothesis": "crypt_area",
+    "tagHypothesis": "crypt_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Bone Crypt, Cursed Crypt, The Coward's Trial, The Crypt (Act 7)",
@@ -1003,7 +1003,7 @@
   {
     "greynote": null,
     "name": "Grave Knowledge",
-    "hypothesis": "catacomb_area",
+    "tagHypothesis": "catacomb_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Bone Crypt, The Ossuary (Act 10), The Catacombs, The Ossuary (Act 5)",
@@ -1014,7 +1014,7 @@
   {
     "greynote": null,
     "name": "Grave Knowledge",
-    "hypothesis": "necropolis_area",
+    "tagHypothesis": "necropolis_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Necropolis",
@@ -1025,7 +1025,7 @@
   {
     "greynote": "vendor",
     "name": "Guardian's Challenge",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -1036,7 +1036,7 @@
   {
     "greynote": null,
     "name": "Harmony of Souls",
-    "hypothesis": "trio_soul_area",
+    "tagHypothesis": "trio_soul_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Doedre the Defiler; Shavronne the Sickening; Maligaro the Mutilator",
@@ -1047,7 +1047,7 @@
   {
     "greynote": null,
     "name": "Haunting Shadows",
-    "hypothesis": "Twilight Temple (no tag)",
+    "tagHypothesis": "Twilight Temple (no tag)",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Twilight Temple",
@@ -1058,7 +1058,7 @@
   {
     "greynote": "globalDrop",
     "name": "Her Mask",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -1069,7 +1069,7 @@
   {
     "greynote": null,
     "name": "Heterochromia",
-    "hypothesis": "fire_affinity + cold_affinity bosses?",
+    "tagHypothesis": "fire_affinity + cold_affinity bosses?",
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Estuary, The Twilight Temple",
@@ -1080,7 +1080,7 @@
   {
     "greynote": null,
     "name": "Home",
-    "hypothesis": "city_home_map",
+    "tagHypothesis": "city_home_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Alleyways, Arcade, City Square, Crimson Township, Residence, Sunken City, Tower, Ancient City, Chateau, Haunted Mansion, Siege, Bazaar",
@@ -1091,7 +1091,7 @@
   {
     "greynote": "globalDrop",
     "name": "Hope",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -1102,7 +1102,7 @@
   {
     "greynote": null,
     "name": "House of Mirrors",
-    "hypothesis": "atziri_area",
+    "tagHypothesis": "atziri_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Alluring Abyss",
@@ -1113,7 +1113,7 @@
   {
     "greynote": "strongbox",
     "name": "Hubris",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -1124,7 +1124,7 @@
   {
     "greynote": null,
     "name": "Humility",
-    "hypothesis": "aqueduct_area",
+    "tagHypothesis": "aqueduct_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Channel, Frozen Cabins, Waterways, The Aqueduct, The Blood Aqueduct",
@@ -1135,7 +1135,7 @@
   {
     "greynote": null,
     "name": "Hunter's Resolve",
-    "hypothesis": "river_area",
+    "tagHypothesis": "river_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Forking River, Ramparts, The Sarn Ramparts, The Riverways (Act 6), The Southern Forest (Act 6)",
@@ -1146,7 +1146,7 @@
   {
     "greynote": null,
     "name": "Hunter's Reward",
-    "hypothesis": "bestiary_spirit_boss",
+    "tagHypothesis": "bestiary_spirit_boss",
     "confidence": "low",
     "remainingWork": "confirm",
     "dropsFrom": "Fenumus, First of the Night",
@@ -1157,7 +1157,7 @@
   {
     "greynote": null,
     "name": "Immortal Resolve",
-    "hypothesis": "unholy_trio_combined_boss_map",
+    "tagHypothesis": "unholy_trio_combined_boss_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Amalgam of Nightmares",
@@ -1168,7 +1168,7 @@
   {
     "greynote": null,
     "name": "Immortal Resolve",
-    "hypothesis": "unholy_trio_boss_map",
+    "tagHypothesis": "unholy_trio_boss_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Lord of the Hollows, Messenger of the Hollows, and Champion of the Hollows",
@@ -1179,7 +1179,7 @@
   {
     "greynote": null,
     "name": "Imperfect Memories",
-    "hypothesis": "cortex_boss",
+    "tagHypothesis": "cortex_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Venarius",
@@ -1190,7 +1190,7 @@
   {
     "greynote": null,
     "name": "Imperial Legacy",
-    "hypothesis": "desert_area",
+    "tagHypothesis": "desert_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Desert, Desert Spring, Dry Sea, Dunes, Pillars of Arun",
@@ -1201,7 +1201,7 @@
   {
     "greynote": null,
     "name": "Jack in the Box",
-    "hypothesis": "urban_sarn_area",
+    "tagHypothesis": "urban_sarn_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Arsenal, Ghetto, Port, Precinct, Promenade, Colonnade\nThe Docks, The Ebony Barracks, The Grain Gate, The Grand Promenade, The Harbour Bridge, The Lunaris Concourse, The Quay, The Sarn Ramparts, The Slums, The Solaris Concourse, The City of Sarn, The Battlefront, The Marketplace",
@@ -1212,7 +1212,7 @@
   {
     "greynote": null,
     "name": "Judging Voices",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "none",
     "remainingWork": "noHypothesis",
     "dropsFrom": null,
@@ -1223,7 +1223,7 @@
   {
     "greynote": null,
     "name": "Justified Ambition",
-    "hypothesis": "crusader_conqueror_boss",
+    "tagHypothesis": "crusader_conqueror_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Baran, The Crusader",
@@ -1234,7 +1234,7 @@
   {
     "greynote": null,
     "name": "Justified Ambition",
-    "hypothesis": "redeemer_conqueror_boss",
+    "tagHypothesis": "redeemer_conqueror_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Veritania, The Redeemer",
@@ -1245,7 +1245,7 @@
   {
     "greynote": null,
     "name": "Justified Ambition",
-    "hypothesis": "hunter_conqueror_boss",
+    "tagHypothesis": "hunter_conqueror_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Al-Hezmin, The Hunter",
@@ -1256,7 +1256,7 @@
   {
     "greynote": null,
     "name": "Justified Ambition",
-    "hypothesis": "warlord_conqueror_boss",
+    "tagHypothesis": "warlord_conqueror_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Drox, The Warlord",
@@ -1267,7 +1267,7 @@
   {
     "greynote": null,
     "name": "Keeper's Corruption",
-    "hypothesis": "chaos_breachlord, area drop",
+    "tagHypothesis": "chaos_breachlord, area drop",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Chayula's Domain",
@@ -1278,7 +1278,7 @@
   {
     "greynote": null,
     "name": "Lachrymal Necrosis",
-    "hypothesis": "AvariusCasticus boss areas",
+    "tagHypothesis": "AvariusCasticus boss areas",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Basilica, Chamber of Innocence (A5/A10), Defiled Cathedral",
@@ -1289,7 +1289,7 @@
   {
     "greynote": null,
     "name": "Lantador's Lost Love",
-    "hypothesis": "ocean_area",
+    "tagHypothesis": "ocean_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Atoll, Coral Ruins, Lighthouse, Maelström of Chaos, Port, Reef, Strand, Whakawairua Tuahu, Mao Kun, Beach, Coves, Plateau, Shore, Tropical Island, Peninsula, Wharf, Shipyard, Pier, Estuary, The Beacon, The Brine King's Reef, The Coast (A6), The Tidal Island (A6), The Twilight Strand (A6), The Mud Flats (Act 6)",
@@ -1300,7 +1300,7 @@
   {
     "greynote": "areaSpecific",
     "name": "Last Hope",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Vaal Temple",
@@ -1311,7 +1311,7 @@
   {
     "greynote": null,
     "name": "Left to Fate",
-    "hypothesis": "river_area",
+    "tagHypothesis": "river_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Ramparts, Forking River",
@@ -1322,7 +1322,7 @@
   {
     "greynote": null,
     "name": "Light and Truth",
-    "hypothesis": "sceptre_of_god_area",
+    "tagHypothesis": "sceptre_of_god_area",
     "confidence": "ok",
     "remainingWork": "storyOnly",
     "dropsFrom": "Palace, Residence, Villa, The Upper Sceptre of God",
@@ -1333,7 +1333,7 @@
   {
     "greynote": "globalDrop",
     "name": "Lingering Remnants",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -1344,7 +1344,7 @@
   {
     "greynote": "vendor",
     "name": "Lost Worlds",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -1355,7 +1355,7 @@
   {
     "greynote": null,
     "name": "Love Through Ice",
-    "hypothesis": "redeemer_conqueror_boss",
+    "tagHypothesis": "redeemer_conqueror_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Veritania, The Redeemer",
@@ -1366,7 +1366,7 @@
   {
     "greynote": null,
     "name": "Loyalty",
-    "hypothesis": "den_area",
+    "tagHypothesis": "den_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Barrows, Grotto, Lair; Caer Blaidd, Wolfpack's Den; The Den (Act 7)",
@@ -1377,7 +1377,7 @@
   {
     "greynote": "disabled",
     "name": "Luck of the Vaal",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -1388,7 +1388,7 @@
   {
     "greynote": null,
     "name": "Lucky Connections",
-    "hypothesis": "dock_area",
+    "tagHypothesis": "dock_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Pier, Port, Shipyard, Wharf",
@@ -1399,7 +1399,7 @@
   {
     "greynote": "globalDrop",
     "name": "Lucky Deck",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -1410,7 +1410,7 @@
   {
     "greynote": null,
     "name": "Luminous Trove",
-    "hypothesis": "delve_protovaal_boss",
+    "tagHypothesis": "delve_protovaal_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Aul, the Crystal King",
@@ -1421,7 +1421,7 @@
   {
     "greynote": null,
     "name": "Lysah's Respite",
-    "hypothesis": "merveil_area",
+    "tagHypothesis": "merveil_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Maelström of Chaos, Underground Sea",
@@ -1432,7 +1432,7 @@
   {
     "greynote": null,
     "name": "Magnum Opus",
-    "hypothesis": "synthesis_area",
+    "tagHypothesis": "synthesis_area",
     "confidence": "ok",
     "remainingWork": "confirm",
     "dropsFrom": "Altered Distant Memory, Augmented Distant Memory, Twisted Distant Memory, Rewritten Distant Memory",
@@ -1443,7 +1443,7 @@
   {
     "greynote": null,
     "name": "Mawr Blaidd",
-    "hypothesis": "dark_forest_area",
+    "tagHypothesis": "dark_forest_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Bramble Valley, Dark Forest, Forbidden Woods",
@@ -1454,7 +1454,7 @@
   {
     "greynote": null,
     "name": "Merciless Armament",
-    "hypothesis": "military_area",
+    "tagHypothesis": "military_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Armoury, Colonnade, Arsenal, Promenade",
@@ -1465,7 +1465,7 @@
   {
     "greynote": null,
     "name": "Might is Right",
-    "hypothesis": "mausoleum_area",
+    "tagHypothesis": "mausoleum_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Mausoleum, Relic Chambers, Sepulchre, The Ossuary (Act 5/10), The Reliquary (Act 5/10)",
@@ -1476,7 +1476,7 @@
   {
     "greynote": null,
     "name": "Misery in Darkness",
-    "hypothesis": "delve_lich_boss",
+    "tagHypothesis": "delve_lich_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Kurgal, the Blackblooded",
@@ -1487,7 +1487,7 @@
   {
     "greynote": null,
     "name": "Mitts",
-    "hypothesis": "snow_area",
+    "tagHypothesis": "snow_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Forbidden Woods, Frozen Cabins, Iceberg, Summit, Glacier, Cold River, The Ascent, The Descent",
@@ -1498,7 +1498,7 @@
   {
     "greynote": "areaSpecific",
     "name": "Monochrome",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -1509,7 +1509,7 @@
   {
     "greynote": null,
     "name": "More is Never Enough",
-    "hypothesis": "god_boss_map_area",
+    "tagHypothesis": "god_boss_map_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Ara, Sister of Light;\r\nArmala, the Widow;\r\nDrek, Apex Hunter;\r\nErebix, Light's Bane;\r\nGorulis, Will-Thief;\r\nKhor, Sister of Shadows;\r\nMephod, the Earth Scorcher;\r\nNassar, Lion of the Seas;\r\nStalker of the Endless Dunes;\r\nTahsin, Warmaker;\r\nTerror of the Infinite Drifts;\r\nVarhesh, Shimmering Aberration",
@@ -1520,7 +1520,7 @@
   {
     "greynote": null,
     "name": "More is Never Enough",
-    "hypothesis": "god_boss_map_area OR ?",
+    "tagHypothesis": "god_boss_map_area OR ?",
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Vault",
@@ -1531,7 +1531,7 @@
   {
     "greynote": null,
     "name": "No Traces",
-    "hypothesis": "mausoleum_area",
+    "tagHypothesis": "mausoleum_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Mausoleum, Relic Chambers, Sepulchre",
@@ -1542,7 +1542,7 @@
   {
     "greynote": null,
     "name": "Nook's Crown",
-    "hypothesis": "betrayal_catarina",
+    "tagHypothesis": "betrayal_catarina",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Catarina, Master of Undeath",
@@ -1553,7 +1553,7 @@
   {
     "greynote": null,
     "name": "Parasitic Passengers",
-    "hypothesis": "internal name contains \"Parasite\" OR arachnid_tomb_map_area",
+    "tagHypothesis": "internal name contains \"Parasite\" OR arachnid_tomb_map_area",
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Infested Valley, Channel, Arachnid Tomb",
@@ -1564,7 +1564,7 @@
   {
     "greynote": null,
     "name": "Peaceful Moments",
-    "hypothesis": "garden_area",
+    "tagHypothesis": "garden_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Gardens, Courtyard, Orchard, Terrace",
@@ -1575,7 +1575,7 @@
   {
     "greynote": null,
     "name": "Perfection",
-    "hypothesis": "shaper_guardian_boss",
+    "tagHypothesis": "shaper_guardian_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Guardian of the Chimera, Guardian of the Hydra, Guardian of the Minotaur, Guardian of the Phoenix",
@@ -1586,7 +1586,7 @@
   {
     "greynote": null,
     "name": "Prejudice",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -1597,7 +1597,7 @@
   {
     "greynote": null,
     "name": "Pride Before the Fall",
-    "hypothesis": "kaom_area",
+    "tagHypothesis": "kaom_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Caldera, Volcano",
@@ -1608,7 +1608,7 @@
   {
     "greynote": null,
     "name": "Pride of the First Ones",
-    "hypothesis": "den_area",
+    "tagHypothesis": "den_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Barrows, Grotto, Lair; Caer Blaidd, Wolfpack's Den",
@@ -1619,7 +1619,7 @@
   {
     "greynote": null,
     "name": "Prometheus' Armoury",
-    "hypothesis": "betrayal_haku",
+    "tagHypothesis": "betrayal_haku",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Haku, Warmaster",
@@ -1630,7 +1630,7 @@
   {
     "greynote": null,
     "name": "Prosperity",
-    "hypothesis": "ocean_area",
+    "tagHypothesis": "ocean_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Estuary, Peninsula, Port, Shore, Strand, Mao Kun, Beach, Whakawairua Tuahu, Lighthouse, Wharf, Atoll, Maelström of Chaos, Coral Ruins, Tropical Island, Plateau, Shipyard, Pier, Coves, Reef",
@@ -1641,7 +1641,7 @@
   {
     "greynote": null,
     "name": "Rain of Chaos",
-    "hypothesis": "crossroad_area",
+    "tagHypothesis": "crossroad_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Castle Ruins, Fields",
@@ -1652,7 +1652,7 @@
   {
     "greynote": null,
     "name": "Rain Tempter",
-    "hypothesis": "garden_area",
+    "tagHypothesis": "garden_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Courtyard, Terrace, Gardens, Orchard, The High Gardens",
@@ -1663,7 +1663,7 @@
   {
     "greynote": null,
     "name": "Rats",
-    "hypothesis": "warehouse_area",
+    "tagHypothesis": "warehouse_area",
     "confidence": "done",
     "remainingWork": "storyOnly",
     "dropsFrom": "Arsenal, Factory, The Grain Gate",
@@ -1674,7 +1674,7 @@
   {
     "greynote": "areaSpecific",
     "name": "Rebirth",
-    "hypothesis": "NOT otherworldly_story_area",
+    "tagHypothesis": "NOT otherworldly_story_area",
     "confidence": "ok",
     "remainingWork": "storyOnly",
     "dropsFrom": "The Ashen Fields\nThe Bath House\nThe Battlefront\nThe Beacon\nThe Blood Aqueduct\nThe Broken Bridge\nThe Control Blocks\nThe Crypt\nThe Crystal Veins\nThe Desecrated Chambers\nThe Foothills\nThe Harbour Bridge\nThe Oasis\nThe Ossuary\nThe Quarry\nThe Ravaged Square\nThe Reliquary\nThe Ruined Square\nThe Slave Pens\nThe Solaris Temple Level 1 (A3)\nThe Temple of Decay Level 2\nThe Vastiri Desert",
@@ -1685,7 +1685,7 @@
   {
     "greynote": null,
     "name": "Rebirth and Renewal",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "none",
     "remainingWork": "noHypothesis",
     "dropsFrom": null,
@@ -1696,7 +1696,7 @@
   {
     "greynote": null,
     "name": "Reckless Ambition",
-    "hypothesis": "elder_lightning_guardian",
+    "tagHypothesis": "elder_lightning_guardian",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Eradicator",
@@ -1707,7 +1707,7 @@
   {
     "greynote": "chestObject",
     "name": "Remembrance",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Light Jewellery chest (Primeval Ruins, Abyssal City, Vaal Outpost)",
@@ -1718,7 +1718,7 @@
   {
     "greynote": null,
     "name": "Sambodhi's Vow",
-    "hypothesis": "betrayal_syndicate_member",
+    "tagHypothesis": "betrayal_syndicate_member",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Haku, Elreon, Tora, Vagan, Vorici, Hillock, the Blacksmith, Leo, Wolf of the Pits, Guff \"Tiny\" Grenn, Janus Perandus, It That Fled, Gravicius, Thane Jorgin, Korell Goya, Rin Yuushu, Cameria the Coldblooded, Aisling Laffrey, Riker Maloney",
@@ -1729,7 +1729,7 @@
   {
     "greynote": null,
     "name": "Sambodhi's Wisdom",
-    "hypothesis": "Hillock boss & desert_area & area drop?",
+    "tagHypothesis": "Hillock boss & desert_area & area drop?",
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Dunes",
@@ -1740,7 +1740,7 @@
   {
     "greynote": null,
     "name": "Scholar of the Seas",
-    "hypothesis": "ship_graveyard_area",
+    "tagHypothesis": "ship_graveyard_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Coves, Reef, Strand, Whakawhairua Tuahu",
@@ -1751,7 +1751,7 @@
   {
     "greynote": null,
     "name": "Seven Years Bad Luck",
-    "hypothesis": "church & blood_mage_boss_map",
+    "tagHypothesis": "church & blood_mage_boss_map",
     "confidence": "low",
     "remainingWork": "confirm",
     "dropsFrom": "Defiled Cathedral, Crimson Temple",
@@ -1762,7 +1762,7 @@
   {
     "greynote": null,
     "name": "Shard of Fate",
-    "hypothesis": "chamber_of_sins_area",
+    "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Overgrown Ruin, Overgrown Shrine, The Chamber of Sins Level 1/2 (Act 7)",
@@ -1773,7 +1773,7 @@
   {
     "greynote": null,
     "name": "Silence and Frost",
-    "hypothesis": "bestiary_spirit_boss & feline_beast",
+    "tagHypothesis": "bestiary_spirit_boss & feline_beast",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Farrul, First of the Plains",
@@ -1784,7 +1784,7 @@
   {
     "greynote": "chestObject",
     "name": "Society's Remorse",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -1795,7 +1795,7 @@
   {
     "greynote": "disabled",
     "name": "Squandered Prosperity",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -1806,7 +1806,7 @@
   {
     "greynote": null,
     "name": "Struck by Lightning",
-    "hypothesis": "rain_area",
+    "tagHypothesis": "rain_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Cemetery, Colonnade, Courtyard, Graveyard, Infested Valley, Leyline, Promenade, Shipyard, Tower, Villa, Wharf",
@@ -1817,7 +1817,7 @@
   {
     "greynote": null,
     "name": "Succor of the Sinless",
-    "hypothesis": "crusader_conqueror_boss",
+    "tagHypothesis": "crusader_conqueror_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Baran, The Crusader",
@@ -1828,7 +1828,7 @@
   {
     "greynote": null,
     "name": "Terrible Secret of Space",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Avatar of Undoing; Calderus; Fragment of Winter; Guardian of the Vault; Pirate Treasure; Stone of the Currents; Telvar, the Inebriated; The Eroding One; Titan of the Grove; Void Anomaly",
@@ -1839,7 +1839,7 @@
   {
     "greynote": null,
     "name": "The Academic",
-    "hypothesis": "library_area",
+    "tagHypothesis": "library_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Academy, Museum, Scriptorium",
@@ -1850,7 +1850,7 @@
   {
     "greynote": null,
     "name": "The Admirer",
-    "hypothesis": "vaal_pyramid_area",
+    "tagHypothesis": "vaal_pyramid_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Maze, Vaal Pyramid, Vaal Temple, Vaults of Atziri, Doryani's Machinarium",
@@ -1861,7 +1861,7 @@
   {
     "greynote": null,
     "name": "The Admirer",
-    "hypothesis": "vaal_ruin_area",
+    "tagHypothesis": "vaal_ruin_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Ancient City",
@@ -1872,7 +1872,7 @@
   {
     "greynote": "areaSpecific",
     "name": "The Adventuring Spirit",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Vaults of Atziri",
@@ -1883,7 +1883,7 @@
   {
     "greynote": null,
     "name": "The Aesthete",
-    "hypothesis": "shavronne_monster_story OR unholy_trio_combined_boss_story",
+    "tagHypothesis": "shavronne_monster_story OR unholy_trio_combined_boss_story",
     "confidence": "ok",
     "remainingWork": "storyOnly",
     "dropsFrom": "Reassembled Brutus; Shavronne, Unbound",
@@ -1894,7 +1894,7 @@
   {
     "greynote": null,
     "name": "The Aesthete",
-    "hypothesis": "shavronne_monster_map OR unholy_trio_combined_boss_map",
+    "tagHypothesis": "shavronne_monster_map OR unholy_trio_combined_boss_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Bazur; Gisale, Thought Thief; Prodigy of Darkness; Shavronne the Sickening; Amalgam of Nightmares",
@@ -1905,7 +1905,7 @@
   {
     "greynote": null,
     "name": "The Apothecary",
-    "hypothesis": "blood_mage_boss_map",
+    "tagHypothesis": "blood_mage_boss_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Crimson Temple, Defiled Cathedral, Crimson Township, Haunted Mansion",
@@ -1916,7 +1916,7 @@
   {
     "greynote": "areaSpecific",
     "name": "The Archmage's Right Hand",
-    "hypothesis": "breach_map",
+    "tagHypothesis": "breach_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Chayula's Domain, Uul-Netol's Domain, Esh's Domain, Xoph's Domain, Tul's Domain",
@@ -1927,7 +1927,7 @@
   {
     "greynote": null,
     "name": "The Arena Champion",
-    "hypothesis": "pitfight_area AND boss only",
+    "tagHypothesis": "pitfight_area AND boss only",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Olof, Son of the Headsman; Guardian of the Chimera; Ambrius, Legion Slayer; Avatar of the Forge; Avatar of the Huntress; Avatar of the Skies",
@@ -1938,7 +1938,7 @@
   {
     "greynote": null,
     "name": "The Army of Blood",
-    "hypothesis": "lunaris_blood_area",
+    "tagHypothesis": "lunaris_blood_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Poorjoy's Asylum, Shrine, The Lunaris Temple Level 2 (Act 3), The Lunaris Temple Level 2 (Act 8)",
@@ -1949,7 +1949,7 @@
   {
     "greynote": null,
     "name": "The Artist",
-    "hypothesis": "chamber_of_sins_area",
+    "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Overgrown Ruin, Overgrown Shrine",
@@ -1960,7 +1960,7 @@
   {
     "greynote": null,
     "name": "The Aspirant",
-    "hypothesis": "oshabi_boss",
+    "tagHypothesis": "oshabi_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Oshabi, Avatar of the Grove",
@@ -1971,7 +1971,7 @@
   {
     "greynote": null,
     "name": "The Astromancer",
-    "hypothesis": "heist_science_miniboss_monster",
+    "tagHypothesis": "heist_science_miniboss_monster",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Corpse Stitcher, Flesh Sculptor",
@@ -1982,7 +1982,7 @@
   {
     "greynote": null,
     "name": "The Avenger",
-    "hypothesis": "sea_witch_boss_area",
+    "tagHypothesis": "sea_witch_boss_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Mineral Pools, Underground Sea, Lava Chamber, Maelström of Chaos, Whakawairua Tuahu",
@@ -1993,7 +1993,7 @@
   {
     "greynote": null,
     "name": "The Awakened",
-    "hypothesis": "metamorph_boss",
+    "tagHypothesis": "metamorph_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Metamorph",
@@ -2004,7 +2004,7 @@
   {
     "greynote": null,
     "name": "The Bargain",
-    "hypothesis": "betrayal_breach",
+    "tagHypothesis": "betrayal_breach",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "It That Fled",
@@ -2015,7 +2015,7 @@
   {
     "greynote": null,
     "name": "The Battle Born",
-    "hypothesis": "kaom_area",
+    "tagHypothesis": "kaom_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Caldera, Kaom's Stronghold, Volcano, Kaom's Dream ",
@@ -2026,7 +2026,7 @@
   {
     "greynote": null,
     "name": "The Bear Woman",
-    "hypothesis": "innocence_map OR bear_boss_map",
+    "tagHypothesis": "innocence_map OR bear_boss_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Cleansing Light; Beast of the Pits; Erebix, Light's Bane",
@@ -2037,7 +2037,7 @@
   {
     "greynote": "story",
     "name": "The Beast",
-    "hypothesis": "belly_area",
+    "tagHypothesis": "belly_area",
     "confidence": "ok",
     "remainingWork": "storyOnly",
     "dropsFrom": "The Belly of the Beast (A4/9)",
@@ -2048,7 +2048,7 @@
   {
     "greynote": null,
     "name": "The Betrayal",
-    "hypothesis": "bandit_area",
+    "tagHypothesis": "bandit_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Burial Chambers, Fungal Hollow, Mesa, Spider Forest, Strand, Castle Ruins",
@@ -2059,7 +2059,7 @@
   {
     "greynote": null,
     "name": "The Bitter Blossom",
-    "hypothesis": "oshabi_boss",
+    "tagHypothesis": "oshabi_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Oshabi, Avatar of the Grove",
@@ -2070,7 +2070,7 @@
   {
     "greynote": null,
     "name": "The Bitter Blossom",
-    "hypothesis": "nature_boss",
+    "tagHypothesis": "nature_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Oshabi, Avatar of the Grove; Murgeth Bogsong; Elida Blisterclaw (Bramble Valley); Gorulis, Will-Thief (Infested Valley)",
@@ -2081,7 +2081,7 @@
   {
     "greynote": null,
     "name": "The Blazing Fire",
-    "hypothesis": "kitava_cultist_area",
+    "tagHypothesis": "kitava_cultist_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Alleyways, Crimson Temple, Haunted Mansion, Lookout, City Square, Defiled Cathedral, Silo Map",
@@ -2092,7 +2092,7 @@
   {
     "greynote": "chestObject",
     "name": "The Blessing of Moosh",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -2103,7 +2103,7 @@
   {
     "greynote": "strongbox",
     "name": "The Body",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -2114,7 +2114,7 @@
   {
     "greynote": null,
     "name": "The Bones",
-    "hypothesis": "necromancer_exile",
+    "tagHypothesis": "necromancer_exile",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Minara Anemina",
@@ -2125,7 +2125,7 @@
   {
     "greynote": null,
     "name": "The Brawny Battle Mage",
-    "hypothesis": "alira_area",
+    "tagHypothesis": "alira_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Burial Chambers, Spider Forest",
@@ -2136,7 +2136,7 @@
   {
     "greynote": null,
     "name": "The Brawny Battle Mage",
-    "hypothesis": "doedre_map_area",
+    "tagHypothesis": "doedre_map_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Putrid Cloister, Sepulchre, Waste Pool, Phantasmagoria",
@@ -2147,7 +2147,7 @@
   {
     "greynote": null,
     "name": "The Breach",
-    "hypothesis": "elder_portal_monster",
+    "tagHypothesis": "elder_portal_monster",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Null Portal",
@@ -2158,7 +2158,7 @@
   {
     "greynote": null,
     "name": "The Brittle Emperor",
-    "hypothesis": "voll_monster_map",
+    "tagHypothesis": "voll_monster_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Brittle Emperor",
@@ -2169,7 +2169,7 @@
   {
     "greynote": "story",
     "name": "The Brittle Emperor",
-    "hypothesis": "voll_monster_story",
+    "tagHypothesis": "voll_monster_story",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Voll, Emperor of Purity",
@@ -2180,7 +2180,7 @@
   {
     "greynote": null,
     "name": "The Cache",
-    "hypothesis": "gold_pile_area",
+    "tagHypothesis": "gold_pile_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Maelström of Chaos, Mineral Pools, Underground Sea, Vaults of Atziri, Vault",
@@ -2191,7 +2191,7 @@
   {
     "greynote": null,
     "name": "The Cacophony",
-    "hypothesis": "screeching_boss",
+    "tagHypothesis": "screeching_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Merveil, the Returned; Shrieker Eihal; The Sanguine Siren; Erebix, Light's Bane; Doedre the Defiler; Nassar, Lion of the Seas",
@@ -2202,7 +2202,7 @@
   {
     "greynote": null,
     "name": "The Calling",
-    "hypothesis": "beyond_demon",
+    "tagHypothesis": "beyond_demon",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -2213,7 +2213,7 @@
   {
     "greynote": null,
     "name": "The Card Sharp",
-    "hypothesis": "incursion_architect_card_sharp",
+    "tagHypothesis": "incursion_architect_card_sharp",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Paquate, Architect of Corruption, Ahuana, Architect of Ceremonies, Zalatl, Architect of Thaumaturgy",
@@ -2224,7 +2224,7 @@
   {
     "greynote": "story",
     "name": "The Carrion Crow",
-    "hypothesis": "military_area",
+    "tagHypothesis": "military_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Battlefront, The Ebony Barracks, The Imperial Gardens, The Aqueduct, The Ascent, Oriath Square, The Grand Promenade, The Blood Aqueduct",
@@ -2235,7 +2235,7 @@
   {
     "greynote": "strongbox",
     "name": "The Cartographer",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -2246,7 +2246,7 @@
   {
     "greynote": null,
     "name": "The Cataclysm",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "All Vaal side areas (need specific information)",
@@ -2257,7 +2257,7 @@
   {
     "greynote": null,
     "name": "The Catalyst",
-    "hypothesis": "vaal_pyramid_area",
+    "tagHypothesis": "vaal_pyramid_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Maze, Vaal Pyramid, Vaults of Atziri, Vaal Temple, Doryani's Machinarium, The Temple of Decay Level 1/2, The Ancient Pyramid",
@@ -2268,7 +2268,7 @@
   {
     "greynote": null,
     "name": "The Catalyst",
-    "hypothesis": "vaal_ruin_area",
+    "tagHypothesis": "vaal_ruin_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Ancient City, The Vaal City, The Causeway",
@@ -2279,7 +2279,7 @@
   {
     "greynote": null,
     "name": "The Catch",
-    "hypothesis": "ocean_area",
+    "tagHypothesis": "ocean_area",
     "confidence": "low",
     "remainingWork": "confirm",
     "dropsFrom": "Atoll, Beach, Shipyard, Strand, Tropical Island, Shore, Peninsula, Coves, Maelström of Chaos",
@@ -2290,7 +2290,7 @@
   {
     "greynote": null,
     "name": "The Celestial Justicar",
-    "hypothesis": "crypt_area",
+    "tagHypothesis": "crypt_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Bone Crypt, Cursed Crypt, The Coward's Trial, The Crypt (Act 7)",
@@ -2301,7 +2301,7 @@
   {
     "greynote": "strongbox",
     "name": "The Celestial Stone",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -2312,7 +2312,7 @@
   {
     "greynote": null,
     "name": "The Chains that Bind",
-    "hypothesis": "prison_area",
+    "tagHypothesis": "prison_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Cage, Cells, Dungeon, Pen; Control BLocks; Shavronne's Tower; The Slave Pens",
@@ -2323,7 +2323,7 @@
   {
     "greynote": null,
     "name": "The Cheater",
-    "hypothesis": "betrayal_guff",
+    "tagHypothesis": "betrayal_guff",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Guff \"Tiny\" Grenn",
@@ -2334,7 +2334,7 @@
   {
     "greynote": "chestObject",
     "name": "The Chosen",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -2345,7 +2345,7 @@
   {
     "greynote": null,
     "name": "The Coming Storm",
-    "hypothesis": "rain_area; NOT lightning_area",
+    "tagHypothesis": "rain_area; NOT lightning_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Colonnade, Graveyard, Infested Valley, Leyline, Shipyard, Villa, Wharf, Promenade, Cemetery, Stagnation",
@@ -2356,7 +2356,7 @@
   {
     "greynote": null,
     "name": "The Conduit",
-    "hypothesis": "dominus_monster_map",
+    "tagHypothesis": "dominus_monster_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The High Templar; The Hallowed Husk; Excellis Aurafix",
@@ -2367,7 +2367,7 @@
   {
     "greynote": null,
     "name": "The Craving",
-    "hypothesis": "necromancer_boss",
+    "tagHypothesis": "necromancer_boss",
     "confidence": "ok",
     "remainingWork": "confirm",
     "dropsFrom": "Xixic, High Necromancer; Rose; Thorn; Infector of Dreams; The Bone Sculptor",
@@ -2378,10 +2378,10 @@
   {
     "greynote": "areaSpecific",
     "name": "The Cursed King",
-    "hypothesis": "Caer Balidd, Wolfpack's Den (no tag)",
+    "tagHypothesis": "Caer Blaidd, Wolfpack's Den (no tag)",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": null,
+    "dropsFrom": "Care Blaidd, Wolfpack's Den",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Caer Blaidd, Wolfpack's Den only"
@@ -2389,7 +2389,7 @@
   {
     "greynote": null,
     "name": "The Damned",
-    "hypothesis": "vaal_pyramid_area",
+    "tagHypothesis": "vaal_pyramid_area",
     "confidence": "ok",
     "remainingWork": "confirm",
     "dropsFrom": "Vaults of Atziri, Vaal Pyramid, Vaal Temple, Maze",
@@ -2400,7 +2400,7 @@
   {
     "greynote": null,
     "name": "The Damned",
-    "hypothesis": "ruined_vaal_city_area",
+    "tagHypothesis": "ruined_vaal_city_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Ancient City, Sunken City",
@@ -2411,7 +2411,7 @@
   {
     "greynote": null,
     "name": "The Damned",
-    "hypothesis": "vaal_ruin_area",
+    "tagHypothesis": "vaal_ruin_area",
     "confidence": "low",
     "remainingWork": "storyOnly",
     "dropsFrom": "Ancient City",
@@ -2422,7 +2422,7 @@
   {
     "greynote": null,
     "name": "The Dapper Prodigy",
-    "hypothesis": "sceptre_of_god_area",
+    "tagHypothesis": "sceptre_of_god_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Palace, Villa, Residence",
@@ -2433,7 +2433,7 @@
   {
     "greynote": null,
     "name": "The Dark Mage",
-    "hypothesis": "chamber_of_sins_area",
+    "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Overgrown Ruin, Overgrown Shrine, Chamber of Sins Level 1/2 (Act 7)",
@@ -2444,7 +2444,7 @@
   {
     "greynote": "areaSpecific",
     "name": "The Darkest Dream",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -2455,7 +2455,7 @@
   {
     "greynote": null,
     "name": "The Deal",
-    "hypothesis": "betrayal_cameria",
+    "tagHypothesis": "betrayal_cameria",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Cameria the Coldblooded",
@@ -2466,7 +2466,7 @@
   {
     "greynote": null,
     "name": "The Deceiver",
-    "hypothesis": "arena_area",
+    "tagHypothesis": "arena_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Arena, Colosseum, Racecourse, The Grand Arena",
@@ -2477,7 +2477,7 @@
   {
     "greynote": null,
     "name": "The Deep Ones",
-    "hypothesis": "reef_area",
+    "tagHypothesis": "reef_area",
     "confidence": "done",
     "remainingWork": "legacyTag",
     "dropsFrom": "Coves, Reef, Coral Ruins",
@@ -2488,7 +2488,7 @@
   {
     "greynote": null,
     "name": "The Deep Ones",
-    "hypothesis": "ship_graveyard_area",
+    "tagHypothesis": "ship_graveyard_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Coves, Reef, Strand, Whakawhairua Tuahu, The Brine King's Reef",
@@ -2499,7 +2499,7 @@
   {
     "greynote": null,
     "name": "The Demon",
-    "hypothesis": "kitava_map_boss",
+    "tagHypothesis": "kitava_map_boss",
     "confidence": "ok",
     "remainingWork": "confirm",
     "dropsFrom": "Kitava, The Destroyer (The Destroyer's Heart)",
@@ -2510,7 +2510,7 @@
   {
     "greynote": null,
     "name": "The Demoness",
-    "hypothesis": "dark_forest_area",
+    "tagHypothesis": "dark_forest_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Dark Forest, Bramble Valley, Forbidden Woods",
@@ -2521,7 +2521,7 @@
   {
     "greynote": null,
     "name": "The Destination",
-    "hypothesis": "peaceful_map",
+    "tagHypothesis": "peaceful_map",
     "confidence": "low",
     "remainingWork": "confirm",
     "dropsFrom": "Tropical Island, Beach, Shore, Fungal Hollow",
@@ -2532,7 +2532,7 @@
   {
     "greynote": "disabled",
     "name": "The Devastator",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -2543,7 +2543,7 @@
   {
     "greynote": null,
     "name": "The Doctor",
-    "hypothesis": "alira_area",
+    "tagHypothesis": "alira_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Burial Chambers, Spider Forest",
@@ -2554,7 +2554,7 @@
   {
     "greynote": null,
     "name": "The Doctor",
-    "hypothesis": "doedre_map_area",
+    "tagHypothesis": "doedre_map_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Putrid Cloister, Sepulchre, Waste Pool, Phantasmagoria",
@@ -2565,7 +2565,7 @@
   {
     "greynote": "areaSpecific",
     "name": "The Doppelganger",
-    "hypothesis": "Whakawairua Tuahu (no tag)",
+    "tagHypothesis": "Whakawairua Tuahu (no tag)",
     "confidence": "ok",
     "remainingWork": null,
     "dropsFrom": "Whakawairua Tuahu",
@@ -2576,7 +2576,7 @@
   {
     "greynote": null,
     "name": "The Doppelganger",
-    "hypothesis": "?",
+    "tagHypothesis": "?",
     "confidence": "none",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "The Crossroads (Act 7)",
@@ -2587,7 +2587,7 @@
   {
     "greynote": null,
     "name": "The Dragon",
-    "hypothesis": "dark_forest_area",
+    "tagHypothesis": "dark_forest_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Forbidden Woods, Dark Forest, Bramble Valley",
@@ -2598,7 +2598,7 @@
   {
     "greynote": "globalDrop",
     "name": "The Dragon's Heart",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -2609,7 +2609,7 @@
   {
     "greynote": null,
     "name": "The Dreamer",
-    "hypothesis": "shaper_void_entity_monster",
+    "tagHypothesis": "shaper_void_entity_monster",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Entity of the Void",
@@ -2620,7 +2620,7 @@
   {
     "greynote": "strongbox",
     "name": "The Dreamland",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -2631,7 +2631,7 @@
   {
     "greynote": null,
     "name": "The Drunken Aristocrat",
-    "hypothesis": "undying_boss_area",
+    "tagHypothesis": "undying_boss_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Bazaar, Academy, Ramparts, Residence, Pier, Crystal Ore",
@@ -2642,7 +2642,7 @@
   {
     "greynote": null,
     "name": "The Dungeon Master",
-    "hypothesis": "prison_area",
+    "tagHypothesis": "prison_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Cage, Cells, Dungeon, Pen",
@@ -2653,7 +2653,7 @@
   {
     "greynote": null,
     "name": "The Easy Stroll",
-    "hypothesis": "garden_area",
+    "tagHypothesis": "garden_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Gardens, Courtyard, Orchard, Terrace",
@@ -2664,7 +2664,7 @@
   {
     "greynote": null,
     "name": "The Eldritch Decay",
-    "hypothesis": "elder_guardian_boss",
+    "tagHypothesis": "elder_guardian_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Enslaver, The Eradicator, The Constrictor, The Purifier",
@@ -2675,7 +2675,7 @@
   {
     "greynote": "areaSpecific",
     "name": "The Emptiness",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "ok",
     "remainingWork": "confirm",
     "dropsFrom": null,
@@ -2686,7 +2686,7 @@
   {
     "greynote": "globalDrop",
     "name": "The Encroaching Darkness",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -2697,7 +2697,7 @@
   {
     "greynote": null,
     "name": "The Endless Darkness",
-    "hypothesis": "harbinger_portal_monster",
+    "tagHypothesis": "harbinger_portal_monster",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "HarbingerPortal, HarbingerPortalDelve, HarbingerPortalUber",
@@ -2708,7 +2708,7 @@
   {
     "greynote": null,
     "name": "The Endurance",
-    "hypothesis": "mine_area",
+    "tagHypothesis": "mine_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Crystal Ore, Dig, Excavation, Flooded Mine, Geode, Grotto",
@@ -2719,7 +2719,7 @@
   {
     "greynote": null,
     "name": "The Enlightened",
-    "hypothesis": "church",
+    "tagHypothesis": "church",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Crimson Temple, Defiled Cathedral, Ivory Temple, Lookout, Temple, Belfry, The Twilight Temple, Moon Temple, Basilica",
@@ -2730,7 +2730,7 @@
   {
     "greynote": null,
     "name": "The Enthusiasts",
-    "hypothesis": "library_area",
+    "tagHypothesis": "library_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Museum, Academy, Scriptorium",
@@ -2741,7 +2741,7 @@
   {
     "greynote": null,
     "name": "The Escape",
-    "hypothesis": "breachlord_boss_domain",
+    "tagHypothesis": "breachlord_boss_domain",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Xoph, Dark Embers; Tul, Creeping Avalanche; Esh, Forked Thought; Chayula, Who Dreamt; Uul-Netol, Unburdened Flesh",
@@ -2752,7 +2752,7 @@
   {
     "greynote": null,
     "name": "The Eternal War",
-    "hypothesis": "crusader_conqueror_boss",
+    "tagHypothesis": "crusader_conqueror_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Baran, The Crusader",
@@ -2763,7 +2763,7 @@
   {
     "greynote": null,
     "name": "The Eternal War",
-    "hypothesis": "hunter_conqueror_boss",
+    "tagHypothesis": "hunter_conqueror_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Al-Hezmin, The Hunter",
@@ -2774,7 +2774,7 @@
   {
     "greynote": null,
     "name": "The Eternal War",
-    "hypothesis": "redeemer_conqueror_boss",
+    "tagHypothesis": "redeemer_conqueror_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Veritania, The Redeemer",
@@ -2785,7 +2785,7 @@
   {
     "greynote": null,
     "name": "The Eternal War",
-    "hypothesis": "warlord_conqueror_boss",
+    "tagHypothesis": "warlord_conqueror_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Drox, The Warlord",
@@ -2796,7 +2796,7 @@
   {
     "greynote": null,
     "name": "The Ethereal",
-    "hypothesis": "atziri_area",
+    "tagHypothesis": "atziri_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Alluring Abyss, The Apex of Sacrifice",
@@ -2807,7 +2807,7 @@
   {
     "greynote": null,
     "name": "The Explorer",
-    "hypothesis": "thicket_area",
+    "tagHypothesis": "thicket_area",
     "confidence": "done",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Thicket",
@@ -2818,7 +2818,7 @@
   {
     "greynote": null,
     "name": "The Eye of Terror",
-    "hypothesis": "betrayal_breach",
+    "tagHypothesis": "betrayal_breach",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "It That Fled",
@@ -2829,7 +2829,7 @@
   {
     "greynote": null,
     "name": "The Eye of the Dragon",
-    "hypothesis": "\"Phoenix\" boss",
+    "tagHypothesis": "\"Phoenix\" boss",
     "confidence": "ok",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Sulphur Vents, Forge of the Phoenix, The Boiling Lake",
@@ -2840,7 +2840,7 @@
   {
     "greynote": null,
     "name": "The Fathomless Depths",
-    "hypothesis": "flooded_area",
+    "tagHypothesis": "flooded_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Flooded Mine, Underground Sea, Mineral Pools",
@@ -2851,7 +2851,7 @@
   {
     "greynote": null,
     "name": "The Feast",
-    "hypothesis": "sewer_area",
+    "tagHypothesis": "sewer_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Lair of the Hydra, Toxic Sewer, Waste Pool, The Toxic Conduits",
@@ -2862,7 +2862,7 @@
   {
     "greynote": null,
     "name": "The Fiend",
-    "hypothesis": "thaumaturgy_area",
+    "tagHypothesis": "thaumaturgy_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Poorjoy's Asylum, Shrine, Foundry, Laboratory",
@@ -2873,7 +2873,7 @@
   {
     "greynote": null,
     "name": "The Fishmonger",
-    "hypothesis": "rhoa_map_boss",
+    "tagHypothesis": "rhoa_map_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Drought-Maddened Rhoa, Skullbeak",
@@ -2884,7 +2884,7 @@
   {
     "greynote": null,
     "name": "The Fletcher",
-    "hypothesis": "archer_boss",
+    "tagHypothesis": "archer_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Steelpoint the Avenger; Lord of the Ashen Arrow; Mirage of Bones; Stonebeak, Battle Fowl; Eyepecker; The Animal Pack; Nightwane",
@@ -2895,7 +2895,7 @@
   {
     "greynote": null,
     "name": "The Flora's Gift",
-    "hypothesis": "forest_map_area",
+    "tagHypothesis": "forest_map_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Tropical Island, Jungle Valley, Ashen Wood, Spider Forest, Stagnation, Bramble Valley, Thicket, Dark Forest, Lair, Ramparts, Forbidden Woods",
@@ -2906,7 +2906,7 @@
   {
     "greynote": null,
     "name": "The Fool",
-    "hypothesis": "betrayal_janus",
+    "tagHypothesis": "betrayal_janus",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Janus Perandus",
@@ -2917,7 +2917,7 @@
   {
     "greynote": null,
     "name": "The Forgotten Treasure",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "low",
     "remainingWork": "noHypothesis",
     "dropsFrom": "Temple",
@@ -2928,7 +2928,7 @@
   {
     "greynote": null,
     "name": "The Formless Sea",
-    "hypothesis": "ship_graveyard_area",
+    "tagHypothesis": "ship_graveyard_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Reef, Coves, Strand, Whakawhairua Tuahu",
@@ -2939,7 +2939,7 @@
   {
     "greynote": null,
     "name": "The Forsaken",
-    "hypothesis": "crypt_area",
+    "tagHypothesis": "crypt_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Bone Crypt, Cursed Crypt, The Coward's Trial",
@@ -2950,7 +2950,7 @@
   {
     "greynote": null,
     "name": "The Forsaken",
-    "hypothesis": "necropolis_area",
+    "tagHypothesis": "necropolis_area",
     "confidence": "ok",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Necropolis",
@@ -2961,7 +2961,7 @@
   {
     "greynote": "areaSpecific",
     "name": "The Forward Gaze",
-    "hypothesis": "Doryani's Machinarium (no tag)",
+    "tagHypothesis": "Doryani's Machinarium (no tag)",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Doryani's Machinarium",
@@ -2972,7 +2972,7 @@
   {
     "greynote": null,
     "name": "The Fox",
-    "hypothesis": "has_foxes_area",
+    "tagHypothesis": "has_foxes_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Barrows, Castle Ruins, Sunken City, Fields",
@@ -2983,7 +2983,7 @@
   {
     "greynote": null,
     "name": "The Fox in the Brambles",
-    "hypothesis": "garden_area",
+    "tagHypothesis": "garden_area",
     "confidence": "ok",
     "remainingWork": "storyOnly",
     "dropsFrom": "Courtyard, Gardens, Terrace, Orchard",
@@ -2994,7 +2994,7 @@
   {
     "greynote": "globalDrop",
     "name": "The Gambler",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -3005,7 +3005,7 @@
   {
     "greynote": null,
     "name": "The Garish Power",
-    "hypothesis": "chamber_of_sins_area",
+    "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Overgrown Ruin, Overgrown Shrine, The Chamber of Sins Level 1/2 (Act 7)",
@@ -3016,7 +3016,7 @@
   {
     "greynote": "strongbox",
     "name": "The Gemcutter",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -3027,7 +3027,7 @@
   {
     "greynote": null,
     "name": "The Gentleman",
-    "hypothesis": "slums_area",
+    "tagHypothesis": "slums_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Ghetto, Precinct",
@@ -3038,7 +3038,7 @@
   {
     "greynote": null,
     "name": "The Gladiator",
-    "hypothesis": "pitfight_area",
+    "tagHypothesis": "pitfight_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Arena, Pit of the Chimera, Colosseum Map, Pit, The Slums, The Sarn Ramparts, The Grain Gate",
@@ -3049,7 +3049,7 @@
   {
     "greynote": null,
     "name": "The Golden Era",
-    "hypothesis": "wealthy_area + Boss with `has_two_handed_melee`",
+    "tagHypothesis": "wealthy_area + Boss with `has_two_handed_melee`",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Basilica, Ivory Temple",
@@ -3060,7 +3060,7 @@
   {
     "greynote": null,
     "name": "The Golden Era",
-    "hypothesis": "wealthy_area + tower_area / undying_boss_area",
+    "tagHypothesis": "wealthy_area + tower_area / undying_boss_area",
     "confidence": "done",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Residence",
@@ -3071,7 +3071,7 @@
   {
     "greynote": null,
     "name": "The Greatest Intentions",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "none",
     "remainingWork": "noHypothesis",
     "dropsFrom": null,
@@ -3082,7 +3082,7 @@
   {
     "greynote": null,
     "name": "The Gulf",
-    "hypothesis": "uber_elder",
+    "tagHypothesis": "uber_elder",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Uber Elder",
@@ -3093,7 +3093,7 @@
   {
     "greynote": null,
     "name": "The Hale Heart",
-    "hypothesis": "elder_guardian_boss",
+    "tagHypothesis": "elder_guardian_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Constrictor, The Enslaver, The Eradicator, The Purifier",
@@ -3104,7 +3104,7 @@
   {
     "greynote": null,
     "name": "The Harvester",
-    "hypothesis": "crossroad_area",
+    "tagHypothesis": "crossroad_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Imperial Fields, Fields, Castle Ruins, The Crossroads (A7)",
@@ -3115,7 +3115,7 @@
   {
     "greynote": "story",
     "name": "The Hermit",
-    "hypothesis": "Act 7 & NOT indoors_area",
+    "tagHypothesis": "Act 7 & NOT indoors_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Ashen Fields, The Broken Bridge, The Causeway, The Crossroads, The Fellshrine Ruins, The Northern Forest, The Vaal City, Maligaro's Sanctum",
@@ -3126,7 +3126,7 @@
   {
     "greynote": "chestObject",
     "name": "The Heroic Shot",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -3137,7 +3137,7 @@
   {
     "greynote": null,
     "name": "The Hive of Knowledge",
-    "hypothesis": "vaal_pyramid_area",
+    "tagHypothesis": "vaal_pyramid_area",
     "confidence": "ok",
     "remainingWork": "confirm",
     "dropsFrom": "Vaal Pyramid, Vaal Temple, Maze",
@@ -3148,7 +3148,7 @@
   {
     "greynote": null,
     "name": "The Hoarder",
-    "hypothesis": "gold_pile_area",
+    "tagHypothesis": "gold_pile_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Maelström of Chaos, Underground Sea, Vault, Vaults of Atziri, Mineral Pools",
@@ -3159,7 +3159,7 @@
   {
     "greynote": null,
     "name": "The Hook",
-    "hypothesis": "cortex_boss",
+    "tagHypothesis": "cortex_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Venarius",
@@ -3170,7 +3170,7 @@
   {
     "greynote": null,
     "name": "The Hunger",
-    "hypothesis": "belly_area",
+    "tagHypothesis": "belly_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Carcass, Malformation, Phantasmagoria, Core, The Belly of the Beast (A4/A9), The Harvest, The Rotting Core",
@@ -3181,7 +3181,7 @@
   {
     "greynote": "areaSpecific",
     "name": "The Immortal",
-    "hypothesis": "hall_of_grandmasters",
+    "tagHypothesis": "hall_of_grandmasters",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Hall of the Grandmasters",
@@ -3192,7 +3192,7 @@
   {
     "greynote": null,
     "name": "The Incantation",
-    "hypothesis": "alira_area",
+    "tagHypothesis": "alira_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Burial Chambers, Spider Forest",
@@ -3203,7 +3203,7 @@
   {
     "greynote": null,
     "name": "The Incantation",
-    "hypothesis": "doedre_map_area",
+    "tagHypothesis": "doedre_map_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Putrid Cloister, Sepulchre, Waste Pool, Phantasmagoria",
@@ -3214,7 +3214,7 @@
   {
     "greynote": null,
     "name": "The Innocent",
-    "hypothesis": "AvariusCasticus boss areas (no tag)",
+    "tagHypothesis": "AvariusCasticus boss areas (no tag)",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Basilica, Defiled Cathedral",
@@ -3225,7 +3225,7 @@
   {
     "greynote": "story",
     "name": "The Innocent",
-    "hypothesis": "innocence_story",
+    "tagHypothesis": "innocence_story",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Chamber of Innocence",
@@ -3236,7 +3236,7 @@
   {
     "greynote": null,
     "name": "The Inoculated",
-    "hypothesis": "toxic_pool_area",
+    "tagHypothesis": "toxic_pool_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Acid Caverns, Primordial Pool, Stagnation, Sulphure Vents, Mud Geyser, Marshes, Bog",
@@ -3247,7 +3247,7 @@
   {
     "greynote": null,
     "name": "The Insatiable",
-    "hypothesis": "harvest_area",
+    "tagHypothesis": "harvest_area",
     "confidence": "ok",
     "remainingWork": "storyOnly",
     "dropsFrom": "Carcass, Core, The Rotting Core",
@@ -3258,7 +3258,7 @@
   {
     "greynote": null,
     "name": "The Inventor",
-    "hypothesis": "vaal_pyramid_area",
+    "tagHypothesis": "vaal_pyramid_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Maze, Vaal Pyramid, Vaal Temple, Vaults of Atziri, Doryani's Machinarium, The Temple of Decay Level 1/2",
@@ -3269,7 +3269,7 @@
   {
     "greynote": null,
     "name": "The Jester",
-    "hypothesis": "trap_exile",
+    "tagHypothesis": "trap_exile",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Ash Lessard",
@@ -3280,7 +3280,7 @@
   {
     "greynote": null,
     "name": "The Jeweller's Boon",
-    "hypothesis": "crystalline_area",
+    "tagHypothesis": "crystalline_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Crystal Ore, Mineral Pools, Primordial Blocks, Grotto",
@@ -3291,7 +3291,7 @@
   {
     "greynote": null,
     "name": "The Journalist",
-    "hypothesis": "kitava_cultist_area",
+    "tagHypothesis": "kitava_cultist_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "City Square, Crimson Temple, Defiled Cathedral, Haunted Mansion, Lookout, Silo, Alleyways",
@@ -3302,7 +3302,7 @@
   {
     "greynote": null,
     "name": "The Journey",
-    "hypothesis": "ocean_area",
+    "tagHypothesis": "ocean_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Atoll, Lighthouse, Mao Kun, Peninsula, Port, Reef, Shipyard, Whakawairua Tuahu, Wharf, Shore, Tropical Island, Strand, Estuary, Pier, Plateau, Coves, Maelström of Chaos, Coral Ruins, Beach",
@@ -3313,7 +3313,7 @@
   {
     "greynote": null,
     "name": "The King's Blade",
-    "hypothesis": "daresso_area",
+    "tagHypothesis": "daresso_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Arena, Pit, Colosseum, Pit of the Chimera",
@@ -3324,7 +3324,7 @@
   {
     "greynote": null,
     "name": "The King's Heart",
-    "hypothesis": "kaom_area",
+    "tagHypothesis": "kaom_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Caldera, Volcano",
@@ -3335,7 +3335,7 @@
   {
     "greynote": null,
     "name": "The Landing",
-    "hypothesis": "coast_boat_area",
+    "tagHypothesis": "coast_boat_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Shore, Mao Kun, Strand, Whakawairua Tuahu",
@@ -3346,7 +3346,7 @@
   {
     "greynote": null,
     "name": "The Last One Standing",
-    "hypothesis": "pitfight_area",
+    "tagHypothesis": "pitfight_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Pit of the Chimera, Pit, Arena, Colosseum",
@@ -3357,7 +3357,7 @@
   {
     "greynote": "areaSpecific",
     "name": "The Last Supper",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -3368,7 +3368,7 @@
   {
     "greynote": null,
     "name": "The Lich",
-    "hypothesis": "necromancer_boss",
+    "tagHypothesis": "necromancer_boss",
     "confidence": "none",
     "remainingWork": "legacyTag",
     "dropsFrom": "Xixic, High Necromancer; Burtok, Shaper of Bones",
@@ -3379,7 +3379,7 @@
   {
     "greynote": null,
     "name": "The Lich",
-    "hypothesis": "abyss_lich_boss?",
+    "tagHypothesis": "abyss_lich_boss?",
     "confidence": "none",
     "remainingWork": null,
     "dropsFrom": null,
@@ -3390,7 +3390,7 @@
   {
     "greynote": null,
     "name": "The Life Thief",
-    "hypothesis": "kitava_cultist_area",
+    "tagHypothesis": "kitava_cultist_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "City Square, Crimson Temple, Lookout, Alleyways, Defiled Cathedral, Silo, Haunted Mansion",
@@ -3401,7 +3401,7 @@
   {
     "greynote": null,
     "name": "The Lion",
-    "hypothesis": "dishonoured_queen; dishonoured_queen_map",
+    "tagHypothesis": "dishonoured_queen; dishonoured_queen_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Vindicated Queen; The Dishonoured Queen",
@@ -3412,7 +3412,7 @@
   {
     "greynote": "chestObject",
     "name": "The Long Con",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -3423,7 +3423,7 @@
   {
     "greynote": null,
     "name": "The Long Watch",
-    "hypothesis": "bridge_area",
+    "tagHypothesis": "bridge_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Iceberg, Infested Valley, Primordial Blocks, Mineral Pools, Alleyways, Siege, Castle Ruins, Armoury, Arachnid Tomb, Forking River",
@@ -3434,7 +3434,7 @@
   {
     "greynote": "monsterSpecific",
     "name": "The Lord in Black",
-    "hypothesis": "hellscape_demon_boss",
+    "tagHypothesis": "hellscape_demon_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "K'tash, the Hate Shepherd",
@@ -3445,7 +3445,7 @@
   {
     "greynote": null,
     "name": "The Lord of Celebration",
-    "hypothesis": "wealthy_area",
+    "tagHypothesis": "wealthy_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Residence, Ivory Temple, Crimson Temple, Crimson Township, Laboratory, Basilica, Palace, Conservatory, Vault, Haunted Mansion, Villa, Chateau, Temple, Relic Chambers, The Twilight Temple, Vaults of Atziri",
@@ -3456,7 +3456,7 @@
   {
     "greynote": null,
     "name": "The Lover",
-    "hypothesis": "merveil_area",
+    "tagHypothesis": "merveil_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Maelström of Chaos, Underground Sea",
@@ -3467,7 +3467,7 @@
   {
     "greynote": null,
     "name": "The Lunaris Priestess",
-    "hypothesis": "lunaris_area",
+    "tagHypothesis": "lunaris_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Twilight Temple, Cold River, Moon Temple, Lunaris Temple Level 1/2 (A8)",
@@ -3478,7 +3478,7 @@
   {
     "greynote": null,
     "name": "The Mad King",
-    "hypothesis": "king_boss_map",
+    "tagHypothesis": "king_boss_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Colosseum, Dark Forest, Caldera, Reef",
@@ -3489,7 +3489,7 @@
   {
     "greynote": null,
     "name": "The Magma Crab",
-    "hypothesis": "exile_molten_shell",
+    "tagHypothesis": "exile_molten_shell",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Magnus Stonethorn",
@@ -3500,7 +3500,7 @@
   {
     "greynote": null,
     "name": "The Master",
-    "hypothesis": "boss summons canine_beast minion",
+    "tagHypothesis": "boss summons canine_beast minion",
     "confidence": "none",
     "remainingWork": "noHypothesis",
     "dropsFrom": "Lair, Pen",
@@ -3511,7 +3511,7 @@
   {
     "greynote": "strongbox",
     "name": "The Master Artisan",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -3522,7 +3522,7 @@
   {
     "greynote": "disabled",
     "name": "The Mayor",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -3533,7 +3533,7 @@
   {
     "greynote": null,
     "name": "The Mercenary",
-    "hypothesis": "kraityn_area",
+    "tagHypothesis": "kraityn_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Castle Ruins, The Broken Bridge, Strand",
@@ -3544,7 +3544,7 @@
   {
     "greynote": null,
     "name": "The Messenger",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "low",
     "remainingWork": "noHypothesis",
     "dropsFrom": "Port, Crystal Ore",
@@ -3555,7 +3555,7 @@
   {
     "greynote": "story",
     "name": "The Metalsmith's Gift",
-    "hypothesis": "act6_karui_area",
+    "tagHypothesis": "act6_karui_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Coast (A6), The Karui Fortress, The Mud Flats (A6)",
@@ -3566,7 +3566,7 @@
   {
     "greynote": null,
     "name": "The Mind's Eyes",
-    "hypothesis": "mine_area; boss only",
+    "tagHypothesis": "mine_area; boss only",
     "confidence": "ok",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Champion of the Hollows; Messenger of the Hollows; Lord of the Hollows; The Eroding One; Stalker of the Endless Dunes; Void Anomaly; Avatar of Undoing; Shrieker Eihal",
@@ -3577,7 +3577,7 @@
   {
     "greynote": null,
     "name": "The Mountain",
-    "hypothesis": "snow_mountain_area",
+    "tagHypothesis": "snow_mountain_area",
     "confidence": "ok",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Summit, Glacier, The Ascent, The Descent",
@@ -3588,7 +3588,7 @@
   {
     "greynote": null,
     "name": "The Nurse",
-    "hypothesis": "shavronne_area",
+    "tagHypothesis": "shavronne_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Cells, Core, Tower, Scriptorium, Shavronne's Tower, The Harvest, The Rotting Core",
@@ -3599,7 +3599,7 @@
   {
     "greynote": null,
     "name": "The Nurse",
-    "hypothesis": "harvest_area",
+    "tagHypothesis": "harvest_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Carcass, Core, The Harvest, The Rotting Core",
@@ -3610,7 +3610,7 @@
   {
     "greynote": null,
     "name": "The Oath",
-    "hypothesis": "belly_area",
+    "tagHypothesis": "belly_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Carcass, Core, Malformation, Phantasmagoria, The Belly of the Beast, The Rotting Core",
@@ -3621,7 +3621,7 @@
   {
     "greynote": null,
     "name": "The Obscured",
-    "hypothesis": "abyssal",
+    "tagHypothesis": "abyssal",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "All Abyss Monsters",
@@ -3632,7 +3632,7 @@
   {
     "greynote": null,
     "name": "The Offering",
-    "hypothesis": "shavronne_monster_story OR unholy_trio_combined_boss_story",
+    "tagHypothesis": "shavronne_monster_story OR unholy_trio_combined_boss_story",
     "confidence": "ok",
     "remainingWork": "storyOnly",
     "dropsFrom": "Reassembled Brutus; Shavronne, Unbound",
@@ -3643,7 +3643,7 @@
   {
     "greynote": null,
     "name": "The Offering",
-    "hypothesis": "shavronne_monster_map OR unholy_trio_combined_boss_map",
+    "tagHypothesis": "shavronne_monster_map OR unholy_trio_combined_boss_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Bazur; Gisale, Thought Thief; Prodigy of Darkness; Shavronne the Sickening; Amalgam of Nightmares",
@@ -3654,7 +3654,7 @@
   {
     "greynote": null,
     "name": "The Offspring",
-    "hypothesis": "Ryslatha boss",
+    "tagHypothesis": "Ryslatha boss",
     "confidence": "ok",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Gorulis, Will-Thief; Ryslatha, the Puppet Mistress",
@@ -3665,7 +3665,7 @@
   {
     "greynote": null,
     "name": "The Offspring",
-    "hypothesis": "nature_boss",
+    "tagHypothesis": "nature_boss",
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Gorulis, Will-Thief; Murgeth Bogsong",
@@ -3676,7 +3676,7 @@
   {
     "greynote": null,
     "name": "The Offspring",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "low",
     "remainingWork": "noHypothesis",
     "dropsFrom": null,
@@ -3687,7 +3687,7 @@
   {
     "greynote": null,
     "name": "The Old Man",
-    "hypothesis": "map_area_with_open_water",
+    "tagHypothesis": "map_area_with_open_water",
     "confidence": "low",
     "remainingWork": "confirm",
     "dropsFrom": "Atoll, Lighthouse, Peninsula, Pier, Shore, Strand, Tropical Island, Wharf",
@@ -3698,7 +3698,7 @@
   {
     "greynote": null,
     "name": "The One That Got Away",
-    "hypothesis": "coast_boat_area",
+    "tagHypothesis": "coast_boat_area",
     "confidence": "low",
     "remainingWork": "confirm",
     "dropsFrom": "Strand",
@@ -3709,7 +3709,7 @@
   {
     "greynote": null,
     "name": "The One With All",
-    "hypothesis": "cemetery_map_area",
+    "tagHypothesis": "cemetery_map_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Barrows, Burial Chambers, Cemetery, Graveyard, Grave Trough",
@@ -3720,7 +3720,7 @@
   {
     "greynote": null,
     "name": "The Opulent",
-    "hypothesis": "wealthy_area",
+    "tagHypothesis": "wealthy_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Basilica, Chateau, Conservatory, Crimson Temple, Crimson Township, Haunted Mansion, Ivory Temple, Laboratory, Palace, Relic Chambers, Residence, Temple, Vault, Vaults of Atziri, Villa, The Twilight Temple",
@@ -3731,7 +3731,7 @@
   {
     "greynote": null,
     "name": "The Pack Leader",
-    "hypothesis": "forest_map_area",
+    "tagHypothesis": "forest_map_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Ashen Wood, Jungle Valley, Lair, Spider Forest, Stagnation, Thicket, Tropical Island, Ramparts, Dark Forest, Bramble Valley, Forbidden Woods",
@@ -3742,7 +3742,7 @@
   {
     "greynote": null,
     "name": "The Pact",
-    "hypothesis": "dock_area",
+    "tagHypothesis": "dock_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Pier, Port, Wharf, Shipyard, The Quay",
@@ -3753,7 +3753,7 @@
   {
     "greynote": null,
     "name": "The Patient",
-    "hypothesis": "military_area",
+    "tagHypothesis": "military_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Armoury, Arsenal, Colonnade, Promenade",
@@ -3764,7 +3764,7 @@
   {
     "greynote": null,
     "name": "The Penitent",
-    "hypothesis": "prison_area",
+    "tagHypothesis": "prison_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Cells, Dungeon, Pen, Cage",
@@ -3775,7 +3775,7 @@
   {
     "greynote": null,
     "name": "The Poet",
-    "hypothesis": "marketplace_area",
+    "tagHypothesis": "marketplace_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Alleyways, Arcade, Bazaar, Port, The Marketplace, The Quay",
@@ -3786,7 +3786,7 @@
   {
     "greynote": null,
     "name": "The Polymath",
-    "hypothesis": "relic_area",
+    "tagHypothesis": "relic_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Museum, Relic Chambers, The Reliquary (Act 5/10)",
@@ -3797,7 +3797,7 @@
   {
     "greynote": null,
     "name": "The Porcupine",
-    "hypothesis": "garden_area",
+    "tagHypothesis": "garden_area",
     "confidence": "done",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Courtyard, Gardens, Orchard, Terrace, The High Gardens",
@@ -3808,7 +3808,7 @@
   {
     "greynote": null,
     "name": "The Porcupine",
-    "hypothesis": "garden_area OR (labyrinth_tileset_area & NOT indoors_area)",
+    "tagHypothesis": "garden_area OR (labyrinth_tileset_area & NOT indoors_area)",
     "confidence": "done",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Courtyard, Gardens, Orchard, Plaza, Terrace, The High Gardens",
@@ -3819,7 +3819,7 @@
   {
     "greynote": null,
     "name": "The Price of Loyalty",
-    "hypothesis": "incursion_architect_breach",
+    "tagHypothesis": "incursion_architect_breach",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Zilquapa, Architect of the Breach",
@@ -3830,7 +3830,7 @@
   {
     "greynote": null,
     "name": "The Price of Prescience",
-    "hypothesis": "crusader_conqueror_boss",
+    "tagHypothesis": "crusader_conqueror_boss",
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Baran, The Crusader",
@@ -3841,7 +3841,7 @@
   {
     "greynote": null,
     "name": "The Price of Prescience",
-    "hypothesis": "hunter_conqueror_boss",
+    "tagHypothesis": "hunter_conqueror_boss",
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Al-Hezmin, The Hunter",
@@ -3852,7 +3852,7 @@
   {
     "greynote": null,
     "name": "The Price of Prescience",
-    "hypothesis": "redeemer_conqueror_boss",
+    "tagHypothesis": "redeemer_conqueror_boss",
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Veritania, The Redeemer",
@@ -3863,7 +3863,7 @@
   {
     "greynote": null,
     "name": "The Price of Prescience",
-    "hypothesis": "warlord_conqueror_boss",
+    "tagHypothesis": "warlord_conqueror_boss",
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Drox, The Warlord",
@@ -3874,7 +3874,7 @@
   {
     "greynote": null,
     "name": "The Price of Protection",
-    "hypothesis": "invasion_boss",
+    "tagHypothesis": "invasion_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -3885,7 +3885,7 @@
   {
     "greynote": null,
     "name": "The Price of Protection",
-    "hypothesis": "vaalsidearea_boss",
+    "tagHypothesis": "vaalsidearea_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -3896,7 +3896,7 @@
   {
     "greynote": null,
     "name": "The Primordial",
-    "hypothesis": "golem_boss_area",
+    "tagHypothesis": "golem_boss_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Coves, Flooded Mine, Geode, Grotto, Peninsula, Vault, Waterways, Wharf",
@@ -3907,7 +3907,7 @@
   {
     "greynote": null,
     "name": "The Prince of Darkness",
-    "hypothesis": "malachai_boss_map",
+    "tagHypothesis": "malachai_boss_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Eater of Souls; Malachai's Omen",
@@ -3918,7 +3918,7 @@
   {
     "greynote": null,
     "name": "The Professor",
-    "hypothesis": "library_area",
+    "tagHypothesis": "library_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Museum, Academy, Scriptorium",
@@ -3929,7 +3929,7 @@
   {
     "greynote": null,
     "name": "The Professor",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Laboratory",
@@ -3940,7 +3940,7 @@
   {
     "greynote": "monsterSpecific",
     "name": "The Progeny of Lunaris",
-    "hypothesis": "lunaris_area + solaris_area + unique_map_boss",
+    "tagHypothesis": "lunaris_area + solaris_area + unique_map_boss",
     "confidence": "ok",
     "remainingWork": "confirm",
     "dropsFrom": "Selenia, the Endless Night; Helial, the Day Unending; Khor, Sister of Shadows",
@@ -3951,7 +3951,7 @@
   {
     "greynote": null,
     "name": "The Puzzle",
-    "hypothesis": "beyond_demon",
+    "tagHypothesis": "beyond_demon",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "All (Scourge) beyond demons",
@@ -3962,7 +3962,7 @@
   {
     "greynote": null,
     "name": "The Queen",
-    "hypothesis": "vaults_of_atziri",
+    "tagHypothesis": "vaults_of_atziri",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Vaults of Atziri",
@@ -3973,7 +3973,7 @@
   {
     "greynote": null,
     "name": "The Rabbit's Foot",
-    "hypothesis": "crypt_area",
+    "tagHypothesis": "crypt_area",
     "confidence": "ok",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Bone Crypt, Cursed Crypt, The Coward's Trial",
@@ -3984,7 +3984,7 @@
   {
     "greynote": null,
     "name": "The Rabid Rhoa",
-    "hypothesis": "rhoa_map_boss",
+    "tagHypothesis": "rhoa_map_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Drought-Maddened Rhoa, Skullbeak",
@@ -3995,7 +3995,7 @@
   {
     "greynote": null,
     "name": "The Realm",
-    "hypothesis": "Breach monster (no tag)",
+    "tagHypothesis": "Breach monster (no tag)",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -4006,7 +4006,7 @@
   {
     "greynote": "chestObject",
     "name": "The Risk",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -4017,7 +4017,7 @@
   {
     "greynote": null,
     "name": "The Rite of Elements",
-    "hypothesis": "golem_boss_area",
+    "tagHypothesis": "golem_boss_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Coves, Flooded Mine, Geode, Grotto, Vault, Waterways, Wharf, Peninsula",
@@ -4028,7 +4028,7 @@
   {
     "greynote": null,
     "name": "The Road to Power",
-    "hypothesis": "has_road_area",
+    "tagHypothesis": "has_road_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Castle Ruins, Dark Forest, Orchard, Shore",
@@ -4039,7 +4039,7 @@
   {
     "greynote": null,
     "name": "The Rusted Bard",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "low",
     "remainingWork": "confirm",
     "dropsFrom": "The Vinktar Square",
@@ -4050,7 +4050,7 @@
   {
     "greynote": null,
     "name": "The Ruthless Ceinture",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "none",
     "remainingWork": "noHypothesis",
     "dropsFrom": "Dig, Maze of the Minotaur, Summit, The Ascent, The Descent, The Foothills",
@@ -4061,7 +4061,7 @@
   {
     "greynote": null,
     "name": "The Sacrifice",
-    "hypothesis": "incursion_temple_area",
+    "tagHypothesis": "incursion_temple_area",
     "confidence": "ok",
     "remainingWork": "confirm",
     "dropsFrom": "The Temple of Atzoatl",
@@ -4072,7 +4072,7 @@
   {
     "greynote": null,
     "name": "The Saint's Treasure",
-    "hypothesis": "marketplace_area",
+    "tagHypothesis": "marketplace_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Alleyways, Port, Arcade, Bazaar",
@@ -4083,7 +4083,7 @@
   {
     "greynote": null,
     "name": "The Saint's Treasure",
-    "hypothesis": "slums_area",
+    "tagHypothesis": "slums_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Ghetto, Precinct",
@@ -4094,7 +4094,7 @@
   {
     "greynote": null,
     "name": "The Samurai's Eye",
-    "hypothesis": "abyss_lich_boss",
+    "tagHypothesis": "abyss_lich_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Ulaman, Sovereign of the Well; Amanamu, Liege of the Lightless",
@@ -4105,7 +4105,7 @@
   {
     "greynote": null,
     "name": "The Scarred Meadow",
-    "hypothesis": "fields_area",
+    "tagHypothesis": "fields_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Ashen Wood, Fields, Peninsula, The Ashen Fields, The Imperial Fields",
@@ -4116,7 +4116,7 @@
   {
     "greynote": null,
     "name": "The Scavenger",
-    "hypothesis": "scavenger_boss_area",
+    "tagHypothesis": "scavenger_boss_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Gnar, Eater of Carrion; Stonebeak, Battle Fowl; Hephaeus, The Hammer; The Winged Death",
@@ -4127,7 +4127,7 @@
   {
     "greynote": null,
     "name": "The Scholar",
-    "hypothesis": "library_area",
+    "tagHypothesis": "library_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Academy, Museum, Scriptorium, The Library, The Archives",
@@ -4138,7 +4138,7 @@
   {
     "greynote": null,
     "name": "The Scout",
-    "hypothesis": "forest_map_area",
+    "tagHypothesis": "forest_map_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Ashen Wood, Bramble Valley, Forbidden Woods, Jungle Valley, Lair, Ramparts, Spider Forest, Tropical Island, Thicket, Dark Forest, Stagnation",
@@ -4149,7 +4149,7 @@
   {
     "greynote": null,
     "name": "The Seeker",
-    "hypothesis": "incursion_temple_area",
+    "tagHypothesis": "incursion_temple_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Temple of Atzoatl",
@@ -4160,7 +4160,7 @@
   {
     "greynote": "monsterSpecific",
     "name": "The Sephirot",
-    "hypothesis": "dominus_monster_map",
+    "tagHypothesis": "dominus_monster_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The High Templar; The Hallowed Husk; Excellis Aurafix",
@@ -4171,7 +4171,7 @@
   {
     "greynote": null,
     "name": "The Shortcut",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Vaal Side Areas",
@@ -4182,7 +4182,7 @@
   {
     "greynote": null,
     "name": "The Side Quest",
-    "hypothesis": "bridge_area",
+    "tagHypothesis": "bridge_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Alleyways, Armoury, Mineral Pools, Infested Valley, Castle Ruins, Forking River, Arachnid Tomb, Primordial Blocks, Iceberg, Siege",
@@ -4193,7 +4193,7 @@
   {
     "greynote": null,
     "name": "The Sigil",
-    "hypothesis": "chamber_of_sins_area",
+    "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Overgrown Ruin, Overgrown Shrine",
@@ -4204,7 +4204,7 @@
   {
     "greynote": null,
     "name": "The Siren",
-    "hypothesis": "merveil_area",
+    "tagHypothesis": "merveil_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Maelström of Chaos, Underground Sea",
@@ -4215,10 +4215,10 @@
   {
     "greynote": "monsterSpecific",
     "name": "The Skeleton",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": null,
+    "dropsFrom": "Fairgraves, Never Dying",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Fairgraves, Never Dying"
@@ -4226,7 +4226,7 @@
   {
     "greynote": null,
     "name": "The Soul",
-    "hypothesis": "unholy_trio_area",
+    "tagHypothesis": "unholy_trio_area",
     "confidence": "ok",
     "remainingWork": "confirm",
     "dropsFrom": "Cells, Overgrown Shrine, Sepulchre, Tower, Waste Pool, Core, Museum, Phantasmagoria",
@@ -4237,7 +4237,7 @@
   {
     "greynote": null,
     "name": "The Spark and the Flame",
-    "hypothesis": "totem_boss_area",
+    "tagHypothesis": "totem_boss_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Atoll, Plateau, Siege",
@@ -4248,7 +4248,7 @@
   {
     "greynote": null,
     "name": "The Spoiled Prince",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "none",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Vaal Pyramid",
@@ -4259,7 +4259,7 @@
   {
     "greynote": null,
     "name": "The Standoff",
-    "hypothesis": "fire_area",
+    "tagHypothesis": "fire_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Crater, Lava Chamber, Lava Lake, Forge of the Phoenix, The Ruined Square, The Torched Courts (A5/10), Estuary, Silo, The Crematorium, The Ravaged Square",
@@ -4270,7 +4270,7 @@
   {
     "greynote": null,
     "name": "The Stormcaller",
-    "hypothesis": "lightning_area, NOT unique_map",
+    "tagHypothesis": "lightning_area, NOT unique_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Courtyard, Strand, Tower",
@@ -4281,7 +4281,7 @@
   {
     "greynote": null,
     "name": "The Strategist",
-    "hypothesis": "warlord_conqueror_boss",
+    "tagHypothesis": "warlord_conqueror_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Drox, The Warlord",
@@ -4292,7 +4292,7 @@
   {
     "greynote": null,
     "name": "The Summoner",
-    "hypothesis": "summoner_area",
+    "tagHypothesis": "summoner_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Bone Crypt, Burial Chambers, Spider Forest, Cage; Lower Prison (Act 6), The Crematorium, The Catacombs, Shavronne's Tower, The Chamber of Sins Level 1 (Act 7)",
@@ -4303,7 +4303,7 @@
   {
     "greynote": null,
     "name": "The Sun",
-    "hypothesis": "solaris_area",
+    "tagHypothesis": "solaris_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Twilight Temple, Temple, Cold River, The Harbour Bridge, The Solaris Temple Level 2 (Act 8), The Solaris Temple Level 1 (Act 8)",
@@ -4314,7 +4314,7 @@
   {
     "greynote": null,
     "name": "The Surgeon",
-    "hypothesis": "chamber_of_sins_area",
+    "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Overgrown Ruin, Overgrown Shrine",
@@ -4325,7 +4325,7 @@
   {
     "greynote": null,
     "name": "The Surveyor",
-    "hypothesis": "belly_area",
+    "tagHypothesis": "belly_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Carcass, Core, Malformation, Phantasmagoria",
@@ -4336,7 +4336,7 @@
   {
     "greynote": null,
     "name": "The Survivalist",
-    "hypothesis": "flooded_area",
+    "tagHypothesis": "flooded_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Flooded Mine, Mineral Pools, Underground Sea; The Cavern of Anger (Act 6)",
@@ -4347,7 +4347,7 @@
   {
     "greynote": "disabled",
     "name": "The Sustenance",
-    "hypothesis": "doedre_monster_map",
+    "tagHypothesis": "doedre_monster_map",
     "confidence": "low",
     "remainingWork": null,
     "dropsFrom": "Portentia, the Foul (Waste Pool); Erythrophagia (Phantasmagoria)",
@@ -4358,7 +4358,7 @@
   {
     "greynote": null,
     "name": "The Sword King's Salute",
-    "hypothesis": "daresso_area",
+    "tagHypothesis": "daresso_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Colosseum, Pit of the Chimera, Pit, Arena, The Grand Arena, Daresso's Dream",
@@ -4369,7 +4369,7 @@
   {
     "greynote": null,
     "name": "The Thaumaturgist",
-    "hypothesis": "thaumaturgy_area",
+    "tagHypothesis": "thaumaturgy_area",
     "confidence": "ok",
     "remainingWork": "storyOnly",
     "dropsFrom": "Foundry, Shrine, Laboratory, Poorjoy's Asylum",
@@ -4380,7 +4380,7 @@
   {
     "greynote": null,
     "name": "The Throne",
-    "hypothesis": "sewer_area",
+    "tagHypothesis": "sewer_area",
     "confidence": "ok",
     "remainingWork": "storyOnly",
     "dropsFrom": "Lair of the Hydra, Toxic Sewer, Waste Pool",
@@ -4391,7 +4391,7 @@
   {
     "greynote": "globalDrop",
     "name": "The Tinkerer's Table",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -4402,7 +4402,7 @@
   {
     "greynote": null,
     "name": "The Tireless Extractor",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Factory, Silo",
@@ -4413,7 +4413,7 @@
   {
     "greynote": null,
     "name": "The Tower",
-    "hypothesis": "tower_area",
+    "tagHypothesis": "tower_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Residence, Tower, Shavronne's Tower, The Sceptre of God, The Upper Sceptre of God",
@@ -4424,7 +4424,7 @@
   {
     "greynote": null,
     "name": "The Traitor",
-    "hypothesis": "parapet_area",
+    "tagHypothesis": "parapet_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Promenade, Ramparts; The Sarn Ramparts, The Solaris Concourse, The Battlefront",
@@ -4435,7 +4435,7 @@
   {
     "greynote": null,
     "name": "The Transformation",
-    "hypothesis": "metamorph_boss",
+    "tagHypothesis": "metamorph_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Metamorph",
@@ -4446,7 +4446,7 @@
   {
     "greynote": "globalDrop",
     "name": "The Trial",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -4457,7 +4457,7 @@
   {
     "greynote": null,
     "name": "The Tumbleweed",
-    "hypothesis": "desert_map_area",
+    "tagHypothesis": "desert_map_area",
     "confidence": "ok",
     "remainingWork": "confirm",
     "dropsFrom": "Desert Spring, Dunes, Dry Sea",
@@ -4468,7 +4468,7 @@
   {
     "greynote": null,
     "name": "The Twilight Moon",
-    "hypothesis": "lunaris_area",
+    "tagHypothesis": "lunaris_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Cold River, Moon Temple, Temple",
@@ -4479,7 +4479,7 @@
   {
     "greynote": null,
     "name": "The Twins",
-    "hypothesis": "lunaris_area OR solaris_area",
+    "tagHypothesis": "lunaris_area OR solaris_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Moon Temple, Cold River, the Twilight Temple, Temple",
@@ -4490,7 +4490,7 @@
   {
     "greynote": null,
     "name": "The Tyrant",
-    "hypothesis": "ruined_area",
+    "tagHypothesis": "ruined_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Port, Precinct, Coral Ruins, Bazaar, Castle Ruins, Arcade, Ancient City, Ghetto",
@@ -4501,7 +4501,7 @@
   {
     "greynote": null,
     "name": "The Undaunted",
-    "hypothesis": "rogue_exile_boss_area",
+    "tagHypothesis": "rogue_exile_boss_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Courthouse, Precinct, Whakawairua Tuahu",
@@ -4512,7 +4512,7 @@
   {
     "greynote": null,
     "name": "The Undisputed",
-    "hypothesis": "chayula_boss",
+    "tagHypothesis": "chayula_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Chayula, Who Dreamt",
@@ -4523,7 +4523,7 @@
   {
     "greynote": null,
     "name": "The Unexpected Prize",
-    "hypothesis": "sceptre_of_god_area",
+    "tagHypothesis": "sceptre_of_god_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Residence, Villa, Palace",
@@ -4534,7 +4534,7 @@
   {
     "greynote": null,
     "name": "The Union",
-    "hypothesis": "graveyard_area",
+    "tagHypothesis": "graveyard_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Cemetery, Grave Trough, Graveyard, The Fellshrine Ruins (A7)",
@@ -4545,7 +4545,7 @@
   {
     "greynote": null,
     "name": "The Valkyrie",
-    "hypothesis": "female_rogue_exile",
+    "tagHypothesis": "female_rogue_exile",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -4556,7 +4556,7 @@
   {
     "greynote": "disabled",
     "name": "The Valley of Steel Boxes",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -4567,7 +4567,7 @@
   {
     "greynote": null,
     "name": "The Vast",
-    "hypothesis": "reef_area",
+    "tagHypothesis": "reef_area",
     "confidence": "ok",
     "remainingWork": "storyOnly",
     "dropsFrom": "Reef, Coral Ruins, Coves",
@@ -4578,7 +4578,7 @@
   {
     "greynote": null,
     "name": "The Visionary",
-    "hypothesis": "arena_area",
+    "tagHypothesis": "arena_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Arena, Colosseum, Racecourse",
@@ -4589,7 +4589,7 @@
   {
     "greynote": "areaSpecific",
     "name": "The Void",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -4600,7 +4600,7 @@
   {
     "greynote": null,
     "name": "The Void",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "none",
     "remainingWork": "legacyTag",
     "dropsFrom": null,
@@ -4611,7 +4611,7 @@
   {
     "greynote": null,
     "name": "The Warden",
-    "hypothesis": "prison_area",
+    "tagHypothesis": "prison_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Cage, Dungeon, Pen, Cells, Shavronne's Tower, The Control Blocks (Act 5), The Lower Prison (Act 6), The Slave Pens",
@@ -4622,7 +4622,7 @@
   {
     "greynote": null,
     "name": "The Warlord",
-    "hypothesis": "military_area",
+    "tagHypothesis": "military_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Armoury, Arsenal, Promenade, Colonnade",
@@ -4633,7 +4633,7 @@
   {
     "greynote": null,
     "name": "The Watcher",
-    "hypothesis": "chaos_golem_boss_area",
+    "tagHypothesis": "chaos_golem_boss_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Geode, Grotto",
@@ -4644,7 +4644,7 @@
   {
     "greynote": null,
     "name": "The Web",
-    "hypothesis": "spider_boss_area",
+    "tagHypothesis": "spider_boss_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Arachnid Nest, Arachnid Tomb, Jungle Valley, Spider Lair, Toxic Sewer, Sunken City",
@@ -4655,7 +4655,7 @@
   {
     "greynote": null,
     "name": "The White Knight",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Trial of Stinging Doubt",
@@ -4666,7 +4666,7 @@
   {
     "greynote": "monsterSpecific",
     "name": "The Whiteout",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Stonebeak, Battle Fowl",
@@ -4677,7 +4677,7 @@
   {
     "greynote": "areaSpecific",
     "name": "The Wilted Rose",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Acton's Nightmare",
@@ -4688,7 +4688,7 @@
   {
     "greynote": null,
     "name": "The Wind",
-    "hypothesis": "windy_area",
+    "tagHypothesis": "windy_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Atoll, Jungle Valley, Mesa, Ligthouse, Plateau, Summit",
@@ -4699,7 +4699,7 @@
   {
     "greynote": null,
     "name": "The Witch",
-    "hypothesis": "alira_area",
+    "tagHypothesis": "alira_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Burial Chambers, Spider Forest",
@@ -4710,7 +4710,7 @@
   {
     "greynote": null,
     "name": "The Witch",
-    "hypothesis": "doedre_map_area",
+    "tagHypothesis": "doedre_map_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Putrid Cloister, Sepulchre, Waste Pool, Phantasmagoria",
@@ -4721,7 +4721,7 @@
   {
     "greynote": null,
     "name": "The Wolf",
-    "hypothesis": "mine_area",
+    "tagHypothesis": "mine_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Flooded Mine, Geode, Crystal Ore, Dig, Excavation, Grotto, The Quarry, The Tunnel",
@@ -4732,7 +4732,7 @@
   {
     "greynote": "chestObject",
     "name": "The Wolf's Legacy",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "ok",
     "remainingWork": "openEnded",
     "dropsFrom": "Uber Labyrinth/Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)",
@@ -4743,7 +4743,7 @@
   {
     "greynote": null,
     "name": "The Wolf's Shadow",
-    "hypothesis": "rigwald_area",
+    "tagHypothesis": "rigwald_area",
     "confidence": "done",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Lair, Dark Forest",
@@ -4754,7 +4754,7 @@
   {
     "greynote": null,
     "name": "The Wolven King's Bite",
-    "hypothesis": "rigwald_area",
+    "tagHypothesis": "rigwald_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Dark Forest, Lair",
@@ -4765,7 +4765,7 @@
   {
     "greynote": null,
     "name": "The Wolverine",
-    "hypothesis": "goatman_boss_area",
+    "tagHypothesis": "goatman_boss_area",
     "confidence": "ok",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Glacier, Summit, Prisoner's Gate (A6)",
@@ -4776,7 +4776,7 @@
   {
     "greynote": null,
     "name": "The Wolverine",
-    "hypothesis": "(den_area OR cave_area) & (rigwald_area OR forest_map_area)",
+    "tagHypothesis": "(den_area OR cave_area) & (rigwald_area OR forest_map_area)",
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Lair",
@@ -4787,7 +4787,7 @@
   {
     "greynote": "monsterSpecific",
     "name": "The World Eater",
-    "hypothesis": "hellscape_flesh_boss",
+    "tagHypothesis": "hellscape_flesh_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Ghorr, the Grasping Maw",
@@ -4798,7 +4798,7 @@
   {
     "greynote": null,
     "name": "The Wrath",
-    "hypothesis": "kitava_area",
+    "tagHypothesis": "kitava_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Belfry, Lava Lake, The Feeding Trough, The Cathedral Rooftop (A5)",
@@ -4809,7 +4809,7 @@
   {
     "greynote": null,
     "name": "The Wretched",
-    "hypothesis": "crypt_area",
+    "tagHypothesis": "crypt_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Bone Crypt, Cursed Crypt, The Coward's Trial",
@@ -4820,7 +4820,7 @@
   {
     "greynote": null,
     "name": "The Wretched",
-    "hypothesis": "necromancer_area",
+    "tagHypothesis": "necromancer_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Bone Crypt, The Coward's Trial, Acton's Nightmare",
@@ -4831,7 +4831,7 @@
   {
     "greynote": null,
     "name": "The Wretched",
-    "hypothesis": "necropolis_area",
+    "tagHypothesis": "necropolis_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Necropolis",
@@ -4842,7 +4842,7 @@
   {
     "greynote": null,
     "name": "The Wretched",
-    "hypothesis": "mud_geyser_area",
+    "tagHypothesis": "mud_geyser_area",
     "confidence": "done",
     "remainingWork": "legacyTag",
     "dropsFrom": null,
@@ -4853,7 +4853,7 @@
   {
     "greynote": null,
     "name": "Thirst for Knowledge",
-    "hypothesis": "library_area",
+    "tagHypothesis": "library_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Academy, Museum, Scriptorium, The Archives, The Library",
@@ -4864,7 +4864,7 @@
   {
     "greynote": null,
     "name": "Three Faces in the Dark",
-    "hypothesis": "warehouse_area",
+    "tagHypothesis": "warehouse_area",
     "confidence": "ok",
     "remainingWork": "storyOnly",
     "dropsFrom": "Arsenal, Factory, The Grain Gate, The Refinery",
@@ -4875,7 +4875,7 @@
   {
     "greynote": null,
     "name": "Three Voices",
-    "hypothesis": "triple_boss_map",
+    "tagHypothesis": "triple_boss_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Arena, City Square, Courthouse, Courtyard, Crystal Ore, Forbidden Woods, Graveyard, Racecourse, Vaal Pyramid, Vaal Temple",
@@ -4886,7 +4886,7 @@
   {
     "greynote": null,
     "name": "Thunderous Skies",
-    "hypothesis": "lightning_area",
+    "tagHypothesis": "lightning_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Courtyard, Strand, Tower, The Vinktar Square, Shavronne's Tower, The Twilight Strand (A6)",
@@ -4897,7 +4897,7 @@
   {
     "greynote": null,
     "name": "Time-Lost Relic",
-    "hypothesis": "mine_area",
+    "tagHypothesis": "mine_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Flooded Mine, Excavation, Dig, Geode, Crystal Ore, Grotto",
@@ -4908,7 +4908,7 @@
   {
     "greynote": null,
     "name": "Time-Lost Relic",
-    "hypothesis": "expedition_common_remnant_logbook",
+    "tagHypothesis": "expedition_common_remnant_logbook",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -4919,7 +4919,7 @@
   {
     "greynote": null,
     "name": "Tranquillity",
-    "hypothesis": "fields_area",
+    "tagHypothesis": "fields_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Ashen Wood, Fields, Peninsula, The Ashen Fields",
@@ -4930,7 +4930,7 @@
   {
     "greynote": null,
     "name": "Treasure Hunter",
-    "hypothesis": "cave_area",
+    "tagHypothesis": "cave_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Crystal Ore, Flooded Mine, Grotto, Underground River, Underground Sea, Lair, Maze of the Minoatur, Fungal Hollow; Caer Blaidd, Wolfpack's Den",
@@ -4941,7 +4941,7 @@
   {
     "greynote": "disabled",
     "name": "Treasures of the Vaal",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -4952,7 +4952,7 @@
   {
     "greynote": null,
     "name": "Triskaidekaphobia",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "low",
     "remainingWork": null,
     "dropsFrom": null,
@@ -4963,7 +4963,7 @@
   {
     "greynote": "story",
     "name": "Turn the Other Cheek",
-    "hypothesis": "library_area",
+    "tagHypothesis": "library_area",
     "confidence": "low",
     "remainingWork": "storyOnly",
     "dropsFrom": "The Library",
@@ -4974,7 +4974,7 @@
   {
     "greynote": null,
     "name": "Unchained",
-    "hypothesis": "pitfight_area",
+    "tagHypothesis": "pitfight_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Pit of the Chimera, Pit, Arena, Colosseum",
@@ -4985,7 +4985,7 @@
   {
     "greynote": "chestObject",
     "name": "Underground Forest",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -4996,7 +4996,7 @@
   {
     "greynote": null,
     "name": "Unrequited Love",
-    "hypothesis": "vaal_pyramid_area",
+    "tagHypothesis": "vaal_pyramid_area",
     "confidence": "low",
     "remainingWork": "confirm",
     "dropsFrom": "Maze, Vaal Pyramid, The Temple of Decay Level 1, Vaal Temple, Vaults of Atziri",
@@ -5007,7 +5007,7 @@
   {
     "greynote": "chestObject",
     "name": "Vanity",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -5018,7 +5018,7 @@
   {
     "greynote": null,
     "name": "Vile Power",
-    "hypothesis": "vile_areas",
+    "tagHypothesis": "vile_areas",
     "confidence": "ok",
     "remainingWork": "storyOnly",
     "dropsFrom": "Carcass, Core, Phantasmagoria, Toxic Sewer, Waste Pool, The Rotting Core, Acid Caverns, Malformation, The Sewers, ",
@@ -5029,7 +5029,7 @@
   {
     "greynote": null,
     "name": "Vinia's Token",
-    "hypothesis": "piety_area",
+    "tagHypothesis": "piety_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Core, Malformation, Shrine",
@@ -5040,7 +5040,7 @@
   {
     "greynote": null,
     "name": "Void of the Elements",
-    "hypothesis": "elder_boss OR uber_elder",
+    "tagHypothesis": "elder_boss OR uber_elder",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Elder, Uber Elder",
@@ -5051,7 +5051,7 @@
   {
     "greynote": null,
     "name": "Volatile Power",
-    "hypothesis": "mine_area",
+    "tagHypothesis": "mine_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Crystal Ore, Dig, Excavation, Flooded Mine, Geode, Grotto,\nThe Crystal Veins, The Mines Level 1, The Mines Level 2, The Quarry, The Tunnel",
@@ -5062,7 +5062,7 @@
   {
     "greynote": null,
     "name": "Wealth and Power",
-    "hypothesis": "lunaris_area",
+    "tagHypothesis": "lunaris_area",
     "confidence": "ok",
     "remainingWork": null,
     "dropsFrom": "Moon Temple, Cold River",
@@ -5073,7 +5073,7 @@
   {
     "greynote": null,
     "name": "Winter's Embrace",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "none",
     "remainingWork": "noHypothesis",
     "dropsFrom": null,
@@ -5084,7 +5084,7 @@
   {
     "greynote": null,
     "name": "Astral Protection",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "none",
     "remainingWork": "noHypothesis",
     "dropsFrom": "Moon Temple",
@@ -5095,7 +5095,7 @@
   {
     "greynote": null,
     "name": "Azure Rage",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "low",
     "remainingWork": "noHypothesis",
     "dropsFrom": "Factory",
@@ -5106,7 +5106,7 @@
   {
     "greynote": null,
     "name": "Broken Truce",
-    "hypothesis": "betrayal_thane_jorgin",
+    "tagHypothesis": "betrayal_thane_jorgin",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Thane Jorgin",
@@ -5117,7 +5117,7 @@
   {
     "greynote": null,
     "name": "Checkmate",
-    "hypothesis": "library_area",
+    "tagHypothesis": "library_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Academy, Museum, Scriptorium",
@@ -5128,7 +5128,7 @@
   {
     "greynote": null,
     "name": "Choking Guilt",
-    "hypothesis": "infinite_hunger",
+    "tagHypothesis": "infinite_hunger",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Infinite Hunger",
@@ -5139,7 +5139,7 @@
   {
     "greynote": "areaSpecific",
     "name": "Doryani's Epiphany",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Doryani's Machinarium",
@@ -5150,7 +5150,7 @@
   {
     "greynote": null,
     "name": "Endless Night",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "none",
     "remainingWork": "noHypothesis",
     "dropsFrom": null,
@@ -5161,7 +5161,7 @@
   {
     "greynote": "chestObject",
     "name": "Gemcutter's Mercy",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Delve Gem Chests",
@@ -5172,7 +5172,7 @@
   {
     "greynote": null,
     "name": "Lethean Temptation",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "none",
     "remainingWork": "noHypothesis",
     "dropsFrom": null,
@@ -5183,7 +5183,7 @@
   {
     "greynote": null,
     "name": "Something Dark",
-    "hypothesis": "breachlord_boss_domain",
+    "tagHypothesis": "breachlord_boss_domain",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Xoph, Dark Embers; Tul, Creeping Avalanche; Esh, Forked Thought; Chayula, Who Dreamt; Uul-Netol, Unburdened Flesh (in Breachstones)",
@@ -5194,7 +5194,7 @@
   {
     "greynote": null,
     "name": "The Enforcer",
-    "hypothesis": "brute_boss",
+    "tagHypothesis": "brute_boss",
     "confidence": "none",
     "remainingWork": "confirm",
     "dropsFrom": null,
@@ -5205,7 +5205,7 @@
   {
     "greynote": "areaSpecific",
     "name": "The Leviathan",
-    "hypothesis": "Maelström of Chaos (no tags)",
+    "tagHypothesis": "Maelström of Chaos (no tags)",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Maelström of Chaos",
@@ -5216,7 +5216,7 @@
   {
     "greynote": null,
     "name": "The Price of Devotion",
-    "hypothesis": "uber_atziri_boss",
+    "tagHypothesis": "uber_atziri_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -5227,7 +5227,7 @@
   {
     "greynote": null,
     "name": "The Shepherd's Sandals",
-    "hypothesis": "den_area",
+    "tagHypothesis": "den_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Grotto, Lair, Barrows, Caer Blaidd",
@@ -5238,7 +5238,7 @@
   {
     "greynote": null,
     "name": "The Shieldbearer",
-    "hypothesis": "uber_elder",
+    "tagHypothesis": "uber_elder",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Uber Elder",
@@ -5249,7 +5249,7 @@
   {
     "greynote": null,
     "name": "A Dusty Memory",
-    "hypothesis": "synthesis_area",
+    "tagHypothesis": "synthesis_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Cortex, Augmented Distant Memory, Twisted Distant Memory, Altered Distant Memory, Rewritten Distant Memory",
@@ -5260,7 +5260,7 @@
   {
     "greynote": null,
     "name": "Alivia's Grace",
-    "hypothesis": "forest_map_area",
+    "tagHypothesis": "forest_map_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Ashen Wood, Spider Forest, Lair, Thicket, Dark Forest, Forbidden Woods, Tropical Island, Jungle Valley, Ramparts, Stagnation, Bramble Valley",
@@ -5271,7 +5271,7 @@
   {
     "greynote": null,
     "name": "Auspicious Ambitions",
-    "hypothesis": "eldritch_pinnacle_boss",
+    "tagHypothesis": "eldritch_pinnacle_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "The Maven, The Searing Exarch, The Eater of Worlds, Uber Elder",
@@ -5282,7 +5282,7 @@
   {
     "greynote": null,
     "name": "Divine Beauty",
-    "hypothesis": "merveil_boss",
+    "tagHypothesis": "merveil_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Tormented Temptress (Whakawairua Tuahu); Shock and Horror (Mineral Pools); Merveil, the Reflection (Underground Sea); Merveil, the Reflection (Maelstrom of Chaos); Fire and Fury (Lava Chamber)",
@@ -5293,7 +5293,7 @@
   {
     "greynote": null,
     "name": "Ever-Changing",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -5304,7 +5304,7 @@
   {
     "greynote": null,
     "name": "Man With Bear",
-    "hypothesis": "bear_boss_map",
+    "tagHypothesis": "bear_boss_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Cemetery, Barrows",
@@ -5315,7 +5315,7 @@
   {
     "greynote": null,
     "name": "The Finishing Touch",
-    "hypothesis": "hillock_syndicate",
+    "tagHypothesis": "hillock_syndicate",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": null,
@@ -5326,7 +5326,7 @@
   {
     "greynote": null,
     "name": "The Insane Cat",
-    "hypothesis": "affliction_boss",
+    "tagHypothesis": "affliction_boss",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Omniphobia, Fear Manifest; Kosis, The Revelation (both in maps only)",
@@ -5337,7 +5337,7 @@
   {
     "greynote": null,
     "name": "The Return of the Rat",
-    "hypothesis": "warehouse_area",
+    "tagHypothesis": "warehouse_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Arsenal, Factory, The Grain Gate, The Refinery",
@@ -5348,7 +5348,7 @@
   {
     "greynote": null,
     "name": "The Wedding Gift",
-    "hypothesis": "arakaali_area OR ?",
+    "tagHypothesis": "arakaali_area OR ?",
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Sunken City",
@@ -5359,7 +5359,7 @@
   {
     "greynote": null,
     "name": "The Wedding Gift",
-    "hypothesis": "spider_boss_area",
+    "tagHypothesis": "spider_boss_area",
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Sunken City",
@@ -5370,7 +5370,7 @@
   {
     "greynote": null,
     "name": "Brother's Gift",
-    "hypothesis": "graveyard_area",
+    "tagHypothesis": "graveyard_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Cemetery, Graveyard, Grave Trough",
@@ -5381,7 +5381,7 @@
   {
     "greynote": null,
     "name": "Soul Quenched",
-    "hypothesis": "Forge_Area",
+    "tagHypothesis": "Forge_Area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Factory, Foundry, Forge of the Phoenix, Silo",
@@ -5392,7 +5392,7 @@
   {
     "greynote": null,
     "name": "Poisoned Faith",
-    "hypothesis": null,
+    "tagHypothesis": null,
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "dropsFrom": "Overgrown Ruin, Sunken City",
@@ -5403,7 +5403,7 @@
   {
     "greynote": null,
     "name": "A Chilling Wind",
-    "hypothesis": "snow_area",
+    "tagHypothesis": "snow_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Forbidden Woods, Cold River, Frozen Cabins, Iceberg, Glacier, Summit",
@@ -5414,7 +5414,7 @@
   {
     "greynote": null,
     "name": "Matryoshka",
-    "hypothesis": "matryoshka_boss",
+    "tagHypothesis": "matryoshka_boss",
     "confidence": "low",
     "remainingWork": "confirm",
     "dropsFrom": null,
@@ -5425,7 +5425,7 @@
   {
     "greynote": null,
     "name": "The Fortunate",
-    "hypothesis": "sun_nature_area",
+    "tagHypothesis": "sun_nature_area",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Tropical Island, Mineral Pools, Plateau, Dunes, Mesa, Atoll, Estuary, Arid Lake, Leyline, Beach, Marshes, Peninsula, Sulphur Vents, Shore,  Terrace, Caldera, Orchard, Canyon, Ancient City, Fields, Jungle Valley, Desert Spring, Dry Sea, Crater, Desert, Burial Chambers",
@@ -5436,7 +5436,7 @@
   {
     "greynote": null,
     "name": "Fire of Unknown Origin",
-    "hypothesis": "undyingcultist_map",
+    "tagHypothesis": "undyingcultist_map",
     "confidence": "done",
     "remainingWork": null,
     "dropsFrom": "Academy, Residence",

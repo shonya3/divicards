@@ -1,7 +1,7 @@
 use chrono::Utc;
 use divi::{league::League, sample::DivinationCardsSample};
 use googlesheets::sheet::{Credential, Dimension, ReadBatchResponse, SheetUrl, ValueRange};
-use serde_json::{json, Value};
+use serde_json::json;
 use tracing::debug;
 
 use crate::{
