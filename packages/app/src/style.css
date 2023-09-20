@@ -4,6 +4,13 @@
 	box-sizing: border-box;
 }
 
+@font-face {
+	font-family: 'fontin';
+	font-weight: normal;
+	font-style: normal;
+	src: url('/fontin.woff') format('woff');
+}
+
 :root {
 	--bg-color: #242424;
 	--color: rgba(255, 255, 255, 0.87);

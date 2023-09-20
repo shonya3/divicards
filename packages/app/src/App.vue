@@ -21,11 +21,14 @@ import { toast } from './toast';
 import { useSheets } from './composables/useSheets';
 import { isTauriError } from './error';
 import { League } from '@divicards/shared/types';
+import { DivinationCardElement } from '../../wc/src/wc/divination-card/wc-divination-card';
 BasePopupElement.define();
 DropFilesMessageElement.define();
 PoeAuthElement.define();
 GoogleAuthElement.define();
 const stashLoader = new StashLoader();
+
+DivinationCardElement.define();
 
 const toSheetsSample = ref<DivinationCardsSample | null>(null);
 const toSheetsLeague = ref<League | null>(null);
@@ -137,6 +140,8 @@ const onSheetsSubmit = async ({
 			></wc-poe-auth>
 		</header>
 
+		<wc-divination-card name="The Harvester"></wc-divination-card>
+
 		<div v-show="authStore.loggedIn && stashVisible">
 			<StashesView
 				:stashLoader="stashLoader"
@@ -202,6 +207,12 @@ const onSheetsSubmit = async ({
 </template>
 
 <style scoped>
+@font-face {
+	font-family: 'fontin';
+	font-weight: normal;
+	font-style: normal;
+	src: url('/fontin-smallcaps-webfont.woff') format('woff');
+}
 .header {
 	display: flex;
 	justify-content: space-between;

@@ -63,14 +63,14 @@ export class DivinationCardElement extends BaseElement {
 			<div id="skeleton" style=${sizeMap}></div>
 			<header id="name" style=${nameTopPadding}>${this.name}</header>
 			<div id="imageWrapper">
-				<img id="image" width="100%" src="/images/cards/${this.artFilename}.png" alt="" />
+				<img loading="lazy" id="image" width="100%" src="/images/cards/${this.artFilename}.png" alt="" />
 			</div>
 			<div id="stackSize">${this.stackSize}</div>
 			<div id="bottom-half">
 				${staticHtml`${unsafeStatic(this.rewardHtml)}`}
 				<div id="divider"></div>
 				<footer>
-					<div id="flavourText">${this.flavourText}</div>
+					<div style="font-style: italic" id="flavourText">${this.flavourText}</div>
 				</footer>
 			</div>
 		</div>`;
@@ -167,7 +167,7 @@ function styles() {
 		}
 
 		#element {
-			font-family: 'fontin';
+			font-family: 'fontin', Verdana, Arial;
 			width: 10vw;
 			min-height: 25vh;
 			height: 401px;
@@ -268,8 +268,8 @@ function styles() {
 
 		#flavourText {
 			color: rgba(167, 90, 27, 1);
-			font-style: italic;
 			text-wrap: balance;
+			font-style: italic;
 		}
 
 		#divider {
