@@ -116,9 +116,9 @@ impl HighlightedExpression {
                     Modifier::Size(size) => {
                         let open_curly = s[closing_angle..].find("{").unwrap() + closing_angle;
                         let closing_curly = s[open_curly..].find("}}").unwrap() + open_curly;
-                        let contents = s[open_curly + 1..closing_curly + 1].to_string();
+                        // let contents = s[open_curly + 1..closing_curly + 1].to_string();
                         sizes.push((size, open_curly + 1, closing_curly + 1));
-                        dbg!(contents);
+                        // dbg!(contents);
                     }
                     modifier => {
                         let line = Self::which_line(open_angle, &newlines);
@@ -142,7 +142,7 @@ impl HighlightedExpression {
                             coordinates: (open_curly, closing_curly),
                         };
 
-                        dbg!(&expr);
+                        // dbg!(&expr);
                         exprs.push(expr);
                     }
                 }
@@ -191,10 +191,13 @@ pub fn reward_to_html(s: &str) -> String {
 
 impl From<Vec<HighlightedExpression>> for Div {
     fn from(mut exprs: Vec<HighlightedExpression>) -> Self {
-        exprs.sort_by(|a, b| a.order.cmp(&b.order));
-        let number_of_lines = exprs.iter().map(|e| e.line).max().unwrap() + 1;
-
         let mut div = Div(vec![], None);
+        exprs.sort_by(|a, b| a.order.cmp(&b.order));
+        let Some(number_of_lines) = exprs.iter().map(|e| e.line).max() else {
+            return div;
+        };
+
+        let number_of_lines = number_of_lines + 1;
 
         for line in 0..number_of_lines {
             let vec: Vec<Span> = exprs
@@ -215,7 +218,7 @@ pub struct Span(pub HighlightedExpression);
 
 impl Span {
     pub fn as_html(&self) -> String {
-        dbg!(&self.0.modifier.to_string());
+        // dbg!(&self.0.modifier.to_string());
         let classlist = match &self.0.size {
             Some(size) => format!("\"{} {}\"", &self.0.modifier.to_string(), size.to_string()),
             None => self.0.modifier.to_string(),

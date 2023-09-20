@@ -19,7 +19,9 @@ use error::Error;
 use serde_json::Value;
 
 #[tokio::main]
-async fn main() {}
+async fn main() {
+    DivinationCardElementData::write_data().await;
+}
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 #[serde(rename_all = "camelCase")]
