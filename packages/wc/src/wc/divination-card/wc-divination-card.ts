@@ -1,10 +1,8 @@
-import { html, css, PropertyValues, PropertyValueMap } from 'lit';
+import { html, css, PropertyValues } from 'lit';
 import { html as staticHtml, unsafeStatic } from 'lit/static-html.js';
 import { BaseElement } from '../base-element';
-import { property, state, query } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { Column, Order, TablePreferences } from '@divicards/shared/types';
-import { HelpTipElement } from '../help-tip';
+import { property, state } from 'lit/decorators.js';
+import { styleMap } from 'lit/directives/style-map.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -14,11 +12,11 @@ declare global {
 
 import { cardsDataMap } from './data';
 
+export type CardSize = 'medium' | 'large';
+
 export interface Props {
 	name: string;
-	// artFilename: string;
-	// stackSize: number;
-	// flavourText: string;
+	size: CardSize;
 }
 export interface Events {}
 
@@ -30,6 +28,7 @@ export class DivinationCardElement extends BaseElement {
 	static override styles = [this.baseStyles, styles()];
 
 	@property({ reflect: true }) name: string = '';
+	@property({ reflect: true }) size: CardSize = 'large';
 
 	@state() stackSize: number = 0;
 	@state()
@@ -40,9 +39,6 @@ export class DivinationCardElement extends BaseElement {
 
 	protected willUpdate(changedProperties: PropertyValues<this>): void {
 		if (changedProperties.has('name')) {
-			// if (this.name === 'Fire of Unknown Origin') {
-			// 	this.artFilename = 'FireOfUnknownOrigin';
-			// }
 			const cardData = cardsDataMap.get(this.name);
 			if (cardData) {
 				this.stackSize = cardData.stackSize ?? 1;
@@ -54,12 +50,22 @@ export class DivinationCardElement extends BaseElement {
 	}
 
 	protected override render() {
-		return html`<div id="element">
-			<div id="skeleton"></div>
-			<header id="name">${this.name}</header>
+		const sizeMap = styleMap({
+			'--card-width': `var(--card-width-${this.size})`,
+			'--card-height': `var(--card-height-${this.size})`,
+		});
+
+		const nameTopPadding = styleMap({
+			'padding-top': `${this.size === 'medium' ? '0rem' : '0.4rem'}`,
+		});
+
+		return html`<div id="element" style=${sizeMap}>
+			<div id="skeleton" style=${sizeMap}></div>
+			<header id="name" style=${nameTopPadding}>${this.name}</header>
 			<div id="imageWrapper">
 				<img id="image" width="100%" src="/images/cards/${this.artFilename}.png" alt="" />
 			</div>
+			<div id="stackSize">${this.stackSize}</div>
 			<div id="bottom-half">
 				${staticHtml`${unsafeStatic(this.rewardHtml)}`}
 				<div id="divider"></div>
@@ -71,14 +77,16 @@ export class DivinationCardElement extends BaseElement {
 	}
 }
 
-// <div id="imageWrapper">
-// 	<img id="image" width="100%" src="/images/cards/${this.artFilename}.png" alt="" />
-// </div>
-
 function styles() {
 	return css`
 		:host {
 			display: block;
+
+			--card-width-large: 326px;
+			--card-height-large: 501px;
+
+			--card-width-medium: 268px;
+			--card-height-medium: 401px;
 
 			--item-normal: 0, 0%, 78%;
 			--item-magic: 240, 100%, 77%;
@@ -157,13 +165,18 @@ function styles() {
 			margin: 0;
 			padding: 0;
 		}
+		@font-face {
+			font-family: FontinSmallCaps;
+			src: url(/fontin.otf) format('opentype');
+		}
 		#element {
+			font-family: FontInSmallCaps;
 			width: 10vw;
 			min-height: 25vh;
 			height: 401px;
 
-			width: 326px;
-			height: 501px;
+			width: var(--card-width, var(--card-width-medium));
+			height: var(--card-height, var(--card-height-medium));
 
 			padding: 0.15rem;
 
@@ -172,9 +185,9 @@ function styles() {
 
 			display: flex;
 			flex-direction: column;
-			background-color: hsla(var(--coolgrey-1000), 0.95);
 
 			position: relative;
+			text-transform: uppercase;
 		}
 
 		#skeleton {
@@ -185,18 +198,16 @@ function styles() {
 			height: 401px;
 			width: 100%;
 
-			width: 326px;
-			height: 501px;
+			width: var(--card-width, var(--card-width-medium));
+			height: var(--card-height, var(--card-height-medium));
 		}
 
 		#name {
 			color: hsl(var(--item-divination));
-			padding-block: 0.4rem;
+			padding-top: 0.4rem;
 			padding-bottom: 0.6rem;
 			z-index: 4;
 			color: #111;
-			font-size: 1.2rem;
-			font-weight: 500;
 		}
 
 		#imageWrapper {
@@ -208,7 +219,6 @@ function styles() {
 			top: 8%;
 			height: 42%;
 			width: 90%;
-			background: #1e1e1e;
 			overflow: hidden;
 		}
 
@@ -218,6 +228,21 @@ function styles() {
 			min-width: 100%;
 			height: 100%;
 			overflow-y: hidden;
+		}
+
+		#stackSize {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			position: absolute;
+			color: #c8c8c8;
+			left: 8%;
+			top: 46.8%;
+			z-index: 4;
+			width: 16%;
+			font-size: 1rem;
+			height: 26px;
 		}
 
 		#bottom-half {
