@@ -6,6 +6,13 @@
 		<title>Vite + TS</title>
 		<script type="module" src="/main.ts"></script>
 		<style>
+			@font-face {
+				font-family: 'fontin';
+				font-weight: normal;
+				font-style: normal;
+				src: url('/fontin.woff') format('woff');
+			}
+
 			:root {
 				color-scheme: dark;
 				background-color: #242424;
@@ -17,12 +24,6 @@
 			#cards {
 				display: flex;
 				flex-wrap: wrap;
-				gap: 4rem;
-			}
-
-			wc-divination-card {
-				/* width: 200px; */
-				height: 500px;
 			}
 		</style>
 	</head>

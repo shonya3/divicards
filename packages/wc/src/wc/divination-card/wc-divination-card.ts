@@ -28,7 +28,7 @@ export class DivinationCardElement extends BaseElement {
 	static override styles = [this.baseStyles, styles()];
 
 	@property({ reflect: true }) name: string = '';
-	@property({ reflect: true }) size: CardSize = 'large';
+	@property({ reflect: true }) size: CardSize = 'medium';
 
 	@state() stackSize: number = 0;
 	@state()
@@ -165,12 +165,9 @@ function styles() {
 			margin: 0;
 			padding: 0;
 		}
-		@font-face {
-			font-family: FontinSmallCaps;
-			src: url(/fontin.otf) format('opentype');
-		}
+
 		#element {
-			font-family: FontInSmallCaps;
+			font-family: 'fontin';
 			width: 10vw;
 			min-height: 25vh;
 			height: 401px;
@@ -187,7 +184,6 @@ function styles() {
 			flex-direction: column;
 
 			position: relative;
-			text-transform: uppercase;
 		}
 
 		#skeleton {
