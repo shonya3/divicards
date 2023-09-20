@@ -96,7 +96,6 @@ pub fn write_drops_from<P: AsRef<Path>>(path: P, table: &[CardDropRecord]) -> Re
     Ok(())
 }
 
-#[tokio::test]
 pub async fn update_all_jsons() {
     let sheet = download_table_sheet()
         .await

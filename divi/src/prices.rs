@@ -108,7 +108,7 @@ pub struct NinjaCardData {
     pub sparkline: Sparkline,
     pub low_confidence_sparkline: Sparkline,
     pub implicit_modifiers: Vec<Value>,
-    pub explicit_modifiers: Vec<Value>,
+    pub explicit_modifiers: Vec<ExpilicitModifier>,
     pub flavour_text: String,
     pub chaos_value: Option<f32>,
     pub exalted_value: Option<f32>,
@@ -117,6 +117,12 @@ pub struct NinjaCardData {
     pub details_id: String,
     pub trade_info: Vec<Value>,
     pub listing_count: usize,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ExpilicitModifier {
+    pub optional: bool,
+    pub text: String,
 }
 
 impl NinjaCardData {

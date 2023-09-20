@@ -1,16 +1,67 @@
-mod comments;
+pub mod cards;
+pub mod consts;
 pub mod error;
+pub mod reward;
 pub mod scripts;
 
-use std::collections::HashMap;
+#[allow(unused)]
+use std::{
+    collections::{HashMap, HashSet},
+    fmt::Display,
+    slice::Iter,
+};
 
-use divi::{sample::fix_name, IsCard};
+use divi::{league::TradeLeague, prices::NinjaCardData, sample::fix_name, IsCard};
+use reward::reward_to_html;
 use serde::{Deserialize, Serialize};
 
 use error::Error;
 use serde_json::Value;
 
-use crate::scripts::read_original_table_sheet;
+#[tokio::main]
+async fn main() {}
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct DivinationCardElementData {
+    pub name: String,
+    pub art_filename: String,
+    pub reward_html: String,
+    pub flavour_text: String,
+    pub stack_size: Option<usize>,
+}
+
+impl DivinationCardElementData {
+    pub async fn write_data() {
+        let vec: Vec<NinjaCardData> = NinjaCardData::fetch(&TradeLeague::default()).await.unwrap();
+        let v: Vec<DivinationCardElementData> = vec
+            .into_iter()
+            .map(|data| {
+                let mut fl = data.flavour_text;
+                if fl.starts_with("<size:") {
+                    fl = fl[10..fl.len() - 1].to_string();
+                }
+
+                if fl.starts_with("<smaller>{") {
+                    fl = fl[10..fl.len() - 1].to_string();
+                }
+
+                DivinationCardElementData {
+                    name: data.name,
+                    art_filename: data.art_filename,
+                    flavour_text: fl,
+                    stack_size: data.stack_size,
+                    reward_html: reward_to_html(&data.explicit_modifiers[0].text),
+                }
+            })
+            .collect();
+
+        std::fs::write("data.json", serde_json::to_string(&v).unwrap()).unwrap();
+    }
+}
+
+#[allow(unused)]
+use crate::scripts::{parse_table, read_original_table_sheet};
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 #[serde(rename_all = "camelCase")]
@@ -49,7 +100,7 @@ impl GreyNote {
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Hash, Eq)]
 #[serde(rename_all = "camelCase")]
 pub enum Confidence {
     #[serde(alias = "none")]
@@ -100,9 +151,10 @@ impl RemainingWork {
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[serde(rename_all = "camelCase")]
 pub enum DropSource {
+    ExpeditionLogbook,
     GlobalDrop,
     ChestObject,
     Map(String),
@@ -110,7 +162,7 @@ pub enum DropSource {
     Disabled,
     Unknown,
     Delirium,
-    Vendor,
+    Vendor(Option<Vendor>),
     Strongbox,
 }
 
@@ -154,7 +206,7 @@ pub fn parse_string_cell(val: &Value) -> Option<String> {
 pub struct CardDropRecord {
     pub greynote: Option<GreyNote>,
     pub name: String,
-    pub hypothesis: Option<String>,
+    pub tag_hypothesis: Option<String>,
     pub confidence: Confidence,
     pub remaining_work: Option<RemainingWork>,
     pub drops_from: Option<String>,
@@ -166,7 +218,7 @@ pub struct CardDropRecord {
 pub fn parse_row(row: &[Value]) -> Result<CardDropRecord, Error> {
     let greynote = parse_greynote(&row[0])?;
     let name = parse_name(&row[1])?;
-    let hypothesis = parse_string_cell(&row[2]);
+    let tag_hypothesis = parse_string_cell(&row[2]);
     let confidence = parse_confidence(&row[3])?;
     let remaining_work = parse_remaining_work(&row[4])?;
     let drops_from = row.get(5).map(|val| parse_string_cell(val)).flatten();
@@ -177,7 +229,7 @@ pub fn parse_row(row: &[Value]) -> Result<CardDropRecord, Error> {
     Ok(CardDropRecord {
         greynote,
         name,
-        hypothesis,
+        tag_hypothesis,
         confidence,
         remaining_work,
         drops_from,
@@ -187,37 +239,63 @@ pub fn parse_row(row: &[Value]) -> Result<CardDropRecord, Error> {
     })
 }
 
-fn main() {
-    let sheet = read_original_table_sheet("sheet.json").unwrap();
-    let mut map: HashMap<String, Vec<CardDropRecord>> = HashMap::new();
-    for row in &sheet.values[2..] {
-        let record = parse_row(row).unwrap();
-        let r = map.entry(record.name.as_str().to_owned()).or_insert(vec![]);
-        r.push(record);
+pub fn parse_drop_source(record: &CardDropRecord) -> Result<Vec<DropSource>, Error> {
+    let mut sources: Vec<DropSource> = Vec::new();
+
+    if let Some(tag_hypothesis) = &record.tag_hypothesis {
+        if tag_hypothesis.contains("logbook") {
+            sources.push(DropSource::ExpeditionLogbook);
+        }
     }
 
-    dbg!(map.keys().len());
+    if let Some(greynote) = &record.greynote {
+        if greynote == &GreyNote::Disabled {
+            sources.push(DropSource::Disabled);
+        }
+
+        if greynote == &GreyNote::Vendor {
+            if let Some(_drops_from) = &record.drops_from {}
+            // return Ok(DropSource::Vendor());
+        }
+    }
+
+    // match greynote {
+    //     GreyNote::Disabled => return Ok(DropSource::Disabled),
+    //     GreyNote::Delirium => return Ok(DropSource::Delirium),
+    //     GreyNote::ChestObject => return Ok(DropSource::ChestObject),
+    //     GreyNote::GlobalDrop => return Ok(DropSource::GlobalDrop),
+    //     GreyNote::Vendor => return Ok(DropSource::Vendor),
+    //     GreyNote::Strongbox => return Ok(DropSource::Strongbox),
+    //     GreyNote::AreaSpecific => todo!(),
+    //     GreyNote::MonsterSpecific => todo!(),
+    //     GreyNote::Story => todo!(),
+    // }
+
+    // let sources = sources.into_iter().unique();
+
+    Ok(sources)
 }
 
-// pub fn parse_map_source(row: &[Value]) -> Result<DropSource, Error> {
-//     if row.len() < 6 {
-//         return Err(Error::RowIsTooShort("Drop Source".to_string(), 6));
-//     };
+#[derive(Serialize, Deserialize, Hash, Eq, PartialEq, Clone, Debug)]
+pub enum Vendor {
+    #[serde(alias = "Kirac shop")]
+    KiracShop,
+}
 
-//     let greynote = parse_greynote(&row[0])?;
+impl Vendor {
+    pub fn iter() -> Iter<'static, Vendor> {
+        static VENDORS: [Vendor; 1] = [Vendor::KiracShop];
+        VENDORS.iter()
+    }
+}
 
-//     // match greynote {
-//     //     GreyNote::Disabled => return Ok(DropSource::Disabled),
-//     //     GreyNote::Delirium => return Ok(DropSource::Delirium),
-//     //     GreyNote::ChestObject => return Ok(DropSource::ChestObject),
-//     //     GreyNote::GlobalDrop => return Ok(DropSource::GlobalDrop),
-//     //     GreyNote::Vendor => return Ok(DropSource::Vendor),
-//     //     GreyNote::Strongbox => return Ok(DropSource::Strongbox),
-//     //     GreyNote::AreaSpecific => todo!(),
-//     //     GreyNote::MonsterSpecific => todo!(),
-//     //     GreyNote::Story => todo!(),
-//     // }
-// }
+impl Display for Vendor {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Vendor::KiracShop => write!(f, "Kirac shop"),
+        }
+    }
+}
 
 #[cfg(test)]
 mod tests {
@@ -365,4 +443,60 @@ mod tests {
 
         assert_eq!(None, parse_remaining_work(&json!("")).unwrap());
     }
+}
+
+pub fn temp_main() {
+    let sheet = read_original_table_sheet("sheet.json").unwrap();
+    let records = parse_table(&sheet.values[2..]).unwrap();
+
+    let mut confidence_map: HashMap<Confidence, u16> = HashMap::new();
+    for record in &records {
+        let counter = confidence_map.entry(record.confidence.clone()).or_insert(0);
+        *counter += 1;
+    }
+
+    dbg!(confidence_map);
+
+    let mut map: HashMap<String, Vec<CardDropRecord>> = HashMap::new();
+    for record in records {
+        let vec = map.entry(record.name.as_str().to_owned()).or_insert(vec![]);
+        vec.push(record);
+    }
+
+    dbg!(map.keys().len());
+    std::fs::write("map.json", serde_json::to_string_pretty(&map).unwrap()).unwrap();
+
+    let mut multiple_map: HashMap<String, Vec<CardDropRecord>> = HashMap::new();
+    for (name, record) in map {
+        if record.len() > 1 {
+            multiple_map.insert(name.clone(), record.clone());
+        }
+    }
+
+    dbg!(multiple_map.keys().len());
+    std::fs::write(
+        "multiple-map.json",
+        serde_json::to_string_pretty(&multiple_map).unwrap(),
+    )
+    .unwrap();
+
+    let mut _map: HashMap<&CardDropRecord, Vec<HashSet<DropSource>>> = HashMap::new();
+
+    let mut set: HashSet<DropSource> = HashSet::new();
+    set.insert(DropSource::ChestObject);
+    set.insert(DropSource::ExpeditionLogbook);
+    set.insert(DropSource::Vendor(Some(Vendor::KiracShop)));
+    set.insert(DropSource::Vendor(Some(Vendor::KiracShop)));
+    dbg!(set);
+
+    let sheet = read_original_table_sheet("sheet.json").unwrap();
+    let records = parse_table(&sheet.values[2..]).unwrap();
+
+    for record in records {
+        let drop_source = parse_drop_source(&record).unwrap();
+        if drop_source.contains(&DropSource::ExpeditionLogbook) {
+            dbg!(record);
+        }
+    }
+    // std::fs::write("map.json", &serde_json::to_string_pretty(&map).unwrap()).unwrap();
 }
