@@ -25,3 +25,4 @@ dist-ssr
 storybook-static
 /index.html
 /src/main.ts
+public/images/cards/*

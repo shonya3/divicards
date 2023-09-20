@@ -211,7 +211,7 @@ const onSheetsSubmit = async ({
 	font-family: 'fontin';
 	font-weight: normal;
 	font-style: normal;
-	src: url('/fontin-smallcaps-webfont.woff') format('woff');
+	src: url('/fontin') format('woff');
 }
 .header {
 	display: flex;
