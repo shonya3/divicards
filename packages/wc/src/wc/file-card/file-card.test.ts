@@ -81,13 +81,10 @@ describe('<wc-file-card>', () => {
 			uuid: '2',
 			minimumCardPrice: 0,
 			sample: {
-				type: 'ok',
-				data: {
-					cards: [{ name: 'Rain of Chaos', price: 1, amount: 1, sum: 1, weight: 0 }],
-					notCards: [],
-					fixedNames: [],
-					csv: '',
-				},
+				cards: [{ name: 'Rain of Chaos', price: 1, amount: 1, sum: 1, weight: 0 }],
+				notCards: [],
+				fixedNames: [],
+				csv: '',
 			},
 		};
 
