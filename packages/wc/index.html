@@ -20,6 +20,24 @@
 				src: url('/Fontin-Italic.woff') format('woff');
 			} */
 
+			form {
+				margin-left: 1rem;
+				padding: 2rem;
+
+				display: flex;
+				gap: 1rem;
+				font-size: 1.4rem;
+			}
+
+			form > div {
+				display: flex;
+				align-items: center;
+			}
+
+			form > p {
+				text-decoration: underline;
+			}
+
 			:root {
 				color-scheme: dark;
 				background-color: #242424;
@@ -31,8 +49,24 @@
 			#cards {
 				display: flex;
 				flex-wrap: wrap;
+				gap: 0.5rem;
 			}
 		</style>
 	</head>
-	<body></body>
+	<body>
+		<form>
+			<div>
+				<label for="small">small</label>
+				<input id="small" type="radio" name="size" />
+			</div>
+			<div>
+				<label for="medium">medium</label>
+				<input id="medium" type="radio" name="size" id="" />
+			</div>
+			<div>
+				<label for="large">large</label>
+				<input id="large" type="radio" name="size" id="" />
+			</div>
+		</form>
+	</body>
 </html>

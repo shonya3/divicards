@@ -1,4 +1,4 @@
-import { DivinationCardElement } from './src/wc/divination-card/wc-divination-card';
+import { CardSize, DivinationCardElement } from './src/wc/divination-card/wc-divination-card';
 
 const cards = [
 	'Fire Of Unknown Origin',
@@ -451,7 +451,65 @@ const cardsContainer = Object.assign(document.createElement('div'), {
 
 document.body.append(cardsContainer);
 
+class State {
+	#size: CardSize = this.#sizeFromLocalStorage();
+	get size(): CardSize {
+		return this.#size;
+	}
+
+	set size(v) {
+		this.#size = v;
+
+		onSizeChanged(v);
+		localStorage.setItem('size', v);
+	}
+
+	#sizeFromLocalStorage(): CardSize {
+		const val = localStorage.getItem('size');
+		if (val === 'small' || val == 'medium' || val === 'large') {
+			return val;
+		} else return 'small';
+	}
+}
+
+const smallRadio = document.querySelector('#small');
+if (!(smallRadio instanceof HTMLInputElement)) throw new Error('#small should be HTMLInputElement');
+const mediumRadio = document.querySelector('#medium');
+if (!(mediumRadio instanceof HTMLInputElement)) throw new Error('#medium should be HTMLInputElement');
+const largeRadio = document.querySelector('#large');
+if (!(largeRadio instanceof HTMLInputElement)) throw new Error('#large should be HTMLInputElement');
+const radios: Map<CardSize, HTMLInputElement> = new Map([
+	['small', smallRadio],
+	['medium', mediumRadio],
+	['large', largeRadio],
+]);
+
+const cardElements = () => Array.from(document.querySelectorAll('wc-divination-card'));
+
+const onSizeChanged = (size: CardSize) => {
+	console.log('size is changed');
+	for (const card of cardElements()) {
+		card.size = size;
+	}
+};
+
+const state = new State();
+const radio = radios.get(state.size);
+if (!radio) {
+	throw new Error(`No radio control for size: ${state.size}`);
+}
+radio.checked = true;
+
 for (const card of cards) {
-	console.log(card);
 	cardsContainer.insertAdjacentHTML('beforeend', `<wc-divination-card name="${card}"></wc-divination-card>`);
+}
+
+onSizeChanged(state.size);
+
+for (const r of radios.values()) {
+	r.addEventListener('input', e => {
+		if (r.id === 'small' || r.id === 'medium' || r.id === 'large') {
+			state.size = r.id;
+		}
+	});
 }
