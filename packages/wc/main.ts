@@ -468,7 +468,11 @@ class State {
 		const val = localStorage.getItem('size');
 		if (val === 'small' || val == 'medium' || val === 'large') {
 			return val;
-		} else return 'small';
+		} else return this.#default();
+	}
+
+	#default(): CardSize {
+		return 'medium';
 	}
 }
 
