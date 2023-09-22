@@ -1,6 +1,7 @@
 pub mod cards;
 pub mod consts;
 pub mod error;
+pub mod maps;
 pub mod reward;
 pub mod scripts;
 
@@ -12,6 +13,7 @@ use std::{
 };
 
 use divi::{league::TradeLeague, prices::NinjaCardData, sample::fix_name, IsCard};
+use maps::load_poedb_non_unique_actual_maplist;
 use reward::reward_to_html;
 use serde::{Deserialize, Serialize};
 
@@ -20,7 +22,7 @@ use serde_json::Value;
 
 #[tokio::main]
 async fn main() {
-    DivinationCardElementData::write_data().await;
+    load_poedb_non_unique_actual_maplist().await.unwrap();
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
