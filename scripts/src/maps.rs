@@ -31,9 +31,10 @@ pub async fn load_from_wiki() -> Result<Vec<MapDataFromWiki>, Error> {
         pub tier: String,
     }
 
-    let url = format!("{WIKI_API_URL}?action=cargoquery&tables=maps,items,areas&fields=items.name,maps.tier&format=json&where=items.class_id='Map' AND maps.area_id LIKE '%MapWorlds%'&group_by=items.name&join_on=items._pageID=maps._pageID,maps.area_id=areas.id&smaxage=0&maxage=0");
+    let url = format!("{WIKI_API_URL}?action=cargoquery&format=json&smaxage=0&maxage=0&limit=500&tables=maps,items,areas&join_on=items._pageID=maps._pageID,maps.area_id=areas.id&fields=maps.tier,items.name,maps.area_id,maps.area_level,areas.boss_monster_ids,maps.unique_area_id&group_by=items.name&where=items.class_id='Map' AND maps.area_id LIKE '%MapWorlds%'");
 
     let response: WikiResponse = reqwest::get(url).await?.json().await?;
+
     Ok(response
         .cargoquery
         .into_iter()
