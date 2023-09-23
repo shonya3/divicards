@@ -1,3 +1,5 @@
+use std::path::Path;
+
 use scraper::{Html, Selector};
 use serde::{Deserialize, Serialize};
 
@@ -20,7 +22,13 @@ pub async fn load_from_wiki() -> Result<Vec<MapDataFromWiki>, Error> {
 
     #[derive(Deserialize)]
     pub struct Title {
-        pub title: MapDataFromWiki,
+        pub title: MapRecord,
+    }
+
+    #[derive(Deserialize)]
+    pub struct MapRecord {
+        pub name: String,
+        pub tier: String,
     }
 
     let url = format!("{WIKI_API_URL}?action=cargoquery&tables=maps,items,areas&fields=items.name,maps.tier&format=json&where=items.class_id='Map' AND maps.area_id LIKE '%MapWorlds%'&group_by=items.name&join_on=items._pageID=maps._pageID,maps.area_id=areas.id&smaxage=0&maxage=0");
@@ -29,11 +37,14 @@ pub async fn load_from_wiki() -> Result<Vec<MapDataFromWiki>, Error> {
     Ok(response
         .cargoquery
         .into_iter()
-        .map(|title| title.title)
+        .map(|title| MapDataFromWiki {
+            name: title.title.name,
+            tier: title.title.tier.parse().unwrap(),
+        })
         .collect::<Vec<MapDataFromWiki>>())
 }
 
-pub async fn load_poedb_non_unique_actual_maplist() -> Result<Vec<String>, Error> {
+pub async fn load_poedb_non_unique_available_maplist() -> Result<Vec<String>, Error> {
     let markup = reqwest::get(POEDB_MAPS_URL).await?.text().await?;
     let html = Html::parse_fragment(&markup);
     let mut maps = html
@@ -62,4 +73,34 @@ pub async fn load_poedb_non_unique_actual_maplist() -> Result<Vec<String>, Error
     Ok(maps)
 }
 
-pub async fn collect_map_data() {}
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Map {
+    pub name: String,
+    pub tier: u32,
+    pub available: bool,
+    pub unique: bool,
+}
+
+pub async fn collect_map_data() -> Result<Vec<Map>, Error> {
+    let available_maps = load_poedb_non_unique_available_maplist().await?;
+    let wiki_maps = load_from_wiki().await?;
+
+    Ok(wiki_maps
+        .into_iter()
+        .map(|MapDataFromWiki { name, tier }| {
+            let unique = !name.ends_with(" Map");
+            let available = unique || available_maps.contains(&name);
+            Map {
+                name,
+                tier,
+                available,
+                unique,
+            }
+        })
+        .collect())
+}
+
+pub async fn write_map_data<P: AsRef<Path>>(path: P) {
+    let maps = collect_map_data().await.unwrap();
+    std::fs::write(path, serde_json::to_string(&maps).unwrap()).unwrap();
+}

@@ -13,7 +13,7 @@ use std::{
 };
 
 use divi::{league::TradeLeague, prices::NinjaCardData, sample::fix_name, IsCard};
-use maps::load_poedb_non_unique_actual_maplist;
+use maps::{load_poedb_non_unique_available_maplist, write_map_data};
 use reward::reward_to_html;
 use serde::{Deserialize, Serialize};
 
@@ -22,7 +22,8 @@ use serde_json::Value;
 
 #[tokio::main]
 async fn main() {
-    load_poedb_non_unique_actual_maplist().await.unwrap();
+    // load_poedb_non_unique_available_maplist().await.unwrap();
+    write_map_data("maps.json").await;
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
