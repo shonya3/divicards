@@ -24,7 +24,7 @@
       "library_area",
       "DONE",
       "n/a",
-      "Academy, Museum, Scriptorium",
+      "Academy; Museum; Scriptorium",
       "n/a",
       "n/a"
     ],
@@ -77,7 +77,7 @@
       "garden_area",
       "DONE",
       "n/a",
-      "The High Gardens, The Imperial Gardens",
+      "The High Gardens; The Imperial Gardens",
       "",
       "",
       "Need verification on whether or not this drops in Maps (e.g. Gardens?)\n\nFrom Supporter Attribution post: \"I can't even tell you how many bird magazines I pulled out of our mailbox or how many plants she bought over the years. Even while she was sick, she started planting and maintaining strawberry plants in our backyard and even helped create a community garden.\"\n\nDoes not appear to drop in Terrace, which likely means it is story only"
@@ -88,7 +88,7 @@
       "desert_area",
       "DONE",
       "n/a",
-      "Dry Sea, Dunes, Desert Spring, Desert, The Oasis",
+      "Dry Sea; Dunes; Desert Spring; Desert; The Oasis",
       "",
       "Pillars of Arun",
       "If A Note in the Wind drops in Pillars of Arun, then it's `desert_area` instead of `desert_map_area`\n3.20 re-verified in Dunes"
@@ -99,7 +99,7 @@
       "desert_map_area",
       "DONE",
       "n/a",
-      "Dry Sea, Dunes, Desert Spring, Desert",
+      "Dry Sea; Dunes; Desert Spring; Desert",
       "The Oasis",
       "Pillars of Arun",
       "Could also be `desert_area`\nDivcord: Desert Map verified by nennas\n3.20 re-verified in Dunes"
@@ -110,7 +110,7 @@
       "crystalline_area",
       "DONE",
       "n/a",
-      "Crystal Ore, Mineral Pools, Primordial Blocks, Grotto",
+      "Crystal Ore; Mineral Pools; Primordial Blocks; Grotto",
       "",
       "n/a",
       "Prim blocks verified in divcord\n3.19: \"A Sea of Blue can now be found in the Grotto Map.\""
@@ -121,7 +121,7 @@
       "golem_boss_area",
       "DONE",
       "n/a",
-      "Coves, Flooded Mine, Grotto, Vault, Waterways, Wharf, Peninsula, Geode",
+      "Coves; Flooded Mine; Grotto; Vault; Waterways; Wharf; Peninsula; Geode",
       "",
       "",
       "Divcord: Peninsula verified\nDivcord: 3.21, Geode verified by Zimzams"
@@ -143,7 +143,7 @@
       "desert_map_area",
       "DONE",
       "n/a",
-      "Desert Spring, Dunes, Dry Sea, Desert",
+      "Desert Spring; Dunes; Dry Sea; Desert",
       "",
       "",
       "coolwaldo in Divcord claims it drops in Dry Sea (verified)\nTebec verified Desert in Divcord. Does not appear to drop in Pillars of Arun, so likely desert_map_area over desert_area"
@@ -176,7 +176,7 @@
       "atziri_area",
       "DONE",
       "n/a",
-      "The Apex of Sacrifice, The Alluring Abyss"
+      "The Apex of Sacrifice; The Alluring Abyss"
     ],
     [
       "Chest_object",
@@ -227,7 +227,7 @@
       "ruined_vaal_city_area",
       "low",
       "unclear hypothesis",
-      "Ancient City, Sunken City",
+      "Ancient City; Sunken City",
       "Vaal Pyramid",
       "",
       "3.21: Arrogance of the Vaal can now be found in the Vaal Pyramid Map.\n\nDivcord: 3.21, Vaal Pyramid verified by Zimzams as per patch notes.\nVaal Pyramid did not receive any new Tags. Separate new governance added for Arrogance of the Vaal?\n\nCould this be related to how The Spoiled Prince is handled (The Fallen Queen?), which is likewise an Area drop isolated to Vaal Pyramid? Something else?"
@@ -238,7 +238,7 @@
       "marketplace_area",
       "DONE",
       "n/a",
-      "Alleyways, Arcade, Bazaar, Port, The Marketplace, The Quay",
+      "Alleyways; Arcade; Bazaar; Port; The Marketplace; The Quay",
       "Park",
       "n/a",
       "Divcord: Park tested by nennas with high juice; zero drops of Assassin's Favour. Assassin's Favour is about ~0.78 the droprate of The Gambler, so seeing 0 drops of Assassin's Favour in this trial is extremely unlikely.\n\nThus Park is very likely no longer an eligible drop location for Assassin's Favour in 3.18"
@@ -269,7 +269,7 @@
       "",
       "none",
       "no hypothesis",
-      "Stagnation, Laboratory, Relic Chambers",
+      "Stagnation; Laboratory; Relic Chambers",
       "",
       "?",
       "Divcord: Stagnation as Kirac Mission by SlipperyJim\nDivcord: Stagnation reverified as natural Area drop in 3.18.\nLaboratory was explicitly patch noted in 3.18.\n\nwealthy_area, very low confidence (2/17)\n\nMaybe `relic_area`? (EDIT: No, see below.) Laboratory is weird in that it seems to inherit Tag properties without having those Tags, similar to Necropolis. (Museum)\n\nPossible naming theory - check azyran's reward thread under #general on divcord (Malformation, Racecoure, Primordial Blocks)\n\nCould also be `mausoleum_area` (Mausoleum, Sepulchre) or based on The Reliquary tilsets only (disprove all other theories)\nDM from card creator\n\nDivcord: 3.20, Shrine: Zimzams tested >500 natural Card drops, zero Azyran's Reward. This disproves `thaumaturgy_area` as a sole factor with >99% confidence.\nDivcord: 3.20, Museum: Zimzams tested 1034 natural Card drops (on top of a prior n=340 sample) zero Azyran's Reward. So `relic_area` cannot be the sole governing factor."
@@ -280,7 +280,7 @@
       "desert_map_area",
       "DONE",
       "n/a",
-      "Desert Spring, Dry Sea, Dunes, Desert",
+      "Desert Spring; Dry Sea; Dunes; Desert",
       "",
       "",
       "Divcord: Desert verified by Jasmine"
@@ -302,7 +302,7 @@
       "mine_area",
       "DONE",
       "n/a",
-      "Flooded Mine, Crystal Ore, Dig, Excavation, Grotto, Geode",
+      "Flooded Mine; Crystal Ore; Dig; Excavation; Grotto; Geode",
       "Maze of the Minotaur",
       "",
       "mine_area ? or cave_area?\n\nDivcord: Zimzams verified Dig which has `mine_area` but not `cave_area`\n(Possible that it's still both Tags, though.)\n\nExcavation verified on divcord\nVerifications needed for `mine_area`:\n{Geode}\n3.20 patch notes: Added Grotto\n\nDivcord 3.21: Geode verified by sokratis12GR"
@@ -335,7 +335,7 @@
       "relic_area",
       "DONE",
       "n/a",
-      "Museum, Relic Chambers, The Reliquary (Act 5/10)",
+      "Museum; Relic Chambers; The Reliquary (Act 5/10)",
       "n/a",
       "n/a"
     ],
@@ -345,7 +345,7 @@
       "labyrinth_tileset_area",
       "DONE",
       "n/a",
-      "Chateau, Orchard, Plaza, Conservatory",
+      "Chateau; Orchard; Plaza; Conservatory",
       "n/a",
       "",
       "Conservatory observed by SlipperyJim8 as a Kirac Mission drop"
@@ -367,7 +367,7 @@
       "solaris_area",
       "DONE",
       "n/a",
-      "Temple, The Twilight Temple, The Solaris Temple 1/2 (A8), Cold River, The Harbour Bridge",
+      "Temple; The Twilight Temple; The Solaris Temple 1/2 (A8); Cold River; The Harbour Bridge",
       "Ivory Temple",
       "",
       "Divcord: fal claims Boundless Realms drops in Cold River (confirmed)\n\nNeed to see if the wiki claim of Ivory Temple is still accurate"
@@ -400,7 +400,7 @@
       "graveyard_area",
       "DONE",
       "n/a",
-      "Cemetery, Graveyard, Grave Trough",
+      "Cemetery; Graveyard; Grave Trough",
       "n/a",
       "",
       "Grave Trough confirmed in divcord"
@@ -411,7 +411,7 @@
       "labyrinth_tileset_area",
       "DONE",
       "n/a",
-      "Chateau, Orchard, Plaza, Conservatory",
+      "Chateau; Orchard; Plaza; Conservatory",
       "",
       "",
       "Droprate is low: worse than The Nurse, about the same as Alluring Bounty\n\nDivcord: nennas posted a video of a drop in Orchard from a Strongbox with a Rogue Exile. Natural drop? Deterministic drop?\nChateau and Orchard both share `labyrinth_tileset_area`, could this be the correct Tag? If so, then need verifications in Conservatory\n\nDivcord: Plaza verified by nennas\nDivcord: 3.21, Conservatory verified by Zimzams"
@@ -433,7 +433,7 @@
       "mine_area",
       "DONE",
       "n/a",
-      "Crystal Ore, Dig, Excavation, Flooded Mine, Geode, Grotto",
+      "Crystal Ore; Dig; Excavation; Flooded Mine; Geode; Grotto",
       "n/a",
       "n/a",
       "3.20 patch notes: Added Grotto"
@@ -444,7 +444,7 @@
       "fire_prison_area",
       "DONE",
       "n/a",
-      "Forge of the Phoenix, Lava Chamber",
+      "Forge of the Phoenix; Lava Chamber",
       "n/a",
       "n/a"
     ],
@@ -454,7 +454,7 @@
       "dark_forest_area",
       "DONE",
       "n/a",
-      "Dark Forest, Bramble Valley, Forbidden Woods, The Northern Forest (A7)",
+      "Dark Forest; Bramble Valley; Forbidden Woods; The Northern Forest (A7)",
       "",
       "",
       "Divcord: Dark Forest verified by Zimzams\n\nIf someone verifies a drop in Lair, that would indicate `rigwald_area`\nCould also be `dark_forest_area` but less likely given theme\n\nDivcord: In 3.19, CommissarTyr tracked 4 Call to the First Ones in Bramble Valley, which implies `dark_forest_area` is probably correct; remaining to verify: none\n\nDivcord: Thicket verified. Might also key off of `thicket_area` ? Thicket has `forest_map_area` but not `dark_forest_area`.\n\nDivcord: Forbidden Woods verified 3.19"
@@ -465,7 +465,7 @@
       "thicket_area",
       "DONE",
       "n/a",
-      "Thicket, The Dread Thicket (A7)",
+      "Thicket; The Dread Thicket (A7)",
       "",
       "",
       "Divcord: Verified that `thicket_area` permits Call to the First Ones, but does NOT permit other `dark_forest_area` Cards. Thus `thicket_area` does not inherit `dark_forest_area`. Call to the First Ones is simply governed by two separate Tags.\n3.21: Krolya verified Dread Thicket A7."
@@ -518,7 +518,7 @@
       "relic_area",
       "DONE",
       "n/a",
-      "Reliquary, Museum",
+      "Reliquary; Museum",
       "",
       "",
       "Previously uncertain if drop was due to Reliquary Map vs Redeemer influence\n3.19: verified in Museum (Exarch) - likely relic_area instead (may require repeat testing to be sure)\n3.19: Verified in Museum in a Kirac mission (no Influence) by Zimzams"
@@ -539,7 +539,7 @@
       "catacomb_area",
       "DONE",
       "n/a",
-      "Bone Crypt, The Catacombs, The Ossuary (Act 5), The Ossuary (Act 10)",
+      "Bone Crypt; The Catacombs; The Ossuary (Act 5); The Ossuary (Act 10)",
       "n/a",
       "n/a",
       "The reason this association was not marked \"Done\" is that Bone Crypt is the sole Map with catacomb_area currently, so we can't test the hypothesis of the Tag association in Maps. We'd need to see at least one more Map with catacomb_area other than Bone Crypt in which Coveted Possession drops to be more confident that the association is correct. But no such Map exists currently.\n(The pattern seems to hold true for Story Areas, though.)\n\nFor example, eligibility could be governed by some other non-Tag aspect shared by Bone Crypt and the Story Areas (true of a small number of other Cards), but we have no way to distinguish that right now.\n\nOne could argue that the Story evidence is sufficient to mark this Done, though."
@@ -550,7 +550,7 @@
       "graveyard_area",
       "DONE",
       "n/a",
-      "Graveyard, Cemetery, Grave Trough",
+      "Graveyard; Cemetery; Grave Trough",
       "",
       "",
       "Needs verifications to distinguish between cemetery_map_area and graveyard_area; graveyard_area more likely"
@@ -602,7 +602,7 @@
       "fetid_area",
       "DONE",
       "n/a",
-      "Bog, Marshes, Mud Geyser",
+      "Bog; Marshes; Mud Geyser",
       "The Karui Fortress*",
       "n/a",
       "*In order for this card to drop in The Karui Fortress, you require a strongbox with +5 to level of items. (46 -> 51)"
@@ -695,7 +695,7 @@
       "innocence_map + ?",
       "low",
       "unclear hypothesis",
-      "Basilica, Residence",
+      "Basilica; Residence",
       "n/a",
       "Tower, Palace, Villa",
       "Basilica\n\nPretty uncommon, about the same droprate as The Nurse or The Scout\nPlayerbase's farming in Crimson Temple rules out `church` -- it should have dropped there by now.\n\n\nOne possible explanation:\nNot a Boss-specific drop, but keyed off of a Boss's Monster Tag? \"Drops in any Areas where Boss has innocence_map\"?\n\nThere are a couple of other candidates that follow that potential pattern, where there is not an appropriate Area Tag, but the Card is nevertheless predictable based on qualities of the Boss.\n\n3.19: \"Desperate Crusade can now be found in the Residence Map.\" desperate crusade only previously was confirmed in Basilica. only lead was innocence_map. Palace was removed, so Villa should be tested to check sceptre_of_god_area (1/3); otherwise, Tower needs to be tested in Standard (1/2). If nothing else, check for new 3.19 tags\n\n\nCould this follow the same weird rules as The Golden Era? If so, Ivory Temple needs to be checked.\nDivcord: 3.22, Elinvynia checked n=928 natural Card drops in Ivory Temple, 0 hits; ~99.82% confidence."
@@ -706,7 +706,7 @@
       "library_area",
       "DONE",
       "n/a",
-      "Academy, Museum, Scriptorium",
+      "Academy; Museum; Scriptorium",
       "n/a",
       "n/a"
     ],
@@ -716,7 +716,7 @@
       "solaris_area",
       "DONE",
       "n/a",
-      "Temple, The Twilight Temple, Cold River, The Solaris Temple Level 1 (Act 8); The Harbour Bridge, The Solaris Temple Level 2 (Act 8)",
+      "Temple; The Twilight Temple; Cold River; The Solaris Temple Level 1 (Act 8); The Harbour Bridge; The Solaris Temple Level 2 (Act 8)",
       "Ivory Temple",
       "",
       "Divcord: Temple verified by Zimzams\nDivcord: Cold River verified by Zimzams\n\nDivcord: Moderate evidence from Ivory Temple testing that Dialla's Subjugation no longer drops here\n3.21: Harbour Bridge verified by Elinvynia\n3.22: Solaris Temple 2 (Act 8) verified by Elinvynia"
@@ -781,7 +781,7 @@
       "urban_sarn_area",
       "DONE",
       "n/a",
-      "Arsenal, Colonnade, Ghetto, Port, Promenade, Precinct",
+      "Arsenal; Colonnade; Ghetto; Port; Promenade; Precinct",
       "n/a",
       "",
       "Divcord: Precinct verified by fal"
@@ -803,7 +803,7 @@
       "desert_area",
       "DONE",
       "n/a",
-      "Desert, Desert Spring, Dunes, Dry Sea, The Foothills, The Oasis, The Vastiri Desert, Pillars of Arun",
+      "Desert; Desert Spring; Dunes; Dry Sea; The Foothills; The Oasis; The Vastiri Desert; Pillars of Arun",
       "n/a",
       "",
       "Divcord: Dry Sea verified by Zimzams\nPillars of Arun verified by Elinvynia"
@@ -814,7 +814,7 @@
       "chamber_of_sins_area",
       "OK",
       "story only",
-      "Overgrown Ruin, Overgrown Shrine",
+      "Overgrown Ruin; Overgrown Shrine",
       "n/a",
       "The Chamber of Sins Level 1/2 (Act 7)",
       "maligaro_area ? chamber_of_sins_area ? both?\nOvergrown Shrine verified in divcord\nneeds verification\n\nmight be both: \n{`chamber_of_sins_area` + `maligaro_area`}. \n"
@@ -825,7 +825,7 @@
       "maligaro_area",
       "OK",
       "story only",
-      "Overgrown Shrine, Core, Museum",
+      "Overgrown Shrine; Core; Museum",
       "n/a",
       "The Harvest (magic+ monsters), The Rotting Core",
       "Divcord: clip of Lighty posted by Zimzams shows drop in Museum"
@@ -836,7 +836,7 @@
       "chamber_of_sins_area",
       "DONE",
       "n/a",
-      "Overgrown Ruin, Overgrown Shrine, The Chamber of Sins Level 1/2 (Act 7)",
+      "Overgrown Ruin; Overgrown Shrine; The Chamber of Sins Level 1/2 (Act 7)",
       "Fungal Hollow",
       "n/a",
       "Divcord: verified in Overgrown Ruin by Zimzams via a Kirac Card Mission\n\nIs the old wiki Fungal Hollow claim still accurate? Doesn't mesh with `chamber_of_sins_area`\n\nDivcord: nennas tested Fungal Hollow; with that sample, zero Emperor of Purity observed; probability this would occur by chance is ~1.7%. Unlikely to drop in Fungal Hollow anymore. It's probably safe to call this one done and revisit only if we're surprised by a Fungal Hollow drop in the future."
@@ -847,7 +847,7 @@
       "garden_area",
       "DONE",
       "n/a",
-      "Courtyard, Orchard, Terrace, Gardens, The Imperial Gardens, The High Gardens",
+      "Courtyard; Orchard; Terrace; Gardens; The Imperial Gardens; The High Gardens",
       "n/a",
       "",
       "Gardens observed by SlipperyJim8 as a Kirac Mission drop"
@@ -920,7 +920,7 @@
       "karui_map",
       "DONE",
       "n/a",
-      "Strand, Caldera, Shore, Lava Lake, Coves, Estuary, Volcano",
+      "Strand; Caldera; Shore; Lava Lake; Coves; Estuary; Volcano",
       "",
       "",
       "Caldera Verified in Divcord\nDivcord: Shore verified by ColdMamba\nLava Lake verified by DabIt\nDivcord: 3.20 Coves verified by Jasmine\nDivcord: 3.20 Estuary verified by fal\nDivcord: 3.20 Volcano verified by Zimzams"
@@ -931,7 +931,7 @@
       "inventing_area",
       "OK",
       "confirm",
-      "Vault, Foundry",
+      "Vault; Foundry",
       "",
       "Laboratory",
       "Vault verified on divcord\nDivcord: Foundry verified by RiPHeartofGold 3.19\n\nRemaining to verify:\n{Laboratory}"
@@ -942,7 +942,7 @@
       "lunaris_outer_area",
       "DONE",
       "n/a",
-      "Colonnade, Promenade, The Ebony Barracks, The Lunaris Concourse",
+      "Colonnade; Promenade; The Ebony Barracks; The Lunaris Concourse",
       "n/a",
       "n/a",
       "maybe lunaris_outer_area ?\ncould be a different shared Tag between Colonnade, Promenade"
@@ -953,7 +953,7 @@
       "mine_area",
       "DONE",
       "n/a",
-      "Dig, Grotto, Geode, Crystal Ore, Flooded Mine, Excavation",
+      "Dig; Grotto; Geode; Crystal Ore; Flooded Mine; Excavation",
       "",
       "",
       "Dig - Garukhan specific?\n3.20 patch notes: Added Grotto\npossibly mine_area as Grotto newly gained mine_area?\n\n3.21 Geode verified by RiPHeartofGold\n3.21 Crystal Ore verified by CardboardMonka\n3.21 Flooded Mine verified by RiPHeartofGold\n3.21 Excavation verbally confirmed by Peepo"
@@ -964,7 +964,7 @@
       "mine_area",
       "DONE",
       "n/a",
-      "Crystal Ore, Dig, Excavation, Flooded Mine, Geode, Grotto",
+      "Crystal Ore; Dig; Excavation; Flooded Mine; Geode; Grotto",
       "n/a",
       "n/a",
       "3.20 patch notes: Added Grotto\nThe Quarry and The Tunnel no longer eligible due to drop level"
@@ -975,7 +975,7 @@
       "flooded_area",
       "DONE",
       "n/a",
-      "Flooded Mine, Mineral Pools, Underground Sea, The Cavern of Anger (Act 6)",
+      "Flooded Mine; Mineral Pools; Underground Sea; The Cavern of Anger (Act 6)",
       "n/a",
       "n/a"
     ],
@@ -985,7 +985,7 @@
       "crypt_area",
       "DONE",
       "n/a",
-      "Bone Crypt, Cursed Crypt, The Coward's Trial, The Crypt (Act 7)",
+      "Bone Crypt; Cursed Crypt; The Coward's Trial; The Crypt (Act 7)",
       "Olmec's Sanctum",
       "n/a",
       "Divcord: Coward's Trial verified by Zimzams\nZimzams mentioned a drop from Kirac Card Mission in Necropolis\n\nZimzams hypothesizes: \"Similar to The Forsaken, maybe `crypt_area` + `necropolis`? \"\n\n\nStill eligible to drop in Olmec's Sanctum in 3.18?\nIf so, then it needs another row for an Area-Specific Drop"
@@ -996,7 +996,7 @@
       "catacomb_area",
       "DONE",
       "n/a",
-      "Bone Crypt, The Ossuary (Act 10), The Catacombs, The Ossuary (Act 5)",
+      "Bone Crypt; The Ossuary (Act 10); The Catacombs; The Ossuary (Act 5)",
       "",
       "",
       "New tag eligibility discovered by Elinvynia in 3.21 - The Ossuary (Act 10).\nDivcord: 3.21, A3 The Catacombs verified by Elinvynia\nDivcord: 3.21, A5 The Ossuary verified by Elinvynia"
@@ -1062,7 +1062,7 @@
       "fire_affinity + cold_affinity bosses?",
       "low",
       "unclear hypothesis",
-      "Estuary, The Twilight Temple",
+      "Estuary; The Twilight Temple",
       "",
       "",
       "fire_area + a water tag? Need to test Lava Lake if so.\nIf suspecting just dual element bosses, perhaps Plateau, Residence, Shrine Piety?\nVerified Twilight Temple on Divcord\n\nSumter the Twisted in Estuary has Tags including `cold_affinity`, `fire_affinity`, `physical_affinity`.\nHypothetically, if the rule implied by Sumter the Twisted in Estuary is \"Natural drop in an Area whose Boss has `cold_affinity` and `fire_affinity`\", then these might also be leads:\n* Coral Ruins: Captain Tanner Lightfoot (cold_affinity, fire_affinity, physical_affinity)\n* Maze: Shadow of the Vaal (cold_affinity, fire_affinity, lightning_affinity)\n* Acid Caverns: Morgrants, The Deafening (cold_affinity, fire_affinity, lightning_affinity, physical_affinity)\n(But we don't know if this guess is correct. If it is, Coral Ruins would probably be the closest fit.)\n\nDivcord: 3.20, zero hits in Coral Ruins with n=115. This sample gives ~98.95% confidence that Heterochromia is not a natural Area drop in Coral Ruins. That means the condition \"Drops in an Area whose Boss has both cold_affinity and fire_affinity\" is not sufficient alone.\nDivcord: 3.20, zero hits in Plateau with n=143, ~99.6% confidence. That means the condition \"Drops in an Area with at least two Bosses with different elemental affinity Tags\" is not sufficient alone.\nDivcord: 3.20, zero hits in Lava Lake with n=81, ~99.5% confidence. That means the condition \"`fire_area` + a water Tag\" is not sufficient alone."
@@ -1073,7 +1073,7 @@
       "city_home_map",
       "DONE",
       "n/a",
-      "Alleyways, Arcade, City Square, Crimson Township, Residence, Sunken City, Tower, Ancient City, Chateau, Haunted Mansion, Siege, Bazaar",
+      "Alleyways; Arcade; City Square; Crimson Township; Residence; Sunken City; Tower; Ancient City; Chateau; Haunted Mansion; Siege; Bazaar",
       "n/a",
       "",
       "Ancient City verified in Divcord\nChateau verified by RiPHeartofGold in Divcord\nDivcord: 3.20 Haunted Mansion claim by both reh and Superlight (no screenshot)\nDivcord: 3.21 Siege verified by RiPHeartofGold"
@@ -1116,7 +1116,7 @@
       "aqueduct_area",
       "DONE",
       "n/a",
-      "Channel, Frozen Cabins, Waterways, The Aqueduct, The Blood Aqueduct",
+      "Channel; Frozen Cabins; Waterways; The Aqueduct; The Blood Aqueduct",
       "n/a",
       "n/a"
     ],
@@ -1126,7 +1126,7 @@
       "river_area",
       "DONE",
       "n/a",
-      "Forking River, Ramparts, The Sarn Ramparts, The Riverways (Act 6), The Southern Forest (Act 6)",
+      "Forking River; Ramparts; The Sarn Ramparts; The Riverways (Act 6); The Southern Forest (Act 6)",
       "",
       "n/a",
       "Divcord: nennas tested Fungal Hollow and never observed Hunter's Resolve. (Expected: 20; Sample Actual: 0). We can state with very high confidence that Hunter's Resolve no longer drops in Fungal Hollow.\n\nDivcord: Story A6 The Southern Forest verified by Jas 3.19"
@@ -1159,7 +1159,7 @@
       "unholy_trio_boss_map",
       "Done",
       "n/a",
-      "Lord of the Hollows, Messenger of the Hollows, and Champion of the Hollows",
+      "Lord of the Hollows; Messenger of the Hollows; Champion of the Hollows",
       "",
       "",
       "3.21: Immortal Resolve can now be found in the Crystal Ore Map.\nAmalgam of Nightmares + Crystal Ore's trio makes me suspect a \"linked boss\" theory. Will need to check if there are any suspicious tags; Amalgam has unholy_trio_combined_boss_map \nThe new Monster Tag unholy_trio_boss_map is applied to only these Monsters in Crystal Ore: {Lord of the Hollows, Messenger of the Hollows, Champion of the Hollows}\nZimzams verified Champion of the Hollows in 3.21"
@@ -1180,7 +1180,7 @@
       "desert_area",
       "DONE",
       "n/a",
-      "Desert, Desert Spring, Dry Sea, Dunes, Pillars of Arun",
+      "Desert; Desert Spring; Dry Sea; Dunes; Pillars of Arun",
       "n/a",
       "n/a",
       "level 80+\nPillars verified in divcord"
@@ -1191,7 +1191,7 @@
       "urban_sarn_area",
       "DONE",
       "n/a",
-      "Arsenal, Ghetto, Port, Precinct, Promenade, Colonnade\nThe Docks, The Ebony Barracks, The Grain Gate, The Grand Promenade, The Harbour Bridge, The Lunaris Concourse, The Quay, The Sarn Ramparts, The Slums, The Solaris Concourse, The City of Sarn, The Battlefront, The Marketplace",
+      "Arsenal; Ghetto; Port; Precinct; Promenade; Colonnade;\nThe Docks; The Ebony Barracks; The Grain Gate; The Grand Promenade; The Harbour Bridge; The Lunaris Concourse; The Quay; The Sarn Ramparts; The Slums; The Solaris Concourse; The City of Sarn; The Battlefront; The Marketplace",
       "The Imperial Fields",
       "",
       "Divcord verified in collonade\nSolaris Concourse, The Battlefront, The Marketplace, The City of Sarn verified by Elinvynia (3.21)\nDisproved in The Imperial Fields with 99% confidence"
@@ -1264,7 +1264,7 @@
       "AvariusCasticus boss areas",
       "DONE",
       "n/a",
-      "Basilica, Chamber of Innocence (A5/A10), Defiled Cathedral",
+      "Basilica; Chamber of Innocence (A5/A10); Defiled Cathedral",
       "",
       "",
       "`church` ?\nBasilica and Defiled Cathedral were drop locations in 3.15 -- but are they still both eligible after the 3.17 rework?\nBasilica verified in divcord\nDefiled Cathedral confirmed in divcord"
@@ -1275,7 +1275,7 @@
       "ocean_area",
       "DONE",
       "n/a",
-      "Atoll, Coral Ruins, Lighthouse, Maelström of Chaos, Port, Reef, Strand, Whakawairua Tuahu, Mao Kun, Beach, Coves, Plateau, Shore, Tropical Island, Peninsula, Wharf, Shipyard, Pier, Estuary, The Beacon, The Brine King's Reef, The Coast (A6), The Tidal Island (A6), The Twilight Strand (A6), The Mud Flats (Act 6)",
+      "Atoll; Coral Ruins; Lighthouse; Maelström of Chaos; Port; Reef; Strand; Whakawairua Tuahu; Mao Kun; Beach; Coves; Plateau; Shore; Tropical Island; Peninsula; Wharf; Shipyard; Pier; Estuary; The Beacon; The Brine King's Reef; The Coast (A6); The Tidal Island (A6); The Twilight Strand (A6); The Mud Flats (Act 6)",
       "",
       "",
       "Shipyard observed by SlipperyJim8 as a Kirac Mission drop \nWhakawairua Tuahu, mao kun, beach, Shore, Peninsula drop in divcord \nThe verification in Beach confirms this is `ocean_area` and not `map_area_with_open_water`, since Beach has the former but not the latter. \n\nDivcord: Estuary, Tropical Island, Lighthouse, Pier, Plateau, Wharf, Coves verified by Zimzams\n3.19: \"The Formless Sea can now be found in the Strand Map and the Whakawhairua Tuahu Unique Map.\" - no changes\nMud Flats verified by Elinvynia."
@@ -1297,7 +1297,7 @@
       "river_area",
       "DONE",
       "n/a",
-      "Ramparts, Forking River",
+      "Ramparts; Forking River",
       "n/a",
       "",
       "Divcord: Ramparts verified\nDivcord: Forking River verified"
@@ -1308,7 +1308,7 @@
       "sceptre_of_god_area",
       "OK",
       "story only",
-      "Palace, Residence, Villa, The Upper Sceptre of God",
+      "Palace; Residence; Villa; The Upper Sceptre of God",
       "n/a",
       "The Sceptre of God"
     ],
@@ -1346,7 +1346,7 @@
       "den_area",
       "DONE",
       "n/a",
-      "Barrows, Grotto, Lair; Caer Blaidd, Wolfpack's Den; The Den (Act 7)",
+      "Barrows; Grotto; Lair; Caer Blaidd, Wolfpack's Den; The Den (Act 7)",
       "n/a",
       "",
       "Divcord verified Caer Blaidd, Wolfpack's Den"
@@ -1368,7 +1368,7 @@
       "dock_area",
       "DONE",
       "n/a",
-      "Pier, Port, Shipyard, Wharf",
+      "Pier; Port; Shipyard; Wharf",
       "n/a",
       "n/a"
     ],
@@ -1399,7 +1399,7 @@
       "merveil_area",
       "DONE",
       "n/a",
-      "Maelström of Chaos, Underground Sea",
+      "Maelström of Chaos; Underground Sea",
       "Mineral Pools",
       "n/a",
       "This might be `merveil_area` instead of `sea_witch_boss_area`, if Mineral Pools cannot actually produce Lysah's Respite. (Mineral Pools cannot produce The Lover which was erroneously tagged to Mineral Pools as well. But this one might be different. More testing needed in Mineral Pools -- lowish dropweight.)\n\nUpdate:\nDoes seem to be `merveil_area`: Zimzams did an n=65 sample in Lava Chamber (which has `sea_witch_boss_area` but not `merveil_area` and observed 0 Lysah's Respite. Likelihood is ~0.0012.\n\nThis implies we should also fail to see Lysah's Respite in Mineral Pools, contrary to the old wiki claim.\n\nUpdate:\nDivcord: Mineral Pools tested by nennas, n=192, 0 Lysah's Respite. This is sufficient to rule it out with high confidence."
@@ -1410,7 +1410,7 @@
       "synthesis_area",
       "ok",
       "confirm",
-      "Altered Distant Memory, Augmented Distant Memory, Twisted Distant Memory, Rewritten Distant Memory",
+      "Altered Distant Memory; Augmented Distant Memory; Twisted Distant Memory; Rewritten Distant Memory",
       "",
       "Cortex",
       "Drops from Synthesis Maps\n\nCortex has `synthesis_area` as well, but no verified drop here yet in 3.18"
@@ -1421,7 +1421,7 @@
       "dark_forest_area",
       "DONE",
       "n/a",
-      "Bramble Valley, Dark Forest, Forbidden Woods",
+      "Bramble Valley; Dark Forest; Forbidden Woods",
       "n/a",
       "n/a"
     ],
@@ -1431,7 +1431,7 @@
       "military_area",
       "DONE",
       "n/a",
-      "Armoury, Colonnade, Arsenal, Promenade",
+      "Armoury; Colonnade; Arsenal; Promenade",
       "n/a",
       "",
       "Divcord: Arsenal verified by nennas\nDivcord: Promenade verified by RiPHeartofGold 3.19"
@@ -1442,7 +1442,7 @@
       "mausoleum_area",
       "DONE",
       "n/a",
-      "Mausoleum, Relic Chambers, Sepulchre, The Ossuary (Act 5/10), The Reliquary (Act 5/10)",
+      "Mausoleum; Relic Chambers; Sepulchre; The Ossuary (Act 5/10); The Reliquary (Act 5/10)",
       "n/a",
       "n/a"
     ],
@@ -1462,7 +1462,7 @@
       "snow_area",
       "DONE",
       "n/a",
-      "Forbidden Woods, Frozen Cabins, Iceberg, Summit, Glacier, Cold River, The Ascent, The Descent",
+      "Forbidden Woods; Frozen Cabins; Iceberg; Summit; Glacier; Cold River; The Ascent; The Descent",
       "n/a",
       "",
       "Divcord: fal verified drop in Cold River\nDivcord: Glacier verified\nVerified in The Descent (A9)"
@@ -1506,7 +1506,7 @@
       "mausoleum_area",
       "DONE",
       "n/a",
-      "Mausoleum, Relic Chambers, Sepulchre",
+      "Mausoleum; Relic Chambers; Sepulchre",
       "n/a",
       "n/a"
     ],
@@ -1526,7 +1526,7 @@
       "internal name contains \"Parasite\" OR arachnid_tomb_map_area",
       "low",
       "unclear hypothesis",
-      "Infested Valley, Channel, Arachnid Tomb",
+      "Infested Valley; Channel; Arachnid Tomb",
       "Palace",
       "",
       "Parasitic Passengers is an Area drop, but unclear how this is governed\n\n* The Winged Death : VultureParasiteMapBoss\n* Gorulis, Will-Thief : InsectSpawnerParasiteBossMap\n\nThe Hallowed Husk could be considered a demonic parasite? Needs drop confirmation\n3.19: \"Parasitic Passengers can now be found in the Arachnid Tomb Map\". Hybrid Widow also lacks Parasite in internal name, but uses a skill called \"Covered in Spiders\"\nReverified Channel in 3.20\n\nThe Winged Death's summoned Monster is named \"Mindless Scavenger\" variant (`VultureParasiteMapBossMinion`).\nHybrid Widow's summoned Monster is named \"Widow's Hatchling\", `SpiderBossSinsMinion`."
@@ -1537,7 +1537,7 @@
       "garden_area",
       "DONE",
       "n/a",
-      "Gardens, Courtyard, Orchard, Terrace",
+      "Gardens; Courtyard; Orchard, Terrace",
       "",
       "",
       "Divcord: Terrace verified by Zimzams\nDivcord: Orchard verified by RiPHeartofGold 3.19"
@@ -1548,7 +1548,7 @@
       "shaper_guardian_boss",
       "DONE",
       "n/a",
-      "Guardian of the Chimera, Guardian of the Hydra, Guardian of the Minotaur, Guardian of the Phoenix",
+      "Guardian of the Chimera; Guardian of the Hydra; Guardian of the Minotaur; Guardian of the Phoenix",
       "n/a",
       "n/a"
     ],
@@ -1569,7 +1569,7 @@
       "kaom_area",
       "DONE",
       "n/a",
-      "Caldera, Volcano",
+      "Caldera; Volcano",
       "Lava Lake",
       "",
       "karui_map but not beach?\n\nDivcord 3.20: Zimzams tracked n=1970 in Coves with zero hits of Pride Before the Fall, sample confidence >99%. Coves has `karui_map`.\n\nThe old claims of Pride Before the Fall in {Caldera, Volcano, Lava Lake} seem to be from 2018 or earlier. Do we have modern reverifications?\nPossible alternatives:\n* If Lava Lake is still eligible, maybe both `kaom_area` and `kitava_area`?\n* If Lava Lake is not eligible anymore, maybe only `kaom_area` (and therefore only Caldera and Volcano)?\n\n3.20: Partial T16 Lava Lake sample, n=521, zero hits of Pride Before the Fall, current confidence ~91%. Needs more testing to have better certainty, but this may be more evidence of simply `kaom_area`.\nUpdate: Zimzams added +484 trials; new confidence >99%.\n\nResult: Seems like it's simply `kaom_area` and nothing else."
@@ -1580,7 +1580,7 @@
       "den_area",
       "DONE",
       "n/a",
-      "Barrows, Grotto, Lair; Caer Blaidd, Wolfpack's Den",
+      "Barrows; Grotto; Lair; Caer Blaidd, Wolfpack's Den",
       "n/a",
       "",
       "Reported dropping by krolya in Caer Blaidd in divcord. A direct verification would be beneficial."
@@ -1601,7 +1601,7 @@
       "ocean_area",
       "DONE",
       "n/a",
-      "Estuary, Peninsula, Port, Shore, Strand, Mao Kun, Beach, Whakawairua Tuahu, Lighthouse, Wharf, Atoll, Maelström of Chaos, Coral Ruins, Tropical Island, Plateau, Shipyard, Pier, Coves, Reef",
+      "Estuary; Peninsula; Port; Shore; Strand; Mao Kun; Beach; Whakawairua Tuahu; Lighthouse; Wharf; Atoll; Maelström of Chaos; Coral Ruins; Tropical Island; Plateau; Shipyard; Pier; Coves; Reef",
       "n/a",
       "",
       "Mao Kun verified in Divcord\nWharf verified in Divcord\nBeach verified in Divcord\nWhakawairua Tuahu verified in divcord\nCoral Ruins verified in Divcord\nReef verified in Divcord\nAtoll verified in Divcord\nMaelstrom verified in Divcord\nTropical Island verified in Divcord\nAll verified in Divcord: {Lighthouse, Plateau, Shipyard, Pier, Coves}"
@@ -1612,7 +1612,7 @@
       "crossroad_area",
       "DONE",
       "n/a",
-      "Castle Ruins, Fields",
+      "Castle Ruins; Fields",
       "n/a",
       "n/a"
     ],
@@ -1622,7 +1622,7 @@
       "garden_area",
       "DONE",
       "n/a",
-      "Courtyard, Terrace, Gardens, Orchard, The High Gardens",
+      "Courtyard; Terrace; Gardens; Orchard; The High Gardens",
       "n/a",
       "",
       "Gardens verified per Divcord\nDivcord: Orchard verified by Zimzams\n\nDrop level limit of ilvl 80"
@@ -1633,7 +1633,7 @@
       "warehouse_area",
       "DONE",
       "story only",
-      "Arsenal, Factory, The Grain Gate",
+      "Arsenal; Factory; The Grain Gate",
       "The Imperial Fields",
       "The Refinery",
       "3.21 - disproved Rats 99% in Imperial Fields"
@@ -1644,7 +1644,7 @@
       "NOT otherworldly_story_area",
       "OK",
       "story only",
-      "The Ashen Fields\nThe Bath House\nThe Battlefront\nThe Beacon\nThe Blood Aqueduct\nThe Broken Bridge\nThe Control Blocks\nThe Crypt\nThe Crystal Veins\nThe Desecrated Chambers\nThe Foothills\nThe Harbour Bridge\nThe Oasis\nThe Ossuary\nThe Quarry\nThe Ravaged Square\nThe Reliquary\nThe Ruined Square\nThe Slave Pens\nThe Solaris Temple Level 1 (A3)\nThe Temple of Decay Level 2\nThe Vastiri Desert",
+      "The Ashen Fields;\nThe Bath House;\nThe Battlefront;\nThe Beacon;\nThe Blood Aqueduct;\nThe Broken Bridge;\nThe Control Blocks;\nThe Crypt;\nThe Crystal Veins;\nThe Desecrated Chambers;\nThe Foothills;\nThe Harbour Bridge;\nThe Oasis;\nThe Ossuary;\nThe Quarry;\nThe Ravaged Square;\nThe Reliquary;\nThe Ruined Square;\nThe Slave Pens;\nThe Solaris Temple Level 1 (A3);\nThe Temple of Decay Level 2;\nThe Vastiri Desert;",
       "",
       "",
       "Has a Drop Level Requirement of 23.\nImplicitly has a Drop Level Cap, based on Charan's comments, at least somewhere as high as Act 10.\n\nCharan states:\n\"Drops from: *most core zones in parts 1 and 2* (nothing sealed like the belly of the beast or otherworldly like Maligaro’s Sanctum. Basically, anywhere ‘in’ Wraeclast.)\"\n\nLong term project due to numerous locations and low drop rate. otherworldly_story_area is likely the NOT tag, which includes the following:\n\nKaom's Dream, Kaom's Stronghold, Daresso's Dream, The Grand Arena, The Belly of the Beast Level 1/2 (Act 4), The Harvest, Maligaro's Sanctum, The Belly of the Beast (Act 9), The Rotting Core"
@@ -1687,7 +1687,7 @@
       "betrayal_syndicate_member",
       "DONE",
       "n/a",
-      "Haku, Elreon, Tora, Vagan, Vorici, Hillock, the Blacksmith, Leo, Wolf of the Pits, Guff \"Tiny\" Grenn, Janus Perandus, It That Fled, Gravicius, Thane Jorgin, Korell Goya, Rin Yuushu, Cameria the Coldblooded, Aisling Laffrey, Riker Maloney",
+      "Haku; Elreon; Tora; Vagan; Vorici; Hillock, the Blacksmith; Leo, Wolf of the Pits; Guff \"Tiny\" Grenn; Janus Perandus; It That Fled; Gravicius; Thane Jorgin; Korell Goya; Rin Yuushu; Cameria the Coldblooded; Aisling Laffrey; Riker Maloney",
       "n/a",
       "n/a"
     ],
@@ -1708,7 +1708,7 @@
       "ship_graveyard_area",
       "DONE",
       "n/a",
-      "Coves, Reef, Strand, Whakawhairua Tuahu",
+      "Coves; Reef; Strand; Whakawhairua Tuahu",
       "",
       "n/a",
       "Previously DONE in 3.18\r\n3.19: \"Scholar of the Seas can now be found in the Strand Map and the Whakawhairua Tuahu Unique Map.\"\r\nNeeds check if these maps have ship_graveyard_area tag. If not, may be manual"
@@ -1719,7 +1719,7 @@
       "church & blood_mage_boss_map",
       "low",
       "confirm",
-      "Defiled Cathedral, Crimson Temple",
+      "Defiled Cathedral; Crimson Temple",
       "Sepulchre, The Desecrated Chambers",
       "",
       "Crimson Temple well known.\nDefiled Cathedral confirmed on divcord per Sirgog\nPossible Sepulchre but unclear if Altar or not - link\nLookout disproved to 99.9% - disproves kitava_cultist_area; pivot theory to blood_mage_boss_map instead?\nWas the Desecrated Chambers drop actually observed?"
@@ -1730,7 +1730,7 @@
       "chamber_of_sins_area",
       "DONE",
       "n/a",
-      "Overgrown Ruin, Overgrown Shrine, The Chamber of Sins Level 1/2 (Act 7)",
+      "Overgrown Ruin; Overgrown Shrine; The Chamber of Sins Level 1/2 (Act 7)",
       "n/a",
       "",
       "Overgrown Ruin verified in Divcord by Tebec\n\nPossibly `maligaro_area` + `chamber_of_sins_area`?\nNo: `maligaro_area` disproved in 3.20. The historical drop location of Museum is no longer true.\n\nDivcord: 3.20, Zimzams observed zero hits of Shard of Fate in Core with n=34. Nennas previously tested and observed the same.\nThis implies the Museum claim is unexpected as well.\nThe claim of Shard of Fate dropping in Museum seems to date back to Jan 2018, very stale.\nDivcord: 3.20, Shard of Fate no longer drops in Museum (n = 340, confidence >99.999%).\n3.21: Verified in Chamber of Sins Level 1 (Act 7)."
@@ -1774,7 +1774,7 @@
       "rain_area",
       "DONE",
       "n/a",
-      "Cemetery, Colonnade, Courtyard, Graveyard, Infested Valley, Leyline, Promenade, Shipyard, Tower, Villa, Wharf",
+      "Cemetery; Colonnade; Courtyard; Graveyard; Infested Valley; Leyline; Promenade; Shipyard; Tower; Villa; Wharf",
       "n/a",
       "The Vinktar Square, Stagnation",
       "Stagnation observed by SlipperyJim8 as a Kirac Mission drop\nVinktar Square verified in divcord"
@@ -1806,7 +1806,7 @@
       "library_area",
       "DONE",
       "n/a",
-      "Academy, Museum, Scriptorium",
+      "Academy; Museum; Scriptorium",
       "",
       "",
       "Reddit claims it drops in Academy\nDivcord 3.20: Zimzams verified Academy\n3.21 Zizmzams verified Scriptorium"
@@ -1817,7 +1817,7 @@
       "vaal_pyramid_area",
       "DONE",
       "n/a",
-      "Maze, Vaal Pyramid, Vaal Temple, Vaults of Atziri, Doryani's Machinarium",
+      "Maze; Vaal Pyramid; Vaal Temple; Vaults of Atziri; Doryani's Machinarium",
       "Ancient City",
       "",
       "Other vaal Tags may qualify as well\nAncient City Verified in Divcord \nSunken City will need testing to differentiate between ruined_vaal_city_area or vaal_ruin_area\n\nSunken City testing by Jas and Zimzams showed no The Admirer drops, which means `ruined_vaal_city_area` is not sufficient\nVaults of Atziri verified in divcord\n\n3.20: Doryani's Machinarium verified by NcuriousmediatoR"
@@ -1872,7 +1872,7 @@
       "blood_mage_boss_map",
       "DONE",
       "n/a",
-      "Crimson Temple, Defiled Cathedral, Crimson Township, Haunted Mansion",
+      "Crimson Temple; Defiled Cathedral; Crimson Township; Haunted Mansion",
       "",
       "",
       "level 75+\nCrimson Township, Defiled Cathedral verified in divcord\n\nDivcord: 3.20 Haunted Mansion verified by Dampin via Snap OW and Superlights"
@@ -1883,7 +1883,7 @@
       "breach_map",
       "DONE",
       "n/a",
-      "Chayula's Domain, Uul-Netol's Domain, Esh's Domain, Xoph's Domain, Tul's Domain",
+      "Chayula's Domain; Uul-Netol's Domain; Esh's Domain; Xoph's Domain; Tul's Domain",
       "",
       "",
       "Speculative claims of Invasion monsters\nDivcord post of a Chayula Breachstone, pre-Boss\nDivcord: 3.20 Uul-Netol Breachstone posted by Stymphalian ID.27, pre-Boss loot explosion at end of Arena\n\nBreachstone Areas all have the Tag `breach_map`. Maybe that's a factor. Or perhaps there's a deterministic chance for it to drop as part of the loot explosion.\n\n3.21: Isolated drop in Esh Breachstone noted by Jasmine (1x The Archmage's Right Hand, 2x The Realm, no other cards); no Div card reward modifiers or incubators opened. May need to investigate in Xoph/Tul Breaches; may be a drop across all Breachstones.\n\nDvicord: 3.21, Elinvynia counted Active Skill Gems in Breachstones and proved that The Archmage's Right Hand is a deterministic drop (not a natural drop).\nDivcord: 3.21, Xoph's Domain and Tul's Domain verified by Elinvynia\n\nDeterministic drop in all `breach_map` Areas (Breachstones)"
@@ -1905,7 +1905,7 @@
       "lunaris_blood_area",
       "DONE",
       "n/a",
-      "Poorjoy's Asylum, Shrine, The Lunaris Temple Level 2 (Act 3), The Lunaris Temple Level 2 (Act 8)",
+      "Poorjoy's Asylum; Shrine; The Lunaris Temple Level 2 (Act 3); The Lunaris Temple Level 2 (Act 8)",
       "n/a",
       "",
       "Need to prove/disprove Act 8 Lunaris temple to determine if the tag is 'lunaris_blood_area\" alone, or \"lunaris_blood_area & thaumaturgy_area\"\nVerified Lunaris Temple Level 2 (Act 8), ruling out need for thaumaturgy_area"
@@ -1916,7 +1916,7 @@
       "chamber_of_sins_area",
       "DONE",
       "n/a",
-      "Overgrown Ruin, Overgrown Shrine",
+      "Overgrown Ruin; Overgrown Shrine",
       "n/a",
       "n/a"
     ],
@@ -1936,7 +1936,7 @@
       "heist_science_miniboss_monster",
       "DONE",
       "n/a",
-      "Corpse Stitcher, Flesh Sculptor",
+      "Corpse Stitcher; Flesh Sculptor",
       "n/a",
       "n/a",
       "Zimzams believes it might have dropped from a regular Laboratory heist monster, but low confidence regarding it. Would need better report to disprove this\nAnother drop reported by Jasmine in a Prohibited Library blueprint. Unable to verify corpse, but appeared to have a staff-like weapon with a rounded end (Flesh Sculptor?)"
@@ -1947,7 +1947,7 @@
       "sea_witch_boss_area",
       "DONE",
       "n/a",
-      "Mineral Pools, Underground Sea, Lava Chamber, Maelström of Chaos, Whakawairua Tuahu",
+      "Mineral Pools; Underground Sea; Lava Chamber; Maelström of Chaos; Whakawairua Tuahu",
       "n/a",
       "",
       "Mineral Pools verified in Divcord\nUnderground Sea verified in Divcord\nDivcord: Lava Chamber verified by Zimzams\nDivcord: Maelström of Chaos verified by Zimzams\nDivcord: 3.20, Whakawairua Tuahu verified"
@@ -1978,7 +1978,7 @@
       "kaom_area",
       "DONE",
       "n/a",
-      "Caldera, Kaom's Stronghold, Volcano, Kaom's Dream ",
+      "Caldera; Kaom's Stronghold; Volcano; Kaom's Dream ",
       "",
       "n/a",
       "Reverified Caldera and Volcano in 3.21"
@@ -2011,7 +2011,7 @@
       "bandit_area",
       "DONE",
       "n/a",
-      "Burial Chambers, Fungal Hollow, Mesa, Spider Forest, Strand, Castle Ruins",
+      "Burial Chambers; Fungal Hollow; Mesa; Spider Forest; Strand; Castle Ruins",
       "n/a",
       "",
       "Castle Ruins verified in divcord.\nThe Ashen Fields verified in divcord.\nWiki previously had \"The Crossroads, The Northern Forest, The Riverways, The Southern Forest, The Western Forest (Act 6/7)\" however these do not seem current. Removed for now."
@@ -2044,7 +2044,7 @@
       "kitava_cultist_area",
       "DONE",
       "n/a",
-      "Alleyways, Crimson Temple, Haunted Mansion, Lookout, City Square, Defiled Cathedral, Silo Map",
+      "Alleyways; Crimson Temple; Haunted Mansion; Lookout; City Square; Defiled Cathedral; Silo Map",
       "n/a",
       "",
       "City Square, Lookout verified in Divcord\nDefiled Cathedral in divcord\nSilo verified in divcord"
@@ -2086,7 +2086,7 @@
       "alira_area",
       "DONE",
       "n/a",
-      "Burial Chambers, Spider Forest",
+      "Burial Chambers; Spider Forest",
       "",
       "",
       "Many claims of Burial Chambers; possibly `alira_area`?\nOne unverified claim of Spider Forest on reddit; consistent with `alira_area`\n\nMay also be related to Map Bosses with Wand Attacks; see Divcord\n\nDivcord: Spider Forest verified by RiPHeartofGold 3.19"
@@ -2097,7 +2097,7 @@
       "doedre_map_area",
       "DONE",
       "n/a",
-      "The Putrid Cloister, Sepulchre, Waste Pool, Phantasmagoria",
+      "The Putrid Cloister; Sepulchre; Waste Pool; Phantasmagoria",
       "",
       "",
       "3.21: The Brawny Battle Mage can now be found in the The Putrid Cloister, Sepulchre, Waste Pool, and Phantasmagoria Maps.\nThese Areas all received the new doedre_map_area Tag. They are the only four Areas with that Tag."
@@ -2138,7 +2138,7 @@
       "gold_pile_area",
       "DONE",
       "n/a",
-      "Maelström of Chaos, Mineral Pools, Underground Sea, Vaults of Atziri, Vault",
+      "Maelström of Chaos; Mineral Pools; Underground Sea; Vaults of Atziri; Vault",
       "n/a",
       "",
       "Vault verified in divcord"
@@ -2171,7 +2171,7 @@
       "incursion_architect_card_sharp",
       "DONE",
       "n/a",
-      "Paquate, Architect of Corruption, Ahuana, Architect of Ceremonies, Zalatl, Architect of Thaumaturgy",
+      "Paquate, Architect of Corruption; Ahuana, Architect of Ceremonies; Zalatl, Architect of Thaumaturgy",
       "n/a",
       "n/a",
       "Needs verification that it cannot possibly drop from any other Incursion Architects\nXopec (lightning) in divcord incorrect assumption about upgrade rooms/killing architects"
@@ -2182,7 +2182,7 @@
       "military_area",
       "DONE",
       "n/a",
-      "The Battlefront, The Ebony Barracks, The Imperial Gardens, The Aqueduct, The Ascent, Oriath Square, The Grand Promenade, The Blood Aqueduct",
+      "The Battlefront; The Ebony Barracks; The Imperial Gardens; The Aqueduct; The Ascent; Oriath Square; The Grand Promenade; The Blood Aqueduct",
       "",
       "",
       "Probably has a Drop Level Cap, which might explain its absence in later Areas\nRe-investigation in 3.21 indicates that military_area is the closest fit (and not urban_sarn_area). Removed The City of Sarn from legacy locations. Also removed maps - does not appear to drop in maps."
@@ -2215,7 +2215,7 @@
       "vaal_pyramid_area",
       "DONE",
       "n/a",
-      "Maze, Vaal Pyramid, Vaults of Atziri, Vaal Temple, Doryani's Machinarium, The Temple of Decay Level 1/2, The Ancient Pyramid",
+      "Maze; Vaal Pyramid; Vaults of Atziri; Vaal Temple; Doryani's Machinarium; The Temple of Decay Level 1/2; The Ancient Pyramid",
       "n/a",
       "n/a",
       "vaal_pyramid_area ?\nPossible also `vaal_ruin_area` or `ruined_vaal_city_area\nNeeds verification\nVaal Pyramid Map verified in divcord\nDoryani's machinarium verified in divcord"
@@ -2226,7 +2226,7 @@
       "vaal_ruin_area",
       "DONE",
       "n/a",
-      "Ancient City, The Vaal City, The Causeway",
+      "Ancient City; The Vaal City; The Causeway",
       "Sunken City",
       "",
       "Needs verification in:\nAncient City, if `vaal_ruin_area` or `ruined_vaal_city_area`\nor\nSunken City, if `ruined_vaal_city_area`\n\nAncient City verified in divcord\nDoes not appear to drop in Sunken City (sample size 20 alch&go and 42 high investment maps)\nVaal Ruins is not eligible due to area level 20 vs req lvl 23 for card (unless u do some weird strongbox shenanigans)"
@@ -2237,7 +2237,7 @@
       "ocean_area",
       "low",
       "confirm",
-      "Atoll, Beach, Shipyard, Strand, Tropical Island, Shore, Peninsula, Coves, Maelström of Chaos",
+      "Atoll; Beach; Shipyard; Strand; Tropical Island; Shore; Peninsula; Coves; Maelström of Chaos",
       "n/a",
       "Port, Whakawairua Tuahu, Lighthouse, Wharf, Coral Ruins, Mao Kun, Plateau, Estuary, Pier, Reef",
       "Needs tons of verifications before ocean_area can be a reasonable guess\n\nUnfortunately The Catch is significantly rarer than The Doctor; hard to observe\n\nDivcord: Shore verified\nDivcord: Peninsula verified by RiPHeartofGold 3.19\nDivcord: 3.20, Coves verified by Zimzams\nDivcord: 3.21, Maelstrom of Chaos verified by Elinvynia"
@@ -2248,7 +2248,7 @@
       "crypt_area",
       "DONE",
       "n/a",
-      "Bone Crypt, Cursed Crypt, The Coward's Trial, The Crypt (Act 7)",
+      "Bone Crypt; Cursed Crypt; The Coward's Trial; The Crypt (Act 7)",
       "n/a",
       "Necropolis? (see necropolis_area tag science)",
       "Divcord: The Coward's Trial verified by nennas\n\nBased on the pattern of other `crypt_area` Cards, would The Celestial Justicar also drop from Necropolis...?\n\nDivcord: 3.21, Elinvynia gathered 117 natural Card drops in Necropolis, 0 hits of The Celestial Justicar"
@@ -2270,7 +2270,7 @@
       "prison_area",
       "DONE",
       "n/a",
-      "Cage, Cells, Dungeon, Pen; Control BLocks; Shavronne's Tower; The Slave Pens",
+      "Cage; Cells; Dungeon; Pen; Control BLocks; Shavronne's Tower; The Slave Pens",
       "",
       "",
       "note: Lava Chamber is fire_prison_area, not prison_area. Likewise with Forge of the Phoenix\nPen verified in divcord"
@@ -2303,7 +2303,7 @@
       "rain_area; NOT lightning_area",
       "DONE",
       "n/a",
-      "Colonnade, Graveyard, Infested Valley, Leyline, Shipyard, Villa, Wharf, Promenade, Cemetery, Stagnation",
+      "Colonnade; Graveyard; Infested Valley; Leyline; Shipyard; Villa; Wharf; Promenade; Cemetery; Stagnation",
       "n/a",
       "n/a",
       "`rain_area` alone is not sufficient; The Coming Storm cannot drop in Courtyard (n>1000). See below.\n\nVerified Promenade in Divcord\nReconfirmed Colonnade, Wharf, Villa in Divcord - Jas\nconfirmed Cemetery in Divcord - fal\nStagnation confirmed by zimzams\nCourtyard and Tower do not appear to drop this card\n\nExplanation of Tags: The Coming Storm seems to drop in an Area only if (1) the Area has `rain_area`; and (2) the Area does NOT have `lightning_area`. (Fits the theme: The storm is coming, but it has not yet arrived.)\n\nVerified Promenade in Divcord\nReconfirmed Colonnade, Wharf, Villa, Infested Valley in Divcord \nConfirmed Cemetery in Divcord - fal\nStagnation confirmed by zimzams\n\nExcludes Couryard, Tower, The Vinktar Square"
@@ -2347,7 +2347,7 @@
       "vaal_pyramid_area",
       "OK",
       "confirm",
-      "Vaults of Atziri, Vaal Pyramid, Vaal Temple, Maze",
+      "Vaults of Atziri; Vaal Pyramid; Vaal Temple; Maze",
       "",
       "Doryani's Machinarium",
       "Verified in Vaal Pyramid and Vaal Temple in Divcord\nNeed to verify Maze and Doryani's Machinarium for second Tag\n\n3.20: Maze verified by developershins"
@@ -2358,7 +2358,7 @@
       "ruined_vaal_city_area",
       "DONE",
       "n/a",
-      "Ancient City, Sunken City",
+      "Ancient City; Sunken City",
       "",
       "",
       "Divcord: 3.21, Sunken City verified by Elinvynia.\nThis supports `ruined_vaal_city_area`."
@@ -2380,7 +2380,7 @@
       "sceptre_of_god_area",
       "DONE",
       "n/a",
-      "Palace, Villa, Residence",
+      "Palace; Villa; Residence",
       "",
       "",
       "Divcord: Villa verified by nennas\nPalace declared in 3.16 patch notes; reverified in 3.20\nPreviously there was an association to `sceptre_of_god_area`.\nThe claim on the wiki that The Dapper Prodigy drops in Residence was first made on Dec 2015, i.e., way too old to take seriously.\nDivcord: 3.20, samples referenced by GAO & more testing showed The Dapper Prodigy is no longer eligible in Residence (p>>0.99)\n\n{Villa, Palace} are the sole two Map Areas with `dominus_area`.\n{Villa, Palace, Residence} are the sole three Map Areas with `sceptre_of_god_area`. If the stale Residence claim from 2015 were taken for granted and it's in fact false now, that would cause an incorrect and misleading Tag association.\n\n3.21: previously dominus_area. Assuming that Residence does not gain dominus_area, it would mean that card now drops from sceptre_of_god_area, a previously disproven tag."
@@ -2391,7 +2391,7 @@
       "chamber_of_sins_area",
       "DONE",
       "n/a",
-      "Overgrown Ruin, Overgrown Shrine, Chamber of Sins Level 1/2 (Act 7)",
+      "Overgrown Ruin; Overgrown Shrine; Chamber of Sins Level 1/2 (Act 7)",
       "n/a"
     ],
     [
@@ -2421,7 +2421,7 @@
       "arena_area",
       "DONE",
       "n/a",
-      "Arena, Colosseum, Racecourse, The Grand Arena",
+      "Arena; Colosseum; Racecourse; The Grand Arena",
       "n/a",
       "",
       "Racecourse verified in Divcord"
@@ -2432,7 +2432,7 @@
       "reef_area",
       "DONE",
       "legacy tag",
-      "Coves, Reef, Coral Ruins",
+      "Coves; Reef; Coral Ruins",
       "",
       "",
       "Previously DONE in 3.18\n"
@@ -2443,7 +2443,7 @@
       "ship_graveyard_area",
       "DONE",
       "n/a",
-      "Coves, Reef, Strand, Whakawhairua Tuahu, The Brine King's Reef",
+      "Coves; Reef; Strand; Whakawhairua Tuahu; The Brine King's Reef",
       "Coral Ruins",
       "",
       "3.19: \"The Deep Ones can now be found in the Strand Map and the Whakawhairua Tuahu Unique Map.\"\nStrand and Whaka both gained the \"ship_graveyard_area\" tag, but not \"reef_area\". Is Coral Ruins still correct? Or is ship_graveyard_area a subset of reef_area (therefore automatically corresponding to this card as well?)\nAlternatively, could be reef_area OR ship_graveyard_area.\n3.21: Disproved Coral Ruins with 99% confidence."
@@ -2465,7 +2465,7 @@
       "dark_forest_area",
       "DONE",
       "n/a",
-      "Dark Forest, Bramble Valley, Forbidden Woods",
+      "Dark Forest; Bramble Valley; Forbidden Woods",
       "n/a",
       "",
       "Divcord: Dark Forest + Forbidden Woods verified by Zimzams\nBramble Valley  observed by SlipperyJim as kirac mission"
@@ -2476,7 +2476,7 @@
       "peaceful_map",
       "low",
       "confirm",
-      "Tropical Island, Beach, Shore, Fungal Hollow",
+      "Tropical Island; Beach; Shore; Fungal Hollow",
       "",
       "Peninsula, Channel, Waterways",
       "Beach verified in Divcord\nShore verified in Divcord\n3.21: Fungal Hollow verified by Pan (Kirac div card mission)"
@@ -2498,7 +2498,7 @@
       "alira_area",
       "DONE",
       "n/a",
-      "Burial Chambers, Spider Forest",
+      "Burial Chambers; Spider Forest",
       "n/a",
       "n/a"
     ],
@@ -2508,7 +2508,7 @@
       "doedre_map_area",
       "DONE",
       "n/a",
-      "The Putrid Cloister, Sepulchre, Waste Pool, Phantasmagoria",
+      "The Putrid Cloister; Sepulchre; Waste Pool; Phantasmagoria",
       "",
       "",
       "3.21: The Doctor can now be found in the The Putrid Cloister, Sepulchre, Waste Pool, and Phantasmagoria Maps.\nThese Areas all received the new doedre_map_area Tag. They are the only four Areas with that Tag."
@@ -2541,7 +2541,7 @@
       "dark_forest_area",
       "DONE",
       "n/a",
-      "Forbidden Woods, Dark Forest, Bramble Valley",
+      "Forbidden Woods; Dark Forest; Bramble Valley",
       "n/a",
       "n/a",
       "dark_forest_area ?\nIf so, Bramble Valley and Forbidden Woods need verification\nForbidden Woods observed by SlipperyJim8 as Kirac Card Mission\nDivcord: Bramble Valley verified by Cal"
@@ -2580,7 +2580,7 @@
       "undying_boss_area",
       "DONE",
       "n/a",
-      "Bazaar, Academy, Ramparts, Residence, Pier, Crystal Ore",
+      "Bazaar; Academy; Ramparts; Residence; Pier; Crystal Ore",
       "",
       "",
       "Divcord verified drops from legacy-series Academy Maps on Standard\nRamparts verified in divcord\nResidence verified in divcord\nPier + Crystal Ore verified in divcord"
@@ -2591,7 +2591,7 @@
       "prison_area",
       "DONE",
       "n/a",
-      "Cage, Cells, Dungeon, Pen",
+      "Cage; Cells; Dungeon; Pen",
       "n/a",
       "",
       "Divcord: Dungeon and Pen verified by Zimzams"
@@ -2602,7 +2602,7 @@
       "garden_area",
       "DONE",
       "n/a",
-      "Gardens, Courtyard, Orchard, Terrace",
+      "Gardens; Courtyard; Orchard; Terrace",
       "",
       "",
       "Orchard observed by SlipperyJim8 as a Kirac Mission drop\nDivcord: Terrace verified by ChronoExile"
@@ -2613,7 +2613,7 @@
       "elder_guardian_boss",
       "DONE",
       "n/a",
-      "The Enslaver, The Eradicator, The Constrictor, The Purifier",
+      "The Enslaver; The Eradicator; The Constrictor; The Purifier",
       "n/a",
       "n/a"
     ],
@@ -2641,7 +2641,7 @@
       "harbinger_portal_monster",
       "DONE",
       "n/a",
-      "HarbingerPortal, HarbingerPortalDelve, HarbingerPortalUber",
+      "HarbingerPortal; HarbingerPortalDelve; HarbingerPortalUber",
       "n/a",
       "n/a"
     ],
@@ -2651,7 +2651,7 @@
       "mine_area",
       "DONE",
       "n/a",
-      "Crystal Ore, Dig, Excavation, Flooded Mine, Geode, Grotto",
+      "Crystal Ore; Dig; Excavation; Flooded Mine; Geode; Grotto",
       "n/a",
       "n/a",
       "3.20 patch notes: Added Grotto"
@@ -2662,7 +2662,7 @@
       "church",
       "DONE",
       "n/a",
-      "Crimson Temple, Defiled Cathedral, Ivory Temple, Lookout, Temple, Belfry, The Twilight Temple, Moon Temple, Basilica",
+      "Crimson Temple; Defiled Cathedral; Ivory Temple; Lookout; Temple; Belfry; The Twilight Temple; Moon Temple; Basilica",
       "n/a",
       "",
       "Belfry cited in the Wiki Server\nDivcord: 3.21, The Twilight Temple verified by Zimzams, Moon Temple by Elinvynia\n3.22: confirmed Basilica."
@@ -2673,7 +2673,7 @@
       "library_area",
       "DONE",
       "n/a",
-      "Museum, Academy, Scriptorium",
+      "Museum; Academy; Scriptorium",
       "",
       "",
       "Museum is the only known area - library_area, relic_area, maligaro_area, unholy_trio_area?\n\nDivcord: 3.20 Academy verified\n`library_area` is sole shared Tag\n\nVerified Scriptorium in 3.20 standard"
@@ -2735,7 +2735,7 @@
       "atziri_area",
       "DONE",
       "n/a",
-      "The Alluring Abyss, The Apex of Sacrifice"
+      "The Alluring Abyss; The Apex of Sacrifice"
     ],
     [
       "",
@@ -2764,7 +2764,7 @@
       "\"Phoenix\" boss",
       "OK",
       "unclear hypothesis",
-      "Sulphur Vents, Forge of the Phoenix, The Boiling Lake",
+      "Sulphur Vents; Forge of the Phoenix; The Boiling Lake",
       "Marshes",
       "n/a",
       "Wiki claims: Marshes, Sulphur Vents, Forge of the Phoenix\nIs Marshes still true? (Update: No, Marshes is no longer eligible.)\nDivcord: Sulphur vents verified\n\nShaper Guardian Maps seem to work like Unique Maps in that they have Area-specific natural Card drops which do not depend on Tags. Maybe toxic_pool_area + fire_affinity? Does not explain The Boiling Lake, however.\n\nDivcord: Zimzams tested Bog and Marshes in 3.19, disproved The Eye of the Dragon with >99.9% confidence. This means `fetid_area`, `toxic_pool_area` alone are insufficient.\n\nI wonder if it has to do with the Basilisk-type Boss, given the observation of it dropping in Story The Boiling Lake?\n\nPerhaps a rule like: \"Natural Area drop in an Area with a Basilisk-type Map Boss\", or perhaps a reference to at least two of the Map Boss's Tags like `fire_affinity`+`reptile_beast`?\n\nOr perhaps even another name/internal reference check like that of The Spoiled Prince? I noticed that the internal name of the Sulphur Vents Map Boss (The Gorgon) is `IguanaBossPhoenixMap` which strangely includes the word \"Phoenix\", and The Eye of the Dragon was also found in Forge of the Phoenix (which we thought was possibly just a hardcoded exception like some other Shaper Guardian Area Cards).\nThe only relevant Monsters with internal name like /phoenix/ are Guardian of the Phoenix, The Basilisk, and The Gorgon -- so there currently are not any others to test."
@@ -2775,7 +2775,7 @@
       "flooded_area",
       "DONE",
       "n/a",
-      "Flooded Mine, Underground Sea, Mineral Pools",
+      "Flooded Mine; Underground Sea; Mineral Pools",
       "n/a",
       "",
       "Divcord verified Mineral Pools"
@@ -2786,7 +2786,7 @@
       "sewer_area",
       "DONE",
       "n/a",
-      "Lair of the Hydra, Toxic Sewer, Waste Pool, The Toxic Conduits",
+      "Lair of the Hydra; Toxic Sewer; Waste Pool; The Toxic Conduits",
       "n/a",
       "n/a",
       "Not obtainable in The Sewers due to drop level."
@@ -2797,7 +2797,7 @@
       "thaumaturgy_area",
       "DONE",
       "n/a",
-      "Poorjoy's Asylum, Shrine, Foundry, Laboratory",
+      "Poorjoy's Asylum; Shrine; Foundry; Laboratory",
       "n/a",
       "",
       "Shrine was legacy drop location; may have been reintroduced - correction, this card was never removed and should still drop in Shrine.\n\n3.20: Kory reports a The Fiend in an Atlas Memory in Foundry\n\nPreviously this was guessed as `lunaris_blood_area` due to the only historical reports being Shrine and Poorjoy's Asylum.\nBut Shrine and Poorjoy's Asylum also have `thaumaturgy_area`, like Foundry does.\n\nCrusader posted a verfiable drop from Laboratory from Archnemesis league during the 3.21 era."
@@ -2808,7 +2808,7 @@
       "rhoa_map_boss",
       "DONE",
       "n/a",
-      "Drought-Maddened Rhoa, Skullbeak",
+      "Drought-Maddened Rhoa; Skullbeak",
       "n/a",
       "n/a",
       "<')))><"
@@ -2830,7 +2830,7 @@
       "forest_map_area",
       "DONE",
       "n/a",
-      "Tropical Island, Jungle Valley, Ashen Wood, Spider Forest, Stagnation, Bramble Valley, Thicket, Dark Forest, Lair, Ramparts, Forbidden Woods",
+      "Tropical Island; Jungle Valley; Ashen Wood; Spider Forest; Stagnation; Bramble Valley; Thicket; Dark Forest; Lair; Ramparts; Forbidden Woods",
       "",
       "",
       "**Has Drop Level Cap.** Cannot drop in T16 Maps, even if eligible per Tags.\nVerifications need to be done in lower-Tier Maps.\n\nforest_map_area is an OK candidate, but needs more verified locations first\n\nDivcord: T1 Stagnation verified. (But cannot drop in T16 Stagnation.)\nT6 Bramble Valley verified\nT1 Thicket verified, does not drop in T11 Thicket\nT7 Dark forest verified (does not drop T16 dark forest)\nT6 Lair verified\nT3 Ramparts, T3 Forbidden Woods verified. Does not drop in T10 Forbidden Woods."
@@ -2862,7 +2862,7 @@
       "ship_graveyard_area",
       "DONE",
       "n/a",
-      "Reef, Coves, Strand, Whakawhairua Tuahu",
+      "Reef; Coves; Strand; Whakawhairua Tuahu",
       "",
       "",
       "Coves was legacy drop location; may have been reintroduced\nCoves verified in divcord\nMight also be `reef_area`; Coral Ruins would need verification\n3.19: \"The Formless Sea can now be found in the Strand Map and the Whakawhairua Tuahu Unique Map.\"\nNeeds check if these maps have reef_map or ship_graveyard_area tag. If not, may be manual\nVerified that Strand/Whaka gaine ship_graveyard_area"
@@ -2873,7 +2873,7 @@
       "crypt_area",
       "DONE",
       "n/a",
-      "Bone Crypt, Cursed Crypt, The Coward's Trial",
+      "Bone Crypt; Cursed Crypt; The Coward's Trial",
       "Olmec's Sanctum",
       "n/a",
       "Zimzams on Divcord verified The Forsaken from a Kirac Card Mission in Cursed Crypt.\n\nMaybe it's affected by two or more Tags? `crypt_area` would cover Bone Crypt, Cursed Crypt, and Coward's Trial. But this doesn't cover all the wiki claims.\n\nPerhaps some of the claims on the wiki are also outdated...?\n\nDivcord, Necropolis verified still true in 3.18\nDivcord, The Coward's Trial verified by nennas as still true in 3.18\n\n\nIs Olmec's Sanctum still an eligible drop location in 3.18?\nIf so, it's probably a Unique-Map-specific eligiblity without a Tag for that Area. We've seen that a couple of other times, e.g. apparently in Poorjoy's with other Cards."
@@ -2906,7 +2906,7 @@
       "has_foxes_area",
       "DONE",
       "n/a",
-      "Barrows, Castle Ruins, Sunken City, Fields",
+      "Barrows; Castle Ruins; Sunken City; Fields",
       "n/a",
       "n/a",
       "The Fox is a verified drop in Fields Map; see Fields Map sample in Divcord (46 The Fox obtained)"
@@ -2917,7 +2917,7 @@
       "garden_area",
       "OK",
       "story only",
-      "Courtyard, Gardens, Terrace, Orchard",
+      "Courtyard; Gardens; Terrace; Orchard",
       "n/a",
       "The High Gardens",
       "Divcord: Orchard verified by nennas\nDivcord: Terrace verified by nennas"
@@ -2935,7 +2935,7 @@
       "chamber_of_sins_area",
       "DONE",
       "n/a",
-      "Overgrown Ruin, Overgrown Shrine, The Chamber of Sins Level 1/2 (Act 7)",
+      "Overgrown Ruin; Overgrown Shrine; The Chamber of Sins Level 1/2 (Act 7)",
       "n/a",
       "n/a"
     ],
@@ -2956,7 +2956,7 @@
       "slums_area",
       "DONE",
       "n/a",
-      "Ghetto, Precinct",
+      "Ghetto; Precinct",
       "n/a",
       "n/a"
     ],
@@ -2966,7 +2966,7 @@
       "pitfight_area",
       "DONE",
       "n/a",
-      "Arena, Pit of the Chimera, Colosseum Map, Pit, The Slums, The Sarn Ramparts, The Grain Gate",
+      "Arena; Pit of the Chimera; Colosseum Map; Pit; The Slums; The Sarn Ramparts; The Grain Gate",
       "n/a",
       "n/a"
     ],
@@ -2976,7 +2976,7 @@
       "wealthy_area + Boss with `has_two_handed_melee`",
       "DONE",
       "n/a",
-      "Basilica, Ivory Temple",
+      "Basilica; Ivory Temple",
       "n/a",
       "n/a",
       "Divcord: KroIya disproved The Golden Era in Villa, >99.99% confidence in sample, 3.19\nThis proves that `wealthy_area` alone is insufficent\nDivcord: 3.20, Zimzams tested Temple with n=158, 0 hits of The Golden Era\nDivcord: 3.20, Zimzams reverified Ivory Temple\n\nDivcord: 3.20, Jasmine analyzed Tags for `wealthy_area` Areas. Outside of Residence which was added later in 3.19 and has separate governance, Jas's statement of \"eligible in an Area with `wealthy_area` whose Boss has `has_two_handed_melee`\" accurately describes the Areas in which The Golden Era can occur.\nWe checked the Bosses of all other `wealthy_area` Areas and found no counterexamples.\nThere's no way to disprove that hypothesis with current Maps' Tags, and the hypothesis accurately predicts the non-patch-noted Areas in which The Golden Era occurs, so this seems sufficient for now.\nMaybe in the future a new Map in which The Golden Era is eligible will reveal more info."
@@ -3020,7 +3020,7 @@
       "elder_guardian_boss",
       "DONE",
       "n/a",
-      "The Constrictor, The Enslaver, The Eradicator, The Purifier",
+      "The Constrictor; The Enslaver; The Eradicator; The Purifier",
       "n/a",
       "n/a"
     ],
@@ -3030,7 +3030,7 @@
       "crossroad_area",
       "DONE",
       "n/a",
-      "The Imperial Fields, Fields, Castle Ruins, The Crossroads (A7)",
+      "The Imperial Fields; Fields; Castle Ruins; The Crossroads (A7)",
       "n/a",
       "",
       "Divcord: Fields verified\nPrevious guess was `fields_area` but...\nTechnically could also be `crossroad_area` ; need more verifications to determine (Castle Ruins specifically)\n\nDroprate is quite low, about that of The Nurse\n\nDivcord: Zimzams tested n~1200 in Peninsula, no The Harvester; ~99% confidence. Either sample was unlucky or `crossroad_area` is the real governing Tag.\n\nDivcord: Castle Ruins verified by RiPHeartofGold 3.19"
@@ -3041,7 +3041,7 @@
       "Act 7 & NOT indoors_area",
       "DONE",
       "n/a",
-      "The Ashen Fields, The Broken Bridge, The Causeway, The Crossroads, The Fellshrine Ruins, The Northern Forest, The Vaal City, Maligaro's Sanctum",
+      "The Ashen Fields; The Broken Bridge; The Causeway; The Crossroads; The Fellshrine Ruins; The Northern Forest; The Vaal City; Maligaro's Sanctum",
       "",
       "",
       "Story only - Act 7?\nMight have Drop Level Cap? not necessary if using tileset\nDivcord verified The Northern Forest (Act 7)\n3.21: Verified in Maligaro's Sanctum, meaning tileset is not the correct hypothesis.\nMay still be worthwhile to check some areas in Act 6 linked to the Forest areas."
@@ -3063,7 +3063,7 @@
       "vaal_pyramid_area",
       "OK",
       "confirm",
-      "Vaal Pyramid, Vaal Temple, Maze",
+      "Vaal Pyramid; Vaal Temple; Maze",
       "n/a",
       "Doryani's Machinarium, Vaults of Atziri",
       "Divcord: Maze verified by RiPHeartofGold 3.19"
@@ -3074,7 +3074,7 @@
       "gold_pile_area",
       "DONE",
       "n/a",
-      "Maelström of Chaos, Underground Sea, Vault, Vaults of Atziri, Mineral Pools",
+      "Maelström of Chaos; Underground Sea; Vault; Vaults of Atziri; Mineral Pools",
       "n/a",
       "",
       "Mineral Pools verified in Divcord"
@@ -3095,7 +3095,7 @@
       "belly_area",
       "DONE",
       "n/a",
-      "Carcass, Malformation, Phantasmagoria, Core, The Belly of the Beast (A4/A9), The Harvest, The Rotting Core",
+      "Carcass; Malformation; Phantasmagoria; Core; The Belly of the Beast (A4/A9); The Harvest; The Rotting Core",
       "n/a",
       "",
       "Core was legacy drop location; may have been reintroduced\n\nDivcord: Core verified 3.18"
@@ -3117,7 +3117,7 @@
       "alira_area",
       "DONE",
       "n/a",
-      "Burial Chambers, Spider Forest",
+      "Burial Chambers; Spider Forest",
       "n/a",
       "n/a"
     ],
@@ -3127,7 +3127,7 @@
       "doedre_map_area",
       "DONE",
       "n/a",
-      "The Putrid Cloister, Sepulchre, Waste Pool, Phantasmagoria",
+      "The Putrid Cloister; Sepulchre; Waste Pool; Phantasmagoria",
       "",
       "",
       "3.21: The Incantation can now be found in the The Putrid Cloister, Sepulchre, Waste Pool, and Phantasmagoria Maps.\nThese Areas all received the new doedre_map_area Tag. They are the only four Areas with that Tag."
@@ -3138,7 +3138,7 @@
       "AvariusCasticus boss areas (no tag)",
       "DONE",
       "n/a",
-      "Basilica, Defiled Cathedral",
+      "Basilica; Defiled Cathedral",
       "",
       "",
       "No tags on maps\n\nOne possible explanation:\nNot a Boss-specific drop, but keyed off of a Boss's Monster Tag? \"Drops in any Areas where Boss has innocence_map\"?\n\nThere are a couple of other candidates that follow that potential pattern, where there is not an appropriate Area Tag, but the Card is nevertheless predictable based on qualities of the Boss.\n\n3.19: The Innocent can now be found in the Defiled Cathedral Map. Chamber of Innocence tileset? AvariusCasticus instead of innocence_map? Woad, Mockery of Man could also gain innocence_map tag instead "
@@ -3160,7 +3160,7 @@
       "toxic_pool_area",
       "DONE",
       "n/a",
-      "Acid Caverns, Primordial Pool, Stagnation, Sulphure Vents, Mud Geyser, Marshes, Bog",
+      "Acid Caverns; Primordial Pool; Stagnation; Sulphure Vents; Mud Geyser; Marshes; Bog",
       "n/a",
       "",
       "Divcord: Mud Geyser & Bog verified by fal\nDivcord: Stagnation\nDivcord: Marshes verified by nennas\nSulphur Vents verified in divcord"
@@ -3171,7 +3171,7 @@
       "harvest_area",
       "ok",
       "story only",
-      "Carcass, Core, The Rotting Core",
+      "Carcass; Core; The Rotting Core",
       "",
       "The Harvest",
       "Divcord: Core verified by ColdMamba\n\nPreviously we'd wondered if `belly_area` might fit too, since the confirmed locations of Core and Carcass had both `harvest_area` and `belly_area` and we weren't able to distinguish between them. If true, then The Insatiable would also have been able to drop in {Malformation, Phantasmagoria} which have `belly_area` but not `harvest_area`\nDivcord: 3.20, Zimzams showed 0 hits of The Insatiable in Phantasmagoria, n=69, meaning `belly_area` is not sufficient to make The Insatiable eligible. Only `harvest_area` enables it for now."
@@ -3182,7 +3182,7 @@
       "vaal_pyramid_area",
       "Done",
       "n/a",
-      "Maze, Vaal Pyramid, Vaal Temple, Vaults of Atziri, Doryani's Machinarium, The Temple of Decay Level 1/2",
+      "Maze; Vaal Pyramid; Vaal Temple; Vaults of Atziri; Doryani's Machinarium; The Temple of Decay Level 1/2",
       "n/a",
       "",
       "Other vaal Tags might also qualify\nDoryani's Machinarium verified on Divcord"
@@ -3204,7 +3204,7 @@
       "crystalline_area",
       "DONE",
       "n/a",
-      "Crystal Ore, Mineral Pools, Primordial Blocks, Grotto",
+      "Crystal Ore; Mineral Pools; Primordial Blocks; Grotto",
       "n/a",
       "n/a",
       "No longer drops from The Crystal Veins.\nPrim blocks verified in divcord\n3.19: \"The Jeweller's Boon can now be found in the Grotto Map.\""
@@ -3215,7 +3215,7 @@
       "kitava_cultist_area",
       "DONE",
       "n/a",
-      "City Square, Crimson Temple, Defiled Cathedral, Haunted Mansion, Lookout, Silo, Alleyways",
+      "City Square; Crimson Temple; Defiled Cathedral; Haunted Mansion; Lookout; Silo; Alleyways",
       "n/a",
       "n/a",
       "fal claimed Alleyways on Divcord, confirmed by Jas"
@@ -3226,7 +3226,7 @@
       "ocean_area",
       "DONE",
       "n/a",
-      "Atoll, Lighthouse, Mao Kun, Peninsula, Port, Reef, Shipyard, Whakawairua Tuahu, Wharf, Shore, Tropical Island, Strand, Estuary, Pier, Plateau, Coves, Maelström of Chaos, Coral Ruins, Beach",
+      "Atoll; Lighthouse; Mao Kun; Peninsula; Port; Reef; Shipyard; Whakawairua Tuahu; Wharf; Shore; Tropical Island; Strand; Estuary; Pier; Plateau; Coves; Maelström of Chaos; Coral Ruins; Beach",
       "",
       "",
       "Forking River has map_area_with_open_water but not ocean_area, could be used as a test\nBeach and Port have ocean_area but not map_area_with_open_water, could be used as a test\nDivcord verified drop in Mao Kun, Wharf, Reef\nDivcord verified drop in Whakawairua Tuahu\nDivcord verified in Port, which means ocean_area is correct (unless both Tags work, in which case ocean_area is still correct, just one of two)\nDivcord verified in Shore\nDivcord verified Tropical Island\nDivcord verified Strand\nDivcord verified Pier + Estuary\n3.19: verified Plateau\n3.20: verified Coves\n3.20: verified The Journey in Maelstrom of Chaos while collecting data to estimate The Leviathan\n3.20: verified Coral Ruins\n3.21 verified Beach"
@@ -3237,7 +3237,7 @@
       "daresso_area",
       "DONE",
       "n/a",
-      "Arena, Pit, Colosseum, Pit of the Chimera",
+      "Arena; Pit; Colosseum; Pit of the Chimera",
       "n/a",
       "",
       "Wiki claims Pit; need more drop locations to verify.\nTry to find a drop in a Map with one or more related Tags.\nTry: daresso_area, pitfight_area\n\nDivcord: Pit verified by Zimzams\nDivcord: Arena verified by Zimzams\nDivcord: Chimera + Colossuem verified by Zimzams\n\n\nDue to Drop Level Requirement, we cannot use The Grand Arena to distinguish between `daresso_area` and `pitfight_area`. For now just assume it's `daresso_area` due to flavour-- inconsequential currently since all eligible Maps have both Tags."
@@ -3248,7 +3248,7 @@
       "kaom_area",
       "DONE",
       "n/a",
-      "Caldera, Volcano",
+      "Caldera; Volcano",
       "n/a",
       "n/a"
     ],
@@ -3258,7 +3258,7 @@
       "coast_boat_area",
       "DONE",
       "n/a",
-      "Shore, Mao Kun, Strand, Whakawairua Tuahu",
+      "Shore; Mao Kun; Strand; Whakawairua Tuahu",
       "n/a",
       "n/a",
       "Whakawairua Tuahu drop in divcord"
@@ -3269,7 +3269,7 @@
       "pitfight_area",
       "DONE",
       "n/a",
-      "Pit of the Chimera, Pit, Arena, Colosseum",
+      "Pit of the Chimera; Pit; Arena; Colosseum",
       "n/a",
       "",
       "Wiki claims Pit of the Chimera and a Boss-specific drop from Ambrius, Legion Slayer\n\nDivcord: Pit natural drop verified by Zimzams, so it has at least some non-Boss-specific drop conditions, probably `pitfight_area`\nDivcord: Arena verified by Zimzams\nDivcord: Colosseum verified by RiPHeartofGold\n\nCould also be `daresso_area`; all Map Areas with `pitfight_area` also have `daresso_area`."
@@ -3313,7 +3313,7 @@
       "kitava_cultist_area",
       "DONE",
       "n/a",
-      "City Square, Crimson Temple, Lookout, Alleyways, Defiled Cathedral, Silo, Haunted Mansion",
+      "City Square; Crimson Temple; Lookout; Alleyways; Defiled Cathedral; Silo; Haunted Mansion",
       "n/a",
       "",
       "Silo verified in divcord\nDefiled Cathedral verified in Divcord\nHaunted Mansion verified by Jasmine"
@@ -3344,7 +3344,7 @@
       "bridge_area",
       "DONE",
       "n/a",
-      "Iceberg, Infested Valley, Primordial Blocks, Mineral Pools, Alleyways, Siege, Castle Ruins, Armoury, Arachnid Tomb, Forking River",
+      "Iceberg; Infested Valley; Primordial Blocks; Mineral Pools; Alleyways; Siege; Castle Ruins; Armoury; Arachnid Tomb; Forking River",
       "",
       "",
       "May be joined bridge_area with snow_area/rain_area, which would exclude Primordial Blocks this theory disproved by newer maps\n\nDivcord: verified Mineral Pools, Alleyways, Siege, Castle Ruins, Armoury\nDivcord: verified Arachnid Tomb\nDivcord: Forking River verified by RiPHeartofGold"
@@ -3365,7 +3365,7 @@
       "wealthy_area",
       "DONE",
       "n/a",
-      "Residence, Ivory Temple, Crimson Temple, Crimson Township, Laboratory, Basilica, Palace, Conservatory, Vault, Haunted Mansion, Villa, Chateau, Temple, Relic Chambers, The Twilight Temple, Vaults of Atziri",
+      "Residence; Ivory Temple; Crimson Temple; Crimson Township; Laboratory; Basilica; Palace; Conservatory; Vault; Haunted Mansion; Villa; Chateau; Temple; Relic Chambers; The Twilight Temple; Vaults of Atziri",
       "Siege",
       "",
       "Ivory Temple observed by SlipperyJim8 as a Kirac Card Mission drop\n\nDivcord: Crimson Township verified by fal as a Kirac Card Mission drop\nDivcord: Laboratory verified by Jasmine as a Kirac Card Mission drop\nDivcord: Basilica verified by nennas\nDivcord: Palace verified by nennas\nDivcord: Conservatory verified\nDivcord: Haunted Mansion verified\n\nWiki claims Siege but that note was added pre-3.17; no longer true?\n\n3.19 Divcord: Vault, Villa, Chateau, Temple\n\n3.21: Relic Chambers verified by RiPHeartofGold\n3.21: Siege no longer appears to drop this card.\n\nDivcord 3.21: The Twilight Temple verified by Zimzams\nVaults of Atziri verified by Elinvynia"
@@ -3376,7 +3376,7 @@
       "merveil_area",
       "DONE",
       "n/a",
-      "Maelström of Chaos, Underground Sea",
+      "Maelström of Chaos; Underground Sea",
       "n/a",
       "n/a",
       "The Lover cannot drop from Mineral Pools, the wiki note there must be out-of-date. (Sampling expected: 94; observed: 0)\nThe Lover also cannot drop from Whakawairua Tuahu. (Sampling expected: 42; observed: 0)\n\nThis means that The Lover is governed by `merveil_area`, not `sea_witch_boss_area`."
@@ -3387,7 +3387,7 @@
       "lunaris_area",
       "DONE",
       "n/a",
-      "The Twilight Temple, Cold River, Moon Temple, Lunaris Temple Level 1/2 (A8)",
+      "The Twilight Temple; Cold River; Moon Temple; Lunaris Temple Level 1/2 (A8)",
       "n/a",
       "n/a",
       "Need to test if Shrine still drops this\nDivcord: Zimzams ran Shrine, n=31, zero The Lunaris Priestess drops"
@@ -3398,7 +3398,7 @@
       "king_boss_map",
       "DONE",
       "n/a",
-      "Colosseum, Dark Forest, Caldera, Reef",
+      "Colosseum; Dark Forest; Caldera; Reef",
       "n/a",
       "Aul's Throne, Rigwald's Lair",
       "Monster Tag probably fits, but this could also be e.g. \"Map Bosses killed in `king_boss_area` Areas\"\n3.20: The Mad King Divination card has been re-enabled, and now awards an Ultimatum Aspect. This card can now be found in the Caldera, Colosseum, Dark Forest, and Reef Maps\nJasmine confirmed drops as an area drop. This most likely rules out Aul (The Crystal King's Throne) and Talisman Rigwald (Lair of the Wolven King). Drop level was changed to 68 (from 27), making it ineligible for Kaom's Dream, Daresso's Dream, and the Brine King's Reef."
@@ -3419,7 +3419,7 @@
       "boss summons canine_beast minion",
       "none",
       "no hypothesis",
-      "Lair, Pen",
+      "Lair; Pen",
       "",
       "Dark Forest",
       "Lair, Pen (Lair added in 3.16 after Pen was off-atlas; may be area specific?)\nBoth Lycius, Midnight's Howl and Arwyn, the Houndmaster are \"masters of canines\" and can spawn wolves/hounds respectively.\nRuled out Dark Forest with 99.9% certainty"
@@ -3451,7 +3451,7 @@
       "kraityn_area",
       "DONE",
       "n/a",
-      "Castle Ruins, The Broken Bridge, Strand",
+      "Castle Ruins; The Broken Bridge; Strand",
       "n/a",
       "",
       "Divcord verified Strand in 3.18 again"
@@ -3462,7 +3462,7 @@
       "",
       "low",
       "no hypothesis",
-      "Port, Crystal Ore",
+      "Port; Crystal Ore",
       "n/a",
       "",
       "no clear connection\nCrystal Ore boss is named \"Messenger of the Hollows\"\nVerified in crystal ore\n\nI wonder if any other dock_area Areas might comply with The Messenger other than Port (Wharf, Shipyard, Pier).\n\nSince Crystal Ore Boss is \"Messenger of the Hollows\", it might be both a Tag plus a special circumstance like our hypothesis for The Spoiled Prince:\nThe Spoiled Prince => \"Natural drop in an Area whose Boss is a Prince\"\nThe Messenger => \"Natural drop in an Area whose Boss is a Messenger\"(?)\n\nDivcord: 3.20, disproved in Shipyard (n=370, conf>>0.99). So `dock_area` alone is not sufficient.\n\nPerhaps \"Unravelling Horror\" may be a reference to the scroll unravelling?"
@@ -3473,7 +3473,7 @@
       "act6_karui_area",
       "DONE",
       "n/a",
-      "The Coast (A6), The Karui Fortress, The Mud Flats (A6)",
+      "The Coast (A6); The Karui Fortress; The Mud Flats (A6)",
       "",
       "",
       "No longer drops in coast/mud flats Act 1 due to ilvl 23 requirement"
@@ -3495,7 +3495,7 @@
       "snow_mountain_area",
       "ok",
       "unclear hypothesis",
-      "Summit, Glacier, The Ascent, The Descent",
+      "Summit; Glacier; The Ascent; The Descent",
       "Volcano",
       "",
       "Divcord: Glacier verified and reverified in 3.21 (off-atlas)\n3.20 patch notes: Added Volcano - did not get snow_mountain_area, outlier?"
@@ -3506,7 +3506,7 @@
       "shavronne_area",
       "DONE",
       "n/a",
-      "Cells, Core, Tower, Scriptorium, Shavronne's Tower, The Harvest, The Rotting Core",
+      "Cells; Core; Tower; Scriptorium; Shavronne's Tower; The Harvest; The Rotting Core",
       "",
       "",
       "No evidence of Arachnid Tomb drops that we can find -- and a few people have tried spamming Arachnid Tomb with no drops. Original wiki claim of Arachnid Tomb came from a user in Mar 2019. Seems like an error, and The Nurse probably does not in fact drop from Arachnid Tomb.\n\nIf someone verified Scriptorium, this would probably be enough to conclude `shavronne_area`.\n3.20 patch notes: The Nurse can now be found in the Carcass Map.\nIt seems like Carcass's Boss (Amalgam of Nightmares) exclusive Tag `unholy_trio_combined_boss_map` might qualify for `shavronne_area`; see below.\n\nDivcord 3.21: Scriptorium verified by Itacheey\nDivcord: 3.21, A9 The Rotting Core verified by Maude034, shared by CardboardMonka"
@@ -3517,7 +3517,7 @@
       "harvest_area",
       "DONE",
       "n/a",
-      "Carcass, Core, The Harvest, The Rotting Core",
+      "Carcass; Core; The Harvest; The Rotting Core",
       "",
       "",
       "3.20 patch notes: The Nurse can now be found in the Carcass Map.\nThis is a natural Area drop (not Boss-specific), verified by Jasmine\n\nIt seems like Carcass's Boss (Amalgam of Nightmares) exclusive Tag `unholy_trio_combined_boss_map` might qualify for `shavronne_area`.\n\nWith confirmation of The Nurse in The Rotting Core, this completes 4/4 eligibility in \"harvest_area\" (2 were already confirmed and Carcass was patch noted)."
@@ -3528,7 +3528,7 @@
       "belly_area",
       "DONE",
       "n/a",
-      "Carcass, Core, Malformation, Phantasmagoria, The Belly of the Beast, The Rotting Core",
+      "Carcass; Core; Malformation; Phantasmagoria; The Belly of the Beast; The Rotting Core",
       "n/a",
       "n/a"
     ],
@@ -3603,7 +3603,7 @@
       "map_area_with_open_water",
       "low",
       "confirm",
-      "Atoll, Lighthouse, Peninsula, Pier, Shore, Strand, Tropical Island, Wharf",
+      "Atoll; Lighthouse; Peninsula; Pier; Shore; Strand; Tropical Island; Wharf",
       "n/a",
       "Whakawairua Tuahu, Maelström of Chaos, Coral Ruins, Mao Kun, Untainted Paradise, Plateau, Estuary, Shipyard, Coves, Reef, Forking River",
       "People in the Fishing Research Discord have claimed The Old Man drops in the following locations, not yet reflected on the wiki other than Strand:\n{Atoll, Lighthouse, Peninsula, Pier, Shore, Strand, Tropical Island, Wharf}\n\nThis leaves the following Areas to verify:\n{Whakawairua Tuahu, Maelström of Chaos, Coral Ruins, Mao Kun, Untainted Paradise, Plateau, Estuary, Shipyard, Coves, Reef, Forking River}\n\nNote that all claimed drop locations also have ocean_area, not just map_area_with_open_water.\nForking River is the litmus test:\nForking River has map_area_with_open_water, but NOT ocean_area.\nSo if The Old Man drops in Forking River, then ocean_area is not correct.\n\nDivcord 3.22: KroIya reverified Tropical Island"
@@ -3625,7 +3625,7 @@
       "cemetery_map_area",
       "DONE",
       "n/a",
-      "Barrows, Burial Chambers, Cemetery, Graveyard, Grave Trough",
+      "Barrows; Burial Chambers; Cemetery; Graveyard; Grave Trough",
       "n/a",
       "",
       "Divcord: Grave Trough verified by nennas"
@@ -3636,7 +3636,7 @@
       "wealthy_area",
       "DONE",
       "n/a",
-      "Basilica, Chateau, Conservatory, Crimson Temple, Crimson Township, Haunted Mansion, Ivory Temple, Laboratory, Palace, Relic Chambers, Residence, Temple, Vault, Vaults of Atziri, Villa, The Twilight Temple",
+      "Basilica; Chateau; Conservatory; Crimson Temple; Crimson Township; Haunted Mansion; Ivory Temple; Laboratory; Palace; Relic Chambers; Residence; Temple; Vault; Vaults of Atziri; Villa; The Twilight Temple",
       "n/a",
       "",
       "Divcord: Twilight Temple verified"
@@ -3647,7 +3647,7 @@
       "forest_map_area",
       "DONE",
       "n/a",
-      "Ashen Wood, Jungle Valley, Lair, Spider Forest, Stagnation, Thicket, Tropical Island, Ramparts, Dark Forest, Bramble Valley, Forbidden Woods",
+      "Ashen Wood; Jungle Valley; Lair; Spider Forest; Stagnation; Thicket; Tropical Island; Ramparts; Dark Forest; Bramble Valley; Forbidden Woods",
       "n/a",
       "",
       "Divcord: Dark Forest + ramparts verified by Zimzams\nDivcord: Bramble Valley + Forbidden Woods verified"
@@ -3658,7 +3658,7 @@
       "dock_area",
       "DONE",
       "n/a",
-      "Pier, Port, Wharf, Shipyard, The Quay",
+      "Pier; Port; Wharf; Shipyard; The Quay",
       "n/a",
       "",
       "Divcord verified in Wharf\n\nDivcord: 3.20, verified in Shipyard"
@@ -3669,7 +3669,7 @@
       "military_area",
       "DONE",
       "n/a",
-      "Armoury, Arsenal, Colonnade, Promenade",
+      "Armoury; Arsenal; Colonnade; Promenade",
       "Lighthouse",
       "",
       "Level 68+\n\nLighthouse claim on the wiki was added 2021/02/07 by the wiki user TheTreeBranch -- but no documentation of the drop? Maybe an error, e.g. mistaking a generic Card source for a natural Area drop...? There is a very slim chance it may be still eligible.\nThis was in 3.13 Ritual, far before the sweeping changes occurred in 3.17 and 3.18."
@@ -3680,7 +3680,7 @@
       "prison_area",
       "DONE",
       "n/a",
-      "Cells, Dungeon, Pen, Cage",
+      "Cells; Dungeon; Pen; Cage",
       "n/a",
       "",
       "Cage verified in Divcord\nDungeon verified in divcord\nPen verified in divcord"
@@ -3691,7 +3691,7 @@
       "marketplace_area",
       "DONE",
       "n/a",
-      "Alleyways, Arcade, Bazaar, Port, The Marketplace, The Quay",
+      "Alleyways; Arcade; Bazaar; Port; The Marketplace; The Quay",
       "n/a",
       "",
       "Port verified in Divcord"
@@ -3702,7 +3702,7 @@
       "relic_area",
       "DONE",
       "n/a",
-      "Museum, Relic Chambers, The Reliquary (Act 5/10)",
+      "Museum; Relic Chambers; The Reliquary (Act 5/10)",
       "n/a",
       "n/a"
     ],
@@ -3712,7 +3712,7 @@
       "garden_area",
       "DONE",
       "unclear hypothesis",
-      "Courtyard, Gardens, Orchard, Terrace, The High Gardens",
+      "Courtyard; Gardens; Orchard; Terrace; The High Gardens",
       "Plaza",
       "n/a",
       "Incomplete hypothesis. See below"
@@ -3723,7 +3723,7 @@
       "garden_area OR (labyrinth_tileset_area & NOT indoors_area)",
       "DONE",
       "unclear hypothesis",
-      "Courtyard, Gardens, Orchard, Plaza, Terrace, The High Gardens",
+      "Courtyard; Gardens; Orchard; Plaza; Terrace; The High Gardens",
       "",
       "Chateau, Conservatory",
       "Related to Porcupine Goliath spawn areas, but Porcupines do not necessarily need to be in the map (desecrate pool?)\n\nDivcord: Plaza verified by nennas, which does not have `garden_area`, further supporting association with Porcupine Goliath instead of just Area Tags\nDivcord: Terrace verified by nennas\n\nJasmine's old comments are still true re: The Porcupine being associated with natural Porcupine Goliaths spawns instead of just a single Area Tag.\nBecause of nennas's earlier verification in Plaza, we know The Porcupine is not governed solely by `garden_area` or `labyrinth_tileset_area`.\n\nAre there any Areas without either Tag that naturally spawn Porcupine Goliaths?\nOr maybe it's as simple as *both* of those Tags enabling The Porcupine...? If {Chateau, Conservatory} also have The Porcupine as an eligible natural Card, and no other Maps do, maybe that's the answer...?\n\nDisproved in Chateau with 367 natural card drops; not simply labyrinth_tileset_area.\nDivcord: 3.21, Zimzams tested Conservatory; 71 natural Card drops, 0 hits.\n\nMonster-specific hypotheses are not common, so looking more at area tags, \"garden_area OR (labyrinth_tileset_area & NOT indoors_area)\" does fit the bill and includes Plaza on top of the garden_area maps. Plaza has very few tags to work with otherwise"
@@ -3809,7 +3809,7 @@
       "golem_boss_area",
       "DONE",
       "n/a",
-      "Coves, Flooded Mine, Geode, Grotto, Peninsula, Vault, Waterways, Wharf",
+      "Coves; Flooded Mine; Geode; Grotto; Peninsula; Vault; Waterways; Wharf",
       "n/a",
       "n/a"
     ],
@@ -3830,7 +3830,7 @@
       "library_area",
       "DONE",
       "n/a",
-      "Museum, Academy, Scriptorium",
+      "Museum; Academy; Scriptorium",
       "Laboratory",
       "n/a",
       "Divcord confirmed Museum and Laboratory, and also legacy-series Academy on Standard; probably at least `library_area`, but this doesn't explain Laboratory\nVerified scriptorium in divcord\n\nDivcord: Laboratory reverified by CommissarTyr in 3.19"
@@ -3881,7 +3881,7 @@
       "crypt_area",
       "OK",
       "unclear hypothesis",
-      "Bone Crypt, Cursed Crypt, The Coward's Trial",
+      "Bone Crypt; Cursed Crypt; The Coward's Trial",
       "",
       "Necropolis? (see necropolis_area tag science)",
       "66% confident to disprove Necropolis; however, based on The Celestial Justicar, it seems highly likely that necropolis_area is not an overlapping tag with crypt_area."
@@ -3892,7 +3892,7 @@
       "rhoa_map_boss",
       "DONE",
       "n/a",
-      "Drought-Maddened Rhoa, Skullbeak",
+      "Drought-Maddened Rhoa; Skullbeak",
       "n/a",
       "",
       "Divcord: Skullbeak verified by fal"
@@ -3925,7 +3925,7 @@
       "golem_boss_area",
       "DONE",
       "n/a",
-      "Coves, Flooded Mine, Geode, Grotto, Vault, Waterways, Wharf, Peninsula",
+      "Coves; Flooded Mine; Geode; Grotto; Vault; Waterways; Wharf; Peninsula",
       "n/a",
       "",
       "Divcord: Peninsula verified"
@@ -3936,7 +3936,7 @@
       "has_road_area",
       "DONE",
       "n/a",
-      "Castle Ruins, Dark Forest, Orchard, Shore",
+      "Castle Ruins; Dark Forest; Orchard; Shore",
       "n/a",
       "",
       "Divcord: Dark Forest verified by Zimzams\nDivcord: Orchard verified by nennas\n\nAll of {Shore, Orchard, Dark Forest} were eligible drop locations in the past. Probably these are still eligible now.\n\nDivcord: Shore verified by kroIya 3.19"
@@ -3958,7 +3958,7 @@
       "",
       "none",
       "no hypothesis",
-      "Dig, Maze of the Minotaur, Summit, The Ascent, The Descent, The Foothills",
+      "Dig; Maze of the Minotaur; Summit; The Ascent; The Descent; The Foothills",
       "",
       "",
       "Dig, Summit, Maze of the Minotaur, The Descent, The Foothills\nNo shared tags except einharmaps and cannot_be_twinned\n\nDivcord: Ræin verified A9 The Descent, which shares `snow_mountain_area` and `snow_area` with Summit.\nDig verified via Kirac Mission (Slipperyjim)\nGoruku verified The Foothills\nReverified 3.20 Maze of the Minotaur, no titan mobs\n\nCould this card be mob-specific? Goruku proposes it being related to Boulder-type Golems (https://discord.com/channels/834368692560461846/834368692997455924/1028577393239130153)\nDig: Cinder Elemental\nMaze of the minoatur: Hulking titan\nSummit: mountain fragment, frozen titan, cinder elemental\nThe descent: frozen titan\nthe foothill: mountain fragment\n?Summit or crematorium to disprove\nHowever NOT peninsula. Does not appear to necessarily require the mob type to spawn in the map.\nCould also be related to Bull/Taurus mobs.\n\n3.21: Verified The Ascent (likely a Vendigo?) Still no significant leads in terms of tags."
@@ -3980,7 +3980,7 @@
       "marketplace_area",
       "DONE",
       "n/a",
-      "Alleyways, Port, Arcade, Bazaar",
+      "Alleyways; Port; Arcade; Bazaar",
       "n/a",
       "n/a",
       "marketplace_area + slums_area ?"
@@ -3991,7 +3991,7 @@
       "slums_area",
       "DONE",
       "n/a",
-      "Ghetto, Precinct",
+      "Ghetto; Precinct",
       "n/a",
       "n/a",
       "marketplace_area + slums_area ?"
@@ -4012,7 +4012,7 @@
       "fields_area",
       "DONE",
       "n/a",
-      "Ashen Wood, Fields, Peninsula, The Ashen Fields, The Imperial Fields",
+      "Ashen Wood; Fields; Peninsula; The Ashen Fields; The Imperial Fields",
       "n/a"
     ],
     [
@@ -4032,7 +4032,7 @@
       "library_area",
       "DONE",
       "n/a",
-      "Academy, Museum, Scriptorium, The Library, The Archives",
+      "Academy; Museum; Scriptorium; The Library; The Archives",
       "n/a",
       "n/a"
     ],
@@ -4042,7 +4042,7 @@
       "forest_map_area",
       "DONE",
       "n/a",
-      "Ashen Wood, Bramble Valley, Forbidden Woods, Jungle Valley, Lair, Ramparts, Spider Forest, Tropical Island, Thicket, Dark Forest, Stagnation",
+      "Ashen Wood; Bramble Valley; Forbidden Woods; Jungle Valley; Lair; Ramparts; Spider Forest; Tropical Island; Thicket; Dark Forest; Stagnation",
       "",
       "",
       "Divcord: Thicket verified by abax and Crash\nDivcord: Dark Forest verified by Zimzams\nStagnation reported from Obob"
@@ -4083,7 +4083,7 @@
       "bridge_area",
       "DONE",
       "n/a",
-      "Alleyways, Armoury, Mineral Pools, Infested Valley, Castle Ruins, Forking River, Arachnid Tomb, Primordial Blocks, Iceberg, Siege",
+      "Alleyways; Armoury; Mineral Pools; Infested Valley; Castle Ruins; Forking River; Arachnid Tomb; Primordial Blocks; Iceberg; Siege",
       "n/a",
       "",
       "Mineral Pools Divcord verified drop by Xsia\nInfested Valley Divcord verified drop by Xsia\nCastle Ruins verified in divcord\n\nDivcord: Forking River verified (legacy-series on Standard)\nDivcord: Arachnid Tomb verified by RiPHeartofGold\nDivcord: 3.20 Primordial Blocks verified by CardboardMonka\nDivcord: 3.20 Iceberg verified by Zimzams\nDivcord: 3.21 Siege verified by RiPHeartofGold"
@@ -4094,7 +4094,7 @@
       "chamber_of_sins_area",
       "DONE",
       "n/a",
-      "Overgrown Ruin, Overgrown Shrine",
+      "Overgrown Ruin; Overgrown Shrine",
       "n/a",
       "n/a"
     ],
@@ -4104,7 +4104,7 @@
       "merveil_area",
       "DONE",
       "n/a",
-      "Maelström of Chaos, Underground Sea",
+      "Maelström of Chaos; Underground Sea",
       "Brine King's Reef, The Cavern of Anger (A6)",
       "n/a",
       "Reports from 2018 regarding Brine King's Reef and The Cavern of Anger (Act 6). Neither of these fit the theme. Historic drop locations were Mineral Pools (when the boss was still Merveil, the Reflection), Maelstrom of Chaos, and Underground Sea.\nRemoved the story locations for now."
@@ -4126,7 +4126,7 @@
       "unholy_trio_area",
       "OK",
       "confirm",
-      "Cells, Overgrown Shrine, Sepulchre, Tower, Waste Pool, Core, Museum, Phantasmagoria",
+      "Cells; Overgrown Shrine; Sepulchre; Tower; Waste Pool; Core; Museum; Phantasmagoria",
       "n/a",
       "The Putrid Cloister, Scriptorium",
       "Divcord: clip of Lighty posted by Zimzams shows drop in Museum\n\nDivcord: Core verified\nDivcord: Phantasmagoria verified by Zimzams 3.19"
@@ -4137,7 +4137,7 @@
       "totem_boss_area",
       "DONE",
       "n/a",
-      "Atoll, Plateau, Siege",
+      "Atoll; Plateau; Siege",
       "Maelström of Chaos",
       "",
       "Divcord: 3.21 Siege verified by RiPHeartofGold\nNo further sightings in Maelstrom of Chaos, may be a conversion drop."
@@ -4159,7 +4159,7 @@
       "fire_area",
       "DONE",
       "n/a",
-      "Crater, Lava Chamber, Lava Lake, Forge of the Phoenix, The Ruined Square, The Torched Courts (A5/10), Estuary, Silo, The Crematorium, The Ravaged Square",
+      "Crater; Lava Chamber; Lava Lake; Forge of the Phoenix; The Ruined Square; The Torched Courts (A5/10); Estuary; Silo; The Crematorium; The Ravaged Square",
       "Bone Crypt",
       "Not accesible: The Fallen Courts, The Haunted Reliquary - see notes",
       "Note: The Fallen Courts and The Haunted Reliquary are no longer accessible areas. They were part of the Epilogue during the Conquerors of the Atlas expansion and became inacessible with Siege of the Atlas.\n\nDivcord: Estuary, Silo\nDivcord: 3.21, A3 The Crematorium verified by Elinvynia\nThe Ravaged Square verified by Elinvynia"
@@ -4170,7 +4170,7 @@
       "lightning_area, NOT unique_map",
       "DONE",
       "n/a",
-      "Courtyard, Strand, Tower",
+      "Courtyard; Strand; Tower",
       "n/a",
       "",
       "Divcord: fal verified in Tower\n\nDivcord: 3.20, Zimzams tested \"21 cards in Vinktar Square ~ 9x Struck by Lightning, 12x Thunderous Skies. No the Stormcaller\"\nDivcord: 3:20, Jasmine tested 26 cards in Vinktar Square ~ 6x Struck by Lightning, 20x Thunderous Skies. No the Stormcaller.\nUnlikely that tag is only \"lightning_area\" to prevent recursion of card -> reward -> card"
@@ -4191,7 +4191,7 @@
       "summoner_area",
       "DONE",
       "n/a",
-      "Bone Crypt, Burial Chambers, Spider Forest, Cage; Lower Prison (Act 6), The Crematorium, The Catacombs, Shavronne's Tower, The Chamber of Sins Level 1 (Act 7)",
+      "Bone Crypt; Burial Chambers; Spider Forest; Cage; Lower Prison (Act 6); The Crematorium; The Catacombs; Shavronne's Tower; The Chamber of Sins Level 1 (Act 7)",
       "Lava Chamber",
       "",
       "Divcord: fal verified drop in Spider Forest\nDivcord: Jas verified drop in Cage\n\nDivcord: Zimzams did n=65 sample in Lava Chamber with zero hits; extremely high confidence that The Summoner no longer drops in Lava Chamber\nElinvynia verified in Chamber of Sins Level 1 (Act 7)"
@@ -4202,7 +4202,7 @@
       "solaris_area",
       "DONE",
       "n/a",
-      "The Twilight Temple, Temple, Cold River, The Harbour Bridge, The Solaris Temple Level 2 (Act 8), The Solaris Temple Level 1 (Act 8)",
+      "The Twilight Temple; Temple; Cold River; The Harbour Bridge; The Solaris Temple Level 2 (Act 8); The Solaris Temple Level 1 (Act 8)",
       "Ivory Temple",
       "",
       "Divcord: Moderate evidence from Ivory Temple testing that The Sun no longer drops here\n\nDivcord: Cold River verified by Zimzams\nDivcord: 3.21, [Story] A8 The Solaris Temple Lv2 (from Dawn, Harbinger of Solaris) verified by Zimzams"
@@ -4213,7 +4213,7 @@
       "chamber_of_sins_area",
       "DONE",
       "n/a",
-      "Overgrown Ruin, Overgrown Shrine",
+      "Overgrown Ruin; Overgrown Shrine",
       "n/a",
       "n/a"
     ],
@@ -4223,7 +4223,7 @@
       "belly_area",
       "DONE",
       "n/a",
-      "Carcass, Core, Malformation, Phantasmagoria",
+      "Carcass; Core; Malformation; Phantasmagoria",
       "n/a",
       "n/a",
       "Drops even in T16 Maps, unlike some of the other Map Reward Cards -- so this one does *not* have a Drop Level Requirement like some other similar Cards."
@@ -4234,7 +4234,7 @@
       "flooded_area",
       "DONE",
       "n/a",
-      "Flooded Mine, Mineral Pools, Underground Sea; The Cavern of Anger (Act 6)",
+      "Flooded Mine; Mineral Pools; Underground Sea; The Cavern of Anger (Act 6)",
       "n/a",
       "n/a"
     ],
@@ -4255,7 +4255,7 @@
       "daresso_area",
       "DONE",
       "n/a",
-      "Colosseum, Pit of the Chimera, Pit, Arena, The Grand Arena, Daresso's Dream",
+      "Colosseum; Pit of the Chimera; Pit; Arena; The Grand Arena; Daresso's Dream",
       "n/a",
       "",
       "Divcord: Pit of the Chimera verified by Jasmine\n\nCould be either `daresso_area` or `pitfight_area` -- currently these Tags both match the exact same 4 Maps\n\nStory could be used to distinguish: The Grand Arena has `daresso_area`, but not `pitfight_area`.\n\n\nDivcord: Story Daresso's Dream verified by Stymphalian ID.27.\nDivcord: Pit, Arena verified by Zimzams\nDivcord: Story The Grand Arena verified bY Stymphalian ID.27, which confirms `daresso_area` instead of `pitfight_area`."
@@ -4266,7 +4266,7 @@
       "thaumaturgy_area",
       "OK",
       "story only",
-      "Foundry, Shrine, Laboratory, Poorjoy's Asylum",
+      "Foundry; Shrine; Laboratory; Poorjoy's Asylum",
       "n/a",
       "The Lunaris Temple Level 2 (Act 3)",
       "Divcord: Laboratory verified by ColdMamba\nDivcord: Replica Poorjoy's Asylum verified by CommissarTyr 3.19\nFrom poking around in the data, it looks like Replica Poorjoy's Asylum reuses the same WorldArea as Poorjoy's Asylum. Thus it seems safe to verify the non-Replica version."
@@ -4277,7 +4277,7 @@
       "sewer_area",
       "OK",
       "story only",
-      "Lair of the Hydra, Toxic Sewer, Waste Pool",
+      "Lair of the Hydra; Toxic Sewer; Waste Pool",
       "n/a",
       "The Toxic Conduits, Doedre's Cesspool"
     ],
@@ -4298,7 +4298,7 @@
       "",
       "low",
       "unclear hypothesis",
-      "Factory, Silo",
+      "Factory; Silo",
       "n/a",
       "Forge of the Phoenix, Foundry",
       "Factory, Silo\n\nThe only 3.18 verification we have is Factory (it's common there), and Factory's sole non-vacuous Tag is `warehouse_area`, which is why the Tag association here was originally set to that.\nThe Tireless Extractor does not drop in Arsenal, however, which has `warehouse_area`. Thus that Tag cannot be the governing factor.\n\nRe-verified as dropping in Silo in 3.18 using a legacy-series Silo Map on Standard.\nBut other Maps that have Silo's Tags do not seem to produce The Tireless Extractor.\n\nThere's something else special about Factory and Silo which govern the natural Card drop in those Areas. Forge_Area in 3.21 connected the two maps, but the actual relationship could be something else.\n\n3.21: Elinvynia found no cards in 56 cards in Foundry or 20 in Phoenix. This makes it more likely it's not related to Forge_Area"
@@ -4309,7 +4309,7 @@
       "tower_area",
       "DONE",
       "n/a",
-      "Residence, Tower, Shavronne's Tower, The Sceptre of God, The Upper Sceptre of God",
+      "Residence; Tower; Shavronne's Tower; The Sceptre of God; The Upper Sceptre of God",
       "n/a",
       "n/a"
     ],
@@ -4319,7 +4319,7 @@
       "parapet_area",
       "DONE",
       "n/a",
-      "Promenade, Ramparts; The Sarn Ramparts, The Solaris Concourse, The Battlefront",
+      "Promenade; Ramparts; The Sarn Ramparts; The Solaris Concourse; The Battlefront",
       "n/a",
       "n/a",
       "3.21: Reconfirmed The Sarn Ramparts\nThe Ebony Barracks and The Solaris Concourse are locations from old wiki - Ebony Barracks may be incorrect."
@@ -4351,7 +4351,7 @@
       "desert_map_area",
       "ok",
       "confirm",
-      "Desert Spring, Dunes, Dry Sea",
+      "Desert Spring; Dunes; Dry Sea",
       "",
       "Desert",
       "Divcord: Dunes verified by ColdMamba\nDry Sea verified in 3.21 by Elinvynia"
@@ -4362,7 +4362,7 @@
       "lunaris_area",
       "DONE",
       "n/a",
-      "Cold River, Moon Temple, Temple",
+      "Cold River; Moon Temple; Temple",
       "n/a",
       "n/a"
     ],
@@ -4372,7 +4372,7 @@
       "lunaris_area OR solaris_area",
       "DONE",
       "n/a",
-      "Moon Temple, Cold River, the Twilight Temple, Temple",
+      "Moon Temple; Cold River; the Twilight Temple; Temple",
       "",
       "",
       "Moon temple verified in divcord\nDivcord: Cold River verified by Zimzams\nDivcord: Strong evidence from Ivory Temple testing that The Twins no longer drops here\nDivcord: Twilight Temple verified\nDivcord: Temple verified by Zimzams\nTemple has `solaris_area`, not `lunaris_area`\r\nNot unexpected given theme of Card"
@@ -4383,7 +4383,7 @@
       "ruined_area",
       "DONE",
       "n/a",
-      "Port, Precinct, Coral Ruins, Bazaar, Castle Ruins, Arcade, Ancient City, Ghetto",
+      "Port; Precinct; Coral Ruins; Bazaar; Castle Ruins; Arcade; Ancient City; Ghetto",
       "",
       "",
       "Formerly dropped in Primordial Blocks Map for 1 league.\n\nReddit claims: Port\nRainover68 on Divcord claims: \"either Arcade or Arsenal\"\n\nPrecinct, Port, Arsenal all have `urban_sarn_area`\nPrecinct reconfirmed in 3.18 in Divcord by Zimzams\nArsenal testing showed 0 The Tyrant after 756 natural Card drops. This rules out `urban_sarn_area`.\n\n\n`ruined_area` also fits for Precinct, Port, and Arcade\n\nDivcord: Coral Ruins verified by nennas, which has `ruined_area` and not `urban_sarn_area`, so the association is likely the former\nDivcord: Bazaar verified by nennas\nDivcord: Castle Ruins verified by Zimzams\nDivcord: Ancient City verified by RiPHeartofGold 3.19\nDivcord: Ghetto verified by RiPHeartofGold 3.19\nDivcord: Arcade verified by RiPHeartofGold 3.19"
@@ -4394,7 +4394,7 @@
       "rogue_exile_boss_area",
       "DONE",
       "n/a",
-      "Courthouse, Precinct, Whakawairua Tuahu",
+      "Courthouse; Precinct; Whakawairua Tuahu",
       "Conservatory",
       "",
       "Iron believed this dropped in Courthouse in earlier leagues, not from a Boss\nSlipperyJim8 observed this as a Kirac Card Mission drop in Precinct\nPossibly rogue_exile_boss_area, which covers exactly {Precinct, Courthouse}\nDivcord: Whakawairua Tuahu verified\nConservatory was explicitly included in 3.16; need to re-verify if it is still eligible.\n\nDivcord: 3.21, zero hits of The Undaunted in Conservatory (n = 154, c ~ 99% by Elinvynia). This means that the 3.16 patch note is out-of-date (this patch note predated the major Tag reworks), and The Undaunted very likely no longer drops in Conservatory."
@@ -4415,7 +4415,7 @@
       "sceptre_of_god_area",
       "DONE",
       "n/a",
-      "Residence, Villa, Palace",
+      "Residence; Villa; Palace",
       "n/a",
       "",
       "Divcord: Villa verified by ChronoExile\n\nThe Unexpected Prize occurred in a 3.18 natural Card sample of Palace Maps as well"
@@ -4426,7 +4426,7 @@
       "graveyard_area",
       "DONE",
       "n/a",
-      "Cemetery, Grave Trough, Graveyard, The Fellshrine Ruins (A7)",
+      "Cemetery; Grave Trough; Graveyard; The Fellshrine Ruins (A7)",
       "n/a",
       "n/a"
     ],
@@ -4458,7 +4458,7 @@
       "reef_area",
       "OK",
       "story only",
-      "Reef, Coral Ruins, Coves",
+      "Reef; Coral Ruins; Coves",
       "n/a",
       "The Brine King's Reef",
       "Coves was legacy drop location; may have been reintroduced\nDivcord: 3.21, Coves verified by Itacheey"
@@ -4469,7 +4469,7 @@
       "arena_area",
       "DONE",
       "n/a",
-      "Arena, Colosseum, Racecourse",
+      "Arena; Colosseum; Racecourse",
       "n/a",
       "n/a"
     ],
