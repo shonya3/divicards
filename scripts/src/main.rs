@@ -17,6 +17,8 @@ use serde_json::{json, Value};
 #[allow(unused)]
 use std::collections::HashSet;
 #[allow(unused)]
+use std::path::Path;
+#[allow(unused)]
 use std::{collections::HashMap, fmt::Display, slice::Iter};
 #[allow(unused)]
 use table_record::{CardDropTableRecord, Confidence, GreyNote};
@@ -26,6 +28,7 @@ use error::Error;
 
 #[allow(unused)]
 use crate::scripts::read_original_table_sheet;
+#[allow(unused)]
 use crate::table::Table;
 
 // #[tokio::main]
@@ -68,42 +71,7 @@ use crate::table::Table;
 //     Ok(sources)
 // }
 
-pub fn write_confidence_map() {}
-
 pub fn main() {
-    let sheet = read_original_table_sheet("sheet.json").unwrap();
-    let table = Table::parse(&sheet.values[2..]).unwrap();
-
-    let mut confidence_map: HashMap<Confidence, u16> = HashMap::new();
-    for record in &table.0 {
-        let counter = confidence_map.entry(record.confidence.clone()).or_insert(0);
-        *counter += 1;
-    }
-
-    dbg!(confidence_map);
-
-    let mut map: HashMap<String, Vec<CardDropTableRecord>> = HashMap::new();
-    for record in table.0.clone() {
-        let vec = map.entry(record.name.as_str().to_owned()).or_insert(vec![]);
-        vec.push(record);
-    }
-
-    dbg!(map.keys().len());
-    std::fs::write("map.json", serde_json::to_string_pretty(&map).unwrap()).unwrap();
-
-    let mut multiple_map: HashMap<String, Vec<CardDropTableRecord>> = HashMap::new();
-    for (name, record) in map {
-        if record.len() > 1 {
-            multiple_map.insert(name.clone(), record.clone());
-        }
-    }
-
-    dbg!(multiple_map.keys().len());
-    std::fs::write(
-        "multiple-map.json",
-        serde_json::to_string_pretty(&multiple_map).unwrap(),
-    )
-    .unwrap();
 
     // let mut _map: HashMap<&CardDropTableRecord, Vec<HashSet<DropSource>>> = HashMap::new();
 

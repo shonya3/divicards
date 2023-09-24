@@ -1,10 +1,14 @@
-use std::path::Path;
+use std::{collections::HashMap, path::Path};
 
 use googlesheets::sheet::ValueRange;
 use reqwest::Client;
 use serde_json::Value;
 
-use crate::{error::Error, table::Table};
+use crate::{
+    error::Error,
+    table::Table,
+    table_record::{CardDropTableRecord, Confidence},
+};
 
 pub fn read_original_table_sheet<P: AsRef<Path>>(path: P) -> Result<ValueRange, Error> {
     let sheet: ValueRange = serde_json::from_str(&std::fs::read_to_string(path)?)?;
@@ -87,6 +91,43 @@ pub fn write_drops_from<P: AsRef<Path>>(path: P, table: &Table) -> Result<(), Er
     Ok(())
 }
 
+pub fn write_confidence_map<P: AsRef<Path>>(path: P, table: &Table) -> Result<(), Error> {
+    let mut confidence_map: HashMap<Confidence, u16> = HashMap::new();
+    for record in &table.0 {
+        let counter = confidence_map.entry(record.confidence.clone()).or_insert(0);
+        *counter += 1;
+    }
+
+    std::fs::write(path, serde_json::to_string(&confidence_map)?)?;
+    Ok(())
+}
+
+pub fn write_hypothesis_maps(table: Table) -> Result<(), Error> {
+    let mut map: HashMap<String, Vec<CardDropTableRecord>> = HashMap::new();
+    for record in table.0 {
+        let vec = map.entry(record.name.as_str().to_owned()).or_insert(vec![]);
+        vec.push(record);
+    }
+
+    dbg!(map.keys().len());
+    std::fs::write("hypothesis-map.json", serde_json::to_string_pretty(&map)?)?;
+
+    let mut multiple_map: HashMap<String, Vec<CardDropTableRecord>> = HashMap::new();
+    for (name, record) in map {
+        if record.len() > 1 {
+            multiple_map.insert(name.clone(), record.clone());
+        }
+    }
+
+    dbg!(multiple_map.keys().len());
+    std::fs::write(
+        "multiple-hypothesis-map.json",
+        serde_json::to_string_pretty(&multiple_map)?,
+    )?;
+
+    Ok(())
+}
+
 pub async fn update_all_jsons() {
     let sheet = download_table_sheet()
         .await
@@ -98,6 +139,8 @@ pub async fn update_all_jsons() {
     let table = Table::try_from(&sheet).expect("Could not parse the table");
     write_parsed_table("parsed-table.json", &table).expect("Write parsed table error");
     write_drops_from("drops-from.json", &table).expect("Write drops-from error");
+    write_confidence_map("confidence-map.json", &table).expect("Wrtie confidence map error");
+    write_hypothesis_maps(table).expect("write_hypothesis_maps eror");
 }
 
 // pub fn write_sized_rewards() {
