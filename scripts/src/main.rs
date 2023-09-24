@@ -1,627 +1,27 @@
 pub mod cards;
 pub mod consts;
+pub mod dropconsts;
+pub mod dropsource;
 pub mod error;
 pub mod maps;
 pub mod reward;
 pub mod scripts;
 
+#[allow(unused)]
+use serde_json::{json, Value};
 use std::collections::HashSet;
 #[allow(unused)]
 use std::{collections::HashMap, fmt::Display, slice::Iter};
 
 use divi::{league::TradeLeague, prices::NinjaCardData, sample::fix_name, IsCard};
-use maps::Map;
+use dropsource::DropSource;
 use reward::reward_to_html;
 use serde::{Deserialize, Serialize};
 
 use error::Error;
-use serde_json::{json, Value};
-
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
-pub enum StoryBoss {
-    #[serde(alias = "Reassembled Brutus")]
-    ReassembledBrutus,
-    #[serde(alias = "Shavronne, Unbound")]
-    ShavronneUnbound,
-    #[serde(alias = "Dawn, Harbinger of Solaris")]
-    Dawn,
-    #[serde(alias = "Solaris, Eternal Sun")]
-    Solaris,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
-pub enum AbyssLichBoss {
-    #[serde(alias = "Ulaman, Sovereign of the Well")]
-    Ulaman,
-    #[serde(alias = "Amanamu, Liege of the Lightless")]
-    Amanamu,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
-pub enum ElderGuardianBoss {
-    #[serde(alias = "The Enslaver")]
-    Enslaver,
-    #[serde(alias = "The Eradicator")]
-    Eradicator,
-    #[serde(alias = "The Constrictor")]
-    Constrictor,
-    #[serde(alias = "The Purifier")]
-    Purifier,
-}
-
-// Guardian of the Minotaur; Guardian of the Phoenix
-
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
-pub enum ShaperGuardianBoss {
-    #[serde(alias = "Guardian of the Chimera")]
-    Chimera,
-    #[serde(alias = "Guardian of the Hydra")]
-    Hydra,
-    #[serde(alias = "Guardian of the Minotaur")]
-    Minotaur,
-    #[serde(alias = "Guardian of the Phoenix")]
-    Phoenix,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
-pub enum Elderslayer {
-    #[serde(alias = "Baran, The Crusader")]
-    Baran,
-    #[serde(alias = "Veritania, The Redeemer")]
-    Veritania,
-    #[serde(alias = "Al-Hezmin, The Hunter")]
-    AlHezmin,
-    #[serde(alias = "Drox, The Warlord")]
-    Drox,
-    #[serde(alias = "Sirus, Awakener of Worlds")]
-    Sirus,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
-#[serde(rename_all = "camelCase")]
-pub enum DropSource {
-    ExpeditionLogbook,
-    GlobalDrop,
-    ChestObject,
-    Map(String),
-    MapBoss {
-        boss: String,
-        map: String,
-    },
-    Disabled,
-    Unknown,
-    Delirium,
-    Vendor(Option<Vendor>),
-    Strongbox,
-    #[serde(alias = "All (Scourge) beyond demons")]
-    ScourgeBeyondDemons,
-    #[serde(alias = "All Rogue Exiles")]
-    AllRogueExiles,
-    #[serde(alias = "HarbingerPortal")]
-    HarbingerPortal,
-    #[serde(alias = "HarbingerPortalDelve")]
-    HarbingerPortalDelve,
-    #[serde(alias = "HarbingerPortalUber")]
-    HarbingerPortalUber,
-    #[serde(alias = "Metamorph")]
-    Metamorph,
-    #[serde(alias = "Uul-Netol, Unburdened Flesh (in Breachstones)")]
-    UulNetolInBreachstones,
-    #[serde(alias = "All Abyss Monsters")]
-    AllAbyssMonsters,
-
-    #[serde(alias = "All Incursion Architects in Alva missions/Alva's Memory")]
-    AllIncursionArchitectsInAlvaMission,
-    #[serde(alias = "Vaal Flesh Merchant")]
-    VaalFleshMerchant,
-    #[serde(alias = "Null Portal")]
-    BreachNullPortal,
-
-    #[serde(alias = "Pirate Treasure")]
-    PirateTreasure,
-
-    #[serde(alias = "Trial of Stinging Doubt")]
-    TrialOfStingingDoubt,
-
-    #[serde(alias = "Maven's Invitation: The Feared")]
-    MavensInvitationTheFeared,
-
-    #[serde(alias = "The Temple of Atzoatl")]
-    TempleOfAtzoatl,
-
-    #[serde(alias = "The Vaal Omnitect")]
-    VaalOmnitect,
-
-    #[serde(alias = "All Vaal side areas (need specific information)")]
-    AllVaalSideAreas,
-    #[serde(alias = "Vaal Side Areas")]
-    VaalSideAreas,
-
-    #[serde(untagged)]
-    BreachlordBossDomain(BreachlordBossDomain),
-    #[serde(untagged)]
-    RogueExile(RogueExile),
-    #[serde(untagged)]
-    Elderslayer(Elderslayer),
-    #[serde(untagged)]
-    Architect(Architect),
-    #[serde(untagged)]
-    AreaSpecific(AreaSpecific),
-    #[serde(untagged)]
-    ElderGuardianBoss(ElderGuardianBoss),
-    #[serde(untagged)]
-    ShaperGuardianBoss(ShaperGuardianBoss),
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
-pub enum AreaSpecific {
-    #[serde(alias = "Chayula's Domain")]
-    ChayulasDomain,
-    #[serde(alias = "Uul-Netol's Domain")]
-    UulNetolsDomain,
-    #[serde(alias = "Esh's Domain")]
-    EshsDomain,
-    #[serde(alias = "Xoph's Domain")]
-    XophsDomain,
-    #[serde(alias = "Tul's Domain")]
-    TulsDomain,
-}
-
-//   Chayula, Who Dreamt; Uul-Netol, Unburdened Flesh
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
-pub enum BreachlordBossDomain {
-    #[serde(alias = "Xoph, Dark Embers")]
-    Xoph,
-    #[serde(alias = "Tul, Creeping Avalanche")]
-    Tul,
-    #[serde(alias = "Esh, Forked Thought")]
-    Esh,
-    #[serde(alias = "Chayula, Who Dreamt")]
-    Chayula,
-    #[serde(alias = "Uul-Netol, Unburdened Flesh")]
-    UulNetol,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
-pub enum Architect {
-    #[serde(alias = "Zilquapa, Architect of the Breach")]
-    Zilquapa,
-    #[serde(alias = "Paquate, Architect of Corruption")]
-    Paquate,
-    #[serde(alias = "Ahuana, Architect of Ceremonies")]
-    Ahuana,
-    #[serde(alias = "Zalatl, Architect of Thaumaturgy")]
-    Zalatl,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
-pub enum BetrayalSyndicateMember {
-    #[serde(alias = "Haku", alias = "Haku, Warmaster")]
-    Haku,
-    #[serde(alias = "Elreon")]
-    Elreon,
-    #[serde(alias = "Tora")]
-    Tora,
-    #[serde(alias = "Vagan")]
-    Vagan,
-    #[serde(alias = "Vorici")]
-    Vorici,
-    #[serde(alias = "Hillock, the Blacksmith")]
-    Hillock,
-    #[serde(alias = "Leo, Wolf of the Pits")]
-    Leo,
-    #[serde(alias = "Guff \"Tiny\" Grenn")]
-    GuffTinyGrenn,
-    #[serde(alias = "Janus Perandus")]
-    JanusPerandus,
-    #[serde(alias = "It That Fled")]
-    ItThatFled,
-    #[serde(alias = "Gravicius")]
-    Gravicius,
-    #[serde(alias = "Thane Jorgin")]
-    ThandeJorgin,
-    #[serde(alias = "Korell Goya")]
-    KorellGoya,
-    #[serde(alias = "Rin Yuushu")]
-    RinYuushu,
-    #[serde(alias = "Cameria the Coldblooded")]
-    CameriaTheColdblooded,
-    #[serde(alias = "Aisling Laffrey")]
-    AislingLaffrey,
-    #[serde(alias = "Riker Maloney")]
-    RikerMaloney,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
-pub enum RogueExile {
-    #[serde(alias = "Ash Lessard")]
-    AshLessard,
-    #[serde(alias = "Magnus Stonethorn")]
-    Magnus,
-    #[serde(alias = "Minara Anemina")]
-    Minara,
-}
-
-pub const BOSS_NAMES: &'static [&'static str] = &[
-    "Tormented Temptress (Whakawairua Tuahu)",
-    "Avatar of the Huntress",
-    "Rose",
-    "Malachai's Omen",
-    "Caer Blaidd",
-    "Caer Blaidd, Wolfpack's Den",
-    "Helial, the Day Unending",
-    "Ghorr, the Grasping Maw",
-    "The Vindicated Queen",
-    "Kurgal, the Blackblooded",
-    "Aul, the Crystal King",
-    "The Infinite Hunger",
-    "Fenumus, First of the Night",
-    "Infector of Dreams",
-    "Tahsin, Warmaker",
-    "Stone of the Currents",
-    "Nightmare's Omen",
-    "Fragment of Winter",
-    "Gorulis, Will-Thief (Infested Valley)",
-    "Titan of the Grove",
-    "Calderus",
-    "Avatar of the Skies",
-    "Avatar of Undoing",
-    "Varhesh, Shimmering Aberration",
-    "Erebix, Light's Bane",
-    "Lord of the Hollows",
-    "Messenger of the Hollows",
-    "Champion of the Hollows",
-    "Entity of the Void",
-    "Opid, Helial's Herald",
-    "Skullbeak",
-    "Headmistress Braeta",
-    "Eyepecker",
-    "Gorulis, Will-Thief",
-    "Mephod, the Earth Scorcher",
-    "Ara, Sister of Light",
-    "Flesh Sculptor",
-    "Corpse Stitcher",
-    "Nightwane",
-    "The Animal Pack",
-    "Stonebeak, Battle Fowl",
-    "Jorus, Sky's Edge",
-    "Shrieker Eihal",
-    "Gisale, Thought Thief",
-    "K'aj Y'ara'az",
-    "Uul-Netol, Unburdened Flesh",
-    "Olof, Son of the Headsman",
-    "Chayula, Who Dreamt",
-    "Farrul, First of the Plains",
-    "Uhtred, Covetous Traitor",
-    "Omniphobia, Fear Manifest",
-    "Kosis, The Revelation",
-    "Merveil, the Reflection (Underground Sea)",
-    "Fairgraves",
-    "Avatar of the Forge",
-    "Eater of Souls",
-    "The Cleansing Light",
-    "Xixic, High Necromancer",
-    "Armala, the Widow",
-    "Ambrius, Legion Slayer",
-    "Drek, Apex Hunter",
-    "Bazur",
-    "Thought Thief",
-    "Prodigy of Darkness",
-    "Shavronne the Sickening",
-    "Amalgam of Nightmares",
-    "Wolf of the Pits",
-    "The High Templar",
-    "The Bone Sculptor",
-    "The Maven",
-    "Oshabi, Avatar of the Grove",
-    "Beast of the Pits",
-    "Tolman, the Exhumer",
-    "Burtok, Shaper of Bones",
-    "K'aj Q'ura",
-    "The Brittle Emperor",
-    "Uber Elder",
-    "The Searing Exarch",
-    "Catarina, Master of Undeath",
-    "Gnar, Eater of Carrion",
-    "Argus",
-    "The Hallowed Husk",
-    "The Cursed King",
-    "The Eater of Worlds",
-    "Drought-Maddened Rhoa",
-    "Doedre the Defiler",
-    "Khor, Sister of Shadows",
-    "Murgeth Bogsong",
-    "Stalker of the Endless Dunes",
-    "Telvar, the Inebriated",
-    "Nassar, Lion of the Seas",
-    "Venarius",
-    "Void Anomaly",
-    "Maligaro the Mutilator",
-    "Merveil, the Returned",
-    "The Elder",
-    "Ryslatha, the Puppet Mistress",
-    "Voll, Emperor of Purity",
-    "Portentia, the Foul",
-    "Portentia, the Foul (Waste Pool)",
-    "Erythrophagia (Phantasmagoria)",
-    "Erythrophagia",
-    "Hephaeus, The Hammer",
-    "Selenia, the Endless Night",
-    "The Brine King's Reef",
-    "K'tash, the Hate Shepherd",
-    "Prodigy of Hexes",
-    "Excellis Aurafix",
-    "Guardian of the Vault",
-    "Terror of the Infinite Drifts",
-    "The Eroding One",
-    "The Winged Death",
-    "Elida Blisterclaw (Bramble Valley)",
-    "Fire and Fury (Lava Chamber)",
-    "Merveil, the Reflection (Maelstrom of Chaos)",
-    "Shock and Horror (Mineral Pools)",
-    "Steelpoint the Avenger",
-    "The Sanguine Siren",
-    "K'aj A'alai (Vaal Temple Trio)",
-    "The Dishonoured Queen",
-    "Steelpoint the Avenger",
-    "Mirage of Bones",
-    "Lord of the Ashen Arrow",
-    "Wolfpack's Den",
-];
-
-pub const AREA_NAMES: &'static [&'static str] = &["The Apex of Sacrifice", "The Alluring Abyss"];
-
-pub const ACT_AREA_NAMES: &'static [&'static str] = &[
-    "Kitava, The Destroyer (The Destroyer's Heart)",
-    "The Imperial Fields",
-    "The Fellshrine Ruins",
-    "The Quay",
-    "The Ascent",
-    "The Causeway",
-    "The Grand Arena",
-    "Shavronne's Tower",
-    "The Sarn Ramparts",
-    "The Docks",
-    "Oriath Square",
-    "The High Gardens",
-    "The Slums",
-    "The Vastiri Desert",
-    "The Feeding Trough",
-    "The Oasis",
-    "The Ebony Barracks",
-    "The Grain Gate",
-    "Kaom's Dream",
-    "The Lunaris Concourse",
-    "The Ancient Pyramid",
-    "The Aqueduct",
-    "The Grand Promenade",
-    "The Boiling Lake",
-    "Reliquary",
-    "The Catacombs",
-    "The Toxic Conduits",
-    "The Sewers",
-    "The Archives",
-    "Daresso's Dream",
-    "The Marketplace",
-    "The Sceptre of God",
-    "The Refinery",
-    "The Solaris Temple Level 1 (A3)",
-    "The Lunaris Temple Level 2 (Act 3)",
-    "The Solaris Concourse",
-    "The Mines Level 1",
-    "The Mines Level 2",
-    "The Belly of the Beast (A4/A9)",
-    "The Belly of the Beast (A4/9)",
-    "The Belly of the Beast",
-    "The Cathedral Rooftop (A5)",
-    "The Mud Flats (A6)",
-    "The Mud Flats (Act 6)",
-    "The Lower Prison (Act 6)",
-    "Lower Prison (Act 6)",
-    "The Riverways (Act 6)",
-    "The Tidal Island (A6)",
-    "Prisoner's Gate (A6)",
-    "The Twilight Strand (A6)",
-    "The Chamber of Sins Level 1 (Act 7)",
-    "Chamber of Sins Level 1/2 (Act 7)",
-    "The Chamber of Sins Level 1/2 (Act 7)",
-    "The Crossroads",
-    "The Crossroads (A7)",
-    "The Crossroads (Act 7)",
-    "The Crypt (Act 7)",
-    "The Crypt",
-    "The Solaris Temple Level 1 (Act 8)",
-    "The Solaris Temple 1/2 (A8)",
-    "The Lunaris Temple Level 2 (Act 8)",
-    "The Fellshrine Ruins (A7)",
-    "The Ossuary (Act 5)",
-    "The Ossuary (Act 10)",
-    "The Ossuary (Act 5/10)",
-    "The Ossuary",
-    "Maligaro's Sanctum",
-    "The Bath House",
-    "The Battlefront",
-    "The Ashen Fields",
-    "The Beacon",
-    "The Blood Aqueduct",
-    "The Broken Bridge",
-    "Control BLocks",
-    "The Control Blocks",
-    "The Control Blocks (Act 5)",
-    "The Harbour Bridge, The Solaris Temple Level 2 (Act 8)",
-    "The Solaris Temple Level 2 (Act 8)",
-    "Temple, The Twilight Temple, Cold River, The Solaris Temple Level 1 (Act 8)",
-    "The Coast (A6)",
-    "The Cavern of Anger (Act 6)",
-    "The Southern Forest (Act 6)",
-    "The Den (Act 7)",
-    "The Torched Courts (A5/10)",
-    "Lunaris Temple Level 1/2 (A8)",
-    "The Library",
-    "The Crystal Veins",
-    "The Reliquary",
-    "The Reliquary (Act 5/10)",
-    "The Desecrated Chambers",
-    "The Foothills",
-    "The Harbour Bridge",
-    "The Ravaged Square",
-    "The Ruined Square",
-    "The Slave Pens",
-    "The Quarry",
-    "The Temple of Decay Level 1",
-    "The Temple of Decay Level 2",
-    "The Temple of Decay Level 1/2",
-    "The Vasitri Desert",
-    "The Dread Thicket (A7)",
-    "The Northern Forest (A7)",
-    "Chamber of Innocence (A5/A10)",
-    "The Descent",
-    "The Crematorium",
-    "The Tunnel",
-    "The Harvest",
-    "The Chamber of Innocence",
-    "Kaom's Stronghold",
-    "The Northern Forest",
-    "The Karui Fortress",
-    "The Vaal City",
-    "The Imperial Gardens",
-    "The Rotting Core",
-    "The City of Sarn",
-    "The Upper Sceptre of God",
-];
-
-pub const CHESTS: &'static [&'static str] =
-    &["Light Jewellery chest (Primeval Ruins, Abyssal City, Vaal Outpost)"];
 
 #[tokio::main]
-async fn main() {
-    scripts::update_all_jsons().await;
-    let maps: Vec<Map> =
-        serde_json::from_str(&std::fs::read_to_string("maps.json").unwrap()).unwrap();
-    let maps = maps.into_iter().map(|m| m.name).collect::<Vec<String>>();
-    let maps_without_the: Vec<String> = maps.iter().map(|m| m.replace(" Map", "")).collect();
-
-    let drops: Vec<Option<String>> =
-        serde_json::from_str(&std::fs::read_to_string("drops-from.json").unwrap()).unwrap();
-
-    let mut sources = Vec::new();
-    for drop in drops {
-        let Some(drop_str) = drop else {
-            continue;
-        };
-
-        let drop_str = drop_str.replace(";\r\n", ";");
-        let drop_str = drop_str.replace(";\n", ";");
-        let drop_str = drop_str.replace(",\r\n", ",");
-        let drop_str = drop_str.replace(",\n", ",");
-
-        let mut separator = ",";
-        if drop_str.contains("\n") {
-            separator = "\n"
-        };
-
-        if drop_str.contains(";") {
-            separator = ";"
-        }
-
-        if drop_str.contains(";") && drop_str.contains("\n") {
-            panic!("Drop string contains ; and \\n at same time {}", &drop_str);
-        }
-
-        if separator == "," {
-            if drop_str.matches(",").count() == 1 {
-                if BOSS_NAMES.contains(&drop_str.as_str()) {
-                    continue;
-                }
-
-                let dropsource = serde_json::from_str::<DropSource>(&json!(drop_str).to_string());
-                if dropsource.is_ok() {
-                    dbg!(&drop_str);
-                    continue;
-                }
-            };
-        };
-
-        let droplist = drop_str.split(separator);
-        for s in droplist {
-            let s = s.trim().to_string();
-
-            if maps.contains(&s) || maps_without_the.contains(&s) {
-                continue;
-            }
-
-            if CHESTS.contains(&s.as_str()) {
-                continue;
-            }
-
-            if ACT_AREA_NAMES.contains(&s.as_str()) {
-                continue;
-            }
-
-            if BOSS_NAMES.contains(&s.as_str()) {
-                continue;
-            }
-
-            if AREA_NAMES.contains(&s.as_str()) {
-                continue;
-            }
-
-            let area_specific = serde_json::from_str::<AreaSpecific>(&json!(s).to_string());
-            if area_specific.is_ok() {
-                continue;
-            }
-
-            let betryal_syndycate_member =
-                serde_json::from_str::<BetrayalSyndicateMember>(&json!(s).to_string());
-            if betryal_syndycate_member.is_ok() {
-                continue;
-            }
-
-            let story_boss = serde_json::from_str::<StoryBoss>(&json!(s).to_string());
-            if story_boss.is_ok() {
-                continue;
-            }
-
-            let abyss_lich_boss = serde_json::from_str::<AbyssLichBoss>(&json!(s).to_string());
-            if abyss_lich_boss.is_ok() {
-                continue;
-            }
-
-            let breachlord_boss_domain =
-                serde_json::from_str::<BreachlordBossDomain>(&json!(s).to_string());
-            if breachlord_boss_domain.is_ok() {
-                continue;
-            }
-
-            let architect = serde_json::from_str::<Architect>(&json!(s).to_string());
-            if architect.is_ok() {
-                continue;
-            }
-
-            let rogue_exile = serde_json::from_str::<RogueExile>(&json!(s).to_string());
-            if rogue_exile.is_ok() {
-                continue;
-            }
-
-            let dropsource = serde_json::from_str::<DropSource>(&json!(s).to_string());
-            if dropsource.is_ok() {
-                // dbg!(&dropsource);
-                continue;
-            }
-
-            sources.push(s.to_owned());
-        }
-    }
-
-    let sources: HashSet<String> = HashSet::from_iter(sources.iter().cloned());
-    dbg!(sources.len());
-
-    std::fs::write(
-        "dropsources.json",
-        &serde_json::to_string_pretty(&sources).unwrap(),
-    )
-    .unwrap();
-}
+async fn main() {}
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 #[serde(rename_all = "camelCase")]
@@ -662,6 +62,7 @@ impl DivinationCardElementData {
     }
 }
 
+use crate::dropsource::Vendor;
 #[allow(unused)]
 use crate::scripts::{parse_table, read_original_table_sheet};
 
@@ -863,32 +264,15 @@ pub fn parse_drop_source(record: &CardDropRecord) -> Result<Vec<DropSource>, Err
     Ok(sources)
 }
 
-#[derive(Serialize, Deserialize, Hash, Eq, PartialEq, Clone, Debug)]
-pub enum Vendor {
-    #[serde(alias = "Kirac shop")]
-    KiracShop,
-}
-
-impl Vendor {
-    pub fn iter() -> Iter<'static, Vendor> {
-        static VENDORS: [Vendor; 1] = [Vendor::KiracShop];
-        VENDORS.iter()
-    }
-}
-
-impl Display for Vendor {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Vendor::KiracShop => write!(f, "Kirac shop"),
-        }
-    }
-}
-
 #[cfg(test)]
 mod tests {
     use serde_json::json;
 
-    use crate::parse_greynote;
+    use crate::{
+        dropconsts::{ACT_AREA_NAMES, AREA_NAMES, BOSS_NAMES, CHESTS},
+        maps::Map,
+        parse_greynote,
+    };
 
     use super::*;
 
@@ -1029,6 +413,74 @@ mod tests {
         );
 
         assert_eq!(None, parse_remaining_work(&json!("")).unwrap());
+    }
+
+    #[tokio::test]
+    async fn parses_dropsources_from_wiki_map_monster_agreements_column() {
+        scripts::update_all_jsons().await;
+        let maps: Vec<Map> =
+            serde_json::from_str(&std::fs::read_to_string("maps.json").unwrap()).unwrap();
+        let maps: Vec<String> = maps.into_iter().map(|m| m.name).collect();
+        let maps_without_the: Vec<String> = maps.iter().map(|m| m.replace(" Map", "")).collect();
+
+        let drops: Vec<Option<String>> =
+            serde_json::from_str(&std::fs::read_to_string("drops-from.json").unwrap()).unwrap();
+
+        let mut sources = Vec::new();
+        for drop in drops {
+            let Some(drop_str) = drop else {
+                continue;
+            };
+
+            let drop_str = drop_str.replace("\r\n", "");
+            let mut drop_str = drop_str.replace("\n", "");
+
+            if drop_str.ends_with(";") {
+                println!("drop_str ends with ; {}", &drop_str);
+                drop_str.drain(drop_str.len() - 1..);
+            }
+
+            for s in drop_str.split(";") {
+                let s = s.trim();
+
+                if CHESTS.contains(&s) {
+                    continue;
+                }
+
+                if ACT_AREA_NAMES.contains(&s) {
+                    continue;
+                }
+
+                if BOSS_NAMES.contains(&s) {
+                    continue;
+                }
+
+                if AREA_NAMES.contains(&s) {
+                    continue;
+                }
+
+                if let Ok(_dropsource) = serde_json::from_str::<DropSource>(&json!(s).to_string()) {
+                    continue;
+                }
+
+                let string = s.to_string();
+                if maps.contains(&string) || maps_without_the.contains(&string) {
+                    continue;
+                }
+
+                sources.push(s.to_owned());
+            }
+        }
+
+        let sources: HashSet<String> = HashSet::from_iter(sources.iter().cloned());
+
+        // std::fs::write(
+        //     "dropsources.json",
+        //     &serde_json::to_string_pretty(&sources).unwrap(),
+        // )
+        // .unwrap();
+
+        assert_eq!(sources.len(), 0);
     }
 }
 

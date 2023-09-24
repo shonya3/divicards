@@ -1050,7 +1050,7 @@
     "tagHypothesis": "Twilight Temple (no tag)",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Twilight Temple",
+    "dropsFrom": "The Twilight Temple",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": "Cold River",
     "notes": "Twilight Temple -- but if this is keyed to e.g. \"both solaris_area + lunaris_area\", then Cold River might comply too\n\nDivcord: 3.19, kroIya sampled 593 natural Card drops in Cold River, finding 0 Haunting Shadows\n\nSeeing zero Haunting Shadows in 593 natural Card drops would have been 99.8% confidence that Haunting Shadows does not drop in Cold River in 3.18 -- but we don't know if Haunting Shadows's weight was nerfed in 3.19 (this is possible since it rewards a Unique Item category, and certain other Unique Item category Cards did indeed have their weights nerfed if the set of Tiers of their respective possible Unique Item outcomes were overall nerfed as well). \nThat said, unless we learn in the future its weight was indeed heavily changed, this is probably sufficient evidence that Haunting Shadows is exclusive to Twilight Temple (i.e., as part of its Unique Map Card eligibility table).\n\n3.21: Elinvynia provided a 98% confident sample of no Haunting Shadows in Cold River. Concluding this card as a unique map only card."
@@ -1567,7 +1567,7 @@
     "tagHypothesis": "garden_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Gardens; Courtyard; Orchard, Terrace",
+    "dropsFrom": "Gardens; Courtyard; Orchard; Terrace",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Divcord: Terrace verified by Zimzams\nDivcord: Orchard verified by RiPHeartofGold 3.19"
@@ -1677,7 +1677,7 @@
     "tagHypothesis": "NOT otherworldly_story_area",
     "confidence": "ok",
     "remainingWork": "storyOnly",
-    "dropsFrom": "The Ashen Fields;\nThe Bath House;\nThe Battlefront;\nThe Beacon;\nThe Blood Aqueduct;\nThe Broken Bridge;\nThe Control Blocks;\nThe Crypt;\nThe Crystal Veins;\nThe Desecrated Chambers;\nThe Foothills;\nThe Harbour Bridge;\nThe Oasis;\nThe Ossuary;\nThe Quarry;\nThe Ravaged Square;\nThe Reliquary;\nThe Ruined Square;\nThe Slave Pens;\nThe Solaris Temple Level 1 (A3);\nThe Temple of Decay Level 2;\nThe Vastiri Desert;",
+    "dropsFrom": "The Ashen Fields;\nThe Bath House;\nThe Battlefront;\nThe Beacon;\nThe Blood Aqueduct;\nThe Broken Bridge;\nThe Control Blocks;\nThe Crypt;\nThe Crystal Veins;\nThe Desecrated Chambers;\nThe Foothills;\nThe Harbour Bridge;\nThe Oasis;\nThe Ossuary;\nThe Quarry;\nThe Ravaged Square;\nThe Reliquary;\nThe Ruined Square;\nThe Slave Pens;\nThe Solaris Temple Level 1 (A3);\nThe Temple of Decay Level 2;\nThe Vastiri Desert",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Has a Drop Level Requirement of 23.\nImplicitly has a Drop Level Cap, based on Charan's comments, at least somewhere as high as Act 10.\n\nCharan states:\n\"Drops from: *most core zones in parts 1 and 2* (nothing sealed like the belly of the beast or otherworldly like Maligaro’s Sanctum. Basically, anywhere ‘in’ Wraeclast.)\"\n\nLong term project due to numerous locations and low drop rate. otherworldly_story_area is likely the NOT tag, which includes the following:\n\nKaom's Dream, Kaom's Stronghold, Daresso's Dream, The Grand Arena, The Belly of the Beast Level 1/2 (Act 4), The Harvest, Maligaro's Sanctum, The Belly of the Beast (Act 9), The Rotting Core"
@@ -1743,7 +1743,7 @@
     "tagHypothesis": "ship_graveyard_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Coves; Reef; Strand; Whakawhairua Tuahu",
+    "dropsFrom": "Coves; Reef; Strand; Whakawairua Tuahu",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Previously DONE in 3.18\r\n3.19: \"Scholar of the Seas can now be found in the Strand Map and the Whakawhairua Tuahu Unique Map.\"\r\nNeeds check if these maps have ship_graveyard_area tag. If not, may be manual"
@@ -2381,7 +2381,7 @@
     "tagHypothesis": "Caer Blaidd, Wolfpack's Den (no tag)",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Care Blaidd, Wolfpack's Den",
+    "dropsFrom": "Caer Blaidd, Wolfpack's Den",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Caer Blaidd, Wolfpack's Den only"
@@ -2491,7 +2491,7 @@
     "tagHypothesis": "ship_graveyard_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Coves; Reef; Strand; Whakawhairua Tuahu; The Brine King's Reef",
+    "dropsFrom": "Coves; Reef; Strand; Whakawairua Tuahu; The Brine King's Reef",
     "wikiDisagreements": "Coral Ruins",
     "sourcesWithTagButNotOnWiki": null,
     "notes": "3.19: \"The Deep Ones can now be found in the Strand Map and the Whakawhairua Tuahu Unique Map.\"\nStrand and Whaka both gained the \"ship_graveyard_area\" tag, but not \"reef_area\". Is Coral Ruins still correct? Or is ship_graveyard_area a subset of reef_area (therefore automatically corresponding to this card as well?)\nAlternatively, could be reef_area OR ship_graveyard_area.\n3.21: Disproved Coral Ruins with 99% confidence."
@@ -2931,7 +2931,7 @@
     "tagHypothesis": "ship_graveyard_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Reef; Coves; Strand; Whakawhairua Tuahu",
+    "dropsFrom": "Reef; Coves; Strand; Whakawairua Tuahu",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Coves was legacy drop location; may have been reintroduced\nCoves verified in divcord\nMight also be `reef_area`; Coral Ruins would need verification\n3.19: \"The Formless Sea can now be found in the Strand Map and the Whakawhairua Tuahu Unique Map.\"\nNeeds check if these maps have reef_map or ship_graveyard_area tag. If not, may be manual\nVerified that Strand/Whaka gaine ship_graveyard_area"
@@ -3184,7 +3184,7 @@
     "tagHypothesis": "hall_of_grandmasters",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Hall of the Grandmasters",
+    "dropsFrom": "Hall of Grandmasters",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Drops from the grandmaster created by Dy'Ness specifically; current name in data is `QBotU_DyNess`\nNo longer monster-specific."
@@ -3239,7 +3239,7 @@
     "tagHypothesis": "toxic_pool_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Acid Caverns; Primordial Pool; Stagnation; Sulphure Vents; Mud Geyser; Marshes; Bog",
+    "dropsFrom": "Acid Caverns; Primordial Pool; Stagnation; Sulphur Vents; Mud Geyser; Marshes; Bog",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Divcord: Mud Geyser & Bog verified by fal\nDivcord: Stagnation\nDivcord: Marshes verified by nennas\nSulphur Vents verified in divcord"
@@ -4482,7 +4482,7 @@
     "tagHypothesis": "lunaris_area OR solaris_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Moon Temple; Cold River; the Twilight Temple; Temple",
+    "dropsFrom": "Moon Temple; Cold River; The Twilight Temple; Temple",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Moon temple verified in divcord\nDivcord: Cold River verified by Zimzams\nDivcord: Strong evidence from Ivory Temple testing that The Twins no longer drops here\nDivcord: Twilight Temple verified\nDivcord: Temple verified by Zimzams\nTemple has `solaris_area`, not `lunaris_area`\r\nNot unexpected given theme of Card"
@@ -4614,7 +4614,7 @@
     "tagHypothesis": "prison_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Cage, Dungeon, Pen, Cells, Shavronne's Tower, The Control Blocks (Act 5), The Lower Prison (Act 6), The Slave Pens",
+    "dropsFrom": "Cage; Dungeon; Pen; Cells; Shavronne's Tower; The Control Blocks (Act 5); The Lower Prison (Act 6); The Slave Pens",
     "wikiDisagreements": "Tower",
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Divcord verified in cells\n\nDivcord: No longer drops in Tower (Expected: >100 ; Sample Actual: 0)."
@@ -4625,7 +4625,7 @@
     "tagHypothesis": "military_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Armoury, Arsenal, Promenade, Colonnade",
+    "dropsFrom": "Armoury; Arsenal; Promenade; Colonnade",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Colonnade verified in divcord"
@@ -4636,7 +4636,7 @@
     "tagHypothesis": "chaos_golem_boss_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Geode, Grotto",
+    "dropsFrom": "Geode; Grotto",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": null
@@ -4647,7 +4647,7 @@
     "tagHypothesis": "spider_boss_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Arachnid Nest, Arachnid Tomb, Jungle Valley, Spider Lair, Toxic Sewer, Sunken City",
+    "dropsFrom": "Arachnid Nest; Arachnid Tomb; Jungle Valley; Spider Lair; Toxic Sewer; Sunken City",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Toxic Sewer observed by SlipperyJim8 as a Kirac Mission drop\nSunken city verified in divcord"
@@ -4669,7 +4669,7 @@
     "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Stonebeak, Battle Fowl",
+    "dropsFrom": "Stonebeak; Battle Fowl",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Stonebeak, Batle Fowl"
@@ -4691,7 +4691,7 @@
     "tagHypothesis": "windy_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Atoll, Jungle Valley, Mesa, Ligthouse, Plateau, Summit",
+    "dropsFrom": "Atoll; Jungle Valley; Mesa; Lighthouse; Plateau; Summit",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Lighthouse verified in divcord\nPlateau verified in divcord\nDivcord: Summit verified by RiPHeartofGold 3.19"
@@ -4702,7 +4702,7 @@
     "tagHypothesis": "alira_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Burial Chambers, Spider Forest",
+    "dropsFrom": "Burial Chambers; Spider Forest",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": null
@@ -4713,7 +4713,7 @@
     "tagHypothesis": "doedre_map_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "The Putrid Cloister, Sepulchre, Waste Pool, Phantasmagoria",
+    "dropsFrom": "The Putrid Cloister; Sepulchre; Waste Pool; Phantasmagoria",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "3.21: The Witch can now be found in the The Putrid Cloister, Sepulchre, Waste Pool, and Phantasmagoria Maps.\nThese Areas all received the new doedre_map_area Tag. They are the only four Areas with that Tag."
@@ -4724,7 +4724,7 @@
     "tagHypothesis": "mine_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Flooded Mine, Geode, Crystal Ore, Dig, Excavation, Grotto, The Quarry, The Tunnel",
+    "dropsFrom": "Flooded Mine; Geode; Crystal Ore; Dig; Excavation; Grotto; The Quarry; The Tunnel",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Divcord: T7 Crystal Ore verified by Zimzams\nDivcord: Geode verified -> mine_area\nExcavation, Dig verified in Divcord\n3.20 patch notes: Added Grotto\n\nDivcord: [Story] 3.21, A9 The Quarry verified by Zimzams"
@@ -4746,7 +4746,7 @@
     "tagHypothesis": "rigwald_area",
     "confidence": "done",
     "remainingWork": "unclearHypothesis",
-    "dropsFrom": "Lair, Dark Forest",
+    "dropsFrom": "Lair; Dark Forest",
     "wikiDisagreements": "Caer Blaidd, Wolfpack's Den",
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Divcord also verified this in Caer Blaidd, which has `den_area` but not `rigwald_area`\n\nNeeds verification for Barrows and Grotto if actually den_area\n\nDivcord: Dark Forest verified by Zimzams\n\nZimzams ran sufficient Grotto to obtain 82 Loyalty while observing 0 The Wolf's Shadow ; expected:14; actual 0. This sufficiently falsifies `den_area`.\n\nCould be rigwald_area + Caer Blaidd, or alternatively, \"Wolf\" boss + area drop."
@@ -4757,7 +4757,7 @@
     "tagHypothesis": "rigwald_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Dark Forest, Lair",
+    "dropsFrom": "Dark Forest; Lair",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": null
@@ -4768,7 +4768,7 @@
     "tagHypothesis": "goatman_boss_area",
     "confidence": "ok",
     "remainingWork": "unclearHypothesis",
-    "dropsFrom": "Glacier, Summit, Prisoner's Gate (A6)",
+    "dropsFrom": "Glacier; Summit; Prisoner's Gate (A6)",
     "wikiDisagreements": "Lair",
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Originally, both goatman_boss_area and snow_mountain_area returned the same set of Maps; with Story drops, goatman_boss_area is more likely, but this is not sufficient to explain drops in Lair\n\nLair has neither `goatman_boss_area` nor `snow_mountain_area`, which means that either hypothesis is incomplete.\nThe Wolverine is probably enabled by multiple different rules."
@@ -4801,7 +4801,7 @@
     "tagHypothesis": "kitava_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Belfry, Lava Lake, The Feeding Trough, The Cathedral Rooftop (A5)",
+    "dropsFrom": "Belfry; Lava Lake; The Feeding Trough; The Cathedral Rooftop (A5)",
     "wikiDisagreements": "The Cavern of Anger, The Canals",
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Cavern of Wrath (Cruel/Merc) is a historical drop location. It was changed without any explanation to Cavern of Anger Act 6 without any data in 2017 by Logopolis01 - likely no longer valid. Likewise, The Canals was added by a deleted user in 2017 - not consistent with current tags."
@@ -4812,7 +4812,7 @@
     "tagHypothesis": "crypt_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Bone Crypt, Cursed Crypt, The Coward's Trial",
+    "dropsFrom": "Bone Crypt; Cursed Crypt; The Coward's Trial",
     "wikiDisagreements": "Cells, Dungeon, Mud Geyser, Overgrown Ruin",
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Need verifications that these Areas are still eligible for The Wretched in 3.18:\n{Cells, Dungeon, Mud Geyser, Overgrown Ruin}\n\nIf Dungeon is eligible, maybe also `prison_area`\nIf Overgrown Ruin is eligible, maybe also `chamber_of_sins_area`\nIf Mud Geyser is eligible, maybe also `fetid_area` or `toxic_pool_area`\n\n\nDivcord: Zimzams tested Cells, n>200, 0 The Wretched -- no longer drops in Cells.\nDivcord: 3.20, Zimzams tested Dungeon, n=288, 0 The Wretched -- no longer drops in Dungeon (conf>>99.9%).\nDivcord: 3.20, Overgrown Ruin, n=95, 0 The Wretched -- no longer drops in Overgrown Ruin (conf>99.9%)."
@@ -4823,7 +4823,7 @@
     "tagHypothesis": "necromancer_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Bone Crypt, The Coward's Trial, Acton's Nightmare",
+    "dropsFrom": "Bone Crypt; The Coward's Trial; Acton's Nightmare",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": null
@@ -4856,7 +4856,7 @@
     "tagHypothesis": "library_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Academy, Museum, Scriptorium, The Archives, The Library",
+    "dropsFrom": "Academy; Museum; Scriptorium; The Archives; The Library",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Scriptorium verified in divcord"
@@ -4867,7 +4867,7 @@
     "tagHypothesis": "warehouse_area",
     "confidence": "ok",
     "remainingWork": "storyOnly",
-    "dropsFrom": "Arsenal, Factory, The Grain Gate, The Refinery",
+    "dropsFrom": "Arsenal; Factory; The Grain Gate; The Refinery",
     "wikiDisagreements": "The Imperial Fields, The Marketplace",
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Arsenal and Factory added - not sure what \"hidden_monster\" is.\nTag clash with The Marketplace (Act 3) and The Imperial Fields (Act 8) - reverify/disprove.\nThe Marketplace may be a remnant of the old \"The Warehouse District\". Cannot be \"marketplace_area\" or \"urban_sarn_area\"."
@@ -4878,7 +4878,7 @@
     "tagHypothesis": "triple_boss_map",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Arena, City Square, Courthouse, Courtyard, Crystal Ore, Forbidden Woods, Graveyard, Racecourse, Vaal Pyramid, Vaal Temple",
+    "dropsFrom": "Arena; City Square; Courthouse; Courtyard; Crystal Ore; Forbidden Woods; Graveyard; Racecourse; Vaal Pyramid; Vaal Temple",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": null
@@ -4889,7 +4889,7 @@
     "tagHypothesis": "lightning_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Courtyard, Strand, Tower, The Vinktar Square, Shavronne's Tower, The Twilight Strand (A6)",
+    "dropsFrom": "Courtyard; Strand; Tower; The Vinktar Square; Shavronne's Tower; The Twilight Strand (A6)",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Divcord: Viunktar verified"
@@ -4900,7 +4900,7 @@
     "tagHypothesis": "mine_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Flooded Mine, Excavation, Dig, Geode, Crystal Ore, Grotto",
+    "dropsFrom": "Flooded Mine; Excavation; Dig; Geode; Crystal Ore; Grotto",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Expedition Logbooks; Flooded Mine; Excavation\n\nDivcord: Crystal Ore verified by Tebec\nDivcord: Geode verified\n\nBesides the Expedition Areas, maybe also mine_area? That would cover Crystal Ore and the legacy location of Excavation. We would need verifications in {Dig, Flooded Mine, Geode}. Dig would distinguish it from cave_area.\n\nVerified Dig\n3.20 patch notes: Added Grotto"
@@ -4922,7 +4922,7 @@
     "tagHypothesis": "fields_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Ashen Wood, Fields, Peninsula, The Ashen Fields",
+    "dropsFrom": "Ashen Wood; Fields; Peninsula; The Ashen Fields",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Divcord: Peninsula verified\nPeninsula was legacy drop location; may have been reintroduced\n"
@@ -4933,7 +4933,7 @@
     "tagHypothesis": "cave_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Crystal Ore, Flooded Mine, Grotto, Underground River, Underground Sea, Lair, Maze of the Minoatur, Fungal Hollow; Caer Blaidd, Wolfpack's Den",
+    "dropsFrom": "Crystal Ore; Flooded Mine; Grotto; Underground River; Underground Sea; Lair; Maze of the Minotaur; Fungal Hollow; Caer Blaidd, Wolfpack's Den",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": "Excavation; ",
     "notes": "Caer Blaidd, Wolfpack's Den, Excavation, and Lair were legacy drop locations; may have been reintroduced\n\nfal verified Lair on Divcord\nDivcord: Fungal Hollow verified by nennas\njas verified Maze of the Minotaur on Divcord\nTreasure Hunter reported in Caer Blaidd by krolya"
@@ -4977,7 +4977,7 @@
     "tagHypothesis": "pitfight_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Pit of the Chimera, Pit, Arena, Colosseum",
+    "dropsFrom": "Pit of the Chimera; Pit; Arena; Colosseum",
     "wikiDisagreements": "Dungeon, Pen",
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Divcord: nennas verified Pit of the Chimera.\nDivcord: Zimzams ran Cells, n=578 without seeing any Unchained.\nDivcord: Pit confirmed by Jate\n\nThe Dungeon and Pen claims were older claims on the wiki, from 2021. The prison_area association was only based on those prior observations. I don't think we've seen any reverifications of Dungeon or Pen for Unchained in 3.18.\n\nIn fact, besides nennas's verified find in Pit of the Chimera, there was also Pold's tentative find in Arena, though Pold was hesitant about it because the Monster might have been Empowered by a Sentinel (albeit not with a Sentinel with a Divination Card Mod).\nIf Pold's find was not caused by a Sentinel, then `pitfight_area` might be a fit.\n\n\nStill need the following verifications to confirm `pitfight_area`:\n{Colosseum}\n\nRe-testing Dungeon/Pen might reveal whether or not multiple Tags apply in this case; if not, then `pitfight_area` may be the sole Tag now\nDivcord: 3.20 Zimzams tested Dungeon with n=288; zero drops of Unchained.\nDivcord: 3.20, NcuriousmediatoR reports a drop of Unchained from Colosseum, while running Eater (which cannot produce Cards that drop Corrupted Items, so wouldn't be able to be an Eldritch Altar false-positive).\nDivcord: 3.20, Zimzams verified Unchained in Colosseum."
@@ -4999,7 +4999,7 @@
     "tagHypothesis": "vaal_pyramid_area",
     "confidence": "low",
     "remainingWork": "confirm",
-    "dropsFrom": "Maze, Vaal Pyramid, The Temple of Decay Level 1, Vaal Temple, Vaults of Atziri",
+    "dropsFrom": "Maze; Vaal Pyramid; The Temple of Decay Level 1; Vaal Temple; Vaults of Atziri",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": "The Temple of Decay Level 2, Doryani's Machinarium",
     "notes": "Reported from Maze map and Temple of Decay 1, and verified in Vaal Pyramid\n\nProhibited Library: HotPocketRemix reported finding Unrequited Love in Vaal Temple, 3.19 -- agrees with tag predictions, but no screenshot\nPOEwiki discord: diamond reported finding in Vaults of Atziri, no timely screenshot"
@@ -5021,7 +5021,7 @@
     "tagHypothesis": "vile_areas",
     "confidence": "ok",
     "remainingWork": "storyOnly",
-    "dropsFrom": "Carcass, Core, Phantasmagoria, Toxic Sewer, Waste Pool, The Rotting Core, Acid Caverns, Malformation, The Sewers, ",
+    "dropsFrom": "Carcass; Core; Phantasmagoria; Toxic Sewer; Waste Pool; The Rotting Core; Acid Caverns; Malformation; The Sewers",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": "The Belly of the Beast Level 1/2, The Temple of Decay Level 1/2, The Toxic Conduits, Doedre's Cesspool, The Belly of the Beast (A9)",
     "notes": "Acid Caverns observed by SlipperyJim8 as a Kirac Mission drop\nMalformation verified in divcord\n3.20 patch notes: re-enabled.\nDivcord: 3.21, A3 The Sewers verified by Elinvynia"
@@ -5032,7 +5032,7 @@
     "tagHypothesis": "piety_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Core, Malformation, Shrine",
+    "dropsFrom": "Core; Malformation; Shrine",
     "wikiDisagreements": "Palace",
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Need to verify Palace and Villa -- if so, then both piety_area and dominus_area might qualify\n\nSeems like Vinia's Token cannot drop from Palace, the wiki note there must be out-of-date. (Sampling expected: 52; observed: 0)"
@@ -5043,7 +5043,7 @@
     "tagHypothesis": "elder_boss OR uber_elder",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "The Elder, Uber Elder",
+    "dropsFrom": "The Elder; Uber Elder",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Here's a remark from u/jokey321 of Void of the Elements dropping from Uber Elder:\nhttps://www.reddit.com/r/pathofexile/comments/pikn9t/i_paid_100_ex_for_73_uber_elder_runs_here_are_the/hbqigqw/?context=999\nThat comment was made during 3.15 Expedition.\n\nAnother comment, from u/Minkelol -- Void of the Elements from The Elder (not uber).\nhttps://www.reddit.com/r/pathofexile/comments/lm1ztg/loot_from_30_normal_elder/gnso4ay/?context=999\nThis would have been 3.13 Ritual.\n\n3.21: Verified drop in The Feared."
@@ -5054,7 +5054,7 @@
     "tagHypothesis": "mine_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Crystal Ore, Dig, Excavation, Flooded Mine, Geode, Grotto,\nThe Crystal Veins, The Mines Level 1, The Mines Level 2, The Quarry, The Tunnel",
+    "dropsFrom": "Crystal Ore; Dig; Excavation; Flooded Mine; Geode; Grotto;\nThe Crystal Veins; The Mines Level 1; The Mines Level 2; The Quarry; The Tunnel",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "3.20 patch notes: Added Grotto"
@@ -5065,7 +5065,7 @@
     "tagHypothesis": "lunaris_area",
     "confidence": "ok",
     "remainingWork": null,
-    "dropsFrom": "Moon Temple, Cold River",
+    "dropsFrom": "Moon Temple; Cold River",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": "The Twilight Temple",
     "notes": "lunaris_area ?\nIf so, this would mean The Twilight Temple & Cold River are eligible\nOr is Wealth and Power actually a Boss-specific drop?\nPreviously dropped from Lunaris Temple 2 (Act 8)\nTwilight Temple is closest to check if suspecting lunaris_area + church; could also be lunaris_area and NOT solaris_area\n\nDivcord: Cold River verified by kroIya 3.19\nCold River has both `lunaris_area` and `solaris_area`, so the presence of the latter does not prohibit it"
@@ -5120,7 +5120,7 @@
     "tagHypothesis": "library_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Academy, Museum, Scriptorium",
+    "dropsFrom": "Academy; Museum; Scriptorium",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Museum verified in Divcord\nNot related to incursion most likely\nCould also be relic_area\nDivcord: 3.20 Academy verified by Zimzams\n3.21 Scriptorium verified by Zimzams"
@@ -5230,7 +5230,7 @@
     "tagHypothesis": "den_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Grotto, Lair, Barrows, Caer Blaidd",
+    "dropsFrom": "Grotto; Lair; Barrows; Caer Blaidd, Wolfpack's Den",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Might match `den_area`=>Loyalty due to similar doggo theme?\n\nDivcord verifications: Lair, Grotto\nDivcord: Barrows verified by RiPHeartofGold 3.19\nLikely unrealistic to confirm in Caer Blaidd due ot rarity\nCaer Blaidd confirmed by Elinvynia in 3.21"
@@ -5252,7 +5252,7 @@
     "tagHypothesis": "synthesis_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Cortex, Augmented Distant Memory, Twisted Distant Memory, Altered Distant Memory, Rewritten Distant Memory",
+    "dropsFrom": "Cortex; Augmented Distant Memory; Twisted Distant Memory; Altered Distant Memory; Rewritten Distant Memory",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Divcord: 3.20, Cortex verified by Black Mamba\nThe sole Tag on Cortex is `synthesis_area`\nAugmented Distant Memory verified by yfeah\nTwisted Distant Memory verified by Jas\nAltered Distant Memory, Rewritten Distant Memory verified by Elinvynia"
@@ -5263,7 +5263,7 @@
     "tagHypothesis": "forest_map_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Ashen Wood, Spider Forest, Lair, Thicket, Dark Forest, Forbidden Woods, Tropical Island, Jungle Valley, Ramparts, Stagnation, Bramble Valley",
+    "dropsFrom": "Ashen Wood; Spider Forest; Lair; Thicket; Dark Forest; Forbidden Woods; Tropical Island; Jungle Valley; Ramparts; Stagnation; Bramble Valley",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Divcord: 3.20 verified Spider Forest, Lair, Thicket, Ashen Wood, Dark Forest, Forbidden Woods, Tropical Island\nDivcord: 3.20, Razgarnok verified Ramparts, Stagnation, Jungle Valley, Bramble Valley"
@@ -5274,7 +5274,7 @@
     "tagHypothesis": "eldritch_pinnacle_boss",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "The Maven, The Searing Exarch, The Eater of Worlds, Uber Elder",
+    "dropsFrom": "The Maven; The Searing Exarch; The Eater of Worlds; Uber Elder",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Divcord: 3.20 Uber Maven, Uber Eater, Uber Exarch verified\nConfirmed it can drop from non-uber versions of those bosses as well\nDoki verified Uber Uber Elder."
@@ -5307,7 +5307,7 @@
     "tagHypothesis": "bear_boss_map",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Cemetery, Barrows",
+    "dropsFrom": "Cemetery; Barrows",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Cemetery verified\nnote: Bramble Valley does not have the bear_boss_map tag despite Melur technically being a bear.\nDivcord: 3.20 Barrows verified"
@@ -5340,7 +5340,7 @@
     "tagHypothesis": "warehouse_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Arsenal, Factory, The Grain Gate, The Refinery",
+    "dropsFrom": "Arsenal; Factory; The Grain Gate; The Refinery",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Divcord: 3.20 The Grain Gate verified, A9 The Refinery verified, claim of Arsenal\nClaim of Factory on reddit"
@@ -5373,7 +5373,7 @@
     "tagHypothesis": "graveyard_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Cemetery, Graveyard, Grave Trough",
+    "dropsFrom": "Cemetery; Graveyard; Grave Trough",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Divcord: 3.21, Grave Trough verified by Elinvynia\nDivcord: 3.21, Graveyard verified by Elinvynia"
@@ -5384,7 +5384,7 @@
     "tagHypothesis": "Forge_Area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Factory, Foundry, Forge of the Phoenix, Silo",
+    "dropsFrom": "Factory; Foundry; Forge of the Phoenix; Silo",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": null
@@ -5395,7 +5395,7 @@
     "tagHypothesis": null,
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
-    "dropsFrom": "Overgrown Ruin, Sunken City",
+    "dropsFrom": "Overgrown Ruin; Sunken City",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": "Maligaro's Sanctum, The Temple of Decay Floor 2",
     "notes": "Tentative report of a drop in Temple of Decay (not sure which floor)\nDivcord: Zimzams and Elinvynia tracked >3400 natural Card drops in Overgrown Shrine; no hits.\n\nA few reports in 3.21 for Overgrown Ruin, no obvious tags (overlaps Overgrown Shrine, which also has chamber_of_sins_area)\nDivcord: 3.21, Overgrown Ruin verified by Elinvynia.\n\n\nMaybe it's a connection to Akaveesh (based off of Black Death, Pain Unending), the Unique Spider that Maligaro summons in the Overgrown Ruin and A7 Maligaro's Sanctum Boss fights?\n* That Monster appears in Overgrown Ruin but not in Overgrown Shrine.\n* In Story, the Black Venom Quest Item drops from the Spider, not Maligaro.\n* Black Venom => Poisoned Faith seems like acceptable theming.\n* Poisoned Faith has a Drop Level Requirement of 53, and A7 Maligaro's Sanctum is Area Level 52.\n\nNo standout Monster Tags.\nMaybe a rule equivalent to something like: \"Drops in an Area with a Boss based from `SpiderBossMaligaro`\"...?\nThis would limit eligible Areas to Overgrown Ruin and A7 Maligaro's Sanctum.\nA natural drop outside these two Areas would rule out this hypothesis.\n\nSunken City verified by Elinvynia, indicating a more complex solution.\nJungle Valley (and spider_boss_area) ruled out."
@@ -5406,7 +5406,7 @@
     "tagHypothesis": "snow_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Forbidden Woods, Cold River, Frozen Cabins, Iceberg, Glacier, Summit",
+    "dropsFrom": "Forbidden Woods; Cold River; Frozen Cabins; Iceberg; Glacier; Summit",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Divcord: 3.21, Summit and Glacier verified by Elinvynia\nDivcord: 3.21, Iceberg verified by Elinvynia"
@@ -5428,7 +5428,7 @@
     "tagHypothesis": "sun_nature_area",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Tropical Island, Mineral Pools, Plateau, Dunes, Mesa, Atoll, Estuary, Arid Lake, Leyline, Beach, Marshes, Peninsula, Sulphur Vents, Shore,  Terrace, Caldera, Orchard, Canyon, Ancient City, Fields, Jungle Valley, Desert Spring, Dry Sea, Crater, Desert, Burial Chambers",
+    "dropsFrom": "Tropical Island; Mineral Pools; Plateau; Dunes; Mesa; Atoll; Estuary; Arid Lake; Leyline; Beach; Marshes; Peninsula; Sulphur Vents; Shore; Terrace; Caldera; Orchard; Canyon; Ancient City; Fields; Jungle Valley; Desert Spring; Dry Sea; Crater; Desert; Burial Chambers",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": null
@@ -5439,7 +5439,7 @@
     "tagHypothesis": "undyingcultist_map",
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Academy, Residence",
+    "dropsFrom": "Academy; Residence",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "Divcord: 3.22, Residence verified by Elinvynia\nDivcord: 3.22, Academy verified by Elinvynia"
