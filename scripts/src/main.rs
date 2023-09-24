@@ -7,21 +7,29 @@ pub mod error;
 pub mod maps;
 pub mod reward;
 pub mod scripts;
+pub mod table;
 pub mod table_record;
 
 #[allow(unused)]
+use dropsource::{DropSource, Vendor};
+#[allow(unused)]
 use serde_json::{json, Value};
 #[allow(unused)]
+use std::collections::HashSet;
+#[allow(unused)]
 use std::{collections::HashMap, fmt::Display, slice::Iter};
+#[allow(unused)]
+use table_record::{CardDropTableRecord, Confidence, GreyNote};
 
 #[allow(unused)]
 use error::Error;
 
-#[tokio::main]
-async fn main() {}
-
 #[allow(unused)]
-use crate::scripts::{parse_table, read_original_table_sheet};
+use crate::scripts::read_original_table_sheet;
+use crate::table::Table;
+
+// #[tokio::main]
+// async fn main() {}
 
 // pub fn parse_drop_source(record: &CardDropTableRecord) -> Result<Vec<DropSource>, Error> {
 //     let mut sources: Vec<DropSource> = Vec::new();
@@ -60,76 +68,60 @@ use crate::scripts::{parse_table, read_original_table_sheet};
 //     Ok(sources)
 // }
 
-// pub fn temp_main() {
-//     let sheet = read_original_table_sheet("sheet.json").unwrap();
-//     let records = parse_table(&sheet.values[2..]).unwrap();
+pub fn write_confidence_map() {}
 
-//     let mut confidence_map: HashMap<Confidence, u16> = HashMap::new();
-//     for record in &records {
-//         let counter = confidence_map.entry(record.confidence.clone()).or_insert(0);
-//         *counter += 1;
-//     }
+pub fn main() {
+    let sheet = read_original_table_sheet("sheet.json").unwrap();
+    let table = Table::parse(&sheet.values[2..]).unwrap();
 
-//     dbg!(confidence_map);
+    let mut confidence_map: HashMap<Confidence, u16> = HashMap::new();
+    for record in &table.0 {
+        let counter = confidence_map.entry(record.confidence.clone()).or_insert(0);
+        *counter += 1;
+    }
 
-//     let mut map: HashMap<String, Vec<CardDropTableRecord>> = HashMap::new();
-//     for record in records {
-//         let vec = map.entry(record.name.as_str().to_owned()).or_insert(vec![]);
-//         vec.push(record);
-//     }
+    dbg!(confidence_map);
 
-//     dbg!(map.keys().len());
-//     std::fs::write("map.json", serde_json::to_string_pretty(&map).unwrap()).unwrap();
+    let mut map: HashMap<String, Vec<CardDropTableRecord>> = HashMap::new();
+    for record in table.0.clone() {
+        let vec = map.entry(record.name.as_str().to_owned()).or_insert(vec![]);
+        vec.push(record);
+    }
 
-//     let mut multiple_map: HashMap<String, Vec<CardDropTableRecord>> = HashMap::new();
-//     for (name, record) in map {
-//         if record.len() > 1 {
-//             multiple_map.insert(name.clone(), record.clone());
-//         }
-//     }
+    dbg!(map.keys().len());
+    std::fs::write("map.json", serde_json::to_string_pretty(&map).unwrap()).unwrap();
 
-//     dbg!(multiple_map.keys().len());
-//     std::fs::write(
-//         "multiple-map.json",
-//         serde_json::to_string_pretty(&multiple_map).unwrap(),
-//     )
-//     .unwrap();
+    let mut multiple_map: HashMap<String, Vec<CardDropTableRecord>> = HashMap::new();
+    for (name, record) in map {
+        if record.len() > 1 {
+            multiple_map.insert(name.clone(), record.clone());
+        }
+    }
 
-//     let mut _map: HashMap<&CardDropTableRecord, Vec<HashSet<DropSource>>> = HashMap::new();
+    dbg!(multiple_map.keys().len());
+    std::fs::write(
+        "multiple-map.json",
+        serde_json::to_string_pretty(&multiple_map).unwrap(),
+    )
+    .unwrap();
 
-//     let mut set: HashSet<DropSource> = HashSet::new();
-//     set.insert(DropSource::ChestObject);
-//     set.insert(DropSource::ExpeditionLogbook);
-//     set.insert(DropSource::Vendor(Some(Vendor::KiracShop)));
-//     set.insert(DropSource::Vendor(Some(Vendor::KiracShop)));
-//     dbg!(set);
+    // let mut _map: HashMap<&CardDropTableRecord, Vec<HashSet<DropSource>>> = HashMap::new();
 
-//     let sheet = read_original_table_sheet("sheet.json").unwrap();
-//     let records = parse_table(&sheet.values[2..]).unwrap();
+    // let mut set: HashSet<DropSource> = HashSet::new();
+    // set.insert(DropSource::ChestObject);
+    // set.insert(DropSource::ExpeditionLogbook);
+    // set.insert(DropSource::Vendor(Some(Vendor::KiracShop)));
+    // set.insert(DropSource::Vendor(Some(Vendor::KiracShop)));
+    // dbg!(set);
 
-//     for record in records {
-//         let drop_source = parse_drop_source(&record).unwrap();
-//         if drop_source.contains(&DropSource::ExpeditionLogbook) {
-//             dbg!(record);
-//         }
-//     }
-//     // std::fs::write("map.json", &serde_json::to_string_pretty(&map).unwrap()).unwrap();
-// }
+    // let sheet = read_original_table_sheet("sheet.json").unwrap();
+    // let records = parse_table(&sheet.values[2..]).unwrap();
 
-// pub fn write_sized_rewards() {
-//     let vec: Vec<NinjaCardData> =
-//         serde_json::from_str(&std::fs::read_to_string("ninja-data.json").unwrap()).unwrap();
-//     let mut with_size: Vec<String> = Vec::new();
-//     for card_data in vec {
-//         let reward = &card_data.explicit_modifiers[0].text;
-//         if reward.contains("<size:") {
-//             with_size.push(reward.clone());
-//         }
-//     }
-
-//     std::fs::write(
-//         "rewards-with-size.json",
-//         serde_json::to_string(&with_size).unwrap(),
-//     )
-//     .unwrap();
-// }
+    // for record in records {
+    //     let drop_source = parse_drop_source(&record).unwrap();
+    //     if drop_source.contains(&DropSource::ExpeditionLogbook) {
+    //         dbg!(record);
+    //     }
+    // }
+    // std::fs::write("map.json", &serde_json::to_string_pretty(&map).unwrap()).unwrap();
+}

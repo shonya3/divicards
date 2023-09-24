@@ -4,7 +4,7 @@ use googlesheets::sheet::ValueRange;
 use reqwest::Client;
 use serde_json::Value;
 
-use crate::{error::Error, table_record::CardDropTableRecord};
+use crate::{error::Error, table::Table};
 
 pub fn read_original_table_sheet<P: AsRef<Path>>(path: P) -> Result<ValueRange, Error> {
     let sheet: ValueRange = serde_json::from_str(&std::fs::read_to_string(path)?)?;
@@ -69,31 +69,16 @@ pub fn write_hypothesis_tags<P: AsRef<Path>>(path: P, sheet: &ValueRange) -> Res
     Ok(())
 }
 
-pub fn parse_table(values: &[Vec<Value>]) -> Result<Vec<CardDropTableRecord>, Error> {
-    let mut records: Vec<CardDropTableRecord> = Vec::new();
-    for row in values {
-        let record = CardDropTableRecord::parse(row)?;
-        records.push(record);
-    }
-
-    Ok(records)
-}
-
-pub fn write_parsed_table<P: AsRef<Path>>(
-    path: P,
-    table: &[CardDropTableRecord],
-) -> Result<(), Error> {
+pub fn write_parsed_table<P: AsRef<Path>>(path: P, table: &Table) -> Result<(), Error> {
     let json = serde_json::to_string_pretty(&table)?;
     std::fs::write(path, &json)?;
 
     Ok(())
 }
 
-pub fn write_drops_from<P: AsRef<Path>>(
-    path: P,
-    table: &[CardDropTableRecord],
-) -> Result<(), Error> {
+pub fn write_drops_from<P: AsRef<Path>>(path: P, table: &Table) -> Result<(), Error> {
     let drops_from: Vec<Option<String>> = table
+        .0
         .iter()
         .map(|record| record.drops_from.to_owned())
         .collect();
@@ -110,7 +95,25 @@ pub async fn update_all_jsons() {
     write_notes("notes.json", &sheet).expect("Write notes error");
     write_table_sheet("sheet.json", &sheet).expect("Write  sheet error");
 
-    let table = parse_table(&sheet.values[2..]).expect("Could not parse the table");
+    let table = Table::try_from(&sheet).expect("Could not parse the table");
     write_parsed_table("parsed-table.json", &table).expect("Write parsed table error");
     write_drops_from("drops-from.json", &table).expect("Write drops-from error");
 }
+
+// pub fn write_sized_rewards() {
+//     let vec: Vec<NinjaCardData> =
+//         serde_json::from_str(&std::fs::read_to_string("ninja-data.json").unwrap()).unwrap();
+//     let mut with_size: Vec<String> = Vec::new();
+//     for card_data in vec {
+//         let reward = &card_data.explicit_modifiers[0].text;
+//         if reward.contains("<size:") {
+//             with_size.push(reward.clone());
+//         }
+//     }
+
+//     std::fs::write(
+//         "rewards-with-size.json",
+//         serde_json::to_string(&with_size).unwrap(),
+//     )
+//     .unwrap();
+// }
