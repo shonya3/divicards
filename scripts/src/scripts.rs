@@ -4,7 +4,7 @@ use googlesheets::sheet::ValueRange;
 use reqwest::Client;
 use serde_json::Value;
 
-use crate::{error::Error, parse_row, CardDropRecord};
+use crate::{error::Error, parse_row, CardDropTableRecord};
 
 pub fn read_original_table_sheet<P: AsRef<Path>>(path: P) -> Result<ValueRange, Error> {
     let sheet: ValueRange = serde_json::from_str(&std::fs::read_to_string(path)?)?;
@@ -69,8 +69,8 @@ pub fn write_hypothesis_tags<P: AsRef<Path>>(path: P, sheet: &ValueRange) -> Res
     Ok(())
 }
 
-pub fn parse_table(values: &[Vec<Value>]) -> Result<Vec<CardDropRecord>, Error> {
-    let mut records: Vec<CardDropRecord> = Vec::new();
+pub fn parse_table(values: &[Vec<Value>]) -> Result<Vec<CardDropTableRecord>, Error> {
+    let mut records: Vec<CardDropTableRecord> = Vec::new();
     for row in values {
         let record = parse_row(row)?;
         records.push(record);
@@ -79,14 +79,20 @@ pub fn parse_table(values: &[Vec<Value>]) -> Result<Vec<CardDropRecord>, Error> 
     Ok(records)
 }
 
-pub fn write_parsed_table<P: AsRef<Path>>(path: P, table: &[CardDropRecord]) -> Result<(), Error> {
+pub fn write_parsed_table<P: AsRef<Path>>(
+    path: P,
+    table: &[CardDropTableRecord],
+) -> Result<(), Error> {
     let json = serde_json::to_string_pretty(&table)?;
     std::fs::write(path, &json)?;
 
     Ok(())
 }
 
-pub fn write_drops_from<P: AsRef<Path>>(path: P, table: &[CardDropRecord]) -> Result<(), Error> {
+pub fn write_drops_from<P: AsRef<Path>>(
+    path: P,
+    table: &[CardDropTableRecord],
+) -> Result<(), Error> {
     let drops_from: Vec<Option<String>> = table
         .iter()
         .map(|record| record.drops_from.to_owned())

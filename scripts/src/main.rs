@@ -1,3 +1,4 @@
+pub mod card_element;
 pub mod cards;
 pub mod consts;
 pub mod dropconsts;
@@ -13,54 +14,14 @@ use std::collections::HashSet;
 #[allow(unused)]
 use std::{collections::HashMap, fmt::Display, slice::Iter};
 
-use divi::{league::TradeLeague, prices::NinjaCardData, sample::fix_name, IsCard};
+use divi::{prices::NinjaCardData, sample::fix_name, IsCard};
 use dropsource::DropSource;
-use reward::reward_to_html;
 use serde::{Deserialize, Serialize};
 
 use error::Error;
 
 #[tokio::main]
 async fn main() {}
-
-#[derive(Serialize, Deserialize, Clone, Debug)]
-#[serde(rename_all = "camelCase")]
-pub struct DivinationCardElementData {
-    pub name: String,
-    pub art_filename: String,
-    pub reward_html: String,
-    pub flavour_text: String,
-    pub stack_size: Option<usize>,
-}
-
-impl DivinationCardElementData {
-    pub async fn write_data() {
-        let vec: Vec<NinjaCardData> = NinjaCardData::fetch(&TradeLeague::default()).await.unwrap();
-        let v: Vec<DivinationCardElementData> = vec
-            .into_iter()
-            .map(|data| {
-                let mut fl = data.flavour_text;
-                if fl.starts_with("<size:") {
-                    fl = fl[10..fl.len() - 1].to_string();
-                }
-
-                if fl.starts_with("<smaller>{") {
-                    fl = fl[10..fl.len() - 1].to_string();
-                }
-
-                DivinationCardElementData {
-                    name: data.name,
-                    art_filename: data.art_filename,
-                    flavour_text: fl,
-                    stack_size: data.stack_size,
-                    reward_html: reward_to_html(&data.explicit_modifiers[0].text),
-                }
-            })
-            .collect();
-
-        std::fs::write("data.json", serde_json::to_string(&v).unwrap()).unwrap();
-    }
-}
 
 use crate::dropsource::Vendor;
 #[allow(unused)]
@@ -191,7 +152,7 @@ pub fn parse_string_cell(val: &Value) -> Option<String> {
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 #[serde(rename_all = "camelCase")]
-pub struct CardDropRecord {
+pub struct CardDropTableRecord {
     pub greynote: Option<GreyNote>,
     pub name: String,
     pub tag_hypothesis: Option<String>,
@@ -203,7 +164,7 @@ pub struct CardDropRecord {
     pub notes: Option<String>,
 }
 
-pub fn parse_row(row: &[Value]) -> Result<CardDropRecord, Error> {
+pub fn parse_row(row: &[Value]) -> Result<CardDropTableRecord, Error> {
     let greynote = parse_greynote(&row[0])?;
     let name = parse_name(&row[1])?;
     let tag_hypothesis = parse_string_cell(&row[2]);
@@ -214,7 +175,7 @@ pub fn parse_row(row: &[Value]) -> Result<CardDropRecord, Error> {
     let sources_with_tag_but_not_on_wiki = row.get(7).map(|val| parse_string_cell(val)).flatten();
     let notes = row.get(8).map(|val| parse_string_cell(val)).flatten();
 
-    Ok(CardDropRecord {
+    Ok(CardDropTableRecord {
         greynote,
         name,
         tag_hypothesis,
@@ -227,7 +188,7 @@ pub fn parse_row(row: &[Value]) -> Result<CardDropRecord, Error> {
     })
 }
 
-pub fn parse_drop_source(record: &CardDropRecord) -> Result<Vec<DropSource>, Error> {
+pub fn parse_drop_source(record: &CardDropTableRecord) -> Result<Vec<DropSource>, Error> {
     let mut sources: Vec<DropSource> = Vec::new();
 
     if let Some(tag_hypothesis) = &record.tag_hypothesis {
@@ -496,7 +457,7 @@ pub fn temp_main() {
 
     dbg!(confidence_map);
 
-    let mut map: HashMap<String, Vec<CardDropRecord>> = HashMap::new();
+    let mut map: HashMap<String, Vec<CardDropTableRecord>> = HashMap::new();
     for record in records {
         let vec = map.entry(record.name.as_str().to_owned()).or_insert(vec![]);
         vec.push(record);
@@ -505,7 +466,7 @@ pub fn temp_main() {
     dbg!(map.keys().len());
     std::fs::write("map.json", serde_json::to_string_pretty(&map).unwrap()).unwrap();
 
-    let mut multiple_map: HashMap<String, Vec<CardDropRecord>> = HashMap::new();
+    let mut multiple_map: HashMap<String, Vec<CardDropTableRecord>> = HashMap::new();
     for (name, record) in map {
         if record.len() > 1 {
             multiple_map.insert(name.clone(), record.clone());
@@ -519,7 +480,7 @@ pub fn temp_main() {
     )
     .unwrap();
 
-    let mut _map: HashMap<&CardDropRecord, Vec<HashSet<DropSource>>> = HashMap::new();
+    let mut _map: HashMap<&CardDropTableRecord, Vec<HashSet<DropSource>>> = HashMap::new();
 
     let mut set: HashSet<DropSource> = HashSet::new();
     set.insert(DropSource::ChestObject);
