@@ -259,3 +259,84 @@ impl Display for Vendor {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use std::collections::HashSet;
+
+    use serde_json::json;
+
+    use crate::{
+        dropconsts::{ACT_AREA_NAMES, AREA_NAMES, BOSS_NAMES, CHESTS},
+        dropsource::DropSource,
+        maps::Map,
+    };
+
+    #[tokio::test]
+    async fn parses_dropsources_from_wiki_map_monster_agreements_column() {
+        crate::scripts::update_all_jsons().await;
+        let maps: Vec<Map> =
+            serde_json::from_str(&std::fs::read_to_string("maps.json").unwrap()).unwrap();
+        let maps: Vec<String> = maps.into_iter().map(|m| m.name).collect();
+        let maps_without_the: Vec<String> = maps.iter().map(|m| m.replace(" Map", "")).collect();
+
+        let drops: Vec<Option<String>> =
+            serde_json::from_str(&std::fs::read_to_string("drops-from.json").unwrap()).unwrap();
+
+        let mut sources = Vec::new();
+        for drop in drops {
+            let Some(drop_str) = drop else {
+                continue;
+            };
+
+            let drop_str = drop_str.replace("\r\n", "");
+            let mut drop_str = drop_str.replace("\n", "");
+
+            if drop_str.ends_with(";") {
+                println!("drop_str ends with ; {}", &drop_str);
+                drop_str.drain(drop_str.len() - 1..);
+            }
+
+            for s in drop_str.split(";") {
+                let s = s.trim();
+
+                if CHESTS.contains(&s) {
+                    continue;
+                }
+
+                if ACT_AREA_NAMES.contains(&s) {
+                    continue;
+                }
+
+                if BOSS_NAMES.contains(&s) {
+                    continue;
+                }
+
+                if AREA_NAMES.contains(&s) {
+                    continue;
+                }
+
+                if let Ok(_dropsource) = serde_json::from_str::<DropSource>(&json!(s).to_string()) {
+                    continue;
+                }
+
+                let string = s.to_string();
+                if maps.contains(&string) || maps_without_the.contains(&string) {
+                    continue;
+                }
+
+                sources.push(s.to_owned());
+            }
+        }
+
+        let sources: HashSet<String> = HashSet::from_iter(sources.iter().cloned());
+
+        // std::fs::write(
+        //     "dropsources.json",
+        //     &serde_json::to_string_pretty(&sources).unwrap(),
+        // )
+        // .unwrap();
+
+        assert_eq!(sources.len(), 0);
+    }
+}

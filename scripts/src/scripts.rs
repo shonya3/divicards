@@ -4,7 +4,7 @@ use googlesheets::sheet::ValueRange;
 use reqwest::Client;
 use serde_json::Value;
 
-use crate::{error::Error, parse_row, CardDropTableRecord};
+use crate::{error::Error, table_record::CardDropTableRecord};
 
 pub fn read_original_table_sheet<P: AsRef<Path>>(path: P) -> Result<ValueRange, Error> {
     let sheet: ValueRange = serde_json::from_str(&std::fs::read_to_string(path)?)?;
@@ -72,7 +72,7 @@ pub fn write_hypothesis_tags<P: AsRef<Path>>(path: P, sheet: &ValueRange) -> Res
 pub fn parse_table(values: &[Vec<Value>]) -> Result<Vec<CardDropTableRecord>, Error> {
     let mut records: Vec<CardDropTableRecord> = Vec::new();
     for row in values {
-        let record = parse_row(row)?;
+        let record = CardDropTableRecord::parse(row)?;
         records.push(record);
     }
 
