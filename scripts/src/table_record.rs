@@ -1,8 +1,13 @@
+use std::collections::HashSet;
+
 use divi::{sample::fix_name, IsCard};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-use crate::error::Error;
+use crate::{
+    dropsource::{DropSource, Vendor},
+    error::Error,
+};
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 #[serde(rename_all = "camelCase")]
@@ -42,6 +47,43 @@ impl CardDropTableRecord {
             sources_with_tag_but_not_on_wiki,
             notes,
         })
+    }
+
+    pub fn resolve_dropsources(&self) -> Result<HashSet<DropSource>, Error> {
+        let None = self.drops_from else {
+            let drops_from = self.drops_from.as_ref().unwrap().as_str();
+            return DropSource::parse(drops_from);
+        };
+
+        let mut dropsources = HashSet::new();
+
+        if let Some(greynote) = &self.greynote {
+            match greynote {
+                GreyNote::MonsterSpecific => {}
+                GreyNote::AreaSpecific => {}
+                GreyNote::Disabled => {
+                    dropsources.insert(DropSource::Disabled);
+                }
+                GreyNote::Story => {}
+                GreyNote::Delirium => {
+                    dropsources.insert(DropSource::Delirium);
+                }
+                GreyNote::ChestObject => {
+                    dropsources.insert(DropSource::ChestObject);
+                }
+                GreyNote::Strongbox => {
+                    dropsources.insert(DropSource::Strongbox);
+                }
+                GreyNote::GlobalDrop => {
+                    dropsources.insert(DropSource::GlobalDrop);
+                }
+                GreyNote::Vendor => {
+                    dropsources.insert(DropSource::Vendor(Some(Vendor::KiracShop)));
+                }
+            }
+        }
+
+        Ok(dropsources)
     }
 }
 

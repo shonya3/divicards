@@ -1,18 +1,22 @@
-use std::{fmt::Display, slice::Iter};
+use std::{collections::HashSet, fmt::Display, slice::Iter};
 
 use serde::{Deserialize, Serialize};
+use serde_json::json;
+
+use crate::{
+    dropconsts::{ACT_AREA_NAMES, AREA_NAMES, BOSS_NAMES, CHESTS},
+    error::Error,
+    maps::Map,
+};
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 pub enum DropSource {
-    MapName(String),
-    BossName(String),
     ExpeditionLogbook,
     GlobalDrop,
     ChestObject,
     Disabled,
     Unknown,
     Delirium,
-    Vendor(Option<Vendor>),
     Strongbox,
     #[serde(alias = "All (Scourge) beyond demons")]
     ScourgeBeyondDemons,
@@ -59,6 +63,16 @@ pub enum DropSource {
     VaalSideAreas,
 
     #[serde(untagged)]
+    Vendor(Option<Vendor>),
+
+    #[serde(untagged)]
+    MapName(String),
+    #[serde(untagged)]
+    BossName(String),
+    #[serde(untagged)]
+    Story(String),
+
+    #[serde(untagged)]
     MapsOnly(MapsOnly),
     #[serde(untagged)]
     BetrayalSyndicateMember(BetrayalSyndicateMember),
@@ -80,6 +94,52 @@ pub enum DropSource {
     ElderGuardianBoss(ElderGuardianBoss),
     #[serde(untagged)]
     ShaperGuardianBoss(ShaperGuardianBoss),
+}
+
+impl DropSource {
+    pub fn parse(drops_from: &str) -> Result<HashSet<DropSource>, Error> {
+        let maps: Vec<Map> =
+            serde_json::from_str(&std::fs::read_to_string("maps.json").unwrap()).unwrap();
+        let maps: Vec<String> = maps.into_iter().map(|m| m.name).collect();
+        let maps_without_the: Vec<String> = maps.iter().map(|m| m.replace(" Map", "")).collect();
+
+        let drops_from = drops_from.replace("\r\n", "");
+        let mut drops_from = drops_from.replace("\n", "");
+
+        if drops_from.ends_with(";") {
+            println!("drops_from ends with ; {}", &drops_from);
+            drops_from.drain(drops_from.len() - 1..);
+        }
+
+        let mut sources: HashSet<DropSource> = HashSet::new();
+        for s in drops_from.split(";") {
+            let s = s.trim();
+            let string = s.to_string();
+
+            let source = match s {
+                s if BOSS_NAMES.contains(&s) => DropSource::BossName(string),
+                s if ACT_AREA_NAMES.contains(&s) => DropSource::Story(string),
+                s if AREA_NAMES.contains(&s) => DropSource::MapName(string),
+                s if CHESTS.contains(&s) => DropSource::ChestObject,
+                _ => {
+                    if maps.contains(&string) || maps_without_the.contains(&string) {
+                        DropSource::MapName(string)
+                    } else if let Ok(dropsource) =
+                        serde_json::from_str::<DropSource>(&json!(s).to_string())
+                    {
+                        dropsource
+                    } else {
+                        dbg!(&s);
+                        DropSource::Unknown
+                    }
+                }
+            };
+
+            sources.insert(source);
+        }
+
+        Ok(sources)
+    }
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
