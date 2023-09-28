@@ -71,7 +71,7 @@ pub const BOSS_NAMES: &'static [&'static str] = &[
     "Oshabi, Avatar of the Grove",
     "Beast of the Pits",
     "Tolman, the Exhumer",
-    "Burtok, Shaper of Bones",
+    "Burtok, Conjurer of Bones",
     "K'aj Q'ura",
     "The Brittle Emperor",
     "Uber Elder",
