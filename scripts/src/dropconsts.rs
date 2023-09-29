@@ -124,6 +124,13 @@ pub const BOSS_NAMES: &'static [&'static str] = &[
     "Kitava, The Destroyer (The Destroyer's Heart)",
 ];
 
+pub fn poedb_page_url(boss: &str) {
+    let name = boss.split("(").next().unwrap().trim();
+    let name = name.replace(" ", "_");
+    let name = name.replace(",", "%2C");
+    format!("https://poedb.tw/us/{name}");
+}
+
 pub const AREA_NAMES: &'static [&'static str] = &["The Apex of Sacrifice", "The Alluring Abyss"];
 
 pub const ACT_AREA_NAMES: &'static [&'static str] = &[
