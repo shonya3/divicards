@@ -184,7 +184,7 @@
       "",
       "DONE",
       "n/a",
-      "n/a",
+      "Abyssal Trove",
       "n/a",
       "n/a",
       "Abyssal Trove"
@@ -569,7 +569,7 @@
       "",
       "DONE",
       "n/a",
-      "n/a",
+      "Delve chest",
       "n/a",
       "n/a",
       "Delve chest item"
@@ -727,7 +727,7 @@
       "",
       "DONE",
       "n/a",
-      "n/a",
+      "The Maven's Crucible",
       "n/a",
       "n/a",
       "The Maven's Crucible Event Completion loot"
@@ -869,7 +869,7 @@
       "",
       "DONE",
       "n/a",
-      "n/a",
+      "Map Reward Heist Chests",
       "n/a",
       "n/a",
       "Map Reward Heist Chests"
@@ -1106,7 +1106,7 @@
       "",
       "DONE",
       "n/a",
-      "n/a",
+      "Jeweller's Strongbox",
       "n/a",
       "n/a"
     ],
@@ -1752,7 +1752,7 @@
       "",
       "DONE",
       "n/a",
-      "",
+      "Voltaxic Sulphite",
       "",
       "",
       "Voltaxic Sulphite"
@@ -2055,7 +2055,7 @@
       "",
       "DONE",
       "n/a",
-      "",
+      "Labyrinth Darkshrines",
       "",
       "",
       "Labyrinth Darkshrines"
@@ -2066,7 +2066,7 @@
       "",
       "DONE",
       "n/a",
-      "n/a",
+      "Armourer's Strongbox",
       "n/a",
       "n/a"
     ],
@@ -2193,7 +2193,7 @@
       "",
       "DONE",
       "n/a",
-      "n/a",
+      "Cartographer's Strongbox",
       "n/a",
       "n/a",
       "Cartographer's Strongboxes"
@@ -2259,7 +2259,7 @@
       "",
       "DONE",
       "n/a",
-      "",
+      "Jeweller's Strongbox",
       "",
       "",
       "In the past, there were claims of The Celestial Stone dropping in Lair of the Hydra -- either as an Area drop or as a Boss-specific drop from Guardian of the Hydra.\nShaper Guardian Maps seem to work like Unique Maps in that they can have Area-specific natural Card drops which do not depend on Tags.\nThese claims were prior to to the modern Card drop location reworks, however. We don't know if they're still true.\n* If the Hydra claim were about an Area drop, I'd assume it to be another example of a drop from a Jeweller's Strongbox that someone mistakenly misattributed as an Area drop.\n* If the claim were instead about a Boss-specific drop, I don't know what to expect re: data for that. If it's eligible, it's likely very uncommon.\n\nHere's a \"Hydra\" claim from 2019 relayed by sirgog (https://www.reddit.com/r/pathofexile/comments/cuynv7/check_out_one_of_the_new_divination_cards_from/ey1knly/); but 2019 is far before the modern Card location rework, so even if it was true in the past it might not be true anymore.\n\n(Wiki also has old claims of Basilica, Terrace from 2018. Terrace was tested in Divcord during ~Aug 2022, n=1941 natural Card drops with no hits of The Celestial Stone -- but given the rarity of the Card, that test was technically inconclusive. So far, no affirmative modern evidence exists of drops in those Areas.)\n3.21: Total cards 2146.\n\nDeterministic drop from Jeweller's Strongboxes"
@@ -2292,7 +2292,7 @@
       "",
       "DONE",
       "n/a",
-      "n/a",
+      "Breach Clasped Hand",
       "n/a",
       "n/a",
       "Breach Clasped Hand"
@@ -2569,7 +2569,7 @@
       "",
       "DONE",
       "n/a",
-      "",
+      "Cartographer's Strongbox",
       "",
       "",
       "The following note on The Dreamland came from a 2018 claim on the wiki that The Dreamland was a natural Area drop in Laboratory Map. That was prior to the Tag reworks, though: \"Could this be an Area-specific drop in Laboratory...? Laboratory is weird in general. Card flavourwise could relate to the boss or Shaper.\"\n\nLooking at a thread from 4 years ago, seems to be mostly attributed to Cartographer Strongboxes (including Unique ones).\n\nUntil we see any evidence of a new Area drop location, assume that The Dreamland is restricted solely to Cartographer's Strongboxes for now."
@@ -2945,7 +2945,7 @@
       "",
       "DONE",
       "n/a",
-      "n/a",
+      "Gemcutter's Strongbox",
       "n/a",
       "n/a",
       "Gemcutter's Strongbox"
@@ -3052,7 +3052,7 @@
       "",
       "DONE",
       "n/a",
-      "",
+      "Arcanist's Strongbox",
       "",
       "",
       "Arcanist's Strongbox"
@@ -3430,7 +3430,7 @@
       "",
       "DONE",
       "n/a",
-      "n/a",
+      "Artisan's Strongbox",
       "n/a",
       "n/a"
     ],
@@ -3914,7 +3914,7 @@
       "",
       "DONE",
       "n/a",
-      "n/a",
+      "Izaro's Treasure",
       "n/a",
       "n/a",
       "Diviner's Strongbox, Izaro's Treasure"
@@ -4867,7 +4867,7 @@
       "",
       "DONE",
       "n/a",
-      "n/a",
+      "Delve Interactables behind Fractured Wall",
       "n/a",
       "n/a",
       "Delve Interactables behind Fractured Wall"
@@ -4889,7 +4889,7 @@
       "",
       "DONE",
       "n/a",
-      "",
+      "Vaal Vessel (Vaal Side Areas)",
       "",
       "",
       "Vaal Vessel in Vaal Side Areas"
