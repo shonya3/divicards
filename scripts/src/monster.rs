@@ -7,6 +7,8 @@ use crate::dropconsts::BOSS_NAMES;
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
 #[serde(tag = "uniqueMonster")]
 pub enum UniqueMonster {
+    #[serde(alias = "Maven's Invitation: The Feared")]
+    MavensInvitationTheFeared,
     #[serde(alias = "Uul-Netol, Unburdened Flesh (in Breachstones)")]
     UulNetolInBreachstones,
     #[serde(rename = "The Vaal Omnitect")]
@@ -34,7 +36,7 @@ pub enum UniqueMonster {
     RogueExile(RogueExile),
     AbyssLichBoss(AbyssLichBoss),
     MapsOnly(MapsOnly),
-    StoryBoos(StoryBoss),
+    StoryBoss(StoryBoss),
     HarbingerPortal(HarbingerPortal),
     Boss(String),
 }
@@ -43,7 +45,9 @@ impl FromStr for UniqueMonster {
     type Err = strum::ParseError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        if s == "Uul-Netol, Unburdened Flesh (in Breachstones)" {
+        if s == "Maven's Invitation: The Feared" {
+            return Ok(UniqueMonster::MavensInvitationTheFeared);
+        } else if s == "Uul-Netol, Unburdened Flesh (in Breachstones)" {
             return Ok(UniqueMonster::UulNetolInBreachstones);
         } else if s == "The Vaal Omnitect" {
             return Ok(UniqueMonster::VaalOmnitect);
@@ -80,7 +84,7 @@ impl FromStr for UniqueMonster {
         } else if let Ok(mapsonly) = s.parse::<MapsOnly>() {
             return Ok(UniqueMonster::MapsOnly(mapsonly));
         } else if let Ok(storyboss) = s.parse::<StoryBoss>() {
-            return Ok(UniqueMonster::StoryBoos(storyboss));
+            return Ok(UniqueMonster::StoryBoss(storyboss));
         } else if let Ok(harbingerportal) = s.parse::<HarbingerPortal>() {
             return Ok(UniqueMonster::HarbingerPortal(harbingerportal));
         } else if BOSS_NAMES.contains(&s) {
@@ -94,6 +98,7 @@ impl FromStr for UniqueMonster {
 impl std::fmt::Display for UniqueMonster {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
+            UniqueMonster::MavensInvitationTheFeared => write!(f, "Maven's Invitation: The Feared"),
             UniqueMonster::UulNetolInBreachstones => {
                 write!(f, "Uul-Netol, Unburdened Flesh (in Breachstones)")
             }
@@ -116,7 +121,7 @@ impl std::fmt::Display for UniqueMonster {
             UniqueMonster::RogueExile(rogueexile) => rogueexile.fmt(f),
             UniqueMonster::AbyssLichBoss(abysslichboss) => abysslichboss.fmt(f),
             UniqueMonster::MapsOnly(mapsonly) => mapsonly.fmt(f),
-            UniqueMonster::StoryBoos(storyboss) => storyboss.fmt(f),
+            UniqueMonster::StoryBoss(storyboss) => storyboss.fmt(f),
             UniqueMonster::HarbingerPortal(harbingerportal) => harbingerportal.fmt(f),
             UniqueMonster::Boss(s) => s.fmt(f),
         }

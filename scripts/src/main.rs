@@ -1,3 +1,4 @@
+pub mod act;
 pub mod card_element;
 pub mod cards;
 pub mod consts;
@@ -5,11 +6,13 @@ pub mod dropconsts;
 pub mod dropsource;
 pub mod error;
 pub mod maps;
+pub mod monster;
 pub mod reward;
 pub mod scripts;
 pub mod table;
 pub mod table_record;
 
+use crate::monster::UniqueMonster;
 #[allow(unused)]
 use crate::scripts::{read_original_table_sheet, update_all_jsons};
 #[allow(unused)]
@@ -51,4 +54,10 @@ use std::{collections::HashMap, fmt::Display, slice::Iter};
 #[allow(unused)]
 use table_record::{CardDropTableRecord, Confidence, GreyNote};
 
-fn main() {}
+fn main() {
+    let monster = "Reassembled Brutus".parse::<UniqueMonster>().unwrap();
+
+    println!("{:?}", monster);
+    println!("{monster}");
+    println!("{}", serde_json::to_string(&monster).unwrap());
+}
