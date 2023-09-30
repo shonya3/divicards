@@ -2,14 +2,14 @@ use serde::{Deserialize, Serialize};
 use std::str::FromStr;
 use strum_macros::EnumString;
 
-use crate::dropconsts::BOSS_NAMES;
+use super::dropconsts::BOSS_NAMES;
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
 #[serde(tag = "uniqueMonster")]
 pub enum UniqueMonster {
-    #[serde(alias = "Maven's Invitation: The Feared")]
+    #[serde(rename = "Maven's Invitation: The Feared")]
     MavensInvitationTheFeared,
-    #[serde(alias = "Uul-Netol, Unburdened Flesh (in Breachstones)")]
+    #[serde(rename = "Uul-Netol, Unburdened Flesh (in Breachstones)")]
     UulNetolInBreachstones,
     #[serde(rename = "The Vaal Omnitect")]
     VaalOmnitect,
@@ -38,7 +38,9 @@ pub enum UniqueMonster {
     MapsOnly(MapsOnly),
     StoryBoss(StoryBoss),
     HarbingerPortal(HarbingerPortal),
-    Boss(String),
+    Boss {
+        name: String,
+    },
 }
 
 impl FromStr for UniqueMonster {
@@ -88,7 +90,9 @@ impl FromStr for UniqueMonster {
         } else if let Ok(harbingerportal) = s.parse::<HarbingerPortal>() {
             return Ok(UniqueMonster::HarbingerPortal(harbingerportal));
         } else if BOSS_NAMES.contains(&s) {
-            return Ok(UniqueMonster::Boss(s.to_string()));
+            return Ok(UniqueMonster::Boss {
+                name: s.to_string(),
+            });
         }
 
         Err(strum::ParseError::VariantNotFound)
@@ -123,7 +127,7 @@ impl std::fmt::Display for UniqueMonster {
             UniqueMonster::MapsOnly(mapsonly) => mapsonly.fmt(f),
             UniqueMonster::StoryBoss(storyboss) => storyboss.fmt(f),
             UniqueMonster::HarbingerPortal(harbingerportal) => harbingerportal.fmt(f),
-            UniqueMonster::Boss(s) => s.fmt(f),
+            UniqueMonster::Boss { name } => name.fmt(f),
         }
     }
 }

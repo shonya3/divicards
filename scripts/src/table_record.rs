@@ -1,13 +1,8 @@
-use std::collections::HashSet;
-
 use divi::{sample::fix_name, IsCard};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-use crate::{
-    dropsource::{DropSource, Vendor},
-    error::Error,
-};
+use crate::error::Error;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 #[serde(rename_all = "camelCase")]
@@ -49,42 +44,63 @@ impl CardDropTableRecord {
         })
     }
 
-    pub fn resolve_dropsources(&self) -> Result<HashSet<DropSource>, Error> {
-        let None = self.drops_from else {
-            let drops_from = self.drops_from.as_ref().unwrap().as_str();
-            return DropSource::parse(drops_from);
+    pub fn vec_drops_from(&self) -> Vec<String> {
+        let mut vec: Vec<String> = Vec::new();
+        if let Some(drops_from) = &self.drops_from {
+            let drops_from = drops_from.replace("\r\n", "");
+            let mut drops_from = drops_from.replace("\n", "");
+
+            if drops_from.ends_with(";") {
+                println!("drops_from ends with ; {}", &drops_from);
+                drops_from.drain(drops_from.len() - 1..);
+            }
+
+            for s in drops_from.split(";") {
+                let s = s.trim().to_string();
+                vec.push(s);
+            }
         };
 
-        let mut dropsources = HashSet::new();
-
-        if let Some(greynote) = &self.greynote {
-            match greynote {
-                GreyNote::MonsterSpecific => {}
-                GreyNote::AreaSpecific => {}
-                GreyNote::Disabled => {
-                    dropsources.insert(DropSource::Disabled);
-                }
-                GreyNote::Story => {}
-                GreyNote::Delirium => {
-                    dropsources.insert(DropSource::Delirium);
-                }
-                GreyNote::ChestObject => {
-                    dropsources.insert(DropSource::ChestObject);
-                }
-                GreyNote::Strongbox => {
-                    dropsources.insert(DropSource::Strongbox);
-                }
-                GreyNote::GlobalDrop => {
-                    dropsources.insert(DropSource::GlobalDrop);
-                }
-                GreyNote::Vendor => {
-                    dropsources.insert(DropSource::Vendor(Some(Vendor::KiracShop)));
-                }
-            }
-        }
-
-        Ok(dropsources)
+        vec
     }
+
+    // TODO
+    // pub fn resolve_dropsources(&self) -> HashSet<DropSource> {
+    //     let None = self.drops_from else {
+    //         let drops_from = self.drops_from.as_ref().unwrap().as_str();
+    //         return DropSource::parse(drops_from).unwrap();
+    //     };
+
+    //     let mut dropsources = HashSet::new();
+
+    //     if let Some(greynote) = &self.greynote {
+    //         match greynote {
+    //             GreyNote::MonsterSpecific => {}
+    //             GreyNote::AreaSpecific => {}
+    //             GreyNote::Disabled => {
+    //                 dropsources.insert(DropSource::Disabled);
+    //             }
+    //             GreyNote::Story => {}
+    //             GreyNote::Delirium => {
+    //                 dropsources.insert(DropSource::Delirium);
+    //             }
+    //             GreyNote::ChestObject => {
+    //                 dropsources.insert(DropSource::ChestObject);
+    //             }
+    //             GreyNote::Strongbox => {
+    //                 dropsources.insert(DropSource::Strongbox);
+    //             }
+    //             GreyNote::GlobalDrop => {
+    //                 dropsources.insert(DropSource::GlobalDrop);
+    //             }
+    //             GreyNote::Vendor => {
+    //                 dropsources.insert(DropSource::Vendor(Some(Vendor::KiracShop)));
+    //             }
+    //         }
+    //     }
+
+    //     dropsources
+    // }
 }
 
 pub fn parse_greynote(val: &Value) -> Result<Option<GreyNote>, Error> {
@@ -220,7 +236,7 @@ mod tests {
 
     #[test]
     fn parses_table_without_errors() {
-        let sheet = read_original_table_sheet("sheet.json").unwrap();
+        let sheet = read_original_table_sheet("jsons/sheet.json").unwrap();
         for row in &sheet.values[2..] {
             CardDropTableRecord::parse(row).unwrap();
         }
@@ -228,7 +244,7 @@ mod tests {
 
     #[test]
     fn test_parse_greynote() {
-        let sheet = read_original_table_sheet("sheet.json").unwrap();
+        let sheet = read_original_table_sheet("jsons/sheet.json").unwrap();
         let mut vec: Vec<Vec<Value>> = vec![];
         for val in &sheet.values {
             if let Err(_) = parse_greynote(&val[0]) {
@@ -292,7 +308,7 @@ mod tests {
 
     #[test]
     fn test_parse_name() {
-        let sheet = read_original_table_sheet("sheet.json").unwrap();
+        let sheet = read_original_table_sheet("jsons/sheet.json").unwrap();
         let mut vec: Vec<Vec<Value>> = vec![];
         for val in &sheet.values[2..] {
             if let Err(_) = super::parse_name(&val[1]) {
@@ -315,7 +331,7 @@ mod tests {
 
     #[test]
     fn test_parse_remaining_work() {
-        let sheet = read_original_table_sheet("sheet.json").unwrap();
+        let sheet = read_original_table_sheet("jsons/sheet.json").unwrap();
         let mut vec: Vec<Vec<Value>> = vec![];
         for val in &sheet.values[2..] {
             if val.len() < 5 {

@@ -19,3 +19,5 @@ scraper = "0.17.1"
 reqwest = { workspace = true, features = ["blocking"] }
 regex = "1.9.5"
 strum_macros = "0.25.2"
+playwright = "0.0.20"
+strum = "0.25.0"

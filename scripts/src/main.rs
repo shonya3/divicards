@@ -2,17 +2,14 @@ pub mod act;
 pub mod card_element;
 pub mod cards;
 pub mod consts;
-pub mod dropconsts;
 pub mod dropsource;
 pub mod error;
 pub mod maps;
-pub mod monster;
 pub mod reward;
 pub mod scripts;
 pub mod table;
 pub mod table_record;
 
-use crate::monster::UniqueMonster;
 #[allow(unused)]
 use crate::scripts::{read_original_table_sheet, update_all_jsons};
 #[allow(unused)]
@@ -20,11 +17,7 @@ use crate::table::Table;
 #[allow(unused)]
 use divi::consts::CARDS;
 #[allow(unused)]
-use dropconsts::ACT_AREA_NAMES;
-#[allow(unused)]
-use dropconsts::BOSS_NAMES;
-#[allow(unused)]
-use dropsource::{DropSource, Vendor};
+use dropsource::Source;
 #[allow(unused)]
 use error::Error;
 #[allow(unused)]
@@ -54,10 +47,5 @@ use std::{collections::HashMap, fmt::Display, slice::Iter};
 #[allow(unused)]
 use table_record::{CardDropTableRecord, Confidence, GreyNote};
 
-fn main() {
-    let monster = "Reassembled Brutus".parse::<UniqueMonster>().unwrap();
-
-    println!("{:?}", monster);
-    println!("{monster}");
-    println!("{}", serde_json::to_string(&monster).unwrap());
-}
+#[tokio::main]
+async fn main() {}

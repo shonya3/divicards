@@ -132,7 +132,7 @@
       "",
       "DONE",
       "n/a",
-      "Mao Kun",
+      "Booty Chest (Mao Kun)",
       "n/a",
       "n/a",
       "level 68+; old claims were Arsenal, with hypothesis on `warehouse_area`\nOnly Mao Kun has been verified in 3.18\n\nNeeds reverification in 3.18. Factory sample has produced 0 Abandoned Wealth so far, but might just be bad luck. Possible that this is now Mao-Kun-exclusive, unless someone can confirm Arsenal or Factory in 3.18.\nDivcord: Aggregate natural Card drop count from T16 Factory is 565, zero instances of Abandoned Wealth.\n\nDivcord: Aggregate natural Card drop count from T16 Arsenal is 756, zero instances of Abandoned Wealth. Probability of occurrence: 0.23%.\n\nVery unlikely that Abandoned Wealth drops from either Factory or Arsenal anymore. Might be Mao-Kun-exclusive now."
@@ -335,7 +335,7 @@
       "relic_area",
       "DONE",
       "n/a",
-      "Museum; Relic Chambers; The Reliquary (Act 5/10)",
+      "Museum; Relic Chambers; The Reliquary (A5/A10)",
       "n/a",
       "n/a"
     ],
@@ -367,7 +367,7 @@
       "solaris_area",
       "DONE",
       "n/a",
-      "Temple; The Twilight Temple; The Solaris Temple 1/2 (A8); Cold River; The Harbour Bridge",
+      "Temple; The Twilight Temple; The Solaris Temple Level 1/2 (A8); Cold River; The Harbour Bridge",
       "Ivory Temple",
       "",
       "Divcord: fal claims Boundless Realms drops in Cold River (confirmed)\n\nNeed to see if the wiki claim of Ivory Temple is still accurate"
@@ -539,7 +539,7 @@
       "catacomb_area",
       "DONE",
       "n/a",
-      "Bone Crypt; The Catacombs; The Ossuary (Act 5); The Ossuary (Act 10)",
+      "Bone Crypt; The Catacombs; The Ossuary (A5/A10)",
       "n/a",
       "n/a",
       "The reason this association was not marked \"Done\" is that Bone Crypt is the sole Map with catacomb_area currently, so we can't test the hypothesis of the Tag association in Maps. We'd need to see at least one more Map with catacomb_area other than Bone Crypt in which Coveted Possession drops to be more confident that the association is correct. But no such Map exists currently.\n(The pattern seems to hold true for Story Areas, though.)\n\nFor example, eligibility could be governed by some other non-Tag aspect shared by Bone Crypt and the Story Areas (true of a small number of other Cards), but we have no way to distinguish that right now.\n\nOne could argue that the Story evidence is sufficient to mark this Done, though."
@@ -716,7 +716,7 @@
       "solaris_area",
       "DONE",
       "n/a",
-      "Temple; The Twilight Temple; Cold River; The Solaris Temple Level 1 (Act 8); The Harbour Bridge; The Solaris Temple Level 2 (Act 8)",
+      "Temple; The Twilight Temple; Cold River; The Solaris Temple Level 1/2 (A8); The Harbour Bridge",
       "Ivory Temple",
       "",
       "Divcord: Temple verified by Zimzams\nDivcord: Cold River verified by Zimzams\n\nDivcord: Moderate evidence from Ivory Temple testing that Dialla's Subjugation no longer drops here\n3.21: Harbour Bridge verified by Elinvynia\n3.22: Solaris Temple 2 (Act 8) verified by Elinvynia"
@@ -816,7 +816,7 @@
       "story only",
       "Overgrown Ruin; Overgrown Shrine",
       "n/a",
-      "The Chamber of Sins Level 1/2 (Act 7)",
+      "The Chamber of Sins Level 1/2 (A7)",
       "maligaro_area ? chamber_of_sins_area ? both?\nOvergrown Shrine verified in divcord\nneeds verification\n\nmight be both: \n{`chamber_of_sins_area` + `maligaro_area`}. \n"
     ],
     [
@@ -836,7 +836,7 @@
       "chamber_of_sins_area",
       "DONE",
       "n/a",
-      "Overgrown Ruin; Overgrown Shrine; The Chamber of Sins Level 1/2 (Act 7)",
+      "Overgrown Ruin; Overgrown Shrine; The Chamber of Sins Level 1/2 (A7)",
       "Fungal Hollow",
       "n/a",
       "Divcord: verified in Overgrown Ruin by Zimzams via a Kirac Card Mission\n\nIs the old wiki Fungal Hollow claim still accurate? Doesn't mesh with `chamber_of_sins_area`\n\nDivcord: nennas tested Fungal Hollow; with that sample, zero Emperor of Purity observed; probability this would occur by chance is ~1.7%. Unlikely to drop in Fungal Hollow anymore. It's probably safe to call this one done and revisit only if we're surprised by a Fungal Hollow drop in the future."
@@ -975,7 +975,7 @@
       "flooded_area",
       "DONE",
       "n/a",
-      "Flooded Mine; Mineral Pools; Underground Sea; The Cavern of Anger (Act 6)",
+      "Flooded Mine; Mineral Pools; Underground Sea; The Cavern of Anger (A6)",
       "n/a",
       "n/a"
     ],
@@ -985,7 +985,7 @@
       "crypt_area",
       "DONE",
       "n/a",
-      "Bone Crypt; Cursed Crypt; The Coward's Trial; The Crypt (Act 7)",
+      "Bone Crypt; Cursed Crypt; The Coward's Trial; The Crypt (A7)",
       "Olmec's Sanctum",
       "n/a",
       "Divcord: Coward's Trial verified by Zimzams\nZimzams mentioned a drop from Kirac Card Mission in Necropolis\n\nZimzams hypothesizes: \"Similar to The Forsaken, maybe `crypt_area` + `necropolis`? \"\n\n\nStill eligible to drop in Olmec's Sanctum in 3.18?\nIf so, then it needs another row for an Area-Specific Drop"
@@ -996,7 +996,7 @@
       "catacomb_area",
       "DONE",
       "n/a",
-      "Bone Crypt; The Ossuary (Act 10); The Catacombs; The Ossuary (Act 5)",
+      "Bone Crypt; The Ossuary (A5/A10); The Catacombs",
       "",
       "",
       "New tag eligibility discovered by Elinvynia in 3.21 - The Ossuary (Act 10).\nDivcord: 3.21, A3 The Catacombs verified by Elinvynia\nDivcord: 3.21, A5 The Ossuary verified by Elinvynia"
@@ -1126,7 +1126,7 @@
       "river_area",
       "DONE",
       "n/a",
-      "Forking River; Ramparts; The Sarn Ramparts; The Riverways (Act 6); The Southern Forest (Act 6)",
+      "Forking River; Ramparts; The Sarn Ramparts; The Riverways (A6); The Southern Forest (A6)",
       "",
       "n/a",
       "Divcord: nennas tested Fungal Hollow and never observed Hunter's Resolve. (Expected: 20; Sample Actual: 0). We can state with very high confidence that Hunter's Resolve no longer drops in Fungal Hollow.\n\nDivcord: Story A6 The Southern Forest verified by Jas 3.19"
@@ -1275,7 +1275,7 @@
       "ocean_area",
       "DONE",
       "n/a",
-      "Atoll; Coral Ruins; Lighthouse; Maelström of Chaos; Port; Reef; Strand; Whakawairua Tuahu; Mao Kun; Beach; Coves; Plateau; Shore; Tropical Island; Peninsula; Wharf; Shipyard; Pier; Estuary; The Beacon; The Brine King's Reef; The Coast (A6); The Tidal Island (A6); The Twilight Strand (A6); The Mud Flats (Act 6)",
+      "Atoll; Coral Ruins; Lighthouse; Maelström of Chaos; Port; Reef; Strand; Whakawairua Tuahu; Mao Kun; Beach; Coves; Plateau; Shore; Tropical Island; Peninsula; Wharf; Shipyard; Pier; Estuary; The Beacon; The Brine King's Reef; The Coast (A6); The Tidal Island (A6); The Twilight Strand (A6); The Mud Flats (A6)",
       "",
       "",
       "Shipyard observed by SlipperyJim8 as a Kirac Mission drop \nWhakawairua Tuahu, mao kun, beach, Shore, Peninsula drop in divcord \nThe verification in Beach confirms this is `ocean_area` and not `map_area_with_open_water`, since Beach has the former but not the latter. \n\nDivcord: Estuary, Tropical Island, Lighthouse, Pier, Plateau, Wharf, Coves verified by Zimzams\n3.19: \"The Formless Sea can now be found in the Strand Map and the Whakawhairua Tuahu Unique Map.\" - no changes\nMud Flats verified by Elinvynia."
@@ -1346,7 +1346,7 @@
       "den_area",
       "DONE",
       "n/a",
-      "Barrows; Grotto; Lair; Caer Blaidd, Wolfpack's Den; The Den (Act 7)",
+      "Barrows; Grotto; Lair; Caer Blaidd, Wolfpack's Den; The Den (A7)",
       "n/a",
       "",
       "Divcord verified Caer Blaidd, Wolfpack's Den"
@@ -1442,7 +1442,7 @@
       "mausoleum_area",
       "DONE",
       "n/a",
-      "Mausoleum; Relic Chambers; Sepulchre; The Ossuary (Act 5/10); The Reliquary (Act 5/10)",
+      "Mausoleum; Relic Chambers; Sepulchre; The Ossuary (A5/A10); The Reliquary (A5/A10)",
       "n/a",
       "n/a"
     ],
@@ -1730,7 +1730,7 @@
       "chamber_of_sins_area",
       "DONE",
       "n/a",
-      "Overgrown Ruin; Overgrown Shrine; The Chamber of Sins Level 1/2 (Act 7)",
+      "Overgrown Ruin; Overgrown Shrine; The Chamber of Sins Level 1/2 (A7)",
       "n/a",
       "",
       "Overgrown Ruin verified in Divcord by Tebec\n\nPossibly `maligaro_area` + `chamber_of_sins_area`?\nNo: `maligaro_area` disproved in 3.20. The historical drop location of Museum is no longer true.\n\nDivcord: 3.20, Zimzams observed zero hits of Shard of Fate in Core with n=34. Nennas previously tested and observed the same.\nThis implies the Museum claim is unexpected as well.\nThe claim of Shard of Fate dropping in Museum seems to date back to Jan 2018, very stale.\nDivcord: 3.20, Shard of Fate no longer drops in Museum (n = 340, confidence >99.999%).\n3.21: Verified in Chamber of Sins Level 1 (Act 7)."
@@ -1905,7 +1905,7 @@
       "lunaris_blood_area",
       "DONE",
       "n/a",
-      "Poorjoy's Asylum; Shrine; The Lunaris Temple Level 2 (Act 3); The Lunaris Temple Level 2 (Act 8)",
+      "Poorjoy's Asylum; Shrine; The Lunaris Temple Level 2 (A3/A8)",
       "n/a",
       "",
       "Need to prove/disprove Act 8 Lunaris temple to determine if the tag is 'lunaris_blood_area\" alone, or \"lunaris_blood_area & thaumaturgy_area\"\nVerified Lunaris Temple Level 2 (Act 8), ruling out need for thaumaturgy_area"
@@ -2000,7 +2000,7 @@
       "belly_area",
       "ok",
       "story only",
-      "The Belly of the Beast (A4/9)",
+      "The Belly of the Beast (A4/A9)",
       "",
       "The Harvest, The Rotting Core",
       "Story only? \"belly_area\"? or perhaps \"belly_area, NOT harvest_area\"?\nAppears level capped for story zones"
@@ -2248,7 +2248,7 @@
       "crypt_area",
       "DONE",
       "n/a",
-      "Bone Crypt; Cursed Crypt; The Coward's Trial; The Crypt (Act 7)",
+      "Bone Crypt; Cursed Crypt; The Coward's Trial; The Crypt (A7)",
       "n/a",
       "Necropolis? (see necropolis_area tag science)",
       "Divcord: The Coward's Trial verified by nennas\n\nBased on the pattern of other `crypt_area` Cards, would The Celestial Justicar also drop from Necropolis...?\n\nDivcord: 3.21, Elinvynia gathered 117 natural Card drops in Necropolis, 0 hits of The Celestial Justicar"
@@ -2327,7 +2327,7 @@
       "confirm",
       "Xixic, High Necromancer; Rose; Thorn; Infector of Dreams; The Bone Sculptor",
       "",
-      "Burtok, Shaper of Bones",
+      "Burtok, Conjurer of Bones",
       "Could this drop from more Bosses than just Xixic? Maybe necromancer_boss ?\n\nIf Bone Crypt were to rotate off-Atlas, it'd need a new location.\n\nGigaro in Divcord reports a drop from Acton's Nightmare's Boss, which also has `necromancer_boss`\n\nDivcord: Infector of Dreams verified by Zimzams\nDivcord: verified The Bone Sculptor"
     ],
     [
@@ -2391,7 +2391,7 @@
       "chamber_of_sins_area",
       "DONE",
       "n/a",
-      "Overgrown Ruin; Overgrown Shrine; Chamber of Sins Level 1/2 (Act 7)",
+      "Overgrown Ruin; Overgrown Shrine; Chamber of Sins Level 1/2 (A7)",
       "n/a"
     ],
     [
@@ -2520,7 +2520,7 @@
       "OK",
       "n/a",
       "Whakawairua Tuahu",
-      "The Crossroads (Act 7)",
+      "The Crossroads (A7)",
       "",
       "Whakawairua Tuahu Area-specific Drop?\n3.21: This does in fact still drop from the Crossroads (Act 7). Damn."
     ],
@@ -2530,7 +2530,7 @@
       "?",
       "none",
       "unclear hypothesis",
-      "The Crossroads (Act 7)",
+      "The Crossroads (A7)",
       "",
       "",
       "Shares no tags with Whakawairua Tuahu except area_with_water, which is a non-factor.\nNo lore tidbits. No unique boss. No monsters using Blink or Mirror Arrow. A reference to the moon in Act 2, but not Act 7.\nPossible reference to Chamber of Sins vs Fellshrine Cathedral? I am stumped.\nDoesn't appear to drop in Castle Ruins or Fields, and hasn't been reported elsewhere."
@@ -2935,7 +2935,7 @@
       "chamber_of_sins_area",
       "DONE",
       "n/a",
-      "Overgrown Ruin; Overgrown Shrine; The Chamber of Sins Level 1/2 (Act 7)",
+      "Overgrown Ruin; Overgrown Shrine; The Chamber of Sins Level 1/2 (A7)",
       "n/a",
       "n/a"
     ],
@@ -3041,7 +3041,7 @@
       "Act 7 & NOT indoors_area",
       "DONE",
       "n/a",
-      "The Ashen Fields; The Broken Bridge; The Causeway; The Crossroads; The Fellshrine Ruins; The Northern Forest; The Vaal City; Maligaro's Sanctum",
+      "The Ashen Fields; The Broken Bridge; The Causeway; The Crossroads (A7); The Fellshrine Ruins (A7); The Northern Forest (A7); The Vaal City; Maligaro's Sanctum",
       "",
       "",
       "Story only - Act 7?\nMight have Drop Level Cap? not necessary if using tileset\nDivcord verified The Northern Forest (Act 7)\n3.21: Verified in Maligaro's Sanctum, meaning tileset is not the correct hypothesis.\nMay still be worthwhile to check some areas in Act 6 linked to the Forest areas."
@@ -3291,7 +3291,7 @@
       "necromancer_boss",
       "none",
       "legacy tag",
-      "Xixic, High Necromancer; Burtok, Shaper of Bones",
+      "Xixic, High Necromancer; Burtok, Conjurer of Bones",
       "",
       "Rose; Thorn; Infector of Dreams; The Bone Sculptor",
       "necromancer_boss ?\nIf so, more Bosses need to be verified\n\nfal posted in Divcord a full stack Kirac Card Mission drop from non-Boss in Necropolis\nDivcord: 3.21, Elinvynia reports: \"I ran 105 Acton Nightmares (no MF boss rushing, mostly very low tier) trying to verify The Lich - I didn't get it\"\nHistorically dropped from Merciless Sawbones. All necromancer-type bosses do not appear to drop this card anymore - different tag?"
@@ -3702,7 +3702,7 @@
       "relic_area",
       "DONE",
       "n/a",
-      "Museum; Relic Chambers; The Reliquary (Act 5/10)",
+      "Museum; Relic Chambers; The Reliquary (A5/A10)",
       "n/a",
       "n/a"
     ],
@@ -3819,7 +3819,7 @@
       "malachai_boss_map",
       "DONE",
       "n/a",
-      "Eater of Souls; Malachai's Omen",
+      "Eater of Souls; Nightmare's Omen",
       "n/a",
       "n/a",
       "drops only from boss\nNeed to verify Primordial Pool Nightmare's Omen\n\nMatimateo in Divcord claims multiple drops from Primordial Pool Nightmare's Omen"
@@ -4159,7 +4159,7 @@
       "fire_area",
       "DONE",
       "n/a",
-      "Crater; Lava Chamber; Lava Lake; Forge of the Phoenix; The Ruined Square; The Torched Courts (A5/10); Estuary; Silo; The Crematorium; The Ravaged Square",
+      "Crater; Lava Chamber; Lava Lake; Forge of the Phoenix; The Ruined Square; The Torched Courts (A5/A10); Estuary; Silo; The Crematorium; The Ravaged Square",
       "Bone Crypt",
       "Not accesible: The Fallen Courts, The Haunted Reliquary - see notes",
       "Note: The Fallen Courts and The Haunted Reliquary are no longer accessible areas. They were part of the Epilogue during the Conquerors of the Atlas expansion and became inacessible with Siege of the Atlas.\n\nDivcord: Estuary, Silo\nDivcord: 3.21, A3 The Crematorium verified by Elinvynia\nThe Ravaged Square verified by Elinvynia"
@@ -4191,7 +4191,7 @@
       "summoner_area",
       "DONE",
       "n/a",
-      "Bone Crypt; Burial Chambers; Spider Forest; Cage; Lower Prison (Act 6); The Crematorium; The Catacombs; Shavronne's Tower; The Chamber of Sins Level 1 (Act 7)",
+      "Bone Crypt; Burial Chambers; Spider Forest; Cage; Lower Prison (A6); The Crematorium; The Catacombs; Shavronne's Tower; The Chamber of Sins Level 1 (A7)",
       "Lava Chamber",
       "",
       "Divcord: fal verified drop in Spider Forest\nDivcord: Jas verified drop in Cage\n\nDivcord: Zimzams did n=65 sample in Lava Chamber with zero hits; extremely high confidence that The Summoner no longer drops in Lava Chamber\nElinvynia verified in Chamber of Sins Level 1 (Act 7)"
@@ -4202,7 +4202,7 @@
       "solaris_area",
       "DONE",
       "n/a",
-      "The Twilight Temple; Temple; Cold River; The Harbour Bridge; The Solaris Temple Level 2 (Act 8); The Solaris Temple Level 1 (Act 8)",
+      "The Twilight Temple; Temple; Cold River; The Harbour Bridge; The Solaris Temple Level 1 (A8); The Solaris Temple Level 2 (A8)",
       "Ivory Temple",
       "",
       "Divcord: Moderate evidence from Ivory Temple testing that The Sun no longer drops here\n\nDivcord: Cold River verified by Zimzams\nDivcord: 3.21, [Story] A8 The Solaris Temple Lv2 (from Dawn, Harbinger of Solaris) verified by Zimzams"
@@ -4234,7 +4234,7 @@
       "flooded_area",
       "DONE",
       "n/a",
-      "Flooded Mine; Mineral Pools; Underground Sea; The Cavern of Anger (Act 6)",
+      "Flooded Mine; Mineral Pools; Underground Sea; The Cavern of Anger (A6)",
       "n/a",
       "n/a"
     ],
@@ -4501,7 +4501,7 @@
       "prison_area",
       "DONE",
       "n/a",
-      "Cage; Dungeon; Pen; Cells; Shavronne's Tower; The Control Blocks (Act 5); The Lower Prison (Act 6); The Slave Pens",
+      "Cage; Dungeon; Pen; Cells; Shavronne's Tower; The Control Blocks (A5); The Lower Prison (A6); The Slave Pens",
       "Tower",
       "",
       "Divcord verified in cells\n\nDivcord: No longer drops in Tower (Expected: >100 ; Sample Actual: 0)."
@@ -4555,7 +4555,7 @@
       "",
       "DONE",
       "n/a",
-      "Stonebeak; Battle Fowl",
+      "Stonebeak, Battle Fowl",
       "",
       "",
       "Stonebeak, Batle Fowl"
@@ -5203,7 +5203,7 @@
       "affliction_boss",
       "DONE",
       "n/a",
-      "Omniphobia, Fear Manifest; Kosis, The Revelation (both in maps only)",
+      "Omniphobia, Fear Manifest (maps only); Kosis, The Revelation (maps only)",
       "",
       "",
       "Divcord: A player reportedly dropped one from Kosis, no screenshot. Consistent with new 3.20 Tag `affliction_boss` and theme -- if true, then Omniphobia should also be eligible. Both need verification. (But the Card will be insanely uncommon!)\n\nDivcord: 3.20 Omniphobia verified by MSS on video\nDivcord: 3.20 Kosis reported by Hatchling13\nUnlikely to drop from the Deli bosses in Simualcrum due to drop mechanics"

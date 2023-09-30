@@ -1,3 +1,5 @@
+use std::fs;
+
 use googlesheets::sheet::ValueRange;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
@@ -15,6 +17,17 @@ impl Table {
         }
 
         Ok(Table(records))
+    }
+
+    pub fn all_drops_from(&self) -> Vec<String> {
+        self.0.iter().flat_map(|r| r.vec_drops_from()).collect()
+    }
+
+    pub fn read_file(path: Option<&str>) -> Result<Table, Error> {
+        let p = path.unwrap_or("jsons/sheet.json");
+        let s = fs::read_to_string(p)?;
+        let sheet: ValueRange = serde_json::from_str(&s)?;
+        Table::try_from(&sheet)
     }
 }
 

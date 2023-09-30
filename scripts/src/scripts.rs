@@ -1,15 +1,11 @@
-use std::{
-    collections::{HashMap, HashSet},
-    path::Path,
-};
+use std::{collections::HashMap, path::Path};
 
-use divi::consts::CARDS;
 use googlesheets::sheet::ValueRange;
 use reqwest::Client;
 use serde_json::Value;
 
 use crate::{
-    dropsource::DropSource,
+    dropsource::Source,
     error::Error,
     table::Table,
     table_record::{CardDropTableRecord, Confidence},
@@ -141,6 +137,34 @@ pub fn write_hypothesis_maps(table: Table) -> Result<(), Error> {
     Ok(())
 }
 
+pub fn write_sources(sheet: &ValueRange) -> Result<(), Error> {
+    let table = Table::try_from(sheet)?;
+    let drops = table.all_drops_from();
+    let mut unparsed: Vec<String> = Vec::new();
+    let mut sources: Vec<Source> = Vec::new();
+
+    for s in drops {
+        match s.parse::<Source>() {
+            Ok(source) => sources.push(source),
+            Err(_) => {
+                unparsed.push(s);
+            }
+        }
+    }
+
+    std::fs::write(
+        "jsons/sources.json",
+        serde_json::to_string(&sources).unwrap(),
+    )?;
+
+    std::fs::write(
+        "jsons/unparsed_sources.json",
+        serde_json::to_string(&unparsed).unwrap(),
+    )?;
+
+    Ok(())
+}
+
 pub async fn update_all_jsons() {
     let sheet = download_table_sheet()
         .await
@@ -155,7 +179,8 @@ pub async fn update_all_jsons() {
     write_drops_from("jsons/drops-from.json", &table).expect("Write drops-from error");
     write_confidence_map("jsons/confidence-map.json", &table).expect("Wrtie confidence map error");
     write_hypothesis_maps(table.clone()).expect("write_hypothesis_maps eror");
-    write_drops_debug_jsons(table);
+    write_sources(&sheet).unwrap();
+    // write_drops_debug_jsons(table);
 }
 
 // pub fn write_sized_rewards() {
@@ -176,51 +201,51 @@ pub async fn update_all_jsons() {
 //     .unwrap();
 // }
 
-pub fn write_drops_debug_jsons(table: Table) {
-    // update_all_jsons().await;
-    let mut map: HashMap<String, HashSet<DropSource>> = HashMap::new();
+// pub fn write_drops_debug_jsons(table: Table) {
+//     // update_all_jsons().await;
+//     let mut map: HashMap<String, HashSet<DropSource>> = HashMap::new();
 
-    for card in CARDS {
-        map.insert(card.to_string(), HashSet::new());
-    }
+//     for card in CARDS {
+//         map.insert(card.to_string(), HashSet::new());
+//     }
 
-    let mut unrecognized: Vec<CardDropTableRecord> = Vec::new();
-    for table_record in table.0 {
-        let set = table_record.resolve_dropsources().unwrap();
-        if table_record.drops_from.is_none() {
-            if set.len() == 0 {
-                unrecognized.push(table_record.clone());
-            }
-        };
+//     let mut unrecognized: Vec<CardDropTableRecord> = Vec::new();
+//     for table_record in table.0 {
+//         let set = table_record.resolve_dropsources();
+//         if table_record.drops_from.is_none() {
+//             if set.len() == 0 {
+//                 unrecognized.push(table_record.clone());
+//             }
+//         };
 
-        if set.len() > 0 {
-            map.entry(table_record.name)
-                .and_modify(|s1| s1.extend(set.clone()))
-                .or_insert(set.clone());
-        }
-    }
+//         if set.len() > 0 {
+//             map.entry(table_record.name)
+//                 .and_modify(|s1| s1.extend(set.clone()))
+//                 .or_insert(set.clone());
+//         }
+//     }
 
-    let mut unrecognized_names: Vec<String> = Vec::new();
-    for (name, set) in &map {
-        if set.len() == 0 {
-            unrecognized_names.push(name.to_string());
-        }
-    }
+//     let mut unrecognized_names: Vec<String> = Vec::new();
+//     for (name, set) in &map {
+//         if set.len() == 0 {
+//             unrecognized_names.push(name.to_string());
+//         }
+//     }
 
-    dbg!(&unrecognized_names.len());
+//     dbg!(&unrecognized_names.len());
 
-    std::fs::write(
-        "jsons/cards_without_dropsorces.json",
-        &serde_json::to_string(&unrecognized_names).unwrap(),
-    )
-    .unwrap();
+//     std::fs::write(
+//         "jsons/cards_without_dropsorces.json",
+//         &serde_json::to_string(&unrecognized_names).unwrap(),
+//     )
+//     .unwrap();
 
-    std::fs::write(
-        "jsons/unrecognized.json",
-        serde_json::to_string(&unrecognized).unwrap(),
-    )
-    .unwrap();
+//     std::fs::write(
+//         "jsons/unrecognized.json",
+//         serde_json::to_string(&unrecognized).unwrap(),
+//     )
+//     .unwrap();
 
-    std::fs::write("jsons/drops.json", serde_json::to_string(&map).unwrap()).unwrap();
-    dbg!(unrecognized.len());
-}
+//     std::fs::write("jsons/drops.json", serde_json::to_string(&map).unwrap()).unwrap();
+//     dbg!(unrecognized.len());
+// }
