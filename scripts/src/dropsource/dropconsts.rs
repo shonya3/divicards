@@ -339,9 +339,3 @@ pub const ACT_AREA_NAMES: &'static [&'static str] = &[
     "The Grain Gate",
     "The Refinery",
 ];
-
-pub const CHESTS: &'static [&'static str] = &[
-    "Light Jewellery chest (Primeval Ruins, Abyssal City, Vaal Outpost)",
-    "Delve Gem Chests",
-    "Uber Labyrinth/Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)",
-];
