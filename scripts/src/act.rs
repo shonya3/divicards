@@ -218,9 +218,6 @@ pub fn selector(s: &str) -> Selector {
     Selector::parse(s).unwrap()
 }
 
-pub struct Row<'a>(ElementRef<'a>);
-impl<'a> Row<'a> {}
-
 // #[tokio::main]
 // pub async fn main() {
 //     let areas = ActArea::_load_areas_from_file("files/areas.json");
@@ -231,45 +228,32 @@ impl<'a> Row<'a> {}
 ///     for area in ACT_AREA_NAMES {
 ///        find_by_name(area, &areas)
 ///     }
-pub fn find_by_name(area_name_from_table: &str, _areas: &[ActArea]) {
-    let mut split = area_name_from_table.split("(");
 
-    if let Some(name) = split.next() {
-        if name.contains("1/2") {
-            let name = name.replace("1/2", "");
-            let name = name.trim();
-            println!("{}, {}", format!("{name} 1"), format!("{name} 2"))
-        }
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct AreaNameAct {
+    pub name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub act: Option<u8>,
+}
 
-        if let Some(acts) = split.next() {
-            if acts.contains("/") {
-                let (left, right) = acts.split_once("/").unwrap();
+impl AreaNameAct {
+    pub const fn new(name: String, act: Option<u8>) -> Self {
+        Self { name, act }
+    }
+}
 
-                let left = left
-                    .chars()
-                    .into_iter()
-                    .filter(|c| c.is_digit(10))
-                    .collect::<String>()
-                    .parse::<u8>()
-                    .unwrap();
-
-                let right = right
-                    .chars()
-                    .into_iter()
-                    .filter(|c| c.is_digit(10))
-                    .collect::<String>()
-                    .parse::<u8>()
-                    .unwrap();
-
-                println!("{acts} {left} {right}");
-            }
+impl From<String> for AreaNameAct {
+    fn from(value: String) -> Self {
+        AreaNameAct {
+            name: value,
+            act: None,
         }
     }
 }
 
-pub fn parse_area_name(s: &str) -> Vec<String> {
+pub fn parse_area_name(s: &str) -> Vec<AreaNameAct> {
     if !s.contains("(") && !s.contains("/") {
-        return vec![String::from(s)];
+        return vec![AreaNameAct::from(s.to_string())];
     };
 
     let mut split = s.split("(");
@@ -288,6 +272,15 @@ pub fn parse_area_name(s: &str) -> Vec<String> {
     } else {
         names.push(name.to_string());
     }
+
+    let names = match name.contains("1/2") {
+        true => {
+            let name = name.replace("1/2", "");
+            let name = name.trim();
+            [1, 2].iter().map(|n| format!("{name} {n}")).collect()
+        }
+        false => vec![name.trim().to_string()],
+    };
 
     if let Some(acts) = split.next() {
         if acts.contains("/") {
@@ -316,11 +309,15 @@ pub fn parse_area_name(s: &str) -> Vec<String> {
             //     let n2 = format!("{name} {right}");
             // }
 
-            let a: Vec<_> = names
+            names
                 .into_iter()
-                .flat_map(|n| [format!("{n} (Act {left})"), format!("{n} (Act {right})")])
-                .collect();
-            return a;
+                .flat_map(|name| {
+                    [
+                        AreaNameAct::new(name.clone(), Some(left)),
+                        AreaNameAct::new(name, Some(right)),
+                    ]
+                })
+                .collect()
         } else {
             let left = acts
                 .chars()
@@ -330,16 +327,19 @@ pub fn parse_area_name(s: &str) -> Vec<String> {
                 .parse::<u8>()
                 .unwrap();
 
-            return names
+            names
                 .into_iter()
-                .map(|n| format!("{n} (Act {left})"))
-                .collect();
-
-            // panic!("There is (), but no / inside it, {names:?}");
+                .map(|name| AreaNameAct::new(name, Some(left)))
+                .collect()
         }
+    } else {
+        names
+            .into_iter()
+            .map(|name| AreaNameAct::from(name))
+            .collect()
     }
 
-    names
+    // names
 }
 
 // fn area_id_from_str(s: &str) {}
