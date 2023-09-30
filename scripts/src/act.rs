@@ -1,3 +1,11 @@
+use std::{env, fs, path::Path};
+
+use playwright::{api::DocumentLoadState, Playwright};
+use scraper::{ElementRef, Html, Selector};
+use serde::{Deserialize, Serialize};
+
+use crate::error::Error;
+
 pub const TOWN_IMAGE_URL: &'static str =
     "https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/WorldPanelTownPinIcon.webp";
 pub const WAYPOINT_IMAGE_URL: &'static str =
@@ -29,6 +37,62 @@ impl ActArea {
 
     async fn act_html(act: u8) -> Result<String, Error> {
         Ok(reqwest::get(ActArea::act_url(act)).await?.text().await?)
+    }
+
+    pub async fn download_images() {
+        // for act in 1..=10 {}
+
+        let act = 1;
+
+        let playwright = Playwright::initialize().await.unwrap();
+        playwright.install_chromium().unwrap();
+        let chrome = playwright.chromium();
+        let browser = chrome.launcher().headless(false).launch().await.unwrap();
+        let context = browser
+            .context_builder()
+            .clear_user_agent()
+            .build()
+            .await
+            .unwrap();
+        let page = context.new_page().await.unwrap();
+        page.goto_builder(&ActArea::act_url(act))
+            .wait_until(DocumentLoadState::DomContentLoaded)
+            .goto()
+            .await
+            .unwrap();
+
+        // let res: u8 = page
+        //     .eval(
+        //         r#"
+        //         () => {
+        //             const tbody = document.querySelector('tbody');
+        //             for
+
+        //         }"#,
+        //     )
+        //     .await
+        //     .unwrap();
+
+        // dbg!(res);
+
+        // page.keyboard.press("Escape", Some(2000.0)).await.unwrap();
+
+        let tbody = page.query_selector("tbody").await.unwrap().unwrap();
+        let rows = tbody.query_selector_all("tr").await.unwrap();
+        for row in rows {
+            let columns = row.query_selector_all("td").await.unwrap();
+            let name_column = &columns[1];
+            let name_element = name_column.query_selector("a").await.unwrap().unwrap();
+            name_element.hover_builder().goto().await.unwrap();
+            // page.wait_for_timeout(2000.0).await;
+            let a = page
+                .wait_for_selector_builder("div.tippy-content[data-state=visible]:has(img)")
+                .wait_for_selector()
+                .await
+                .unwrap()
+                .unwrap();
+            dbg!(a);
+        }
     }
 
     pub async fn download_data() -> Vec<Self> {
@@ -144,7 +208,7 @@ impl ActArea {
         fs::write(path, serde_json::to_string_pretty(&areas).unwrap()).unwrap();
     }
 
-    fn _load_areas_from_file<P: AsRef<Path>>(path: P) -> Vec<Self> {
+    pub fn _load_areas_from_file<P: AsRef<Path>>(path: P) -> Vec<Self> {
         let s = std::fs::read_to_string(path).unwrap();
         serde_json::from_str(&s).unwrap()
     }
@@ -163,46 +227,119 @@ impl<'a> Row<'a> {}
 //     dbg!(areas);
 // }
 
+/// let areas = ActArea::_load_areas_from_file("files/areas.json");
+///     for area in ACT_AREA_NAMES {
+///        find_by_name(area, &areas)
+///     }
 pub fn find_by_name(area_name_from_table: &str, _areas: &[ActArea]) {
-    let split: Vec<_> = area_name_from_table.split("(").map(|s| s.trim()).collect();
+    let mut split = area_name_from_table.split("(");
 
-    // let name = split[0];
+    if let Some(name) = split.next() {
+        if name.contains("1/2") {
+            let name = name.replace("1/2", "");
+            let name = name.trim();
+            println!("{}, {}", format!("{name} 1"), format!("{name} 2"))
+        }
 
-    // if name.contains("1/2") {
-    //     let name = name.replace("1/2", "");
-    //     let name = name.trim();
-    //     println!("{}, {}", format!("{name} 1"), format!("{name} 2"))
-    // }
+        if let Some(acts) = split.next() {
+            if acts.contains("/") {
+                let (left, right) = acts.split_once("/").unwrap();
 
-    if split.len() == 2 {
-        let acts = split[1];
-        if acts.contains("/") {
-            let (left, right) = acts.split_once("/").unwrap();
-            // dbg!(left, right);
+                let left = left
+                    .chars()
+                    .into_iter()
+                    .filter(|c| c.is_digit(10))
+                    .collect::<String>()
+                    .parse::<u8>()
+                    .unwrap();
 
-            let mut l: Option<u32> = None;
-            let mut r: Option<u8> = None;
+                let right = right
+                    .chars()
+                    .into_iter()
+                    .filter(|c| c.is_digit(10))
+                    .collect::<String>()
+                    .parse::<u8>()
+                    .unwrap();
 
-            let mut digits: Vec<char> = Vec::new();
-            for ch in right.chars() {
-                if ch.is_digit(10) {
-                    digits.push(ch);
-                }
+                println!("{acts} {left} {right}");
             }
-
-            let act = digits
-                .into_iter()
-                .collect::<String>()
-                .parse::<u8>()
-                .unwrap();
-            dbg!(act);
         }
     }
 }
 
-fn area_id_from_str(s: &str) {}
+pub fn parse_area_name(s: &str) -> Vec<String> {
+    if !s.contains("(") && !s.contains("/") {
+        return vec![String::from(s)];
+    };
 
-//  let areas = ActArea::_load_areas_from_file("files/areas.json");
-//     for area in ACT_AREA_NAMES {
-//         find_by_name(area, &areas)
-//     }
+    let mut split = s.split("(");
+
+    let name = split.next().expect("No name, {s}");
+    let mut names: Vec<String> = Vec::new();
+
+    if name.contains("1/2") {
+        let name = name.replace("1/2", "");
+        let name = name.trim();
+        for n in [1, 2] {
+            let name = format!("{name} {n}");
+            // println!("PUSHING {name}");
+            names.push(name);
+        }
+    } else {
+        names.push(name.to_string());
+    }
+
+    if let Some(acts) = split.next() {
+        if acts.contains("/") {
+            let (left, right) = acts.split_once("/").unwrap();
+
+            let left = left
+                .chars()
+                .into_iter()
+                .filter(|c| c.is_digit(10))
+                .collect::<String>()
+                .parse::<u8>()
+                .unwrap();
+
+            let right = right
+                .chars()
+                .into_iter()
+                .filter(|c| c.is_digit(10))
+                .collect::<String>()
+                .parse::<u8>()
+                .unwrap();
+
+            // println!("{acts} {left} {right}");
+
+            // for name in &names {
+            //     let n1 = format!("{name} {left}");
+            //     let n2 = format!("{name} {right}");
+            // }
+
+            let a: Vec<_> = names
+                .into_iter()
+                .flat_map(|n| [format!("{n} (Act {left})"), format!("{n} (Act {right})")])
+                .collect();
+            return a;
+        } else {
+            let left = acts
+                .chars()
+                .into_iter()
+                .filter(|c| c.is_digit(10))
+                .collect::<String>()
+                .parse::<u8>()
+                .unwrap();
+
+            return names
+                .into_iter()
+                .map(|n| format!("{n} (Act {left})"))
+                .collect();
+
+            // panic!("There is (), but no / inside it, {names:?}");
+        }
+    }
+
+    names
+}
+
+// fn area_id_from_str(s: &str) {}

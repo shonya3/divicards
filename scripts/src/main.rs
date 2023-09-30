@@ -48,4 +48,6 @@ use std::{collections::HashMap, fmt::Display, slice::Iter};
 use table_record::{CardDropTableRecord, Confidence, GreyNote};
 
 #[tokio::main]
-async fn main() {}
+async fn main() {
+    update_all_jsons().await;
+}

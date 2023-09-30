@@ -128,7 +128,7 @@ pub enum Strongbox {
     strum_macros::EnumString,
     strum_macros::Display,
 )]
-#[serde(tag = "vendor")]
+#[serde(tag = "chest")]
 pub enum Chest {
     #[strum(serialize = "Abyssal Trove")]
     #[serde(rename = "Abyssal Trove")]
