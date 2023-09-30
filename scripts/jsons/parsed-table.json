@@ -115,7 +115,7 @@
     "tagHypothesis": null,
     "confidence": "done",
     "remainingWork": null,
-    "dropsFrom": "Booty Chest (Mao Kun)",
+    "dropsFrom": "Mao Kun",
     "wikiDisagreements": null,
     "sourcesWithTagButNotOnWiki": null,
     "notes": "level 68+; old claims were Arsenal, with hypothesis on `warehouse_area`\nOnly Mao Kun has been verified in 3.18\n\nNeeds reverification in 3.18. Factory sample has produced 0 Abandoned Wealth so far, but might just be bad luck. Possible that this is now Mao-Kun-exclusive, unless someone can confirm Arsenal or Factory in 3.18.\nDivcord: Aggregate natural Card drop count from T16 Factory is 565, zero instances of Abandoned Wealth.\n\nDivcord: Aggregate natural Card drop count from T16 Arsenal is 756, zero instances of Abandoned Wealth. Probability of occurrence: 0.23%.\n\nVery unlikely that Abandoned Wealth drops from either Factory or Arsenal anymore. Might be Mao-Kun-exclusive now."
