@@ -2,7 +2,7 @@ use tokio::sync::Mutex;
 
 use divi::{
     league::TradeLeague,
-    sample::{DivinationCardsSample, SampleData},
+    sample::{DivinationCardsSample, SampleData, TablePreferences},
 };
 use tauri::{command, State, Window};
 use tracing::instrument;
@@ -43,4 +43,12 @@ pub async fn merge(
 #[command]
 pub async fn open_url(url: String) {
     open::that(url).unwrap();
+}
+
+#[command]
+pub async fn sample_into_csv(
+    sample: DivinationCardsSample,
+    preferences: TablePreferences,
+) -> String {
+    sample.into_csv(Some(preferences))
 }

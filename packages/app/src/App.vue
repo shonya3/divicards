@@ -7,7 +7,7 @@ import { useAutoAnimate } from './composables/useAutoAnimate';
 
 import SampleCard from './components/SampleCard.vue';
 import StashesView from './components/StashesView.vue';
-import ToGoogleSheets from './components/ToGoogleSheets.vue';
+import FormSampleExport from './components/FormSampleExport.vue';
 import { DropFilesMessageElement } from '@divicards/wc/src/wc/drop-files-message';
 import { PoeAuthElement } from '@divicards/wc/src/wc/poe-auth';
 import { StashLoader } from './StashLoader';
@@ -15,27 +15,23 @@ import { useGoogleAuthStore } from './stores/googleAuth';
 import { GoogleAuthElement } from '../../wc/src/wc/google-auth/poe-auth';
 import { command } from './command';
 import { BasePopupElement } from '../../wc/src/wc/base-popup';
-import { Props as SheetsProps } from '@divicards/wc/src/wc/to-google-sheets/to-google-sheets';
+import { Props as FormExportProps } from '@divicards/wc/src/wc/form-export-sample/form-export-sample';
 import { DivinationCardsSample } from '../../shared/types';
 import { toast } from './toast';
-import { useSheets } from './composables/useSheets';
+import { usePreferences } from './composables/usePreferences';
 import { isTauriError } from './error';
 import { League } from '@divicards/shared/types';
-import { DivinationCardElement } from '../../wc/src/wc/divination-card/wc-divination-card';
+import { downloadText } from '../../shared/lib';
+import { useExportState } from './composables/useExportState';
 BasePopupElement.define();
 DropFilesMessageElement.define();
 PoeAuthElement.define();
 GoogleAuthElement.define();
 const stashLoader = new StashLoader();
 
-DivinationCardElement.define();
-
-const toSheetsSample = ref<DivinationCardsSample | null>(null);
-const toSheetsLeague = ref<League | null>(null);
-const sheetsError = ref<string | null>(null);
-const { spreadsheet, columns, order, orderedBy, cardsMustHaveAmount, sheetTitle } = useSheets();
-
-const sheetsPopupRef = ref<BasePopupElement | null>(null);
+const { spreadsheet, columns, order, orderedBy, cardsMustHaveAmount, sheetTitle, minPrice } = usePreferences();
+const exportState = useExportState();
+const formPopupExportRef = ref<BasePopupElement | null>(null);
 
 const sampleStore = useSampleStore();
 const authStore = useAuthStore();
@@ -53,23 +49,34 @@ const openStashWindow = async () => {
 	stashVisible.value = true;
 };
 
-const onGoogleSheetsClicked = (sample: DivinationCardsSample, league: League) => {
-	if (!sheetsPopupRef.value) return;
-	toSheetsSample.value = sample;
-	toSheetsLeague.value = league;
-	sheetsPopupRef.value.open();
+const onSaveToFileClicked = (sample: DivinationCardsSample, league: League, filename: string) => {
+	if (!formPopupExportRef.value) return;
+	exportState.to.value = 'file';
+	exportState.filename.value = filename;
+	exportState.sample.value = sample;
+	exportState.league.value = league;
+	formPopupExportRef.value.open();
 };
 
-const onSheetsSubmit = async ({
+const onGoogleSheetsClicked = (sample: DivinationCardsSample, league: League) => {
+	if (!formPopupExportRef.value) return;
+	exportState.to.value = 'sheets';
+	exportState.sample.value = sample;
+	exportState.league.value = league;
+	formPopupExportRef.value.open();
+};
+
+const onSubmit = async ({
 	spreadsheetId,
 	sheetTitle,
 	order,
 	orderedBy,
 	columns,
 	cardsMustHaveAmount,
-}: SheetsProps) => {
-	const sample = toSheetsSample.value;
-	const league = toSheetsLeague.value;
+	minPrice,
+}: FormExportProps) => {
+	const sample = exportState.sample.value;
+	const league = exportState.league.value;
 
 	if (!sample) {
 		throw new Error('No sample to sheets');
@@ -79,38 +86,48 @@ const onSheetsSubmit = async ({
 		throw new Error('No league to sheets');
 	}
 
-	if (!googleAuthStore.loggedIn) {
-		await googleAuthStore.login();
-	}
+	const preferences = {
+		cardsMustHaveAmount,
+		order,
+		orderedBy,
+		columns: Array.from(columns),
+		minPrice,
+	};
 
-	try {
-		const url = await command('new_sheet_with_sample', {
-			spreadsheetId,
-			title: sheetTitle,
-			sample,
-			preferences: {
-				cardsMustHaveAmount,
-				order,
-				orderedBy,
-				columns: Array.from(columns),
-			},
-			league,
-		});
-
-		toast('success', 'New sheet created successfully');
-		sheetsPopupRef.value?.hide();
-		command('open_url', { url });
-
-		// In the end,  save spreadshetId to LocalStorage
-		spreadsheet.value = spreadsheetId;
-	} catch (err) {
-		if (isTauriError(err)) {
-			sheetsError.value = err.message;
-		} else {
-			console.log(err);
-			sheetsPopupRef.value?.hide();
-			throw err;
+	if (exportState.to.value === 'sheets') {
+		if (!googleAuthStore.loggedIn) {
+			await googleAuthStore.login();
 		}
+
+		try {
+			const url = await command('new_sheet_with_sample', {
+				spreadsheetId,
+				title: sheetTitle,
+				sample,
+				preferences,
+				league,
+			});
+
+			toast('success', 'New sheet created successfully');
+			formPopupExportRef.value?.hide();
+			command('open_url', { url });
+
+			// In the end,  save spreadshetId to LocalStorage
+			spreadsheet.value = spreadsheetId;
+			return;
+		} catch (err) {
+			if (isTauriError(err)) {
+				exportState.sheetsError.value = err.message;
+			} else {
+				console.log(err);
+				formPopupExportRef.value?.hide();
+				throw err;
+			}
+		}
+	} else if (exportState.to.value === 'file') {
+		const csv = await command('sample_into_csv', { sample, preferences });
+		downloadText(exportState.filename.value, csv);
+		formPopupExportRef.value?.hide();
 	}
 };
 </script>
@@ -140,8 +157,6 @@ const onSheetsSubmit = async ({
 			></wc-poe-auth>
 		</header>
 
-		<wc-divination-card name="The Harvester"></wc-divination-card>
-
 		<div v-show="authStore.loggedIn && stashVisible">
 			<StashesView
 				:stashLoader="stashLoader"
@@ -155,6 +170,7 @@ const onSheetsSubmit = async ({
 				v-if="sampleStore.merged"
 				v-bind="sampleStore.merged"
 				@delete="sampleStore.deleteMerged"
+				@save-to-file-clicked="onSaveToFileClicked"
 				@google-sheets-clicked="onGoogleSheetsClicked"
 				@update:minimumCardPrice="price => sampleStore.merged && (sampleStore.merged.minimumCardPrice = price)"
 				@update:league="sampleStore.replaceMerged"
@@ -182,6 +198,7 @@ const onSheetsSubmit = async ({
 				<SampleCard
 					v-for="fileCard in sampleStore.sampleCards"
 					v-bind="fileCard"
+					@save-to-file-clicked="onSaveToFileClicked"
 					@google-sheets-clicked="onGoogleSheetsClicked"
 					@delete="sampleStore.deleteFile"
 					v-model:selected="fileCard.selected"
@@ -192,17 +209,19 @@ const onSheetsSubmit = async ({
 		</Transition>
 	</div>
 
-	<wc-base-popup ref="sheetsPopupRef">
-		<ToGoogleSheets
-			:error="sheetsError"
+	<wc-base-popup ref="formPopupExportRef">
+		<FormSampleExport
+			:error="exportState.sheetsError.value"
+			:to="exportState.to.value"
 			v-model:columns="columns"
 			v-model:order="order"
 			v-model:orderedBy="orderedBy"
 			v-model:cardsMustHaveAmount="cardsMustHaveAmount"
 			v-model:sheetTitle="sheetTitle"
+			v-model:minPrice="minPrice"
 			:spreadsheet-id="spreadsheet"
-			@submit="onSheetsSubmit"
-		></ToGoogleSheets>
+			@submit="onSubmit"
+		></FormSampleExport>
 	</wc-base-popup>
 </template>
 
@@ -256,3 +275,4 @@ const onSheetsSubmit = async ({
 	font-size: 1.4rem;
 }
 </style>
+./composables/usePreferences

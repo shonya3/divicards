@@ -10,7 +10,6 @@ import { DivinationCardsSample, League, TradeLeague, isTradeLeague } from '@divi
 import { property, query } from 'lit/decorators.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { classMap } from 'lit/directives/class-map.js';
-import { ToGoogleSheetsElement } from '../to-google-sheets/to-google-sheets';
 const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 
 declare global {
@@ -34,12 +33,12 @@ export interface Events {
 	'upd:minimumCardPrice': FileCardElement['minimumCardPrice'];
 	delete: FileCardElement['uuid'];
 	'google-sheets-clicked': { sample: DivinationCardsSample; league: League };
+	'save-to-file-clicked': { sample: DivinationCardsSample; league: League; filename: string };
 }
 
 export class FileCardElement extends BaseElement {
 	static override get defineList() {
 		return [
-			ToGoogleSheetsElement,
 			LeagueSelectElement,
 			DivTableElement,
 			BasePopupElement,
@@ -82,6 +81,14 @@ export class FileCardElement extends BaseElement {
 			amount,
 			value,
 		};
+	}
+
+	#onSaveToFileClicked() {
+		this.emit<Events['save-to-file-clicked']>('save-to-file-clicked', {
+			sample: this.sample,
+			league: this.league,
+			filename: this.filename,
+		});
 	}
 
 	#onSheetsIconClicked() {
@@ -178,9 +185,12 @@ export class FileCardElement extends BaseElement {
 
 			<wc-league-select trade .league=${this.league} @upd:league=${this.#onLeagueSelected}></wc-league-select>
 
-			<a class="download" .download=${this.filename} .href=${this.urlObject}>Download</a>
-			<div class="export-to-google-docs" @click=${this.#onSheetsIconClicked}>
-				<p>Export to Sheets</p>
+			<!-- <a class="download" .download=${this.filename} .href=${this.urlObject}>Download</a> -->
+
+			<button @click=${this.#onSaveToFileClicked}>Save to file</button>
+
+			<button class="export-to-google-docs" @click=${this.#onSheetsIconClicked}>
+				Export to Sheets
 				<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 100 100">
 					<path
 						fill="#70b570"
@@ -252,7 +262,7 @@ export class FileCardElement extends BaseElement {
 						d="M26.5,61c-0.276,0-0.5-0.224-0.5-0.5v-3c0-0.276,0.224-0.5,0.5-0.5s0.5,0.224,0.5,0.5v3 C27,60.776,26.776,61,26.5,61z"
 					></path>
 				</svg>
-			</div>
+			</button>
 
 			${this.selected === null
 				? nothing

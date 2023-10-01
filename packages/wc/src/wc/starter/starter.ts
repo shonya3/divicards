@@ -5,7 +5,7 @@
 
 // declare global {
 // 	interface HTMLElementTagNameMap {
-// 		'wc-to-google-sheets': ToGoogleSheetsElement;
+// 		'wc-form-export-sample': ToGoogleSheetsElement;
 // 	}
 // }
 
@@ -15,7 +15,7 @@
 // 	static override get defineList() {
 // 		return [];
 // 	}
-// 	static override tag = 'wc-to-google-sheets';
+// 	static override tag = 'wc-form-export-sample';
 // 	static override styles = [this.baseStyles, styles()];
 
 // 	protected override render() {

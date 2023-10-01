@@ -5,6 +5,7 @@ export type TablePreferences = {
 	orderedBy: Column;
 	order: Order;
 	cardsMustHaveAmount: boolean;
+	minPrice: number;
 };
 
 export const leagues = [

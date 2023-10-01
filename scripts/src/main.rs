@@ -16,10 +16,13 @@ use crate::scripts::{read_original_table_sheet, read_table, update_all_jsons};
 use crate::table::Table;
 #[allow(unused)]
 use act::{parse_area_name, ActArea};
+#[allow(unused)]
 use csv::Writer;
 #[allow(unused)]
 use divi::consts::CARDS;
+#[allow(unused)]
 use divi::prices::Prices;
+#[allow(unused)]
 use divi::sample::{Column, DivinationCardsSample, TablePreferences};
 #[allow(unused)]
 use dropsource::{area, dropconsts::ACT_AREA_NAMES, Source};

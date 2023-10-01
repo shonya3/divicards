@@ -16,6 +16,7 @@ export type ValueRange = {
 	range: string;
 	values: Array<Array<string | number | null | undefined>>;
 };
+type Preferences = Omit<TablePreferences, 'columns'> & { columns: Column[] };
 
 export interface Commands {
 	read_batch(args: { spreadsheetId: string; ranges: string[] }): unknown;
@@ -25,7 +26,7 @@ export interface Commands {
 		title: string;
 		sample: DivinationCardsSample;
 		league: League;
-		preferences: Omit<TablePreferences, 'columns'> & { columns: Column[] };
+		preferences: Preferences;
 	}) => string;
 	google_logout: () => void;
 	google_identity: () => GoogleIdentity;
@@ -37,6 +38,7 @@ export interface Commands {
 	poe_auth: () => string;
 	poe_logout: () => void;
 	stashes: (args: { league: League }) => { stashes: NoItemsTab[] };
+	sample_into_csv: (args: { sample: DivinationCardsSample; preferences: Preferences }) => string;
 	sample_from_tab: (args: { league: League; stashId: string; subStashId?: string }) => DivinationCardsSample;
 }
 

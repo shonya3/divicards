@@ -10,6 +10,7 @@ const emit = defineEmits<{
 	'update:minimumCardPrice': [FileCardElement['minimumCardPrice']];
 	delete: [FileCardElement['uuid']];
 	'google-sheets-clicked': [DivinationCardsSample, League];
+	'save-to-file-clicked': [DivinationCardsSample, League, string];
 }>();
 
 const onUpdLeague = (e: CustomEvent<Events['upd:league']>) => {
@@ -31,12 +32,17 @@ const onDelete = (e: CustomEvent<Events['delete']>) => {
 const onGoogleSheetsClicked = (e: CustomEvent<Events['google-sheets-clicked']>) => {
 	emit('google-sheets-clicked', e.detail.sample, e.detail.league);
 };
+
+const onSaveToFileClicked = (e: CustomEvent<Events['save-to-file-clicked']>) => {
+	emit('save-to-file-clicked', e.detail.sample, e.detail.league, e.detail.filename);
+};
 </script>
 
 <template>
 	<wc-file-card
 		v-bind="props"
 		@google-sheets-clicked="onGoogleSheetsClicked"
+		@save-to-file-clicked="onSaveToFileClicked"
 		@upd:league="onUpdLeague"
 		@upd:selected="onUpdSelected"
 		@upd:minimumCardPrice="onUpdPrice"

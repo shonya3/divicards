@@ -33,6 +33,7 @@ async fn main() {
             commands::sample,
             commands::merge,
             commands::open_url,
+            commands::sample_into_csv,
             poe::auth::poe_auth,
             poe::auth::poe_logout,
             poe::stash::stashes,
