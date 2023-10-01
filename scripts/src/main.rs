@@ -51,20 +51,4 @@ use std::{collections::HashMap, fmt::Display, slice::Iter};
 use table_record::{CardDropTableRecord, Confidence, GreyNote};
 
 #[tokio::main]
-async fn main() {
-    // let areas = ActArea::_load_areas_from_file("files/areas.json");
-    for area in ACT_AREA_NAMES {
-        parse_area_name(area);
-    }
-
-    let areas: Vec<_> = ACT_AREA_NAMES
-        .iter()
-        .flat_map(|a| parse_area_name(a))
-        .collect();
-
-    std::fs::write(
-        "parsed_act_areas.json",
-        &serde_json::to_string(&areas).unwrap(),
-    )
-    .unwrap();
-}
+async fn main() {}

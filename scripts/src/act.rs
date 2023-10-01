@@ -1,4 +1,8 @@
-use std::{env, fs, path::Path};
+use std::{
+    env,
+    fs::{self, File},
+    path::Path,
+};
 
 use playwright::{api::DocumentLoadState, Playwright};
 use scraper::{ElementRef, Html, Selector};
@@ -39,10 +43,37 @@ impl ActArea {
         Ok(reqwest::get(ActArea::act_url(act)).await?.text().await?)
     }
 
-    pub async fn download_images() {
+    pub fn download_images(urls: Vec<String>) -> Result<(), Error> {
+        let act_images_dir = env::current_dir()
+            .unwrap()
+            .join("public")
+            .join("images")
+            .join("acts");
+
+        if !act_images_dir.exists() {
+            std::fs::create_dir_all(&act_images_dir).unwrap();
+        }
+
+        tokio::task::spawn_blocking(move || {
+            for url in urls {
+                let (_, filename) = url.rsplit_once("/").unwrap();
+                // let filename = format!("{}.png", card.art_filename);
+                let path = act_images_dir.join(filename);
+                let mut file = File::create(path).unwrap();
+                let _ = reqwest::blocking::get(url)
+                    .unwrap()
+                    .copy_to(&mut file)
+                    .unwrap();
+            }
+        });
+
+        Ok(())
+    }
+
+    pub async fn collect_image_urls() -> Vec<String> {
         // for act in 1..=10 {}
 
-        let act = 1;
+        let mut urls: Vec<String> = vec![];
 
         let playwright = Playwright::initialize().await.unwrap();
         playwright.install_chromium().unwrap();
@@ -55,44 +86,57 @@ impl ActArea {
             .await
             .unwrap();
         let page = context.new_page().await.unwrap();
-        page.goto_builder(&ActArea::act_url(act))
-            .wait_until(DocumentLoadState::DomContentLoaded)
-            .goto()
-            .await
-            .unwrap();
 
-        // let res: u8 = page
-        //     .eval(
-        //         r#"
-        //         () => {
-        //             const tbody = document.querySelector('tbody');
-        //             for
-
-        //         }"#,
-        //     )
-        //     .await
-        //     .unwrap();
-
-        // dbg!(res);
-
-        // page.keyboard.press("Escape", Some(2000.0)).await.unwrap();
-
-        let tbody = page.query_selector("tbody").await.unwrap().unwrap();
-        let rows = tbody.query_selector_all("tr").await.unwrap();
-        for row in rows {
-            let columns = row.query_selector_all("td").await.unwrap();
-            let name_column = &columns[1];
-            let name_element = name_column.query_selector("a").await.unwrap().unwrap();
-            name_element.hover_builder().goto().await.unwrap();
-            // page.wait_for_timeout(2000.0).await;
-            let a = page
-                .wait_for_selector_builder("div.tippy-content[data-state=visible]:has(img)")
-                .wait_for_selector()
+        for act in 1..=10 {
+            dbg!("doing act {act}");
+            page.goto_builder(&ActArea::act_url(act))
+                .wait_until(DocumentLoadState::DomContentLoaded)
+                .goto()
                 .await
-                .unwrap()
                 .unwrap();
-            dbg!(a);
+
+            // let res: u8 = page
+            //     .eval(
+            //         r#"
+            //         () => {
+            //             const tbody = document.querySelector('tbody');
+            //             for
+
+            //         }"#,
+            //     )
+            //     .await
+            //     .unwrap();
+
+            // dbg!(res);
+
+            // page.keyboard.press("Escape", Some(2000.0)).await.unwrap();
+
+            let tbody = page.query_selector("tbody").await.unwrap().unwrap();
+            let rows = tbody.query_selector_all("tr").await.unwrap();
+            for row in rows {
+                let columns = row.query_selector_all("td").await.unwrap();
+                let name_column = &columns[1];
+                for name_element in name_column.query_selector_all("a").await.unwrap() {
+                    name_column.query_selector("a").await.unwrap().unwrap();
+                    name_element.hover_builder().goto().await.unwrap();
+                    let tippy_content = page
+                        .wait_for_selector_builder("div.tippy-content[data-state=visible]:has(img)")
+                        .wait_for_selector()
+                        .await
+                        .unwrap()
+                        .unwrap();
+                    let img = tippy_content
+                        .query_selector(".itemboximage img")
+                        .await
+                        .unwrap()
+                        .unwrap();
+                    let src = img.get_attribute("src").await.unwrap().unwrap();
+                    urls.push(src);
+                }
+            }
         }
+
+        urls
     }
 
     pub async fn download_data() -> Vec<Self> {
@@ -122,58 +166,59 @@ impl ActArea {
                     .unwrap();
                 let name_column = cols[1];
 
-                let name_element_ref = name_column.select(&selector("a")).next().unwrap();
-                let id = name_element_ref
-                    .value()
-                    .attr("data-hover")
-                    .unwrap()
-                    .replace("?t=WorldAreas&c=", "");
-                let name = name_element_ref
-                    .text()
-                    .collect::<String>()
-                    .trim()
-                    .to_string();
+                for name_element_ref in name_column.select(&selector("a")) {
+                    let id = name_element_ref
+                        .value()
+                        .attr("data-hover")
+                        .unwrap()
+                        .replace("?t=WorldAreas&c=", "");
+                    let name = name_element_ref
+                        .text()
+                        .collect::<String>()
+                        .trim()
+                        .to_string();
 
-                let area_level_column = cols[2];
+                    let area_level_column = cols[2];
 
-                let area_level = area_level_column
-                    .first_child()
-                    .unwrap()
-                    .value()
-                    .as_text()
-                    .unwrap()
-                    .trim()
-                    .parse::<u8>()
-                    .unwrap();
+                    let area_level = area_level_column
+                        .first_child()
+                        .unwrap()
+                        .value()
+                        .as_text()
+                        .unwrap()
+                        .trim()
+                        .parse::<u8>()
+                        .unwrap();
 
-                let mut has_waypoint = false;
-                let mut has_labyrinth_trial = false;
-                let mut is_town = false;
-                for img in area_level_column.select(&selector("img")) {
-                    if let Some(src) = img.value().attr("src") {
-                        match src.trim() {
-                            TOWN_IMAGE_URL => is_town = true,
-                            WAYPOINT_IMAGE_URL => has_waypoint = true,
-                            LABYRINTH_TRIAL_IMAGE_URL => has_labyrinth_trial = true,
-                            _ => {}
-                        }
+                    let mut has_waypoint = false;
+                    let mut has_labyrinth_trial = false;
+                    let mut is_town = false;
+                    for img in area_level_column.select(&selector("img")) {
+                        if let Some(src) = img.value().attr("src") {
+                            match src.trim() {
+                                TOWN_IMAGE_URL => is_town = true,
+                                WAYPOINT_IMAGE_URL => has_waypoint = true,
+                                LABYRINTH_TRIAL_IMAGE_URL => has_labyrinth_trial = true,
+                                _ => {}
+                            }
+                        };
+                    }
+
+                    let image_url = ActArea::image_url(act, &id);
+
+                    let area = ActArea {
+                        id,
+                        name,
+                        act,
+                        area_level,
+                        image_url,
+                        has_waypoint,
+                        has_labyrinth_trial,
+                        is_town,
                     };
+
+                    areas.push(area);
                 }
-
-                let image_url = ActArea::image_url(act, &id);
-
-                let area = ActArea {
-                    id,
-                    name,
-                    act,
-                    area_level,
-                    image_url,
-                    has_waypoint,
-                    has_labyrinth_trial,
-                    is_town,
-                };
-
-                areas.push(area);
             }
         }
         areas
