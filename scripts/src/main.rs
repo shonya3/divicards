@@ -11,16 +11,18 @@ pub mod table;
 pub mod table_record;
 
 #[allow(unused)]
-use crate::scripts::{read_original_table_sheet, update_all_jsons};
+use crate::scripts::{read_original_table_sheet, read_table, update_all_jsons};
 #[allow(unused)]
 use crate::table::Table;
+#[allow(unused)]
 use act::{parse_area_name, ActArea};
+use csv::Writer;
 #[allow(unused)]
 use divi::consts::CARDS;
-use dropsource::area;
-use dropsource::dropconsts::ACT_AREA_NAMES;
+use divi::prices::Prices;
+use divi::sample::{Column, DivinationCardsSample, TablePreferences};
 #[allow(unused)]
-use dropsource::Source;
+use dropsource::{area, dropconsts::ACT_AREA_NAMES, Source};
 #[allow(unused)]
 use error::Error;
 #[allow(unused)]
@@ -29,8 +31,6 @@ use scraper::node::Text;
 use scraper::Element;
 #[allow(unused)]
 use scraper::{ElementRef, Html, Selector};
-#[allow(unused)]
-use scripts::read_table;
 #[allow(unused)]
 use serde::{Deserialize, Serialize};
 #[allow(unused)]

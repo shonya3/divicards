@@ -256,6 +256,9 @@ impl DivinationCardsSample {
         values.push(headers);
 
         for card in self.cards.iter() {
+            if card.price.unwrap_or_default() < preferences.min_price {
+                continue;
+            }
             values.push(
                 columns
                     .iter()
@@ -272,6 +275,16 @@ impl DivinationCardsSample {
 
         values
     }
+
+    pub fn into_csv(self, preferences: Option<TablePreferences>) -> String {
+        let values = self.into_serde_values(preferences);
+        let mut writer = csv::Writer::from_writer(vec![]);
+        for val in values {
+            writer.serialize(val).unwrap();
+        }
+
+        String::from_utf8(writer.into_inner().unwrap()).unwrap()
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -281,6 +294,7 @@ pub struct TablePreferences {
     pub ordered_by: Column,
     pub order: Order,
     pub cards_must_have_amount: bool,
+    pub min_price: f32,
 }
 
 impl Default for TablePreferences {
@@ -290,6 +304,7 @@ impl Default for TablePreferences {
             ordered_by: Column::Amount,
             order: Order::Desc,
             cards_must_have_amount: false,
+            min_price: 0.,
         }
     }
 }
@@ -463,6 +478,7 @@ mod tests {
             ordered_by: Column::Name,
             order: Order::Desc,
             cards_must_have_amount: false,
+            min_price: 0.,
         }));
         let json = serde_json::to_string(&values).unwrap();
         write("serde-values.json", &json).unwrap();

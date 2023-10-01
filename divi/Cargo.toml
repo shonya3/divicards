@@ -11,9 +11,9 @@ serde_json.workspace = true
 tracing.workspace = true
 tokio.workspace = true
 serde.workspace = true
+csv.workspace = true
 googlesheets ={ path = "../googlesheets"}
 
-csv = "1.2.1"
 serde-big-array = "0.5.1"
 strsim = "0.10.0"
 urlencoding = "2.1.2"

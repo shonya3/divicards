@@ -20,6 +20,7 @@ fn main() -> Result<(), divi::error::Error> {
         ordered_by: Column::Amount,
         order: Order::Desc,
         cards_must_have_amount: false,
+        min_price: 0.0,
     };
 
     let values = sample.into_serde_values(Some(preferences));

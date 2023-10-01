@@ -781,13 +781,6 @@ dependencies = [
 
 [[package]]
 name = "csv"
-version = "0.1.0"
-dependencies = [
- "divi",
-]
-
-[[package]]
-name = "csv"
 version = "1.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "626ae34994d3d8d668f4269922248239db4ae42d538b14c398b74a52208e8086"
@@ -805,6 +798,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2b2466559f260f48ad25fe6317b3c8dac77b5bdb5763ac7d9d6103530663bc90"
 dependencies = [
  "memchr",
+]
+
+[[package]]
+name = "csv-example"
+version = "0.1.0"
+dependencies = [
+ "divi",
+ "tokio",
 ]
 
 [[package]]
@@ -982,7 +983,7 @@ checksum = "bd0c93bb4b0c6d9b77f4435b0ae98c24d17f1c45b2ff844c6151a07256ca923b"
 name = "divi"
 version = "0.1.0"
 dependencies = [
- "csv 1.2.2",
+ "csv",
  "googlesheets",
  "reqwest",
  "serde",
@@ -3486,6 +3487,7 @@ dependencies = [
 name = "scripts"
 version = "0.4.2"
 dependencies = [
+ "csv",
  "divi",
  "dotenv",
  "googlesheets",
