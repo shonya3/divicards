@@ -53,13 +53,15 @@ const extractActAreaPopupData = actAreaPopup => {
 
 	const props = stats.querySelectorAll('.property');
 	for (const prop of props) {
-		if (!(prop instanceof HTMLElement)) throw new Error(`prop should be HTMLElement`);
+		if (!(prop instanceof HTMLElement)) {
+			throw new Error(`==${name}== prop should be HTMLElement`);
+		}
+
 		const text = prop.innerText;
 
 		const valueElement = prop.querySelector('.text-type0');
 		if (!(valueElement instanceof HTMLElement)) {
 			continue;
-			throw new Error(`valueElement should be HTMLElement, ${valueElement}`);
 		}
 
 		if (text.includes('Id:')) {
