@@ -54,4 +54,14 @@ use std::{collections::HashMap, fmt::Display, slice::Iter};
 use table_record::{CardDropTableRecord, Confidence, GreyNote};
 
 #[tokio::main]
-async fn main() {}
+async fn main() {
+    // let urls = ActArea::collect_image_urls().await;
+    // std::fs::write("jsons/urls.json", serde_json::to_string(&urls).unwrap()).unwrap();
+
+    // let urls: Vec<String> =
+    //     serde_json::from_str(&std::fs::read_to_string("jsons/urls.json").unwrap()).unwrap();
+    // ActArea::download_images(urls).unwrap();
+
+    let acts = ActArea::collect_acts_data().await;
+    std::fs::write("jsons/acts.json", &serde_json::to_string(&acts).unwrap()).unwrap();
+}

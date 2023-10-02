@@ -5,7 +5,6 @@ use std::{
 };
 
 use playwright::{api::DocumentLoadState, Playwright};
-use scraper::{ElementRef, Html, Selector};
 use serde::{Deserialize, Serialize};
 
 use crate::error::Error;
@@ -18,29 +17,79 @@ pub const LABYRINTH_TRIAL_IMAGE_URL: &'static str =
     "https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/WorldPanelLabyrinthWaypointPinIcon.webp";
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct ActArea {
     pub id: String,
     pub name: String,
     pub act: u8,
     pub area_level: u8,
     pub image_url: String,
+    pub poedb_image_url: String,
     pub has_waypoint: bool,
     pub has_labyrinth_trial: bool,
     pub is_town: bool,
+    pub bossfights: Vec<Bossfight>,
+    pub flavour_text: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Bossfight {
+    pub name: String,
+    pub url: String,
 }
 
 impl ActArea {
-    fn act_url(act: u8) -> String {
-        format!("https://poedb.tw/us/Act_{act}")
-    }
+    pub async fn collect_acts_data() -> Vec<ActArea> {
+        let script = format!(
+            "(el) => {{{} return extractActAreaPopupData(el)}}",
+            &std::fs::read_to_string("extractActAreaPopupData.js").unwrap()
+        );
 
-    pub fn image_url(act: u8, id: &str) -> String {
-        let (_, area) = id.split_once("_").unwrap();
-        format!("https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/Acts/{act}/{area}.webp")
-    }
+        let playwright = Playwright::initialize().await.unwrap();
+        playwright.install_chromium().unwrap();
+        let chrome = playwright.chromium();
+        let browser = chrome.launcher().headless(false).launch().await.unwrap();
+        let context = browser
+            .context_builder()
+            .clear_user_agent()
+            .build()
+            .await
+            .unwrap();
+        let page = context.new_page().await.unwrap();
 
-    async fn act_html(act: u8) -> Result<String, Error> {
-        Ok(reqwest::get(ActArea::act_url(act)).await?.text().await?)
+        let mut act_areas: Vec<ActArea> = Vec::new();
+
+        for act in 1..=10 {
+            println!("Doing act {act}");
+            page.goto_builder(&ActArea::act_url(act))
+                .wait_until(DocumentLoadState::DomContentLoaded)
+                .goto()
+                .await
+                .unwrap();
+
+            let tbody = page.query_selector("tbody").await.unwrap().unwrap();
+            let rows = tbody.query_selector_all("tr").await.unwrap();
+            for row in rows {
+                let columns = row.query_selector_all("td").await.unwrap();
+                let name_column = &columns[1];
+                for name_element in name_column.query_selector_all("a").await.unwrap() {
+                    let area = name_element.inner_text().await.unwrap();
+                    println!("{area}");
+                    name_element.hover_builder().goto().await.unwrap();
+                    let tippy_content = page
+                        .wait_for_selector_builder("div.tippy-content[data-state=visible]:has(img)")
+                        .wait_for_selector()
+                        .await
+                        .unwrap()
+                        .unwrap();
+
+                    let a: ActArea = page.evaluate(&script, tippy_content).await.unwrap();
+                    act_areas.push(a);
+                }
+            }
+        }
+
+        act_areas
     }
 
     pub fn download_images(urls: Vec<String>) -> Result<(), Error> {
@@ -57,7 +106,6 @@ impl ActArea {
         tokio::task::spawn_blocking(move || {
             for url in urls {
                 let (_, filename) = url.rsplit_once("/").unwrap();
-                // let filename = format!("{}.png", card.art_filename);
                 let path = act_images_dir.join(filename);
                 let mut file = File::create(path).unwrap();
                 let _ = reqwest::blocking::get(url)
@@ -70,158 +118,17 @@ impl ActArea {
         Ok(())
     }
 
-    pub async fn collect_image_urls() -> Vec<String> {
-        // for act in 1..=10 {}
-
-        let mut urls: Vec<String> = vec![];
-
-        let playwright = Playwright::initialize().await.unwrap();
-        playwright.install_chromium().unwrap();
-        let chrome = playwright.chromium();
-        let browser = chrome.launcher().headless(false).launch().await.unwrap();
-        let context = browser
-            .context_builder()
-            .clear_user_agent()
-            .build()
-            .await
-            .unwrap();
-        let page = context.new_page().await.unwrap();
-
-        for act in 1..=10 {
-            dbg!("doing act {act}");
-            page.goto_builder(&ActArea::act_url(act))
-                .wait_until(DocumentLoadState::DomContentLoaded)
-                .goto()
-                .await
-                .unwrap();
-
-            // let res: u8 = page
-            //     .eval(
-            //         r#"
-            //         () => {
-            //             const tbody = document.querySelector('tbody');
-            //             for
-
-            //         }"#,
-            //     )
-            //     .await
-            //     .unwrap();
-
-            // dbg!(res);
-
-            // page.keyboard.press("Escape", Some(2000.0)).await.unwrap();
-
-            let tbody = page.query_selector("tbody").await.unwrap().unwrap();
-            let rows = tbody.query_selector_all("tr").await.unwrap();
-            for row in rows {
-                let columns = row.query_selector_all("td").await.unwrap();
-                let name_column = &columns[1];
-                for name_element in name_column.query_selector_all("a").await.unwrap() {
-                    name_column.query_selector("a").await.unwrap().unwrap();
-                    name_element.hover_builder().goto().await.unwrap();
-                    let tippy_content = page
-                        .wait_for_selector_builder("div.tippy-content[data-state=visible]:has(img)")
-                        .wait_for_selector()
-                        .await
-                        .unwrap()
-                        .unwrap();
-                    let img = tippy_content
-                        .query_selector(".itemboximage img")
-                        .await
-                        .unwrap()
-                        .unwrap();
-                    let src = img.get_attribute("src").await.unwrap().unwrap();
-                    urls.push(src);
-                }
-            }
-        }
-
-        urls
+    fn act_url(act: u8) -> String {
+        format!("https://poedb.tw/us/Act_{act}")
     }
 
-    pub async fn download_data() -> Vec<Self> {
-        let mut areas: Vec<ActArea> = Vec::new();
+    pub fn image_url(act: u8, id: &str) -> String {
+        let (_, area) = id.split_once("_").unwrap();
+        format!("https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/Acts/{act}/{area}.webp")
+    }
 
-        // let html = ActArea::act1_html().await;
-
-        for act in 1..=10 {
-            println!("doing act {act}");
-            let html = ActArea::act_html(act).await.unwrap();
-            let html = Html::parse_document(&html);
-            for row in html
-                .select(&selector("tbody"))
-                .next()
-                .unwrap()
-                .select(&selector("tr"))
-            {
-                let cols: Vec<ElementRef> = row.select(&selector("td")).collect();
-                let act = cols[0]
-                    .select(&selector("a"))
-                    .next()
-                    .unwrap()
-                    .text()
-                    .collect::<String>()
-                    .trim()
-                    .parse::<u8>()
-                    .unwrap();
-                let name_column = cols[1];
-
-                for name_element_ref in name_column.select(&selector("a")) {
-                    let id = name_element_ref
-                        .value()
-                        .attr("data-hover")
-                        .unwrap()
-                        .replace("?t=WorldAreas&c=", "");
-                    let name = name_element_ref
-                        .text()
-                        .collect::<String>()
-                        .trim()
-                        .to_string();
-
-                    let area_level_column = cols[2];
-
-                    let area_level = area_level_column
-                        .first_child()
-                        .unwrap()
-                        .value()
-                        .as_text()
-                        .unwrap()
-                        .trim()
-                        .parse::<u8>()
-                        .unwrap();
-
-                    let mut has_waypoint = false;
-                    let mut has_labyrinth_trial = false;
-                    let mut is_town = false;
-                    for img in area_level_column.select(&selector("img")) {
-                        if let Some(src) = img.value().attr("src") {
-                            match src.trim() {
-                                TOWN_IMAGE_URL => is_town = true,
-                                WAYPOINT_IMAGE_URL => has_waypoint = true,
-                                LABYRINTH_TRIAL_IMAGE_URL => has_labyrinth_trial = true,
-                                _ => {}
-                            }
-                        };
-                    }
-
-                    let image_url = ActArea::image_url(act, &id);
-
-                    let area = ActArea {
-                        id,
-                        name,
-                        act,
-                        area_level,
-                        image_url,
-                        has_waypoint,
-                        has_labyrinth_trial,
-                        is_town,
-                    };
-
-                    areas.push(area);
-                }
-            }
-        }
-        areas
+    async fn _act_html(act: u8) -> Result<String, Error> {
+        Ok(reqwest::get(ActArea::act_url(act)).await?.text().await?)
     }
 
     async fn _act1_html() -> String {
@@ -257,10 +164,6 @@ impl ActArea {
         let s = std::fs::read_to_string(path).unwrap();
         serde_json::from_str(&s).unwrap()
     }
-}
-
-pub fn selector(s: &str) -> Selector {
-    Selector::parse(s).unwrap()
 }
 
 // #[tokio::main]
@@ -383,8 +286,6 @@ pub fn parse_area_name(s: &str) -> Vec<AreaNameAct> {
             .map(|name| AreaNameAct::from(name))
             .collect()
     }
-
-    // names
 }
 
 // fn area_id_from_str(s: &str) {}
