@@ -178,8 +178,7 @@ const onSubmit = async ({
 		</Transition>
 
 		<div v-if="sampleStore.sampleCards.length >= 2">
-			<h2>Select files you want to merge</h2>
-			<button class="btn" @click="sampleStore.downloadAll">Download All</button>
+			<h2>Select samples you want to merge</h2>
 			<button :disabled="sampleStore.samples.length < 2" class="btn" @click="sampleStore.mergeAll">
 				Merge All
 			</button>
@@ -226,12 +225,6 @@ const onSubmit = async ({
 </template>
 
 <style scoped>
-@font-face {
-	font-family: 'fontin';
-	font-weight: normal;
-	font-style: normal;
-	src: url('/fontin') format('woff');
-}
 .header {
 	display: flex;
 	justify-content: space-between;
@@ -275,4 +268,3 @@ const onSubmit = async ({
 	font-size: 1.4rem;
 }
 </style>
-./composables/usePreferences
