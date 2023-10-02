@@ -41,10 +41,15 @@ const extractActAreaPopupData = actAreaPopup => {
 	const itemHeader = actAreaPopup.querySelector('.itemHeader');
 	if (!(itemHeader instanceof HTMLElement)) throw new Error('no itemHeader element');
 	const name = itemHeader.innerText;
+
+	/** @type string | null */
 	let id = null;
+	/** @type number | null */
 	let act = null;
+	/** @type number | null */
 	let areaLevel = null;
-	let bossfights = [];
+	/** @type Bossfight[] */
+	const bossfights = [];
 	let flavourText = stats.querySelector('.FlavourText')?.textContent ?? null;
 	const poedbImageUrl = img.src;
 	const slashIndex = poedbImageUrl.lastIndexOf('/');
