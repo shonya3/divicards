@@ -30,7 +30,7 @@ pub enum UniqueMonster {
     BreachlordBossDomain(BreachlordBossDomain),
     Architect(Architect),
     ShaperGuardianBoss(ShaperGuardianBoss),
-    BetrayalSyndicateMember(BetrayalSyndicateMember),
+    SyndicateMember(SyndicateMember),
     Elderslayer(Elderslayer),
     ElderGuardianBoss(ElderGuardianBoss),
     RogueExile(RogueExile),
@@ -47,55 +47,38 @@ impl FromStr for UniqueMonster {
     type Err = strum::ParseError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        if s == "Maven's Invitation: The Feared" {
-            return Ok(UniqueMonster::MavensInvitationTheFeared);
-        } else if s == "Uul-Netol, Unburdened Flesh (in Breachstones)" {
-            return Ok(UniqueMonster::UulNetolInBreachstones);
-        } else if s == "The Vaal Omnitect" {
-            return Ok(UniqueMonster::VaalOmnitect);
-        } else if s == "Metamorph" {
-            return Ok(UniqueMonster::Metamorph);
-        } else if s == "Null Portal" {
-            return Ok(UniqueMonster::NullPortal);
-        } else if s == "Vaal Flesh Merchant" {
-            return Ok(UniqueMonster::VaalFleshMerchant);
-        } else if s == "All Incursion Architects in Alva missions/Alva's Memory" {
-            return Ok(UniqueMonster::AllIncursionArchitectsInAlvaMission);
-        } else if s == "All Abyss Monsters" {
-            return Ok(UniqueMonster::AllAbyssMonsters);
-        } else if s == "All Rogue Exiles" {
-            return Ok(UniqueMonster::AllRogueExiles);
-        } else if s == "All (Scourge) beyond demons" {
-            return Ok(UniqueMonster::AllRogueExiles);
-        } else if let Ok(breachlord) = s.parse::<BreachlordBossDomain>() {
-            return Ok(UniqueMonster::BreachlordBossDomain(breachlord));
-        } else if let Ok(architect) = s.parse::<Architect>() {
-            return Ok(UniqueMonster::Architect(architect));
-        } else if let Ok(shaperguard) = s.parse::<ShaperGuardianBoss>() {
-            return Ok(UniqueMonster::ShaperGuardianBoss(shaperguard));
-        } else if let Ok(betrayal) = s.parse::<BetrayalSyndicateMember>() {
-            return Ok(UniqueMonster::BetrayalSyndicateMember(betrayal));
-        } else if let Ok(elderslayer) = s.parse::<Elderslayer>() {
-            return Ok(UniqueMonster::Elderslayer(elderslayer));
-        } else if let Ok(elderguard) = s.parse::<ElderGuardianBoss>() {
-            return Ok(UniqueMonster::ElderGuardianBoss(elderguard));
-        } else if let Ok(rogueexile) = s.parse::<RogueExile>() {
-            return Ok(UniqueMonster::RogueExile(rogueexile));
-        } else if let Ok(abysslichboss) = s.parse::<AbyssLichBoss>() {
-            return Ok(UniqueMonster::AbyssLichBoss(abysslichboss));
-        } else if let Ok(mapsonly) = s.parse::<MapsOnly>() {
-            return Ok(UniqueMonster::MapsOnly(mapsonly));
-        } else if let Ok(storyboss) = s.parse::<StoryBoss>() {
-            return Ok(UniqueMonster::StoryBoss(storyboss));
-        } else if let Ok(harbingerportal) = s.parse::<HarbingerPortal>() {
-            return Ok(UniqueMonster::HarbingerPortal(harbingerportal));
-        } else if BOSS_NAMES.contains(&s) {
-            return Ok(UniqueMonster::Boss {
-                name: s.to_string(),
-            });
+        match s {
+            "Maven's Invitation: The Feared" => Ok(Self::MavensInvitationTheFeared),
+            "Uul-Netol, Unburdened Flesh (in Breachstones)" => Ok(Self::UulNetolInBreachstones),
+            "The Vaal Omnitect" => Ok(Self::VaalOmnitect),
+            "Metamorph" => Ok(Self::Metamorph),
+            "Null Portal" => Ok(Self::NullPortal),
+            "Vaal Flesh Merchant" => Ok(Self::VaalFleshMerchant),
+            "All Incursion Architects in Alva missions/Alva's Memory" => {
+                Ok(Self::AllIncursionArchitectsInAlvaMission)
+            }
+            "All Abyss Monsters" => Ok(Self::AllAbyssMonsters),
+            "All Rogue Exiles" => Ok(Self::AllRogueExiles),
+            "All (Scourge) beyond demons" => Ok(Self::AllScourgeBeyondDemons),
+            _ => BreachlordBossDomain::from_str(s)
+                .map(|b| Self::BreachlordBossDomain(b))
+                .or_else(|_| Architect::from_str(s).map(|b| Self::Architect(b)))
+                .or_else(|_| ShaperGuardianBoss::from_str(s).map(|b| Self::ShaperGuardianBoss(b)))
+                .or_else(|_| SyndicateMember::from_str(s).map(|b| Self::SyndicateMember(b)))
+                .or_else(|_| Elderslayer::from_str(s).map(|b| Self::Elderslayer(b)))
+                .or_else(|_| ElderGuardianBoss::from_str(s).map(|b| Self::ElderGuardianBoss(b)))
+                .or_else(|_| RogueExile::from_str(s).map(|b| Self::RogueExile(b)))
+                .or_else(|_| AbyssLichBoss::from_str(s).map(|b| Self::AbyssLichBoss(b)))
+                .or_else(|_| MapsOnly::from_str(s).map(|b| Self::MapsOnly(b)))
+                .or_else(|_| StoryBoss::from_str(s).map(|b| Self::StoryBoss(b)))
+                .or_else(|_| HarbingerPortal::from_str(s).map(|b| Self::HarbingerPortal(b)))
+                .or_else(|_| match BOSS_NAMES.contains(&s) {
+                    true => Ok(Self::Boss {
+                        name: s.to_string(),
+                    }),
+                    false => Err(strum::ParseError::VariantNotFound),
+                }),
         }
-
-        Err(strum::ParseError::VariantNotFound)
     }
 }
 
@@ -119,7 +102,7 @@ impl std::fmt::Display for UniqueMonster {
             UniqueMonster::BreachlordBossDomain(breachlord) => breachlord.fmt(f),
             UniqueMonster::Architect(architect) => architect.fmt(f),
             UniqueMonster::ShaperGuardianBoss(shaperguard) => shaperguard.fmt(f),
-            UniqueMonster::BetrayalSyndicateMember(betrayal) => betrayal.fmt(f),
+            UniqueMonster::SyndicateMember(syndicate) => syndicate.fmt(f),
             UniqueMonster::Elderslayer(elderslayer) => elderslayer.fmt(f),
             UniqueMonster::ElderGuardianBoss(elderguard) => elderguard.fmt(f),
             UniqueMonster::RogueExile(rogueexile) => rogueexile.fmt(f),
@@ -196,7 +179,7 @@ pub enum ShaperGuardianBoss {
     Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
 )]
 #[serde(tag = "name")]
-pub enum BetrayalSyndicateMember {
+pub enum SyndicateMember {
     #[strum(serialize = "Haku", serialize = "Haku, Warmaster")]
     #[serde(rename = "Haku, Warmaster")]
     Haku,
