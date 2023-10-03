@@ -21,6 +21,9 @@
  */
 
 /**
+ * Running this function in act.rs ActArea::collect_act_data
+ * for each act area popup(that appears on hover area's name) with playwright's page.evaluate("actAreaPopup => extractActAreaPopupData(actAreaPopup)", actAreaPopup)
+ * https://poedb.tw/us/Act_1
  * @param {HTMLElement} actAreaPopup
  * @returns {ActArea}
  */
@@ -34,9 +37,9 @@ const extractActAreaPopupData = actAreaPopup => {
 	const stats = document.querySelector('.Stats');
 	if (!(img instanceof HTMLImageElement)) throw new Error('no img element');
 	if (!stats) throw new Error('no stats element');
-	const hasWaypoint = stats?.querySelector(`[src="${WAYPOINT_IMAGE_URL}"]`) !== null;
-	const isTown = stats?.querySelector(`[src="${TOWN_IMAGE_URL}"]`) !== null;
-	const hasLabyrinthTrial = stats?.querySelector(`[src="${LABYRINTH_TRIAL_IMAGE_URL}"]`) !== null;
+	const hasWaypoint = stats.querySelector(`[src="${WAYPOINT_IMAGE_URL}"]`) !== null;
+	const isTown = stats.querySelector(`[src="${TOWN_IMAGE_URL}"]`) !== null;
+	const hasLabyrinthTrial = stats.querySelector(`[src="${LABYRINTH_TRIAL_IMAGE_URL}"]`) !== null;
 
 	const itemHeader = actAreaPopup.querySelector('.itemHeader');
 	if (!(itemHeader instanceof HTMLElement)) throw new Error('no itemHeader element');
