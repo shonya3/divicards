@@ -15,13 +15,13 @@ name = "lib"
 path = "lib/src/lib.rs"
 
 [build-dependencies]
-tauri-build = { version = "1.4", features = [] }
+tauri-build = { version = "1.5", features = [] }
 
 [dependencies]
 divi = {path = "../../../divi"}
 googlesheets = {path = "../../../googlesheets"}
 
-tauri = { version = "1.4", features = [ "api-all"] }
+tauri = { version = "1.5", features = [ "api-all"] }
 
 tokio.workspace = true
 tracing.workspace = true
