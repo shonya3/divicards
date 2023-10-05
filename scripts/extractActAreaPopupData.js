@@ -8,6 +8,7 @@
  * @property {number} areaLevel
  * @property {string} imageUrl
  * @property {string} poedbImageUrl
+ * @property {boolean} hasWaypoint
  * @property {boolean} hasLabyrinthTrial
  * @property {boolean} isTown
  * @property {Bossfight[]} bossfights
@@ -104,7 +105,8 @@ const extractActAreaPopupData = actAreaPopup => {
 	if (!areaLevel) throw new Error(`==${name}== no area level`);
 	if (!flavourText) throw new Error(`==${name}== No flavourText`);
 
-	const data = {
+	/** @type ActArea */
+	const actArea = {
 		id,
 		name,
 		act,
@@ -118,5 +120,5 @@ const extractActAreaPopupData = actAreaPopup => {
 		flavourText,
 	};
 
-	return data;
+	return actArea;
 };
