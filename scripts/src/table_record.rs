@@ -20,11 +20,11 @@ pub struct CardDropTableRecord {
 
 impl CardDropTableRecord {
     pub fn parse(row: &[Value]) -> Result<CardDropTableRecord, Error> {
-        let greynote = parse_greynote(&row[0])?;
+        let greynote = GreyNote::parse(&row[0])?;
         let name = parse_name(&row[1])?;
         let tag_hypothesis = parse_string_cell(&row[2]);
-        let confidence = parse_confidence(&row[3])?;
-        let remaining_work = parse_remaining_work(&row[4])?;
+        let confidence = Confidence::parse(&row[3])?;
+        let remaining_work = RemainingWork::parse(&row[4])?;
         let drops_from = row.get(5).map(|val| parse_string_cell(val)).flatten();
         let wiki_disagreements = row.get(6).map(|val| parse_string_cell(val)).flatten();
         let sources_with_tag_but_not_on_wiki =
@@ -63,48 +63,6 @@ impl CardDropTableRecord {
 
         vec
     }
-
-    // TODO
-    // pub fn resolve_dropsources(&self) -> HashSet<DropSource> {
-    //     let None = self.drops_from else {
-    //         let drops_from = self.drops_from.as_ref().unwrap().as_str();
-    //         return DropSource::parse(drops_from).unwrap();
-    //     };
-
-    //     let mut dropsources = HashSet::new();
-
-    //     if let Some(greynote) = &self.greynote {
-    //         match greynote {
-    //             GreyNote::MonsterSpecific => {}
-    //             GreyNote::AreaSpecific => {}
-    //             GreyNote::Disabled => {
-    //                 dropsources.insert(DropSource::Disabled);
-    //             }
-    //             GreyNote::Story => {}
-    //             GreyNote::Delirium => {
-    //                 dropsources.insert(DropSource::Delirium);
-    //             }
-    //             GreyNote::ChestObject => {
-    //                 dropsources.insert(DropSource::ChestObject);
-    //             }
-    //             GreyNote::Strongbox => {
-    //                 dropsources.insert(DropSource::Strongbox);
-    //             }
-    //             GreyNote::GlobalDrop => {
-    //                 dropsources.insert(DropSource::GlobalDrop);
-    //             }
-    //             GreyNote::Vendor => {
-    //                 dropsources.insert(DropSource::Vendor(Some(Vendor::KiracShop)));
-    //             }
-    //         }
-    //     }
-
-    //     dropsources
-    // }
-}
-
-pub fn parse_greynote(val: &Value) -> Result<Option<GreyNote>, Error> {
-    GreyNote::parse(val)
 }
 
 pub fn parse_name(val: &Value) -> Result<String, Error> {
@@ -116,112 +74,129 @@ pub fn parse_name(val: &Value) -> Result<String, Error> {
         true => Ok(second_column_contents.to_string()),
         false => match fix_name(second_column_contents) {
             Some(s) => Ok(s),
-            None => Err(Error::ParseNameError(second_column_contents.to_string())),
+            None => Err(Error::ParseCardNameError(
+                second_column_contents.to_string(),
+            )),
         },
     }
 }
 
-pub fn parse_confidence(val: &Value) -> Result<Confidence, Error> {
-    Confidence::parse(val)
-}
-
-pub fn parse_remaining_work(val: &Value) -> Result<Option<RemainingWork>, Error> {
-    RemainingWork::parse(val)
-}
-
 pub fn parse_string_cell(val: &Value) -> Option<String> {
-    let Some(s) = val.as_str() else { return None };
-    if s.is_empty() || s == "n/a" {
-        return None;
-    } else {
-        return Some(s.to_string());
+    match val.as_str() {
+        Some(s) if s.is_empty() || s == "n/a" => None,
+        Some(s) => Some(s.to_string()),
+        None => None,
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(
+    Serialize, Deserialize, Clone, Debug, PartialEq, strum_macros::EnumString, strum_macros::Display,
+)]
 #[serde(rename_all = "camelCase")]
 pub enum GreyNote {
+    #[strum(serialize = "Monster-specific")]
     #[serde(alias = "Monster-specific")]
     MonsterSpecific,
+    #[strum(serialize = "Area-specific")]
     #[serde(alias = "Area-specific")]
     AreaSpecific,
+    #[strum(serialize = "disabled", serialize = "Drop disabled")]
     #[serde(alias = "disabled", alias = "Drop disabled")]
     Disabled,
+    #[strum(serialize = "story")]
     #[serde(alias = "story")]
     Story,
+    #[strum(serialize = "Delirium_reward")]
     #[serde(alias = "Delirium_reward")]
     Delirium,
+    #[strum(to_string = "Chest_object", serialize = "Chest_obkect")]
     #[serde(alias = "Chest_object", alias = "Chest_obkect")]
     ChestObject,
+    #[strum(serialize = "strongbox")]
     #[serde(alias = "strongbox")]
     Strongbox,
+    #[strum(serialize = "Global Drop")]
     #[serde(alias = "Global Drop")]
     GlobalDrop,
+    #[strum(serialize = "Vendor")]
     #[serde(alias = "Vendor")]
     Vendor,
 }
 
 impl GreyNote {
     pub fn parse(val: &Value) -> Result<Option<Self>, Error> {
-        let Some(s) = val.as_str() else {
-            return Ok(None);
-        };
-        if s.is_empty() || s == "n/a" {
-            return Ok(None);
-        } else {
-            let greynote = serde_json::from_str(&val.to_string())?;
-            Ok(greynote)
+        match val.as_str() {
+            Some(s) if s.is_empty() || s == "n/a" => Ok(None),
+            Some(s) => Ok(Some(s.parse()?)),
+            None => Ok(None),
         }
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Hash, Eq)]
-#[serde(rename_all = "camelCase")]
+#[derive(
+    Serialize,
+    Deserialize,
+    Clone,
+    Debug,
+    PartialEq,
+    Hash,
+    Eq,
+    strum_macros::EnumString,
+    strum_macros::Display,
+)]
 pub enum Confidence {
-    #[serde(alias = "none")]
+    #[strum(to_string = "None", serialize = "none")]
+    #[serde(rename = "None", alias = "none")]
     None,
-    #[serde(alias = "Low", alias = "low")]
+    #[strum(to_string = "Low", serialize = "low")]
+    #[serde(rename = "Low", alias = "low")]
     Low,
-    #[serde(alias = "OK", alias = "ok")]
+    #[strum(to_string = "OK", serialize = "ok")]
+    #[serde(rename = "OK", alias = "ok")]
     Ok,
-    #[serde(alias = "DONE", alias = "Done")]
+    #[strum(to_string = "Done", serialize = "DONE")]
+    #[serde(rename = "Done", alias = "DONE")]
     Done,
 }
 
 impl Confidence {
     pub fn parse(val: &Value) -> Result<Self, Error> {
-        let conf: Confidence = serde_json::from_str(&val.to_string())?;
+        let conf: Confidence = serde_json::from_value(val.to_owned())?;
         Ok(conf)
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(
+    Serialize, Deserialize, Clone, Debug, PartialEq, strum_macros::EnumString, strum_macros::Display,
+)]
 #[serde(rename_all = "camelCase")]
 pub enum RemainingWork {
+    #[strum(serialize = "confirm")]
     #[serde(alias = "confirm")]
     Confirm,
+    #[strum(serialize = "unclear hypothesis")]
     #[serde(alias = "unclear hypothesis")]
     UnclearHypothesis,
+    #[strum(serialize = "no hypothesis")]
     #[serde(alias = "no hypothesis")]
     NoHypothesis,
+    #[strum(serialize = "story only")]
     #[serde(alias = "story only")]
     StoryOnly,
+    #[strum(serialize = "legacy tag")]
     #[serde(alias = "legacy tag")]
     LegacyTag,
+    #[strum(serialize = "open ended")]
     #[serde(alias = "open ended")]
     OpenEnded,
 }
 
 impl RemainingWork {
     pub fn parse(val: &Value) -> Result<Option<Self>, Error> {
-        let Some(s) = val.as_str() else {
-            return Ok(None);
-        };
-        if s.is_empty() || s == "n/a" {
-            return Ok(None);
-        } else {
-            let remaining_work = serde_json::from_str(&val.to_string())?;
-            Ok(remaining_work)
+        match val.as_str() {
+            Some(s) if s.is_empty() || s == "n/a" => Ok(None),
+            Some(s) => Ok(Some(s.parse()?)),
+            None => Ok(None),
         }
     }
 }
@@ -247,7 +222,7 @@ mod tests {
         let sheet = read_original_table_sheet("jsons/sheet.json").unwrap();
         let mut vec: Vec<Vec<Value>> = vec![];
         for val in &sheet.values {
-            if let Err(_) = parse_greynote(&val[0]) {
+            if let Err(_) = GreyNote::parse(&val[0]) {
                 vec.push(val.to_owned());
                 dbg!(val);
             }
@@ -256,54 +231,54 @@ mod tests {
 
         assert_eq!(
             Some(GreyNote::AreaSpecific),
-            parse_greynote(&json!("Area-specific")).unwrap()
+            GreyNote::parse(&json!("Area-specific")).unwrap()
         );
         assert_eq!(
             Some(GreyNote::MonsterSpecific),
-            parse_greynote(&json!("Monster-specific")).unwrap()
+            GreyNote::parse(&json!("Monster-specific")).unwrap()
         );
         assert_eq!(
             Some(GreyNote::Disabled),
-            parse_greynote(&json!("disabled")).unwrap()
+            GreyNote::parse(&json!("disabled")).unwrap()
         );
         assert_eq!(
             Some(GreyNote::Disabled),
-            parse_greynote(&json!("disabled")).unwrap()
+            GreyNote::parse(&json!("disabled")).unwrap()
         );
         assert_eq!(
             Some(GreyNote::Disabled),
-            parse_greynote(&json!("Drop disabled")).unwrap()
+            GreyNote::parse(&json!("Drop disabled")).unwrap()
         );
         assert_eq!(
             Some(GreyNote::Story),
-            parse_greynote(&json!("story")).unwrap()
+            GreyNote::parse(&json!("story")).unwrap()
         );
         assert_eq!(
             Some(GreyNote::Delirium),
-            parse_greynote(&json!("Delirium_reward")).unwrap()
+            GreyNote::parse(&json!("Delirium_reward")).unwrap()
         );
         assert_eq!(
             Some(GreyNote::ChestObject),
-            parse_greynote(&json!("Chest_object")).unwrap()
+            GreyNote::parse(&json!("Chest_object")).unwrap()
         );
         assert_eq!(
             Some(GreyNote::ChestObject),
-            parse_greynote(&json!("Chest_obkect")).unwrap()
+            GreyNote::parse(&json!("Chest_obkect")).unwrap()
         );
         assert_eq!(
             Some(GreyNote::Strongbox),
-            parse_greynote(&json!("strongbox")).unwrap()
+            GreyNote::parse(&json!("strongbox")).unwrap()
         );
         assert_eq!(
             Some(GreyNote::GlobalDrop),
-            parse_greynote(&json!("Global Drop")).unwrap()
+            GreyNote::parse(&json!("Global Drop")).unwrap()
         );
         assert_eq!(
             Some(GreyNote::Vendor),
-            parse_greynote(&json!("Vendor")).unwrap()
+            GreyNote::parse(&json!("Vendor")).unwrap()
         );
-        assert_eq!(None, parse_greynote(&json!("")).unwrap());
-        assert_eq!(None, parse_greynote(&json!("n/a")).unwrap());
+        assert_eq!(None, GreyNote::parse(&json!("")).unwrap());
+        assert_eq!(None, GreyNote::parse(&json!("n/a")).unwrap());
     }
 
     #[test]
@@ -321,12 +296,12 @@ mod tests {
 
     #[test]
     fn test_parse_confidence() {
-        assert_eq!(Confidence::Done, parse_confidence(&json!("DONE")).unwrap());
-        assert_eq!(Confidence::Low, parse_confidence(&json!("Low")).unwrap());
-        assert_eq!(Confidence::Low, parse_confidence(&json!("low")).unwrap());
-        assert_eq!(Confidence::None, parse_confidence(&json!("none")).unwrap());
-        assert_eq!(Confidence::Ok, parse_confidence(&json!("OK")).unwrap());
-        assert_eq!(Confidence::Ok, parse_confidence(&json!("ok")).unwrap());
+        assert_eq!(Confidence::Done, Confidence::parse(&json!("DONE")).unwrap());
+        assert_eq!(Confidence::Low, Confidence::parse(&json!("Low")).unwrap());
+        assert_eq!(Confidence::Low, Confidence::parse(&json!("low")).unwrap());
+        assert_eq!(Confidence::None, Confidence::parse(&json!("none")).unwrap());
+        assert_eq!(Confidence::Ok, Confidence::parse(&json!("OK")).unwrap());
+        assert_eq!(Confidence::Ok, Confidence::parse(&json!("ok")).unwrap());
     }
 
     #[test]
@@ -337,7 +312,7 @@ mod tests {
             if val.len() < 5 {
                 continue;
             }
-            if let Err(_) = parse_remaining_work(&val[4]) {
+            if let Err(_) = RemainingWork::parse(&val[4]) {
                 vec.push(val.to_owned());
             }
         }
@@ -345,31 +320,31 @@ mod tests {
 
         assert_eq!(
             Some(RemainingWork::Confirm),
-            parse_remaining_work(&json!("confirm")).unwrap()
+            RemainingWork::parse(&json!("confirm")).unwrap()
         );
         assert_eq!(
             Some(RemainingWork::UnclearHypothesis),
-            parse_remaining_work(&json!("unclear hypothesis")).unwrap()
+            RemainingWork::parse(&json!("unclear hypothesis")).unwrap()
         );
         assert_eq!(
             Some(RemainingWork::NoHypothesis),
-            parse_remaining_work(&json!("no hypothesis")).unwrap()
+            RemainingWork::parse(&json!("no hypothesis")).unwrap()
         );
         assert_eq!(
             Some(RemainingWork::StoryOnly),
-            parse_remaining_work(&json!("story only")).unwrap()
+            RemainingWork::parse(&json!("story only")).unwrap()
         );
-        assert_eq!(None, parse_remaining_work(&json!("n/a")).unwrap());
+        assert_eq!(None, RemainingWork::parse(&json!("n/a")).unwrap());
         assert_eq!(
             Some(RemainingWork::LegacyTag),
-            parse_remaining_work(&json!("legacy tag")).unwrap()
+            RemainingWork::parse(&json!("legacy tag")).unwrap()
         );
 
         assert_eq!(
             Some(RemainingWork::OpenEnded),
-            parse_remaining_work(&json!("open ended")).unwrap()
+            RemainingWork::parse(&json!("open ended")).unwrap()
         );
 
-        assert_eq!(None, parse_remaining_work(&json!("")).unwrap());
+        assert_eq!(None, RemainingWork::parse(&json!("")).unwrap());
     }
 }
