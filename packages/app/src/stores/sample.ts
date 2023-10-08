@@ -99,12 +99,6 @@ export const useSampleStore = defineStore('sampleCards', {
 			this.merged = merged;
 		},
 
-		downloadAll(): void {
-			for (const file of this.sampleCards) {
-				downloadText(file.filename, file.sample.csv);
-			}
-		},
-
 		deleteMerged(): void {
 			this.merged = null;
 		},
