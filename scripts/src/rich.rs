@@ -10,27 +10,17 @@ pub struct RichSourcesColumn {
 }
 
 impl RichSourcesColumn {
-    pub fn cells(self) -> std::vec::IntoIter<Cell> {
-        self.sheets[0].data[0]
-            .row_data
-            .iter()
-            .map(|row| {
-                if row.values.len() > 1 {
-                    panic!("Expected values array length to be 1");
-                };
-                row.values[0].clone()
-            })
-            .collect::<Vec<Cell>>()
-            .into_iter()
+    pub fn cells(&self) -> impl Iterator<Item = &Cell> {
+        let sheet = &self.sheets[0];
+        let data = &sheet.data[0];
+        let row_data = &data.row_data;
+        row_data.iter().map(|row| {
+            if row.values.len() > 1 {
+                panic!("Expected values array length to be 1");
+            };
+            &row.values[0]
+        })
     }
-
-    // pub fn drops_from(self) {
-    //     for cell in self.cells().clone() {
-    //         if let Some(text) = cell.text {
-    //             cell.text_format_runs.into_iter().map(|runs| );
-    //         };
-    //     }
-    // }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -72,6 +62,17 @@ pub struct Cell {
 }
 
 impl Cell {
+    pub fn drops_from(&self) -> Vec<DropsFrom> {
+        self.text_fragments()
+            .into_iter()
+            .flat_map(|t| t.drops_from())
+            .collect()
+    }
+
+    pub fn italics(&self) -> impl Iterator<Item = DropsFrom> {
+        self.drops_from().into_iter().filter(|d| d.styles.italic)
+    }
+
     pub fn text_fragments(&self) -> Vec<Text> {
         let text_format_runs = self.text_format_runs();
         let text_content = self.text_content.clone().unwrap_or_default();
@@ -117,17 +118,6 @@ impl Cell {
         }
     }
 
-    pub fn drops_from(self) {
-        if let Some(_text) = self.text_content {
-            if let Some(text_format_runs) = self.text_format_runs {
-                if text_format_runs.len() > 0 {
-                    panic!("Text format runs is not expected to be more than 2 length");
-                }
-                // text_format_runs.into_iter().map(|run|run.);
-            }
-        };
-    }
-
     pub fn has_italics(&self) -> bool {
         match self.text_format_runs {
             Some(ref text_format_runs) => text_format_runs
@@ -139,39 +129,6 @@ impl Cell {
 
     pub fn font_styles(&self) -> FontStyles {
         self.effective_format.font_styles.to_owned().into()
-    }
-
-    pub fn n_text_format_runs(&self) -> usize {
-        match &self.text_format_runs {
-            Some(vec) => vec.len(),
-            None => 0,
-        }
-    }
-
-    pub fn n_italic_text_framgents(&self) -> usize {
-        self.text_format_runs()
-            .iter()
-            .map(|run| {
-                if run.is_italic(&self.font_styles()) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-            })
-            .sum()
-    }
-
-    pub fn has_more_than_one_italic_fragments(&self) -> bool {
-        self.n_italic_text_framgents() > 1
-    }
-
-    pub fn italics(&self) -> Vec<TextFormatRun> {
-        self.text_format_runs
-            .clone()
-            .unwrap_or_else(Vec::new)
-            .into_iter()
-            .filter(|run| run.is_italic(&self.font_styles()))
-            .collect()
     }
 
     pub fn text_format_runs(&self) -> Vec<TextFormatRun> {
@@ -234,7 +191,13 @@ impl ProtobufColor {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(rename_all = "camelCase")]
-pub struct HexColor(String);
+pub struct HexColor(pub String);
+
+impl HexColor {
+    pub fn as_str(&self) -> &str {
+        self.0.as_str()
+    }
+}
 
 impl From<ProtobufColor> for HexColor {
     fn from(value: ProtobufColor) -> Self {
@@ -254,9 +217,9 @@ pub struct TextFormat {
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct FontStyles {
-    color: HexColor,
-    italic: bool,
-    strikethrough: bool,
+    pub color: HexColor,
+    pub italic: bool,
+    pub strikethrough: bool,
 }
 
 impl From<TextFormat> for FontStyles {
@@ -282,6 +245,22 @@ impl Text {
             .map(|s| s.trim())
             .filter(|s| *s != "n/a" && !s.is_empty())
     }
+
+    pub fn drops_from(&self) -> Vec<DropsFrom> {
+        self.items()
+            .map(|i| DropsFrom {
+                name: i.to_string(),
+                styles: self.styles.to_owned(),
+            })
+            .collect()
+    }
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct DropsFrom {
+    pub name: String,
+    pub styles: FontStyles,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -347,8 +326,6 @@ pub struct Format {
     pub strikethrough: Option<bool>,
 }
 
-impl Format {}
-
 async fn _load_drops_column() -> Result<Value, Error> {
     dotenv::dotenv().ok();
     let key = std::env::var("GOOGLE_API_KEY").expect("No google api key");
@@ -370,20 +347,3 @@ pub async fn load_t() -> Result<RichSourcesColumn, Error> {
     // let url = format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}?&ranges={sheet}!A:A&ranges={sheet}!F:F&includeGridData=true&key={key}");
     Ok(reqwest::get(url).await?.json().await?)
 }
-
-pub enum TableColor {
-    White,
-    Grey,
-}
-
-pub struct DropsFrom {
-    pub s: String,
-    pub color: HexColor,
-    pub row_number: usize,
-    pub italic: bool,
-    pub strikethrough: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
-#[serde(rename_all = "camelCase")]
-pub struct T {}
