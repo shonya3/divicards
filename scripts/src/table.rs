@@ -1,10 +1,14 @@
-use std::{fs, path::PathBuf};
+use std::{collections::HashMap, fs, path::PathBuf};
 
 use googlesheets::sheet::ValueRange;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-use crate::{error::Error, rich::RichSourcesColumn, table_record::CardDropTableRecord};
+use crate::{
+    error::Error,
+    rich::{DropsFrom, RichSourcesColumn},
+    table_record::{CardDropTableRecord, Confidence, GreyNote, RemainingWork},
+};
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Table(pub Vec<CardDropTableRecord>);
@@ -41,12 +45,83 @@ pub struct DivcordTable {
     pub rich_sources_column: RichSourcesColumn,
 }
 
+#[derive(Debug, Serialize, Deserialize, Clone)]
+#[serde(rename_all = "camelCase")]
+pub struct DivcordTableRecord {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub greynote: Option<GreyNote>,
+    pub name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tag_hypothesis: Option<String>,
+    pub confidence: Confidence,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub remaining_work: Option<RemainingWork>,
+    pub drops_from: Vec<DropsFrom>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub wiki_disagreements: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub sources_with_tag_but_not_on_wiki: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub notes: Option<String>,
+}
+
 impl DivcordTable {
     pub const fn new(sheet: ValueRange, rich_sources_column: RichSourcesColumn) -> Self {
         Self {
             sheet,
             rich_sources_column,
         }
+    }
+
+    pub fn records_by_card(&self) -> Result<HashMap<String, Vec<DivcordTableRecord>>, Error> {
+        let mut map: HashMap<String, Vec<DivcordTableRecord>> = HashMap::new();
+        for record in self.records() {
+            let record = record?;
+            map.entry(record.name.clone())
+                .and_modify(|vec| vec.push(record.clone()))
+                .or_insert(vec![record]);
+        }
+
+        Ok(map)
+    }
+
+    pub fn records(&self) -> impl Iterator<Item = Result<DivcordTableRecord, Error>> + '_ {
+        self.sheet
+            .values
+            .iter()
+            .zip(self.rich_sources_column.cells())
+            .map(|(row, cell)| {
+                let greynote = GreyNote::parse(&row[0])?;
+                let name = crate::table_record::parse_name(&row[1])?;
+                let tag_hypothesis = crate::table_record::parse_string_cell(&row[2]);
+                let confidence = Confidence::parse(&row[3])?;
+                let remaining_work = RemainingWork::parse(&row[4])?;
+                let wiki_disagreements = row
+                    .get(6)
+                    .map(|val| crate::table_record::parse_string_cell(val))
+                    .flatten();
+                let sources_with_tag_but_not_on_wiki = row
+                    .get(7)
+                    .map(|val| crate::table_record::parse_string_cell(val))
+                    .flatten();
+                let notes = row
+                    .get(8)
+                    .map(|val| crate::table_record::parse_string_cell(val))
+                    .flatten();
+                let drops_from = cell.drops_from();
+
+                Ok(DivcordTableRecord {
+                    greynote,
+                    name,
+                    tag_hypothesis,
+                    confidence,
+                    remaining_work,
+                    drops_from,
+                    wiki_disagreements,
+                    sources_with_tag_but_not_on_wiki,
+                    notes,
+                })
+            })
     }
 }
 
