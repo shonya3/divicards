@@ -145,7 +145,6 @@ pub const ACT_AREA_NAMES: &'static [&'static str] = &[
     "The Harbour Bridge",
     "The Northern Forest (A7)",
     "The Dread Thicket (A7)",
-    "Reliquary",
     "The Catacombs",
     "The Ossuary (A5/A10)",
     "The Solaris Temple Level 1/2 (A8)",
@@ -338,4 +337,6 @@ pub const ACT_AREA_NAMES: &'static [&'static str] = &[
     "The Tunnel",
     "The Grain Gate",
     "The Refinery",
+    "The Chamber of Innocence (A5/A10)",
+    "The Lunaris Temple Level 1/2 (A8)",
 ];
