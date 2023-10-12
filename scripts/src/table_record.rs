@@ -43,26 +43,6 @@ impl CardDropTableRecord {
             notes,
         })
     }
-
-    pub fn vec_drops_from(&self) -> Vec<String> {
-        let mut vec: Vec<String> = Vec::new();
-        if let Some(drops_from) = &self.drops_from {
-            let drops_from = drops_from.replace("\r\n", "");
-            let mut drops_from = drops_from.replace("\n", "");
-
-            if drops_from.ends_with(";") {
-                println!("drops_from ends with ; {}", &drops_from);
-                drops_from.drain(drops_from.len() - 1..);
-            }
-
-            for s in drops_from.split(";") {
-                let s = s.trim().to_string();
-                vec.push(s);
-            }
-        };
-
-        vec
-    }
 }
 
 pub fn parse_name(val: &Value) -> Result<String, Error> {
