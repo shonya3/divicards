@@ -6,10 +6,15 @@ use crate::error::Error;
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct RichSourcesColumn {
-    sheets: Vec<Sheet>,
+    pub sheets: Vec<Sheet>,
 }
 
 impl RichSourcesColumn {
+    pub fn new(mut sheets: Vec<Sheet>, number_of_rows: usize) -> Self {
+        sheets[0].data[0].row_data = Vec::from(&sheets[0].data[0].row_data[0..number_of_rows]);
+        Self { sheets }
+    }
+
     pub fn cells(&self) -> impl Iterator<Item = &Cell> {
         let sheet = &self.sheets[0];
         let data = &sheet.data[0];
