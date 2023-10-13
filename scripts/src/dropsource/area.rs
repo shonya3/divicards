@@ -7,7 +7,8 @@ use crate::maps::Map;
 use super::dropconsts::{ACT_AREA_NAMES, AREA_NAMES};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
-#[serde(tag = "area")]
+#[serde(tag = "type")]
+#[serde(rename_all = "camelCase")]
 pub enum Area {
     #[serde(alias = "Trial of Stinging Doubt")]
     TrialOfStingingDoubt,
@@ -18,11 +19,9 @@ pub enum Area {
     #[serde(alias = "Vaal Side Areas")]
     VaalSideAreas,
     AreaSpecific(AreaSpecific),
-    #[serde(rename = "map")]
     Map {
         name: String,
     },
-    #[serde(rename = "acts")]
     Acts {
         name: String,
     },
@@ -48,13 +47,11 @@ impl FromStr for Area {
 
         let s = s.to_string();
 
-        if maps_without_mapword.contains(&s)
-            || AREA_NAMES.contains(&s.as_str())
-            || maps.contains(&s)
+        if maps_without_mapword.iter().any(|map| map == &s.as_str())
+            || AREA_NAMES.iter().any(|area| area == &s.as_str())
+            || maps.iter().any(|map| map == &s.as_str())
         {
-            return Ok(Area::Acts { name: s });
-        } else if ACT_AREA_NAMES.contains(&s.as_str()) {
-            return Ok(Area::Acts { name: s });
+            return Ok(Area::Map { name: s });
         } else if let Ok(areaspecific) = s.parse::<AreaSpecific>() {
             return Ok(Area::AreaSpecific(areaspecific));
         }
