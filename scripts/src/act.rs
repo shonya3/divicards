@@ -1,8 +1,4 @@
-use std::{
-    env,
-    fs::{self, File},
-    path::Path,
-};
+use std::{env, fs::File};
 
 use async_trait::async_trait;
 use playwright::{api::DocumentLoadState, Playwright};
@@ -116,31 +112,21 @@ impl DataLoader<Vec<ActArea>> for ActsLoader {
     }
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[serde(rename_all = "camelCase")]
+pub struct ActAreaDivcordNotation(pub String);
+
 #[derive(Debug, Serialize, Deserialize, Clone)]
-pub struct AreaNameAct {
-    pub name: String,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub act: Option<u8>,
+pub enum ParsedActAreaNotation {
+    #[serde(untagged)]
+    Name(String),
+    #[serde(untagged)]
+    NameWithAct((String, u8)),
 }
 
-impl AreaNameAct {
-    pub const fn new(name: String, act: Option<u8>) -> Self {
-        Self { name, act }
-    }
-}
-
-impl From<String> for AreaNameAct {
-    fn from(value: String) -> Self {
-        AreaNameAct {
-            name: value,
-            act: None,
-        }
-    }
-}
-
-pub fn parse_area_name(s: &str) -> Vec<AreaNameAct> {
+pub fn parse_act_notation(s: &str) -> Vec<ParsedActAreaNotation> {
     if !s.contains("(") && !s.contains("/") {
-        return vec![AreaNameAct::from(s.to_string())];
+        panic!("Expected act notation, got {s}");
     };
 
     let mut split = s.split("(");
@@ -200,8 +186,8 @@ pub fn parse_area_name(s: &str) -> Vec<AreaNameAct> {
                 .into_iter()
                 .flat_map(|name| {
                     [
-                        AreaNameAct::new(name.clone(), Some(left)),
-                        AreaNameAct::new(name, Some(right)),
+                        ParsedActAreaNotation::NameWithAct((name.clone(), left)),
+                        ParsedActAreaNotation::NameWithAct((name, right)),
                     ]
                 })
                 .collect()
@@ -216,13 +202,13 @@ pub fn parse_area_name(s: &str) -> Vec<AreaNameAct> {
 
             names
                 .into_iter()
-                .map(|name| AreaNameAct::new(name, Some(left)))
+                .map(|name| ParsedActAreaNotation::NameWithAct((name, left)))
                 .collect()
         }
     } else {
         names
             .into_iter()
-            .map(|name| AreaNameAct::from(name))
+            .map(|name| ParsedActAreaNotation::Name(name))
             .collect()
     }
 }
