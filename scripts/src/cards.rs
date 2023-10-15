@@ -60,6 +60,15 @@ pub struct Card {
     pub price: Option<f32>,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CardsData(Vec<Card>);
+impl CardsData {
+    pub fn card(&self, s: &str) -> &Card {
+        self.0.iter().find(|card| card.name == s).unwrap()
+    }
+}
+
 pub struct CardsLoader(reqwest::Client);
 impl CardsLoader {
     pub const fn new(client: reqwest::Client) -> Self {
@@ -68,12 +77,12 @@ impl CardsLoader {
 }
 
 #[async_trait]
-impl DataLoader<Vec<Card>> for CardsLoader {
+impl DataLoader<CardsData> for CardsLoader {
     fn filename(&self) -> &'static str {
         "cards.json"
     }
 
-    async fn fetch(&self) -> Result<Vec<Card>, Error> {
+    async fn fetch(&self) -> Result<CardsData, Error> {
         println!("Fetching cards");
         #[derive(Serialize, Deserialize, Debug, Clone)]
         pub struct WikiCard {
@@ -160,25 +169,27 @@ impl DataLoader<Vec<Card>> for CardsLoader {
         let sample = load_total_sample(key, Some(prices)).await?;
         let mut wiki_vec = load_wiki().await.unwrap();
 
-        Ok(sample
-            .cards
-            .into_iter()
-            .map(|card| {
-                let (min_level, max_level) = wiki_vec
-                    .iter()
-                    .position(|w| w.name == card.name)
-                    .and_then(|index| Some(wiki_vec.swap_remove(index)))
-                    .map(|w| (w.min_level, w.max_level))
-                    .unwrap_or_default();
+        Ok(CardsData(
+            sample
+                .cards
+                .into_iter()
+                .map(|card| {
+                    let (min_level, max_level) = wiki_vec
+                        .iter()
+                        .position(|w| w.name == card.name)
+                        .and_then(|index| Some(wiki_vec.swap_remove(index)))
+                        .map(|w| (w.min_level, w.max_level))
+                        .unwrap_or_default();
 
-                Card {
-                    name: card.name,
-                    min_level,
-                    max_level,
-                    weight: card.weight,
-                    price: card.price,
-                }
-            })
-            .collect())
+                    Card {
+                        name: card.name,
+                        min_level,
+                        max_level,
+                        weight: card.weight,
+                        price: card.price,
+                    }
+                })
+                .collect(),
+        ))
     }
 }
