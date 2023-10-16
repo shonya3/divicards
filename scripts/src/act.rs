@@ -4,7 +4,7 @@ use async_trait::async_trait;
 use playwright::{api::DocumentLoadState, Playwright};
 use serde::{Deserialize, Serialize};
 
-use crate::{error::Error, loader::DataLoader};
+use crate::{error::Error, is_act_notation, loader::DataLoader, rich::DropsFrom};
 
 pub const TOWN_IMAGE_URL: &'static str =
     "https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/WorldPanelTownPinIcon.webp";
@@ -117,14 +117,14 @@ impl DataLoader<Vec<ActArea>> for ActsLoader {
 pub struct ActAreaDivcordNotation(pub String);
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
-pub enum ParsedActAreaNotation {
+pub enum ActAreaName {
     #[serde(untagged)]
     Name(String),
     #[serde(untagged)]
     NameWithAct((String, u8)),
 }
 
-pub fn parse_act_notation(s: &str) -> Vec<ParsedActAreaNotation> {
+pub fn parse_act_notation(s: &str) -> Vec<ActAreaName> {
     if !s.contains("(") && !s.contains("/") {
         panic!("Expected act notation, got {s}");
     };
@@ -186,8 +186,8 @@ pub fn parse_act_notation(s: &str) -> Vec<ParsedActAreaNotation> {
                 .into_iter()
                 .flat_map(|name| {
                     [
-                        ParsedActAreaNotation::NameWithAct((name.clone(), left)),
-                        ParsedActAreaNotation::NameWithAct((name, right)),
+                        ActAreaName::NameWithAct((name.clone(), left)),
+                        ActAreaName::NameWithAct((name, right)),
                     ]
                 })
                 .collect()
@@ -202,14 +202,52 @@ pub fn parse_act_notation(s: &str) -> Vec<ParsedActAreaNotation> {
 
             names
                 .into_iter()
-                .map(|name| ParsedActAreaNotation::NameWithAct((name, left)))
+                .map(|name| ActAreaName::NameWithAct((name, left)))
                 .collect()
         }
     } else {
         names
             .into_iter()
-            .map(|name| ParsedActAreaNotation::Name(name))
+            .map(|name| ActAreaName::Name(name))
             .collect()
+    }
+}
+
+pub fn parse_act_areas(drops_from: &DropsFrom, acts: &[ActArea], min_level: u8) -> Vec<ActArea> {
+    if !drops_from.styles.italic || drops_from.styles.color.as_str() != "#FFFFFF" {
+        panic!("Act areas should be white italic");
+    }
+
+    let s = &drops_from.name;
+    let _names = match is_act_notation(s) {
+        true if s == "The Belly of the Beast (A4/A9)" => vec![
+            ActAreaName::NameWithAct(("The Belly of the Beast Level 1".to_string(), 4)),
+            ActAreaName::NameWithAct(("The Belly of the Beast Level 1".to_string(), 4)),
+            ActAreaName::NameWithAct(("The Belly of the Beast".to_string(), 9)),
+        ],
+        true => parse_act_notation(s),
+        false => vec![ActAreaName::Name(s.to_owned())],
+    };
+
+    //
+
+    todo!()
+}
+
+pub fn find_acts(name: &ActAreaName, acts: &[ActArea], min_level: u8) -> Vec<String> {
+    match name {
+        ActAreaName::Name(_) => todo!(),
+        ActAreaName::NameWithAct((name, act)) => {
+            let mut v = vec![];
+            if let Some(a) = acts
+                .iter()
+                .find(|a| &a.name == name && &a.act == act && a.area_level >= min_level)
+            {
+                v.push(a.id.to_owned())
+            };
+
+            v
+        }
     }
 }
 
