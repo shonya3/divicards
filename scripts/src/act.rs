@@ -175,13 +175,6 @@ pub fn parse_act_notation(s: &str) -> Vec<ActAreaName> {
                 .parse::<u8>()
                 .unwrap();
 
-            // println!("{acts} {left} {right}");
-
-            // for name in &names {
-            //     let n1 = format!("{name} {left}");
-            //     let n2 = format!("{name} {right}");
-            // }
-
             names
                 .into_iter()
                 .flat_map(|name| {
@@ -213,13 +206,13 @@ pub fn parse_act_notation(s: &str) -> Vec<ActAreaName> {
     }
 }
 
-pub fn parse_act_areas(drops_from: &DropsFrom, acts: &[ActArea], min_level: u8) -> Vec<ActArea> {
-    if !drops_from.styles.italic || drops_from.styles.color.as_str() != "#FFFFFF" {
-        panic!("Act areas should be white italic");
+pub fn parse_act_areas(drops_from: &DropsFrom, acts: &[ActArea], min_level: u8) -> Vec<String> {
+    if !drops_from.styles.italic {
+        panic!("Act areas should be italic");
     }
 
     let s = &drops_from.name;
-    let _names = match is_act_notation(s) {
+    let names = match is_act_notation(s) {
         true if s == "The Belly of the Beast (A4/A9)" => vec![
             ActAreaName::NameWithAct(("The Belly of the Beast Level 1".to_string(), 4)),
             ActAreaName::NameWithAct(("The Belly of the Beast Level 1".to_string(), 4)),
@@ -229,14 +222,19 @@ pub fn parse_act_areas(drops_from: &DropsFrom, acts: &[ActArea], min_level: u8) 
         false => vec![ActAreaName::Name(s.to_owned())],
     };
 
-    //
-
-    todo!()
+    names
+        .iter()
+        .flat_map(|name| find_ids(&name, acts, min_level))
+        .collect()
 }
 
-pub fn find_acts(name: &ActAreaName, acts: &[ActArea], min_level: u8) -> Vec<String> {
+pub fn find_ids(name: &ActAreaName, acts: &[ActArea], min_level: u8) -> Vec<String> {
     match name {
-        ActAreaName::Name(_) => todo!(),
+        ActAreaName::Name(name) => acts
+            .iter()
+            .filter(|a| &a.name == name && a.is_town == false && a.area_level >= min_level)
+            .map(|a| a.id.to_owned())
+            .collect(),
         ActAreaName::NameWithAct((name, act)) => {
             let mut v = vec![];
             if let Some(a) = acts
@@ -250,8 +248,6 @@ pub fn find_acts(name: &ActAreaName, acts: &[ActArea], min_level: u8) -> Vec<Str
         }
     }
 }
-
-// fn area_id_from_str(s: &str) {}
 
 pub fn download_images(urls: Vec<String>) -> Result<(), Error> {
     let act_images_dir = env::current_dir()
