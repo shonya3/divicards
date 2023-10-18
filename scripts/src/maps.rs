@@ -1,51 +1,54 @@
-use std::path::Path;
-
 use scraper::{Html, Selector};
 use serde::{Deserialize, Serialize};
 
 use crate::{
     consts::{POEDB_MAPS_URL, WIKI_API_URL},
     error::Error,
+    loader::DataLoader,
 };
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct MapDataFromWiki {
+pub struct Map {
     pub name: String,
     pub tier: u32,
+    pub available: bool,
+    pub unique: bool,
 }
 
-pub async fn load_from_wiki() -> Result<Vec<MapDataFromWiki>, Error> {
-    #[derive(Deserialize)]
-    pub struct WikiResponse {
-        pub cargoquery: Vec<Title>,
+pub struct MapLoader;
+impl MapLoader {
+    pub const fn new() -> Self {
+        MapLoader
     }
-
-    #[derive(Deserialize)]
-    pub struct Title {
-        pub title: MapRecord,
-    }
-
-    #[derive(Deserialize)]
-    pub struct MapRecord {
-        pub name: String,
-        pub tier: String,
-    }
-
-    let url = format!("{WIKI_API_URL}?action=cargoquery&format=json&smaxage=0&maxage=0&limit=500&tables=maps,items,areas&join_on=items._pageID=maps._pageID,maps.area_id=areas.id&fields=maps.tier,items.name,maps.area_id,maps.area_level,areas.boss_monster_ids,maps.unique_area_id&group_by=items.name&where=items.class_id='Map' AND maps.area_id LIKE '%MapWorlds%'");
-
-    let response: WikiResponse = reqwest::get(url).await?.json().await?;
-
-    Ok(response
-        .cargoquery
-        .into_iter()
-        .map(|title| MapDataFromWiki {
-            name: title.title.name,
-            tier: title.title.tier.parse().unwrap(),
-        })
-        .collect::<Vec<MapDataFromWiki>>())
 }
 
-pub async fn load_poedb_non_unique_available_maplist() -> Result<Vec<String>, Error> {
+#[async_trait::async_trait]
+impl DataLoader<Vec<Map>> for MapLoader {
+    fn filename(&self) -> &'static str {
+        "maps.json"
+    }
+
+    async fn fetch(&self) -> Result<Vec<Map>, Error> {
+        let available_maps = load_poedb_non_unique_available_maplist().await?;
+        let wiki_maps = load_from_wiki().await?;
+
+        Ok(wiki_maps
+            .into_iter()
+            .map(|MapDataFromWiki { name, tier }| {
+                let unique = !name.ends_with(" Map");
+                let available = unique || available_maps.contains(&name);
+                Map {
+                    name,
+                    tier,
+                    available,
+                    unique,
+                }
+            })
+            .collect())
+    }
+}
+
+async fn load_poedb_non_unique_available_maplist() -> Result<Vec<String>, Error> {
     let markup = reqwest::get(POEDB_MAPS_URL).await?.text().await?;
     let html = Html::parse_fragment(&markup);
     let mut maps = html
@@ -75,33 +78,38 @@ pub async fn load_poedb_non_unique_available_maplist() -> Result<Vec<String>, Er
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Map {
+pub struct MapDataFromWiki {
     pub name: String,
     pub tier: u32,
-    pub available: bool,
-    pub unique: bool,
 }
 
-pub async fn collect_map_data() -> Result<Vec<Map>, Error> {
-    let available_maps = load_poedb_non_unique_available_maplist().await?;
-    let wiki_maps = load_from_wiki().await?;
+async fn load_from_wiki() -> Result<Vec<MapDataFromWiki>, Error> {
+    #[derive(Deserialize)]
+    pub struct WikiResponse {
+        pub cargoquery: Vec<Title>,
+    }
 
-    Ok(wiki_maps
+    #[derive(Deserialize)]
+    pub struct Title {
+        pub title: MapRecord,
+    }
+
+    #[derive(Deserialize)]
+    pub struct MapRecord {
+        pub name: String,
+        pub tier: String,
+    }
+
+    let url = format!("{WIKI_API_URL}?action=cargoquery&format=json&smaxage=0&maxage=0&limit=500&tables=maps,items,areas&join_on=items._pageID=maps._pageID,maps.area_id=areas.id&fields=maps.tier,items.name,maps.area_id,maps.area_level,areas.boss_monster_ids,maps.unique_area_id&group_by=items.name&where=items.class_id='Map' AND maps.area_id LIKE '%MapWorlds%'");
+
+    let response: WikiResponse = reqwest::get(url).await?.json().await?;
+
+    Ok(response
+        .cargoquery
         .into_iter()
-        .map(|MapDataFromWiki { name, tier }| {
-            let unique = !name.ends_with(" Map");
-            let available = unique || available_maps.contains(&name);
-            Map {
-                name,
-                tier,
-                available,
-                unique,
-            }
+        .map(|title| MapDataFromWiki {
+            name: title.title.name,
+            tier: title.title.tier.parse().unwrap(),
         })
-        .collect())
-}
-
-pub async fn write_map_data<P: AsRef<Path>>(path: P) {
-    let maps = collect_map_data().await.unwrap();
-    std::fs::write(path, serde_json::to_string(&maps).unwrap()).unwrap();
+        .collect::<Vec<MapDataFromWiki>>())
 }
