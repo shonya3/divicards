@@ -15,6 +15,12 @@ pub struct Map {
     pub unique: bool,
 }
 
+impl Map {
+    pub fn level(&self) -> u32 {
+        67 + self.tier
+    }
+}
+
 pub struct MapLoader;
 impl MapLoader {
     pub const fn new() -> Self {
