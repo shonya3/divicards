@@ -5,11 +5,12 @@ pub enum Error {
     HttpError(reqwest::Error),
     IoError(std::io::Error),
     SerdeError(serde_json::Error),
-    ParseNameError(String),
+    ParseCardNameError(String),
     ValueNotStr(serde_json::Value),
     RowIsTooShort(String, u8),
     GoogleError(googlesheets::error::Error),
     DiviError(divi::error::Error),
+    StrumParseError(strum::ParseError),
 }
 
 impl Display for Error {
@@ -18,11 +19,12 @@ impl Display for Error {
             Error::HttpError(err) => err.fmt(f),
             Error::IoError(err) => err.fmt(f),
             Error::SerdeError(err) => err.fmt(f),
-            Error::ParseNameError(name) => write!(f, "{name} is not a card"),
+            Error::ParseCardNameError(name) => write!(f, "{name} is not a card"),
             Error::ValueNotStr(val) => write!(f, "{val} is not an str"),
             Error::RowIsTooShort(column, n_columns) => write!(f, "Could not parse {column}. Row is too short. Expected at least {n_columns} columns to extract {column}"),
             Error::GoogleError(err) => err.fmt(f),
             Error::DiviError(err) => err.fmt(f),
+            Error::StrumParseError(err) => err.fmt(f)
         }
     }
 }
@@ -54,5 +56,11 @@ impl From<googlesheets::error::Error> for Error {
 impl From<divi::error::Error> for Error {
     fn from(value: divi::error::Error) -> Self {
         Error::DiviError(value)
+    }
+}
+
+impl From<strum::ParseError> for Error {
+    fn from(value: strum::ParseError) -> Self {
+        Error::StrumParseError(value)
     }
 }
