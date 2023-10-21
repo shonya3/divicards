@@ -135,7 +135,7 @@
       "Mao Kun",
       "n/a",
       "n/a",
-      "level 68+; old claims were Arsenal, with hypothesis on `warehouse_area`\nOnly Mao Kun has been verified in 3.18\n\nNeeds reverification in 3.18. Factory sample has produced 0 Abandoned Wealth so far, but might just be bad luck. Possible that this is now Mao-Kun-exclusive, unless someone can confirm Arsenal or Factory in 3.18.\nDivcord: Aggregate natural Card drop count from T16 Factory is 565, zero instances of Abandoned Wealth.\n\nDivcord: Aggregate natural Card drop count from T16 Arsenal is 756, zero instances of Abandoned Wealth. Probability of occurrence: 0.23%.\n\nVery unlikely that Abandoned Wealth drops from either Factory or Arsenal anymore. Might be Mao-Kun-exclusive now."
+      "level 68+; old claims were Arsenal, with hypothesis on `warehouse_area`\nOnly Mao Kun has been verified in 3.18\n\nNeeds reverification in 3.18. Factory sample has produced 0 Abandoned Wealth so far, but might just be bad luck. Possible that this is now Mao-Kun-exclusive, unless someone can confirm Arsenal or Factory in 3.18.\nDivcord: Aggregate natural Card drop count from T16 Factory is 565, zero instances of Abandoned Wealth.\n\nDivcord: Aggregate natural Card drop count from T16 Arsenal is 756, zero instances of Abandoned Wealth. Probability of occurrence: 0.23%.\n\nVery unlikely that Abandoned Wealth drops from either Factory or Arsenal anymore. Might be Mao-Kun-exclusive now. \n\nClaimed drop from Fairgraves in Mao Kun by relgaw, could technically still fall under the \"Chest_object\" category along with the Booty Chests."
     ],
     [
       "",
@@ -367,7 +367,7 @@
       "solaris_area",
       "DONE",
       "n/a",
-      "Temple; The Twilight Temple; The Solaris Temple Level 1/2 (A8); Cold River; The Harbour Bridge",
+      "Temple; The Twilight Temple; Cold River; The Solaris Temple Level 1/2 (A8); The Harbour Bridge",
       "Ivory Temple",
       "",
       "Divcord: fal claims Boundless Realms drops in Cold River (confirmed)\n\nNeed to see if the wiki claim of Ivory Temple is still accurate"
@@ -518,10 +518,10 @@
       "relic_area",
       "DONE",
       "n/a",
-      "Reliquary; Museum",
+      "Relic Chambers; Museum",
       "",
       "",
-      "Previously uncertain if drop was due to Reliquary Map vs Redeemer influence\n3.19: verified in Museum (Exarch) - likely relic_area instead (may require repeat testing to be sure)\n3.19: Verified in Museum in a Kirac mission (no Influence) by Zimzams"
+      "Previously uncertain if drop was due to Relic Chambers Map vs Redeemer influence\n3.19: verified in Museum (Exarch) - likely relic_area instead (may require repeat testing to be sure)\n3.19: Verified in Museum in a Kirac mission (no Influence) by Zimzams"
     ],
     [
       "",
@@ -692,13 +692,13 @@
     [
       "",
       "Desperate Crusade",
-      "innocence_map + ?",
+      "innocence_map OR ?",
       "low",
       "unclear hypothesis",
       "Basilica; Residence",
       "n/a",
       "Tower, Palace, Villa",
-      "Basilica\n\nPretty uncommon, about the same droprate as The Nurse or The Scout\nPlayerbase's farming in Crimson Temple rules out `church` -- it should have dropped there by now.\n\n\nOne possible explanation:\nNot a Boss-specific drop, but keyed off of a Boss's Monster Tag? \"Drops in any Areas where Boss has innocence_map\"?\n\nThere are a couple of other candidates that follow that potential pattern, where there is not an appropriate Area Tag, but the Card is nevertheless predictable based on qualities of the Boss.\n\n3.19: \"Desperate Crusade can now be found in the Residence Map.\" desperate crusade only previously was confirmed in Basilica. only lead was innocence_map. Palace was removed, so Villa should be tested to check sceptre_of_god_area (1/3); otherwise, Tower needs to be tested in Standard (1/2). If nothing else, check for new 3.19 tags\n\n\nCould this follow the same weird rules as The Golden Era? If so, Ivory Temple needs to be checked.\nDivcord: 3.22, Elinvynia checked n=928 natural Card drops in Ivory Temple, 0 hits; ~99.82% confidence."
+      "Basilica\nPretty uncommon, about the same droprate as The Nurse or The Scout\nPlayerbase's farming in Crimson Temple rules out `church` -- it should have dropped there by now.\n\nOne possible explanation:\nNot a Boss-specific drop, but keyed off of a Boss's Monster Tag? \"Drops in any Areas where Boss has innocence_map\"?\n\nThere are a couple of other candidates that follow that potential pattern, where there is not an appropriate Area Tag, but the Card is nevertheless predictable based on qualities of the Boss.\n\n3.19: \"Desperate Crusade can now be found in the Residence Map.\" desperate crusade only previously was confirmed in Basilica. only lead was innocence_map. Palace was removed, so Villa should be tested to check sceptre_of_god_area (1/3); otherwise, Tower needs to be tested in Standard (1/2). If nothing else, check for new 3.19 tags\n\nCould this follow the same weird rules as The Golden Era? If so, Ivory Temple needs to be checked.\nDivcord: 3.22, Elinvynia checked n=928 natural Card drops in Ivory Temple, 0 hits; ~99.82% confidence.\nDivcord: 3.22, Zimzams checked n=720 natural Card drops in Palace (`sceptre_of_god_area`); 0 hits."
     ],
     [
       "",
@@ -803,7 +803,7 @@
       "desert_area",
       "DONE",
       "n/a",
-      "Desert; Desert Spring; Dunes; Dry Sea; The Foothills; The Oasis; The Vastiri Desert; Pillars of Arun",
+      "Desert; Desert Spring; Dunes; Dry Sea; Pillars of Arun; The Foothills; The Oasis; The Vastiri Desert",
       "n/a",
       "",
       "Divcord: Dry Sea verified by Zimzams\nPillars of Arun verified by Elinvynia"
@@ -1029,7 +1029,7 @@
       "trio_soul_area",
       "DONE",
       "n/a",
-      "Doedre the Defiler; Shavronne the Sickening; Maligaro the Mutilator",
+      "Doedre the Defiler; Shavronne the Sickening; Maligaro, the Mutilator",
       "",
       "",
       "tag appears to be for maps, though card drops from the bosses\n\nRule would be:\n\"Drops from a Map Boss in an Area with `trio_soul_area`\"\n\nThis rule is similar to the rule for The Arena Champion"
@@ -1264,7 +1264,7 @@
       "AvariusCasticus boss areas",
       "DONE",
       "n/a",
-      "Basilica; Chamber of Innocence (A5/A10); Defiled Cathedral",
+      "Basilica; Defiled Cathedral; The Chamber of Innocence; The Desecrated Chambers",
       "",
       "",
       "`church` ?\nBasilica and Defiled Cathedral were drop locations in 3.15 -- but are they still both eligible after the 3.17 rework?\nBasilica verified in divcord\nDefiled Cathedral confirmed in divcord"
@@ -1527,9 +1527,9 @@
       "low",
       "unclear hypothesis",
       "Infested Valley; Channel; Arachnid Tomb",
-      "Palace",
       "",
-      "Parasitic Passengers is an Area drop, but unclear how this is governed\n\n* The Winged Death : VultureParasiteMapBoss\n* Gorulis, Will-Thief : InsectSpawnerParasiteBossMap\n\nThe Hallowed Husk could be considered a demonic parasite? Needs drop confirmation\n3.19: \"Parasitic Passengers can now be found in the Arachnid Tomb Map\". Hybrid Widow also lacks Parasite in internal name, but uses a skill called \"Covered in Spiders\"\nReverified Channel in 3.20\n\nThe Winged Death's summoned Monster is named \"Mindless Scavenger\" variant (`VultureParasiteMapBossMinion`).\nHybrid Widow's summoned Monster is named \"Widow's Hatchling\", `SpiderBossSinsMinion`."
+      "",
+      "Parasitic Passengers is an Area drop, but unclear how this is governed\n\n* The Winged Death : VultureParasiteMapBoss\n* Gorulis, Will-Thief : InsectSpawnerParasiteBossMap\n\nThe Hallowed Husk could be considered a demonic parasite? Needs drop confirmation\n3.19: \"Parasitic Passengers can now be found in the Arachnid Tomb Map\". Hybrid Widow also lacks Parasite in internal name, but uses a skill called \"Covered in Spiders\"\nReverified Channel in 3.20\n\nThe Winged Death's summoned Monster is named \"Mindless Scavenger\" variant (`VultureParasiteMapBossMinion`).\nHybrid Widow's summoned Monster is named \"Widow's Hatchling\", `SpiderBossSinsMinion`.\n\nDivcord: 3.22, Zimzams checked n=720 natural Card drops in Palace; 0 hits."
     ],
     [
       "",
@@ -1978,7 +1978,7 @@
       "kaom_area",
       "DONE",
       "n/a",
-      "Caldera; Kaom's Stronghold; Volcano; Kaom's Dream ",
+      "Caldera; Volcano; Kaom's Stronghold; Kaom's Dream ",
       "",
       "n/a",
       "Reverified Caldera and Volcano in 3.21"
@@ -2240,7 +2240,7 @@
       "Atoll; Beach; Shipyard; Strand; Tropical Island; Shore; Peninsula; Coves; Maelström of Chaos",
       "n/a",
       "Port, Whakawairua Tuahu, Lighthouse, Wharf, Coral Ruins, Mao Kun, Plateau, Estuary, Pier, Reef",
-      "Needs tons of verifications before ocean_area can be a reasonable guess\n\nUnfortunately The Catch is significantly rarer than The Doctor; hard to observe\n\nDivcord: Shore verified\nDivcord: Peninsula verified by RiPHeartofGold 3.19\nDivcord: 3.20, Coves verified by Zimzams\nDivcord: 3.21, Maelstrom of Chaos verified by Elinvynia"
+      "Needs tons of verifications before ocean_area can be a reasonable guess\n\nUnfortunately The Catch is significantly rarer than The Doctor; hard to observe\n\nDivcord: Shore verified\nDivcord: Peninsula verified by RiPHeartofGold 3.19\nDivcord: 3.20, Coves verified by Zimzams\nDivcord: 3.21, Maelstrom of Chaos verified by Elinvynia\nDivcord: 3.22, Plateau verified by Zimzams"
     ],
     [
       "",
@@ -2270,7 +2270,7 @@
       "prison_area",
       "DONE",
       "n/a",
-      "Cage; Cells; Dungeon; Pen; Control BLocks; Shavronne's Tower; The Slave Pens",
+      "Cage; Cells; Dungeon; Pen; The Control Blocks; Shavronne's Tower; The Slave Pens",
       "",
       "",
       "note: Lava Chamber is fire_prison_area, not prison_area. Likewise with Forge of the Phoenix\nPen verified in divcord"
@@ -2391,7 +2391,7 @@
       "chamber_of_sins_area",
       "DONE",
       "n/a",
-      "Overgrown Ruin; Overgrown Shrine; Chamber of Sins Level 1/2 (A7)",
+      "Overgrown Ruin; Overgrown Shrine; The Chamber of Sins Level 1/2 (A7)",
       "n/a"
     ],
     [
@@ -2966,7 +2966,7 @@
       "pitfight_area",
       "DONE",
       "n/a",
-      "Arena; Pit of the Chimera; Colosseum Map; Pit; The Slums; The Sarn Ramparts; The Grain Gate",
+      "Arena; Pit of the Chimera; Colosseum Map; Pit",
       "n/a",
       "n/a"
     ],
@@ -3030,7 +3030,7 @@
       "crossroad_area",
       "DONE",
       "n/a",
-      "The Imperial Fields; Fields; Castle Ruins; The Crossroads (A7)",
+      "Fields; Castle Ruins; The Imperial Fields; The Crossroads (A7)",
       "n/a",
       "",
       "Divcord: Fields verified\nPrevious guess was `fields_area` but...\nTechnically could also be `crossroad_area` ; need more verifications to determine (Castle Ruins specifically)\n\nDroprate is quite low, about that of The Nurse\n\nDivcord: Zimzams tested n~1200 in Peninsula, no The Harvester; ~99% confidence. Either sample was unlucky or `crossroad_area` is the real governing Tag.\n\nDivcord: Castle Ruins verified by RiPHeartofGold 3.19"
@@ -3387,7 +3387,7 @@
       "lunaris_area",
       "DONE",
       "n/a",
-      "The Twilight Temple; Cold River; Moon Temple; Lunaris Temple Level 1/2 (A8)",
+      "The Twilight Temple; Cold River; Moon Temple; The Lunaris Temple Level 1/2 (A8)",
       "n/a",
       "n/a",
       "Need to test if Shrine still drops this\nDivcord: Zimzams ran Shrine, n=31, zero The Lunaris Priestess drops"
@@ -3451,7 +3451,7 @@
       "kraityn_area",
       "DONE",
       "n/a",
-      "Castle Ruins; The Broken Bridge; Strand",
+      "Castle Ruins; Strand; The Broken Bridge",
       "n/a",
       "",
       "Divcord verified Strand in 3.18 again"
@@ -4159,7 +4159,7 @@
       "fire_area",
       "DONE",
       "n/a",
-      "Crater; Lava Chamber; Lava Lake; Forge of the Phoenix; The Ruined Square; The Torched Courts (A5/A10); Estuary; Silo; The Crematorium; The Ravaged Square",
+      "Crater; Lava Chamber; Lava Lake; Forge of the Phoenix; Estuary; Silo; The Ruined Square; The Torched Courts (A5/A10); The Crematorium; The Ravaged Square",
       "Bone Crypt",
       "Not accesible: The Fallen Courts, The Haunted Reliquary - see notes",
       "Note: The Fallen Courts and The Haunted Reliquary are no longer accessible areas. They were part of the Epilogue during the Conquerors of the Atlas expansion and became inacessible with Siege of the Atlas.\n\nDivcord: Estuary, Silo\nDivcord: 3.21, A3 The Crematorium verified by Elinvynia\nThe Ravaged Square verified by Elinvynia"
@@ -4191,7 +4191,7 @@
       "summoner_area",
       "DONE",
       "n/a",
-      "Bone Crypt; Burial Chambers; Spider Forest; Cage; Lower Prison (A6); The Crematorium; The Catacombs; Shavronne's Tower; The Chamber of Sins Level 1 (A7)",
+      "Bone Crypt; Burial Chambers; Spider Forest; Cage; The Lower Prison (A6); The Crematorium; The Catacombs; Shavronne's Tower; The Chamber of Sins Level 1 (A7)",
       "Lava Chamber",
       "",
       "Divcord: fal verified drop in Spider Forest\nDivcord: Jas verified drop in Cage\n\nDivcord: Zimzams did n=65 sample in Lava Chamber with zero hits; extremely high confidence that The Summoner no longer drops in Lava Chamber\nElinvynia verified in Chamber of Sins Level 1 (Act 7)"
@@ -4736,7 +4736,7 @@
       "library_area",
       "DONE",
       "n/a",
-      "Academy; Museum; Scriptorium; The Archives; The Library",
+      "Academy; Museum; Scriptorium",
       "n/a",
       "n/a",
       "Scriptorium verified in divcord"
@@ -4878,7 +4878,7 @@
       "vaal_pyramid_area",
       "low",
       "confirm",
-      "Maze; Vaal Pyramid; The Temple of Decay Level 1; Vaal Temple; Vaults of Atziri",
+      "Maze; Vaal Pyramid; Vaal Temple; Vaults of Atziri; The Temple of Decay Level 1",
       "",
       "The Temple of Decay Level 2, Doryani's Machinarium",
       "Reported from Maze map and Temple of Decay 1, and verified in Vaal Pyramid\n\nProhibited Library: HotPocketRemix reported finding Unrequited Love in Vaal Temple, 3.19 -- agrees with tag predictions, but no screenshot\nPOEwiki discord: diamond reported finding in Vaults of Atziri, no timely screenshot"
@@ -4900,7 +4900,7 @@
       "vile_areas",
       "OK",
       "story only",
-      "Carcass; Core; Phantasmagoria; Toxic Sewer; Waste Pool; The Rotting Core; Acid Caverns; Malformation; The Sewers",
+      "Carcass; Core; Phantasmagoria; Toxic Sewer; Waste Pool; Acid Caverns; Malformation; The Sewers; The Rotting Core",
       "",
       "The Belly of the Beast Level 1/2, The Temple of Decay Level 1/2, The Toxic Conduits, Doedre's Cesspool, The Belly of the Beast (A9)",
       "Acid Caverns observed by SlipperyJim8 as a Kirac Mission drop\nMalformation verified in divcord\n3.20 patch notes: re-enabled.\nDivcord: 3.21, A3 The Sewers verified by Elinvynia"
@@ -5035,7 +5035,7 @@
       "",
       "",
       "",
-      "Seen in Vaal Temple"
+      "Spotty sightings indicate that this is might be \"Drops from a Rogue Exile with `has_bow` and `rogue_exile`\"\n\nCandidates are:\nAntalie Napora\r\nAilentia Rac\r\nAinsley Varrich\r\nOrra Greengate\r\nOyra Ona\r\n\r\nShade of a Ranger (Whakawairua Tuahu)\r\n\r\nIneligible:\r\n- Rudiarius Felix (The Grand Arena; but ineligible due to Drop Level Requirement)\r\n- Antonio Bravadi (Descent: Champions)\r\n- Silva Fearsting (Descent: Champions)\n\n\nNot a natural drop in Vaal Temple per Zimzams's testing (n>1000, 3.21 & 3.21)"
     ],
     [
       "Chest_object",

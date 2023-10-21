@@ -49,7 +49,7 @@
   "warlord_conqueror_boss",
   "innocence_map",
   "delve_protovaal_boss",
-  "innocence_map + ?",
+  "innocence_map OR ?",
   "library_area",
   "solaris_area",
   "Armourer's Strongbox",

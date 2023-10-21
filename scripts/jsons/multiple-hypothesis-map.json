@@ -1,82 +1,10 @@
 {
-  "The Admirer": [
-    {
-      "greynote": null,
-      "name": "The Admirer",
-      "tagHypothesis": "vaal_pyramid_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Maze; Vaal Pyramid; Vaal Temple; Vaults of Atziri; Doryani's Machinarium",
-      "wikiDisagreements": "Ancient City",
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Other vaal Tags may qualify as well\nAncient City Verified in Divcord \nSunken City will need testing to differentiate between ruined_vaal_city_area or vaal_ruin_area\n\nSunken City testing by Jas and Zimzams showed no The Admirer drops, which means `ruined_vaal_city_area` is not sufficient\nVaults of Atziri verified in divcord\n\n3.20: Doryani's Machinarium verified by NcuriousmediatoR"
-    },
-    {
-      "greynote": null,
-      "name": "The Admirer",
-      "tagHypothesis": "vaal_ruin_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Ancient City",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Ancient City Verified in Divcord "
-    }
-  ],
-  "The Void": [
-    {
-      "greynote": "areaSpecific",
-      "name": "The Void",
-      "tagHypothesis": null,
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": null,
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "The Shaper's Realm"
-    },
-    {
-      "greynote": null,
-      "name": "The Void",
-      "tagHypothesis": null,
-      "confidence": "none",
-      "remainingWork": "legacyTag",
-      "dropsFrom": null,
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Dropped from Park in a Kirac Mission as the stack of cards. Park has no area-specific cards. Perhaps another weird Kirac Mission mechanic?\nRequires reconfirmation of Park Kirac Map or other tag-less maps\nAfter more testing with Kirac missions - conclusion: dropping The Void from any source completes the mission; may not be Park specific."
-    }
-  ],
-  "The Doctor": [
-    {
-      "greynote": null,
-      "name": "The Doctor",
-      "tagHypothesis": "alira_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Burial Chambers; Spider Forest",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": null
-    },
-    {
-      "greynote": null,
-      "name": "The Doctor",
-      "tagHypothesis": "doedre_map_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "The Putrid Cloister; Sepulchre; Waste Pool; Phantasmagoria",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "3.21: The Doctor can now be found in the The Putrid Cloister, Sepulchre, Waste Pool, and Phantasmagoria Maps.\nThese Areas all received the new doedre_map_area Tag. They are the only four Areas with that Tag."
-    }
-  ],
   "The Professor": [
     {
       "greynote": null,
       "name": "The Professor",
       "tagHypothesis": "library_area",
-      "confidence": "done",
+      "confidence": "Done",
       "remainingWork": null,
       "dropsFrom": "Museum; Academy; Scriptorium",
       "wikiDisagreements": "Laboratory",
@@ -87,7 +15,7 @@
       "greynote": null,
       "name": "The Professor",
       "tagHypothesis": null,
-      "confidence": "low",
+      "confidence": "Low",
       "remainingWork": "unclearHypothesis",
       "dropsFrom": "Laboratory",
       "wikiDisagreements": null,
@@ -95,165 +23,12 @@
       "notes": "The Professor also drops from Laboratory -- but what governs this?\nReported drop from Ciergan, Shadow Alchemist - unclear if altar was used\nCould also be inventing_area\nNeed to prove either Shrine or Vault to confirm.\n\nDivcord: 3.20, Zimzams tested >500 natural drops in Shrine without producing a single The Professor. This rules out The Professor with >99% confidence from Shrine, which means `thaumaturgy_area` is unlikely to be an eligibility Tag.\n\nEither this is a specific exception for Laboratory, or `inventing_area` is another eligible Tag. (Probably the former.)\n\n3.21: Elinvynia disproved in Foundry 99.9%. wealthy_area is the only  unshared tag with Laboratory, so it's rather unlikely either inventing_area or thaumaturgy_area are the answer."
     }
   ],
-  "Justified Ambition": [
-    {
-      "greynote": null,
-      "name": "Justified Ambition",
-      "tagHypothesis": "crusader_conqueror_boss",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Baran, The Crusader",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Conquerors; Four separate Boss-specific Tags since `elderslayer` does not appear to be correct as no drop has been verified from Sirus (who also has `elderslayer)"
-    },
-    {
-      "greynote": null,
-      "name": "Justified Ambition",
-      "tagHypothesis": "redeemer_conqueror_boss",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Veritania, The Redeemer",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Conquerors; Four separate Boss-specific Tags since `elderslayer` does not appear to be correct as no drop has been verified from Sirus (who also has `elderslayer)"
-    },
-    {
-      "greynote": null,
-      "name": "Justified Ambition",
-      "tagHypothesis": "hunter_conqueror_boss",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Al-Hezmin, The Hunter",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Conquerors; Four separate Boss-specific Tags since `elderslayer` does not appear to be correct as no drop has been verified from Sirus (who also has `elderslayer)"
-    },
-    {
-      "greynote": null,
-      "name": "Justified Ambition",
-      "tagHypothesis": "warlord_conqueror_boss",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Drox, The Warlord",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Conquerors; Four separate Boss-specific Tags since `elderslayer` does not appear to be correct as no drop has been verified from Sirus (who also has `elderslayer)"
-    }
-  ],
-  "The Incantation": [
-    {
-      "greynote": null,
-      "name": "The Incantation",
-      "tagHypothesis": "alira_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Burial Chambers; Spider Forest",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": null
-    },
-    {
-      "greynote": null,
-      "name": "The Incantation",
-      "tagHypothesis": "doedre_map_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "The Putrid Cloister; Sepulchre; Waste Pool; Phantasmagoria",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "3.21: The Incantation can now be found in the The Putrid Cloister, Sepulchre, Waste Pool, and Phantasmagoria Maps.\nThese Areas all received the new doedre_map_area Tag. They are the only four Areas with that Tag."
-    }
-  ],
-  "The Damned": [
-    {
-      "greynote": null,
-      "name": "The Damned",
-      "tagHypothesis": "vaal_pyramid_area",
-      "confidence": "ok",
-      "remainingWork": "confirm",
-      "dropsFrom": "Vaults of Atziri; Vaal Pyramid; Vaal Temple; Maze",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": "Doryani's Machinarium",
-      "notes": "Verified in Vaal Pyramid and Vaal Temple in Divcord\nNeed to verify Maze and Doryani's Machinarium for second Tag\n\n3.20: Maze verified by developershins"
-    },
-    {
-      "greynote": null,
-      "name": "The Damned",
-      "tagHypothesis": "ruined_vaal_city_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Ancient City; Sunken City",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Divcord: 3.21, Sunken City verified by Elinvynia.\nThis supports `ruined_vaal_city_area`."
-    },
-    {
-      "greynote": null,
-      "name": "The Damned",
-      "tagHypothesis": "vaal_ruin_area",
-      "confidence": "low",
-      "remainingWork": "storyOnly",
-      "dropsFrom": "Ancient City",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": "The Causeway, The Vaal City",
-      "notes": "(History: There are at least two independent rules for The Damned. The original hypotheses were: (1) `vaal_pyramid_area` => The Damned; and (2) `vaal_ruin_area` => The Damned. But the latter hypothesis was solely due to confirmed drops in Ancient City and vaal_ruin_area was not the only possible Tag option.\nThe second rule could easily be `ruined_vaal_city_area` instead, which exists only on Ancient City and Sunken City.)"
-    }
-  ],
-  "The Aesthete": [
-    {
-      "greynote": null,
-      "name": "The Aesthete",
-      "tagHypothesis": "shavronne_monster_story OR unholy_trio_combined_boss_story",
-      "confidence": "ok",
-      "remainingWork": "storyOnly",
-      "dropsFrom": "Reassembled Brutus; Shavronne, Unbound",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": "The Depraved Trinity",
-      "notes": "Possible parallel to The Depraved Trinity due to it being eligible from Amalgam of Nightmares?"
-    },
-    {
-      "greynote": null,
-      "name": "The Aesthete",
-      "tagHypothesis": "shavronne_monster_map OR unholy_trio_combined_boss_map",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Bazur; Gisale, Thought Thief; Prodigy of Darkness; Shavronne the Sickening; Amalgam of Nightmares",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "3.20 patch notes: Added Carcass"
-    }
-  ],
-  "The Nurse": [
-    {
-      "greynote": null,
-      "name": "The Nurse",
-      "tagHypothesis": "shavronne_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Cells; Core; Tower; Scriptorium; Shavronne's Tower; The Harvest; The Rotting Core",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "No evidence of Arachnid Tomb drops that we can find -- and a few people have tried spamming Arachnid Tomb with no drops. Original wiki claim of Arachnid Tomb came from a user in Mar 2019. Seems like an error, and The Nurse probably does not in fact drop from Arachnid Tomb.\n\nIf someone verified Scriptorium, this would probably be enough to conclude `shavronne_area`.\n3.20 patch notes: The Nurse can now be found in the Carcass Map.\nIt seems like Carcass's Boss (Amalgam of Nightmares) exclusive Tag `unholy_trio_combined_boss_map` might qualify for `shavronne_area`; see below.\n\nDivcord 3.21: Scriptorium verified by Itacheey\nDivcord: 3.21, A9 The Rotting Core verified by Maude034, shared by CardboardMonka"
-    },
-    {
-      "greynote": null,
-      "name": "The Nurse",
-      "tagHypothesis": "harvest_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Carcass; Core; The Harvest; The Rotting Core",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "3.20 patch notes: The Nurse can now be found in the Carcass Map.\nThis is a natural Area drop (not Boss-specific), verified by Jasmine\n\nIt seems like Carcass's Boss (Amalgam of Nightmares) exclusive Tag `unholy_trio_combined_boss_map` might qualify for `shavronne_area`.\n\nWith confirmation of The Nurse in The Rotting Core, this completes 4/4 eligibility in \"harvest_area\" (2 were already confirmed and Carcass was patch noted)."
-    }
-  ],
   "The Lich": [
     {
       "greynote": null,
       "name": "The Lich",
       "tagHypothesis": "necromancer_boss",
-      "confidence": "none",
+      "confidence": "None",
       "remainingWork": "legacyTag",
       "dropsFrom": "Xixic, High Necromancer; Burtok, Conjurer of Bones",
       "wikiDisagreements": null,
@@ -264,7 +39,7 @@
       "greynote": null,
       "name": "The Lich",
       "tagHypothesis": "abyss_lich_boss?",
-      "confidence": "none",
+      "confidence": "None",
       "remainingWork": null,
       "dropsFrom": null,
       "wikiDisagreements": null,
@@ -272,215 +47,12 @@
       "notes": "necromancer_boss no longer appears to be the associated tag."
     }
   ],
-  "The Brittle Emperor": [
-    {
-      "greynote": null,
-      "name": "The Brittle Emperor",
-      "tagHypothesis": "voll_monster_map",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "The Brittle Emperor",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": null
-    },
-    {
-      "greynote": "story",
-      "name": "The Brittle Emperor",
-      "tagHypothesis": "voll_monster_story",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Voll, Emperor of Purity",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": null
-    }
-  ],
-  "The Brawny Battle Mage": [
-    {
-      "greynote": null,
-      "name": "The Brawny Battle Mage",
-      "tagHypothesis": "alira_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Burial Chambers; Spider Forest",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Many claims of Burial Chambers; possibly `alira_area`?\nOne unverified claim of Spider Forest on reddit; consistent with `alira_area`\n\nMay also be related to Map Bosses with Wand Attacks; see Divcord\n\nDivcord: Spider Forest verified by RiPHeartofGold 3.19"
-    },
-    {
-      "greynote": null,
-      "name": "The Brawny Battle Mage",
-      "tagHypothesis": "doedre_map_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "The Putrid Cloister; Sepulchre; Waste Pool; Phantasmagoria",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "3.21: The Brawny Battle Mage can now be found in the The Putrid Cloister, Sepulchre, Waste Pool, and Phantasmagoria Maps.\nThese Areas all received the new doedre_map_area Tag. They are the only four Areas with that Tag."
-    }
-  ],
-  "The Witch": [
-    {
-      "greynote": null,
-      "name": "The Witch",
-      "tagHypothesis": "alira_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Burial Chambers; Spider Forest",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": null
-    },
-    {
-      "greynote": null,
-      "name": "The Witch",
-      "tagHypothesis": "doedre_map_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "The Putrid Cloister; Sepulchre; Waste Pool; Phantasmagoria",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "3.21: The Witch can now be found in the The Putrid Cloister, Sepulchre, Waste Pool, and Phantasmagoria Maps.\nThese Areas all received the new doedre_map_area Tag. They are the only four Areas with that Tag."
-    }
-  ],
-  "The Golden Era": [
-    {
-      "greynote": null,
-      "name": "The Golden Era",
-      "tagHypothesis": "wealthy_area + Boss with `has_two_handed_melee`",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Basilica; Ivory Temple",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Divcord: KroIya disproved The Golden Era in Villa, >99.99% confidence in sample, 3.19\nThis proves that `wealthy_area` alone is insufficent\nDivcord: 3.20, Zimzams tested Temple with n=158, 0 hits of The Golden Era\nDivcord: 3.20, Zimzams reverified Ivory Temple\n\nDivcord: 3.20, Jasmine analyzed Tags for `wealthy_area` Areas. Outside of Residence which was added later in 3.19 and has separate governance, Jas's statement of \"eligible in an Area with `wealthy_area` whose Boss has `has_two_handed_melee`\" accurately describes the Areas in which The Golden Era can occur.\nWe checked the Bosses of all other `wealthy_area` Areas and found no counterexamples.\nThere's no way to disprove that hypothesis with current Maps' Tags, and the hypothesis accurately predicts the non-patch-noted Areas in which The Golden Era occurs, so this seems sufficient for now.\nMaybe in the future a new Map in which The Golden Era is eligible will reveal more info."
-    },
-    {
-      "greynote": null,
-      "name": "The Golden Era",
-      "tagHypothesis": "wealthy_area + tower_area / undying_boss_area",
-      "confidence": "done",
-      "remainingWork": "unclearHypothesis",
-      "dropsFrom": "Residence",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Cannot distinguish between {wealthy_area + tower_area} and {wealthy_area + undying_boss_area} -- both sets return only Residence, so either set could be the governing rule\n\n3.19 \"The Golden Era can now be found in the Residence Map.\" - may have introduced a new tag options. Need to rule out other maps - Only Villa and Crimson Township will be on atlas in 3.19\n\nDisproved in Chateau with 367 natural card drops; not city_home_area.\nDisproved Villa with 303 natural card drops; not sceptre_of_god_area.\nDivcord: 3.20, Zimzams tested Temple with n=158, 0 hits of The Golden Era\n\ntower_area may be more likely considering that The Tower is referencing a staff"
-    }
-  ],
-  "The Catalyst": [
-    {
-      "greynote": null,
-      "name": "The Catalyst",
-      "tagHypothesis": "vaal_pyramid_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Maze; Vaal Pyramid; Vaults of Atziri; Vaal Temple; Doryani's Machinarium; The Temple of Decay Level 1/2; The Ancient Pyramid",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "vaal_pyramid_area ?\nPossible also `vaal_ruin_area` or `ruined_vaal_city_area\nNeeds verification\nVaal Pyramid Map verified in divcord\nDoryani's machinarium verified in divcord"
-    },
-    {
-      "greynote": null,
-      "name": "The Catalyst",
-      "tagHypothesis": "vaal_ruin_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Ancient City; The Vaal City; The Causeway",
-      "wikiDisagreements": "Sunken City",
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Needs verification in:\nAncient City, if `vaal_ruin_area` or `ruined_vaal_city_area`\nor\nSunken City, if `ruined_vaal_city_area`\n\nAncient City verified in divcord\nDoes not appear to drop in Sunken City (sample size 20 alch&go and 42 high investment maps)\nVaal Ruins is not eligible due to area level 20 vs req lvl 23 for card (unless u do some weird strongbox shenanigans)"
-    }
-  ],
-  "Grave Knowledge": [
-    {
-      "greynote": null,
-      "name": "Grave Knowledge",
-      "tagHypothesis": "crypt_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Bone Crypt; Cursed Crypt; The Coward's Trial; The Crypt (A7)",
-      "wikiDisagreements": "Olmec's Sanctum",
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Divcord: Coward's Trial verified by Zimzams\nZimzams mentioned a drop from Kirac Card Mission in Necropolis\n\nZimzams hypothesizes: \"Similar to The Forsaken, maybe `crypt_area` + `necropolis`? \"\n\n\nStill eligible to drop in Olmec's Sanctum in 3.18?\nIf so, then it needs another row for an Area-Specific Drop"
-    },
-    {
-      "greynote": null,
-      "name": "Grave Knowledge",
-      "tagHypothesis": "catacomb_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Bone Crypt; The Ossuary (A5/A10); The Catacombs",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "New tag eligibility discovered by Elinvynia in 3.21 - The Ossuary (Act 10).\nDivcord: 3.21, A3 The Catacombs verified by Elinvynia\nDivcord: 3.21, A5 The Ossuary verified by Elinvynia"
-    },
-    {
-      "greynote": null,
-      "name": "Grave Knowledge",
-      "tagHypothesis": "necropolis_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Necropolis",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Divcord: Coward's Trial verified by Zimzams\nZimzams mentioned a drop from Kirac Card Mission in Necropolis\n\nZimzams hypothesizes: \"Similar to The Forsaken, maybe `crypt_area` + `necropolis`? \""
-    }
-  ],
-  "The Offering": [
-    {
-      "greynote": null,
-      "name": "The Offering",
-      "tagHypothesis": "shavronne_monster_story OR unholy_trio_combined_boss_story",
-      "confidence": "ok",
-      "remainingWork": "storyOnly",
-      "dropsFrom": "Reassembled Brutus; Shavronne, Unbound",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": "The Depraved Trinity",
-      "notes": "Possible parallel to The Depraved Trinity due to it being eligible from Amalgam of Nightmares?"
-    },
-    {
-      "greynote": null,
-      "name": "The Offering",
-      "tagHypothesis": "shavronne_monster_map OR unholy_trio_combined_boss_map",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Bazur; Gisale, Thought Thief; Prodigy of Darkness; Shavronne the Sickening; Amalgam of Nightmares",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "3.20 patch notes: Added Carcass"
-    }
-  ],
-  "Echoes of Love": [
-    {
-      "greynote": null,
-      "name": "Echoes of Love",
-      "tagHypothesis": "chamber_of_sins_area",
-      "confidence": "ok",
-      "remainingWork": "storyOnly",
-      "dropsFrom": "Overgrown Ruin; Overgrown Shrine",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": "The Chamber of Sins Level 1/2 (A7)",
-      "notes": "maligaro_area ? chamber_of_sins_area ? both?\nOvergrown Shrine verified in divcord\nneeds verification\n\nmight be both: \n{`chamber_of_sins_area` + `maligaro_area`}. \n"
-    },
-    {
-      "greynote": null,
-      "name": "Echoes of Love",
-      "tagHypothesis": "maligaro_area",
-      "confidence": "ok",
-      "remainingWork": "storyOnly",
-      "dropsFrom": "Overgrown Shrine; Core; Museum",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": "The Harvest (magic+ monsters), The Rotting Core",
-      "notes": "Divcord: clip of Lighty posted by Zimzams shows drop in Museum"
-    }
-  ],
   "The Innocent": [
     {
       "greynote": null,
       "name": "The Innocent",
       "tagHypothesis": "AvariusCasticus boss areas (no tag)",
-      "confidence": "done",
+      "confidence": "Done",
       "remainingWork": null,
       "dropsFrom": "Basilica; Defiled Cathedral",
       "wikiDisagreements": null,
@@ -491,7 +63,7 @@
       "greynote": "story",
       "name": "The Innocent",
       "tagHypothesis": "innocence_story",
-      "confidence": "done",
+      "confidence": "Done",
       "remainingWork": null,
       "dropsFrom": "The Chamber of Innocence",
       "wikiDisagreements": null,
@@ -504,7 +76,7 @@
       "greynote": null,
       "name": "The Saint's Treasure",
       "tagHypothesis": "marketplace_area",
-      "confidence": "done",
+      "confidence": "Done",
       "remainingWork": null,
       "dropsFrom": "Alleyways; Port; Arcade; Bazaar",
       "wikiDisagreements": null,
@@ -515,7 +87,7 @@
       "greynote": null,
       "name": "The Saint's Treasure",
       "tagHypothesis": "slums_area",
-      "confidence": "done",
+      "confidence": "Done",
       "remainingWork": null,
       "dropsFrom": "Ghetto; Precinct",
       "wikiDisagreements": null,
@@ -523,28 +95,122 @@
       "notes": "marketplace_area + slums_area ?"
     }
   ],
-  "More is Never Enough": [
+  "The Brawny Battle Mage": [
     {
       "greynote": null,
-      "name": "More is Never Enough",
-      "tagHypothesis": "god_boss_map_area",
-      "confidence": "done",
+      "name": "The Brawny Battle Mage",
+      "tagHypothesis": "alira_area",
+      "confidence": "Done",
       "remainingWork": null,
-      "dropsFrom": "Ara, Sister of Light;\r\nArmala, the Widow;\r\nDrek, Apex Hunter;\r\nErebix, Light's Bane;\r\nGorulis, Will-Thief;\r\nKhor, Sister of Shadows;\r\nMephod, the Earth Scorcher;\r\nNassar, Lion of the Seas;\r\nStalker of the Endless Dunes;\r\nTahsin, Warmaker;\r\nTerror of the Infinite Drifts;\r\nVarhesh, Shimmering Aberration",
-      "wikiDisagreements": "Vault",
+      "dropsFrom": "Burial Chambers; Spider Forest",
+      "wikiDisagreements": null,
       "sourcesWithTagButNotOnWiki": null,
-      "notes": "Seems like this might match Ambitious Obsession ?\nDivcord: Sunken City Boss drop, as expected by Armala, the Widow; Reef Boss drop, as expected by Nassar\n\nRelated to Pantheon and/or capturable souls; specifics unknown.\nTwo leading options are:\n(1) \"Kill a Boss of a Map which has `god_boss_map_area`\": a little unorthodox since `god_boss_map_area` is an *Area* Tag and the drop is Monster-specific, so the rule is oblique instead of the usual direct Tag association.\n(2) \"Kill a Boss which has a Pantheon Capturable Soul, even if they are not on the Story Pantheon\".\n\nAn example that would support Option 1 is Gorulis, Will-Thief. We'd need a new verification of a drop from Gorulis in 3.18.\nGorulis (1) is based on a Monster on the Story Pantheon; (2) is in a god_boss_map_area Area; (3) is *not* in PantheonSouls.dat; (4) *cannot* be captured in 3.18, though was capturable in the past.\n\nExamples that would support Option 2 are:\nCaptain Clayborne, The Accursed; Puruna, The Challenger; Captain Tanner Lightfoot; Sebbert, Crescent's Point; Shock and Horror; Forest of Flames; Vision of Justice; The Infernal King; Pagan Bishop of Agony; The Cursed King; Lycius, Midnight's Howl; The Hallowed Husk; The Restless Shade\nA drop from any of these Bosses would show that having a capturable soul enables the drop even without Story Pantheon presence.\n\nIt's also possible for both Option 1 and Option 2 to be true simultaneously.\n\n3.19: Jasmine verified a drop from Khor, Sister of Shadows in Cold River who is NOT capturable (though Ara, Sister of Light is). This proves that \"capturability\" is not a requirement.\n\n3.19: Observed in an Atlas Memory Cemetery Map, not from Boss -- could Atlas Memories behave differently? - confirmed."
+      "notes": "Many claims of Burial Chambers; possibly `alira_area`?\nOne unverified claim of Spider Forest on reddit; consistent with `alira_area`\n\nMay also be related to Map Bosses with Wand Attacks; see Divcord\n\nDivcord: Spider Forest verified by RiPHeartofGold 3.19"
     },
     {
       "greynote": null,
-      "name": "More is Never Enough",
-      "tagHypothesis": "god_boss_map_area OR ?",
-      "confidence": "low",
-      "remainingWork": "unclearHypothesis",
-      "dropsFrom": "Vault",
+      "name": "The Brawny Battle Mage",
+      "tagHypothesis": "doedre_map_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "The Putrid Cloister; Sepulchre; Waste Pool; Phantasmagoria",
       "wikiDisagreements": null,
       "sourcesWithTagButNotOnWiki": null,
-      "notes": "Vault was added as a separate area in 3.16, inconsistent in theme with the pantheon bosses but fits the theme of \"greed\".\nNo clear tags - does not included \"Pirate Treasure (Coves)\", and not gold_pile_area+wealthy_area as not found in Vaults of Atziri."
+      "notes": "3.21: The Brawny Battle Mage can now be found in the The Putrid Cloister, Sepulchre, Waste Pool, and Phantasmagoria Maps.\nThese Areas all received the new doedre_map_area Tag. They are the only four Areas with that Tag."
+    }
+  ],
+  "Justified Ambition": [
+    {
+      "greynote": null,
+      "name": "Justified Ambition",
+      "tagHypothesis": "crusader_conqueror_boss",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Baran, The Crusader",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Conquerors; Four separate Boss-specific Tags since `elderslayer` does not appear to be correct as no drop has been verified from Sirus (who also has `elderslayer)"
+    },
+    {
+      "greynote": null,
+      "name": "Justified Ambition",
+      "tagHypothesis": "redeemer_conqueror_boss",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Veritania, The Redeemer",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Conquerors; Four separate Boss-specific Tags since `elderslayer` does not appear to be correct as no drop has been verified from Sirus (who also has `elderslayer)"
+    },
+    {
+      "greynote": null,
+      "name": "Justified Ambition",
+      "tagHypothesis": "hunter_conqueror_boss",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Al-Hezmin, The Hunter",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Conquerors; Four separate Boss-specific Tags since `elderslayer` does not appear to be correct as no drop has been verified from Sirus (who also has `elderslayer)"
+    },
+    {
+      "greynote": null,
+      "name": "Justified Ambition",
+      "tagHypothesis": "warlord_conqueror_boss",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Drox, The Warlord",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Conquerors; Four separate Boss-specific Tags since `elderslayer` does not appear to be correct as no drop has been verified from Sirus (who also has `elderslayer)"
+    }
+  ],
+  "The Bitter Blossom": [
+    {
+      "greynote": null,
+      "name": "The Bitter Blossom",
+      "tagHypothesis": "oshabi_boss",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Oshabi, Avatar of the Grove",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Manually added to Oshabi in 3.16; however previous location was not found at the time. See below\nProhibited Library: CardPender 3.20 dropped 1 Bitter Blossom from Oshabi over n=200 kills."
+    },
+    {
+      "greynote": null,
+      "name": "The Bitter Blossom",
+      "tagHypothesis": "nature_boss",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Oshabi, Avatar of the Grove; Murgeth Bogsong; Elida Blisterclaw (Bramble Valley); Gorulis, Will-Thief (Infested Valley)",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Original source for this card was missing between 3.12 and 3.16 before being added to Oshabi.\n3.19: Verified Murgeth Bogsong, likely coding to nature_boss\nDivcord: kroIya verified Elida Blisterclaw in Bramble Valley 3.19\nProhibited Library: CardPender 3.20 dropped 1 Bitter Blossom from Oshabi over n=200 kills.\nVerified Gorulis, Will-Thief in 3.21, completing nature_boss - this was likely the original location. oshabi_boss is redundant with nature_boss."
+    }
+  ],
+  "The Porcupine": [
+    {
+      "greynote": null,
+      "name": "The Porcupine",
+      "tagHypothesis": "garden_area",
+      "confidence": "Done",
+      "remainingWork": "unclearHypothesis",
+      "dropsFrom": "Courtyard; Gardens; Orchard; Terrace; The High Gardens",
+      "wikiDisagreements": "Plaza",
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Incomplete hypothesis. See below"
+    },
+    {
+      "greynote": null,
+      "name": "The Porcupine",
+      "tagHypothesis": "garden_area OR (labyrinth_tileset_area & NOT indoors_area)",
+      "confidence": "Done",
+      "remainingWork": "unclearHypothesis",
+      "dropsFrom": "Courtyard; Gardens; Orchard; Plaza; Terrace; The High Gardens",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": "Chateau, Conservatory",
+      "notes": "Related to Porcupine Goliath spawn areas, but Porcupines do not necessarily need to be in the map (desecrate pool?)\n\nDivcord: Plaza verified by nennas, which does not have `garden_area`, further supporting association with Porcupine Goliath instead of just Area Tags\nDivcord: Terrace verified by nennas\n\nJasmine's old comments are still true re: The Porcupine being associated with natural Porcupine Goliaths spawns instead of just a single Area Tag.\nBecause of nennas's earlier verification in Plaza, we know The Porcupine is not governed solely by `garden_area` or `labyrinth_tileset_area`.\n\nAre there any Areas without either Tag that naturally spawn Porcupine Goliaths?\nOr maybe it's as simple as *both* of those Tags enabling The Porcupine...? If {Chateau, Conservatory} also have The Porcupine as an eligible natural Card, and no other Maps do, maybe that's the answer...?\n\nDisproved in Chateau with 367 natural card drops; not simply labyrinth_tileset_area.\nDivcord: 3.21, Zimzams tested Conservatory; 71 natural Card drops, 0 hits.\n\nMonster-specific hypotheses are not common, so looking more at area tags, \"garden_area OR (labyrinth_tileset_area & NOT indoors_area)\" does fit the bill and includes Plaza on top of the garden_area maps. Plaza has very few tags to work with otherwise"
     }
   ],
   "Forbidden Power": [
@@ -552,7 +218,7 @@
       "greynote": null,
       "name": "Forbidden Power",
       "tagHypothesis": "solaris_boss_map",
-      "confidence": "done",
+      "confidence": "Done",
       "remainingWork": null,
       "dropsFrom": "Helial, the Day Unending; Ara, Sister of Light; Jorus, Sky's Edge; Opid, Helial's Herald",
       "wikiDisagreements": null,
@@ -563,7 +229,7 @@
       "greynote": "story",
       "name": "Forbidden Power",
       "tagHypothesis": "solaris_boss_story",
-      "confidence": "done",
+      "confidence": "Done",
       "remainingWork": null,
       "dropsFrom": "Dawn, Harbinger of Solaris; Solaris, Eternal Sun",
       "wikiDisagreements": null,
@@ -576,7 +242,7 @@
       "greynote": null,
       "name": "The Forsaken",
       "tagHypothesis": "crypt_area",
-      "confidence": "done",
+      "confidence": "Done",
       "remainingWork": null,
       "dropsFrom": "Bone Crypt; Cursed Crypt; The Coward's Trial",
       "wikiDisagreements": "Olmec's Sanctum",
@@ -587,7 +253,7 @@
       "greynote": null,
       "name": "The Forsaken",
       "tagHypothesis": "necropolis_area",
-      "confidence": "ok",
+      "confidence": "OK",
       "remainingWork": "unclearHypothesis",
       "dropsFrom": "Necropolis",
       "wikiDisagreements": null,
@@ -595,12 +261,95 @@
       "notes": "As with other cases, Necropolis's `necropolis_area` Tag seems to be treated as `crypt_area` even though Necropolis is missing the `crypt_area` Tag"
     }
   ],
+  "The Catalyst": [
+    {
+      "greynote": null,
+      "name": "The Catalyst",
+      "tagHypothesis": "vaal_pyramid_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Maze; Vaal Pyramid; Vaults of Atziri; Vaal Temple; Doryani's Machinarium; The Temple of Decay Level 1/2; The Ancient Pyramid",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "vaal_pyramid_area ?\nPossible also `vaal_ruin_area` or `ruined_vaal_city_area\nNeeds verification\nVaal Pyramid Map verified in divcord\nDoryani's machinarium verified in divcord"
+    },
+    {
+      "greynote": null,
+      "name": "The Catalyst",
+      "tagHypothesis": "vaal_ruin_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Ancient City; The Vaal City; The Causeway",
+      "wikiDisagreements": "Sunken City",
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Needs verification in:\nAncient City, if `vaal_ruin_area` or `ruined_vaal_city_area`\nor\nSunken City, if `ruined_vaal_city_area`\n\nAncient City verified in divcord\nDoes not appear to drop in Sunken City (sample size 20 alch&go and 42 high investment maps)\nVaal Ruins is not eligible due to area level 20 vs req lvl 23 for card (unless u do some weird strongbox shenanigans)"
+    }
+  ],
+  "The Offering": [
+    {
+      "greynote": null,
+      "name": "The Offering",
+      "tagHypothesis": "shavronne_monster_story OR unholy_trio_combined_boss_story",
+      "confidence": "OK",
+      "remainingWork": "storyOnly",
+      "dropsFrom": "Reassembled Brutus; Shavronne, Unbound",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": "The Depraved Trinity",
+      "notes": "Possible parallel to The Depraved Trinity due to it being eligible from Amalgam of Nightmares?"
+    },
+    {
+      "greynote": null,
+      "name": "The Offering",
+      "tagHypothesis": "shavronne_monster_map OR unholy_trio_combined_boss_map",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Bazur; Gisale, Thought Thief; Prodigy of Darkness; Shavronne the Sickening; Amalgam of Nightmares",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "3.20 patch notes: Added Carcass"
+    }
+  ],
+  "The Damned": [
+    {
+      "greynote": null,
+      "name": "The Damned",
+      "tagHypothesis": "vaal_pyramid_area",
+      "confidence": "OK",
+      "remainingWork": "confirm",
+      "dropsFrom": "Vaults of Atziri; Vaal Pyramid; Vaal Temple; Maze",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": "Doryani's Machinarium",
+      "notes": "Verified in Vaal Pyramid and Vaal Temple in Divcord\nNeed to verify Maze and Doryani's Machinarium for second Tag\n\n3.20: Maze verified by developershins"
+    },
+    {
+      "greynote": null,
+      "name": "The Damned",
+      "tagHypothesis": "ruined_vaal_city_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Ancient City; Sunken City",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Divcord: 3.21, Sunken City verified by Elinvynia.\nThis supports `ruined_vaal_city_area`."
+    },
+    {
+      "greynote": null,
+      "name": "The Damned",
+      "tagHypothesis": "vaal_ruin_area",
+      "confidence": "Low",
+      "remainingWork": "storyOnly",
+      "dropsFrom": "Ancient City",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": "The Causeway, The Vaal City",
+      "notes": "(History: There are at least two independent rules for The Damned. The original hypotheses were: (1) `vaal_pyramid_area` => The Damned; and (2) `vaal_ruin_area` => The Damned. But the latter hypothesis was solely due to confirmed drops in Ancient City and vaal_ruin_area was not the only possible Tag option.\nThe second rule could easily be `ruined_vaal_city_area` instead, which exists only on Ancient City and Sunken City.)"
+    }
+  ],
   "A Modest Request": [
     {
       "greynote": null,
       "name": "A Modest Request",
       "tagHypothesis": "dominus_monster_map",
-      "confidence": "done",
+      "confidence": "Done",
       "remainingWork": null,
       "dropsFrom": "The Hallowed Husk; The High Templar",
       "wikiDisagreements": null,
@@ -611,7 +360,7 @@
       "greynote": null,
       "name": "A Modest Request",
       "tagHypothesis": "malachai_boss_map",
-      "confidence": "done",
+      "confidence": "Done",
       "remainingWork": null,
       "dropsFrom": "Nightmare's Omen; Eater of Souls",
       "wikiDisagreements": null,
@@ -619,85 +368,360 @@
       "notes": "Divcord: Also dropped in Core by DSLily via a Kirac Card Mission\n\nDivcord: 3.14 Ultimatum archive showed drop from Primordial Pool boss as well\n\nBased on both these, likely also `malachai_boss_map`\n\n\nNightmare's Omen => Primordial Pool\nEater of Souls => Core"
     }
   ],
-  "Dementophobia": [
+  "The Admirer": [
     {
       "greynote": null,
-      "name": "Dementophobia",
-      "tagHypothesis": "cortex_boss",
-      "confidence": "done",
+      "name": "The Admirer",
+      "tagHypothesis": "vaal_pyramid_area",
+      "confidence": "Done",
       "remainingWork": null,
-      "dropsFrom": "Venarius",
+      "dropsFrom": "Maze; Vaal Pyramid; Vaal Temple; Vaults of Atziri; Doryani's Machinarium",
+      "wikiDisagreements": "Ancient City",
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Other vaal Tags may qualify as well\nAncient City Verified in Divcord \nSunken City will need testing to differentiate between ruined_vaal_city_area or vaal_ruin_area\n\nSunken City testing by Jas and Zimzams showed no The Admirer drops, which means `ruined_vaal_city_area` is not sufficient\nVaults of Atziri verified in divcord\n\n3.20: Doryani's Machinarium verified by NcuriousmediatoR"
+    },
+    {
+      "greynote": null,
+      "name": "The Admirer",
+      "tagHypothesis": "vaal_ruin_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Ancient City",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Ancient City Verified in Divcord "
+    }
+  ],
+  "The Offspring": [
+    {
+      "greynote": null,
+      "name": "The Offspring",
+      "tagHypothesis": "Ryslatha boss",
+      "confidence": "OK",
+      "remainingWork": "unclearHypothesis",
+      "dropsFrom": "Gorulis, Will-Thief; Ryslatha, the Puppet Mistress",
+      "wikiDisagreements": "Murgeth Bogsong, Titan of the Grove",
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Original drop locations; consistent with theme of card."
+    },
+    {
+      "greynote": null,
+      "name": "The Offspring",
+      "tagHypothesis": "nature_boss",
+      "confidence": "Low",
+      "remainingWork": "unclearHypothesis",
+      "dropsFrom": "Gorulis, Will-Thief; Murgeth Bogsong",
+      "wikiDisagreements": "Ryslatha, the Puppet Mistress; Titan of the Grove",
+      "sourcesWithTagButNotOnWiki": "Elida Blisterclaw (Bramble Valley); Oshabi",
+      "notes": "3.18 patch notes say:\nSome Divination Cards have found new homes as a result of these Atlas Changes:\nThe Offspring can now drop in the Peninsula Map.\n\nRyslatha and Gorulis have `nature_boss`, a possible Monster Tag candidate.\nVerified Murgeth Bogsong (Stagnation); appears to be boss only\nAlso not dropping from Peninsula cards (1194 card sample, 6 maps) - likely to be boss only"
+    },
+    {
+      "greynote": null,
+      "name": "The Offspring",
+      "tagHypothesis": null,
+      "confidence": "Low",
+      "remainingWork": "noHypothesis",
+      "dropsFrom": null,
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": "Titan of the Grove",
+      "notes": null
+    }
+  ],
+  "Time-Lost Relic": [
+    {
+      "greynote": null,
+      "name": "Time-Lost Relic",
+      "tagHypothesis": "mine_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Flooded Mine; Excavation; Dig; Geode; Crystal Ore; Grotto",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Expedition Logbooks; Flooded Mine; Excavation\n\nDivcord: Crystal Ore verified by Tebec\nDivcord: Geode verified\n\nBesides the Expedition Areas, maybe also mine_area? That would cover Crystal Ore and the legacy location of Excavation. We would need verifications in {Dig, Flooded Mine, Geode}. Dig would distinguish it from cave_area.\n\nVerified Dig\n3.20 patch notes: Added Grotto"
+    },
+    {
+      "greynote": null,
+      "name": "Time-Lost Relic",
+      "tagHypothesis": "expedition_common_remnant_logbook",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": null,
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Also found in all Expedition Areas; any Tag or Area relationship for these...?"
+    }
+  ],
+  "The Incantation": [
+    {
+      "greynote": null,
+      "name": "The Incantation",
+      "tagHypothesis": "alira_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Burial Chambers; Spider Forest",
       "wikiDisagreements": null,
       "sourcesWithTagButNotOnWiki": null,
       "notes": null
     },
     {
       "greynote": null,
-      "name": "Dementophobia",
-      "tagHypothesis": "crusader_conqueror_boss",
-      "confidence": "done",
+      "name": "The Incantation",
+      "tagHypothesis": "doedre_map_area",
+      "confidence": "Done",
       "remainingWork": null,
-      "dropsFrom": "Baran, The Crusader",
+      "dropsFrom": "The Putrid Cloister; Sepulchre; Waste Pool; Phantasmagoria",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "3.21: The Incantation can now be found in the The Putrid Cloister, Sepulchre, Waste Pool, and Phantasmagoria Maps.\nThese Areas all received the new doedre_map_area Tag. They are the only four Areas with that Tag."
+    }
+  ],
+  "The Wedding Gift": [
+    {
+      "greynote": null,
+      "name": "The Wedding Gift",
+      "tagHypothesis": "arakaali_area OR ?",
+      "confidence": "Low",
+      "remainingWork": "unclearHypothesis",
+      "dropsFrom": "Sunken City",
+      "wikiDisagreements": "Overgrown Ruin",
+      "sourcesWithTagButNotOnWiki": "The Temple of Decay Level 2",
+      "notes": "Divcord: 3.20 Sunken City from a Blight Pump explosion -- likely confirms this as a natural Area drop in `arakaali_area` Areas\n\nDivcord: 3.20 Toxic Sewer screenshot by Boltonsquad; Toxic Sewer and Sunken City both have `spider_boss_area`, which may be a governing Tag -- but this may have been \"a very unluckily misleading Monster Conversion\"\nTo fully verify `spider_boss_area`, we'd need to observe The Wedding Gift in additional Areas.\nRemaining verifications for `spider_boss_area`:\nSpider Lair, Arachnid Nest, Arachnid Tomb, Jungle Valley (off-Atlas for 3.20)\n\nDivcord: 3.20, players tested many `spider_boss_area` Areas with no hits of The Wedding Gift. See Divcord for full natural Card drop breakdowns from players' samples. Looking at solely The Web:\nBambam: 137 The Web in T16 Toxic Sewer\nSanctia: 295 The Web in T16 Toxic Sewer\npoorFishwife: 389 The Web in T16 Arachnid Tomb\nElinvynia: 634 The Web in T16 Jungle Valley\n\nThese cannot be directly summed due to different Card weights in those Areas, but it's still very low likelihood that all these attempts would have produced zero The Wedding Gift if `spider_boss_area` were a governing Tag.\nFor now these conclusions seem solid:\n* Boltonsquad's drop was \"a very unluckily misleading Monster Conversion\";\n* The sole governing Tag for The Wedding Gift is `arakaali_area`, as originally guessed.\n\nMaybe we'll get surprised in the future, but for now I think this one should be marked Done."
+    },
+    {
+      "greynote": null,
+      "name": "The Wedding Gift",
+      "tagHypothesis": "spider_boss_area",
+      "confidence": "Low",
+      "remainingWork": "unclearHypothesis",
+      "dropsFrom": "Sunken City",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": "Spider Lair, Arachnid Nest, Arachnid Tomb, Jungle Valley, (Overgrown Ruin)",
+      "notes": "Currently we are fairly confident the original tag is arakaali_area, with a lower chance for spider_boss_area. Overgrown Ruin's tags in 3.21 will be key, seems unlikely to get arakaali_area, but more likely to get spider_boss_area, due to Akaveesh (Black Death, Pain Unending). "
+    }
+  ],
+  "The Golden Era": [
+    {
+      "greynote": null,
+      "name": "The Golden Era",
+      "tagHypothesis": "wealthy_area + Boss with `has_two_handed_melee`",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Basilica; Ivory Temple",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Divcord: KroIya disproved The Golden Era in Villa, >99.99% confidence in sample, 3.19\nThis proves that `wealthy_area` alone is insufficent\nDivcord: 3.20, Zimzams tested Temple with n=158, 0 hits of The Golden Era\nDivcord: 3.20, Zimzams reverified Ivory Temple\n\nDivcord: 3.20, Jasmine analyzed Tags for `wealthy_area` Areas. Outside of Residence which was added later in 3.19 and has separate governance, Jas's statement of \"eligible in an Area with `wealthy_area` whose Boss has `has_two_handed_melee`\" accurately describes the Areas in which The Golden Era can occur.\nWe checked the Bosses of all other `wealthy_area` Areas and found no counterexamples.\nThere's no way to disprove that hypothesis with current Maps' Tags, and the hypothesis accurately predicts the non-patch-noted Areas in which The Golden Era occurs, so this seems sufficient for now.\nMaybe in the future a new Map in which The Golden Era is eligible will reveal more info."
+    },
+    {
+      "greynote": null,
+      "name": "The Golden Era",
+      "tagHypothesis": "wealthy_area + tower_area / undying_boss_area",
+      "confidence": "Done",
+      "remainingWork": "unclearHypothesis",
+      "dropsFrom": "Residence",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Cannot distinguish between {wealthy_area + tower_area} and {wealthy_area + undying_boss_area} -- both sets return only Residence, so either set could be the governing rule\n\n3.19 \"The Golden Era can now be found in the Residence Map.\" - may have introduced a new tag options. Need to rule out other maps - Only Villa and Crimson Township will be on atlas in 3.19\n\nDisproved in Chateau with 367 natural card drops; not city_home_area.\nDisproved Villa with 303 natural card drops; not sceptre_of_god_area.\nDivcord: 3.20, Zimzams tested Temple with n=158, 0 hits of The Golden Era\n\ntower_area may be more likely considering that The Tower is referencing a staff"
+    }
+  ],
+  "The Brittle Emperor": [
+    {
+      "greynote": null,
+      "name": "The Brittle Emperor",
+      "tagHypothesis": "voll_monster_map",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "The Brittle Emperor",
       "wikiDisagreements": null,
       "sourcesWithTagButNotOnWiki": null,
       "notes": null
     },
     {
-      "greynote": null,
-      "name": "Dementophobia",
-      "tagHypothesis": "hunter_conqueror_boss",
-      "confidence": "done",
+      "greynote": "story",
+      "name": "The Brittle Emperor",
+      "tagHypothesis": "voll_monster_story",
+      "confidence": "Done",
       "remainingWork": null,
-      "dropsFrom": "Al-Hezmin, The Hunter",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": null
-    },
-    {
-      "greynote": null,
-      "name": "Dementophobia",
-      "tagHypothesis": "redeemer_conqueror_boss",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Veritania, The Redeemer",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": null
-    },
-    {
-      "greynote": null,
-      "name": "Dementophobia",
-      "tagHypothesis": "warlord_conqueror_boss",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Drox, The Warlord",
+      "dropsFrom": "Voll, Emperor of Purity",
       "wikiDisagreements": null,
       "sourcesWithTagButNotOnWiki": null,
       "notes": null
     }
   ],
-  "Call to the First Ones": [
+  "More is Never Enough": [
     {
       "greynote": null,
-      "name": "Call to the First Ones",
-      "tagHypothesis": "dark_forest_area",
-      "confidence": "done",
+      "name": "More is Never Enough",
+      "tagHypothesis": "god_boss_map_area",
+      "confidence": "Done",
       "remainingWork": null,
-      "dropsFrom": "Dark Forest; Bramble Valley; Forbidden Woods; The Northern Forest (A7)",
-      "wikiDisagreements": null,
+      "dropsFrom": "Ara, Sister of Light;\r\nArmala, the Widow;\r\nDrek, Apex Hunter;\r\nErebix, Light's Bane;\r\nGorulis, Will-Thief;\r\nKhor, Sister of Shadows;\r\nMephod, the Earth Scorcher;\r\nNassar, Lion of the Seas;\r\nStalker of the Endless Dunes;\r\nTahsin, Warmaker;\r\nTerror of the Infinite Drifts;\r\nVarhesh, Shimmering Aberration",
+      "wikiDisagreements": "Vault",
       "sourcesWithTagButNotOnWiki": null,
-      "notes": "Divcord: Dark Forest verified by Zimzams\n\nIf someone verifies a drop in Lair, that would indicate `rigwald_area`\nCould also be `dark_forest_area` but less likely given theme\n\nDivcord: In 3.19, CommissarTyr tracked 4 Call to the First Ones in Bramble Valley, which implies `dark_forest_area` is probably correct; remaining to verify: none\n\nDivcord: Thicket verified. Might also key off of `thicket_area` ? Thicket has `forest_map_area` but not `dark_forest_area`.\n\nDivcord: Forbidden Woods verified 3.19"
+      "notes": "Seems like this might match Ambitious Obsession ?\nDivcord: Sunken City Boss drop, as expected by Armala, the Widow; Reef Boss drop, as expected by Nassar\n\nRelated to Pantheon and/or capturable souls; specifics unknown.\nTwo leading options are:\n(1) \"Kill a Boss of a Map which has `god_boss_map_area`\": a little unorthodox since `god_boss_map_area` is an *Area* Tag and the drop is Monster-specific, so the rule is oblique instead of the usual direct Tag association.\n(2) \"Kill a Boss which has a Pantheon Capturable Soul, even if they are not on the Story Pantheon\".\n\nAn example that would support Option 1 is Gorulis, Will-Thief. We'd need a new verification of a drop from Gorulis in 3.18.\nGorulis (1) is based on a Monster on the Story Pantheon; (2) is in a god_boss_map_area Area; (3) is *not* in PantheonSouls.dat; (4) *cannot* be captured in 3.18, though was capturable in the past.\n\nExamples that would support Option 2 are:\nCaptain Clayborne, The Accursed; Puruna, The Challenger; Captain Tanner Lightfoot; Sebbert, Crescent's Point; Shock and Horror; Forest of Flames; Vision of Justice; The Infernal King; Pagan Bishop of Agony; The Cursed King; Lycius, Midnight's Howl; The Hallowed Husk; The Restless Shade\nA drop from any of these Bosses would show that having a capturable soul enables the drop even without Story Pantheon presence.\n\nIt's also possible for both Option 1 and Option 2 to be true simultaneously.\n\n3.19: Jasmine verified a drop from Khor, Sister of Shadows in Cold River who is NOT capturable (though Ara, Sister of Light is). This proves that \"capturability\" is not a requirement.\n\n3.19: Observed in an Atlas Memory Cemetery Map, not from Boss -- could Atlas Memories behave differently? - confirmed."
     },
     {
       "greynote": null,
-      "name": "Call to the First Ones",
-      "tagHypothesis": "thicket_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Thicket; The Dread Thicket (A7)",
+      "name": "More is Never Enough",
+      "tagHypothesis": "god_boss_map_area OR ?",
+      "confidence": "Low",
+      "remainingWork": "unclearHypothesis",
+      "dropsFrom": "Vault",
       "wikiDisagreements": null,
       "sourcesWithTagButNotOnWiki": null,
-      "notes": "Divcord: Verified that `thicket_area` permits Call to the First Ones, but does NOT permit other `dark_forest_area` Cards. Thus `thicket_area` does not inherit `dark_forest_area`. Call to the First Ones is simply governed by two separate Tags.\n3.21: Krolya verified Dread Thicket A7."
+      "notes": "Vault was added as a separate area in 3.16, inconsistent in theme with the pantheon bosses but fits the theme of \"greed\".\nNo clear tags - does not included \"Pirate Treasure (Coves)\", and not gold_pile_area+wealthy_area as not found in Vaults of Atziri."
+    }
+  ],
+  "Echoes of Love": [
+    {
+      "greynote": null,
+      "name": "Echoes of Love",
+      "tagHypothesis": "chamber_of_sins_area",
+      "confidence": "OK",
+      "remainingWork": "storyOnly",
+      "dropsFrom": "Overgrown Ruin; Overgrown Shrine",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": "The Chamber of Sins Level 1/2 (A7)",
+      "notes": "maligaro_area ? chamber_of_sins_area ? both?\nOvergrown Shrine verified in divcord\nneeds verification\n\nmight be both: \n{`chamber_of_sins_area` + `maligaro_area`}. \n"
+    },
+    {
+      "greynote": null,
+      "name": "Echoes of Love",
+      "tagHypothesis": "maligaro_area",
+      "confidence": "OK",
+      "remainingWork": "storyOnly",
+      "dropsFrom": "Overgrown Shrine; Core; Museum",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": "The Harvest (magic+ monsters), The Rotting Core",
+      "notes": "Divcord: clip of Lighty posted by Zimzams shows drop in Museum"
+    }
+  ],
+  "Grave Knowledge": [
+    {
+      "greynote": null,
+      "name": "Grave Knowledge",
+      "tagHypothesis": "crypt_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Bone Crypt; Cursed Crypt; The Coward's Trial; The Crypt (A7)",
+      "wikiDisagreements": "Olmec's Sanctum",
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Divcord: Coward's Trial verified by Zimzams\nZimzams mentioned a drop from Kirac Card Mission in Necropolis\n\nZimzams hypothesizes: \"Similar to The Forsaken, maybe `crypt_area` + `necropolis`? \"\n\n\nStill eligible to drop in Olmec's Sanctum in 3.18?\nIf so, then it needs another row for an Area-Specific Drop"
+    },
+    {
+      "greynote": null,
+      "name": "Grave Knowledge",
+      "tagHypothesis": "catacomb_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Bone Crypt; The Ossuary (A5/A10); The Catacombs",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "New tag eligibility discovered by Elinvynia in 3.21 - The Ossuary (Act 10).\nDivcord: 3.21, A3 The Catacombs verified by Elinvynia\nDivcord: 3.21, A5 The Ossuary verified by Elinvynia"
+    },
+    {
+      "greynote": null,
+      "name": "Grave Knowledge",
+      "tagHypothesis": "necropolis_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Necropolis",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Divcord: Coward's Trial verified by Zimzams\nZimzams mentioned a drop from Kirac Card Mission in Necropolis\n\nZimzams hypothesizes: \"Similar to The Forsaken, maybe `crypt_area` + `necropolis`? \""
+    }
+  ],
+  "A Note in the Wind": [
+    {
+      "greynote": null,
+      "name": "A Note in the Wind",
+      "tagHypothesis": "desert_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Dry Sea; Dunes; Desert Spring; Desert; The Oasis",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": "Pillars of Arun",
+      "notes": "If A Note in the Wind drops in Pillars of Arun, then it's `desert_area` instead of `desert_map_area`\n3.20 re-verified in Dunes"
+    },
+    {
+      "greynote": null,
+      "name": "A Note in the Wind",
+      "tagHypothesis": "desert_map_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Dry Sea; Dunes; Desert Spring; Desert",
+      "wikiDisagreements": "The Oasis",
+      "sourcesWithTagButNotOnWiki": "Pillars of Arun",
+      "notes": "Could also be `desert_area`\nDivcord: Desert Map verified by nennas\n3.20 re-verified in Dunes"
+    }
+  ],
+  "The Nurse": [
+    {
+      "greynote": null,
+      "name": "The Nurse",
+      "tagHypothesis": "shavronne_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Cells; Core; Tower; Scriptorium; Shavronne's Tower; The Harvest; The Rotting Core",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "No evidence of Arachnid Tomb drops that we can find -- and a few people have tried spamming Arachnid Tomb with no drops. Original wiki claim of Arachnid Tomb came from a user in Mar 2019. Seems like an error, and The Nurse probably does not in fact drop from Arachnid Tomb.\n\nIf someone verified Scriptorium, this would probably be enough to conclude `shavronne_area`.\n3.20 patch notes: The Nurse can now be found in the Carcass Map.\nIt seems like Carcass's Boss (Amalgam of Nightmares) exclusive Tag `unholy_trio_combined_boss_map` might qualify for `shavronne_area`; see below.\n\nDivcord 3.21: Scriptorium verified by Itacheey\nDivcord: 3.21, A9 The Rotting Core verified by Maude034, shared by CardboardMonka"
+    },
+    {
+      "greynote": null,
+      "name": "The Nurse",
+      "tagHypothesis": "harvest_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Carcass; Core; The Harvest; The Rotting Core",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "3.20 patch notes: The Nurse can now be found in the Carcass Map.\nThis is a natural Area drop (not Boss-specific), verified by Jasmine\n\nIt seems like Carcass's Boss (Amalgam of Nightmares) exclusive Tag `unholy_trio_combined_boss_map` might qualify for `shavronne_area`.\n\nWith confirmation of The Nurse in The Rotting Core, this completes 4/4 eligibility in \"harvest_area\" (2 were already confirmed and Carcass was patch noted)."
+    }
+  ],
+  "The Price of Prescience": [
+    {
+      "greynote": null,
+      "name": "The Price of Prescience",
+      "tagHypothesis": "crusader_conqueror_boss",
+      "confidence": "Low",
+      "remainingWork": "unclearHypothesis",
+      "dropsFrom": "Baran, The Crusader",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Additional drop conditions? Seems odd"
+    },
+    {
+      "greynote": null,
+      "name": "The Price of Prescience",
+      "tagHypothesis": "hunter_conqueror_boss",
+      "confidence": "Low",
+      "remainingWork": "unclearHypothesis",
+      "dropsFrom": "Al-Hezmin, The Hunter",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Additional drop conditions? Seems odd"
+    },
+    {
+      "greynote": null,
+      "name": "The Price of Prescience",
+      "tagHypothesis": "redeemer_conqueror_boss",
+      "confidence": "Low",
+      "remainingWork": "unclearHypothesis",
+      "dropsFrom": "Veritania, The Redeemer",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Additional drop conditions? Seems odd"
+    },
+    {
+      "greynote": null,
+      "name": "The Price of Prescience",
+      "tagHypothesis": "warlord_conqueror_boss",
+      "confidence": "Low",
+      "remainingWork": "unclearHypothesis",
+      "dropsFrom": "Drox, The Warlord",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Additional drop conditions? Seems odd"
     }
   ],
   "Akil's Prophecy": [
@@ -705,7 +729,7 @@
       "greynote": null,
       "name": "Akil's Prophecy",
       "tagHypothesis": "vaal_architect_incursion",
-      "confidence": "ok",
+      "confidence": "OK",
       "remainingWork": null,
       "dropsFrom": "All Incursion Architects in Alva missions/Alva's Memory",
       "wikiDisagreements": null,
@@ -716,7 +740,7 @@
       "greynote": null,
       "name": "Akil's Prophecy",
       "tagHypothesis": "vaal_architect_temple",
-      "confidence": "low",
+      "confidence": "Low",
       "remainingWork": "confirm",
       "dropsFrom": null,
       "wikiDisagreements": null,
@@ -724,28 +748,131 @@
       "notes": "3.20: The Akil's Prophecy Divination Card has been re-enabled, and now awards a Double Corrupted Unique Elegant Round Shield. This card can now be found in the Temple of Atzoatl.\nIs this an area drop or a monster drop?\n\nSee notes above; might be both `vaal_architect_incursion` and `vaal_architect_temple`.\n\n3.21: Unless we find evidence of this occurring as an Area drop in the Temple of Atzoatl (as opposed to strictly dropping from Architects), this is probably `vaal_architect_temple` instead of `incursion_temple_area`."
     }
   ],
-  "The Bitter Blossom": [
+  "Dementophobia": [
     {
       "greynote": null,
-      "name": "The Bitter Blossom",
-      "tagHypothesis": "oshabi_boss",
-      "confidence": "done",
+      "name": "Dementophobia",
+      "tagHypothesis": "cortex_boss",
+      "confidence": "Done",
       "remainingWork": null,
-      "dropsFrom": "Oshabi, Avatar of the Grove",
+      "dropsFrom": "Venarius",
       "wikiDisagreements": null,
       "sourcesWithTagButNotOnWiki": null,
-      "notes": "Manually added to Oshabi in 3.16; however previous location was not found at the time. See below\nProhibited Library: CardPender 3.20 dropped 1 Bitter Blossom from Oshabi over n=200 kills."
+      "notes": null
     },
     {
       "greynote": null,
-      "name": "The Bitter Blossom",
-      "tagHypothesis": "nature_boss",
-      "confidence": "done",
+      "name": "Dementophobia",
+      "tagHypothesis": "crusader_conqueror_boss",
+      "confidence": "Done",
       "remainingWork": null,
-      "dropsFrom": "Oshabi, Avatar of the Grove; Murgeth Bogsong; Elida Blisterclaw (Bramble Valley); Gorulis, Will-Thief (Infested Valley)",
+      "dropsFrom": "Baran, The Crusader",
       "wikiDisagreements": null,
       "sourcesWithTagButNotOnWiki": null,
-      "notes": "Original source for this card was missing between 3.12 and 3.16 before being added to Oshabi.\n3.19: Verified Murgeth Bogsong, likely coding to nature_boss\nDivcord: kroIya verified Elida Blisterclaw in Bramble Valley 3.19\nProhibited Library: CardPender 3.20 dropped 1 Bitter Blossom from Oshabi over n=200 kills.\nVerified Gorulis, Will-Thief in 3.21, completing nature_boss - this was likely the original location. oshabi_boss is redundant with nature_boss."
+      "notes": null
+    },
+    {
+      "greynote": null,
+      "name": "Dementophobia",
+      "tagHypothesis": "hunter_conqueror_boss",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Al-Hezmin, The Hunter",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": null
+    },
+    {
+      "greynote": null,
+      "name": "Dementophobia",
+      "tagHypothesis": "redeemer_conqueror_boss",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Veritania, The Redeemer",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": null
+    },
+    {
+      "greynote": null,
+      "name": "Dementophobia",
+      "tagHypothesis": "warlord_conqueror_boss",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Drox, The Warlord",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": null
+    }
+  ],
+  "The Wretched": [
+    {
+      "greynote": null,
+      "name": "The Wretched",
+      "tagHypothesis": "crypt_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Bone Crypt; Cursed Crypt; The Coward's Trial",
+      "wikiDisagreements": "Cells, Dungeon, Mud Geyser, Overgrown Ruin",
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Need verifications that these Areas are still eligible for The Wretched in 3.18:\n{Cells, Dungeon, Mud Geyser, Overgrown Ruin}\n\nIf Dungeon is eligible, maybe also `prison_area`\nIf Overgrown Ruin is eligible, maybe also `chamber_of_sins_area`\nIf Mud Geyser is eligible, maybe also `fetid_area` or `toxic_pool_area`\n\n\nDivcord: Zimzams tested Cells, n>200, 0 The Wretched -- no longer drops in Cells.\nDivcord: 3.20, Zimzams tested Dungeon, n=288, 0 The Wretched -- no longer drops in Dungeon (conf>>99.9%).\nDivcord: 3.20, Overgrown Ruin, n=95, 0 The Wretched -- no longer drops in Overgrown Ruin (conf>99.9%)."
+    },
+    {
+      "greynote": null,
+      "name": "The Wretched",
+      "tagHypothesis": "necromancer_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Bone Crypt; The Coward's Trial; Acton's Nightmare",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": null
+    },
+    {
+      "greynote": null,
+      "name": "The Wretched",
+      "tagHypothesis": "necropolis_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Necropolis",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Similar to the situation with Grave Knowledge and The Forsaken, Necropolis seems to drop anything which can appear in crypt_area even though it doesn't have that Tag - see necropolis_area quirk."
+    },
+    {
+      "greynote": null,
+      "name": "The Wretched",
+      "tagHypothesis": "mud_geyser_area",
+      "confidence": "Done",
+      "remainingWork": "legacyTag",
+      "dropsFrom": null,
+      "wikiDisagreements": "Mud Geyser",
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "In the past, The Wretched was eligible in Mud Geyser. The claim on the wiki is stale, however, and Mud Geyser has not been reverified in a long time. It's likely it is no longer an eligible Area.\n\nDivcord 3.20: testing Bog which is on-Atlas and shares Tags with Mud Geyser (fetid_area, toxic_pool_area). No The Wretched in Bog, confidence >99.9%, so those Tags can't be it.\n\nThe only options are:\n1) The Wretched no longer drops in Mud Geyser either; or\n2) Mud Geyser's special exclusive Tag mud_geyser_area is another eligibility-grantor."
+    }
+  ],
+  "The Aesthete": [
+    {
+      "greynote": null,
+      "name": "The Aesthete",
+      "tagHypothesis": "shavronne_monster_story OR unholy_trio_combined_boss_story",
+      "confidence": "OK",
+      "remainingWork": "storyOnly",
+      "dropsFrom": "Reassembled Brutus; Shavronne, Unbound",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": "The Depraved Trinity",
+      "notes": "Possible parallel to The Depraved Trinity due to it being eligible from Amalgam of Nightmares?"
+    },
+    {
+      "greynote": null,
+      "name": "The Aesthete",
+      "tagHypothesis": "shavronne_monster_map OR unholy_trio_combined_boss_map",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Bazur; Gisale, Thought Thief; Prodigy of Darkness; Shavronne the Sickening; Amalgam of Nightmares",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "3.20 patch notes: Added Carcass"
     }
   ],
   "Immortal Resolve": [
@@ -753,7 +880,7 @@
       "greynote": null,
       "name": "Immortal Resolve",
       "tagHypothesis": "unholy_trio_combined_boss_map",
-      "confidence": "done",
+      "confidence": "Done",
       "remainingWork": null,
       "dropsFrom": "Amalgam of Nightmares",
       "wikiDisagreements": "Vault",
@@ -764,7 +891,7 @@
       "greynote": null,
       "name": "Immortal Resolve",
       "tagHypothesis": "unholy_trio_boss_map",
-      "confidence": "done",
+      "confidence": "Done",
       "remainingWork": null,
       "dropsFrom": "Lord of the Hollows; Messenger of the Hollows; Champion of the Hollows",
       "wikiDisagreements": null,
@@ -772,12 +899,58 @@
       "notes": "3.21: Immortal Resolve can now be found in the Crystal Ore Map.\nAmalgam of Nightmares + Crystal Ore's trio makes me suspect a \"linked boss\" theory. Will need to check if there are any suspicious tags; Amalgam has unholy_trio_combined_boss_map \nThe new Monster Tag unholy_trio_boss_map is applied to only these Monsters in Crystal Ore: {Lord of the Hollows, Messenger of the Hollows, Champion of the Hollows}\nZimzams verified Champion of the Hollows in 3.21"
     }
   ],
+  "The Eternal War": [
+    {
+      "greynote": null,
+      "name": "The Eternal War",
+      "tagHypothesis": "crusader_conqueror_boss",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Baran, The Crusader",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": null
+    },
+    {
+      "greynote": null,
+      "name": "The Eternal War",
+      "tagHypothesis": "hunter_conqueror_boss",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Al-Hezmin, The Hunter",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": null
+    },
+    {
+      "greynote": null,
+      "name": "The Eternal War",
+      "tagHypothesis": "redeemer_conqueror_boss",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Veritania, The Redeemer",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": null
+    },
+    {
+      "greynote": null,
+      "name": "The Eternal War",
+      "tagHypothesis": "warlord_conqueror_boss",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Drox, The Warlord",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": null
+    }
+  ],
   "The Doppelganger": [
     {
       "greynote": "areaSpecific",
       "name": "The Doppelganger",
       "tagHypothesis": "Whakawairua Tuahu (no tag)",
-      "confidence": "ok",
+      "confidence": "OK",
       "remainingWork": null,
       "dropsFrom": "Whakawairua Tuahu",
       "wikiDisagreements": "The Crossroads (A7)",
@@ -788,7 +961,7 @@
       "greynote": null,
       "name": "The Doppelganger",
       "tagHypothesis": "?",
-      "confidence": "none",
+      "confidence": "None",
       "remainingWork": "unclearHypothesis",
       "dropsFrom": "The Crossroads (A7)",
       "wikiDisagreements": null,
@@ -801,7 +974,7 @@
       "greynote": null,
       "name": "The Wolverine",
       "tagHypothesis": "goatman_boss_area",
-      "confidence": "ok",
+      "confidence": "OK",
       "remainingWork": "unclearHypothesis",
       "dropsFrom": "Glacier; Summit; Prisoner's Gate (A6)",
       "wikiDisagreements": "Lair",
@@ -812,7 +985,7 @@
       "greynote": null,
       "name": "The Wolverine",
       "tagHypothesis": "(den_area OR cave_area) & (rigwald_area OR forest_map_area)",
-      "confidence": "low",
+      "confidence": "Low",
       "remainingWork": "unclearHypothesis",
       "dropsFrom": "Lair",
       "wikiDisagreements": "Glacier, Summit, Prisoner's Gate (A6)",
@@ -820,257 +993,12 @@
       "notes": "3.20 patch notes: Added Lair; if Volcano gains snow_mountain_area, may indicate another combo for Lair to fit.\n\nLair has neither `goatman_boss_area` nor `snow_mountain_area`, which means that either hypothesis is incomplete.\nThe Wolverine is probably enabled by multiple different rules.\nThe lack of patch-note mention of The Wolverine in Dark Forest rules out a lot of single-tags for Lair as well.\n\nden_area + cave_area returns Lair, Grotto and Caer Blaidd\n(den_area OR cave_area) + rigwald_area returns only Lair\nNo observations in Grotto in 3.20 (n=1613) or Caer Blaidd (n=88)\nNot in Dark Forest either."
     }
   ],
-  "A Note in the Wind": [
-    {
-      "greynote": null,
-      "name": "A Note in the Wind",
-      "tagHypothesis": "desert_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Dry Sea; Dunes; Desert Spring; Desert; The Oasis",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": "Pillars of Arun",
-      "notes": "If A Note in the Wind drops in Pillars of Arun, then it's `desert_area` instead of `desert_map_area`\n3.20 re-verified in Dunes"
-    },
-    {
-      "greynote": null,
-      "name": "A Note in the Wind",
-      "tagHypothesis": "desert_map_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Dry Sea; Dunes; Desert Spring; Desert",
-      "wikiDisagreements": "The Oasis",
-      "sourcesWithTagButNotOnWiki": "Pillars of Arun",
-      "notes": "Could also be `desert_area`\nDivcord: Desert Map verified by nennas\n3.20 re-verified in Dunes"
-    }
-  ],
-  "The Wretched": [
-    {
-      "greynote": null,
-      "name": "The Wretched",
-      "tagHypothesis": "crypt_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Bone Crypt; Cursed Crypt; The Coward's Trial",
-      "wikiDisagreements": "Cells, Dungeon, Mud Geyser, Overgrown Ruin",
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Need verifications that these Areas are still eligible for The Wretched in 3.18:\n{Cells, Dungeon, Mud Geyser, Overgrown Ruin}\n\nIf Dungeon is eligible, maybe also `prison_area`\nIf Overgrown Ruin is eligible, maybe also `chamber_of_sins_area`\nIf Mud Geyser is eligible, maybe also `fetid_area` or `toxic_pool_area`\n\n\nDivcord: Zimzams tested Cells, n>200, 0 The Wretched -- no longer drops in Cells.\nDivcord: 3.20, Zimzams tested Dungeon, n=288, 0 The Wretched -- no longer drops in Dungeon (conf>>99.9%).\nDivcord: 3.20, Overgrown Ruin, n=95, 0 The Wretched -- no longer drops in Overgrown Ruin (conf>99.9%)."
-    },
-    {
-      "greynote": null,
-      "name": "The Wretched",
-      "tagHypothesis": "necromancer_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Bone Crypt; The Coward's Trial; Acton's Nightmare",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": null
-    },
-    {
-      "greynote": null,
-      "name": "The Wretched",
-      "tagHypothesis": "necropolis_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Necropolis",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Similar to the situation with Grave Knowledge and The Forsaken, Necropolis seems to drop anything which can appear in crypt_area even though it doesn't have that Tag - see necropolis_area quirk."
-    },
-    {
-      "greynote": null,
-      "name": "The Wretched",
-      "tagHypothesis": "mud_geyser_area",
-      "confidence": "done",
-      "remainingWork": "legacyTag",
-      "dropsFrom": null,
-      "wikiDisagreements": "Mud Geyser",
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "In the past, The Wretched was eligible in Mud Geyser. The claim on the wiki is stale, however, and Mud Geyser has not been reverified in a long time. It's likely it is no longer an eligible Area.\n\nDivcord 3.20: testing Bog which is on-Atlas and shares Tags with Mud Geyser (fetid_area, toxic_pool_area). No The Wretched in Bog, confidence >99.9%, so those Tags can't be it.\n\nThe only options are:\n1) The Wretched no longer drops in Mud Geyser either; or\n2) Mud Geyser's special exclusive Tag mud_geyser_area is another eligibility-grantor."
-    }
-  ],
-  "Time-Lost Relic": [
-    {
-      "greynote": null,
-      "name": "Time-Lost Relic",
-      "tagHypothesis": "mine_area",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Flooded Mine; Excavation; Dig; Geode; Crystal Ore; Grotto",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Expedition Logbooks; Flooded Mine; Excavation\n\nDivcord: Crystal Ore verified by Tebec\nDivcord: Geode verified\n\nBesides the Expedition Areas, maybe also mine_area? That would cover Crystal Ore and the legacy location of Excavation. We would need verifications in {Dig, Flooded Mine, Geode}. Dig would distinguish it from cave_area.\n\nVerified Dig\n3.20 patch notes: Added Grotto"
-    },
-    {
-      "greynote": null,
-      "name": "Time-Lost Relic",
-      "tagHypothesis": "expedition_common_remnant_logbook",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": null,
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Also found in all Expedition Areas; any Tag or Area relationship for these...?"
-    }
-  ],
-  "The Eternal War": [
-    {
-      "greynote": null,
-      "name": "The Eternal War",
-      "tagHypothesis": "crusader_conqueror_boss",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Baran, The Crusader",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": null
-    },
-    {
-      "greynote": null,
-      "name": "The Eternal War",
-      "tagHypothesis": "hunter_conqueror_boss",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Al-Hezmin, The Hunter",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": null
-    },
-    {
-      "greynote": null,
-      "name": "The Eternal War",
-      "tagHypothesis": "redeemer_conqueror_boss",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Veritania, The Redeemer",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": null
-    },
-    {
-      "greynote": null,
-      "name": "The Eternal War",
-      "tagHypothesis": "warlord_conqueror_boss",
-      "confidence": "done",
-      "remainingWork": null,
-      "dropsFrom": "Drox, The Warlord",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": null
-    }
-  ],
-  "The Offspring": [
-    {
-      "greynote": null,
-      "name": "The Offspring",
-      "tagHypothesis": "Ryslatha boss",
-      "confidence": "ok",
-      "remainingWork": "unclearHypothesis",
-      "dropsFrom": "Gorulis, Will-Thief; Ryslatha, the Puppet Mistress",
-      "wikiDisagreements": "Murgeth Bogsong, Titan of the Grove",
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Original drop locations; consistent with theme of card."
-    },
-    {
-      "greynote": null,
-      "name": "The Offspring",
-      "tagHypothesis": "nature_boss",
-      "confidence": "low",
-      "remainingWork": "unclearHypothesis",
-      "dropsFrom": "Gorulis, Will-Thief; Murgeth Bogsong",
-      "wikiDisagreements": "Ryslatha, the Puppet Mistress; Titan of the Grove",
-      "sourcesWithTagButNotOnWiki": "Elida Blisterclaw (Bramble Valley); Oshabi",
-      "notes": "3.18 patch notes say:\nSome Divination Cards have found new homes as a result of these Atlas Changes:\nThe Offspring can now drop in the Peninsula Map.\n\nRyslatha and Gorulis have `nature_boss`, a possible Monster Tag candidate.\nVerified Murgeth Bogsong (Stagnation); appears to be boss only\nAlso not dropping from Peninsula cards (1194 card sample, 6 maps) - likely to be boss only"
-    },
-    {
-      "greynote": null,
-      "name": "The Offspring",
-      "tagHypothesis": null,
-      "confidence": "low",
-      "remainingWork": "noHypothesis",
-      "dropsFrom": null,
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": "Titan of the Grove",
-      "notes": null
-    }
-  ],
-  "The Price of Prescience": [
-    {
-      "greynote": null,
-      "name": "The Price of Prescience",
-      "tagHypothesis": "crusader_conqueror_boss",
-      "confidence": "low",
-      "remainingWork": "unclearHypothesis",
-      "dropsFrom": "Baran, The Crusader",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Additional drop conditions? Seems odd"
-    },
-    {
-      "greynote": null,
-      "name": "The Price of Prescience",
-      "tagHypothesis": "hunter_conqueror_boss",
-      "confidence": "low",
-      "remainingWork": "unclearHypothesis",
-      "dropsFrom": "Al-Hezmin, The Hunter",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Additional drop conditions? Seems odd"
-    },
-    {
-      "greynote": null,
-      "name": "The Price of Prescience",
-      "tagHypothesis": "redeemer_conqueror_boss",
-      "confidence": "low",
-      "remainingWork": "unclearHypothesis",
-      "dropsFrom": "Veritania, The Redeemer",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Additional drop conditions? Seems odd"
-    },
-    {
-      "greynote": null,
-      "name": "The Price of Prescience",
-      "tagHypothesis": "warlord_conqueror_boss",
-      "confidence": "low",
-      "remainingWork": "unclearHypothesis",
-      "dropsFrom": "Drox, The Warlord",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": null,
-      "notes": "Additional drop conditions? Seems odd"
-    }
-  ],
-  "The Wedding Gift": [
-    {
-      "greynote": null,
-      "name": "The Wedding Gift",
-      "tagHypothesis": "arakaali_area OR ?",
-      "confidence": "low",
-      "remainingWork": "unclearHypothesis",
-      "dropsFrom": "Sunken City",
-      "wikiDisagreements": "Overgrown Ruin",
-      "sourcesWithTagButNotOnWiki": "The Temple of Decay Level 2",
-      "notes": "Divcord: 3.20 Sunken City from a Blight Pump explosion -- likely confirms this as a natural Area drop in `arakaali_area` Areas\n\nDivcord: 3.20 Toxic Sewer screenshot by Boltonsquad; Toxic Sewer and Sunken City both have `spider_boss_area`, which may be a governing Tag -- but this may have been \"a very unluckily misleading Monster Conversion\"\nTo fully verify `spider_boss_area`, we'd need to observe The Wedding Gift in additional Areas.\nRemaining verifications for `spider_boss_area`:\nSpider Lair, Arachnid Nest, Arachnid Tomb, Jungle Valley (off-Atlas for 3.20)\n\nDivcord: 3.20, players tested many `spider_boss_area` Areas with no hits of The Wedding Gift. See Divcord for full natural Card drop breakdowns from players' samples. Looking at solely The Web:\nBambam: 137 The Web in T16 Toxic Sewer\nSanctia: 295 The Web in T16 Toxic Sewer\npoorFishwife: 389 The Web in T16 Arachnid Tomb\nElinvynia: 634 The Web in T16 Jungle Valley\n\nThese cannot be directly summed due to different Card weights in those Areas, but it's still very low likelihood that all these attempts would have produced zero The Wedding Gift if `spider_boss_area` were a governing Tag.\nFor now these conclusions seem solid:\n* Boltonsquad's drop was \"a very unluckily misleading Monster Conversion\";\n* The sole governing Tag for The Wedding Gift is `arakaali_area`, as originally guessed.\n\nMaybe we'll get surprised in the future, but for now I think this one should be marked Done."
-    },
-    {
-      "greynote": null,
-      "name": "The Wedding Gift",
-      "tagHypothesis": "spider_boss_area",
-      "confidence": "low",
-      "remainingWork": "unclearHypothesis",
-      "dropsFrom": "Sunken City",
-      "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": "Spider Lair, Arachnid Nest, Arachnid Tomb, Jungle Valley, (Overgrown Ruin)",
-      "notes": "Currently we are fairly confident the original tag is arakaali_area, with a lower chance for spider_boss_area. Overgrown Ruin's tags in 3.21 will be key, seems unlikely to get arakaali_area, but more likely to get spider_boss_area, due to Akaveesh (Black Death, Pain Unending). "
-    }
-  ],
   "The Price of Protection": [
     {
       "greynote": null,
       "name": "The Price of Protection",
       "tagHypothesis": "invasion_boss",
-      "confidence": "done",
+      "confidence": "Done",
       "remainingWork": null,
       "dropsFrom": null,
       "wikiDisagreements": null,
@@ -1081,7 +1009,7 @@
       "greynote": null,
       "name": "The Price of Protection",
       "tagHypothesis": "vaalsidearea_boss",
-      "confidence": "done",
+      "confidence": "Done",
       "remainingWork": null,
       "dropsFrom": null,
       "wikiDisagreements": null,
@@ -1089,28 +1017,76 @@
       "notes": "also includes Invasion Bosses"
     }
   ],
-  "The Porcupine": [
+  "Call to the First Ones": [
     {
       "greynote": null,
-      "name": "The Porcupine",
-      "tagHypothesis": "garden_area",
-      "confidence": "done",
-      "remainingWork": "unclearHypothesis",
-      "dropsFrom": "Courtyard; Gardens; Orchard; Terrace; The High Gardens",
-      "wikiDisagreements": "Plaza",
+      "name": "Call to the First Ones",
+      "tagHypothesis": "dark_forest_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Dark Forest; Bramble Valley; Forbidden Woods; The Northern Forest (A7)",
+      "wikiDisagreements": null,
       "sourcesWithTagButNotOnWiki": null,
-      "notes": "Incomplete hypothesis. See below"
+      "notes": "Divcord: Dark Forest verified by Zimzams\n\nIf someone verifies a drop in Lair, that would indicate `rigwald_area`\nCould also be `dark_forest_area` but less likely given theme\n\nDivcord: In 3.19, CommissarTyr tracked 4 Call to the First Ones in Bramble Valley, which implies `dark_forest_area` is probably correct; remaining to verify: none\n\nDivcord: Thicket verified. Might also key off of `thicket_area` ? Thicket has `forest_map_area` but not `dark_forest_area`.\n\nDivcord: Forbidden Woods verified 3.19"
     },
     {
       "greynote": null,
-      "name": "The Porcupine",
-      "tagHypothesis": "garden_area OR (labyrinth_tileset_area & NOT indoors_area)",
-      "confidence": "done",
-      "remainingWork": "unclearHypothesis",
-      "dropsFrom": "Courtyard; Gardens; Orchard; Plaza; Terrace; The High Gardens",
+      "name": "Call to the First Ones",
+      "tagHypothesis": "thicket_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Thicket; The Dread Thicket (A7)",
       "wikiDisagreements": null,
-      "sourcesWithTagButNotOnWiki": "Chateau, Conservatory",
-      "notes": "Related to Porcupine Goliath spawn areas, but Porcupines do not necessarily need to be in the map (desecrate pool?)\n\nDivcord: Plaza verified by nennas, which does not have `garden_area`, further supporting association with Porcupine Goliath instead of just Area Tags\nDivcord: Terrace verified by nennas\n\nJasmine's old comments are still true re: The Porcupine being associated with natural Porcupine Goliaths spawns instead of just a single Area Tag.\nBecause of nennas's earlier verification in Plaza, we know The Porcupine is not governed solely by `garden_area` or `labyrinth_tileset_area`.\n\nAre there any Areas without either Tag that naturally spawn Porcupine Goliaths?\nOr maybe it's as simple as *both* of those Tags enabling The Porcupine...? If {Chateau, Conservatory} also have The Porcupine as an eligible natural Card, and no other Maps do, maybe that's the answer...?\n\nDisproved in Chateau with 367 natural card drops; not simply labyrinth_tileset_area.\nDivcord: 3.21, Zimzams tested Conservatory; 71 natural Card drops, 0 hits.\n\nMonster-specific hypotheses are not common, so looking more at area tags, \"garden_area OR (labyrinth_tileset_area & NOT indoors_area)\" does fit the bill and includes Plaza on top of the garden_area maps. Plaza has very few tags to work with otherwise"
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Divcord: Verified that `thicket_area` permits Call to the First Ones, but does NOT permit other `dark_forest_area` Cards. Thus `thicket_area` does not inherit `dark_forest_area`. Call to the First Ones is simply governed by two separate Tags.\n3.21: Krolya verified Dread Thicket A7."
+    }
+  ],
+  "The Void": [
+    {
+      "greynote": "areaSpecific",
+      "name": "The Void",
+      "tagHypothesis": null,
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": null,
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "The Shaper's Realm"
+    },
+    {
+      "greynote": null,
+      "name": "The Void",
+      "tagHypothesis": null,
+      "confidence": "None",
+      "remainingWork": "legacyTag",
+      "dropsFrom": null,
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "Dropped from Park in a Kirac Mission as the stack of cards. Park has no area-specific cards. Perhaps another weird Kirac Mission mechanic?\nRequires reconfirmation of Park Kirac Map or other tag-less maps\nAfter more testing with Kirac missions - conclusion: dropping The Void from any source completes the mission; may not be Park specific."
+    }
+  ],
+  "The Doctor": [
+    {
+      "greynote": null,
+      "name": "The Doctor",
+      "tagHypothesis": "alira_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Burial Chambers; Spider Forest",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": null
+    },
+    {
+      "greynote": null,
+      "name": "The Doctor",
+      "tagHypothesis": "doedre_map_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "The Putrid Cloister; Sepulchre; Waste Pool; Phantasmagoria",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "3.21: The Doctor can now be found in the The Putrid Cloister, Sepulchre, Waste Pool, and Phantasmagoria Maps.\nThese Areas all received the new doedre_map_area Tag. They are the only four Areas with that Tag."
     }
   ],
   "The Deep Ones": [
@@ -1118,7 +1094,7 @@
       "greynote": null,
       "name": "The Deep Ones",
       "tagHypothesis": "reef_area",
-      "confidence": "done",
+      "confidence": "Done",
       "remainingWork": "legacyTag",
       "dropsFrom": "Coves; Reef; Coral Ruins",
       "wikiDisagreements": null,
@@ -1129,12 +1105,36 @@
       "greynote": null,
       "name": "The Deep Ones",
       "tagHypothesis": "ship_graveyard_area",
-      "confidence": "done",
+      "confidence": "Done",
       "remainingWork": null,
       "dropsFrom": "Coves; Reef; Strand; Whakawairua Tuahu; The Brine King's Reef",
       "wikiDisagreements": "Coral Ruins",
       "sourcesWithTagButNotOnWiki": null,
       "notes": "3.19: \"The Deep Ones can now be found in the Strand Map and the Whakawhairua Tuahu Unique Map.\"\nStrand and Whaka both gained the \"ship_graveyard_area\" tag, but not \"reef_area\". Is Coral Ruins still correct? Or is ship_graveyard_area a subset of reef_area (therefore automatically corresponding to this card as well?)\nAlternatively, could be reef_area OR ship_graveyard_area.\n3.21: Disproved Coral Ruins with 99% confidence."
+    }
+  ],
+  "The Witch": [
+    {
+      "greynote": null,
+      "name": "The Witch",
+      "tagHypothesis": "alira_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "Burial Chambers; Spider Forest",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": null
+    },
+    {
+      "greynote": null,
+      "name": "The Witch",
+      "tagHypothesis": "doedre_map_area",
+      "confidence": "Done",
+      "remainingWork": null,
+      "dropsFrom": "The Putrid Cloister; Sepulchre; Waste Pool; Phantasmagoria",
+      "wikiDisagreements": null,
+      "sourcesWithTagButNotOnWiki": null,
+      "notes": "3.21: The Witch can now be found in the The Putrid Cloister, Sepulchre, Waste Pool, and Phantasmagoria Maps.\nThese Areas all received the new doedre_map_area Tag. They are the only four Areas with that Tag."
     }
   ]
 }

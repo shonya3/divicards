@@ -1,0 +1,7124 @@
+{
+  "Justified Ambition": [
+    {
+      "type": "elderslayer",
+      "name": "Baran, The Crusader"
+    },
+    {
+      "type": "elderslayer",
+      "name": "Veritania, The Redeemer"
+    },
+    {
+      "type": "elderslayer",
+      "name": "Al-Hezmin, The Hunter"
+    },
+    {
+      "type": "elderslayer",
+      "name": "Drox, The Warlord"
+    }
+  ],
+  "The Insatiable": [
+    {
+      "type": "map",
+      "name": "Carcass"
+    },
+    {
+      "type": "map",
+      "name": "Core"
+    },
+    {
+      "type": "acts",
+      "name": "The Rotting Core"
+    }
+  ],
+  "Death": [
+    {
+      "type": "map",
+      "name": "Bog"
+    },
+    {
+      "type": "map",
+      "name": "Marshes"
+    },
+    {
+      "type": "map",
+      "name": "Mud Geyser"
+    }
+  ],
+  "The Journalist": [
+    {
+      "type": "map",
+      "name": "City Square"
+    },
+    {
+      "type": "map",
+      "name": "Crimson Temple"
+    },
+    {
+      "type": "map",
+      "name": "Defiled Cathedral"
+    },
+    {
+      "type": "map",
+      "name": "Haunted Mansion"
+    },
+    {
+      "type": "map",
+      "name": "Lookout"
+    },
+    {
+      "type": "map",
+      "name": "Silo"
+    },
+    {
+      "type": "map",
+      "name": "Alleyways"
+    }
+  ],
+  "The Jester": [
+    {
+      "type": "rogueExile",
+      "name": "Ash Lessard"
+    }
+  ],
+  "The Insane Cat": [
+    {
+      "type": "mapsOnly",
+      "name": "Omniphobia, Fear Manifest (maps only)"
+    },
+    {
+      "type": "mapsOnly",
+      "name": "Kosis, The Revelation (maps only)"
+    }
+  ],
+  "The Gemcutter": [
+    {
+      "type": "Strongbox",
+      "name": "Gemcutter's Strongbox"
+    }
+  ],
+  "Hubris": [
+    {
+      "type": "Strongbox",
+      "name": "Jeweller's Strongbox"
+    }
+  ],
+  "Friendship": [
+    {
+      "type": "mapboss",
+      "name": "Argus"
+    }
+  ],
+  "Volatile Power": [
+    {
+      "type": "map",
+      "name": "Crystal Ore"
+    },
+    {
+      "type": "map",
+      "name": "Dig"
+    },
+    {
+      "type": "map",
+      "name": "Excavation"
+    },
+    {
+      "type": "map",
+      "name": "Flooded Mine"
+    },
+    {
+      "type": "map",
+      "name": "Geode"
+    },
+    {
+      "type": "map",
+      "name": "Grotto"
+    },
+    {
+      "type": "acts",
+      "name": "The Crystal Veins"
+    },
+    {
+      "type": "acts",
+      "name": "The Mines Level 1"
+    },
+    {
+      "type": "acts",
+      "name": "The Mines Level 2"
+    },
+    {
+      "type": "acts",
+      "name": "The Quarry"
+    },
+    {
+      "type": "acts",
+      "name": "The Tunnel"
+    }
+  ],
+  "The Standoff": [
+    {
+      "type": "map",
+      "name": "Crater"
+    },
+    {
+      "type": "map",
+      "name": "Lava Chamber"
+    },
+    {
+      "type": "map",
+      "name": "Lava Lake"
+    },
+    {
+      "type": "map",
+      "name": "Forge of the Phoenix"
+    },
+    {
+      "type": "map",
+      "name": "Estuary"
+    },
+    {
+      "type": "map",
+      "name": "Silo"
+    },
+    {
+      "type": "acts",
+      "name": "The Ruined Square"
+    },
+    {
+      "type": "acts",
+      "name": "The Torched Courts (A5/A10)"
+    },
+    {
+      "type": "acts",
+      "name": "The Crematorium"
+    },
+    {
+      "type": "acts",
+      "name": "The Ravaged Square"
+    }
+  ],
+  "The Side Quest": [
+    {
+      "type": "map",
+      "name": "Alleyways"
+    },
+    {
+      "type": "map",
+      "name": "Armoury"
+    },
+    {
+      "type": "map",
+      "name": "Mineral Pools"
+    },
+    {
+      "type": "map",
+      "name": "Infested Valley"
+    },
+    {
+      "type": "map",
+      "name": "Castle Ruins"
+    },
+    {
+      "type": "map",
+      "name": "Forking River"
+    },
+    {
+      "type": "map",
+      "name": "Arachnid Tomb"
+    },
+    {
+      "type": "map",
+      "name": "Primordial Blocks"
+    },
+    {
+      "type": "map",
+      "name": "Iceberg"
+    },
+    {
+      "type": "map",
+      "name": "Siege"
+    }
+  ],
+  "The Oath": [
+    {
+      "type": "map",
+      "name": "Carcass"
+    },
+    {
+      "type": "map",
+      "name": "Core"
+    },
+    {
+      "type": "map",
+      "name": "Malformation"
+    },
+    {
+      "type": "map",
+      "name": "Phantasmagoria"
+    },
+    {
+      "type": "acts",
+      "name": "The Belly of the Beast"
+    },
+    {
+      "type": "acts",
+      "name": "The Rotting Core"
+    }
+  ],
+  "The Incantation": [
+    {
+      "type": "map",
+      "name": "Burial Chambers"
+    },
+    {
+      "type": "map",
+      "name": "Spider Forest"
+    },
+    {
+      "type": "map",
+      "name": "The Putrid Cloister"
+    },
+    {
+      "type": "map",
+      "name": "Sepulchre"
+    },
+    {
+      "type": "map",
+      "name": "Waste Pool"
+    },
+    {
+      "type": "map",
+      "name": "Phantasmagoria"
+    }
+  ],
+  "The Obscured": [
+    {
+      "type": "allAbyssMonsters"
+    }
+  ],
+  "Brother's Stash": [
+    {
+      "type": "map",
+      "name": "Cemetery"
+    },
+    {
+      "type": "map",
+      "name": "Graveyard"
+    },
+    {
+      "type": "map",
+      "name": "Grave Trough"
+    }
+  ],
+  "No Traces": [
+    {
+      "type": "map",
+      "name": "Mausoleum"
+    },
+    {
+      "type": "map",
+      "name": "Relic Chambers"
+    },
+    {
+      "type": "map",
+      "name": "Sepulchre"
+    }
+  ],
+  "The Wilted Rose": [
+    {
+      "type": "map",
+      "name": "Acton's Nightmare"
+    }
+  ],
+  "The Dreamer": [
+    {
+      "type": "mapboss",
+      "name": "Entity of the Void"
+    }
+  ],
+  "The Destination": [
+    {
+      "type": "map",
+      "name": "Tropical Island"
+    },
+    {
+      "type": "map",
+      "name": "Beach"
+    },
+    {
+      "type": "map",
+      "name": "Shore"
+    },
+    {
+      "type": "map",
+      "name": "Fungal Hollow"
+    }
+  ],
+  "The Brittle Emperor": [
+    {
+      "type": "mapboss",
+      "name": "The Brittle Emperor"
+    },
+    {
+      "type": "mapboss",
+      "name": "Voll, Emperor of Purity"
+    }
+  ],
+  "The Shepherd's Sandals": [
+    {
+      "type": "map",
+      "name": "Grotto"
+    },
+    {
+      "type": "map",
+      "name": "Lair"
+    },
+    {
+      "type": "map",
+      "name": "Barrows"
+    },
+    {
+      "type": "mapboss",
+      "name": "Caer Blaidd, Wolfpack's Den"
+    }
+  ],
+  "Abandoned Wealth": [
+    {
+      "type": "map",
+      "name": "Mao Kun"
+    }
+  ],
+  "The Eldritch Decay": [
+    {
+      "type": "elderGuardianBoss",
+      "name": "The Enslaver"
+    },
+    {
+      "type": "elderGuardianBoss",
+      "name": "The Eradicator"
+    },
+    {
+      "type": "elderGuardianBoss",
+      "name": "The Constrictor"
+    },
+    {
+      "type": "elderGuardianBoss",
+      "name": "The Purifier"
+    }
+  ],
+  "The Adventuring Spirit": [
+    {
+      "type": "map",
+      "name": "Vaults of Atziri"
+    }
+  ],
+  "The Messenger": [
+    {
+      "type": "map",
+      "name": "Port"
+    },
+    {
+      "type": "map",
+      "name": "Crystal Ore"
+    }
+  ],
+  "The Hoarder": [
+    {
+      "type": "map",
+      "name": "Maelström of Chaos"
+    },
+    {
+      "type": "map",
+      "name": "Underground Sea"
+    },
+    {
+      "type": "map",
+      "name": "Vault"
+    },
+    {
+      "type": "map",
+      "name": "Vaults of Atziri"
+    },
+    {
+      "type": "map",
+      "name": "Mineral Pools"
+    }
+  ],
+  "Last Hope": [
+    {
+      "type": "map",
+      "name": "Vaal Temple"
+    }
+  ],
+  "The Twilight Moon": [
+    {
+      "type": "map",
+      "name": "Cold River"
+    },
+    {
+      "type": "map",
+      "name": "Moon Temple"
+    },
+    {
+      "type": "map",
+      "name": "Temple"
+    }
+  ],
+  "The Mercenary": [
+    {
+      "type": "map",
+      "name": "Castle Ruins"
+    },
+    {
+      "type": "map",
+      "name": "Strand"
+    },
+    {
+      "type": "acts",
+      "name": "The Broken Bridge"
+    }
+  ],
+  "Wealth and Power": [
+    {
+      "type": "map",
+      "name": "Moon Temple"
+    },
+    {
+      "type": "map",
+      "name": "Cold River"
+    }
+  ],
+  "Ambitious Obsession": [
+    {
+      "type": "mapboss",
+      "name": "Ara, Sister of Light"
+    },
+    {
+      "type": "mapboss",
+      "name": "Armala, the Widow"
+    },
+    {
+      "type": "mapboss",
+      "name": "Drek, Apex Hunter"
+    },
+    {
+      "type": "mapboss",
+      "name": "Erebix, Light's Bane"
+    },
+    {
+      "type": "mapboss",
+      "name": "Gorulis, Will-Thief"
+    },
+    {
+      "type": "mapboss",
+      "name": "Khor, Sister of Shadows"
+    },
+    {
+      "type": "mapboss",
+      "name": "Mephod, the Earth Scorcher"
+    },
+    {
+      "type": "mapboss",
+      "name": "Nassar, Lion of the Seas"
+    },
+    {
+      "type": "mapboss",
+      "name": "Stalker of the Endless Dunes"
+    },
+    {
+      "type": "mapboss",
+      "name": "Tahsin, Warmaker"
+    },
+    {
+      "type": "mapboss",
+      "name": "Terror of the Infinite Drifts"
+    },
+    {
+      "type": "mapboss",
+      "name": "Varhesh, Shimmering Aberration"
+    }
+  ],
+  "Lucky Connections": [
+    {
+      "type": "map",
+      "name": "Pier"
+    },
+    {
+      "type": "map",
+      "name": "Port"
+    },
+    {
+      "type": "map",
+      "name": "Shipyard"
+    },
+    {
+      "type": "map",
+      "name": "Wharf"
+    }
+  ],
+  "The Poet": [
+    {
+      "type": "map",
+      "name": "Alleyways"
+    },
+    {
+      "type": "map",
+      "name": "Arcade"
+    },
+    {
+      "type": "map",
+      "name": "Bazaar"
+    },
+    {
+      "type": "map",
+      "name": "Port"
+    },
+    {
+      "type": "acts",
+      "name": "The Marketplace"
+    },
+    {
+      "type": "acts",
+      "name": "The Quay"
+    }
+  ],
+  "Further Invention": [
+    {
+      "type": "map",
+      "name": "Vault"
+    },
+    {
+      "type": "map",
+      "name": "Foundry"
+    }
+  ],
+  "Glimmer of Hope": [
+    {
+      "type": "map",
+      "name": "Flooded Mine"
+    },
+    {
+      "type": "map",
+      "name": "Mineral Pools"
+    },
+    {
+      "type": "map",
+      "name": "Underground Sea"
+    },
+    {
+      "type": "acts",
+      "name": "The Cavern of Anger (A6)"
+    }
+  ],
+  "The Beast": [
+    {
+      "type": "acts",
+      "name": "The Belly of the Beast (A4/A9)"
+    }
+  ],
+  "The Web": [
+    {
+      "type": "map",
+      "name": "Arachnid Nest"
+    },
+    {
+      "type": "map",
+      "name": "Arachnid Tomb"
+    },
+    {
+      "type": "map",
+      "name": "Jungle Valley"
+    },
+    {
+      "type": "map",
+      "name": "Spider Lair"
+    },
+    {
+      "type": "map",
+      "name": "Toxic Sewer"
+    },
+    {
+      "type": "map",
+      "name": "Sunken City"
+    }
+  ],
+  "The World Eater": [
+    {
+      "type": "mapboss",
+      "name": "Ghorr, the Grasping Maw"
+    }
+  ],
+  "The Porcupine": [
+    {
+      "type": "map",
+      "name": "Courtyard"
+    },
+    {
+      "type": "map",
+      "name": "Gardens"
+    },
+    {
+      "type": "map",
+      "name": "Orchard"
+    },
+    {
+      "type": "map",
+      "name": "Terrace"
+    },
+    {
+      "type": "acts",
+      "name": "The High Gardens"
+    },
+    {
+      "type": "map",
+      "name": "Courtyard"
+    },
+    {
+      "type": "map",
+      "name": "Gardens"
+    },
+    {
+      "type": "map",
+      "name": "Orchard"
+    },
+    {
+      "type": "map",
+      "name": "Plaza"
+    },
+    {
+      "type": "map",
+      "name": "Terrace"
+    },
+    {
+      "type": "acts",
+      "name": "The High Gardens"
+    }
+  ],
+  "Peaceful Moments": [
+    {
+      "type": "map",
+      "name": "Gardens"
+    },
+    {
+      "type": "map",
+      "name": "Courtyard"
+    },
+    {
+      "type": "map",
+      "name": "Orchard"
+    },
+    {
+      "type": "map",
+      "name": "Terrace"
+    }
+  ],
+  "The Forward Gaze": [
+    {
+      "type": "map",
+      "name": "Doryani's Machinarium"
+    }
+  ],
+  "The Gladiator": [
+    {
+      "type": "map",
+      "name": "Arena"
+    },
+    {
+      "type": "map",
+      "name": "Pit of the Chimera"
+    },
+    {
+      "type": "map",
+      "name": "Colosseum Map"
+    },
+    {
+      "type": "map",
+      "name": "Pit"
+    },
+    {
+      "type": "acts",
+      "name": "The Slums"
+    },
+    {
+      "type": "acts",
+      "name": "The Sarn Ramparts"
+    },
+    {
+      "type": "acts",
+      "name": "The Grain Gate"
+    }
+  ],
+  "The Witch": [
+    {
+      "type": "map",
+      "name": "Burial Chambers"
+    },
+    {
+      "type": "map",
+      "name": "Spider Forest"
+    },
+    {
+      "type": "map",
+      "name": "The Putrid Cloister"
+    },
+    {
+      "type": "map",
+      "name": "Sepulchre"
+    },
+    {
+      "type": "map",
+      "name": "Waste Pool"
+    },
+    {
+      "type": "map",
+      "name": "Phantasmagoria"
+    }
+  ],
+  "The Soul": [
+    {
+      "type": "map",
+      "name": "Cells"
+    },
+    {
+      "type": "map",
+      "name": "Overgrown Shrine"
+    },
+    {
+      "type": "map",
+      "name": "Sepulchre"
+    },
+    {
+      "type": "map",
+      "name": "Tower"
+    },
+    {
+      "type": "map",
+      "name": "Waste Pool"
+    },
+    {
+      "type": "map",
+      "name": "Core"
+    },
+    {
+      "type": "map",
+      "name": "Museum"
+    },
+    {
+      "type": "map",
+      "name": "Phantasmagoria"
+    }
+  ],
+  "Cameria's Cut": [
+    {
+      "type": "syndicateMember",
+      "name": "Cameria the Coldblooded"
+    }
+  ],
+  "Eternal Bonds": [
+    {
+      "type": "Chest",
+      "name": "Map Reward Heist Chests"
+    }
+  ],
+  "The Eye of the Dragon": [
+    {
+      "type": "map",
+      "name": "Sulphur Vents"
+    },
+    {
+      "type": "map",
+      "name": "Forge of the Phoenix"
+    },
+    {
+      "type": "acts",
+      "name": "The Boiling Lake"
+    }
+  ],
+  "Light and Truth": [
+    {
+      "type": "map",
+      "name": "Palace"
+    },
+    {
+      "type": "map",
+      "name": "Residence"
+    },
+    {
+      "type": "map",
+      "name": "Villa"
+    },
+    {
+      "type": "acts",
+      "name": "The Upper Sceptre of God"
+    }
+  ],
+  "The Shieldbearer": [
+    {
+      "type": "mapboss",
+      "name": "Uber Elder"
+    }
+  ],
+  "The Skeleton": [
+    {
+      "type": "mapboss",
+      "name": "Fairgraves, Never Dying"
+    }
+  ],
+  "Broken Promises": [
+    {
+      "type": "mapboss",
+      "name": "Tolman, the Exhumer"
+    },
+    {
+      "type": "mapboss",
+      "name": "Eater of Souls"
+    }
+  ],
+  "Call to the First Ones": [
+    {
+      "type": "map",
+      "name": "Dark Forest"
+    },
+    {
+      "type": "map",
+      "name": "Bramble Valley"
+    },
+    {
+      "type": "map",
+      "name": "Forbidden Woods"
+    },
+    {
+      "type": "acts",
+      "name": "The Northern Forest (A7)"
+    },
+    {
+      "type": "map",
+      "name": "Thicket"
+    },
+    {
+      "type": "acts",
+      "name": "The Dread Thicket (A7)"
+    }
+  ],
+  "The Dreamland": [
+    {
+      "type": "Strongbox",
+      "name": "Cartographer's Strongbox"
+    }
+  ],
+  "The Price of Prescience": [
+    {
+      "type": "elderslayer",
+      "name": "Baran, The Crusader"
+    },
+    {
+      "type": "elderslayer",
+      "name": "Al-Hezmin, The Hunter"
+    },
+    {
+      "type": "elderslayer",
+      "name": "Veritania, The Redeemer"
+    },
+    {
+      "type": "elderslayer",
+      "name": "Drox, The Warlord"
+    }
+  ],
+  "Sambodhi's Wisdom": [
+    {
+      "type": "map",
+      "name": "Dunes"
+    }
+  ],
+  "Anarchy's Price": [
+    {
+      "type": "allRogueExiles"
+    }
+  ],
+  "The Formless Sea": [
+    {
+      "type": "map",
+      "name": "Reef"
+    },
+    {
+      "type": "map",
+      "name": "Coves"
+    },
+    {
+      "type": "map",
+      "name": "Strand"
+    },
+    {
+      "type": "map",
+      "name": "Whakawairua Tuahu"
+    }
+  ],
+  "The Cataclysm": [
+    {
+      "type": "allVaalSideAreas"
+    }
+  ],
+  "The Saint's Treasure": [
+    {
+      "type": "map",
+      "name": "Alleyways"
+    },
+    {
+      "type": "map",
+      "name": "Port"
+    },
+    {
+      "type": "map",
+      "name": "Arcade"
+    },
+    {
+      "type": "map",
+      "name": "Bazaar"
+    },
+    {
+      "type": "map",
+      "name": "Ghetto"
+    },
+    {
+      "type": "map",
+      "name": "Precinct"
+    }
+  ],
+  "Unchained": [
+    {
+      "type": "map",
+      "name": "Pit of the Chimera"
+    },
+    {
+      "type": "map",
+      "name": "Pit"
+    },
+    {
+      "type": "map",
+      "name": "Arena"
+    },
+    {
+      "type": "map",
+      "name": "Colosseum"
+    }
+  ],
+  "Imperfect Memories": [
+    {
+      "type": "mapboss",
+      "name": "Venarius"
+    }
+  ],
+  "Shard of Fate": [
+    {
+      "type": "map",
+      "name": "Overgrown Ruin"
+    },
+    {
+      "type": "map",
+      "name": "Overgrown Shrine"
+    },
+    {
+      "type": "acts",
+      "name": "The Chamber of Sins Level 1/2 (A7)"
+    }
+  ],
+  "The Aesthete": [
+    {
+      "type": "actBoss",
+      "name": "Reassembled Brutus"
+    },
+    {
+      "type": "actBoss",
+      "name": "Shavronne, Unbound"
+    },
+    {
+      "type": "mapboss",
+      "name": "Bazur"
+    },
+    {
+      "type": "mapboss",
+      "name": "Gisale, Thought Thief"
+    },
+    {
+      "type": "mapboss",
+      "name": "Prodigy of Darkness"
+    },
+    {
+      "type": "mapboss",
+      "name": "Shavronne the Sickening"
+    },
+    {
+      "type": "mapboss",
+      "name": "Amalgam of Nightmares"
+    }
+  ],
+  "The Deceiver": [
+    {
+      "type": "map",
+      "name": "Arena"
+    },
+    {
+      "type": "map",
+      "name": "Colosseum"
+    },
+    {
+      "type": "map",
+      "name": "Racecourse"
+    },
+    {
+      "type": "acts",
+      "name": "The Grand Arena"
+    }
+  ],
+  "The Fox in the Brambles": [
+    {
+      "type": "map",
+      "name": "Courtyard"
+    },
+    {
+      "type": "map",
+      "name": "Gardens"
+    },
+    {
+      "type": "map",
+      "name": "Terrace"
+    },
+    {
+      "type": "map",
+      "name": "Orchard"
+    }
+  ],
+  "The Catalyst": [
+    {
+      "type": "map",
+      "name": "Maze"
+    },
+    {
+      "type": "map",
+      "name": "Vaal Pyramid"
+    },
+    {
+      "type": "map",
+      "name": "Vaults of Atziri"
+    },
+    {
+      "type": "map",
+      "name": "Vaal Temple"
+    },
+    {
+      "type": "map",
+      "name": "Doryani's Machinarium"
+    },
+    {
+      "type": "acts",
+      "name": "The Temple of Decay Level 1/2"
+    },
+    {
+      "type": "acts",
+      "name": "The Ancient Pyramid"
+    },
+    {
+      "type": "map",
+      "name": "Ancient City"
+    },
+    {
+      "type": "acts",
+      "name": "The Vaal City"
+    },
+    {
+      "type": "acts",
+      "name": "The Causeway"
+    }
+  ],
+  "Underground Forest": [
+    {
+      "type": "Chest",
+      "name": "Delve Interactables behind Fractured Wall"
+    }
+  ],
+  "Luminous Trove": [
+    {
+      "type": "mapboss",
+      "name": "Aul, the Crystal King"
+    }
+  ],
+  "Akil's Prophecy": [
+    {
+      "type": "allIncursionArchitectsInAlvaMission"
+    }
+  ],
+  "Bowyer's Dream": [
+    {
+      "type": "mapboss",
+      "name": "Lord of the Ashen Arrow"
+    },
+    {
+      "type": "mapboss",
+      "name": "Steelpoint the Avenger"
+    },
+    {
+      "type": "mapboss",
+      "name": "Mirage of Bones"
+    },
+    {
+      "type": "mapboss",
+      "name": "Stonebeak, Battle Fowl"
+    }
+  ],
+  "The Rabbit's Foot": [
+    {
+      "type": "map",
+      "name": "Bone Crypt"
+    },
+    {
+      "type": "map",
+      "name": "Cursed Crypt"
+    },
+    {
+      "type": "map",
+      "name": "The Coward's Trial"
+    }
+  ],
+  "A Modest Request": [
+    {
+      "type": "mapboss",
+      "name": "The Hallowed Husk"
+    },
+    {
+      "type": "mapboss",
+      "name": "The High Templar"
+    },
+    {
+      "type": "mapboss",
+      "name": "Nightmare's Omen"
+    },
+    {
+      "type": "mapboss",
+      "name": "Eater of Souls"
+    }
+  ],
+  "Acclimatisation": [
+    {
+      "type": "map",
+      "name": "Desert Spring"
+    },
+    {
+      "type": "map",
+      "name": "Dunes"
+    },
+    {
+      "type": "map",
+      "name": "Dry Sea"
+    },
+    {
+      "type": "map",
+      "name": "Desert"
+    }
+  ],
+  "The Penitent": [
+    {
+      "type": "map",
+      "name": "Cells"
+    },
+    {
+      "type": "map",
+      "name": "Dungeon"
+    },
+    {
+      "type": "map",
+      "name": "Pen"
+    },
+    {
+      "type": "map",
+      "name": "Cage"
+    }
+  ],
+  "The Sun": [
+    {
+      "type": "map",
+      "name": "The Twilight Temple"
+    },
+    {
+      "type": "map",
+      "name": "Temple"
+    },
+    {
+      "type": "map",
+      "name": "Cold River"
+    },
+    {
+      "type": "acts",
+      "name": "The Harbour Bridge"
+    },
+    {
+      "type": "acts",
+      "name": "The Solaris Temple Level 1 (A8)"
+    },
+    {
+      "type": "acts",
+      "name": "The Solaris Temple Level 2 (A8)"
+    }
+  ],
+  "The Demon": [
+    {
+      "type": "mapboss",
+      "name": "Kitava, The Destroyer (The Destroyer's Heart)"
+    }
+  ],
+  "Dying Anguish": [
+    {
+      "type": "map",
+      "name": "Arsenal"
+    },
+    {
+      "type": "map",
+      "name": "Colonnade"
+    },
+    {
+      "type": "map",
+      "name": "Ghetto"
+    },
+    {
+      "type": "map",
+      "name": "Port"
+    },
+    {
+      "type": "map",
+      "name": "Promenade"
+    },
+    {
+      "type": "map",
+      "name": "Precinct"
+    }
+  ],
+  "The Enthusiasts": [
+    {
+      "type": "map",
+      "name": "Museum"
+    },
+    {
+      "type": "map",
+      "name": "Academy"
+    },
+    {
+      "type": "map",
+      "name": "Scriptorium"
+    }
+  ],
+  "The Coming Storm": [
+    {
+      "type": "map",
+      "name": "Colonnade"
+    },
+    {
+      "type": "map",
+      "name": "Graveyard"
+    },
+    {
+      "type": "map",
+      "name": "Infested Valley"
+    },
+    {
+      "type": "map",
+      "name": "Leyline"
+    },
+    {
+      "type": "map",
+      "name": "Shipyard"
+    },
+    {
+      "type": "map",
+      "name": "Villa"
+    },
+    {
+      "type": "map",
+      "name": "Wharf"
+    },
+    {
+      "type": "map",
+      "name": "Promenade"
+    },
+    {
+      "type": "map",
+      "name": "Cemetery"
+    },
+    {
+      "type": "map",
+      "name": "Stagnation"
+    }
+  ],
+  "A Sea of Blue": [
+    {
+      "type": "map",
+      "name": "Crystal Ore"
+    },
+    {
+      "type": "map",
+      "name": "Mineral Pools"
+    },
+    {
+      "type": "map",
+      "name": "Primordial Blocks"
+    },
+    {
+      "type": "map",
+      "name": "Grotto"
+    }
+  ],
+  "The Craving": [
+    {
+      "type": "mapboss",
+      "name": "Xixic, High Necromancer"
+    },
+    {
+      "type": "mapboss",
+      "name": "Rose"
+    },
+    {
+      "type": "mapboss",
+      "name": "Thorn"
+    },
+    {
+      "type": "mapboss",
+      "name": "Infector of Dreams"
+    },
+    {
+      "type": "mapboss",
+      "name": "The Bone Sculptor"
+    }
+  ],
+  "The Betrayal": [
+    {
+      "type": "map",
+      "name": "Burial Chambers"
+    },
+    {
+      "type": "map",
+      "name": "Fungal Hollow"
+    },
+    {
+      "type": "map",
+      "name": "Mesa"
+    },
+    {
+      "type": "map",
+      "name": "Spider Forest"
+    },
+    {
+      "type": "map",
+      "name": "Strand"
+    },
+    {
+      "type": "map",
+      "name": "Castle Ruins"
+    }
+  ],
+  "The Siren": [
+    {
+      "type": "map",
+      "name": "Maelström of Chaos"
+    },
+    {
+      "type": "map",
+      "name": "Underground Sea"
+    }
+  ],
+  "Jack in the Box": [
+    {
+      "type": "map",
+      "name": "Arsenal"
+    },
+    {
+      "type": "map",
+      "name": "Ghetto"
+    },
+    {
+      "type": "map",
+      "name": "Port"
+    },
+    {
+      "type": "map",
+      "name": "Precinct"
+    },
+    {
+      "type": "map",
+      "name": "Promenade"
+    },
+    {
+      "type": "map",
+      "name": "Colonnade"
+    },
+    {
+      "type": "acts",
+      "name": "The Docks"
+    },
+    {
+      "type": "acts",
+      "name": "The Ebony Barracks"
+    },
+    {
+      "type": "acts",
+      "name": "The Grain Gate"
+    },
+    {
+      "type": "acts",
+      "name": "The Grand Promenade"
+    },
+    {
+      "type": "acts",
+      "name": "The Harbour Bridge"
+    },
+    {
+      "type": "acts",
+      "name": "The Lunaris Concourse"
+    },
+    {
+      "type": "acts",
+      "name": "The Quay"
+    },
+    {
+      "type": "acts",
+      "name": "The Sarn Ramparts"
+    },
+    {
+      "type": "acts",
+      "name": "The Slums"
+    },
+    {
+      "type": "acts",
+      "name": "The Solaris Concourse"
+    },
+    {
+      "type": "acts",
+      "name": "The City of Sarn"
+    },
+    {
+      "type": "acts",
+      "name": "The Battlefront"
+    },
+    {
+      "type": "acts",
+      "name": "The Marketplace"
+    }
+  ],
+  "The Wolf's Shadow": [
+    {
+      "type": "map",
+      "name": "Lair"
+    },
+    {
+      "type": "map",
+      "name": "Dark Forest"
+    }
+  ],
+  "The King's Heart": [
+    {
+      "type": "map",
+      "name": "Caldera"
+    },
+    {
+      "type": "map",
+      "name": "Volcano"
+    }
+  ],
+  "The Lion": [
+    {
+      "type": "mapboss",
+      "name": "The Vindicated Queen"
+    },
+    {
+      "type": "mapboss",
+      "name": "The Dishonoured Queen"
+    }
+  ],
+  "Altered Perception": [
+    {
+      "type": "mapboss",
+      "name": "Uhtred, Covetous Traitor"
+    }
+  ],
+  "Misery in Darkness": [
+    {
+      "type": "mapboss",
+      "name": "Kurgal, the Blackblooded"
+    }
+  ],
+  "Beauty Through Death": [
+    {
+      "type": "mapboss",
+      "name": "K'aj Q'ura"
+    },
+    {
+      "type": "mapboss",
+      "name": "K'aj Y'ara'az"
+    },
+    {
+      "type": "mapboss",
+      "name": "K'aj A'alai (Vaal Temple Trio)"
+    }
+  ],
+  "Tranquillity": [
+    {
+      "type": "map",
+      "name": "Ashen Wood"
+    },
+    {
+      "type": "map",
+      "name": "Fields"
+    },
+    {
+      "type": "map",
+      "name": "Peninsula"
+    },
+    {
+      "type": "acts",
+      "name": "The Ashen Fields"
+    }
+  ],
+  "The Garish Power": [
+    {
+      "type": "map",
+      "name": "Overgrown Ruin"
+    },
+    {
+      "type": "map",
+      "name": "Overgrown Shrine"
+    },
+    {
+      "type": "acts",
+      "name": "The Chamber of Sins Level 1/2 (A7)"
+    }
+  ],
+  "The Hale Heart": [
+    {
+      "type": "elderGuardianBoss",
+      "name": "The Constrictor"
+    },
+    {
+      "type": "elderGuardianBoss",
+      "name": "The Enslaver"
+    },
+    {
+      "type": "elderGuardianBoss",
+      "name": "The Eradicator"
+    },
+    {
+      "type": "elderGuardianBoss",
+      "name": "The Purifier"
+    }
+  ],
+  "Grave Knowledge": [
+    {
+      "type": "map",
+      "name": "Bone Crypt"
+    },
+    {
+      "type": "map",
+      "name": "Cursed Crypt"
+    },
+    {
+      "type": "map",
+      "name": "The Coward's Trial"
+    },
+    {
+      "type": "acts",
+      "name": "The Crypt (A7)"
+    },
+    {
+      "type": "map",
+      "name": "Bone Crypt"
+    },
+    {
+      "type": "acts",
+      "name": "The Ossuary (A5/A10)"
+    },
+    {
+      "type": "acts",
+      "name": "The Catacombs"
+    },
+    {
+      "type": "map",
+      "name": "Necropolis"
+    }
+  ],
+  "The Apothecary": [
+    {
+      "type": "map",
+      "name": "Crimson Temple"
+    },
+    {
+      "type": "map",
+      "name": "Defiled Cathedral"
+    },
+    {
+      "type": "map",
+      "name": "Crimson Township"
+    },
+    {
+      "type": "map",
+      "name": "Haunted Mansion"
+    }
+  ],
+  "The Arena Champion": [
+    {
+      "type": "mapboss",
+      "name": "Olof, Son of the Headsman"
+    },
+    {
+      "type": "shaperGuardianBoss",
+      "name": "Guardian of the Chimera"
+    },
+    {
+      "type": "mapboss",
+      "name": "Ambrius, Legion Slayer"
+    },
+    {
+      "type": "mapboss",
+      "name": "Avatar of the Forge"
+    },
+    {
+      "type": "mapboss",
+      "name": "Avatar of the Huntress"
+    },
+    {
+      "type": "mapboss",
+      "name": "Avatar of the Skies"
+    }
+  ],
+  "The Inventor": [
+    {
+      "type": "map",
+      "name": "Maze"
+    },
+    {
+      "type": "map",
+      "name": "Vaal Pyramid"
+    },
+    {
+      "type": "map",
+      "name": "Vaal Temple"
+    },
+    {
+      "type": "map",
+      "name": "Vaults of Atziri"
+    },
+    {
+      "type": "map",
+      "name": "Doryani's Machinarium"
+    },
+    {
+      "type": "acts",
+      "name": "The Temple of Decay Level 1/2"
+    }
+  ],
+  "The Brawny Battle Mage": [
+    {
+      "type": "map",
+      "name": "Burial Chambers"
+    },
+    {
+      "type": "map",
+      "name": "Spider Forest"
+    },
+    {
+      "type": "map",
+      "name": "The Putrid Cloister"
+    },
+    {
+      "type": "map",
+      "name": "Sepulchre"
+    },
+    {
+      "type": "map",
+      "name": "Waste Pool"
+    },
+    {
+      "type": "map",
+      "name": "Phantasmagoria"
+    }
+  ],
+  "The Wind": [
+    {
+      "type": "map",
+      "name": "Atoll"
+    },
+    {
+      "type": "map",
+      "name": "Jungle Valley"
+    },
+    {
+      "type": "map",
+      "name": "Mesa"
+    },
+    {
+      "type": "map",
+      "name": "Lighthouse"
+    },
+    {
+      "type": "map",
+      "name": "Plateau"
+    },
+    {
+      "type": "map",
+      "name": "Summit"
+    }
+  ],
+  "Rats": [
+    {
+      "type": "map",
+      "name": "Arsenal"
+    },
+    {
+      "type": "map",
+      "name": "Factory"
+    },
+    {
+      "type": "acts",
+      "name": "The Grain Gate"
+    }
+  ],
+  "The Scout": [
+    {
+      "type": "map",
+      "name": "Ashen Wood"
+    },
+    {
+      "type": "map",
+      "name": "Bramble Valley"
+    },
+    {
+      "type": "map",
+      "name": "Forbidden Woods"
+    },
+    {
+      "type": "map",
+      "name": "Jungle Valley"
+    },
+    {
+      "type": "map",
+      "name": "Lair"
+    },
+    {
+      "type": "map",
+      "name": "Ramparts"
+    },
+    {
+      "type": "map",
+      "name": "Spider Forest"
+    },
+    {
+      "type": "map",
+      "name": "Tropical Island"
+    },
+    {
+      "type": "map",
+      "name": "Thicket"
+    },
+    {
+      "type": "map",
+      "name": "Dark Forest"
+    },
+    {
+      "type": "map",
+      "name": "Stagnation"
+    }
+  ],
+  "Three Faces in the Dark": [
+    {
+      "type": "map",
+      "name": "Arsenal"
+    },
+    {
+      "type": "map",
+      "name": "Factory"
+    },
+    {
+      "type": "acts",
+      "name": "The Grain Gate"
+    },
+    {
+      "type": "acts",
+      "name": "The Refinery"
+    }
+  ],
+  "The Demoness": [
+    {
+      "type": "map",
+      "name": "Dark Forest"
+    },
+    {
+      "type": "map",
+      "name": "Bramble Valley"
+    },
+    {
+      "type": "map",
+      "name": "Forbidden Woods"
+    }
+  ],
+  "The Landing": [
+    {
+      "type": "map",
+      "name": "Shore"
+    },
+    {
+      "type": "map",
+      "name": "Mao Kun"
+    },
+    {
+      "type": "map",
+      "name": "Strand"
+    },
+    {
+      "type": "map",
+      "name": "Whakawairua Tuahu"
+    }
+  ],
+  "The Puzzle": [
+    {
+      "type": "allScourgeBeyondDemons"
+    }
+  ],
+  "The Wrath": [
+    {
+      "type": "map",
+      "name": "Belfry"
+    },
+    {
+      "type": "map",
+      "name": "Lava Lake"
+    },
+    {
+      "type": "acts",
+      "name": "The Feeding Trough"
+    },
+    {
+      "type": "acts",
+      "name": "The Cathedral Rooftop (A5)"
+    }
+  ],
+  "Earth Drinker": [
+    {
+      "type": "map",
+      "name": "Desert"
+    },
+    {
+      "type": "map",
+      "name": "Desert Spring"
+    },
+    {
+      "type": "map",
+      "name": "Dunes"
+    },
+    {
+      "type": "map",
+      "name": "Dry Sea"
+    },
+    {
+      "type": "map",
+      "name": "Pillars of Arun"
+    },
+    {
+      "type": "acts",
+      "name": "The Foothills"
+    },
+    {
+      "type": "acts",
+      "name": "The Oasis"
+    },
+    {
+      "type": "acts",
+      "name": "The Vastiri Desert"
+    }
+  ],
+  "Disdain": [
+    {
+      "type": "Chest",
+      "name": "The Maven's Crucible"
+    }
+  ],
+  "Etched in Blood": [
+    {
+      "type": "mapboss",
+      "name": "The Cursed King"
+    }
+  ],
+  "The Dragon": [
+    {
+      "type": "map",
+      "name": "Forbidden Woods"
+    },
+    {
+      "type": "map",
+      "name": "Dark Forest"
+    },
+    {
+      "type": "map",
+      "name": "Bramble Valley"
+    }
+  ],
+  "The Lord in Black": [
+    {
+      "type": "mapboss",
+      "name": "K'tash, the Hate Shepherd"
+    }
+  ],
+  "The Journey": [
+    {
+      "type": "map",
+      "name": "Atoll"
+    },
+    {
+      "type": "map",
+      "name": "Lighthouse"
+    },
+    {
+      "type": "map",
+      "name": "Mao Kun"
+    },
+    {
+      "type": "map",
+      "name": "Peninsula"
+    },
+    {
+      "type": "map",
+      "name": "Port"
+    },
+    {
+      "type": "map",
+      "name": "Reef"
+    },
+    {
+      "type": "map",
+      "name": "Shipyard"
+    },
+    {
+      "type": "map",
+      "name": "Whakawairua Tuahu"
+    },
+    {
+      "type": "map",
+      "name": "Wharf"
+    },
+    {
+      "type": "map",
+      "name": "Shore"
+    },
+    {
+      "type": "map",
+      "name": "Tropical Island"
+    },
+    {
+      "type": "map",
+      "name": "Strand"
+    },
+    {
+      "type": "map",
+      "name": "Estuary"
+    },
+    {
+      "type": "map",
+      "name": "Pier"
+    },
+    {
+      "type": "map",
+      "name": "Plateau"
+    },
+    {
+      "type": "map",
+      "name": "Coves"
+    },
+    {
+      "type": "map",
+      "name": "Maelström of Chaos"
+    },
+    {
+      "type": "map",
+      "name": "Coral Ruins"
+    },
+    {
+      "type": "map",
+      "name": "Beach"
+    }
+  ],
+  "Dark Temptation": [
+    {
+      "type": "Chest",
+      "name": "Delve chest"
+    }
+  ],
+  "Divine Beauty": [
+    {
+      "type": "mapboss",
+      "name": "Tormented Temptress (Whakawairua Tuahu)"
+    },
+    {
+      "type": "mapboss",
+      "name": "Shock and Horror (Mineral Pools)"
+    },
+    {
+      "type": "mapboss",
+      "name": "Merveil, the Reflection (Underground Sea)"
+    },
+    {
+      "type": "mapboss",
+      "name": "Merveil, the Reflection (Maelstrom of Chaos)"
+    },
+    {
+      "type": "mapboss",
+      "name": "Fire and Fury (Lava Chamber)"
+    }
+  ],
+  "Fire of Unknown Origin": [
+    {
+      "type": "map",
+      "name": "Academy"
+    },
+    {
+      "type": "map",
+      "name": "Residence"
+    }
+  ],
+  "Rebirth": [
+    {
+      "type": "acts",
+      "name": "The Ashen Fields"
+    },
+    {
+      "type": "acts",
+      "name": "The Bath House"
+    },
+    {
+      "type": "acts",
+      "name": "The Battlefront"
+    },
+    {
+      "type": "acts",
+      "name": "The Beacon"
+    },
+    {
+      "type": "acts",
+      "name": "The Blood Aqueduct"
+    },
+    {
+      "type": "acts",
+      "name": "The Broken Bridge"
+    },
+    {
+      "type": "acts",
+      "name": "The Control Blocks"
+    },
+    {
+      "type": "acts",
+      "name": "The Crypt"
+    },
+    {
+      "type": "acts",
+      "name": "The Crystal Veins"
+    },
+    {
+      "type": "acts",
+      "name": "The Desecrated Chambers"
+    },
+    {
+      "type": "acts",
+      "name": "The Foothills"
+    },
+    {
+      "type": "acts",
+      "name": "The Harbour Bridge"
+    },
+    {
+      "type": "acts",
+      "name": "The Oasis"
+    },
+    {
+      "type": "acts",
+      "name": "The Ossuary"
+    },
+    {
+      "type": "acts",
+      "name": "The Quarry"
+    },
+    {
+      "type": "acts",
+      "name": "The Ravaged Square"
+    },
+    {
+      "type": "acts",
+      "name": "The Reliquary"
+    },
+    {
+      "type": "acts",
+      "name": "The Ruined Square"
+    },
+    {
+      "type": "acts",
+      "name": "The Slave Pens"
+    },
+    {
+      "type": "acts",
+      "name": "The Solaris Temple Level 1 (A3)"
+    },
+    {
+      "type": "acts",
+      "name": "The Temple of Decay Level 2"
+    },
+    {
+      "type": "acts",
+      "name": "The Vastiri Desert"
+    }
+  ],
+  "Azure Rage": [
+    {
+      "type": "map",
+      "name": "Factory"
+    }
+  ],
+  "Pride Before the Fall": [
+    {
+      "type": "map",
+      "name": "Caldera"
+    },
+    {
+      "type": "map",
+      "name": "Volcano"
+    }
+  ],
+  "The Master": [
+    {
+      "type": "map",
+      "name": "Lair"
+    },
+    {
+      "type": "map",
+      "name": "Pen"
+    }
+  ],
+  "Fateful Meeting": [
+    {
+      "type": "vaalFleshMerchant"
+    }
+  ],
+  "The Surgeon": [
+    {
+      "type": "map",
+      "name": "Overgrown Ruin"
+    },
+    {
+      "type": "map",
+      "name": "Overgrown Shrine"
+    }
+  ],
+  "The Doctor": [
+    {
+      "type": "map",
+      "name": "Burial Chambers"
+    },
+    {
+      "type": "map",
+      "name": "Spider Forest"
+    },
+    {
+      "type": "map",
+      "name": "The Putrid Cloister"
+    },
+    {
+      "type": "map",
+      "name": "Sepulchre"
+    },
+    {
+      "type": "map",
+      "name": "Waste Pool"
+    },
+    {
+      "type": "map",
+      "name": "Phantasmagoria"
+    }
+  ],
+  "Boundless Realms": [
+    {
+      "type": "map",
+      "name": "Temple"
+    },
+    {
+      "type": "map",
+      "name": "The Twilight Temple"
+    },
+    {
+      "type": "map",
+      "name": "Cold River"
+    },
+    {
+      "type": "acts",
+      "name": "The Solaris Temple Level 1/2 (A8)"
+    },
+    {
+      "type": "acts",
+      "name": "The Harbour Bridge"
+    }
+  ],
+  "Perfection": [
+    {
+      "type": "shaperGuardianBoss",
+      "name": "Guardian of the Chimera"
+    },
+    {
+      "type": "shaperGuardianBoss",
+      "name": "Guardian of the Hydra"
+    },
+    {
+      "type": "shaperGuardianBoss",
+      "name": "Guardian of the Minotaur"
+    },
+    {
+      "type": "shaperGuardianBoss",
+      "name": "Guardian of the Phoenix"
+    }
+  ],
+  "Society's Remorse": [
+    {
+      "type": "Chest",
+      "name": "Voltaxic Sulphite"
+    }
+  ],
+  "The Price of Loyalty": [
+    {
+      "type": "architect",
+      "name": "Zilquapa, Architect of the Breach"
+    }
+  ],
+  "Chaotic Disposition": [
+    {
+      "type": "map",
+      "name": "Poorjoy's Asylum"
+    }
+  ],
+  "The Flora's Gift": [
+    {
+      "type": "map",
+      "name": "Tropical Island"
+    },
+    {
+      "type": "map",
+      "name": "Jungle Valley"
+    },
+    {
+      "type": "map",
+      "name": "Ashen Wood"
+    },
+    {
+      "type": "map",
+      "name": "Spider Forest"
+    },
+    {
+      "type": "map",
+      "name": "Stagnation"
+    },
+    {
+      "type": "map",
+      "name": "Bramble Valley"
+    },
+    {
+      "type": "map",
+      "name": "Thicket"
+    },
+    {
+      "type": "map",
+      "name": "Dark Forest"
+    },
+    {
+      "type": "map",
+      "name": "Lair"
+    },
+    {
+      "type": "map",
+      "name": "Ramparts"
+    },
+    {
+      "type": "map",
+      "name": "Forbidden Woods"
+    }
+  ],
+  "Struck by Lightning": [
+    {
+      "type": "map",
+      "name": "Cemetery"
+    },
+    {
+      "type": "map",
+      "name": "Colonnade"
+    },
+    {
+      "type": "map",
+      "name": "Courtyard"
+    },
+    {
+      "type": "map",
+      "name": "Graveyard"
+    },
+    {
+      "type": "map",
+      "name": "Infested Valley"
+    },
+    {
+      "type": "map",
+      "name": "Leyline"
+    },
+    {
+      "type": "map",
+      "name": "Promenade"
+    },
+    {
+      "type": "map",
+      "name": "Shipyard"
+    },
+    {
+      "type": "map",
+      "name": "Tower"
+    },
+    {
+      "type": "map",
+      "name": "Villa"
+    },
+    {
+      "type": "map",
+      "name": "Wharf"
+    }
+  ],
+  "The Forgotten Treasure": [
+    {
+      "type": "map",
+      "name": "Temple"
+    }
+  ],
+  "Scholar of the Seas": [
+    {
+      "type": "map",
+      "name": "Coves"
+    },
+    {
+      "type": "map",
+      "name": "Reef"
+    },
+    {
+      "type": "map",
+      "name": "Strand"
+    },
+    {
+      "type": "map",
+      "name": "Whakawairua Tuahu"
+    }
+  ],
+  "Doryani's Epiphany": [
+    {
+      "type": "map",
+      "name": "Doryani's Machinarium"
+    }
+  ],
+  "The Rusted Bard": [
+    {
+      "type": "map",
+      "name": "The Vinktar Square"
+    }
+  ],
+  "The Wolf": [
+    {
+      "type": "map",
+      "name": "Flooded Mine"
+    },
+    {
+      "type": "map",
+      "name": "Geode"
+    },
+    {
+      "type": "map",
+      "name": "Crystal Ore"
+    },
+    {
+      "type": "map",
+      "name": "Dig"
+    },
+    {
+      "type": "map",
+      "name": "Excavation"
+    },
+    {
+      "type": "map",
+      "name": "Grotto"
+    },
+    {
+      "type": "acts",
+      "name": "The Quarry"
+    },
+    {
+      "type": "acts",
+      "name": "The Tunnel"
+    }
+  ],
+  "The One That Got Away": [
+    {
+      "type": "map",
+      "name": "Strand"
+    }
+  ],
+  "Haunting Shadows": [
+    {
+      "type": "map",
+      "name": "The Twilight Temple"
+    }
+  ],
+  "The Feast": [
+    {
+      "type": "map",
+      "name": "Lair of the Hydra"
+    },
+    {
+      "type": "map",
+      "name": "Toxic Sewer"
+    },
+    {
+      "type": "map",
+      "name": "Waste Pool"
+    },
+    {
+      "type": "acts",
+      "name": "The Toxic Conduits"
+    }
+  ],
+  "Coveted Possession": [
+    {
+      "type": "map",
+      "name": "Bone Crypt"
+    },
+    {
+      "type": "acts",
+      "name": "The Catacombs"
+    },
+    {
+      "type": "acts",
+      "name": "The Ossuary (A5/A10)"
+    }
+  ],
+  "The Breach": [
+    {
+      "type": "nullPortal"
+    }
+  ],
+  "The Hermit": [
+    {
+      "type": "acts",
+      "name": "The Ashen Fields"
+    },
+    {
+      "type": "acts",
+      "name": "The Broken Bridge"
+    },
+    {
+      "type": "acts",
+      "name": "The Causeway"
+    },
+    {
+      "type": "acts",
+      "name": "The Crossroads (A7)"
+    },
+    {
+      "type": "acts",
+      "name": "The Fellshrine Ruins (A7)"
+    },
+    {
+      "type": "acts",
+      "name": "The Northern Forest (A7)"
+    },
+    {
+      "type": "acts",
+      "name": "The Vaal City"
+    },
+    {
+      "type": "acts",
+      "name": "Maligaro's Sanctum"
+    }
+  ],
+  "Void of the Elements": [
+    {
+      "type": "mapboss",
+      "name": "The Elder"
+    },
+    {
+      "type": "mapboss",
+      "name": "Uber Elder"
+    }
+  ],
+  "A Chilling Wind": [
+    {
+      "type": "map",
+      "name": "Forbidden Woods"
+    },
+    {
+      "type": "map",
+      "name": "Cold River"
+    },
+    {
+      "type": "map",
+      "name": "Frozen Cabins"
+    },
+    {
+      "type": "map",
+      "name": "Iceberg"
+    },
+    {
+      "type": "map",
+      "name": "Glacier"
+    },
+    {
+      "type": "map",
+      "name": "Summit"
+    }
+  ],
+  "The Battle Born": [
+    {
+      "type": "map",
+      "name": "Caldera"
+    },
+    {
+      "type": "map",
+      "name": "Volcano"
+    },
+    {
+      "type": "acts",
+      "name": "Kaom's Stronghold"
+    },
+    {
+      "type": "acts",
+      "name": "Kaom's Dream"
+    }
+  ],
+  "Thirst for Knowledge": [
+    {
+      "type": "map",
+      "name": "Academy"
+    },
+    {
+      "type": "map",
+      "name": "Museum"
+    },
+    {
+      "type": "map",
+      "name": "Scriptorium"
+    },
+    {
+      "type": "acts",
+      "name": "The Archives"
+    },
+    {
+      "type": "acts",
+      "name": "The Library"
+    }
+  ],
+  "The Scholar": [
+    {
+      "type": "map",
+      "name": "Academy"
+    },
+    {
+      "type": "map",
+      "name": "Museum"
+    },
+    {
+      "type": "map",
+      "name": "Scriptorium"
+    },
+    {
+      "type": "acts",
+      "name": "The Library"
+    },
+    {
+      "type": "acts",
+      "name": "The Archives"
+    }
+  ],
+  "The Eternal War": [
+    {
+      "type": "elderslayer",
+      "name": "Baran, The Crusader"
+    },
+    {
+      "type": "elderslayer",
+      "name": "Al-Hezmin, The Hunter"
+    },
+    {
+      "type": "elderslayer",
+      "name": "Veritania, The Redeemer"
+    },
+    {
+      "type": "elderslayer",
+      "name": "Drox, The Warlord"
+    }
+  ],
+  "Something Dark": [
+    {
+      "type": "breachlordBossDomain",
+      "name": "Xoph, Dark Embers"
+    },
+    {
+      "type": "breachlordBossDomain",
+      "name": "Tul, Creeping Avalanche"
+    },
+    {
+      "type": "breachlordBossDomain",
+      "name": "Esh, Forked Thought"
+    },
+    {
+      "type": "breachlordBossDomain",
+      "name": "Chayula, Who Dreamt"
+    },
+    {
+      "type": "uulNetolInBreachstones"
+    }
+  ],
+  "The Bitter Blossom": [
+    {
+      "type": "mapboss",
+      "name": "Oshabi, Avatar of the Grove"
+    },
+    {
+      "type": "mapboss",
+      "name": "Oshabi, Avatar of the Grove"
+    },
+    {
+      "type": "mapboss",
+      "name": "Murgeth Bogsong"
+    },
+    {
+      "type": "mapboss",
+      "name": "Elida Blisterclaw (Bramble Valley)"
+    },
+    {
+      "type": "mapboss",
+      "name": "Gorulis, Will-Thief (Infested Valley)"
+    }
+  ],
+  "The Seeker": [
+    {
+      "type": "templeOfAtzoatl"
+    }
+  ],
+  "The Sustenance": [
+    {
+      "type": "mapboss",
+      "name": "Portentia, the Foul (Waste Pool)"
+    },
+    {
+      "type": "mapboss",
+      "name": "Erythrophagia (Phantasmagoria)"
+    }
+  ],
+  "The Pack Leader": [
+    {
+      "type": "map",
+      "name": "Ashen Wood"
+    },
+    {
+      "type": "map",
+      "name": "Jungle Valley"
+    },
+    {
+      "type": "map",
+      "name": "Lair"
+    },
+    {
+      "type": "map",
+      "name": "Spider Forest"
+    },
+    {
+      "type": "map",
+      "name": "Stagnation"
+    },
+    {
+      "type": "map",
+      "name": "Thicket"
+    },
+    {
+      "type": "map",
+      "name": "Tropical Island"
+    },
+    {
+      "type": "map",
+      "name": "Ramparts"
+    },
+    {
+      "type": "map",
+      "name": "Dark Forest"
+    },
+    {
+      "type": "map",
+      "name": "Bramble Valley"
+    },
+    {
+      "type": "map",
+      "name": "Forbidden Woods"
+    }
+  ],
+  "The Shortcut": [
+    {
+      "type": "vaalSideAreas"
+    }
+  ],
+  "A Fate Worse Than Death": [
+    {
+      "type": "elderslayer",
+      "name": "Baran, The Crusader"
+    },
+    {
+      "type": "elderslayer",
+      "name": "Veritania, The Redeemer"
+    },
+    {
+      "type": "elderslayer",
+      "name": "Al-Hezmin, The Hunter"
+    },
+    {
+      "type": "elderslayer",
+      "name": "Drox, The Warlord"
+    },
+    {
+      "type": "elderslayer",
+      "name": "Sirus, Awakener of Worlds"
+    }
+  ],
+  "The Polymath": [
+    {
+      "type": "map",
+      "name": "Museum"
+    },
+    {
+      "type": "map",
+      "name": "Relic Chambers"
+    },
+    {
+      "type": "acts",
+      "name": "The Reliquary (A5/A10)"
+    }
+  ],
+  "The Master Artisan": [
+    {
+      "type": "Strongbox",
+      "name": "Artisan's Strongbox"
+    }
+  ],
+  "The Blazing Fire": [
+    {
+      "type": "map",
+      "name": "Alleyways"
+    },
+    {
+      "type": "map",
+      "name": "Crimson Temple"
+    },
+    {
+      "type": "map",
+      "name": "Haunted Mansion"
+    },
+    {
+      "type": "map",
+      "name": "Lookout"
+    },
+    {
+      "type": "map",
+      "name": "City Square"
+    },
+    {
+      "type": "map",
+      "name": "Defiled Cathedral"
+    },
+    {
+      "type": "map",
+      "name": "Silo Map"
+    }
+  ],
+  "Thunderous Skies": [
+    {
+      "type": "map",
+      "name": "Courtyard"
+    },
+    {
+      "type": "map",
+      "name": "Strand"
+    },
+    {
+      "type": "map",
+      "name": "Tower"
+    },
+    {
+      "type": "map",
+      "name": "The Vinktar Square"
+    },
+    {
+      "type": "acts",
+      "name": "Shavronne's Tower"
+    },
+    {
+      "type": "acts",
+      "name": "The Twilight Strand (A6)"
+    }
+  ],
+  "The Whiteout": [
+    {
+      "type": "mapboss",
+      "name": "Stonebeak, Battle Fowl"
+    }
+  ],
+  "Lysah's Respite": [
+    {
+      "type": "map",
+      "name": "Maelström of Chaos"
+    },
+    {
+      "type": "map",
+      "name": "Underground Sea"
+    }
+  ],
+  "The Eye of Terror": [
+    {
+      "type": "syndicateMember",
+      "name": "It That Fled"
+    }
+  ],
+  "Checkmate": [
+    {
+      "type": "map",
+      "name": "Academy"
+    },
+    {
+      "type": "map",
+      "name": "Museum"
+    },
+    {
+      "type": "map",
+      "name": "Scriptorium"
+    }
+  ],
+  "The Warlord": [
+    {
+      "type": "map",
+      "name": "Armoury"
+    },
+    {
+      "type": "map",
+      "name": "Arsenal"
+    },
+    {
+      "type": "map",
+      "name": "Promenade"
+    },
+    {
+      "type": "map",
+      "name": "Colonnade"
+    }
+  ],
+  "The Innocent": [
+    {
+      "type": "map",
+      "name": "Basilica"
+    },
+    {
+      "type": "map",
+      "name": "Defiled Cathedral"
+    },
+    {
+      "type": "acts",
+      "name": "The Chamber of Innocence"
+    }
+  ],
+  "The Chains that Bind": [
+    {
+      "type": "map",
+      "name": "Cage"
+    },
+    {
+      "type": "map",
+      "name": "Cells"
+    },
+    {
+      "type": "map",
+      "name": "Dungeon"
+    },
+    {
+      "type": "map",
+      "name": "Pen"
+    },
+    {
+      "type": "acts",
+      "name": "The Control Blocks"
+    },
+    {
+      "type": "acts",
+      "name": "Shavronne's Tower"
+    },
+    {
+      "type": "acts",
+      "name": "The Slave Pens"
+    }
+  ],
+  "The Visionary": [
+    {
+      "type": "map",
+      "name": "Arena"
+    },
+    {
+      "type": "map",
+      "name": "Colosseum"
+    },
+    {
+      "type": "map",
+      "name": "Racecourse"
+    }
+  ],
+  "The Metalsmith's Gift": [
+    {
+      "type": "acts",
+      "name": "The Coast (A6)"
+    },
+    {
+      "type": "acts",
+      "name": "The Karui Fortress"
+    },
+    {
+      "type": "acts",
+      "name": "The Mud Flats (A6)"
+    }
+  ],
+  "Gemcutter's Promise": [
+    {
+      "type": "map",
+      "name": "Colonnade"
+    },
+    {
+      "type": "map",
+      "name": "Promenade"
+    },
+    {
+      "type": "acts",
+      "name": "The Ebony Barracks"
+    },
+    {
+      "type": "acts",
+      "name": "The Lunaris Concourse"
+    }
+  ],
+  "The Sigil": [
+    {
+      "type": "map",
+      "name": "Overgrown Ruin"
+    },
+    {
+      "type": "map",
+      "name": "Overgrown Shrine"
+    }
+  ],
+  "The Wedding Gift": [
+    {
+      "type": "map",
+      "name": "Sunken City"
+    },
+    {
+      "type": "map",
+      "name": "Sunken City"
+    }
+  ],
+  "Treasure Hunter": [
+    {
+      "type": "map",
+      "name": "Crystal Ore"
+    },
+    {
+      "type": "map",
+      "name": "Flooded Mine"
+    },
+    {
+      "type": "map",
+      "name": "Grotto"
+    },
+    {
+      "type": "map",
+      "name": "Underground River"
+    },
+    {
+      "type": "map",
+      "name": "Underground Sea"
+    },
+    {
+      "type": "map",
+      "name": "Lair"
+    },
+    {
+      "type": "map",
+      "name": "Maze of the Minotaur"
+    },
+    {
+      "type": "map",
+      "name": "Fungal Hollow"
+    },
+    {
+      "type": "mapboss",
+      "name": "Caer Blaidd, Wolfpack's Den"
+    }
+  ],
+  "Council of Cats": [
+    {
+      "type": "elderslayer",
+      "name": "Al-Hezmin, The Hunter"
+    }
+  ],
+  "The Cheater": [
+    {
+      "type": "syndicateMember",
+      "name": "Guff \"Tiny\" Grenn"
+    }
+  ],
+  "The Spoiled Prince": [
+    {
+      "type": "map",
+      "name": "Vaal Pyramid"
+    }
+  ],
+  "The Bargain": [
+    {
+      "type": "syndicateMember",
+      "name": "It That Fled"
+    }
+  ],
+  "Remembrance": [
+    {
+      "type": "Chest",
+      "name": "Light Jewellery chest (Primeval Ruins, Abyssal City, Vaal Outpost)"
+    }
+  ],
+  "The Last One Standing": [
+    {
+      "type": "map",
+      "name": "Pit of the Chimera"
+    },
+    {
+      "type": "map",
+      "name": "Pit"
+    },
+    {
+      "type": "map",
+      "name": "Arena"
+    },
+    {
+      "type": "map",
+      "name": "Colosseum"
+    }
+  ],
+  "The Watcher": [
+    {
+      "type": "map",
+      "name": "Geode"
+    },
+    {
+      "type": "map",
+      "name": "Grotto"
+    }
+  ],
+  "Dialla's Subjugation": [
+    {
+      "type": "map",
+      "name": "Temple"
+    },
+    {
+      "type": "map",
+      "name": "The Twilight Temple"
+    },
+    {
+      "type": "map",
+      "name": "Cold River"
+    },
+    {
+      "type": "acts",
+      "name": "The Solaris Temple Level 1/2 (A8)"
+    },
+    {
+      "type": "acts",
+      "name": "The Harbour Bridge"
+    }
+  ],
+  "The Dark Mage": [
+    {
+      "type": "map",
+      "name": "Overgrown Ruin"
+    },
+    {
+      "type": "map",
+      "name": "Overgrown Shrine"
+    },
+    {
+      "type": "acts",
+      "name": "The Chamber of Sins Level 1/2 (A7)"
+    }
+  ],
+  "Buried Treasure": [
+    {
+      "type": "map",
+      "name": "Crystal Ore"
+    },
+    {
+      "type": "map",
+      "name": "Dig"
+    },
+    {
+      "type": "map",
+      "name": "Excavation"
+    },
+    {
+      "type": "map",
+      "name": "Flooded Mine"
+    },
+    {
+      "type": "map",
+      "name": "Geode"
+    },
+    {
+      "type": "map",
+      "name": "Grotto"
+    }
+  ],
+  "The Throne": [
+    {
+      "type": "map",
+      "name": "Lair of the Hydra"
+    },
+    {
+      "type": "map",
+      "name": "Toxic Sewer"
+    },
+    {
+      "type": "map",
+      "name": "Waste Pool"
+    }
+  ],
+  "The Life Thief": [
+    {
+      "type": "map",
+      "name": "City Square"
+    },
+    {
+      "type": "map",
+      "name": "Crimson Temple"
+    },
+    {
+      "type": "map",
+      "name": "Lookout"
+    },
+    {
+      "type": "map",
+      "name": "Alleyways"
+    },
+    {
+      "type": "map",
+      "name": "Defiled Cathedral"
+    },
+    {
+      "type": "map",
+      "name": "Silo"
+    },
+    {
+      "type": "map",
+      "name": "Haunted Mansion"
+    }
+  ],
+  "The Body": [
+    {
+      "type": "Strongbox",
+      "name": "Armourer's Strongbox"
+    }
+  ],
+  "Succor of the Sinless": [
+    {
+      "type": "elderslayer",
+      "name": "Baran, The Crusader"
+    }
+  ],
+  "The Cartographer": [
+    {
+      "type": "Strongbox",
+      "name": "Cartographer's Strongbox"
+    }
+  ],
+  "The King's Blade": [
+    {
+      "type": "map",
+      "name": "Arena"
+    },
+    {
+      "type": "map",
+      "name": "Pit"
+    },
+    {
+      "type": "map",
+      "name": "Colosseum"
+    },
+    {
+      "type": "map",
+      "name": "Pit of the Chimera"
+    }
+  ],
+  "Burning Blood": [
+    {
+      "type": "map",
+      "name": "Forge of the Phoenix"
+    },
+    {
+      "type": "map",
+      "name": "Lava Chamber"
+    }
+  ],
+  "The Leviathan": [
+    {
+      "type": "map",
+      "name": "Maelström of Chaos"
+    }
+  ],
+  "House of Mirrors": [
+    {
+      "type": "map",
+      "name": "The Alluring Abyss"
+    }
+  ],
+  "The Cursed King": [
+    {
+      "type": "mapboss",
+      "name": "Caer Blaidd, Wolfpack's Den"
+    }
+  ],
+  "The Summoner": [
+    {
+      "type": "map",
+      "name": "Bone Crypt"
+    },
+    {
+      "type": "map",
+      "name": "Burial Chambers"
+    },
+    {
+      "type": "map",
+      "name": "Spider Forest"
+    },
+    {
+      "type": "map",
+      "name": "Cage"
+    },
+    {
+      "type": "acts",
+      "name": "The Lower Prison (A6)"
+    },
+    {
+      "type": "acts",
+      "name": "The Crematorium"
+    },
+    {
+      "type": "acts",
+      "name": "The Catacombs"
+    },
+    {
+      "type": "acts",
+      "name": "Shavronne's Tower"
+    },
+    {
+      "type": "acts",
+      "name": "The Chamber of Sins Level 1 (A7)"
+    }
+  ],
+  "The Patient": [
+    {
+      "type": "map",
+      "name": "Armoury"
+    },
+    {
+      "type": "map",
+      "name": "Arsenal"
+    },
+    {
+      "type": "map",
+      "name": "Colonnade"
+    },
+    {
+      "type": "map",
+      "name": "Promenade"
+    }
+  ],
+  "Prosperity": [
+    {
+      "type": "map",
+      "name": "Estuary"
+    },
+    {
+      "type": "map",
+      "name": "Peninsula"
+    },
+    {
+      "type": "map",
+      "name": "Port"
+    },
+    {
+      "type": "map",
+      "name": "Shore"
+    },
+    {
+      "type": "map",
+      "name": "Strand"
+    },
+    {
+      "type": "map",
+      "name": "Mao Kun"
+    },
+    {
+      "type": "map",
+      "name": "Beach"
+    },
+    {
+      "type": "map",
+      "name": "Whakawairua Tuahu"
+    },
+    {
+      "type": "map",
+      "name": "Lighthouse"
+    },
+    {
+      "type": "map",
+      "name": "Wharf"
+    },
+    {
+      "type": "map",
+      "name": "Atoll"
+    },
+    {
+      "type": "map",
+      "name": "Maelström of Chaos"
+    },
+    {
+      "type": "map",
+      "name": "Coral Ruins"
+    },
+    {
+      "type": "map",
+      "name": "Tropical Island"
+    },
+    {
+      "type": "map",
+      "name": "Plateau"
+    },
+    {
+      "type": "map",
+      "name": "Shipyard"
+    },
+    {
+      "type": "map",
+      "name": "Pier"
+    },
+    {
+      "type": "map",
+      "name": "Coves"
+    },
+    {
+      "type": "map",
+      "name": "Reef"
+    }
+  ],
+  "The Risk": [
+    {
+      "type": "Chest",
+      "name": "Izaro's Treasure"
+    }
+  ],
+  "The Catch": [
+    {
+      "type": "map",
+      "name": "Atoll"
+    },
+    {
+      "type": "map",
+      "name": "Beach"
+    },
+    {
+      "type": "map",
+      "name": "Shipyard"
+    },
+    {
+      "type": "map",
+      "name": "Strand"
+    },
+    {
+      "type": "map",
+      "name": "Tropical Island"
+    },
+    {
+      "type": "map",
+      "name": "Shore"
+    },
+    {
+      "type": "map",
+      "name": "Peninsula"
+    },
+    {
+      "type": "map",
+      "name": "Coves"
+    },
+    {
+      "type": "map",
+      "name": "Maelström of Chaos"
+    }
+  ],
+  "The Forsaken": [
+    {
+      "type": "map",
+      "name": "Bone Crypt"
+    },
+    {
+      "type": "map",
+      "name": "Cursed Crypt"
+    },
+    {
+      "type": "map",
+      "name": "The Coward's Trial"
+    },
+    {
+      "type": "map",
+      "name": "Necropolis"
+    }
+  ],
+  "Reckless Ambition": [
+    {
+      "type": "elderGuardianBoss",
+      "name": "The Eradicator"
+    }
+  ],
+  "The Sephirot": [
+    {
+      "type": "mapboss",
+      "name": "The High Templar"
+    },
+    {
+      "type": "mapboss",
+      "name": "The Hallowed Husk"
+    },
+    {
+      "type": "mapboss",
+      "name": "Excellis Aurafix"
+    }
+  ],
+  "The Warden": [
+    {
+      "type": "map",
+      "name": "Cage"
+    },
+    {
+      "type": "map",
+      "name": "Dungeon"
+    },
+    {
+      "type": "map",
+      "name": "Pen"
+    },
+    {
+      "type": "map",
+      "name": "Cells"
+    },
+    {
+      "type": "acts",
+      "name": "Shavronne's Tower"
+    },
+    {
+      "type": "acts",
+      "name": "The Control Blocks (A5)"
+    },
+    {
+      "type": "acts",
+      "name": "The Lower Prison (A6)"
+    },
+    {
+      "type": "acts",
+      "name": "The Slave Pens"
+    }
+  ],
+  "Parasitic Passengers": [
+    {
+      "type": "map",
+      "name": "Infested Valley"
+    },
+    {
+      "type": "map",
+      "name": "Channel"
+    },
+    {
+      "type": "map",
+      "name": "Arachnid Tomb"
+    }
+  ],
+  "The Deep Ones": [
+    {
+      "type": "map",
+      "name": "Coves"
+    },
+    {
+      "type": "map",
+      "name": "Reef"
+    },
+    {
+      "type": "map",
+      "name": "Coral Ruins"
+    },
+    {
+      "type": "map",
+      "name": "Coves"
+    },
+    {
+      "type": "map",
+      "name": "Reef"
+    },
+    {
+      "type": "map",
+      "name": "Strand"
+    },
+    {
+      "type": "map",
+      "name": "Whakawairua Tuahu"
+    },
+    {
+      "type": "mapboss",
+      "name": "The Brine King's Reef"
+    }
+  ],
+  "The Spark and the Flame": [
+    {
+      "type": "map",
+      "name": "Atoll"
+    },
+    {
+      "type": "map",
+      "name": "Plateau"
+    },
+    {
+      "type": "map",
+      "name": "Siege"
+    }
+  ],
+  "The Stormcaller": [
+    {
+      "type": "map",
+      "name": "Courtyard"
+    },
+    {
+      "type": "map",
+      "name": "Strand"
+    },
+    {
+      "type": "map",
+      "name": "Tower"
+    }
+  ],
+  "The Wolverine": [
+    {
+      "type": "map",
+      "name": "Glacier"
+    },
+    {
+      "type": "map",
+      "name": "Summit"
+    },
+    {
+      "type": "acts",
+      "name": "Prisoner's Gate (A6)"
+    },
+    {
+      "type": "map",
+      "name": "Lair"
+    }
+  ],
+  "Vinia's Token": [
+    {
+      "type": "map",
+      "name": "Core"
+    },
+    {
+      "type": "map",
+      "name": "Malformation"
+    },
+    {
+      "type": "map",
+      "name": "Shrine"
+    }
+  ],
+  "Bijoux": [
+    {
+      "type": "map",
+      "name": "Flooded Mine"
+    },
+    {
+      "type": "map",
+      "name": "Crystal Ore"
+    },
+    {
+      "type": "map",
+      "name": "Dig"
+    },
+    {
+      "type": "map",
+      "name": "Excavation"
+    },
+    {
+      "type": "map",
+      "name": "Grotto"
+    },
+    {
+      "type": "map",
+      "name": "Geode"
+    }
+  ],
+  "The Scarred Meadow": [
+    {
+      "type": "map",
+      "name": "Ashen Wood"
+    },
+    {
+      "type": "map",
+      "name": "Fields"
+    },
+    {
+      "type": "map",
+      "name": "Peninsula"
+    },
+    {
+      "type": "acts",
+      "name": "The Ashen Fields"
+    },
+    {
+      "type": "acts",
+      "name": "The Imperial Fields"
+    }
+  ],
+  "Love Through Ice": [
+    {
+      "type": "elderslayer",
+      "name": "Veritania, The Redeemer"
+    }
+  ],
+  "Deadly Joy": [
+    {
+      "type": "map",
+      "name": "Poorjoy's Asylum"
+    }
+  ],
+  "The Hunger": [
+    {
+      "type": "map",
+      "name": "Carcass"
+    },
+    {
+      "type": "map",
+      "name": "Malformation"
+    },
+    {
+      "type": "map",
+      "name": "Phantasmagoria"
+    },
+    {
+      "type": "map",
+      "name": "Core"
+    },
+    {
+      "type": "acts",
+      "name": "The Belly of the Beast (A4/A9)"
+    },
+    {
+      "type": "acts",
+      "name": "The Harvest"
+    },
+    {
+      "type": "acts",
+      "name": "The Rotting Core"
+    }
+  ],
+  "Boon of Justice": [
+    {
+      "type": "map",
+      "name": "Chateau"
+    },
+    {
+      "type": "map",
+      "name": "Orchard"
+    },
+    {
+      "type": "map",
+      "name": "Plaza"
+    },
+    {
+      "type": "map",
+      "name": "Conservatory"
+    }
+  ],
+  "Heterochromia": [
+    {
+      "type": "map",
+      "name": "Estuary"
+    },
+    {
+      "type": "map",
+      "name": "The Twilight Temple"
+    }
+  ],
+  "Soul Quenched": [
+    {
+      "type": "map",
+      "name": "Factory"
+    },
+    {
+      "type": "map",
+      "name": "Foundry"
+    },
+    {
+      "type": "map",
+      "name": "Forge of the Phoenix"
+    },
+    {
+      "type": "map",
+      "name": "Silo"
+    }
+  ],
+  "The Undaunted": [
+    {
+      "type": "map",
+      "name": "Courthouse"
+    },
+    {
+      "type": "map",
+      "name": "Precinct"
+    },
+    {
+      "type": "map",
+      "name": "Whakawairua Tuahu"
+    }
+  ],
+  "The Mad King": [
+    {
+      "type": "map",
+      "name": "Colosseum"
+    },
+    {
+      "type": "map",
+      "name": "Dark Forest"
+    },
+    {
+      "type": "map",
+      "name": "Caldera"
+    },
+    {
+      "type": "map",
+      "name": "Reef"
+    }
+  ],
+  "The Fathomless Depths": [
+    {
+      "type": "map",
+      "name": "Flooded Mine"
+    },
+    {
+      "type": "map",
+      "name": "Underground Sea"
+    },
+    {
+      "type": "map",
+      "name": "Mineral Pools"
+    }
+  ],
+  "The Dungeon Master": [
+    {
+      "type": "map",
+      "name": "Cage"
+    },
+    {
+      "type": "map",
+      "name": "Cells"
+    },
+    {
+      "type": "map",
+      "name": "Dungeon"
+    },
+    {
+      "type": "map",
+      "name": "Pen"
+    }
+  ],
+  "The Thaumaturgist": [
+    {
+      "type": "map",
+      "name": "Foundry"
+    },
+    {
+      "type": "map",
+      "name": "Shrine"
+    },
+    {
+      "type": "map",
+      "name": "Laboratory"
+    },
+    {
+      "type": "map",
+      "name": "Poorjoy's Asylum"
+    }
+  ],
+  "The Return of the Rat": [
+    {
+      "type": "map",
+      "name": "Arsenal"
+    },
+    {
+      "type": "map",
+      "name": "Factory"
+    },
+    {
+      "type": "acts",
+      "name": "The Grain Gate"
+    },
+    {
+      "type": "acts",
+      "name": "The Refinery"
+    }
+  ],
+  "The Rite of Elements": [
+    {
+      "type": "map",
+      "name": "Coves"
+    },
+    {
+      "type": "map",
+      "name": "Flooded Mine"
+    },
+    {
+      "type": "map",
+      "name": "Geode"
+    },
+    {
+      "type": "map",
+      "name": "Grotto"
+    },
+    {
+      "type": "map",
+      "name": "Vault"
+    },
+    {
+      "type": "map",
+      "name": "Waterways"
+    },
+    {
+      "type": "map",
+      "name": "Wharf"
+    },
+    {
+      "type": "map",
+      "name": "Peninsula"
+    }
+  ],
+  "Echoes of Love": [
+    {
+      "type": "map",
+      "name": "Overgrown Ruin"
+    },
+    {
+      "type": "map",
+      "name": "Overgrown Shrine"
+    },
+    {
+      "type": "map",
+      "name": "Overgrown Shrine"
+    },
+    {
+      "type": "map",
+      "name": "Core"
+    },
+    {
+      "type": "map",
+      "name": "Museum"
+    }
+  ],
+  "The Endless Darkness": [
+    {
+      "type": "harbingerPortal",
+      "name": "HarbingerPortal"
+    },
+    {
+      "type": "harbingerPortal",
+      "name": "HarbingerPortalDelve"
+    },
+    {
+      "type": "harbingerPortal",
+      "name": "HarbingerPortalUber"
+    }
+  ],
+  "The Undisputed": [
+    {
+      "type": "breachlordBossDomain",
+      "name": "Chayula, Who Dreamt"
+    }
+  ],
+  "Hunter's Reward": [
+    {
+      "type": "mapboss",
+      "name": "Fenumus, First of the Night"
+    }
+  ],
+  "The Wolf's Legacy": [
+    {
+      "type": "Chest",
+      "name": "Uber Labyrinth/Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)"
+    }
+  ],
+  "The Fox": [
+    {
+      "type": "map",
+      "name": "Barrows"
+    },
+    {
+      "type": "map",
+      "name": "Castle Ruins"
+    },
+    {
+      "type": "map",
+      "name": "Sunken City"
+    },
+    {
+      "type": "map",
+      "name": "Fields"
+    }
+  ],
+  "The Hook": [
+    {
+      "type": "mapboss",
+      "name": "Venarius"
+    }
+  ],
+  "Lantador's Lost Love": [
+    {
+      "type": "map",
+      "name": "Atoll"
+    },
+    {
+      "type": "map",
+      "name": "Coral Ruins"
+    },
+    {
+      "type": "map",
+      "name": "Lighthouse"
+    },
+    {
+      "type": "map",
+      "name": "Maelström of Chaos"
+    },
+    {
+      "type": "map",
+      "name": "Port"
+    },
+    {
+      "type": "map",
+      "name": "Reef"
+    },
+    {
+      "type": "map",
+      "name": "Strand"
+    },
+    {
+      "type": "map",
+      "name": "Whakawairua Tuahu"
+    },
+    {
+      "type": "map",
+      "name": "Mao Kun"
+    },
+    {
+      "type": "map",
+      "name": "Beach"
+    },
+    {
+      "type": "map",
+      "name": "Coves"
+    },
+    {
+      "type": "map",
+      "name": "Plateau"
+    },
+    {
+      "type": "map",
+      "name": "Shore"
+    },
+    {
+      "type": "map",
+      "name": "Tropical Island"
+    },
+    {
+      "type": "map",
+      "name": "Peninsula"
+    },
+    {
+      "type": "map",
+      "name": "Wharf"
+    },
+    {
+      "type": "map",
+      "name": "Shipyard"
+    },
+    {
+      "type": "map",
+      "name": "Pier"
+    },
+    {
+      "type": "map",
+      "name": "Estuary"
+    },
+    {
+      "type": "acts",
+      "name": "The Beacon"
+    },
+    {
+      "type": "mapboss",
+      "name": "The Brine King's Reef"
+    },
+    {
+      "type": "acts",
+      "name": "The Coast (A6)"
+    },
+    {
+      "type": "acts",
+      "name": "The Tidal Island (A6)"
+    },
+    {
+      "type": "acts",
+      "name": "The Twilight Strand (A6)"
+    },
+    {
+      "type": "acts",
+      "name": "The Mud Flats (A6)"
+    }
+  ],
+  "The Vast": [
+    {
+      "type": "map",
+      "name": "Reef"
+    },
+    {
+      "type": "map",
+      "name": "Coral Ruins"
+    },
+    {
+      "type": "map",
+      "name": "Coves"
+    }
+  ],
+  "Desecrated Virtue": [
+    {
+      "type": "mapboss",
+      "name": "Aul, the Crystal King"
+    }
+  ],
+  "Merciless Armament": [
+    {
+      "type": "map",
+      "name": "Armoury"
+    },
+    {
+      "type": "map",
+      "name": "Colonnade"
+    },
+    {
+      "type": "map",
+      "name": "Arsenal"
+    },
+    {
+      "type": "map",
+      "name": "Promenade"
+    }
+  ],
+  "Brush, Paint and Palette": [
+    {
+      "type": "mapboss",
+      "name": "Portentia, the Foul"
+    },
+    {
+      "type": "mapboss",
+      "name": "Doedre the Defiler"
+    },
+    {
+      "type": "mapboss",
+      "name": "Headmistress Braeta"
+    },
+    {
+      "type": "mapboss",
+      "name": "Erythrophagia"
+    }
+  ],
+  "Alluring Bounty": [
+    {
+      "type": "map",
+      "name": "The Apex of Sacrifice"
+    },
+    {
+      "type": "map",
+      "name": "The Alluring Abyss"
+    }
+  ],
+  "Blind Venture": [
+    {
+      "type": "map",
+      "name": "Museum"
+    },
+    {
+      "type": "map",
+      "name": "Relic Chambers"
+    },
+    {
+      "type": "acts",
+      "name": "The Reliquary (A5/A10)"
+    }
+  ],
+  "The Fortunate": [
+    {
+      "type": "map",
+      "name": "Tropical Island"
+    },
+    {
+      "type": "map",
+      "name": "Mineral Pools"
+    },
+    {
+      "type": "map",
+      "name": "Plateau"
+    },
+    {
+      "type": "map",
+      "name": "Dunes"
+    },
+    {
+      "type": "map",
+      "name": "Mesa"
+    },
+    {
+      "type": "map",
+      "name": "Atoll"
+    },
+    {
+      "type": "map",
+      "name": "Estuary"
+    },
+    {
+      "type": "map",
+      "name": "Arid Lake"
+    },
+    {
+      "type": "map",
+      "name": "Leyline"
+    },
+    {
+      "type": "map",
+      "name": "Beach"
+    },
+    {
+      "type": "map",
+      "name": "Marshes"
+    },
+    {
+      "type": "map",
+      "name": "Peninsula"
+    },
+    {
+      "type": "map",
+      "name": "Sulphur Vents"
+    },
+    {
+      "type": "map",
+      "name": "Shore"
+    },
+    {
+      "type": "map",
+      "name": "Terrace"
+    },
+    {
+      "type": "map",
+      "name": "Caldera"
+    },
+    {
+      "type": "map",
+      "name": "Orchard"
+    },
+    {
+      "type": "map",
+      "name": "Canyon"
+    },
+    {
+      "type": "map",
+      "name": "Ancient City"
+    },
+    {
+      "type": "map",
+      "name": "Fields"
+    },
+    {
+      "type": "map",
+      "name": "Jungle Valley"
+    },
+    {
+      "type": "map",
+      "name": "Desert Spring"
+    },
+    {
+      "type": "map",
+      "name": "Dry Sea"
+    },
+    {
+      "type": "map",
+      "name": "Crater"
+    },
+    {
+      "type": "map",
+      "name": "Desert"
+    },
+    {
+      "type": "map",
+      "name": "Burial Chambers"
+    }
+  ],
+  "The Tireless Extractor": [
+    {
+      "type": "map",
+      "name": "Factory"
+    },
+    {
+      "type": "map",
+      "name": "Silo"
+    }
+  ],
+  "Mawr Blaidd": [
+    {
+      "type": "map",
+      "name": "Bramble Valley"
+    },
+    {
+      "type": "map",
+      "name": "Dark Forest"
+    },
+    {
+      "type": "map",
+      "name": "Forbidden Woods"
+    }
+  ],
+  "The Prince of Darkness": [
+    {
+      "type": "mapboss",
+      "name": "Eater of Souls"
+    },
+    {
+      "type": "mapboss",
+      "name": "Nightmare's Omen"
+    }
+  ],
+  "A Stone Perfected": [
+    {
+      "type": "map",
+      "name": "Coves"
+    },
+    {
+      "type": "map",
+      "name": "Flooded Mine"
+    },
+    {
+      "type": "map",
+      "name": "Grotto"
+    },
+    {
+      "type": "map",
+      "name": "Vault"
+    },
+    {
+      "type": "map",
+      "name": "Waterways"
+    },
+    {
+      "type": "map",
+      "name": "Wharf"
+    },
+    {
+      "type": "map",
+      "name": "Peninsula"
+    },
+    {
+      "type": "map",
+      "name": "Geode"
+    }
+  ],
+  "Hunter's Resolve": [
+    {
+      "type": "map",
+      "name": "Forking River"
+    },
+    {
+      "type": "map",
+      "name": "Ramparts"
+    },
+    {
+      "type": "acts",
+      "name": "The Sarn Ramparts"
+    },
+    {
+      "type": "acts",
+      "name": "The Riverways (A6)"
+    },
+    {
+      "type": "acts",
+      "name": "The Southern Forest (A6)"
+    }
+  ],
+  "The One With All": [
+    {
+      "type": "map",
+      "name": "Barrows"
+    },
+    {
+      "type": "map",
+      "name": "Burial Chambers"
+    },
+    {
+      "type": "map",
+      "name": "Cemetery"
+    },
+    {
+      "type": "map",
+      "name": "Graveyard"
+    },
+    {
+      "type": "map",
+      "name": "Grave Trough"
+    }
+  ],
+  "Boon of the First Ones": [
+    {
+      "type": "map",
+      "name": "Pit of the Chimera"
+    }
+  ],
+  "The Mountain": [
+    {
+      "type": "map",
+      "name": "Summit"
+    },
+    {
+      "type": "map",
+      "name": "Glacier"
+    },
+    {
+      "type": "acts",
+      "name": "The Ascent"
+    },
+    {
+      "type": "acts",
+      "name": "The Descent"
+    }
+  ],
+  "The Tumbleweed": [
+    {
+      "type": "map",
+      "name": "Desert Spring"
+    },
+    {
+      "type": "map",
+      "name": "Dunes"
+    },
+    {
+      "type": "map",
+      "name": "Dry Sea"
+    }
+  ],
+  "The Primordial": [
+    {
+      "type": "map",
+      "name": "Coves"
+    },
+    {
+      "type": "map",
+      "name": "Flooded Mine"
+    },
+    {
+      "type": "map",
+      "name": "Geode"
+    },
+    {
+      "type": "map",
+      "name": "Grotto"
+    },
+    {
+      "type": "map",
+      "name": "Peninsula"
+    },
+    {
+      "type": "map",
+      "name": "Vault"
+    },
+    {
+      "type": "map",
+      "name": "Waterways"
+    },
+    {
+      "type": "map",
+      "name": "Wharf"
+    }
+  ],
+  "Home": [
+    {
+      "type": "map",
+      "name": "Alleyways"
+    },
+    {
+      "type": "map",
+      "name": "Arcade"
+    },
+    {
+      "type": "map",
+      "name": "City Square"
+    },
+    {
+      "type": "map",
+      "name": "Crimson Township"
+    },
+    {
+      "type": "map",
+      "name": "Residence"
+    },
+    {
+      "type": "map",
+      "name": "Sunken City"
+    },
+    {
+      "type": "map",
+      "name": "Tower"
+    },
+    {
+      "type": "map",
+      "name": "Ancient City"
+    },
+    {
+      "type": "map",
+      "name": "Chateau"
+    },
+    {
+      "type": "map",
+      "name": "Haunted Mansion"
+    },
+    {
+      "type": "map",
+      "name": "Siege"
+    },
+    {
+      "type": "map",
+      "name": "Bazaar"
+    }
+  ],
+  "The Escape": [
+    {
+      "type": "breachlordBossDomain",
+      "name": "Xoph, Dark Embers"
+    },
+    {
+      "type": "breachlordBossDomain",
+      "name": "Tul, Creeping Avalanche"
+    },
+    {
+      "type": "breachlordBossDomain",
+      "name": "Esh, Forked Thought"
+    },
+    {
+      "type": "breachlordBossDomain",
+      "name": "Chayula, Who Dreamt"
+    },
+    {
+      "type": "breachlordBossDomain",
+      "name": "Uul-Netol, Unburdened Flesh"
+    }
+  ],
+  "Pride of the First Ones": [
+    {
+      "type": "map",
+      "name": "Barrows"
+    },
+    {
+      "type": "map",
+      "name": "Grotto"
+    },
+    {
+      "type": "map",
+      "name": "Lair"
+    },
+    {
+      "type": "mapboss",
+      "name": "Caer Blaidd, Wolfpack's Den"
+    }
+  ],
+  "The Awakened": [
+    {
+      "type": "metamorph"
+    }
+  ],
+  "Audacity": [
+    {
+      "type": "map",
+      "name": "The Apex of Sacrifice"
+    }
+  ],
+  "Destined to Crumble": [
+    {
+      "type": "map",
+      "name": "Academy"
+    },
+    {
+      "type": "map",
+      "name": "Museum"
+    },
+    {
+      "type": "map",
+      "name": "Scriptorium"
+    }
+  ],
+  "The Jeweller's Boon": [
+    {
+      "type": "map",
+      "name": "Crystal Ore"
+    },
+    {
+      "type": "map",
+      "name": "Mineral Pools"
+    },
+    {
+      "type": "map",
+      "name": "Primordial Blocks"
+    },
+    {
+      "type": "map",
+      "name": "Grotto"
+    }
+  ],
+  "The Drunken Aristocrat": [
+    {
+      "type": "map",
+      "name": "Bazaar"
+    },
+    {
+      "type": "map",
+      "name": "Academy"
+    },
+    {
+      "type": "map",
+      "name": "Ramparts"
+    },
+    {
+      "type": "map",
+      "name": "Residence"
+    },
+    {
+      "type": "map",
+      "name": "Pier"
+    },
+    {
+      "type": "map",
+      "name": "Crystal Ore"
+    }
+  ],
+  "The Samurai's Eye": [
+    {
+      "type": "abyssLichBoss",
+      "name": "Ulaman, Sovereign of the Well"
+    },
+    {
+      "type": "abyssLichBoss",
+      "name": "Amanamu, Liege of the Lightless"
+    }
+  ],
+  "The Blessing of Moosh": [
+    {
+      "type": "Chest",
+      "name": "Labyrinth Darkshrines"
+    }
+  ],
+  "The Unexpected Prize": [
+    {
+      "type": "map",
+      "name": "Residence"
+    },
+    {
+      "type": "map",
+      "name": "Villa"
+    },
+    {
+      "type": "map",
+      "name": "Palace"
+    }
+  ],
+  "The Endurance": [
+    {
+      "type": "map",
+      "name": "Crystal Ore"
+    },
+    {
+      "type": "map",
+      "name": "Dig"
+    },
+    {
+      "type": "map",
+      "name": "Excavation"
+    },
+    {
+      "type": "map",
+      "name": "Flooded Mine"
+    },
+    {
+      "type": "map",
+      "name": "Geode"
+    },
+    {
+      "type": "map",
+      "name": "Grotto"
+    }
+  ],
+  "Rain of Chaos": [
+    {
+      "type": "map",
+      "name": "Castle Ruins"
+    },
+    {
+      "type": "map",
+      "name": "Fields"
+    }
+  ],
+  "The Lover": [
+    {
+      "type": "map",
+      "name": "Maelström of Chaos"
+    },
+    {
+      "type": "map",
+      "name": "Underground Sea"
+    }
+  ],
+  "The Queen": [
+    {
+      "type": "map",
+      "name": "Vaults of Atziri"
+    }
+  ],
+  "The Tyrant": [
+    {
+      "type": "map",
+      "name": "Port"
+    },
+    {
+      "type": "map",
+      "name": "Precinct"
+    },
+    {
+      "type": "map",
+      "name": "Coral Ruins"
+    },
+    {
+      "type": "map",
+      "name": "Bazaar"
+    },
+    {
+      "type": "map",
+      "name": "Castle Ruins"
+    },
+    {
+      "type": "map",
+      "name": "Arcade"
+    },
+    {
+      "type": "map",
+      "name": "Ancient City"
+    },
+    {
+      "type": "map",
+      "name": "Ghetto"
+    }
+  ],
+  "Imperial Legacy": [
+    {
+      "type": "map",
+      "name": "Desert"
+    },
+    {
+      "type": "map",
+      "name": "Desert Spring"
+    },
+    {
+      "type": "map",
+      "name": "Dry Sea"
+    },
+    {
+      "type": "map",
+      "name": "Dunes"
+    },
+    {
+      "type": "map",
+      "name": "Pillars of Arun"
+    }
+  ],
+  "The Doppelganger": [
+    {
+      "type": "map",
+      "name": "Whakawairua Tuahu"
+    },
+    {
+      "type": "acts",
+      "name": "The Crossroads (A7)"
+    }
+  ],
+  "Doedre's Madness": [
+    {
+      "type": "mapboss",
+      "name": "Prodigy of Hexes"
+    },
+    {
+      "type": "mapboss",
+      "name": "Erythrophagia"
+    },
+    {
+      "type": "mapboss",
+      "name": "Headmistress Braeta"
+    },
+    {
+      "type": "mapboss",
+      "name": "Portentia, the Foul"
+    },
+    {
+      "type": "mapboss",
+      "name": "Doedre the Defiler"
+    }
+  ],
+  "The Bear Woman": [
+    {
+      "type": "mapboss",
+      "name": "The Cleansing Light"
+    },
+    {
+      "type": "mapboss",
+      "name": "Beast of the Pits"
+    },
+    {
+      "type": "mapboss",
+      "name": "Erebix, Light's Bane"
+    }
+  ],
+  "The Archmage's Right Hand": [
+    {
+      "type": "areaSpecific",
+      "name": "Chayula's Domain"
+    },
+    {
+      "type": "areaSpecific",
+      "name": "Uul-Netol's Domain"
+    },
+    {
+      "type": "areaSpecific",
+      "name": "Esh's Domain"
+    },
+    {
+      "type": "areaSpecific",
+      "name": "Xoph's Domain"
+    },
+    {
+      "type": "areaSpecific",
+      "name": "Tul's Domain"
+    }
+  ],
+  "The Progeny of Lunaris": [
+    {
+      "type": "mapboss",
+      "name": "Selenia, the Endless Night"
+    },
+    {
+      "type": "mapboss",
+      "name": "Helial, the Day Unending"
+    },
+    {
+      "type": "mapboss",
+      "name": "Khor, Sister of Shadows"
+    }
+  ],
+  "The Conduit": [
+    {
+      "type": "mapboss",
+      "name": "The High Templar"
+    },
+    {
+      "type": "mapboss",
+      "name": "The Hallowed Husk"
+    },
+    {
+      "type": "mapboss",
+      "name": "Excellis Aurafix"
+    }
+  ],
+  "The Cacophony": [
+    {
+      "type": "mapboss",
+      "name": "Merveil, the Returned"
+    },
+    {
+      "type": "mapboss",
+      "name": "Shrieker Eihal"
+    },
+    {
+      "type": "mapboss",
+      "name": "The Sanguine Siren"
+    },
+    {
+      "type": "mapboss",
+      "name": "Erebix, Light's Bane"
+    },
+    {
+      "type": "mapboss",
+      "name": "Doedre the Defiler"
+    },
+    {
+      "type": "mapboss",
+      "name": "Nassar, Lion of the Seas"
+    }
+  ],
+  "Chasing Risk": [
+    {
+      "type": "vaalOmnitect"
+    }
+  ],
+  "The Rabid Rhoa": [
+    {
+      "type": "mapboss",
+      "name": "Drought-Maddened Rhoa"
+    },
+    {
+      "type": "mapboss",
+      "name": "Skullbeak"
+    }
+  ],
+  "Brother's Gift": [
+    {
+      "type": "map",
+      "name": "Cemetery"
+    },
+    {
+      "type": "map",
+      "name": "Graveyard"
+    },
+    {
+      "type": "map",
+      "name": "Grave Trough"
+    }
+  ],
+  "Auspicious Ambitions": [
+    {
+      "type": "mapboss",
+      "name": "The Maven"
+    },
+    {
+      "type": "mapboss",
+      "name": "The Searing Exarch"
+    },
+    {
+      "type": "mapboss",
+      "name": "The Eater of Worlds"
+    },
+    {
+      "type": "mapboss",
+      "name": "Uber Elder"
+    }
+  ],
+  "The Fiend": [
+    {
+      "type": "map",
+      "name": "Poorjoy's Asylum"
+    },
+    {
+      "type": "map",
+      "name": "Shrine"
+    },
+    {
+      "type": "map",
+      "name": "Foundry"
+    },
+    {
+      "type": "map",
+      "name": "Laboratory"
+    }
+  ],
+  "The Pact": [
+    {
+      "type": "map",
+      "name": "Pier"
+    },
+    {
+      "type": "map",
+      "name": "Port"
+    },
+    {
+      "type": "map",
+      "name": "Wharf"
+    },
+    {
+      "type": "map",
+      "name": "Shipyard"
+    },
+    {
+      "type": "acts",
+      "name": "The Quay"
+    }
+  ],
+  "The Transformation": [
+    {
+      "type": "metamorph"
+    }
+  ],
+  "Choking Guilt": [
+    {
+      "type": "mapboss",
+      "name": "The Infinite Hunger"
+    }
+  ],
+  "Astral Protection": [
+    {
+      "type": "map",
+      "name": "Moon Temple"
+    }
+  ],
+  "Gift of Asenath": [
+    {
+      "type": "map",
+      "name": "Dig"
+    },
+    {
+      "type": "map",
+      "name": "Grotto"
+    },
+    {
+      "type": "map",
+      "name": "Geode"
+    },
+    {
+      "type": "map",
+      "name": "Crystal Ore"
+    },
+    {
+      "type": "map",
+      "name": "Flooded Mine"
+    },
+    {
+      "type": "map",
+      "name": "Excavation"
+    }
+  ],
+  "The Card Sharp": [
+    {
+      "type": "architect",
+      "name": "Paquate, Architect of Corruption"
+    },
+    {
+      "type": "architect",
+      "name": "Ahuana, Architect of Ceremonies"
+    },
+    {
+      "type": "architect",
+      "name": "Zalatl, Architect of Thaumaturgy"
+    }
+  ],
+  "Mitts": [
+    {
+      "type": "mapboss",
+      "name": "Kurgal, the Blackblooded"
+    }
+  ],
+  "The Fletcher": [
+    {
+      "type": "mapboss",
+      "name": "Steelpoint the Avenger"
+    },
+    {
+      "type": "mapboss",
+      "name": "Lord of the Ashen Arrow"
+    },
+    {
+      "type": "mapboss",
+      "name": "Mirage of Bones"
+    },
+    {
+      "type": "mapboss",
+      "name": "Stonebeak, Battle Fowl"
+    },
+    {
+      "type": "mapboss",
+      "name": "Eyepecker"
+    },
+    {
+      "type": "mapboss",
+      "name": "The Animal Pack"
+    },
+    {
+      "type": "mapboss",
+      "name": "Nightwane"
+    }
+  ],
+  "Alone in the Darkness": [
+    {
+      "type": "Chest",
+      "name": "Abyssal Trove"
+    }
+  ],
+  "The Magma Crab": [
+    {
+      "type": "rogueExile",
+      "name": "Magnus Stonethorn"
+    }
+  ],
+  "The Chosen": [
+    {
+      "type": "Chest",
+      "name": "Breach Clasped Hand"
+    }
+  ],
+  "The Hive of Knowledge": [
+    {
+      "type": "map",
+      "name": "Vaal Pyramid"
+    },
+    {
+      "type": "map",
+      "name": "Vaal Temple"
+    },
+    {
+      "type": "map",
+      "name": "Maze"
+    }
+  ],
+  "Loyalty": [
+    {
+      "type": "map",
+      "name": "Barrows"
+    },
+    {
+      "type": "map",
+      "name": "Grotto"
+    },
+    {
+      "type": "map",
+      "name": "Lair"
+    },
+    {
+      "type": "mapboss",
+      "name": "Caer Blaidd, Wolfpack's Den"
+    },
+    {
+      "type": "acts",
+      "name": "The Den (A7)"
+    }
+  ],
+  "Keeper's Corruption": [
+    {
+      "type": "areaSpecific",
+      "name": "Chayula's Domain"
+    }
+  ],
+  "The Academic": [
+    {
+      "type": "map",
+      "name": "Academy"
+    },
+    {
+      "type": "map",
+      "name": "Museum"
+    },
+    {
+      "type": "map",
+      "name": "Scriptorium"
+    }
+  ],
+  "Sambodhi's Vow": [
+    {
+      "type": "syndicateMember",
+      "name": "Haku, Warmaster"
+    },
+    {
+      "type": "syndicateMember",
+      "name": "Elreon"
+    },
+    {
+      "type": "syndicateMember",
+      "name": "Tora"
+    },
+    {
+      "type": "syndicateMember",
+      "name": "Vagan"
+    },
+    {
+      "type": "syndicateMember",
+      "name": "Vorici"
+    },
+    {
+      "type": "syndicateMember",
+      "name": "Hillock, the Blacksmith"
+    },
+    {
+      "type": "syndicateMember",
+      "name": "Leo, Wolf of the Pits"
+    },
+    {
+      "type": "syndicateMember",
+      "name": "Guff \"Tiny\" Grenn"
+    },
+    {
+      "type": "syndicateMember",
+      "name": "Janus Perandus"
+    },
+    {
+      "type": "syndicateMember",
+      "name": "It That Fled"
+    },
+    {
+      "type": "syndicateMember",
+      "name": "Gravicius"
+    },
+    {
+      "type": "syndicateMember",
+      "name": "Thane Jorgin"
+    },
+    {
+      "type": "syndicateMember",
+      "name": "Korell Goya"
+    },
+    {
+      "type": "syndicateMember",
+      "name": "Rin Yuushu"
+    },
+    {
+      "type": "syndicateMember",
+      "name": "Cameria the Coldblooded"
+    },
+    {
+      "type": "syndicateMember",
+      "name": "Aisling Laffrey"
+    },
+    {
+      "type": "syndicateMember",
+      "name": "Riker Maloney"
+    }
+  ],
+  "Forbidden Power": [
+    {
+      "type": "mapboss",
+      "name": "Helial, the Day Unending"
+    },
+    {
+      "type": "mapboss",
+      "name": "Ara, Sister of Light"
+    },
+    {
+      "type": "mapboss",
+      "name": "Jorus, Sky's Edge"
+    },
+    {
+      "type": "mapboss",
+      "name": "Opid, Helial's Herald"
+    },
+    {
+      "type": "actBoss",
+      "name": "Dawn, Harbinger of Solaris"
+    },
+    {
+      "type": "actBoss",
+      "name": "Solaris, Eternal Sun"
+    }
+  ],
+  "The Harvester": [
+    {
+      "type": "map",
+      "name": "Fields"
+    },
+    {
+      "type": "map",
+      "name": "Castle Ruins"
+    },
+    {
+      "type": "acts",
+      "name": "The Imperial Fields"
+    },
+    {
+      "type": "acts",
+      "name": "The Crossroads (A7)"
+    }
+  ],
+  "Left to Fate": [
+    {
+      "type": "map",
+      "name": "Ramparts"
+    },
+    {
+      "type": "map",
+      "name": "Forking River"
+    }
+  ],
+  "The Astromancer": [
+    {
+      "type": "mapboss",
+      "name": "Corpse Stitcher"
+    },
+    {
+      "type": "mapboss",
+      "name": "Flesh Sculptor"
+    }
+  ],
+  "Harmony of Souls": [
+    {
+      "type": "mapboss",
+      "name": "Doedre the Defiler"
+    },
+    {
+      "type": "mapboss",
+      "name": "Shavronne the Sickening"
+    },
+    {
+      "type": "mapboss",
+      "name": "Maligaro the Mutilator"
+    }
+  ],
+  "Assassin's Favour": [
+    {
+      "type": "map",
+      "name": "Alleyways"
+    },
+    {
+      "type": "map",
+      "name": "Arcade"
+    },
+    {
+      "type": "map",
+      "name": "Bazaar"
+    },
+    {
+      "type": "map",
+      "name": "Port"
+    },
+    {
+      "type": "acts",
+      "name": "The Marketplace"
+    },
+    {
+      "type": "acts",
+      "name": "The Quay"
+    }
+  ],
+  "The Cache": [
+    {
+      "type": "map",
+      "name": "Maelström of Chaos"
+    },
+    {
+      "type": "map",
+      "name": "Mineral Pools"
+    },
+    {
+      "type": "map",
+      "name": "Underground Sea"
+    },
+    {
+      "type": "map",
+      "name": "Vaults of Atziri"
+    },
+    {
+      "type": "map",
+      "name": "Vault"
+    }
+  ],
+  "The Ruthless Ceinture": [
+    {
+      "type": "map",
+      "name": "Dig"
+    },
+    {
+      "type": "map",
+      "name": "Maze of the Minotaur"
+    },
+    {
+      "type": "map",
+      "name": "Summit"
+    },
+    {
+      "type": "acts",
+      "name": "The Ascent"
+    },
+    {
+      "type": "acts",
+      "name": "The Descent"
+    },
+    {
+      "type": "acts",
+      "name": "The Foothills"
+    }
+  ],
+  "The Ethereal": [
+    {
+      "type": "map",
+      "name": "The Alluring Abyss"
+    },
+    {
+      "type": "map",
+      "name": "The Apex of Sacrifice"
+    }
+  ],
+  "Baited Expectations": [
+    {
+      "type": "map",
+      "name": "Desert Spring"
+    },
+    {
+      "type": "map",
+      "name": "Dry Sea"
+    },
+    {
+      "type": "map",
+      "name": "Dunes"
+    },
+    {
+      "type": "map",
+      "name": "Desert"
+    }
+  ],
+  "The Strategist": [
+    {
+      "type": "elderslayer",
+      "name": "Drox, The Warlord"
+    }
+  ],
+  "Time-Lost Relic": [
+    {
+      "type": "map",
+      "name": "Flooded Mine"
+    },
+    {
+      "type": "map",
+      "name": "Excavation"
+    },
+    {
+      "type": "map",
+      "name": "Dig"
+    },
+    {
+      "type": "map",
+      "name": "Geode"
+    },
+    {
+      "type": "map",
+      "name": "Crystal Ore"
+    },
+    {
+      "type": "map",
+      "name": "Grotto"
+    }
+  ],
+  "Costly Curio": [
+    {
+      "type": "map",
+      "name": "Relic Chambers"
+    },
+    {
+      "type": "map",
+      "name": "Museum"
+    }
+  ],
+  "Atziri's Arsenal": [
+    {
+      "type": "map",
+      "name": "Vaults of Atziri"
+    }
+  ],
+  "The Mind's Eyes": [
+    {
+      "type": "mapboss",
+      "name": "Champion of the Hollows"
+    },
+    {
+      "type": "mapboss",
+      "name": "Messenger of the Hollows"
+    },
+    {
+      "type": "mapboss",
+      "name": "Lord of the Hollows"
+    },
+    {
+      "type": "mapboss",
+      "name": "The Eroding One"
+    },
+    {
+      "type": "mapboss",
+      "name": "Stalker of the Endless Dunes"
+    },
+    {
+      "type": "mapboss",
+      "name": "Void Anomaly"
+    },
+    {
+      "type": "mapboss",
+      "name": "Avatar of Undoing"
+    },
+    {
+      "type": "mapboss",
+      "name": "Shrieker Eihal"
+    }
+  ],
+  "The Tower": [
+    {
+      "type": "map",
+      "name": "Residence"
+    },
+    {
+      "type": "map",
+      "name": "Tower"
+    },
+    {
+      "type": "acts",
+      "name": "Shavronne's Tower"
+    },
+    {
+      "type": "acts",
+      "name": "The Sceptre of God"
+    },
+    {
+      "type": "acts",
+      "name": "The Upper Sceptre of God"
+    }
+  ],
+  "The Enlightened": [
+    {
+      "type": "map",
+      "name": "Crimson Temple"
+    },
+    {
+      "type": "map",
+      "name": "Defiled Cathedral"
+    },
+    {
+      "type": "map",
+      "name": "Ivory Temple"
+    },
+    {
+      "type": "map",
+      "name": "Lookout"
+    },
+    {
+      "type": "map",
+      "name": "Temple"
+    },
+    {
+      "type": "map",
+      "name": "Belfry"
+    },
+    {
+      "type": "map",
+      "name": "The Twilight Temple"
+    },
+    {
+      "type": "map",
+      "name": "Moon Temple"
+    },
+    {
+      "type": "map",
+      "name": "Basilica"
+    }
+  ],
+  "Magnum Opus": [
+    {
+      "type": "map",
+      "name": "Altered Distant Memory"
+    },
+    {
+      "type": "map",
+      "name": "Augmented Distant Memory"
+    },
+    {
+      "type": "map",
+      "name": "Twisted Distant Memory"
+    },
+    {
+      "type": "map",
+      "name": "Rewritten Distant Memory"
+    }
+  ],
+  "The Fool": [
+    {
+      "type": "syndicateMember",
+      "name": "Janus Perandus"
+    }
+  ],
+  "Gift of the Gemling Queen": [
+    {
+      "type": "map",
+      "name": "Crystal Ore"
+    },
+    {
+      "type": "map",
+      "name": "Dig"
+    },
+    {
+      "type": "map",
+      "name": "Excavation"
+    },
+    {
+      "type": "map",
+      "name": "Flooded Mine"
+    },
+    {
+      "type": "map",
+      "name": "Geode"
+    },
+    {
+      "type": "map",
+      "name": "Grotto"
+    }
+  ],
+  "Prometheus' Armoury": [
+    {
+      "type": "syndicateMember",
+      "name": "Haku, Warmaster"
+    }
+  ],
+  "From Bone to Ashes": [
+    {
+      "type": "map",
+      "name": "Strand"
+    },
+    {
+      "type": "map",
+      "name": "Caldera"
+    },
+    {
+      "type": "map",
+      "name": "Shore"
+    },
+    {
+      "type": "map",
+      "name": "Lava Lake"
+    },
+    {
+      "type": "map",
+      "name": "Coves"
+    },
+    {
+      "type": "map",
+      "name": "Estuary"
+    },
+    {
+      "type": "map",
+      "name": "Volcano"
+    }
+  ],
+  "The Gentleman": [
+    {
+      "type": "map",
+      "name": "Ghetto"
+    },
+    {
+      "type": "map",
+      "name": "Precinct"
+    }
+  ],
+  "The Long Watch": [
+    {
+      "type": "map",
+      "name": "Iceberg"
+    },
+    {
+      "type": "map",
+      "name": "Infested Valley"
+    },
+    {
+      "type": "map",
+      "name": "Primordial Blocks"
+    },
+    {
+      "type": "map",
+      "name": "Mineral Pools"
+    },
+    {
+      "type": "map",
+      "name": "Alleyways"
+    },
+    {
+      "type": "map",
+      "name": "Siege"
+    },
+    {
+      "type": "map",
+      "name": "Castle Ruins"
+    },
+    {
+      "type": "map",
+      "name": "Armoury"
+    },
+    {
+      "type": "map",
+      "name": "Arachnid Tomb"
+    },
+    {
+      "type": "map",
+      "name": "Forking River"
+    }
+  ],
+  "The Easy Stroll": [
+    {
+      "type": "map",
+      "name": "Gardens"
+    },
+    {
+      "type": "map",
+      "name": "Courtyard"
+    },
+    {
+      "type": "map",
+      "name": "Orchard"
+    },
+    {
+      "type": "map",
+      "name": "Terrace"
+    }
+  ],
+  "The Artist": [
+    {
+      "type": "map",
+      "name": "Overgrown Ruin"
+    },
+    {
+      "type": "map",
+      "name": "Overgrown Shrine"
+    }
+  ],
+  "Alivia's Grace": [
+    {
+      "type": "map",
+      "name": "Ashen Wood"
+    },
+    {
+      "type": "map",
+      "name": "Spider Forest"
+    },
+    {
+      "type": "map",
+      "name": "Lair"
+    },
+    {
+      "type": "map",
+      "name": "Thicket"
+    },
+    {
+      "type": "map",
+      "name": "Dark Forest"
+    },
+    {
+      "type": "map",
+      "name": "Forbidden Woods"
+    },
+    {
+      "type": "map",
+      "name": "Tropical Island"
+    },
+    {
+      "type": "map",
+      "name": "Jungle Valley"
+    },
+    {
+      "type": "map",
+      "name": "Ramparts"
+    },
+    {
+      "type": "map",
+      "name": "Stagnation"
+    },
+    {
+      "type": "map",
+      "name": "Bramble Valley"
+    }
+  ],
+  "Brotherhood in Exile": [
+    {
+      "type": "map",
+      "name": "Chateau"
+    },
+    {
+      "type": "map",
+      "name": "Orchard"
+    },
+    {
+      "type": "map",
+      "name": "Plaza"
+    },
+    {
+      "type": "map",
+      "name": "Conservatory"
+    }
+  ],
+  "The Twins": [
+    {
+      "type": "map",
+      "name": "Moon Temple"
+    },
+    {
+      "type": "map",
+      "name": "Cold River"
+    },
+    {
+      "type": "map",
+      "name": "The Twilight Temple"
+    },
+    {
+      "type": "map",
+      "name": "Temple"
+    }
+  ],
+  "A Dab of Ink": [
+    {
+      "type": "map",
+      "name": "Academy"
+    },
+    {
+      "type": "map",
+      "name": "Museum"
+    },
+    {
+      "type": "map",
+      "name": "Scriptorium"
+    }
+  ],
+  "Vanity": [
+    {
+      "type": "Chest",
+      "name": "Vaal Vessel (Vaal Side Areas)"
+    }
+  ],
+  "Demigod's Wager": [
+    {
+      "type": "mapboss",
+      "name": "The Cleansing Light"
+    }
+  ],
+  "The Offspring": [
+    {
+      "type": "mapboss",
+      "name": "Gorulis, Will-Thief"
+    },
+    {
+      "type": "mapboss",
+      "name": "Ryslatha, the Puppet Mistress"
+    },
+    {
+      "type": "mapboss",
+      "name": "Gorulis, Will-Thief"
+    },
+    {
+      "type": "mapboss",
+      "name": "Murgeth Bogsong"
+    }
+  ],
+  "The Gulf": [
+    {
+      "type": "mapboss",
+      "name": "Uber Elder"
+    }
+  ],
+  "A Dusty Memory": [
+    {
+      "type": "map",
+      "name": "Cortex"
+    },
+    {
+      "type": "map",
+      "name": "Augmented Distant Memory"
+    },
+    {
+      "type": "map",
+      "name": "Twisted Distant Memory"
+    },
+    {
+      "type": "map",
+      "name": "Altered Distant Memory"
+    },
+    {
+      "type": "map",
+      "name": "Rewritten Distant Memory"
+    }
+  ],
+  "The Heroic Shot": [
+    {
+      "type": "Strongbox",
+      "name": "Arcanist's Strongbox"
+    }
+  ],
+  "The Lord of Celebration": [
+    {
+      "type": "map",
+      "name": "Residence"
+    },
+    {
+      "type": "map",
+      "name": "Ivory Temple"
+    },
+    {
+      "type": "map",
+      "name": "Crimson Temple"
+    },
+    {
+      "type": "map",
+      "name": "Crimson Township"
+    },
+    {
+      "type": "map",
+      "name": "Laboratory"
+    },
+    {
+      "type": "map",
+      "name": "Basilica"
+    },
+    {
+      "type": "map",
+      "name": "Palace"
+    },
+    {
+      "type": "map",
+      "name": "Conservatory"
+    },
+    {
+      "type": "map",
+      "name": "Vault"
+    },
+    {
+      "type": "map",
+      "name": "Haunted Mansion"
+    },
+    {
+      "type": "map",
+      "name": "Villa"
+    },
+    {
+      "type": "map",
+      "name": "Chateau"
+    },
+    {
+      "type": "map",
+      "name": "Temple"
+    },
+    {
+      "type": "map",
+      "name": "Relic Chambers"
+    },
+    {
+      "type": "map",
+      "name": "The Twilight Temple"
+    },
+    {
+      "type": "map",
+      "name": "Vaults of Atziri"
+    }
+  ],
+  "The Old Man": [
+    {
+      "type": "map",
+      "name": "Atoll"
+    },
+    {
+      "type": "map",
+      "name": "Lighthouse"
+    },
+    {
+      "type": "map",
+      "name": "Peninsula"
+    },
+    {
+      "type": "map",
+      "name": "Pier"
+    },
+    {
+      "type": "map",
+      "name": "Shore"
+    },
+    {
+      "type": "map",
+      "name": "Strand"
+    },
+    {
+      "type": "map",
+      "name": "Tropical Island"
+    },
+    {
+      "type": "map",
+      "name": "Wharf"
+    }
+  ],
+  "The Army of Blood": [
+    {
+      "type": "map",
+      "name": "Poorjoy's Asylum"
+    },
+    {
+      "type": "map",
+      "name": "Shrine"
+    },
+    {
+      "type": "acts",
+      "name": "The Lunaris Temple Level 2 (A3/A8)"
+    }
+  ],
+  "Dementophobia": [
+    {
+      "type": "mapboss",
+      "name": "Venarius"
+    },
+    {
+      "type": "elderslayer",
+      "name": "Baran, The Crusader"
+    },
+    {
+      "type": "elderslayer",
+      "name": "Al-Hezmin, The Hunter"
+    },
+    {
+      "type": "elderslayer",
+      "name": "Veritania, The Redeemer"
+    },
+    {
+      "type": "elderslayer",
+      "name": "Drox, The Warlord"
+    }
+  ],
+  "The Wretched": [
+    {
+      "type": "map",
+      "name": "Bone Crypt"
+    },
+    {
+      "type": "map",
+      "name": "Cursed Crypt"
+    },
+    {
+      "type": "map",
+      "name": "The Coward's Trial"
+    },
+    {
+      "type": "map",
+      "name": "Bone Crypt"
+    },
+    {
+      "type": "map",
+      "name": "The Coward's Trial"
+    },
+    {
+      "type": "map",
+      "name": "Acton's Nightmare"
+    },
+    {
+      "type": "map",
+      "name": "Necropolis"
+    }
+  ],
+  "The Wolven King's Bite": [
+    {
+      "type": "map",
+      "name": "Dark Forest"
+    },
+    {
+      "type": "map",
+      "name": "Lair"
+    }
+  ],
+  "Gemcutter's Mercy": [
+    {
+      "type": "Chest",
+      "name": "Delve Gem Chests"
+    }
+  ],
+  "Nook's Crown": [
+    {
+      "type": "mapboss",
+      "name": "Catarina, Master of Undeath"
+    }
+  ],
+  "The Explorer": [
+    {
+      "type": "map",
+      "name": "Thicket"
+    }
+  ],
+  "The Scavenger": [
+    {
+      "type": "mapboss",
+      "name": "Gnar, Eater of Carrion"
+    },
+    {
+      "type": "mapboss",
+      "name": "Stonebeak, Battle Fowl"
+    },
+    {
+      "type": "mapboss",
+      "name": "Hephaeus, The Hammer"
+    },
+    {
+      "type": "mapboss",
+      "name": "The Winged Death"
+    }
+  ],
+  "The Avenger": [
+    {
+      "type": "map",
+      "name": "Mineral Pools"
+    },
+    {
+      "type": "map",
+      "name": "Underground Sea"
+    },
+    {
+      "type": "map",
+      "name": "Lava Chamber"
+    },
+    {
+      "type": "map",
+      "name": "Maelström of Chaos"
+    },
+    {
+      "type": "map",
+      "name": "Whakawairua Tuahu"
+    }
+  ],
+  "The Deal": [
+    {
+      "type": "syndicateMember",
+      "name": "Cameria the Coldblooded"
+    }
+  ],
+  "The Survivalist": [
+    {
+      "type": "map",
+      "name": "Flooded Mine"
+    },
+    {
+      "type": "map",
+      "name": "Mineral Pools"
+    },
+    {
+      "type": "map",
+      "name": "Underground Sea"
+    },
+    {
+      "type": "acts",
+      "name": "The Cavern of Anger (A6)"
+    }
+  ],
+  "The Nurse": [
+    {
+      "type": "map",
+      "name": "Cells"
+    },
+    {
+      "type": "map",
+      "name": "Core"
+    },
+    {
+      "type": "map",
+      "name": "Tower"
+    },
+    {
+      "type": "map",
+      "name": "Scriptorium"
+    },
+    {
+      "type": "acts",
+      "name": "Shavronne's Tower"
+    },
+    {
+      "type": "acts",
+      "name": "The Harvest"
+    },
+    {
+      "type": "acts",
+      "name": "The Rotting Core"
+    },
+    {
+      "type": "map",
+      "name": "Carcass"
+    },
+    {
+      "type": "map",
+      "name": "Core"
+    },
+    {
+      "type": "acts",
+      "name": "The Harvest"
+    },
+    {
+      "type": "acts",
+      "name": "The Rotting Core"
+    }
+  ],
+  "The Inoculated": [
+    {
+      "type": "map",
+      "name": "Acid Caverns"
+    },
+    {
+      "type": "map",
+      "name": "Primordial Pool"
+    },
+    {
+      "type": "map",
+      "name": "Stagnation"
+    },
+    {
+      "type": "map",
+      "name": "Sulphur Vents"
+    },
+    {
+      "type": "map",
+      "name": "Mud Geyser"
+    },
+    {
+      "type": "map",
+      "name": "Marshes"
+    },
+    {
+      "type": "map",
+      "name": "Bog"
+    }
+  ],
+  "The Damned": [
+    {
+      "type": "map",
+      "name": "Vaults of Atziri"
+    },
+    {
+      "type": "map",
+      "name": "Vaal Pyramid"
+    },
+    {
+      "type": "map",
+      "name": "Vaal Temple"
+    },
+    {
+      "type": "map",
+      "name": "Maze"
+    },
+    {
+      "type": "map",
+      "name": "Ancient City"
+    },
+    {
+      "type": "map",
+      "name": "Sunken City"
+    },
+    {
+      "type": "map",
+      "name": "Ancient City"
+    }
+  ],
+  "The Offering": [
+    {
+      "type": "actBoss",
+      "name": "Reassembled Brutus"
+    },
+    {
+      "type": "actBoss",
+      "name": "Shavronne, Unbound"
+    },
+    {
+      "type": "mapboss",
+      "name": "Bazur"
+    },
+    {
+      "type": "mapboss",
+      "name": "Gisale, Thought Thief"
+    },
+    {
+      "type": "mapboss",
+      "name": "Prodigy of Darkness"
+    },
+    {
+      "type": "mapboss",
+      "name": "Shavronne the Sickening"
+    },
+    {
+      "type": "mapboss",
+      "name": "Amalgam of Nightmares"
+    }
+  ],
+  "More is Never Enough": [
+    {
+      "type": "mapboss",
+      "name": "Ara, Sister of Light"
+    },
+    {
+      "type": "mapboss",
+      "name": "Armala, the Widow"
+    },
+    {
+      "type": "mapboss",
+      "name": "Drek, Apex Hunter"
+    },
+    {
+      "type": "mapboss",
+      "name": "Erebix, Light's Bane"
+    },
+    {
+      "type": "mapboss",
+      "name": "Gorulis, Will-Thief"
+    },
+    {
+      "type": "mapboss",
+      "name": "Khor, Sister of Shadows"
+    },
+    {
+      "type": "mapboss",
+      "name": "Mephod, the Earth Scorcher"
+    },
+    {
+      "type": "mapboss",
+      "name": "Nassar, Lion of the Seas"
+    },
+    {
+      "type": "mapboss",
+      "name": "Stalker of the Endless Dunes"
+    },
+    {
+      "type": "mapboss",
+      "name": "Tahsin, Warmaker"
+    },
+    {
+      "type": "mapboss",
+      "name": "Terror of the Infinite Drifts"
+    },
+    {
+      "type": "mapboss",
+      "name": "Varhesh, Shimmering Aberration"
+    },
+    {
+      "type": "map",
+      "name": "Vault"
+    }
+  ],
+  "Emperor of Purity": [
+    {
+      "type": "map",
+      "name": "Overgrown Ruin"
+    },
+    {
+      "type": "map",
+      "name": "Overgrown Shrine"
+    },
+    {
+      "type": "acts",
+      "name": "The Chamber of Sins Level 1/2 (A7)"
+    }
+  ],
+  "Lachrymal Necrosis": [
+    {
+      "type": "map",
+      "name": "Basilica"
+    },
+    {
+      "type": "map",
+      "name": "Defiled Cathedral"
+    },
+    {
+      "type": "acts",
+      "name": "The Chamber of Innocence (A5/A10)"
+    }
+  ],
+  "The Celestial Justicar": [
+    {
+      "type": "map",
+      "name": "Bone Crypt"
+    },
+    {
+      "type": "map",
+      "name": "Cursed Crypt"
+    },
+    {
+      "type": "map",
+      "name": "The Coward's Trial"
+    },
+    {
+      "type": "acts",
+      "name": "The Crypt (A7)"
+    }
+  ],
+  "A Note in the Wind": [
+    {
+      "type": "map",
+      "name": "Dry Sea"
+    },
+    {
+      "type": "map",
+      "name": "Dunes"
+    },
+    {
+      "type": "map",
+      "name": "Desert Spring"
+    },
+    {
+      "type": "map",
+      "name": "Desert"
+    },
+    {
+      "type": "acts",
+      "name": "The Oasis"
+    },
+    {
+      "type": "map",
+      "name": "Dry Sea"
+    },
+    {
+      "type": "map",
+      "name": "Dunes"
+    },
+    {
+      "type": "map",
+      "name": "Desert Spring"
+    },
+    {
+      "type": "map",
+      "name": "Desert"
+    }
+  ],
+  "Deathly Designs": [
+    {
+      "type": "rogueExile",
+      "name": "Ash Lessard"
+    }
+  ],
+  "Azyran's Reward": [
+    {
+      "type": "map",
+      "name": "Stagnation"
+    },
+    {
+      "type": "map",
+      "name": "Laboratory"
+    },
+    {
+      "type": "map",
+      "name": "Relic Chambers"
+    }
+  ],
+  "Rain Tempter": [
+    {
+      "type": "map",
+      "name": "Courtyard"
+    },
+    {
+      "type": "map",
+      "name": "Terrace"
+    },
+    {
+      "type": "map",
+      "name": "Gardens"
+    },
+    {
+      "type": "map",
+      "name": "Orchard"
+    },
+    {
+      "type": "acts",
+      "name": "The High Gardens"
+    }
+  ],
+  "Emperor's Luck": [
+    {
+      "type": "map",
+      "name": "Courtyard"
+    },
+    {
+      "type": "map",
+      "name": "Orchard"
+    },
+    {
+      "type": "map",
+      "name": "Terrace"
+    },
+    {
+      "type": "map",
+      "name": "Gardens"
+    },
+    {
+      "type": "acts",
+      "name": "The Imperial Gardens"
+    },
+    {
+      "type": "acts",
+      "name": "The High Gardens"
+    }
+  ],
+  "Dark Dreams": [
+    {
+      "type": "rogueExile",
+      "name": "Minara Anemina"
+    }
+  ],
+  "Broken Truce": [
+    {
+      "type": "syndicateMember",
+      "name": "Thane Jorgin"
+    }
+  ],
+  "Immortal Resolve": [
+    {
+      "type": "mapboss",
+      "name": "Amalgam of Nightmares"
+    },
+    {
+      "type": "mapboss",
+      "name": "Lord of the Hollows"
+    },
+    {
+      "type": "mapboss",
+      "name": "Messenger of the Hollows"
+    },
+    {
+      "type": "mapboss",
+      "name": "Champion of the Hollows"
+    }
+  ],
+  "The Fishmonger": [
+    {
+      "type": "mapboss",
+      "name": "Drought-Maddened Rhoa"
+    },
+    {
+      "type": "mapboss",
+      "name": "Skullbeak"
+    }
+  ],
+  "The Golden Era": [
+    {
+      "type": "map",
+      "name": "Basilica"
+    },
+    {
+      "type": "map",
+      "name": "Ivory Temple"
+    },
+    {
+      "type": "map",
+      "name": "Residence"
+    }
+  ],
+  "The Carrion Crow": [
+    {
+      "type": "acts",
+      "name": "The Battlefront"
+    },
+    {
+      "type": "acts",
+      "name": "The Ebony Barracks"
+    },
+    {
+      "type": "acts",
+      "name": "The Imperial Gardens"
+    },
+    {
+      "type": "acts",
+      "name": "The Aqueduct"
+    },
+    {
+      "type": "acts",
+      "name": "The Ascent"
+    },
+    {
+      "type": "acts",
+      "name": "Oriath Square"
+    },
+    {
+      "type": "acts",
+      "name": "The Grand Promenade"
+    },
+    {
+      "type": "acts",
+      "name": "The Blood Aqueduct"
+    }
+  ],
+  "Might is Right": [
+    {
+      "type": "map",
+      "name": "Mausoleum"
+    },
+    {
+      "type": "map",
+      "name": "Relic Chambers"
+    },
+    {
+      "type": "map",
+      "name": "Sepulchre"
+    },
+    {
+      "type": "acts",
+      "name": "The Ossuary (A5/A10)"
+    },
+    {
+      "type": "acts",
+      "name": "The Reliquary (A5/A10)"
+    }
+  ],
+  "Man With Bear": [
+    {
+      "type": "map",
+      "name": "Cemetery"
+    },
+    {
+      "type": "map",
+      "name": "Barrows"
+    }
+  ],
+  "Silence and Frost": [
+    {
+      "type": "mapboss",
+      "name": "Farrul, First of the Plains"
+    }
+  ],
+  "The Sacrifice": [
+    {
+      "type": "templeOfAtzoatl"
+    }
+  ],
+  "The Admirer": [
+    {
+      "type": "map",
+      "name": "Maze"
+    },
+    {
+      "type": "map",
+      "name": "Vaal Pyramid"
+    },
+    {
+      "type": "map",
+      "name": "Vaal Temple"
+    },
+    {
+      "type": "map",
+      "name": "Vaults of Atziri"
+    },
+    {
+      "type": "map",
+      "name": "Doryani's Machinarium"
+    },
+    {
+      "type": "map",
+      "name": "Ancient City"
+    }
+  ],
+  "The Lunaris Priestess": [
+    {
+      "type": "map",
+      "name": "The Twilight Temple"
+    },
+    {
+      "type": "map",
+      "name": "Cold River"
+    },
+    {
+      "type": "map",
+      "name": "Moon Temple"
+    },
+    {
+      "type": "acts",
+      "name": "The Lunaris Temple Level 1/2 (A8)"
+    }
+  ],
+  "The Celestial Stone": [
+    {
+      "type": "Strongbox",
+      "name": "Jeweller's Strongbox"
+    }
+  ],
+  "The Bones": [
+    {
+      "type": "rogueExile",
+      "name": "Minara Anemina"
+    }
+  ],
+  "The Professor": [
+    {
+      "type": "map",
+      "name": "Museum"
+    },
+    {
+      "type": "map",
+      "name": "Academy"
+    },
+    {
+      "type": "map",
+      "name": "Scriptorium"
+    },
+    {
+      "type": "map",
+      "name": "Laboratory"
+    }
+  ],
+  "A Mother's Parting Gift": [
+    {
+      "type": "acts",
+      "name": "The High Gardens"
+    },
+    {
+      "type": "acts",
+      "name": "The Imperial Gardens"
+    }
+  ],
+  "Vile Power": [
+    {
+      "type": "map",
+      "name": "Carcass"
+    },
+    {
+      "type": "map",
+      "name": "Core"
+    },
+    {
+      "type": "map",
+      "name": "Phantasmagoria"
+    },
+    {
+      "type": "map",
+      "name": "Toxic Sewer"
+    },
+    {
+      "type": "map",
+      "name": "Waste Pool"
+    },
+    {
+      "type": "map",
+      "name": "Acid Caverns"
+    },
+    {
+      "type": "map",
+      "name": "Malformation"
+    },
+    {
+      "type": "acts",
+      "name": "The Sewers"
+    },
+    {
+      "type": "acts",
+      "name": "The Rotting Core"
+    }
+  ],
+  "The Opulent": [
+    {
+      "type": "map",
+      "name": "Basilica"
+    },
+    {
+      "type": "map",
+      "name": "Chateau"
+    },
+    {
+      "type": "map",
+      "name": "Conservatory"
+    },
+    {
+      "type": "map",
+      "name": "Crimson Temple"
+    },
+    {
+      "type": "map",
+      "name": "Crimson Township"
+    },
+    {
+      "type": "map",
+      "name": "Haunted Mansion"
+    },
+    {
+      "type": "map",
+      "name": "Ivory Temple"
+    },
+    {
+      "type": "map",
+      "name": "Laboratory"
+    },
+    {
+      "type": "map",
+      "name": "Palace"
+    },
+    {
+      "type": "map",
+      "name": "Relic Chambers"
+    },
+    {
+      "type": "map",
+      "name": "Residence"
+    },
+    {
+      "type": "map",
+      "name": "Temple"
+    },
+    {
+      "type": "map",
+      "name": "Vault"
+    },
+    {
+      "type": "map",
+      "name": "Vaults of Atziri"
+    },
+    {
+      "type": "map",
+      "name": "Villa"
+    },
+    {
+      "type": "map",
+      "name": "The Twilight Temple"
+    }
+  ],
+  "Cursed Words": [
+    {
+      "type": "map",
+      "name": "Graveyard"
+    },
+    {
+      "type": "map",
+      "name": "Cemetery"
+    },
+    {
+      "type": "map",
+      "name": "Grave Trough"
+    }
+  ],
+  "The Lich": [
+    {
+      "type": "mapboss",
+      "name": "Xixic, High Necromancer"
+    },
+    {
+      "type": "mapboss",
+      "name": "Burtok, Conjurer of Bones"
+    }
+  ],
+  "The Road to Power": [
+    {
+      "type": "map",
+      "name": "Castle Ruins"
+    },
+    {
+      "type": "map",
+      "name": "Dark Forest"
+    },
+    {
+      "type": "map",
+      "name": "Orchard"
+    },
+    {
+      "type": "map",
+      "name": "Shore"
+    }
+  ],
+  "Desperate Crusade": [
+    {
+      "type": "map",
+      "name": "Basilica"
+    },
+    {
+      "type": "map",
+      "name": "Residence"
+    }
+  ],
+  "A Familiar Call": [
+    {
+      "type": "shaperGuardianBoss",
+      "name": "Guardian of the Chimera"
+    }
+  ],
+  "The Dapper Prodigy": [
+    {
+      "type": "map",
+      "name": "Palace"
+    },
+    {
+      "type": "map",
+      "name": "Villa"
+    },
+    {
+      "type": "map",
+      "name": "Residence"
+    }
+  ],
+  "The Surveyor": [
+    {
+      "type": "map",
+      "name": "Carcass"
+    },
+    {
+      "type": "map",
+      "name": "Core"
+    },
+    {
+      "type": "map",
+      "name": "Malformation"
+    },
+    {
+      "type": "map",
+      "name": "Phantasmagoria"
+    }
+  ],
+  "Three Voices": [
+    {
+      "type": "map",
+      "name": "Arena"
+    },
+    {
+      "type": "map",
+      "name": "City Square"
+    },
+    {
+      "type": "map",
+      "name": "Courthouse"
+    },
+    {
+      "type": "map",
+      "name": "Courtyard"
+    },
+    {
+      "type": "map",
+      "name": "Crystal Ore"
+    },
+    {
+      "type": "map",
+      "name": "Forbidden Woods"
+    },
+    {
+      "type": "map",
+      "name": "Graveyard"
+    },
+    {
+      "type": "map",
+      "name": "Racecourse"
+    },
+    {
+      "type": "map",
+      "name": "Vaal Pyramid"
+    },
+    {
+      "type": "map",
+      "name": "Vaal Temple"
+    }
+  ],
+  "The Union": [
+    {
+      "type": "map",
+      "name": "Cemetery"
+    },
+    {
+      "type": "map",
+      "name": "Grave Trough"
+    },
+    {
+      "type": "map",
+      "name": "Graveyard"
+    },
+    {
+      "type": "acts",
+      "name": "The Fellshrine Ruins (A7)"
+    }
+  ],
+  "Unrequited Love": [
+    {
+      "type": "map",
+      "name": "Maze"
+    },
+    {
+      "type": "map",
+      "name": "Vaal Pyramid"
+    },
+    {
+      "type": "map",
+      "name": "Vaal Temple"
+    },
+    {
+      "type": "map",
+      "name": "Vaults of Atziri"
+    },
+    {
+      "type": "acts",
+      "name": "The Temple of Decay Level 1"
+    }
+  ],
+  "The White Knight": [
+    {
+      "type": "trialOfStingingDoubt"
+    }
+  ],
+  "Humility": [
+    {
+      "type": "map",
+      "name": "Channel"
+    },
+    {
+      "type": "map",
+      "name": "Frozen Cabins"
+    },
+    {
+      "type": "map",
+      "name": "Waterways"
+    },
+    {
+      "type": "acts",
+      "name": "The Aqueduct"
+    },
+    {
+      "type": "acts",
+      "name": "The Blood Aqueduct"
+    }
+  ],
+  "Turn the Other Cheek": [
+    {
+      "type": "acts",
+      "name": "The Library"
+    }
+  ],
+  "The Traitor": [
+    {
+      "type": "map",
+      "name": "Promenade"
+    },
+    {
+      "type": "map",
+      "name": "Ramparts"
+    },
+    {
+      "type": "acts",
+      "name": "The Sarn Ramparts"
+    },
+    {
+      "type": "acts",
+      "name": "The Solaris Concourse"
+    },
+    {
+      "type": "acts",
+      "name": "The Battlefront"
+    }
+  ],
+  "Arrogance of the Vaal": [
+    {
+      "type": "map",
+      "name": "Ancient City"
+    },
+    {
+      "type": "map",
+      "name": "Sunken City"
+    }
+  ],
+  "The Sword King's Salute": [
+    {
+      "type": "map",
+      "name": "Colosseum"
+    },
+    {
+      "type": "map",
+      "name": "Pit of the Chimera"
+    },
+    {
+      "type": "map",
+      "name": "Pit"
+    },
+    {
+      "type": "map",
+      "name": "Arena"
+    },
+    {
+      "type": "acts",
+      "name": "The Grand Arena"
+    },
+    {
+      "type": "acts",
+      "name": "Daresso's Dream"
+    }
+  ],
+  "Seven Years Bad Luck": [
+    {
+      "type": "map",
+      "name": "Defiled Cathedral"
+    },
+    {
+      "type": "map",
+      "name": "Crimson Temple"
+    }
+  ],
+  "The Immortal": [
+    {
+      "type": "map",
+      "name": "Hall of Grandmasters"
+    }
+  ],
+  "The Aspirant": [
+    {
+      "type": "mapboss",
+      "name": "Oshabi, Avatar of the Grove"
+    }
+  ],
+  "Terrible Secret of Space": [
+    {
+      "type": "mapboss",
+      "name": "Avatar of Undoing"
+    },
+    {
+      "type": "mapboss",
+      "name": "Calderus"
+    },
+    {
+      "type": "mapboss",
+      "name": "Fragment of Winter"
+    },
+    {
+      "type": "mapboss",
+      "name": "Guardian of the Vault"
+    },
+    {
+      "type": "mapboss",
+      "name": "Pirate Treasure"
+    },
+    {
+      "type": "mapboss",
+      "name": "Stone of the Currents"
+    },
+    {
+      "type": "mapboss",
+      "name": "Telvar, the Inebriated"
+    },
+    {
+      "type": "mapboss",
+      "name": "The Eroding One"
+    },
+    {
+      "type": "mapboss",
+      "name": "Titan of the Grove"
+    },
+    {
+      "type": "mapboss",
+      "name": "Void Anomaly"
+    }
+  ],
+  "Dying Light": [
+    {
+      "type": "mavensInvitationTheFeared"
+    }
+  ],
+  "Poisoned Faith": [
+    {
+      "type": "map",
+      "name": "Overgrown Ruin"
+    },
+    {
+      "type": "map",
+      "name": "Sunken City"
+    }
+  ]
+}

@@ -1,0 +1,223 @@
+{
+	"userEnteredValue": {
+		"stringValue": "Temple; The Twilight Temple; Cold River; The Solaris Temple Level 1/2 (A8); The Harbour Bridge"
+	},
+	"effectiveValue": {
+		"stringValue": "Temple; The Twilight Temple; Cold River; The Solaris Temple Level 1/2 (A8); The Harbour Bridge"
+	},
+	"formattedValue": "Temple; The Twilight Temple; Cold River; The Solaris Temple Level 1/2 (A8); The Harbour Bridge",
+	"userEnteredFormat": {
+		"backgroundColor": {
+			"green": 0.105882354,
+			"blue": 0.007843138
+		},
+		"borders": {
+			"top": {
+				"style": "SOLID",
+				"width": 1,
+				"color": {
+					"red": 0.2627451,
+					"green": 0.2627451,
+					"blue": 0.2627451
+				},
+				"colorStyle": {
+					"rgbColor": {
+						"red": 0.2627451,
+						"green": 0.2627451,
+						"blue": 0.2627451
+					}
+				}
+			},
+			"bottom": {
+				"style": "SOLID",
+				"width": 1,
+				"color": {
+					"red": 0.2627451,
+					"green": 0.2627451,
+					"blue": 0.2627451
+				},
+				"colorStyle": {
+					"rgbColor": {
+						"red": 0.2627451,
+						"green": 0.2627451,
+						"blue": 0.2627451
+					}
+				}
+			},
+			"left": {
+				"style": "SOLID",
+				"width": 1,
+				"color": {
+					"red": 0.2627451,
+					"green": 0.2627451,
+					"blue": 0.2627451
+				},
+				"colorStyle": {
+					"rgbColor": {
+						"red": 0.2627451,
+						"green": 0.2627451,
+						"blue": 0.2627451
+					}
+				}
+			},
+			"right": {
+				"style": "SOLID",
+				"width": 1,
+				"color": {
+					"red": 0.2627451,
+					"green": 0.2627451,
+					"blue": 0.2627451
+				},
+				"colorStyle": {
+					"rgbColor": {
+						"red": 0.2627451,
+						"green": 0.2627451,
+						"blue": 0.2627451
+					}
+				}
+			}
+		},
+		"wrapStrategy": "WRAP",
+		"textFormat": {
+			"foregroundColor": {
+				"red": 1,
+				"green": 1,
+				"blue": 1
+			},
+			"fontFamily": "Ubuntu Mono",
+			"fontSize": 10,
+			"foregroundColorStyle": {
+				"rgbColor": {
+					"red": 1,
+					"green": 1,
+					"blue": 1
+				}
+			}
+		},
+		"backgroundColorStyle": {
+			"rgbColor": {
+				"green": 0.105882354,
+				"blue": 0.007843138
+			}
+		}
+	},
+	"effectiveFormat": {
+		"backgroundColor": {
+			"green": 0.105882354,
+			"blue": 0.007843138
+		},
+		"borders": {
+			"top": {
+				"style": "SOLID",
+				"width": 1,
+				"color": {
+					"red": 0.2627451,
+					"green": 0.2627451,
+					"blue": 0.2627451
+				},
+				"colorStyle": {
+					"rgbColor": {
+						"red": 0.2627451,
+						"green": 0.2627451,
+						"blue": 0.2627451
+					}
+				}
+			},
+			"bottom": {
+				"style": "SOLID",
+				"width": 1,
+				"color": {
+					"red": 0.2627451,
+					"green": 0.2627451,
+					"blue": 0.2627451
+				},
+				"colorStyle": {
+					"rgbColor": {
+						"red": 0.2627451,
+						"green": 0.2627451,
+						"blue": 0.2627451
+					}
+				}
+			},
+			"left": {
+				"style": "SOLID",
+				"width": 1,
+				"color": {
+					"red": 0.2627451,
+					"green": 0.2627451,
+					"blue": 0.2627451
+				},
+				"colorStyle": {
+					"rgbColor": {
+						"red": 0.2627451,
+						"green": 0.2627451,
+						"blue": 0.2627451
+					}
+				}
+			},
+			"right": {
+				"style": "SOLID",
+				"width": 1,
+				"color": {
+					"red": 0.2627451,
+					"green": 0.2627451,
+					"blue": 0.2627451
+				},
+				"colorStyle": {
+					"rgbColor": {
+						"red": 0.2627451,
+						"green": 0.2627451,
+						"blue": 0.2627451
+					}
+				}
+			}
+		},
+		"padding": {
+			"top": 2,
+			"right": 3,
+			"bottom": 2,
+			"left": 3
+		},
+		"horizontalAlignment": "LEFT",
+		"verticalAlignment": "BOTTOM",
+		"wrapStrategy": "WRAP",
+		"textFormat": {
+			"foregroundColor": {
+				"red": 1,
+				"green": 1,
+				"blue": 1
+			},
+			"fontFamily": "Ubuntu Mono",
+			"fontSize": 10,
+			"bold": false,
+			"italic": false,
+			"strikethrough": false,
+			"underline": false,
+			"foregroundColorStyle": {
+				"rgbColor": {
+					"red": 1,
+					"green": 1,
+					"blue": 1
+				}
+			}
+		},
+		"hyperlinkDisplayType": "PLAIN_TEXT",
+		"backgroundColorStyle": {
+			"rgbColor": {
+				"green": 0.105882354,
+				"blue": 0.007843138
+			}
+		}
+	},
+	"textFormatRuns": [
+		{
+			"format": {}
+		},
+		{
+			"startIndex": 41,
+			"format": {
+				"italic": true
+			}
+		}
+	]
+}

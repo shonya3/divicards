@@ -4,53 +4,44 @@ pub mod cards;
 pub mod consts;
 pub mod dropsource;
 pub mod error;
+pub mod loader;
+pub mod mapbosses;
 pub mod maps;
+pub mod poe_data;
 pub mod reward;
 pub mod rich;
 pub mod scripts;
 pub mod table;
 pub mod table_record;
 
-#[allow(unused)]
-use crate::scripts::{read_original_table_sheet, read_table, update_all_jsons};
-#[allow(unused)]
-use crate::table::Table;
-#[allow(unused)]
-use act::{parse_area_name, ActArea};
-#[allow(unused)]
-use csv::Writer;
-#[allow(unused)]
-use divi::consts::CARDS;
-#[allow(unused)]
-use divi::prices::Prices;
-#[allow(unused)]
-use divi::sample::{Column, DivinationCardsSample, TablePreferences};
-#[allow(unused)]
-use dropsource::{area, dropconsts::ACT_AREA_NAMES, Source};
-#[allow(unused)]
+use std::collections::HashMap;
+
+use dropsource::Source;
 use error::Error;
-#[allow(unused)]
-use scraper::Element;
-#[allow(unused)]
-use scraper::{ElementRef, Html, Selector};
-#[allow(unused)]
-use serde::{Deserialize, Serialize};
-#[allow(unused)]
-use serde_json::{json, Value};
-#[allow(unused)]
-use std::collections::HashSet;
-#[allow(unused)]
-use std::env;
-#[allow(unused)]
-use std::fs;
-#[allow(unused)]
-use std::path::Path;
-#[allow(unused)]
-use std::str::FromStr;
-#[allow(unused)]
-use std::{collections::HashMap, fmt::Display, slice::Iter};
-#[allow(unused)]
-use table_record::{CardDropTableRecord, Confidence, GreyNote};
+
+use crate::{poe_data::PoeData, table::DivcordTable};
 
 #[tokio::main]
-async fn main() {}
+async fn main() {
+    let divcord_table = DivcordTable::load().await.unwrap();
+    let poe_data = PoeData::load().await.unwrap();
+    dbg!(sources_by_card(&divcord_table, &poe_data).unwrap());
+}
+
+pub fn sources_by_card(
+    divcord_table: &DivcordTable,
+    poe_data: &PoeData,
+) -> Result<HashMap<String, Vec<Source>>, Error> {
+    let mut map: HashMap<String, Vec<Source>> = HashMap::new();
+    for record in divcord_table.records() {
+        let record = record?;
+        for d in &record.drops_from {
+            let sources = crate::dropsource::parse_source(d, &record, poe_data).unwrap();
+            for source in sources {
+                map.entry(record.name.clone()).or_default().push(source);
+            }
+        }
+    }
+
+    Ok(map)
+}
