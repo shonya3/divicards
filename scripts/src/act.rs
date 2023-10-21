@@ -4,7 +4,7 @@ use async_trait::async_trait;
 use playwright::{api::DocumentLoadState, Playwright};
 use serde::{Deserialize, Serialize};
 
-use crate::{error::Error, is_act_notation, loader::DataLoader, rich::DropsFrom};
+use crate::{error::Error, loader::DataLoader, rich::DropsFrom};
 
 pub const TOWN_IMAGE_URL: &'static str =
     "https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/WorldPanelTownPinIcon.webp";
@@ -73,6 +73,14 @@ pub fn parse_act_areas(drops_from: &DropsFrom, acts: &[ActArea], min_level: u8) 
         .iter()
         .flat_map(|name| find_ids(&name, acts, min_level))
         .collect()
+}
+
+pub fn is_act_notation(s: &str) -> bool {
+    match s {
+        s if s.contains("(") && s.contains(")") => true,
+        s if s.contains("1/2") => true,
+        _ => false,
+    }
 }
 
 pub fn parse_act_notation(s: &str) -> Vec<ActAreaName> {
