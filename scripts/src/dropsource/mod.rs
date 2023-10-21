@@ -1,5 +1,8 @@
 pub mod area;
 pub mod monster;
+pub mod parse;
+
+pub use parse::parse_source;
 
 use std::str::FromStr;
 
