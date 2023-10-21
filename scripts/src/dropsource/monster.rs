@@ -2,31 +2,34 @@ use serde::{Deserialize, Serialize};
 use std::str::FromStr;
 use strum_macros::EnumString;
 
-use super::dropconsts::BOSS_NAMES;
-
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
-#[serde(tag = "uniqueMonster")]
+#[serde(tag = "type")]
+#[serde(rename_all = "camelCase")]
 pub enum UniqueMonster {
-    #[serde(rename = "Maven's Invitation: The Feared")]
+    #[serde(alias = "Maven's Invitation: The Feared")]
     MavensInvitationTheFeared,
-    #[serde(rename = "Uul-Netol, Unburdened Flesh (in Breachstones)")]
+    #[serde(alias = "Uul-Netol, Unburdened Flesh (in Breachstones)")]
     UulNetolInBreachstones,
-    #[serde(rename = "The Vaal Omnitect")]
+    #[serde(alias = "The Vaal Omnitect")]
     VaalOmnitect,
-    #[serde(rename = "Metamorph")]
+    #[serde(alias = "Metamorph")]
     Metamorph,
-    #[serde(rename = "Null Portal")]
+    #[serde(alias = "Null Portal")]
     NullPortal,
-    #[serde(rename = "Vaal Flesh Merchant")]
+    #[serde(alias = "Vaal Flesh Merchant")]
     VaalFleshMerchant,
-    #[serde(rename = "All Incursion Architects in Alva missions/Alva's Memory")]
+    #[serde(alias = "All Incursion Architects in Alva missions/Alva's Memory")]
     AllIncursionArchitectsInAlvaMission,
-    #[serde(rename = "All Abyss Monsters")]
+    #[serde(alias = "All Abyss Monsters")]
     AllAbyssMonsters,
-    #[serde(rename = "All (Scourge) beyond demons")]
+    #[serde(alias = "All (Scourge) beyond demons")]
     AllScourgeBeyondDemons,
-    #[serde(rename = "All Rogue Exiles")]
+    #[serde(alias = "All Rogue Exiles")]
     AllRogueExiles,
+    #[serde(alias = "Venarius")]
+    CortexVenarius,
+    #[serde(alias = "Argus")]
+    Argus,
     BreachlordBossDomain(BreachlordBossDomain),
     Architect(Architect),
     ShaperGuardianBoss(ShaperGuardianBoss),
@@ -36,11 +39,20 @@ pub enum UniqueMonster {
     RogueExile(RogueExile),
     AbyssLichBoss(AbyssLichBoss),
     MapsOnly(MapsOnly),
-    StoryBoss(StoryBoss),
+    ActBoss(ActBoss),
     HarbingerPortal(HarbingerPortal),
-    Boss {
-        name: String,
-    },
+    EndgameBoss(EndgameBoss),
+    DelveBoss(DelveBoss),
+    BeastBoss(BeastBoss),
+    HeistBoss(HeistBoss),
+    BeyondBoss(BeyondBoss),
+    ExpeditionLogbookBoss(ExpeditionLogbookBoss),
+    ShaperMiniBoss(ShaperMiniBoss),
+    BetrayalCatarina(BetrayalCatarina),
+    OshabiBoss(OshabiBoss),
+    // Mapboss {
+    //     name: String,
+    // },
 }
 
 impl FromStr for UniqueMonster {
@@ -60,6 +72,8 @@ impl FromStr for UniqueMonster {
             "All Abyss Monsters" => Ok(Self::AllAbyssMonsters),
             "All Rogue Exiles" => Ok(Self::AllRogueExiles),
             "All (Scourge) beyond demons" => Ok(Self::AllScourgeBeyondDemons),
+            "Venarius" => Ok(Self::CortexVenarius),
+            "Argus" => Ok(Self::Argus),
             _ => BreachlordBossDomain::from_str(s)
                 .map(|b| Self::BreachlordBossDomain(b))
                 .or_else(|_| Architect::from_str(s).map(|b| Self::Architect(b)))
@@ -70,14 +84,20 @@ impl FromStr for UniqueMonster {
                 .or_else(|_| RogueExile::from_str(s).map(|b| Self::RogueExile(b)))
                 .or_else(|_| AbyssLichBoss::from_str(s).map(|b| Self::AbyssLichBoss(b)))
                 .or_else(|_| MapsOnly::from_str(s).map(|b| Self::MapsOnly(b)))
-                .or_else(|_| StoryBoss::from_str(s).map(|b| Self::StoryBoss(b)))
+                .or_else(|_| ActBoss::from_str(s).map(|b| Self::ActBoss(b)))
                 .or_else(|_| HarbingerPortal::from_str(s).map(|b| Self::HarbingerPortal(b)))
-                .or_else(|_| match BOSS_NAMES.contains(&s) {
-                    true => Ok(Self::Boss {
-                        name: s.to_string(),
-                    }),
-                    false => Err(strum::ParseError::VariantNotFound),
-                }),
+                .or_else(|_| EndgameBoss::from_str(s).map(|b| Self::EndgameBoss(b)))
+                .or_else(|_| DelveBoss::from_str(s).map(|b| Self::DelveBoss(b)))
+                .or_else(|_| BeastBoss::from_str(s).map(|b| Self::BeastBoss(b)))
+                .or_else(|_| HeistBoss::from_str(s).map(|b| Self::HeistBoss(b)))
+                .or_else(|_| BeyondBoss::from_str(s).map(|b| Self::BeyondBoss(b)))
+                .or_else(|_| {
+                    ExpeditionLogbookBoss::from_str(s).map(|b| Self::ExpeditionLogbookBoss(b))
+                })
+                .or_else(|_| ShaperMiniBoss::from_str(s).map(|b| Self::ShaperMiniBoss(b)))
+                .or_else(|_| BetrayalCatarina::from_str(s).map(|b| Self::BetrayalCatarina(b)))
+                .or_else(|_| OshabiBoss::from_str(s).map(|b| Self::OshabiBoss(b)))
+                .or_else(|_| return Err(strum::ParseError::VariantNotFound)),
         }
     }
 }
@@ -108,9 +128,19 @@ impl std::fmt::Display for UniqueMonster {
             UniqueMonster::RogueExile(rogueexile) => rogueexile.fmt(f),
             UniqueMonster::AbyssLichBoss(abysslichboss) => abysslichboss.fmt(f),
             UniqueMonster::MapsOnly(mapsonly) => mapsonly.fmt(f),
-            UniqueMonster::StoryBoss(storyboss) => storyboss.fmt(f),
+            UniqueMonster::ActBoss(act_boss) => act_boss.fmt(f),
             UniqueMonster::HarbingerPortal(harbingerportal) => harbingerportal.fmt(f),
-            UniqueMonster::Boss { name } => name.fmt(f),
+            UniqueMonster::CortexVenarius => write!(f, "Venarius"),
+            UniqueMonster::Argus => write!(f, "Argus"),
+            UniqueMonster::EndgameBoss(boss) => boss.fmt(f),
+            UniqueMonster::DelveBoss(boss) => boss.fmt(f),
+            UniqueMonster::BeastBoss(boss) => boss.fmt(f),
+            UniqueMonster::HeistBoss(boss) => boss.fmt(f),
+            UniqueMonster::BeyondBoss(boss) => boss.fmt(f),
+            UniqueMonster::ExpeditionLogbookBoss(boss) => boss.fmt(f),
+            UniqueMonster::ShaperMiniBoss(boss) => boss.fmt(f),
+            UniqueMonster::BetrayalCatarina(boss) => boss.fmt(f),
+            UniqueMonster::OshabiBoss(boss) => boss.fmt(f),
         }
     }
 }
@@ -320,7 +350,7 @@ pub enum MapsOnly {
     Serialize, Deserialize, Clone, Debug, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
 )]
 #[serde(tag = "name")]
-pub enum StoryBoss {
+pub enum ActBoss {
     #[strum(serialize = "Reassembled Brutus")]
     #[serde(rename = "Reassembled Brutus")]
     ReassembledBrutus,
@@ -349,4 +379,121 @@ pub enum HarbingerPortal {
     #[strum(serialize = "HarbingerPortalUber")]
     #[serde(rename = "HarbingerPortalUber")]
     HarbingerPortalUber,
+}
+
+#[derive(
+    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+)]
+#[serde(tag = "name")]
+pub enum EndgameBoss {
+    #[strum(to_string = "The Maven", serialize = "Maven")]
+    #[serde(rename = "The Maven")]
+    Maven,
+    #[strum(to_string = "The Elder", serialize = "Elder")]
+    #[serde(rename = "The Elder")]
+    Elder,
+    #[strum(to_string = "Uber Elder")]
+    #[serde(rename = "Uber Elder")]
+    UberElder,
+    #[strum(to_string = "The Searing Exarch")]
+    #[serde(rename = "The Searing Exarch")]
+    SearingExarch,
+    #[strum(to_string = "The Eater of Worlds")]
+    #[serde(rename = "The Eater of Worlds")]
+    EaterOfWorlds,
+    #[strum(to_string = "The Infinite Hunger")]
+    #[serde(rename = "The Infinite Hunger")]
+    InfiniteHunger,
+}
+
+#[derive(
+    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+)]
+#[serde(tag = "name")]
+pub enum DelveBoss {
+    #[strum(to_string = "Aul, the Crystal King", serialize = "Aul")]
+    #[serde(rename = "Aul, the Crystal King")]
+    Aul,
+    #[strum(to_string = "Kurgal, the Blackblooded", serialize = "Kurgal")]
+    #[serde(rename = "Kurgal, the Blackblooded")]
+    Kurgal,
+}
+
+#[derive(
+    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+)]
+#[serde(tag = "name")]
+pub enum BeastBoss {
+    #[strum(to_string = "Farrul, First of the Plains", serialize = "Farrul")]
+    #[serde(rename = "Farrul, First of the Plains")]
+    Farrul,
+    #[strum(to_string = "Fenumus, First of the Night", serialize = "Fenumus")]
+    #[serde(rename = "Fenumus, First of the Night")]
+    Fenumus,
+}
+
+#[derive(
+    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+)]
+#[serde(tag = "name")]
+pub enum HeistBoss {
+    #[strum(to_string = "Flesh Sculptor")]
+    #[serde(rename = "Flesh Sculptor")]
+    FleshSculptor,
+    #[strum(to_string = "Corpse Stitcher")]
+    #[serde(rename = "Corpse Stitcher")]
+    CorpseStitcher,
+}
+
+#[derive(
+    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+)]
+#[serde(tag = "name")]
+pub enum BeyondBoss {
+    #[strum(to_string = "Ghorr, the Grasping Maw", serialize = "Ghorr")]
+    #[serde(rename = "Ghorr, the Grasping Maw")]
+    Ghorr,
+    #[strum(to_string = "K'tash, the Hate Shepherd", serialize = "K'tash")]
+    #[serde(rename = "K'tash, the Hate Shepherd")]
+    Ktash,
+}
+
+#[derive(
+    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+)]
+#[serde(tag = "name")]
+pub enum ExpeditionLogbookBoss {
+    #[strum(to_string = "Uhtred, Covetous Traitor", serialize = "Uhtred")]
+    #[serde(rename = "Uhtred, Covetous Traitor")]
+    Uhtred,
+}
+
+#[derive(
+    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+)]
+#[serde(tag = "name")]
+pub enum ShaperMiniBoss {
+    #[strum(to_string = "Entity of the Void")]
+    #[serde(rename = "Entity of the Void")]
+    EntityOfTheVoid,
+}
+
+#[derive(
+    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+)]
+#[serde(tag = "name")]
+pub enum BetrayalCatarina {
+    #[strum(to_string = "Catarina, Master of Undeath", serialize = "Catarina")]
+    #[serde(rename = "Catarina, Master of Undeath")]
+    Catarina,
+}
+
+#[derive(
+    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+)]
+#[serde(tag = "name")]
+pub enum OshabiBoss {
+    #[strum(to_string = "Oshabi, Avatar of the Grove", serialize = "Oshabi")]
+    #[serde(rename = "Oshabi, Avatar of the Grove")]
+    Oshabi,
 }

@@ -2,10 +2,6 @@ use serde::{Deserialize, Serialize};
 use std::str::FromStr;
 use strum_macros::EnumString;
 
-use crate::maps::Map;
-
-use super::dropconsts::{ACT_AREA_NAMES, AREA_NAMES};
-
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
 #[serde(tag = "type")]
 #[serde(rename_all = "camelCase")]
@@ -18,43 +14,27 @@ pub enum Area {
     AllVaalSideAreas,
     #[serde(alias = "Vaal Side Areas")]
     VaalSideAreas,
+    AtziriArea(AtziriArea),
     AreaSpecific(AreaSpecific),
-    Map {
-        name: String,
-    },
-    Acts {
-        name: String,
-    },
 }
 
 impl FromStr for Area {
     type Err = strum::ParseError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let maps: Vec<Map> =
-            serde_json::from_str(&std::fs::read_to_string("jsons/maps.json").unwrap()).unwrap();
-        let maps: Vec<String> = maps.into_iter().map(|m| m.name).collect();
-        let maps_without_mapword: Vec<String> =
-            maps.iter().map(|m| m.replace(" Map", "")).collect();
-
         match s {
             "Trial of Stinging Doubt" => return Ok(Area::TrialOfStingingDoubt),
             "The Temple of Atzoatl" => return Ok(Area::TempleOfAtzoatl),
             "All Vaal side areas (need specific information)" => return Ok(Area::AllVaalSideAreas),
             "Vaal Side Areas" => return Ok(Area::VaalSideAreas),
-            _ => {}
+            _ => {
+                if let Ok(areaspecific) = s.parse::<AreaSpecific>() {
+                    return Ok(Area::AreaSpecific(areaspecific));
+                } else if let Ok(atziri_area) = s.parse::<AtziriArea>() {
+                    return Ok(Area::AtziriArea(atziri_area));
+                };
+            }
         };
-
-        let s = s.to_string();
-
-        if maps_without_mapword.iter().any(|map| map == &s.as_str())
-            || AREA_NAMES.iter().any(|area| area == &s.as_str())
-            || maps.iter().any(|map| map == &s.as_str())
-        {
-            return Ok(Area::Map { name: s });
-        } else if let Ok(areaspecific) = s.parse::<AreaSpecific>() {
-            return Ok(Area::AreaSpecific(areaspecific));
-        }
 
         Err(strum::ParseError::VariantNotFound)
     }
@@ -68,8 +48,29 @@ impl std::fmt::Display for Area {
             Area::AllVaalSideAreas => write!(f, "All Vaal side areas (need specific information)"),
             Area::VaalSideAreas => write!(f, "Vaal Side Areas"),
             Area::AreaSpecific(areaspecific) => areaspecific.fmt(f),
-            Area::Map { name } => name.fmt(f),
-            Area::Acts { name } => name.fmt(f),
+            Area::AtziriArea(atziri_area) => atziri_area.fmt(f),
+        }
+    }
+}
+
+#[derive(
+    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+)]
+#[serde(tag = "name")]
+pub enum AtziriArea {
+    #[strum(to_string = "The Apex of Sacrifice")]
+    #[serde(rename = "The Apex of Sacrifice")]
+    ApexOfSacrifice,
+    #[strum(to_string = "The Alluring Abyss")]
+    #[serde(rename = "The Alluring Abyss")]
+    AlluringAbyss,
+}
+
+impl AtziriArea {
+    pub fn level(&self) -> u32 {
+        match self {
+            AtziriArea::ApexOfSacrifice => 70,
+            AtziriArea::AlluringAbyss => 80,
         }
     }
 }

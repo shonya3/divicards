@@ -1,5 +1,4 @@
 pub mod area;
-pub mod dropconsts;
 pub mod monster;
 
 use std::str::FromStr;
@@ -9,7 +8,8 @@ use serde::{Deserialize, Serialize};
 use self::{area::Area, monster::UniqueMonster};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
-#[serde(tag = "source")]
+#[serde(tag = "type")]
+#[serde(rename_all = "camelCase")]
 pub enum Source {
     ExpeditionLogbook,
     Chest(Chest),
@@ -19,10 +19,28 @@ pub enum Source {
     Disabled,
     #[serde(rename = "Global Drop")]
     GlobalDrop,
-    #[serde(rename = "uniqueMonster")]
+    Acts {
+        ids: Vec<String>,
+    },
+
+    Act {
+        id: String,
+    },
+
+    Map {
+        name: String,
+    },
+    MapBoss {
+        name: String,
+    },
+    ActBoss {
+        name: String,
+    },
+    #[serde(untagged)]
     UniqueMonster(UniqueMonster),
-    #[serde(rename = "area")]
+    #[serde(untagged)]
     Area(Area),
+    #[serde(untagged)]
     Vendor(Vendor),
 }
 
@@ -62,6 +80,11 @@ impl std::fmt::Display for Source {
             Source::UniqueMonster(uniquemonster) => uniquemonster.fmt(f),
             Source::Area(area) => area.fmt(f),
             Source::Vendor(vendor) => vendor.fmt(f),
+            Source::ActBoss { name } => write!(f, "{name}"),
+            Source::Acts { ids } => write!(f, "{ids:?}"),
+            Source::Map { name } => write!(f, "{name}"),
+            Source::MapBoss { name } => write!(f, "{name}"),
+            Source::Act { id } => write!(f, "{id}"),
         }
     }
 }
@@ -77,7 +100,7 @@ impl std::fmt::Display for Source {
     strum_macros::EnumString,
     strum_macros::Display,
 )]
-#[serde(tag = "vendor")]
+#[serde(tag = "name")]
 pub enum Vendor {
     #[strum(serialize = "Kirac shop")]
     #[serde(rename = "Kirac shop")]
@@ -95,7 +118,7 @@ pub enum Vendor {
     strum_macros::EnumString,
     strum_macros::Display,
 )]
-#[serde(tag = "strongbox")]
+#[serde(tag = "name")]
 pub enum Strongbox {
     #[strum(serialize = "Jeweller's Strongbox")]
     #[serde(rename = "Jeweller's Strongbox")]
@@ -128,7 +151,7 @@ pub enum Strongbox {
     strum_macros::EnumString,
     strum_macros::Display,
 )]
-#[serde(tag = "chest")]
+#[serde(tag = "name")]
 pub enum Chest {
     #[strum(serialize = "Abyssal Trove")]
     #[serde(rename = "Abyssal Trove")]
@@ -176,4 +199,11 @@ pub enum Chest {
     #[strum(serialize = "Booty Chest (Mao Kun)")]
     #[serde(rename = "Booty Chest (Mao Kun)")]
     BootyChestMaoKun,
+}
+
+pub fn poedb_page_url(boss: &str) {
+    let name = boss.split("(").next().unwrap().trim();
+    let name = name.replace(" ", "_");
+    let name = name.replace(",", "%2C");
+    format!("https://poedb.tw/us/{name}");
 }
