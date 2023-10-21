@@ -124,6 +124,7 @@ impl GreyNote {
     strum_macros::EnumString,
     strum_macros::Display,
 )]
+#[serde(rename_all = "camelCase")]
 pub enum Confidence {
     #[strum(to_string = "None", serialize = "none")]
     #[serde(rename = "None", alias = "none")]
