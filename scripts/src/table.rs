@@ -1,4 +1,4 @@
-use std::{collections::HashMap, fs, path::PathBuf};
+use std::{collections::HashMap, fs};
 
 use async_trait::async_trait;
 use googlesheets::sheet::ValueRange;
@@ -50,6 +50,7 @@ pub struct DivcordTable {
 #[derive(Debug, Serialize, Deserialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct DivcordTableRecord {
+    pub id: usize,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub greynote: Option<GreyNote>,
     pub name: String,
@@ -58,6 +59,7 @@ pub struct DivcordTableRecord {
     pub confidence: Confidence,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub remaining_work: Option<RemainingWork>,
+    #[serde(skip_serializing)]
     pub drops_from: Vec<DropsFrom>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub wiki_disagreements: Option<String>,
@@ -73,6 +75,10 @@ impl DivcordTable {
             sheet,
             rich_sources_column,
         }
+    }
+
+    pub async fn load() -> Result<Self, Error> {
+        DivcordTableLoader::new().load().await
     }
 
     pub fn records_by_card(&self) -> Result<HashMap<String, Vec<DivcordTableRecord>>, Error> {
@@ -92,7 +98,8 @@ impl DivcordTable {
             .values
             .iter()
             .zip(self.rich_sources_column.cells())
-            .map(|(row, cell)| {
+            .enumerate()
+            .map(|(index, (row, cell))| {
                 let greynote = GreyNote::parse(&row[0])?;
                 let name = crate::table_record::parse_name(&row[1])?;
                 let tag_hypothesis = crate::table_record::parse_string_cell(&row[2]);
@@ -122,6 +129,7 @@ impl DivcordTable {
                     wiki_disagreements,
                     sources_with_tag_but_not_on_wiki,
                     notes,
+                    id: index + 3,
                 })
             })
     }
