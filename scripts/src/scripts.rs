@@ -5,7 +5,6 @@ use reqwest::Client;
 use serde_json::Value;
 
 use crate::{
-    dropsource::Source,
     error::Error,
     table::Table,
     table_record::{CardDropTableRecord, Confidence},
@@ -137,33 +136,33 @@ pub fn write_hypothesis_maps(table: Table) -> Result<(), Error> {
     Ok(())
 }
 
-pub fn write_sources(sheet: &ValueRange) -> Result<(), Error> {
-    let table = Table::try_from(sheet)?;
-    let drops = table.all_drops_from();
-    let mut unparsed: Vec<String> = Vec::new();
-    let mut sources: Vec<Source> = Vec::new();
+// pub fn write_sources(sheet: &ValueRange) -> Result<(), Error> {
+//     let table = Table::try_from(sheet)?;
+//     let drops = table.all_drops_from();
+//     let mut unparsed: Vec<String> = Vec::new();
+//     let mut sources: Vec<Source> = Vec::new();
 
-    for s in drops {
-        match s.parse::<Source>() {
-            Ok(source) => sources.push(source),
-            Err(_) => {
-                unparsed.push(s);
-            }
-        }
-    }
+//     for s in drops {
+//         match s.parse::<Source>() {
+//             Ok(source) => sources.push(source),
+//             Err(_) => {
+//                 unparsed.push(s);
+//             }
+//         }
+//     }
 
-    std::fs::write(
-        "jsons/sources.json",
-        serde_json::to_string(&sources).unwrap(),
-    )?;
+//     std::fs::write(
+//         "jsons/sources.json",
+//         serde_json::to_string(&sources).unwrap(),
+//     )?;
 
-    std::fs::write(
-        "jsons/unparsed_sources.json",
-        serde_json::to_string(&unparsed).unwrap(),
-    )?;
+//     std::fs::write(
+//         "jsons/unparsed_sources.json",
+//         serde_json::to_string(&unparsed).unwrap(),
+//     )?;
 
-    Ok(())
-}
+//     Ok(())
+// }
 
 pub async fn update_all_jsons() {
     let sheet = download_table_sheet()
@@ -179,7 +178,7 @@ pub async fn update_all_jsons() {
     write_drops_from("jsons/drops-from.json", &table).expect("Write drops-from error");
     write_confidence_map("jsons/confidence-map.json", &table).expect("Wrtie confidence map error");
     write_hypothesis_maps(table.clone()).expect("write_hypothesis_maps eror");
-    write_sources(&sheet).unwrap();
+    // write_sources(&sheet).unwrap();
     // write_drops_debug_jsons(table);
 }
 
