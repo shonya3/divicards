@@ -1009,7 +1009,6 @@ dependencies = [
  "serde-big-array",
  "serde_json",
  "strsim",
- "tokio",
  "tracing",
  "urlencoding",
 ]
@@ -1604,7 +1603,6 @@ dependencies = [
  "reqwest",
  "serde",
  "serde_json",
- "tokio",
  "tracing",
 ]
 

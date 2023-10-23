@@ -458,14 +458,12 @@ mod tests {
 
     use std::fs::{read_to_string, write};
 
-    use crate::league::TradeLeague;
-
     use super::*;
 
-    #[tokio::test]
-    async fn into_serde_values() {
+    #[test]
+    fn into_serde_values() {
         let csv = read_to_string("example-2.csv").unwrap();
-        let prices = Prices::fetch(&TradeLeague::Ancestor).await.unwrap();
+        let prices = Prices::default();
         let sample = DivinationCardsSample::create(SampleData::Csv(csv), Some(prices)).unwrap();
         let values = sample.into_serde_values(Some(TablePreferences {
             columns: vec![
