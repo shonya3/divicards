@@ -127,16 +127,16 @@ impl GreyNote {
 #[serde(rename_all = "camelCase")]
 pub enum Confidence {
     #[strum(to_string = "None", serialize = "none")]
-    #[serde(rename = "None", alias = "none")]
+    #[serde(alias = "None", alias = "none")]
     None,
     #[strum(to_string = "Low", serialize = "low")]
-    #[serde(rename = "Low", alias = "low")]
+    #[serde(alias = "Low", alias = "low")]
     Low,
     #[strum(to_string = "OK", serialize = "ok")]
-    #[serde(rename = "OK", alias = "ok")]
+    #[serde(alias = "OK", alias = "ok")]
     Ok,
     #[strum(to_string = "Done", serialize = "DONE")]
-    #[serde(rename = "Done", alias = "DONE")]
+    #[serde(alias = "Done", alias = "DONE")]
     Done,
 }
 
