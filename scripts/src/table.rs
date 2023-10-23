@@ -249,3 +249,21 @@ impl DataLoader<DivcordTable> for DivcordTableLoader {
         })
     }
 }
+
+pub fn sources_by_card(
+    divcord_table: &DivcordTable,
+    poe_data: &PoeData,
+) -> Result<HashMap<String, Vec<Source>>, Error> {
+    let mut map: HashMap<String, Vec<Source>> = HashMap::new();
+    for record in divcord_table.records() {
+        let record = record?;
+        for d in &record.drops_from {
+            let sources = crate::dropsource::parse_source(d, &record, poe_data).unwrap();
+            for source in sources {
+                map.entry(record.name.clone()).or_default().push(source);
+            }
+        }
+    }
+
+    Ok(map)
+}
