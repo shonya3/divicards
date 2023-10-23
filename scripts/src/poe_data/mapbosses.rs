@@ -1,3 +1,5 @@
+use std::env::current_dir;
+
 use playwright::Playwright;
 use serde::{Deserialize, Serialize};
 
@@ -26,7 +28,14 @@ impl DataLoader<Vec<MapBoss>> for BossLoader {
     async fn fetch(&self) -> Result<Vec<MapBoss>, Error> {
         let script = format!(
             "() => {{{} return fetchMapBosses()}}",
-            &std::fs::read_to_string("fetchMapBosses.js").unwrap()
+            &std::fs::read_to_string(
+                current_dir()
+                    .unwrap()
+                    .join("src")
+                    .join("poe_data")
+                    .join("fetchMapBosses.js")
+            )
+            .unwrap()
         );
 
         let playwright = Playwright::initialize().await.unwrap();

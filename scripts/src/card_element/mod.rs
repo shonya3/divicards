@@ -1,7 +1,9 @@
+pub mod reward;
+
 use divi::{league::TradeLeague, prices::NinjaCardData};
 use serde::{Deserialize, Serialize};
 
-use crate::reward::reward_to_html;
+use self::reward::reward_to_html;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 #[serde(rename_all = "camelCase")]

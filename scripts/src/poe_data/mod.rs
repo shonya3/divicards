@@ -1,10 +1,15 @@
+pub mod act;
+pub mod cards;
+pub mod mapbosses;
+pub mod maps;
+
 use serde::{Deserialize, Serialize};
 
-use crate::{
+use crate::{error::Error, loader::DataLoader};
+
+use self::{
     act::{ActArea, ActsLoader},
     cards::{CardsData, CardsLoader},
-    error::Error,
-    loader::DataLoader,
     mapbosses::{BossLoader, MapBoss},
     maps::{Map, MapLoader},
 };

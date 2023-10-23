@@ -1,18 +1,11 @@
-pub mod act;
 pub mod card_element;
-pub mod cards;
 pub mod consts;
 pub mod dropsource;
 pub mod error;
 pub mod loader;
-pub mod mapbosses;
-pub mod maps;
 pub mod poe_data;
-pub mod reward;
-pub mod rich;
 pub mod scripts;
 pub mod table;
-pub mod table_record;
 
 use crate::{poe_data::PoeData, table::DivcordTable};
 

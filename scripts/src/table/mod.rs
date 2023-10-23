@@ -1,3 +1,6 @@
+pub mod rich;
+pub mod table_record;
+
 use std::{collections::HashMap, fs};
 
 use async_trait::async_trait;
@@ -5,13 +8,15 @@ use googlesheets::sheet::ValueRange;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
+use self::{
+    rich::{DropsFrom, RichSourcesColumn},
+    table_record::{CardDropTableRecord, Confidence, GreyNote, RemainingWork},
+};
 use crate::{
     dropsource::{parse_source, Source},
     error::Error,
     loader::DataLoader,
     poe_data::PoeData,
-    rich::{DropsFrom, RichSourcesColumn},
-    table_record::{CardDropTableRecord, Confidence, GreyNote, RemainingWork},
 };
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -136,21 +141,21 @@ impl DivcordTable {
             .enumerate()
             .map(|(index, (row, cell))| {
                 let greynote = GreyNote::parse(&row[0])?;
-                let name = crate::table_record::parse_name(&row[1])?;
-                let tag_hypothesis = crate::table_record::parse_string_cell(&row[2]);
+                let name = table_record::parse_name(&row[1])?;
+                let tag_hypothesis = table_record::parse_string_cell(&row[2]);
                 let confidence = Confidence::parse(&row[3])?;
                 let remaining_work = RemainingWork::parse(&row[4])?;
                 let wiki_disagreements = row
                     .get(6)
-                    .map(|val| crate::table_record::parse_string_cell(val))
+                    .map(|val| table_record::parse_string_cell(val))
                     .flatten();
                 let sources_with_tag_but_not_on_wiki = row
                     .get(7)
-                    .map(|val| crate::table_record::parse_string_cell(val))
+                    .map(|val| table_record::parse_string_cell(val))
                     .flatten();
                 let notes = row
                     .get(8)
-                    .map(|val| crate::table_record::parse_string_cell(val))
+                    .map(|val| table_record::parse_string_cell(val))
                     .flatten();
                 let drops_from = cell.drops_from();
 

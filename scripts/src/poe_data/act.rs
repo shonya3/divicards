@@ -1,10 +1,13 @@
-use std::{env, fs::File};
+use std::{
+    env::{self, current_dir},
+    fs::File,
+};
 
 use async_trait::async_trait;
 use playwright::{api::DocumentLoadState, Playwright};
 use serde::{Deserialize, Serialize};
 
-use crate::{error::Error, loader::DataLoader, rich::DropsFrom};
+use crate::{error::Error, loader::DataLoader, table::rich::DropsFrom};
 
 pub const TOWN_IMAGE_URL: &'static str =
     "https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/WorldPanelTownPinIcon.webp";
@@ -231,7 +234,14 @@ impl DataLoader<Vec<ActArea>> for ActsLoader {
     async fn fetch(&self) -> Result<Vec<ActArea>, Error> {
         let script = format!(
             "(el) => {{{} return extractActAreaPopupData(el)}}",
-            &std::fs::read_to_string("extractActAreaPopupData.js").unwrap()
+            &std::fs::read_to_string(
+                current_dir()
+                    .unwrap()
+                    .join("src")
+                    .join("poe_data")
+                    .join("extractActAreaPopupData.js")
+            )
+            .unwrap()
         );
 
         let playwright = Playwright::initialize().await.unwrap();

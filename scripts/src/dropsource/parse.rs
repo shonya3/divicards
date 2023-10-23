@@ -1,7 +1,8 @@
 use std::fmt::Display;
 
 use crate::{
-    poe_data::PoeData, rich::DropsFrom, table::DivcordTableRecord, table_record::GreyNote,
+    poe_data::{act::parse_act_areas, PoeData},
+    table::{rich::DropsFrom, table_record::GreyNote, DivcordTableRecord},
 };
 
 use super::Source;
@@ -57,8 +58,7 @@ pub fn parse_source<'a>(
     if d.styles.italic == true
         && (d.styles.color.as_str() == "#FFFFFF" || record.greynote == Some(GreyNote::Story))
     {
-        let ids =
-            crate::act::parse_act_areas(d, &acts, card_drop_level_requirement.try_into().unwrap());
+        let ids = parse_act_areas(d, &acts, card_drop_level_requirement.try_into().unwrap());
         if ids.is_empty() {
             if acts.iter().any(|a| {
                 a.bossfights.iter().any(|b| {

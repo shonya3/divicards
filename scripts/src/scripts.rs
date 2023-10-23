@@ -6,8 +6,8 @@ use serde_json::Value;
 
 use crate::{
     error::Error,
+    table::table_record::{CardDropTableRecord, Confidence},
     table::Table,
-    table_record::{CardDropTableRecord, Confidence},
 };
 
 pub fn read_original_table_sheet<P: AsRef<Path>>(path: P) -> Result<ValueRange, Error> {
