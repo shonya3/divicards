@@ -187,6 +187,7 @@ pub struct ParsedDivcordTableRecord {
     pub confidence: Confidence,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub remaining_work: Option<RemainingWork>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
     pub sources: Vec<Source>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub wiki_disagreements: Option<String>,
