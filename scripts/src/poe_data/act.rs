@@ -4,7 +4,6 @@ use std::{
 };
 
 use async_trait::async_trait;
-use playwright::{api::DocumentLoadState, Playwright};
 use serde::{Deserialize, Serialize};
 
 use crate::{error::Error, loader::DataLoader, table::rich::DropsFrom};
@@ -244,7 +243,7 @@ impl DataLoader<Vec<ActArea>> for ActsLoader {
             .unwrap()
         );
 
-        let playwright = Playwright::initialize().await.unwrap();
+        let playwright = playwright::Playwright::initialize().await.unwrap();
         playwright.install_chromium().unwrap();
         let chrome = playwright.chromium();
         let browser = chrome.launcher().headless(false).launch().await.unwrap();
@@ -261,7 +260,7 @@ impl DataLoader<Vec<ActArea>> for ActsLoader {
         for act in 1..=10 {
             println!("Doing act {act}");
             page.goto_builder(&ActArea::act_url(act))
-                .wait_until(DocumentLoadState::DomContentLoaded)
+                .wait_until(playwright::api::DocumentLoadState::DomContentLoaded)
                 .goto()
                 .await
                 .unwrap();
