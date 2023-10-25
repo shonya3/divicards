@@ -43,3 +43,8 @@ impl DivinationCardElementData {
         std::fs::write("data.json", serde_json::to_string(&v).unwrap()).unwrap();
     }
 }
+
+#[tokio::main]
+async fn main() {
+    DivinationCardElementData::write_data().await;
+}

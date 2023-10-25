@@ -1,0 +1,15 @@
+[package]
+name = "card_element"
+version.workspace = true
+edition.workspace = true
+repository.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tokio = {workspace = true}
+serde = {workspace = true} 
+serde_json = {workspace = true}
+regex = "1.9.5"
+reqwest = { workspace = true }
+divi = {path = "../divi"}
