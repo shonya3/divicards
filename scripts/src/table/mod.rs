@@ -1,16 +1,15 @@
 pub mod rich;
 pub mod table_record;
 
-use std::{collections::HashMap, fs};
+use std::{collections::HashMap, fs, io::BufReader};
 
 use async_trait::async_trait;
 use googlesheets::sheet::ValueRange;
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
 
 use self::{
-    rich::{DropsFrom, RichSourcesColumn},
-    table_record::{CardDropTableRecord, Confidence, GreyNote, RemainingWork},
+    rich::RichSourcesColumn,
+    table_record::{DivcordTableRecord, SourcefulDivcordTableRecord},
 };
 use crate::{
     dropsource::{parse_source, Source},
@@ -20,60 +19,9 @@ use crate::{
 };
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
-pub struct Table(pub Vec<CardDropTableRecord>);
-impl Table {
-    pub fn parse(rows: &[Vec<Value>]) -> Result<Table, Error> {
-        let mut records: Vec<CardDropTableRecord> = Vec::new();
-        for row in rows {
-            let record = CardDropTableRecord::parse(row)?;
-            records.push(record);
-        }
-
-        Ok(Table(records))
-    }
-
-    pub fn read_file(path: Option<&str>) -> Result<Table, Error> {
-        let p = path.unwrap_or("jsons/sheet.json");
-        let s = fs::read_to_string(p)?;
-        let sheet: ValueRange = serde_json::from_str(&s)?;
-        Table::try_from(&sheet)
-    }
-}
-
-impl TryFrom<&ValueRange> for Table {
-    type Error = Error;
-
-    fn try_from(sheet: &ValueRange) -> Result<Self, Self::Error> {
-        Table::parse(&sheet.values[2..])
-    }
-}
-
-#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct DivcordTable {
     pub sheet: ValueRange,
     pub rich_sources_column: RichSourcesColumn,
-}
-
-#[derive(Debug, Serialize, Deserialize, Clone)]
-#[serde(rename_all = "camelCase")]
-pub struct DivcordTableRecord {
-    pub id: usize,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub greynote: Option<GreyNote>,
-    pub name: String,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag_hypothesis: Option<String>,
-    pub confidence: Confidence,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub remaining_work: Option<RemainingWork>,
-    #[serde(skip_serializing)]
-    pub drops_from: Vec<DropsFrom>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub wiki_disagreements: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub sources_with_tag_but_not_on_wiki: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub notes: Option<String>,
 }
 
 impl DivcordTable {
@@ -92,7 +40,7 @@ impl DivcordTable {
         let mut map: HashMap<String, Vec<DivcordTableRecord>> = HashMap::new();
         for record in self.records() {
             let record = record?;
-            map.entry(record.name.clone())
+            map.entry(record.card.clone())
                 .and_modify(|vec| vec.push(record.clone()))
                 .or_insert(vec![record]);
         }
@@ -103,7 +51,7 @@ impl DivcordTable {
     pub fn parsed_records(
         &self,
         poe_data: &PoeData,
-    ) -> Result<Vec<ParsedDivcordTableRecord>, Error> {
+    ) -> Result<Vec<SourcefulDivcordTableRecord>, Error> {
         let parsed_records = self
             .records()
             .map(|r| {
@@ -116,11 +64,11 @@ impl DivcordTable {
                         source
                     })
                     .collect::<Vec<_>>();
-                ParsedDivcordTableRecord {
+                SourcefulDivcordTableRecord {
                     sources,
                     id: record.id,
                     greynote: record.greynote,
-                    name: record.name,
+                    card: record.card,
                     tag_hypothesis: record.tag_hypothesis,
                     confidence: record.confidence,
                     remaining_work: record.remaining_work,
@@ -139,72 +87,24 @@ impl DivcordTable {
             .iter()
             .zip(self.rich_sources_column.cells())
             .enumerate()
-            .map(|(index, (row, cell))| {
-                let greynote = GreyNote::parse(&row[0])?;
-                let name = table_record::parse_name(&row[1])?;
-                let tag_hypothesis = table_record::parse_string_cell(&row[2]);
-                let confidence = Confidence::parse(&row[3])?;
-                let remaining_work = RemainingWork::parse(&row[4])?;
-                let wiki_disagreements = row
-                    .get(6)
-                    .map(|val| table_record::parse_string_cell(val))
-                    .flatten();
-                let sources_with_tag_but_not_on_wiki = row
-                    .get(7)
-                    .map(|val| table_record::parse_string_cell(val))
-                    .flatten();
-                let notes = row
-                    .get(8)
-                    .map(|val| table_record::parse_string_cell(val))
-                    .flatten();
-                let drops_from = cell.drops_from();
-
-                Ok(DivcordTableRecord {
-                    greynote,
-                    name,
-                    tag_hypothesis,
-                    confidence,
-                    remaining_work,
-                    drops_from,
-                    wiki_disagreements,
-                    sources_with_tag_but_not_on_wiki,
-                    notes,
-                    id: index + 3,
-                })
+            .map(|(row_index, (divcord_table_row, cell))| {
+                DivcordTableRecord::create(row_index, divcord_table_row, cell.drops_from())
             })
     }
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
-#[serde(rename_all = "camelCase")]
-pub struct ParsedDivcordTableRecord {
-    pub id: usize,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub greynote: Option<GreyNote>,
-    pub name: String,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag_hypothesis: Option<String>,
-    pub confidence: Confidence,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub remaining_work: Option<RemainingWork>,
-    #[serde(skip_serializing_if = "Vec::is_empty")]
-    pub sources: Vec<Source>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub wiki_disagreements: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub sources_with_tag_but_not_on_wiki: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub notes: Option<String>,
-}
-
-pub fn parsed_records(
-    table: &DivcordTable,
-    poe_data: &PoeData,
-) -> Result<Vec<ParsedDivcordTableRecord>, Error> {
-    table.parsed_records(poe_data)
-}
-
 pub struct DivcordTableLoader(reqwest::Client);
+impl DivcordTableLoader {
+    pub fn read_file(&self) -> DivcordTable {
+        let path = std::env::current_dir()
+            .unwrap()
+            .join("data")
+            .join("divcord_table.json");
+        let file = std::fs::File::open(&path).unwrap();
+        let reader = BufReader::new(file);
+        serde_json::from_reader(reader).unwrap()
+    }
+}
 impl DivcordTableLoader {
     pub fn new() -> Self {
         Self(reqwest::Client::new())
@@ -266,7 +166,7 @@ pub fn sources_by_card(
         for d in &record.drops_from {
             let sources = crate::dropsource::parse_source(d, &record, poe_data).unwrap();
             for source in sources {
-                map.entry(record.name.clone()).or_default().push(source);
+                map.entry(record.card.clone()).or_default().push(source);
             }
         }
     }

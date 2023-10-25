@@ -2,7 +2,10 @@ use std::fmt::Display;
 
 use crate::{
     poe_data::{act::parse_act_areas, PoeData},
-    table::{rich::DropsFrom, table_record::GreyNote, DivcordTableRecord},
+    table::{
+        rich::DropsFrom,
+        table_record::{DivcordTableRecord, GreyNote},
+    },
 };
 
 use super::Source;
@@ -27,9 +30,9 @@ pub fn parse_source<'a>(
         mapbosses,
     } = poe_data;
 
-    let card = cards.card(&record.name);
+    let card = cards.card(&record.card);
     let card_drop_level_requirement = card.min_level.unwrap_or_default();
-    let card_name = &record.name;
+    let card_name = &record.card;
     let row = record.id;
     if let Ok(source) = d.name.parse::<Source>() {
         match source.to_string().as_str() {

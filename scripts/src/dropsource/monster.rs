@@ -404,6 +404,9 @@ pub enum EndgameBoss {
     #[strum(to_string = "The Infinite Hunger")]
     #[serde(rename = "The Infinite Hunger")]
     InfiniteHunger,
+    #[strum(to_string = "Atziri, Queen of the Vaal (Uber)")]
+    #[serde(rename = "Atziri, Queen of the Vaal (Uber)")]
+    UberAtziri,
 }
 
 #[derive(
