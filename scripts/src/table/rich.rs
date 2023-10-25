@@ -1,7 +1,4 @@
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
-
-use crate::error::Error;
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(rename_all = "camelCase")]
@@ -139,19 +136,6 @@ impl Cell {
     pub fn text_format_runs(&self) -> Vec<TextFormatRun> {
         self.text_format_runs.clone().unwrap_or_else(Vec::new)
     }
-
-    // pub fn text_fragments(&self) {
-    //     let runs = self.text_format_runs();
-    //     if self.has_more_than_one_italic_fragments() {
-    //         panic!("More than one italic fragment is not expected");
-    //     }
-
-    //     for italic in self.italics() {}
-    // }
-
-    // pub fn italic_preceeds_normal_text(&self) -> bool {
-    //     for run in self.text_format_runs() {}
-    // }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -329,26 +313,4 @@ impl TextFormatRun {
 pub struct Format {
     pub italic: Option<bool>,
     pub strikethrough: Option<bool>,
-}
-
-async fn _load_drops_column() -> Result<Value, Error> {
-    dotenv::dotenv().ok();
-    let key = std::env::var("GOOGLE_API_KEY").expect("No google api key");
-    let spreadsheet_id = "1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU";
-    let sheet = "Cards_and_Hypotheses";
-    let url = format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}?&ranges={sheet}!B3:B&ranges={sheet}!F3:F&includeGridData=true&key={key}");
-    // let url = format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}?&ranges={sheet}!B3:B&includeGridData=true&key={key}");
-    // let url = format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}?&ranges={sheet}!A:A&ranges={sheet}!F:F&includeGridData=true&key={key}");
-    Ok(reqwest::get(url).await?.json().await?)
-}
-
-pub async fn load_t() -> Result<RichSourcesColumn, Error> {
-    dotenv::dotenv().ok();
-    let key = std::env::var("GOOGLE_API_KEY").expect("No google api key");
-    let spreadsheet_id = "1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU";
-    let sheet = "Cards_and_Hypotheses";
-    // let url = format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}?&ranges={sheet}!B3:B&ranges={sheet}!F3:F&includeGridData=true&key={key}");
-    let url = format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}?&ranges={sheet}!F3:F&includeGridData=true&key={key}");
-    // let url = format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}?&ranges={sheet}!A:A&ranges={sheet}!F:F&includeGridData=true&key={key}");
-    Ok(reqwest::get(url).await?.json().await?)
 }
