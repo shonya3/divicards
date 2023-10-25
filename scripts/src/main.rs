@@ -2,10 +2,10 @@ pub mod consts;
 pub mod dropsource;
 pub mod error;
 pub mod loader;
-pub mod poe_data;
 pub mod table;
 
-use crate::{poe_data::PoeData, table::DivcordTable};
+use crate::table::DivcordTable;
+use poe_data::PoeData;
 
 #[tokio::main]
 async fn main() {

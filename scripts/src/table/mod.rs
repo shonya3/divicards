@@ -11,7 +11,8 @@ use self::{
     rich::RichSourcesColumn,
     table_record::{DivcordTableRecord, SourcefulDivcordTableRecord},
 };
-use crate::{dropsource::Source, error::Error, loader::DataLoader, poe_data::PoeData};
+use crate::{dropsource::Source, error::Error, loader::DataLoader};
+use poe_data::PoeData;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct DivcordTable {

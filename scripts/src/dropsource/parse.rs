@@ -1,14 +1,13 @@
 use std::fmt::Display;
 
-use crate::{
-    poe_data::{
-        act::{ActArea, ActAreaName},
-        PoeData,
-    },
-    table::{
-        rich::DropsFrom,
-        table_record::{DivcordTableRecord, GreyNote},
-    },
+use crate::table::{
+    rich::DropsFrom,
+    table_record::{DivcordTableRecord, GreyNote},
+};
+
+use poe_data::{
+    act::{ActArea, ActAreaName},
+    PoeData,
 };
 
 use super::Source;

@@ -1,5 +1,3 @@
-use std::env::current_dir;
-
 use async_trait::async_trait;
 use serde::{Deserialize, Serialize};
 
@@ -72,14 +70,7 @@ impl DataLoader<Vec<ActArea>> for ActsLoader {
     async fn fetch(&self) -> Result<Vec<ActArea>, Error> {
         let script = format!(
             "(el) => {{{} return extractActAreaPopupData(el)}}",
-            &std::fs::read_to_string(
-                current_dir()
-                    .unwrap()
-                    .join("src")
-                    .join("poe_data")
-                    .join("extractActAreaPopupData.js")
-            )
-            .unwrap()
+            &std::fs::read_to_string("extractActAreaPopupData.js").unwrap()
         );
 
         let playwright = playwright::Playwright::initialize().await.unwrap();

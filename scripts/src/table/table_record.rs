@@ -5,8 +5,8 @@ use serde_json::Value;
 use crate::{
     dropsource::{parse::ParseSourceError, parse_source, Source},
     error::Error,
-    poe_data::PoeData,
 };
+use poe_data::PoeData;
 
 use super::rich::DropsFrom;
 

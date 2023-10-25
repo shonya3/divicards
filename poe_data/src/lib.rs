@@ -1,5 +1,8 @@
 pub mod act;
 pub mod cards;
+pub mod consts;
+pub mod error;
+pub mod loader;
 pub mod mapbosses;
 pub mod maps;
 

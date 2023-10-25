@@ -1,16 +1,12 @@
-use std::{env, fs::File};
-
 use async_trait::async_trait;
 
 use divi::{
-    league::TradeLeague,
-    prices::{NinjaCardData, Prices},
+    prices::Prices,
     sample::{DivinationCardsSample, SampleData},
 };
 use googlesheets::sheet::Credential;
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
-use tokio::task::spawn_blocking;
 
 use crate::{
     consts::{WEIGHT_RANGES, WIKI_API_URL},

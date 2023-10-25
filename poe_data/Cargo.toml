@@ -1,0 +1,17 @@
+[package]
+name = "poe_data"
+version.workspace = true
+edition.workspace = true
+repository.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+playwright = "0.0.20"
+async-trait = "0.1.73"
+reqwest = { workspace = true, features = ["blocking"] }
+googlesheets = {path = "../googlesheets"}
+serde = {workspace = true} 
+serde_json = {workspace = true}
+dotenv = "0.15.0"
+divi = {path = "../divi"}
