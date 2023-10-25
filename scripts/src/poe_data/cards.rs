@@ -164,32 +164,3 @@ impl DataLoader<CardsData> for CardsLoader {
         ))
     }
 }
-
-pub async fn download_card_images() -> Result<(), Error> {
-    let data = NinjaCardData::fetch(&TradeLeague::Ancestor).await?;
-
-    let cards_images_dir = env::current_dir()
-        .unwrap()
-        .join("public")
-        .join("images")
-        .join("cards");
-
-    if !cards_images_dir.exists() {
-        std::fs::create_dir_all(&cards_images_dir).unwrap();
-    }
-
-    spawn_blocking(move || {
-        for card in data {
-            let url = format!("{POE_CDN_CARDS}{}.png", card.art_filename);
-            let filename = format!("{}.png", card.art_filename);
-            let path = cards_images_dir.join(filename);
-            let mut file = File::create(path).unwrap();
-            let _ = reqwest::blocking::get(url)
-                .unwrap()
-                .copy_to(&mut file)
-                .unwrap();
-        }
-    });
-
-    Ok(())
-}

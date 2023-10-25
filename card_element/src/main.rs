@@ -1,3 +1,4 @@
+pub mod images;
 pub mod reward;
 
 use divi::{league::TradeLeague, prices::NinjaCardData};

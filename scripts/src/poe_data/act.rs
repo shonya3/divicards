@@ -187,32 +187,6 @@ pub fn find_ids(name: &ActAreaName, acts: &[ActArea], min_level: u8) -> Vec<Stri
     }
 }
 
-pub fn download_images(urls: Vec<String>) -> Result<(), Error> {
-    let act_images_dir = env::current_dir()
-        .unwrap()
-        .join("public")
-        .join("images")
-        .join("acts");
-
-    if !act_images_dir.exists() {
-        std::fs::create_dir_all(&act_images_dir).unwrap();
-    }
-
-    tokio::task::spawn_blocking(move || {
-        for url in urls {
-            let (_, filename) = url.rsplit_once("/").unwrap();
-            let path = act_images_dir.join(filename);
-            let mut file = File::create(path).unwrap();
-            let _ = reqwest::blocking::get(url)
-                .unwrap()
-                .copy_to(&mut file)
-                .unwrap();
-        }
-    });
-
-    Ok(())
-}
-
 pub struct ActsLoader(reqwest::Client);
 impl ActsLoader {
     pub const fn new(client: reqwest::Client) -> Self {

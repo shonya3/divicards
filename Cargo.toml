@@ -6,7 +6,7 @@ members = [
     "googlesheets",
     "divi/examples/*",
     "scripts",
-    "card_element"
+    "card_element",
 ]
 
 [workspace.package]
