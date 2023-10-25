@@ -4,7 +4,6 @@ pub mod dropsource;
 pub mod error;
 pub mod loader;
 pub mod poe_data;
-pub mod scripts;
 pub mod table;
 
 use crate::{poe_data::PoeData, table::DivcordTable};
