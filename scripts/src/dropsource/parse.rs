@@ -1,7 +1,10 @@
 use std::fmt::Display;
 
 use crate::{
-    poe_data::{act::parse_act_areas, PoeData},
+    poe_data::{
+        act::{ActArea, ActAreaName},
+        PoeData,
+    },
     table::{
         rich::DropsFrom,
         table_record::{DivcordTableRecord, GreyNote},
@@ -113,4 +116,136 @@ pub fn parse_source(
     }
 
     Err(ParseSourceError(d.to_owned()))
+}
+
+pub fn parse_act_areas(drops_from: &DropsFrom, acts: &[ActArea], min_level: u8) -> Vec<String> {
+    if !drops_from.styles.italic {
+        panic!("Act areas should be italic");
+    }
+
+    let s = &drops_from.name;
+    let names = match is_act_notation(s) {
+        true if s == "The Belly of the Beast (A4/A9)" => vec![
+            ActAreaName::NameWithAct(("The Belly of the Beast Level 1".to_string(), 4)),
+            ActAreaName::NameWithAct(("The Belly of the Beast Level 1".to_string(), 4)),
+            ActAreaName::NameWithAct(("The Belly of the Beast".to_string(), 9)),
+        ],
+        true => parse_act_notation(s),
+        false => vec![ActAreaName::Name(s.to_owned())],
+    };
+
+    names
+        .iter()
+        .flat_map(|name| find_ids(&name, acts, min_level))
+        .collect()
+}
+
+pub fn is_act_notation(s: &str) -> bool {
+    match s {
+        s if s.contains("(") && s.contains(")") => true,
+        s if s.contains("1/2") => true,
+        _ => false,
+    }
+}
+
+pub fn parse_act_notation(s: &str) -> Vec<ActAreaName> {
+    if !s.contains("(") && !s.contains("/") {
+        panic!("Expected act notation, got {s}");
+    };
+
+    let mut split = s.split("(");
+
+    let name = split.next().expect("No name, {s}");
+    let mut names: Vec<String> = Vec::new();
+
+    if name.contains("1/2") {
+        let name = name.replace("1/2", "");
+        let name = name.trim();
+        for n in [1, 2] {
+            let name = format!("{name} {n}");
+            names.push(name);
+        }
+    } else {
+        names.push(name.to_string());
+    }
+
+    let names = match name.contains("1/2") {
+        true => {
+            let name = name.replace("1/2", "");
+            let name = name.trim();
+            [1, 2].iter().map(|n| format!("{name} {n}")).collect()
+        }
+        false => vec![name.trim().to_string()],
+    };
+
+    if let Some(acts) = split.next() {
+        if acts.contains("/") {
+            let (left, right) = acts.split_once("/").unwrap();
+
+            let left = left
+                .chars()
+                .into_iter()
+                .filter(|c| c.is_digit(10))
+                .collect::<String>()
+                .parse::<u8>()
+                .unwrap();
+
+            let right = right
+                .chars()
+                .into_iter()
+                .filter(|c| c.is_digit(10))
+                .collect::<String>()
+                .parse::<u8>()
+                .unwrap();
+
+            names
+                .into_iter()
+                .flat_map(|name| {
+                    [
+                        ActAreaName::NameWithAct((name.clone(), left)),
+                        ActAreaName::NameWithAct((name, right)),
+                    ]
+                })
+                .collect()
+        } else {
+            let left = acts
+                .chars()
+                .into_iter()
+                .filter(|c| c.is_digit(10))
+                .collect::<String>()
+                .parse::<u8>()
+                .unwrap();
+
+            names
+                .into_iter()
+                .map(|name| ActAreaName::NameWithAct((name, left)))
+                .collect()
+        }
+    } else {
+        names
+            .into_iter()
+            .map(|name| ActAreaName::Name(name))
+            .collect()
+    }
+}
+
+pub fn find_ids(name: &ActAreaName, acts: &[ActArea], min_level: u8) -> Vec<String> {
+    match name {
+        ActAreaName::Name(name) => acts
+            .iter()
+            .filter(|a| &a.name == name && a.is_town == false && a.area_level >= min_level)
+            .map(|a| a.id.to_owned())
+            .collect(),
+        ActAreaName::NameWithAct((name, act)) => {
+            let mut v = vec![];
+            if let Some(a) = acts
+                .iter()
+                .find(|a| &a.name == name && &a.act == act && a.area_level >= min_level)
+            {
+                v.push(a.id.to_owned())
+            };
+
+            v
+        }
+    }
 }
