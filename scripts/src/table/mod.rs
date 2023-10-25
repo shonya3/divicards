@@ -47,14 +47,9 @@ impl DivcordTable {
         &self,
         poe_data: &PoeData,
     ) -> Result<Vec<SourcefulDivcordTableRecord>, Error> {
-        let sourceful_records = self
-            .records()
-            .map(|r| {
-                let record = r.unwrap();
-                SourcefulDivcordTableRecord::from_record(record, poe_data).unwrap()
-            })
-            .collect::<Vec<_>>();
-        Ok(sourceful_records)
+        self.records()
+            .map(|r| Ok(SourcefulDivcordTableRecord::from_record(r?, poe_data)?))
+            .collect()
     }
 
     pub fn records(&self) -> impl Iterator<Item = Result<DivcordTableRecord, Error>> + '_ {
