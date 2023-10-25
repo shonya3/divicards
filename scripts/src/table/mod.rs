@@ -1,7 +1,7 @@
 pub mod rich;
 pub mod table_record;
 
-use std::{collections::HashMap, fs, io::BufReader};
+use std::{collections::HashMap, io::BufReader};
 
 use async_trait::async_trait;
 use googlesheets::sheet::ValueRange;
@@ -11,12 +11,7 @@ use self::{
     rich::RichSourcesColumn,
     table_record::{DivcordTableRecord, SourcefulDivcordTableRecord},
 };
-use crate::{
-    dropsource::{parse_source, Source},
-    error::Error,
-    loader::DataLoader,
-    poe_data::PoeData,
-};
+use crate::{dropsource::Source, error::Error, loader::DataLoader, poe_data::PoeData};
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct DivcordTable {
@@ -48,37 +43,18 @@ impl DivcordTable {
         Ok(map)
     }
 
-    pub fn parsed_records(
+    pub fn sourceful_records(
         &self,
         poe_data: &PoeData,
     ) -> Result<Vec<SourcefulDivcordTableRecord>, Error> {
-        let parsed_records = self
+        let sourceful_records = self
             .records()
             .map(|r| {
                 let record = r.unwrap();
-                let sources = record
-                    .drops_from
-                    .iter()
-                    .flat_map(|d| {
-                        let source = parse_source(d, &record, &poe_data).unwrap();
-                        source
-                    })
-                    .collect::<Vec<_>>();
-                SourcefulDivcordTableRecord {
-                    sources,
-                    id: record.id,
-                    greynote: record.greynote,
-                    card: record.card,
-                    tag_hypothesis: record.tag_hypothesis,
-                    confidence: record.confidence,
-                    remaining_work: record.remaining_work,
-                    wiki_disagreements: record.wiki_disagreements,
-                    sources_with_tag_but_not_on_wiki: record.sources_with_tag_but_not_on_wiki,
-                    notes: record.notes,
-                }
+                SourcefulDivcordTableRecord::from_record(record, poe_data).unwrap()
             })
             .collect::<Vec<_>>();
-        Ok(parsed_records)
+        Ok(sourceful_records)
     }
 
     pub fn records(&self) -> impl Iterator<Item = Result<DivcordTableRecord, Error>> + '_ {

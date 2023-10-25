@@ -11,18 +11,18 @@ use crate::{
 use super::Source;
 
 #[derive(Debug)]
-pub struct ParseSourceError<'a>(&'a DropsFrom);
-impl<'a> Display for ParseSourceError<'a> {
+pub struct ParseSourceError(pub DropsFrom);
+impl Display for ParseSourceError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "Source variant not found for {:?}", self.0)
     }
 }
 
-pub fn parse_source<'a>(
-    d: &'a DropsFrom,
+pub fn parse_source(
+    d: &DropsFrom,
     record: &DivcordTableRecord,
     poe_data: &PoeData,
-) -> Result<Vec<Source>, ParseSourceError<'a>> {
+) -> Result<Vec<Source>, ParseSourceError> {
     let PoeData {
         acts,
         cards,
@@ -112,5 +112,5 @@ pub fn parse_source<'a>(
         }
     }
 
-    Err(ParseSourceError(d))
+    Err(ParseSourceError(d.to_owned()))
 }

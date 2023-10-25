@@ -2,7 +2,11 @@ use divi::{sample::fix_name, IsCard};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-use crate::{dropsource::Source, error::Error};
+use crate::{
+    dropsource::{parse::ParseSourceError, parse_source, Source},
+    error::Error,
+    poe_data::PoeData,
+};
 
 use super::rich::DropsFrom;
 
@@ -87,6 +91,36 @@ pub struct SourcefulDivcordTableRecord {
     pub sources_with_tag_but_not_on_wiki: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub notes: Option<String>,
+}
+
+impl SourcefulDivcordTableRecord {
+    pub fn from_record(
+        record: DivcordTableRecord,
+        poe_data: &PoeData,
+    ) -> Result<Self, ParseSourceError> {
+        let mut sources: Vec<Source> = Vec::new();
+        for d in &record.drops_from {
+            let Ok(inner_sources) = parse_source(d, &record, poe_data) else {
+                return Err(ParseSourceError(d.to_owned()));
+            };
+            for s in inner_sources {
+                sources.push(s)
+            }
+        }
+
+        Ok(SourcefulDivcordTableRecord {
+            sources,
+            id: record.id,
+            greynote: record.greynote,
+            card: record.card,
+            tag_hypothesis: record.tag_hypothesis,
+            confidence: record.confidence,
+            remaining_work: record.remaining_work,
+            wiki_disagreements: record.wiki_disagreements,
+            sources_with_tag_but_not_on_wiki: record.sources_with_tag_but_not_on_wiki,
+            notes: record.notes,
+        })
+    }
 }
 
 pub fn parse_card_name(val: &Value) -> Result<String, Error> {
@@ -231,7 +265,7 @@ mod tests {
     use googlesheets::sheet::ValueRange;
     use serde_json::json;
 
-    use crate::table::{DivcordTable, DivcordTableLoader};
+    use crate::table::DivcordTableLoader;
 
     use super::*;
 
