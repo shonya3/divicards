@@ -1,5 +1,7 @@
 use std::fmt::Display;
 
+use crate::dropsource::parse::ParseSourceError;
+
 #[derive(Debug)]
 pub enum Error {
     HttpError(reqwest::Error),
@@ -11,6 +13,7 @@ pub enum Error {
     GoogleError(googlesheets::error::Error),
     DiviError(divi::error::Error),
     StrumParseError(strum::ParseError),
+    ParseSourceError(ParseSourceError),
 }
 
 impl Display for Error {
@@ -24,7 +27,8 @@ impl Display for Error {
             Error::RowIsTooShort(column, n_columns) => write!(f, "Could not parse {column}. Row is too short. Expected at least {n_columns} columns to extract {column}"),
             Error::GoogleError(err) => err.fmt(f),
             Error::DiviError(err) => err.fmt(f),
-            Error::StrumParseError(err) => err.fmt(f)
+            Error::StrumParseError(err) => err.fmt(f),
+            Error::ParseSourceError(err) => err.fmt(f),
         }
     }
 }
@@ -62,5 +66,11 @@ impl From<divi::error::Error> for Error {
 impl From<strum::ParseError> for Error {
     fn from(value: strum::ParseError) -> Self {
         Error::StrumParseError(value)
+    }
+}
+
+impl From<ParseSourceError> for Error {
+    fn from(value: ParseSourceError) -> Self {
+        Error::ParseSourceError(value)
     }
 }
