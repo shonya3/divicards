@@ -18,4 +18,4 @@ strum_macros = "0.25.2"
 playwright = "0.0.20"
 strum = "0.25.0"
 async-trait = "0.1.73"
-poe_data = {path = "../poe_data"}
+poe_data = {path = "../poe_data", features = ["fetch"]}

@@ -7,11 +7,16 @@ repository.workspace = true
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-playwright = "0.0.20"
-async-trait = "0.1.73"
-reqwest = { workspace = true, features = ["blocking"] }
-googlesheets = {path = "../googlesheets"}
 serde = {workspace = true} 
 serde_json = {workspace = true}
-dotenv = "0.15.0"
-divi = {path = "../divi"}
+
+async-trait = {version = "0.1.73", optional = true}
+reqwest = { workspace = true, features = ["blocking"], optional = true}
+googlesheets = {path = "../googlesheets", optional = true}
+dotenv = { version = "0.15.0", optional = true}
+divi = {path = "../divi", optional = true}
+playwright = {version = "0.0.20", optional = true}
+
+[features]
+default = []
+fetch = ["dep:playwright", "dep:divi", "dep:dotenv", "dep:googlesheets", "dep:reqwest", "dep:async-trait"]

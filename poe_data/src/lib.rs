@@ -2,20 +2,17 @@ pub mod act;
 pub mod cards;
 pub mod consts;
 pub mod error;
+
+#[cfg(feature = "fetch")]
 pub mod loader;
+#[cfg(feature = "fetch")]
+pub mod loaders;
 pub mod mapbosses;
 pub mod maps;
 
 use serde::{Deserialize, Serialize};
 
-use crate::{error::Error, loader::DataLoader};
-
-use self::{
-    act::{ActArea, ActsLoader},
-    cards::{CardsData, CardsLoader},
-    mapbosses::{BossLoader, MapBoss},
-    maps::{Map, MapLoader},
-};
+use self::{act::ActArea, cards::CardsData, mapbosses::MapBoss, maps::Map};
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct PoeData {
@@ -26,12 +23,17 @@ pub struct PoeData {
 }
 
 impl PoeData {
-    pub async fn load() -> Result<Self, Error> {
+    #[cfg(feature = "fetch")]
+    pub async fn load() -> Result<Self, crate::error::Error> {
+        use crate::{
+            loader::DataLoader,
+            loaders::{ActsLoader, CardsLoader, MapBossesLoader, MapsLoader},
+        };
         Ok(Self {
-            acts: ActsLoader::new(reqwest::Client::new()).load().await?,
-            cards: CardsLoader::new(reqwest::Client::new()).load().await?,
-            maps: MapLoader::new().load().await?,
-            mapbosses: BossLoader::new().load().await?,
+            acts: ActsLoader.load().await?,
+            cards: CardsLoader.load().await?,
+            maps: MapsLoader.load().await?,
+            mapbosses: MapBossesLoader.load().await?,
         })
     }
 }

@@ -1,7 +1,4 @@
-use async_trait::async_trait;
 use serde::{Deserialize, Serialize};
-
-use crate::{error::Error, loader::DataLoader};
 
 pub const TOWN_IMAGE_URL: &'static str =
     "https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/WorldPanelTownPinIcon.webp";
@@ -50,73 +47,179 @@ pub enum ActAreaName {
     NameWithAct((String, u8)),
 }
 
-pub struct ActsLoader(reqwest::Client);
-impl ActsLoader {
-    pub const fn new(client: reqwest::Client) -> Self {
-        Self(client)
-    }
-}
+#[cfg(feature = "fetch")]
+pub async fn fetch() -> Result<Vec<ActArea>, crate::error::Error> {
+    let js = r#"
+        //@ts-check
 
-#[async_trait]
-impl DataLoader<Vec<ActArea>> for ActsLoader {
-    fn filename(&self) -> &'static str {
-        "acts.json"
-    }
+        /**
+         * @typedef {Object} ActArea
+         * @property {string} id
+         * @property {string} name
+         * @property {number} act
+         * @property {number} areaLevel
+         * @property {string} imageUrl
+         * @property {string} poedbImageUrl
+         * @property {boolean} hasWaypoint
+         * @property {boolean} hasLabyrinthTrial
+         * @property {boolean} isTown
+         * @property {Bossfight[]} bossfights
+         * @property {string} flavourText
+         */
 
-    fn reload(&self) -> bool {
-        false
-    }
+        /**
+         * @typedef {Object} Bossfight
+         * @property {string} name
+         * @property {string} url
+         */
 
-    async fn fetch(&self) -> Result<Vec<ActArea>, Error> {
-        let script = format!(
-            "(el) => {{{} return extractActAreaPopupData(el)}}",
-            &std::fs::read_to_string("extractActAreaPopupData.js").unwrap()
-        );
+        /**
+         * Running this function in act.rs ActArea::collect_act_data
+         * for each act area popup(that appears on hover area's name) with playwright's page.evaluate("actAreaPopup => extractActAreaPopupData(actAreaPopup)", actAreaPopup)
+         * https://poedb.tw/us/Act_1
+         * @param {HTMLElement} actAreaPopup
+         * @returns {ActArea}
+         */
+        const extractActAreaPopupData = actAreaPopup => {
+            const TOWN_IMAGE_URL = 'https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/WorldPanelTownPinIcon.webp';
+            const WAYPOINT_IMAGE_URL = 'https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/WorldPanelWaypointIcon.webp';
+            const LABYRINTH_TRIAL_IMAGE_URL =
+                'https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/WorldPanelLabyrinthWaypointPinIcon.webp';
 
-        let playwright = playwright::Playwright::initialize().await.unwrap();
-        playwright.install_chromium().unwrap();
-        let chrome = playwright.chromium();
-        let browser = chrome.launcher().headless(false).launch().await.unwrap();
-        let context = browser
-            .context_builder()
-            .clear_user_agent()
-            .build()
-            .await
-            .unwrap();
-        let page = context.new_page().await.unwrap();
+            const img = actAreaPopup.querySelector('.itemboximage img');
+            const stats = document.querySelector('.Stats');
+            if (!(img instanceof HTMLImageElement)) throw new Error('no img element');
+            if (!stats) throw new Error('no stats element');
+            const hasWaypoint = stats.querySelector(`[src="${WAYPOINT_IMAGE_URL}"]`) !== null;
+            const isTown = stats.querySelector(`[src="${TOWN_IMAGE_URL}"]`) !== null;
+            const hasLabyrinthTrial = stats.querySelector(`[src="${LABYRINTH_TRIAL_IMAGE_URL}"]`) !== null;
 
-        let mut act_areas: Vec<ActArea> = Vec::new();
+            const itemHeader = actAreaPopup.querySelector('.itemHeader');
+            if (!(itemHeader instanceof HTMLElement)) throw new Error('no itemHeader element');
+            const name = itemHeader.innerText;
 
-        for act in 1..=10 {
-            println!("Doing act {act}");
-            page.goto_builder(&ActArea::act_url(act))
-                .wait_until(playwright::api::DocumentLoadState::DomContentLoaded)
-                .goto()
-                .await
-                .unwrap();
+            /** @type string | null */
+            let id = null;
+            /** @type number | null */
+            let act = null;
+            /** @type number | null */
+            let areaLevel = null;
+            /** @type Bossfight[] */
+            const bossfights = [];
+            let flavourText = stats.querySelector('.FlavourText')?.textContent ?? null;
+            const poedbImageUrl = img.src;
+            const slashIndex = poedbImageUrl.lastIndexOf('/');
+            const filename = poedbImageUrl.slice(slashIndex);
+            const imageUrl = `/images/acts${filename}`;
 
-            let tbody = page.query_selector("tbody").await.unwrap().unwrap();
-            let rows = tbody.query_selector_all("tr").await.unwrap();
-            for row in rows {
-                let columns = row.query_selector_all("td").await.unwrap();
-                let name_column = &columns[1];
-                for name_element in name_column.query_selector_all("a").await.unwrap() {
-                    let area = name_element.inner_text().await.unwrap();
-                    println!("{area}");
-                    name_element.hover_builder().goto().await.unwrap();
-                    let tippy_content = page
-                        .wait_for_selector_builder("div.tippy-content[data-state=visible]:has(img)")
-                        .wait_for_selector()
-                        .await
-                        .unwrap()
-                        .unwrap();
+            const props = stats.querySelectorAll('.property');
+            for (const prop of props) {
+                if (!(prop instanceof HTMLElement)) {
+                    throw new Error(`==${name}== prop should be HTMLElement`);
+                }
 
-                    let a: ActArea = page.evaluate(&script, tippy_content).await.unwrap();
-                    act_areas.push(a);
+                const text = prop.innerText;
+
+                const valueElement = prop.querySelector('.text-type0');
+                if (!(valueElement instanceof HTMLElement)) {
+                    continue;
+                }
+
+                if (text.includes('Id:')) {
+                    id = valueElement.innerText;
+                }
+
+                if (text.includes('Act: ')) {
+                    act = Number(valueElement.innerText);
+                }
+
+                if (text.includes('Area Level')) {
+                    areaLevel = Number(valueElement.innerText);
+                }
+
+                if (text.includes('Boss Fights')) {
+                    const span = prop.querySelector('span');
+                    if (!span) {
+                        continue;
+                    }
+                    const aElements = Array.from(prop.querySelector('span')?.querySelectorAll('a') ?? []);
+                    for (const a of aElements) {
+                        bossfights.push({
+                            name: a.innerText,
+                            url: a.href,
+                        });
+                    }
                 }
             }
-        }
 
-        Ok(act_areas)
+            if (!id) throw new Error(`==${name}== No id`);
+            if (!act) throw new Error(`==${name}== no act`);
+            if (!areaLevel) throw new Error(`==${name}== no area level`);
+            if (!flavourText) throw new Error(`==${name}== No flavourText`);
+
+            /** @type ActArea */
+            const actArea = {
+                id,
+                name,
+                act,
+                areaLevel,
+                imageUrl,
+                poedbImageUrl,
+                hasWaypoint,
+                hasLabyrinthTrial,
+                isTown,
+                bossfights,
+                flavourText,
+            };
+
+            return actArea;
+        };
+    "#;
+
+    let script = format!("(el) => {{{js} return extractActAreaPopupData(el)}}");
+    let playwright = playwright::Playwright::initialize().await.unwrap();
+    playwright.install_chromium().unwrap();
+    let chrome = playwright.chromium();
+    let browser = chrome.launcher().headless(false).launch().await.unwrap();
+    let context = browser
+        .context_builder()
+        .clear_user_agent()
+        .build()
+        .await
+        .unwrap();
+    let page = context.new_page().await.unwrap();
+
+    let mut act_areas: Vec<ActArea> = Vec::new();
+
+    for act in 1..=10 {
+        println!("Doing act {act}");
+        page.goto_builder(&ActArea::act_url(act))
+            .wait_until(playwright::api::DocumentLoadState::DomContentLoaded)
+            .goto()
+            .await
+            .unwrap();
+
+        let tbody = page.query_selector("tbody").await.unwrap().unwrap();
+        let rows = tbody.query_selector_all("tr").await.unwrap();
+        for row in rows {
+            let columns = row.query_selector_all("td").await.unwrap();
+            let name_column = &columns[1];
+            for name_element in name_column.query_selector_all("a").await.unwrap() {
+                let area = name_element.inner_text().await.unwrap();
+                println!("{area}");
+                name_element.hover_builder().goto().await.unwrap();
+                let tippy_content = page
+                    .wait_for_selector_builder("div.tippy-content[data-state=visible]:has(img)")
+                    .wait_for_selector()
+                    .await
+                    .unwrap()
+                    .unwrap();
+
+                let a: ActArea = page.evaluate(&script, tippy_content).await.unwrap();
+                act_areas.push(a);
+            }
+        }
     }
+
+    Ok(act_areas)
 }

@@ -1,11 +1,5 @@
 use serde::{Deserialize, Serialize};
 
-use crate::{
-    consts::{POEDB_MAPS_URL, WIKI_API_URL},
-    error::Error,
-    loader::DataLoader,
-};
-
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Map {
     pub name: String,
@@ -20,124 +14,113 @@ impl Map {
     }
 }
 
-pub struct MapLoader;
-impl MapLoader {
-    pub const fn new() -> Self {
-        MapLoader
-    }
-}
+#[cfg(feature = "fetch")]
+pub async fn fetch() -> Result<Vec<Map>, crate::error::Error> {
+    use crate::consts::{POEDB_MAPS_URL, WIKI_API_URL};
+    pub async fn load_poedb_non_unique_available_maplist(
+    ) -> Result<Vec<String>, crate::error::Error> {
+        let playwright = playwright::Playwright::initialize().await.unwrap();
+        playwright.install_chromium().unwrap();
+        let chrome = playwright.chromium();
+        let browser = chrome.launcher().headless(false).launch().await.unwrap();
+        let context = browser
+            .context_builder()
+            .clear_user_agent()
+            .build()
+            .await
+            .unwrap();
+        let page = context.new_page().await.unwrap();
 
-#[async_trait::async_trait]
-impl DataLoader<Vec<Map>> for MapLoader {
-    fn filename(&self) -> &'static str {
-        "maps.json"
-    }
+        page.goto_builder(POEDB_MAPS_URL)
+            .wait_until(playwright::api::DocumentLoadState::DomContentLoaded)
+            .goto()
+            .await
+            .unwrap();
 
-    async fn fetch(&self) -> Result<Vec<Map>, Error> {
-        pub async fn load_poedb_non_unique_available_maplist() -> Result<Vec<String>, Error> {
-            let playwright = playwright::Playwright::initialize().await.unwrap();
-            playwright.install_chromium().unwrap();
-            let chrome = playwright.chromium();
-            let browser = chrome.launcher().headless(false).launch().await.unwrap();
-            let context = browser
-                .context_builder()
-                .clear_user_agent()
-                .build()
+        let maplist = page.query_selector("#MapsList").await.unwrap().unwrap();
+        let table = maplist.query_selector("table").await.unwrap().unwrap();
+        let tbody = table.query_selector("tbody").await.unwrap().unwrap();
+        let rows = tbody.query_selector_all("tr").await.unwrap();
+        dbg!(&rows);
+
+        let mut maps: Vec<String> = Vec::new();
+        for row in rows {
+            let mapname_column = row
+                .query_selector_all("td")
                 .await
-                .unwrap();
-            let page = context.new_page().await.unwrap();
-
-            page.goto_builder(POEDB_MAPS_URL)
-                .wait_until(playwright::api::DocumentLoadState::DomContentLoaded)
-                .goto()
-                .await
-                .unwrap();
-
-            let maplist = page.query_selector("#MapsList").await.unwrap().unwrap();
-            let table = maplist.query_selector("table").await.unwrap().unwrap();
-            let tbody = table.query_selector("tbody").await.unwrap().unwrap();
-            let rows = tbody.query_selector_all("tr").await.unwrap();
-            dbg!(&rows);
-
-            let mut maps: Vec<String> = Vec::new();
-            for row in rows {
-                let mapname_column = row
-                    .query_selector_all("td")
-                    .await
-                    .unwrap()
-                    .into_iter()
-                    .skip(3)
-                    .next()
-                    .unwrap();
-                let map = mapname_column
-                    .text_content()
-                    .await
-                    .unwrap()
-                    .unwrap()
-                    .trim()
-                    .to_string();
-                if !map.is_empty() {
-                    maps.push(map);
-                };
-            }
-
-            maps.sort();
-
-            Ok(maps)
-        }
-
-        #[derive(Debug, Clone, Serialize, Deserialize)]
-        pub struct MapDataFromWiki {
-            pub name: String,
-            pub tier: u32,
-        }
-
-        async fn load_from_wiki() -> Result<Vec<MapDataFromWiki>, Error> {
-            #[derive(Deserialize)]
-            pub struct WikiResponse {
-                pub cargoquery: Vec<Title>,
-            }
-
-            #[derive(Deserialize)]
-            pub struct Title {
-                pub title: MapRecord,
-            }
-
-            #[derive(Deserialize)]
-            pub struct MapRecord {
-                pub name: String,
-                pub tier: String,
-            }
-
-            let url = format!("{WIKI_API_URL}?action=cargoquery&format=json&smaxage=0&maxage=0&limit=500&tables=maps,items,areas&join_on=items._pageID=maps._pageID,maps.area_id=areas.id&fields=maps.tier,items.name,maps.area_id,maps.area_level,areas.boss_monster_ids,maps.unique_area_id&group_by=items.name&where=items.class_id='Map' AND maps.area_id LIKE '%MapWorlds%'");
-
-            let response: WikiResponse = reqwest::get(url).await?.json().await?;
-
-            Ok(response
-                .cargoquery
+                .unwrap()
                 .into_iter()
-                .map(|title| MapDataFromWiki {
-                    name: title.title.name,
-                    tier: title.title.tier.parse().unwrap(),
-                })
-                .collect::<Vec<MapDataFromWiki>>())
+                .skip(3)
+                .next()
+                .unwrap();
+            let map = mapname_column
+                .text_content()
+                .await
+                .unwrap()
+                .unwrap()
+                .trim()
+                .to_string();
+            if !map.is_empty() {
+                maps.push(map);
+            };
         }
 
-        let available_maps = load_poedb_non_unique_available_maplist().await?;
-        let wiki_maps = load_from_wiki().await?;
+        maps.sort();
 
-        Ok(wiki_maps
-            .into_iter()
-            .map(|MapDataFromWiki { name, tier }| {
-                let unique = !name.ends_with(" Map");
-                let available = unique || available_maps.contains(&name);
-                Map {
-                    name,
-                    tier,
-                    available,
-                    unique,
-                }
-            })
-            .collect())
+        Ok(maps)
     }
+
+    #[derive(Debug, Clone, Serialize, Deserialize)]
+    pub struct MapDataFromWiki {
+        pub name: String,
+        pub tier: u32,
+    }
+
+    async fn load_from_wiki() -> Result<Vec<MapDataFromWiki>, crate::error::Error> {
+        #[derive(Deserialize)]
+        pub struct WikiResponse {
+            pub cargoquery: Vec<Title>,
+        }
+
+        #[derive(Deserialize)]
+        pub struct Title {
+            pub title: MapRecord,
+        }
+
+        #[derive(Deserialize)]
+        pub struct MapRecord {
+            pub name: String,
+            pub tier: String,
+        }
+
+        let url = format!("{WIKI_API_URL}?action=cargoquery&format=json&smaxage=0&maxage=0&limit=500&tables=maps,items,areas&join_on=items._pageID=maps._pageID,maps.area_id=areas.id&fields=maps.tier,items.name,maps.area_id,maps.area_level,areas.boss_monster_ids,maps.unique_area_id&group_by=items.name&where=items.class_id='Map' AND maps.area_id LIKE '%MapWorlds%'");
+
+        let response: WikiResponse = reqwest::get(url).await?.json().await?;
+
+        Ok(response
+            .cargoquery
+            .into_iter()
+            .map(|title| MapDataFromWiki {
+                name: title.title.name,
+                tier: title.title.tier.parse().unwrap(),
+            })
+            .collect::<Vec<MapDataFromWiki>>())
+    }
+
+    let available_maps = load_poedb_non_unique_available_maplist().await?;
+    let wiki_maps = load_from_wiki().await?;
+
+    Ok(wiki_maps
+        .into_iter()
+        .map(|MapDataFromWiki { name, tier }| {
+            let unique = !name.ends_with(" Map");
+            let available = unique || available_maps.contains(&name);
+            Map {
+                name,
+                tier,
+                available,
+                unique,
+            }
+        })
+        .collect())
 }
