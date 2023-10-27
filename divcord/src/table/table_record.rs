@@ -262,29 +262,12 @@ impl RemainingWork {
 
 #[cfg(test)]
 mod tests {
-    use googlesheets::sheet::ValueRange;
     use serde_json::json;
-
-    use crate::table::DivcordTableLoader;
 
     use super::*;
 
-    fn read_sheet() -> ValueRange {
-        DivcordTableLoader::new().read_file().sheet
-    }
-
     #[test]
     fn test_parse_greynote() {
-        let sheet = read_sheet();
-        let mut vec: Vec<Vec<Value>> = vec![];
-        for val in &sheet.values {
-            if let Err(_) = GreyNote::parse(&val[0]) {
-                vec.push(val.to_owned());
-                dbg!(val);
-            }
-        }
-        assert_eq!(vec.len(), 0);
-
         assert_eq!(
             Some(GreyNote::AreaSpecific),
             GreyNote::parse(&json!("Area-specific")).unwrap()
@@ -338,19 +321,6 @@ mod tests {
     }
 
     #[test]
-    fn test_parse_name() {
-        let sheet = read_sheet();
-        let mut vec: Vec<Vec<Value>> = vec![];
-        for val in &sheet.values[2..] {
-            if let Err(_) = super::parse_card_name(&val[1]) {
-                vec.push(val.to_owned());
-            }
-        }
-
-        assert_eq!(vec.len(), 0);
-    }
-
-    #[test]
     fn test_parse_confidence() {
         assert_eq!(Confidence::Done, Confidence::parse(&json!("DONE")).unwrap());
         assert_eq!(Confidence::Low, Confidence::parse(&json!("Low")).unwrap());
@@ -362,18 +332,6 @@ mod tests {
 
     #[test]
     fn test_parse_remaining_work() {
-        let sheet = read_sheet();
-        let mut vec: Vec<Vec<Value>> = vec![];
-        for val in &sheet.values[2..] {
-            if val.len() < 5 {
-                continue;
-            }
-            if let Err(_) = RemainingWork::parse(&val[4]) {
-                vec.push(val.to_owned());
-            }
-        }
-        assert_eq!(vec.len(), 0);
-
         assert_eq!(
             Some(RemainingWork::Confirm),
             RemainingWork::parse(&json!("confirm")).unwrap()

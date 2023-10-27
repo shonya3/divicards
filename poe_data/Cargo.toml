@@ -16,8 +16,9 @@ dotenv = { version = "0.15.0", optional = true}
 divi = {path = "../divi", optional = true}
 playwright = {version = "0.0.20", optional = true}
 serde_json = {workspace = true, optional = true}
+loader = {path = "../loader", optional = true}
 
 
 [features]
 default = []
-fetch = ["dep:serde_json", "dep:playwright", "dep:divi", "dep:dotenv", "dep:googlesheets", "dep:reqwest", "dep:async-trait"]
+fetch = ["dep:serde_json", "dep:playwright", "dep:divi", "dep:dotenv", "dep:googlesheets", "dep:reqwest", "dep:async-trait", "dep:loader"]

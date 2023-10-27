@@ -15,6 +15,10 @@ divi = {path = "../divi"}
 reqwest = { workspace = true }
 strum_macros = "0.25.2"
 strum = "0.25.0"
-async-trait = "0.1.73"
 poe_data = {path = "../poe_data"}
+async-trait = {version = "0.1.73", optional = true}
+loader = {path = "../loader", optional = true}
 
+[features]
+default = []
+fetch = ["dep:async-trait", "dep:loader"]

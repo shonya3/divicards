@@ -14,6 +14,8 @@ pub enum Error {
     DiviError(divi::error::Error),
     StrumParseError(strum::ParseError),
     ParseSourceError(ParseSourceError),
+    #[cfg(feature = "fetch")]
+    LoaderError(loader::Error),
 }
 
 impl Display for Error {
@@ -29,7 +31,16 @@ impl Display for Error {
             Error::DiviError(err) => err.fmt(f),
             Error::StrumParseError(err) => err.fmt(f),
             Error::ParseSourceError(err) => err.fmt(f),
+            #[cfg(feature = "fetch")]
+            Error::LoaderError(err) => err.fmt(f),
         }
+    }
+}
+
+#[cfg(feature = "fetch")]
+impl From<loader::Error> for Error {
+    fn from(value: loader::Error) -> Self {
+        Error::LoaderError(value)
     }
 }
 

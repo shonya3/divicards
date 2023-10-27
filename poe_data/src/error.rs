@@ -12,6 +12,8 @@ pub enum Error {
     DiviError(divi::error::Error),
     IoError(std::io::Error),
     SerdeError(serde_json::Error),
+    #[cfg(feature = "fetch")]
+    LoaderError(loader::Error),
 }
 
 impl Display for Error {
@@ -25,6 +27,8 @@ impl Display for Error {
             Error::GoogleError(err) => err.fmt(f),
             #[cfg(feature = "fetch")]
             Error::DiviError(err) => err.fmt(f),
+            #[cfg(feature = "fetch")]
+            Error::LoaderError(err) => err.fmt(f),
         }
     }
 }
@@ -59,5 +63,12 @@ impl From<googlesheets::error::Error> for Error {
 impl From<divi::error::Error> for Error {
     fn from(value: divi::error::Error) -> Self {
         Error::DiviError(value)
+    }
+}
+
+#[cfg(feature = "fetch")]
+impl From<loader::Error> for Error {
+    fn from(value: loader::Error) -> Self {
+        Error::LoaderError(value)
     }
 }

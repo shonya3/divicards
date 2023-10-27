@@ -1,14 +1,12 @@
 #![cfg(feature = "fetch")]
 
-use crate::{
-    act::ActArea, cards::CardsData, error::Error, loader::DataLoader, mapbosses::MapBoss,
-    maps::Map, PoeData,
-};
+use crate::{act::ActArea, cards::CardsData, error::Error, mapbosses::MapBoss, maps::Map, PoeData};
 use async_trait::async_trait;
+use loader::DataLoader;
 
 pub struct MapBossesLoader;
 #[async_trait]
-impl DataLoader<Vec<MapBoss>> for MapBossesLoader {
+impl DataLoader<Vec<MapBoss>, Error> for MapBossesLoader {
     fn filename(&self) -> &'static str {
         "mapBosses.json"
     }
@@ -20,7 +18,7 @@ impl DataLoader<Vec<MapBoss>> for MapBossesLoader {
 
 pub struct MapsLoader;
 #[async_trait]
-impl DataLoader<Vec<Map>> for MapsLoader {
+impl DataLoader<Vec<Map>, Error> for MapsLoader {
     fn filename(&self) -> &'static str {
         "maps.json"
     }
@@ -32,7 +30,7 @@ impl DataLoader<Vec<Map>> for MapsLoader {
 
 pub struct ActsLoader;
 #[async_trait]
-impl DataLoader<Vec<ActArea>> for ActsLoader {
+impl DataLoader<Vec<ActArea>, Error> for ActsLoader {
     fn filename(&self) -> &'static str {
         "acts.json"
     }
@@ -48,7 +46,7 @@ impl DataLoader<Vec<ActArea>> for ActsLoader {
 
 pub struct CardsLoader;
 #[async_trait]
-impl DataLoader<CardsData> for CardsLoader {
+impl DataLoader<CardsData, Error> for CardsLoader {
     fn filename(&self) -> &'static str {
         "cards.json"
     }
@@ -60,7 +58,7 @@ impl DataLoader<CardsData> for CardsLoader {
 
 pub struct PoeDataLoader;
 #[async_trait]
-impl DataLoader<PoeData> for PoeDataLoader {
+impl DataLoader<PoeData, Error> for PoeDataLoader {
     fn filename(&self) -> &'static str {
         "poeData.json"
     }

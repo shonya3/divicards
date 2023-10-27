@@ -5,8 +5,8 @@ pub mod consts;
 #[cfg(feature = "fetch")]
 pub mod error;
 #[cfg(feature = "fetch")]
-pub mod loader;
-#[cfg(feature = "fetch")]
+// pub mod loader;
+// #[cfg(feature = "fetch")]
 pub mod loaders;
 pub mod mapbosses;
 pub mod maps;

@@ -9,6 +9,6 @@ repository.workspace = true
 [dependencies]
 serde = {workspace = true}
 serde_json = {workspace = true}
-divcord = {path = "../divcord"}
+divcord = {path = "../divcord", features = ["fetch"]}
 poe_data = {path = "../poe_data", features = ["fetch"]}
 tokio = {workspace = true}
