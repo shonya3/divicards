@@ -1,3 +1,5 @@
+//@ts-check
+
 /**
  * @typedef {Object} MapBoss
  * @property {string} name

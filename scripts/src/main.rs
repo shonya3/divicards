@@ -1,10 +1,4 @@
-pub mod consts;
-pub mod dropsource;
-pub mod error;
-pub mod loader;
-pub mod table;
-
-use crate::table::DivcordTable;
+use divcord::table::DivcordTable;
 use poe_data::PoeData;
 
 #[tokio::main]

@@ -6,7 +6,34 @@ use std::{
 
 use async_trait::async_trait;
 
-use crate::error::Error;
+use std::fmt::Display;
+
+#[derive(Debug)]
+pub enum Error {
+    IoError(std::io::Error),
+    SerdeError(serde_json::Error),
+}
+
+impl Display for Error {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Error::IoError(err) => err.fmt(f),
+            Error::SerdeError(err) => err.fmt(f),
+        }
+    }
+}
+
+impl From<std::io::Error> for Error {
+    fn from(value: std::io::Error) -> Self {
+        Error::IoError(value)
+    }
+}
+
+impl From<serde_json::Error> for Error {
+    fn from(value: serde_json::Error) -> Self {
+        Error::SerdeError(value)
+    }
+}
 
 #[async_trait]
 pub trait DataLoader<T>
@@ -39,10 +66,10 @@ where
         Ok(())
     }
     async fn load(&self) -> Result<T, Error> {
+        let path = self.file_path();
+        let exists = path.try_exists().unwrap();
         let file_days_old = || -> Option<f32> {
             pub const DAY_AS_SECS: f64 = 86_400.0;
-            let path = self.file_path();
-            let exists = path.try_exists().unwrap();
             match exists {
                 true => match fs::metadata(&path) {
                     Ok(metadata) => match metadata.modified() {
@@ -59,14 +86,14 @@ where
             }
         };
 
-        let exists_and_up_to_date = || -> bool {
+        let up_to_date = || -> bool {
             match file_days_old() {
                 Some(n) if n <= 1.0 => true,
                 _ => false,
             }
         };
 
-        if exists_and_up_to_date() || self.reload() == false {
+        if up_to_date() || (exists && self.reload() == false) {
             let file = File::open(&self.file_path())?;
             let reader = BufReader::new(file);
 

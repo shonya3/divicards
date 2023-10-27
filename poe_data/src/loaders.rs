@@ -1,7 +1,8 @@
 #![cfg(feature = "fetch")]
 
 use crate::{
-    act::ActArea, cards::CardsData, error::Error, loader::DataLoader, mapbosses::MapBoss, maps::Map,
+    act::ActArea, cards::CardsData, error::Error, loader::DataLoader, mapbosses::MapBoss,
+    maps::Map, PoeData,
 };
 use async_trait::async_trait;
 
@@ -54,5 +55,22 @@ impl DataLoader<CardsData> for CardsLoader {
 
     async fn fetch(&self) -> Result<CardsData, Error> {
         crate::cards::fetch().await
+    }
+}
+
+pub struct PoeDataLoader;
+#[async_trait]
+impl DataLoader<PoeData> for PoeDataLoader {
+    fn filename(&self) -> &'static str {
+        "poeData.json"
+    }
+
+    async fn fetch(&self) -> Result<PoeData, Error> {
+        Ok(PoeData {
+            acts: ActsLoader.load().await?,
+            cards: CardsLoader.load().await?,
+            maps: MapsLoader.load().await?,
+            mapbosses: MapBossesLoader.load().await?,
+        })
     }
 }

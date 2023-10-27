@@ -30,7 +30,7 @@ pub struct Bossfight {
 }
 
 impl ActArea {
-    fn act_url(act: u8) -> String {
+    pub fn act_url(act: u8) -> String {
         format!("https://poedb.tw/us/Act_{act}")
     }
 }

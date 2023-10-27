@@ -1,8 +1,9 @@
 pub mod act;
 pub mod cards;
 pub mod consts;
-pub mod error;
 
+#[cfg(feature = "fetch")]
+pub mod error;
 #[cfg(feature = "fetch")]
 pub mod loader;
 #[cfg(feature = "fetch")]
@@ -25,15 +26,7 @@ pub struct PoeData {
 impl PoeData {
     #[cfg(feature = "fetch")]
     pub async fn load() -> Result<Self, crate::error::Error> {
-        use crate::{
-            loader::DataLoader,
-            loaders::{ActsLoader, CardsLoader, MapBossesLoader, MapsLoader},
-        };
-        Ok(Self {
-            acts: ActsLoader.load().await?,
-            cards: CardsLoader.load().await?,
-            maps: MapsLoader.load().await?,
-            mapbosses: MapBossesLoader.load().await?,
-        })
+        use loader::DataLoader;
+        crate::loaders::PoeDataLoader.load().await
     }
 }

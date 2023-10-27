@@ -1,3 +1,5 @@
+#![cfg(feature = "fetch")]
+
 use std::fmt::Display;
 
 #[derive(Debug)]
@@ -10,9 +12,6 @@ pub enum Error {
     DiviError(divi::error::Error),
     IoError(std::io::Error),
     SerdeError(serde_json::Error),
-    ParseCardNameError(String),
-    ValueNotStr(serde_json::Value),
-    RowIsTooShort(String, u8),
 }
 
 impl Display for Error {
@@ -22,9 +21,6 @@ impl Display for Error {
             Error::HttpError(err) => err.fmt(f),
             Error::IoError(err) => err.fmt(f),
             Error::SerdeError(err) => err.fmt(f),
-            Error::ParseCardNameError(name) => write!(f, "{name} is not a card"),
-            Error::ValueNotStr(val) => write!(f, "{val} is not an str"),
-            Error::RowIsTooShort(column, n_columns) => write!(f, "Could not parse {column}. Row is too short. Expected at least {n_columns} columns to extract {column}"),
             #[cfg(feature = "fetch")]
             Error::GoogleError(err) => err.fmt(f),
             #[cfg(feature = "fetch")]

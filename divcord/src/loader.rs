@@ -1,5 +1,3 @@
-#![cfg(feature = "fetch")]
-
 use std::{
     fs::{self, File},
     io::BufReader,

@@ -3,11 +3,13 @@ resolver = "2"
 members = [
     "packages/app/src-tauri",
     "divi",
+    "scripts",
     "googlesheets",
     "divi/examples/*",
-    "scripts",
     "card_element",
-    "poe_data"
+    "poe_data",
+    "divcord",
+    "loader"
 ]
 
 [workspace.package]
