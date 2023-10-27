@@ -46,9 +46,10 @@
 //!        ordered_by: Column::Amount,
 //!        order: Order::Desc,
 //!        cards_must_have_amount: false,
+//!        min_price: 0.
 //!    };
 //!
-//!    let values = sample.into_values(Some(preferences));
+//!    let values = sample.into_serde_values(Some(preferences));
 //!    let json = serde_json::to_string(&values)?;
 //!    dbg!(json);
 //!

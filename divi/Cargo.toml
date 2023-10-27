@@ -12,7 +12,9 @@ tracing.workspace = true
 serde.workspace = true
 csv.workspace = true
 googlesheets ={ path = "../googlesheets"}
-
-serde-big-array = "0.5.1"
 strsim = "0.10.0"
-urlencoding = "2.1.2"
+
+
+[dev-dependencies]
+tokio = {workspace = true}
+

@@ -1009,11 +1009,10 @@ dependencies = [
  "googlesheets",
  "reqwest",
  "serde",
- "serde-big-array",
  "serde_json",
  "strsim",
+ "tokio",
  "tracing",
- "urlencoding",
 ]
 
 [[package]]
@@ -3628,15 +3627,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "serde-big-array"
-version = "0.5.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "11fc7cc2c76d73e0f27ee52abbd64eec84d46f370c88371120433196934e4b7f"
-dependencies = [
- "serde",
-]
-
-[[package]]
 name = "serde_derive"
 version = "1.0.189"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4801,12 +4791,6 @@ dependencies = [
  "percent-encoding",
  "serde",
 ]
-
-[[package]]
-name = "urlencoding"
-version = "2.1.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "daf8dba3b7eb870caf1ddeed7bc9d2a049f3cfdfae7cb521b087cc33ae4c49da"
 
 [[package]]
 name = "utf-8"
