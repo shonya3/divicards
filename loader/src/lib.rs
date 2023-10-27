@@ -36,15 +36,16 @@ impl From<serde_json::Error> for Error {
 }
 
 #[async_trait]
-pub trait DataLoader<T>
+pub trait DataLoader<T, E>
 where
     T: serde::Serialize + serde::de::DeserializeOwned,
+    E: From<Error>,
 {
     fn filename(&self) -> &'static str;
     fn reload(&self) -> bool {
         true
     }
-    async fn fetch(&self) -> Result<T, Error>;
+    async fn fetch(&self) -> Result<T, E>;
 
     fn file_path(&self) -> PathBuf {
         let dir = std::env::current_dir().unwrap().join("data");
@@ -54,18 +55,18 @@ where
 
         dir.join(self.filename())
     }
-    async fn update(&self) -> Result<(), Error> {
+    async fn update(&self) -> Result<(), E> {
         let t = self.fetch().await?;
         self.save(&t)?;
         Ok(())
     }
-    fn save(&self, data: &T) -> Result<(), Error> {
-        let json = serde_json::to_string(data)?;
-        fs::write(self.file_path(), &json)?;
+    fn save(&self, data: &T) -> Result<(), E> {
+        let json = serde_json::to_string(data).map_err(Error::SerdeError)?;
+        fs::write(self.file_path(), &json).map_err(Error::IoError)?;
 
         Ok(())
     }
-    async fn load(&self) -> Result<T, Error> {
+    async fn load(&self) -> Result<T, E> {
         let path = self.file_path();
         let exists = path.try_exists().unwrap();
         let file_days_old = || -> Option<f32> {
@@ -94,10 +95,10 @@ where
         };
 
         if up_to_date() || (exists && self.reload() == false) {
-            let file = File::open(&self.file_path())?;
+            let file = File::open(&self.file_path()).map_err(Error::IoError)?;
             let reader = BufReader::new(file);
 
-            Ok(serde_json::from_reader(reader)?)
+            Ok(serde_json::from_reader(reader).map_err(Error::SerdeError)?)
         } else {
             let t = self.fetch().await?;
             self.save(&t)?;
