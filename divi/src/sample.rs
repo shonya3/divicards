@@ -479,7 +479,7 @@ mod tests {
             min_price: 0.,
         }));
         let json = serde_json::to_string(&values).unwrap();
-        write("serde-values.json", &json).unwrap();
+        // write("serde-values.json", &json).unwrap();
     }
 
     #[test]
@@ -517,7 +517,7 @@ mod tests {
         dbg!(&values);
         assert_eq!(values.len(), 3);
         let json = serde_json::to_string(&values).unwrap();
-        write("values2.json", &json).unwrap();
+        // write("values2.json", &json).unwrap();
     }
 
     #[test]
