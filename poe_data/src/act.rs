@@ -1,12 +1,5 @@
 use serde::{Deserialize, Serialize};
 
-pub const TOWN_IMAGE_URL: &'static str =
-    "https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/WorldPanelTownPinIcon.webp";
-pub const WAYPOINT_IMAGE_URL: &'static str =
-    "https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/WorldPanelWaypointIcon.webp";
-pub const LABYRINTH_TRIAL_IMAGE_URL: &'static str =
-    "https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/WorldPanelLabyrinthWaypointPinIcon.webp";
-
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct ActArea {

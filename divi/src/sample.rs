@@ -456,7 +456,7 @@ impl Display for Column {
 #[cfg(test)]
 mod tests {
 
-    use std::fs::{read_to_string, write};
+    use std::fs::read_to_string;
 
     use super::*;
 
@@ -478,7 +478,7 @@ mod tests {
             cards_must_have_amount: false,
             min_price: 0.,
         }));
-        let json = serde_json::to_string(&values).unwrap();
+        let _json = serde_json::to_string(&values).unwrap();
         // write("serde-values.json", &json).unwrap();
     }
 
@@ -516,7 +516,7 @@ mod tests {
         }));
         dbg!(&values);
         assert_eq!(values.len(), 3);
-        let json = serde_json::to_string(&values).unwrap();
+        let _json = serde_json::to_string(&values).unwrap();
         // write("values2.json", &json).unwrap();
     }
 
