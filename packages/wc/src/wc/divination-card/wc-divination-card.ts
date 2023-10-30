@@ -22,21 +22,21 @@ export interface Props {
 export interface Events {}
 
 export class DivinationCardElement extends BaseElement {
-	static override get defineList() {
-		return [];
-	}
 	static override tag = 'wc-divination-card';
-	static override styles = [this.baseStyles, styles()];
+	static override styles = styles();
 
 	@property({ reflect: true }) name: string = '';
 	@property({ reflect: true }) size: CardSize = 'small';
 
 	@state() stackSize: number = 0;
-	@state()
-	flavourText: string = ``;
-	@state()
-	artFilename: string = '';
+	@state() flavourText: string = ``;
+	@state() artFilename: string = '';
 	@state() rewardHtml: string = '';
+
+	get imageUrl() {
+		// return `/images/cards/${this.artFilename}.png`;
+		return `https://web.poecdn.com/image/divination-card/${this.artFilename}.png`;
+	}
 
 	protected nameMarginTop(size: CardSize) {
 		switch (size) {
@@ -71,18 +71,29 @@ export class DivinationCardElement extends BaseElement {
 			'margin-top': this.nameMarginTop(this.size),
 		});
 
-		return html`<div id="element" style=${sizeMap}>
-			<div id="skeleton" style=${sizeMap}></div>
-			<header class="${classMap({ size22: this.size === 'small' })}" id="name" style=${nameTopPadding}>
+		return html`<div
+			class=${classMap({
+				'divination-card': true,
+				[`divination-card--${this.size}`]: true,
+			})}
+		>
+			<div
+				class=${classMap({
+					skeleton: true,
+					[`skeleton--${this.size}`]: true,
+				})}
+				style=${sizeMap}
+			></div>
+			<header class="${classMap({ name: true, size22: this.size === 'small' })}" style=${nameTopPadding}>
 				${this.name}
 			</header>
-			<div id="imageWrapper">
-				<img loading="lazy" id="image" width="100%" src="/images/cards/${this.artFilename}.png" alt="" />
+			<div class="imageWrapper">
+				<img loading="lazy" class="image" width="100%" src=${this.imageUrl} alt="" />
 			</div>
 			<div class=${classMap({ stackSize: true, 'stackSize--small': this.size === 'small' })}>
 				${this.stackSize}
 			</div>
-			<div class="${classMap({ size25: this.size === 'small' })}" id="bottom-half">
+			<div class="${classMap({ 'bottom-half': true, size25: this.size === 'small' })}">
 				${staticHtml`${unsafeStatic(this.rewardHtml)}`}
 				${this.size !== 'small' ? html`${this.divider()}${this.footer()}` : nothing}
 			</div>
@@ -90,7 +101,7 @@ export class DivinationCardElement extends BaseElement {
 	}
 
 	protected divider() {
-		return html`<div id="divider"></div>`;
+		return html`<div class="divider"></div>`;
 	}
 
 	protected footer() {
@@ -106,17 +117,16 @@ function styles() {
 			display: block;
 
 			--card-width-small: 134px;
-			--card-height-small: 200px;
-
 			--card-width-medium: 268px;
-			--card-height-medium: 401px;
-
 			--card-width-large: 326px;
-			--card-height-large: 501px;
+			--card-font-size: 1rem;
+			--card-aspect-ratio: 0.668329;
+
+			--font-small: 0.8rem;
 
 			--item-normal: 0, 0%, 78%;
-			--item-magic: 240, 100%, 77%;
 			--item-rare: 60, 100%, 73%;
+			--item-magic: 240, 100%, 77%;
 			--item-unique-contrast: 25, 63%, 48%;
 			--item-unique: 26, 65%, 42%;
 			--item-gem: 177, 72%, 37%;
@@ -146,11 +156,11 @@ function styles() {
 			padding: 0;
 		}
 
-		#element {
+		.divination-card {
 			font-family: 'fontin', Verdana, Arial;
 
 			width: var(--card-width, var(--card-width-medium));
-			height: var(--card-height, var(--card-height-medium));
+			aspect-ratio: var(--card-aspect-ratio);
 
 			text-align: center;
 			overflow: hidden;
@@ -161,42 +171,33 @@ function styles() {
 			position: relative;
 		}
 
-		#skeleton {
+		.divination-card--small {
+			--card-width: var(--card-width-small);
+		}
+
+		.divination-card--medium {
+			--card-width: var(--card-width-medium);
+		}
+
+		.divination-card--large {
+			--card-width: var(--card-width-large);
+		}
+
+		.skeleton {
 			background: rgba(0, 0, 0, 0) url(/images/cards/divination-card.png) no-repeat center;
 			background-size: 105%;
 			z-index: 3;
 			position: absolute;
-			height: 401px;
-			width: 100%;
 
 			width: var(--card-width, var(--card-width-medium));
-			height: var(--card-height, var(--card-height-medium));
+			aspect-ratio: var(--card-aspect-ratio);
 		}
 
-		#name {
-			color: hsl(var(--item-divination));
+		.name {
+			line-height: 24px;
+			font-size: var(--card-font-size);
 			z-index: 4;
 			color: #111;
-		}
-
-		#imageWrapper {
-			overflow-y: hidden;
-			height: 100px;
-
-			position: absolute;
-			left: 4%;
-			top: 8%;
-			height: 42%;
-			width: 90%;
-			overflow: hidden;
-		}
-
-		#image {
-			display: block;
-			object-fit: contain;
-			min-width: 100%;
-			height: 100%;
-			overflow-y: hidden;
 		}
 
 		.stackSize {
@@ -219,7 +220,7 @@ function styles() {
 			font-size: 0.6rem;
 		}
 
-		#bottom-half {
+		.bottom-half {
 			position: absolute;
 			top: 52%;
 			height: 44%;
@@ -236,6 +237,7 @@ function styles() {
 		}
 
 		.reward {
+			font-size: 0.8rem;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
@@ -243,13 +245,14 @@ function styles() {
 		}
 
 		.flavourText {
+			font-size: 1rem;
 			color: rgba(167, 90, 27, 1);
 			text-wrap: balance;
 			font-style: italic;
 			line-height: 1.2rem;
 		}
 
-		#divider {
+		.divider {
 			height: 1px;
 			width: 50%;
 			transform: translateX(50%);
@@ -293,6 +296,10 @@ function styles() {
 		}
 		.rare {
 			color: hsla(var(--item-rare));
+		}
+
+		.divination {
+			color: #0ebaff;
 		}
 
 		.augmented {
@@ -362,9 +369,6 @@ function styles() {
 
 		p:has(.size30) {
 			line-height: 1.15rem;
-		}
-
-		footer {
 		}
 	`;
 }
