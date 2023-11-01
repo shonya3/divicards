@@ -12,7 +12,7 @@ use poe_data::{
     PoeData,
 };
 
-use super::{Source, Vendor};
+use super::{monster::UniqueMonster, Source, Vendor};
 
 #[derive(Debug)]
 pub enum ParseSourceError {
@@ -96,6 +96,14 @@ pub fn parse_record_dropsources(
         return Err(ParseSourceError::SourceIsExptectedButEmpty {
             record_id: record.id,
         });
+    }
+
+    if record.tag_hypothesis == Some(String::from("invasion_boss")) {
+        sources.push(Source::UniqueMonster(UniqueMonster::AllInvasionBosses))
+    }
+
+    if record.tag_hypothesis == Some(String::from("vaalsidearea_boss")) {
+        sources.push(Source::UniqueMonster(UniqueMonster::AllVaalSideAreaBosses))
     }
 
     Ok(sources)

@@ -30,6 +30,8 @@ pub enum UniqueMonster {
     CortexVenarius,
     #[serde(alias = "Argus")]
     Argus,
+    AllInvasionBosses,
+    AllVaalSideAreaBosses,
     BreachlordBossDomain(BreachlordBossDomain),
     Architect(Architect),
     ShaperGuardianBoss(ShaperGuardianBoss),
@@ -144,6 +146,8 @@ impl std::fmt::Display for UniqueMonster {
             UniqueMonster::ShaperMiniBoss(boss) => boss.fmt(f),
             UniqueMonster::BetrayalCatarina(boss) => boss.fmt(f),
             UniqueMonster::OshabiBoss(boss) => boss.fmt(f),
+            UniqueMonster::AllInvasionBosses => write!(f, "All invasion bosses"),
+            UniqueMonster::AllVaalSideAreaBosses => write!(f, "All vaal side area bosses"),
         }
     }
 }
