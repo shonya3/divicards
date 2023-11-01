@@ -1,26 +1,126 @@
+use divi::IsCard;
 use std::fmt::Display;
 
 use crate::table::{
     rich::DropsFrom,
-    table_record::{DivcordTableRecord, GreyNote},
+    table_record::{Confidence, DivcordTableRecord, GreyNote},
 };
 
 use poe_data::{
     act::{ActArea, ActAreaName},
+    cards::Card,
     PoeData,
 };
 
-use super::Source;
+use super::{Source, Vendor};
 
 #[derive(Debug)]
-pub struct ParseSourceError(pub DropsFrom);
+pub enum ParseSourceError {
+    NoSourceParsingDropsFrom {
+        record_id: usize,
+        drops_from: DropsFrom,
+    },
+    SourceIsExptectedButEmpty {
+        record_id: usize,
+    },
+}
+
 impl Display for ParseSourceError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "Source variant not found for {:?}", self.0)
+        match self {
+            ParseSourceError::NoSourceParsingDropsFrom {
+                record_id,
+                drops_from,
+            } => {
+                write!(
+                    f,
+                    "Parsing drops_from, no source found. Record id: {record_id}. {}",
+                    drops_from.name
+                )
+            }
+            ParseSourceError::SourceIsExptectedButEmpty { record_id } => {
+                write!(
+                    f,
+                    "Source if expected, but there is nothing. Record id: {record_id}"
+                )
+            }
+        }
     }
 }
 
-pub fn parse_source(
+pub fn parse_record_dropsources(
+    record: &DivcordTableRecord,
+    poe_data: &PoeData,
+) -> Result<Vec<Source>, ParseSourceError> {
+    let mut sources: Vec<Source> = vec![];
+    sources.append(&mut parse_dropses_from(record, poe_data)?);
+
+    if record.greynote == Some(GreyNote::GlobalDrop) {
+        let Card {
+            min_level,
+            max_level,
+            ..
+        } = poe_data.cards.card(&record.card).to_owned();
+        sources.push(Source::GlobalDrop {
+            min_level,
+            max_level,
+        });
+    };
+
+    if record.greynote == Some(GreyNote::Delirium) {
+        if record.notes
+            == Some("Appears to drop from any source of Delirium Currency rewards".to_string())
+        {
+            sources.push(Source::DeliriumCurrencyRewards);
+        }
+    }
+
+    if record.greynote == Some(GreyNote::Vendor) {
+        if record.notes == Some(String::from("Kirac shop")) {
+            sources.push(Source::Vendor(Vendor::KiracShop));
+        }
+    }
+
+    if record.notes == Some(String::from("Redeemer influenced maps")) {
+        sources.push(Source::RedeemerInfluencedMaps)
+    }
+
+    if record.greynote == Some(GreyNote::Disabled) {
+        if !record.card.as_str().is_legacy_card() {
+            panic!("Card has greynote Disabled, but this is not a legacy card");
+        }
+        sources.push(Source::Disabled);
+    }
+
+    if record.greynote.is_some() && sources.is_empty() && record.confidence == Confidence::Done {
+        return Err(ParseSourceError::SourceIsExptectedButEmpty {
+            record_id: record.id,
+        });
+    }
+
+    Ok(sources)
+}
+
+/// Parses all instances of record's drops_from and collects it into one Vec<Source>
+pub fn parse_dropses_from(
+    record: &DivcordTableRecord,
+    poe_data: &PoeData,
+) -> Result<Vec<Source>, ParseSourceError> {
+    let mut sources: Vec<Source> = vec![];
+    for d in &record.drops_from {
+        let Ok(mut inner_sources) = parse_one_drops_from(d, &record, poe_data) else {
+            return Err(ParseSourceError::NoSourceParsingDropsFrom {
+                record_id: record.id,
+                drops_from: d.to_owned(),
+            });
+        };
+        sources.append(&mut inner_sources);
+    }
+
+    Ok(sources)
+}
+
+pub fn parse_one_drops_from(
     d: &DropsFrom,
     record: &DivcordTableRecord,
     poe_data: &PoeData,
@@ -114,7 +214,10 @@ pub fn parse_source(
         }
     }
 
-    Err(ParseSourceError(d.to_owned()))
+    Err(ParseSourceError::NoSourceParsingDropsFrom {
+        record_id: record.id,
+        drops_from: d.to_owned(),
+    })
 }
 
 pub fn parse_act_areas(drops_from: &DropsFrom, acts: &[ActArea], min_level: u8) -> Vec<String> {

@@ -2,8 +2,6 @@ pub mod area;
 pub mod monster;
 pub mod parse;
 
-pub use parse::parse_source;
-
 use std::str::FromStr;
 
 use serde::{Deserialize, Serialize};
@@ -19,9 +17,16 @@ pub enum Source {
     Delirium,
     Strongbox(Strongbox),
     Unknown,
+    #[serde(rename = "Delirium Currency Rewards")]
+    DeliriumCurrencyRewards,
+    #[serde(rename = "Redeemer influenced maps")]
+    RedeemerInfluencedMaps,
     Disabled,
     #[serde(rename = "Global Drop")]
-    GlobalDrop,
+    GlobalDrop {
+        min_level: Option<u32>,
+        max_level: Option<u32>,
+    },
     Acts {
         ids: Vec<String>,
     },
@@ -51,8 +56,17 @@ impl FromStr for Source {
     type Err = strum::ParseError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
+        if s == "Redeemer influenced maps" {
+            return Ok(Source::RedeemerInfluencedMaps);
+        }
+        if s == "Delirium Currency Rewards" {
+            return Ok(Source::DeliriumCurrencyRewards);
+        }
         if s == "Global Drop" {
-            return Ok(Source::GlobalDrop);
+            return Ok(Source::GlobalDrop {
+                min_level: None,
+                max_level: None,
+            });
         }
         if let Ok(uniquemonster) = UniqueMonster::from_str(s) {
             return Ok(Source::UniqueMonster(uniquemonster));
@@ -79,7 +93,7 @@ impl std::fmt::Display for Source {
             Source::Strongbox(strongbox) => strongbox.fmt(f),
             Source::Unknown => write!(f, "Unknown"),
             Source::Disabled => write!(f, "Disabled"),
-            Source::GlobalDrop => write!(f, "Global Drop"),
+            Source::GlobalDrop { .. } => write!(f, "Global Drop"),
             Source::UniqueMonster(uniquemonster) => uniquemonster.fmt(f),
             Source::Area(area) => area.fmt(f),
             Source::Vendor(vendor) => vendor.fmt(f),
@@ -88,6 +102,8 @@ impl std::fmt::Display for Source {
             Source::Map { name } => write!(f, "{name}"),
             Source::MapBoss { name } => write!(f, "{name}"),
             Source::Act { id } => write!(f, "{id}"),
+            Source::DeliriumCurrencyRewards => write!(f, "Delirium Currency Rewards"),
+            Source::RedeemerInfluencedMaps => write!(f, "Redeemer influenced maps"),
         }
     }
 }

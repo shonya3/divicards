@@ -76,8 +76,8 @@ pub fn sources_by_card(
     let mut map: HashMap<String, Vec<Source>> = HashMap::new();
     for record in divcord_table.records() {
         let record = record?;
-        for d in &record.drops_from {
-            let sources = crate::dropsource::parse_source(d, &record, poe_data).unwrap();
+        for _d in &record.drops_from {
+            let sources = crate::dropsource::parse::parse_dropses_from(&record, &poe_data).unwrap();
             for source in sources {
                 map.entry(record.card.clone()).or_default().push(source);
             }

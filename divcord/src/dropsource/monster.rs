@@ -37,6 +37,7 @@ pub enum UniqueMonster {
     Elderslayer(Elderslayer),
     ElderGuardianBoss(ElderGuardianBoss),
     RogueExile(RogueExile),
+    FemaleRogueExile(FemaleRogueExile),
     AbyssLichBoss(AbyssLichBoss),
     MapsOnly(MapsOnly),
     ActBoss(ActBoss),
@@ -82,6 +83,7 @@ impl FromStr for UniqueMonster {
                 .or_else(|_| Elderslayer::from_str(s).map(|b| Self::Elderslayer(b)))
                 .or_else(|_| ElderGuardianBoss::from_str(s).map(|b| Self::ElderGuardianBoss(b)))
                 .or_else(|_| RogueExile::from_str(s).map(|b| Self::RogueExile(b)))
+                .or_else(|_| FemaleRogueExile::from_str(s).map(|b| Self::FemaleRogueExile(b)))
                 .or_else(|_| AbyssLichBoss::from_str(s).map(|b| Self::AbyssLichBoss(b)))
                 .or_else(|_| MapsOnly::from_str(s).map(|b| Self::MapsOnly(b)))
                 .or_else(|_| ActBoss::from_str(s).map(|b| Self::ActBoss(b)))
@@ -126,6 +128,7 @@ impl std::fmt::Display for UniqueMonster {
             UniqueMonster::Elderslayer(elderslayer) => elderslayer.fmt(f),
             UniqueMonster::ElderGuardianBoss(elderguard) => elderguard.fmt(f),
             UniqueMonster::RogueExile(rogueexile) => rogueexile.fmt(f),
+            UniqueMonster::FemaleRogueExile(rogue) => rogue.fmt(f),
             UniqueMonster::AbyssLichBoss(abysslichboss) => abysslichboss.fmt(f),
             UniqueMonster::MapsOnly(mapsonly) => mapsonly.fmt(f),
             UniqueMonster::ActBoss(act_boss) => act_boss.fmt(f),
@@ -318,6 +321,52 @@ pub enum RogueExile {
     #[strum(serialize = "Minara Anemina")]
     #[serde(rename = "Minara Anemina")]
     Minara,
+}
+
+#[derive(
+    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+)]
+#[serde(tag = "name")]
+pub enum FemaleRogueExile {
+    #[strum(serialize = "Dena Lorenni")]
+    #[serde(rename = "Dena Lorenni")]
+    DenaLorenni,
+    #[strum(serialize = "Igna Phoenix")]
+    #[serde(rename = "Igna Phoenix")]
+    IgnaPhoenix,
+    #[strum(serialize = "Minara Anemina")]
+    #[serde(rename = "Minara Anemina")]
+    MinaraAnemina,
+    #[strum(serialize = "Ultima Thule")]
+    #[serde(rename = "Ultima Thule")]
+    UltimaThule,
+    #[strum(serialize = "Kirmes Olli")]
+    #[serde(rename = "Kirmes Olli")]
+    KirmesOlli,
+    #[strum(serialize = "Ailentia Rac")]
+    #[serde(rename = "Ailentia Rac")]
+    AilentiaRac,
+    #[strum(serialize = "Antalie Napora")]
+    #[serde(rename = "Antalie Napora")]
+    AntalieNapora,
+    #[strum(serialize = "Orra Greengate")]
+    #[serde(rename = "Orra Greengate")]
+    OrraGreengate,
+    #[strum(serialize = "Thena Moga")]
+    #[serde(rename = "Thena Moga")]
+    ThenaMoga,
+    #[strum(serialize = "Augustina Solaria")]
+    #[serde(rename = "Augustina Solaria")]
+    AugustinaSolaria,
+    #[strum(serialize = "Vanth Agiel")]
+    #[serde(rename = "Vanth Agiel")]
+    VanthAgiel,
+    #[strum(serialize = "Ash Lessard")]
+    #[serde(rename = "Ash Lessard")]
+    AshLessard,
+    #[strum(serialize = "Lael Furia")]
+    #[serde(rename = "Lael Furia")]
+    LaelFuria,
 }
 
 #[derive(

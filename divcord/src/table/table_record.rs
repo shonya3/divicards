@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
 use crate::{
-    dropsource::{parse::ParseSourceError, parse_source, Source},
+    dropsource::{parse::ParseSourceError, Source},
     error::Error,
 };
 use poe_data::PoeData;
@@ -69,6 +69,10 @@ impl DivcordTableRecord {
             id: row_index + 3,
         })
     }
+
+    pub fn parse_dropsources(&self, poe_data: &PoeData) -> Result<Vec<Source>, ParseSourceError> {
+        crate::dropsource::parse::parse_record_dropsources(self, poe_data)
+    }
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -98,18 +102,8 @@ impl SourcefulDivcordTableRecord {
         record: DivcordTableRecord,
         poe_data: &PoeData,
     ) -> Result<Self, ParseSourceError> {
-        let mut sources: Vec<Source> = Vec::new();
-        for d in &record.drops_from {
-            let Ok(inner_sources) = parse_source(d, &record, poe_data) else {
-                return Err(ParseSourceError(d.to_owned()));
-            };
-            for s in inner_sources {
-                sources.push(s)
-            }
-        }
-
         Ok(SourcefulDivcordTableRecord {
-            sources,
+            sources: record.parse_dropsources(poe_data)?,
             id: record.id,
             greynote: record.greynote,
             card: record.card,
