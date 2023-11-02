@@ -23,6 +23,11 @@ pub enum ParseSourceError {
     SourceIsExptectedButEmpty {
         record_id: usize,
     },
+
+    GreynoteDisabledButCardIsNotLegacy {
+        record_id: usize,
+        card: String,
+    },
 }
 
 impl Display for ParseSourceError {
@@ -44,6 +49,12 @@ impl Display for ParseSourceError {
                     "Source if expected, but there is nothing. Record id: {record_id}"
                 )
             }
+            ParseSourceError::GreynoteDisabledButCardIsNotLegacy { record_id, card } => {
+                write!(
+                    f,
+                    "Record {record_id}. Card {card} has greynote Disabled, but this is not a legacy card"
+                )
+            }
         }
     }
 }
@@ -53,6 +64,18 @@ pub fn parse_record_dropsources(
     poe_data: &PoeData,
 ) -> Result<Vec<Source>, ParseSourceError> {
     let mut sources: Vec<Source> = vec![];
+
+    if record.greynote == Some(GreyNote::Disabled) {
+        if !record.card.as_str().is_legacy_card() {
+            return Err(ParseSourceError::GreynoteDisabledButCardIsNotLegacy {
+                record_id: record.id,
+                card: record.card.to_owned(),
+            });
+        }
+        sources.push(Source::Disabled);
+        return Ok(sources);
+    }
+
     sources.append(&mut parse_dropses_from(record, poe_data)?);
 
     if record.greynote == Some(GreyNote::GlobalDrop) {
@@ -85,17 +108,8 @@ pub fn parse_record_dropsources(
         sources.push(Source::RedeemerInfluencedMaps)
     }
 
-    if record.greynote == Some(GreyNote::Disabled) {
-        if !record.card.as_str().is_legacy_card() {
-            panic!("Card has greynote Disabled, but this is not a legacy card");
-        }
-        sources.push(Source::Disabled);
-    }
-
-    if record.greynote.is_some() && sources.is_empty() && record.confidence == Confidence::Done {
-        return Err(ParseSourceError::SourceIsExptectedButEmpty {
-            record_id: record.id,
-        });
+    if record.confidence == Confidence::None && sources.len() > 0 {
+        println!("{} {} {sources:?}", record.id, record.card);
     }
 
     if record.tag_hypothesis == Some(String::from("invasion_boss")) {
@@ -104,6 +118,12 @@ pub fn parse_record_dropsources(
 
     if record.tag_hypothesis == Some(String::from("vaalsidearea_boss")) {
         sources.push(Source::UniqueMonster(UniqueMonster::AllVaalSideAreaBosses))
+    }
+
+    if record.greynote.is_some() && sources.is_empty() && record.confidence == Confidence::Done {
+        return Err(ParseSourceError::SourceIsExptectedButEmpty {
+            record_id: record.id,
+        });
     }
 
     Ok(sources)
@@ -133,6 +153,10 @@ pub fn parse_one_drops_from(
     record: &DivcordTableRecord,
     poe_data: &PoeData,
 ) -> Result<Vec<Source>, ParseSourceError> {
+    if d.styles.strikethrough == true {
+        return Ok(vec![]);
+    }
+
     let PoeData {
         acts,
         cards,
