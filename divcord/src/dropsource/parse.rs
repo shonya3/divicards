@@ -74,6 +74,7 @@ pub fn parse_record_dropsources(
 ) -> Result<Vec<Source>, ParseSourceError> {
     let mut sources: Vec<Source> = vec![];
 
+    // 1. Legacy cards rules
     if record.card.as_str().is_legacy_card() && record.greynote != Some(GreyNote::Disabled) {
         return Err(ParseSourceError::LegacyCardShouldBeMarkedAsDisabled {
             record_id: record.id,
@@ -92,8 +93,19 @@ pub fn parse_record_dropsources(
         return Ok(sources);
     }
 
+    // 2. Parse sources from "Wiki Map/Monster Agreements" column(the main part)
     sources.append(&mut parse_dropses_from(record, poe_data)?);
 
+    // 3. Read from tags(3rd column)
+    if record.tag_hypothesis == Some(String::from("invasion_boss")) {
+        sources.push(Source::UniqueMonster(UniqueMonster::AllInvasionBosses))
+    }
+
+    if record.tag_hypothesis == Some(String::from("vaalsidearea_boss")) {
+        sources.push(Source::UniqueMonster(UniqueMonster::AllVaalSideAreaBosses))
+    }
+
+    // 4. Read greynotes(first column)
     if record.greynote == Some(GreyNote::GlobalDrop) {
         let Card {
             min_level,
@@ -120,20 +132,14 @@ pub fn parse_record_dropsources(
         }
     }
 
+    // 5. Read notes(last column)
     if record.notes == Some(String::from("Redeemer influenced maps")) {
         sources.push(Source::RedeemerInfluencedMaps)
     }
 
+    // 6. Final rules
     if record.confidence == Confidence::None && sources.len() > 0 {
         println!("{} {} {sources:?}", record.id, record.card);
-    }
-
-    if record.tag_hypothesis == Some(String::from("invasion_boss")) {
-        sources.push(Source::UniqueMonster(UniqueMonster::AllInvasionBosses))
-    }
-
-    if record.tag_hypothesis == Some(String::from("vaalsidearea_boss")) {
-        sources.push(Source::UniqueMonster(UniqueMonster::AllVaalSideAreaBosses))
     }
 
     if record.greynote.is_some() && sources.is_empty() && record.confidence == Confidence::Done {
