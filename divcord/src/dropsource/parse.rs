@@ -28,6 +28,11 @@ pub enum ParseSourceError {
         record_id: usize,
         card: String,
     },
+
+    LegacyCardShouldBeMarkedAsDisabled {
+        record_id: usize,
+        card: String,
+    },
 }
 
 impl Display for ParseSourceError {
@@ -55,6 +60,10 @@ impl Display for ParseSourceError {
                     "Record {record_id}. Card {card} has greynote Disabled, but this is not a legacy card"
                 )
             }
+            ParseSourceError::LegacyCardShouldBeMarkedAsDisabled { record_id, card } => write!(
+                f,
+                "Record {record_id}. Card {card} is legacy, but not marked as disabled"
+            ),
         }
     }
 }
@@ -64,6 +73,13 @@ pub fn parse_record_dropsources(
     poe_data: &PoeData,
 ) -> Result<Vec<Source>, ParseSourceError> {
     let mut sources: Vec<Source> = vec![];
+
+    if record.card.as_str().is_legacy_card() && record.greynote != Some(GreyNote::Disabled) {
+        return Err(ParseSourceError::LegacyCardShouldBeMarkedAsDisabled {
+            record_id: record.id,
+            card: record.card.to_owned(),
+        });
+    }
 
     if record.greynote == Some(GreyNote::Disabled) {
         if !record.card.as_str().is_legacy_card() {
