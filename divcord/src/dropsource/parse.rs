@@ -24,7 +24,7 @@ pub enum ParseSourceError {
         record_id: usize,
     },
 
-    GreynoteDisabledButCardIsNotLegacy {
+    GreynoteDisabledCardShouldBeLegacy {
         record_id: usize,
         card: String,
     },
@@ -54,7 +54,7 @@ impl Display for ParseSourceError {
                     "Source if expected, but there is nothing. Record id: {record_id}"
                 )
             }
-            ParseSourceError::GreynoteDisabledButCardIsNotLegacy { record_id, card } => {
+            ParseSourceError::GreynoteDisabledCardShouldBeLegacy { record_id, card } => {
                 write!(
                     f,
                     "Record {record_id}. Card {card} has greynote Disabled, but this is not a legacy card"
@@ -83,7 +83,7 @@ pub fn parse_record_dropsources(
 
     if record.greynote == Some(GreyNote::Disabled) {
         if !record.card.as_str().is_legacy_card() {
-            return Err(ParseSourceError::GreynoteDisabledButCardIsNotLegacy {
+            return Err(ParseSourceError::GreynoteDisabledCardShouldBeLegacy {
                 record_id: record.id,
                 card: record.card.to_owned(),
             });
