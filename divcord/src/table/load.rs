@@ -7,20 +7,8 @@ use loader::DataLoader;
 use crate::error::Error;
 
 use super::{rich::RichSourcesColumn, DivcordTable};
-use std::io::BufReader;
 
 pub struct DivcordTableLoader(reqwest::Client);
-impl DivcordTableLoader {
-    pub fn read_file(&self) -> DivcordTable {
-        let path = std::env::current_dir()
-            .unwrap()
-            .join("data")
-            .join("divcord_table.json");
-        let file = std::fs::File::open(&path).unwrap();
-        let reader = BufReader::new(file);
-        serde_json::from_reader(reader).unwrap()
-    }
-}
 impl DivcordTableLoader {
     pub fn new() -> Self {
         Self(reqwest::Client::new())
