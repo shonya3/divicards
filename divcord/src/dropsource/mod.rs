@@ -74,7 +74,7 @@ impl Source {
         }
     }
 
-    pub fn _name(&self) -> String {
+    pub fn _id(&self) -> String {
         self.to_string()
     }
 }
@@ -86,12 +86,12 @@ impl Serialize for Source {
     {
         let mut source = serializer.serialize_struct("Source", 2)?;
         let _type = self._type();
-        let _name = self._name();
+        let _id = self._id();
 
         source.serialize_field("type", _type)?;
-        match _type == _name {
+        match _type == _id {
             true => source.skip_field("id")?,
-            false => source.serialize_field("id", &self._name())?,
+            false => source.serialize_field("id", &self._id())?,
         }
 
         source.end()
