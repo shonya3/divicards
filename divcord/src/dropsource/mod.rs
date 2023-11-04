@@ -28,14 +28,9 @@ pub enum Source {
         min_level: Option<u32>,
         max_level: Option<u32>,
     },
-    Acts {
-        ids: Vec<String>,
-    },
-
     Act {
         id: String,
     },
-
     Map {
         name: String,
     },
@@ -64,7 +59,6 @@ impl Source {
             Source::RedeemerInfluencedMaps => "Redeemer influenced maps",
             Source::Disabled => "Disabled",
             Source::GlobalDrop { .. } => "Global Drop",
-            Source::Acts { .. } => "Acts",
             Source::Act { .. } => "Act",
             Source::Map { .. } => "Map",
             Source::MapBoss { .. } => "Map Boss",
@@ -144,7 +138,6 @@ impl std::fmt::Display for Source {
             Source::Area(area) => area.fmt(f),
             Source::Vendor(vendor) => vendor.fmt(f),
             Source::ActBoss { name } => write!(f, "{name}"),
-            Source::Acts { ids } => write!(f, "{ids:?}"),
             Source::Map { name } => write!(f, "{name}"),
             Source::MapBoss { name } => write!(f, "{name}"),
             Source::Act { id } => write!(f, "{id}"),
