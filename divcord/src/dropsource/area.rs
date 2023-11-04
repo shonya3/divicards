@@ -4,18 +4,32 @@ use strum_macros::EnumString;
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
 #[serde(tag = "type")]
-#[serde(rename_all = "camelCase")]
 pub enum Area {
-    #[serde(alias = "Trial of Stinging Doubt")]
+    #[serde(rename = "Trial of Stinging Doubt")]
     TrialOfStingingDoubt,
-    #[serde(alias = "The Temple of Atzoatl")]
+    #[serde(rename = "The Temple of Atzoatl")]
     TempleOfAtzoatl,
-    #[serde(alias = "All Vaal side areas (need specific information)")]
+    #[serde(rename = "All Vaal side areas (need specific information)")]
     AllVaalSideAreas,
-    #[serde(alias = "Vaal Side Areas")]
+    #[serde(rename = "Vaal Side Areas")]
     VaalSideAreas,
+    #[serde(rename = "Atziri Area")]
     AtziriArea(AtziriArea),
+    #[serde(rename = "Area-Specific")]
     AreaSpecific(AreaSpecific),
+}
+
+impl Area {
+    pub fn _type(&self) -> &str {
+        match self {
+            Area::TrialOfStingingDoubt => "Trial of Stinging Doubt",
+            Area::TempleOfAtzoatl => "The Temple of Atzoatl",
+            Area::AllVaalSideAreas => "All Vaal side areas (need specific information)",
+            Area::VaalSideAreas => "Vaal Side Areas",
+            Area::AtziriArea(_) => "Atziri Area",
+            Area::AreaSpecific(_) => "Area-Specific",
+        }
+    }
 }
 
 impl FromStr for Area {

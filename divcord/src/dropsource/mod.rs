@@ -4,14 +4,14 @@ pub mod parse;
 
 use std::str::FromStr;
 
-use serde::{Deserialize, Serialize};
+use serde::{ser::SerializeStruct, Deserialize, Serialize};
 
 use self::{area::Area, monster::UniqueMonster};
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Deserialize, PartialEq, Eq, Hash)]
 #[serde(tag = "type")]
-#[serde(rename_all = "camelCase")]
 pub enum Source {
+    #[serde(rename = "Expedition Logbook")]
     ExpeditionLogbook,
     Chest(Chest),
     Delirium,
@@ -49,6 +49,46 @@ pub enum Source {
     UniqueMonster(UniqueMonster),
     #[serde(untagged)]
     Area(Area),
+}
+
+impl Source {
+    pub fn _type(&self) -> &str {
+        match self {
+            Source::ExpeditionLogbook => "Expedition Logbook",
+            Source::Chest(_) => "Chest",
+            Source::Delirium => "Delirium",
+            Source::Strongbox(_) => "Strongbox",
+            Source::Vendor(_) => "Vendor",
+            Source::Unknown => "Unknown",
+            Source::DeliriumCurrencyRewards => "Delirium Currency Rewards",
+            Source::RedeemerInfluencedMaps => "Redeemer influenced maps",
+            Source::Disabled => "Disabled",
+            Source::GlobalDrop { .. } => "Global Drop",
+            Source::Acts { .. } => "Acts",
+            Source::Act { .. } => "Act",
+            Source::Map { .. } => "Map",
+            Source::MapBoss { .. } => "Map Boss",
+            Source::ActBoss { .. } => "Act Boss",
+            Source::UniqueMonster(monster) => monster._type(),
+            Source::Area(area) => area._type(),
+        }
+    }
+
+    pub fn _name(&self) -> String {
+        self.to_string()
+    }
+}
+
+impl Serialize for Source {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let mut source = serializer.serialize_struct("Source", 2)?;
+        source.serialize_field("type", self._type())?;
+        source.serialize_field("name", &self._name())?;
+        source.end()
+    }
 }
 
 impl FromStr for Source {

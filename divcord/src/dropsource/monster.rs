@@ -6,56 +6,125 @@ use strum_macros::EnumString;
 #[serde(tag = "type")]
 #[serde(rename_all = "camelCase")]
 pub enum UniqueMonster {
-    #[serde(alias = "Maven's Invitation: The Feared")]
+    #[serde(rename = "Maven's Invitation: The Feared")]
     MavensInvitationTheFeared,
-    #[serde(alias = "Uul-Netol, Unburdened Flesh (in Breachstones)")]
+    #[serde(rename = "Uul-Netol, Unburdened Flesh (in Breachstones)")]
     UulNetolInBreachstones,
-    #[serde(alias = "The Vaal Omnitect")]
+    #[serde(rename = "The Vaal Omnitect")]
     VaalOmnitect,
-    #[serde(alias = "Metamorph")]
+    #[serde(rename = "Metamorph")]
     Metamorph,
-    #[serde(alias = "Null Portal")]
+    #[serde(rename = "Null Portal")]
     NullPortal,
-    #[serde(alias = "Vaal Flesh Merchant")]
+    #[serde(rename = "Vaal Flesh Merchant")]
     VaalFleshMerchant,
-    #[serde(alias = "All Incursion Architects in Alva missions/Alva's Memory")]
+    #[serde(rename = "All Incursion Architects in Alva missions/Alva's Memory")]
     AllIncursionArchitectsInAlvaMission,
-    #[serde(alias = "All Abyss Monsters")]
+    #[serde(rename = "All Abyss Monsters")]
     AllAbyssMonsters,
-    #[serde(alias = "All (Scourge) beyond demons")]
+    #[serde(rename = "All (Scourge) beyond demons")]
     AllScourgeBeyondDemons,
-    #[serde(alias = "All Rogue Exiles")]
+    #[serde(rename = "All Rogue Exiles")]
     AllRogueExiles,
-    #[serde(alias = "Venarius")]
+    #[serde(rename = "Venarius")]
     CortexVenarius,
-    #[serde(alias = "Argus")]
+    #[serde(rename = "Argus")]
     Argus,
+    #[serde(rename = "All Invasion Bosses")]
     AllInvasionBosses,
+    #[serde(rename = "All Vaal Side Area Bosses")]
     AllVaalSideAreaBosses,
+    #[serde(rename = "Breachlord Boss Domain")]
     BreachlordBossDomain(BreachlordBossDomain),
+    #[serde(rename = "Architect")]
     Architect(Architect),
+    #[serde(rename = "Shaper Guardian Boss")]
     ShaperGuardianBoss(ShaperGuardianBoss),
+    #[serde(rename = "Syndicate Member")]
     SyndicateMember(SyndicateMember),
+    #[serde(rename = "Elder Slayer")]
     Elderslayer(Elderslayer),
+    #[serde(rename = "Elder Guardian Boss")]
     ElderGuardianBoss(ElderGuardianBoss),
+    #[serde(rename = "Rogue Exile")]
     RogueExile(RogueExile),
+    #[serde(rename = "Female Rogue Exile")]
     FemaleRogueExile(FemaleRogueExile),
+    #[serde(rename = "Abyss Lich Boss")]
     AbyssLichBoss(AbyssLichBoss),
+    #[serde(rename = "Maps Only")]
     MapsOnly(MapsOnly),
+    #[serde(rename = "Act Boss")]
     ActBoss(ActBoss),
+    #[serde(rename = "Harbinger Portal")]
     HarbingerPortal(HarbingerPortal),
+    #[serde(rename = "Endgame Boss")]
     EndgameBoss(EndgameBoss),
+    #[serde(rename = "Delve Boss")]
     DelveBoss(DelveBoss),
+    #[serde(rename = "Beast Boss")]
     BeastBoss(BeastBoss),
+    #[serde(rename = "Heist Boss")]
     HeistBoss(HeistBoss),
+    #[serde(rename = "Beyond Boss")]
     BeyondBoss(BeyondBoss),
+    #[serde(rename = "Expedition Logbook Boss")]
     ExpeditionLogbookBoss(ExpeditionLogbookBoss),
+    #[serde(rename = "Shaper Mini-Boss")]
     ShaperMiniBoss(ShaperMiniBoss),
+    #[serde(rename = "Betrayal Catarina")]
     BetrayalCatarina(BetrayalCatarina),
+    #[serde(rename = "Oshabi Boss")]
     OshabiBoss(OshabiBoss),
     // Mapboss {
     //     name: String,
     // },
+}
+
+impl UniqueMonster {
+    pub fn _type(&self) -> &str {
+        match self {
+            UniqueMonster::MavensInvitationTheFeared => "Maven's Invitation: The Feared",
+            UniqueMonster::UulNetolInBreachstones => {
+                "Uul-Netol, Unburdened Flesh (in Breachstones)"
+            }
+            UniqueMonster::VaalOmnitect => "The Vaal Omnitect",
+            UniqueMonster::Metamorph => "Metamorph",
+            UniqueMonster::NullPortal => "Null Portal",
+            UniqueMonster::VaalFleshMerchant => "Vaal Flesh Merchant",
+            UniqueMonster::AllIncursionArchitectsInAlvaMission => {
+                "All Incursion Architects in Alva missions/Alva's Memory"
+            }
+            UniqueMonster::AllAbyssMonsters => "All Abyss Monsters",
+            UniqueMonster::AllScourgeBeyondDemons => "All (Scourge) beyond demons",
+            UniqueMonster::AllRogueExiles => "All Rogue Exiles",
+            UniqueMonster::CortexVenarius => "Venarius",
+            UniqueMonster::Argus => "Argus",
+            UniqueMonster::AllInvasionBosses => "All Invasion Bosses",
+            UniqueMonster::AllVaalSideAreaBosses => "All Vaal Side Area Bosses",
+            UniqueMonster::BreachlordBossDomain(_) => "Breachlord Boss Domain",
+            UniqueMonster::Architect(_) => "Architect",
+            UniqueMonster::ShaperGuardianBoss(_) => "Shaper Guardian Boss",
+            UniqueMonster::SyndicateMember(_) => "Syndicate Member",
+            UniqueMonster::Elderslayer(_) => "Elder Slayer",
+            UniqueMonster::ElderGuardianBoss(_) => "Elder Guardian Boss",
+            UniqueMonster::RogueExile(_) => "Rogue Exile",
+            UniqueMonster::FemaleRogueExile(_) => "Female Rogue Exile",
+            UniqueMonster::AbyssLichBoss(_) => "Abyss Lich Boss",
+            UniqueMonster::MapsOnly(_) => "Maps Only",
+            UniqueMonster::ActBoss(_) => "Act Boss",
+            UniqueMonster::HarbingerPortal(_) => "Harbinger Portal",
+            UniqueMonster::EndgameBoss(_) => "Endgame Boss",
+            UniqueMonster::DelveBoss(_) => "Delve Boss",
+            UniqueMonster::BeastBoss(_) => "Beast Boss",
+            UniqueMonster::HeistBoss(_) => "Heist Boss",
+            UniqueMonster::BeyondBoss(_) => "Beyond Boss",
+            UniqueMonster::ExpeditionLogbookBoss(_) => "Expedition Logbook Boss",
+            UniqueMonster::ShaperMiniBoss(_) => "Shaper Mini-Boss",
+            UniqueMonster::BetrayalCatarina(_) => "Betrayal Catarina",
+            UniqueMonster::OshabiBoss(_) => "Oshabi Boss",
+        }
+    }
 }
 
 impl FromStr for UniqueMonster {
