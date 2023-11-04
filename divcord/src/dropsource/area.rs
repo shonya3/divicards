@@ -1,10 +1,15 @@
 use serde::{Deserialize, Serialize};
 use std::str::FromStr;
+use strum::IntoEnumIterator;
+
 use strum_macros::EnumString;
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[derive(
+    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, strum_macros::EnumIter, Default,
+)]
 #[serde(tag = "type")]
 pub enum Area {
+    #[default]
     #[serde(rename = "Trial of Stinging Doubt")]
     TrialOfStingingDoubt,
     #[serde(rename = "The Temple of Atzoatl")]
@@ -29,6 +34,10 @@ impl Area {
             Area::AtziriArea(_) => "Atziri Area",
             Area::AreaSpecific(_) => "Area-Specific",
         }
+    }
+
+    pub fn _types() -> impl Iterator<Item = String> {
+        Area::iter().map(|a| a._type().to_string())
     }
 }
 
@@ -68,7 +77,16 @@ impl std::fmt::Display for Area {
 }
 
 #[derive(
-    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Debug,
+    Clone,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
 )]
 #[serde(tag = "name")]
 pub enum AtziriArea {
@@ -89,8 +107,23 @@ impl AtziriArea {
     }
 }
 
+impl Default for AtziriArea {
+    fn default() -> Self {
+        AtziriArea::AlluringAbyss
+    }
+}
+
 #[derive(
-    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Debug,
+    Clone,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
 )]
 #[serde(tag = "name")]
 pub enum BreachlordBossDomain {
@@ -112,7 +145,16 @@ pub enum BreachlordBossDomain {
 }
 
 #[derive(
-    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Debug,
+    Clone,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
 )]
 #[serde(tag = "name")]
 pub enum AreaSpecific {
@@ -131,4 +173,10 @@ pub enum AreaSpecific {
     #[strum(serialize = "Tul's Domain")]
     #[serde(rename = "Tul's Domain")]
     TulsDomain,
+}
+
+impl Default for AreaSpecific {
+    fn default() -> Self {
+        AreaSpecific::ChayulasDomain
+    }
 }

@@ -1,11 +1,15 @@
-use serde::{Deserialize, Serialize};
-use std::str::FromStr;
+use serde::{de, Deserialize, Serialize};
+use std::{default, str::FromStr};
+use strum::IntoEnumIterator;
 use strum_macros::EnumString;
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[derive(
+    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, strum_macros::EnumIter, Default,
+)]
 #[serde(tag = "type")]
 #[serde(rename_all = "camelCase")]
 pub enum UniqueMonster {
+    #[default]
     #[serde(rename = "Maven's Invitation: The Feared")]
     MavensInvitationTheFeared,
     #[serde(rename = "Uul-Netol, Unburdened Flesh (in Breachstones)")]
@@ -79,6 +83,12 @@ pub enum UniqueMonster {
     // Mapboss {
     //     name: String,
     // },
+}
+
+impl UniqueMonster {
+    pub fn _types() -> impl Iterator<Item = String> {
+        UniqueMonster::iter().map(|a| a._type().to_string())
+    }
 }
 
 impl UniqueMonster {
@@ -222,10 +232,21 @@ impl std::fmt::Display for UniqueMonster {
 }
 
 #[derive(
-    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Debug,
+    Clone,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum BreachlordBossDomain {
+    #[default]
     #[strum(serialize = "Xoph, Dark Embers")]
     #[serde(rename = "Xoph, Dark Embers")]
     Xoph,
@@ -244,10 +265,21 @@ pub enum BreachlordBossDomain {
 }
 
 #[derive(
-    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Debug,
+    Clone,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum Architect {
+    #[default]
     #[strum(serialize = "Zilquapa, Architect of the Breach")]
     #[serde(rename = "Zilquapa, Architect of the Breach")]
     Zilquapa,
@@ -263,10 +295,20 @@ pub enum Architect {
 }
 
 #[derive(
-    Serialize, Deserialize, Clone, Debug, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Serialize,
+    Deserialize,
+    Clone,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum ShaperGuardianBoss {
+    #[default]
     #[strum(serialize = "Guardian of the Chimera")]
     #[serde(rename = "Guardian of the Chimera")]
     Chimera,
@@ -282,10 +324,21 @@ pub enum ShaperGuardianBoss {
 }
 
 #[derive(
-    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Debug,
+    Clone,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    Default,
+    strum_macros::EnumIter,
 )]
 #[serde(tag = "name")]
 pub enum SyndicateMember {
+    #[default]
     #[strum(serialize = "Haku", serialize = "Haku, Warmaster")]
     #[serde(rename = "Haku, Warmaster")]
     Haku,
@@ -340,10 +393,21 @@ pub enum SyndicateMember {
 }
 
 #[derive(
-    Serialize, Deserialize, Clone, Debug, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Serialize,
+    Deserialize,
+    Clone,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum Elderslayer {
+    #[default]
     #[strum(serialize = "Baran, The Crusader")]
     #[serde(rename = "Baran, The Crusader")]
     Baran,
@@ -362,10 +426,21 @@ pub enum Elderslayer {
 }
 
 #[derive(
-    Serialize, Deserialize, Clone, Debug, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Serialize,
+    Deserialize,
+    Clone,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum ElderGuardianBoss {
+    #[default]
     #[strum(serialize = "The Enslaver")]
     #[serde(rename = "The Enslaver")]
     Enslaver,
@@ -381,10 +456,21 @@ pub enum ElderGuardianBoss {
 }
 
 #[derive(
-    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Debug,
+    Clone,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum RogueExile {
+    #[default]
     #[strum(serialize = "Ash Lessard")]
     #[serde(rename = "Ash Lessard")]
     AshLessard,
@@ -397,10 +483,21 @@ pub enum RogueExile {
 }
 
 #[derive(
-    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Debug,
+    Clone,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum FemaleRogueExile {
+    #[default]
     #[strum(serialize = "Dena Lorenni")]
     #[serde(rename = "Dena Lorenni")]
     DenaLorenni,
@@ -443,10 +540,21 @@ pub enum FemaleRogueExile {
 }
 
 #[derive(
-    Serialize, Deserialize, Clone, Debug, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Serialize,
+    Deserialize,
+    Clone,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum AbyssLichBoss {
+    #[default]
     #[strum(serialize = "Ulaman, Sovereign of the Well")]
     #[serde(rename = "Ulaman, Sovereign of the Well")]
     Ulaman,
@@ -456,10 +564,21 @@ pub enum AbyssLichBoss {
 }
 
 #[derive(
-    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Debug,
+    Clone,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum MapsOnly {
+    #[default]
     #[strum(serialize = "Omniphobia, Fear Manifest (maps only)")]
     #[serde(rename = "Omniphobia, Fear Manifest (maps only)")]
     Omniphobia,
@@ -469,10 +588,21 @@ pub enum MapsOnly {
 }
 
 #[derive(
-    Serialize, Deserialize, Clone, Debug, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Serialize,
+    Deserialize,
+    Clone,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum ActBoss {
+    #[default]
     #[strum(serialize = "Reassembled Brutus")]
     #[serde(rename = "Reassembled Brutus")]
     ReassembledBrutus,
@@ -488,10 +618,21 @@ pub enum ActBoss {
 }
 
 #[derive(
-    Serialize, Deserialize, Clone, Debug, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Serialize,
+    Deserialize,
+    Clone,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum HarbingerPortal {
+    #[default]
     #[strum(serialize = "HarbingerPortal")]
     #[serde(rename = "HarbingerPortal")]
     HarbingerPortal,
@@ -504,10 +645,21 @@ pub enum HarbingerPortal {
 }
 
 #[derive(
-    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Debug,
+    Clone,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum EndgameBoss {
+    #[default]
     #[strum(to_string = "The Maven", serialize = "Maven")]
     #[serde(rename = "The Maven")]
     Maven,
@@ -532,10 +684,21 @@ pub enum EndgameBoss {
 }
 
 #[derive(
-    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Debug,
+    Clone,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum DelveBoss {
+    #[default]
     #[strum(to_string = "Aul, the Crystal King", serialize = "Aul")]
     #[serde(rename = "Aul, the Crystal King")]
     Aul,
@@ -545,10 +708,21 @@ pub enum DelveBoss {
 }
 
 #[derive(
-    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Debug,
+    Clone,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum BeastBoss {
+    #[default]
     #[strum(to_string = "Farrul, First of the Plains", serialize = "Farrul")]
     #[serde(rename = "Farrul, First of the Plains")]
     Farrul,
@@ -558,10 +732,21 @@ pub enum BeastBoss {
 }
 
 #[derive(
-    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Debug,
+    Clone,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum HeistBoss {
+    #[default]
     #[strum(to_string = "Flesh Sculptor")]
     #[serde(rename = "Flesh Sculptor")]
     FleshSculptor,
@@ -571,10 +756,21 @@ pub enum HeistBoss {
 }
 
 #[derive(
-    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Debug,
+    Clone,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum BeyondBoss {
+    #[default]
     #[strum(to_string = "Ghorr, the Grasping Maw", serialize = "Ghorr")]
     #[serde(rename = "Ghorr, the Grasping Maw")]
     Ghorr,
@@ -584,40 +780,84 @@ pub enum BeyondBoss {
 }
 
 #[derive(
-    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Debug,
+    Clone,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum ExpeditionLogbookBoss {
+    #[default]
     #[strum(to_string = "Uhtred, Covetous Traitor", serialize = "Uhtred")]
     #[serde(rename = "Uhtred, Covetous Traitor")]
     Uhtred,
 }
 
 #[derive(
-    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Debug,
+    Clone,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum ShaperMiniBoss {
+    #[default]
     #[strum(to_string = "Entity of the Void")]
     #[serde(rename = "Entity of the Void")]
     EntityOfTheVoid,
 }
 
 #[derive(
-    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Debug,
+    Clone,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum BetrayalCatarina {
+    #[default]
     #[strum(to_string = "Catarina, Master of Undeath", serialize = "Catarina")]
     #[serde(rename = "Catarina, Master of Undeath")]
     Catarina,
 }
 
 #[derive(
-    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, EnumString, strum_macros::Display,
+    Debug,
+    Clone,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum OshabiBoss {
+    #[default]
     #[strum(to_string = "Oshabi, Avatar of the Grove", serialize = "Oshabi")]
     #[serde(rename = "Oshabi, Avatar of the Grove")]
     Oshabi,

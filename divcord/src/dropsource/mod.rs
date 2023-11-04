@@ -5,12 +5,14 @@ pub mod parse;
 use std::str::FromStr;
 
 use serde::{ser::SerializeStruct, Deserialize, Serialize};
+use strum::IntoEnumIterator;
 
 use self::{area::Area, monster::UniqueMonster};
 
-#[derive(Debug, Clone, Deserialize, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Deserialize, PartialEq, Eq, Hash, strum_macros::EnumIter, Default)]
 #[serde(tag = "type")]
 pub enum Source {
+    #[default]
     #[serde(rename = "Expedition Logbook")]
     ExpeditionLogbook,
     Chest(Chest),
@@ -70,6 +72,16 @@ impl Source {
 
     pub fn _id(&self) -> String {
         self.to_string()
+    }
+
+    pub fn types() -> Vec<String> {
+        let mut vec: Vec<String> = vec![];
+        Source::iter().for_each(|source| match source {
+            Source::UniqueMonster(_) => vec.extend(UniqueMonster::_types()),
+            Source::Area(_) => vec.extend(Area::_types()),
+            _ => vec.push(source._type().to_string()),
+        });
+        vec
     }
 }
 
@@ -157,9 +169,12 @@ impl std::fmt::Display for Source {
     Hash,
     strum_macros::EnumString,
     strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum Vendor {
+    #[default]
     #[strum(serialize = "Kirac shop")]
     #[serde(rename = "Kirac shop")]
     KiracShop,
@@ -175,9 +190,12 @@ pub enum Vendor {
     Hash,
     strum_macros::EnumString,
     strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum Strongbox {
+    #[default]
     #[strum(serialize = "Jeweller's Strongbox")]
     #[serde(rename = "Jeweller's Strongbox")]
     Jeweller,
@@ -208,9 +226,12 @@ pub enum Strongbox {
     Hash,
     strum_macros::EnumString,
     strum_macros::Display,
+    strum_macros::EnumIter,
+    Default,
 )]
 #[serde(tag = "name")]
 pub enum Chest {
+    #[default]
     #[strum(serialize = "Abyssal Trove")]
     #[serde(rename = "Abyssal Trove")]
     AbyssalTrove,
