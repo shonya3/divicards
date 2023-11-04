@@ -85,8 +85,15 @@ impl Serialize for Source {
         S: serde::Serializer,
     {
         let mut source = serializer.serialize_struct("Source", 2)?;
-        source.serialize_field("type", self._type())?;
-        source.serialize_field("name", &self._name())?;
+        let _type = self._type();
+        let _name = self._name();
+
+        source.serialize_field("type", _type)?;
+        match _type == _name {
+            true => source.skip_field("id")?,
+            false => source.serialize_field("id", &self._name())?,
+        }
+
         source.end()
     }
 }
