@@ -1871,6 +1871,7 @@
     "confidence": "done",
     "sources": [
       {
+        "type": "vendor",
         "name": "Kirac shop"
       }
     ],
@@ -2553,6 +2554,7 @@
     "confidence": "done",
     "sources": [
       {
+        "type": "vendor",
         "name": "Kirac shop"
       }
     ],

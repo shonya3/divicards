@@ -16,6 +16,7 @@ pub enum Source {
     Chest(Chest),
     Delirium,
     Strongbox(Strongbox),
+    Vendor(Vendor),
     Unknown,
     #[serde(rename = "Delirium Currency Rewards")]
     DeliriumCurrencyRewards,
@@ -48,8 +49,6 @@ pub enum Source {
     UniqueMonster(UniqueMonster),
     #[serde(untagged)]
     Area(Area),
-    #[serde(untagged)]
-    Vendor(Vendor),
 }
 
 impl FromStr for Source {
