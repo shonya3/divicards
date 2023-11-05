@@ -1,5 +1,3 @@
-use std::io::Write;
-
 use divcord::{
     dropsource::Source,
     table::{table_record::SourcefulDivcordTableRecord, DivcordTable},
