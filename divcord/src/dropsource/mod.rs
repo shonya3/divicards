@@ -83,6 +83,32 @@ impl Source {
         });
         vec
     }
+
+    pub fn write_ts_file() -> std::io::Result<()> {
+        let mut _types: String = Source::types()
+            .into_iter()
+            .map(|t| {
+                let q = match t.contains("'") {
+                    true => "\"",
+                    false => "'",
+                };
+                format!("\n\t| {q}{t}{q}")
+            })
+            .collect();
+
+        let s = format!(
+            r#"export interface Source {{
+    type: SourceType;
+    id?: string;
+}}
+export type SourceType = {_types};
+    "#,
+        );
+
+        std::fs::write("Source.ts", &s)?;
+
+        Ok(())
+    }
 }
 
 impl Serialize for Source {

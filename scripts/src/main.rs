@@ -1,4 +1,9 @@
-use divcord::table::{table_record::SourcefulDivcordTableRecord, DivcordTable};
+use std::io::Write;
+
+use divcord::{
+    dropsource::Source,
+    table::{table_record::SourcefulDivcordTableRecord, DivcordTable},
+};
 use poe_data::PoeData;
 
 #[tokio::main]
@@ -15,4 +20,6 @@ async fn main() {
         .collect();
     let json = serde_json::to_string_pretty(&empty).unwrap();
     std::fs::write("empty.json", &json).unwrap();
+
+    Source::write_ts_file().unwrap();
 }
