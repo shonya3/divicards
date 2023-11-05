@@ -6,6 +6,7 @@ pub struct Map {
     pub tier: u32,
     pub available: bool,
     pub unique: bool,
+    pub icon: String,
 }
 
 impl Map {
@@ -110,17 +111,96 @@ pub async fn fetch() -> Result<Vec<Map>, crate::error::Error> {
     let available_maps = load_poedb_non_unique_available_maplist().await?;
     let wiki_maps = load_from_wiki().await?;
 
-    Ok(wiki_maps
-        .into_iter()
-        .map(|MapDataFromWiki { name, tier }| {
-            let unique = !name.ends_with(" Map");
-            let available = unique || available_maps.contains(&name);
-            Map {
-                name,
-                tier,
-                available,
-                unique,
+    fn poedb_page_url(boss: &str) -> String {
+        let name = boss.split("(").next().unwrap().trim();
+        let name = name.replace(" ", "_");
+        let name = name.replace(",", "%2C");
+        format!("https://poedb.tw/us/{name}")
+    }
+
+    let playwright = playwright::Playwright::initialize().await.unwrap();
+    playwright.install_chromium().unwrap();
+    let chrome = playwright.chromium();
+    let browser = chrome.launcher().headless(false).launch().await.unwrap();
+    let context = browser
+        .context_builder()
+        .clear_user_agent()
+        .build()
+        .await
+        .unwrap();
+    let page = context.new_page().await.unwrap();
+
+    async fn get_map_icon_url(map: &str, page: &playwright::api::Page) -> Result<String, String> {
+        let url = poedb_page_url(&map);
+        let Ok(_) = page
+            .goto_builder(&url)
+            .wait_until(playwright::api::DocumentLoadState::DomContentLoaded)
+            .goto()
+            .await
+        else {
+            return Err(format!("No page found for {url}"));
+        };
+
+        let script_get_icon_url_from_individual_map_page = r#"
+        () => {
+                const iconUrl = (icon) => `https://web.poecdn.com/image/${icon}.png`
+                const {pathname} = new URL(location.href);
+                switch (pathname) {
+                    case '/us/Lighthouse_Map': {
+                        return iconUrl('Art/2DItems/Maps/Atlas2Maps/New/Beacon')
+                    };
+                    case '/us/Shipyard_Map': {
+                        return iconUrl('Art/2DItems/Maps/Atlas2Maps/New/SulphurVents')
+                    };
+                    case '/us/Acid_Caverns_Map': {
+                        return iconUrl('Art/2DItems/Maps/Atlas2Maps/New/SulphurVents')
+                    };
+                    case '/us/Iceberg_Map': {
+                        return iconUrl('Art/2DItems/Maps/Atlas2Maps/New/Iceberg')
+                    }
+                }
+                for(const row of document.querySelector('tbody').querySelectorAll('tr')){
+                    const [nameColumn, value] = Array.from(row.querySelectorAll('td'));
+                    if (nameColumn.innerText.trim() === "Icon"){
+                        const icon = value.innerText.trim();
+                        return iconUrl(icon);
+                }
             }
+        }
+        "#;
+
+        match page
+            .eval::<String>(script_get_icon_url_from_individual_map_page)
+            .await
+        {
+            Ok(icon) => Ok(icon),
+            Err(err) => {
+                let s = format!("Could not extract icon from {url} {err}");
+                Err(s)
+            }
+        }
+    }
+
+    let mut maps: Vec<Map> = vec![];
+    for map in wiki_maps.into_iter() {
+        let unique = !map.name.ends_with(" Map");
+        let available = unique || available_maps.contains(&map.name);
+        let icon = match get_map_icon_url(&map.name, &page).await {
+            Ok(icon) => icon,
+            Err(err) => {
+                eprintln!("{err}");
+                err
+            }
+        };
+
+        maps.push(Map {
+            name: map.name,
+            tier: map.tier,
+            available,
+            unique,
+            icon,
         })
-        .collect())
+    }
+
+    Ok(maps)
 }

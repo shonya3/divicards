@@ -14,6 +14,10 @@ impl DataLoader<Vec<MapBoss>, Error> for MapBossesLoader {
     async fn fetch(&self) -> Result<Vec<MapBoss>, Error> {
         crate::mapbosses::fetch().await
     }
+
+    fn reload(&self) -> bool {
+        false
+    }
 }
 
 pub struct MapsLoader;
