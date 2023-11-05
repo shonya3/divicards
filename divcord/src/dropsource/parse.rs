@@ -283,7 +283,7 @@ pub fn parse_act_areas(drops_from: &DropsFrom, acts: &[ActArea], min_level: u8) 
     let names = match is_act_notation(s) {
         true if s == "The Belly of the Beast (A4/A9)" => vec![
             ActAreaName::NameWithAct(("The Belly of the Beast Level 1".to_string(), 4)),
-            ActAreaName::NameWithAct(("The Belly of the Beast Level 1".to_string(), 4)),
+            ActAreaName::NameWithAct(("The Belly of the Beast Level 2".to_string(), 4)),
             ActAreaName::NameWithAct(("The Belly of the Beast".to_string(), 9)),
         ],
         true => parse_act_notation(s),
