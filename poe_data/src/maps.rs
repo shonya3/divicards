@@ -19,6 +19,7 @@ impl Map {
 pub mod fetch {
     use super::Map;
     use crate::consts::{POEDB_MAPS_URL, WIKI_API_URL};
+    use playwright::{api::browser, Playwright};
     use serde::{Deserialize, Serialize};
 
     #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -28,26 +29,18 @@ pub mod fetch {
     }
 
     pub async fn fetch() -> Result<Vec<Map>, crate::error::Error> {
-        let wiki_maps = load_from_wiki().await?;
-        let available_maps = load_poedb_non_unique_available_maplist().await?;
-
-        let playwright = playwright::Playwright::initialize().await.unwrap();
-        playwright.install_chromium().unwrap();
-        let chrome = playwright.chromium();
-        let browser = chrome.launcher().headless(false).launch().await.unwrap();
-        let context = browser
-            .context_builder()
-            .clear_user_agent()
-            .build()
-            .await
-            .unwrap();
-        let page = context.new_page().await.unwrap();
-
         let mut maps: Vec<Map> = vec![];
+        let wiki_maps = load_from_wiki().await?;
+
+        let playwright = Playwright::initialize().await.unwrap();
+        let chrome = launch_chrome_page(&playwright).await;
+
+        let available_maps = load_poedb_non_unique_available_maplist(&chrome).await?;
+
         for map in wiki_maps.into_iter() {
             let unique = !map.name.ends_with(" Map");
             let available = unique || available_maps.contains(&map.name);
-            let icon = match get_map_icon_url(&map.name, &page).await {
+            let icon = match get_map_icon_url(&map.name, &chrome).await {
                 Ok(icon) => icon,
                 Err(err) => {
                     eprintln!("{err}");
@@ -98,9 +91,7 @@ pub mod fetch {
             .collect::<Vec<MapDataFromWiki>>())
     }
 
-    pub async fn load_poedb_non_unique_available_maplist(
-    ) -> Result<Vec<String>, crate::error::Error> {
-        let playwright = playwright::Playwright::initialize().await.unwrap();
+    async fn launch_chrome_page(playwright: &Playwright) -> playwright::api::Page {
         playwright.install_chromium().unwrap();
         let chrome = playwright.chromium();
         let browser = chrome.launcher().headless(false).launch().await.unwrap();
@@ -111,7 +102,12 @@ pub mod fetch {
             .await
             .unwrap();
         let page = context.new_page().await.unwrap();
+        page
+    }
 
+    pub async fn load_poedb_non_unique_available_maplist(
+        page: &playwright::api::Page,
+    ) -> Result<Vec<String>, crate::error::Error> {
         page.goto_builder(POEDB_MAPS_URL)
             .wait_until(playwright::api::DocumentLoadState::DomContentLoaded)
             .goto()
@@ -122,7 +118,6 @@ pub mod fetch {
         let table = maplist.query_selector("table").await.unwrap().unwrap();
         let tbody = table.query_selector("tbody").await.unwrap().unwrap();
         let rows = tbody.query_selector_all("tr").await.unwrap();
-        dbg!(&rows);
 
         let mut maps: Vec<String> = Vec::new();
         for row in rows {
