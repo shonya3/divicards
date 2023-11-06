@@ -37,10 +37,10 @@ pub mod fetch {
 
         let available_maps = load_poedb_non_unique_available_maplist(&chrome).await?;
 
-        for map in wiki_maps.into_iter() {
-            let unique = !map.name.ends_with(" Map");
-            let available = unique || available_maps.contains(&map.name);
-            let icon = match get_map_icon_url(&map.name, &chrome).await {
+        for MapDataFromWiki { name, tier } in wiki_maps.into_iter() {
+            let unique = name.ends_with(" Map");
+            let available = unique || available_maps.contains(&name);
+            let icon = match get_map_icon_url(&name, &chrome).await {
                 Ok(icon) => icon,
                 Err(err) => {
                     eprintln!("{err}");
@@ -49,8 +49,8 @@ pub mod fetch {
             };
 
             maps.push(Map {
-                name: map.name,
-                tier: map.tier,
+                name,
+                tier,
                 available,
                 unique,
                 icon,
