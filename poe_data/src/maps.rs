@@ -19,7 +19,7 @@ impl Map {
 pub mod fetch {
     use super::Map;
     use crate::consts::{POEDB_MAPS_URL, WIKI_API_URL};
-    use playwright::{api::browser, Playwright};
+    use playwright::Playwright;
     use serde::{Deserialize, Serialize};
 
     #[derive(Debug, Clone, Serialize, Deserialize)]
