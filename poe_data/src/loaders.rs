@@ -28,7 +28,7 @@ impl DataLoader<Vec<Map>, Error> for MapsLoader {
     }
 
     async fn fetch(&self) -> Result<Vec<Map>, Error> {
-        crate::maps::fetch().await
+        crate::maps::fetch::fetch().await
     }
 }
 
