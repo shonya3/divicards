@@ -14,10 +14,3 @@ typos:
 Drought-Maddened Rhoa - missing hyphen
 Hephaeus, The Hammer  - capital The
 Kitava, The Destroyer - capital The
-
-
-Could not extract icon from https://poedb.tw/us/Lighthouse_Map Incorrect type
-Could not extract icon from https://poedb.tw/us/Shipyard_Map Incorrect type
-Could not extract icon from https://poedb.tw/us/Acid_Caverns_Map Incorrect type
-Could not extract icon from https://poedb.tw/us/Iceberg_Map Incorrect type
-Art/2DItems/Maps/Atlas2Maps/New/Iceberg
