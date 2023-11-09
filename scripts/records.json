@@ -3262,6 +3262,10 @@
       {
         "type": "Map",
         "id": "Fields Map"
+      },
+      {
+        "type": "Act",
+        "id": "2_8_10"
       }
     ]
   },
@@ -3352,10 +3356,6 @@
       },
       {
         "type": "Act",
-        "id": "1_5_2"
-      },
-      {
-        "type": "Act",
         "id": "2_10_7"
       },
       {
@@ -3384,10 +3384,6 @@
       },
       {
         "type": "Act",
-        "id": "1_5_6"
-      },
-      {
-        "type": "Act",
         "id": "2_10_9"
       },
       {
@@ -3397,10 +3393,6 @@
       {
         "type": "Act",
         "id": "2_10_2"
-      },
-      {
-        "type": "Act",
-        "id": "1_5_7"
       },
       {
         "type": "Act",
@@ -3425,9 +3417,15 @@
       {
         "type": "Act",
         "id": "2_9_3"
+      },
+      {
+        "type": "Act",
+        "id": "2_6_11"
       }
     ],
-    "notes": "Has a Drop Level Requirement of 23.\nImplicitly has a Drop Level Cap, based on Charan's comments, at least somewhere as high as Act 10.\n\nCharan states:\n\"Drops from: *most core zones in parts 1 and 2* (nothing sealed like the belly of the beast or otherworldly like Maligaro’s Sanctum. Basically, anywhere ‘in’ Wraeclast.)\"\n\nLong term project due to numerous locations and low drop rate. otherworldly_story_area is likely the NOT tag, which includes the following:\n\nKaom's Dream, Kaom's Stronghold, Daresso's Dream, The Grand Arena, The Belly of the Beast Level 1/2 (Act 4), The Harvest, Maligaro's Sanctum, The Belly of the Beast (Act 9), The Rotting Core"
+    "wikiDisagreements": "Remaining list (1/2)\n\nDoedre's Cesspool;\nOriath Square;\nPrisoner's Gate (A6);\nShavronne's Tower;\nThe Ancient Pyramid;\nThe Aqueduct;\nThe Archives;\nThe Ascent;\nThe Boiling Lake;\nThe Brine King's Reef;\nThe Canals;\nThe Catacombs;\nThe Cathedral Rooftop (A5);\nThe Cathedral Rooftop (A10);\nThe Causeway;\nThe Cavern of Anger (A6);\nThe Chamber of Innocence;\nThe Chamber of Sins Level 1 (A7);\nThe Chamber of Sins Level 2 (A7);\nThe City of Sarn;\nThe Coast (A6);\nThe Control Blocks (A5);\nThe Crematorium;\nThe Crossroads (A7);\nThe Den (A7);\nThe Descent;\nThe Docks;\nThe Dread Thicket (A7);\nThe Dried Lake;\nThe Ebony Barracks;\nThe Feeding Trough;\nThe Fellshrine Ruins;\nThe Grain Gate;\nThe Grand Promenade;\nThe High Gardens;\nThe Imperial Fields;\nThe Imperial Gardens;\nThe Karui Fortress;\nThe Library;\nThe Lower Prison (A6);\nThe Lunaris Concourse;",
+    "sourcesWithTagButNotOnWiki": "Remaining list (2/2)\n\nThe Lunaris Temple Level 1 (A3);\nThe Lunaris Temple Level 1 (A8);\nThe Lunaris Temple Level 2 (A3);\nThe Lunaris Temple Level 2 (A8);\nThe Marketplace;\nThe Mines Level 1;\nThe Mines Level 2;\nThe Mud Flats (A6);\nThe Northern Forest (A7);\nThe Ossuary (A5);\nThe Quay;\nThe Refinery;\nThe Reliquary (A5);\nThe Ridge;\nThe Riverways (A6);\nThe Sarn Ramparts;\nThe Sceptre of God;\nThe Sewers;\nThe Slums;\nThe Solaris Concourse;\nThe Solaris Temple Level 1 (A8);\nThe Solaris Temple Level 2 (A3);\nThe Solaris Temple Level 2 (A8);\nThe Southern Forest (A6);\nThe Templar Courts;\nThe Temple of Decay Level 1;\nThe Tidal Island (A6);\nThe Torched Courts (A5);\nThe Torched Courts (A10);\nThe Toxic Conduits;\nThe Tunnel;\nThe Twilight Strand (A6);\nThe Upper Sceptre of God;\nThe Vaal City (A7);\nThe Western Forest (A6);",
+    "notes": "Has a Drop Level Requirement of 23.\nImplicitly has a Drop Level Cap, based on Charan's comments, at least somewhere as high as Act 10.\n\nCharan states:\n\"Drops from: *most core zones in parts 1 and 2* (nothing sealed like the belly of the beast or otherworldly like Maligaro’s Sanctum. Basically, anywhere ‘in’ Wraeclast.)\"\n\nLong term project due to numerous locations and low drop rate. otherworldly_story_area is likely the NOT tag, which includes the following:\n\nKaom's Dream, Kaom's Stronghold, Daresso's Dream, The Grand Arena, The Belly of the Beast Level 1/2 (Act 4), The Harvest, Maligaro's Sanctum, The Belly of the Beast (Act 9), The Rotting Core\n\n3.22: The Wetlands A6"
   },
   {
     "id": 156,
@@ -9949,7 +9947,7 @@
     "id": 445,
     "card": "Three Faces in the Dark",
     "tagHypothesis": "warehouse_area",
-    "confidence": "ok",
+    "confidence": "done",
     "remainingWork": "storyOnly",
     "sources": [
       {
@@ -9970,7 +9968,7 @@
       }
     ],
     "wikiDisagreements": "The Imperial Fields, The Marketplace",
-    "notes": "Arsenal and Factory added - not sure what \"hidden_monster\" is.\nTag clash with The Marketplace (Act 3) and The Imperial Fields (Act 8) - reverify/disprove.\nThe Marketplace may be a remnant of the old \"The Warehouse District\". Cannot be \"marketplace_area\" or \"urban_sarn_area\"."
+    "notes": "Arsenal and Factory added - not sure what \"hidden_monster\" is.\nTag clash with The Marketplace (Act 3) and The Imperial Fields (Act 8) - reverify/disprove.\nThe Marketplace may be a remnant of the old \"The Warehouse District\". Cannot be \"marketplace_area\" or \"urban_sarn_area\".\nNo sightings in either Imperial Fields or Marketplace in recent patches."
   },
   {
     "id": 446,

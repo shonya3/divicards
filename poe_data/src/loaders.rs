@@ -27,6 +27,10 @@ impl DataLoader<Vec<Map>, Error> for MapsLoader {
         "maps.json"
     }
 
+    fn reload() -> bool {
+        return false;
+    }
+
     async fn fetch(&self) -> Result<Vec<Map>, Error> {
         crate::maps::fetch::fetch().await
     }
