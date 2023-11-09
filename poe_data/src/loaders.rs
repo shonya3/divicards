@@ -27,7 +27,7 @@ impl DataLoader<Vec<Map>, Error> for MapsLoader {
         "maps.json"
     }
 
-    fn reload() -> bool {
+    fn reload(&self) -> bool {
         return false;
     }
 
