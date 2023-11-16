@@ -124,11 +124,11 @@ impl Serialize for Source {
         match _type == _id {
             true => {
                 source.skip_field("id")?;
-                source.serialize_field("kind", "empty-source-type")?;
+                source.serialize_field("kind", "empty-source")?;
             }
             false => {
                 source.serialize_field("id", &self._id())?;
-                source.serialize_field("kind", "source-type-with-members")?;
+                source.serialize_field("kind", "source-with-member")?;
             }
         }
 
