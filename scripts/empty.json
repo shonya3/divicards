@@ -46,6 +46,13 @@
     "notes": "Divcord 3.19: Iron reports a drop from General Marceus Lioneye in a Map Legion Monolith, but the drop occurred while Lioneye was still in Stasis.\n\nDatamining shows that Legion Generals (but not other Legion Monsters) do in fact have a special item drop eligibility override while in Stasis.\n\nIf this is the deterministic drop source of Rebirth and Renewal, either the hardcoded droprate is extremely low, or another condition needs to be met.\n\nSo far Iron's case is the sole report of Rebirth and Renewal despite lots of players running Legion. A drop from Legion is in-theme with the Card; when a Legion Monster leaves stasis, it's called \"LegionRevive\"."
   },
   {
+    "id": 190,
+    "card": "The Bitter Blossom",
+    "tagHypothesis": "oshabi_boss",
+    "confidence": "done",
+    "notes": "Manually added to Oshabi in 3.16; however previous location was not found at the time. See below\nProhibited Library: CardPender 3.20 dropped 1 Bitter Blossom from Oshabi over n=200 kills."
+  },
+  {
     "id": 246,
     "greynote": "areaSpecific",
     "card": "The Emptiness",

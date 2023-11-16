@@ -4220,12 +4220,6 @@
     "card": "The Bitter Blossom",
     "tagHypothesis": "oshabi_boss",
     "confidence": "done",
-    "sources": [
-      {
-        "type": "Oshabi Boss",
-        "id": "Oshabi, Avatar of the Grove"
-      }
-    ],
     "notes": "Manually added to Oshabi in 3.16; however previous location was not found at the time. See below\nProhibited Library: CardPender 3.20 dropped 1 Bitter Blossom from Oshabi over n=200 kills."
   },
   {
