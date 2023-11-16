@@ -84,7 +84,7 @@ impl Source {
         vec
     }
 
-    pub fn write_ts_file() -> std::io::Result<()> {
+    pub fn write_typescript_file() -> std::io::Result<()> {
         let mut _types: String = Source::types()
             .into_iter()
             .map(|t| {
@@ -97,10 +97,10 @@ impl Source {
             .collect();
 
         let s = format!(
-            r#"export interface Source {{
-    type: SourceType;
-    id?: string;
-}}
+            r#"export type Source =
+	| {{ type: SourceType; id: string; kind: 'source-type-with-members' }}
+	| {{ type: SourceType; kind: 'empty-source-type' }};
+
 export type SourceType = {_types};
     "#,
         );
@@ -116,14 +116,20 @@ impl Serialize for Source {
     where
         S: serde::Serializer,
     {
-        let mut source = serializer.serialize_struct("Source", 2)?;
+        let mut source = serializer.serialize_struct("Source", 3)?;
         let _type = self._type();
         let _id = self._id();
 
         source.serialize_field("type", _type)?;
         match _type == _id {
-            true => source.skip_field("id")?,
-            false => source.serialize_field("id", &self._id())?,
+            true => {
+                source.skip_field("id")?;
+                source.serialize_field("kind", "empty-source-type")?;
+            }
+            false => {
+                source.serialize_field("id", &self._id())?;
+                source.serialize_field("kind", "source-type-with-members")?;
+            }
         }
 
         source.end()

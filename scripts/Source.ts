@@ -1,7 +1,7 @@
-export interface Source {
-    type: SourceType;
-    id?: string;
-}
+export type Source =
+	| { type: SourceType; id: string; kind: 'source-type-with-members' }
+	| { type: SourceType; kind: 'empty-source-type' };
+
 export type SourceType = 
 	| 'Expedition Logbook'
 	| 'Chest'
