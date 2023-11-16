@@ -97,15 +97,15 @@ impl Source {
             .collect();
 
         let s = format!(
-            r#"export type Source =
-	| {{ type: SourceType; id: string; kind: 'source-type-with-members' }}
-	| {{ type: SourceType; kind: 'empty-source-type' }};
+            r#"export type SourceWithMember = {{ type: SourceType; id: string; kind: 'source-with-member' }};
+export type EmptySource = {{ type: SourceType; kind: 'empty-source' }};
+export type ISource = SourceWithMember | EmptySource;
 
 export type SourceType = {_types};
     "#,
         );
 
-        std::fs::write("Source.ts", &s)?;
+        std::fs::write("ISource.interface.ts", &s)?;
 
         Ok(())
     }
