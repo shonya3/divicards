@@ -6575,9 +6575,14 @@
         "type": "Act",
         "id": "2_8_2_1",
         "kind": "source-with-member"
+      },
+      {
+        "type": "Act",
+        "id": "2_8_2_2",
+        "kind": "source-with-member"
       }
     ],
-    "notes": "Not obtainable in The Sewers due to drop level."
+    "notes": "Not obtainable in The Sewers due to drop level.\nDivcord: 3.22, A8 Doedre's Cesspool verified by Zimzams"
   },
   {
     "id": 263,
@@ -11866,10 +11871,20 @@
         "type": "Act",
         "id": "2_9_10_2",
         "kind": "source-with-member"
+      },
+      {
+        "type": "Act",
+        "id": "2_7_12_1",
+        "kind": "source-with-member"
+      },
+      {
+        "type": "Act",
+        "id": "2_8_2_1",
+        "kind": "source-with-member"
       }
     ],
-    "sourcesWithTagButNotOnWiki": "The Belly of the Beast Level 1/2, The Temple of Decay Level 1/2, The Toxic Conduits, Doedre's Cesspool, The Belly of the Beast (A9)",
-    "notes": "Acid Caverns observed by SlipperyJim8 as a Kirac Mission drop\nMalformation verified in divcord\n3.20 patch notes: re-enabled.\nDivcord: 3.21, A3 The Sewers verified by Elinvynia"
+    "sourcesWithTagButNotOnWiki": "The Belly of the Beast Level 1/2, The Temple of Decay Level 2, Doedre's Cesspool, The Belly of the Beast (A9)",
+    "notes": "Acid Caverns observed by SlipperyJim8 as a Kirac Mission drop\nMalformation verified in divcord\n3.20 patch notes: re-enabled.\nDivcord: 3.21, A3 The Sewers verified by Elinvynia\nDivcord: 3.22, A7 The Temple of Decay Level 1 verified by Zimzams\nDivcord: 3.22, A8 The Toxic Conduits verified by Zimzams"
   },
   {
     "id": 460,
