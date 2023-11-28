@@ -85,23 +85,18 @@ impl Source {
     }
 
     pub fn write_typescript_file() -> std::io::Result<()> {
-        let mut _types: String = Source::types()
-            .into_iter()
-            .map(|t| {
-                let q = match t.contains("'") {
-                    true => "\"",
-                    false => "'",
-                };
-                format!("\n\t| {q}{t}{q}")
-            })
-            .collect();
+        let mut _types = serde_json::to_string(&Source::types()).unwrap();
 
         let s = format!(
-            r#"export type SourceWithMember = {{ type: SourceType; id: string; kind: 'source-with-member' }};
-export type EmptySource = {{ type: SourceType; kind: 'empty-source' }};
+            r#"export type SourceWithMember = {{ type: SourceType; id: string; kind: SourceWithMemberKind }};
+export type EmptySourceKind = 'empty-source';
+export type SourceWithMemberKind = 'source-with-member';
+export type Kind = EmptySourceKind | SourceWithMemberKind;
+export type EmptySource = {{ type: SourceType; kind: EmptySourceKind }};
 export type ISource = SourceWithMember | EmptySource;
+export const sourceTypes = {_types} as const;
 
-export type SourceType = {_types};
+export type SourceType = (typeof sourceTypes)[number];
     "#,
         );
 
