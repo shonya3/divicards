@@ -75,7 +75,7 @@ impl DivcordTableRecord {
     }
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
+#[derive(Debug, Serialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct SourcefulDivcordTableRecord {
     pub id: usize,

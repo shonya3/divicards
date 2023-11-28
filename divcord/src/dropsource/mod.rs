@@ -9,23 +9,18 @@ use strum::IntoEnumIterator;
 
 use self::{area::Area, monster::UniqueMonster};
 
-#[derive(Debug, Clone, Deserialize, PartialEq, Eq, Hash, strum_macros::EnumIter, Default)]
-#[serde(tag = "type")]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, strum_macros::EnumIter, Default)]
 pub enum Source {
     #[default]
-    #[serde(rename = "Expedition Logbook")]
     ExpeditionLogbook,
     Chest(Chest),
     Delirium,
     Strongbox(Strongbox),
     Vendor(Vendor),
     Unknown,
-    #[serde(rename = "Delirium Currency Rewards")]
     DeliriumCurrencyRewards,
-    #[serde(rename = "Redeemer influenced maps")]
     RedeemerInfluencedMaps,
     Disabled,
-    #[serde(rename = "Global Drop")]
     GlobalDrop {
         min_level: Option<u32>,
         max_level: Option<u32>,
@@ -42,9 +37,7 @@ pub enum Source {
     ActBoss {
         name: String,
     },
-    #[serde(untagged)]
     UniqueMonster(UniqueMonster),
-    #[serde(untagged)]
     Area(Area),
 }
 
