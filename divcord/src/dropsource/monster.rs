@@ -7,7 +7,6 @@ use strum_macros::EnumString;
     Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, strum_macros::EnumIter, Default,
 )]
 #[serde(tag = "type")]
-#[serde(rename_all = "camelCase")]
 pub enum UniqueMonster {
     #[default]
     #[serde(rename = "Maven's Invitation: The Feared")]
@@ -153,6 +152,8 @@ impl FromStr for UniqueMonster {
             }
             "All Abyss Monsters" => Ok(Self::AllAbyssMonsters),
             "All Rogue Exiles" => Ok(Self::AllRogueExiles),
+            "All Invasion Bosses" => Ok(Self::AllInvasionBosses),
+            "All Vaal Side Area Bosses" => Ok(Self::AllVaalSideAreaBosses),
             "All (Scourge) beyond demons" => Ok(Self::AllScourgeBeyondDemons),
             "Venarius" => Ok(Self::CortexVenarius),
             "Argus" => Ok(Self::Argus),
@@ -225,8 +226,8 @@ impl std::fmt::Display for UniqueMonster {
             UniqueMonster::ShaperMiniBoss(boss) => boss.fmt(f),
             UniqueMonster::BetrayalCatarina(boss) => boss.fmt(f),
             UniqueMonster::OshabiBoss(boss) => boss.fmt(f),
-            UniqueMonster::AllInvasionBosses => write!(f, "All invasion bosses"),
-            UniqueMonster::AllVaalSideAreaBosses => write!(f, "All vaal side area bosses"),
+            UniqueMonster::AllInvasionBosses => write!(f, "All Invasion Bosses"),
+            UniqueMonster::AllVaalSideAreaBosses => write!(f, "All Vaal Side Area Bosses"),
         }
     }
 }

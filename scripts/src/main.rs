@@ -13,6 +13,7 @@ async fn main() {
     std::fs::write("records.json", &json).unwrap();
 
     let empty: Vec<SourcefulDivcordTableRecord> = records
+        .clone()
         .into_iter()
         .filter(|r| r.sources.is_empty())
         .collect();

@@ -9139,8 +9139,7 @@
     "sources": [
       {
         "type": "All Invasion Bosses",
-        "id": "All invasion bosses",
-        "kind": "source-with-member"
+        "kind": "empty-source"
       }
     ]
   },
@@ -9152,8 +9151,7 @@
     "sources": [
       {
         "type": "All Vaal Side Area Bosses",
-        "id": "All vaal side area bosses",
-        "kind": "source-with-member"
+        "kind": "empty-source"
       }
     ],
     "notes": "also includes Invasion Bosses"

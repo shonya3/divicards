@@ -4,7 +4,7 @@ pub mod parse;
 
 use std::str::FromStr;
 
-use serde::{ser::SerializeStruct, Deserialize, Serialize};
+use serde::{de, ser::SerializeStruct, Deserialize, Serialize};
 use strum::IntoEnumIterator;
 
 use self::{area::Area, monster::UniqueMonster};
@@ -39,6 +39,46 @@ pub enum Source {
     },
     UniqueMonster(UniqueMonster),
     Area(Area),
+}
+
+impl<'de> Deserialize<'de> for Source {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        #[derive(Deserialize)]
+        struct JSSource {
+            id: Option<String>,
+            #[serde(rename = "type")]
+            _type: String,
+            kind: SourceKind,
+        }
+
+        let JSSource { id, _type, kind } = JSSource::deserialize(deserializer)?;
+        match kind {
+            SourceKind::EmptySource => match _type.parse::<Source>() {
+                Ok(source) => Ok(source),
+                Err(_) => Err(de::Error::custom(format!(
+                    "Could not deserialize Source. {_type}"
+                ))),
+            },
+            SourceKind::SourceWithMember => {
+                let id = id.unwrap();
+                match id.parse::<Source>() {
+                    Ok(source) => Ok(source),
+                    Err(_) => match _type.as_str() {
+                        "Map" => Ok(Source::Map { name: id }),
+                        "Map Boss" => Ok(Source::MapBoss { name: id }),
+                        "Act" => Ok(Source::Act { id }),
+                        "Act Boss" => Ok(Source::ActBoss { name: id }),
+                        _ => Err(de::Error::custom(format!(
+                            "Could not deserialize Source. {_type} {id}"
+                        ))),
+                    },
+                }
+            }
+        }
+    }
 }
 
 impl Source {
@@ -99,6 +139,14 @@ export type SourceType = (typeof sourceTypes)[number];
     }
 }
 
+#[derive(Deserialize, Serialize)]
+pub enum SourceKind {
+    #[serde(rename = "empty-source")]
+    EmptySource,
+    #[serde(rename = "source-with-member")]
+    SourceWithMember,
+}
+
 impl Serialize for Source {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
@@ -140,6 +188,21 @@ impl FromStr for Source {
                 max_level: None,
             });
         }
+
+        match s {
+            "Disabled" => return Ok(Source::Disabled),
+            "Unknown" => return Ok(Source::Unknown),
+            "Redeemer influenced maps" => return Ok(Source::RedeemerInfluencedMaps),
+            "Delirium Currency Rewards" => return Ok(Source::DeliriumCurrencyRewards),
+            "Global Drop" => {
+                return Ok(Source::GlobalDrop {
+                    min_level: None,
+                    max_level: None,
+                })
+            }
+            _ => {}
+        };
+
         if let Ok(uniquemonster) = UniqueMonster::from_str(s) {
             return Ok(Source::UniqueMonster(uniquemonster));
         } else if let Ok(area) = Area::from_str(s) {
