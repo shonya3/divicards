@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -63,6 +65,25 @@ pub struct Cell {
     pub text_format_runs: Option<Vec<TextFormatRun>>,
 }
 
+pub enum ParseCellError {
+    InvalidNumberOfTextFragments(Cell, usize),
+    ItalicTextCannotPrecedeNormalText(Cell),
+}
+
+impl Display for ParseCellError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            ParseCellError::InvalidNumberOfTextFragments(cell, n) => write!(
+                f,
+                "Invalid number of text fragments, expected 0 or 2, got {n} {cell:?}"
+            ),
+            ParseCellError::ItalicTextCannotPrecedeNormalText(cell) => {
+                write!(f, "Italic text cannot precede the normal text {cell:?}")
+            }
+        }
+    }
+}
+
 impl Cell {
     pub fn drops_from(&self) -> Vec<DropsFrom> {
         self.text_fragments()
@@ -75,7 +96,7 @@ impl Cell {
         self.drops_from().into_iter().filter(|d| d.styles.italic)
     }
 
-    pub fn text_fragments(&self) -> Vec<Text> {
+    pub fn text_fragments(&self) -> Result<Vec<Text>, ParseCellError> {
         let text_format_runs = self.text_format_runs();
         let text_content = self.text_content.clone().unwrap_or_default();
         let cell_styles = self.font_styles();
@@ -86,9 +107,9 @@ impl Cell {
                     styles: cell_styles.to_owned(),
                 };
                 if text.content.len() == 0 || text.content.trim() == "n/a" {
-                    vec![]
+                    Ok(vec![])
                 } else {
-                    vec![text]
+                    Ok(vec![text])
                 }
             }
             2 => {
@@ -110,13 +131,18 @@ impl Cell {
                     },
                 ];
 
-                if vec[0].styles.italic == true && vec[0].styles.italic == false {
-                    panic!("Italic text cannot preceed the normal text");
+                if vec[0].styles.italic == true && vec[1].styles.italic == false {
+                    return Err(ParseCellError::ItalicTextCannotPrecedeNormalText(
+                        self.to_owned(),
+                    ));
                 }
 
-                vec
+                Ok(vec)
             }
-            len => panic!("Invalid number of text fragments, expected 0 or 2, got {len}"),
+            len => Err(ParseCellError::InvalidNumberOfTextFragments(
+                self.to_owned(),
+                len,
+            )),
         }
     }
 
