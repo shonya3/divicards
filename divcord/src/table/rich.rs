@@ -65,6 +65,7 @@ pub struct Cell {
     pub text_format_runs: Option<Vec<TextFormatRun>>,
 }
 
+#[derive(Debug)]
 pub enum ParseCellError {
     InvalidNumberOfTextFragments(Cell, usize),
     ItalicTextCannotPrecedeNormalText(Cell),
@@ -85,15 +86,19 @@ impl Display for ParseCellError {
 }
 
 impl Cell {
-    pub fn drops_from(&self) -> Vec<DropsFrom> {
-        self.text_fragments()
+    pub fn drops_from(&self) -> Result<Vec<DropsFrom>, ParseCellError> {
+        Ok(self
+            .text_fragments()?
             .into_iter()
             .flat_map(|t| t.drops_from())
-            .collect()
+            .collect())
     }
 
     pub fn italics(&self) -> impl Iterator<Item = DropsFrom> {
-        self.drops_from().into_iter().filter(|d| d.styles.italic)
+        self.drops_from()
+            .unwrap()
+            .into_iter()
+            .filter(|d| d.styles.italic)
     }
 
     pub fn text_fragments(&self) -> Result<Vec<Text>, ParseCellError> {

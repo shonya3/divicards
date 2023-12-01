@@ -64,7 +64,7 @@ impl DivcordTable {
             .zip(self.rich_sources_column.cells())
             .enumerate()
             .map(|(row_index, (divcord_table_row, cell))| {
-                DivcordTableRecord::create(row_index, divcord_table_row, cell.drops_from())
+                DivcordTableRecord::create(row_index, divcord_table_row, cell.drops_from()?)
             })
     }
 }

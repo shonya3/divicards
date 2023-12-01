@@ -1,6 +1,6 @@
 use std::fmt::Display;
 
-use crate::dropsource::parse::ParseSourceError;
+use crate::{dropsource::parse::ParseSourceError, table::rich::ParseCellError};
 
 #[derive(Debug)]
 pub enum Error {
@@ -16,6 +16,7 @@ pub enum Error {
     ParseSourceError(ParseSourceError),
     #[cfg(feature = "fetch")]
     LoaderError(loader::Error),
+    ParseCellError(crate::table::rich::ParseCellError),
 }
 
 impl Display for Error {
@@ -33,6 +34,7 @@ impl Display for Error {
             Error::ParseSourceError(err) => err.fmt(f),
             #[cfg(feature = "fetch")]
             Error::LoaderError(err) => err.fmt(f),
+            Error::ParseCellError(err) => err.fmt(f),
         }
     }
 }
@@ -83,5 +85,11 @@ impl From<strum::ParseError> for Error {
 impl From<ParseSourceError> for Error {
     fn from(value: ParseSourceError) -> Self {
         Error::ParseSourceError(value)
+    }
+}
+
+impl From<ParseCellError> for Error {
+    fn from(value: ParseCellError) -> Self {
+        Error::ParseCellError(value)
     }
 }
