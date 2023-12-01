@@ -14,10 +14,16 @@ pub const LEGACY_CARDS: [&'static str; LEGACY_CARDS_N] = [
     "The Bargain",
     "The Long Watch",
     "The Sustenance",
+    "Divine Justice",
+    "Doryani's Epiphany",
+    "Dying Anguish",
+    "Terrible Secret of Space",
+    "The Blessing of Moosh",
+    "The Hook",
 ];
 
 pub const CARDS_N: usize = 440;
-pub const LEGACY_CARDS_N: usize = 12;
+pub const LEGACY_CARDS_N: usize = 18;
 pub const CARDS: [&'static str; CARDS_N] = [
     "Fire of Unknown Origin",
     "The Fortunate",
