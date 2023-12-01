@@ -22,9 +22,11 @@ pub const LEGACY_CARDS: [&'static str; LEGACY_CARDS_N] = [
     "The Hook",
 ];
 
-pub const CARDS_N: usize = 440;
+pub const CARDS_N: usize = 442;
 pub const LEGACY_CARDS_N: usize = 18;
 pub const CARDS: [&'static str; CARDS_N] = [
+    "Assassin's Gift",
+    "Eldritch Perfection",
     "Fire of Unknown Origin",
     "The Fortunate",
     "Brother's Gift",
