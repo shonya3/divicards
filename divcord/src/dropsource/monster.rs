@@ -57,8 +57,6 @@ pub enum UniqueMonster {
     AbyssLichBoss(AbyssLichBoss),
     #[serde(rename = "Maps Only")]
     MapsOnly(MapsOnly),
-    #[serde(rename = "Act Boss")]
-    ActBoss(ActBoss),
     #[serde(rename = "Harbinger Portal")]
     HarbingerPortal(HarbingerPortal),
     #[serde(rename = "Endgame Boss")]
@@ -121,7 +119,6 @@ impl UniqueMonster {
             UniqueMonster::FemaleRogueExile(_) => "Female Rogue Exile",
             UniqueMonster::AbyssLichBoss(_) => "Abyss Lich Boss",
             UniqueMonster::MapsOnly(_) => "Maps Only",
-            UniqueMonster::ActBoss(_) => "Act Boss",
             UniqueMonster::HarbingerPortal(_) => "Harbinger Portal",
             UniqueMonster::EndgameBoss(_) => "Endgame Boss",
             UniqueMonster::DelveBoss(_) => "Delve Boss",
@@ -168,7 +165,6 @@ impl FromStr for UniqueMonster {
                 .or_else(|_| FemaleRogueExile::from_str(s).map(|b| Self::FemaleRogueExile(b)))
                 .or_else(|_| AbyssLichBoss::from_str(s).map(|b| Self::AbyssLichBoss(b)))
                 .or_else(|_| MapsOnly::from_str(s).map(|b| Self::MapsOnly(b)))
-                .or_else(|_| ActBoss::from_str(s).map(|b| Self::ActBoss(b)))
                 .or_else(|_| HarbingerPortal::from_str(s).map(|b| Self::HarbingerPortal(b)))
                 .or_else(|_| EndgameBoss::from_str(s).map(|b| Self::EndgameBoss(b)))
                 .or_else(|_| DelveBoss::from_str(s).map(|b| Self::DelveBoss(b)))
@@ -213,7 +209,6 @@ impl std::fmt::Display for UniqueMonster {
             UniqueMonster::FemaleRogueExile(rogue) => rogue.fmt(f),
             UniqueMonster::AbyssLichBoss(abysslichboss) => abysslichboss.fmt(f),
             UniqueMonster::MapsOnly(mapsonly) => mapsonly.fmt(f),
-            UniqueMonster::ActBoss(act_boss) => act_boss.fmt(f),
             UniqueMonster::HarbingerPortal(harbingerportal) => harbingerportal.fmt(f),
             UniqueMonster::CortexVenarius => write!(f, "Venarius"),
             UniqueMonster::Argus => write!(f, "Argus"),
@@ -586,36 +581,6 @@ pub enum MapsOnly {
     #[strum(serialize = "Kosis, The Revelation (maps only)")]
     #[serde(rename = "Kosis, The Revelation (maps only)")]
     Kosis,
-}
-
-#[derive(
-    Serialize,
-    Deserialize,
-    Clone,
-    Debug,
-    PartialEq,
-    Eq,
-    Hash,
-    EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
-pub enum ActBoss {
-    #[default]
-    #[strum(serialize = "Reassembled Brutus")]
-    #[serde(rename = "Reassembled Brutus")]
-    ReassembledBrutus,
-    #[strum(serialize = "Shavronne, Unbound")]
-    #[serde(rename = "Shavronne, Unbound")]
-    ShavronneUnbound,
-    #[strum(serialize = "Dawn, Harbinger of Solaris")]
-    #[serde(rename = "Dawn, Harbinger of Solaris")]
-    Dawn,
-    #[strum(serialize = "Solaris, Eternal Sun")]
-    #[serde(rename = "Solaris, Eternal Sun")]
-    Solaris,
 }
 
 #[derive(
