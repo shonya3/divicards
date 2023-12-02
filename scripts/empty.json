@@ -99,6 +99,14 @@
     "notes": "Breach Monsters, but which? All?\nbreach_commander ?\n\nAlso has been observed as Kirac Card Mission drops in: {Park, Marshes, Bazaar}. See Divcord. Jasmine: The Realm is likely added to the pool of possible cards in Kirac Missions. The card does not appear to drop in a single card - only in stacks. Kirac Missions can also pool boss cards, and is likely governed by unusual rules.\n\nAppears to drop from any Breach Monster\n\nDvicord: 3.21, Elinvynia counted Active Skill Gems in Breachstones and proved that The Realm is a deterministic drop (not a natural drop)."
   },
   {
+    "id": 406,
+    "card": "The Transformation",
+    "confidence": "low",
+    "remainingWork": "confirm",
+    "sourcesWithTagButNotOnWiki": "Death and Taxes, Gardens, Hallowed Ground, Haunted Mansion, Maelström of Chaos, Palace, Tower, Underground Sea",
+    "notes": "3.23: Removed Metamorph monster. \nNew patch noted maps: Death and Taxes, Gardens, Hallowed Ground, Haunted Mansion, Maelström of Chaos, Palace, Tower, Underground Sea (bosses?)"
+  },
+  {
     "id": 421,
     "card": "The Void",
     "confidence": "none",

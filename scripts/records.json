@@ -1465,19 +1465,18 @@
   },
   {
     "id": 70,
-    "greynote": "strongbox",
+    "greynote": "disabled",
     "card": "Divine Justice",
     "tagHypothesis": "Armourer's Strongbox",
     "confidence": "done",
     "sources": [
       {
-        "type": "Strongbox",
-        "id": "Armourer's Strongbox",
-        "kind": "source-with-member"
+        "type": "Disabled",
+        "kind": "empty-source"
       }
     ],
     "wikiDisagreements": "Defiled Cathedral, Chateau",
-    "notes": "No longer drops in Defiled Cathedral (tested in 3.19 with n>1000 non-global natural Card drops). \n\n3.19 sampling from RiPHeartofGold and Zimzams showed zero drops in Orchard as well.\n\nIt's possible that the sole drop location is now Armourer's Strongbox, but it may have a natural drop location somewhere still.\n\nDisproved in Chateau with 367 natural card drops; not labyrinth_tileset_area.\n\nVewrified Armourer's Strongbox in Bog and Arsenal, no shared tags."
+    "notes": "No longer drops in Defiled Cathedral (tested in 3.19 with n>1000 non-global natural Card drops). \n\n3.19 sampling from RiPHeartofGold and Zimzams showed zero drops in Orchard as well.\n\nIt's possible that the sole drop location is now Armourer's Strongbox, but it may have a natural drop location somewhere still.\n\nDisproved in Chateau with 367 natural card drops; not labyrinth_tileset_area.\n\nVewrified Armourer's Strongbox in Bog and Arsenal, no shared tags.\nDisabled in 3.23"
   },
   {
     "id": 71,
@@ -1529,42 +1528,17 @@
   },
   {
     "id": 74,
+    "greynote": "disabled",
     "card": "Dying Anguish",
     "tagHypothesis": "urban_sarn_area",
     "confidence": "done",
     "sources": [
       {
-        "type": "Map",
-        "id": "Arsenal Map",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map",
-        "id": "Colonnade Map",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map",
-        "id": "Ghetto Map",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map",
-        "id": "Port Map",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map",
-        "id": "Promenade Map",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map",
-        "id": "Precinct Map",
-        "kind": "source-with-member"
+        "type": "Disabled",
+        "kind": "empty-source"
       }
     ],
-    "notes": "Divcord: Precinct verified by fal"
+    "notes": "Divcord: Precinct verified by fal\nDisabled in 3.23"
   },
   {
     "id": 75,
@@ -3809,6 +3783,11 @@
         "kind": "source-with-member"
       },
       {
+        "type": "Map",
+        "id": "Port Map",
+        "kind": "source-with-member"
+      },
+      {
         "type": "Act",
         "id": "2_8_9",
         "kind": "source-with-member"
@@ -3816,7 +3795,7 @@
     ],
     "wikiDisagreements": "The Imperial Fields",
     "sourcesWithTagButNotOnWiki": "The Refinery",
-    "notes": "3.21 - disproved Rats 99% in Imperial Fields"
+    "notes": "3.21 - disproved Rats 99% in Imperial Fields\n3.23 - Added Port"
   },
   {
     "id": 155,
@@ -4289,62 +4268,17 @@
   },
   {
     "id": 169,
+    "greynote": "disabled",
     "card": "Terrible Secret of Space",
     "confidence": "low",
     "remainingWork": "unclearHypothesis",
     "sources": [
       {
-        "type": "Map Boss",
-        "id": "Avatar of Undoing",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map Boss",
-        "id": "Calderus",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map Boss",
-        "id": "Fragment of Winter",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map Boss",
-        "id": "Guardian of the Vault",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map Boss",
-        "id": "Pirate Treasure",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map Boss",
-        "id": "Stone of the Currents",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map Boss",
-        "id": "Telvar, the Inebriated",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map Boss",
-        "id": "The Eroding One",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map Boss",
-        "id": "Titan of the Grove",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map Boss",
-        "id": "Void Anomaly",
-        "kind": "source-with-member"
+        "type": "Disabled",
+        "kind": "empty-source"
       }
     ],
-    "notes": "\"construct\"? not searchable on poedb due to common Tags being ignored in search\n\nMaybe Unique Monster + `construct`\n\nMost appear to be a form of Golem monster type"
+    "notes": "\"construct\"? not searchable on poedb due to common Tags being ignored in search\n\nMaybe Unique Monster + `construct`\n\nMost appear to be a form of Golem monster type\nDisabled in 3.23"
   },
   {
     "id": 170,
@@ -4707,14 +4641,16 @@
   {
     "id": 184,
     "card": "The Awakened",
-    "tagHypothesis": "metamorph_boss",
-    "confidence": "done",
+    "confidence": "low",
+    "remainingWork": "confirm",
     "sources": [
       {
         "type": "Metamorph",
         "kind": "empty-source"
       }
-    ]
+    ],
+    "sourcesWithTagButNotOnWiki": "Death and Taxes, Gardens, Hallowed Ground, Haunted Mansion, Maelström of Chaos, Palace, Tower, Underground Sea",
+    "notes": "3.23: Removed Metamorph monster. \nNew patch noted maps: Death and Taxes, Gardens, Hallowed Ground, Haunted Mansion, Maelström of Chaos, Palace, Tower, Underground Sea (bosses?)"
   },
   {
     "id": 185,
@@ -4931,17 +4867,16 @@
   },
   {
     "id": 193,
-    "greynote": "chestObject",
+    "greynote": "disabled",
     "card": "The Blessing of Moosh",
     "confidence": "done",
     "sources": [
       {
-        "type": "Chest",
-        "id": "Labyrinth Darkshrines",
-        "kind": "source-with-member"
+        "type": "Disabled",
+        "kind": "empty-source"
       }
     ],
-    "notes": "Labyrinth Darkshrines"
+    "notes": "Labyrinth Darkshrines\nDisabled in 3.23"
   },
   {
     "id": 194,
@@ -5860,9 +5795,9 @@
   {
     "id": 230,
     "card": "The Demon",
-    "tagHypothesis": "kitava_map_boss",
+    "tagHypothesis": "kitava_area",
     "confidence": "ok",
-    "remainingWork": "confirm",
+    "remainingWork": "unclearHypothesis",
     "sources": [
       {
         "type": "Map Boss",
@@ -5870,8 +5805,8 @@
         "kind": "source-with-member"
       }
     ],
-    "sourcesWithTagButNotOnWiki": "Lord of the Grey",
-    "notes": "We recently got video evidence of The Demon dropping from Kitava, the Destroyer in Lava Lake Map.\nBut Lava Lake Map was not on-Atlas in 3.17 Archnemesis.\nSo following GGG's rule, it must have had a secondary drop location -- presumably via `kitava_map_boss`, which applies to \"The Destroyer's Heart\" (the heart of Kitava, the Destroyer in Lava Lake) and \"Lord of the Grey\" in Belfry.\n\nSo presumably The Demon should also drop from Lord of the Grey, as some people had speculated in the past."
+    "wikiDisagreements": "Megaera",
+    "notes": "We recently got video evidence of The Demon dropping from Kitava, the Destroyer in Lava Lake Map.\nBut Lava Lake Map was not on-Atlas in 3.17 Archnemesis.\nSo following GGG's rule, it must have had a secondary drop location -- presumably via `kitava_map_boss`, which applies to \"The Destroyer's Heart\" (the heart of Kitava, the Destroyer in Lava Lake) and \"Lord of the Grey\" in Belfry.\n\nSo presumably The Demon should also drop from Lord of the Grey, as some people had speculated in the past.\n3.23: Added Crater - is this now kitava_area? Or new tag? Patch notes indirectly confirmed that The Wrath and The Demon most likely share tags - is this an area tag or boss tag?"
   },
   {
     "id": 231,
@@ -5939,7 +5874,7 @@
         "kind": "empty-source"
       }
     ],
-    "notes": "drop disabled"
+    "notes": "Never implemented in game"
   },
   {
     "id": 234,
@@ -7251,15 +7186,17 @@
   },
   {
     "id": 290,
+    "greynote": "disabled",
     "card": "The Hook",
     "tagHypothesis": "cortex_boss",
     "confidence": "done",
     "sources": [
       {
-        "type": "Venarius",
+        "type": "Disabled",
         "kind": "empty-source"
       }
-    ]
+    ],
+    "notes": "Disabled in 3.23"
   },
   {
     "id": 291,
@@ -8157,10 +8094,15 @@
         "type": "Map",
         "id": "Pen Map",
         "kind": "source-with-member"
+      },
+      {
+        "type": "Map",
+        "id": "Fields Map",
+        "kind": "source-with-member"
       }
     ],
     "sourcesWithTagButNotOnWiki": "Dark Forest",
-    "notes": "Lair, Pen (Lair added in 3.16 after Pen was off-atlas; may be area specific?)\nBoth Lycius, Midnight's Howl and Arwyn, the Houndmaster are \"masters of canines\" and can spawn wolves/hounds respectively.\nRuled out Dark Forest with 99.9% certainty"
+    "notes": "Lair, Pen (Lair added in 3.16 after Pen was off-atlas; may be area specific?)\nBoth Lycius, Midnight's Howl and Arwyn, the Houndmaster are \"masters of canines\" and can spawn wolves/hounds respectively.\nRuled out Dark Forest with 99.9% certainty\n3.23: Added to Fields; boss summons a hellion and a wolf."
   },
   {
     "id": 322,
@@ -10329,7 +10271,7 @@
         "kind": "source-with-member"
       }
     ],
-    "notes": "Divcord: Pit of the Chimera verified by Jasmine\n\nCould be either `daresso_area` or `pitfight_area` -- currently these Tags both match the exact same 4 Maps\n\nStory could be used to distinguish: The Grand Arena has `daresso_area`, but not `pitfight_area`.\n\n\nDivcord: Story Daresso's Dream verified by Stymphalian ID.27.\nDivcord: Pit, Arena verified by Zimzams\nDivcord: Story The Grand Arena verified bY Stymphalian ID.27, which confirms `daresso_area` instead of `pitfight_area`."
+    "notes": "Port"
   },
   {
     "id": 400,
@@ -10417,8 +10359,9 @@
         "kind": "source-with-member"
       }
     ],
+    "wikiDisagreements": "Port",
     "sourcesWithTagButNotOnWiki": "Forge of the Phoenix, Foundry",
-    "notes": "Factory, Silo\n\nThe only 3.18 verification we have is Factory (it's common there), and Factory's sole non-vacuous Tag is `warehouse_area`, which is why the Tag association here was originally set to that.\nThe Tireless Extractor does not drop in Arsenal, however, which has `warehouse_area`. Thus that Tag cannot be the governing factor.\n\nRe-verified as dropping in Silo in 3.18 using a legacy-series Silo Map on Standard.\nBut other Maps that have Silo's Tags do not seem to produce The Tireless Extractor.\n\nThere's something else special about Factory and Silo which govern the natural Card drop in those Areas. Forge_Area in 3.21 connected the two maps, but the actual relationship could be something else.\n\n3.21: Elinvynia found no cards in 56 cards in Foundry or 20 in Phoenix. This makes it more likely it's not related to Forge_Area"
+    "notes": "Factory, Silo\n\nThe only 3.18 verification we have is Factory (it's common there), and Factory's sole non-vacuous Tag is `warehouse_area`, which is why the Tag association here was originally set to that.\nThe Tireless Extractor does not drop in Arsenal, however, which has `warehouse_area`. Thus that Tag cannot be the governing factor.\n\nRe-verified as dropping in Silo in 3.18 using a legacy-series Silo Map on Standard.\nBut other Maps that have Silo's Tags do not seem to produce The Tireless Extractor.\n\nThere's something else special about Factory and Silo which govern the natural Card drop in those Areas. Forge_Area in 3.21 connected the two maps, but the actual relationship could be something else.\n\n3.21: Elinvynia found no cards in 56 cards in Foundry or 20 in Phoenix. This makes it more likely it's not related to Forge_Area\n3.23 - Added Port"
   },
   {
     "id": 404,
@@ -10490,14 +10433,10 @@
   {
     "id": 406,
     "card": "The Transformation",
-    "tagHypothesis": "metamorph_boss",
-    "confidence": "done",
-    "sources": [
-      {
-        "type": "Metamorph",
-        "kind": "empty-source"
-      }
-    ]
+    "confidence": "low",
+    "remainingWork": "confirm",
+    "sourcesWithTagButNotOnWiki": "Death and Taxes, Gardens, Hallowed Ground, Haunted Mansion, Maelström of Chaos, Palace, Tower, Underground Sea",
+    "notes": "3.23: Removed Metamorph monster. \nNew patch noted maps: Death and Taxes, Gardens, Hallowed Ground, Haunted Mansion, Maelström of Chaos, Palace, Tower, Underground Sea (bosses?)"
   },
   {
     "id": 407,
@@ -11309,7 +11248,7 @@
     "id": 439,
     "card": "The Wrath",
     "tagHypothesis": "kitava_area",
-    "confidence": "done",
+    "confidence": "ok",
     "sources": [
       {
         "type": "Map",
@@ -11332,8 +11271,8 @@
         "kind": "source-with-member"
       }
     ],
-    "wikiDisagreements": "The Cavern of Anger, The Canals",
-    "notes": "Cavern of Wrath (Cruel/Merc) is a historical drop location. It was changed without any explanation to Cavern of Anger Act 6 without any data in 2017 by Logopolis01 - likely no longer valid. Likewise, The Canals was added by a deleted user in 2017 - not consistent with current tags."
+    "wikiDisagreements": "Crater",
+    "notes": "Cavern of Wrath (Cruel/Merc) is a historical drop location. It was changed without any explanation to Cavern of Anger Act 6 without any data in 2017 by Logopolis01 - likely no longer valid. Likewise, The Canals was added by a deleted user in 2017 - not consistent with current tags.\n3.23: Added Crater - is this now kitava_area? Or new tag?"
   },
   {
     "id": 440,
@@ -11448,6 +11387,11 @@
         "kind": "source-with-member"
       },
       {
+        "type": "Map",
+        "id": "Port Map",
+        "kind": "source-with-member"
+      },
+      {
         "type": "Act",
         "id": "2_8_9",
         "kind": "source-with-member"
@@ -11459,7 +11403,7 @@
       }
     ],
     "wikiDisagreements": "The Imperial Fields, The Marketplace",
-    "notes": "Arsenal and Factory added - not sure what \"hidden_monster\" is.\nTag clash with The Marketplace (Act 3) and The Imperial Fields (Act 8) - reverify/disprove.\nThe Marketplace may be a remnant of the old \"The Warehouse District\". Cannot be \"marketplace_area\" or \"urban_sarn_area\".\nNo sightings in either Imperial Fields or Marketplace in recent patches."
+    "notes": "Arsenal and Factory added - not sure what \"hidden_monster\" is.\nTag clash with The Marketplace (Act 3) and The Imperial Fields (Act 8) - reverify/disprove.\nThe Marketplace may be a remnant of the old \"The Warehouse District\". Cannot be \"marketplace_area\" or \"urban_sarn_area\".\nNo sightings in either Imperial Fields or Marketplace in recent patches.\n3.23 - Added Port"
   },
   {
     "id": 446,
@@ -12045,7 +11989,8 @@
         "kind": "source-with-member"
       }
     ],
-    "notes": "verified multiple times in Factory.\n\nNo sightings in Arsenal or Silo (warehouse_area).\nLava Lake and Ashen Wood sightings possibly debunked (altar?)\nNo sightings in Villa (masked boss theory)\n\n3.20, zero hits in Courthouse (n=46; conf >99%), checking \"Boss uses Earthquake-based Skill\" hypothesis\n3.20, zero hits in The Vinktar Square (n=34; conf ~99%), considering `lightning_affinity` as well"
+    "wikiDisagreements": "Port",
+    "notes": "verified multiple times in Factory.\n\nNo sightings in Arsenal or Silo (warehouse_area).\nLava Lake and Ashen Wood sightings possibly debunked (altar?)\nNo sightings in Villa (masked boss theory)\n\n3.20, zero hits in Courthouse (n=46; conf >99%), checking \"Boss uses Earthquake-based Skill\" hypothesis\n3.20, zero hits in The Vinktar Square (n=34; conf ~99%), considering `lightning_affinity` as well\n3.23 - Added Port"
   },
   {
     "id": 467,
@@ -12101,17 +12046,16 @@
   },
   {
     "id": 470,
-    "greynote": "areaSpecific",
+    "greynote": "disabled",
     "card": "Doryani's Epiphany",
     "confidence": "done",
     "sources": [
       {
-        "type": "Map",
-        "id": "Doryani's Machinarium",
-        "kind": "source-with-member"
+        "type": "Disabled",
+        "kind": "empty-source"
       }
     ],
-    "notes": "Divcord: 3.21, Doryani's Machinarium reported by Silentraz.\n\nTheme fits. Doryani's Epiphany being a Unique-Map-specific Card would certainly make sense given the absence of any other valid reports.\n\nUnique Map Cards do not necessarily use Tags. The two highest-likelihood options are:\n1) Doryani's Epiphany is restricted to Doryani's Machinarium.\n2) Doryani's Epiphany is governed by `vaal_pyramid_area`.\nOption 1 is probably much more likely.\n\nTo falsify Option 2, we'd need big samples in another `vaal_pyramid_area` Area:\n{Maze, Vaal Pyramid, Vaal Temple, Doryani's Machinarium, Vaults of Atziri}\n\n\nExample: For vaal_pyramid_area => Doryani's Epiphany in T16 Maze:\n* ~420 natural Card drops on average to obtain one; or\n* ~2000 natural Card drops with zero observations to disprove with 99% confidence.\n\nDivcord: 3.21, Zimzams collected 1131 natural Card drops in T16 Vaal Pyramid, 0 hits.\nDivcord: 3.21, Elinvynia collected another 919 natural Card drops in Vaal Pyramid, 0 hits.\nThis is sufficient to rule out `vaal_pyramid_area` with 99% confidence.\n\nSeems to be exclusive to Doryani's Machinarium."
+    "notes": "Divcord: 3.21, Doryani's Machinarium reported by Silentraz.\n\nTheme fits. Doryani's Epiphany being a Unique-Map-specific Card would certainly make sense given the absence of any other valid reports.\n\nUnique Map Cards do not necessarily use Tags. The two highest-likelihood options are:\n1) Doryani's Epiphany is restricted to Doryani's Machinarium.\n2) Doryani's Epiphany is governed by `vaal_pyramid_area`.\nOption 1 is probably much more likely.\n\nTo falsify Option 2, we'd need big samples in another `vaal_pyramid_area` Area:\n{Maze, Vaal Pyramid, Vaal Temple, Doryani's Machinarium, Vaults of Atziri}\n\n\nExample: For vaal_pyramid_area => Doryani's Epiphany in T16 Maze:\n* ~420 natural Card drops on average to obtain one; or\n* ~2000 natural Card drops with zero observations to disprove with 99% confidence.\n\nDivcord: 3.21, Zimzams collected 1131 natural Card drops in T16 Vaal Pyramid, 0 hits.\nDivcord: 3.21, Elinvynia collected another 919 natural Card drops in Vaal Pyramid, 0 hits.\nThis is sufficient to rule out `vaal_pyramid_area` with 99% confidence.\n\nSeems to be exclusive to Doryani's Machinarium.\nDisabled in 3.23"
   },
   {
     "id": 471,
@@ -12490,6 +12434,11 @@
         "kind": "source-with-member"
       },
       {
+        "type": "Map",
+        "id": "Port Map",
+        "kind": "source-with-member"
+      },
+      {
         "type": "Act",
         "id": "2_8_9",
         "kind": "source-with-member"
@@ -12500,7 +12449,7 @@
         "kind": "source-with-member"
       }
     ],
-    "notes": "Divcord: 3.20 The Grain Gate verified, A9 The Refinery verified, claim of Arsenal\nClaim of Factory on reddit"
+    "notes": "Divcord: 3.20 The Grain Gate verified, A9 The Refinery verified, claim of Arsenal\nClaim of Factory on reddit\n3.23 - Added Port"
   },
   {
     "id": 489,
