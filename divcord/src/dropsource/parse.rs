@@ -139,7 +139,7 @@ pub fn parse_record_dropsources(
 
     // 6. Final rules
     if record.confidence == Confidence::None && sources.len() > 0 {
-        println!("{} {} {sources:?}", record.id, record.card);
+        // println!("{} {} {sources:?}", record.id, record.card);
     }
 
     if record.greynote.is_some() && sources.is_empty() && record.confidence == Confidence::Done {
