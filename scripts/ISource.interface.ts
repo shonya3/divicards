@@ -2,7 +2,7 @@ export type SourceWithMember = { type: SourceType; id: string; kind: SourceWithM
 export type EmptySourceKind = 'empty-source';
 export type SourceWithMemberKind = 'source-with-member';
 export type Kind = EmptySourceKind | SourceWithMemberKind;
-export type EmptySource = { type: SourceType; kind: EmptySourceKind };
+export type EmptySource = { type: SourceType; id: string; kind: EmptySourceKind };
 export type ISource = SourceWithMember | EmptySource;
 export const sourceTypes = [
 	"Expedition Logbook",

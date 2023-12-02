@@ -129,7 +129,7 @@ impl Source {
 export type EmptySourceKind = 'empty-source';
 export type SourceWithMemberKind = 'source-with-member';
 export type Kind = EmptySourceKind | SourceWithMemberKind;
-export type EmptySource = {{ type: SourceType; kind: EmptySourceKind }};
+export type EmptySource = {{ type: SourceType; id: string; kind: EmptySourceKind }};
 export type ISource = SourceWithMember | EmptySource;
 export const sourceTypes = {_types} as const;
 
@@ -163,7 +163,7 @@ impl Serialize for Source {
         source.serialize_field("type", _type)?;
         match _type == _id {
             true => {
-                source.skip_field("id")?;
+                source.serialize_field("id", &self._id())?;
                 source.serialize_field("kind", "empty-source")?;
             }
             false => {

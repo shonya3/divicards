@@ -322,6 +322,7 @@
     "sources": [
       {
         "type": "All Incursion Architects in Alva missions/Alva's Memory",
+        "id": "All Incursion Architects in Alva missions/Alva's Memory",
         "kind": "empty-source"
       }
     ],
@@ -459,6 +460,7 @@
     "sources": [
       {
         "type": "All Rogue Exiles",
+        "id": "All Rogue Exiles",
         "kind": "empty-source"
       }
     ]
@@ -679,6 +681,7 @@
     "sources": [
       {
         "type": "Disabled",
+        "id": "Disabled",
         "kind": "empty-source"
       }
     ],
@@ -692,6 +695,7 @@
     "sources": [
       {
         "type": "Disabled",
+        "id": "Disabled",
         "kind": "empty-source"
       }
     ],
@@ -1090,6 +1094,7 @@
     "sources": [
       {
         "type": "The Vaal Omnitect",
+        "id": "The Vaal Omnitect",
         "kind": "empty-source"
       }
     ]
@@ -1214,6 +1219,7 @@
     "sources": [
       {
         "type": "Delirium Currency Rewards",
+        "id": "Delirium Currency Rewards",
         "kind": "empty-source"
       }
     ],
@@ -1279,6 +1285,7 @@
     "sources": [
       {
         "type": "Venarius",
+        "id": "Venarius",
         "kind": "empty-source"
       }
     ]
@@ -1472,6 +1479,7 @@
     "sources": [
       {
         "type": "Disabled",
+        "id": "Disabled",
         "kind": "empty-source"
       }
     ],
@@ -1535,6 +1543,7 @@
     "sources": [
       {
         "type": "Disabled",
+        "id": "Disabled",
         "kind": "empty-source"
       }
     ],
@@ -1548,6 +1557,7 @@
     "sources": [
       {
         "type": "Maven's Invitation: The Feared",
+        "id": "Maven's Invitation: The Feared",
         "kind": "empty-source"
       }
     ],
@@ -1756,6 +1766,7 @@
     "sources": [
       {
         "type": "Vaal Flesh Merchant",
+        "id": "Vaal Flesh Merchant",
         "kind": "empty-source"
       }
     ]
@@ -1817,6 +1828,7 @@
     "sources": [
       {
         "type": "Disabled",
+        "id": "Disabled",
         "kind": "empty-source"
       }
     ],
@@ -2156,6 +2168,7 @@
     "sources": [
       {
         "type": "Global Drop",
+        "id": "Global Drop",
         "kind": "empty-source"
       }
     ],
@@ -2258,6 +2271,7 @@
     "sources": [
       {
         "type": "Global Drop",
+        "id": "Global Drop",
         "kind": "empty-source"
       }
     ],
@@ -2420,6 +2434,7 @@
     "sources": [
       {
         "type": "Venarius",
+        "id": "Venarius",
         "kind": "empty-source"
       }
     ]
@@ -2873,6 +2888,7 @@
     "sources": [
       {
         "type": "Global Drop",
+        "id": "Global Drop",
         "kind": "empty-source"
       }
     ]
@@ -2946,6 +2962,7 @@
     "sources": [
       {
         "type": "Disabled",
+        "id": "Disabled",
         "kind": "empty-source"
       }
     ],
@@ -2987,6 +3004,7 @@
     "sources": [
       {
         "type": "Global Drop",
+        "id": "Global Drop",
         "kind": "empty-source"
       }
     ],
@@ -3532,6 +3550,7 @@
     "sources": [
       {
         "type": "Redeemer influenced maps",
+        "id": "Redeemer influenced maps",
         "kind": "empty-source"
       }
     ],
@@ -4183,6 +4202,7 @@
     "sources": [
       {
         "type": "Disabled",
+        "id": "Disabled",
         "kind": "empty-source"
       }
     ],
@@ -4275,6 +4295,7 @@
     "sources": [
       {
         "type": "Disabled",
+        "id": "Disabled",
         "kind": "empty-source"
       }
     ],
@@ -4646,6 +4667,7 @@
     "sources": [
       {
         "type": "Metamorph",
+        "id": "Metamorph",
         "kind": "empty-source"
       }
     ],
@@ -4661,6 +4683,7 @@
     "sources": [
       {
         "type": "Disabled",
+        "id": "Disabled",
         "kind": "empty-source"
       }
     ],
@@ -4873,6 +4896,7 @@
     "sources": [
       {
         "type": "Disabled",
+        "id": "Disabled",
         "kind": "empty-source"
       }
     ],
@@ -4960,6 +4984,7 @@
     "sources": [
       {
         "type": "Null Portal",
+        "id": "Null Portal",
         "kind": "empty-source"
       }
     ]
@@ -5072,6 +5097,7 @@
     "sources": [
       {
         "type": "All (Scourge) beyond demons",
+        "id": "All (Scourge) beyond demons",
         "kind": "empty-source"
       }
     ],
@@ -5173,6 +5199,7 @@
     "sources": [
       {
         "type": "All Vaal side areas (need specific information)",
+        "id": "All Vaal side areas (need specific information)",
         "kind": "empty-source"
       }
     ],
@@ -5871,6 +5898,7 @@
     "sources": [
       {
         "type": "Disabled",
+        "id": "Disabled",
         "kind": "empty-source"
       }
     ],
@@ -5986,6 +6014,7 @@
     "sources": [
       {
         "type": "Global Drop",
+        "id": "Global Drop",
         "kind": "empty-source"
       }
     ]
@@ -6159,6 +6188,7 @@
     "sources": [
       {
         "type": "Global Drop",
+        "id": "Global Drop",
         "kind": "empty-source"
       }
     ]
@@ -6856,6 +6886,7 @@
     "sources": [
       {
         "type": "Global Drop",
+        "id": "Global Drop",
         "kind": "empty-source"
       }
     ]
@@ -7193,6 +7224,7 @@
     "sources": [
       {
         "type": "Disabled",
+        "id": "Disabled",
         "kind": "empty-source"
       }
     ],
@@ -7873,6 +7905,7 @@
     "sources": [
       {
         "type": "Disabled",
+        "id": "Disabled",
         "kind": "empty-source"
       }
     ],
@@ -8125,6 +8158,7 @@
     "sources": [
       {
         "type": "Disabled",
+        "id": "Disabled",
         "kind": "empty-source"
       }
     ],
@@ -8399,6 +8433,7 @@
     "sources": [
       {
         "type": "All Abyss Monsters",
+        "id": "All Abyss Monsters",
         "kind": "empty-source"
       }
     ],
@@ -9081,6 +9116,7 @@
     "sources": [
       {
         "type": "All Invasion Bosses",
+        "id": "All Invasion Bosses",
         "kind": "empty-source"
       }
     ]
@@ -9093,6 +9129,7 @@
     "sources": [
       {
         "type": "All Vaal Side Area Bosses",
+        "id": "All Vaal Side Area Bosses",
         "kind": "empty-source"
       }
     ],
@@ -9240,6 +9277,7 @@
     "sources": [
       {
         "type": "All (Scourge) beyond demons",
+        "id": "All (Scourge) beyond demons",
         "kind": "empty-source"
       }
     ]
@@ -9463,6 +9501,7 @@
     "sources": [
       {
         "type": "The Temple of Atzoatl",
+        "id": "The Temple of Atzoatl",
         "kind": "empty-source"
       }
     ],
@@ -9702,6 +9741,7 @@
     "sources": [
       {
         "type": "The Temple of Atzoatl",
+        "id": "The Temple of Atzoatl",
         "kind": "empty-source"
       }
     ]
@@ -9739,6 +9779,7 @@
     "sources": [
       {
         "type": "Vaal Side Areas",
+        "id": "Vaal Side Areas",
         "kind": "empty-source"
       }
     ],
@@ -10228,6 +10269,7 @@
     "sources": [
       {
         "type": "Disabled",
+        "id": "Disabled",
         "kind": "empty-source"
       }
     ],
@@ -10337,6 +10379,7 @@
     "sources": [
       {
         "type": "Global Drop",
+        "id": "Global Drop",
         "kind": "empty-source"
       }
     ],
@@ -10446,6 +10489,7 @@
     "sources": [
       {
         "type": "Global Drop",
+        "id": "Global Drop",
         "kind": "empty-source"
       }
     ],
@@ -10745,6 +10789,7 @@
     "sources": [
       {
         "type": "Disabled",
+        "id": "Disabled",
         "kind": "empty-source"
       }
     ],
@@ -10964,6 +11009,7 @@
     "sources": [
       {
         "type": "Trial of Stinging Doubt",
+        "id": "Trial of Stinging Doubt",
         "kind": "empty-source"
       }
     ],
@@ -11640,6 +11686,7 @@
     "sources": [
       {
         "type": "Disabled",
+        "id": "Disabled",
         "kind": "empty-source"
       }
     ],
@@ -12052,6 +12099,7 @@
     "sources": [
       {
         "type": "Disabled",
+        "id": "Disabled",
         "kind": "empty-source"
       }
     ],
@@ -12112,6 +12160,7 @@
       },
       {
         "type": "Uul-Netol, Unburdened Flesh (in Breachstones)",
+        "id": "Uul-Netol, Unburdened Flesh (in Breachstones)",
         "kind": "empty-source"
       }
     ],
