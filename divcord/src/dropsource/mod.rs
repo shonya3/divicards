@@ -118,7 +118,11 @@ impl Source {
     }
 
     pub fn write_typescript_file() -> std::io::Result<()> {
-        let mut _types = serde_json::to_string(&Source::types()).unwrap();
+        let mut buf = Vec::new();
+        let formatter = serde_json::ser::PrettyFormatter::with_indent(b"\t");
+        let mut serializer = serde_json::Serializer::with_formatter(&mut buf, formatter);
+        Source::types().serialize(&mut serializer).unwrap();
+        let _types = String::from_utf8(buf).unwrap();
 
         let s = format!(
             r#"export type SourceWithMember = {{ type: SourceType; id: string; kind: SourceWithMemberKind }};
