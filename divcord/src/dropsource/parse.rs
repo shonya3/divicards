@@ -51,7 +51,7 @@ impl Display for ParseSourceError {
             ParseSourceError::SourceIsExptectedButEmpty { record_id } => {
                 write!(
                     f,
-                    "Source if expected, but there is nothing. Record id: {record_id}"
+                    "Source is expected, but there is nothing. Record id: {record_id}"
                 )
             }
             ParseSourceError::GreynoteDisabledCardShouldBeLegacy { record_id, card } => {
