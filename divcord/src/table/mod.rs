@@ -57,6 +57,17 @@ impl DivcordTable {
             .collect()
     }
 
+    pub fn sourceful_records_iter(
+        &self,
+        poe_data: PoeData,
+    ) -> impl Iterator<Item = Result<SourcefulDivcordTableRecord, Error>> + '_ {
+        self.records().map(move |record| {
+            Ok(SourcefulDivcordTableRecord::from_record(
+                record?, &poe_data,
+            )?)
+        })
+    }
+
     pub fn records(&self) -> impl Iterator<Item = Result<DivcordTableRecord, Error>> + '_ {
         self.sheet
             .values
