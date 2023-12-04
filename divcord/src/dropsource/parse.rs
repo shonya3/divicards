@@ -17,21 +17,23 @@ use super::{monster::UniqueMonster, Source, Vendor};
 #[derive(Debug)]
 pub enum ParseSourceError {
     NoSourceParsingDropsFrom {
+        card: String,
         record_id: usize,
         drops_from: DropsFrom,
     },
     SourceIsExptectedButEmpty {
+        card: String,
         record_id: usize,
     },
 
     GreynoteDisabledCardShouldBeLegacy {
-        record_id: usize,
         card: String,
+        record_id: usize,
     },
 
     LegacyCardShouldBeMarkedAsDisabled {
-        record_id: usize,
         card: String,
+        record_id: usize,
     },
 }
 
@@ -41,31 +43,67 @@ impl Display for ParseSourceError {
             ParseSourceError::NoSourceParsingDropsFrom {
                 record_id,
                 drops_from,
+                card,
             } => {
                 write!(
                     f,
-                    "Parsing drops_from, no source found. Record id: {record_id}. {}",
-                    drops_from.name
+                    "{record_id}.{card}. Parsing drops_from: {}, no source found. {}",
+                    drops_from.name,
+                    record_url(*record_id, DivcordColumn::Source)
                 )
             }
-            ParseSourceError::SourceIsExptectedButEmpty { record_id } => {
+            ParseSourceError::SourceIsExptectedButEmpty { record_id, card } => {
                 write!(
                     f,
-                    "Source is expected, but there is nothing. Record id: {record_id}"
+                    "{record_id}.{card}.  Source is expected, but there is nothing. {}",
+                    record_url(*record_id, DivcordColumn::Source)
                 )
             }
             ParseSourceError::GreynoteDisabledCardShouldBeLegacy { record_id, card } => {
                 write!(
                     f,
-                    "Record {record_id}. Card {card} has greynote Disabled, but this is not a legacy card"
+                    "{record_id}. Card {card} has greynote Disabled, but this is not a legacy card {}", record_url(*record_id, DivcordColumn::GreyNote)
                 )
             }
             ParseSourceError::LegacyCardShouldBeMarkedAsDisabled { record_id, card } => write!(
                 f,
-                "Record {record_id}. Card {card} is legacy, but not marked as disabled"
+                "{record_id}. Card {card} is legacy, but not marked as disabled. {}",
+                record_url(*record_id, DivcordColumn::GreyNote)
             ),
         }
     }
+}
+
+pub enum DivcordColumn {
+    GreyNote,
+    Card,
+    TagHypothesis,
+    Confidence,
+    RemainingWork,
+    Source,
+    WikiDisagreements,
+    SourcesWithTagButNotOnWiki,
+    Notes,
+}
+
+impl DivcordColumn {
+    pub fn letter(&self) -> &str {
+        match self {
+            DivcordColumn::GreyNote => "A",
+            DivcordColumn::Card => "B",
+            DivcordColumn::TagHypothesis => "C",
+            DivcordColumn::Confidence => "D",
+            DivcordColumn::RemainingWork => "E",
+            DivcordColumn::Source => "F",
+            DivcordColumn::WikiDisagreements => "G",
+            DivcordColumn::SourcesWithTagButNotOnWiki => "H",
+            DivcordColumn::Notes => "I",
+        }
+    }
+}
+
+pub fn record_url(id: usize, column: DivcordColumn) -> String {
+    format!("https://docs.google.com/spreadsheets/d/1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU/edit?pli=1#gid=0&range={}{id}", column.letter())
 }
 
 pub fn parse_record_dropsources(
@@ -145,6 +183,7 @@ pub fn parse_record_dropsources(
     if record.greynote.is_some() && sources.is_empty() && record.confidence == Confidence::Done {
         return Err(ParseSourceError::SourceIsExptectedButEmpty {
             record_id: record.id,
+            card: record.card.to_owned(),
         });
     }
 
@@ -160,6 +199,7 @@ pub fn parse_dropses_from(
     for d in &record.drops_from {
         let Ok(mut inner_sources) = parse_one_drops_from(d, &record, poe_data) else {
             return Err(ParseSourceError::NoSourceParsingDropsFrom {
+                card: record.card.to_owned(),
                 record_id: record.id,
                 drops_from: d.to_owned(),
             });
@@ -269,6 +309,7 @@ pub fn parse_one_drops_from(
     }
 
     Err(ParseSourceError::NoSourceParsingDropsFrom {
+        card: record.card.to_owned(),
         record_id: record.id,
         drops_from: d.to_owned(),
     })
