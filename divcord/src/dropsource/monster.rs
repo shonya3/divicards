@@ -21,7 +21,10 @@ pub enum UniqueMonster {
     NullPortal,
     #[serde(rename = "Vaal Flesh Merchant")]
     VaalFleshMerchant,
-    #[serde(rename = "All Incursion Architects in Alva missions/Alva's Memory")]
+    #[serde(
+        rename = "All Incursion Architects in Alva missions or Alva's Memory",
+        alias = "All Incursion Architects in Alva missions/Alva's Memory"
+    )]
     AllIncursionArchitectsInAlvaMission,
     #[serde(rename = "All Abyss Monsters")]
     AllAbyssMonsters,
@@ -77,9 +80,6 @@ pub enum UniqueMonster {
     BetrayalCatarina(BetrayalCatarina),
     #[serde(rename = "Oshabi Boss")]
     OshabiBoss(OshabiBoss),
-    // Mapboss {
-    //     name: String,
-    // },
 }
 
 impl UniqueMonster {
@@ -100,7 +100,7 @@ impl UniqueMonster {
             UniqueMonster::NullPortal => "Null Portal",
             UniqueMonster::VaalFleshMerchant => "Vaal Flesh Merchant",
             UniqueMonster::AllIncursionArchitectsInAlvaMission => {
-                "All Incursion Architects in Alva missions/Alva's Memory"
+                "All Incursion Architects in Alva missions or Alva's Memory"
             }
             UniqueMonster::AllAbyssMonsters => "All Abyss Monsters",
             UniqueMonster::AllScourgeBeyondDemons => "All (Scourge) beyond demons",
@@ -194,7 +194,10 @@ impl std::fmt::Display for UniqueMonster {
             UniqueMonster::NullPortal => write!(f, "Null Portal"),
             UniqueMonster::VaalFleshMerchant => write!(f, "Vaal Flesh Merchant"),
             UniqueMonster::AllIncursionArchitectsInAlvaMission => {
-                write!(f, "All Incursion Architects in Alva missions/Alva's Memory")
+                write!(
+                    f,
+                    "All Incursion Architects in Alva missions or Alva's Memory"
+                )
             }
             UniqueMonster::AllAbyssMonsters => write!(f, "All Abyss Monsters"),
             UniqueMonster::AllScourgeBeyondDemons => write!(f, "All (Scourge) beyond demons"),

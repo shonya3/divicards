@@ -321,8 +321,8 @@
     "confidence": "ok",
     "sources": [
       {
-        "type": "All Incursion Architects in Alva missions/Alva's Memory",
-        "id": "All Incursion Architects in Alva missions/Alva's Memory",
+        "type": "All Incursion Architects in Alva missions or Alva's Memory",
+        "id": "All Incursion Architects in Alva missions or Alva's Memory",
         "kind": "empty-source"
       }
     ],
@@ -11188,7 +11188,7 @@
     "sources": [
       {
         "type": "Chest",
-        "id": "Uber Labyrinth/Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)",
+        "id": "Uber Labyrinth or Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)",
         "kind": "source-with-member"
       }
     ],

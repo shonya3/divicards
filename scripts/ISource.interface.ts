@@ -25,7 +25,7 @@ export const sourceTypes = [
 	"Metamorph",
 	"Null Portal",
 	"Vaal Flesh Merchant",
-	"All Incursion Architects in Alva missions/Alva's Memory",
+	"All Incursion Architects in Alva missions or Alva's Memory",
 	"All Abyss Monsters",
 	"All (Scourge) beyond demons",
 	"All Rogue Exiles",

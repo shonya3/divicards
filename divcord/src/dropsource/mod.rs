@@ -353,7 +353,8 @@ pub enum Chest {
     #[serde(rename = "Vaal Vessel (Vaal Side Areas)")]
     VaalVessel,
     #[strum(
-        serialize = "Uber Labyrinth/Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)"
+        serialize = "Uber Labyrinth/Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)",
+        to_string = "Uber Labyrinth or Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)"
     )]
     #[serde(
         rename = "Uber Labyrinth/Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)"
