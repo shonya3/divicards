@@ -20,8 +20,8 @@ pub struct DivcordTableRecord {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub tag_hypothesis: Option<String>,
     pub confidence: Confidence,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub remaining_work: Option<RemainingWork>,
+    #[serde(default)]
+    pub remaining_work: RemainingWork,
     #[serde(skip_serializing)]
     pub drops_from: Vec<DropsFrom>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -85,8 +85,8 @@ pub struct SourcefulDivcordTableRecord {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub tag_hypothesis: Option<String>,
     pub confidence: Confidence,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub remaining_work: Option<RemainingWork>,
+    #[serde(default)]
+    pub remaining_work: RemainingWork,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub sources: Vec<Source>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -224,32 +224,41 @@ impl Confidence {
 )]
 #[serde(rename_all = "camelCase")]
 pub enum RemainingWork {
+    #[strum(serialize = "n/a")]
+    #[serde(rename = "n/a")]
+    NotApplicable,
     #[strum(serialize = "confirm")]
     #[serde(alias = "confirm")]
     Confirm,
     #[strum(serialize = "unclear hypothesis")]
-    #[serde(alias = "unclear hypothesis")]
+    #[serde(rename = "unclear hypothesis")]
     UnclearHypothesis,
     #[strum(serialize = "no hypothesis")]
-    #[serde(alias = "no hypothesis")]
+    #[serde(rename = "no hypothesis")]
     NoHypothesis,
     #[strum(serialize = "story only")]
-    #[serde(alias = "story only")]
+    #[serde(rename = "story only")]
     StoryOnly,
     #[strum(serialize = "legacy tag")]
-    #[serde(alias = "legacy tag")]
+    #[serde(rename = "legacy tag")]
     LegacyTag,
     #[strum(serialize = "open ended")]
-    #[serde(alias = "open ended")]
+    #[serde(rename = "open ended")]
     OpenEnded,
 }
 
+impl Default for RemainingWork {
+    fn default() -> Self {
+        RemainingWork::NotApplicable
+    }
+}
+
 impl RemainingWork {
-    pub fn parse(val: &Value) -> Result<Option<Self>, Error> {
+    pub fn parse(val: &Value) -> Result<Self, Error> {
         match val.as_str() {
-            Some(s) if s.is_empty() || s == "n/a" => Ok(None),
-            Some(s) => Ok(Some(s.parse()?)),
-            None => Ok(None),
+            Some(s) if s.is_empty() || s == "n/a" => Ok(Self::NotApplicable),
+            Some(s) => Ok(s.parse()?),
+            None => Ok(Self::NotApplicable),
         }
     }
 }
@@ -327,32 +336,38 @@ mod tests {
     #[test]
     fn test_parse_remaining_work() {
         assert_eq!(
-            Some(RemainingWork::Confirm),
+            RemainingWork::Confirm,
             RemainingWork::parse(&json!("confirm")).unwrap()
         );
         assert_eq!(
-            Some(RemainingWork::UnclearHypothesis),
+            RemainingWork::UnclearHypothesis,
             RemainingWork::parse(&json!("unclear hypothesis")).unwrap()
         );
         assert_eq!(
-            Some(RemainingWork::NoHypothesis),
+            RemainingWork::NoHypothesis,
             RemainingWork::parse(&json!("no hypothesis")).unwrap()
         );
         assert_eq!(
-            Some(RemainingWork::StoryOnly),
+            RemainingWork::StoryOnly,
             RemainingWork::parse(&json!("story only")).unwrap()
         );
-        assert_eq!(None, RemainingWork::parse(&json!("n/a")).unwrap());
         assert_eq!(
-            Some(RemainingWork::LegacyTag),
+            RemainingWork::NotApplicable,
+            RemainingWork::parse(&json!("n/a")).unwrap()
+        );
+        assert_eq!(
+            RemainingWork::LegacyTag,
             RemainingWork::parse(&json!("legacy tag")).unwrap()
         );
 
         assert_eq!(
-            Some(RemainingWork::OpenEnded),
+            RemainingWork::OpenEnded,
             RemainingWork::parse(&json!("open ended")).unwrap()
         );
 
-        assert_eq!(None, RemainingWork::parse(&json!("")).unwrap());
+        assert_eq!(
+            RemainingWork::NotApplicable,
+            RemainingWork::parse(&json!("")).unwrap()
+        );
     }
 }

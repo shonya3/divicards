@@ -13,7 +13,7 @@
     "greynote": "story",
     "card": "Cartographer's Delight",
     "confidence": "none",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "wikiDisagreements": "The Harbour Bridge, The Foothills",
     "notes": "Story Only? Former drop location was The Docks (Merciless).\nProbably has Drop Level Cap\n2022: Cartographer's Delight, significantly nerfed (was: ~Lantador's Lost Love ; now: ~The Witch)"
   },
@@ -21,7 +21,7 @@
     "id": 72,
     "card": "Draped in Dreams",
     "confidence": "none",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "notes": "3.20: Natural weight similar to The Dragon's Heart; likely Boss-specific though (since it hasn't been reported in any Area yet), and Boss-specific drops ignore natural weights"
   },
   {
@@ -29,20 +29,20 @@
     "card": "Duality",
     "tagHypothesis": "vaal_architect_temple",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "notes": "Can this occur from Architects outside of the Temple of Atzoatl, e.g. from Alva Memories or Incursions?\n\nAkil's Prophecy is similar, and can in fact appear outside of the Temple of Atzoatl. See Akil's Prophecy notes above."
   },
   {
     "id": 113,
     "card": "Judging Voices",
     "confidence": "none",
-    "remainingWork": "noHypothesis"
+    "remainingWork": "no hypothesis"
   },
   {
     "id": 156,
     "card": "Rebirth and Renewal",
     "confidence": "none",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "notes": "Divcord 3.19: Iron reports a drop from General Marceus Lioneye in a Map Legion Monolith, but the drop occurred while Lioneye was still in Stasis.\n\nDatamining shows that Legion Generals (but not other Legion Monsters) do in fact have a special item drop eligibility override while in Stasis.\n\nIf this is the deterministic drop source of Rebirth and Renewal, either the hardcoded droprate is extremely low, or another condition needs to be met.\n\nSo far Iron's case is the sole report of Rebirth and Renewal despite lots of players running Legion. A drop from Legion is in-theme with the Card; when a Legion Monster leaves stasis, it's called \"LegionRevive\"."
   },
   {
@@ -50,6 +50,7 @@
     "card": "The Bitter Blossom",
     "tagHypothesis": "oshabi_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "notes": "Manually added to Oshabi in 3.16; however previous location was not found at the time. See below\nProhibited Library: CardPender 3.20 dropped 1 Bitter Blossom from Oshabi over n=200 kills."
   },
   {
@@ -65,7 +66,7 @@
     "id": 282,
     "card": "The Greatest Intentions",
     "confidence": "none",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "notes": "Shaper?\n\nDivcord 3.22: Kenny obtains The Greatest Intentions from The Feared.\nUnknown if this is specific to The Feared, or from one of the Bosses."
   },
   {
@@ -73,7 +74,7 @@
     "card": "The Lich",
     "tagHypothesis": "necromancer_boss",
     "confidence": "none",
-    "remainingWork": "legacyTag",
+    "remainingWork": "legacy tag",
     "sourcesWithTagButNotOnWiki": "Rose; Thorn; Infector of Dreams; The Bone Sculptor",
     "notes": "necromancer_boss ?\nIf so, more Bosses need to be verified\n\nfal posted in Divcord a full stack Kirac Card Mission drop from non-Boss in Necropolis\nDivcord: 3.21, Elinvynia reports: \"I ran 105 Acton Nightmares (no MF boss rushing, mostly very low tier) trying to verify The Lich - I didn't get it\"\nHistorically dropped from Merciless Sawbones. All necromancer-type bosses do not appear to drop this card anymore - different tag?"
   },
@@ -82,13 +83,14 @@
     "card": "The Lich",
     "tagHypothesis": "abyss_lich_boss?",
     "confidence": "none",
+    "remainingWork": "n/a",
     "notes": "necromancer_boss no longer appears to be the associated tag."
   },
   {
     "id": 337,
     "card": "The Offspring",
     "confidence": "low",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "sourcesWithTagButNotOnWiki": "Titan of the Grove"
   },
   {
@@ -96,6 +98,7 @@
     "card": "The Realm",
     "tagHypothesis": "Breach monster (no tag)",
     "confidence": "done",
+    "remainingWork": "n/a",
     "notes": "Breach Monsters, but which? All?\nbreach_commander ?\n\nAlso has been observed as Kirac Card Mission drops in: {Park, Marshes, Bazaar}. See Divcord. Jasmine: The Realm is likely added to the pool of possible cards in Kirac Missions. The card does not appear to drop in a single card - only in stacks. Kirac Missions can also pool boss cards, and is likely governed by unusual rules.\n\nAppears to drop from any Breach Monster\n\nDvicord: 3.21, Elinvynia counted Active Skill Gems in Breachstones and proved that The Realm is a deterministic drop (not a natural drop)."
   },
   {
@@ -110,7 +113,7 @@
     "id": 421,
     "card": "The Void",
     "confidence": "none",
-    "remainingWork": "legacyTag",
+    "remainingWork": "legacy tag",
     "notes": "Dropped from Park in a Kirac Mission as the stack of cards. Park has no area-specific cards. Perhaps another weird Kirac Mission mechanic?\nRequires reconfirmation of Park Kirac Map or other tag-less maps\nAfter more testing with Kirac missions - conclusion: dropping The Void from any source completes the mission; may not be Park specific."
   },
   {
@@ -118,7 +121,7 @@
     "card": "The Wretched",
     "tagHypothesis": "mud_geyser_area",
     "confidence": "done",
-    "remainingWork": "legacyTag",
+    "remainingWork": "legacy tag",
     "wikiDisagreements": "Mud Geyser",
     "notes": "In the past, The Wretched was eligible in Mud Geyser. The claim on the wiki is stale, however, and Mud Geyser has not been reverified in a long time. It's likely it is no longer an eligible Area.\n\nDivcord 3.20: testing Bog which is on-Atlas and shares Tags with Mud Geyser (fetid_area, toxic_pool_area). No The Wretched in Bog, confidence >99.9%, so those Tags can't be it.\n\nThe only options are:\n1) The Wretched no longer drops in Mud Geyser either; or\n2) Mud Geyser's special exclusive Tag mud_geyser_area is another eligibility-grantor."
   },
@@ -127,33 +130,35 @@
     "card": "Time-Lost Relic",
     "tagHypothesis": "expedition_common_remnant_logbook",
     "confidence": "done",
+    "remainingWork": "n/a",
     "notes": "Also found in all Expedition Areas; any Tag or Area relationship for these...?"
   },
   {
     "id": 453,
     "card": "Triskaidekaphobia",
     "confidence": "low",
+    "remainingWork": "n/a",
     "notes": "Uber Atziri was original report\nUnverified from Incursion Atziri\nT13 Maps? - disproved in T13 Volcano; might be drop capped to 80? unclear what Bex is referring to in her tweet"
   },
   {
     "id": 464,
     "card": "Winter's Embrace",
     "confidence": "none",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "notes": "snow_area? no leads"
   },
   {
     "id": 471,
     "card": "Endless Night",
     "confidence": "none",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "notes": "Spotty sightings indicate that this is might be \"Drops from a Rogue Exile with `has_bow` and `rogue_exile`\"\n\nCandidates are:\nAntalie Napora\r\nAilentia Rac\r\nAinsley Varrich\r\nOrra Greengate\r\nOyra Ona\r\n\r\nShade of a Ranger (Whakawairua Tuahu)\r\n\r\nIneligible:\r\n- Rudiarius Felix (The Grand Arena; but ineligible due to Drop Level Requirement)\r\n- Antonio Bravadi (Descent: Champions)\r\n- Silva Fearsting (Descent: Champions)\n\n\nNot a natural drop in Vaal Temple per Zimzams's testing (n>1000, 3.21 & 3.21)"
   },
   {
     "id": 473,
     "card": "Lethean Temptation",
     "confidence": "none",
-    "remainingWork": "noHypothesis"
+    "remainingWork": "no hypothesis"
   },
   {
     "id": 475,
@@ -167,6 +172,7 @@
     "id": 484,
     "card": "Ever-Changing",
     "confidence": "done",
+    "remainingWork": "n/a",
     "notes": "Appears to drop in any map generated by Kirac Mission, several confirms."
   },
   {

@@ -4,6 +4,7 @@
     "card": "A Dab of Ink",
     "tagHypothesis": "library_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -27,6 +28,7 @@
     "greynote": "monsterSpecific",
     "card": "A Familiar Call",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Shaper Guardian Boss",
@@ -41,6 +43,7 @@
     "card": "A Fate Worse Than Death",
     "tagHypothesis": "elderslayer",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -74,6 +77,7 @@
     "card": "A Modest Request",
     "tagHypothesis": "dominus_monster_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -93,6 +97,7 @@
     "card": "A Modest Request",
     "tagHypothesis": "malachai_boss_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -113,6 +118,7 @@
     "card": "A Mother's Parting Gift",
     "tagHypothesis": "garden_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Act",
@@ -132,6 +138,7 @@
     "card": "A Note in the Wind",
     "tagHypothesis": "desert_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -167,6 +174,7 @@
     "card": "A Note in the Wind",
     "tagHypothesis": "desert_map_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -198,6 +206,7 @@
     "card": "A Sea of Blue",
     "tagHypothesis": "crystalline_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -227,6 +236,7 @@
     "card": "A Stone Perfected",
     "tagHypothesis": "golem_boss_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -276,6 +286,7 @@
     "greynote": "chestObject",
     "card": "Abandoned Wealth",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -290,6 +301,7 @@
     "card": "Acclimatisation",
     "tagHypothesis": "desert_map_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -319,6 +331,7 @@
     "card": "Akil's Prophecy",
     "tagHypothesis": "vaal_architect_incursion",
     "confidence": "ok",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "All Incursion Architects in Alva missions or Alva's Memory",
@@ -342,6 +355,7 @@
     "card": "Alluring Bounty",
     "tagHypothesis": "atziri_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Atziri Area",
@@ -360,6 +374,7 @@
     "greynote": "chestObject",
     "card": "Alone in the Darkness",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Chest",
@@ -374,6 +389,7 @@
     "greynote": "monsterSpecific",
     "card": "Altered Perception",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Expedition Logbook Boss",
@@ -388,6 +404,7 @@
     "card": "Ambitious Obsession",
     "tagHypothesis": "god_boss_map_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -457,6 +474,7 @@
     "card": "Anarchy's Price",
     "tagHypothesis": "rogue_exile",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "All Rogue Exiles",
@@ -470,7 +488,7 @@
     "card": "Arrogance of the Vaal",
     "tagHypothesis": "ruined_vaal_city_area",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -491,6 +509,7 @@
     "card": "Assassin's Favour",
     "tagHypothesis": "marketplace_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -531,6 +550,7 @@
     "card": "Atziri's Arsenal",
     "tagHypothesis": "vaults_of_atziri",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -558,7 +578,7 @@
     "id": 26,
     "card": "Azyran's Reward",
     "confidence": "none",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -584,6 +604,7 @@
     "card": "Baited Expectations",
     "tagHypothesis": "desert_map_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -614,6 +635,7 @@
     "card": "Beauty Through Death",
     "tagHypothesis": "\"DemonBoss#Map\" boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -638,6 +660,7 @@
     "card": "Bijoux",
     "tagHypothesis": "mine_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -678,6 +701,7 @@
     "greynote": "disabled",
     "card": "Birth of the Three",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Disabled",
@@ -692,6 +716,7 @@
     "greynote": "disabled",
     "card": "Blessing of God",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Disabled",
@@ -706,6 +731,7 @@
     "card": "Blind Venture",
     "tagHypothesis": "relic_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -734,6 +760,7 @@
     "card": "Boon of Justice",
     "tagHypothesis": "labyrinth_tileset_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -763,6 +790,7 @@
     "greynote": "areaSpecific",
     "card": "Boon of the First Ones",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -777,6 +805,7 @@
     "card": "Boundless Realms",
     "tagHypothesis": "solaris_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -817,6 +846,7 @@
     "card": "Bowyer's Dream",
     "tagHypothesis": "archer_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -846,7 +876,7 @@
     "greynote": "monsterSpecific",
     "card": "Broken Promises",
     "confidence": "ok",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map Boss",
@@ -866,6 +896,7 @@
     "card": "Brother's Stash",
     "tagHypothesis": "graveyard_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -890,6 +921,7 @@
     "card": "Brotherhood in Exile",
     "tagHypothesis": "labyrinth_tileset_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -919,6 +951,7 @@
     "card": "Brush, Paint and Palette",
     "tagHypothesis": "doedre_monster_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -949,6 +982,7 @@
     "card": "Buried Treasure",
     "tagHypothesis": "mine_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -988,6 +1022,7 @@
     "card": "Burning Blood",
     "tagHypothesis": "fire_prison_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -1006,6 +1041,7 @@
     "card": "Call to the First Ones",
     "tagHypothesis": "dark_forest_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -1035,6 +1071,7 @@
     "card": "Call to the First Ones",
     "tagHypothesis": "thicket_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -1054,6 +1091,7 @@
     "card": "Cameria's Cut",
     "tagHypothesis": "betrayal_cameria",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Syndicate Member",
@@ -1067,7 +1105,7 @@
     "greynote": "story",
     "card": "Cartographer's Delight",
     "confidence": "none",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "wikiDisagreements": "The Harbour Bridge, The Foothills",
     "notes": "Story Only? Former drop location was The Docks (Merciless).\nProbably has Drop Level Cap\n2022: Cartographer's Delight, significantly nerfed (was: ~Lantador's Lost Love ; now: ~The Witch)"
   },
@@ -1077,6 +1115,7 @@
     "card": "Chaotic Disposition",
     "tagHypothesis": "Poorjoy's Asylum (no tags)",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -1091,6 +1130,7 @@
     "card": "Chasing Risk",
     "tagHypothesis": "incursion_temple_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "The Vaal Omnitect",
@@ -1104,6 +1144,7 @@
     "card": "Costly Curio",
     "tagHypothesis": "relic_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -1123,6 +1164,7 @@
     "card": "Council of Cats",
     "tagHypothesis": "hunter_conqueror_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -1136,6 +1178,7 @@
     "card": "Coveted Possession",
     "tagHypothesis": "catacomb_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -1165,6 +1208,7 @@
     "card": "Cursed Words",
     "tagHypothesis": "graveyard_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -1189,6 +1233,7 @@
     "card": "Dark Dreams",
     "tagHypothesis": "necromancer_exile",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Rogue Exile",
@@ -1202,6 +1247,7 @@
     "greynote": "chestObject",
     "card": "Dark Temptation",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Chest",
@@ -1216,6 +1262,7 @@
     "greynote": "delirium",
     "card": "Darker Half",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Delirium Currency Rewards",
@@ -1230,6 +1277,7 @@
     "greynote": "areaSpecific",
     "card": "Deadly Joy",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -1244,6 +1292,7 @@
     "card": "Death",
     "tagHypothesis": "fetid_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -1269,6 +1318,7 @@
     "card": "Deathly Designs",
     "tagHypothesis": "trap_exile",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Rogue Exile",
@@ -1282,6 +1332,7 @@
     "card": "Dementophobia",
     "tagHypothesis": "cortex_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Venarius",
@@ -1295,6 +1346,7 @@
     "card": "Dementophobia",
     "tagHypothesis": "crusader_conqueror_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -1308,6 +1360,7 @@
     "card": "Dementophobia",
     "tagHypothesis": "hunter_conqueror_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -1321,6 +1374,7 @@
     "card": "Dementophobia",
     "tagHypothesis": "redeemer_conqueror_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -1334,6 +1388,7 @@
     "card": "Dementophobia",
     "tagHypothesis": "warlord_conqueror_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -1347,7 +1402,7 @@
     "card": "Demigod's Wager",
     "tagHypothesis": "innocence_map",
     "confidence": "ok",
-    "remainingWork": "storyOnly",
+    "remainingWork": "story only",
     "sources": [
       {
         "type": "Map Boss",
@@ -1363,6 +1418,7 @@
     "card": "Desecrated Virtue",
     "tagHypothesis": "delve_protovaal_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Delve Boss",
@@ -1377,7 +1433,7 @@
     "card": "Desperate Crusade",
     "tagHypothesis": "innocence_map OR ?",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -1398,6 +1454,7 @@
     "card": "Destined to Crumble",
     "tagHypothesis": "library_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -1421,6 +1478,7 @@
     "card": "Dialla's Subjugation",
     "tagHypothesis": "solaris_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -1461,6 +1519,7 @@
     "greynote": "chestObject",
     "card": "Disdain",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Chest",
@@ -1476,6 +1535,7 @@
     "card": "Divine Justice",
     "tagHypothesis": "Armourer's Strongbox",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Disabled",
@@ -1491,6 +1551,7 @@
     "card": "Doedre's Madness",
     "tagHypothesis": "doedre_monster_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -1523,7 +1584,7 @@
     "id": 72,
     "card": "Draped in Dreams",
     "confidence": "none",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "notes": "3.20: Natural weight similar to The Dragon's Heart; likely Boss-specific though (since it hasn't been reported in any Area yet), and Boss-specific drops ignore natural weights"
   },
   {
@@ -1531,7 +1592,7 @@
     "card": "Duality",
     "tagHypothesis": "vaal_architect_temple",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "notes": "Can this occur from Architects outside of the Temple of Atzoatl, e.g. from Alva Memories or Incursions?\n\nAkil's Prophecy is similar, and can in fact appear outside of the Temple of Atzoatl. See Akil's Prophecy notes above."
   },
   {
@@ -1540,6 +1601,7 @@
     "card": "Dying Anguish",
     "tagHypothesis": "urban_sarn_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Disabled",
@@ -1554,6 +1616,7 @@
     "greynote": "areaSpecific",
     "card": "Dying Light",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Maven's Invitation: The Feared",
@@ -1568,6 +1631,7 @@
     "card": "Earth Drinker",
     "tagHypothesis": "desert_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -1617,7 +1681,7 @@
     "card": "Echoes of Love",
     "tagHypothesis": "chamber_of_sins_area",
     "confidence": "ok",
-    "remainingWork": "storyOnly",
+    "remainingWork": "story only",
     "sources": [
       {
         "type": "Map",
@@ -1638,7 +1702,7 @@
     "card": "Echoes of Love",
     "tagHypothesis": "maligaro_area",
     "confidence": "ok",
-    "remainingWork": "storyOnly",
+    "remainingWork": "story only",
     "sources": [
       {
         "type": "Map",
@@ -1664,6 +1728,7 @@
     "card": "Emperor of Purity",
     "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -1694,6 +1759,7 @@
     "card": "Emperor's Luck",
     "tagHypothesis": "garden_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -1749,6 +1815,7 @@
     "greynote": "chestObject",
     "card": "Eternal Bonds",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Chest",
@@ -1763,6 +1830,7 @@
     "card": "Fateful Meeting",
     "tagHypothesis": "vaal_flesh_merchant",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Vaal Flesh Merchant",
@@ -1776,6 +1844,7 @@
     "card": "Forbidden Power",
     "tagHypothesis": "solaris_boss_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -1806,6 +1875,7 @@
     "card": "Forbidden Power",
     "tagHypothesis": "solaris_boss_story",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Act Boss",
@@ -1825,6 +1895,7 @@
     "card": "Friendship",
     "tagHypothesis": "argus_labyrinth",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Disabled",
@@ -1839,6 +1910,7 @@
     "card": "From Bone to Ashes",
     "tagHypothesis": "karui_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -1904,6 +1976,7 @@
     "card": "Gemcutter's Promise",
     "tagHypothesis": "lunaris_outer_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -1933,6 +2006,7 @@
     "card": "Gift of Asenath",
     "tagHypothesis": "mine_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -1972,6 +2046,7 @@
     "card": "Gift of the Gemling Queen",
     "tagHypothesis": "mine_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -2011,6 +2086,7 @@
     "card": "Glimmer of Hope",
     "tagHypothesis": "flooded_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -2039,6 +2115,7 @@
     "card": "Grave Knowledge",
     "tagHypothesis": "crypt_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -2069,6 +2146,7 @@
     "card": "Grave Knowledge",
     "tagHypothesis": "catacomb_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -2098,6 +2176,7 @@
     "card": "Grave Knowledge",
     "tagHypothesis": "necropolis_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -2112,6 +2191,7 @@
     "greynote": "vendor",
     "card": "Guardian's Challenge",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Vendor",
@@ -2126,6 +2206,7 @@
     "card": "Harmony of Souls",
     "tagHypothesis": "trio_soul_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -2150,6 +2231,7 @@
     "card": "Haunting Shadows",
     "tagHypothesis": "Twilight Temple (no tag)",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -2165,6 +2247,7 @@
     "greynote": "globalDrop",
     "card": "Her Mask",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Global Drop",
@@ -2179,7 +2262,7 @@
     "card": "Heterochromia",
     "tagHypothesis": "fire_affinity + cold_affinity bosses?",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -2199,6 +2282,7 @@
     "card": "Home",
     "tagHypothesis": "city_home_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -2268,6 +2352,7 @@
     "greynote": "globalDrop",
     "card": "Hope",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Global Drop",
@@ -2282,6 +2367,7 @@
     "card": "House of Mirrors",
     "tagHypothesis": "atziri_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Atziri Area",
@@ -2296,6 +2382,7 @@
     "greynote": "strongbox",
     "card": "Hubris",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Strongbox",
@@ -2309,6 +2396,7 @@
     "card": "Humility",
     "tagHypothesis": "aqueduct_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -2342,6 +2430,7 @@
     "card": "Hunter's Resolve",
     "tagHypothesis": "river_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -2392,6 +2481,7 @@
     "card": "Immortal Resolve",
     "tagHypothesis": "unholy_trio_combined_boss_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -2407,6 +2497,7 @@
     "card": "Immortal Resolve",
     "tagHypothesis": "unholy_trio_boss_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -2431,6 +2522,7 @@
     "card": "Imperfect Memories",
     "tagHypothesis": "cortex_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Venarius",
@@ -2444,6 +2536,7 @@
     "card": "Imperial Legacy",
     "tagHypothesis": "desert_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -2478,6 +2571,7 @@
     "card": "Jack in the Box",
     "tagHypothesis": "urban_sarn_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -2582,13 +2676,14 @@
     "id": 113,
     "card": "Judging Voices",
     "confidence": "none",
-    "remainingWork": "noHypothesis"
+    "remainingWork": "no hypothesis"
   },
   {
     "id": 114,
     "card": "Justified Ambition",
     "tagHypothesis": "crusader_conqueror_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -2603,6 +2698,7 @@
     "card": "Justified Ambition",
     "tagHypothesis": "redeemer_conqueror_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -2617,6 +2713,7 @@
     "card": "Justified Ambition",
     "tagHypothesis": "hunter_conqueror_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -2631,6 +2728,7 @@
     "card": "Justified Ambition",
     "tagHypothesis": "warlord_conqueror_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -2645,6 +2743,7 @@
     "card": "Keeper's Corruption",
     "tagHypothesis": "chaos_breachlord, area drop",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Area-Specific",
@@ -2659,6 +2758,7 @@
     "card": "Lachrymal Necrosis",
     "tagHypothesis": "AvariusCasticus boss areas",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -2688,6 +2788,7 @@
     "card": "Lantador's Lost Love",
     "tagHypothesis": "ocean_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -2822,6 +2923,7 @@
     "greynote": "areaSpecific",
     "card": "Last Hope",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -2836,6 +2938,7 @@
     "card": "Left to Fate",
     "tagHypothesis": "river_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -2855,7 +2958,7 @@
     "card": "Light and Truth",
     "tagHypothesis": "sceptre_of_god_area",
     "confidence": "ok",
-    "remainingWork": "storyOnly",
+    "remainingWork": "story only",
     "sources": [
       {
         "type": "Map",
@@ -2885,6 +2988,7 @@
     "greynote": "globalDrop",
     "card": "Lingering Remnants",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Global Drop",
@@ -2898,6 +3002,7 @@
     "greynote": "vendor",
     "card": "Lost Worlds",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Vendor",
@@ -2912,6 +3017,7 @@
     "card": "Love Through Ice",
     "tagHypothesis": "redeemer_conqueror_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -2925,6 +3031,7 @@
     "card": "Loyalty",
     "tagHypothesis": "den_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -2959,6 +3066,7 @@
     "greynote": "disabled",
     "card": "Luck of the Vaal",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Disabled",
@@ -2973,6 +3081,7 @@
     "card": "Lucky Connections",
     "tagHypothesis": "dock_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -3001,6 +3110,7 @@
     "greynote": "globalDrop",
     "card": "Lucky Deck",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Global Drop",
@@ -3015,6 +3125,7 @@
     "card": "Luminous Trove",
     "tagHypothesis": "delve_protovaal_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Delve Boss",
@@ -3028,6 +3139,7 @@
     "card": "Lysah's Respite",
     "tagHypothesis": "merveil_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -3079,6 +3191,7 @@
     "card": "Mawr Blaidd",
     "tagHypothesis": "dark_forest_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -3102,6 +3215,7 @@
     "card": "Merciless Armament",
     "tagHypothesis": "military_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -3131,6 +3245,7 @@
     "card": "Might is Right",
     "tagHypothesis": "mausoleum_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -3174,6 +3289,7 @@
     "card": "Misery in Darkness",
     "tagHypothesis": "delve_lich_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Delve Boss",
@@ -3187,6 +3303,7 @@
     "card": "Mitts",
     "tagHypothesis": "snow_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -3236,6 +3353,7 @@
     "greynote": "areaSpecific",
     "card": "Monochrome",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -3345,6 +3463,7 @@
     "card": "More is Never Enough",
     "tagHypothesis": "god_boss_map_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -3415,7 +3534,7 @@
     "card": "More is Never Enough",
     "tagHypothesis": "god_boss_map_area OR ?",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -3430,6 +3549,7 @@
     "card": "No Traces",
     "tagHypothesis": "mausoleum_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -3453,6 +3573,7 @@
     "card": "Nook's Crown",
     "tagHypothesis": "betrayal_catarina",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Betrayal Catarina",
@@ -3466,7 +3587,7 @@
     "card": "Parasitic Passengers",
     "tagHypothesis": "internal name contains \"Parasite\" OR arachnid_tomb_map_area",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -3491,6 +3612,7 @@
     "card": "Peaceful Moments",
     "tagHypothesis": "garden_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -3520,6 +3642,7 @@
     "card": "Perfection",
     "tagHypothesis": "shaper_guardian_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Shaper Guardian Boss",
@@ -3547,6 +3670,7 @@
     "id": 147,
     "card": "Prejudice",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Redeemer influenced maps",
@@ -3561,6 +3685,7 @@
     "card": "Pride Before the Fall",
     "tagHypothesis": "kaom_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -3581,6 +3706,7 @@
     "card": "Pride of the First Ones",
     "tagHypothesis": "den_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -3610,6 +3736,7 @@
     "card": "Prometheus' Armoury",
     "tagHypothesis": "betrayal_haku",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Syndicate Member",
@@ -3623,6 +3750,7 @@
     "card": "Prosperity",
     "tagHypothesis": "ocean_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -3727,6 +3855,7 @@
     "card": "Rain of Chaos",
     "tagHypothesis": "crossroad_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -3755,6 +3884,7 @@
     "card": "Rain Tempter",
     "tagHypothesis": "garden_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -3789,7 +3919,7 @@
     "card": "Rats",
     "tagHypothesis": "warehouse_area",
     "confidence": "done",
-    "remainingWork": "storyOnly",
+    "remainingWork": "story only",
     "sources": [
       {
         "type": "Map",
@@ -3822,7 +3952,7 @@
     "card": "Rebirth",
     "tagHypothesis": "NOT otherworldly_story_area",
     "confidence": "ok",
-    "remainingWork": "storyOnly",
+    "remainingWork": "story only",
     "sources": [
       {
         "type": "Act",
@@ -3948,7 +4078,7 @@
     "id": 156,
     "card": "Rebirth and Renewal",
     "confidence": "none",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "notes": "Divcord 3.19: Iron reports a drop from General Marceus Lioneye in a Map Legion Monolith, but the drop occurred while Lioneye was still in Stasis.\n\nDatamining shows that Legion Generals (but not other Legion Monsters) do in fact have a special item drop eligibility override while in Stasis.\n\nIf this is the deterministic drop source of Rebirth and Renewal, either the hardcoded droprate is extremely low, or another condition needs to be met.\n\nSo far Iron's case is the sole report of Rebirth and Renewal despite lots of players running Legion. A drop from Legion is in-theme with the Card; when a Legion Monster leaves stasis, it's called \"LegionRevive\"."
   },
   {
@@ -3956,6 +4086,7 @@
     "card": "Reckless Ambition",
     "tagHypothesis": "elder_lightning_guardian",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Elder Guardian Boss",
@@ -3969,6 +4100,7 @@
     "greynote": "chestObject",
     "card": "Remembrance",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Chest",
@@ -3983,6 +4115,7 @@
     "card": "Sambodhi's Vow",
     "tagHypothesis": "betrayal_syndicate_member",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Syndicate Member",
@@ -4076,7 +4209,7 @@
     "card": "Sambodhi's Wisdom",
     "tagHypothesis": "Hillock boss & desert_area & area drop?",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -4092,6 +4225,7 @@
     "card": "Scholar of the Seas",
     "tagHypothesis": "ship_graveyard_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -4142,6 +4276,7 @@
     "card": "Shard of Fate",
     "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -4171,6 +4306,7 @@
     "card": "Silence and Frost",
     "tagHypothesis": "bestiary_spirit_boss & feline_beast",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Beast Boss",
@@ -4185,6 +4321,7 @@
     "greynote": "chestObject",
     "card": "Society's Remorse",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Chest",
@@ -4199,6 +4336,7 @@
     "greynote": "disabled",
     "card": "Squandered Prosperity",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Disabled",
@@ -4213,6 +4351,7 @@
     "card": "Struck by Lightning",
     "tagHypothesis": "rain_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -4278,6 +4417,7 @@
     "card": "Succor of the Sinless",
     "tagHypothesis": "crusader_conqueror_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -4291,7 +4431,7 @@
     "greynote": "disabled",
     "card": "Terrible Secret of Space",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Disabled",
@@ -4306,6 +4446,7 @@
     "card": "The Academic",
     "tagHypothesis": "library_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -4330,6 +4471,7 @@
     "card": "The Admirer",
     "tagHypothesis": "vaal_pyramid_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -4365,6 +4507,7 @@
     "card": "The Admirer",
     "tagHypothesis": "vaal_ruin_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -4379,6 +4522,7 @@
     "greynote": "areaSpecific",
     "card": "The Adventuring Spirit",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -4393,7 +4537,7 @@
     "card": "The Aesthete",
     "tagHypothesis": "shavronne_monster_story OR unholy_trio_combined_boss_story",
     "confidence": "ok",
-    "remainingWork": "storyOnly",
+    "remainingWork": "story only",
     "sources": [
       {
         "type": "Act Boss",
@@ -4414,6 +4558,7 @@
     "card": "The Aesthete",
     "tagHypothesis": "shavronne_monster_map OR unholy_trio_combined_boss_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -4448,6 +4593,7 @@
     "card": "The Apothecary",
     "tagHypothesis": "blood_mage_boss_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -4478,6 +4624,7 @@
     "card": "The Archmage's Right Hand",
     "tagHypothesis": "breach_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Area-Specific",
@@ -4512,6 +4659,7 @@
     "card": "The Arena Champion",
     "tagHypothesis": "pitfight_area AND boss only",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -4551,6 +4699,7 @@
     "card": "The Army of Blood",
     "tagHypothesis": "lunaris_blood_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -4580,6 +4729,7 @@
     "card": "The Artist",
     "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -4598,6 +4748,7 @@
     "card": "The Aspirant",
     "tagHypothesis": "oshabi_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Oshabi Boss",
@@ -4611,6 +4762,7 @@
     "card": "The Astromancer",
     "tagHypothesis": "heist_science_miniboss_monster",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Heist Boss",
@@ -4630,6 +4782,7 @@
     "card": "The Avenger",
     "tagHypothesis": "sea_witch_boss_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -4680,6 +4833,7 @@
     "card": "The Bargain",
     "tagHypothesis": "betrayal_breach",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Disabled",
@@ -4694,6 +4848,7 @@
     "card": "The Battle Born",
     "tagHypothesis": "kaom_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -4723,6 +4878,7 @@
     "card": "The Bear Woman",
     "tagHypothesis": "innocence_map OR bear_boss_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -4748,7 +4904,7 @@
     "card": "The Beast",
     "tagHypothesis": "belly_area",
     "confidence": "ok",
-    "remainingWork": "storyOnly",
+    "remainingWork": "story only",
     "sources": [
       {
         "type": "Act",
@@ -4774,6 +4930,7 @@
     "card": "The Betrayal",
     "tagHypothesis": "bandit_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -4813,6 +4970,7 @@
     "card": "The Bitter Blossom",
     "tagHypothesis": "oshabi_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "notes": "Manually added to Oshabi in 3.16; however previous location was not found at the time. See below\nProhibited Library: CardPender 3.20 dropped 1 Bitter Blossom from Oshabi over n=200 kills."
   },
   {
@@ -4820,6 +4978,7 @@
     "card": "The Bitter Blossom",
     "tagHypothesis": "nature_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Oshabi Boss",
@@ -4849,6 +5008,7 @@
     "card": "The Blazing Fire",
     "tagHypothesis": "kitava_cultist_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -4893,6 +5053,7 @@
     "greynote": "disabled",
     "card": "The Blessing of Moosh",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Disabled",
@@ -4907,6 +5068,7 @@
     "greynote": "strongbox",
     "card": "The Body",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Strongbox",
@@ -4920,6 +5082,7 @@
     "card": "The Bones",
     "tagHypothesis": "necromancer_exile",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Rogue Exile",
@@ -4933,6 +5096,7 @@
     "card": "The Brawny Battle Mage",
     "tagHypothesis": "alira_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -4952,6 +5116,7 @@
     "card": "The Brawny Battle Mage",
     "tagHypothesis": "doedre_map_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -4981,6 +5146,7 @@
     "card": "The Breach",
     "tagHypothesis": "elder_portal_monster",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Null Portal",
@@ -4994,6 +5160,7 @@
     "card": "The Brittle Emperor",
     "tagHypothesis": "voll_monster_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -5008,6 +5175,7 @@
     "card": "The Brittle Emperor",
     "tagHypothesis": "voll_monster_story",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Act Boss",
@@ -5021,6 +5189,7 @@
     "card": "The Cache",
     "tagHypothesis": "gold_pile_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -5055,6 +5224,7 @@
     "card": "The Cacophony",
     "tagHypothesis": "screeching_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -5094,6 +5264,7 @@
     "card": "The Calling",
     "tagHypothesis": "beyond_demon",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "All (Scourge) beyond demons",
@@ -5108,6 +5279,7 @@
     "card": "The Card Sharp",
     "tagHypothesis": "incursion_architect_card_sharp",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Architect",
@@ -5133,6 +5305,7 @@
     "card": "The Carrion Crow",
     "tagHypothesis": "military_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Act",
@@ -5182,6 +5355,7 @@
     "greynote": "strongbox",
     "card": "The Cartographer",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Strongbox",
@@ -5195,7 +5369,7 @@
     "id": 207,
     "card": "The Cataclysm",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "All Vaal side areas (need specific information)",
@@ -5210,6 +5384,7 @@
     "card": "The Catalyst",
     "tagHypothesis": "vaal_pyramid_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -5259,6 +5434,7 @@
     "card": "The Catalyst",
     "tagHypothesis": "vaal_ruin_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -5340,6 +5516,7 @@
     "card": "The Celestial Justicar",
     "tagHypothesis": "crypt_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -5370,6 +5547,7 @@
     "greynote": "strongbox",
     "card": "The Celestial Stone",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Strongbox",
@@ -5384,6 +5562,7 @@
     "card": "The Chains that Bind",
     "tagHypothesis": "prison_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -5433,6 +5612,7 @@
     "card": "The Cheater",
     "tagHypothesis": "betrayal_guff",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Syndicate Member",
@@ -5447,6 +5627,7 @@
     "greynote": "chestObject",
     "card": "The Chosen",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Chest",
@@ -5461,6 +5642,7 @@
     "card": "The Coming Storm",
     "tagHypothesis": "rain_area; NOT lightning_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -5520,6 +5702,7 @@
     "card": "The Conduit",
     "tagHypothesis": "dominus_monster_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -5581,6 +5764,7 @@
     "card": "The Cursed King",
     "tagHypothesis": "Caer Blaidd, Wolfpack's Den (no tag)",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -5626,6 +5810,7 @@
     "card": "The Damned",
     "tagHypothesis": "ruined_vaal_city_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -5645,7 +5830,7 @@
     "card": "The Damned",
     "tagHypothesis": "vaal_ruin_area",
     "confidence": "low",
-    "remainingWork": "storyOnly",
+    "remainingWork": "story only",
     "sources": [
       {
         "type": "Map",
@@ -5661,6 +5846,7 @@
     "card": "The Dapper Prodigy",
     "tagHypothesis": "sceptre_of_god_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -5685,6 +5871,7 @@
     "card": "The Dark Mage",
     "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -5713,6 +5900,7 @@
     "greynote": "areaSpecific",
     "card": "The Darkest Dream",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -5727,6 +5915,7 @@
     "card": "The Deal",
     "tagHypothesis": "betrayal_cameria",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Syndicate Member",
@@ -5740,6 +5929,7 @@
     "card": "The Deceiver",
     "tagHypothesis": "arena_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -5769,7 +5959,7 @@
     "card": "The Deep Ones",
     "tagHypothesis": "reef_area",
     "confidence": "done",
-    "remainingWork": "legacyTag",
+    "remainingWork": "legacy tag",
     "sources": [
       {
         "type": "Map",
@@ -5789,6 +5979,7 @@
     "card": "The Deep Ones",
     "tagHypothesis": "ship_graveyard_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -5824,7 +6015,7 @@
     "card": "The Demon",
     "tagHypothesis": "kitava_area",
     "confidence": "ok",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map Boss",
@@ -5840,6 +6031,7 @@
     "card": "The Demoness",
     "tagHypothesis": "dark_forest_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -5895,6 +6087,7 @@
     "greynote": "disabled",
     "card": "The Devastator",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Disabled",
@@ -5909,6 +6102,7 @@
     "card": "The Doctor",
     "tagHypothesis": "alira_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -5927,6 +6121,7 @@
     "card": "The Doctor",
     "tagHypothesis": "doedre_map_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -5957,6 +6152,7 @@
     "card": "The Doppelganger",
     "tagHypothesis": "Whakawairua Tuahu (no tag)",
     "confidence": "ok",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -5972,7 +6168,7 @@
     "card": "The Doppelganger",
     "tagHypothesis": "?",
     "confidence": "none",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Act",
@@ -5987,6 +6183,7 @@
     "card": "The Dragon",
     "tagHypothesis": "dark_forest_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -6011,6 +6208,7 @@
     "greynote": "globalDrop",
     "card": "The Dragon's Heart",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Global Drop",
@@ -6024,6 +6222,7 @@
     "card": "The Dreamer",
     "tagHypothesis": "shaper_void_entity_monster",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Shaper Mini-Boss",
@@ -6037,6 +6236,7 @@
     "greynote": "strongbox",
     "card": "The Dreamland",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Strongbox",
@@ -6051,6 +6251,7 @@
     "card": "The Drunken Aristocrat",
     "tagHypothesis": "undying_boss_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -6090,6 +6291,7 @@
     "card": "The Dungeon Master",
     "tagHypothesis": "prison_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -6119,6 +6321,7 @@
     "card": "The Easy Stroll",
     "tagHypothesis": "garden_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -6148,6 +6351,7 @@
     "card": "The Eldritch Decay",
     "tagHypothesis": "elder_guardian_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Elder Guardian Boss",
@@ -6185,6 +6389,7 @@
     "greynote": "globalDrop",
     "card": "The Encroaching Darkness",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Global Drop",
@@ -6198,6 +6403,7 @@
     "card": "The Endless Darkness",
     "tagHypothesis": "harbinger_portal_monster",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Harbinger Portal",
@@ -6221,6 +6427,7 @@
     "card": "The Endurance",
     "tagHypothesis": "mine_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -6260,6 +6467,7 @@
     "card": "The Enlightened",
     "tagHypothesis": "church",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -6314,6 +6522,7 @@
     "card": "The Enthusiasts",
     "tagHypothesis": "library_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -6338,6 +6547,7 @@
     "card": "The Escape",
     "tagHypothesis": "breachlord_boss_domain",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Breachlord Boss Domain",
@@ -6372,6 +6582,7 @@
     "card": "The Eternal War",
     "tagHypothesis": "crusader_conqueror_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -6385,6 +6596,7 @@
     "card": "The Eternal War",
     "tagHypothesis": "hunter_conqueror_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -6398,6 +6610,7 @@
     "card": "The Eternal War",
     "tagHypothesis": "redeemer_conqueror_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -6411,6 +6624,7 @@
     "card": "The Eternal War",
     "tagHypothesis": "warlord_conqueror_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -6424,6 +6638,7 @@
     "card": "The Ethereal",
     "tagHypothesis": "atziri_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Atziri Area",
@@ -6442,7 +6657,7 @@
     "card": "The Explorer",
     "tagHypothesis": "thicket_area",
     "confidence": "done",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -6457,6 +6672,7 @@
     "card": "The Eye of Terror",
     "tagHypothesis": "betrayal_breach",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Syndicate Member",
@@ -6470,7 +6686,7 @@
     "card": "The Eye of the Dragon",
     "tagHypothesis": "\"Phoenix\" boss",
     "confidence": "ok",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -6496,6 +6712,7 @@
     "card": "The Fathomless Depths",
     "tagHypothesis": "flooded_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -6520,6 +6737,7 @@
     "card": "The Feast",
     "tagHypothesis": "sewer_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -6554,6 +6772,7 @@
     "card": "The Fiend",
     "tagHypothesis": "thaumaturgy_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -6583,6 +6802,7 @@
     "card": "The Fishmonger",
     "tagHypothesis": "rhoa_map_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -6602,6 +6822,7 @@
     "card": "The Fletcher",
     "tagHypothesis": "archer_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -6647,6 +6868,7 @@
     "card": "The Flora's Gift",
     "tagHypothesis": "forest_map_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -6711,6 +6933,7 @@
     "card": "The Fool",
     "tagHypothesis": "betrayal_janus",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Syndicate Member",
@@ -6723,7 +6946,7 @@
     "id": 268,
     "card": "The Forgotten Treasure",
     "confidence": "low",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -6739,6 +6962,7 @@
     "card": "The Formless Sea",
     "tagHypothesis": "ship_graveyard_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -6768,6 +6992,7 @@
     "card": "The Forsaken",
     "tagHypothesis": "crypt_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -6793,7 +7018,7 @@
     "card": "The Forsaken",
     "tagHypothesis": "necropolis_area",
     "confidence": "ok",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -6809,6 +7034,7 @@
     "card": "The Forward Gaze",
     "tagHypothesis": "Doryani's Machinarium (no tag)",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -6823,6 +7049,7 @@
     "card": "The Fox",
     "tagHypothesis": "has_foxes_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -6852,7 +7079,7 @@
     "card": "The Fox in the Brambles",
     "tagHypothesis": "garden_area",
     "confidence": "ok",
-    "remainingWork": "storyOnly",
+    "remainingWork": "story only",
     "sources": [
       {
         "type": "Map",
@@ -6883,6 +7110,7 @@
     "greynote": "globalDrop",
     "card": "The Gambler",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Global Drop",
@@ -6896,6 +7124,7 @@
     "card": "The Garish Power",
     "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -6924,6 +7153,7 @@
     "greynote": "strongbox",
     "card": "The Gemcutter",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Strongbox",
@@ -6938,6 +7168,7 @@
     "card": "The Gentleman",
     "tagHypothesis": "slums_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -6956,6 +7187,7 @@
     "card": "The Gladiator",
     "tagHypothesis": "pitfight_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -6984,6 +7216,7 @@
     "card": "The Golden Era",
     "tagHypothesis": "wealthy_area + Boss with `has_two_handed_melee`",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -7003,7 +7236,7 @@
     "card": "The Golden Era",
     "tagHypothesis": "wealthy_area + tower_area / undying_boss_area",
     "confidence": "done",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -7017,7 +7250,7 @@
     "id": 282,
     "card": "The Greatest Intentions",
     "confidence": "none",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "notes": "Shaper?\n\nDivcord 3.22: Kenny obtains The Greatest Intentions from The Feared.\nUnknown if this is specific to The Feared, or from one of the Bosses."
   },
   {
@@ -7025,6 +7258,7 @@
     "card": "The Gulf",
     "tagHypothesis": "uber_elder",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Endgame Boss",
@@ -7039,6 +7273,7 @@
     "card": "The Hale Heart",
     "tagHypothesis": "elder_guardian_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Elder Guardian Boss",
@@ -7067,6 +7302,7 @@
     "card": "The Harvester",
     "tagHypothesis": "crossroad_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -7097,6 +7333,7 @@
     "card": "The Hermit",
     "tagHypothesis": "Act 7 & NOT indoors_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Act",
@@ -7146,6 +7383,7 @@
     "greynote": "strongbox",
     "card": "The Heroic Shot",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Strongbox",
@@ -7186,6 +7424,7 @@
     "card": "The Hoarder",
     "tagHypothesis": "gold_pile_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -7221,6 +7460,7 @@
     "card": "The Hook",
     "tagHypothesis": "cortex_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Disabled",
@@ -7235,6 +7475,7 @@
     "card": "The Hunger",
     "tagHypothesis": "belly_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -7290,6 +7531,7 @@
     "card": "The Immortal",
     "tagHypothesis": "hall_of_grandmasters",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -7304,6 +7546,7 @@
     "card": "The Incantation",
     "tagHypothesis": "alira_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -7322,6 +7565,7 @@
     "card": "The Incantation",
     "tagHypothesis": "doedre_map_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -7351,6 +7595,7 @@
     "card": "The Innocent",
     "tagHypothesis": "AvariusCasticus boss areas (no tag)",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -7371,6 +7616,7 @@
     "card": "The Innocent",
     "tagHypothesis": "innocence_story",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Act",
@@ -7385,6 +7631,7 @@
     "card": "The Inoculated",
     "tagHypothesis": "toxic_pool_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -7429,7 +7676,7 @@
     "card": "The Insatiable",
     "tagHypothesis": "harvest_area",
     "confidence": "ok",
-    "remainingWork": "storyOnly",
+    "remainingWork": "story only",
     "sources": [
       {
         "type": "Map",
@@ -7455,6 +7702,7 @@
     "card": "The Inventor",
     "tagHypothesis": "vaal_pyramid_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -7499,6 +7747,7 @@
     "card": "The Jester",
     "tagHypothesis": "trap_exile",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Rogue Exile",
@@ -7513,6 +7762,7 @@
     "card": "The Jeweller's Boon",
     "tagHypothesis": "crystalline_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -7542,6 +7792,7 @@
     "card": "The Journalist",
     "tagHypothesis": "kitava_cultist_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -7586,6 +7837,7 @@
     "card": "The Journey",
     "tagHypothesis": "ocean_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -7690,6 +7942,7 @@
     "card": "The King's Blade",
     "tagHypothesis": "daresso_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -7719,6 +7972,7 @@
     "card": "The King's Heart",
     "tagHypothesis": "kaom_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -7737,6 +7991,7 @@
     "card": "The Landing",
     "tagHypothesis": "coast_boat_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -7766,6 +8021,7 @@
     "card": "The Last One Standing",
     "tagHypothesis": "pitfight_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -7795,6 +8051,7 @@
     "greynote": "areaSpecific",
     "card": "The Last Supper",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -7809,7 +8066,7 @@
     "card": "The Lich",
     "tagHypothesis": "necromancer_boss",
     "confidence": "none",
-    "remainingWork": "legacyTag",
+    "remainingWork": "legacy tag",
     "sourcesWithTagButNotOnWiki": "Rose; Thorn; Infector of Dreams; The Bone Sculptor",
     "notes": "necromancer_boss ?\nIf so, more Bosses need to be verified\n\nfal posted in Divcord a full stack Kirac Card Mission drop from non-Boss in Necropolis\nDivcord: 3.21, Elinvynia reports: \"I ran 105 Acton Nightmares (no MF boss rushing, mostly very low tier) trying to verify The Lich - I didn't get it\"\nHistorically dropped from Merciless Sawbones. All necromancer-type bosses do not appear to drop this card anymore - different tag?"
   },
@@ -7818,6 +8075,7 @@
     "card": "The Lich",
     "tagHypothesis": "abyss_lich_boss?",
     "confidence": "none",
+    "remainingWork": "n/a",
     "notes": "necromancer_boss no longer appears to be the associated tag."
   },
   {
@@ -7825,6 +8083,7 @@
     "card": "The Life Thief",
     "tagHypothesis": "kitava_cultist_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -7869,6 +8128,7 @@
     "card": "The Lion",
     "tagHypothesis": "dishonoured_queen; dishonoured_queen_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -7887,6 +8147,7 @@
     "greynote": "chestObject",
     "card": "The Long Con",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Chest",
@@ -7902,6 +8163,7 @@
     "card": "The Long Watch",
     "tagHypothesis": "bridge_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Disabled",
@@ -7917,6 +8179,7 @@
     "card": "The Lord in Black",
     "tagHypothesis": "hellscape_demon_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Beyond Boss",
@@ -7930,6 +8193,7 @@
     "card": "The Lord of Celebration",
     "tagHypothesis": "wealthy_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -8020,6 +8284,7 @@
     "card": "The Lover",
     "tagHypothesis": "merveil_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -8039,6 +8304,7 @@
     "card": "The Lunaris Priestess",
     "tagHypothesis": "lunaris_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -8073,6 +8339,7 @@
     "card": "The Mad King",
     "tagHypothesis": "king_boss_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -8103,6 +8370,7 @@
     "card": "The Magma Crab",
     "tagHypothesis": "exile_molten_shell",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Rogue Exile",
@@ -8116,7 +8384,7 @@
     "card": "The Master",
     "tagHypothesis": "boss summons canine_beast minion",
     "confidence": "none",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -8142,6 +8410,7 @@
     "greynote": "strongbox",
     "card": "The Master Artisan",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Strongbox",
@@ -8155,6 +8424,7 @@
     "greynote": "disabled",
     "card": "The Mayor",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Disabled",
@@ -8169,6 +8439,7 @@
     "card": "The Mercenary",
     "tagHypothesis": "kraityn_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -8192,7 +8463,7 @@
     "id": 325,
     "card": "The Messenger",
     "confidence": "low",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -8213,6 +8484,7 @@
     "card": "The Metalsmith's Gift",
     "tagHypothesis": "act6_karui_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Act",
@@ -8237,7 +8509,7 @@
     "card": "The Mind's Eyes",
     "tagHypothesis": "mine_area; boss only",
     "confidence": "ok",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map Boss",
@@ -8288,7 +8560,7 @@
     "card": "The Mountain",
     "tagHypothesis": "snow_mountain_area",
     "confidence": "ok",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -8319,6 +8591,7 @@
     "card": "The Nurse",
     "tagHypothesis": "shavronne_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -8363,6 +8636,7 @@
     "card": "The Nurse",
     "tagHypothesis": "harvest_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -8392,6 +8666,7 @@
     "card": "The Oath",
     "tagHypothesis": "belly_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -8430,6 +8705,7 @@
     "card": "The Obscured",
     "tagHypothesis": "abyssal",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "All Abyss Monsters",
@@ -8444,7 +8720,7 @@
     "card": "The Offering",
     "tagHypothesis": "shavronne_monster_story OR unholy_trio_combined_boss_story",
     "confidence": "ok",
-    "remainingWork": "storyOnly",
+    "remainingWork": "story only",
     "sources": [
       {
         "type": "Act Boss",
@@ -8465,6 +8741,7 @@
     "card": "The Offering",
     "tagHypothesis": "shavronne_monster_map OR unholy_trio_combined_boss_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -8499,7 +8776,7 @@
     "card": "The Offspring",
     "tagHypothesis": "Ryslatha boss",
     "confidence": "ok",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map Boss",
@@ -8520,7 +8797,7 @@
     "card": "The Offspring",
     "tagHypothesis": "nature_boss",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map Boss",
@@ -8541,7 +8818,7 @@
     "id": 337,
     "card": "The Offspring",
     "confidence": "low",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "sourcesWithTagButNotOnWiki": "Titan of the Grove"
   },
   {
@@ -8616,6 +8893,7 @@
     "card": "The One With All",
     "tagHypothesis": "cemetery_map_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -8650,6 +8928,7 @@
     "card": "The Opulent",
     "tagHypothesis": "wealthy_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -8739,6 +9018,7 @@
     "card": "The Pack Leader",
     "tagHypothesis": "forest_map_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -8803,6 +9083,7 @@
     "card": "The Pact",
     "tagHypothesis": "dock_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -8837,6 +9118,7 @@
     "card": "The Patient",
     "tagHypothesis": "military_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -8867,6 +9149,7 @@
     "card": "The Penitent",
     "tagHypothesis": "prison_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -8896,6 +9179,7 @@
     "card": "The Poet",
     "tagHypothesis": "marketplace_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -8935,6 +9219,7 @@
     "card": "The Polymath",
     "tagHypothesis": "relic_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -8963,7 +9248,7 @@
     "card": "The Porcupine",
     "tagHypothesis": "garden_area",
     "confidence": "done",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -8999,7 +9284,7 @@
     "card": "The Porcupine",
     "tagHypothesis": "garden_area OR (labyrinth_tileset_area & NOT indoors_area)",
     "confidence": "done",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -9040,6 +9325,7 @@
     "card": "The Price of Loyalty",
     "tagHypothesis": "incursion_architect_breach",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Architect",
@@ -9053,7 +9339,7 @@
     "card": "The Price of Prescience",
     "tagHypothesis": "crusader_conqueror_boss",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -9068,7 +9354,7 @@
     "card": "The Price of Prescience",
     "tagHypothesis": "hunter_conqueror_boss",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -9083,7 +9369,7 @@
     "card": "The Price of Prescience",
     "tagHypothesis": "redeemer_conqueror_boss",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -9098,7 +9384,7 @@
     "card": "The Price of Prescience",
     "tagHypothesis": "warlord_conqueror_boss",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -9113,6 +9399,7 @@
     "card": "The Price of Protection",
     "tagHypothesis": "invasion_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "All Invasion Bosses",
@@ -9126,6 +9413,7 @@
     "card": "The Price of Protection",
     "tagHypothesis": "vaalsidearea_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "All Vaal Side Area Bosses",
@@ -9140,6 +9428,7 @@
     "card": "The Primordial",
     "tagHypothesis": "golem_boss_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -9188,6 +9477,7 @@
     "card": "The Prince of Darkness",
     "tagHypothesis": "malachai_boss_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -9207,6 +9497,7 @@
     "card": "The Professor",
     "tagHypothesis": "library_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -9231,7 +9522,7 @@
     "id": 360,
     "card": "The Professor",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -9274,6 +9565,7 @@
     "card": "The Puzzle",
     "tagHypothesis": "beyond_demon",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "All (Scourge) beyond demons",
@@ -9287,6 +9579,7 @@
     "card": "The Queen",
     "tagHypothesis": "vaults_of_atziri",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -9300,7 +9593,7 @@
     "card": "The Rabbit's Foot",
     "tagHypothesis": "crypt_area",
     "confidence": "ok",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -9326,6 +9619,7 @@
     "card": "The Rabid Rhoa",
     "tagHypothesis": "rhoa_map_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -9345,6 +9639,7 @@
     "card": "The Realm",
     "tagHypothesis": "Breach monster (no tag)",
     "confidence": "done",
+    "remainingWork": "n/a",
     "notes": "Breach Monsters, but which? All?\nbreach_commander ?\n\nAlso has been observed as Kirac Card Mission drops in: {Park, Marshes, Bazaar}. See Divcord. Jasmine: The Realm is likely added to the pool of possible cards in Kirac Missions. The card does not appear to drop in a single card - only in stacks. Kirac Missions can also pool boss cards, and is likely governed by unusual rules.\n\nAppears to drop from any Breach Monster\n\nDvicord: 3.21, Elinvynia counted Active Skill Gems in Breachstones and proved that The Realm is a deterministic drop (not a natural drop)."
   },
   {
@@ -9352,6 +9647,7 @@
     "greynote": "chestObject",
     "card": "The Risk",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Chest",
@@ -9366,6 +9662,7 @@
     "card": "The Rite of Elements",
     "tagHypothesis": "golem_boss_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -9415,6 +9712,7 @@
     "card": "The Road to Power",
     "tagHypothesis": "has_road_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -9457,7 +9755,7 @@
     "id": 371,
     "card": "The Ruthless Ceinture",
     "confidence": "none",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -9512,6 +9810,7 @@
     "card": "The Saint's Treasure",
     "tagHypothesis": "marketplace_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -9541,6 +9840,7 @@
     "card": "The Saint's Treasure",
     "tagHypothesis": "slums_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -9560,6 +9860,7 @@
     "card": "The Samurai's Eye",
     "tagHypothesis": "abyss_lich_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Abyss Lich Boss",
@@ -9578,6 +9879,7 @@
     "card": "The Scarred Meadow",
     "tagHypothesis": "fields_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -9611,6 +9913,7 @@
     "card": "The Scavenger",
     "tagHypothesis": "scavenger_boss_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -9641,6 +9944,7 @@
     "card": "The Scholar",
     "tagHypothesis": "library_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -9674,6 +9978,7 @@
     "card": "The Scout",
     "tagHypothesis": "forest_map_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -9738,6 +10043,7 @@
     "card": "The Seeker",
     "tagHypothesis": "incursion_temple_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "The Temple of Atzoatl",
@@ -9752,6 +10058,7 @@
     "card": "The Sephirot",
     "tagHypothesis": "dominus_monster_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -9775,7 +10082,7 @@
     "id": 382,
     "card": "The Shortcut",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Vaal Side Areas",
@@ -9791,6 +10098,7 @@
     "card": "The Side Quest",
     "tagHypothesis": "bridge_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -9850,6 +10158,7 @@
     "card": "The Sigil",
     "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -9868,6 +10177,7 @@
     "card": "The Siren",
     "tagHypothesis": "merveil_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -9888,6 +10198,7 @@
     "greynote": "monsterSpecific",
     "card": "The Skeleton",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -9953,6 +10264,7 @@
     "card": "The Spark and the Flame",
     "tagHypothesis": "totem_boss_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -9977,7 +10289,7 @@
     "id": 389,
     "card": "The Spoiled Prince",
     "confidence": "none",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -9992,6 +10304,7 @@
     "card": "The Standoff",
     "tagHypothesis": "fire_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10058,6 +10371,7 @@
     "card": "The Stormcaller",
     "tagHypothesis": "lightning_area, NOT unique_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10082,6 +10396,7 @@
     "card": "The Strategist",
     "tagHypothesis": "warlord_conqueror_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Elder Slayer",
@@ -10095,6 +10410,7 @@
     "card": "The Summoner",
     "tagHypothesis": "summoner_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10150,6 +10466,7 @@
     "card": "The Sun",
     "tagHypothesis": "solaris_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10190,6 +10507,7 @@
     "card": "The Surgeon",
     "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10208,6 +10526,7 @@
     "card": "The Surveyor",
     "tagHypothesis": "belly_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10237,6 +10556,7 @@
     "card": "The Survivalist",
     "tagHypothesis": "flooded_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10266,6 +10586,7 @@
     "card": "The Sustenance",
     "tagHypothesis": "doedre_monster_map",
     "confidence": "low",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Disabled",
@@ -10281,6 +10602,7 @@
     "card": "The Sword King's Salute",
     "tagHypothesis": "daresso_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10320,7 +10642,7 @@
     "card": "The Thaumaturgist",
     "tagHypothesis": "thaumaturgy_area",
     "confidence": "ok",
-    "remainingWork": "storyOnly",
+    "remainingWork": "story only",
     "sources": [
       {
         "type": "Map",
@@ -10351,7 +10673,7 @@
     "card": "The Throne",
     "tagHypothesis": "sewer_area",
     "confidence": "ok",
-    "remainingWork": "storyOnly",
+    "remainingWork": "story only",
     "sources": [
       {
         "type": "Map",
@@ -10376,6 +10698,7 @@
     "greynote": "globalDrop",
     "card": "The Tinkerer's Table",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Global Drop",
@@ -10389,7 +10712,7 @@
     "id": 403,
     "card": "The Tireless Extractor",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -10411,6 +10734,7 @@
     "card": "The Tower",
     "tagHypothesis": "tower_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10444,6 +10768,7 @@
     "card": "The Traitor",
     "tagHypothesis": "parapet_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10486,6 +10811,7 @@
     "greynote": "globalDrop",
     "card": "The Trial",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Global Drop",
@@ -10526,6 +10852,7 @@
     "card": "The Twilight Moon",
     "tagHypothesis": "lunaris_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10549,6 +10876,7 @@
     "card": "The Twins",
     "tagHypothesis": "lunaris_area OR solaris_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10578,6 +10906,7 @@
     "card": "The Tyrant",
     "tagHypothesis": "ruined_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10627,6 +10956,7 @@
     "card": "The Undaunted",
     "tagHypothesis": "rogue_exile_boss_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10652,6 +10982,7 @@
     "card": "The Undisputed",
     "tagHypothesis": "chayula_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Breachlord Boss Domain",
@@ -10665,6 +10996,7 @@
     "card": "The Unexpected Prize",
     "tagHypothesis": "sceptre_of_god_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10689,6 +11021,7 @@
     "card": "The Union",
     "tagHypothesis": "graveyard_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10717,6 +11050,7 @@
     "card": "The Valkyrie",
     "tagHypothesis": "female_rogue_exile",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Female Rogue Exile",
@@ -10786,6 +11120,7 @@
     "greynote": "disabled",
     "card": "The Valley of Steel Boxes",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Disabled",
@@ -10800,7 +11135,7 @@
     "card": "The Vast",
     "tagHypothesis": "reef_area",
     "confidence": "ok",
-    "remainingWork": "storyOnly",
+    "remainingWork": "story only",
     "sources": [
       {
         "type": "Map",
@@ -10826,6 +11161,7 @@
     "card": "The Visionary",
     "tagHypothesis": "arena_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10849,6 +11185,7 @@
     "greynote": "areaSpecific",
     "card": "The Void",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10862,7 +11199,7 @@
     "id": 421,
     "card": "The Void",
     "confidence": "none",
-    "remainingWork": "legacyTag",
+    "remainingWork": "legacy tag",
     "notes": "Dropped from Park in a Kirac Mission as the stack of cards. Park has no area-specific cards. Perhaps another weird Kirac Mission mechanic?\nRequires reconfirmation of Park Kirac Map or other tag-less maps\nAfter more testing with Kirac missions - conclusion: dropping The Void from any source completes the mission; may not be Park specific."
   },
   {
@@ -10870,6 +11207,7 @@
     "card": "The Warden",
     "tagHypothesis": "prison_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10920,6 +11258,7 @@
     "card": "The Warlord",
     "tagHypothesis": "military_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10949,6 +11288,7 @@
     "card": "The Watcher",
     "tagHypothesis": "chaos_golem_boss_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -10967,6 +11307,7 @@
     "card": "The Web",
     "tagHypothesis": "spider_boss_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -11005,7 +11346,7 @@
     "id": 426,
     "card": "The White Knight",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Trial of Stinging Doubt",
@@ -11020,6 +11361,7 @@
     "greynote": "monsterSpecific",
     "card": "The Whiteout",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -11035,6 +11377,7 @@
     "greynote": "areaSpecific",
     "card": "The Wilted Rose",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -11049,6 +11392,7 @@
     "card": "The Wind",
     "tagHypothesis": "windy_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -11088,6 +11432,7 @@
     "card": "The Witch",
     "tagHypothesis": "alira_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -11106,6 +11451,7 @@
     "card": "The Witch",
     "tagHypothesis": "doedre_map_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -11135,6 +11481,7 @@
     "card": "The Wolf",
     "tagHypothesis": "mine_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -11184,7 +11531,7 @@
     "greynote": "chestObject",
     "card": "The Wolf's Legacy",
     "confidence": "ok",
-    "remainingWork": "openEnded",
+    "remainingWork": "open ended",
     "sources": [
       {
         "type": "Chest",
@@ -11200,7 +11547,7 @@
     "card": "The Wolf's Shadow",
     "tagHypothesis": "rigwald_area",
     "confidence": "done",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -11221,6 +11568,7 @@
     "card": "The Wolven King's Bite",
     "tagHypothesis": "rigwald_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -11239,7 +11587,7 @@
     "card": "The Wolverine",
     "tagHypothesis": "goatman_boss_area",
     "confidence": "ok",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -11265,7 +11613,7 @@
     "card": "The Wolverine",
     "tagHypothesis": "(den_area OR cave_area) & (rigwald_area OR forest_map_area)",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -11282,6 +11630,7 @@
     "card": "The World Eater",
     "tagHypothesis": "hellscape_flesh_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Beyond Boss",
@@ -11295,6 +11644,7 @@
     "card": "The Wrath",
     "tagHypothesis": "kitava_area",
     "confidence": "ok",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -11325,6 +11675,7 @@
     "card": "The Wretched",
     "tagHypothesis": "crypt_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -11350,6 +11701,7 @@
     "card": "The Wretched",
     "tagHypothesis": "necromancer_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -11373,6 +11725,7 @@
     "card": "The Wretched",
     "tagHypothesis": "necropolis_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -11387,7 +11740,7 @@
     "card": "The Wretched",
     "tagHypothesis": "mud_geyser_area",
     "confidence": "done",
-    "remainingWork": "legacyTag",
+    "remainingWork": "legacy tag",
     "wikiDisagreements": "Mud Geyser",
     "notes": "In the past, The Wretched was eligible in Mud Geyser. The claim on the wiki is stale, however, and Mud Geyser has not been reverified in a long time. It's likely it is no longer an eligible Area.\n\nDivcord 3.20: testing Bog which is on-Atlas and shares Tags with Mud Geyser (fetid_area, toxic_pool_area). No The Wretched in Bog, confidence >99.9%, so those Tags can't be it.\n\nThe only options are:\n1) The Wretched no longer drops in Mud Geyser either; or\n2) Mud Geyser's special exclusive Tag mud_geyser_area is another eligibility-grantor."
   },
@@ -11396,6 +11749,7 @@
     "card": "Thirst for Knowledge",
     "tagHypothesis": "library_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -11420,7 +11774,7 @@
     "card": "Three Faces in the Dark",
     "tagHypothesis": "warehouse_area",
     "confidence": "done",
-    "remainingWork": "storyOnly",
+    "remainingWork": "story only",
     "sources": [
       {
         "type": "Map",
@@ -11456,6 +11810,7 @@
     "card": "Three Voices",
     "tagHypothesis": "triple_boss_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -11514,6 +11869,7 @@
     "card": "Thunderous Skies",
     "tagHypothesis": "lightning_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -11553,6 +11909,7 @@
     "card": "Time-Lost Relic",
     "tagHypothesis": "mine_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -11592,6 +11949,7 @@
     "card": "Time-Lost Relic",
     "tagHypothesis": "expedition_common_remnant_logbook",
     "confidence": "done",
+    "remainingWork": "n/a",
     "notes": "Also found in all Expedition Areas; any Tag or Area relationship for these...?"
   },
   {
@@ -11599,6 +11957,7 @@
     "card": "Tranquillity",
     "tagHypothesis": "fields_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -11628,6 +11987,7 @@
     "card": "Treasure Hunter",
     "tagHypothesis": "cave_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -11683,6 +12043,7 @@
     "greynote": "disabled",
     "card": "Treasures of the Vaal",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Disabled",
@@ -11696,6 +12057,7 @@
     "id": 453,
     "card": "Triskaidekaphobia",
     "confidence": "low",
+    "remainingWork": "n/a",
     "notes": "Uber Atziri was original report\nUnverified from Incursion Atziri\nT13 Maps? - disproved in T13 Volcano; might be drop capped to 80? unclear what Bex is referring to in her tweet"
   },
   {
@@ -11704,7 +12066,7 @@
     "card": "Turn the Other Cheek",
     "tagHypothesis": "library_area",
     "confidence": "low",
-    "remainingWork": "storyOnly",
+    "remainingWork": "story only",
     "sources": [
       {
         "type": "Act",
@@ -11720,6 +12082,7 @@
     "card": "Unchained",
     "tagHypothesis": "pitfight_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -11750,6 +12113,7 @@
     "greynote": "chestObject",
     "card": "Underground Forest",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Chest",
@@ -11800,6 +12164,7 @@
     "greynote": "chestObject",
     "card": "Vanity",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Chest",
@@ -11814,7 +12179,7 @@
     "card": "Vile Power",
     "tagHypothesis": "vile_areas",
     "confidence": "ok",
-    "remainingWork": "storyOnly",
+    "remainingWork": "story only",
     "sources": [
       {
         "type": "Map",
@@ -11880,6 +12245,7 @@
     "card": "Vinia's Token",
     "tagHypothesis": "piety_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -11905,6 +12271,7 @@
     "card": "Void of the Elements",
     "tagHypothesis": "elder_boss OR uber_elder",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Endgame Boss",
@@ -11924,6 +12291,7 @@
     "card": "Volatile Power",
     "tagHypothesis": "mine_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -11988,6 +12356,7 @@
     "card": "Wealth and Power",
     "tagHypothesis": "lunaris_area",
     "confidence": "ok",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -12007,14 +12376,14 @@
     "id": 464,
     "card": "Winter's Embrace",
     "confidence": "none",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "notes": "snow_area? no leads"
   },
   {
     "id": 465,
     "card": "Astral Protection",
     "confidence": "none",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -12028,7 +12397,7 @@
     "id": 466,
     "card": "Azure Rage",
     "confidence": "low",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -12044,6 +12413,7 @@
     "card": "Broken Truce",
     "tagHypothesis": "betrayal_thane_jorgin",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Syndicate Member",
@@ -12058,6 +12428,7 @@
     "card": "Checkmate",
     "tagHypothesis": "library_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -12082,6 +12453,7 @@
     "card": "Choking Guilt",
     "tagHypothesis": "infinite_hunger",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Endgame Boss",
@@ -12096,6 +12468,7 @@
     "greynote": "disabled",
     "card": "Doryani's Epiphany",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Disabled",
@@ -12109,7 +12482,7 @@
     "id": 471,
     "card": "Endless Night",
     "confidence": "none",
-    "remainingWork": "noHypothesis",
+    "remainingWork": "no hypothesis",
     "notes": "Spotty sightings indicate that this is might be \"Drops from a Rogue Exile with `has_bow` and `rogue_exile`\"\n\nCandidates are:\nAntalie Napora\r\nAilentia Rac\r\nAinsley Varrich\r\nOrra Greengate\r\nOyra Ona\r\n\r\nShade of a Ranger (Whakawairua Tuahu)\r\n\r\nIneligible:\r\n- Rudiarius Felix (The Grand Arena; but ineligible due to Drop Level Requirement)\r\n- Antonio Bravadi (Descent: Champions)\r\n- Silva Fearsting (Descent: Champions)\n\n\nNot a natural drop in Vaal Temple per Zimzams's testing (n>1000, 3.21 & 3.21)"
   },
   {
@@ -12117,6 +12490,7 @@
     "greynote": "chestObject",
     "card": "Gemcutter's Mercy",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Chest",
@@ -12130,13 +12504,14 @@
     "id": 473,
     "card": "Lethean Temptation",
     "confidence": "none",
-    "remainingWork": "noHypothesis"
+    "remainingWork": "no hypothesis"
   },
   {
     "id": 474,
     "card": "Something Dark",
     "tagHypothesis": "breachlord_boss_domain",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Breachlord Boss Domain",
@@ -12180,6 +12555,7 @@
     "card": "The Leviathan",
     "tagHypothesis": "Maelström of Chaos (no tags)",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -12194,6 +12570,7 @@
     "card": "The Price of Devotion",
     "tagHypothesis": "uber_atziri_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Endgame Boss",
@@ -12209,6 +12586,7 @@
     "card": "The Shepherd's Sandals",
     "tagHypothesis": "den_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -12238,6 +12616,7 @@
     "card": "The Shieldbearer",
     "tagHypothesis": "uber_elder",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Endgame Boss",
@@ -12252,6 +12631,7 @@
     "card": "A Dusty Memory",
     "tagHypothesis": "synthesis_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -12286,6 +12666,7 @@
     "card": "Alivia's Grace",
     "tagHypothesis": "forest_map_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -12350,6 +12731,7 @@
     "card": "Auspicious Ambitions",
     "tagHypothesis": "eldritch_pinnacle_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Endgame Boss",
@@ -12379,6 +12761,7 @@
     "card": "Divine Beauty",
     "tagHypothesis": "merveil_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map Boss",
@@ -12412,6 +12795,7 @@
     "id": 484,
     "card": "Ever-Changing",
     "confidence": "done",
+    "remainingWork": "n/a",
     "notes": "Appears to drop in any map generated by Kirac Mission, several confirms."
   },
   {
@@ -12419,6 +12803,7 @@
     "card": "Man With Bear",
     "tagHypothesis": "bear_boss_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -12438,6 +12823,7 @@
     "card": "The Finishing Touch",
     "tagHypothesis": "hillock_syndicate",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Syndicate Member",
@@ -12452,6 +12838,7 @@
     "card": "The Insane Cat",
     "tagHypothesis": "affliction_boss",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Maps Only",
@@ -12471,6 +12858,7 @@
     "card": "The Return of the Rat",
     "tagHypothesis": "warehouse_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -12505,7 +12893,7 @@
     "card": "The Wedding Gift",
     "tagHypothesis": "arakaali_area OR ?",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -12522,7 +12910,7 @@
     "card": "The Wedding Gift",
     "tagHypothesis": "spider_boss_area",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -12538,6 +12926,7 @@
     "card": "Brother's Gift",
     "tagHypothesis": "graveyard_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -12562,6 +12951,7 @@
     "card": "Soul Quenched",
     "tagHypothesis": "Forge_Area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -12589,7 +12979,7 @@
     "id": 493,
     "card": "Poisoned Faith",
     "confidence": "low",
-    "remainingWork": "unclearHypothesis",
+    "remainingWork": "unclear hypothesis",
     "sources": [
       {
         "type": "Map",
@@ -12610,6 +13000,7 @@
     "card": "A Chilling Wind",
     "tagHypothesis": "snow_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -12658,6 +13049,7 @@
     "card": "The Fortunate",
     "tagHypothesis": "sun_nature_area",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -12796,6 +13188,7 @@
     "card": "Fire of Unknown Origin",
     "tagHypothesis": "undyingcultist_map",
     "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
