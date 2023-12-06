@@ -10,13 +10,13 @@ pub enum League {
     SSFStandard,
     #[serde(alias = "SSF Hardcore")]
     SSFHardcore,
-    Ancestor,
-    #[serde(alias = "Hardcore Ancestor")]
-    HardcoreAncestor,
-    #[serde(alias = "SSF Ancestor")]
-    SSFAncestor,
-    #[serde(alias = "HC SSF Ancestor")]
-    SSFHCAncestor,
+    Affliction,
+    #[serde(alias = "Hardcore Affliction")]
+    HardcoreAffliction,
+    #[serde(alias = "SSF Affliction")]
+    SSFAffliction,
+    #[serde(alias = "HC SSF Affliction")]
+    SSFHCAffliction,
 }
 
 impl League {
@@ -30,7 +30,7 @@ impl League {
 
 impl Default for League {
     fn default() -> Self {
-        League::Ancestor
+        League::Affliction
     }
 }
 
@@ -41,10 +41,10 @@ impl Display for League {
             League::Hardcore => write!(f, "Hardcore"),
             League::SSFStandard => write!(f, "Solo Self-Found"),
             League::SSFHardcore => write!(f, "Hardcore SSF"),
-            League::Ancestor => write!(f, "Ancestor"),
-            League::HardcoreAncestor => write!(f, "Hardcore Ancestor"),
-            League::SSFAncestor => write!(f, "SSF Ancestor"),
-            League::SSFHCAncestor => write!(f, "HC SSF Ancestor"),
+            League::Affliction => write!(f, "Affliction"),
+            League::HardcoreAffliction => write!(f, "Hardcore Affliction"),
+            League::SSFAffliction => write!(f, "SSF Affliction"),
+            League::SSFHCAffliction => write!(f, "HC SSF Affliction"),
         }
     }
 }
@@ -54,8 +54,8 @@ impl From<TradeLeague> for League {
         match value {
             TradeLeague::Standard => League::Standard,
             TradeLeague::Hardcore => League::Hardcore,
-            TradeLeague::Ancestor => League::Ancestor,
-            TradeLeague::HardcoreAncestor => League::HardcoreAncestor,
+            TradeLeague::Affliction => League::Affliction,
+            TradeLeague::HardcoreAffliction => League::HardcoreAffliction,
         }
     }
 }
@@ -64,9 +64,9 @@ impl From<TradeLeague> for League {
 pub enum TradeLeague {
     Standard,
     Hardcore,
-    Ancestor,
-    #[serde(alias = "Hardcore Ancestor", rename = "Hardcore Ancestor")]
-    HardcoreAncestor,
+    Affliction,
+    #[serde(alias = "Hardcore Affliction", rename = "Hardcore Affliction")]
+    HardcoreAffliction,
 }
 
 impl Display for TradeLeague {
@@ -74,14 +74,14 @@ impl Display for TradeLeague {
         match self {
             TradeLeague::Standard => write!(f, "Standard"),
             TradeLeague::Hardcore => write!(f, "Hardcore"),
-            TradeLeague::Ancestor => write!(f, "Ancestor"),
-            TradeLeague::HardcoreAncestor => write!(f, "Hardcore Ancestor"),
+            TradeLeague::Affliction => write!(f, "Affliction"),
+            TradeLeague::HardcoreAffliction => write!(f, "Hardcore Affliction"),
         }
     }
 }
 impl Default for TradeLeague {
     fn default() -> Self {
-        TradeLeague::Ancestor
+        TradeLeague::Affliction
     }
 }
 
@@ -96,10 +96,10 @@ impl TryFrom<League> for TradeLeague {
             League::Hardcore => Ok(TradeLeague::Hardcore),
             League::SSFStandard => Err(msg),
             League::SSFHardcore => Err(msg),
-            League::Ancestor => Ok(TradeLeague::Ancestor),
-            League::HardcoreAncestor => Ok(TradeLeague::HardcoreAncestor),
-            League::SSFAncestor => Err(msg),
-            League::SSFHCAncestor => Err(msg),
+            League::Affliction => Ok(TradeLeague::Affliction),
+            League::HardcoreAffliction => Ok(TradeLeague::HardcoreAffliction),
+            League::SSFAffliction => Err(msg),
+            League::SSFHCAffliction => Err(msg),
         }
     }
 }

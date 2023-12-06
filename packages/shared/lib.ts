@@ -1,4 +1,4 @@
-export const ACTIVE_LEAGUE = 'Ancestor';
+export const ACTIVE_LEAGUE = 'Affliction';
 export const downloadText = (filename: string, text: string = 'empty') => {
 	const file = new File([text], filename);
 	const a = document.createElement('a');

@@ -6,7 +6,7 @@ use tokio::task::spawn_blocking;
 pub const POE_CDN_CARDS: &'static str = "https://web.poecdn.com/image/divination-card/";
 
 pub async fn download_card_images() -> Result<(), divi::error::Error> {
-    let data = NinjaCardData::fetch(&TradeLeague::Ancestor).await?;
+    let data = NinjaCardData::fetch(&TradeLeague::Standard).await?;
 
     let cards_images_dir = env::current_dir()
         .unwrap()

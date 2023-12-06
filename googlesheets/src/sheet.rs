@@ -288,7 +288,7 @@ mod tests {
     //                 "range": "science!H5",
     //                 "majorDimension": "ROWS",
     //                 "values": [
-    //                     ["league", "Ancestor"],
+    //                     ["league", "Affliction"],
     //                     ["date", "11 Sep, 2023"],
     //                     ["total cards", 40000],
     //                     ["total price", 200000],

@@ -23,7 +23,7 @@ googlesheets = {path = "../../../googlesheets"}
 
 tauri = { version = "1.5", features = [ "api-all"] }
 
-tokio = {version = "1", features = ["full"]}
+tokio = {version = "1", features = ["full"] }
 tracing.workspace = true
 tracing-subscriber.workspace = true
 reqwest.workspace = true
