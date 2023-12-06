@@ -14,8 +14,8 @@ use super::rich::DropsFrom;
 #[serde(rename_all = "camelCase")]
 pub struct DivcordTableRecord {
     pub id: usize,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub greynote: Option<GreyNote>,
+    #[serde(default)]
+    pub greynote: GreyNote,
     pub card: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub tag_hypothesis: Option<String>,
@@ -79,8 +79,8 @@ impl DivcordTableRecord {
 #[serde(rename_all = "camelCase")]
 pub struct SourcefulDivcordTableRecord {
     pub id: usize,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub greynote: Option<GreyNote>,
+    #[serde(default)]
+    pub greynote: GreyNote,
     pub card: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub tag_hypothesis: Option<String>,
@@ -146,41 +146,50 @@ pub fn parse_string_cell(val: &Value) -> Option<String> {
 )]
 #[serde(rename_all = "camelCase")]
 pub enum GreyNote {
-    #[strum(serialize = "Monster-specific")]
-    #[serde(alias = "Monster-specific")]
+    #[strum(to_string = "Empty")]
+    #[serde(rename = "Empty")]
+    Empty,
+    #[strum(to_string = "Monster-specific")]
+    #[serde(rename = "Monster-specific")]
     MonsterSpecific,
-    #[strum(serialize = "Area-specific")]
-    #[serde(alias = "Area-specific")]
+    #[strum(to_string = "Area-specific")]
+    #[serde(rename = "Area-specific")]
     AreaSpecific,
-    #[strum(serialize = "disabled", serialize = "Drop disabled")]
-    #[serde(alias = "disabled", alias = "Drop disabled")]
+    #[strum(to_string = "disabled", serialize = "Drop disabled")]
+    #[serde(rename = "disabled", alias = "Drop disabled")]
     Disabled,
-    #[strum(serialize = "story")]
-    #[serde(alias = "story")]
+    #[strum(to_string = "story")]
+    #[serde(rename = "story")]
     Story,
-    #[strum(serialize = "Delirium_reward")]
-    #[serde(alias = "Delirium_reward")]
+    #[strum(to_string = "Delirium_reward")]
+    #[serde(rename = "Delirium_reward")]
     Delirium,
     #[strum(to_string = "Chest_object", serialize = "Chest_obkect")]
-    #[serde(alias = "Chest_object", alias = "Chest_obkect")]
+    #[serde(rename = "Chest_object", alias = "Chest_obkect")]
     ChestObject,
-    #[strum(serialize = "strongbox")]
-    #[serde(alias = "strongbox")]
+    #[strum(to_string = "strongbox")]
+    #[serde(rename = "strongbox")]
     Strongbox,
-    #[strum(serialize = "Global Drop")]
-    #[serde(alias = "Global Drop")]
+    #[strum(to_string = "Global Drop")]
+    #[serde(rename = "Global Drop")]
     GlobalDrop,
-    #[strum(serialize = "Vendor")]
-    #[serde(alias = "Vendor")]
+    #[strum(to_string = "Vendor")]
+    #[serde(rename = "Vendor")]
     Vendor,
 }
 
+impl Default for GreyNote {
+    fn default() -> Self {
+        GreyNote::Empty
+    }
+}
+
 impl GreyNote {
-    pub fn parse(val: &Value) -> Result<Option<Self>, Error> {
+    pub fn parse(val: &Value) -> Result<Self, Error> {
         match val.as_str() {
-            Some(s) if s.is_empty() || s == "n/a" => Ok(None),
-            Some(s) => Ok(Some(s.parse()?)),
-            None => Ok(None),
+            Some(s) if s.is_empty() || s == "n/a" => Ok(Self::Empty),
+            Some(s) => Ok(s.parse()?),
+            None => Ok(Self::Empty),
         }
     }
 }
@@ -272,55 +281,49 @@ mod tests {
     #[test]
     fn test_parse_greynote() {
         assert_eq!(
-            Some(GreyNote::AreaSpecific),
+            GreyNote::AreaSpecific,
             GreyNote::parse(&json!("Area-specific")).unwrap()
         );
         assert_eq!(
-            Some(GreyNote::MonsterSpecific),
+            GreyNote::MonsterSpecific,
             GreyNote::parse(&json!("Monster-specific")).unwrap()
         );
         assert_eq!(
-            Some(GreyNote::Disabled),
+            GreyNote::Disabled,
             GreyNote::parse(&json!("disabled")).unwrap()
         );
         assert_eq!(
-            Some(GreyNote::Disabled),
+            GreyNote::Disabled,
             GreyNote::parse(&json!("disabled")).unwrap()
         );
         assert_eq!(
-            Some(GreyNote::Disabled),
+            GreyNote::Disabled,
             GreyNote::parse(&json!("Drop disabled")).unwrap()
         );
+        assert_eq!(GreyNote::Story, GreyNote::parse(&json!("story")).unwrap());
         assert_eq!(
-            Some(GreyNote::Story),
-            GreyNote::parse(&json!("story")).unwrap()
-        );
-        assert_eq!(
-            Some(GreyNote::Delirium),
+            GreyNote::Delirium,
             GreyNote::parse(&json!("Delirium_reward")).unwrap()
         );
         assert_eq!(
-            Some(GreyNote::ChestObject),
+            GreyNote::ChestObject,
             GreyNote::parse(&json!("Chest_object")).unwrap()
         );
         assert_eq!(
-            Some(GreyNote::ChestObject),
+            GreyNote::ChestObject,
             GreyNote::parse(&json!("Chest_obkect")).unwrap()
         );
         assert_eq!(
-            Some(GreyNote::Strongbox),
+            GreyNote::Strongbox,
             GreyNote::parse(&json!("strongbox")).unwrap()
         );
         assert_eq!(
-            Some(GreyNote::GlobalDrop),
+            GreyNote::GlobalDrop,
             GreyNote::parse(&json!("Global Drop")).unwrap()
         );
-        assert_eq!(
-            Some(GreyNote::Vendor),
-            GreyNote::parse(&json!("Vendor")).unwrap()
-        );
-        assert_eq!(None, GreyNote::parse(&json!("")).unwrap());
-        assert_eq!(None, GreyNote::parse(&json!("n/a")).unwrap());
+        assert_eq!(GreyNote::Vendor, GreyNote::parse(&json!("Vendor")).unwrap());
+        assert_eq!(GreyNote::Empty, GreyNote::parse(&json!("")).unwrap());
+        assert_eq!(GreyNote::Empty, GreyNote::parse(&json!("n/a")).unwrap());
     }
 
     #[test]

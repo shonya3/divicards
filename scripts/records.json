@@ -1,6 +1,7 @@
 [
   {
     "id": 3,
+    "greynote": "Empty",
     "card": "A Dab of Ink",
     "tagHypothesis": "library_area",
     "confidence": "done",
@@ -25,7 +26,7 @@
   },
   {
     "id": 4,
-    "greynote": "monsterSpecific",
+    "greynote": "Monster-specific",
     "card": "A Familiar Call",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -40,6 +41,7 @@
   },
   {
     "id": 5,
+    "greynote": "Empty",
     "card": "A Fate Worse Than Death",
     "tagHypothesis": "elderslayer",
     "confidence": "done",
@@ -74,6 +76,7 @@
   },
   {
     "id": 6,
+    "greynote": "Empty",
     "card": "A Modest Request",
     "tagHypothesis": "dominus_monster_map",
     "confidence": "done",
@@ -94,6 +97,7 @@
   },
   {
     "id": 7,
+    "greynote": "Empty",
     "card": "A Modest Request",
     "tagHypothesis": "malachai_boss_map",
     "confidence": "done",
@@ -135,6 +139,7 @@
   },
   {
     "id": 9,
+    "greynote": "Empty",
     "card": "A Note in the Wind",
     "tagHypothesis": "desert_area",
     "confidence": "done",
@@ -171,6 +176,7 @@
   },
   {
     "id": 10,
+    "greynote": "Empty",
     "card": "A Note in the Wind",
     "tagHypothesis": "desert_map_area",
     "confidence": "done",
@@ -203,6 +209,7 @@
   },
   {
     "id": 11,
+    "greynote": "Empty",
     "card": "A Sea of Blue",
     "tagHypothesis": "crystalline_area",
     "confidence": "done",
@@ -233,6 +240,7 @@
   },
   {
     "id": 12,
+    "greynote": "Empty",
     "card": "A Stone Perfected",
     "tagHypothesis": "golem_boss_area",
     "confidence": "done",
@@ -283,7 +291,7 @@
   },
   {
     "id": 13,
-    "greynote": "chestObject",
+    "greynote": "Chest_object",
     "card": "Abandoned Wealth",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -298,6 +306,7 @@
   },
   {
     "id": 14,
+    "greynote": "Empty",
     "card": "Acclimatisation",
     "tagHypothesis": "desert_map_area",
     "confidence": "done",
@@ -328,6 +337,7 @@
   },
   {
     "id": 15,
+    "greynote": "Empty",
     "card": "Akil's Prophecy",
     "tagHypothesis": "vaal_architect_incursion",
     "confidence": "ok",
@@ -343,6 +353,7 @@
   },
   {
     "id": 16,
+    "greynote": "Empty",
     "card": "Akil's Prophecy",
     "tagHypothesis": "vaal_architect_temple",
     "confidence": "low",
@@ -352,6 +363,7 @@
   },
   {
     "id": 17,
+    "greynote": "Empty",
     "card": "Alluring Bounty",
     "tagHypothesis": "atziri_area",
     "confidence": "done",
@@ -371,7 +383,7 @@
   },
   {
     "id": 18,
-    "greynote": "chestObject",
+    "greynote": "Chest_object",
     "card": "Alone in the Darkness",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -386,7 +398,7 @@
   },
   {
     "id": 19,
-    "greynote": "monsterSpecific",
+    "greynote": "Monster-specific",
     "card": "Altered Perception",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -401,6 +413,7 @@
   },
   {
     "id": 20,
+    "greynote": "Empty",
     "card": "Ambitious Obsession",
     "tagHypothesis": "god_boss_map_area",
     "confidence": "done",
@@ -471,6 +484,7 @@
   },
   {
     "id": 21,
+    "greynote": "Empty",
     "card": "Anarchy's Price",
     "tagHypothesis": "rogue_exile",
     "confidence": "done",
@@ -485,6 +499,7 @@
   },
   {
     "id": 22,
+    "greynote": "Empty",
     "card": "Arrogance of the Vaal",
     "tagHypothesis": "ruined_vaal_city_area",
     "confidence": "low",
@@ -506,6 +521,7 @@
   },
   {
     "id": 23,
+    "greynote": "Empty",
     "card": "Assassin's Favour",
     "tagHypothesis": "marketplace_area",
     "confidence": "done",
@@ -547,6 +563,7 @@
   },
   {
     "id": 24,
+    "greynote": "Empty",
     "card": "Atziri's Arsenal",
     "tagHypothesis": "vaults_of_atziri",
     "confidence": "done",
@@ -561,6 +578,7 @@
   },
   {
     "id": 25,
+    "greynote": "Empty",
     "card": "Audacity",
     "tagHypothesis": "atziri_area",
     "confidence": "low",
@@ -576,6 +594,7 @@
   },
   {
     "id": 26,
+    "greynote": "Empty",
     "card": "Azyran's Reward",
     "confidence": "none",
     "remainingWork": "no hypothesis",
@@ -601,6 +620,7 @@
   },
   {
     "id": 27,
+    "greynote": "Empty",
     "card": "Baited Expectations",
     "tagHypothesis": "desert_map_area",
     "confidence": "done",
@@ -631,7 +651,7 @@
   },
   {
     "id": 28,
-    "greynote": "monsterSpecific",
+    "greynote": "Monster-specific",
     "card": "Beauty Through Death",
     "tagHypothesis": "\"DemonBoss#Map\" boss",
     "confidence": "done",
@@ -657,6 +677,7 @@
   },
   {
     "id": 29,
+    "greynote": "Empty",
     "card": "Bijoux",
     "tagHypothesis": "mine_area",
     "confidence": "done",
@@ -728,6 +749,7 @@
   },
   {
     "id": 32,
+    "greynote": "Empty",
     "card": "Blind Venture",
     "tagHypothesis": "relic_area",
     "confidence": "done",
@@ -757,6 +779,7 @@
   },
   {
     "id": 33,
+    "greynote": "Empty",
     "card": "Boon of Justice",
     "tagHypothesis": "labyrinth_tileset_area",
     "confidence": "done",
@@ -787,7 +810,7 @@
   },
   {
     "id": 34,
-    "greynote": "areaSpecific",
+    "greynote": "Area-specific",
     "card": "Boon of the First Ones",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -802,6 +825,7 @@
   },
   {
     "id": 35,
+    "greynote": "Empty",
     "card": "Boundless Realms",
     "tagHypothesis": "solaris_area",
     "confidence": "done",
@@ -843,6 +867,7 @@
   },
   {
     "id": 36,
+    "greynote": "Empty",
     "card": "Bowyer's Dream",
     "tagHypothesis": "archer_boss",
     "confidence": "done",
@@ -873,7 +898,7 @@
   },
   {
     "id": 37,
-    "greynote": "monsterSpecific",
+    "greynote": "Monster-specific",
     "card": "Broken Promises",
     "confidence": "ok",
     "remainingWork": "unclear hypothesis",
@@ -893,6 +918,7 @@
   },
   {
     "id": 38,
+    "greynote": "Empty",
     "card": "Brother's Stash",
     "tagHypothesis": "graveyard_area",
     "confidence": "done",
@@ -918,6 +944,7 @@
   },
   {
     "id": 39,
+    "greynote": "Empty",
     "card": "Brotherhood in Exile",
     "tagHypothesis": "labyrinth_tileset_area",
     "confidence": "done",
@@ -948,6 +975,7 @@
   },
   {
     "id": 40,
+    "greynote": "Empty",
     "card": "Brush, Paint and Palette",
     "tagHypothesis": "doedre_monster_map",
     "confidence": "done",
@@ -979,6 +1007,7 @@
   },
   {
     "id": 41,
+    "greynote": "Empty",
     "card": "Buried Treasure",
     "tagHypothesis": "mine_area",
     "confidence": "done",
@@ -1019,6 +1048,7 @@
   },
   {
     "id": 42,
+    "greynote": "Empty",
     "card": "Burning Blood",
     "tagHypothesis": "fire_prison_area",
     "confidence": "done",
@@ -1038,6 +1068,7 @@
   },
   {
     "id": 43,
+    "greynote": "Empty",
     "card": "Call to the First Ones",
     "tagHypothesis": "dark_forest_area",
     "confidence": "done",
@@ -1068,6 +1099,7 @@
   },
   {
     "id": 44,
+    "greynote": "Empty",
     "card": "Call to the First Ones",
     "tagHypothesis": "thicket_area",
     "confidence": "done",
@@ -1088,6 +1120,7 @@
   },
   {
     "id": 45,
+    "greynote": "Empty",
     "card": "Cameria's Cut",
     "tagHypothesis": "betrayal_cameria",
     "confidence": "done",
@@ -1111,7 +1144,7 @@
   },
   {
     "id": 47,
-    "greynote": "areaSpecific",
+    "greynote": "Area-specific",
     "card": "Chaotic Disposition",
     "tagHypothesis": "Poorjoy's Asylum (no tags)",
     "confidence": "done",
@@ -1127,6 +1160,7 @@
   },
   {
     "id": 48,
+    "greynote": "Empty",
     "card": "Chasing Risk",
     "tagHypothesis": "incursion_temple_boss",
     "confidence": "done",
@@ -1141,6 +1175,7 @@
   },
   {
     "id": 49,
+    "greynote": "Empty",
     "card": "Costly Curio",
     "tagHypothesis": "relic_area",
     "confidence": "done",
@@ -1161,6 +1196,7 @@
   },
   {
     "id": 50,
+    "greynote": "Empty",
     "card": "Council of Cats",
     "tagHypothesis": "hunter_conqueror_boss",
     "confidence": "done",
@@ -1175,6 +1211,7 @@
   },
   {
     "id": 51,
+    "greynote": "Empty",
     "card": "Coveted Possession",
     "tagHypothesis": "catacomb_area",
     "confidence": "done",
@@ -1205,6 +1242,7 @@
   },
   {
     "id": 52,
+    "greynote": "Empty",
     "card": "Cursed Words",
     "tagHypothesis": "graveyard_area",
     "confidence": "done",
@@ -1230,6 +1268,7 @@
   },
   {
     "id": 53,
+    "greynote": "Empty",
     "card": "Dark Dreams",
     "tagHypothesis": "necromancer_exile",
     "confidence": "done",
@@ -1244,7 +1283,7 @@
   },
   {
     "id": 54,
-    "greynote": "chestObject",
+    "greynote": "Chest_object",
     "card": "Dark Temptation",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -1259,7 +1298,7 @@
   },
   {
     "id": 55,
-    "greynote": "delirium",
+    "greynote": "Delirium_reward",
     "card": "Darker Half",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -1274,7 +1313,7 @@
   },
   {
     "id": 56,
-    "greynote": "areaSpecific",
+    "greynote": "Area-specific",
     "card": "Deadly Joy",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -1289,6 +1328,7 @@
   },
   {
     "id": 57,
+    "greynote": "Empty",
     "card": "Death",
     "tagHypothesis": "fetid_area",
     "confidence": "done",
@@ -1315,6 +1355,7 @@
   },
   {
     "id": 58,
+    "greynote": "Empty",
     "card": "Deathly Designs",
     "tagHypothesis": "trap_exile",
     "confidence": "done",
@@ -1329,6 +1370,7 @@
   },
   {
     "id": 59,
+    "greynote": "Empty",
     "card": "Dementophobia",
     "tagHypothesis": "cortex_boss",
     "confidence": "done",
@@ -1343,6 +1385,7 @@
   },
   {
     "id": 60,
+    "greynote": "Empty",
     "card": "Dementophobia",
     "tagHypothesis": "crusader_conqueror_boss",
     "confidence": "done",
@@ -1357,6 +1400,7 @@
   },
   {
     "id": 61,
+    "greynote": "Empty",
     "card": "Dementophobia",
     "tagHypothesis": "hunter_conqueror_boss",
     "confidence": "done",
@@ -1371,6 +1415,7 @@
   },
   {
     "id": 62,
+    "greynote": "Empty",
     "card": "Dementophobia",
     "tagHypothesis": "redeemer_conqueror_boss",
     "confidence": "done",
@@ -1385,6 +1430,7 @@
   },
   {
     "id": 63,
+    "greynote": "Empty",
     "card": "Dementophobia",
     "tagHypothesis": "warlord_conqueror_boss",
     "confidence": "done",
@@ -1399,6 +1445,7 @@
   },
   {
     "id": 64,
+    "greynote": "Empty",
     "card": "Demigod's Wager",
     "tagHypothesis": "innocence_map",
     "confidence": "ok",
@@ -1415,6 +1462,7 @@
   },
   {
     "id": 65,
+    "greynote": "Empty",
     "card": "Desecrated Virtue",
     "tagHypothesis": "delve_protovaal_boss",
     "confidence": "done",
@@ -1430,6 +1478,7 @@
   },
   {
     "id": 66,
+    "greynote": "Empty",
     "card": "Desperate Crusade",
     "tagHypothesis": "innocence_map OR ?",
     "confidence": "low",
@@ -1451,6 +1500,7 @@
   },
   {
     "id": 67,
+    "greynote": "Empty",
     "card": "Destined to Crumble",
     "tagHypothesis": "library_area",
     "confidence": "done",
@@ -1475,6 +1525,7 @@
   },
   {
     "id": 68,
+    "greynote": "Empty",
     "card": "Dialla's Subjugation",
     "tagHypothesis": "solaris_area",
     "confidence": "done",
@@ -1516,7 +1567,7 @@
   },
   {
     "id": 69,
-    "greynote": "chestObject",
+    "greynote": "Chest_object",
     "card": "Disdain",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -1548,6 +1599,7 @@
   },
   {
     "id": 71,
+    "greynote": "Empty",
     "card": "Doedre's Madness",
     "tagHypothesis": "doedre_monster_map",
     "confidence": "done",
@@ -1582,6 +1634,7 @@
   },
   {
     "id": 72,
+    "greynote": "Empty",
     "card": "Draped in Dreams",
     "confidence": "none",
     "remainingWork": "no hypothesis",
@@ -1589,6 +1642,7 @@
   },
   {
     "id": 73,
+    "greynote": "Empty",
     "card": "Duality",
     "tagHypothesis": "vaal_architect_temple",
     "confidence": "low",
@@ -1613,7 +1667,7 @@
   },
   {
     "id": 75,
-    "greynote": "areaSpecific",
+    "greynote": "Area-specific",
     "card": "Dying Light",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -1628,6 +1682,7 @@
   },
   {
     "id": 76,
+    "greynote": "Empty",
     "card": "Earth Drinker",
     "tagHypothesis": "desert_area",
     "confidence": "done",
@@ -1678,6 +1733,7 @@
   },
   {
     "id": 77,
+    "greynote": "Empty",
     "card": "Echoes of Love",
     "tagHypothesis": "chamber_of_sins_area",
     "confidence": "ok",
@@ -1699,6 +1755,7 @@
   },
   {
     "id": 78,
+    "greynote": "Empty",
     "card": "Echoes of Love",
     "tagHypothesis": "maligaro_area",
     "confidence": "ok",
@@ -1725,6 +1782,7 @@
   },
   {
     "id": 79,
+    "greynote": "Empty",
     "card": "Emperor of Purity",
     "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
@@ -1756,6 +1814,7 @@
   },
   {
     "id": 80,
+    "greynote": "Empty",
     "card": "Emperor's Luck",
     "tagHypothesis": "garden_area",
     "confidence": "done",
@@ -1796,6 +1855,7 @@
   },
   {
     "id": 81,
+    "greynote": "Empty",
     "card": "Etched in Blood",
     "tagHypothesis": "rigwald_area + boss only",
     "confidence": "low",
@@ -1812,7 +1872,7 @@
   },
   {
     "id": 82,
-    "greynote": "chestObject",
+    "greynote": "Chest_object",
     "card": "Eternal Bonds",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -1827,6 +1887,7 @@
   },
   {
     "id": 83,
+    "greynote": "Empty",
     "card": "Fateful Meeting",
     "tagHypothesis": "vaal_flesh_merchant",
     "confidence": "done",
@@ -1841,6 +1902,7 @@
   },
   {
     "id": 84,
+    "greynote": "Empty",
     "card": "Forbidden Power",
     "tagHypothesis": "solaris_boss_map",
     "confidence": "done",
@@ -1907,6 +1969,7 @@
   },
   {
     "id": 87,
+    "greynote": "Empty",
     "card": "From Bone to Ashes",
     "tagHypothesis": "karui_map",
     "confidence": "done",
@@ -1952,6 +2015,7 @@
   },
   {
     "id": 88,
+    "greynote": "Empty",
     "card": "Further Invention",
     "tagHypothesis": "inventing_area",
     "confidence": "ok",
@@ -1973,6 +2037,7 @@
   },
   {
     "id": 89,
+    "greynote": "Empty",
     "card": "Gemcutter's Promise",
     "tagHypothesis": "lunaris_outer_area",
     "confidence": "done",
@@ -2003,6 +2068,7 @@
   },
   {
     "id": 90,
+    "greynote": "Empty",
     "card": "Gift of Asenath",
     "tagHypothesis": "mine_area",
     "confidence": "done",
@@ -2043,6 +2109,7 @@
   },
   {
     "id": 91,
+    "greynote": "Empty",
     "card": "Gift of the Gemling Queen",
     "tagHypothesis": "mine_area",
     "confidence": "done",
@@ -2083,6 +2150,7 @@
   },
   {
     "id": 92,
+    "greynote": "Empty",
     "card": "Glimmer of Hope",
     "tagHypothesis": "flooded_area",
     "confidence": "done",
@@ -2112,6 +2180,7 @@
   },
   {
     "id": 93,
+    "greynote": "Empty",
     "card": "Grave Knowledge",
     "tagHypothesis": "crypt_area",
     "confidence": "done",
@@ -2143,6 +2212,7 @@
   },
   {
     "id": 94,
+    "greynote": "Empty",
     "card": "Grave Knowledge",
     "tagHypothesis": "catacomb_area",
     "confidence": "done",
@@ -2173,6 +2243,7 @@
   },
   {
     "id": 95,
+    "greynote": "Empty",
     "card": "Grave Knowledge",
     "tagHypothesis": "necropolis_area",
     "confidence": "done",
@@ -2188,7 +2259,7 @@
   },
   {
     "id": 96,
-    "greynote": "vendor",
+    "greynote": "Vendor",
     "card": "Guardian's Challenge",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -2203,6 +2274,7 @@
   },
   {
     "id": 97,
+    "greynote": "Empty",
     "card": "Harmony of Souls",
     "tagHypothesis": "trio_soul_area",
     "confidence": "done",
@@ -2228,6 +2300,7 @@
   },
   {
     "id": 98,
+    "greynote": "Empty",
     "card": "Haunting Shadows",
     "tagHypothesis": "Twilight Temple (no tag)",
     "confidence": "done",
@@ -2244,7 +2317,7 @@
   },
   {
     "id": 99,
-    "greynote": "globalDrop",
+    "greynote": "Global Drop",
     "card": "Her Mask",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -2259,6 +2332,7 @@
   },
   {
     "id": 100,
+    "greynote": "Empty",
     "card": "Heterochromia",
     "tagHypothesis": "fire_affinity + cold_affinity bosses?",
     "confidence": "low",
@@ -2279,6 +2353,7 @@
   },
   {
     "id": 101,
+    "greynote": "Empty",
     "card": "Home",
     "tagHypothesis": "city_home_map",
     "confidence": "done",
@@ -2349,7 +2424,7 @@
   },
   {
     "id": 102,
-    "greynote": "globalDrop",
+    "greynote": "Global Drop",
     "card": "Hope",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -2364,6 +2439,7 @@
   },
   {
     "id": 103,
+    "greynote": "Empty",
     "card": "House of Mirrors",
     "tagHypothesis": "atziri_area",
     "confidence": "done",
@@ -2393,6 +2469,7 @@
   },
   {
     "id": 105,
+    "greynote": "Empty",
     "card": "Humility",
     "tagHypothesis": "aqueduct_area",
     "confidence": "done",
@@ -2427,6 +2504,7 @@
   },
   {
     "id": 106,
+    "greynote": "Empty",
     "card": "Hunter's Resolve",
     "tagHypothesis": "river_area",
     "confidence": "done",
@@ -2462,6 +2540,7 @@
   },
   {
     "id": 107,
+    "greynote": "Empty",
     "card": "Hunter's Reward",
     "tagHypothesis": "bestiary_spirit_boss",
     "confidence": "low",
@@ -2478,6 +2557,7 @@
   },
   {
     "id": 108,
+    "greynote": "Empty",
     "card": "Immortal Resolve",
     "tagHypothesis": "unholy_trio_combined_boss_map",
     "confidence": "done",
@@ -2494,6 +2574,7 @@
   },
   {
     "id": 109,
+    "greynote": "Empty",
     "card": "Immortal Resolve",
     "tagHypothesis": "unholy_trio_boss_map",
     "confidence": "done",
@@ -2519,6 +2600,7 @@
   },
   {
     "id": 110,
+    "greynote": "Empty",
     "card": "Imperfect Memories",
     "tagHypothesis": "cortex_boss",
     "confidence": "done",
@@ -2533,6 +2615,7 @@
   },
   {
     "id": 111,
+    "greynote": "Empty",
     "card": "Imperial Legacy",
     "tagHypothesis": "desert_area",
     "confidence": "done",
@@ -2568,6 +2651,7 @@
   },
   {
     "id": 112,
+    "greynote": "Empty",
     "card": "Jack in the Box",
     "tagHypothesis": "urban_sarn_area",
     "confidence": "done",
@@ -2674,12 +2758,14 @@
   },
   {
     "id": 113,
+    "greynote": "Empty",
     "card": "Judging Voices",
     "confidence": "none",
     "remainingWork": "no hypothesis"
   },
   {
     "id": 114,
+    "greynote": "Empty",
     "card": "Justified Ambition",
     "tagHypothesis": "crusader_conqueror_boss",
     "confidence": "done",
@@ -2695,6 +2781,7 @@
   },
   {
     "id": 115,
+    "greynote": "Empty",
     "card": "Justified Ambition",
     "tagHypothesis": "redeemer_conqueror_boss",
     "confidence": "done",
@@ -2710,6 +2797,7 @@
   },
   {
     "id": 116,
+    "greynote": "Empty",
     "card": "Justified Ambition",
     "tagHypothesis": "hunter_conqueror_boss",
     "confidence": "done",
@@ -2725,6 +2813,7 @@
   },
   {
     "id": 117,
+    "greynote": "Empty",
     "card": "Justified Ambition",
     "tagHypothesis": "warlord_conqueror_boss",
     "confidence": "done",
@@ -2740,6 +2829,7 @@
   },
   {
     "id": 118,
+    "greynote": "Empty",
     "card": "Keeper's Corruption",
     "tagHypothesis": "chaos_breachlord, area drop",
     "confidence": "done",
@@ -2755,6 +2845,7 @@
   },
   {
     "id": 119,
+    "greynote": "Empty",
     "card": "Lachrymal Necrosis",
     "tagHypothesis": "AvariusCasticus boss areas",
     "confidence": "done",
@@ -2785,6 +2876,7 @@
   },
   {
     "id": 120,
+    "greynote": "Empty",
     "card": "Lantador's Lost Love",
     "tagHypothesis": "ocean_area",
     "confidence": "done",
@@ -2920,7 +3012,7 @@
   },
   {
     "id": 121,
-    "greynote": "areaSpecific",
+    "greynote": "Area-specific",
     "card": "Last Hope",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -2935,6 +3027,7 @@
   },
   {
     "id": 122,
+    "greynote": "Empty",
     "card": "Left to Fate",
     "tagHypothesis": "river_area",
     "confidence": "done",
@@ -2955,6 +3048,7 @@
   },
   {
     "id": 123,
+    "greynote": "Empty",
     "card": "Light and Truth",
     "tagHypothesis": "sceptre_of_god_area",
     "confidence": "ok",
@@ -2985,7 +3079,7 @@
   },
   {
     "id": 124,
-    "greynote": "globalDrop",
+    "greynote": "Global Drop",
     "card": "Lingering Remnants",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -2999,7 +3093,7 @@
   },
   {
     "id": 125,
-    "greynote": "vendor",
+    "greynote": "Vendor",
     "card": "Lost Worlds",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -3014,6 +3108,7 @@
   },
   {
     "id": 126,
+    "greynote": "Empty",
     "card": "Love Through Ice",
     "tagHypothesis": "redeemer_conqueror_boss",
     "confidence": "done",
@@ -3028,6 +3123,7 @@
   },
   {
     "id": 127,
+    "greynote": "Empty",
     "card": "Loyalty",
     "tagHypothesis": "den_area",
     "confidence": "done",
@@ -3078,6 +3174,7 @@
   },
   {
     "id": 129,
+    "greynote": "Empty",
     "card": "Lucky Connections",
     "tagHypothesis": "dock_area",
     "confidence": "done",
@@ -3107,7 +3204,7 @@
   },
   {
     "id": 130,
-    "greynote": "globalDrop",
+    "greynote": "Global Drop",
     "card": "Lucky Deck",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -3122,6 +3219,7 @@
   },
   {
     "id": 131,
+    "greynote": "Empty",
     "card": "Luminous Trove",
     "tagHypothesis": "delve_protovaal_boss",
     "confidence": "done",
@@ -3136,6 +3234,7 @@
   },
   {
     "id": 132,
+    "greynote": "Empty",
     "card": "Lysah's Respite",
     "tagHypothesis": "merveil_area",
     "confidence": "done",
@@ -3157,6 +3256,7 @@
   },
   {
     "id": 133,
+    "greynote": "Empty",
     "card": "Magnum Opus",
     "tagHypothesis": "synthesis_area",
     "confidence": "ok",
@@ -3188,6 +3288,7 @@
   },
   {
     "id": 134,
+    "greynote": "Empty",
     "card": "Mawr Blaidd",
     "tagHypothesis": "dark_forest_area",
     "confidence": "done",
@@ -3212,6 +3313,7 @@
   },
   {
     "id": 135,
+    "greynote": "Empty",
     "card": "Merciless Armament",
     "tagHypothesis": "military_area",
     "confidence": "done",
@@ -3242,6 +3344,7 @@
   },
   {
     "id": 136,
+    "greynote": "Empty",
     "card": "Might is Right",
     "tagHypothesis": "mausoleum_area",
     "confidence": "done",
@@ -3286,6 +3389,7 @@
   },
   {
     "id": 137,
+    "greynote": "Empty",
     "card": "Misery in Darkness",
     "tagHypothesis": "delve_lich_boss",
     "confidence": "done",
@@ -3300,6 +3404,7 @@
   },
   {
     "id": 138,
+    "greynote": "Empty",
     "card": "Mitts",
     "tagHypothesis": "snow_area",
     "confidence": "done",
@@ -3350,7 +3455,7 @@
   },
   {
     "id": 139,
-    "greynote": "areaSpecific",
+    "greynote": "Area-specific",
     "card": "Monochrome",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -3460,6 +3565,7 @@
   },
   {
     "id": 140,
+    "greynote": "Empty",
     "card": "More is Never Enough",
     "tagHypothesis": "god_boss_map_area",
     "confidence": "done",
@@ -3531,6 +3637,7 @@
   },
   {
     "id": 141,
+    "greynote": "Empty",
     "card": "More is Never Enough",
     "tagHypothesis": "god_boss_map_area OR ?",
     "confidence": "low",
@@ -3546,6 +3653,7 @@
   },
   {
     "id": 142,
+    "greynote": "Empty",
     "card": "No Traces",
     "tagHypothesis": "mausoleum_area",
     "confidence": "done",
@@ -3570,6 +3678,7 @@
   },
   {
     "id": 143,
+    "greynote": "Empty",
     "card": "Nook's Crown",
     "tagHypothesis": "betrayal_catarina",
     "confidence": "done",
@@ -3584,6 +3693,7 @@
   },
   {
     "id": 144,
+    "greynote": "Empty",
     "card": "Parasitic Passengers",
     "tagHypothesis": "internal name contains \"Parasite\" OR arachnid_tomb_map_area",
     "confidence": "low",
@@ -3609,6 +3719,7 @@
   },
   {
     "id": 145,
+    "greynote": "Empty",
     "card": "Peaceful Moments",
     "tagHypothesis": "garden_area",
     "confidence": "done",
@@ -3639,6 +3750,7 @@
   },
   {
     "id": 146,
+    "greynote": "Empty",
     "card": "Perfection",
     "tagHypothesis": "shaper_guardian_boss",
     "confidence": "done",
@@ -3668,6 +3780,7 @@
   },
   {
     "id": 147,
+    "greynote": "Empty",
     "card": "Prejudice",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -3682,6 +3795,7 @@
   },
   {
     "id": 148,
+    "greynote": "Empty",
     "card": "Pride Before the Fall",
     "tagHypothesis": "kaom_area",
     "confidence": "done",
@@ -3703,6 +3817,7 @@
   },
   {
     "id": 149,
+    "greynote": "Empty",
     "card": "Pride of the First Ones",
     "tagHypothesis": "den_area",
     "confidence": "done",
@@ -3733,6 +3848,7 @@
   },
   {
     "id": 150,
+    "greynote": "Empty",
     "card": "Prometheus' Armoury",
     "tagHypothesis": "betrayal_haku",
     "confidence": "done",
@@ -3747,6 +3863,7 @@
   },
   {
     "id": 151,
+    "greynote": "Empty",
     "card": "Prosperity",
     "tagHypothesis": "ocean_area",
     "confidence": "done",
@@ -3852,6 +3969,7 @@
   },
   {
     "id": 152,
+    "greynote": "Empty",
     "card": "Rain of Chaos",
     "tagHypothesis": "crossroad_area",
     "confidence": "done",
@@ -3881,6 +3999,7 @@
   },
   {
     "id": 153,
+    "greynote": "Empty",
     "card": "Rain Tempter",
     "tagHypothesis": "garden_area",
     "confidence": "done",
@@ -3916,6 +4035,7 @@
   },
   {
     "id": 154,
+    "greynote": "Empty",
     "card": "Rats",
     "tagHypothesis": "warehouse_area",
     "confidence": "done",
@@ -3948,7 +4068,7 @@
   },
   {
     "id": 155,
-    "greynote": "areaSpecific",
+    "greynote": "Area-specific",
     "card": "Rebirth",
     "tagHypothesis": "NOT otherworldly_story_area",
     "confidence": "ok",
@@ -4076,6 +4196,7 @@
   },
   {
     "id": 156,
+    "greynote": "Empty",
     "card": "Rebirth and Renewal",
     "confidence": "none",
     "remainingWork": "no hypothesis",
@@ -4083,6 +4204,7 @@
   },
   {
     "id": 157,
+    "greynote": "Empty",
     "card": "Reckless Ambition",
     "tagHypothesis": "elder_lightning_guardian",
     "confidence": "done",
@@ -4097,7 +4219,7 @@
   },
   {
     "id": 158,
-    "greynote": "chestObject",
+    "greynote": "Chest_object",
     "card": "Remembrance",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -4112,6 +4234,7 @@
   },
   {
     "id": 159,
+    "greynote": "Empty",
     "card": "Sambodhi's Vow",
     "tagHypothesis": "betrayal_syndicate_member",
     "confidence": "done",
@@ -4206,6 +4329,7 @@
   },
   {
     "id": 160,
+    "greynote": "Empty",
     "card": "Sambodhi's Wisdom",
     "tagHypothesis": "Hillock boss & desert_area & area drop?",
     "confidence": "low",
@@ -4222,6 +4346,7 @@
   },
   {
     "id": 161,
+    "greynote": "Empty",
     "card": "Scholar of the Seas",
     "tagHypothesis": "ship_graveyard_area",
     "confidence": "done",
@@ -4252,6 +4377,7 @@
   },
   {
     "id": 162,
+    "greynote": "Empty",
     "card": "Seven Years Bad Luck",
     "tagHypothesis": "church & blood_mage_boss_map",
     "confidence": "low",
@@ -4273,6 +4399,7 @@
   },
   {
     "id": 163,
+    "greynote": "Empty",
     "card": "Shard of Fate",
     "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
@@ -4303,6 +4430,7 @@
   },
   {
     "id": 164,
+    "greynote": "Empty",
     "card": "Silence and Frost",
     "tagHypothesis": "bestiary_spirit_boss & feline_beast",
     "confidence": "done",
@@ -4318,7 +4446,7 @@
   },
   {
     "id": 165,
-    "greynote": "chestObject",
+    "greynote": "Chest_object",
     "card": "Society's Remorse",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -4348,6 +4476,7 @@
   },
   {
     "id": 167,
+    "greynote": "Empty",
     "card": "Struck by Lightning",
     "tagHypothesis": "rain_area",
     "confidence": "done",
@@ -4414,6 +4543,7 @@
   },
   {
     "id": 168,
+    "greynote": "Empty",
     "card": "Succor of the Sinless",
     "tagHypothesis": "crusader_conqueror_boss",
     "confidence": "done",
@@ -4443,6 +4573,7 @@
   },
   {
     "id": 170,
+    "greynote": "Empty",
     "card": "The Academic",
     "tagHypothesis": "library_area",
     "confidence": "done",
@@ -4468,6 +4599,7 @@
   },
   {
     "id": 171,
+    "greynote": "Empty",
     "card": "The Admirer",
     "tagHypothesis": "vaal_pyramid_area",
     "confidence": "done",
@@ -4504,6 +4636,7 @@
   },
   {
     "id": 172,
+    "greynote": "Empty",
     "card": "The Admirer",
     "tagHypothesis": "vaal_ruin_area",
     "confidence": "done",
@@ -4519,7 +4652,7 @@
   },
   {
     "id": 173,
-    "greynote": "areaSpecific",
+    "greynote": "Area-specific",
     "card": "The Adventuring Spirit",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -4534,6 +4667,7 @@
   },
   {
     "id": 174,
+    "greynote": "Empty",
     "card": "The Aesthete",
     "tagHypothesis": "shavronne_monster_story OR unholy_trio_combined_boss_story",
     "confidence": "ok",
@@ -4555,6 +4689,7 @@
   },
   {
     "id": 175,
+    "greynote": "Empty",
     "card": "The Aesthete",
     "tagHypothesis": "shavronne_monster_map OR unholy_trio_combined_boss_map",
     "confidence": "done",
@@ -4590,6 +4725,7 @@
   },
   {
     "id": 176,
+    "greynote": "Empty",
     "card": "The Apothecary",
     "tagHypothesis": "blood_mage_boss_map",
     "confidence": "done",
@@ -4620,7 +4756,7 @@
   },
   {
     "id": 177,
-    "greynote": "areaSpecific",
+    "greynote": "Area-specific",
     "card": "The Archmage's Right Hand",
     "tagHypothesis": "breach_map",
     "confidence": "done",
@@ -4656,6 +4792,7 @@
   },
   {
     "id": 178,
+    "greynote": "Empty",
     "card": "The Arena Champion",
     "tagHypothesis": "pitfight_area AND boss only",
     "confidence": "done",
@@ -4696,6 +4833,7 @@
   },
   {
     "id": 179,
+    "greynote": "Empty",
     "card": "The Army of Blood",
     "tagHypothesis": "lunaris_blood_area",
     "confidence": "done",
@@ -4726,6 +4864,7 @@
   },
   {
     "id": 180,
+    "greynote": "Empty",
     "card": "The Artist",
     "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
@@ -4745,6 +4884,7 @@
   },
   {
     "id": 181,
+    "greynote": "Empty",
     "card": "The Aspirant",
     "tagHypothesis": "oshabi_boss",
     "confidence": "done",
@@ -4759,6 +4899,7 @@
   },
   {
     "id": 182,
+    "greynote": "Empty",
     "card": "The Astromancer",
     "tagHypothesis": "heist_science_miniboss_monster",
     "confidence": "done",
@@ -4779,6 +4920,7 @@
   },
   {
     "id": 183,
+    "greynote": "Empty",
     "card": "The Avenger",
     "tagHypothesis": "sea_witch_boss_area",
     "confidence": "done",
@@ -4814,6 +4956,7 @@
   },
   {
     "id": 184,
+    "greynote": "Empty",
     "card": "The Awakened",
     "confidence": "low",
     "remainingWork": "confirm",
@@ -4845,6 +4988,7 @@
   },
   {
     "id": 186,
+    "greynote": "Empty",
     "card": "The Battle Born",
     "tagHypothesis": "kaom_area",
     "confidence": "done",
@@ -4875,6 +5019,7 @@
   },
   {
     "id": 187,
+    "greynote": "Empty",
     "card": "The Bear Woman",
     "tagHypothesis": "innocence_map OR bear_boss_map",
     "confidence": "done",
@@ -4927,6 +5072,7 @@
   },
   {
     "id": 189,
+    "greynote": "Empty",
     "card": "The Betrayal",
     "tagHypothesis": "bandit_area",
     "confidence": "done",
@@ -4967,6 +5113,7 @@
   },
   {
     "id": 190,
+    "greynote": "Empty",
     "card": "The Bitter Blossom",
     "tagHypothesis": "oshabi_boss",
     "confidence": "done",
@@ -4975,6 +5122,7 @@
   },
   {
     "id": 191,
+    "greynote": "Empty",
     "card": "The Bitter Blossom",
     "tagHypothesis": "nature_boss",
     "confidence": "done",
@@ -5005,6 +5153,7 @@
   },
   {
     "id": 192,
+    "greynote": "Empty",
     "card": "The Blazing Fire",
     "tagHypothesis": "kitava_cultist_area",
     "confidence": "done",
@@ -5079,6 +5228,7 @@
   },
   {
     "id": 195,
+    "greynote": "Empty",
     "card": "The Bones",
     "tagHypothesis": "necromancer_exile",
     "confidence": "done",
@@ -5093,6 +5243,7 @@
   },
   {
     "id": 196,
+    "greynote": "Empty",
     "card": "The Brawny Battle Mage",
     "tagHypothesis": "alira_area",
     "confidence": "done",
@@ -5113,6 +5264,7 @@
   },
   {
     "id": 197,
+    "greynote": "Empty",
     "card": "The Brawny Battle Mage",
     "tagHypothesis": "doedre_map_area",
     "confidence": "done",
@@ -5143,6 +5295,7 @@
   },
   {
     "id": 198,
+    "greynote": "Empty",
     "card": "The Breach",
     "tagHypothesis": "elder_portal_monster",
     "confidence": "done",
@@ -5157,6 +5310,7 @@
   },
   {
     "id": 199,
+    "greynote": "Empty",
     "card": "The Brittle Emperor",
     "tagHypothesis": "voll_monster_map",
     "confidence": "done",
@@ -5186,6 +5340,7 @@
   },
   {
     "id": 201,
+    "greynote": "Empty",
     "card": "The Cache",
     "tagHypothesis": "gold_pile_area",
     "confidence": "done",
@@ -5221,6 +5376,7 @@
   },
   {
     "id": 202,
+    "greynote": "Empty",
     "card": "The Cacophony",
     "tagHypothesis": "screeching_boss",
     "confidence": "done",
@@ -5261,6 +5417,7 @@
   },
   {
     "id": 203,
+    "greynote": "Empty",
     "card": "The Calling",
     "tagHypothesis": "beyond_demon",
     "confidence": "done",
@@ -5276,6 +5433,7 @@
   },
   {
     "id": 204,
+    "greynote": "Empty",
     "card": "The Card Sharp",
     "tagHypothesis": "incursion_architect_card_sharp",
     "confidence": "done",
@@ -5367,6 +5525,7 @@
   },
   {
     "id": 207,
+    "greynote": "Empty",
     "card": "The Cataclysm",
     "confidence": "low",
     "remainingWork": "unclear hypothesis",
@@ -5381,6 +5540,7 @@
   },
   {
     "id": 208,
+    "greynote": "Empty",
     "card": "The Catalyst",
     "tagHypothesis": "vaal_pyramid_area",
     "confidence": "done",
@@ -5431,6 +5591,7 @@
   },
   {
     "id": 209,
+    "greynote": "Empty",
     "card": "The Catalyst",
     "tagHypothesis": "vaal_ruin_area",
     "confidence": "done",
@@ -5457,6 +5618,7 @@
   },
   {
     "id": 210,
+    "greynote": "Empty",
     "card": "The Catch",
     "tagHypothesis": "ocean_area",
     "confidence": "low",
@@ -5513,6 +5675,7 @@
   },
   {
     "id": 211,
+    "greynote": "Empty",
     "card": "The Celestial Justicar",
     "tagHypothesis": "crypt_area",
     "confidence": "done",
@@ -5559,6 +5722,7 @@
   },
   {
     "id": 213,
+    "greynote": "Empty",
     "card": "The Chains that Bind",
     "tagHypothesis": "prison_area",
     "confidence": "done",
@@ -5609,6 +5773,7 @@
   },
   {
     "id": 214,
+    "greynote": "Empty",
     "card": "The Cheater",
     "tagHypothesis": "betrayal_guff",
     "confidence": "done",
@@ -5624,7 +5789,7 @@
   },
   {
     "id": 215,
-    "greynote": "chestObject",
+    "greynote": "Chest_object",
     "card": "The Chosen",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -5639,6 +5804,7 @@
   },
   {
     "id": 216,
+    "greynote": "Empty",
     "card": "The Coming Storm",
     "tagHypothesis": "rain_area; NOT lightning_area",
     "confidence": "done",
@@ -5699,6 +5865,7 @@
   },
   {
     "id": 217,
+    "greynote": "Empty",
     "card": "The Conduit",
     "tagHypothesis": "dominus_monster_map",
     "confidence": "done",
@@ -5724,6 +5891,7 @@
   },
   {
     "id": 218,
+    "greynote": "Empty",
     "card": "The Craving",
     "tagHypothesis": "necromancer_boss",
     "confidence": "ok",
@@ -5760,7 +5928,7 @@
   },
   {
     "id": 219,
-    "greynote": "areaSpecific",
+    "greynote": "Area-specific",
     "card": "The Cursed King",
     "tagHypothesis": "Caer Blaidd, Wolfpack's Den (no tag)",
     "confidence": "done",
@@ -5776,6 +5944,7 @@
   },
   {
     "id": 220,
+    "greynote": "Empty",
     "card": "The Damned",
     "tagHypothesis": "vaal_pyramid_area",
     "confidence": "ok",
@@ -5807,6 +5976,7 @@
   },
   {
     "id": 221,
+    "greynote": "Empty",
     "card": "The Damned",
     "tagHypothesis": "ruined_vaal_city_area",
     "confidence": "done",
@@ -5827,6 +5997,7 @@
   },
   {
     "id": 222,
+    "greynote": "Empty",
     "card": "The Damned",
     "tagHypothesis": "vaal_ruin_area",
     "confidence": "low",
@@ -5843,6 +6014,7 @@
   },
   {
     "id": 223,
+    "greynote": "Empty",
     "card": "The Dapper Prodigy",
     "tagHypothesis": "sceptre_of_god_area",
     "confidence": "done",
@@ -5868,6 +6040,7 @@
   },
   {
     "id": 224,
+    "greynote": "Empty",
     "card": "The Dark Mage",
     "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
@@ -5897,7 +6070,7 @@
   },
   {
     "id": 225,
-    "greynote": "areaSpecific",
+    "greynote": "Area-specific",
     "card": "The Darkest Dream",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -5912,6 +6085,7 @@
   },
   {
     "id": 226,
+    "greynote": "Empty",
     "card": "The Deal",
     "tagHypothesis": "betrayal_cameria",
     "confidence": "done",
@@ -5926,6 +6100,7 @@
   },
   {
     "id": 227,
+    "greynote": "Empty",
     "card": "The Deceiver",
     "tagHypothesis": "arena_area",
     "confidence": "done",
@@ -5956,6 +6131,7 @@
   },
   {
     "id": 228,
+    "greynote": "Empty",
     "card": "The Deep Ones",
     "tagHypothesis": "reef_area",
     "confidence": "done",
@@ -5976,6 +6152,7 @@
   },
   {
     "id": 229,
+    "greynote": "Empty",
     "card": "The Deep Ones",
     "tagHypothesis": "ship_graveyard_area",
     "confidence": "done",
@@ -6012,6 +6189,7 @@
   },
   {
     "id": 230,
+    "greynote": "Empty",
     "card": "The Demon",
     "tagHypothesis": "kitava_area",
     "confidence": "ok",
@@ -6028,6 +6206,7 @@
   },
   {
     "id": 231,
+    "greynote": "Empty",
     "card": "The Demoness",
     "tagHypothesis": "dark_forest_area",
     "confidence": "done",
@@ -6053,6 +6232,7 @@
   },
   {
     "id": 232,
+    "greynote": "Empty",
     "card": "The Destination",
     "tagHypothesis": "peaceful_map",
     "confidence": "low",
@@ -6099,6 +6279,7 @@
   },
   {
     "id": 234,
+    "greynote": "Empty",
     "card": "The Doctor",
     "tagHypothesis": "alira_area",
     "confidence": "done",
@@ -6118,6 +6299,7 @@
   },
   {
     "id": 235,
+    "greynote": "Empty",
     "card": "The Doctor",
     "tagHypothesis": "doedre_map_area",
     "confidence": "done",
@@ -6148,7 +6330,7 @@
   },
   {
     "id": 236,
-    "greynote": "areaSpecific",
+    "greynote": "Area-specific",
     "card": "The Doppelganger",
     "tagHypothesis": "Whakawairua Tuahu (no tag)",
     "confidence": "ok",
@@ -6165,6 +6347,7 @@
   },
   {
     "id": 237,
+    "greynote": "Empty",
     "card": "The Doppelganger",
     "tagHypothesis": "?",
     "confidence": "none",
@@ -6180,6 +6363,7 @@
   },
   {
     "id": 238,
+    "greynote": "Empty",
     "card": "The Dragon",
     "tagHypothesis": "dark_forest_area",
     "confidence": "done",
@@ -6205,7 +6389,7 @@
   },
   {
     "id": 239,
-    "greynote": "globalDrop",
+    "greynote": "Global Drop",
     "card": "The Dragon's Heart",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -6219,6 +6403,7 @@
   },
   {
     "id": 240,
+    "greynote": "Empty",
     "card": "The Dreamer",
     "tagHypothesis": "shaper_void_entity_monster",
     "confidence": "done",
@@ -6248,6 +6433,7 @@
   },
   {
     "id": 242,
+    "greynote": "Empty",
     "card": "The Drunken Aristocrat",
     "tagHypothesis": "undying_boss_area",
     "confidence": "done",
@@ -6288,6 +6474,7 @@
   },
   {
     "id": 243,
+    "greynote": "Empty",
     "card": "The Dungeon Master",
     "tagHypothesis": "prison_area",
     "confidence": "done",
@@ -6318,6 +6505,7 @@
   },
   {
     "id": 244,
+    "greynote": "Empty",
     "card": "The Easy Stroll",
     "tagHypothesis": "garden_area",
     "confidence": "done",
@@ -6348,6 +6536,7 @@
   },
   {
     "id": 245,
+    "greynote": "Empty",
     "card": "The Eldritch Decay",
     "tagHypothesis": "elder_guardian_boss",
     "confidence": "done",
@@ -6377,7 +6566,7 @@
   },
   {
     "id": 246,
-    "greynote": "areaSpecific",
+    "greynote": "Area-specific",
     "card": "The Emptiness",
     "confidence": "ok",
     "remainingWork": "confirm",
@@ -6386,7 +6575,7 @@
   },
   {
     "id": 247,
-    "greynote": "globalDrop",
+    "greynote": "Global Drop",
     "card": "The Encroaching Darkness",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -6400,6 +6589,7 @@
   },
   {
     "id": 248,
+    "greynote": "Empty",
     "card": "The Endless Darkness",
     "tagHypothesis": "harbinger_portal_monster",
     "confidence": "done",
@@ -6424,6 +6614,7 @@
   },
   {
     "id": 249,
+    "greynote": "Empty",
     "card": "The Endurance",
     "tagHypothesis": "mine_area",
     "confidence": "done",
@@ -6464,6 +6655,7 @@
   },
   {
     "id": 250,
+    "greynote": "Empty",
     "card": "The Enlightened",
     "tagHypothesis": "church",
     "confidence": "done",
@@ -6519,6 +6711,7 @@
   },
   {
     "id": 251,
+    "greynote": "Empty",
     "card": "The Enthusiasts",
     "tagHypothesis": "library_area",
     "confidence": "done",
@@ -6544,6 +6737,7 @@
   },
   {
     "id": 252,
+    "greynote": "Empty",
     "card": "The Escape",
     "tagHypothesis": "breachlord_boss_domain",
     "confidence": "done",
@@ -6579,6 +6773,7 @@
   },
   {
     "id": 253,
+    "greynote": "Empty",
     "card": "The Eternal War",
     "tagHypothesis": "crusader_conqueror_boss",
     "confidence": "done",
@@ -6593,6 +6788,7 @@
   },
   {
     "id": 254,
+    "greynote": "Empty",
     "card": "The Eternal War",
     "tagHypothesis": "hunter_conqueror_boss",
     "confidence": "done",
@@ -6607,6 +6803,7 @@
   },
   {
     "id": 255,
+    "greynote": "Empty",
     "card": "The Eternal War",
     "tagHypothesis": "redeemer_conqueror_boss",
     "confidence": "done",
@@ -6621,6 +6818,7 @@
   },
   {
     "id": 256,
+    "greynote": "Empty",
     "card": "The Eternal War",
     "tagHypothesis": "warlord_conqueror_boss",
     "confidence": "done",
@@ -6635,6 +6833,7 @@
   },
   {
     "id": 257,
+    "greynote": "Empty",
     "card": "The Ethereal",
     "tagHypothesis": "atziri_area",
     "confidence": "done",
@@ -6654,6 +6853,7 @@
   },
   {
     "id": 258,
+    "greynote": "Empty",
     "card": "The Explorer",
     "tagHypothesis": "thicket_area",
     "confidence": "done",
@@ -6669,6 +6869,7 @@
   },
   {
     "id": 259,
+    "greynote": "Empty",
     "card": "The Eye of Terror",
     "tagHypothesis": "betrayal_breach",
     "confidence": "done",
@@ -6683,6 +6884,7 @@
   },
   {
     "id": 260,
+    "greynote": "Empty",
     "card": "The Eye of the Dragon",
     "tagHypothesis": "\"Phoenix\" boss",
     "confidence": "ok",
@@ -6709,6 +6911,7 @@
   },
   {
     "id": 261,
+    "greynote": "Empty",
     "card": "The Fathomless Depths",
     "tagHypothesis": "flooded_area",
     "confidence": "done",
@@ -6734,6 +6937,7 @@
   },
   {
     "id": 262,
+    "greynote": "Empty",
     "card": "The Feast",
     "tagHypothesis": "sewer_area",
     "confidence": "done",
@@ -6769,6 +6973,7 @@
   },
   {
     "id": 263,
+    "greynote": "Empty",
     "card": "The Fiend",
     "tagHypothesis": "thaumaturgy_area",
     "confidence": "done",
@@ -6799,6 +7004,7 @@
   },
   {
     "id": 264,
+    "greynote": "Empty",
     "card": "The Fishmonger",
     "tagHypothesis": "rhoa_map_boss",
     "confidence": "done",
@@ -6819,6 +7025,7 @@
   },
   {
     "id": 265,
+    "greynote": "Empty",
     "card": "The Fletcher",
     "tagHypothesis": "archer_boss",
     "confidence": "done",
@@ -6865,6 +7072,7 @@
   },
   {
     "id": 266,
+    "greynote": "Empty",
     "card": "The Flora's Gift",
     "tagHypothesis": "forest_map_area",
     "confidence": "done",
@@ -6930,6 +7138,7 @@
   },
   {
     "id": 267,
+    "greynote": "Empty",
     "card": "The Fool",
     "tagHypothesis": "betrayal_janus",
     "confidence": "done",
@@ -6944,6 +7153,7 @@
   },
   {
     "id": 268,
+    "greynote": "Empty",
     "card": "The Forgotten Treasure",
     "confidence": "low",
     "remainingWork": "no hypothesis",
@@ -6959,6 +7169,7 @@
   },
   {
     "id": 269,
+    "greynote": "Empty",
     "card": "The Formless Sea",
     "tagHypothesis": "ship_graveyard_area",
     "confidence": "done",
@@ -6989,6 +7200,7 @@
   },
   {
     "id": 270,
+    "greynote": "Empty",
     "card": "The Forsaken",
     "tagHypothesis": "crypt_area",
     "confidence": "done",
@@ -7015,6 +7227,7 @@
   },
   {
     "id": 271,
+    "greynote": "Empty",
     "card": "The Forsaken",
     "tagHypothesis": "necropolis_area",
     "confidence": "ok",
@@ -7030,7 +7243,7 @@
   },
   {
     "id": 272,
-    "greynote": "areaSpecific",
+    "greynote": "Area-specific",
     "card": "The Forward Gaze",
     "tagHypothesis": "Doryani's Machinarium (no tag)",
     "confidence": "done",
@@ -7046,6 +7259,7 @@
   },
   {
     "id": 273,
+    "greynote": "Empty",
     "card": "The Fox",
     "tagHypothesis": "has_foxes_area",
     "confidence": "done",
@@ -7076,6 +7290,7 @@
   },
   {
     "id": 274,
+    "greynote": "Empty",
     "card": "The Fox in the Brambles",
     "tagHypothesis": "garden_area",
     "confidence": "ok",
@@ -7107,7 +7322,7 @@
   },
   {
     "id": 275,
-    "greynote": "globalDrop",
+    "greynote": "Global Drop",
     "card": "The Gambler",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -7121,6 +7336,7 @@
   },
   {
     "id": 276,
+    "greynote": "Empty",
     "card": "The Garish Power",
     "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
@@ -7165,6 +7381,7 @@
   },
   {
     "id": 278,
+    "greynote": "Empty",
     "card": "The Gentleman",
     "tagHypothesis": "slums_area",
     "confidence": "done",
@@ -7184,6 +7401,7 @@
   },
   {
     "id": 279,
+    "greynote": "Empty",
     "card": "The Gladiator",
     "tagHypothesis": "pitfight_area",
     "confidence": "done",
@@ -7213,6 +7431,7 @@
   },
   {
     "id": 280,
+    "greynote": "Empty",
     "card": "The Golden Era",
     "tagHypothesis": "wealthy_area + Boss with `has_two_handed_melee`",
     "confidence": "done",
@@ -7233,6 +7452,7 @@
   },
   {
     "id": 281,
+    "greynote": "Empty",
     "card": "The Golden Era",
     "tagHypothesis": "wealthy_area + tower_area / undying_boss_area",
     "confidence": "done",
@@ -7248,6 +7468,7 @@
   },
   {
     "id": 282,
+    "greynote": "Empty",
     "card": "The Greatest Intentions",
     "confidence": "none",
     "remainingWork": "no hypothesis",
@@ -7255,6 +7476,7 @@
   },
   {
     "id": 283,
+    "greynote": "Empty",
     "card": "The Gulf",
     "tagHypothesis": "uber_elder",
     "confidence": "done",
@@ -7270,6 +7492,7 @@
   },
   {
     "id": 284,
+    "greynote": "Empty",
     "card": "The Hale Heart",
     "tagHypothesis": "elder_guardian_boss",
     "confidence": "done",
@@ -7299,6 +7522,7 @@
   },
   {
     "id": 285,
+    "greynote": "Empty",
     "card": "The Harvester",
     "tagHypothesis": "crossroad_area",
     "confidence": "done",
@@ -7395,6 +7619,7 @@
   },
   {
     "id": 288,
+    "greynote": "Empty",
     "card": "The Hive of Knowledge",
     "tagHypothesis": "vaal_pyramid_area",
     "confidence": "ok",
@@ -7421,6 +7646,7 @@
   },
   {
     "id": 289,
+    "greynote": "Empty",
     "card": "The Hoarder",
     "tagHypothesis": "gold_pile_area",
     "confidence": "done",
@@ -7472,6 +7698,7 @@
   },
   {
     "id": 291,
+    "greynote": "Empty",
     "card": "The Hunger",
     "tagHypothesis": "belly_area",
     "confidence": "done",
@@ -7527,7 +7754,7 @@
   },
   {
     "id": 292,
-    "greynote": "areaSpecific",
+    "greynote": "Area-specific",
     "card": "The Immortal",
     "tagHypothesis": "hall_of_grandmasters",
     "confidence": "done",
@@ -7543,6 +7770,7 @@
   },
   {
     "id": 293,
+    "greynote": "Empty",
     "card": "The Incantation",
     "tagHypothesis": "alira_area",
     "confidence": "done",
@@ -7562,6 +7790,7 @@
   },
   {
     "id": 294,
+    "greynote": "Empty",
     "card": "The Incantation",
     "tagHypothesis": "doedre_map_area",
     "confidence": "done",
@@ -7592,6 +7821,7 @@
   },
   {
     "id": 295,
+    "greynote": "Empty",
     "card": "The Innocent",
     "tagHypothesis": "AvariusCasticus boss areas (no tag)",
     "confidence": "done",
@@ -7628,6 +7858,7 @@
   },
   {
     "id": 297,
+    "greynote": "Empty",
     "card": "The Inoculated",
     "tagHypothesis": "toxic_pool_area",
     "confidence": "done",
@@ -7673,6 +7904,7 @@
   },
   {
     "id": 298,
+    "greynote": "Empty",
     "card": "The Insatiable",
     "tagHypothesis": "harvest_area",
     "confidence": "ok",
@@ -7699,6 +7931,7 @@
   },
   {
     "id": 299,
+    "greynote": "Empty",
     "card": "The Inventor",
     "tagHypothesis": "vaal_pyramid_area",
     "confidence": "done",
@@ -7744,6 +7977,7 @@
   },
   {
     "id": 300,
+    "greynote": "Empty",
     "card": "The Jester",
     "tagHypothesis": "trap_exile",
     "confidence": "done",
@@ -7759,6 +7993,7 @@
   },
   {
     "id": 301,
+    "greynote": "Empty",
     "card": "The Jeweller's Boon",
     "tagHypothesis": "crystalline_area",
     "confidence": "done",
@@ -7789,6 +8024,7 @@
   },
   {
     "id": 302,
+    "greynote": "Empty",
     "card": "The Journalist",
     "tagHypothesis": "kitava_cultist_area",
     "confidence": "done",
@@ -7834,6 +8070,7 @@
   },
   {
     "id": 303,
+    "greynote": "Empty",
     "card": "The Journey",
     "tagHypothesis": "ocean_area",
     "confidence": "done",
@@ -7939,6 +8176,7 @@
   },
   {
     "id": 304,
+    "greynote": "Empty",
     "card": "The King's Blade",
     "tagHypothesis": "daresso_area",
     "confidence": "done",
@@ -7969,6 +8207,7 @@
   },
   {
     "id": 305,
+    "greynote": "Empty",
     "card": "The King's Heart",
     "tagHypothesis": "kaom_area",
     "confidence": "done",
@@ -7988,6 +8227,7 @@
   },
   {
     "id": 306,
+    "greynote": "Empty",
     "card": "The Landing",
     "tagHypothesis": "coast_boat_area",
     "confidence": "done",
@@ -8018,6 +8258,7 @@
   },
   {
     "id": 307,
+    "greynote": "Empty",
     "card": "The Last One Standing",
     "tagHypothesis": "pitfight_area",
     "confidence": "done",
@@ -8048,7 +8289,7 @@
   },
   {
     "id": 308,
-    "greynote": "areaSpecific",
+    "greynote": "Area-specific",
     "card": "The Last Supper",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -8063,6 +8304,7 @@
   },
   {
     "id": 309,
+    "greynote": "Empty",
     "card": "The Lich",
     "tagHypothesis": "necromancer_boss",
     "confidence": "none",
@@ -8072,6 +8314,7 @@
   },
   {
     "id": 310,
+    "greynote": "Empty",
     "card": "The Lich",
     "tagHypothesis": "abyss_lich_boss?",
     "confidence": "none",
@@ -8080,6 +8323,7 @@
   },
   {
     "id": 311,
+    "greynote": "Empty",
     "card": "The Life Thief",
     "tagHypothesis": "kitava_cultist_area",
     "confidence": "done",
@@ -8125,6 +8369,7 @@
   },
   {
     "id": 312,
+    "greynote": "Empty",
     "card": "The Lion",
     "tagHypothesis": "dishonoured_queen; dishonoured_queen_map",
     "confidence": "done",
@@ -8144,7 +8389,7 @@
   },
   {
     "id": 313,
-    "greynote": "chestObject",
+    "greynote": "Chest_object",
     "card": "The Long Con",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -8175,7 +8420,7 @@
   },
   {
     "id": 315,
-    "greynote": "monsterSpecific",
+    "greynote": "Monster-specific",
     "card": "The Lord in Black",
     "tagHypothesis": "hellscape_demon_boss",
     "confidence": "done",
@@ -8190,6 +8435,7 @@
   },
   {
     "id": 316,
+    "greynote": "Empty",
     "card": "The Lord of Celebration",
     "tagHypothesis": "wealthy_area",
     "confidence": "done",
@@ -8281,6 +8527,7 @@
   },
   {
     "id": 317,
+    "greynote": "Empty",
     "card": "The Lover",
     "tagHypothesis": "merveil_area",
     "confidence": "done",
@@ -8301,6 +8548,7 @@
   },
   {
     "id": 318,
+    "greynote": "Empty",
     "card": "The Lunaris Priestess",
     "tagHypothesis": "lunaris_area",
     "confidence": "done",
@@ -8336,6 +8584,7 @@
   },
   {
     "id": 319,
+    "greynote": "Empty",
     "card": "The Mad King",
     "tagHypothesis": "king_boss_map",
     "confidence": "done",
@@ -8367,6 +8616,7 @@
   },
   {
     "id": 320,
+    "greynote": "Empty",
     "card": "The Magma Crab",
     "tagHypothesis": "exile_molten_shell",
     "confidence": "done",
@@ -8381,6 +8631,7 @@
   },
   {
     "id": 321,
+    "greynote": "Empty",
     "card": "The Master",
     "tagHypothesis": "boss summons canine_beast minion",
     "confidence": "none",
@@ -8436,6 +8687,7 @@
   },
   {
     "id": 324,
+    "greynote": "Empty",
     "card": "The Mercenary",
     "tagHypothesis": "kraityn_area",
     "confidence": "done",
@@ -8461,6 +8713,7 @@
   },
   {
     "id": 325,
+    "greynote": "Empty",
     "card": "The Messenger",
     "confidence": "low",
     "remainingWork": "no hypothesis",
@@ -8506,6 +8759,7 @@
   },
   {
     "id": 327,
+    "greynote": "Empty",
     "card": "The Mind's Eyes",
     "tagHypothesis": "mine_area; boss only",
     "confidence": "ok",
@@ -8557,6 +8811,7 @@
   },
   {
     "id": 328,
+    "greynote": "Empty",
     "card": "The Mountain",
     "tagHypothesis": "snow_mountain_area",
     "confidence": "ok",
@@ -8588,6 +8843,7 @@
   },
   {
     "id": 329,
+    "greynote": "Empty",
     "card": "The Nurse",
     "tagHypothesis": "shavronne_area",
     "confidence": "done",
@@ -8633,6 +8889,7 @@
   },
   {
     "id": 330,
+    "greynote": "Empty",
     "card": "The Nurse",
     "tagHypothesis": "harvest_area",
     "confidence": "done",
@@ -8663,6 +8920,7 @@
   },
   {
     "id": 331,
+    "greynote": "Empty",
     "card": "The Oath",
     "tagHypothesis": "belly_area",
     "confidence": "done",
@@ -8702,6 +8960,7 @@
   },
   {
     "id": 332,
+    "greynote": "Empty",
     "card": "The Obscured",
     "tagHypothesis": "abyssal",
     "confidence": "done",
@@ -8717,6 +8976,7 @@
   },
   {
     "id": 333,
+    "greynote": "Empty",
     "card": "The Offering",
     "tagHypothesis": "shavronne_monster_story OR unholy_trio_combined_boss_story",
     "confidence": "ok",
@@ -8738,6 +8998,7 @@
   },
   {
     "id": 334,
+    "greynote": "Empty",
     "card": "The Offering",
     "tagHypothesis": "shavronne_monster_map OR unholy_trio_combined_boss_map",
     "confidence": "done",
@@ -8773,6 +9034,7 @@
   },
   {
     "id": 335,
+    "greynote": "Empty",
     "card": "The Offspring",
     "tagHypothesis": "Ryslatha boss",
     "confidence": "ok",
@@ -8794,6 +9056,7 @@
   },
   {
     "id": 336,
+    "greynote": "Empty",
     "card": "The Offspring",
     "tagHypothesis": "nature_boss",
     "confidence": "low",
@@ -8816,6 +9079,7 @@
   },
   {
     "id": 337,
+    "greynote": "Empty",
     "card": "The Offspring",
     "confidence": "low",
     "remainingWork": "no hypothesis",
@@ -8823,6 +9087,7 @@
   },
   {
     "id": 338,
+    "greynote": "Empty",
     "card": "The Old Man",
     "tagHypothesis": "map_area_with_open_water",
     "confidence": "low",
@@ -8874,6 +9139,7 @@
   },
   {
     "id": 339,
+    "greynote": "Empty",
     "card": "The One That Got Away",
     "tagHypothesis": "coast_boat_area",
     "confidence": "low",
@@ -8890,6 +9156,7 @@
   },
   {
     "id": 340,
+    "greynote": "Empty",
     "card": "The One With All",
     "tagHypothesis": "cemetery_map_area",
     "confidence": "done",
@@ -8925,6 +9192,7 @@
   },
   {
     "id": 341,
+    "greynote": "Empty",
     "card": "The Opulent",
     "tagHypothesis": "wealthy_area",
     "confidence": "done",
@@ -9015,6 +9283,7 @@
   },
   {
     "id": 342,
+    "greynote": "Empty",
     "card": "The Pack Leader",
     "tagHypothesis": "forest_map_area",
     "confidence": "done",
@@ -9080,6 +9349,7 @@
   },
   {
     "id": 343,
+    "greynote": "Empty",
     "card": "The Pact",
     "tagHypothesis": "dock_area",
     "confidence": "done",
@@ -9115,6 +9385,7 @@
   },
   {
     "id": 344,
+    "greynote": "Empty",
     "card": "The Patient",
     "tagHypothesis": "military_area",
     "confidence": "done",
@@ -9146,6 +9417,7 @@
   },
   {
     "id": 345,
+    "greynote": "Empty",
     "card": "The Penitent",
     "tagHypothesis": "prison_area",
     "confidence": "done",
@@ -9176,6 +9448,7 @@
   },
   {
     "id": 346,
+    "greynote": "Empty",
     "card": "The Poet",
     "tagHypothesis": "marketplace_area",
     "confidence": "done",
@@ -9216,6 +9489,7 @@
   },
   {
     "id": 347,
+    "greynote": "Empty",
     "card": "The Polymath",
     "tagHypothesis": "relic_area",
     "confidence": "done",
@@ -9245,6 +9519,7 @@
   },
   {
     "id": 348,
+    "greynote": "Empty",
     "card": "The Porcupine",
     "tagHypothesis": "garden_area",
     "confidence": "done",
@@ -9281,6 +9556,7 @@
   },
   {
     "id": 349,
+    "greynote": "Empty",
     "card": "The Porcupine",
     "tagHypothesis": "garden_area OR (labyrinth_tileset_area & NOT indoors_area)",
     "confidence": "done",
@@ -9322,6 +9598,7 @@
   },
   {
     "id": 350,
+    "greynote": "Empty",
     "card": "The Price of Loyalty",
     "tagHypothesis": "incursion_architect_breach",
     "confidence": "done",
@@ -9336,6 +9613,7 @@
   },
   {
     "id": 351,
+    "greynote": "Empty",
     "card": "The Price of Prescience",
     "tagHypothesis": "crusader_conqueror_boss",
     "confidence": "low",
@@ -9351,6 +9629,7 @@
   },
   {
     "id": 352,
+    "greynote": "Empty",
     "card": "The Price of Prescience",
     "tagHypothesis": "hunter_conqueror_boss",
     "confidence": "low",
@@ -9366,6 +9645,7 @@
   },
   {
     "id": 353,
+    "greynote": "Empty",
     "card": "The Price of Prescience",
     "tagHypothesis": "redeemer_conqueror_boss",
     "confidence": "low",
@@ -9381,6 +9661,7 @@
   },
   {
     "id": 354,
+    "greynote": "Empty",
     "card": "The Price of Prescience",
     "tagHypothesis": "warlord_conqueror_boss",
     "confidence": "low",
@@ -9396,6 +9677,7 @@
   },
   {
     "id": 355,
+    "greynote": "Empty",
     "card": "The Price of Protection",
     "tagHypothesis": "invasion_boss",
     "confidence": "done",
@@ -9410,6 +9692,7 @@
   },
   {
     "id": 356,
+    "greynote": "Empty",
     "card": "The Price of Protection",
     "tagHypothesis": "vaalsidearea_boss",
     "confidence": "done",
@@ -9425,6 +9708,7 @@
   },
   {
     "id": 357,
+    "greynote": "Empty",
     "card": "The Primordial",
     "tagHypothesis": "golem_boss_area",
     "confidence": "done",
@@ -9474,6 +9758,7 @@
   },
   {
     "id": 358,
+    "greynote": "Empty",
     "card": "The Prince of Darkness",
     "tagHypothesis": "malachai_boss_map",
     "confidence": "done",
@@ -9494,6 +9779,7 @@
   },
   {
     "id": 359,
+    "greynote": "Empty",
     "card": "The Professor",
     "tagHypothesis": "library_area",
     "confidence": "done",
@@ -9520,6 +9806,7 @@
   },
   {
     "id": 360,
+    "greynote": "Empty",
     "card": "The Professor",
     "confidence": "low",
     "remainingWork": "unclear hypothesis",
@@ -9535,7 +9822,7 @@
   },
   {
     "id": 361,
-    "greynote": "monsterSpecific",
+    "greynote": "Monster-specific",
     "card": "The Progeny of Lunaris",
     "tagHypothesis": "lunaris_area + solaris_area + unique_map_boss",
     "confidence": "ok",
@@ -9562,6 +9849,7 @@
   },
   {
     "id": 362,
+    "greynote": "Empty",
     "card": "The Puzzle",
     "tagHypothesis": "beyond_demon",
     "confidence": "done",
@@ -9576,6 +9864,7 @@
   },
   {
     "id": 363,
+    "greynote": "Empty",
     "card": "The Queen",
     "tagHypothesis": "vaults_of_atziri",
     "confidence": "done",
@@ -9590,6 +9879,7 @@
   },
   {
     "id": 364,
+    "greynote": "Empty",
     "card": "The Rabbit's Foot",
     "tagHypothesis": "crypt_area",
     "confidence": "ok",
@@ -9616,6 +9906,7 @@
   },
   {
     "id": 365,
+    "greynote": "Empty",
     "card": "The Rabid Rhoa",
     "tagHypothesis": "rhoa_map_boss",
     "confidence": "done",
@@ -9636,6 +9927,7 @@
   },
   {
     "id": 366,
+    "greynote": "Empty",
     "card": "The Realm",
     "tagHypothesis": "Breach monster (no tag)",
     "confidence": "done",
@@ -9644,7 +9936,7 @@
   },
   {
     "id": 367,
-    "greynote": "chestObject",
+    "greynote": "Chest_object",
     "card": "The Risk",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -9659,6 +9951,7 @@
   },
   {
     "id": 368,
+    "greynote": "Empty",
     "card": "The Rite of Elements",
     "tagHypothesis": "golem_boss_area",
     "confidence": "done",
@@ -9709,6 +10002,7 @@
   },
   {
     "id": 369,
+    "greynote": "Empty",
     "card": "The Road to Power",
     "tagHypothesis": "has_road_area",
     "confidence": "done",
@@ -9739,6 +10033,7 @@
   },
   {
     "id": 370,
+    "greynote": "Empty",
     "card": "The Rusted Bard",
     "confidence": "low",
     "remainingWork": "confirm",
@@ -9753,6 +10048,7 @@
   },
   {
     "id": 371,
+    "greynote": "Empty",
     "card": "The Ruthless Ceinture",
     "confidence": "none",
     "remainingWork": "no hypothesis",
@@ -9792,6 +10088,7 @@
   },
   {
     "id": 372,
+    "greynote": "Empty",
     "card": "The Sacrifice",
     "tagHypothesis": "incursion_temple_area",
     "confidence": "ok",
@@ -9807,6 +10104,7 @@
   },
   {
     "id": 373,
+    "greynote": "Empty",
     "card": "The Saint's Treasure",
     "tagHypothesis": "marketplace_area",
     "confidence": "done",
@@ -9837,6 +10135,7 @@
   },
   {
     "id": 374,
+    "greynote": "Empty",
     "card": "The Saint's Treasure",
     "tagHypothesis": "slums_area",
     "confidence": "done",
@@ -9857,6 +10156,7 @@
   },
   {
     "id": 375,
+    "greynote": "Empty",
     "card": "The Samurai's Eye",
     "tagHypothesis": "abyss_lich_boss",
     "confidence": "done",
@@ -9876,6 +10176,7 @@
   },
   {
     "id": 376,
+    "greynote": "Empty",
     "card": "The Scarred Meadow",
     "tagHypothesis": "fields_area",
     "confidence": "done",
@@ -9910,6 +10211,7 @@
   },
   {
     "id": 377,
+    "greynote": "Empty",
     "card": "The Scavenger",
     "tagHypothesis": "scavenger_boss_area",
     "confidence": "done",
@@ -9941,6 +10243,7 @@
   },
   {
     "id": 378,
+    "greynote": "Empty",
     "card": "The Scholar",
     "tagHypothesis": "library_area",
     "confidence": "done",
@@ -9975,6 +10278,7 @@
   },
   {
     "id": 379,
+    "greynote": "Empty",
     "card": "The Scout",
     "tagHypothesis": "forest_map_area",
     "confidence": "done",
@@ -10040,6 +10344,7 @@
   },
   {
     "id": 380,
+    "greynote": "Empty",
     "card": "The Seeker",
     "tagHypothesis": "incursion_temple_area",
     "confidence": "done",
@@ -10054,7 +10359,7 @@
   },
   {
     "id": 381,
-    "greynote": "monsterSpecific",
+    "greynote": "Monster-specific",
     "card": "The Sephirot",
     "tagHypothesis": "dominus_monster_map",
     "confidence": "done",
@@ -10080,6 +10385,7 @@
   },
   {
     "id": 382,
+    "greynote": "Empty",
     "card": "The Shortcut",
     "confidence": "low",
     "remainingWork": "unclear hypothesis",
@@ -10095,6 +10401,7 @@
   },
   {
     "id": 383,
+    "greynote": "Empty",
     "card": "The Side Quest",
     "tagHypothesis": "bridge_area",
     "confidence": "done",
@@ -10155,6 +10462,7 @@
   },
   {
     "id": 384,
+    "greynote": "Empty",
     "card": "The Sigil",
     "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
@@ -10174,6 +10482,7 @@
   },
   {
     "id": 385,
+    "greynote": "Empty",
     "card": "The Siren",
     "tagHypothesis": "merveil_area",
     "confidence": "done",
@@ -10195,7 +10504,7 @@
   },
   {
     "id": 386,
-    "greynote": "monsterSpecific",
+    "greynote": "Monster-specific",
     "card": "The Skeleton",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -10210,6 +10519,7 @@
   },
   {
     "id": 387,
+    "greynote": "Empty",
     "card": "The Soul",
     "tagHypothesis": "unholy_trio_area",
     "confidence": "ok",
@@ -10261,6 +10571,7 @@
   },
   {
     "id": 388,
+    "greynote": "Empty",
     "card": "The Spark and the Flame",
     "tagHypothesis": "totem_boss_area",
     "confidence": "done",
@@ -10287,6 +10598,7 @@
   },
   {
     "id": 389,
+    "greynote": "Empty",
     "card": "The Spoiled Prince",
     "confidence": "none",
     "remainingWork": "unclear hypothesis",
@@ -10301,6 +10613,7 @@
   },
   {
     "id": 390,
+    "greynote": "Empty",
     "card": "The Standoff",
     "tagHypothesis": "fire_area",
     "confidence": "done",
@@ -10368,6 +10681,7 @@
   },
   {
     "id": 391,
+    "greynote": "Empty",
     "card": "The Stormcaller",
     "tagHypothesis": "lightning_area, NOT unique_map",
     "confidence": "done",
@@ -10393,6 +10707,7 @@
   },
   {
     "id": 392,
+    "greynote": "Empty",
     "card": "The Strategist",
     "tagHypothesis": "warlord_conqueror_boss",
     "confidence": "done",
@@ -10407,6 +10722,7 @@
   },
   {
     "id": 393,
+    "greynote": "Empty",
     "card": "The Summoner",
     "tagHypothesis": "summoner_area",
     "confidence": "done",
@@ -10463,6 +10779,7 @@
   },
   {
     "id": 394,
+    "greynote": "Empty",
     "card": "The Sun",
     "tagHypothesis": "solaris_area",
     "confidence": "done",
@@ -10504,6 +10821,7 @@
   },
   {
     "id": 395,
+    "greynote": "Empty",
     "card": "The Surgeon",
     "tagHypothesis": "chamber_of_sins_area",
     "confidence": "done",
@@ -10523,6 +10841,7 @@
   },
   {
     "id": 396,
+    "greynote": "Empty",
     "card": "The Surveyor",
     "tagHypothesis": "belly_area",
     "confidence": "done",
@@ -10553,6 +10872,7 @@
   },
   {
     "id": 397,
+    "greynote": "Empty",
     "card": "The Survivalist",
     "tagHypothesis": "flooded_area",
     "confidence": "done",
@@ -10599,6 +10919,7 @@
   },
   {
     "id": 399,
+    "greynote": "Empty",
     "card": "The Sword King's Salute",
     "tagHypothesis": "daresso_area",
     "confidence": "done",
@@ -10639,6 +10960,7 @@
   },
   {
     "id": 400,
+    "greynote": "Empty",
     "card": "The Thaumaturgist",
     "tagHypothesis": "thaumaturgy_area",
     "confidence": "ok",
@@ -10670,6 +10992,7 @@
   },
   {
     "id": 401,
+    "greynote": "Empty",
     "card": "The Throne",
     "tagHypothesis": "sewer_area",
     "confidence": "ok",
@@ -10695,7 +11018,7 @@
   },
   {
     "id": 402,
-    "greynote": "globalDrop",
+    "greynote": "Global Drop",
     "card": "The Tinkerer's Table",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -10710,6 +11033,7 @@
   },
   {
     "id": 403,
+    "greynote": "Empty",
     "card": "The Tireless Extractor",
     "confidence": "low",
     "remainingWork": "unclear hypothesis",
@@ -10731,6 +11055,7 @@
   },
   {
     "id": 404,
+    "greynote": "Empty",
     "card": "The Tower",
     "tagHypothesis": "tower_area",
     "confidence": "done",
@@ -10765,6 +11090,7 @@
   },
   {
     "id": 405,
+    "greynote": "Empty",
     "card": "The Traitor",
     "tagHypothesis": "parapet_area",
     "confidence": "done",
@@ -10800,6 +11126,7 @@
   },
   {
     "id": 406,
+    "greynote": "Empty",
     "card": "The Transformation",
     "confidence": "low",
     "remainingWork": "confirm",
@@ -10808,7 +11135,7 @@
   },
   {
     "id": 407,
-    "greynote": "globalDrop",
+    "greynote": "Global Drop",
     "card": "The Trial",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -10823,6 +11150,7 @@
   },
   {
     "id": 408,
+    "greynote": "Empty",
     "card": "The Tumbleweed",
     "tagHypothesis": "desert_map_area",
     "confidence": "ok",
@@ -10849,6 +11177,7 @@
   },
   {
     "id": 409,
+    "greynote": "Empty",
     "card": "The Twilight Moon",
     "tagHypothesis": "lunaris_area",
     "confidence": "done",
@@ -10873,6 +11202,7 @@
   },
   {
     "id": 410,
+    "greynote": "Empty",
     "card": "The Twins",
     "tagHypothesis": "lunaris_area OR solaris_area",
     "confidence": "done",
@@ -10903,6 +11233,7 @@
   },
   {
     "id": 411,
+    "greynote": "Empty",
     "card": "The Tyrant",
     "tagHypothesis": "ruined_area",
     "confidence": "done",
@@ -10953,6 +11284,7 @@
   },
   {
     "id": 412,
+    "greynote": "Empty",
     "card": "The Undaunted",
     "tagHypothesis": "rogue_exile_boss_area",
     "confidence": "done",
@@ -10979,6 +11311,7 @@
   },
   {
     "id": 413,
+    "greynote": "Empty",
     "card": "The Undisputed",
     "tagHypothesis": "chayula_boss",
     "confidence": "done",
@@ -10993,6 +11326,7 @@
   },
   {
     "id": 414,
+    "greynote": "Empty",
     "card": "The Unexpected Prize",
     "tagHypothesis": "sceptre_of_god_area",
     "confidence": "done",
@@ -11018,6 +11352,7 @@
   },
   {
     "id": 415,
+    "greynote": "Empty",
     "card": "The Union",
     "tagHypothesis": "graveyard_area",
     "confidence": "done",
@@ -11047,6 +11382,7 @@
   },
   {
     "id": 416,
+    "greynote": "Empty",
     "card": "The Valkyrie",
     "tagHypothesis": "female_rogue_exile",
     "confidence": "done",
@@ -11132,6 +11468,7 @@
   },
   {
     "id": 418,
+    "greynote": "Empty",
     "card": "The Vast",
     "tagHypothesis": "reef_area",
     "confidence": "ok",
@@ -11158,6 +11495,7 @@
   },
   {
     "id": 419,
+    "greynote": "Empty",
     "card": "The Visionary",
     "tagHypothesis": "arena_area",
     "confidence": "done",
@@ -11182,7 +11520,7 @@
   },
   {
     "id": 420,
-    "greynote": "areaSpecific",
+    "greynote": "Area-specific",
     "card": "The Void",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -11197,6 +11535,7 @@
   },
   {
     "id": 421,
+    "greynote": "Empty",
     "card": "The Void",
     "confidence": "none",
     "remainingWork": "legacy tag",
@@ -11204,6 +11543,7 @@
   },
   {
     "id": 422,
+    "greynote": "Empty",
     "card": "The Warden",
     "tagHypothesis": "prison_area",
     "confidence": "done",
@@ -11255,6 +11595,7 @@
   },
   {
     "id": 423,
+    "greynote": "Empty",
     "card": "The Warlord",
     "tagHypothesis": "military_area",
     "confidence": "done",
@@ -11285,6 +11626,7 @@
   },
   {
     "id": 424,
+    "greynote": "Empty",
     "card": "The Watcher",
     "tagHypothesis": "chaos_golem_boss_area",
     "confidence": "done",
@@ -11304,6 +11646,7 @@
   },
   {
     "id": 425,
+    "greynote": "Empty",
     "card": "The Web",
     "tagHypothesis": "spider_boss_area",
     "confidence": "done",
@@ -11344,6 +11687,7 @@
   },
   {
     "id": 426,
+    "greynote": "Empty",
     "card": "The White Knight",
     "confidence": "low",
     "remainingWork": "unclear hypothesis",
@@ -11358,7 +11702,7 @@
   },
   {
     "id": 427,
-    "greynote": "monsterSpecific",
+    "greynote": "Monster-specific",
     "card": "The Whiteout",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -11374,7 +11718,7 @@
   },
   {
     "id": 428,
-    "greynote": "areaSpecific",
+    "greynote": "Area-specific",
     "card": "The Wilted Rose",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -11389,6 +11733,7 @@
   },
   {
     "id": 429,
+    "greynote": "Empty",
     "card": "The Wind",
     "tagHypothesis": "windy_area",
     "confidence": "done",
@@ -11429,6 +11774,7 @@
   },
   {
     "id": 430,
+    "greynote": "Empty",
     "card": "The Witch",
     "tagHypothesis": "alira_area",
     "confidence": "done",
@@ -11448,6 +11794,7 @@
   },
   {
     "id": 431,
+    "greynote": "Empty",
     "card": "The Witch",
     "tagHypothesis": "doedre_map_area",
     "confidence": "done",
@@ -11478,6 +11825,7 @@
   },
   {
     "id": 432,
+    "greynote": "Empty",
     "card": "The Wolf",
     "tagHypothesis": "mine_area",
     "confidence": "done",
@@ -11528,7 +11876,7 @@
   },
   {
     "id": 433,
-    "greynote": "chestObject",
+    "greynote": "Chest_object",
     "card": "The Wolf's Legacy",
     "confidence": "ok",
     "remainingWork": "open ended",
@@ -11544,6 +11892,7 @@
   },
   {
     "id": 434,
+    "greynote": "Empty",
     "card": "The Wolf's Shadow",
     "tagHypothesis": "rigwald_area",
     "confidence": "done",
@@ -11565,6 +11914,7 @@
   },
   {
     "id": 435,
+    "greynote": "Empty",
     "card": "The Wolven King's Bite",
     "tagHypothesis": "rigwald_area",
     "confidence": "done",
@@ -11584,6 +11934,7 @@
   },
   {
     "id": 436,
+    "greynote": "Empty",
     "card": "The Wolverine",
     "tagHypothesis": "goatman_boss_area",
     "confidence": "ok",
@@ -11610,6 +11961,7 @@
   },
   {
     "id": 437,
+    "greynote": "Empty",
     "card": "The Wolverine",
     "tagHypothesis": "(den_area OR cave_area) & (rigwald_area OR forest_map_area)",
     "confidence": "low",
@@ -11626,7 +11978,7 @@
   },
   {
     "id": 438,
-    "greynote": "monsterSpecific",
+    "greynote": "Monster-specific",
     "card": "The World Eater",
     "tagHypothesis": "hellscape_flesh_boss",
     "confidence": "done",
@@ -11641,6 +11993,7 @@
   },
   {
     "id": 439,
+    "greynote": "Empty",
     "card": "The Wrath",
     "tagHypothesis": "kitava_area",
     "confidence": "ok",
@@ -11672,6 +12025,7 @@
   },
   {
     "id": 440,
+    "greynote": "Empty",
     "card": "The Wretched",
     "tagHypothesis": "crypt_area",
     "confidence": "done",
@@ -11698,6 +12052,7 @@
   },
   {
     "id": 441,
+    "greynote": "Empty",
     "card": "The Wretched",
     "tagHypothesis": "necromancer_area",
     "confidence": "done",
@@ -11722,6 +12077,7 @@
   },
   {
     "id": 442,
+    "greynote": "Empty",
     "card": "The Wretched",
     "tagHypothesis": "necropolis_area",
     "confidence": "done",
@@ -11737,6 +12093,7 @@
   },
   {
     "id": 443,
+    "greynote": "Empty",
     "card": "The Wretched",
     "tagHypothesis": "mud_geyser_area",
     "confidence": "done",
@@ -11746,6 +12103,7 @@
   },
   {
     "id": 444,
+    "greynote": "Empty",
     "card": "Thirst for Knowledge",
     "tagHypothesis": "library_area",
     "confidence": "done",
@@ -11771,6 +12129,7 @@
   },
   {
     "id": 445,
+    "greynote": "Empty",
     "card": "Three Faces in the Dark",
     "tagHypothesis": "warehouse_area",
     "confidence": "done",
@@ -11807,6 +12166,7 @@
   },
   {
     "id": 446,
+    "greynote": "Empty",
     "card": "Three Voices",
     "tagHypothesis": "triple_boss_map",
     "confidence": "done",
@@ -11866,6 +12226,7 @@
   },
   {
     "id": 447,
+    "greynote": "Empty",
     "card": "Thunderous Skies",
     "tagHypothesis": "lightning_area",
     "confidence": "done",
@@ -11906,6 +12267,7 @@
   },
   {
     "id": 448,
+    "greynote": "Empty",
     "card": "Time-Lost Relic",
     "tagHypothesis": "mine_area",
     "confidence": "done",
@@ -11946,6 +12308,7 @@
   },
   {
     "id": 449,
+    "greynote": "Empty",
     "card": "Time-Lost Relic",
     "tagHypothesis": "expedition_common_remnant_logbook",
     "confidence": "done",
@@ -11954,6 +12317,7 @@
   },
   {
     "id": 450,
+    "greynote": "Empty",
     "card": "Tranquillity",
     "tagHypothesis": "fields_area",
     "confidence": "done",
@@ -11984,6 +12348,7 @@
   },
   {
     "id": 451,
+    "greynote": "Empty",
     "card": "Treasure Hunter",
     "tagHypothesis": "cave_area",
     "confidence": "done",
@@ -12055,6 +12420,7 @@
   },
   {
     "id": 453,
+    "greynote": "Empty",
     "card": "Triskaidekaphobia",
     "confidence": "low",
     "remainingWork": "n/a",
@@ -12079,6 +12445,7 @@
   },
   {
     "id": 455,
+    "greynote": "Empty",
     "card": "Unchained",
     "tagHypothesis": "pitfight_area",
     "confidence": "done",
@@ -12110,7 +12477,7 @@
   },
   {
     "id": 456,
-    "greynote": "chestObject",
+    "greynote": "Chest_object",
     "card": "Underground Forest",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -12125,6 +12492,7 @@
   },
   {
     "id": 457,
+    "greynote": "Empty",
     "card": "Unrequited Love",
     "tagHypothesis": "vaal_pyramid_area",
     "confidence": "low",
@@ -12161,7 +12529,7 @@
   },
   {
     "id": 458,
-    "greynote": "chestObject",
+    "greynote": "Chest_object",
     "card": "Vanity",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -12176,6 +12544,7 @@
   },
   {
     "id": 459,
+    "greynote": "Empty",
     "card": "Vile Power",
     "tagHypothesis": "vile_areas",
     "confidence": "ok",
@@ -12242,6 +12611,7 @@
   },
   {
     "id": 460,
+    "greynote": "Empty",
     "card": "Vinia's Token",
     "tagHypothesis": "piety_area",
     "confidence": "done",
@@ -12268,6 +12638,7 @@
   },
   {
     "id": 461,
+    "greynote": "Empty",
     "card": "Void of the Elements",
     "tagHypothesis": "elder_boss OR uber_elder",
     "confidence": "done",
@@ -12288,6 +12659,7 @@
   },
   {
     "id": 462,
+    "greynote": "Empty",
     "card": "Volatile Power",
     "tagHypothesis": "mine_area",
     "confidence": "done",
@@ -12353,6 +12725,7 @@
   },
   {
     "id": 463,
+    "greynote": "Empty",
     "card": "Wealth and Power",
     "tagHypothesis": "lunaris_area",
     "confidence": "ok",
@@ -12374,6 +12747,7 @@
   },
   {
     "id": 464,
+    "greynote": "Empty",
     "card": "Winter's Embrace",
     "confidence": "none",
     "remainingWork": "no hypothesis",
@@ -12381,6 +12755,7 @@
   },
   {
     "id": 465,
+    "greynote": "Empty",
     "card": "Astral Protection",
     "confidence": "none",
     "remainingWork": "no hypothesis",
@@ -12395,6 +12770,7 @@
   },
   {
     "id": 466,
+    "greynote": "Empty",
     "card": "Azure Rage",
     "confidence": "low",
     "remainingWork": "no hypothesis",
@@ -12410,6 +12786,7 @@
   },
   {
     "id": 467,
+    "greynote": "Empty",
     "card": "Broken Truce",
     "tagHypothesis": "betrayal_thane_jorgin",
     "confidence": "done",
@@ -12425,6 +12802,7 @@
   },
   {
     "id": 468,
+    "greynote": "Empty",
     "card": "Checkmate",
     "tagHypothesis": "library_area",
     "confidence": "done",
@@ -12450,6 +12828,7 @@
   },
   {
     "id": 469,
+    "greynote": "Empty",
     "card": "Choking Guilt",
     "tagHypothesis": "infinite_hunger",
     "confidence": "done",
@@ -12480,6 +12859,7 @@
   },
   {
     "id": 471,
+    "greynote": "Empty",
     "card": "Endless Night",
     "confidence": "none",
     "remainingWork": "no hypothesis",
@@ -12487,7 +12867,7 @@
   },
   {
     "id": 472,
-    "greynote": "chestObject",
+    "greynote": "Chest_object",
     "card": "Gemcutter's Mercy",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -12502,12 +12882,14 @@
   },
   {
     "id": 473,
+    "greynote": "Empty",
     "card": "Lethean Temptation",
     "confidence": "none",
     "remainingWork": "no hypothesis"
   },
   {
     "id": 474,
+    "greynote": "Empty",
     "card": "Something Dark",
     "tagHypothesis": "breachlord_boss_domain",
     "confidence": "done",
@@ -12543,6 +12925,7 @@
   },
   {
     "id": 475,
+    "greynote": "Empty",
     "card": "The Enforcer",
     "tagHypothesis": "brute_boss",
     "confidence": "none",
@@ -12551,7 +12934,7 @@
   },
   {
     "id": 476,
-    "greynote": "areaSpecific",
+    "greynote": "Area-specific",
     "card": "The Leviathan",
     "tagHypothesis": "Maelström of Chaos (no tags)",
     "confidence": "done",
@@ -12567,6 +12950,7 @@
   },
   {
     "id": 477,
+    "greynote": "Empty",
     "card": "The Price of Devotion",
     "tagHypothesis": "uber_atziri_boss",
     "confidence": "done",
@@ -12583,6 +12967,7 @@
   },
   {
     "id": 478,
+    "greynote": "Empty",
     "card": "The Shepherd's Sandals",
     "tagHypothesis": "den_area",
     "confidence": "done",
@@ -12613,6 +12998,7 @@
   },
   {
     "id": 479,
+    "greynote": "Empty",
     "card": "The Shieldbearer",
     "tagHypothesis": "uber_elder",
     "confidence": "done",
@@ -12628,6 +13014,7 @@
   },
   {
     "id": 480,
+    "greynote": "Empty",
     "card": "A Dusty Memory",
     "tagHypothesis": "synthesis_area",
     "confidence": "done",
@@ -12663,6 +13050,7 @@
   },
   {
     "id": 481,
+    "greynote": "Empty",
     "card": "Alivia's Grace",
     "tagHypothesis": "forest_map_area",
     "confidence": "done",
@@ -12728,6 +13116,7 @@
   },
   {
     "id": 482,
+    "greynote": "Empty",
     "card": "Auspicious Ambitions",
     "tagHypothesis": "eldritch_pinnacle_boss",
     "confidence": "done",
@@ -12758,6 +13147,7 @@
   },
   {
     "id": 483,
+    "greynote": "Empty",
     "card": "Divine Beauty",
     "tagHypothesis": "merveil_boss",
     "confidence": "done",
@@ -12793,6 +13183,7 @@
   },
   {
     "id": 484,
+    "greynote": "Empty",
     "card": "Ever-Changing",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -12800,6 +13191,7 @@
   },
   {
     "id": 485,
+    "greynote": "Empty",
     "card": "Man With Bear",
     "tagHypothesis": "bear_boss_map",
     "confidence": "done",
@@ -12820,6 +13212,7 @@
   },
   {
     "id": 486,
+    "greynote": "Empty",
     "card": "The Finishing Touch",
     "tagHypothesis": "hillock_syndicate",
     "confidence": "done",
@@ -12835,6 +13228,7 @@
   },
   {
     "id": 487,
+    "greynote": "Empty",
     "card": "The Insane Cat",
     "tagHypothesis": "affliction_boss",
     "confidence": "done",
@@ -12855,6 +13249,7 @@
   },
   {
     "id": 488,
+    "greynote": "Empty",
     "card": "The Return of the Rat",
     "tagHypothesis": "warehouse_area",
     "confidence": "done",
@@ -12890,6 +13285,7 @@
   },
   {
     "id": 489,
+    "greynote": "Empty",
     "card": "The Wedding Gift",
     "tagHypothesis": "arakaali_area OR ?",
     "confidence": "low",
@@ -12907,6 +13303,7 @@
   },
   {
     "id": 490,
+    "greynote": "Empty",
     "card": "The Wedding Gift",
     "tagHypothesis": "spider_boss_area",
     "confidence": "low",
@@ -12923,6 +13320,7 @@
   },
   {
     "id": 491,
+    "greynote": "Empty",
     "card": "Brother's Gift",
     "tagHypothesis": "graveyard_area",
     "confidence": "done",
@@ -12948,6 +13346,7 @@
   },
   {
     "id": 492,
+    "greynote": "Empty",
     "card": "Soul Quenched",
     "tagHypothesis": "Forge_Area",
     "confidence": "done",
@@ -12977,6 +13376,7 @@
   },
   {
     "id": 493,
+    "greynote": "Empty",
     "card": "Poisoned Faith",
     "confidence": "low",
     "remainingWork": "unclear hypothesis",
@@ -12997,6 +13397,7 @@
   },
   {
     "id": 494,
+    "greynote": "Empty",
     "card": "A Chilling Wind",
     "tagHypothesis": "snow_area",
     "confidence": "done",
@@ -13037,6 +13438,7 @@
   },
   {
     "id": 495,
+    "greynote": "Empty",
     "card": "Matryoshka",
     "tagHypothesis": "matryoshka_boss",
     "confidence": "low",
@@ -13046,6 +13448,7 @@
   },
   {
     "id": 496,
+    "greynote": "Empty",
     "card": "The Fortunate",
     "tagHypothesis": "sun_nature_area",
     "confidence": "done",
@@ -13185,6 +13588,7 @@
   },
   {
     "id": 497,
+    "greynote": "Empty",
     "card": "Fire of Unknown Origin",
     "tagHypothesis": "undyingcultist_map",
     "confidence": "done",

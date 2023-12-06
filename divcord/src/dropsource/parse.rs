@@ -113,14 +113,14 @@ pub fn parse_record_dropsources(
     let mut sources: Vec<Source> = vec![];
 
     // 1. Legacy cards rules
-    if record.card.as_str().is_legacy_card() && record.greynote != Some(GreyNote::Disabled) {
+    if record.card.as_str().is_legacy_card() && record.greynote != GreyNote::Disabled {
         return Err(ParseSourceError::LegacyCardShouldBeMarkedAsDisabled {
             record_id: record.id,
             card: record.card.to_owned(),
         });
     }
 
-    if record.greynote == Some(GreyNote::Disabled) {
+    if record.greynote == GreyNote::Disabled {
         if !record.card.as_str().is_legacy_card() {
             return Err(ParseSourceError::GreynoteDisabledCardShouldBeLegacy {
                 record_id: record.id,
@@ -144,7 +144,7 @@ pub fn parse_record_dropsources(
     }
 
     // 4. Read greynotes(first column)
-    if record.greynote == Some(GreyNote::GlobalDrop) {
+    if record.greynote == GreyNote::GlobalDrop {
         let Card {
             min_level,
             max_level,
@@ -156,7 +156,7 @@ pub fn parse_record_dropsources(
         });
     };
 
-    if record.greynote == Some(GreyNote::Delirium) {
+    if record.greynote == GreyNote::Delirium {
         if record.notes
             == Some("Appears to drop from any source of Delirium Currency rewards".to_string())
         {
@@ -164,7 +164,7 @@ pub fn parse_record_dropsources(
         }
     }
 
-    if record.greynote == Some(GreyNote::Vendor) {
+    if record.greynote == GreyNote::Vendor {
         if record.notes == Some(String::from("Kirac shop")) {
             sources.push(Source::Vendor(Vendor::KiracShop));
         }
@@ -180,7 +180,10 @@ pub fn parse_record_dropsources(
         // println!("{} {} {sources:?}", record.id, record.card);
     }
 
-    if record.greynote.is_some() && sources.is_empty() && record.confidence == Confidence::Done {
+    if record.greynote != GreyNote::Empty
+        && sources.is_empty()
+        && record.confidence == Confidence::Done
+    {
         return Err(ParseSourceError::SourceIsExptectedButEmpty {
             record_id: record.id,
             card: record.card.to_owned(),
@@ -255,7 +258,7 @@ pub fn parse_one_drops_from(
 
     // Acts areas or act area bosses
     if d.styles.italic == true
-        && (d.styles.color.as_str() == "#FFFFFF" || record.greynote == Some(GreyNote::Story))
+        && (d.styles.color.as_str() == "#FFFFFF" || record.greynote == GreyNote::Story)
     {
         let ids = parse_act_areas(d, &acts, card_drop_level_requirement.try_into().unwrap());
         if ids.is_empty() {
@@ -282,7 +285,7 @@ pub fn parse_one_drops_from(
 
     // Maps or MapBosses
     if (d.styles.italic == false && d.styles.color.as_str() == "#FFFFFF")
-        || record.greynote == Some(GreyNote::AreaSpecific)
+        || record.greynote == GreyNote::AreaSpecific
     {
         let s = &d.name;
 

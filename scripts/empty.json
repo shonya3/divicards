@@ -1,6 +1,7 @@
 [
   {
     "id": 16,
+    "greynote": "Empty",
     "card": "Akil's Prophecy",
     "tagHypothesis": "vaal_architect_temple",
     "confidence": "low",
@@ -19,6 +20,7 @@
   },
   {
     "id": 72,
+    "greynote": "Empty",
     "card": "Draped in Dreams",
     "confidence": "none",
     "remainingWork": "no hypothesis",
@@ -26,6 +28,7 @@
   },
   {
     "id": 73,
+    "greynote": "Empty",
     "card": "Duality",
     "tagHypothesis": "vaal_architect_temple",
     "confidence": "low",
@@ -34,12 +37,14 @@
   },
   {
     "id": 113,
+    "greynote": "Empty",
     "card": "Judging Voices",
     "confidence": "none",
     "remainingWork": "no hypothesis"
   },
   {
     "id": 156,
+    "greynote": "Empty",
     "card": "Rebirth and Renewal",
     "confidence": "none",
     "remainingWork": "no hypothesis",
@@ -47,6 +52,7 @@
   },
   {
     "id": 190,
+    "greynote": "Empty",
     "card": "The Bitter Blossom",
     "tagHypothesis": "oshabi_boss",
     "confidence": "done",
@@ -55,7 +61,7 @@
   },
   {
     "id": 246,
-    "greynote": "areaSpecific",
+    "greynote": "Area-specific",
     "card": "The Emptiness",
     "confidence": "ok",
     "remainingWork": "confirm",
@@ -64,6 +70,7 @@
   },
   {
     "id": 282,
+    "greynote": "Empty",
     "card": "The Greatest Intentions",
     "confidence": "none",
     "remainingWork": "no hypothesis",
@@ -71,6 +78,7 @@
   },
   {
     "id": 309,
+    "greynote": "Empty",
     "card": "The Lich",
     "tagHypothesis": "necromancer_boss",
     "confidence": "none",
@@ -80,6 +88,7 @@
   },
   {
     "id": 310,
+    "greynote": "Empty",
     "card": "The Lich",
     "tagHypothesis": "abyss_lich_boss?",
     "confidence": "none",
@@ -88,6 +97,7 @@
   },
   {
     "id": 337,
+    "greynote": "Empty",
     "card": "The Offspring",
     "confidence": "low",
     "remainingWork": "no hypothesis",
@@ -95,6 +105,7 @@
   },
   {
     "id": 366,
+    "greynote": "Empty",
     "card": "The Realm",
     "tagHypothesis": "Breach monster (no tag)",
     "confidence": "done",
@@ -103,6 +114,7 @@
   },
   {
     "id": 406,
+    "greynote": "Empty",
     "card": "The Transformation",
     "confidence": "low",
     "remainingWork": "confirm",
@@ -111,6 +123,7 @@
   },
   {
     "id": 421,
+    "greynote": "Empty",
     "card": "The Void",
     "confidence": "none",
     "remainingWork": "legacy tag",
@@ -118,6 +131,7 @@
   },
   {
     "id": 443,
+    "greynote": "Empty",
     "card": "The Wretched",
     "tagHypothesis": "mud_geyser_area",
     "confidence": "done",
@@ -127,6 +141,7 @@
   },
   {
     "id": 449,
+    "greynote": "Empty",
     "card": "Time-Lost Relic",
     "tagHypothesis": "expedition_common_remnant_logbook",
     "confidence": "done",
@@ -135,6 +150,7 @@
   },
   {
     "id": 453,
+    "greynote": "Empty",
     "card": "Triskaidekaphobia",
     "confidence": "low",
     "remainingWork": "n/a",
@@ -142,6 +158,7 @@
   },
   {
     "id": 464,
+    "greynote": "Empty",
     "card": "Winter's Embrace",
     "confidence": "none",
     "remainingWork": "no hypothesis",
@@ -149,6 +166,7 @@
   },
   {
     "id": 471,
+    "greynote": "Empty",
     "card": "Endless Night",
     "confidence": "none",
     "remainingWork": "no hypothesis",
@@ -156,12 +174,14 @@
   },
   {
     "id": 473,
+    "greynote": "Empty",
     "card": "Lethean Temptation",
     "confidence": "none",
     "remainingWork": "no hypothesis"
   },
   {
     "id": 475,
+    "greynote": "Empty",
     "card": "The Enforcer",
     "tagHypothesis": "brute_boss",
     "confidence": "none",
@@ -170,6 +190,7 @@
   },
   {
     "id": 484,
+    "greynote": "Empty",
     "card": "Ever-Changing",
     "confidence": "done",
     "remainingWork": "n/a",
@@ -177,6 +198,7 @@
   },
   {
     "id": 495,
+    "greynote": "Empty",
     "card": "Matryoshka",
     "tagHypothesis": "matryoshka_boss",
     "confidence": "low",
