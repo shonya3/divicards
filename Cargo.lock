@@ -76,7 +76,7 @@ checksum = "a4668cab20f66d8d020e1fbc0ebe47217433c1b6c8f2040faf858554e394ace6"
 
 [[package]]
 name = "app"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "async-trait",
  "axum",
@@ -513,7 +513,7 @@ dependencies = [
 
 [[package]]
 name = "card_element"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "divi",
  "regex",
@@ -986,7 +986,7 @@ checksum = "bd0c93bb4b0c6d9b77f4435b0ae98c24d17f1c45b2ff844c6151a07256ca923b"
 
 [[package]]
 name = "divcord"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "async-trait",
  "divi",
@@ -1585,7 +1585,7 @@ dependencies = [
 
 [[package]]
 name = "googlesheets"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "reqwest",
  "serde",
@@ -3029,7 +3029,7 @@ dependencies = [
 
 [[package]]
 name = "poe_data"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "async-trait",
  "divi",
@@ -3527,7 +3527,7 @@ checksum = "94143f37725109f92c262ed2cf5e59bce7498c01bcc1502d7b9afe439a4e9f49"
 
 [[package]]
 name = "scripts"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "divcord",
  "poe_data",
