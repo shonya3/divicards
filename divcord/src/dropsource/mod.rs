@@ -125,7 +125,7 @@ impl Source {
         let _types = String::from_utf8(buf).unwrap();
 
         let s = format!(
-            r#"export type SourceWithMember = {{ type: SourceType; id: string; kind: SourceWithMemberKind }};
+            r#"export type SourceWithMember = {{ type: SourceType; id: string; kind: SourceWithMemberKind; min_level?: number; max_level?: number }};
 export type EmptySourceKind = 'empty-source';
 export type SourceWithMemberKind = 'source-with-member';
 export type Kind = EmptySourceKind | SourceWithMemberKind;
@@ -156,7 +156,7 @@ impl Serialize for Source {
     where
         S: serde::Serializer,
     {
-        let mut source = serializer.serialize_struct("Source", 3)?;
+        let mut source = serializer.serialize_struct("Source", 5)?;
         let _type = self._type();
         let _id = self._id();
 
@@ -170,6 +170,25 @@ impl Serialize for Source {
                 source.serialize_field("id", &self._id())?;
                 source.serialize_field("kind", "source-with-member")?;
             }
+        }
+
+        if let Source::GlobalDrop {
+            min_level,
+            max_level,
+        } = self
+        {
+            match max_level {
+                Some(max_level) => source.serialize_field("max_level", max_level)?,
+                None => source.skip_field("max_level")?,
+            };
+
+            match min_level {
+                Some(min_level) => source.serialize_field("min_level", min_level)?,
+                None => source.skip_field("min_level")?,
+            };
+        } else {
+            source.skip_field("min_level")?;
+            source.skip_field("max_level")?;
         }
 
         source.end()

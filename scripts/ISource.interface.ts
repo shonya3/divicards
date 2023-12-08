@@ -1,4 +1,4 @@
-export type SourceWithMember = { type: SourceType; id: string; kind: SourceWithMemberKind };
+export type SourceWithMember = { type: SourceType; id: string; kind: SourceWithMemberKind; min_level?: number; max_level?: number };
 export type EmptySourceKind = 'empty-source';
 export type SourceWithMemberKind = 'source-with-member';
 export type Kind = EmptySourceKind | SourceWithMemberKind;

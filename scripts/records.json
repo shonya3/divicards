@@ -2325,7 +2325,9 @@
       {
         "type": "Global Drop",
         "id": "Global Drop",
-        "kind": "empty-source"
+        "kind": "empty-source",
+        "max_level": 72,
+        "min_level": 23
       }
     ],
     "notes": "Global Drop\n\nHas Drop Level Cap"
@@ -2432,7 +2434,9 @@
       {
         "type": "Global Drop",
         "id": "Global Drop",
-        "kind": "empty-source"
+        "kind": "empty-source",
+        "max_level": 68,
+        "min_level": 68
       }
     ],
     "notes": "No Tags fit all wiki claims. Need to check wiki claims.\nDropped in Frozen Cabins and Strand - current version's T1 maps. Maybe drop level cap of 68?\n\n\"MapAtlasArcade, MapAtlasCrystalOre, MapAtlasDesert, MapAtlasJungleValley, MapAtlasGrotto, MapWorldsBeach, MapWorldsLookout, MapWorldsDungeon, MapWorldsGraveyard, MapWorldsJungleValley\" was removed by Jasmine. Almost all of these maps should have been historically t1 or t2 maps, however not global drop. Perhaps drops change each series?\n\nNeeds verification in Overgrown Ruin and Terrace, and disproved in t2 maps to confirm.\n\nIn 3.20, confirmed in Terrace (t1), making a 68-68 drop cap likely"
@@ -3087,7 +3091,8 @@
       {
         "type": "Global Drop",
         "id": "Global Drop",
-        "kind": "empty-source"
+        "kind": "empty-source",
+        "min_level": 78
       }
     ]
   },
@@ -3212,7 +3217,9 @@
       {
         "type": "Global Drop",
         "id": "Global Drop",
-        "kind": "empty-source"
+        "kind": "empty-source",
+        "max_level": 74,
+        "min_level": 74
       }
     ],
     "notes": "T7 Maps Only\nArea-specific Drop\n3.21 verified a drop from an Incursion in a t5 map, confirming that drop level caps (and drop levels) are dependent on the drop source rather than the area level."
@@ -6397,7 +6404,8 @@
       {
         "type": "Global Drop",
         "id": "Global Drop",
-        "kind": "empty-source"
+        "kind": "empty-source",
+        "min_level": 78
       }
     ]
   },
@@ -6583,7 +6591,8 @@
       {
         "type": "Global Drop",
         "id": "Global Drop",
-        "kind": "empty-source"
+        "kind": "empty-source",
+        "min_level": 73
       }
     ]
   },
@@ -7330,7 +7339,8 @@
       {
         "type": "Global Drop",
         "id": "Global Drop",
-        "kind": "empty-source"
+        "kind": "empty-source",
+        "min_level": 68
       }
     ]
   },
@@ -11026,7 +11036,8 @@
       {
         "type": "Global Drop",
         "id": "Global Drop",
-        "kind": "empty-source"
+        "kind": "empty-source",
+        "min_level": 33
       }
     ],
     "notes": "Likely a global drop; see Divcord\nAs of 2022/06/29, at least 8 more locations verified than are documented on the wiki -- we haven't found a single counterexample yet of an Area which *cannot* produce The Tinkerer's Table\n\nDivcord Xsia verified Foundry\nOther Divcord verifications beyond the 8+1 above:\nInfested Valley, Palace, .."
@@ -11143,7 +11154,9 @@
       {
         "type": "Global Drop",
         "id": "Global Drop",
-        "kind": "empty-source"
+        "kind": "empty-source",
+        "max_level": 77,
+        "min_level": 73
       }
     ],
     "notes": "73+ Global Map\n\nHas Drop Level Cap - max ilvl 77"
