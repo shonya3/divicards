@@ -9,6 +9,7 @@ members = [
     "card_element",
     "poe_data",
     "divcord",
+    "divcord-wasm"
     "loader"
 ]
 
