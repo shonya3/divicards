@@ -129,7 +129,7 @@ impl Source {
 export type EmptySourceKind = 'empty-source';
 export type SourceWithMemberKind = 'source-with-member';
 export type Kind = EmptySourceKind | SourceWithMemberKind;
-export type EmptySource = {{ type: SourceType; id: string; kind: EmptySourceKind }};
+export type EmptySource = {{ type: SourceType; id: string; kind: EmptySourceKind; min_level?: number; max_level?: number}};
 export type ISource = SourceWithMember | EmptySource;
 export const sourceTypes = {_types} as const;
 
