@@ -17,6 +17,8 @@ pub enum League {
     SSFAffliction,
     #[serde(alias = "HC SSF Affliction")]
     SSFHCAffliction,
+    #[serde(untagged)]
+    Custom(String),
 }
 
 impl League {
@@ -45,6 +47,7 @@ impl Display for League {
             League::HardcoreAffliction => write!(f, "Hardcore Affliction"),
             League::SSFAffliction => write!(f, "SSF Affliction"),
             League::SSFHCAffliction => write!(f, "HC SSF Affliction"),
+            League::Custom(league) => write!(f, "{}", league),
         }
     }
 }
@@ -100,6 +103,7 @@ impl TryFrom<League> for TradeLeague {
             League::HardcoreAffliction => Ok(TradeLeague::HardcoreAffliction),
             League::SSFAffliction => Err(msg),
             League::SSFHCAffliction => Err(msg),
+            League::Custom(_) => Err(msg),
         }
     }
 }

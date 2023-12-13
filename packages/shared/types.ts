@@ -21,7 +21,7 @@ export const leagues = [
 export const tradeLeagues = ['Affliction', 'Standard', 'Hardcore Affliction', 'Hardcore'] as const;
 export const permanentLeagues: Readonly<League[]> = ['Standard', 'Hardcore', 'SSF Standard'] as const;
 
-export type League = (typeof leagues)[number];
+export type League = (typeof leagues)[number] | string;
 export type TradeLeague = (typeof tradeLeagues)[number];
 
 export const isTradeLeague = (s: string): s is TradeLeague => {

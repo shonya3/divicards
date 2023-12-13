@@ -8,7 +8,7 @@ export class StashLoader implements IStashLoader {
 		return command('sample_from_tab', { league, stashId: tabId });
 	}
 
-	async tabs(league: League): Promise<NoItemsTab[]> {
+	async tabs(league: League | string): Promise<NoItemsTab[]> {
 		const { stashes = [] } = await command('stashes', { league });
 		return this.#flattenStashes(stashes);
 	}

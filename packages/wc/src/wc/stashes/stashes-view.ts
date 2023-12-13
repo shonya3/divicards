@@ -11,6 +11,17 @@ import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { TabBadgeGroupElement } from './tab-badge-group';
 import { classMap } from 'lit/directives/class-map.js';
 
+class CustomLeagueStorage {
+	static #key = 'CUSTOM_LEAGUE';
+	static save(s: string) {
+		localStorage.setItem(this.#key, s);
+	}
+
+	static load(): string | null {
+		return localStorage.getItem(this.#key);
+	}
+}
+
 const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
 const sleepSecs = async (secs: number): Promise<void> => {
@@ -55,6 +66,7 @@ export class StashesViewElement extends BaseElement {
 	static override styles = [this.baseStyles, styles()];
 
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
+	@property() customLeague: string = CustomLeagueStorage.load() ?? '';
 
 	@state() selectedTabs: Map<
 		TabBadgeElement['tabId'],
@@ -76,6 +88,14 @@ export class StashesViewElement extends BaseElement {
 			this.stashes = [];
 			this.msg = '';
 			this.selectedTabs = new Map();
+		}
+
+		if (map.has('customLeague')) {
+			console.log(this.customLeague);
+			CustomLeagueStorage.save(this.customLeague);
+			if (this.customLeague) {
+				this.league = this.customLeague;
+			}
 		}
 	}
 
@@ -108,11 +128,25 @@ export class StashesViewElement extends BaseElement {
 		this.selectedTabs = new Map(map);
 	}
 
+	#onCustomLeagueInput(e: InputEvent) {
+		const target = e.target as HTMLInputElement;
+		this.customLeague = target.value;
+	}
+
 	protected override render() {
 		return html`<div class="main-stashes-component">
 			<div class="controls">
 				<div class="league-stashes">
 					<wc-league-select .league=${this.league} @upd:league=${this.#onLeagueSelected}></wc-league-select>
+					<div class="custom-league">
+						<label for="custom-league-input">Custom league (for private leagues)</label>
+						<input
+							.value=${this.customLeague}
+							@input=${this.#onCustomLeagueInput}
+							id="custom-league-input"
+							type="text"
+						/>
+					</div>
 					<button id="stashes-btn" @click=${this.#onLoadStashesList}>Stashes</button>
 					<wc-help-tip>
 						<p>Select tabs by clicking on them. Then click LOAD ITEMS button</p>
