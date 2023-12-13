@@ -23,7 +23,9 @@ pub enum UniqueMonster {
     VaalFleshMerchant,
     #[serde(
         rename = "All Incursion Architects in Alva missions or Alva's Memory",
-        alias = "All Incursion Architects in Alva missions/Alva's Memory"
+        alias = "All Incursion Architects in Alva missions/Alva's Memory",
+        alias = "All Incursion Architects in Alva missions or Alva's Memory",
+        alias = "All Incursion Architects in Alva missions or Alva's Memory"
     )]
     AllIncursionArchitectsInAlvaMission,
     #[serde(rename = "All Abyss Monsters")]
@@ -144,7 +146,8 @@ impl FromStr for UniqueMonster {
             "Metamorph" => Ok(Self::Metamorph),
             "Null Portal" => Ok(Self::NullPortal),
             "Vaal Flesh Merchant" => Ok(Self::VaalFleshMerchant),
-            "All Incursion Architects in Alva missions/Alva's Memory" => {
+            "All Incursion Architects in Alva missions/Alva's Memory"
+            | "All Incursion Architects in Alva missions or Alva's Memory" => {
                 Ok(Self::AllIncursionArchitectsInAlvaMission)
             }
             "All Abyss Monsters" => Ok(Self::AllAbyssMonsters),
