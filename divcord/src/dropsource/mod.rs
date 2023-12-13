@@ -9,6 +9,10 @@ use strum::IntoEnumIterator;
 
 use self::{area::Area, monster::UniqueMonster};
 
+pub trait Identified {
+    fn id(&self) -> &str;
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Hash, strum_macros::EnumIter, Default)]
 pub enum Source {
     #[default]
@@ -81,6 +85,29 @@ impl<'de> Deserialize<'de> for Source {
     }
 }
 
+impl Identified for Source {
+    fn id(&self) -> &str {
+        match self {
+            Source::ExpeditionLogbook => "Expedition Logbook",
+            Source::Chest(chest) => chest.id(),
+            Source::Delirium => "Delirium",
+            Source::Strongbox(strongbox) => strongbox.id(),
+            Source::Vendor(vendor) => vendor.id(),
+            Source::Unknown => "Unknown",
+            Source::DeliriumCurrencyRewards => "Delirium Currency Rewards",
+            Source::RedeemerInfluencedMaps => "Redeemer influenced maps",
+            Source::Disabled => "Disabled",
+            Source::GlobalDrop { .. } => "Global Drop",
+            Source::Act { id } => id.as_str(),
+            Source::Map { name } => name.as_str(),
+            Source::MapBoss { name } => name.as_str(),
+            Source::ActBoss { name } => name.as_str(),
+            Source::UniqueMonster(m) => m.id(),
+            Source::Area(a) => a.id(),
+        }
+    }
+}
+
 impl Source {
     pub fn _type(&self) -> &str {
         match self {
@@ -103,8 +130,8 @@ impl Source {
         }
     }
 
-    pub fn _id(&self) -> String {
-        self.to_string()
+    pub fn _id(&self) -> &str {
+        self.id()
     }
 
     pub fn types() -> Vec<String> {
@@ -244,24 +271,25 @@ impl FromStr for Source {
 
 impl std::fmt::Display for Source {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Source::ExpeditionLogbook => write!(f, "ExpeditionLogbook"),
-            Source::Chest(chest) => chest.fmt(f),
-            Source::Delirium => write!(f, "Deilirum"),
-            Source::Strongbox(strongbox) => strongbox.fmt(f),
-            Source::Unknown => write!(f, "Unknown"),
-            Source::Disabled => write!(f, "Disabled"),
-            Source::GlobalDrop { .. } => write!(f, "Global Drop"),
-            Source::UniqueMonster(uniquemonster) => uniquemonster.fmt(f),
-            Source::Area(area) => area.fmt(f),
-            Source::Vendor(vendor) => vendor.fmt(f),
-            Source::ActBoss { name } => write!(f, "{name}"),
-            Source::Map { name } => write!(f, "{name}"),
-            Source::MapBoss { name } => write!(f, "{name}"),
-            Source::Act { id } => write!(f, "{id}"),
-            Source::DeliriumCurrencyRewards => write!(f, "Delirium Currency Rewards"),
-            Source::RedeemerInfluencedMaps => write!(f, "Redeemer influenced maps"),
-        }
+        write!(f, "{}", self.id())
+        // match self {
+        // Source::ExpeditionLogbook => write!(f, "ExpeditionLogbook"),
+        // Source::Chest(chest) => chest.fmt(f),
+        // Source::Delirium => write!(f, "Deilirum"),
+        // Source::Strongbox(strongbox) => strongbox.fmt(f),
+        // Source::Unknown => write!(f, "Unknown"),
+        // Source::Disabled => write!(f, "Disabled"),
+        // Source::GlobalDrop { .. } => write!(f, "Global Drop"),
+        // Source::UniqueMonster(uniquemonster) => uniquemonster.fmt(f),
+        // Source::Area(area) => area.fmt(f),
+        // Source::Vendor(vendor) => vendor.fmt(f),
+        // Source::ActBoss { name } => write!(f, "{name}"),
+        // Source::Map { name } => write!(f, "{name}"),
+        // Source::MapBoss { name } => write!(f, "{name}"),
+        // Source::Act { id } => write!(f, "{id}"),
+        // Source::DeliriumCurrencyRewards => write!(f, "Delirium Currency Rewards"),
+        // Source::RedeemerInfluencedMaps => write!(f, "Redeemer influenced maps"),
+        // }
     }
 }
 
@@ -284,6 +312,14 @@ pub enum Vendor {
     #[strum(serialize = "Kirac shop")]
     #[serde(rename = "Kirac shop")]
     KiracShop,
+}
+
+impl Identified for Vendor {
+    fn id(&self) -> &str {
+        match self {
+            Vendor::KiracShop => "Kirac shop",
+        }
+    }
 }
 
 #[derive(
@@ -320,6 +356,19 @@ pub enum Strongbox {
     #[strum(serialize = "Artisan's Strongbox")]
     #[serde(rename = "Artisan's Strongbox")]
     Artisan,
+}
+
+impl Identified for Strongbox {
+    fn id(&self) -> &str {
+        match self {
+            Strongbox::Jeweller => "Jeweller's Strongbox",
+            Strongbox::Armourer => "Armourer's Strongbox",
+            Strongbox::Cartographer => "Cartographer's Strongbox",
+            Strongbox::Gemcutter => "Gemcutter's Strongbox",
+            Strongbox::Arcanist => "Arcanist's Strongbox",
+            Strongbox::Artisan => "Artisan's Strongbox",
+        }
+    }
 }
 
 #[derive(
@@ -385,6 +434,27 @@ pub enum Chest {
     #[strum(serialize = "Booty Chest (Mao Kun)")]
     #[serde(rename = "Booty Chest (Mao Kun)")]
     BootyChestMaoKun,
+}
+
+impl Identified for Chest {
+    fn id(&self) -> &str {
+        match self {
+            Chest::AbyssalTrove => "Abyssal Trove",
+            Chest::DelveChest => "Delve chest",
+            Chest::DelveGemChests => "Delve Gem Chests",
+            Chest::VoltaxicSulphite => "Voltaxic Sulphite",
+            Chest::DelveInteractablesBehindFracturedWall => "Delve Interactables behind Fractured Wall",
+            Chest::DelveCityLightJewelleryChest => "Light Jewellery chest (Primeval Ruins, Abyssal City, Vaal Outpost)",
+            Chest::MavenCrucible => "The Maven's Crucible",
+            Chest::HeistMapChest => "Map Reward Heist Chests",
+            Chest::BreachClaspedHand => "Breach Clasped Hand",
+            Chest::IzaroTreasure => "Izaro's Treasure",
+            Chest::VaalVessel => "Vaal Vessel (Vaal Side Areas)",
+            Chest::UberlabChests => "Uber Labyrinth/Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)",
+            Chest::Darkshrine => "Labyrinth Darkshrines",
+            Chest::BootyChestMaoKun => "Booty Chest (Mao Kun)",
+        }
+    }
 }
 
 pub fn poedb_page_url(boss: &str) {

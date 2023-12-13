@@ -4,6 +4,8 @@ use strum::IntoEnumIterator;
 
 use strum_macros::EnumString;
 
+use super::Identified;
+
 #[derive(
     Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, strum_macros::EnumIter, Default,
 )]
@@ -22,6 +24,19 @@ pub enum Area {
     AtziriArea(AtziriArea),
     #[serde(rename = "Area-Specific")]
     AreaSpecific(AreaSpecific),
+}
+
+impl Identified for Area {
+    fn id(&self) -> &str {
+        match self {
+            Area::TrialOfStingingDoubt => "Trial of Stinging Doubt",
+            Area::TempleOfAtzoatl => "The Temple of Atzoatl",
+            Area::AllVaalSideAreas => "All Vaal side areas (need specific information)",
+            Area::VaalSideAreas => "Vaal Side Areas",
+            Area::AtziriArea(a) => a.id(),
+            Area::AreaSpecific(a) => a.id(),
+        }
+    }
 }
 
 impl Area {
@@ -65,14 +80,15 @@ impl FromStr for Area {
 
 impl std::fmt::Display for Area {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Area::TrialOfStingingDoubt => write!(f, "Trial of Stinging Doubt"),
-            Area::TempleOfAtzoatl => write!(f, "The Temple of Atzoatl"),
-            Area::AllVaalSideAreas => write!(f, "All Vaal side areas (need specific information)"),
-            Area::VaalSideAreas => write!(f, "Vaal Side Areas"),
-            Area::AreaSpecific(areaspecific) => areaspecific.fmt(f),
-            Area::AtziriArea(atziri_area) => atziri_area.fmt(f),
-        }
+        write!(f, "{}", self.id())
+        // match self {
+        //     Area::TrialOfStingingDoubt => write!(f, "Trial of Stinging Doubt"),
+        //     Area::TempleOfAtzoatl => write!(f, "The Temple of Atzoatl"),
+        //     Area::AllVaalSideAreas => write!(f, "All Vaal side areas (need specific information)"),
+        //     Area::VaalSideAreas => write!(f, "Vaal Side Areas"),
+        //     Area::AreaSpecific(areaspecific) => areaspecific.fmt(f),
+        //     Area::AtziriArea(atziri_area) => atziri_area.fmt(f),
+        // }
     }
 }
 
@@ -113,6 +129,15 @@ impl Default for AtziriArea {
     }
 }
 
+impl Identified for AtziriArea {
+    fn id(&self) -> &str {
+        match self {
+            AtziriArea::ApexOfSacrifice => "The Apex of Sacrifice",
+            AtziriArea::AlluringAbyss => "The Alluring Abyss",
+        }
+    }
+}
+
 #[derive(
     Debug,
     Clone,
@@ -142,6 +167,18 @@ pub enum BreachlordBossDomain {
     #[strum(serialize = "Uul-Netol, Unburdened Flesh")]
     #[serde(rename = "Uul-Netol, Unburdened Flesh")]
     UulNetol,
+}
+
+impl Identified for BreachlordBossDomain {
+    fn id(&self) -> &str {
+        match self {
+            BreachlordBossDomain::Xoph => "Xoph, Dark Embers",
+            BreachlordBossDomain::Tul => "Tul, Creeping Avalanche",
+            BreachlordBossDomain::Esh => "Esh, Forked Thought",
+            BreachlordBossDomain::Chayula => "Chayula, Who Dreamt",
+            BreachlordBossDomain::UulNetol => "Uul-Netol, Unburdened Flesh",
+        }
+    }
 }
 
 #[derive(
@@ -178,5 +215,17 @@ pub enum AreaSpecific {
 impl Default for AreaSpecific {
     fn default() -> Self {
         AreaSpecific::ChayulasDomain
+    }
+}
+
+impl Identified for AreaSpecific {
+    fn id(&self) -> &str {
+        match self {
+            AreaSpecific::ChayulasDomain => "Chayula's Domain",
+            AreaSpecific::UulNetolsDomain => "Uul-Netol's Domain",
+            AreaSpecific::EshsDomain => "Esh's Domain",
+            AreaSpecific::XophsDomain => "Xoph's Domain",
+            AreaSpecific::TulsDomain => "Tul's Domain",
+        }
     }
 }
