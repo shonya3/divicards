@@ -91,7 +91,6 @@ export class StashesViewElement extends BaseElement {
 		}
 
 		if (map.has('customLeague')) {
-			console.log(this.customLeague);
 			CustomLeagueStorage.save(this.customLeague);
 			if (this.customLeague) {
 				this.league = this.customLeague;

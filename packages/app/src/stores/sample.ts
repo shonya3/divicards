@@ -22,7 +22,6 @@ export const createSampleCard = async (
 	league: TradeLeague
 ): Promise<FileCardProps> => {
 	const sample = await command('sample', { data: sampleData, league });
-	console.log(sample);
 
 	return {
 		uuid: crypto.randomUUID(),
@@ -121,7 +120,6 @@ export const useSampleStore = defineStore('sampleCards', {
 		},
 
 		async addSample(name: string, sample: DivinationCardsSample, league: League): Promise<void> {
-			console.log(sample);
 			const sampleCard = createSampleCardFromSample(name, sample, isTradeLeague(league) ? league : ACTIVE_LEAGUE);
 			this.sampleCards.push(sampleCard);
 		},
