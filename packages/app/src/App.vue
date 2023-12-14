@@ -50,9 +50,10 @@ const openStashWindow = async () => {
 };
 
 const onSaveToFileClicked = (sample: DivinationCardsSample, league: League, filename: string) => {
+	const name = filename.includes('.') ? filename : `${filename}.csv`;
 	if (!formPopupExportRef.value) return;
 	exportState.to.value = 'file';
-	exportState.filename.value = filename;
+	exportState.filename.value = name;
 	exportState.sample.value = sample;
 	exportState.league.value = league;
 	formPopupExportRef.value.open();
