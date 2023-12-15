@@ -18,7 +18,11 @@ pub struct Card {
 pub struct CardsData(Vec<Card>);
 impl CardsData {
     pub fn card(&self, s: &str) -> &Card {
-        self.0.iter().find(|card| card.name == s).unwrap()
+        let Some(card) = self.0.iter().find(|card| card.name == s) else {
+            panic!("Card not exist {s}");
+        };
+
+        card
     }
 }
 
