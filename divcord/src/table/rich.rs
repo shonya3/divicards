@@ -161,7 +161,7 @@ impl Cell {
     }
 
     pub fn font_styles(&self) -> FontStyles {
-        self.effective_format.font_styles.to_owned().into()
+        self.effective_format.text_format.to_owned().into()
     }
 
     pub fn text_format_runs(&self) -> Vec<TextFormatRun> {
@@ -174,7 +174,7 @@ impl Cell {
 pub struct EffectiveFormat {
     background_color: ProtobufColor,
     #[serde(alias = "textFormat")]
-    font_styles: TextFormat,
+    text_format: TextFormat,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
