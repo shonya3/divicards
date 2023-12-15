@@ -425,7 +425,8 @@ pub enum Chest {
         to_string = "Uber Labyrinth or Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)"
     )]
     #[serde(
-        rename = "Uber Labyrinth/Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)"
+        rename = "Uber Labyrinth or Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)",
+        alias = "Uber Labyrinth/Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)"
     )]
     UberlabChests,
     #[strum(serialize = "Labyrinth Darkshrines")]
@@ -450,7 +451,7 @@ impl Identified for Chest {
             Chest::BreachClaspedHand => "Breach Clasped Hand",
             Chest::IzaroTreasure => "Izaro's Treasure",
             Chest::VaalVessel => "Vaal Vessel (Vaal Side Areas)",
-            Chest::UberlabChests => "Uber Labyrinth/Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)",
+            Chest::UberlabChests => "Uber Labyrinth or Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)",
             Chest::Darkshrine => "Labyrinth Darkshrines",
             Chest::BootyChestMaoKun => "Booty Chest (Mao Kun)",
         }
