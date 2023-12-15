@@ -38,7 +38,7 @@ pub mod fetch {
         let available_maps = load_poedb_non_unique_available_maplist(&chrome).await?;
 
         for MapDataFromWiki { name, tier } in wiki_maps.into_iter() {
-            let unique = name.ends_with(" Map");
+            let unique = !name.ends_with(" Map");
             let available = unique || available_maps.contains(&name);
             let icon = match get_map_icon_url(&name, &chrome).await {
                 Ok(icon) => icon,
