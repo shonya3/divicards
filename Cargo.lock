@@ -1012,6 +1012,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "divcord-wasm"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "divcord",
+ "js-sys",
+ "poe_data",
+ "serde-wasm-bindgen",
+ "serde_json",
+ "wasm-bindgen",
+ "wasm-bindgen-test",
+]
+
+[[package]]
 name = "divi"
 version = "0.1.0"
 dependencies = [
@@ -3925,20 +3939,6 @@ dependencies = [
  "gobject-sys",
  "libc",
  "system-deps 5.0.0",
-]
-
-[[package]]
-name = "sources-wasm"
-version = "0.1.0"
-dependencies = [
- "console_error_panic_hook",
- "divcord",
- "js-sys",
- "poe_data",
- "serde-wasm-bindgen",
- "serde_json",
- "wasm-bindgen",
- "wasm-bindgen-test",
 ]
 
 [[package]]
