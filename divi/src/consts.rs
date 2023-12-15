@@ -29,7 +29,7 @@ pub const CARDS: [&'static str; CARDS_N] = [
     "I See Brothers",
     "Assassin's Gift",
     "Eldritch Perfection",
-    "Fire of Unknown Origin",
+    "Fire Of Unknown Origin",
     "The Fortunate",
     "Brother's Gift",
     "Soul Quenched",
