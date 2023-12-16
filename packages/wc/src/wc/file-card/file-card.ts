@@ -325,7 +325,7 @@ export class FileCardElement extends BaseElement {
 
 				width: 250px;
 				/* max-height: 320px; */
-				height: 500px;
+				height: 550px;
 
 				border: 2px solid black;
 				border-color: var(--border-color);
@@ -409,10 +409,11 @@ export class FileCardElement extends BaseElement {
 			.grid-icon {
 				display: block;
 				cursor: pointer;
-				width: 96px;
-				height: 96px;
+				border: 1px solid red;
 				padding: 0;
 				margin: 0;
+				width: 100px;
+				height: 100px;
 			}
 		`,
 	];
