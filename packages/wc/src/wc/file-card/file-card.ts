@@ -409,7 +409,6 @@ export class FileCardElement extends BaseElement {
 			.grid-icon {
 				display: block;
 				cursor: pointer;
-				border: 1px solid red;
 				padding: 0;
 				margin: 0;
 				width: 100px;
