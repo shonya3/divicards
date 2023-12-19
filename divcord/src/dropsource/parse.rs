@@ -47,7 +47,7 @@ impl Display for ParseSourceError {
             } => {
                 write!(
                     f,
-                    "{record_id}.{card}. Parsing drops_from: {}, no source found. {}",
+                    "{record_id}.{card}. Unknown variant of card source {}. {}",
                     drops_from.name,
                     record_url(*record_id, DivcordColumn::Source)
                 )
