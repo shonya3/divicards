@@ -5,12 +5,12 @@ export type Kind = EmptySourceKind | SourceWithMemberKind;
 export type EmptySource = { type: SourceType; id: string; kind: EmptySourceKind; min_level?: number; max_level?: number};
 export type ISource = SourceWithMember | EmptySource;
 export const sourceTypes = [
+	"Unknown",
 	"Expedition Logbook",
 	"Chest",
 	"Delirium",
 	"Strongbox",
 	"Vendor",
-	"Unknown",
 	"Delirium Currency Rewards",
 	"Redeemer influenced maps",
 	"Disabled",
@@ -53,6 +53,7 @@ export const sourceTypes = [
 	"Shaper Mini-Boss",
 	"Betrayal Catarina",
 	"Oshabi Boss",
+	"Eldritch Perfection Monster",
 	"Trial of Stinging Doubt",
 	"The Temple of Atzoatl",
 	"All Vaal side areas (need specific information)",
