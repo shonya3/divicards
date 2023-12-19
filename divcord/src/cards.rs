@@ -89,22 +89,20 @@ pub fn find_cards_by_source_types(
             });
 
             match source {
-                Source::Map { name } => {
+                Source::Map(name) => {
                     if !set.contains(name.as_str()) {
                         set.insert(name);
                         for boss in bosses_in_map(name, poe_data) {
                             for card in cards_by_mapboss(&boss.name, records, poe_data) {
                                 entry.push(CFromSource::WithBoss {
                                     card,
-                                    boss: Source::MapBoss {
-                                        name: boss.name.clone(),
-                                    },
+                                    boss: Source::MapBoss(boss.name.clone()),
                                 });
                             }
                         }
                     }
                 }
-                Source::Act { id } => {
+                Source::Act(id) => {
                     let act_area = poe_data.acts.iter().find(|a| a.id == *id).unwrap();
                     if !set.contains(id.as_str()) {
                         set.insert(id);
@@ -112,9 +110,7 @@ pub fn find_cards_by_source_types(
                             for card in cards_by_actboss(&fight.name, records) {
                                 entry.push(CFromSource::WithBoss {
                                     card,
-                                    boss: Source::ActBoss {
-                                        name: fight.name.clone(),
-                                    },
+                                    boss: Source::ActBoss(fight.name.clone()),
                                 })
                             }
                         }

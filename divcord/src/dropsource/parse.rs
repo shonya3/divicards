@@ -268,9 +268,7 @@ pub fn parse_one_drops_from(
                         && a.area_level >= card_drop_level_requirement.try_into().unwrap()
                 })
             }) {
-                return Ok(vec![Source::ActBoss {
-                    name: d.name.to_string(),
-                }]);
+                return Ok(vec![Source::ActBoss(d.name.to_string())]);
             } else {
                 println!(
                     "From acts parsing. Could not resolve the source of the name: {}",
@@ -280,7 +278,7 @@ pub fn parse_one_drops_from(
         }
 
         // return Some(Source::Acts { ids });
-        return Ok(ids.into_iter().map(|id| Source::Act { id }).collect());
+        return Ok(ids.into_iter().map(|id| Source::Act(id)).collect());
     }
 
     // Maps or MapBosses
@@ -300,14 +298,12 @@ pub fn parse_one_drops_from(
             //     "{row} {card_name}. {mapname}(lv{maplevel}), need lv{card_drop_level_requirement}"
             // );
             // }
-            return Ok(vec![Source::Map {
-                name: map.name.to_owned(),
-            }]);
+            return Ok(vec![Source::Map(map.name.to_owned())]);
         }
 
         let s = s.split("(").next().unwrap().trim().to_string();
         if let Some(_) = mapbosses.iter().find(|b| b.name == s) {
-            return Ok(vec![Source::MapBoss { name: s }]);
+            return Ok(vec![Source::MapBoss(s)]);
         }
     }
 

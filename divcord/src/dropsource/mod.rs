@@ -18,18 +18,10 @@ pub enum Source {
     #[default]
     Unknown,
 
-    Act {
-        id: String,
-    },
-    Map {
-        name: String,
-    },
-    ActBoss {
-        name: String,
-    },
-    MapBoss {
-        name: String,
-    },
+    Act(String),
+    Map(String),
+    ActBoss(String),
+    MapBoss(String),
 
     UniqueMonster(UniqueMonster),
     Area(Area),
@@ -75,10 +67,10 @@ impl<'de> Deserialize<'de> for Source {
                 match id.parse::<Source>() {
                     Ok(source) => Ok(source),
                     Err(_) => match _type.as_str() {
-                        "Map" => Ok(Source::Map { name: id }),
-                        "Map Boss" => Ok(Source::MapBoss { name: id }),
-                        "Act" => Ok(Source::Act { id }),
-                        "Act Boss" => Ok(Source::ActBoss { name: id }),
+                        "Map" => Ok(Source::Map(id)),
+                        "Map Boss" => Ok(Source::MapBoss(id)),
+                        "Act" => Ok(Source::Act(id)),
+                        "Act Boss" => Ok(Source::ActBoss(id)),
                         _ => Err(de::Error::custom(format!(
                             "Could not deserialize Source. {_type} {id}"
                         ))),
@@ -94,10 +86,10 @@ impl Identified for Source {
         match self {
             Source::Unknown => "Unknown",
 
-            Source::Act { id } => id.as_str(),
-            Source::Map { name } => name.as_str(),
-            Source::ActBoss { name } => name.as_str(),
-            Source::MapBoss { name } => name.as_str(),
+            Source::Act(id) => id.as_str(),
+            Source::Map(name) => name.as_str(),
+            Source::ActBoss(name) => name.as_str(),
+            Source::MapBoss(name) => name.as_str(),
 
             Source::UniqueMonster(m) => m.id(),
             Source::Area(a) => a.id(),

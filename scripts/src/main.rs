@@ -21,7 +21,7 @@ async fn main() {
     let json = serde_json::to_string_pretty(&records).unwrap();
     std::fs::write("records.json", &json).unwrap();
 
-    check_deserialize().unwrap();
+    let records = check_deserialize().unwrap();
 
     let empty: Vec<SourcefulDivcordTableRecord> = records
         .clone()
