@@ -5,7 +5,6 @@ export type Kind = EmptySourceKind | SourceWithMemberKind;
 export type EmptySource = { type: SourceType; id: string; kind: EmptySourceKind; min_level?: number; max_level?: number};
 export type ISource = SourceWithMember | EmptySource;
 export const sourceTypes = [
-	"Unknown",
 	"Act",
 	"Map",
 	"Act Boss",

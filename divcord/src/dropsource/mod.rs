@@ -13,11 +13,8 @@ pub trait Identified {
     fn id(&self) -> &str;
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, strum_macros::EnumIter, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, strum_macros::EnumIter)]
 pub enum Source {
-    #[default]
-    Unknown,
-
     Act(String),
     Map(String),
     ActBoss(String),
@@ -83,8 +80,6 @@ impl<'de> Deserialize<'de> for Source {
 impl Identified for Source {
     fn id(&self) -> &str {
         match self {
-            Source::Unknown => "Unknown",
-
             Source::Act(id) => id.as_str(),
             Source::Map(name) => name.as_str(),
             Source::ActBoss(name) => name.as_str(),
@@ -109,8 +104,6 @@ impl Identified for Source {
 impl Source {
     pub fn _type(&self) -> &str {
         match self {
-            Source::Unknown => "Unknown",
-
             Source::Act { .. } => "Act",
             Source::Map { .. } => "Map",
             Source::ActBoss { .. } => "Act Boss",
@@ -242,7 +235,7 @@ impl FromStr for Source {
 
         match s {
             "Disabled" => return Ok(Source::Disabled),
-            "Unknown" => return Ok(Source::Unknown),
+            // "Unknown" => return Ok(Source::Unknown),
             "Redeemer influenced maps" => return Ok(Source::Area(Area::RedeemerInfluencedMaps)),
             "Delirium Currency Rewards" => return Ok(Source::DeliriumCurrencyRewards),
             "Global Drop" => {
