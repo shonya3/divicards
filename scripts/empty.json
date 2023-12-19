@@ -205,5 +205,15 @@
     "remainingWork": "confirm",
     "sourcesWithTagButNotOnWiki": "Unravelling Horror (Port)",
     "notes": "Potentially also Sporeplume or Peninsula Boss, but unlikely"
+  },
+  {
+    "id": 499,
+    "greynote": "Empty",
+    "card": "Assassin's Gift",
+    "tagHypothesis": "assassins_gift_area",
+    "confidence": "low",
+    "remainingWork": "confirm",
+    "sourcesWithTagButNotOnWiki": "Darnaw's Landing; The Body Pit; Pillaged Camp; The Den; Combat Capacity Test Chamber",
+    "notes": "Appears to have a tag in all unique heist areas.\nAlso tagged for Tomb of the Banished (Jamanra's Rest), which is not an enabled area.\nUnclear if area or boss specific drop."
   }
 ]
