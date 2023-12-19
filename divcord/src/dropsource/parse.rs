@@ -16,7 +16,7 @@ use super::{area::Area, monster::UniqueMonster, Source, Vendor};
 
 #[derive(Debug)]
 pub enum ParseSourceError {
-    NoSourceParsingDropsFrom {
+    UnknownVariant {
         card: String,
         record_id: usize,
         drops_from: DropsFrom,
@@ -40,7 +40,7 @@ pub enum ParseSourceError {
 impl Display for ParseSourceError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            ParseSourceError::NoSourceParsingDropsFrom {
+            ParseSourceError::UnknownVariant {
                 record_id,
                 drops_from,
                 card,
@@ -201,7 +201,7 @@ pub fn parse_dropses_from(
     let mut sources: Vec<Source> = vec![];
     for d in &record.drops_from {
         let Ok(mut inner_sources) = parse_one_drops_from(d, &record, poe_data) else {
-            return Err(ParseSourceError::NoSourceParsingDropsFrom {
+            return Err(ParseSourceError::UnknownVariant {
                 card: record.card.to_owned(),
                 record_id: record.id,
                 drops_from: d.to_owned(),
@@ -307,7 +307,7 @@ pub fn parse_one_drops_from(
         }
     }
 
-    Err(ParseSourceError::NoSourceParsingDropsFrom {
+    Err(ParseSourceError::UnknownVariant {
         card: record.card.to_owned(),
         record_id: record.id,
         drops_from: d.to_owned(),
