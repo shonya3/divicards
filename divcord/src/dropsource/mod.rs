@@ -28,7 +28,6 @@ pub enum Source {
     Vendor(Vendor),
 
     Delirium,
-    ExpeditionLogbook,
     DeliriumCurrencyRewards,
     Disabled,
     GlobalDrop {
@@ -93,7 +92,6 @@ impl Identified for Source {
             Source::Vendor(vendor) => vendor.id(),
 
             Source::Delirium => "Delirium",
-            Source::ExpeditionLogbook => "Expedition Logbook",
             Source::DeliriumCurrencyRewards => "Delirium Currency Rewards",
             Source::Disabled => "Disabled",
             Source::GlobalDrop { .. } => "Global Drop",
@@ -117,7 +115,6 @@ impl Source {
             Source::Vendor(_) => "Vendor",
 
             Source::Delirium => "Delirium",
-            Source::ExpeditionLogbook => "Expedition Logbook",
             Source::DeliriumCurrencyRewards => "Delirium Currency Rewards",
             Source::Disabled => "Disabled",
             Source::GlobalDrop { .. } => "Global Drop",

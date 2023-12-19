@@ -51,11 +51,11 @@ export const sourceTypes = [
 	"Atziri Area",
 	"Area-Specific",
 	"Redeemer influenced maps",
+	"Expedition Logbook",
 	"Chest",
 	"Strongbox",
 	"Vendor",
 	"Delirium",
-	"Expedition Logbook",
 	"Delirium Currency Rewards",
 	"Disabled",
 	"Global Drop"
