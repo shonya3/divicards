@@ -6,15 +6,6 @@ export type EmptySource = { type: SourceType; id: string; kind: EmptySourceKind;
 export type ISource = SourceWithMember | EmptySource;
 export const sourceTypes = [
 	"Unknown",
-	"Expedition Logbook",
-	"Chest",
-	"Delirium",
-	"Strongbox",
-	"Vendor",
-	"Delirium Currency Rewards",
-	"Redeemer influenced maps",
-	"Disabled",
-	"Global Drop",
 	"Act",
 	"Map",
 	"Map Boss",
@@ -59,7 +50,16 @@ export const sourceTypes = [
 	"All Vaal side areas (need specific information)",
 	"Vaal Side Areas",
 	"Atziri Area",
-	"Area-Specific"
+	"Area-Specific",
+	"Chest",
+	"Strongbox",
+	"Vendor",
+	"Delirium",
+	"Expedition Logbook",
+	"Delirium Currency Rewards",
+	"Redeemer influenced maps",
+	"Disabled",
+	"Global Drop"
 ] as const;
 
 export type SourceType = (typeof sourceTypes)[number];

@@ -17,11 +17,29 @@ pub trait Identified {
 pub enum Source {
     #[default]
     Unknown,
-    ExpeditionLogbook,
+
+    Act {
+        id: String,
+    },
+    Map {
+        name: String,
+    },
+    ActBoss {
+        name: String,
+    },
+    MapBoss {
+        name: String,
+    },
+
+    UniqueMonster(UniqueMonster),
+    Area(Area),
+
     Chest(Chest),
-    Delirium,
     Strongbox(Strongbox),
     Vendor(Vendor),
+
+    Delirium,
+    ExpeditionLogbook,
     DeliriumCurrencyRewards,
     RedeemerInfluencedMaps,
     Disabled,
@@ -29,20 +47,6 @@ pub enum Source {
         min_level: Option<u32>,
         max_level: Option<u32>,
     },
-    Act {
-        id: String,
-    },
-    Map {
-        name: String,
-    },
-    MapBoss {
-        name: String,
-    },
-    ActBoss {
-        name: String,
-    },
-    UniqueMonster(UniqueMonster),
-    Area(Area),
 }
 
 impl<'de> Deserialize<'de> for Source {
@@ -88,22 +92,26 @@ impl<'de> Deserialize<'de> for Source {
 impl Identified for Source {
     fn id(&self) -> &str {
         match self {
-            Source::ExpeditionLogbook => "Expedition Logbook",
+            Source::Unknown => "Unknown",
+
+            Source::Act { id } => id.as_str(),
+            Source::Map { name } => name.as_str(),
+            Source::ActBoss { name } => name.as_str(),
+            Source::MapBoss { name } => name.as_str(),
+
+            Source::UniqueMonster(m) => m.id(),
+            Source::Area(a) => a.id(),
+
             Source::Chest(chest) => chest.id(),
-            Source::Delirium => "Delirium",
             Source::Strongbox(strongbox) => strongbox.id(),
             Source::Vendor(vendor) => vendor.id(),
-            Source::Unknown => "Unknown",
+
+            Source::Delirium => "Delirium",
+            Source::ExpeditionLogbook => "Expedition Logbook",
             Source::DeliriumCurrencyRewards => "Delirium Currency Rewards",
             Source::RedeemerInfluencedMaps => "Redeemer influenced maps",
             Source::Disabled => "Disabled",
             Source::GlobalDrop { .. } => "Global Drop",
-            Source::Act { id } => id.as_str(),
-            Source::Map { name } => name.as_str(),
-            Source::MapBoss { name } => name.as_str(),
-            Source::ActBoss { name } => name.as_str(),
-            Source::UniqueMonster(m) => m.id(),
-            Source::Area(a) => a.id(),
         }
     }
 }
@@ -111,22 +119,26 @@ impl Identified for Source {
 impl Source {
     pub fn _type(&self) -> &str {
         match self {
-            Source::ExpeditionLogbook => "Expedition Logbook",
+            Source::Unknown => "Unknown",
+
+            Source::Act { .. } => "Act",
+            Source::Map { .. } => "Map",
+            Source::ActBoss { .. } => "Act Boss",
+            Source::MapBoss { .. } => "Map Boss",
+
+            Source::UniqueMonster(monster) => monster._type(),
+            Source::Area(area) => area._type(),
+
             Source::Chest(_) => "Chest",
-            Source::Delirium => "Delirium",
             Source::Strongbox(_) => "Strongbox",
             Source::Vendor(_) => "Vendor",
-            Source::Unknown => "Unknown",
+
+            Source::Delirium => "Delirium",
+            Source::ExpeditionLogbook => "Expedition Logbook",
             Source::DeliriumCurrencyRewards => "Delirium Currency Rewards",
             Source::RedeemerInfluencedMaps => "Redeemer influenced maps",
             Source::Disabled => "Disabled",
             Source::GlobalDrop { .. } => "Global Drop",
-            Source::Act { .. } => "Act",
-            Source::Map { .. } => "Map",
-            Source::MapBoss { .. } => "Map Boss",
-            Source::ActBoss { .. } => "Act Boss",
-            Source::UniqueMonster(monster) => monster._type(),
-            Source::Area(area) => area._type(),
         }
     }
 
