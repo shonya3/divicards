@@ -12,7 +12,7 @@ use poe_data::{
     PoeData,
 };
 
-use super::{monster::UniqueMonster, Source, Vendor};
+use super::{area::Area, monster::UniqueMonster, Source, Vendor};
 
 #[derive(Debug)]
 pub enum ParseSourceError {
@@ -172,7 +172,7 @@ pub fn parse_record_dropsources(
 
     // 5. Read notes(last column)
     if record.notes == Some(String::from("Redeemer influenced maps")) {
-        sources.push(Source::RedeemerInfluencedMaps)
+        sources.push(Source::Area(Area::RedeemerInfluencedMaps))
     }
 
     // 6. Final rules

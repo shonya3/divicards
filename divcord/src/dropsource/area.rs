@@ -24,6 +24,7 @@ pub enum Area {
     AtziriArea(AtziriArea),
     #[serde(rename = "Area-Specific")]
     AreaSpecific(AreaSpecific),
+    RedeemerInfluencedMaps,
 }
 
 impl Identified for Area {
@@ -35,6 +36,7 @@ impl Identified for Area {
             Area::VaalSideAreas => "Vaal Side Areas",
             Area::AtziriArea(a) => a.id(),
             Area::AreaSpecific(a) => a.id(),
+            Area::RedeemerInfluencedMaps => "Redeemer influenced maps",
         }
     }
 }
@@ -48,6 +50,7 @@ impl Area {
             Area::VaalSideAreas => "Vaal Side Areas",
             Area::AtziriArea(_) => "Atziri Area",
             Area::AreaSpecific(_) => "Area-Specific",
+            Area::RedeemerInfluencedMaps => "Redeemer influenced maps",
         }
     }
 

@@ -33,7 +33,6 @@ pub enum Source {
     Delirium,
     ExpeditionLogbook,
     DeliriumCurrencyRewards,
-    RedeemerInfluencedMaps,
     Disabled,
     GlobalDrop {
         min_level: Option<u32>,
@@ -101,7 +100,6 @@ impl Identified for Source {
             Source::Delirium => "Delirium",
             Source::ExpeditionLogbook => "Expedition Logbook",
             Source::DeliriumCurrencyRewards => "Delirium Currency Rewards",
-            Source::RedeemerInfluencedMaps => "Redeemer influenced maps",
             Source::Disabled => "Disabled",
             Source::GlobalDrop { .. } => "Global Drop",
         }
@@ -128,7 +126,6 @@ impl Source {
             Source::Delirium => "Delirium",
             Source::ExpeditionLogbook => "Expedition Logbook",
             Source::DeliriumCurrencyRewards => "Delirium Currency Rewards",
-            Source::RedeemerInfluencedMaps => "Redeemer influenced maps",
             Source::Disabled => "Disabled",
             Source::GlobalDrop { .. } => "Global Drop",
         }
@@ -231,7 +228,7 @@ impl FromStr for Source {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         if s == "Redeemer influenced maps" {
-            return Ok(Source::RedeemerInfluencedMaps);
+            return Ok(Source::Area(Area::RedeemerInfluencedMaps));
         }
         if s == "Delirium Currency Rewards" {
             return Ok(Source::DeliriumCurrencyRewards);
@@ -246,7 +243,7 @@ impl FromStr for Source {
         match s {
             "Disabled" => return Ok(Source::Disabled),
             "Unknown" => return Ok(Source::Unknown),
-            "Redeemer influenced maps" => return Ok(Source::RedeemerInfluencedMaps),
+            "Redeemer influenced maps" => return Ok(Source::Area(Area::RedeemerInfluencedMaps)),
             "Delirium Currency Rewards" => return Ok(Source::DeliriumCurrencyRewards),
             "Global Drop" => {
                 return Ok(Source::GlobalDrop {
