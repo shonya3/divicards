@@ -24,6 +24,7 @@ pub enum Area {
     AtziriArea(AtziriArea),
     #[serde(rename = "Area-Specific")]
     AreaSpecific(AreaSpecific),
+    #[serde(rename = "Redeemer influenced maps")]
     RedeemerInfluencedMaps,
 }
 
