@@ -16,12 +16,12 @@ pub trait Identified {
 #[derive(Debug, Clone, PartialEq, Eq, Hash, strum_macros::EnumIter, Default)]
 pub enum Source {
     #[default]
+    Unknown,
     ExpeditionLogbook,
     Chest(Chest),
     Delirium,
     Strongbox(Strongbox),
     Vendor(Vendor),
-    Unknown,
     DeliriumCurrencyRewards,
     RedeemerInfluencedMaps,
     Disabled,
