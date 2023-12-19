@@ -84,6 +84,8 @@ pub enum UniqueMonster {
     BetrayalCatarina(BetrayalCatarina),
     #[serde(rename = "Oshabi Boss")]
     OshabiBoss(OshabiBoss),
+    #[serde(rename = "Eldritch Perfection Monster")]
+    EldritchPerfectionMonster(EldritchPerfectionMonster),
 }
 
 impl UniqueMonster {
@@ -133,6 +135,7 @@ impl UniqueMonster {
             UniqueMonster::ShaperMiniBoss(_) => "Shaper Mini-Boss",
             UniqueMonster::BetrayalCatarina(_) => "Betrayal Catarina",
             UniqueMonster::OshabiBoss(_) => "Oshabi Boss",
+            UniqueMonster::EldritchPerfectionMonster(_) => "Eldritch Perfection Monster",
         }
     }
 }
@@ -182,6 +185,10 @@ impl FromStr for UniqueMonster {
                 .or_else(|_| ShaperMiniBoss::from_str(s).map(|b| Self::ShaperMiniBoss(b)))
                 .or_else(|_| BetrayalCatarina::from_str(s).map(|b| Self::BetrayalCatarina(b)))
                 .or_else(|_| OshabiBoss::from_str(s).map(|b| Self::OshabiBoss(b)))
+                .or_else(|_| {
+                    EldritchPerfectionMonster::from_str(s)
+                        .map(|b| Self::EldritchPerfectionMonster(b))
+                })
                 .or_else(|_| return Err(strum::ParseError::VariantNotFound)),
         }
     }
@@ -277,6 +284,7 @@ impl Identified for UniqueMonster {
             UniqueMonster::ShaperMiniBoss(m) => m.id(),
             UniqueMonster::BetrayalCatarina(m) => m.id(),
             UniqueMonster::OshabiBoss(m) => m.id(),
+            UniqueMonster::EldritchPerfectionMonster(m) => m.id(),
         }
     }
 }
@@ -1096,4 +1104,72 @@ impl Identified for OshabiBoss {
     fn id(&self) -> &str {
         "Oshabi, Avatar of the Grove"
     }
+}
+
+#[derive(
+    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, strum_macros::EnumIter, Default,
+)]
+#[serde(tag = "name")]
+pub enum EldritchPerfectionMonster {
+    #[default]
+    ConsumingBearer,
+    ConsumingParasite,
+    ConsumingThrall,
+    GrotesqueCavedweller,
+    GrotesqueMangler,
+    GrotesqueMauler,
+    GrotesqueMaw,
+    MoltenGolem,
+    MoltenMinotaur,
+    MoltenWretch,
+    VoidFlayer,
+    VoidJaguar,
+    VoidSkulker,
+}
+
+impl Identified for EldritchPerfectionMonster {
+    fn id(&self) -> &str {
+        match self {
+            EldritchPerfectionMonster::ConsumingBearer => "Consuming Bearer",
+            EldritchPerfectionMonster::ConsumingParasite => "Consuming Parasite",
+            EldritchPerfectionMonster::ConsumingThrall => "Consuming Thrall",
+            EldritchPerfectionMonster::GrotesqueCavedweller => "Grotesque Cavedweller",
+            EldritchPerfectionMonster::GrotesqueMangler => "Grotesque Mangler",
+            EldritchPerfectionMonster::GrotesqueMauler => "Grotesque Mauler",
+            EldritchPerfectionMonster::GrotesqueMaw => "Grotesque Maw",
+            EldritchPerfectionMonster::MoltenGolem => "Molten Golem",
+            EldritchPerfectionMonster::MoltenMinotaur => "Molten Minotaur",
+            EldritchPerfectionMonster::MoltenWretch => "Molten Wretch",
+            EldritchPerfectionMonster::VoidFlayer => "Void Flayer",
+            EldritchPerfectionMonster::VoidJaguar => "Void Jaguar",
+            EldritchPerfectionMonster::VoidSkulker => "Void Skulker",
+        }
+    }
+}
+
+impl FromStr for EldritchPerfectionMonster {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        from_str_for_identified_enumter(s)
+    }
+}
+
+fn from_str_for_identified_enumter<T>(s: &str) -> Result<T, String>
+where
+    T: Identified + IntoEnumIterator,
+{
+    for variant in T::iter() {
+        if s == variant.id() {
+            return Ok(variant);
+        }
+    }
+
+    Err(format!(
+        "Unknown variant {s}, expected one of `{}`",
+        T::iter()
+            .map(|e| e.id().to_owned())
+            .collect::<Vec<_>>()
+            .join(", ")
+    ))
 }
