@@ -4,6 +4,7 @@ pub mod consts;
 
 #[cfg(feature = "fetch")]
 pub mod error;
+pub mod league;
 #[cfg(feature = "fetch")]
 // pub mod loader;
 // #[cfg(feature = "fetch")]
