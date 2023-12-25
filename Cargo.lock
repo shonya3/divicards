@@ -3555,6 +3555,7 @@ version = "0.5.3"
 dependencies = [
  "divcord",
  "poe_data",
+ "reqwest",
  "serde",
  "serde_json",
  "tokio",

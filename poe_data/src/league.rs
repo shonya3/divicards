@@ -8,11 +8,11 @@ use crate::{consts::WIKI_API_URL, error::Error};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LeagueReleaseInfo {
     #[serde(alias = "name")]
-    league: String,
+    pub name: String,
     #[serde(alias = "release date")]
-    date: String,
+    pub date: String,
     #[serde(alias = "release version")]
-    version: ReleaseVersion,
+    pub version: ReleaseVersion,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

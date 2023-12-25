@@ -12,3 +12,4 @@ serde_json = {workspace = true}
 divcord = {path = "../divcord", features = ["fetch"]}
 poe_data = {path = "../poe_data", features = ["fetch"]}
 tokio = {workspace = true}
+reqwest.workspace = true

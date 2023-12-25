@@ -1,5 +1,7 @@
 use serde::{Deserialize, Serialize};
 
+use crate::league::LeagueReleaseInfo;
+
 pub const POE_CDN_CARDS: &'static str = "https://web.poecdn.com/image/divination-card/";
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -11,11 +13,13 @@ pub struct Card {
     pub max_level: Option<u32>,
     pub weight: Option<f32>,
     pub price: Option<f32>,
+    #[serde(alias = "release version")]
+    pub league: Option<LeagueReleaseInfo>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct CardsData(Vec<Card>);
+pub struct CardsData(pub Vec<Card>);
 impl CardsData {
     pub fn card(&self, s: &str) -> &Card {
         let Some(card) = self.0.iter().find(|card| card.name == s) else {
@@ -38,6 +42,7 @@ pub async fn fetch() -> Result<CardsData, crate::error::Error> {
     use crate::{
         consts::{WEIGHT_RANGES, WIKI_API_URL},
         error::Error,
+        league::ReleaseVersion,
     };
 
     println!("Fetching cards");
@@ -52,6 +57,8 @@ pub async fn fetch() -> Result<CardsData, crate::error::Error> {
         pub drop_monsters: Option<Vec<String>>,
         #[serde(alias = "drop level maximum")]
         pub max_level: Option<u32>,
+        #[serde(alias = "release version")]
+        pub release_version: Option<ReleaseVersion>,
     }
 
     pub async fn load_wiki() -> Result<Vec<WikiCard>, Error> {
@@ -71,6 +78,8 @@ pub async fn fetch() -> Result<CardsData, crate::error::Error> {
             pub drop_monsters: Option<String>,
             #[serde(alias = "drop level maximum")]
             pub max_level: Option<String>,
+            #[serde(alias = "release version")]
+            pub release_version: Option<ReleaseVersion>,
         }
 
         #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -78,7 +87,9 @@ pub async fn fetch() -> Result<CardsData, crate::error::Error> {
             title: WikiCardRaw,
         }
 
-        let url = format!("{WIKI_API_URL}?action=cargoquery&format=json&smaxage=1&maxage=1&tables=items&limit=500&fields=items.name,items.drop_level,items.drop_level_maximum,items.drop_areas,items.drop_monsters&where=items.class_id='DivinationCard'");
+        let url = format!("{WIKI_API_URL}?action=cargoquery&format=json&smaxage=1&maxage=1&tables=items&limit=500&fields=items.release_version,items.name,items.drop_level,items.drop_level_maximum,items.drop_areas,items.drop_monsters&where=items.class_id='DivinationCard'");
+
+        dbg!(&url);
 
         let response = Client::new().get(url).send().await?;
         let wiki_maps: WikiCardsResponse = response.json().await?;
@@ -98,6 +109,7 @@ pub async fn fetch() -> Result<CardsData, crate::error::Error> {
                         .drop_monsters
                         .map(|s| s.split(",").into_iter().map(|s| s.to_string()).collect()),
                     max_level: raw.max_level.map(|s| s.parse().unwrap()),
+                    release_version: raw.release_version,
                 }
             })
             .collect();
@@ -126,17 +138,24 @@ pub async fn fetch() -> Result<CardsData, crate::error::Error> {
     let sample = load_total_sample(key, Some(prices)).await?;
     let mut wiki_vec = load_wiki().await.unwrap();
 
+    let league_info_vec = crate::league::LeagueReleaseInfo::fetch().await?;
+
     Ok(CardsData(
         sample
             .cards
             .into_iter()
             .map(|card| {
-                let (min_level, max_level) = wiki_vec
+                let (min_level, max_level, release_version) = wiki_vec
                     .iter()
                     .position(|w| w.name == card.name)
                     .and_then(|index| Some(wiki_vec.swap_remove(index)))
-                    .map(|w| (w.min_level, w.max_level))
+                    .map(|w| (w.min_level, w.max_level, w.release_version))
                     .unwrap_or_default();
+
+                let league = release_version
+                    .map(|version| league_info_vec.iter().find(|info| info.version == version))
+                    .flatten()
+                    .cloned();
 
                 Card {
                     name: card.name,
@@ -144,6 +163,7 @@ pub async fn fetch() -> Result<CardsData, crate::error::Error> {
                     max_level,
                     weight: card.weight,
                     price: card.price,
+                    league,
                 }
             })
             .collect(),
