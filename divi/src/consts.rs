@@ -23,6 +23,12 @@ pub const LEGACY_CARDS: [&'static str; LEGACY_CARDS_N] = [
     "The Hook",
 ];
 
+pub const NEVER_EXISTED: [&'static str; 3] = [
+    "The Devastator",
+    "Treasures of the Vaal",
+    "Luck of the Vaal",
+];
+
 pub const CARDS_N: usize = 444;
 pub const CARDS: [&'static str; CARDS_N] = [
     "Who Asked",
