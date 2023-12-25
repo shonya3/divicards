@@ -46,6 +46,48 @@ pub async fn fetch() -> Result<CardsData, crate::error::Error> {
     };
 
     println!("Fetching cards");
+    dotenv::dotenv().ok();
+    let key = std::env::var("GOOGLE_API_KEY").expect("No google api key");
+    let prices = Prices::fetch(&divi::league::TradeLeague::Standard).await?;
+    let sample = load_total_sample(key, Some(prices)).await?;
+    let mut wiki_vec = load_wiki().await?;
+
+    let league_info_vec = crate::league::LeagueReleaseInfo::fetch().await?;
+    let vec_json = serde_json::to_string(&league_info_vec).unwrap();
+    println!("{vec_json}");
+    return Ok(CardsData(
+        sample
+            .cards
+            .into_iter()
+            .map(|card| {
+                let (min_level, max_level, release_version) = wiki_vec
+                    .iter()
+                    .position(|w| w.name == card.name)
+                    .and_then(|index| Some(wiki_vec.swap_remove(index)))
+                    .map(|w| (w.min_level, w.max_level, w.release_version))
+                    .unwrap_or_default();
+
+                let league = release_version
+                    .map(|version| {
+                        league_info_vec
+                            .iter()
+                            .find(|info| info.version.same_league(&version))
+                    })
+                    .flatten()
+                    .cloned();
+
+                Card {
+                    name: card.name,
+                    min_level,
+                    max_level,
+                    weight: card.weight,
+                    price: card.price,
+                    league,
+                }
+            })
+            .collect(),
+    ));
+
     #[derive(Serialize, Deserialize, Debug, Clone)]
     pub struct WikiCard {
         pub name: String,
@@ -131,41 +173,4 @@ pub async fn fetch() -> Result<CardsData, crate::error::Error> {
         let sample = DivinationCardsSample::create(data, prices)?;
         Ok(sample)
     }
-
-    dotenv::dotenv().ok();
-    let key = std::env::var("GOOGLE_API_KEY").expect("No google api key");
-    let prices = Prices::fetch(&divi::league::TradeLeague::Standard).await?;
-    let sample = load_total_sample(key, Some(prices)).await?;
-    let mut wiki_vec = load_wiki().await.unwrap();
-
-    let league_info_vec = crate::league::LeagueReleaseInfo::fetch().await?;
-
-    Ok(CardsData(
-        sample
-            .cards
-            .into_iter()
-            .map(|card| {
-                let (min_level, max_level, release_version) = wiki_vec
-                    .iter()
-                    .position(|w| w.name == card.name)
-                    .and_then(|index| Some(wiki_vec.swap_remove(index)))
-                    .map(|w| (w.min_level, w.max_level, w.release_version))
-                    .unwrap_or_default();
-
-                let league = release_version
-                    .map(|version| league_info_vec.iter().find(|info| info.version == version))
-                    .flatten()
-                    .cloned();
-
-                Card {
-                    name: card.name,
-                    min_level,
-                    max_level,
-                    weight: card.weight,
-                    price: card.price,
-                    league,
-                }
-            })
-            .collect(),
-    ))
 }
