@@ -92,7 +92,7 @@ impl LeagueReleaseInfo {
         use serde_json::Value;
 
         let mut league_relese_info_vec: Vec<LeagueReleaseInfo> = vec![];
-        let url = format!("{WIKI_API_URL}?action=cargoquery&format=json&tables=events&fields=events.name,release_date,release_version");
+        let url = format!("{WIKI_API_URL}?action=cargoquery&format=json&tables=events&fields=events.name,release_date,release_version&where=events.type=%22Challenge%20league%22");
         let json: Value = reqwest::get(url).await?.json().await?;
         let Some(vec) = json["cargoquery"].as_array() else {
             return Err(UnexpectedLeagueInfoShapeError::NoCargoqueryArray.into());
