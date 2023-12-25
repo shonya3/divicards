@@ -1,9 +1,6 @@
 use std::fmt::Display;
 
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
-
-use crate::{consts::WIKI_API_URL, error::Error};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LeagueReleaseInfo {
@@ -46,7 +43,10 @@ impl Display for UnexpectedLeagueInfoShapeError {
 
 impl LeagueReleaseInfo {
     #[cfg(feature = "fetch")]
-    pub async fn fetch() -> Result<Vec<LeagueReleaseInfo>, Error> {
+    pub async fn fetch() -> Result<Vec<LeagueReleaseInfo>, crate::error::Error> {
+        use crate::consts::WIKI_API_URL;
+        use serde_json::Value;
+
         let mut league_relese_info_vec: Vec<LeagueReleaseInfo> = vec![];
         let url = format!("{WIKI_API_URL}?action=cargoquery&format=json&tables=events&fields=events.name,release_date,release_version");
         let json: Value = reqwest::get(url).await?.json().await?;
