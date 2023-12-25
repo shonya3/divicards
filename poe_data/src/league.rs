@@ -22,6 +22,50 @@ impl PartialEq for ReleaseVersion {
     }
 }
 
+#[test]
+fn same_league() {
+    let version = ReleaseVersion("2.0.3".to_string());
+    let other = ReleaseVersion("2.0.5".to_string());
+    assert_eq!(version.major(), Some(2u16));
+    assert_eq!(version.minor(), Some(0u16));
+    assert_eq!(version.patch(), Some(3u16));
+    assert_eq!(other.patch(), Some(5u16));
+    assert!(version.same_league(&other))
+}
+
+impl ReleaseVersion {
+    pub fn same_league(&self, other: &Self) -> bool {
+        let major = self.major();
+        let minor = self.minor();
+
+        major.map_or(false, |_| major == other.major() && minor == other.minor())
+    }
+
+    pub fn major(&self) -> Option<u16> {
+        self.0
+            .split(".")
+            .next()
+            .map(|v| v.parse::<u16>().ok())
+            .flatten()
+    }
+
+    pub fn minor(&self) -> Option<u16> {
+        self.0
+            .split(".")
+            .nth(1)
+            .map(|v| v.parse::<u16>().ok())
+            .flatten()
+    }
+
+    pub fn patch(&self) -> Option<u16> {
+        self.0
+            .split(".")
+            .nth(2)
+            .map(|v| v.parse::<u16>().ok())
+            .flatten()
+    }
+}
+
 #[derive(Debug)]
 pub enum UnexpectedLeagueInfoShapeError {
     NoCargoqueryArray,
