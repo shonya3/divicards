@@ -1,46 +1,103 @@
 use std::{
     path::{Path, PathBuf},
-    process::Command,
+    process::{Command, Stdio},
 };
 
+use card_element::DivinationCardElementData;
+use divcord::table::DivcordTable;
+use loader::DataLoader;
+use poe_data::PoeData;
+use serde::Serialize;
+
 pub fn divcord_wasm_pkg() {
-    let divcord_wasm_dir = Path::new("../divcord_wasm");
-    if !divcord_wasm_dir.exists() {
-        panic!("Divcord wasm dir not exists");
-    }
+    let dir_path = Path::new("../divcord_wasm");
 
-    let output = Command::new("wasm-pack")
-        .args(&["build", "--target", "web"])
-        .current_dir(Path::new("../divcord_wasm"))
-        .output()
-        .expect("Could not generate divcord_wasm. Did you install wasm-pack?");
+    if dir_path.exists() && dir_path.is_dir() {
+        let output = Command::new("wasm-pack")
+            .args(&["build", "--target", "web"])
+            .current_dir(&dir_path)
+            .stdout(Stdio::inherit())
+            .stderr(Stdio::inherit())
+            .output();
 
-    if output.status.success() {
-        println!("Divcord_wasm generated successfully!");
+        match output {
+            Ok(output) => {
+                if output.status.success() {
+                    println!("Command executed successfully!");
+                } else {
+                    eprintln!("Error executing command");
+                }
+            }
+            Err(err) => {
+                eprintln!("Failed to execute command: {}", err);
+            }
+        }
     } else {
-        let stderr = String::from_utf8_lossy(&output.stderr);
-        eprintln!("Error: {}", stderr);
+        eprintln!("The directory does not exist or is not a directory.");
     }
 }
 
-pub async fn card_element<P: AsRef<Path>>(dir: Option<P>, filename: Option<&str>) {
+pub async fn card_element(config: &Config) {
     let card_element_data = card_element::fetch().await.unwrap();
     // let dir = dir.unwrap_or(std::env::current_dir().unwrap());
 
-    let dir = match dir {
-        Some(p) => p.as_ref().to_path_buf(),
-        None => std::env::current_dir().unwrap(),
-    };
-
-    let filename = filename.unwrap_or("cardElementJson.json");
-    let p = dir.join(filename);
+    let p = config.dir.join(&config.filename);
 
     std::fs::write(p, serde_json::to_string(&card_element_data).unwrap()).unwrap();
 }
 
+pub struct Config {
+    pub dir: PathBuf,
+    pub filename: String,
+}
+
+impl Config {
+    pub const fn new(dir: PathBuf, filename: String) -> Self {
+        Self { dir, filename }
+    }
+
+    pub fn with_current_dir(filename: String) -> Self {
+        Self {
+            dir: Default::default(),
+            filename,
+        }
+    }
+}
+
+impl Default for Config {
+    fn default() -> Self {
+        Self {
+            dir: Default::default(),
+            filename: Default::default(),
+        }
+    }
+}
+
+pub fn write<T>(value: &T, dir: &Path, filename: &str)
+where
+    T: Serialize,
+{
+    let json = serde_json::to_string(&value).unwrap();
+    let p = dir.join(filename);
+    std::fs::write(p, &json).unwrap();
+}
+
 #[tokio::main]
 async fn main() {
-    println!("Hello, world!");
-    divcord_wasm_pkg();
-    card_element(Option::<PathBuf>::None, None).await;
+    let dir = PathBuf::default();
+
+    // println!("Hello, world!");
+    // divcord_wasm_pkg();
+    // card_element(Option::<PathBuf>::None, None).await;
+
+    
+
+    let divcord_table = DivcordTable::load().await.unwrap();
+    let poe_data = PoeData::load().await.unwrap();
+    let records = divcord_table.sourceful_records(&poe_data).unwrap();
+    let card_element = card_element::fetch().await.unwrap();
+
+    write(&records, &dir, "records.json");
+    write(&poe_data, &dir, "poeData.json");
+    write(&card_element, &dir, DivinationCardElementData::filename());
 }

@@ -41,7 +41,7 @@ where
     T: serde::Serialize + serde::de::DeserializeOwned,
     E: From<Error>,
 {
-    fn filename(&self) -> &'static str;
+    fn filename() -> &'static str;
     fn reload(&self) -> bool {
         true
     }
@@ -53,7 +53,7 @@ where
             std::fs::create_dir(&dir).unwrap();
         }
 
-        dir.join(self.filename())
+        dir.join(Self::filename())
     }
     async fn update(&self) -> Result<(), E> {
         let t = self.fetch().await?;

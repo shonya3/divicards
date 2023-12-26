@@ -515,7 +515,9 @@ dependencies = [
 name = "card_element"
 version = "0.5.3"
 dependencies = [
+ "async-trait",
  "divi",
+ "loader",
  "regex",
  "reqwest",
  "serde",
@@ -614,6 +616,7 @@ version = "0.5.3"
 dependencies = [
  "card_element",
  "divcord",
+ "loader",
  "poe_data",
  "reqwest",
  "serde",

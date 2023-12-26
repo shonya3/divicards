@@ -53,7 +53,7 @@ impl DivcordTableLoader {
 
 #[async_trait]
 impl DataLoader<DivcordTable, Error> for DivcordTableLoader {
-    fn filename(&self) -> &'static str {
+    fn filename() -> &'static str {
         "divcord_table.json"
     }
 

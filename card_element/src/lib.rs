@@ -2,8 +2,10 @@ pub mod error;
 pub mod images;
 pub mod reward;
 
+use async_trait::async_trait;
 use divi::{league::TradeLeague, prices::NinjaCardData};
 pub use error::Error;
+use loader::DataLoader;
 use serde::{Deserialize, Serialize};
 
 use self::reward::reward_to_html;
@@ -43,4 +45,19 @@ pub async fn fetch() -> Result<Vec<DivinationCardElementData>, Error> {
         .collect();
 
     Ok(v)
+}
+
+#[async_trait]
+impl DataLoader<Vec<Self>, Error> for DivinationCardElementData {
+    fn filename() -> &'static str {
+        "cardElementData.json"
+    }
+
+    async fn fetch(&self) -> Result<Vec<Self>, Error> {
+        fetch().await
+    }
+
+    fn reload(&self) -> bool {
+        false
+    }
 }

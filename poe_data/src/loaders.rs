@@ -7,7 +7,7 @@ use loader::DataLoader;
 pub struct MapBossesLoader;
 #[async_trait]
 impl DataLoader<Vec<MapBoss>, Error> for MapBossesLoader {
-    fn filename(&self) -> &'static str {
+    fn filename() -> &'static str {
         "mapBosses.json"
     }
 
@@ -23,7 +23,7 @@ impl DataLoader<Vec<MapBoss>, Error> for MapBossesLoader {
 pub struct MapsLoader;
 #[async_trait]
 impl DataLoader<Vec<Map>, Error> for MapsLoader {
-    fn filename(&self) -> &'static str {
+    fn filename() -> &'static str {
         "maps.json"
     }
 
@@ -39,7 +39,7 @@ impl DataLoader<Vec<Map>, Error> for MapsLoader {
 pub struct ActsLoader;
 #[async_trait]
 impl DataLoader<Vec<ActArea>, Error> for ActsLoader {
-    fn filename(&self) -> &'static str {
+    fn filename() -> &'static str {
         "acts.json"
     }
 
@@ -55,7 +55,7 @@ impl DataLoader<Vec<ActArea>, Error> for ActsLoader {
 pub struct CardsLoader;
 #[async_trait]
 impl DataLoader<CardsData, Error> for CardsLoader {
-    fn filename(&self) -> &'static str {
+    fn filename() -> &'static str {
         "cards.json"
     }
 
@@ -67,7 +67,7 @@ impl DataLoader<CardsData, Error> for CardsLoader {
 pub struct PoeDataLoader;
 #[async_trait]
 impl DataLoader<PoeData, Error> for PoeDataLoader {
-    fn filename(&self) -> &'static str {
+    fn filename() -> &'static str {
         "poeData.json"
     }
 

@@ -6,6 +6,7 @@ pub enum Error {
     DiviError(divi::error::Error),
     IoError(std::io::Error),
     SerdeError(serde_json::Error),
+    LoaderError(loader::Error),
 }
 
 impl Display for Error {
@@ -15,6 +16,7 @@ impl Display for Error {
             Error::DiviError(err) => err.fmt(f),
             Error::IoError(err) => err.fmt(f),
             Error::SerdeError(err) => err.fmt(f),
+            Error::LoaderError(err) => err.fmt(f),
         }
     }
 }
@@ -40,5 +42,11 @@ impl From<std::io::Error> for Error {
 impl From<serde_json::Error> for Error {
     fn from(value: serde_json::Error) -> Self {
         Error::SerdeError(value)
+    }
+}
+
+impl From<loader::Error> for Error {
+    fn from(value: loader::Error) -> Self {
+        Error::LoaderError(value)
     }
 }
