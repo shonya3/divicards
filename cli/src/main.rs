@@ -24,7 +24,7 @@ pub fn divcord_wasm_pkg() {
 }
 
 pub async fn card_element<P: AsRef<Path>>(dir: Option<P>, filename: Option<&str>) {
-    let card_element_data = card_element::fetch().await;
+    let card_element_data = card_element::fetch().await.unwrap();
     // let dir = dir.unwrap_or(std::env::current_dir().unwrap());
 
     let dir = match dir {

@@ -1,7 +1,9 @@
+pub mod error;
 pub mod images;
 pub mod reward;
 
 use divi::{league::TradeLeague, prices::NinjaCardData};
+pub use error::Error;
 use serde::{Deserialize, Serialize};
 
 use self::reward::reward_to_html;
@@ -16,8 +18,8 @@ pub struct DivinationCardElementData {
     pub stack_size: Option<usize>,
 }
 
-pub async fn fetch() -> Vec<DivinationCardElementData> {
-    let vec: Vec<NinjaCardData> = NinjaCardData::fetch(&TradeLeague::default()).await.unwrap();
+pub async fn fetch() -> Result<Vec<DivinationCardElementData>, Error> {
+    let vec: Vec<NinjaCardData> = NinjaCardData::fetch(&TradeLeague::default()).await?;
     let v: Vec<DivinationCardElementData> = vec
         .into_iter()
         .map(|data| {
@@ -40,5 +42,5 @@ pub async fn fetch() -> Vec<DivinationCardElementData> {
         })
         .collect();
 
-    v
+    Ok(v)
 }
