@@ -1173,3 +1173,25 @@ where
             .join(", ")
     ))
 }
+
+// fn from_str_wip<T>(s: &str) -> Result<T, String>
+// where
+//     T: Identified + IntoEnumIterator,
+// {
+//     for variant in T::iter() {
+//         // if s == variant.id() {
+//         //     return Ok(variant);
+//         // }
+//         if variant.id_and_aliases().iter().any(|alias| alias == s) {
+//             return Ok(variant);
+//         }
+//     }
+
+//     Err(format!(
+//         "Unknown variant {s}, expected one of `{}`",
+//         T::iter()
+//             .map(|e| e.id().to_owned())
+//             .collect::<Vec<_>>()
+//             .join(", ")
+//     ))
+// }

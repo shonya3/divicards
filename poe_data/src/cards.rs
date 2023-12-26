@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use serde::{Deserialize, Serialize};
 
 use crate::league::LeagueReleaseInfo;
@@ -19,13 +21,12 @@ pub struct Card {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct CardsData(pub Vec<Card>);
+pub struct CardsData(pub HashMap<String, Card>);
 impl CardsData {
     pub fn card(&self, s: &str) -> &Card {
-        let Some(card) = self.0.iter().find(|card| card.name == s) else {
-            panic!("Card not exist {s}");
+        let Some(card) = self.0.get(s) else {
+            panic!("Card not exists {s}");
         };
-
         card
     }
 }
@@ -55,38 +56,86 @@ pub async fn fetch() -> Result<CardsData, crate::error::Error> {
     let league_info_vec = crate::league::LeagueReleaseInfo::fetch().await?;
     let vec_json = serde_json::to_string(&league_info_vec).unwrap();
     println!("{vec_json}");
-    return Ok(CardsData(
-        sample
-            .cards
-            .into_iter()
-            .map(|card| {
-                let (min_level, max_level, release_version) = wiki_vec
-                    .iter()
-                    .position(|w| w.name == card.name)
-                    .and_then(|index| Some(wiki_vec.swap_remove(index)))
-                    .map(|w| (w.min_level, w.max_level, w.release_version))
-                    .unwrap_or_default();
+    let mut vec: Vec<Card> = sample
+        .cards
+        .into_iter()
+        .map(|card| {
+            let (min_level, max_level, release_version) = wiki_vec
+                .iter()
+                .position(|w| w.name == card.name)
+                .and_then(|index| Some(wiki_vec.swap_remove(index)))
+                .map(|w| (w.min_level, w.max_level, w.release_version))
+                .unwrap_or_default();
 
-                let league = release_version
-                    .map(|version| {
-                        league_info_vec
-                            .iter()
-                            .find(|info| info.version.same_league(&version))
-                    })
-                    .flatten()
-                    .cloned();
+            let league = release_version
+                .map(|version| {
+                    league_info_vec
+                        .iter()
+                        .find(|info| info.version.same_league(&version))
+                })
+                .flatten()
+                .cloned();
 
-                Card {
-                    name: card.name,
-                    min_level,
-                    max_level,
-                    weight: card.weight,
-                    price: card.price,
-                    league,
-                }
-            })
-            .collect(),
-    ));
+            Card {
+                name: card.name,
+                min_level,
+                max_level,
+                weight: card.weight,
+                price: card.price,
+                league,
+            }
+        })
+        .collect();
+
+    let big_value = 1_000_000.0;
+    vec.sort_by(|a, b| {
+        let a_weight = a.weight.unwrap_or(big_value);
+        let b_weight = b.weight.unwrap_or(big_value);
+        return a_weight.partial_cmp(&b_weight).unwrap();
+    });
+    // dbg!(vec.into_iter().map(|c| c.name).collect::<Vec<String>>());
+
+    // HashMap::from_iter(vec.into_iter())
+
+    return Ok(CardsData(HashMap::from_iter(
+        vec.into_iter().map(|c| (c.name.clone(), c)),
+    )));
+    // return Ok(CardsData(HashMap::new()));
+
+    // return Ok(CardsData(
+    //     sample
+    //         .cards
+    //         .into_iter()
+    //         .map(|card| {
+    //             let (min_level, max_level, release_version) = wiki_vec
+    //                 .iter()
+    //                 .position(|w| w.name == card.name)
+    //                 .and_then(|index| Some(wiki_vec.swap_remove(index)))
+    //                 .map(|w| (w.min_level, w.max_level, w.release_version))
+    //                 .unwrap_or_default();
+
+    //             let league = release_version
+    //                 .map(|version| {
+    //                     league_info_vec
+    //                         .iter()
+    //                         .find(|info| info.version.same_league(&version))
+    //                 })
+    //                 .flatten()
+    //                 .cloned();
+
+    //             (
+    //                 card.name.clone(),
+    //                 Card {
+    //                     name: card.name,
+    //                     min_level,
+    //                     max_level,
+    //                     weight: card.weight,
+    //                     price: card.price,
+    //                     league,
+    //                 },
+    //             )
+    //         })
+    //         .collect(),
 
     #[derive(Serialize, Deserialize, Debug, Clone)]
     pub struct WikiCard {

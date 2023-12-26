@@ -11,6 +11,16 @@ use self::{area::Area, monster::UniqueMonster};
 
 pub trait Identified {
     fn id(&self) -> &str;
+
+    fn alises(&self) -> Vec<&'static str> {
+        vec![]
+    }
+
+    fn id_and_aliases<'a>(&'a self) -> Vec<&'a str> {
+        let mut a = self.alises();
+        a.push(self.id());
+        a
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, strum_macros::EnumIter)]
