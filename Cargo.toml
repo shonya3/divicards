@@ -10,7 +10,8 @@ members = [
     "poe_data",
     "divcord",
     "divcord_wasm",
-    "loader"
+    "loader",
+    "cli"
 ]
 
 [workspace.package]
