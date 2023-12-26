@@ -1,5 +1,5 @@
 [package]
-name = "divcord-wasm"
+name = "divcord_wasm"
 version = "0.1.0"
 authors = ["shonya3 <poeshonya3@gmail.com>"]
 edition = "2021"
