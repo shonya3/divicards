@@ -8,13 +8,13 @@ use wasm_bindgen::{prelude::wasm_bindgen, JsValue};
 #[wasm_bindgen]
 pub fn parsed_records(
     divcord_table: String,
-    poe_data: JsValue,
+    poe_data: String,
     toast: &js_sys::Function,
 ) -> Result<JsValue, JsValue> {
     set_panic_hook();
 
     let table: DivcordTable = serde_json::from_str(&divcord_table).unwrap();
-    let poe_data: PoeData = serde_wasm_bindgen::from_value(poe_data).unwrap();
+    let poe_data: PoeData = serde_json::from_str(&poe_data).unwrap();
 
     let mut records: Vec<SourcefulDivcordTableRecord> = vec![];
     for record in table.sourceful_records_iter(poe_data) {
