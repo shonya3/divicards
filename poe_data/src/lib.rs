@@ -30,4 +30,10 @@ impl PoeData {
         use loader::DataLoader;
         crate::loaders::PoeDataLoader.load().await
     }
+
+    #[cfg(feature = "fetch")]
+    pub fn filename() -> &'static str {
+        use loader::DataLoader;
+        crate::loaders::PoeDataLoader::filename()
+    }
 }

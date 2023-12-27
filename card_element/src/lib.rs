@@ -20,6 +20,16 @@ pub struct DivinationCardElementData {
     pub stack_size: Option<usize>,
 }
 
+impl DivinationCardElementData {
+    pub fn filename() -> &'static str {
+        CardElementDataLoader::filename()
+    }
+
+    pub async fn load() -> Result<Vec<DivinationCardElementData>, Error> {
+        CardElementDataLoader.load().await
+    }
+}
+
 pub async fn fetch() -> Result<Vec<DivinationCardElementData>, Error> {
     let vec: Vec<NinjaCardData> = NinjaCardData::fetch(&TradeLeague::default()).await?;
     let v: Vec<DivinationCardElementData> = vec
@@ -47,17 +57,15 @@ pub async fn fetch() -> Result<Vec<DivinationCardElementData>, Error> {
     Ok(v)
 }
 
+pub struct CardElementDataLoader;
+
 #[async_trait]
-impl DataLoader<Vec<Self>, Error> for DivinationCardElementData {
+impl DataLoader<Vec<DivinationCardElementData>, Error> for CardElementDataLoader {
     fn filename() -> &'static str {
         "cardElementData.json"
     }
 
-    async fn fetch(&self) -> Result<Vec<Self>, Error> {
+    async fn fetch(&self) -> Result<Vec<DivinationCardElementData>, Error> {
         fetch().await
-    }
-
-    fn reload(&self) -> bool {
-        false
     }
 }
