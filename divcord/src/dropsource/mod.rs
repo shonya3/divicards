@@ -145,7 +145,7 @@ impl Source {
         vec
     }
 
-    pub fn write_typescript_file() -> std::io::Result<()> {
+    pub fn typescript_types() -> String {
         let mut buf = Vec::new();
         let formatter = serde_json::ser::PrettyFormatter::with_indent(b"\t");
         let mut serializer = serde_json::Serializer::with_formatter(&mut buf, formatter);
@@ -165,9 +165,7 @@ export type SourceType = (typeof sourceTypes)[number];
     "#,
         );
 
-        std::fs::write("ISource.interface.ts", &s)?;
-
-        Ok(())
+        s
     }
 }
 

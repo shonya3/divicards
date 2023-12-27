@@ -11,7 +11,7 @@ members = [
     "divcord",
     "divcord_wasm",
     "loader",
-    "cli"
+    "generate_website_files"
 ]
 
 [workspace.package]

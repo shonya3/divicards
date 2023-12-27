@@ -37,5 +37,5 @@ async fn main() {
     let json = serde_json::to_string_pretty(&empty).unwrap();
     std::fs::write("empty.json", &json).unwrap();
 
-    Source::write_typescript_file().unwrap();
+    // Source::write_typescript_file().unwrap();
 }

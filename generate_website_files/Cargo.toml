@@ -1,5 +1,5 @@
 [package]
-name = "cli"
+name = "generate_website_files"
 version.workspace = true
 edition.workspace = true
 repository.workspace = true

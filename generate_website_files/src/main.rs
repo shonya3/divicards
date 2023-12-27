@@ -5,16 +5,54 @@ use std::{
 
 use card_element::DivinationCardElementData;
 use divcord::table::DivcordTable;
-use loader::DataLoader;
 use poe_data::PoeData;
 use serde::Serialize;
 
-pub fn divcord_wasm_pkg() {
+#[tokio::main]
+async fn main() {
+    let dir = PathBuf::from("../../divicards-site/src/gen");
+    if !dir.exists() {
+        std::fs::create_dir_all(&dir).unwrap();
+    }
+
+    divcord_wasm_pkg(&dir, "divcordWasm");
+
+    let divcord_table = DivcordTable::load().await.unwrap();
+    let poe_data = PoeData::load().await.unwrap();
+    let card_element = DivinationCardElementData::load().await.unwrap();
+    let records = divcord_table.sourceful_records(&poe_data).unwrap();
+
+    write(&records, &dir, "records.json");
+    write(&poe_data, &dir, PoeData::filename());
+    write(&card_element, &dir, DivinationCardElementData::filename());
+    write(
+        &divcord::dropsource::Source::typescript_types(),
+        &dir,
+        "ISource.interface.ts",
+    );
+}
+
+pub fn divcord_wasm_pkg(path: &Path, dirname: &str) {
     let dir_path = Path::new("../divcord_wasm");
+
+    let path = std::env::current_dir()
+        .unwrap()
+        .parent()
+        .unwrap()
+        .join("cli")
+        .join(path)
+        .join(dirname);
+    println!("{}", path.display());
 
     if dir_path.exists() && dir_path.is_dir() {
         let output = Command::new("wasm-pack")
-            .args(&["build", "--target", "web"])
+            .args(&[
+                "build",
+                "--target",
+                "web",
+                "--out-dir",
+                &path.display().to_string(),
+            ])
             .current_dir(&dir_path)
             .stdout(Stdio::inherit())
             .stderr(Stdio::inherit())
@@ -80,24 +118,4 @@ where
     let json = serde_json::to_string(&value).unwrap();
     let p = dir.join(filename);
     std::fs::write(p, &json).unwrap();
-}
-
-#[tokio::main]
-async fn main() {
-    let dir = PathBuf::default();
-
-    // println!("Hello, world!");
-    // divcord_wasm_pkg();
-    // card_element(Option::<PathBuf>::None, None).await;
-
-    
-
-    let divcord_table = DivcordTable::load().await.unwrap();
-    let poe_data = PoeData::load().await.unwrap();
-    let records = divcord_table.sourceful_records(&poe_data).unwrap();
-    let card_element = card_element::fetch().await.unwrap();
-
-    write(&records, &dir, "records.json");
-    write(&poe_data, &dir, "poeData.json");
-    write(&card_element, &dir, DivinationCardElementData::filename());
 }

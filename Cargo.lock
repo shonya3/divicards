@@ -611,19 +611,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "cli"
-version = "0.5.3"
-dependencies = [
- "card_element",
- "divcord",
- "poe_data",
- "reqwest",
- "serde",
- "serde_json",
- "tokio",
-]
-
-[[package]]
 name = "cocoa"
 version = "0.24.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1462,6 +1449,19 @@ dependencies = [
  "libc",
  "system-deps 6.1.2",
  "x11",
+]
+
+[[package]]
+name = "generate_website_files"
+version = "0.5.3"
+dependencies = [
+ "card_element",
+ "divcord",
+ "poe_data",
+ "reqwest",
+ "serde",
+ "serde_json",
+ "tokio",
 ]
 
 [[package]]
