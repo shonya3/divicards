@@ -70,6 +70,12 @@ pub fn divcord_wasm_pkg(path: &Path, dirname: &str) {
                 eprintln!("Failed to execute command: {}", err);
             }
         }
+
+        let gitignore_path = path.join(".gitignore");
+        if gitignore_path.exists() {
+            std::fs::remove_file(&gitignore_path).unwrap();
+            println!(".gitignore is successfully deleted");
+        }
     } else {
         eprintln!("The directory does not exist or is not a directory.");
     }
