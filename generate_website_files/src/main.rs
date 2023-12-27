@@ -25,11 +25,11 @@ async fn main() {
     write(&records, &dir, "records.json");
     write(&poe_data, &dir, PoeData::filename());
     write(&card_element, &dir, DivinationCardElementData::filename());
-    write(
+    std::fs::write(
+        dir.join("ISource.interface.ts"),
         &divcord::dropsource::Source::typescript_types(),
-        &dir,
-        "ISource.interface.ts",
-    );
+    )
+    .unwrap();
 }
 
 pub fn divcord_wasm_pkg(path: &Path, dirname: &str) {
