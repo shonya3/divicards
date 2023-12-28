@@ -77,7 +77,7 @@ pub fn divcord_wasm_pkg(path: &Path, dirname: &str) {
             println!(".gitignore is successfully deleted");
         }
     } else {
-        eprintln!("The directory does not exist or is not a directory.");
+        panic!("The directory does not exist or is not a directory.");
     }
 }
 
