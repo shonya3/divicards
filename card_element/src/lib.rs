@@ -2,7 +2,6 @@ pub mod error;
 pub mod images;
 pub mod reward;
 
-use async_trait::async_trait;
 use divi::{league::TradeLeague, prices::NinjaCardData};
 pub use error::Error;
 use loader::DataLoader;
@@ -59,7 +58,6 @@ pub async fn fetch() -> Result<Vec<DivinationCardElementData>, Error> {
 
 pub struct CardElementDataLoader;
 
-#[async_trait]
 impl DataLoader<Vec<DivinationCardElementData>, Error> for CardElementDataLoader {
     fn filename() -> &'static str {
         "cardElementData.json"

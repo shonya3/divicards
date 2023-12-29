@@ -4,8 +4,6 @@ use std::{
     path::PathBuf,
 };
 
-use async_trait::async_trait;
-
 use std::fmt::Display;
 
 #[derive(Debug)]
@@ -35,7 +33,7 @@ impl From<serde_json::Error> for Error {
     }
 }
 
-#[async_trait]
+#[allow(async_fn_in_trait)]
 pub trait DataLoader<T, E>
 where
     T: serde::Serialize + serde::de::DeserializeOwned,

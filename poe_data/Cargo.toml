@@ -9,7 +9,6 @@ repository.workspace = true
 [dependencies]
 serde = {workspace = true}
 
-async-trait = {version = "0.1.73", optional = true}
 reqwest = { workspace = true, features = ["blocking"], optional = true}
 googlesheets = {path = "../googlesheets", optional = true}
 dotenv = { version = "0.15.0", optional = true}
@@ -21,4 +20,4 @@ loader = {path = "../loader", optional = true}
 
 [features]
 default = []
-fetch = ["dep:serde_json", "dep:playwright", "dep:divi", "dep:dotenv", "dep:googlesheets", "dep:reqwest", "dep:async-trait", "dep:loader"]
+fetch = ["dep:serde_json", "dep:playwright", "dep:divi", "dep:dotenv", "dep:googlesheets", "dep:reqwest", "dep:loader"]

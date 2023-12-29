@@ -1,6 +1,5 @@
 #![cfg(feature = "fetch")]
 
-use async_trait::async_trait;
 use googlesheets::sheet::ValueRange;
 use loader::DataLoader;
 
@@ -51,7 +50,6 @@ impl DivcordTableLoader {
     }
 }
 
-#[async_trait]
 impl DataLoader<DivcordTable, Error> for DivcordTableLoader {
     fn filename() -> &'static str {
         "divcord_table.json"

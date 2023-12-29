@@ -1000,7 +1000,6 @@ checksum = "bd0c93bb4b0c6d9b77f4435b0ae98c24d17f1c45b2ff844c6151a07256ca923b"
 name = "divcord"
 version = "0.5.3"
 dependencies = [
- "async-trait",
  "divi",
  "dotenv",
  "googlesheets",
@@ -2240,7 +2239,6 @@ checksum = "da2479e8c062e40bf0066ffa0bc823de0a9368974af99c9f6df941d2c231e03f"
 name = "loader"
 version = "0.1.0"
 dependencies = [
- "async-trait",
  "serde",
  "serde_json",
 ]
@@ -3070,7 +3068,6 @@ dependencies = [
 name = "poe_data"
 version = "0.5.3"
 dependencies = [
- "async-trait",
  "divi",
  "dotenv",
  "googlesheets",
