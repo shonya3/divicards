@@ -39,7 +39,7 @@ pub fn divcord_wasm_pkg(path: &Path, dirname: &str) {
         .unwrap()
         .parent()
         .unwrap()
-        .join("cli")
+        .join("generate_website_files")
         .join(path)
         .join(dirname);
     println!("{}", path.display());
