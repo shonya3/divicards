@@ -43,7 +43,9 @@ const fetchMapBosses = () => {
 				break;
 			case 'Kitava, the Destroyer':
 				name = 'Kitava, The Destroyer';
-				console.log(n);
+				break;
+			case 'Sanctum Guard':
+				name = 'Sanctum Guardian';
 				break;
 		}
 

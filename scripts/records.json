@@ -13738,10 +13738,15 @@
         "type": "Map Boss",
         "id": "Thorn",
         "kind": "source-with-member"
+      },
+      {
+        "type": "Map Boss",
+        "id": "Puruna, the Challenger",
+        "kind": "source-with-member"
       }
     ],
-    "sourcesWithTagButNotOnWiki": "Telvar, the Inebriated; Pirate Treasure; \nGnar, Eater of Carrion; Stonebeak, Battle Fowl;\nHerald of Ashes; Herald of Thunder;\nShrieker Eihal; Breaker Toruul;\nSanctum Enforcer; Sanctum Guardian;\nPuruna, the Challenger*; Poporo, the Highest Spire*",
-    "notes": "Appears to drop in maps with exactly two bosses that fight simultaneously (unlike maps like Tower).\nSeveral confirmations in Strand.\n\nRemaining maps: Coves, Canyon, Arcade, Excavation, Ivory Temple\n\nThe Plateau boss has an odd quirk: Puruna (the cold totem) has the correct tag in Atoll (where it is alone) but NOT in Plateau. Likewise, Poporo's Plateau version lacks the card, but the now inaccesible default version (from Prophecy) does have the correct tag. It may be possible that Plateau is NOT eligible for this card and should be disproven if possible."
+    "sourcesWithTagButNotOnWiki": "Telvar, the Inebriated; Pirate Treasure; \nGnar, Eater of Carrion; Stonebeak, Battle Fowl;\nHerald of Ashes; Herald of Thunder;\nShrieker Eihal; Breaker Toruul;\nSanctum Enforcer; Sanctum Guardian;\nPoporo, the Highest Spire*",
+    "notes": "Appears to drop in maps with exactly two bosses that fight simultaneously (unlike maps like Tower).\nSeveral confirmations in Strand.\n\nRemaining maps: Coves, Canyon, Arcade, Excavation, Ivory Temple\n\nThe Plateau boss has an odd quirk: Puruna (the cold totem) has the correct tag in Atoll (where it is alone) but NOT in Plateau. Likewise, Poporo's Plateau version lacks the card, but the now inaccesible default version (from Prophecy) does have the correct tag. It may be possible that Plateau is NOT eligible for this card and should be disproven if possible.\n\nAtoll Puruna confirmed by ayce_kbbq in divcord"
   },
   {
     "id": 501,
