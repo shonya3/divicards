@@ -81,15 +81,6 @@ pub fn divcord_wasm_pkg(path: &Path, dirname: &str) {
     }
 }
 
-pub async fn card_element(config: &Config) {
-    let card_element_data = card_element::fetch().await.unwrap();
-    // let dir = dir.unwrap_or(std::env::current_dir().unwrap());
-
-    let p = config.dir.join(&config.filename);
-
-    std::fs::write(p, serde_json::to_string(&card_element_data).unwrap()).unwrap();
-}
-
 pub struct Config {
     pub dir: PathBuf,
     pub filename: String,
