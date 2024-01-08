@@ -1,3 +1,3 @@
 {
-	"recommendations": ["Vue.volar", "runem.lit-plugin"]
+	"recommendations": ["Vue.volar", "runem.lit-plugin", "rust-lang.rust-analyzer"]
 }

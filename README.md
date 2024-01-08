@@ -10,6 +10,10 @@ Desktop Application for Path of Exile divination cards
 -   Merge several tables into one;
 -   Automatically pull and calculate other useful information, such as prices according to the current poe.ninja rates, and weight estimates assuming you got the cards from stacked decks (it's difficult to get a large sample of generic cards from any other source);
 
+### Website
+
+Also, check out [Website](https://divicards-site.pages.dev/) [repo](https://github.com/shonya3/divicards-site)
+
 ## Install
 
 Install the latest release (https://github.com/shonya3/divicards/releases)
@@ -24,4 +28,4 @@ Install the latest release (https://github.com/shonya3/divicards/releases)
 
 ## Recommended IDE Setup
 
--   [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) + [Lit](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin)
+-   [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) + [Lit](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
