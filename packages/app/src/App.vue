@@ -149,12 +149,14 @@ const onSubmit = async ({
 				:name="googleAuthStore.name"
 				:picture="googleAuthStore.picture"
 				:loggedIn="googleAuthStore.loggedIn"
+				v-if="googleAuthStore.loggedIn"
 			></wc-google-auth>
 			<wc-poe-auth
 				@login="authStore.login"
 				@logout="authStore.logout"
 				:name="authStore.name"
 				:loggedIn="authStore.loggedIn"
+				v-if="authStore.loggedIn"
 			></wc-poe-auth>
 		</header>
 
