@@ -203,7 +203,7 @@ export class StashesViewElement extends BaseElement {
 					this.emit<Events['sample-from-tab']>('sample-from-tab', { name, sample, league });
 				}
 			} catch (err) {
-				this.#handleLoadTabError(err);
+				await this.#handleLoadTabError(err);
 			}
 		}
 
