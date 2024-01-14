@@ -84,14 +84,11 @@ pub struct AppCardPrices {
     pub prices_by_league: HashMap<TradeLeague, Prices>,
 }
 impl AppCardPrices {
-    pub const fn new(
-        dir: PathBuf,
-        prices_by_league: HashMap<TradeLeague, Prices>,
-    ) -> AppCardPrices {
-        AppCardPrices {
-            dir,
-            prices_by_league,
-        }
+    pub fn new() -> Result<Self, Error> {
+        Ok(AppCardPrices {
+            dir: paths::appdata_dir()?,
+            prices_by_league: HashMap::new(),
+        })
     }
 
     #[instrument(skip(self, window))]
@@ -135,7 +132,7 @@ impl AppCardPrices {
 
         debug!("fetch_and_update: Serialized. Next write to file");
 
-        std::fs::write(self.league_path(league), &json).unwrap();
+        std::fs::write(self.league_path(league), &json)?;
 
         debug!("fetch_and_update: wrote to file");
         self.prices_by_league
@@ -176,12 +173,17 @@ impl AppCardPrices {
     #[instrument(skip(self))]
     fn file_days_old(&self, league: &TradeLeague) -> Option<f32> {
         let path = self.league_path(league);
-        let exists = path.try_exists().unwrap();
+        let exists = path.try_exists().unwrap_or(false);
         match exists {
             true => match fs::metadata(&path) {
                 Ok(metadata) => match metadata.modified() {
                     Ok(time) => {
-                        let days = (time.elapsed().unwrap().as_secs() as f64 / DAY_AS_SECS) as f32;
+                        let Ok(days) = time
+                            .elapsed()
+                            .map(|elapsed| (elapsed.as_secs() as f64 / DAY_AS_SECS) as f32)
+                        else {
+                            return None;
+                        };
                         Some(days)
                     }
                     Err(err) => {
@@ -200,15 +202,6 @@ impl AppCardPrices {
 
     #[instrument(skip(self))]
     fn league_file_exists(&self, league: &TradeLeague) -> bool {
-        self.league_path(league).try_exists().unwrap()
-    }
-}
-
-impl Default for AppCardPrices {
-    fn default() -> Self {
-        Self {
-            dir: paths::appdata_dir().unwrap(),
-            prices_by_league: Default::default(),
-        }
+        self.league_path(league).try_exists().unwrap_or(false)
     }
 }

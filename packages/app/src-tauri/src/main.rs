@@ -14,7 +14,7 @@ async fn main() {
     lib::dev::init_tracing();
     tracing::event!(tracing::Level::DEBUG, "app startup");
 
-    let app_prices = Mutex::new(AppCardPrices::default());
+    let app_prices = Mutex::new(AppCardPrices::new().unwrap());
 
     tauri::Builder::default()
         .setup(|app| {
