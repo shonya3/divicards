@@ -3,10 +3,9 @@
     windows_subsystem = "windows"
 )]
 
-use std::collections::HashMap;
 use tokio::sync::Mutex;
 
-use lib::{commands, google, paths, poe, prices::AppCardPrices, version::AppVersion};
+use lib::{commands, google, poe, prices::AppCardPrices, version::AppVersion};
 use tauri::Manager;
 
 #[tokio::main]
@@ -15,7 +14,7 @@ async fn main() {
     lib::dev::init_tracing();
     tracing::event!(tracing::Level::DEBUG, "app startup");
 
-    let app_prices = Mutex::new(AppCardPrices::new(paths::appdata(), HashMap::new()));
+    let app_prices = Mutex::new(AppCardPrices::default());
 
     tauri::Builder::default()
         .setup(|app| {

@@ -207,7 +207,7 @@ impl AppCardPrices {
 impl Default for AppCardPrices {
     fn default() -> Self {
         Self {
-            dir: paths::appdata(),
+            dir: paths::appdata_dir().unwrap(),
             prices_by_league: Default::default(),
         }
     }

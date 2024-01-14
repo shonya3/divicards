@@ -12,6 +12,7 @@ pub enum Error {
     IoError(io::Error),
     RetryAfter(String),
     GoogleError(googlesheets::error::Error),
+    ConfigDirNotExists,
 }
 
 impl Error {
@@ -24,6 +25,7 @@ impl Error {
             Error::IoError(_) => "ioError",
             Error::RetryAfter(_) => "retryAfterError",
             Error::GoogleError(_) => "googleError",
+            Error::ConfigDirNotExists => "configDirNotExists",
         }
     }
 }
@@ -40,6 +42,7 @@ impl Display for Error {
                 write!(f, "You have reached the limit, retry after {secs} seconds")
             }
             Error::GoogleError(err) => err.fmt(f),
+            Error::ConfigDirNotExists => f.write_str("Config dir not exists"),
         }
     }
 }

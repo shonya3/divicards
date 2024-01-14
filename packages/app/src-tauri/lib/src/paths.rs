@@ -1,18 +1,14 @@
+use crate::error::Error;
 use std::path::PathBuf;
 
-use divi::league::TradeLeague;
-
-pub fn prices(league: &TradeLeague) -> PathBuf {
-    appdata().join(format!("{}-prices.json", { league }))
-}
-
-pub fn appdata() -> PathBuf {
-    let mut path = tauri::api::path::config_dir().unwrap();
-    path.push("divicards");
+pub fn appdata_dir() -> Result<PathBuf, Error> {
+    let Some(path) = tauri::api::path::config_dir() else {
+        return Err(Error::ConfigDirNotExists);
+    };
 
     if !path.exists() {
-        std::fs::create_dir(&path).expect("Error on appdata dir creation");
+        std::fs::create_dir(&path)?;
     }
 
-    path
+    Ok(path)
 }
