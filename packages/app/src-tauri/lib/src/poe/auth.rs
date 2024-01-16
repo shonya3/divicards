@@ -11,7 +11,7 @@ use oauth2::{
 };
 use serde::{Deserialize, Serialize};
 use tauri::{command, State, Window};
-use tokio::sync::mpsc;
+use tokio::{net::TcpListener, sync::mpsc};
 use tracing::debug;
 
 #[command]
@@ -43,12 +43,11 @@ pub async fn poe_auth(version: State<'_, AppVersion>, window: Window) -> Result<
     );
 
     let (tx, rx) = tokio::sync::oneshot::channel::<()>();
-    let server = axum::Server::bind(&addr)
-        .serve(app.into_make_service())
-        .with_graceful_shutdown(async {
-            rx.await.ok();
-            println!("shutdown");
-        });
+    let tcp_listener = TcpListener::bind(addr).await?;
+    let server = axum::serve(tcp_listener, app.into_make_service()).with_graceful_shutdown(async {
+        rx.await.ok();
+        println!("shutdown");
+    });
 
     tokio::spawn(async move {
         server.await.unwrap();
@@ -68,7 +67,7 @@ pub async fn poe_auth(version: State<'_, AppVersion>, window: Window) -> Result<
     tx.send(()).unwrap();
 
     let Some(response) = res else {
-        return Err(Error::AuthError(AuthError::Failed))
+        return Err(Error::AuthError(AuthError::Failed));
     };
 
     match response {

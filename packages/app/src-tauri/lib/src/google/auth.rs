@@ -10,7 +10,7 @@ use oauth2::{
 };
 use serde::{Deserialize, Serialize};
 use tauri::{command, State, Window};
-use tokio::sync::mpsc;
+use tokio::{net::TcpListener, sync::mpsc};
 use tracing::debug;
 
 #[command]
@@ -69,12 +69,11 @@ pub async fn google_auth(version: State<'_, AppVersion>, window: Window) -> Resu
     );
 
     let (tx, rx) = tokio::sync::oneshot::channel::<()>();
-    let server = axum::Server::bind(&addr)
-        .serve(app.into_make_service())
-        .with_graceful_shutdown(async {
-            rx.await.ok();
-            println!("shutdown");
-        });
+    let tcp_listener = TcpListener::bind(addr).await?;
+    let server = axum::serve(tcp_listener, app.into_make_service()).with_graceful_shutdown(async {
+        rx.await.ok();
+        println!("shutdown");
+    });
 
     tokio::spawn(async move {
         server.await.unwrap();
