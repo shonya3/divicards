@@ -10,8 +10,8 @@ repository.workspace = true
 tokio = {workspace = true}
 serde = {workspace = true} 
 serde_json = {workspace = true}
-regex = "1.9.5"
+regex = "1.10.2"
 reqwest = { workspace = true, features = ["blocking"]}
 divi = {path = "../divi"}
-async-trait = {version = "0.1.73"}
+async-trait = {version = "0.1.77"}
 loader = {path = "../loader"}

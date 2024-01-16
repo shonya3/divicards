@@ -7974,6 +7974,11 @@
       },
       {
         "type": "Act",
+        "id": "1_2_14_3",
+        "kind": "source-with-member"
+      },
+      {
+        "type": "Act",
         "id": "2_7_12_1",
         "kind": "source-with-member"
       },
@@ -7983,7 +7988,7 @@
         "kind": "source-with-member"
       }
     ],
-    "notes": "Other vaal Tags might also qualify\nDoryani's Machinarium verified on Divcord"
+    "notes": "Other vaal Tags might also qualify\nDoryani's Machinarium verified on Divcord\n\nThe Ancient Pyramid (A2) verified on divcord, is consistent with vaal_pyramid_area"
   },
   {
     "id": 300,
@@ -13743,10 +13748,30 @@
         "type": "Map Boss",
         "id": "Puruna, the Challenger",
         "kind": "source-with-member"
+      },
+      {
+        "type": "Map Boss",
+        "id": "Telvar, the Inebriated",
+        "kind": "source-with-member"
+      },
+      {
+        "type": "Map Boss",
+        "id": "Pirate Treasure",
+        "kind": "source-with-member"
+      },
+      {
+        "type": "Map Boss",
+        "id": "Sanctum Enforcer",
+        "kind": "source-with-member"
+      },
+      {
+        "type": "Map Boss",
+        "id": "Sanctum Guardian",
+        "kind": "source-with-member"
       }
     ],
-    "sourcesWithTagButNotOnWiki": "Telvar, the Inebriated; Pirate Treasure; \nGnar, Eater of Carrion; Stonebeak, Battle Fowl;\nHerald of Ashes; Herald of Thunder;\nShrieker Eihal; Breaker Toruul;\nSanctum Enforcer; Sanctum Guardian;\nPoporo, the Highest Spire*",
-    "notes": "Appears to drop in maps with exactly two bosses that fight simultaneously (unlike maps like Tower).\nSeveral confirmations in Strand.\n\nRemaining maps: Coves, Canyon, Arcade, Excavation, Ivory Temple\n\nThe Plateau boss has an odd quirk: Puruna (the cold totem) has the correct tag in Atoll (where it is alone) but NOT in Plateau. Likewise, Poporo's Plateau version lacks the card, but the now inaccesible default version (from Prophecy) does have the correct tag. It may be possible that Plateau is NOT eligible for this card and should be disproven if possible.\n\nAtoll Puruna confirmed by ayce_kbbq in divcord"
+    "sourcesWithTagButNotOnWiki": "Gnar, Eater of Carrion; Stonebeak, Battle Fowl;\nHerald of Ashes; Herald of Thunder;\nShrieker Eihal; Breaker Toruul;\nPoporo, the Highest Spire*",
+    "notes": "Appears to drop in maps with exactly two bosses that fight simultaneously (unlike maps like Tower).\nSeveral confirmations in Strand.\n\nRemaining maps: Canyon, Arcade, Excavation\n\nThe Plateau boss has an odd quirk: Puruna (the cold totem) has the correct tag in Atoll (where it is alone) but NOT in Plateau. Likewise, Poporo's Plateau version lacks the card, but the now inaccesible default version (from Prophecy) does have the correct tag. It may be possible that Plateau is NOT eligible for this card and should be disproven if possible.\n\nAtoll Puruna confirmed by ayce_kbbq in divcord\nCoves confirmed by Jince in divcord\nIvory Temple confirmed by neconeconyaa in divcord"
   },
   {
     "id": 501,
@@ -13760,9 +13785,14 @@
         "type": "Map",
         "id": "Forge of the Phoenix Map",
         "kind": "source-with-member"
+      },
+      {
+        "type": "Map",
+        "id": "Foundry Map",
+        "kind": "source-with-member"
       }
     ],
-    "sourcesWithTagButNotOnWiki": "Factory, Foundry, Silo",
-    "notes": "Observed a drop in Phoenix by reh; no altars and no eldritch influence, seems likely to be a regular drop."
+    "sourcesWithTagButNotOnWiki": "Factory, Silo",
+    "notes": "Observed a drop in Phoenix by reh; no altars and no eldritch influence, seems likely to be a regular drop.\n\nDropped by riotblob from a Map Boss in Foundry - likely a coincidence and still an area drop"
   }
 ]
