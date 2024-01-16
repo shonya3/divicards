@@ -11,8 +11,6 @@ use tracing::{debug, instrument};
 
 pub const DAY_AS_SECS: f64 = 86_400.0;
 
-pub struct DaysOld(Option<f32>);
-
 pub enum LeagueFileState {
     UpToDate(Prices),
     StillUsable(Prices, f32),
