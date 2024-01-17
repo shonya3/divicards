@@ -7,7 +7,7 @@ import { Ref, ref } from 'vue';
 
 export const useTablePreferencesStore = defineStore('tablePreferences', {
 	state: (): {
-		spreadsheet: RemovableRef<string>;
+		spreadsheetId: RemovableRef<string>;
 		columns: RemovableRef<Set<Column>>;
 		order: RemovableRef<Order>;
 		orderedBy: RemovableRef<Column>;
@@ -16,7 +16,7 @@ export const useTablePreferencesStore = defineStore('tablePreferences', {
 		sheetTitle: Ref<string>;
 		to: Ref<To>;
 	} => ({
-		spreadsheet: useLocalStorage<string>('spreadsheetId', ''),
+		spreadsheetId: useLocalStorage<string>('spreadsheetId', ''),
 		columns: useLocalStorage<Set<Column>>('columns', new Set(['name', 'amount'])),
 		order: useLocalStorage<Order>('order', 'desc'),
 		orderedBy: useLocalStorage<Column>('toOrderedBy', 'amount'),
@@ -27,7 +27,7 @@ export const useTablePreferencesStore = defineStore('tablePreferences', {
 	}),
 	actions: {
 		rememberSpreadsheetId(spreadsheetId: string) {
-			this.spreadsheet = spreadsheetId;
+			this.spreadsheetId = spreadsheetId;
 		},
 	},
 });

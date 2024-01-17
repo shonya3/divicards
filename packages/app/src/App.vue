@@ -216,7 +216,7 @@ const onSubmit = async ({
 			v-model:cardsMustHaveAmount="tablePreferences.cardsMustHaveAmount"
 			v-model:sheetTitle="tablePreferences.sheetTitle"
 			v-model:minPrice="tablePreferences.minPrice"
-			:spreadsheetId="tablePreferences.spreadsheet"
+			:spreadsheetId="tablePreferences.spreadsheetId"
 			@submit="onSubmit"
 		></FormExportSample>
 	</wc-base-popup>
