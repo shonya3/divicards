@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { FileCardElement, FileCardProps, Events } from '@divicards/wc/src/wc/file-card/file-card';
-import { DivinationCardsSample } from '../../../shared/types';
+import { DivinationCardsSample } from '@divicards/shared/types';
 import { League } from '@divicards/shared/types';
 FileCardElement.define();
 const props = defineProps<FileCardProps>();

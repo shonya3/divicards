@@ -1,31 +1,28 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 
+import { StashLoader } from './StashLoader';
+import { command } from './command';
+import { toast } from './toast';
+import { isTauriError } from './error';
+
+import { League } from '@divicards/shared/types';
+import { DivinationCardsSample } from '@divicards/shared/types';
+import { downloadText } from '@divicards/shared/lib';
+
 import { useSampleStore } from './stores/sample';
+import { useGoogleAuthStore } from './stores/googleAuth';
 import { useAuthStore } from './stores/auth';
 import { useAutoAnimate } from './composables/useAutoAnimate';
+import { usePreferences } from './composables/usePreferences';
 
 import SampleCard from './components/SampleCard.vue';
 import StashesView from './components/StashesView.vue';
-import FormSampleExport from './components/FormSampleExport.vue';
-import { DropFilesMessageElement } from '@divicards/wc/src/wc/drop-files-message';
-import { PoeAuthElement } from '@divicards/wc/src/wc/poe-auth';
-import { StashLoader } from './StashLoader';
-import { useGoogleAuthStore } from './stores/googleAuth';
-import { GoogleAuthElement } from '../../wc/src/wc/google-auth/poe-auth';
-import { command } from './command';
-import { BasePopupElement } from '../../wc/src/wc/base-popup';
+import FormExportSample from './components/FormExportSample.vue';
+
 import { Props as FormExportProps, To } from '@divicards/wc/src/wc/form-export-sample/form-export-sample';
-import { DivinationCardsSample } from '../../shared/types';
-import { toast } from './toast';
-import { usePreferences } from './composables/usePreferences';
-import { isTauriError } from './error';
-import { League } from '@divicards/shared/types';
-import { downloadText } from '../../shared/lib';
-BasePopupElement.define();
-DropFilesMessageElement.define();
-PoeAuthElement.define();
-GoogleAuthElement.define();
+import { BasePopupElement } from '@divicards/wc/src/wc/base-popup';
+
 const stashLoader = new StashLoader();
 
 export interface ExportSampleState {
@@ -226,7 +223,7 @@ const onSubmit = async ({
 	</div>
 
 	<wc-base-popup ref="formPopupExportRef">
-		<FormSampleExport
+		<FormExportSample
 			:error="exportState.sheetsError"
 			:to="exportState.to"
 			v-model:columns="columns"
@@ -237,7 +234,7 @@ const onSubmit = async ({
 			v-model:minPrice="minPrice"
 			:spreadsheet-id="spreadsheet"
 			@submit="onSubmit"
-		></FormSampleExport>
+		></FormExportSample>
 	</wc-base-popup>
 </template>
 

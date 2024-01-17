@@ -11,12 +11,20 @@ import { addRustListener } from './event';
 import { toast } from './toast';
 import { handleError } from './error';
 import { setBasePath } from '@shoelace-style/shoelace';
-import { command } from './command';
 
 setBasePath('/');
 SlAlrt.define('sl-alert');
 SlButton.define('sl-button');
 SlIcon.define('sl-icon');
+
+import { DropFilesMessageElement } from '@divicards/wc/src/wc/drop-files-message';
+import { PoeAuthElement } from '@divicards/wc/src/wc/poe-auth';
+import { GoogleAuthElement } from '@divicards/wc/src/wc/google-auth/poe-auth';
+import { BasePopupElement } from '@divicards/wc/src/wc/base-popup';
+DropFilesMessageElement.define();
+PoeAuthElement.define();
+GoogleAuthElement.define();
+BasePopupElement.define();
 
 const pinia = createPinia();
 
