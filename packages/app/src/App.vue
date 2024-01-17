@@ -11,10 +11,11 @@ import { DivinationCardsSample } from '@divicards/shared/types';
 import { downloadText } from '@divicards/shared/lib';
 
 import { useSampleStore } from './stores/sample';
+import { useExportSampleStore } from './stores/exportSample';
 import { useGoogleAuthStore } from './stores/googleAuth';
 import { useAuthStore } from './stores/auth';
-import { useAutoAnimate } from './composables/useAutoAnimate';
 import { usePreferences } from './composables/usePreferences';
+import { useAutoAnimate } from './composables/useAutoAnimate';
 
 import SampleCard from './components/SampleCard.vue';
 import StashesView from './components/StashesView.vue';
@@ -25,28 +26,13 @@ import { BasePopupElement } from '@divicards/wc/src/wc/base-popup';
 
 const stashLoader = new StashLoader();
 
-export interface ExportSampleState {
-	sample: DivinationCardsSample | null;
-	league: League | null;
-	sheetsError: string | null;
-	to: To;
-	filename: string;
-}
-
-const exportState: ExportSampleState = reactive({
-	sample: null,
-	league: null,
-	sheetsError: null,
-	to: 'file',
-	filename: 'sample.csv',
-});
-
 const { spreadsheet, columns, order, orderedBy, cardsMustHaveAmount, sheetTitle, minPrice } = usePreferences();
 const formPopupExportRef = ref<BasePopupElement | null>(null);
 
 const sampleStore = useSampleStore();
 const authStore = useAuthStore();
 const googleAuthStore = useGoogleAuthStore();
+const exportSample = useExportSampleStore();
 
 const stashVisible = ref(false);
 const samplesContainerRef = ref<HTMLElement | null>(null);
@@ -63,18 +49,18 @@ const openStashWindow = async () => {
 const onSaveToFileClicked = (sample: DivinationCardsSample, league: League, filename: string) => {
 	const name = filename.includes('.') ? filename : `${filename}.csv`;
 	if (!formPopupExportRef.value) return;
-	exportState.to = 'file';
-	exportState.filename = name;
-	exportState.sample = sample;
-	exportState.league = league;
+	exportSample.to = 'file';
+	exportSample.filename = name;
+	exportSample.sample = sample;
+	exportSample.league = league;
 	formPopupExportRef.value.open();
 };
 
 const onGoogleSheetsClicked = (sample: DivinationCardsSample, league: League) => {
 	if (!formPopupExportRef.value) return;
-	exportState.to = 'sheets';
-	exportState.sample = sample;
-	exportState.league = league;
+	exportSample.to = 'sheets';
+	exportSample.sample = sample;
+	exportSample.league = league;
 	formPopupExportRef.value.open();
 };
 
@@ -87,8 +73,8 @@ const onSubmit = async ({
 	cardsMustHaveAmount,
 	minPrice,
 }: FormExportProps) => {
-	const sample = exportState.sample;
-	const league = exportState.league;
+	const sample = exportSample.sample;
+	const league = exportSample.league;
 
 	if (!sample) {
 		throw new Error('No sample to sheets');
@@ -106,7 +92,7 @@ const onSubmit = async ({
 		minPrice,
 	};
 
-	if (exportState.to === 'sheets') {
+	if (exportSample.to === 'sheets') {
 		if (!googleAuthStore.loggedIn) {
 			await googleAuthStore.login();
 		}
@@ -129,16 +115,16 @@ const onSubmit = async ({
 			return;
 		} catch (err) {
 			if (isTauriError(err)) {
-				exportState.sheetsError = err.message;
+				exportSample.sheetsError = err.message;
 			} else {
 				console.log(err);
 				formPopupExportRef.value?.hide();
 				throw err;
 			}
 		}
-	} else if (exportState.to === 'file') {
+	} else if (exportSample.to === 'file') {
 		const csv = await command('sample_into_csv', { sample, preferences });
-		downloadText(exportState.filename, csv);
+		downloadText(exportSample.filename, csv);
 		formPopupExportRef.value?.hide();
 	}
 };
@@ -224,8 +210,8 @@ const onSubmit = async ({
 
 	<wc-base-popup ref="formPopupExportRef">
 		<FormExportSample
-			:error="exportState.sheetsError"
-			:to="exportState.to"
+			:error="exportSample.sheetsError"
+			:to="exportSample.to"
 			v-model:columns="columns"
 			v-model:order="order"
 			v-model:orderedBy="orderedBy"
