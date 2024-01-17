@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 
 import { useSampleStore } from './stores/sample';
 import { useAuthStore } from './stores/auth';
@@ -15,22 +15,36 @@ import { useGoogleAuthStore } from './stores/googleAuth';
 import { GoogleAuthElement } from '../../wc/src/wc/google-auth/poe-auth';
 import { command } from './command';
 import { BasePopupElement } from '../../wc/src/wc/base-popup';
-import { Props as FormExportProps } from '@divicards/wc/src/wc/form-export-sample/form-export-sample';
+import { Props as FormExportProps, To } from '@divicards/wc/src/wc/form-export-sample/form-export-sample';
 import { DivinationCardsSample } from '../../shared/types';
 import { toast } from './toast';
 import { usePreferences } from './composables/usePreferences';
 import { isTauriError } from './error';
 import { League } from '@divicards/shared/types';
 import { downloadText } from '../../shared/lib';
-import { useExportState } from './composables/useExportState';
 BasePopupElement.define();
 DropFilesMessageElement.define();
 PoeAuthElement.define();
 GoogleAuthElement.define();
 const stashLoader = new StashLoader();
 
+export interface ExportSampleState {
+	sample: DivinationCardsSample | null;
+	league: League | null;
+	sheetsError: string | null;
+	to: To;
+	filename: string;
+}
+
+const exportState: ExportSampleState = reactive({
+	sample: null,
+	league: null,
+	sheetsError: null,
+	to: 'file',
+	filename: 'sample.csv',
+});
+
 const { spreadsheet, columns, order, orderedBy, cardsMustHaveAmount, sheetTitle, minPrice } = usePreferences();
-const exportState = useExportState();
 const formPopupExportRef = ref<BasePopupElement | null>(null);
 
 const sampleStore = useSampleStore();
@@ -52,18 +66,18 @@ const openStashWindow = async () => {
 const onSaveToFileClicked = (sample: DivinationCardsSample, league: League, filename: string) => {
 	const name = filename.includes('.') ? filename : `${filename}.csv`;
 	if (!formPopupExportRef.value) return;
-	exportState.to.value = 'file';
-	exportState.filename.value = name;
-	exportState.sample.value = sample;
-	exportState.league.value = league;
+	exportState.to = 'file';
+	exportState.filename = name;
+	exportState.sample = sample;
+	exportState.league = league;
 	formPopupExportRef.value.open();
 };
 
 const onGoogleSheetsClicked = (sample: DivinationCardsSample, league: League) => {
 	if (!formPopupExportRef.value) return;
-	exportState.to.value = 'sheets';
-	exportState.sample.value = sample;
-	exportState.league.value = league;
+	exportState.to = 'sheets';
+	exportState.sample = sample;
+	exportState.league = league;
 	formPopupExportRef.value.open();
 };
 
@@ -76,8 +90,8 @@ const onSubmit = async ({
 	cardsMustHaveAmount,
 	minPrice,
 }: FormExportProps) => {
-	const sample = exportState.sample.value;
-	const league = exportState.league.value;
+	const sample = exportState.sample;
+	const league = exportState.league;
 
 	if (!sample) {
 		throw new Error('No sample to sheets');
@@ -95,7 +109,7 @@ const onSubmit = async ({
 		minPrice,
 	};
 
-	if (exportState.to.value === 'sheets') {
+	if (exportState.to === 'sheets') {
 		if (!googleAuthStore.loggedIn) {
 			await googleAuthStore.login();
 		}
@@ -118,16 +132,16 @@ const onSubmit = async ({
 			return;
 		} catch (err) {
 			if (isTauriError(err)) {
-				exportState.sheetsError.value = err.message;
+				exportState.sheetsError = err.message;
 			} else {
 				console.log(err);
 				formPopupExportRef.value?.hide();
 				throw err;
 			}
 		}
-	} else if (exportState.to.value === 'file') {
+	} else if (exportState.to === 'file') {
 		const csv = await command('sample_into_csv', { sample, preferences });
-		downloadText(exportState.filename.value, csv);
+		downloadText(exportState.filename, csv);
 		formPopupExportRef.value?.hide();
 	}
 };
@@ -213,8 +227,8 @@ const onSubmit = async ({
 
 	<wc-base-popup ref="formPopupExportRef">
 		<FormSampleExport
-			:error="exportState.sheetsError.value"
-			:to="exportState.to.value"
+			:error="exportState.sheetsError"
+			:to="exportState.to"
 			v-model:columns="columns"
 			v-model:order="order"
 			v-model:orderedBy="orderedBy"
