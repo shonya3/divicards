@@ -3,7 +3,6 @@ import { Column, Order } from '@divicards/shared/types';
 import { RemovableRef, useLocalStorage } from '@vueuse/core';
 import { To } from '@divicards/wc/src/wc/form-export-sample/form-export-sample';
 import { defineStore } from 'pinia';
-import { Ref, ref } from 'vue';
 
 export const useTablePreferencesStore = defineStore('tablePreferences', {
 	state: (): {
