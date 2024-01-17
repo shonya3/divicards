@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { ref } from 'vue';
 
 import { StashLoader } from './StashLoader';
 import { command } from './command';
@@ -21,20 +21,19 @@ import SampleCard from './components/SampleCard.vue';
 import StashesView from './components/StashesView.vue';
 import FormExportSample from './components/FormExportSample.vue';
 
-import { Props as FormExportProps, To } from '@divicards/wc/src/wc/form-export-sample/form-export-sample';
+import { Props as FormExportProps } from '@divicards/wc/src/wc/form-export-sample/form-export-sample';
 import { BasePopupElement } from '@divicards/wc/src/wc/base-popup';
 
 const stashLoader = new StashLoader();
-
-const { spreadsheet, columns, order, orderedBy, cardsMustHaveAmount, sheetTitle, minPrice } = usePreferences();
-const formPopupExportRef = ref<BasePopupElement | null>(null);
 
 const sampleStore = useSampleStore();
 const authStore = useAuthStore();
 const googleAuthStore = useGoogleAuthStore();
 const exportSample = useExportSampleStore();
-
+const { spreadsheet, columns, order, orderedBy, cardsMustHaveAmount, sheetTitle, minPrice } = usePreferences();
 const stashVisible = ref(false);
+
+const formPopupExportRef = ref<BasePopupElement | null>(null);
 const samplesContainerRef = ref<HTMLElement | null>(null);
 useAutoAnimate(samplesContainerRef);
 
