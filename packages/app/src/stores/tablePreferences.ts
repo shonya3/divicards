@@ -13,8 +13,8 @@ export const useTablePreferencesStore = defineStore('tablePreferences', {
 		orderedBy: RemovableRef<Column>;
 		cardsMustHaveAmount: RemovableRef<boolean>;
 		minPrice: RemovableRef<number>;
-		sheetTitle: Ref<string>;
-		to: Ref<To>;
+		sheetTitle: string;
+		to: To;
 	} => ({
 		spreadsheetId: useLocalStorage<string>('spreadsheetId', ''),
 		columns: useLocalStorage<Set<Column>>('columns', new Set(['name', 'amount'])),
@@ -22,8 +22,8 @@ export const useTablePreferencesStore = defineStore('tablePreferences', {
 		orderedBy: useLocalStorage<Column>('toOrderedBy', 'amount'),
 		cardsMustHaveAmount: useLocalStorage<boolean>('cardsMustHaveAmount', false),
 		minPrice: useLocalStorage<number>('minPrice', 0),
-		sheetTitle: ref(''),
-		to: ref('file'),
+		sheetTitle: '',
+		to: 'file',
 	}),
 	actions: {
 		rememberSpreadsheetId(spreadsheetId: string) {
