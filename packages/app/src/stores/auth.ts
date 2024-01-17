@@ -2,24 +2,11 @@ import { defineStore } from 'pinia';
 import { command } from '../command';
 import { ref, watch, Ref, computed } from 'vue';
 import { addRustListener } from '../event';
+import { useLocalStorage } from '@vueuse/core';
 
 const TEN_HOURS_AS_MILLIS = 10 * 3600 * 1000;
 const EXPIRES_IN_MILLIS = TEN_HOURS_AS_MILLIS;
-
-const useName = () => {
-	const NAME_KEY = 'poe-name';
-	const fromStorage = localStorage.getItem(NAME_KEY) ?? '';
-	const name = ref(fromStorage);
-
-	watch(
-		() => name.value,
-		nam => {
-			localStorage.setItem(NAME_KEY, nam);
-		}
-	);
-
-	return name;
-};
+const POE_NAME_KEY = 'poe-name';
 
 export const useExpirationDate = (log = false) => {
 	const EXPIRATION_KEY = 'auth-expiration';
@@ -98,7 +85,7 @@ export const useAuthStore = defineStore('auth', {
 		loggingIn: boolean;
 		auth_url: string | null;
 	} => ({
-		name: useName(),
+		name: useLocalStorage(POE_NAME_KEY, ''),
 		expiration: expirationDate,
 		loggingIn: false,
 		auth_url: null,

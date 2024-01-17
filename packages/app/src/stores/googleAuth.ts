@@ -2,39 +2,12 @@ import { defineStore } from 'pinia';
 import { command } from '../command';
 import { ref, watch, Ref, computed } from 'vue';
 import { addRustListener } from '../event';
+import { useLocalStorage } from '@vueuse/core';
 
 const ONE_HOUR_IN_MILLIS = 3600 * 1000;
 const EXPIRES_IN_MILLIS = ONE_HOUR_IN_MILLIS;
-
-const useName = () => {
-	const NAME_KEY = 'google-name';
-	const fromStorage = localStorage.getItem(NAME_KEY) ?? '';
-	const name = ref(fromStorage);
-
-	watch(
-		() => name.value,
-		nam => {
-			localStorage.setItem(NAME_KEY, nam);
-		}
-	);
-
-	return name;
-};
-
-const usePicture = () => {
-	const PUCTURE_KEY = 'google-picture';
-	const fromStorage = localStorage.getItem(PUCTURE_KEY) ?? '';
-	const picture = ref(fromStorage);
-
-	watch(
-		() => picture.value,
-		nam => {
-			localStorage.setItem(PUCTURE_KEY, nam);
-		}
-	);
-
-	return picture;
-};
+const GOOGLE_AVATAR_KEY = 'google-avatar-url';
+const GOOGLE_NAME_KEY = 'google-name';
 
 export const useExpirationDate = (log = false) => {
 	const EXPIRATION_KEY = 'google-auth-expiration';
@@ -114,8 +87,8 @@ export const useGoogleAuthStore = defineStore('google-auth', {
 		loggingIn: boolean;
 		auth_url: string | null;
 	} => ({
-		name: useName(),
-		picture: usePicture(),
+		name: useLocalStorage(GOOGLE_NAME_KEY, ''),
+		picture: useLocalStorage(GOOGLE_AVATAR_KEY, ''),
 		expiration: expirationDate,
 		loggingIn: false,
 		auth_url: null,
