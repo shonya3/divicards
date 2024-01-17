@@ -14,7 +14,7 @@ import { useSampleStore } from './stores/sample';
 import { useExportSampleStore } from './stores/exportSample';
 import { useGoogleAuthStore } from './stores/googleAuth';
 import { useAuthStore } from './stores/auth';
-import { usePreferences } from './composables/usePreferences';
+import { useTablePreferencesStore } from './stores/tablePreferences';
 import { useAutoAnimate } from './composables/useAutoAnimate';
 
 import SampleCard from './components/SampleCard.vue';
@@ -24,18 +24,18 @@ import FormExportSample from './components/FormExportSample.vue';
 import { Props as FormExportProps } from '@divicards/wc/src/wc/form-export-sample/form-export-sample';
 import { BasePopupElement } from '@divicards/wc/src/wc/base-popup';
 
-const stashLoader = new StashLoader();
-
 const sampleStore = useSampleStore();
 const authStore = useAuthStore();
 const googleAuthStore = useGoogleAuthStore();
 const exportSample = useExportSampleStore();
-const { spreadsheet, columns, order, orderedBy, cardsMustHaveAmount, sheetTitle, minPrice } = usePreferences();
+const tablePreferences = useTablePreferencesStore();
 const stashVisible = ref(false);
 
 const formPopupExportRef = ref<BasePopupElement | null>(null);
 const samplesContainerRef = ref<HTMLElement | null>(null);
 useAutoAnimate(samplesContainerRef);
+
+const stashLoader = new StashLoader();
 
 const openStashWindow = async () => {
 	if (!authStore.loggedIn) {
@@ -109,8 +109,7 @@ const onSubmit = async ({
 			formPopupExportRef.value?.hide();
 			command('open_url', { url });
 
-			// In the end,  save spreadshetId to LocalStorage
-			spreadsheet.value = spreadsheetId;
+			tablePreferences.rememberSpreadsheetId(spreadsheetId);
 			return;
 		} catch (err) {
 			if (isTauriError(err)) {
@@ -211,13 +210,13 @@ const onSubmit = async ({
 		<FormExportSample
 			:error="exportSample.sheetsError"
 			:to="exportSample.to"
-			v-model:columns="columns"
-			v-model:order="order"
-			v-model:orderedBy="orderedBy"
-			v-model:cardsMustHaveAmount="cardsMustHaveAmount"
-			v-model:sheetTitle="sheetTitle"
-			v-model:minPrice="minPrice"
-			:spreadsheet-id="spreadsheet"
+			v-model:columns="tablePreferences.columns"
+			v-model:order="tablePreferences.order"
+			v-model:orderedBy="tablePreferences.orderedBy"
+			v-model:cardsMustHaveAmount="tablePreferences.cardsMustHaveAmount"
+			v-model:sheetTitle="tablePreferences.sheetTitle"
+			v-model:minPrice="tablePreferences.minPrice"
+			:spreadsheetId="tablePreferences.spreadsheet"
 			@submit="onSubmit"
 		></FormExportSample>
 	</wc-base-popup>
