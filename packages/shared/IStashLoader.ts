@@ -7,8 +7,8 @@ export interface IStashLoader {
 }
 
 export interface IDefaultStashLoader {
-	tabs(league: League): Promise<NoItemsTab[]>;
 	tab(tabId: string, league: League): Promise<TabWithItems>;
+	tabs(league: League): Promise<NoItemsTab[]>;
 }
 
 export class DefaultStashLoader implements IDefaultStashLoader {
@@ -35,15 +35,7 @@ export class DefaultStashLoader implements IDefaultStashLoader {
 		this.#contactEmail = contactEmail;
 		this.#token = token;
 	}
-	async tabs(league: string): Promise<NoItemsTab[]> {
-		const url = `${DefaultStashLoader.API_URL}/stash/${league}`;
-		const response = await fetch(url, {
-			headers: this.#authHeaders(),
-		});
 
-		const json = await response.json();
-		return json;
-	}
 	async tab(league: string, tabId: string, subtabId?: string): Promise<TabWithItems> {
 		let url = `${DefaultStashLoader.API_URL}/stash/${league}/${tabId}`;
 		if (subtabId) {
@@ -54,8 +46,36 @@ export class DefaultStashLoader implements IDefaultStashLoader {
 			headers: this.#authHeaders(),
 		});
 		type ApiTabResponse = { stash: TabWithItems };
-		const json: ApiTabResponse = await response.json();
-		return json.stash;
+		const tabResponse: ApiTabResponse = await response.json();
+		return tabResponse.stash;
+	}
+
+	async tabs(league: string): Promise<NoItemsTab[]> {
+		const url = `${DefaultStashLoader.API_URL}/stash/${league}`;
+		const response = await fetch(url, {
+			headers: this.#authHeaders(),
+		});
+
+		const tabs: NoItemsTab[] = await response.json();
+		return this.#flattenTabs(tabs);
+	}
+
+	#flattenTabs(tabs: NoItemsTab[]): NoItemsTab[] {
+		const flat: NoItemsTab[] = [];
+
+		for (const tab of tabs) {
+			if (tab.type !== 'Folder') {
+				flat.push(tab);
+			}
+
+			if (tab.children) {
+				for (const childTab of tab.children) {
+					flat.push(childTab);
+				}
+			}
+		}
+
+		return flat;
 	}
 
 	#authHeaders() {
