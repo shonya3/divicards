@@ -1,4 +1,4 @@
-use reqwest::Client;
+use reqwest::{Client, RequestBuilder};
 use serde::Deserialize;
 use serde_json::Value;
 use tauri::{command, State, Window};
@@ -7,7 +7,7 @@ use tracing::instrument;
 
 use crate::{
     error::Error,
-    poe::{types::TabWithItems, AccessTokenStorage, Persist, API_URL, PROVIDER_LABEL},
+    poe::{types::TabWithItems, AccessTokenStorage, Persist, API_URL},
     prices::AppCardPrices,
     version::AppVersion,
 };
@@ -48,10 +48,6 @@ pub async fn stashes(league: League, version: State<'_, AppVersion>) -> Result<V
     StashAPI::stashes(league, version.inner()).await
 }
 
-pub fn access_token_label() -> String {
-    format!("{}_access_token", { PROVIDER_LABEL })
-}
-
 pub struct StashAPI;
 impl StashAPI {
     async fn tab_with_items(
@@ -67,33 +63,13 @@ impl StashAPI {
             None => format!("{}/stash/{}/{}", API_URL, league, stash_id),
         };
 
-        dbg!(&url);
-        let response = Client::new()
-            .get(url)
-            .header(
-                "Authorization",
-                format!("Bearer {}", { AccessTokenStorage::new().get().unwrap() }),
-            )
-            .header(
-                "User-Agent",
-                format!("OAuth divicards/{} (contact: poeshonya3@gmail.com)", {
-                    version
-                }),
-            )
-            .send()
-            .await?;
+        let response = StashAPI::with_auth_headers(&url, version).send().await?;
 
         let headers = &response.headers();
-
-        // for header in headers.iter() {
-        //     println!("{header:?}");
-        // }
-
         if let Some(s) = headers.get("retry-after") {
             let s = s.to_str().unwrap().to_owned();
             return Err(Error::RetryAfter(s));
         }
-
         if let Some(limit_account_header) = headers.get("x-rate-limit-account") {
             if let Some(limit_account_state_header) = headers.get("x-rate-limit-account-state") {
                 println!(
@@ -114,21 +90,24 @@ impl StashAPI {
 
     async fn stashes(league: League, version: &AppVersion) -> Result<Value, Error> {
         let url = format!("{}/stash/{}", API_URL, league);
-        let response = Client::new()
+        let response = StashAPI::with_auth_headers(&url, version).send().await?;
+        let value = response.json::<Value>().await?;
+        Ok(value)
+    }
+
+    fn with_auth_headers(url: &str, version: &AppVersion) -> RequestBuilder {
+        Client::new()
             .get(url)
-            .header(
-                "Authorization",
-                format!("Bearer {}", { AccessTokenStorage::new().get().unwrap() }),
-            )
+            .header("Authorization", format!("Bearer {}", { access_token() }))
             .header(
                 "User-Agent",
                 format!("OAuth divicards/{} (contact: poeshonya3@gmail.com)", {
                     version
                 }),
             )
-            .send()
-            .await?;
-        let value = response.json::<Value>().await?;
-        Ok(value)
     }
+}
+
+fn access_token() -> String {
+    AccessTokenStorage::new().get().unwrap()
 }

@@ -11,7 +11,11 @@ export const sample: DivinationCardsSample = sampleData;
 
 export class MockStashLoader implements IStashLoader {
 	sampleFromTab(_tabId: string, _league: League): Promise<DivinationCardsSample> {
-		return new Promise(r => r(sample));
+		return new Promise(r =>
+			setTimeout(() => {
+				r(sample);
+			}, 50)
+		);
 	}
 	tabs(_league: League): Promise<NoItemsTab[]> {
 		return new Promise(r => r(stashes));

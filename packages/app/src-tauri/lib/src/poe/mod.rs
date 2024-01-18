@@ -6,7 +6,7 @@ pub mod stash;
 pub mod types;
 
 pub const API_URL: &'static str = "https://api.pathofexile.com";
-const PROVIDER_LABEL: &'static str = "poe";
+pub const PROVIDER_LABEL: &'static str = "poe";
 const CLIENT_ID: &'static str = "divicards";
 const AUTH_URL: &'static str = "https://www.pathofexile.com/oauth/authorize";
 const TOKEN_URL: &'static str = "https://www.pathofexile.com/oauth/token";
