@@ -42,7 +42,9 @@ async fn main() {
             google::auth::google_identity,
             google::sheets::new_sheet_with_sample,
             google::sheets::read_sheet,
-            google::sheets::read_batch
+            google::sheets::read_batch,
+            poe::stash::sample_from_tab_with_items,
+            poe::stash::tab,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

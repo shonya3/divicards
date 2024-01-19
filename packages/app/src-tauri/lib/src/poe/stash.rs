@@ -111,3 +111,33 @@ impl StashAPI {
 fn access_token() -> String {
     AccessTokenStorage::new().get().unwrap()
 }
+
+#[instrument]
+#[command]
+pub async fn tab(
+    league: League,
+    stash_id: String,
+    version: State<'_, AppVersion>,
+) -> Result<TabWithItems, Error> {
+    StashAPI::tab_with_items(&league, stash_id, None, &version).await
+}
+
+#[instrument(skip(prices, window, tab))]
+#[command]
+pub async fn sample_from_tab_with_items(
+    league: League,
+    tab: TabWithItems,
+    prices: State<'_, Mutex<AppCardPrices>>,
+    window: Window,
+) -> Result<DivinationCardsSample, Error> {
+    let prices = match TradeLeague::try_from(league) {
+        Ok(league) => {
+            let mut guard = prices.lock().await;
+            guard.get_price(&league, &window).await
+        }
+        Err(_) => Prices::default(),
+    };
+
+    let sample = DivinationCardsSample::create(SampleData::from(tab), Some(prices))?;
+    Ok(sample)
+}
