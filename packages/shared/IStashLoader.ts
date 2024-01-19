@@ -7,7 +7,7 @@ export interface IStashLoader {
 }
 
 export interface IDefaultStashLoader {
-	tab(tabId: string, league: League): Promise<TabWithItems>;
+	tab(league: League, tabId: string): Promise<TabWithItems>;
 	tabs(league: League): Promise<NoItemsTab[]>;
 }
 
@@ -55,9 +55,10 @@ export class DefaultStashLoader implements IDefaultStashLoader {
 		const response = await fetch(url, {
 			headers: this.#authHeaders(),
 		});
+		type ApiTabsResponse = { stashes: NoItemsTab[] };
 
-		const tabs: NoItemsTab[] = await response.json();
-		return this.#flattenTabs(tabs);
+		const tabs: ApiTabsResponse = await response.json();
+		return this.#flattenTabs(tabs.stashes);
 	}
 
 	#flattenTabs(tabs: NoItemsTab[]): NoItemsTab[] {
