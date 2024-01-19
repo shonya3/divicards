@@ -271,24 +271,6 @@ impl FromStr for Source {
 impl std::fmt::Display for Source {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.id())
-        // match self {
-        // Source::ExpeditionLogbook => write!(f, "ExpeditionLogbook"),
-        // Source::Chest(chest) => chest.fmt(f),
-        // Source::Delirium => write!(f, "Deilirum"),
-        // Source::Strongbox(strongbox) => strongbox.fmt(f),
-        // Source::Unknown => write!(f, "Unknown"),
-        // Source::Disabled => write!(f, "Disabled"),
-        // Source::GlobalDrop { .. } => write!(f, "Global Drop"),
-        // Source::UniqueMonster(uniquemonster) => uniquemonster.fmt(f),
-        // Source::Area(area) => area.fmt(f),
-        // Source::Vendor(vendor) => vendor.fmt(f),
-        // Source::ActBoss { name } => write!(f, "{name}"),
-        // Source::Map { name } => write!(f, "{name}"),
-        // Source::MapBoss { name } => write!(f, "{name}"),
-        // Source::Act { id } => write!(f, "{id}"),
-        // Source::DeliriumCurrencyRewards => write!(f, "Delirium Currency Rewards"),
-        // Source::RedeemerInfluencedMaps => write!(f, "Redeemer influenced maps"),
-        // }
     }
 }
 
