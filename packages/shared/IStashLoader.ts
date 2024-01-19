@@ -11,6 +11,18 @@ export interface IDefaultStashLoader {
 	tabs(league: League): Promise<NoItemsTab[]>;
 }
 
+/**
+ * 
+ * ```
+ * const stashLoader = new DefaultStashLoader(
+	'divicards',
+	'0.5.3',
+	'poeshonya3@gmail.com',
+	'97b464048e88ad2c6433dacbefd67030c97523a5'
+);
+
+    ```
+ */
 export class DefaultStashLoader implements IDefaultStashLoader {
 	static API_URL = 'https://api.pathofexile.com' as const;
 	/** Name of your application */
