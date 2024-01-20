@@ -135,7 +135,6 @@ export class TabBadgeGroupElement extends BaseElement {
 					<input
 						type="checkbox"
 						id="hide-remove-only"
-						v-model="hideRemoveOnly"
 						.checked=${this.hideRemoveOnly}
 						@change=${() => (this.hideRemoveOnly = this.checkbox.checked)}
 					/>
@@ -143,9 +142,9 @@ export class TabBadgeGroupElement extends BaseElement {
 			: nothing;
 
 		const filtersSection = this.shouldFilter
-			? html`<div v-if="shouldFilter" style="display: flex; flex-wrap: wrap; align-items: center; gap: 2rem">
+			? html`<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 2rem">
 					<div>
-						<div class="filter" v-if="shouldFilter">
+						<div class="filter">
 							<label for="filter-stashes-by-name">Filter by name</label>
 							<input
 								type="text"
@@ -155,7 +154,7 @@ export class TabBadgeGroupElement extends BaseElement {
 							/>
 						</div>
 					</div>
-					<div class="page-controls" v-if="shouldFilter">
+					<div class="page-controls">
 						<button ?disabled=${this.page === 1} @click=${this.decreasePage}>prev</button>
 						<input id="page" type="text" .value=${String(this.page)} @input=${this.#onPageInput} />
 						<button @click=${this.increasePage}>next</button>
