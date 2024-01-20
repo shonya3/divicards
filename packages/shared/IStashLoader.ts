@@ -7,8 +7,9 @@ export interface IStashLoader {
 }
 
 export interface IDefaultStashLoader {
-	tab(league: League, tabId: string): Promise<TabWithItems>;
-	tabs(league: League): Promise<NoItemsTab[]>;
+	tabs: (league: League) => Promise<NoItemsTab[]>;
+	tab: (league: League, tabId: string) => Promise<TabWithItems>;
+	sample?: (league: League, tabId: string) => Promise<DivinationCardsSample>;
 }
 
 /**
@@ -23,7 +24,7 @@ export interface IDefaultStashLoader {
 
     ```
  */
-export class DefaultStashLoader implements IDefaultStashLoader {
+export class StashLoader implements IDefaultStashLoader {
 	static API_URL = 'https://api.pathofexile.com' as const;
 	/** Name of your application */
 	#app: string;
@@ -49,7 +50,7 @@ export class DefaultStashLoader implements IDefaultStashLoader {
 	}
 
 	async tab(league: string, tabId: string, subtabId?: string): Promise<TabWithItems> {
-		let url = `${DefaultStashLoader.API_URL}/stash/${league}/${tabId}`;
+		let url = `${StashLoader.API_URL}/stash/${league}/${tabId}`;
 		if (subtabId) {
 			url = `${url}/${subtabId}`;
 		}
@@ -57,20 +58,35 @@ export class DefaultStashLoader implements IDefaultStashLoader {
 		const response = await fetch(url, {
 			headers: this.#authHeaders(),
 		});
+		if (response.status === 401) {
+			throw 'Unauthorized';
+		}
+
 		type ApiTabResponse = { stash: TabWithItems };
-		const tabResponse: ApiTabResponse = await response.json();
-		return tabResponse.stash;
+		const body: ApiTabResponse & { error?: { message: string } } = await response.json();
+		if (!response.ok && typeof body?.error?.message === 'string') {
+			throw body.error.message;
+		}
+		return body.stash;
 	}
 
 	async tabs(league: string): Promise<NoItemsTab[]> {
-		const url = `${DefaultStashLoader.API_URL}/stash/${league}`;
+		const url = `${StashLoader.API_URL}/stash/${league}`;
 		const response = await fetch(url, {
 			headers: this.#authHeaders(),
 		});
+		if (response.status === 401) {
+			throw 'Unauthorized';
+		}
+
 		type ApiTabsResponse = { stashes: NoItemsTab[] };
 
-		const tabs: ApiTabsResponse = await response.json();
-		return this.#flattenTabs(tabs.stashes);
+		const body: ApiTabsResponse & { error?: { message: string } } = await response.json();
+		if (!response.ok && typeof body?.error?.message === 'string') {
+			throw body.error.message;
+		}
+
+		return this.#flattenTabs(body.stashes);
 	}
 
 	#flattenTabs(tabs: NoItemsTab[]): NoItemsTab[] {
