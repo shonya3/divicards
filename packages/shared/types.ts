@@ -13,13 +13,18 @@ export const leagues = [
 	'Standard',
 	'Hardcore Affliction',
 	'Hardcore',
-	'SSF Standard',
-	'SSF Hardcore',
+	'Solo Self-Found',
+	'Hardcore SS1F',
 	'SSF Affliction',
 	'HC SSF Affliction',
 ] as const;
 export const tradeLeagues = ['Affliction', 'Standard', 'Hardcore Affliction', 'Hardcore'] as const;
-export const permanentLeagues: Readonly<League[]> = ['Standard', 'Hardcore', 'SSF Standard'] as const;
+export const permanentLeagues: Readonly<League[]> = [
+	'Standard',
+	'Hardcore',
+	'Solo Self-Found',
+	'Hardcore SSF',
+] as const;
 
 export type League = (typeof leagues)[number] | string;
 export type TradeLeague = (typeof tradeLeagues)[number];

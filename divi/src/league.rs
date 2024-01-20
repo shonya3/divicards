@@ -6,9 +6,9 @@ use serde::{Deserialize, Serialize};
 pub enum League {
     Standard,
     Hardcore,
-    #[serde(alias = "SSF Standard")]
+    #[serde(alias = "Solo Self-Found", alias = "SSF Standard")]
     SSFStandard,
-    #[serde(alias = "SSF Hardcore")]
+    #[serde(alias = "SSF Hardcore", alias = "Hardcore SSF")]
     SSFHardcore,
     Affliction,
     #[serde(alias = "Hardcore Affliction")]
