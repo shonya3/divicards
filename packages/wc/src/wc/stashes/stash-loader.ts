@@ -30,7 +30,7 @@ const sleepSecs = async (secs: number): Promise<void> => {
 
 declare global {
 	interface HTMLElementTagNameMap {
-		'wc-general-stashes-view': GeneralStashesViewElement;
+		'e-stash-loader': StashLoaderElement;
 	}
 }
 
@@ -59,11 +59,11 @@ export interface Props {
 	stashLoader: IDefaultStashLoader;
 }
 
-export class GeneralStashesViewElement extends BaseElement {
+export class StashLoaderElement extends BaseElement {
 	static override get defineList() {
 		return [HelpTipElement, LeagueSelectElement, TabBadgeElement, TabBadgeGroupElement];
 	}
-	static override tag = 'wc-general-stashes-view';
+	static override tag = 'e-stash-loader';
 	static override styles = [this.baseStyles, styles()];
 
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
