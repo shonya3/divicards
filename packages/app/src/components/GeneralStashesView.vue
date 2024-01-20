@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { StashesViewElement, Events } from '@divicards/wc/src/wc/stashes/stashes-view';
+import { GeneralStashesViewElement, Events } from '@divicards/wc/src/wc/stashes/general-stashes-view';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import type { Props } from '@divicards/wc/src/wc/stashes/general-stashes-view';
 import type { League } from '@divicards/shared/types';
 import { TabWithItems } from '../../../shared/poe.types';
-StashesViewElement.define();
+GeneralStashesViewElement.define();
 withDefaults(defineProps<Props>(), { league: ACTIVE_LEAGUE });
 const emit = defineEmits<{
 	close: [];

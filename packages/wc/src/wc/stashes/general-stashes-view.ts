@@ -47,6 +47,7 @@ export class Events {
 	'upd:page': number;
 
 	'tab': { tab: TabWithItems; league: League; name: TabBadgeElement['name'] };
+	'tabs': NoItemsTab[];
 
 	// ---
 	/**  event from TabBadgeElement */
@@ -111,10 +112,21 @@ export class GeneralStashesViewElement extends BaseElement {
 			throw new Error('No stash loader');
 		}
 		this.noStashesMessage = '';
-		this.stashes = await this.stashLoader.tabs(this.league);
-		this.stashes;
-		if (!this.stashes.length) {
-			this.noStashesMessage = 'No stashes here. Try to change the league';
+		try {
+			this.stashes = await this.stashLoader.tabs(this.league);
+			this.emit<Events['tabs']>('tabs', this.stashes);
+			this.stashes;
+			if (!this.stashes.length) {
+				this.noStashesMessage = 'No stashes here. Try to change the league';
+			}
+		} catch (err) {
+			console.dir(err);
+			if (err instanceof Error) {
+				this.noStashesMessage = err.message;
+			} else if (typeof err === 'string') {
+				this.noStashesMessage = err;
+			}
+			throw err;
 		}
 	}
 
@@ -218,7 +230,6 @@ export class GeneralStashesViewElement extends BaseElement {
 
 		this.msg = '';
 
-		console.log({ id, league });
 		const tab = await this.stashLoader.tab(league, id);
 		this.selectedTabs.delete(id);
 		this.selectedTabs = new Map(this.selectedTabs);
