@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/web-components';
 import { SampleCardElement } from './sample-card';
-import { league, filename, selected, uuid, minimumCardPrice, sample, fileCardProps } from './data';
+import { league, filename, selected, uuid, minimumCardPrice, sample } from './data';
 import { html } from 'lit';
 
 export default {
@@ -10,9 +10,6 @@ export default {
 export const Default = {
 	render() {
 		SampleCardElement.define();
-		console.log({
-			fileCardProps,
-		});
 		return html`<wc-sample-card
 			league=${league}
 			filename=${filename}

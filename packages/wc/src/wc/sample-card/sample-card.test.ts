@@ -1,7 +1,7 @@
 import { expect, html, fixture } from '@open-wc/testing';
 import sinon from 'sinon';
 import { SampleCardElement } from './sample-card';
-import { fileCardProps } from './data';
+import { props } from './data';
 import { sendKeys } from '@web/test-runner-commands';
 import type { Props } from './sample-card';
 
@@ -11,7 +11,7 @@ describe('<wc-sample-card>', () => {
 	beforeEach(async () => {
 		SampleCardElement.define();
 		el = await fixture(html`<wc-sample-card></wc-sample-card>`);
-		Object.assign(el, { ...fileCardProps });
+		Object.assign(el, { ...props });
 	});
 
 	it('should render a component', () => {

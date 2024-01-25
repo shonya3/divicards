@@ -1,5 +1,5 @@
-import fileCardPropsJson from './fileCardProps.json' assert { type: 'json' };
-import { FileCardProps } from './sample-card';
+import json from './props.json' assert { type: 'json' };
+import { Props } from './sample-card';
 
-export const fileCardProps: FileCardProps = fileCardPropsJson as FileCardProps;
-export const { league, filename, selected, uuid, minimumCardPrice, sample } = fileCardProps;
+export const props: Props = json as Props;
+export const { league, filename, selected, uuid, minimumCardPrice, sample } = props;
