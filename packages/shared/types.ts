@@ -14,7 +14,6 @@ export const leagues = [
 	'Hardcore Affliction',
 	'Hardcore',
 	'Solo Self-Found',
-	'Hardcore SS1F',
 	'SSF Affliction',
 	'HC SSF Affliction',
 ] as const;
