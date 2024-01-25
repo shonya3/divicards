@@ -14,11 +14,11 @@ const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 
 declare global {
 	interface HTMLElementTagNameMap {
-		'wc-file-card': FileCardElement;
+		'wc-sample-card': SampleCardElement;
 	}
 }
 
-export interface FileCardProps {
+export interface Props {
 	league: League;
 	filename: string;
 	selected: boolean | null;
@@ -28,15 +28,15 @@ export interface FileCardProps {
 }
 
 export interface Events {
-	'upd:selected': FileCardElement['selected'];
-	'upd:league': FileCardElement['league'];
-	'upd:minimumCardPrice': FileCardElement['minimumCardPrice'];
-	delete: FileCardElement['uuid'];
+	'upd:selected': SampleCardElement['selected'];
+	'upd:league': SampleCardElement['league'];
+	'upd:minimumCardPrice': SampleCardElement['minimumCardPrice'];
+	delete: SampleCardElement['uuid'];
 	'google-sheets-clicked': { sample: DivinationCardsSample; league: League };
 	'save-to-file-clicked': { sample: DivinationCardsSample; league: League; filename: string };
 }
 
-export class FileCardElement extends BaseElement {
+export class SampleCardElement extends BaseElement {
 	static override get defineList() {
 		return [
 			LeagueSelectElement,
@@ -47,7 +47,7 @@ export class FileCardElement extends BaseElement {
 			IconButtonElement,
 		];
 	}
-	static override tag = 'wc-file-card';
+	static override tag = 'wc-sample-card';
 
 	@property({ reflect: true }) league: TradeLeague = ACTIVE_LEAGUE;
 	@property({ reflect: true }) filename: string = 'NO FILE NAME';

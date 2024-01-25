@@ -5,7 +5,7 @@ import { NotCardsElement } from './not-cards';
 import { notCards } from './data';
 
 export default {
-	title: 'Elements/file-card/not-cards',
+	title: 'Elements/sample-card/not-cards',
 } satisfies Meta<NotCardsElement>;
 
 export const Default = {

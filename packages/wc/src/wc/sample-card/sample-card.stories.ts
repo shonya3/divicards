@@ -1,25 +1,25 @@
 import { Meta } from '@storybook/web-components';
-import { FileCardElement } from './file-card';
+import { SampleCardElement } from './sample-card';
 import { league, filename, selected, uuid, minimumCardPrice, sample, fileCardProps } from './data';
 import { html } from 'lit';
 
 export default {
-	title: 'Elements/file-card/file-card',
-} satisfies Meta<FileCardElement>;
+	title: 'Elements/sample-card/sample-card',
+} satisfies Meta<SampleCardElement>;
 
 export const Default = {
 	render() {
-		FileCardElement.define();
+		SampleCardElement.define();
 		console.log({
 			fileCardProps,
 		});
-		return html`<wc-file-card
+		return html`<wc-sample-card
 			league=${league}
 			filename=${filename}
 			?selected=${selected}
 			uuid=${uuid}
 			minimum-card-price=${minimumCardPrice}
 			.sample=${sample}
-		></wc-file-card>`;
+		></wc-sample-card>`;
 	},
 };

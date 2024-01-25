@@ -2,7 +2,7 @@ import { ACTIVE_LEAGUE, downloadText } from '@divicards/shared/lib';
 import { defineStore } from 'pinia';
 import { SampleData, command } from '../command';
 import { DivinationCardsSample, League, TradeLeague, isTradeLeague, leagues } from '@divicards/shared/types';
-import { FileCardProps } from '@divicards/wc/src/wc/file-card/file-card';
+import { FileCardProps } from '@divicards/wc/src/wc/sample-card/sample-card';
 
 const prefixFilename = (name: string, league: League): string => {
 	const UNDERSCORE_GLUE = '_';

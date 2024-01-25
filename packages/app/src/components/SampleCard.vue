@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { FileCardElement, FileCardProps, Events } from '@divicards/wc/src/wc/file-card/file-card';
+import { SampleCardElement, Props, Events } from '@divicards/wc/src/wc/sample-card/sample-card';
 import { DivinationCardsSample } from '@divicards/shared/types';
 import { League } from '@divicards/shared/types';
-FileCardElement.define();
-const props = defineProps<FileCardProps>();
+SampleCardElement.define();
+const props = defineProps<Props>();
 const emit = defineEmits<{
-	'update:selected': [FileCardElement['selected']];
-	'update:league': [FileCardElement['league']];
-	'update:minimumCardPrice': [FileCardElement['minimumCardPrice']];
-	delete: [FileCardElement['uuid']];
+	'update:selected': [SampleCardElement['selected']];
+	'update:league': [SampleCardElement['league']];
+	'update:minimumCardPrice': [SampleCardElement['minimumCardPrice']];
+	delete: [SampleCardElement['uuid']];
 	'google-sheets-clicked': [DivinationCardsSample, League];
 	'save-to-file-clicked': [DivinationCardsSample, League, string];
 }>();
@@ -39,7 +39,7 @@ const onSaveToFileClicked = (e: CustomEvent<Events['save-to-file-clicked']>) => 
 </script>
 
 <template>
-	<wc-file-card
+	<wc-sample-card
 		v-bind="props"
 		@google-sheets-clicked="onGoogleSheetsClicked"
 		@save-to-file-clicked="onSaveToFileClicked"
@@ -47,5 +47,5 @@ const onSaveToFileClicked = (e: CustomEvent<Events['save-to-file-clicked']>) => 
 		@upd:selected="onUpdSelected"
 		@upd:minimumCardPrice="onUpdPrice"
 		@delete="onDelete"
-	></wc-file-card>
+	></wc-sample-card>
 </template>

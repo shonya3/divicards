@@ -1,16 +1,16 @@
 import { expect, html, fixture } from '@open-wc/testing';
 import sinon from 'sinon';
-import { FileCardElement } from './file-card';
+import { SampleCardElement } from './sample-card';
 import { fileCardProps } from './data';
 import { sendKeys } from '@web/test-runner-commands';
-import type { FileCardProps } from './file-card';
+import type { Props } from './sample-card';
 
-describe('<wc-file-card>', () => {
-	let el: FileCardElement;
+describe('<wc-sample-card>', () => {
+	let el: SampleCardElement;
 
 	beforeEach(async () => {
-		FileCardElement.define();
-		el = await fixture(html`<wc-file-card></wc-file-card>`);
+		SampleCardElement.define();
+		el = await fixture(html`<wc-sample-card></wc-sample-card>`);
 		Object.assign(el, { ...fileCardProps });
 	});
 
@@ -74,7 +74,7 @@ describe('<wc-file-card>', () => {
 
 	it('table cards get updated when filecard cards get updated', async () => {
 		await el.updateComplete;
-		const newProps: FileCardProps = {
+		const newProps: Props = {
 			league: 'Standard',
 			filename: 'Standard.csv',
 			selected: false,
