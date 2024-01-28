@@ -10,6 +10,12 @@ import { DivinationCardsSample, League, TradeLeague, isTradeLeague } from '@divi
 import { property, query } from 'lit/decorators.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { classMap } from 'lit/directives/class-map.js';
+import '@shoelace-style/shoelace/dist/components/button/button.js';
+import '@shoelace-style/shoelace/dist/components/range/range.js';
+import '@shoelace-style/shoelace/dist/components/icon/icon.js';
+
+import SlRange from '@shoelace-style/shoelace/dist/components/range/range.js';
+
 const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 
 declare global {
@@ -50,7 +56,7 @@ export class SampleCardElement extends BaseElement {
 	static override tag = 'wc-sample-card';
 
 	@property({ reflect: true }) league: TradeLeague = ACTIVE_LEAGUE;
-	@property({ reflect: true }) filename: string = 'NO FILE NAME';
+	@property({ reflect: true }) filename: string = 'NO FILE NAMENO FILE NAME';
 	@property({ type: Boolean, reflect: true }) selected: boolean | null = false;
 	@property({ reflect: true }) uuid: string = 'NO ID';
 	@property({ type: Number, reflect: true, attribute: 'minimum-card-price' }) minimumCardPrice: number = 0;
@@ -61,6 +67,7 @@ export class SampleCardElement extends BaseElement {
 	@query('wc-league-select') leagueSelect!: LeagueSelectElement;
 	@query('#minimum-card-price-slider') priceSlider!: HTMLInputElement;
 	@query('wc-div-table') table!: DivTableElement;
+	@query('sl-range') rangeEl!: SlRange;
 
 	get filteredCards() {
 		return this.sample.cards.filter(card => {
@@ -121,12 +128,9 @@ export class SampleCardElement extends BaseElement {
 		this.emit<Events['delete']>('delete', this.uuid);
 	}
 
-	#onMinPriceSlider(e: InputEvent) {
-		const target = e.composedPath()[0];
-		if (target instanceof HTMLInputElement && target.matches('#minimum-card-price-slider')) {
-			this.minimumCardPrice = Number(target.value);
-			this.emit<Events['upd:minimumCardPrice']>('upd:minimumCardPrice', this.minimumCardPrice);
-		}
+	#onMinPriceRange() {
+		this.minimumCardPrice = Number(this.rangeEl.value);
+		this.emit<Events['upd:minimumCardPrice']>('upd:minimumCardPrice', this.minimumCardPrice);
 	}
 
 	protected override render() {
@@ -159,20 +163,17 @@ export class SampleCardElement extends BaseElement {
 					: nothing}
 			</div>
 			${this.gridIcon()}
-			<label class="slider-box">
-				<span>${this.minimumCardPrice}</span>
-				<input
-					id="minimum-card-price-slider"
-					class="slider"
-					type="range"
-					name=""
-					id=""
-					min="0"
-					max="500"
-					.value=${String(this.minimumCardPrice)}
-					@input=${this.#onMinPriceSlider}
-				/>
-			</label>
+
+			<sl-range
+				id="minimum-card-price-slider"
+				class="slider"
+				name=""
+				id=""
+				min="0"
+				max="500"
+				.value=${this.minimumCardPrice}
+				@sl-input=${this.#onMinPriceRange}
+			></sl-range>
 
 			<div class="total-price">
 				<p>${format(this.filteredSummary.value)}</p>
@@ -185,84 +186,16 @@ export class SampleCardElement extends BaseElement {
 
 			<wc-league-select trade .league=${this.league} @upd:league=${this.#onLeagueSelected}></wc-league-select>
 
-			<!-- <a class="download" .download=${this.filename} .href=${this.urlObject}>Download</a> -->
-
-			<button @click=${this.#onSaveToFileClicked}>Save to file</button>
-
-			<button class="export-to-google-docs" @click=${this.#onSheetsIconClicked}>
-				Export to Sheets
-				<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 100 100">
-					<path
-						fill="#70b570"
-						d="M59.5,12H27c-2.761,0-5,2.239-5,5v66c0,2.761,2.239,5,5,5h46c2.761,0,5-2.239,5-5V30.5L59.5,12z"
-					></path>
-					<path fill="#8cc78c" d="M59.5,11.5V25c0,3.038,2.462,5.5,5.5,5.5h13.5L59.5,11.5z"></path>
-					<path
-						fill="#1f212b"
-						d="M73,89H27c-3.309,0-6-2.691-6-6V17c0-3.309,2.691-6,6-6h32.5c0.266,0,0.52,0.105,0.707,0.293 l18.5,18.5C78.895,29.98,79,30.235,79,30.5V83C79,86.309,76.309,89,73,89z M27,13c-2.206,0-4,1.794-4,4v66c0,2.206,1.794,4,4,4h46 c2.206,0,4-1.794,4-4V30.914L59.086,13H27z"
-					></path>
-					<path
-						fill="#1f212b"
-						d="M78.5,31H65c-3.309,0-6-2.691-6-6V11.5h1V25c0,2.757,2.243,5,5,5h13.5V31z"
-					></path>
-					<path
-						fill="#1f212b"
-						d="M26.5,41c-0.276,0-0.5-0.224-0.5-0.5v-22c0-1.378,1.121-2.5,2.5-2.5h15c0.276,0,0.5,0.224,0.5,0.5 S43.776,17,43.5,17h-15c-0.827,0-1.5,0.673-1.5,1.5v22C27,40.776,26.776,41,26.5,41z"
-					></path>
-					<path
-						fill="#1f212b"
-						d="M71.5,84h-11c-0.276,0-0.5-0.224-0.5-0.5s0.224-0.5,0.5-0.5h11c0.827,0,1.5-0.673,1.5-1.5v-6 c0-0.276,0.224-0.5,0.5-0.5s0.5,0.224,0.5,0.5v6C74,82.878,72.879,84,71.5,84z"
-					></path>
-					<path
-						fill="#1f212b"
-						d="M73.5,73c-0.276,0-0.5-0.224-0.5-0.5v-32c0-0.276,0.224-0.5,0.5-0.5s0.5,0.224,0.5,0.5v32 C74,72.776,73.776,73,73.5,73z"
-					></path>
-					<path
-						fill="#fefdef"
-						d="M66.5,46.5h-33v28h33V46.5z M37.5,50.5H48v4H37.5V50.5z M52,50.5h10.5v4H52V50.5z M37.5,58.5H48v4 H37.5V58.5z M52,58.5h10.5v4H52V58.5z M37.5,66.5H48v4H37.5V66.5z M52,66.5h10.5v4H52V66.5z"
-					></path>
-					<path
-						fill="#1f212b"
-						d="M66.5,75h-33c-0.276,0-0.5-0.224-0.5-0.5v-28c0-0.276,0.224-0.5,0.5-0.5h33 c0.276,0,0.5,0.224,0.5,0.5v28C67,74.776,66.776,75,66.5,75z M34,74h32V47H34V74z"
-					></path>
-					<path
-						fill="#1f212b"
-						d="M48,55H37.5c-0.276,0-0.5-0.224-0.5-0.5v-4c0-0.276,0.224-0.5,0.5-0.5H48c0.276,0,0.5,0.224,0.5,0.5 v4C48.5,54.776,48.276,55,48,55z M38,54h9.5v-3H38V54z"
-					></path>
-					<path
-						fill="#1f212b"
-						d="M62.5,55H52c-0.276,0-0.5-0.224-0.5-0.5v-4c0-0.276,0.224-0.5,0.5-0.5h10.5 c0.276,0,0.5,0.224,0.5,0.5v4C63,54.776,62.776,55,62.5,55z M52.5,54H62v-3h-9.5V54z"
-					></path>
-					<path
-						fill="#1f212b"
-						d="M48,63H37.5c-0.276,0-0.5-0.224-0.5-0.5v-4c0-0.276,0.224-0.5,0.5-0.5H48c0.276,0,0.5,0.224,0.5,0.5 v4C48.5,62.776,48.276,63,48,63z M38,62h9.5v-3H38V62z"
-					></path>
-					<path
-						fill="#1f212b"
-						d="M62.5,63H52c-0.276,0-0.5-0.224-0.5-0.5v-4c0-0.276,0.224-0.5,0.5-0.5h10.5 c0.276,0,0.5,0.224,0.5,0.5v4C63,62.776,62.776,63,62.5,63z M52.5,62H62v-3h-9.5V62z"
-					></path>
-					<path
-						fill="#1f212b"
-						d="M48,71H37.5c-0.276,0-0.5-0.224-0.5-0.5v-4c0-0.276,0.224-0.5,0.5-0.5H48c0.276,0,0.5,0.224,0.5,0.5 v4C48.5,70.776,48.276,71,48,71z M38,70h9.5v-3H38V70z"
-					></path>
-					<path
-						fill="#1f212b"
-						d="M62.5,71H52c-0.276,0-0.5-0.224-0.5-0.5v-4c0-0.276,0.224-0.5,0.5-0.5h10.5 c0.276,0,0.5,0.224,0.5,0.5v4C63,70.776,62.776,71,62.5,71z M52.5,70H62v-3h-9.5V70z"
-					></path>
-					<path
-						fill="#1f212b"
-						d="M57.5,84h-5c-0.276,0-0.5-0.224-0.5-0.5s0.224-0.5,0.5-0.5h5c0.276,0,0.5,0.224,0.5,0.5 S57.776,84,57.5,84z"
-					></path>
-					<path
-						fill="#1f212b"
-						d="M26.5,55c-0.276,0-0.5-0.224-0.5-0.5v-11c0-0.276,0.224-0.5,0.5-0.5s0.5,0.224,0.5,0.5v11 C27,54.776,26.776,55,26.5,55z"
-					></path>
-					<path
-						fill="#1f212b"
-						d="M26.5,61c-0.276,0-0.5-0.224-0.5-0.5v-3c0-0.276,0.224-0.5,0.5-0.5s0.5,0.224,0.5,0.5v3 C27,60.776,26.776,61,26.5,61z"
-					></path>
-				</svg>
-			</button>
+			<div class="export-buttons">
+				<sl-button size="large" @click=${this.#onSaveToFileClicked}>
+					<sl-icon style="font-size:1.6rem" name="filetype-csv"></sl-icon>
+					Save to file</sl-button
+				>
+				<sl-button @click=${this.#onSheetsIconClicked} size="large">
+					<sl-icon style="font-size:1.6rem" name="file-earmark-spreadsheet"></sl-icon>
+					Export to Google Sheets</sl-button
+				>
+			</div>
 
 			${this.selected === null
 				? nothing
@@ -297,6 +230,11 @@ export class SampleCardElement extends BaseElement {
 		this.baseStyles,
 		iconButtonStyles(),
 		css`
+			:host {
+				--border-color: rgba(255, 255, 255, 0.3);
+				--border-radius: 0.25rem;
+			}
+
 			.league {
 				display: flex;
 				gap: 0.4rem;
@@ -313,22 +251,25 @@ export class SampleCardElement extends BaseElement {
 			}
 			.file {
 				position: relative;
-				padding: 1rem;
-				padding-block: 1.4rem;
+				padding-inline: 1rem;
+				padding-top: 1.4rem;
+				padding-bottom: 0.4rem;
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				justify-content: center;
+				justify-content: space-between;
 				gap: 1rem;
 				width: fit-content;
 				box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 
-				width: 250px;
 				/* max-height: 320px; */
-				height: 550px;
+				width: 250px;
+				height: 530px;
 
-				border: 2px solid black;
+				border: 1px solid black;
 				border-color: var(--border-color);
+				border-radius: var(--border-radius);
+				background-color: rgba(40, 40, 40, 1);
 				transition: 0.2s border-color;
 			}
 
@@ -341,7 +282,7 @@ export class SampleCardElement extends BaseElement {
 			}
 
 			.file-selected {
-				border-color: green;
+				border-color: var(--sl-color-green-600);
 			}
 
 			.filename {
@@ -350,6 +291,7 @@ export class SampleCardElement extends BaseElement {
 				overflow: hidden;
 				max-height: 60px;
 				max-width: 100%;
+				margin-top: 1.2rem;
 			}
 
 			.filename:hover {
@@ -375,22 +317,28 @@ export class SampleCardElement extends BaseElement {
 				cursor: pointer;
 			}
 
+			sl-icon {
+				color: var(--sl-color-green-600);
+			}
+
+			.export-buttons {
+				margin-top: 2rem;
+				display: flex;
+				flex-direction: column;
+			}
+
 			.checkbox {
 				background-color: red;
-				padding: 1rem;
 				transform: scale(2);
-				accent-color: green;
+				accent-color: var(--sl-color-green-600);
 				cursor: pointer;
 
 				position: absolute;
 				bottom: 0;
 				right: 0;
-				transform: translate(15%, 15%) scale(2);
-			}
-
-			.download {
-				/* position: absolute; */
-				bottom: 0;
+				width: 10px;
+				height: 10px;
+				transform: translate(50%, 50%) scale(2);
 			}
 
 			.export-to-google-docs {

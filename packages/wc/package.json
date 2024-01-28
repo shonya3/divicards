@@ -34,6 +34,7 @@
 	},
 	"dependencies": {
 		"@divicards/shared": "workspace:^",
+		"@shoelace-style/shoelace": "2.13.1",
 		"@web/dev-server-esbuild": "^1.0.1",
 		"@web/test-runner-playwright": "^0.11.0",
 		"lit": "^3.1.1"

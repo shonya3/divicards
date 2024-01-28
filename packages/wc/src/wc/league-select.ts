@@ -3,6 +3,8 @@ import { PropertyValueMap, css, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { League, tradeLeagues, leagues as allLeagues } from '@divicards/shared/types';
+import '@shoelace-style/shoelace/dist/components/select/select.js';
+import '@shoelace-style/shoelace/dist/components/option/option.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -21,13 +23,23 @@ export interface Events {
 	'upd:league': League;
 }
 
+export class SlConverter {
+	static #SL_DELIMETER = 'sl-v' as const;
+	static toSlValue<T extends string>(s: T): string {
+		return s.replaceAll(' ', this.#SL_DELIMETER);
+	}
+	static fromSlValue<T extends string>(s: string): T {
+		return s.replaceAll(this.#SL_DELIMETER, ' ') as T;
+	}
+}
+
 export class LeagueSelectElement extends BaseElement {
 	static override tag = 'wc-league-select';
 	static override styles = [this.baseStyles, styles];
 
 	@property({ type: Boolean, reflect: true }) trade = false;
 	@property({ type: String, reflect: true }) league: League = ACTIVE_LEAGUE;
-	@query('select', true) select!: HTMLSelectElement;
+	@query('sl-select', true) select!: HTMLSelectElement;
 
 	get value() {
 		return this.select.value;
@@ -40,13 +52,14 @@ export class LeagueSelectElement extends BaseElement {
 	protected override render() {
 		const leagues = this.trade ? tradeLeagues : allLeagues;
 
-		const options = html`${leagues.map(league => html`<option .value=${league}>${league}</option>`)}`;
+		const options = html`${leagues.map(
+			league => html`<sl-option .value=${SlConverter.toSlValue(league)}>${league}</sl-option>`
+		)}`;
 
 		return html`<div class="league-select">
-			<label for="league">League</label>
-			<select .value=${this.league} @change="${this.#emitLeagueChange}" id="league">
+			<sl-select .value=${SlConverter.toSlValue(this.league)} @sl-change="${this.#emitLeagueChange}" id="league">
 				${options}
-			</select>
+			</sl-select>
 		</div>`;
 	}
 
@@ -55,7 +68,7 @@ export class LeagueSelectElement extends BaseElement {
 	}
 
 	async #emitLeagueChange() {
-		this.league = this.select.value as League;
+		this.league = SlConverter.fromSlValue<League>(this.select.value);
 		await this.updateComplete;
 		this.emit<Events['upd:league']>('upd:league', this.league);
 	}

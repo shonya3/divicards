@@ -41,6 +41,14 @@ export default defineConfig({
 					src: 'node_modules/@shoelace-style/shoelace/dist/assets/icons/exclamation-octagon.svg',
 					dest: 'assets/icons',
 				},
+				{
+					src: 'node_modules/@shoelace-style/shoelace/dist/assets/icons/filetype-csv.svg',
+					dest: 'assets/icons',
+				},
+				{
+					src: 'node_modules/@shoelace-style/shoelace/dist/assets/icons/file-earmark-spreadsheet.svg',
+					dest: 'assets/icons',
+				},
 			],
 		}),
 	],
