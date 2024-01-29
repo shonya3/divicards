@@ -3,9 +3,9 @@
 use googlesheets::sheet::ValueRange;
 use loader::DataLoader;
 
-use crate::error::Error;
+use crate::{dropsource::parse::RichColumnVariant, error::Error};
 
-use super::{rich::RichSourcesColumn, DivcordTable};
+use super::{rich::RichColumn, DivcordTable};
 
 pub struct DivcordTableLoader(reqwest::Client);
 impl DivcordTableLoader {
@@ -13,12 +13,13 @@ impl DivcordTableLoader {
         Self(reqwest::Client::new())
     }
 
-    pub async fn fetch_rich_sources_column(&self) -> Result<RichSourcesColumn, Error> {
+    pub async fn fetch_rich_column(&self, variant: RichColumnVariant) -> Result<RichColumn, Error> {
         dotenv::dotenv().ok();
         let key = std::env::var("GOOGLE_API_KEY").expect("No google api key");
         let spreadsheet_id = "1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU";
         let sheet = "Cards_and_Hypotheses";
-        let url = format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}?&ranges={sheet}!F3:F&includeGridData=true&key={key}");
+        let column = variant.column_letter();
+        let url = format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}?&ranges={sheet}!{column}3:{column}&includeGridData=true&key={key}");
         Ok(self.0.get(url).send().await?.json().await?)
     }
 
@@ -38,14 +39,24 @@ impl DivcordTableLoader {
 
     pub async fn _fetch(&self) -> Result<DivcordTable, Error> {
         let sheet = self.fetch_table_sheet(&self.0).await?;
-        let rich_sources_column = RichSourcesColumn::new(
-            self.fetch_rich_sources_column().await?.sheets,
-            sheet.values.len(),
+        let number_of_rows = sheet.values.len();
+        let rich_sources_column = RichColumn::new(
+            self.fetch_rich_column(RichColumnVariant::Sources)
+                .await?
+                .sheets,
+            number_of_rows,
+        );
+        let rich_verify_column = RichColumn::new(
+            self.fetch_rich_column(RichColumnVariant::Verify)
+                .await?
+                .sheets,
+            number_of_rows,
         );
 
         Ok(DivcordTable {
             sheet,
             rich_sources_column,
+            rich_verify_column,
         })
     }
 }
