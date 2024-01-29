@@ -30,6 +30,7 @@ pub enum UniqueMonster {
         alias = "All Incursion Architects in Alva missions or Alva's Memory"
     )]
     AllIncursionArchitectsInAlvaMission,
+    AllIncursionArchitectsInTemple,
     #[serde(rename = "All Abyss Monsters")]
     AllAbyssMonsters,
     #[serde(rename = "All (Scourge) beyond demons")]
@@ -136,6 +137,9 @@ impl UniqueMonster {
             UniqueMonster::BetrayalCatarina(_) => "Betrayal Catarina",
             UniqueMonster::OshabiBoss(_) => "Oshabi Boss",
             UniqueMonster::EldritchPerfectionMonster(_) => "Eldritch Perfection Monster",
+            UniqueMonster::AllIncursionArchitectsInTemple => {
+                "All Incursion Architects (The Temple of Atzoatl)"
+            }
         }
     }
 }
@@ -154,6 +158,9 @@ impl FromStr for UniqueMonster {
             "All Incursion Architects in Alva missions/Alva's Memory"
             | "All Incursion Architects in Alva missions or Alva's Memory" => {
                 Ok(Self::AllIncursionArchitectsInAlvaMission)
+            }
+            "All Incursion Architects (The Temple of Atzoatl)" => {
+                Ok(Self::AllIncursionArchitectsInTemple)
             }
             "All Abyss Monsters" => Ok(Self::AllAbyssMonsters),
             "All Rogue Exiles" => Ok(Self::AllRogueExiles),
@@ -256,6 +263,9 @@ impl Identified for UniqueMonster {
             UniqueMonster::VaalFleshMerchant => "Vaal Flesh Merchant",
             UniqueMonster::AllIncursionArchitectsInAlvaMission => {
                 "All Incursion Architects in Alva missions or Alva's Memory"
+            }
+            UniqueMonster::AllIncursionArchitectsInTemple => {
+                "All Incursion Architects (The Temple of Atzoatl)"
             }
             UniqueMonster::AllAbyssMonsters => "All Abyss Monsters",
             UniqueMonster::AllScourgeBeyondDemons => "All (Scourge) beyond demons",
