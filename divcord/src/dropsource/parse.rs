@@ -109,6 +109,7 @@ pub fn record_url(id: usize, column: DivcordColumn) -> String {
 pub fn parse_record_dropsources(
     record: &DivcordTableRecord,
     poe_data: &PoeData,
+    column: RecordRichColumn,
 ) -> Result<Vec<Source>, ParseSourceError> {
     let mut sources: Vec<Source> = vec![];
 
@@ -132,7 +133,7 @@ pub fn parse_record_dropsources(
     }
 
     // 2. Parse sources from "Wiki Map/Monster Agreements" column(the main part)
-    sources.append(&mut parse_dropses_from(record, poe_data)?);
+    sources.append(&mut parse_dropses_from(record, poe_data, column)?);
 
     // 3. Read from tags(3rd column)
     if record.tag_hypothesis == Some(String::from("invasion_boss")) {
@@ -193,21 +194,44 @@ pub fn parse_record_dropsources(
     Ok(sources)
 }
 
+pub enum RecordRichColumn {
+    Sources,
+    Verify,
+}
+
 /// Parses all instances of record's drops_from and collects it into one Vec<Source>
 pub fn parse_dropses_from(
     record: &DivcordTableRecord,
     poe_data: &PoeData,
+    column: RecordRichColumn,
 ) -> Result<Vec<Source>, ParseSourceError> {
     let mut sources: Vec<Source> = vec![];
-    for d in &record.drops_from {
-        let Ok(mut inner_sources) = parse_one_drops_from(d, &record, poe_data) else {
-            return Err(ParseSourceError::UnknownVariant {
-                card: record.card.to_owned(),
-                record_id: record.id,
-                drops_from: d.to_owned(),
-            });
-        };
-        sources.append(&mut inner_sources);
+
+    match column {
+        RecordRichColumn::Sources => {
+            for d in &record.sources_drops_from {
+                let Ok(mut inner_sources) = parse_one_drops_from(d, &record, poe_data) else {
+                    return Err(ParseSourceError::UnknownVariant {
+                        card: record.card.to_owned(),
+                        record_id: record.id,
+                        drops_from: d.to_owned(),
+                    });
+                };
+                sources.append(&mut inner_sources);
+            }
+        }
+        RecordRichColumn::Verify => {
+            for d in &record.verify_drops_from {
+                let Ok(mut inner_sources) = parse_one_drops_from(d, &record, poe_data) else {
+                    return Err(ParseSourceError::UnknownVariant {
+                        card: record.card.to_owned(),
+                        record_id: record.id,
+                        drops_from: d.to_owned(),
+                    });
+                };
+                sources.append(&mut inner_sources);
+            }
+        }
     }
 
     Ok(sources)
@@ -404,18 +428,21 @@ pub fn parse_act_notation(s: &str) -> Vec<ActAreaName> {
                 })
                 .collect()
         } else {
-            let left = acts
+            let f: Box<dyn Fn(String) -> ActAreaName> = match acts
                 .chars()
                 .into_iter()
                 .filter(|c| c.is_digit(10))
                 .collect::<String>()
                 .parse::<u8>()
-                .unwrap();
+            {
+                Ok(act) => Box::new(move |name: String| ActAreaName::NameWithAct((name, act))),
+                Err(_) => Box::new(|name: String| {
+                    println!("No act notation in brackets {acts}");
+                    ActAreaName::Name(name)
+                }),
+            };
 
-            names
-                .into_iter()
-                .map(|name| ActAreaName::NameWithAct((name, left)))
-                .collect()
+            names.into_iter().map(f).collect()
         }
     } else {
         names
