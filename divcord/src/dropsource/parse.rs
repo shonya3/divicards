@@ -199,6 +199,15 @@ pub enum RichColumnVariant {
     Verify,
 }
 
+impl RichColumnVariant {
+    pub fn column_letter(&self) -> &'static str {
+        match self {
+            RichColumnVariant::Sources => "F",
+            RichColumnVariant::Verify => "H",
+        }
+    }
+}
+
 /// Parses all instances of record's drops_from and collects it into one Vec<Source>
 pub fn parse_dropses_from(
     record: &DivcordTableRecord,
