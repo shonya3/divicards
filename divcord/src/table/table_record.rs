@@ -4,7 +4,7 @@ use serde_json::Value;
 
 use crate::{
     dropsource::{
-        parse::{self, ParseSourceError, RecordRichColumn},
+        parse::{self, ParseSourceError, RichColumnVariant},
         Source,
     },
     error::Error,
@@ -107,8 +107,16 @@ impl SourcefulDivcordTableRecord {
         poe_data: &PoeData,
     ) -> Result<Self, ParseSourceError> {
         Ok(SourcefulDivcordTableRecord {
-            sources: parse::parse_record_dropsources(&record, poe_data, RecordRichColumn::Sources)?,
-            verify_sources: parse::parse_dropses_from(&record, poe_data, RecordRichColumn::Verify)?,
+            sources: parse::parse_record_dropsources(
+                &record,
+                poe_data,
+                RichColumnVariant::Sources,
+            )?,
+            verify_sources: parse::parse_dropses_from(
+                &record,
+                poe_data,
+                RichColumnVariant::Verify,
+            )?,
             id: record.id,
             greynote: record.greynote,
             card: record.card,

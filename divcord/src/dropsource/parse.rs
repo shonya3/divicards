@@ -109,7 +109,7 @@ pub fn record_url(id: usize, column: DivcordColumn) -> String {
 pub fn parse_record_dropsources(
     record: &DivcordTableRecord,
     poe_data: &PoeData,
-    column: RecordRichColumn,
+    column: RichColumnVariant,
 ) -> Result<Vec<Source>, ParseSourceError> {
     let mut sources: Vec<Source> = vec![];
 
@@ -194,7 +194,7 @@ pub fn parse_record_dropsources(
     Ok(sources)
 }
 
-pub enum RecordRichColumn {
+pub enum RichColumnVariant {
     Sources,
     Verify,
 }
@@ -203,12 +203,12 @@ pub enum RecordRichColumn {
 pub fn parse_dropses_from(
     record: &DivcordTableRecord,
     poe_data: &PoeData,
-    column: RecordRichColumn,
+    column: RichColumnVariant,
 ) -> Result<Vec<Source>, ParseSourceError> {
     let mut sources: Vec<Source> = vec![];
 
     match column {
-        RecordRichColumn::Sources => {
+        RichColumnVariant::Sources => {
             for d in &record.sources_drops_from {
                 let Ok(mut inner_sources) = parse_one_drops_from(d, &record, poe_data) else {
                     return Err(ParseSourceError::UnknownVariant {
@@ -220,7 +220,7 @@ pub fn parse_dropses_from(
                 sources.append(&mut inner_sources);
             }
         }
-        RecordRichColumn::Verify => {
+        RichColumnVariant::Verify => {
             for d in &record.verify_drops_from {
                 let Ok(mut inner_sources) = parse_one_drops_from(d, &record, poe_data) else {
                     return Err(ParseSourceError::UnknownVariant {

@@ -117,7 +117,7 @@ pub fn sources_by_card(
             let sources = crate::dropsource::parse::parse_dropses_from(
                 &record,
                 &poe_data,
-                crate::dropsource::parse::RecordRichColumn::Sources,
+                crate::dropsource::parse::RichColumnVariant::Sources,
             )
             .unwrap();
             for source in sources {
