@@ -28,6 +28,8 @@ pub enum Area {
     RedeemerInfluencedMaps,
     #[serde(rename = "Expedition Logbook")]
     ExpeditionLogbook,
+    #[serde(rename = "Labyrinth Trial Areas")]
+    LabyrinthTrialAreas,
 }
 
 impl Identified for Area {
@@ -41,6 +43,7 @@ impl Identified for Area {
             Area::AreaSpecific(a) => a.id(),
             Area::RedeemerInfluencedMaps => "Redeemer influenced maps",
             Area::ExpeditionLogbook => "Expedition Logbook",
+            Area::LabyrinthTrialAreas => "Labyrinth Trial Areas",
         }
     }
 }
@@ -56,6 +59,7 @@ impl Area {
             Area::AreaSpecific(_) => "Area-Specific",
             Area::RedeemerInfluencedMaps => "Redeemer influenced maps",
             Area::ExpeditionLogbook => "Expedition Logbook",
+            Area::LabyrinthTrialAreas => "Labyrinth Trial Areas",
         }
     }
 
@@ -73,6 +77,7 @@ impl FromStr for Area {
             "The Temple of Atzoatl" => return Ok(Area::TempleOfAtzoatl),
             "All Vaal side areas (need specific information)" => return Ok(Area::AllVaalSideAreas),
             "Vaal Side Areas" => return Ok(Area::VaalSideAreas),
+            "Labyrinth Trial Areas" => return Ok(Area::LabyrinthTrialAreas),
             _ => {
                 if let Ok(areaspecific) = s.parse::<AreaSpecific>() {
                     return Ok(Area::AreaSpecific(areaspecific));
