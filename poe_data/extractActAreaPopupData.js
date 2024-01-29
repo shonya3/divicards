@@ -100,6 +100,13 @@ const extractActAreaPopupData = actAreaPopup => {
 		}
 	}
 
+	if (id === '1_5_5') {
+		bossfights.push({
+			name: 'Innocence, God-Emperor of Eternity',
+			url: 'https://poedb.tw/us/Innocence%2C_God-Emperor_of_Eternity',
+		});
+	}
+
 	if (!id) throw new Error(`==${name}== No id`);
 	if (!act) throw new Error(`==${name}== no act`);
 	if (!areaLevel) throw new Error(`==${name}== no area level`);
