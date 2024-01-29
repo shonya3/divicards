@@ -416,6 +416,18 @@ pub enum Chest {
         alias = "Uber Labyrinth/Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)"
     )]
     UberlabChests,
+    #[strum(
+        serialize = "Merciless Labyrinth",
+        to_string = "Merciless Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox, Hidden Coffer)"
+    )]
+    #[serde(
+        rename = "Merciless Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox, Hidden Coffer)",
+        alias = "Merciless Labyrinth"
+    )]
+    MercilessChests,
+    #[serde(rename = "Hidden Coffer")]
+    #[strum(to_string = "Hidden Coffer")]
+    HiddenCoffer,
     #[strum(serialize = "Labyrinth Darkshrines")]
     #[serde(rename = "Labyrinth Darkshrines")]
     Darkshrine,
@@ -441,6 +453,8 @@ impl Identified for Chest {
             Chest::UberlabChests => "Uber Labyrinth or Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)",
             Chest::Darkshrine => "Labyrinth Darkshrines",
             Chest::BootyChestMaoKun => "Booty Chest (Mao Kun)",
+            Chest::MercilessChests => "Merciless Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox, Hidden Coffer)",
+            Chest::HiddenCoffer => "Hidden Coffer",
         }
     }
 }
