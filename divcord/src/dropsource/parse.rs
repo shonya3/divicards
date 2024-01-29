@@ -208,6 +208,32 @@ impl RichColumnVariant {
     }
 }
 
+fn strip_comment(input: &str) -> String {
+    let mut result = String::new();
+    let mut inside_brackets = false;
+
+    for c in input.chars() {
+        match c {
+            '[' => inside_brackets = true,
+            ']' => inside_brackets = false,
+            _ => {
+                if !inside_brackets {
+                    result.push(c);
+                }
+            }
+        }
+    }
+
+    result.trim().to_owned()
+}
+
+#[test]
+fn test_strip_comment() {
+    let input = "Vault [inventing_area + wealthy_area]";
+    let result = strip_comment(input);
+    assert_eq!(result, String::from("Vault"));
+}
+
 /// Parses all instances of record's drops_from and collects it into one Vec<Source>
 pub fn parse_dropses_from(
     record: &DivcordTableRecord,
@@ -232,7 +258,34 @@ pub fn parse_dropses_from(
         RichColumnVariant::Verify => {
             for d in &record.verify_drops_from {
                 let Ok(mut inner_sources) = parse_one_drops_from(d, &record, poe_data) else {
+                    // TODO "Twilight Temple? Arsenal?"
+                    if record.id == 268 {
+                        continue;
+                    }
+
+                    if record.id == 360 {
+                        let drops = DropsFrom {
+                            name: strip_comment(&d.name),
+                            styles: d.styles.clone(),
+                        };
+                        dbg!(drops);
+                    }
+
+                    // try to strip comment and try one more time
+                    if let Ok(mut inner_sources) = parse_one_drops_from(
+                        &DropsFrom {
+                            name: strip_comment(&d.name),
+                            styles: d.styles.clone(),
+                        },
+                        record,
+                        poe_data,
+                    ) {
+                        sources.append(&mut inner_sources);
+                        continue;
+                    }
+
                     println!("parse_one_drops_from Unknown variant {d:#?}");
+
                     return Err(ParseSourceError::UnknownVariant {
                         card: record.card.to_owned(),
                         record_id: record.id,
