@@ -1901,7 +1901,7 @@
         "kind": "source-with-member"
       }
     ],
-    "sourcesWithTagButNotOnWiki": "The Harvest (magic+ monsters); The Rotting Core",
+    "sourcesWithTagButNotOnWiki": "The Harvest [magic+ monsters]; The Rotting Core",
     "notes": "Divcord: clip of Lighty posted by Zimzams shows drop in Museum",
     "verifySources": [
       {
@@ -4448,10 +4448,15 @@
         "kind": "source-with-member"
       }
     ],
-    "wikiDisagreements": "Remaining list (1/2)\n\nDoedre's Cesspool;\nOriath Square;\nPrisoner's Gate (A6);\nShavronne's Tower;\nThe Ancient Pyramid;\nThe Aqueduct;\nThe Archives;\nThe Ascent;\nThe Boiling Lake;\nThe Brine King's Reef;\nThe Canals;\nThe Catacombs;\nThe Cathedral Rooftop (A5);\nThe Cathedral Rooftop (A10);\nThe Causeway;\nThe Cavern of Anger (A6);\nThe Chamber of Innocence;\nThe Chamber of Sins Level 1 (A7);\nThe Chamber of Sins Level 2 (A7);\nThe City of Sarn;\nThe Coast (A6);\nThe Control Blocks (A5);\nThe Crematorium;\nThe Crossroads (A7);\nThe Den (A7);\nThe Descent;\nThe Docks;\nThe Dread Thicket (A7);\nThe Dried Lake;\nThe Ebony Barracks;\nThe Feeding Trough;\nThe Fellshrine Ruins;\nThe Grain Gate;\nThe Grand Promenade;\nThe High Gardens;\nThe Imperial Fields;\nThe Imperial Gardens;\nThe Karui Fortress;\nThe Library;\nThe Lower Prison (A6);\nThe Lunaris Concourse;",
-    "sourcesWithTagButNotOnWiki": "Remaining list (2/2)\n\nThe Lunaris Temple Level 1 (A3);\nThe Lunaris Temple Level 1 (A8);\nThe Lunaris Temple Level 2 (A3);\nThe Lunaris Temple Level 2 (A8);\nThe Marketplace;\nThe Mines Level 1;\nThe Mines Level 2;\nThe Mud Flats (A6);\nThe Northern Forest (A7);\nThe Ossuary (A5);\nThe Quay;\nThe Refinery;\nThe Reliquary (A5);\nThe Ridge;\nThe Riverways (A6);\nThe Sarn Ramparts;\nThe Sceptre of God;\nThe Sewers;\nThe Slums;\nThe Solaris Concourse;\nThe Solaris Temple Level 1 (A8);\nThe Solaris Temple Level 2 (A3);\nThe Solaris Temple Level 2 (A8);\nThe Southern Forest (A6);\nThe Templar Courts;\nThe Temple of Decay Level 1;\nThe Tidal Island (A6);\nThe Torched Courts (A5);\nThe Torched Courts (A10);\nThe Toxic Conduits;\nThe Tunnel;\nThe Twilight Strand (A6);\nThe Upper Sceptre of God;\nThe Vaal City (A7);\nThe Western Forest (A6);",
+    "wikiDisagreements": "[Remaining list (1/2)]\n\nDoedre's Cesspool;\nOriath Square;\nPrisoner's Gate (A6);\nShavronne's Tower;\nThe Ancient Pyramid;\nThe Aqueduct;\nThe Archives;\nThe Ascent;\nThe Boiling Lake;\nThe Brine King's Reef;\nThe Canals;\nThe Catacombs;\nThe Cathedral Rooftop (A5);\nThe Cathedral Rooftop (A10);\nThe Causeway;\nThe Cavern of Anger (A6);\nThe Chamber of Innocence;\nThe Chamber of Sins Level 1 (A7);\nThe Chamber of Sins Level 2 (A7);\nThe City of Sarn;\nThe Coast (A6);\nThe Control Blocks (A5);\nThe Crematorium;\nThe Crossroads (A7);\nThe Den (A7);\nThe Descent;\nThe Docks;\nThe Dread Thicket (A7);\nThe Dried Lake;\nThe Ebony Barracks;\nThe Feeding Trough;\nThe Fellshrine Ruins;\nThe Grain Gate;\nThe Grand Promenade;\nThe High Gardens;\nThe Imperial Fields;\nThe Imperial Gardens;\nThe Karui Fortress;\nThe Library;\nThe Lower Prison (A6);\nThe Lunaris Concourse;",
+    "sourcesWithTagButNotOnWiki": "[Remaining list (2/2)]\n\nThe Lunaris Temple Level 1 (A3);\nThe Lunaris Temple Level 1 (A8);\nThe Lunaris Temple Level 2 (A3);\nThe Lunaris Temple Level 2 (A8);\nThe Marketplace;\nThe Mines Level 1;\nThe Mines Level 2;\nThe Mud Flats (A6);\nThe Northern Forest (A7);\nThe Ossuary (A5);\nThe Quay;\nThe Refinery;\nThe Reliquary (A5);\nThe Ridge;\nThe Riverways (A6);\nThe Sarn Ramparts;\nThe Sceptre of God;\nThe Sewers;\nThe Slums;\nThe Solaris Concourse;\nThe Solaris Temple Level 1 (A8);\nThe Solaris Temple Level 2 (A3);\nThe Solaris Temple Level 2 (A8);\nThe Southern Forest (A6);\nThe Templar Courts;\nThe Temple of Decay Level 1;\nThe Tidal Island (A6);\nThe Torched Courts (A5);\nThe Torched Courts (A10);\nThe Toxic Conduits;\nThe Tunnel;\nThe Twilight Strand (A6);\nThe Upper Sceptre of God;\nThe Vaal City (A7);\nThe Western Forest (A6);",
     "notes": "Has a Drop Level Requirement of 23.\nImplicitly has a Drop Level Cap, based on Charan's comments, at least somewhere as high as Act 10.\n\nCharan states:\n\"Drops from: *most core zones in parts 1 and 2* (nothing sealed like the belly of the beast or otherworldly like Maligaro’s Sanctum. Basically, anywhere ‘in’ Wraeclast.)\"\n\nLong term project due to numerous locations and low drop rate. otherworldly_story_area is likely the NOT tag, which includes the following:\n\nKaom's Dream, Kaom's Stronghold, Daresso's Dream, The Grand Arena, The Belly of the Beast Level 1/2 (Act 4), The Harvest, Maligaro's Sanctum, The Belly of the Beast (Act 9), The Rotting Core\n\n3.22: The Wetlands A6",
     "verifySources": [
+      {
+        "type": "Act",
+        "id": "1_3_14_1",
+        "kind": "source-with-member"
+      },
       {
         "type": "Act",
         "id": "2_8_7_1_",
@@ -14684,9 +14689,15 @@
         "kind": "source-with-member"
       }
     ],
-    "sourcesWithTagButNotOnWiki": "Maligaro's Sanctum; The Temple of Decay Floor 2",
+    "sourcesWithTagButNotOnWiki": "Maligaro's Sanctum; The Temple of Decay Level 2",
     "notes": "Tentative report of a drop in Temple of Decay (not sure which floor)\nDivcord: Zimzams and Elinvynia tracked >3400 natural Card drops in Overgrown Shrine; no hits.\n\nA few reports in 3.21 for Overgrown Ruin, no obvious tags (overlaps Overgrown Shrine, which also has chamber_of_sins_area)\nDivcord: 3.21, Overgrown Ruin verified by Elinvynia.\n\n\nMaybe it's a connection to Akaveesh (based off of Black Death, Pain Unending), the Unique Spider that Maligaro summons in the Overgrown Ruin and A7 Maligaro's Sanctum Boss fights?\n* That Monster appears in Overgrown Ruin but not in Overgrown Shrine.\n* In Story, the Black Venom Quest Item drops from the Spider, not Maligaro.\n* Black Venom => Poisoned Faith seems like acceptable theming.\n* Poisoned Faith has a Drop Level Requirement of 53, and A7 Maligaro's Sanctum is Area Level 52.\n\nNo standout Monster Tags.\nMaybe a rule equivalent to something like: \"Drops in an Area with a Boss based from `SpiderBossMaligaro`\"...?\nThis would limit eligible Areas to Overgrown Ruin and A7 Maligaro's Sanctum.\nA natural drop outside these two Areas would rule out this hypothesis.\n\nSunken City verified by Elinvynia, indicating a more complex solution.\nJungle Valley (and spider_boss_area) ruled out.",
-    "verifySources": []
+    "verifySources": [
+      {
+        "type": "Act",
+        "id": "2_7_12_2",
+        "kind": "source-with-member"
+      }
+    ]
   },
   {
     "id": 494,

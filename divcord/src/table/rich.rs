@@ -90,7 +90,25 @@ impl Cell {
         Ok(self
             .text_fragments()?
             .into_iter()
-            .flat_map(|t| t.drops_from())
+            .flat_map(|t| {
+                t.drops_from().into_iter().filter_map(|d| {
+                    // try to strip comment if there is some
+                    let drops_from = if d.name.contains("[") {
+                        DropsFrom {
+                            name: strip_comment(&d.name),
+                            styles: d.styles,
+                        }
+                    } else {
+                        d
+                    };
+
+                    if drops_from.name.is_empty() {
+                        None
+                    } else {
+                        Some(drops_from)
+                    }
+                })
+            })
             .collect())
     }
 
@@ -281,6 +299,36 @@ impl Text {
 pub struct DropsFrom {
     pub name: String,
     pub styles: FontStyles,
+}
+
+fn strip_comment(input: &str) -> String {
+    let mut result = String::new();
+    let mut inside_brackets = false;
+
+    for c in input.chars() {
+        match c {
+            '[' => inside_brackets = true,
+            ']' => inside_brackets = false,
+            _ => {
+                if !inside_brackets {
+                    result.push(c);
+                }
+            }
+        }
+    }
+
+    result.trim().to_owned()
+}
+
+#[test]
+fn test_strip_comment() {
+    let input = "Vault [inventing_area + wealthy_area]";
+    let result = strip_comment(input);
+    assert_eq!(result, String::from("Vault"));
+
+    let input = "[Remaining list (2/2)]\n\nThe Lunaris Temple Level 1 (A3)";
+    let result = strip_comment(input);
+    assert_eq!(result, String::from("The Lunaris Temple Level 1 (A3)"));
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]

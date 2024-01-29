@@ -43,9 +43,9 @@ async fn main() {
         .sourceful_records_iter(poe_data.clone())
         .enumerate()
     {
-        if index == 63 {
-            println!("{record:#?}");
-        }
+        // if index == 63 {
+        //     println!("{record:#?}");
+        // }
 
         // if let Ok(record) = record {
         //     if record.id == 66 {

@@ -208,32 +208,6 @@ impl RichColumnVariant {
     }
 }
 
-fn strip_comment(input: &str) -> String {
-    let mut result = String::new();
-    let mut inside_brackets = false;
-
-    for c in input.chars() {
-        match c {
-            '[' => inside_brackets = true,
-            ']' => inside_brackets = false,
-            _ => {
-                if !inside_brackets {
-                    result.push(c);
-                }
-            }
-        }
-    }
-
-    result.trim().to_owned()
-}
-
-#[test]
-fn test_strip_comment() {
-    let input = "Vault [inventing_area + wealthy_area]";
-    let result = strip_comment(input);
-    assert_eq!(result, String::from("Vault"));
-}
-
 /// Parses all instances of record's drops_from and collects it into one Vec<Source>
 pub fn parse_dropses_from(
     record: &DivcordTableRecord,
@@ -265,19 +239,6 @@ pub fn parse_dropses_from(
 
                     // TODO Heist unique areas or bosses
                     if record.id == 499 {
-                        continue;
-                    }
-
-                    // try to strip comment and try one more time
-                    if let Ok(mut inner_sources) = parse_one_drops_from(
-                        &DropsFrom {
-                            name: strip_comment(&d.name),
-                            styles: d.styles.clone(),
-                        },
-                        record,
-                        poe_data,
-                    ) {
-                        sources.append(&mut inner_sources);
                         continue;
                     }
 
@@ -389,11 +350,6 @@ pub fn parse_one_drops_from(
         if let Some(_) = mapbosses.iter().find(|b| b.name == s) {
             return Ok(vec![Source::MapBoss(s)]);
         }
-    }
-
-    //TODO: maybe this should be handled on previous stage
-    if d.name.starts_with("[") && d.name.ends_with("]") {
-        return Ok(vec![]);
     }
 
     Err(ParseSourceError::UnknownVariant {
