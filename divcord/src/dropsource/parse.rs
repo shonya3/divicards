@@ -263,12 +263,9 @@ pub fn parse_dropses_from(
                         continue;
                     }
 
-                    if record.id == 360 {
-                        let drops = DropsFrom {
-                            name: strip_comment(&d.name),
-                            styles: d.styles.clone(),
-                        };
-                        dbg!(drops);
+                    // TODO Heist unique areas or bosses
+                    if record.id == 499 {
+                        continue;
                     }
 
                     // try to strip comment and try one more time

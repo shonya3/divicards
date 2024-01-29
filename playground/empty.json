@@ -8,7 +8,13 @@
     "remainingWork": "confirm",
     "sourcesWithTagButNotOnWiki": "All Incursion Architects (The Temple of Atzoatl)",
     "notes": "3.20: The Akil's Prophecy Divination Card has been re-enabled, and now awards a Double Corrupted Unique Elegant Round Shield. This card can now be found in the Temple of Atzoatl.\nIs this an area drop or a monster drop?\n\nSee notes above; might be both `vaal_architect_incursion` and `vaal_architect_temple`.\n\n3.21: Unless we find evidence of this occurring as an Area drop in the Temple of Atzoatl (as opposed to strictly dropping from Architects), this is probably `vaal_architect_temple` instead of `incursion_temple_area`.",
-    "verifySources": []
+    "verifySources": [
+      {
+        "type": "All Incursion Architects (The Temple of Atzoatl)",
+        "id": "All Incursion Architects (The Temple of Atzoatl)",
+        "kind": "empty-source"
+      }
+    ]
   },
   {
     "id": 46,
@@ -57,16 +63,6 @@
     "verifySources": []
   },
   {
-    "id": 184,
-    "greynote": "Empty",
-    "card": "The Awakened",
-    "confidence": "low",
-    "remainingWork": "confirm",
-    "sourcesWithTagButNotOnWiki": "Death and Taxes, Gardens, Hallowed Ground, Haunted Mansion, Maelström of Chaos, Palace, Tower, Underground Sea",
-    "notes": "3.23: Removed Metamorph monster. \nNew patch noted maps: Death and Taxes, Gardens, Hallowed Ground, Haunted Mansion, Maelström of Chaos, Palace, Tower, Underground Sea (bosses?)\n\nPossibly governed by transform_boss",
-    "verifySources": []
-  },
-  {
     "id": 190,
     "greynote": "Empty",
     "card": "The Bitter Blossom",
@@ -82,9 +78,15 @@
     "card": "The Emptiness",
     "confidence": "ok",
     "remainingWork": "confirm",
-    "sourcesWithTagButNotOnWiki": "Maelström of Chaos, Barrel Sextant",
+    "sourcesWithTagButNotOnWiki": "Maelström of Chaos with Barrel Sextant",
     "notes": "Divcord: 3.20, Zimzams documented a drop of The Emptiness from an explodey Mysterious Barrel in Maelstrom of Chaos\n* Mysterious Barrels behave strangely, but the likelihood that a random Card would be The Emptiness is exceedingly slim.\n* The drop may be unrelated to explodey Mysterious Barrels completely; those barrels do drop some natural DropPool items. It could simply be a natural Area drop in Maelstrom of Chaos. Its weight is so low that it's possible it simply hasn't been observed before.\n\nIf this were somehow a misleading generic drop, assuming solely natural weights, the probability of a coincidence is ~0.0000364.\n(And Zimzams did not observed any other unexpected Cards from explodey Mysterious Barrels, so the real chance is even less.)\n\nDivcord: 3.20, Jasmine found a drop in Maelstrom of Chaos from a non-Barrel source, though the Map did have explodey Mysterious Barrels. The Barrels themselves (or monsters within it) did not appear to drop any unusual cards, debunking the theory of random div cards other than possible reward conversion.\nSeems like it's simply a natural Area drop in Maelstrom of Chaos. (The Card art looks like a maelstrom.)\n\nTo confirm, a positive result will be required from one of:\na) Maelstrom of Chaos, without Barrel sextant\nb) Any non-Maelstrom map, with (explody) Barrel sextant",
-    "verifySources": []
+    "verifySources": [
+      {
+        "type": "Maelström of Chaos with Barrel Sextant",
+        "id": "Maelström of Chaos with Barrel Sextant",
+        "kind": "empty-source"
+      }
+    ]
   },
   {
     "id": 282,
@@ -123,7 +125,13 @@
     "confidence": "low",
     "remainingWork": "no hypothesis",
     "sourcesWithTagButNotOnWiki": "Titan of the Grove",
-    "verifySources": []
+    "verifySources": [
+      {
+        "type": "Map Boss",
+        "id": "Titan of the Grove",
+        "kind": "source-with-member"
+      }
+    ]
   },
   {
     "id": 366,
@@ -208,7 +216,23 @@
     "confidence": "none",
     "remainingWork": "confirm",
     "sourcesWithTagButNotOnWiki": "Maker of Mires (Hallowed Ground); Penitentiary Incarcerator (Dungeon); The Forgotten Soldier (Conservatory)",
-    "verifySources": []
+    "verifySources": [
+      {
+        "type": "Map Boss",
+        "id": "Maker of Mires",
+        "kind": "source-with-member"
+      },
+      {
+        "type": "Map Boss",
+        "id": "Penitentiary Incarcerator",
+        "kind": "source-with-member"
+      },
+      {
+        "type": "Map Boss",
+        "id": "The Forgotten Soldier",
+        "kind": "source-with-member"
+      }
+    ]
   },
   {
     "id": 484,
@@ -226,9 +250,15 @@
     "tagHypothesis": "matryoshka_boss",
     "confidence": "low",
     "remainingWork": "confirm",
-    "sourcesWithTagButNotOnWiki": "Unravelling Horror (Port)",
+    "sourcesWithTagButNotOnWiki": "Unravelling Horror",
     "notes": "Potentially also Sporeplume or Peninsula Boss, but unlikely",
-    "verifySources": []
+    "verifySources": [
+      {
+        "type": "Map Boss",
+        "id": "Unravelling Horror",
+        "kind": "source-with-member"
+      }
+    ]
   },
   {
     "id": 499,
