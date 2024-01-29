@@ -341,6 +341,7 @@ pub fn parse_one_drops_from(
         }
     }
 
+    //TODO: maybe this should be handled on previous stage
     if d.name.starts_with("[") && d.name.ends_with("]") {
         return Ok(vec![]);
     }
