@@ -929,6 +929,12 @@ pub enum BeastBoss {
     #[strum(to_string = "Fenumus, First of the Night", serialize = "Fenumus")]
     #[serde(rename = "Fenumus, First of the Night")]
     Fenumus,
+    #[serde(rename = "Saqawal, First of the Sky")]
+    #[strum(to_string = "Saqawal, First of the Sky", serialize = "Saqawal")]
+    Saqawal,
+    #[serde(rename = "Craiceann, First of the Deep")]
+    #[strum(to_string = "Craiceann, First of the Deep", serialize = "Craiceann")]
+    Craiceann,
 }
 
 impl Identified for BeastBoss {
@@ -936,6 +942,8 @@ impl Identified for BeastBoss {
         match self {
             BeastBoss::Farrul => "Farrul, First of the Plains",
             BeastBoss::Fenumus => "Fenumus, First of the Night",
+            BeastBoss::Saqawal => "Saqawal, First of the Sky",
+            BeastBoss::Craiceann => "Craiceann, First of the Deep",
         }
     }
 }
