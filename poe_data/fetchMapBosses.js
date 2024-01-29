@@ -47,6 +47,9 @@ const fetchMapBosses = () => {
 			case 'Sanctum Guard':
 				name = 'Sanctum Guardian';
 				break;
+			case 'Unraveling Horror':
+				name = 'Unravelling Horror';
+				break;
 		}
 
 		mapBosses.push({ name, maps });
