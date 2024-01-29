@@ -7,7 +7,8 @@
     "confidence": "low",
     "remainingWork": "confirm",
     "sourcesWithTagButNotOnWiki": "All Incursion Architects (The Temple of Atzoatl)",
-    "notes": "3.20: The Akil's Prophecy Divination Card has been re-enabled, and now awards a Double Corrupted Unique Elegant Round Shield. This card can now be found in the Temple of Atzoatl.\nIs this an area drop or a monster drop?\n\nSee notes above; might be both `vaal_architect_incursion` and `vaal_architect_temple`.\n\n3.21: Unless we find evidence of this occurring as an Area drop in the Temple of Atzoatl (as opposed to strictly dropping from Architects), this is probably `vaal_architect_temple` instead of `incursion_temple_area`."
+    "notes": "3.20: The Akil's Prophecy Divination Card has been re-enabled, and now awards a Double Corrupted Unique Elegant Round Shield. This card can now be found in the Temple of Atzoatl.\nIs this an area drop or a monster drop?\n\nSee notes above; might be both `vaal_architect_incursion` and `vaal_architect_temple`.\n\n3.21: Unless we find evidence of this occurring as an Area drop in the Temple of Atzoatl (as opposed to strictly dropping from Architects), this is probably `vaal_architect_temple` instead of `incursion_temple_area`.",
+    "verifySources": []
   },
   {
     "id": 46,
@@ -16,7 +17,8 @@
     "confidence": "none",
     "remainingWork": "no hypothesis",
     "wikiDisagreements": "The Harbour Bridge, The Foothills",
-    "notes": "Story Only? Former drop location was The Docks (Merciless).\nProbably has Drop Level Cap\n2022: Cartographer's Delight, significantly nerfed (was: ~Lantador's Lost Love ; now: ~The Witch)"
+    "notes": "Story Only? Former drop location was The Docks (Merciless).\nProbably has Drop Level Cap\n2022: Cartographer's Delight, significantly nerfed (was: ~Lantador's Lost Love ; now: ~The Witch)",
+    "verifySources": []
   },
   {
     "id": 72,
@@ -24,7 +26,8 @@
     "card": "Draped in Dreams",
     "confidence": "none",
     "remainingWork": "no hypothesis",
-    "notes": "3.20: Natural weight similar to The Dragon's Heart; likely Boss-specific though (since it hasn't been reported in any Area yet), and Boss-specific drops ignore natural weights"
+    "notes": "3.20: Natural weight similar to The Dragon's Heart; likely Boss-specific though (since it hasn't been reported in any Area yet), and Boss-specific drops ignore natural weights",
+    "verifySources": []
   },
   {
     "id": 73,
@@ -33,14 +36,16 @@
     "tagHypothesis": "vaal_architect_temple",
     "confidence": "low",
     "remainingWork": "unclear hypothesis",
-    "notes": "Can this occur from Architects outside of the Temple of Atzoatl, e.g. from Alva Memories or Incursions?\n\nAkil's Prophecy is similar, and can in fact appear outside of the Temple of Atzoatl. See Akil's Prophecy notes above."
+    "notes": "Can this occur from Architects outside of the Temple of Atzoatl, e.g. from Alva Memories or Incursions?\n\nAkil's Prophecy is similar, and can in fact appear outside of the Temple of Atzoatl. See Akil's Prophecy notes above.",
+    "verifySources": []
   },
   {
     "id": 113,
     "greynote": "Empty",
     "card": "Judging Voices",
     "confidence": "none",
-    "remainingWork": "no hypothesis"
+    "remainingWork": "no hypothesis",
+    "verifySources": []
   },
   {
     "id": 156,
@@ -48,7 +53,18 @@
     "card": "Rebirth and Renewal",
     "confidence": "none",
     "remainingWork": "no hypothesis",
-    "notes": "Divcord 3.19: Iron reports a drop from General Marceus Lioneye in a Map Legion Monolith, but the drop occurred while Lioneye was still in Stasis.\n\nDatamining shows that Legion Generals (but not other Legion Monsters) do in fact have a special item drop eligibility override while in Stasis.\n\nIf this is the deterministic drop source of Rebirth and Renewal, either the hardcoded droprate is extremely low, or another condition needs to be met.\n\nSo far Iron's case is the sole report of Rebirth and Renewal despite lots of players running Legion. A drop from Legion is in-theme with the Card; when a Legion Monster leaves stasis, it's called \"LegionRevive\"."
+    "notes": "Divcord 3.19: Iron reports a drop from General Marceus Lioneye in a Map Legion Monolith, but the drop occurred while Lioneye was still in Stasis.\n\nDatamining shows that Legion Generals (but not other Legion Monsters) do in fact have a special item drop eligibility override while in Stasis.\n\nIf this is the deterministic drop source of Rebirth and Renewal, either the hardcoded droprate is extremely low, or another condition needs to be met.\n\nSo far Iron's case is the sole report of Rebirth and Renewal despite lots of players running Legion. A drop from Legion is in-theme with the Card; when a Legion Monster leaves stasis, it's called \"LegionRevive\".",
+    "verifySources": []
+  },
+  {
+    "id": 184,
+    "greynote": "Empty",
+    "card": "The Awakened",
+    "confidence": "low",
+    "remainingWork": "confirm",
+    "sourcesWithTagButNotOnWiki": "Death and Taxes, Gardens, Hallowed Ground, Haunted Mansion, Maelström of Chaos, Palace, Tower, Underground Sea",
+    "notes": "3.23: Removed Metamorph monster. \nNew patch noted maps: Death and Taxes, Gardens, Hallowed Ground, Haunted Mansion, Maelström of Chaos, Palace, Tower, Underground Sea (bosses?)\n\nPossibly governed by transform_boss",
+    "verifySources": []
   },
   {
     "id": 190,
@@ -57,7 +73,8 @@
     "tagHypothesis": "oshabi_boss",
     "confidence": "done",
     "remainingWork": "n/a",
-    "notes": "Manually added to Oshabi in 3.16; however previous location was not found at the time. See below\nProhibited Library: CardPender 3.20 dropped 1 Bitter Blossom from Oshabi over n=200 kills."
+    "notes": "Manually added to Oshabi in 3.16; however previous location was not found at the time. See below\nProhibited Library: CardPender 3.20 dropped 1 Bitter Blossom from Oshabi over n=200 kills.",
+    "verifySources": []
   },
   {
     "id": 246,
@@ -66,7 +83,8 @@
     "confidence": "ok",
     "remainingWork": "confirm",
     "sourcesWithTagButNotOnWiki": "Maelström of Chaos, Barrel Sextant",
-    "notes": "Divcord: 3.20, Zimzams documented a drop of The Emptiness from an explodey Mysterious Barrel in Maelstrom of Chaos\n* Mysterious Barrels behave strangely, but the likelihood that a random Card would be The Emptiness is exceedingly slim.\n* The drop may be unrelated to explodey Mysterious Barrels completely; those barrels do drop some natural DropPool items. It could simply be a natural Area drop in Maelstrom of Chaos. Its weight is so low that it's possible it simply hasn't been observed before.\n\nIf this were somehow a misleading generic drop, assuming solely natural weights, the probability of a coincidence is ~0.0000364.\n(And Zimzams did not observed any other unexpected Cards from explodey Mysterious Barrels, so the real chance is even less.)\n\nDivcord: 3.20, Jasmine found a drop in Maelstrom of Chaos from a non-Barrel source, though the Map did have explodey Mysterious Barrels. The Barrels themselves (or monsters within it) did not appear to drop any unusual cards, debunking the theory of random div cards other than possible reward conversion.\nSeems like it's simply a natural Area drop in Maelstrom of Chaos. (The Card art looks like a maelstrom.)\n\nTo confirm, a positive result will be required from one of:\na) Maelstrom of Chaos, without Barrel sextant\nb) Any non-Maelstrom map, with (explody) Barrel sextant"
+    "notes": "Divcord: 3.20, Zimzams documented a drop of The Emptiness from an explodey Mysterious Barrel in Maelstrom of Chaos\n* Mysterious Barrels behave strangely, but the likelihood that a random Card would be The Emptiness is exceedingly slim.\n* The drop may be unrelated to explodey Mysterious Barrels completely; those barrels do drop some natural DropPool items. It could simply be a natural Area drop in Maelstrom of Chaos. Its weight is so low that it's possible it simply hasn't been observed before.\n\nIf this were somehow a misleading generic drop, assuming solely natural weights, the probability of a coincidence is ~0.0000364.\n(And Zimzams did not observed any other unexpected Cards from explodey Mysterious Barrels, so the real chance is even less.)\n\nDivcord: 3.20, Jasmine found a drop in Maelstrom of Chaos from a non-Barrel source, though the Map did have explodey Mysterious Barrels. The Barrels themselves (or monsters within it) did not appear to drop any unusual cards, debunking the theory of random div cards other than possible reward conversion.\nSeems like it's simply a natural Area drop in Maelstrom of Chaos. (The Card art looks like a maelstrom.)\n\nTo confirm, a positive result will be required from one of:\na) Maelstrom of Chaos, without Barrel sextant\nb) Any non-Maelstrom map, with (explody) Barrel sextant",
+    "verifySources": []
   },
   {
     "id": 282,
@@ -74,7 +92,8 @@
     "card": "The Greatest Intentions",
     "confidence": "none",
     "remainingWork": "no hypothesis",
-    "notes": "Shaper?\n\nDivcord 3.22: Kenny obtains The Greatest Intentions from The Feared.\nUnknown if this is specific to The Feared, or from one of the Bosses."
+    "notes": "Shaper?\n\nDivcord 3.22: Kenny obtains The Greatest Intentions from The Feared.\nUnknown if this is specific to The Feared, or from one of the Bosses.",
+    "verifySources": []
   },
   {
     "id": 309,
@@ -84,7 +103,8 @@
     "confidence": "none",
     "remainingWork": "legacy tag",
     "sourcesWithTagButNotOnWiki": "Rose; Thorn; Infector of Dreams; The Bone Sculptor",
-    "notes": "necromancer_boss ?\nIf so, more Bosses need to be verified\n\nfal posted in Divcord a full stack Kirac Card Mission drop from non-Boss in Necropolis\nDivcord: 3.21, Elinvynia reports: \"I ran 105 Acton Nightmares (no MF boss rushing, mostly very low tier) trying to verify The Lich - I didn't get it\"\nHistorically dropped from Merciless Sawbones. All necromancer-type bosses do not appear to drop this card anymore - different tag?"
+    "notes": "necromancer_boss ?\nIf so, more Bosses need to be verified\n\nfal posted in Divcord a full stack Kirac Card Mission drop from non-Boss in Necropolis\nDivcord: 3.21, Elinvynia reports: \"I ran 105 Acton Nightmares (no MF boss rushing, mostly very low tier) trying to verify The Lich - I didn't get it\"\nHistorically dropped from Merciless Sawbones. All necromancer-type bosses do not appear to drop this card anymore - different tag?",
+    "verifySources": []
   },
   {
     "id": 310,
@@ -93,7 +113,8 @@
     "tagHypothesis": "abyss_lich_boss?",
     "confidence": "none",
     "remainingWork": "n/a",
-    "notes": "necromancer_boss no longer appears to be the associated tag."
+    "notes": "necromancer_boss no longer appears to be the associated tag.",
+    "verifySources": []
   },
   {
     "id": 337,
@@ -101,7 +122,8 @@
     "card": "The Offspring",
     "confidence": "low",
     "remainingWork": "no hypothesis",
-    "sourcesWithTagButNotOnWiki": "Titan of the Grove"
+    "sourcesWithTagButNotOnWiki": "Titan of the Grove",
+    "verifySources": []
   },
   {
     "id": 366,
@@ -110,16 +132,8 @@
     "tagHypothesis": "Breach monster (no tag)",
     "confidence": "done",
     "remainingWork": "n/a",
-    "notes": "Breach Monsters, but which? All?\nbreach_commander ?\n\nAlso has been observed as Kirac Card Mission drops in: {Park, Marshes, Bazaar}. See Divcord. Jasmine: The Realm is likely added to the pool of possible cards in Kirac Missions. The card does not appear to drop in a single card - only in stacks. Kirac Missions can also pool boss cards, and is likely governed by unusual rules.\n\nAppears to drop from any Breach Monster\n\nDvicord: 3.21, Elinvynia counted Active Skill Gems in Breachstones and proved that The Realm is a deterministic drop (not a natural drop)."
-  },
-  {
-    "id": 406,
-    "greynote": "Empty",
-    "card": "The Transformation",
-    "confidence": "low",
-    "remainingWork": "confirm",
-    "sourcesWithTagButNotOnWiki": "Death and Taxes, Gardens, Hallowed Ground, Haunted Mansion, Maelström of Chaos, Palace, Tower, Underground Sea",
-    "notes": "3.23: Removed Metamorph monster. \nNew patch noted maps: Death and Taxes, Gardens, Hallowed Ground, Haunted Mansion, Maelström of Chaos, Palace, Tower, Underground Sea (bosses?)"
+    "notes": "Breach Monsters, but which? All?\nbreach_commander ?\n\nAlso has been observed as Kirac Card Mission drops in: {Park, Marshes, Bazaar}. See Divcord. Jasmine: The Realm is likely added to the pool of possible cards in Kirac Missions. The card does not appear to drop in a single card - only in stacks. Kirac Missions can also pool boss cards, and is likely governed by unusual rules.\n\nAppears to drop from any Breach Monster\n\nDvicord: 3.21, Elinvynia counted Active Skill Gems in Breachstones and proved that The Realm is a deterministic drop (not a natural drop).",
+    "verifySources": []
   },
   {
     "id": 421,
@@ -127,7 +141,8 @@
     "card": "The Void",
     "confidence": "none",
     "remainingWork": "legacy tag",
-    "notes": "Dropped from Park in a Kirac Mission as the stack of cards. Park has no area-specific cards. Perhaps another weird Kirac Mission mechanic?\nRequires reconfirmation of Park Kirac Map or other tag-less maps\nAfter more testing with Kirac missions - conclusion: dropping The Void from any source completes the mission; may not be Park specific."
+    "notes": "Dropped from Park in a Kirac Mission as the stack of cards. Park has no area-specific cards. Perhaps another weird Kirac Mission mechanic?\nRequires reconfirmation of Park Kirac Map or other tag-less maps\nAfter more testing with Kirac missions - conclusion: dropping The Void from any source completes the mission; may not be Park specific.",
+    "verifySources": []
   },
   {
     "id": 443,
@@ -137,7 +152,8 @@
     "confidence": "done",
     "remainingWork": "legacy tag",
     "wikiDisagreements": "Mud Geyser",
-    "notes": "In the past, The Wretched was eligible in Mud Geyser. The claim on the wiki is stale, however, and Mud Geyser has not been reverified in a long time. It's likely it is no longer an eligible Area.\n\nDivcord 3.20: testing Bog which is on-Atlas and shares Tags with Mud Geyser (fetid_area, toxic_pool_area). No The Wretched in Bog, confidence >99.9%, so those Tags can't be it.\n\nThe only options are:\n1) The Wretched no longer drops in Mud Geyser either; or\n2) Mud Geyser's special exclusive Tag mud_geyser_area is another eligibility-grantor."
+    "notes": "In the past, The Wretched was eligible in Mud Geyser. The claim on the wiki is stale, however, and Mud Geyser has not been reverified in a long time. It's likely it is no longer an eligible Area.\n\nDivcord 3.20: testing Bog which is on-Atlas and shares Tags with Mud Geyser (fetid_area, toxic_pool_area). No The Wretched in Bog, confidence >99.9%, so those Tags can't be it.\n\nThe only options are:\n1) The Wretched no longer drops in Mud Geyser either; or\n2) Mud Geyser's special exclusive Tag mud_geyser_area is another eligibility-grantor.",
+    "verifySources": []
   },
   {
     "id": 449,
@@ -146,7 +162,8 @@
     "tagHypothesis": "expedition_common_remnant_logbook",
     "confidence": "done",
     "remainingWork": "n/a",
-    "notes": "Also found in all Expedition Areas; any Tag or Area relationship for these...?"
+    "notes": "Also found in all Expedition Areas; any Tag or Area relationship for these...?",
+    "verifySources": []
   },
   {
     "id": 453,
@@ -154,7 +171,8 @@
     "card": "Triskaidekaphobia",
     "confidence": "low",
     "remainingWork": "n/a",
-    "notes": "Uber Atziri was original report\nUnverified from Incursion Atziri\nT13 Maps? - disproved in T13 Volcano; might be drop capped to 80? unclear what Bex is referring to in her tweet"
+    "notes": "Uber Atziri was original report\nUnverified from Incursion Atziri\nT13 Maps? - disproved in T13 Volcano; might be drop capped to 80? unclear what Bex is referring to in her tweet",
+    "verifySources": []
   },
   {
     "id": 464,
@@ -162,7 +180,8 @@
     "card": "Winter's Embrace",
     "confidence": "none",
     "remainingWork": "no hypothesis",
-    "notes": "snow_area? no leads"
+    "notes": "snow_area? no leads",
+    "verifySources": []
   },
   {
     "id": 471,
@@ -170,14 +189,16 @@
     "card": "Endless Night",
     "confidence": "none",
     "remainingWork": "no hypothesis",
-    "notes": "Spotty sightings indicate that this is might be \"Drops from a Rogue Exile with `has_bow` and `rogue_exile`\"\n\nCandidates are:\nAntalie Napora\r\nAilentia Rac\r\nAinsley Varrich\r\nOrra Greengate\r\nOyra Ona\r\n\r\nShade of a Ranger (Whakawairua Tuahu)\r\n\r\nIneligible:\r\n- Rudiarius Felix (The Grand Arena; but ineligible due to Drop Level Requirement)\r\n- Antonio Bravadi (Descent: Champions)\r\n- Silva Fearsting (Descent: Champions)\n\n\nNot a natural drop in Vaal Temple per Zimzams's testing (n>1000, 3.21 & 3.21)"
+    "notes": "Spotty sightings indicate that this is might be \"Drops from a Rogue Exile with `has_bow` and `rogue_exile`\"\n\nCandidates are:\nAntalie Napora\r\nAilentia Rac\r\nAinsley Varrich\r\nOrra Greengate\r\nOyra Ona\r\n\r\nShade of a Ranger (Whakawairua Tuahu)\r\n\r\nIneligible:\r\n- Rudiarius Felix (The Grand Arena; but ineligible due to Drop Level Requirement)\r\n- Antonio Bravadi (Descent: Champions)\r\n- Silva Fearsting (Descent: Champions)\n\n\nNot a natural drop in Vaal Temple per Zimzams's testing (n>1000, 3.21 & 3.21)",
+    "verifySources": []
   },
   {
     "id": 473,
     "greynote": "Empty",
     "card": "Lethean Temptation",
     "confidence": "none",
-    "remainingWork": "no hypothesis"
+    "remainingWork": "no hypothesis",
+    "verifySources": []
   },
   {
     "id": 475,
@@ -186,7 +207,8 @@
     "tagHypothesis": "brute_boss",
     "confidence": "none",
     "remainingWork": "confirm",
-    "sourcesWithTagButNotOnWiki": "Maker of Mires (Hallowed Ground); Penitentiary Incarcerator (Dungeon); The Forgotten Soldier (Conservatory)"
+    "sourcesWithTagButNotOnWiki": "Maker of Mires (Hallowed Ground); Penitentiary Incarcerator (Dungeon); The Forgotten Soldier (Conservatory)",
+    "verifySources": []
   },
   {
     "id": 484,
@@ -194,7 +216,8 @@
     "card": "Ever-Changing",
     "confidence": "done",
     "remainingWork": "n/a",
-    "notes": "Appears to drop in any map generated by Kirac Mission, several confirms."
+    "notes": "Appears to drop in any map generated by Kirac Mission, several confirms.",
+    "verifySources": []
   },
   {
     "id": 495,
@@ -204,7 +227,8 @@
     "confidence": "low",
     "remainingWork": "confirm",
     "sourcesWithTagButNotOnWiki": "Unravelling Horror (Port)",
-    "notes": "Potentially also Sporeplume or Peninsula Boss, but unlikely"
+    "notes": "Potentially also Sporeplume or Peninsula Boss, but unlikely",
+    "verifySources": []
   },
   {
     "id": 499,
@@ -214,6 +238,7 @@
     "confidence": "low",
     "remainingWork": "confirm",
     "sourcesWithTagButNotOnWiki": "Darnaw's Landing; The Body Pit; Pillaged Camp; The Den; Combat Capacity Test Chamber",
-    "notes": "Appears to have a tag in all unique heist areas.\nAlso tagged for Tomb of the Banished (Jamanra's Rest), which is not an enabled area.\nUnclear if area or boss specific drop."
+    "notes": "Appears to have a tag in all unique heist areas.\nAlso tagged for Tomb of the Banished (Jamanra's Rest), which is not an enabled area.\nUnclear if area or boss specific drop.",
+    "verifySources": []
   }
 ]
