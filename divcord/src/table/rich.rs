@@ -329,6 +329,8 @@ fn test_strip_comment() {
     let input = "[Remaining list (2/2)]\n\nThe Lunaris Temple Level 1 (A3)";
     let result = strip_comment(input);
     assert_eq!(result, String::from("The Lunaris Temple Level 1 (A3)"));
+
+    assert_eq!(strip_comment("[?]"), String::from(""));
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
