@@ -232,6 +232,7 @@ pub fn parse_dropses_from(
         RichColumnVariant::Verify => {
             for d in &record.verify_drops_from {
                 let Ok(mut inner_sources) = parse_one_drops_from(d, &record, poe_data) else {
+                    println!("parse_one_drops_from Unknown variant {d:#?}");
                     return Err(ParseSourceError::UnknownVariant {
                         card: record.card.to_owned(),
                         record_id: record.id,
@@ -338,6 +339,10 @@ pub fn parse_one_drops_from(
         if let Some(_) = mapbosses.iter().find(|b| b.name == s) {
             return Ok(vec![Source::MapBoss(s)]);
         }
+    }
+
+    if d.name.starts_with("[") && d.name.ends_with("]") {
+        return Ok(vec![]);
     }
 
     Err(ParseSourceError::UnknownVariant {
