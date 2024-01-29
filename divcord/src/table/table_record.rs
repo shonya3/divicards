@@ -3,7 +3,10 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
 use crate::{
-    dropsource::{parse::ParseSourceError, Source},
+    dropsource::{
+        parse::{self, ParseSourceError, RecordRichColumn},
+        Source,
+    },
     error::Error,
 };
 use poe_data::PoeData;
@@ -23,7 +26,9 @@ pub struct DivcordTableRecord {
     #[serde(default)]
     pub remaining_work: RemainingWork,
     #[serde(skip_serializing)]
-    pub drops_from: Vec<DropsFrom>,
+    pub sources_drops_from: Vec<DropsFrom>,
+    #[serde(skip_serializing)]
+    pub verify_drops_from: Vec<DropsFrom>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub wiki_disagreements: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -36,7 +41,8 @@ impl DivcordTableRecord {
     pub fn create(
         row_index: usize,
         divcord_table_row: &[Value],
-        drops_from: Vec<DropsFrom>,
+        sources_drops_from: Vec<DropsFrom>,
+        verify_drops_from: Vec<DropsFrom>,
     ) -> Result<Self, Error> {
         let greynote = GreyNote::parse(&divcord_table_row[0])?;
         let card = parse_card_name(&divcord_table_row[1])?;
@@ -62,16 +68,13 @@ impl DivcordTableRecord {
             tag_hypothesis,
             confidence,
             remaining_work,
-            drops_from,
+            sources_drops_from,
+            verify_drops_from,
             wiki_disagreements,
             sources_with_tag_but_not_on_wiki,
             notes,
             id: row_index + 3,
         })
-    }
-
-    pub fn parse_dropsources(&self, poe_data: &PoeData) -> Result<Vec<Source>, ParseSourceError> {
-        crate::dropsource::parse::parse_record_dropsources(self, poe_data)
     }
 }
 
@@ -95,6 +98,7 @@ pub struct SourcefulDivcordTableRecord {
     pub sources_with_tag_but_not_on_wiki: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub notes: Option<String>,
+    pub verify_sources: Vec<Source>,
 }
 
 impl SourcefulDivcordTableRecord {
@@ -103,7 +107,8 @@ impl SourcefulDivcordTableRecord {
         poe_data: &PoeData,
     ) -> Result<Self, ParseSourceError> {
         Ok(SourcefulDivcordTableRecord {
-            sources: record.parse_dropsources(poe_data)?,
+            sources: parse::parse_record_dropsources(&record, poe_data, RecordRichColumn::Sources)?,
+            verify_sources: parse::parse_dropses_from(&record, poe_data, RecordRichColumn::Verify)?,
             id: record.id,
             greynote: record.greynote,
             card: record.card,

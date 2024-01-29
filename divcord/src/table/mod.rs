@@ -9,7 +9,7 @@ use googlesheets::sheet::ValueRange;
 use serde::{Deserialize, Serialize};
 
 use self::{
-    rich::RichSourcesColumn,
+    rich::RichColumn,
     table_record::{DivcordTableRecord, SourcefulDivcordTableRecord},
 };
 use crate::{dropsource::Source, error::Error};
@@ -18,14 +18,20 @@ use poe_data::PoeData;
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct DivcordTable {
     pub sheet: ValueRange,
-    pub rich_sources_column: RichSourcesColumn,
+    pub rich_sources_column: RichColumn,
+    pub rich_verify_column: RichColumn,
 }
 
 impl DivcordTable {
-    pub const fn new(sheet: ValueRange, rich_sources_column: RichSourcesColumn) -> Self {
+    pub const fn new(
+        sheet: ValueRange,
+        rich_sources_column: RichColumn,
+        rich_verify_column: RichColumn,
+    ) -> Self {
         Self {
             sheet,
             rich_sources_column,
+            rich_verify_column,
         }
     }
 
@@ -68,15 +74,35 @@ impl DivcordTable {
         })
     }
 
+    // pub fn records(&self) -> impl Iterator<Item = Result<DivcordTableRecord, Error>> + '_ {
+    //     self.sheet
+    //         .values
+    //         .iter()
+    //         .zip(self.rich_sources_column.cells())
+    //         // .zip(self.rich_verify_column.cells())
+    //         .enumerate()
+    //         .map(|(row_index, (divcord_table_row, sources_cell))| {
+    //             DivcordTableRecord::create(row_index, divcord_table_row, sources_cell.drops_from()?)
+    //         })
+    // }
+
     pub fn records(&self) -> impl Iterator<Item = Result<DivcordTableRecord, Error>> + '_ {
         self.sheet
             .values
             .iter()
             .zip(self.rich_sources_column.cells())
+            .zip(self.rich_verify_column.cells())
             .enumerate()
-            .map(|(row_index, (divcord_table_row, cell))| {
-                DivcordTableRecord::create(row_index, divcord_table_row, cell.drops_from()?)
-            })
+            .map(
+                |(row_index, ((divcord_table_row, sources_cell), verify_cell))| {
+                    DivcordTableRecord::create(
+                        row_index,
+                        divcord_table_row,
+                        sources_cell.drops_from()?,
+                        verify_cell.drops_from().unwrap_or_default(),
+                    )
+                },
+            )
     }
 }
 
@@ -87,8 +113,13 @@ pub fn sources_by_card(
     let mut map: HashMap<String, Vec<Source>> = HashMap::new();
     for record in divcord_table.records() {
         let record = record?;
-        for _d in &record.drops_from {
-            let sources = crate::dropsource::parse::parse_dropses_from(&record, &poe_data).unwrap();
+        for _d in &record.sources_drops_from {
+            let sources = crate::dropsource::parse::parse_dropses_from(
+                &record,
+                &poe_data,
+                crate::dropsource::parse::RecordRichColumn::Sources,
+            )
+            .unwrap();
             for source in sources {
                 map.entry(record.card.clone()).or_default().push(source);
             }
