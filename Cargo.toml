@@ -3,7 +3,7 @@ resolver = "2"
 members = [
     "packages/app/src-tauri",
     "divi",
-    "scripts",
+    "playground",
     "googlesheets",
     "divi/examples/*",
     "card_element",
