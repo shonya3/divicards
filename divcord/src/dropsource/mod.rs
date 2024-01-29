@@ -37,6 +37,7 @@ pub enum Source {
     Strongbox(Strongbox),
     Vendor(Vendor),
 
+    MaelstromOfChaosWithBarrelSextant,
     Delirium,
     DeliriumCurrencyRewards,
     Disabled,
@@ -105,6 +106,7 @@ impl Identified for Source {
             Source::DeliriumCurrencyRewards => "Delirium Currency Rewards",
             Source::Disabled => "Disabled",
             Source::GlobalDrop { .. } => "Global Drop",
+            Source::MaelstromOfChaosWithBarrelSextant => "Maelström of Chaos with Barrel Sextant",
         }
     }
 }
@@ -128,6 +130,7 @@ impl Source {
             Source::DeliriumCurrencyRewards => "Delirium Currency Rewards",
             Source::Disabled => "Disabled",
             Source::GlobalDrop { .. } => "Global Drop",
+            Source::MaelstromOfChaosWithBarrelSextant => "Maelström of Chaos with Barrel Sextant",
         }
     }
 
@@ -243,6 +246,9 @@ impl FromStr for Source {
             // "Unknown" => return Ok(Source::Unknown),
             "Redeemer influenced maps" => return Ok(Source::Area(Area::RedeemerInfluencedMaps)),
             "Delirium Currency Rewards" => return Ok(Source::DeliriumCurrencyRewards),
+            "Maelström of Chaos with Barrel Sextant" => {
+                return Ok(Source::MaelstromOfChaosWithBarrelSextant)
+            }
             "Global Drop" => {
                 return Ok(Source::GlobalDrop {
                     min_level: None,
