@@ -4,11 +4,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(rename_all = "camelCase")]
-pub struct RichSourcesColumn {
+pub struct RichColumn {
     pub sheets: Vec<Sheet>,
 }
 
-impl RichSourcesColumn {
+impl RichColumn {
     pub fn new(mut sheets: Vec<Sheet>, number_of_rows: usize) -> Self {
         sheets[0].data[0].row_data = Vec::from(&sheets[0].data[0].row_data[0..number_of_rows]);
         Self { sheets }
