@@ -30,6 +30,8 @@ pub enum Area {
     ExpeditionLogbook,
     #[serde(rename = "Labyrinth Trial Areas")]
     LabyrinthTrialAreas,
+    #[serde(rename = "Unique heist contract or boss")]
+    UniqueHeistContractOrBoss(UniqueHeistContractOrBoss),
 }
 
 impl Identified for Area {
@@ -44,6 +46,7 @@ impl Identified for Area {
             Area::RedeemerInfluencedMaps => "Redeemer influenced maps",
             Area::ExpeditionLogbook => "Expedition Logbook",
             Area::LabyrinthTrialAreas => "Labyrinth Trial Areas",
+            Area::UniqueHeistContractOrBoss(a) => a.id(),
         }
     }
 }
@@ -60,6 +63,7 @@ impl Area {
             Area::RedeemerInfluencedMaps => "Redeemer influenced maps",
             Area::ExpeditionLogbook => "Expedition Logbook",
             Area::LabyrinthTrialAreas => "Labyrinth Trial Areas",
+            Area::UniqueHeistContractOrBoss(_) => "Unique heist contract or boss",
         }
     }
 
@@ -83,6 +87,8 @@ impl FromStr for Area {
                     return Ok(Area::AreaSpecific(areaspecific));
                 } else if let Ok(atziri_area) = s.parse::<AtziriArea>() {
                     return Ok(Area::AtziriArea(atziri_area));
+                } else if let Ok(heist) = s.parse::<UniqueHeistContractOrBoss>() {
+                    return Ok(Area::UniqueHeistContractOrBoss(heist));
                 };
             }
         };
@@ -94,14 +100,6 @@ impl FromStr for Area {
 impl std::fmt::Display for Area {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.id())
-        // match self {
-        //     Area::TrialOfStingingDoubt => write!(f, "Trial of Stinging Doubt"),
-        //     Area::TempleOfAtzoatl => write!(f, "The Temple of Atzoatl"),
-        //     Area::AllVaalSideAreas => write!(f, "All Vaal side areas (need specific information)"),
-        //     Area::VaalSideAreas => write!(f, "Vaal Side Areas"),
-        //     Area::AreaSpecific(areaspecific) => areaspecific.fmt(f),
-        //     Area::AtziriArea(atziri_area) => atziri_area.fmt(f),
-        // }
     }
 }
 
@@ -240,5 +238,65 @@ impl Identified for AreaSpecific {
             AreaSpecific::XophsDomain => "Xoph's Domain",
             AreaSpecific::TulsDomain => "Tul's Domain",
         }
+    }
+}
+
+#[derive(
+    Debug,
+    Clone,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Hash,
+    EnumString,
+    strum_macros::Display,
+    strum_macros::EnumIter,
+)]
+#[serde(tag = "name")]
+pub enum UniqueHeistContractOrBoss {
+    #[strum(
+        to_string = "Contract: Death to Darnaw",
+        serialize = "Darnaw's Landing"
+    )]
+    #[serde(rename = "Contract: Death to Darnaw", alias = "Darnaw's Landing")]
+    DeathToDarnaw,
+    #[strum(to_string = "Contract: The Slaver King", serialize = "The Body Pit")]
+    #[serde(rename = "Contract: The Slaver King", alias = "The Body Pit")]
+    TheSlaverKing,
+    #[strum(to_string = "Contract: Heart of Glory", serialize = "Pillaged Camp")]
+    #[serde(rename = "Contract: Heart of Glory", alias = "Pillaged Camp")]
+    HeartOfGlory,
+    #[strum(to_string = "Contract: The Twins", serialize = "The Den")]
+    #[serde(rename = "Contract: The Twins", alias = "The Den")]
+    TheTwins,
+    #[strum(
+        to_string = "Contract: Breaking the Unbreakable",
+        serialize = "Combat Capacity Test Chamber"
+    )]
+    #[serde(
+        rename = "Contract: Breaking the Unbreakable",
+        alias = "Combat Capacity Test Chamber"
+    )]
+    BreakingTheUnbreakable,
+}
+
+impl Identified for UniqueHeistContractOrBoss {
+    fn id(&self) -> &str {
+        match self {
+            UniqueHeistContractOrBoss::DeathToDarnaw => "Contract: Death to Darnaw",
+            UniqueHeistContractOrBoss::TheSlaverKing => "Contract: The Slaver King",
+            UniqueHeistContractOrBoss::HeartOfGlory => "Contract: Heart of Glory",
+            UniqueHeistContractOrBoss::TheTwins => "Contract: The Twins",
+            UniqueHeistContractOrBoss::BreakingTheUnbreakable => {
+                "Contract: Breaking the Unbreakable"
+            }
+        }
+    }
+}
+
+impl Default for UniqueHeistContractOrBoss {
+    fn default() -> Self {
+        Self::DeathToDarnaw
     }
 }

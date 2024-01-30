@@ -15017,7 +15017,33 @@
     "remainingWork": "confirm",
     "sourcesWithTagButNotOnWiki": "Darnaw's Landing; The Body Pit; Pillaged Camp; The Den; Combat Capacity Test Chamber",
     "notes": "Appears to have a tag in all unique heist areas.\nAlso tagged for Tomb of the Banished (Jamanra's Rest), which is not an enabled area.\nUnclear if area or boss specific drop.",
-    "verifySources": []
+    "verifySources": [
+      {
+        "type": "Unique heist contract or boss",
+        "id": "Contract: Death to Darnaw",
+        "kind": "source-with-member"
+      },
+      {
+        "type": "Unique heist contract or boss",
+        "id": "Contract: The Slaver King",
+        "kind": "source-with-member"
+      },
+      {
+        "type": "Unique heist contract or boss",
+        "id": "Contract: Heart of Glory",
+        "kind": "source-with-member"
+      },
+      {
+        "type": "Unique heist contract or boss",
+        "id": "Contract: The Twins",
+        "kind": "source-with-member"
+      },
+      {
+        "type": "Unique heist contract or boss",
+        "id": "Contract: Breaking the Unbreakable",
+        "kind": "source-with-member"
+      }
+    ]
   },
   {
     "id": 500,

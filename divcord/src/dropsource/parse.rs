@@ -237,11 +237,6 @@ pub fn parse_dropses_from(
                         continue;
                     }
 
-                    // TODO Heist unique areas or bosses
-                    if record.id == 499 {
-                        continue;
-                    }
-
                     println!("parse_one_drops_from Unknown variant {d:#?}");
 
                     return Err(ParseSourceError::UnknownVariant {
