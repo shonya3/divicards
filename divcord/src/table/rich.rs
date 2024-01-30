@@ -121,7 +121,11 @@ impl Cell {
 
     pub fn text_fragments(&self) -> Result<Vec<Text>, ParseCellError> {
         let text_format_runs = self.text_format_runs.as_deref().unwrap_or_default();
-        let cell_text_content = self.text_content.as_deref().unwrap_or_default().trim();
+        let cell_text_content = self
+            .text_content
+            .as_deref()
+            .map(|text| text.trim())
+            .unwrap_or_default();
         let cell_styles = self.font_styles();
         match text_format_runs.len() {
             0 => {
