@@ -120,19 +120,18 @@ impl Cell {
     }
 
     pub fn text_fragments(&self) -> Result<Vec<Text>, ParseCellError> {
-        let text_format_runs = self.text_format_runs();
-        let text_content = self.text_content.clone().unwrap_or_default();
+        let text_format_runs = self.text_format_runs.as_deref().unwrap_or_default();
+        let cell_text_content = self.text_content.as_deref().unwrap_or_default().trim();
         let cell_styles = self.font_styles();
         match text_format_runs.len() {
             0 => {
-                let text = Text {
-                    content: text_content,
-                    styles: cell_styles.to_owned(),
-                };
-                if text.content.len() == 0 || text.content.trim() == "n/a" {
+                if cell_text_content.is_empty() || cell_text_content == "n/a" {
                     Ok(vec![])
                 } else {
-                    Ok(vec![text])
+                    Ok(vec![Text {
+                        content: cell_text_content.to_owned(),
+                        styles: cell_styles,
+                    }])
                 }
             }
             2 => {
@@ -141,15 +140,15 @@ impl Cell {
                     .map(|r| r.start_index.unwrap_or_default())
                     .collect::<Vec<usize>>();
                 let first_range = start_indexes[0]..start_indexes[1];
-                let second_range = start_indexes[1]..text_content.len();
+                let second_range = start_indexes[1]..cell_text_content.len();
 
                 let vec = vec![
                     Text {
-                        content: text_content[first_range].to_string(),
+                        content: cell_text_content[first_range].to_string(),
                         styles: text_format_runs[0].styles(&cell_styles),
                     },
                     Text {
-                        content: text_content[second_range].to_string(),
+                        content: cell_text_content[second_range].to_string(),
                         styles: text_format_runs[1].styles(&cell_styles),
                     },
                 ];
@@ -180,10 +179,6 @@ impl Cell {
 
     pub fn font_styles(&self) -> FontStyles {
         self.effective_format.text_format.to_owned().into()
-    }
-
-    pub fn text_format_runs(&self) -> Vec<TextFormatRun> {
-        self.text_format_runs.clone().unwrap_or_else(Vec::new)
     }
 }
 
