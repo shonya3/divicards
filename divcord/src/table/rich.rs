@@ -126,6 +126,24 @@ impl Cell {
             .as_deref()
             .map(|text| text.trim())
             .unwrap_or_default();
+
+        // Check if cell is just one comment
+        if cell_text_content.starts_with("[") && cell_text_content.ends_with("]") {
+            let mut open_brackets_occurences = 0;
+            let mut close_brackets_occurences = 0;
+            for ch in cell_text_content.chars() {
+                match ch {
+                    '[' => open_brackets_occurences += 1,
+                    ']' => close_brackets_occurences += 1,
+                    _ => {}
+                };
+            }
+
+            if open_brackets_occurences == 1 && close_brackets_occurences == 1 {
+                return Ok(vec![]);
+            }
+        }
+
         let cell_styles = self.font_styles();
         match text_format_runs.len() {
             0 => {
@@ -165,10 +183,15 @@ impl Cell {
 
                 Ok(vec)
             }
-            len => Err(ParseCellError::InvalidNumberOfTextFragments(
-                self.to_owned(),
-                len,
-            )),
+            len => {
+                let err = Err(ParseCellError::InvalidNumberOfTextFragments(
+                    self.to_owned(),
+                    len,
+                ));
+                println!("{err:#?}");
+                println!("{self:#?}");
+                err
+            }
         }
     }
 
@@ -393,4 +416,62 @@ impl TextFormatRun {
 pub struct Format {
     pub italic: Option<bool>,
     pub strikethrough: Option<bool>,
+}
+
+mod tests {
+
+    #[test]
+    fn test_text_fragments() {
+        use super::*;
+
+        let cell = Cell {
+            effective_format: EffectiveFormat {
+                background_color: ProtobufColor {
+                    blue: None,
+                    green: None,
+                    red: None,
+                },
+                text_format: TextFormat {
+                    color: ProtobufColor {
+                        blue: Some(1.0),
+                        green: Some(1.0),
+                        red: Some(1.0),
+                    },
+                    italic: true,
+                    strikethrough: false,
+                },
+            },
+            text_content: Some(String::from(
+                "[Not accesible: The Fallen Courts; The Haunted Reliquary - see notes]",
+            )),
+            text_format_runs: Some(vec![
+                TextFormatRun {
+                    start_index: None,
+                    format: Some(Format {
+                        italic: Some(false),
+                        strikethrough: None,
+                    }),
+                    font_family: None,
+                },
+                TextFormatRun {
+                    start_index: Some(16),
+                    format: Some(Format {
+                        italic: None,
+                        strikethrough: None,
+                    }),
+                    font_family: None,
+                },
+                TextFormatRun {
+                    start_index: Some(59),
+                    format: Some(Format {
+                        italic: Some(false),
+                        strikethrough: None,
+                    }),
+                    font_family: None,
+                },
+            ]),
+        };
+
+        assert_eq!(cell.drops_from().unwrap(), vec![]);
+    }
 }
