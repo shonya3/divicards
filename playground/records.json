@@ -1906,6 +1906,11 @@
     "verifySources": [
       {
         "type": "Act",
+        "id": "1_4_6_3",
+        "kind": "source-with-member"
+      },
+      {
+        "type": "Act",
         "id": "2_9_10_2",
         "kind": "source-with-member"
       }
@@ -14692,6 +14697,11 @@
     "sourcesWithTagButNotOnWiki": "Maligaro's Sanctum; The Temple of Decay Level 2",
     "notes": "Tentative report of a drop in Temple of Decay (not sure which floor)\nDivcord: Zimzams and Elinvynia tracked >3400 natural Card drops in Overgrown Shrine; no hits.\n\nA few reports in 3.21 for Overgrown Ruin, no obvious tags (overlaps Overgrown Shrine, which also has chamber_of_sins_area)\nDivcord: 3.21, Overgrown Ruin verified by Elinvynia.\n\n\nMaybe it's a connection to Akaveesh (based off of Black Death, Pain Unending), the Unique Spider that Maligaro summons in the Overgrown Ruin and A7 Maligaro's Sanctum Boss fights?\n* That Monster appears in Overgrown Ruin but not in Overgrown Shrine.\n* In Story, the Black Venom Quest Item drops from the Spider, not Maligaro.\n* Black Venom => Poisoned Faith seems like acceptable theming.\n* Poisoned Faith has a Drop Level Requirement of 53, and A7 Maligaro's Sanctum is Area Level 52.\n\nNo standout Monster Tags.\nMaybe a rule equivalent to something like: \"Drops in an Area with a Boss based from `SpiderBossMaligaro`\"...?\nThis would limit eligible Areas to Overgrown Ruin and A7 Maligaro's Sanctum.\nA natural drop outside these two Areas would rule out this hypothesis.\n\nSunken City verified by Elinvynia, indicating a more complex solution.\nJungle Valley (and spider_boss_area) ruled out.",
     "verifySources": [
+      {
+        "type": "Act",
+        "id": "2_7_5_map",
+        "kind": "source-with-member"
+      },
       {
         "type": "Act",
         "id": "2_7_12_2",

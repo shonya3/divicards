@@ -309,14 +309,25 @@ pub fn parse_one_drops_from(
         if ids.is_empty() {
             if acts.iter().any(|a| {
                 a.bossfights.iter().any(|b| {
-                    b.name == d.name
-                        && a.area_level >= card_drop_level_requirement.try_into().unwrap()
+                    let names_match = b.name == d.name;
+                    if names_match {
+                        let monster_level = a.area_level as u32 + 2u32;
+                        let level_matches = monster_level >= card_drop_level_requirement;
+                        if !level_matches {
+                            println!("Level of monster level is lower than card drop requirement");
+                        };
+
+                        level_matches
+                    } else {
+                        false
+                    }
+                    // b.name == d.name && a.area_level + 2 >= card_drop_level_requirement as u8
                 })
             }) {
                 return Ok(vec![Source::ActBoss(d.name.to_string())]);
             } else {
                 println!(
-                    "From acts parsing. Could not resolve the source of the name: {}",
+                    "From acts parsing. Could not resolve the source of the name: {} {d:#?} ",
                     &d.name
                 );
             }
@@ -375,10 +386,12 @@ pub fn parse_act_areas(drops_from: &DropsFrom, acts: &[ActArea], min_level: u8) 
         false => vec![ActAreaName::Name(s.to_owned())],
     };
 
-    names
+    let areas = names
         .iter()
         .flat_map(|name| find_ids(&name, acts, min_level))
-        .collect()
+        .collect();
+
+    areas
 }
 
 pub fn is_act_notation(s: &str) -> bool {
@@ -477,14 +490,14 @@ pub fn find_ids(name: &ActAreaName, acts: &[ActArea], min_level: u8) -> Vec<Stri
     match name {
         ActAreaName::Name(name) => acts
             .iter()
-            .filter(|a| &a.name == name && a.is_town == false && a.area_level >= min_level)
+            .filter(|a| &a.name == name && a.is_town == false && (a.area_level + 2) >= min_level)
             .map(|a| a.id.to_owned())
             .collect(),
         ActAreaName::NameWithAct((name, act)) => {
             let mut v = vec![];
             if let Some(a) = acts
                 .iter()
-                .find(|a| &a.name == name && &a.act == act && a.area_level >= min_level)
+                .find(|a| &a.name == name && &a.act == act && (a.area_level + 2) >= min_level)
             {
                 v.push(a.id.to_owned())
             };
