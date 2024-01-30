@@ -232,11 +232,6 @@ pub fn parse_dropses_from(
         RichColumnVariant::Verify => {
             for d in &record.verify_drops_from {
                 let Ok(mut inner_sources) = parse_one_drops_from(d, &record, poe_data) else {
-                    // TODO "Twilight Temple? Arsenal?"
-                    if record.id == 268 {
-                        continue;
-                    }
-
                     println!("parse_one_drops_from Unknown variant {d:#?}");
 
                     return Err(ParseSourceError::UnknownVariant {

@@ -7885,9 +7885,15 @@
         "kind": "source-with-member"
       }
     ],
-    "sourcesWithTagButNotOnWiki": "Twilight Temple? Arsenal?",
-    "notes": "Temple only? May be related to Jorus, Sky's Edge specifically",
-    "verifySources": []
+    "sourcesWithTagButNotOnWiki": "The Twilight Temple",
+    "notes": "3.23: Reverified as an Area drop in T16 Temple Map.\n\nPrior Cold River testing means `solaris_area` alone is insufficient, and `wealthy_area` is too common of a Tag to be alone sufficient either.\r\n\r\nThe possible requirement of `solaris_area + wealthy_area` would permit just {Temple, The Twilight Temple}.\r\nMight be some other Tag governance combination, though.",
+    "verifySources": [
+      {
+        "type": "Map",
+        "id": "The Twilight Temple",
+        "kind": "source-with-member"
+      }
+    ]
   },
   {
     "id": 269,
