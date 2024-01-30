@@ -74,18 +74,6 @@ impl DivcordTable {
         })
     }
 
-    // pub fn records(&self) -> impl Iterator<Item = Result<DivcordTableRecord, Error>> + '_ {
-    //     self.sheet
-    //         .values
-    //         .iter()
-    //         .zip(self.rich_sources_column.cells())
-    //         // .zip(self.rich_verify_column.cells())
-    //         .enumerate()
-    //         .map(|(row_index, (divcord_table_row, sources_cell))| {
-    //             DivcordTableRecord::create(row_index, divcord_table_row, sources_cell.drops_from()?)
-    //         })
-    // }
-
     pub fn records(&self) -> impl Iterator<Item = Result<DivcordTableRecord, Error>> + '_ {
         self.sheet
             .values
@@ -99,7 +87,7 @@ impl DivcordTable {
                         row_index,
                         divcord_table_row,
                         sources_cell.drops_from()?,
-                        verify_cell.drops_from().unwrap_or_default(),
+                        verify_cell.drops_from()?,
                     )
                 },
             )
