@@ -11926,23 +11926,7 @@
     ],
     "sourcesWithTagButNotOnWiki": "Doedre the Defiler; Prodigy of Hexes; Headmistress Braeta ",
     "notes": "Verified Erythrophagia drop in divcord, confirming it also drops from fat Doedre.\nNeed to test Sepulchre and Core bosses.\nDrop disabled - on hold.",
-    "verifySources": [
-      {
-        "type": "Map Boss",
-        "id": "Doedre the Defiler",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map Boss",
-        "id": "Prodigy of Hexes",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map Boss",
-        "id": "Headmistress Braeta",
-        "kind": "source-with-member"
-      }
-    ]
+    "verifySources": []
   },
   {
     "id": 399,

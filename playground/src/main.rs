@@ -53,6 +53,12 @@ async fn main() {
         //         println!("{record:#?}");
         //     }
         // }
+
+        let record = record.unwrap();
+
+        for verify in record.verify_sources {
+            println!("{verify:?}");
+        }
     }
 }
 

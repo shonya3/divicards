@@ -230,6 +230,10 @@ pub fn parse_dropses_from(
             }
         }
         RichColumnVariant::Verify => {
+            if record.greynote == GreyNote::Disabled {
+                return Ok(vec![]);
+            }
+
             for d in &record.verify_drops_from {
                 let Ok(mut inner_sources) = parse_one_drops_from(d, &record, poe_data) else {
                     println!("parse_one_drops_from Unknown variant {d:#?}");
