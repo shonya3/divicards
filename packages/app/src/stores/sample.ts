@@ -4,16 +4,25 @@ import { SampleData, command } from '../command';
 import { DivinationCardsSample, League, TradeLeague, isTradeLeague, leagues } from '@divicards/shared/types';
 import { Props as SampleCardProps } from '@divicards/wc/src/wc/sample-card/sample-card';
 
-const prefixFilename = (name: string, league: League): string => {
+const sampleCardsAmount = (sample: DivinationCardsSample): number => {
+	return sample.cards.reduce((total, { amount }) => (total += amount), 0);
+};
+
+const prefixFilename = (name: string, league: League, sample: DivinationCardsSample): string => {
 	const UNDERSCORE_GLUE = '_';
 
 	for (const old of leagues) {
-		if (name.startsWith(`${old}${UNDERSCORE_GLUE}`)) {
-			return name.replace(old, league);
+		if (name.startsWith(`${old}`) && name.includes(UNDERSCORE_GLUE)) {
+			const numberOfUnderscores = (name.match(/_/g) ?? []).length;
+			if (numberOfUnderscores === 1) {
+				const underscoreIndex = name.indexOf('_');
+				const unprefixedName = name.slice(underscoreIndex + 1);
+				return `${league}-${sampleCardsAmount(sample)}${UNDERSCORE_GLUE}${unprefixedName}`;
+			}
 		}
 	}
 
-	return `${league}${UNDERSCORE_GLUE}${name}`;
+	return `${league}-${sampleCardsAmount(sample)}${UNDERSCORE_GLUE}${name}`;
 };
 
 export const createSampleCard = async (
@@ -25,7 +34,7 @@ export const createSampleCard = async (
 
 	return {
 		uuid: crypto.randomUUID(),
-		filename: prefixFilename(name, league),
+		filename: prefixFilename(name, league, sample),
 		league,
 		sample,
 		selected: false,
@@ -40,7 +49,7 @@ export const createSampleCardFromSample = (
 ): SampleCardProps => {
 	return {
 		uuid: crypto.randomUUID(),
-		filename: prefixFilename(name, league),
+		filename: prefixFilename(name, league, sample),
 		league,
 		sample,
 		selected: false,
