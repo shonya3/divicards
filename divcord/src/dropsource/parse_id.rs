@@ -20,7 +20,7 @@ impl<T: Identified + IntoEnumIterator> Display for UnknownVariant<T> {
     }
 }
 
-pub fn parse_id<T>(s: &str) -> Result<T, UnknownVariant<T>>
+pub fn parseid<T>(s: &str) -> Result<T, UnknownVariant<T>>
 where
     T: Identified + IntoEnumIterator,
 {
@@ -52,7 +52,7 @@ mod test {
             type Err = UnknownVariant<Self>;
 
             fn from_str(s: &str) -> Result<Self, Self::Err> {
-                parse_id(s)
+                parseid(s)
             }
         }
 

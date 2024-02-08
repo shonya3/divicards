@@ -57,7 +57,7 @@ async fn main() {
         let record = record.unwrap();
 
         for verify in record.verify_sources {
-            println!("{verify:?}");
+            // println!("{verify:?}");
         }
     }
 }

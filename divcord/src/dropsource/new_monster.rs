@@ -1,148 +1,51 @@
-use super::parse_id::{parse_id, UnknownVariant};
-use serde::{Deserialize, Serialize};
 use std::str::FromStr;
+
+use super::{
+    parse_id::{parseid, UnknownVariant},
+    Identified,
+};
 use strum::IntoEnumIterator;
-use strum_macros::EnumString;
+use strum_macros::EnumIter;
 
-use super::Identified;
-
-#[derive(
-    Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, strum_macros::EnumIter, Default,
-)]
-#[serde(tag = "type")]
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum UniqueMonster {
     #[default]
-    #[serde(rename = "Maven's Invitation: The Feared")]
     MavensInvitationTheFeared,
-    #[serde(rename = "Uul-Netol, Unburdened Flesh (in Breachstones)")]
     UulNetolInBreachstones,
-    #[serde(rename = "The Vaal Omnitect")]
     VaalOmnitect,
-    #[serde(rename = "Metamorph")]
     Metamorph,
-    #[serde(rename = "Null Portal")]
     NullPortal,
-    #[serde(rename = "Vaal Flesh Merchant")]
     VaalFleshMerchant,
-    #[serde(
-        rename = "All Incursion Architects in Alva missions or Alva's Memory",
-        alias = "All Incursion Architects in Alva missions/Alva's Memory",
-        alias = "All Incursion Architects in Alva missions or Alva's Memory",
-        alias = "All Incursion Architects in Alva missions or Alva's Memory"
-    )]
     AllIncursionArchitectsInAlvaMission,
     AllIncursionArchitectsInTemple,
-    #[serde(rename = "All Abyss Monsters")]
     AllAbyssMonsters,
-    #[serde(rename = "All (Scourge) beyond demons")]
     AllScourgeBeyondDemons,
-    #[serde(rename = "All Rogue Exiles")]
     AllRogueExiles,
-    #[serde(rename = "Venarius")]
     CortexVenarius,
-    #[serde(rename = "Argus")]
     Argus,
-    #[serde(rename = "All Invasion Bosses")]
     AllInvasionBosses,
-    #[serde(rename = "All Vaal Side Area Bosses")]
     AllVaalSideAreaBosses,
-    #[serde(rename = "Breachlord Boss Domain")]
     BreachlordBossDomain(BreachlordBossDomain),
-    #[serde(rename = "Architect")]
     Architect(Architect),
-    #[serde(rename = "Shaper Guardian Boss")]
     ShaperGuardianBoss(ShaperGuardianBoss),
-    #[serde(rename = "Syndicate Member")]
     SyndicateMember(SyndicateMember),
-    #[serde(rename = "Elder Slayer")]
     Elderslayer(Elderslayer),
-    #[serde(rename = "Elder Guardian Boss")]
     ElderGuardianBoss(ElderGuardianBoss),
-    #[serde(rename = "Rogue Exile")]
     RogueExile(RogueExile),
-    #[serde(rename = "Female Rogue Exile")]
     FemaleRogueExile(FemaleRogueExile),
-    #[serde(rename = "Abyss Lich Boss")]
     AbyssLichBoss(AbyssLichBoss),
-    #[serde(rename = "Maps Only")]
     MapsOnly(MapsOnly),
-    #[serde(rename = "Harbinger Portal")]
     HarbingerPortal(HarbingerPortal),
-    #[serde(rename = "Endgame Boss")]
     EndgameBoss(EndgameBoss),
-    #[serde(rename = "Delve Boss")]
     DelveBoss(DelveBoss),
-    #[serde(rename = "Beast Boss")]
     BeastBoss(BeastBoss),
-    #[serde(rename = "Heist Boss")]
     HeistBoss(HeistBoss),
-    #[serde(rename = "Beyond Boss")]
     BeyondBoss(BeyondBoss),
-    #[serde(rename = "Expedition Logbook Boss")]
     ExpeditionLogbookBoss(ExpeditionLogbookBoss),
-    #[serde(rename = "Shaper Mini-Boss")]
-    ShaperMiniBoss(ShaperMiniBoss),
-    #[serde(rename = "Betrayal Catarina")]
     BetrayalCatarina(BetrayalCatarina),
-    // #[serde(rename = "Oshabi Boss")]
-    // OshabiBoss(OshabiBoss),
-    // #[serde(rename = "Eldritch Perfection Monster")]
-    // EldritchPerfectionMonster(EldritchPerfectionMonster),
-}
-
-impl UniqueMonster {
-    pub fn _types() -> impl Iterator<Item = String> {
-        UniqueMonster::iter().map(|a| a._type().to_string())
-    }
-}
-
-impl UniqueMonster {
-    pub fn _type(&self) -> &str {
-        match self {
-            UniqueMonster::MavensInvitationTheFeared => "Maven's Invitation: The Feared",
-            UniqueMonster::UulNetolInBreachstones => {
-                "Uul-Netol, Unburdened Flesh (in Breachstones)"
-            }
-            UniqueMonster::VaalOmnitect => "The Vaal Omnitect",
-            UniqueMonster::Metamorph => "Metamorph",
-            UniqueMonster::NullPortal => "Null Portal",
-            UniqueMonster::VaalFleshMerchant => "Vaal Flesh Merchant",
-            UniqueMonster::AllIncursionArchitectsInAlvaMission => {
-                "All Incursion Architects in Alva missions or Alva's Memory"
-            }
-            UniqueMonster::AllAbyssMonsters => "All Abyss Monsters",
-            UniqueMonster::AllScourgeBeyondDemons => "All (Scourge) beyond demons",
-            UniqueMonster::AllRogueExiles => "All Rogue Exiles",
-            UniqueMonster::CortexVenarius => "Venarius",
-            UniqueMonster::Argus => "Argus",
-            UniqueMonster::AllInvasionBosses => "All Invasion Bosses",
-            UniqueMonster::AllVaalSideAreaBosses => "All Vaal Side Area Bosses",
-            UniqueMonster::BreachlordBossDomain(_) => "Breachlord Boss Domain",
-            UniqueMonster::Architect(_) => "Architect",
-            UniqueMonster::ShaperGuardianBoss(_) => "Shaper Guardian Boss",
-            UniqueMonster::SyndicateMember(_) => "Syndicate Member",
-            UniqueMonster::Elderslayer(_) => "Elder Slayer",
-            UniqueMonster::ElderGuardianBoss(_) => "Elder Guardian Boss",
-            UniqueMonster::RogueExile(_) => "Rogue Exile",
-            UniqueMonster::FemaleRogueExile(_) => "Female Rogue Exile",
-            UniqueMonster::AbyssLichBoss(_) => "Abyss Lich Boss",
-            UniqueMonster::MapsOnly(_) => "Maps Only",
-            UniqueMonster::HarbingerPortal(_) => "Harbinger Portal",
-            UniqueMonster::EndgameBoss(_) => "Endgame Boss",
-            UniqueMonster::DelveBoss(_) => "Delve Boss",
-            UniqueMonster::BeastBoss(_) => "Beast Boss",
-            UniqueMonster::HeistBoss(_) => "Heist Boss",
-            UniqueMonster::BeyondBoss(_) => "Beyond Boss",
-            UniqueMonster::ExpeditionLogbookBoss(_) => "Expedition Logbook Boss",
-            UniqueMonster::ShaperMiniBoss(_) => "Shaper Mini-Boss",
-            UniqueMonster::BetrayalCatarina(_) => "Betrayal Catarina",
-            // UniqueMonster::OshabiBoss(_) => "Oshabi Boss",
-            // UniqueMonster::EldritchPerfectionMonster(_) => "Eldritch Perfection Monster",
-            UniqueMonster::AllIncursionArchitectsInTemple => {
-                "All Incursion Architects (The Temple of Atzoatl)"
-            }
-        }
-    }
+    OshabiBoss(OshabiBoss),
+    EldritchPerfectionMonster(EldritchPerfectionMonster),
+    ShaperMiniBoss(ShaperMiniBoss),
 }
 
 impl FromStr for UniqueMonster {
@@ -192,11 +95,11 @@ impl FromStr for UniqueMonster {
                 })
                 .or_else(|_| ShaperMiniBoss::from_str(s).map(|b| Self::ShaperMiniBoss(b)))
                 .or_else(|_| BetrayalCatarina::from_str(s).map(|b| Self::BetrayalCatarina(b)))
-                // .or_else(|_| OshabiBoss::from_str(s).map(|b| Self::OshabiBoss(b)))
-                // .or_else(|_| {
-                //     EldritchPerfectionMonster::from_str(s)
-                //         .map(|b| Self::EldritchPerfectionMonster(b))
-                // })
+                .or_else(|_| OshabiBoss::from_str(s).map(|b| Self::OshabiBoss(b)))
+                .or_else(|_| {
+                    EldritchPerfectionMonster::from_str(s)
+                        .map(|b| Self::EldritchPerfectionMonster(b))
+                })
                 .or_else(|_| return Err(strum::ParseError::VariantNotFound)),
         }
     }
@@ -204,50 +107,60 @@ impl FromStr for UniqueMonster {
 
 impl std::fmt::Display for UniqueMonster {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.id())
-        // match self {
-        // UniqueMonster::MavensInvitationTheFeared => write!(f, "Maven's Invitation: The Feared"),
-        // UniqueMonster::UulNetolInBreachstones => {
-        //     write!(f, "Uul-Netol, Unburdened Flesh (in Breachstones)")
-        // }
-        // UniqueMonster::VaalOmnitect => write!(f, "The Vaal Omnitect"),
-        // UniqueMonster::Metamorph => write!(f, "Metamorph"),
-        // UniqueMonster::NullPortal => write!(f, "Null Portal"),
-        // UniqueMonster::VaalFleshMerchant => write!(f, "Vaal Flesh Merchant"),
-        // UniqueMonster::AllIncursionArchitectsInAlvaMission => {
-        //     write!(
-        //         f,
-        //         "All Incursion Architects in Alva missions or Alva's Memory"
-        //     )
-        // }
-        // UniqueMonster::AllAbyssMonsters => write!(f, "All Abyss Monsters"),
-        // UniqueMonster::AllScourgeBeyondDemons => write!(f, "All (Scourge) beyond demons"),
-        // UniqueMonster::AllRogueExiles => write!(f, "All Rogue Exiles"),
-        // UniqueMonster::BreachlordBossDomain(breachlord) => breachlord.fmt(f),
-        // UniqueMonster::Architect(architect) => architect.fmt(f),
-        // UniqueMonster::ShaperGuardianBoss(shaperguard) => shaperguard.fmt(f),
-        // UniqueMonster::SyndicateMember(syndicate) => syndicate.fmt(f),
-        // UniqueMonster::Elderslayer(elderslayer) => elderslayer.fmt(f),
-        // UniqueMonster::ElderGuardianBoss(elderguard) => elderguard.fmt(f),
-        // UniqueMonster::RogueExile(rogueexile) => rogueexile.fmt(f),
-        // UniqueMonster::FemaleRogueExile(rogue) => rogue.fmt(f),
-        // UniqueMonster::AbyssLichBoss(abysslichboss) => abysslichboss.fmt(f),
-        // UniqueMonster::MapsOnly(mapsonly) => mapsonly.fmt(f),
-        // UniqueMonster::HarbingerPortal(harbingerportal) => harbingerportal.fmt(f),
-        // UniqueMonster::CortexVenarius => write!(f, "Venarius"),
-        // UniqueMonster::Argus => write!(f, "Argus"),
-        // UniqueMonster::EndgameBoss(boss) => boss.fmt(f),
-        // UniqueMonster::DelveBoss(boss) => boss.fmt(f),
-        // UniqueMonster::BeastBoss(boss) => boss.fmt(f),
-        // UniqueMonster::HeistBoss(boss) => boss.fmt(f),
-        // UniqueMonster::BeyondBoss(boss) => boss.fmt(f),
-        // UniqueMonster::ExpeditionLogbookBoss(boss) => boss.fmt(f),
-        // UniqueMonster::ShaperMiniBoss(boss) => boss.fmt(f),
-        // UniqueMonster::BetrayalCatarina(boss) => boss.fmt(f),
-        // UniqueMonster::OshabiBoss(boss) => boss.fmt(f),
-        // UniqueMonster::AllInvasionBosses => write!(f, "All Invasion Bosses"),
-        // UniqueMonster::AllVaalSideAreaBosses => write!(f, "All Vaal Side Area Bosses"),
-        // }
+        f.write_str(self.id())
+    }
+}
+
+impl UniqueMonster {
+    pub fn _types() -> impl Iterator<Item = String> {
+        UniqueMonster::iter().map(|a| a._type().to_string())
+    }
+
+    pub fn _type(&self) -> &str {
+        match self {
+            UniqueMonster::MavensInvitationTheFeared => "Maven's Invitation: The Feared",
+            UniqueMonster::UulNetolInBreachstones => {
+                "Uul-Netol, Unburdened Flesh (in Breachstones)"
+            }
+            UniqueMonster::VaalOmnitect => "The Vaal Omnitect",
+            UniqueMonster::Metamorph => "Metamorph",
+            UniqueMonster::NullPortal => "Null Portal",
+            UniqueMonster::VaalFleshMerchant => "Vaal Flesh Merchant",
+            UniqueMonster::AllIncursionArchitectsInAlvaMission => {
+                "All Incursion Architects in Alva missions or Alva's Memory"
+            }
+            UniqueMonster::AllAbyssMonsters => "All Abyss Monsters",
+            UniqueMonster::AllScourgeBeyondDemons => "All (Scourge) beyond demons",
+            UniqueMonster::AllRogueExiles => "All Rogue Exiles",
+            UniqueMonster::CortexVenarius => "Venarius",
+            UniqueMonster::Argus => "Argus",
+            UniqueMonster::AllInvasionBosses => "All Invasion Bosses",
+            UniqueMonster::AllVaalSideAreaBosses => "All Vaal Side Area Bosses",
+            UniqueMonster::BreachlordBossDomain(_) => "Breachlord Boss Domain",
+            UniqueMonster::Architect(_) => "Architect",
+            UniqueMonster::ShaperGuardianBoss(_) => "Shaper Guardian Boss",
+            UniqueMonster::SyndicateMember(_) => "Syndicate Member",
+            UniqueMonster::Elderslayer(_) => "Elder Slayer",
+            UniqueMonster::ElderGuardianBoss(_) => "Elder Guardian Boss",
+            UniqueMonster::RogueExile(_) => "Rogue Exile",
+            UniqueMonster::FemaleRogueExile(_) => "Female Rogue Exile",
+            UniqueMonster::AbyssLichBoss(_) => "Abyss Lich Boss",
+            UniqueMonster::MapsOnly(_) => "Maps Only",
+            UniqueMonster::HarbingerPortal(_) => "Harbinger Portal",
+            UniqueMonster::EndgameBoss(_) => "Endgame Boss",
+            UniqueMonster::DelveBoss(_) => "Delve Boss",
+            UniqueMonster::BeastBoss(_) => "Beast Boss",
+            UniqueMonster::HeistBoss(_) => "Heist Boss",
+            UniqueMonster::BeyondBoss(_) => "Beyond Boss",
+            UniqueMonster::ExpeditionLogbookBoss(_) => "Expedition Logbook Boss",
+            UniqueMonster::ShaperMiniBoss(_) => "Shaper Mini-Boss",
+            UniqueMonster::BetrayalCatarina(_) => "Betrayal Catarina",
+            UniqueMonster::AllIncursionArchitectsInTemple => {
+                "All Incursion Architects (The Temple of Atzoatl)"
+            }
+            UniqueMonster::OshabiBoss(_) => "Oshabi Boss",
+            UniqueMonster::EldritchPerfectionMonster(_) => "Eldritch Perfection Monster",
+        }
     }
 }
 
@@ -275,61 +188,212 @@ impl Identified for UniqueMonster {
             UniqueMonster::Argus => "Argus",
             UniqueMonster::AllInvasionBosses => "All Invasion Bosses",
             UniqueMonster::AllVaalSideAreaBosses => "All Vaal Side Area Bosses",
-            UniqueMonster::BreachlordBossDomain(m) => m.id(),
-            UniqueMonster::Architect(m) => m.id(),
-            UniqueMonster::ShaperGuardianBoss(m) => m.id(),
-            UniqueMonster::SyndicateMember(m) => m.id(),
-            UniqueMonster::Elderslayer(m) => m.id(),
-            UniqueMonster::ElderGuardianBoss(m) => m.id(),
-            UniqueMonster::RogueExile(m) => m.id(),
-            UniqueMonster::FemaleRogueExile(m) => m.id(),
-            UniqueMonster::AbyssLichBoss(m) => m.id(),
-            UniqueMonster::MapsOnly(m) => m.id(),
-            UniqueMonster::HarbingerPortal(m) => m.id(),
-            UniqueMonster::EndgameBoss(m) => m.id(),
-            UniqueMonster::DelveBoss(m) => m.id(),
-            UniqueMonster::BeastBoss(m) => m.id(),
-            UniqueMonster::HeistBoss(m) => m.id(),
-            UniqueMonster::BeyondBoss(m) => m.id(),
-            UniqueMonster::ExpeditionLogbookBoss(m) => m.id(),
-            UniqueMonster::ShaperMiniBoss(m) => m.id(),
-            UniqueMonster::BetrayalCatarina(m) => m.id(),
-            // UniqueMonster::OshabiBoss(m) => m.id(),
-            // UniqueMonster::EldritchPerfectionMonster(m) => m.id(),
+            UniqueMonster::BreachlordBossDomain(breach_boss) => match breach_boss {
+                BreachlordBossDomain::Xoph => "Xoph, Dark Embers",
+                BreachlordBossDomain::Tul => "Tul, Creeping Avalanche",
+                BreachlordBossDomain::Esh => "Esh, Forked Thought",
+                BreachlordBossDomain::Chayula => "Chayula, Who Dreamt",
+                BreachlordBossDomain::UulNetol => "Uul-Netol, Unburdened Flesh",
+            },
+            UniqueMonster::Architect(architect) => match architect {
+                Architect::Zilquapa => "Zilquapa, Architect of the Breach",
+                Architect::Paquate => "Paquate, Architect of Corruption",
+                Architect::Ahuana => "Ahuana, Architect of Ceremonies",
+                Architect::Zalatl => "Zalatl, Architect of Thaumaturgy",
+            },
+            UniqueMonster::ShaperGuardianBoss(shaper_guardian) => match shaper_guardian {
+                ShaperGuardianBoss::Chimera => "Guardian of the Chimera",
+                ShaperGuardianBoss::Hydra => "Guardian of the Hydra",
+                ShaperGuardianBoss::Minotaur => "Guardian of the Minotaur",
+                ShaperGuardianBoss::Phoenix => "Guardian of the Phoenix",
+            },
+            UniqueMonster::SyndicateMember(syndicate_member) => match syndicate_member {
+                SyndicateMember::Haku => "Haku, Warmaster",
+                SyndicateMember::Elreon => "Elreon",
+                SyndicateMember::Tora => "Tora",
+                SyndicateMember::Vagan => "Vagan",
+                SyndicateMember::Vorici => "Vorici",
+                SyndicateMember::Hillock => "Hillock, the Blacksmith",
+                SyndicateMember::Leo => "Leo, Wolf of the Pits",
+                SyndicateMember::GuffTinyGrenn => "Guff \"Tiny\" Grenn",
+                SyndicateMember::JanusPerandus => "Janus Perandus",
+                SyndicateMember::ItThatFled => "It That Fled",
+                SyndicateMember::Gravicius => "Gravicius",
+                SyndicateMember::ThandeJorgin => "Thane Jorgin",
+                SyndicateMember::KorellGoya => "Korell Goya",
+                SyndicateMember::RinYuushu => "Rin Yuushu",
+                SyndicateMember::CameriaTheColdblooded => "Cameria the Coldblooded",
+                SyndicateMember::AislingLaffrey => "Aisling Laffrey",
+                SyndicateMember::RikerMaloney => "Riker Maloney",
+            },
+            UniqueMonster::Elderslayer(elderslayer) => match elderslayer {
+                Elderslayer::Baran => "Baran, The Crusader",
+                Elderslayer::Veritania => "Veritania, The Redeemer",
+                Elderslayer::AlHezmin => "Al-Hezmin, The Hunter",
+                Elderslayer::Drox => "Drox, The Warlord",
+                Elderslayer::Sirus => "Sirus, Awakener of Worlds",
+            },
+            UniqueMonster::ElderGuardianBoss(elder_guardian) => match elder_guardian {
+                ElderGuardianBoss::Enslaver => "The Enslaver",
+                ElderGuardianBoss::Eradicator => "The Eradicator",
+                ElderGuardianBoss::Constrictor => "The Constrictor",
+                ElderGuardianBoss::Purifier => "The Purifier",
+            },
+            UniqueMonster::RogueExile(rogue_exile) => match rogue_exile {
+                RogueExile::AshLessard => "Ash Lessard",
+                RogueExile::Magnus => "Magnus Stonethorn",
+                RogueExile::Minara => "Minara Anemina",
+            },
+            UniqueMonster::FemaleRogueExile(female_exile) => match female_exile {
+                FemaleRogueExile::DenaLorenni => "Dena Lorenni",
+                FemaleRogueExile::IgnaPhoenix => "Igna Phoenix",
+                FemaleRogueExile::MinaraAnemina => "Minara Anemina",
+                FemaleRogueExile::UltimaThule => "Ultima Thule",
+                FemaleRogueExile::KirmesOlli => "Kirmes Olli",
+                FemaleRogueExile::AilentiaRac => "Ailentia Rac",
+                FemaleRogueExile::AntalieNapora => "Antalie Napora",
+                FemaleRogueExile::OrraGreengate => "Orra Greengate",
+                FemaleRogueExile::ThenaMoga => "Thena Moga",
+                FemaleRogueExile::AugustinaSolaria => "Augustina Solaria",
+                FemaleRogueExile::VanthAgiel => "Vanth Agiel",
+                FemaleRogueExile::AshLessard => "Ash Lessard",
+                FemaleRogueExile::LaelFuria => "Lael Furia",
+            },
+            UniqueMonster::AbyssLichBoss(lich) => match lich {
+                AbyssLichBoss::Ulaman => "Ulaman, Sovereign of the Well",
+                AbyssLichBoss::Amanamu => "Amanamu, Liege of the Lightless",
+            },
+            UniqueMonster::MapsOnly(maps_only) => match maps_only {
+                MapsOnly::Omniphobia => "Omniphobia, Fear Manifest (maps only)",
+                MapsOnly::Kosis => "Kosis, The Revelation (maps only)",
+            },
+            UniqueMonster::HarbingerPortal(harbinger_portal) => match harbinger_portal {
+                HarbingerPortal::HarbingerPortal => "HarbingerPortal",
+                HarbingerPortal::HarbingerPortalDelve => "HarbingerPortalDelve",
+                HarbingerPortal::HarbingerPortalUber => "HarbingerPortalUber",
+            },
+            UniqueMonster::EndgameBoss(endgame_boss) => match endgame_boss {
+                EndgameBoss::Maven => "The Maven",
+                EndgameBoss::Elder => "The Elder",
+                EndgameBoss::UberElder => "Uber Elder",
+                EndgameBoss::SearingExarch => "The Searing Exarch",
+                EndgameBoss::EaterOfWorlds => "The Eater of Worlds",
+                EndgameBoss::InfiniteHunger => "The Infinite Hunger",
+                EndgameBoss::UberAtziri => "Atziri, Queen of the Vaal (Uber)",
+            },
+            UniqueMonster::DelveBoss(delve_boss) => match delve_boss {
+                DelveBoss::Aul => "Aul, the Crystal King",
+                DelveBoss::Kurgal => "Kurgal, the Blackblooded",
+            },
+            UniqueMonster::BeastBoss(beast_boss) => match beast_boss {
+                BeastBoss::Farrul => "Farrul, First of the Plains",
+                BeastBoss::Fenumus => "Fenumus, First of the Night",
+                BeastBoss::Saqawal => "Saqawal, First of the Sky",
+                BeastBoss::Craiceann => "Craiceann, First of the Deep",
+            },
+            UniqueMonster::HeistBoss(heist_boss) => match heist_boss {
+                HeistBoss::FleshSculptor => "Flesh Sculptor",
+                HeistBoss::CorpseStitcher => "Corpse Stitcher",
+            },
+            UniqueMonster::BeyondBoss(beyond_boss) => match beyond_boss {
+                BeyondBoss::Ghorr => "Ghorr, the Grasping Maw",
+                BeyondBoss::Ktash => "K'tash, the Hate Shepherd",
+            },
+            UniqueMonster::ExpeditionLogbookBoss(logbook_boss) => match logbook_boss {
+                ExpeditionLogbookBoss::Uhtred => "Uhtred, Covetous Traitor",
+            },
+            UniqueMonster::BetrayalCatarina(_) => "Catarina, Master of Undeath",
+            UniqueMonster::OshabiBoss(_) => "Oshabi, Avatar of the Grove",
+            UniqueMonster::EldritchPerfectionMonster(eldritch_monster) => match eldritch_monster {
+                EldritchPerfectionMonster::ConsumingBearer => "Consuming Bearer",
+                EldritchPerfectionMonster::ConsumingParasite => "Consuming Parasite",
+                EldritchPerfectionMonster::ConsumingThrall => "Consuming Thrall",
+                EldritchPerfectionMonster::GrotesqueCavedweller => "Grotesque Cavedweller",
+                EldritchPerfectionMonster::GrotesqueMangler => "Grotesque Mangler",
+                EldritchPerfectionMonster::GrotesqueMauler => "Grotesque Mauler",
+                EldritchPerfectionMonster::GrotesqueMaw => "Grotesque Maw",
+                EldritchPerfectionMonster::MoltenGolem => "Molten Golem",
+                EldritchPerfectionMonster::MoltenMinotaur => "Molten Minotaur",
+                EldritchPerfectionMonster::MoltenWretch => "Molten Wretch",
+                EldritchPerfectionMonster::VoidFlayer => "Void Flayer",
+                EldritchPerfectionMonster::VoidJaguar => "Void Jaguar",
+                EldritchPerfectionMonster::VoidSkulker => "Void Skulker",
+            },
+            UniqueMonster::ShaperMiniBoss(_) => "Entity of the Void",
+        }
+    }
+
+    fn alises(&self) -> Vec<&str> {
+        match self {
+            UniqueMonster::MavensInvitationTheFeared => vec![],
+            UniqueMonster::UulNetolInBreachstones => vec![],
+            UniqueMonster::VaalOmnitect => vec![],
+            UniqueMonster::Metamorph => vec![],
+            UniqueMonster::NullPortal => vec![],
+            UniqueMonster::VaalFleshMerchant => vec![],
+            UniqueMonster::AllIncursionArchitectsInAlvaMission => {
+                vec!["All Incursion Architects in Alva missions/Alva's Memory"]
+            }
+            UniqueMonster::AllIncursionArchitectsInTemple => vec![],
+            UniqueMonster::AllAbyssMonsters => vec![],
+            UniqueMonster::AllScourgeBeyondDemons => vec![],
+            UniqueMonster::AllRogueExiles => vec![],
+            UniqueMonster::CortexVenarius => vec![],
+            UniqueMonster::Argus => vec![],
+            UniqueMonster::AllInvasionBosses => vec![],
+            UniqueMonster::AllVaalSideAreaBosses => vec![],
+            UniqueMonster::BreachlordBossDomain(_) => vec![],
+            UniqueMonster::Architect(_) => vec![],
+            UniqueMonster::ShaperGuardianBoss(_) => vec![],
+            UniqueMonster::SyndicateMember(s) => match s {
+                SyndicateMember::Haku => vec!["Haku"],
+                _ => vec![],
+            },
+            UniqueMonster::Elderslayer(_) => vec![],
+            UniqueMonster::ElderGuardianBoss(_) => vec![],
+            UniqueMonster::RogueExile(_) => vec![],
+            UniqueMonster::FemaleRogueExile(_) => vec![],
+            UniqueMonster::AbyssLichBoss(_) => vec![],
+            UniqueMonster::MapsOnly(_) => vec![],
+            UniqueMonster::HarbingerPortal(_) => vec![],
+            UniqueMonster::EndgameBoss(endgame_boss) => match endgame_boss {
+                EndgameBoss::Maven => vec!["Maven"],
+                EndgameBoss::Elder => vec!["Elder"],
+                _ => vec![],
+            },
+            UniqueMonster::DelveBoss(delve_boss) => match delve_boss {
+                DelveBoss::Aul => vec!["Aul"],
+                DelveBoss::Kurgal => vec!["Kurgal"],
+            },
+            UniqueMonster::BeastBoss(beast_boss) => match beast_boss {
+                BeastBoss::Farrul => vec!["Farrul"],
+                BeastBoss::Fenumus => vec!["Fenumus"],
+                BeastBoss::Saqawal => vec!["Saqawal"],
+                BeastBoss::Craiceann => vec!["Craiceann"],
+            },
+            UniqueMonster::HeistBoss(_) => vec![],
+            UniqueMonster::BeyondBoss(beyond_boss) => match beyond_boss {
+                BeyondBoss::Ghorr => vec!["Ghorr"],
+                BeyondBoss::Ktash => vec!["K'tash"],
+            },
+            UniqueMonster::ExpeditionLogbookBoss(logbook_boss) => match logbook_boss {
+                ExpeditionLogbookBoss::Uhtred => vec!["Uhtred"],
+            },
+            UniqueMonster::BetrayalCatarina(_) => vec!["Catarina"],
+            UniqueMonster::OshabiBoss(_) => vec!["Oshabi"],
+            UniqueMonster::EldritchPerfectionMonster(_) => vec![],
+            UniqueMonster::ShaperMiniBoss(_) => vec![],
         }
     }
 }
 
-#[derive(
-    Debug,
-    Clone,
-    Deserialize,
-    Serialize,
-    PartialEq,
-    Eq,
-    Hash,
-    EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum BreachlordBossDomain {
     #[default]
-    #[strum(serialize = "Xoph, Dark Embers")]
-    #[serde(rename = "Xoph, Dark Embers")]
     Xoph,
-    #[strum(serialize = "Tul, Creeping Avalanche")]
-    #[serde(rename = "Tul, Creeping Avalanche")]
     Tul,
-    #[strum(serialize = "Esh, Forked Thought")]
-    #[serde(rename = "Esh, Forked Thought")]
     Esh,
-    #[strum(serialize = "Chayula, Who Dreamt")]
-    #[serde(rename = "Chayula, Who Dreamt")]
     Chayula,
-    #[strum(serialize = "Uul-Netol, Unburdened Flesh")]
-    #[serde(rename = "Uul-Netol, Unburdened Flesh")]
     UulNetol,
 }
 
@@ -345,33 +409,20 @@ impl Identified for BreachlordBossDomain {
     }
 }
 
-#[derive(
-    Debug,
-    Clone,
-    Serialize,
-    Deserialize,
-    PartialEq,
-    Eq,
-    Hash,
-    EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
+impl FromStr for BreachlordBossDomain {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
+    }
+}
+
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum Architect {
     #[default]
-    #[strum(serialize = "Zilquapa, Architect of the Breach")]
-    #[serde(rename = "Zilquapa, Architect of the Breach")]
     Zilquapa,
-    #[strum(serialize = "Paquate, Architect of Corruption")]
-    #[serde(rename = "Paquate, Architect of Corruption")]
     Paquate,
-    #[strum(serialize = "Ahuana, Architect of Ceremonies")]
-    #[serde(rename = "Ahuana, Architect of Ceremonies")]
     Ahuana,
-    #[strum(serialize = "Zalatl, Architect of Thaumaturgy")]
-    #[serde(rename = "Zalatl, Architect of Thaumaturgy")]
     Zalatl,
 }
 
@@ -386,32 +437,20 @@ impl Identified for Architect {
     }
 }
 
-#[derive(
-    Serialize,
-    Deserialize,
-    Clone,
-    Debug,
-    PartialEq,
-    Eq,
-    Hash,
-    EnumString,
-    strum_macros::Display,
-    Default,
-)]
-#[serde(tag = "name")]
+impl FromStr for Architect {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
+    }
+}
+
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum ShaperGuardianBoss {
     #[default]
-    #[strum(serialize = "Guardian of the Chimera")]
-    #[serde(rename = "Guardian of the Chimera")]
     Chimera,
-    #[strum(serialize = "Guardian of the Hydra")]
-    #[serde(rename = "Guardian of the Hydra")]
     Hydra,
-    #[strum(serialize = "Guardian of the Minotaur")]
-    #[serde(rename = "Guardian of the Minotaur")]
     Minotaur,
-    #[strum(serialize = "Guardian of the Phoenix")]
-    #[serde(rename = "Guardian of the Phoenix")]
     Phoenix,
 }
 
@@ -426,72 +465,33 @@ impl Identified for ShaperGuardianBoss {
     }
 }
 
-#[derive(
-    Debug,
-    Clone,
-    Serialize,
-    Deserialize,
-    PartialEq,
-    Eq,
-    Hash,
-    EnumString,
-    strum_macros::Display,
-    Default,
-    strum_macros::EnumIter,
-)]
-#[serde(tag = "name")]
+impl FromStr for ShaperGuardianBoss {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
+    }
+}
+
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum SyndicateMember {
     #[default]
-    #[strum(serialize = "Haku", to_string = "Haku, Warmaster")]
-    #[serde(rename = "Haku, Warmaster")]
     Haku,
-    #[strum(serialize = "Elreon")]
-    #[serde(rename = "Elreon")]
     Elreon,
-    #[strum(serialize = "Tora")]
-    #[serde(rename = "Tora")]
     Tora,
-    #[strum(serialize = "Vagan")]
-    #[serde(rename = "Vagan")]
     Vagan,
-    #[strum(serialize = "Vorici")]
-    #[serde(rename = "Vorici")]
     Vorici,
-    #[strum(serialize = "Hillock, the Blacksmith")]
-    #[serde(rename = "Hillock, the Blacksmith")]
     Hillock,
-    #[strum(serialize = "Leo, Wolf of the Pits")]
-    #[serde(rename = "Leo, Wolf of the Pits")]
     Leo,
-    #[strum(serialize = "Guff \"Tiny\" Grenn")]
-    #[serde(rename = "Guff \"Tiny\" Grenn")]
     GuffTinyGrenn,
-    #[strum(serialize = "Janus Perandus")]
-    #[serde(rename = "Janus Perandus")]
     JanusPerandus,
-    #[strum(serialize = "It That Fled")]
-    #[serde(rename = "It That Fled")]
     ItThatFled,
-    #[strum(serialize = "Gravicius")]
-    #[serde(rename = "Gravicius")]
     Gravicius,
-    #[strum(serialize = "Thane Jorgin")]
-    #[serde(rename = "Thane Jorgin")]
     ThandeJorgin,
-    #[strum(serialize = "Korell Goya")]
-    #[serde(rename = "Korell Goya")]
     KorellGoya,
-    #[strum(serialize = "Rin Yuushu")]
-    #[serde(rename = "Rin Yuushu")]
     RinYuushu,
-    #[strum(serialize = "Cameria the Coldblooded")]
-    #[serde(rename = "Cameria the Coldblooded")]
     CameriaTheColdblooded,
-    #[strum(serialize = "Aisling Laffrey")]
-    #[serde(rename = "Aisling Laffrey")]
     AislingLaffrey,
-    #[strum(serialize = "Riker Maloney")]
-    #[serde(rename = "Riker Maloney")]
     RikerMaloney,
 }
 
@@ -517,38 +517,30 @@ impl Identified for SyndicateMember {
             SyndicateMember::RikerMaloney => "Riker Maloney",
         }
     }
+
+    fn alises(&self) -> Vec<&str> {
+        match self {
+            SyndicateMember::Haku => vec!["Haku"],
+            _ => vec![],
+        }
+    }
 }
 
-#[derive(
-    Serialize,
-    Deserialize,
-    Clone,
-    Debug,
-    PartialEq,
-    Eq,
-    Hash,
-    EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
+impl FromStr for SyndicateMember {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
+    }
+}
+
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum Elderslayer {
     #[default]
-    #[strum(serialize = "Baran, The Crusader")]
-    #[serde(rename = "Baran, The Crusader")]
     Baran,
-    #[strum(serialize = "Veritania, The Redeemer")]
-    #[serde(rename = "Veritania, The Redeemer")]
     Veritania,
-    #[strum(serialize = "Al-Hezmin, The Hunter")]
-    #[serde(rename = "Al-Hezmin, The Hunter")]
     AlHezmin,
-    #[strum(serialize = "Drox, The Warlord")]
-    #[serde(rename = "Drox, The Warlord")]
     Drox,
-    #[strum(serialize = "Sirus, Awakener of Worlds")]
-    #[serde(rename = "Sirus, Awakener of Worlds")]
     Sirus,
 }
 
@@ -564,33 +556,20 @@ impl Identified for Elderslayer {
     }
 }
 
-#[derive(
-    Serialize,
-    Deserialize,
-    Clone,
-    Debug,
-    PartialEq,
-    Eq,
-    Hash,
-    EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
+impl FromStr for Elderslayer {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
+    }
+}
+
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum ElderGuardianBoss {
     #[default]
-    #[strum(serialize = "The Enslaver")]
-    #[serde(rename = "The Enslaver")]
     Enslaver,
-    #[strum(serialize = "The Eradicator")]
-    #[serde(rename = "The Eradicator")]
     Eradicator,
-    #[strum(serialize = "The Constrictor")]
-    #[serde(rename = "The Constrictor")]
     Constrictor,
-    #[strum(serialize = "The Purifier")]
-    #[serde(rename = "The Purifier")]
     Purifier,
 }
 
@@ -605,30 +584,19 @@ impl Identified for ElderGuardianBoss {
     }
 }
 
-#[derive(
-    Debug,
-    Clone,
-    Serialize,
-    Deserialize,
-    PartialEq,
-    Eq,
-    Hash,
-    EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
+impl FromStr for ElderGuardianBoss {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
+    }
+}
+
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum RogueExile {
     #[default]
-    #[strum(serialize = "Ash Lessard")]
-    #[serde(rename = "Ash Lessard")]
     AshLessard,
-    #[strum(serialize = "Magnus Stonethorn")]
-    #[serde(rename = "Magnus Stonethorn")]
     Magnus,
-    #[strum(serialize = "Minara Anemina")]
-    #[serde(rename = "Minara Anemina")]
     Minara,
 }
 
@@ -642,60 +610,29 @@ impl Identified for RogueExile {
     }
 }
 
-#[derive(
-    Debug,
-    Clone,
-    Serialize,
-    Deserialize,
-    PartialEq,
-    Eq,
-    Hash,
-    EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
+impl FromStr for RogueExile {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
+    }
+}
+
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum FemaleRogueExile {
     #[default]
-    #[strum(serialize = "Dena Lorenni")]
-    #[serde(rename = "Dena Lorenni")]
     DenaLorenni,
-    #[strum(serialize = "Igna Phoenix")]
-    #[serde(rename = "Igna Phoenix")]
     IgnaPhoenix,
-    #[strum(serialize = "Minara Anemina")]
-    #[serde(rename = "Minara Anemina")]
     MinaraAnemina,
-    #[strum(serialize = "Ultima Thule")]
-    #[serde(rename = "Ultima Thule")]
     UltimaThule,
-    #[strum(serialize = "Kirmes Olli")]
-    #[serde(rename = "Kirmes Olli")]
     KirmesOlli,
-    #[strum(serialize = "Ailentia Rac")]
-    #[serde(rename = "Ailentia Rac")]
     AilentiaRac,
-    #[strum(serialize = "Antalie Napora")]
-    #[serde(rename = "Antalie Napora")]
     AntalieNapora,
-    #[strum(serialize = "Orra Greengate")]
-    #[serde(rename = "Orra Greengate")]
     OrraGreengate,
-    #[strum(serialize = "Thena Moga")]
-    #[serde(rename = "Thena Moga")]
     ThenaMoga,
-    #[strum(serialize = "Augustina Solaria")]
-    #[serde(rename = "Augustina Solaria")]
     AugustinaSolaria,
-    #[strum(serialize = "Vanth Agiel")]
-    #[serde(rename = "Vanth Agiel")]
     VanthAgiel,
-    #[strum(serialize = "Ash Lessard")]
-    #[serde(rename = "Ash Lessard")]
     AshLessard,
-    #[strum(serialize = "Lael Furia")]
-    #[serde(rename = "Lael Furia")]
     LaelFuria,
 }
 
@@ -719,27 +656,18 @@ impl Identified for FemaleRogueExile {
     }
 }
 
-#[derive(
-    Serialize,
-    Deserialize,
-    Clone,
-    Debug,
-    PartialEq,
-    Eq,
-    Hash,
-    EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
+impl FromStr for FemaleRogueExile {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
+    }
+}
+
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum AbyssLichBoss {
     #[default]
-    #[strum(serialize = "Ulaman, Sovereign of the Well")]
-    #[serde(rename = "Ulaman, Sovereign of the Well")]
     Ulaman,
-    #[strum(serialize = "Amanamu, Liege of the Lightless")]
-    #[serde(rename = "Amanamu, Liege of the Lightless")]
     Amanamu,
 }
 
@@ -752,27 +680,18 @@ impl Identified for AbyssLichBoss {
     }
 }
 
-#[derive(
-    Debug,
-    Clone,
-    Serialize,
-    Deserialize,
-    PartialEq,
-    Eq,
-    Hash,
-    EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
+impl FromStr for AbyssLichBoss {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
+    }
+}
+
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum MapsOnly {
     #[default]
-    #[strum(serialize = "Omniphobia, Fear Manifest (maps only)")]
-    #[serde(rename = "Omniphobia, Fear Manifest (maps only)")]
     Omniphobia,
-    #[strum(serialize = "Kosis, The Revelation (maps only)")]
-    #[serde(rename = "Kosis, The Revelation (maps only)")]
     Kosis,
 }
 
@@ -785,30 +704,19 @@ impl Identified for MapsOnly {
     }
 }
 
-#[derive(
-    Serialize,
-    Deserialize,
-    Clone,
-    Debug,
-    PartialEq,
-    Eq,
-    Hash,
-    EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
+impl FromStr for MapsOnly {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
+    }
+}
+
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum HarbingerPortal {
     #[default]
-    #[strum(serialize = "HarbingerPortal")]
-    #[serde(rename = "HarbingerPortal")]
     HarbingerPortal,
-    #[strum(serialize = "HarbingerPortalDelve")]
-    #[serde(rename = "HarbingerPortalDelve")]
     HarbingerPortalDelve,
-    #[strum(serialize = "HarbingerPortalUber")]
-    #[serde(rename = "HarbingerPortalUber")]
     HarbingerPortalUber,
 }
 
@@ -822,42 +730,23 @@ impl Identified for HarbingerPortal {
     }
 }
 
-#[derive(
-    Debug,
-    Clone,
-    Serialize,
-    Deserialize,
-    PartialEq,
-    Eq,
-    Hash,
-    EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
+impl FromStr for HarbingerPortal {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
+    }
+}
+
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum EndgameBoss {
     #[default]
-    #[strum(to_string = "The Maven", serialize = "Maven")]
-    #[serde(rename = "The Maven")]
     Maven,
-    #[strum(to_string = "The Elder", serialize = "Elder")]
-    #[serde(rename = "The Elder")]
     Elder,
-    #[strum(to_string = "Uber Elder")]
-    #[serde(rename = "Uber Elder")]
     UberElder,
-    #[strum(to_string = "The Searing Exarch")]
-    #[serde(rename = "The Searing Exarch")]
     SearingExarch,
-    #[strum(to_string = "The Eater of Worlds")]
-    #[serde(rename = "The Eater of Worlds")]
     EaterOfWorlds,
-    #[strum(to_string = "The Infinite Hunger")]
-    #[serde(rename = "The Infinite Hunger")]
     InfiniteHunger,
-    #[strum(to_string = "Atziri, Queen of the Vaal (Uber)")]
-    #[serde(rename = "Atziri, Queen of the Vaal (Uber)")]
     UberAtziri,
 }
 
@@ -873,29 +762,25 @@ impl Identified for EndgameBoss {
             EndgameBoss::UberAtziri => "Atziri, Queen of the Vaal (Uber)",
         }
     }
+
+    fn alises(&self) -> Vec<&str> {
+        // match self {}
+        vec![]
+    }
 }
 
-#[derive(
-    Debug,
-    Clone,
-    Serialize,
-    Deserialize,
-    PartialEq,
-    Eq,
-    Hash,
-    EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
+impl FromStr for EndgameBoss {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
+    }
+}
+
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum DelveBoss {
     #[default]
-    #[strum(to_string = "Aul, the Crystal King", serialize = "Aul")]
-    #[serde(rename = "Aul, the Crystal King")]
     Aul,
-    #[strum(to_string = "Kurgal, the Blackblooded", serialize = "Kurgal")]
-    #[serde(rename = "Kurgal, the Blackblooded")]
     Kurgal,
 }
 
@@ -908,33 +793,20 @@ impl Identified for DelveBoss {
     }
 }
 
-#[derive(
-    Debug,
-    Clone,
-    Serialize,
-    Deserialize,
-    PartialEq,
-    Eq,
-    Hash,
-    EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
+impl FromStr for DelveBoss {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
+    }
+}
+
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum BeastBoss {
     #[default]
-    #[strum(to_string = "Farrul, First of the Plains", serialize = "Farrul")]
-    #[serde(rename = "Farrul, First of the Plains")]
     Farrul,
-    #[strum(to_string = "Fenumus, First of the Night", serialize = "Fenumus")]
-    #[serde(rename = "Fenumus, First of the Night")]
     Fenumus,
-    #[serde(rename = "Saqawal, First of the Sky")]
-    #[strum(to_string = "Saqawal, First of the Sky", serialize = "Saqawal")]
     Saqawal,
-    #[serde(rename = "Craiceann, First of the Deep")]
-    #[strum(to_string = "Craiceann, First of the Deep", serialize = "Craiceann")]
     Craiceann,
 }
 
@@ -949,27 +821,18 @@ impl Identified for BeastBoss {
     }
 }
 
-#[derive(
-    Debug,
-    Clone,
-    Serialize,
-    Deserialize,
-    PartialEq,
-    Eq,
-    Hash,
-    EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
+impl FromStr for BeastBoss {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
+    }
+}
+
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum HeistBoss {
     #[default]
-    #[strum(to_string = "Flesh Sculptor")]
-    #[serde(rename = "Flesh Sculptor")]
     FleshSculptor,
-    #[strum(to_string = "Corpse Stitcher")]
-    #[serde(rename = "Corpse Stitcher")]
     CorpseStitcher,
 }
 
@@ -982,27 +845,18 @@ impl Identified for HeistBoss {
     }
 }
 
-#[derive(
-    Debug,
-    Clone,
-    Serialize,
-    Deserialize,
-    PartialEq,
-    Eq,
-    Hash,
-    EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
+impl FromStr for HeistBoss {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
+    }
+}
+
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum BeyondBoss {
     #[default]
-    #[strum(to_string = "Ghorr, the Grasping Maw", serialize = "Ghorr")]
-    #[serde(rename = "Ghorr, the Grasping Maw")]
     Ghorr,
-    #[strum(to_string = "K'tash, the Hate Shepherd", serialize = "K'tash")]
-    #[serde(rename = "K'tash, the Hate Shepherd")]
     Ktash,
 }
 
@@ -1015,24 +869,17 @@ impl Identified for BeyondBoss {
     }
 }
 
-#[derive(
-    Debug,
-    Clone,
-    Serialize,
-    Deserialize,
-    PartialEq,
-    Eq,
-    Hash,
-    EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
+impl FromStr for BeyondBoss {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
+    }
+}
+
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum ExpeditionLogbookBoss {
     #[default]
-    #[strum(to_string = "Uhtred, Covetous Traitor", serialize = "Uhtred")]
-    #[serde(rename = "Uhtred, Covetous Traitor")]
     Uhtred,
 }
 
@@ -1044,51 +891,17 @@ impl Identified for ExpeditionLogbookBoss {
     }
 }
 
-#[derive(
-    Debug,
-    Clone,
-    Serialize,
-    Deserialize,
-    PartialEq,
-    Eq,
-    Hash,
-    EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
-pub enum ShaperMiniBoss {
-    #[default]
-    #[strum(to_string = "Entity of the Void")]
-    #[serde(rename = "Entity of the Void")]
-    EntityOfTheVoid,
-}
+impl FromStr for ExpeditionLogbookBoss {
+    type Err = UnknownVariant<Self>;
 
-impl Identified for ShaperMiniBoss {
-    fn id(&self) -> &str {
-        "Entity of the Void"
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
     }
 }
 
-#[derive(
-    Debug,
-    Clone,
-    Serialize,
-    Deserialize,
-    PartialEq,
-    Eq,
-    Hash,
-    EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum BetrayalCatarina {
     #[default]
-    #[strum(to_string = "Catarina, Master of Undeath", serialize = "Catarina")]
-    #[serde(rename = "Catarina, Master of Undeath")]
     Catarina,
 }
 
@@ -1098,10 +911,17 @@ impl Identified for BetrayalCatarina {
     }
 }
 
-#[derive(
-    Debug, Clone, PartialEq, Eq, Hash, EnumString, strum_macros::Display, strum_macros::EnumIter,
-)]
+impl FromStr for BetrayalCatarina {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
+    }
+}
+
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum OshabiBoss {
+    #[default]
     Oshabi,
 }
 
@@ -1109,10 +929,23 @@ impl Identified for OshabiBoss {
     fn id(&self) -> &str {
         "Oshabi, Avatar of the Grove"
     }
+
+    fn alises(&self) -> Vec<&str> {
+        vec!["Oshabi"]
+    }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, strum_macros::EnumIter)]
+impl FromStr for OshabiBoss {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
+    }
+}
+
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum EldritchPerfectionMonster {
+    #[default]
     ConsumingBearer,
     ConsumingParasite,
     ConsumingThrall,
@@ -1152,16 +985,40 @@ impl FromStr for EldritchPerfectionMonster {
     type Err = UnknownVariant<Self>;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        parse_id(s)
+        parseid(s)
     }
 }
 
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
+pub enum ShaperMiniBoss {
+    #[default]
+    EntityOfTheVoid,
+}
+
+impl Identified for ShaperMiniBoss {
+    fn id(&self) -> &str {
+        "Entity of the Void"
+    }
+}
+
+impl FromStr for ShaperMiniBoss {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
+    }
+}
+
+#[cfg(test)]
 mod test {
+    use super::*;
 
     #[test]
-    fn test_from_str_for_identified_enumiter() {
-        use super::EldritchPerfectionMonster;
-        let monster: EldritchPerfectionMonster = "Void Jaguar".parse().unwrap();
-        assert_eq!(monster, EldritchPerfectionMonster::VoidJaguar);
+    fn test_unique_monster() {
+        let veritania: UniqueMonster = "Veritania, The Redeemer".parse().unwrap();
+        assert_eq!(
+            veritania,
+            UniqueMonster::Elderslayer(Elderslayer::Veritania)
+        );
     }
 }

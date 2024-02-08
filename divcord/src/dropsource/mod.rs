@@ -9,20 +9,20 @@ use std::str::FromStr;
 use serde::{de, ser::SerializeStruct, Deserialize, Serialize};
 use strum::IntoEnumIterator;
 
-use self::{area::Area, monster::UniqueMonster};
+use self::{area::Area, new_monster::UniqueMonster};
 
 pub trait Identified {
     fn id(&self) -> &str;
 
-    fn alises(&self) -> Vec<&'static str> {
+    fn alises(&self) -> Vec<&str> {
         vec![]
     }
 
-    fn id_and_aliases(&self) -> Vec<&str> {
-        let mut a = self.alises();
-        a.push(self.id());
-        a
-    }
+    // fn id_and_aliases(&self) -> Vec<&str> {
+    //     let mut a = self.alises();
+    //     a.push(self.id());
+    //     a
+    // }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, strum_macros::EnumIter)]

@@ -3422,8 +3422,14 @@
         "type": "Map",
         "id": "Wharf Map",
         "kind": "source-with-member"
+      },
+      {
+        "type": "Act",
+        "id": "2_8_8",
+        "kind": "source-with-member"
       }
     ],
+    "notes": "3.23: A8 The Quay verified by kroIya",
     "verifySources": []
   },
   {
@@ -3802,7 +3808,7 @@
         "kind": "source-with-member"
       }
     ],
-    "notes": "Appears to once again drop in various Unique Maps",
+    "notes": "Appears to once again drop in various Unique Maps\n\n3.23: Death and Taxes verified by kroIya (!)",
     "verifySources": []
   },
   {
@@ -4320,7 +4326,7 @@
     ],
     "wikiDisagreements": "The Imperial Fields",
     "sourcesWithTagButNotOnWiki": "The Refinery",
-    "notes": "3.21 - disproved Rats 99% in Imperial Fields\n3.23 - Added Port",
+    "notes": "3.21 - disproved Rats 99% in Imperial Fields\n3.23 - Added Port\n\n3.23 patch notes: \"Azure Rage, Rats, The Tireless Extractor, The Return of the Rat, and Three Faces in the Dark can now be found in the Port Map.\"\nAt least some of these Cards have the current hypothesis of `warehouse_area`. Port does not have `warehouse_area`. We need new hypotheses that explain Port.\n* Port has `marketplace_area, urban_sarn_area, dock_area, ocean_area, ruined_area`, but not `warehouse_area`.\n* Azure Rage has no Tag hypothesis.\n* Rats has `warehouse_area`.\n* The Tireless Extractor has no Tag hypothesis.\n* Return of the Rat has `warehouse_area`. Verified in A9 The Refinery which has solely `warehouse_area`.\n* Three Faces in the Dark has `warehouse_area`. Verified in A9 The Refinery which has solely `warehouse_area`.\n\n* Port cannot be explained by just one of `marketplace_area`, `urban_sarn_area`, `dock_area`, `ocean_area`, or `ruined_area`: any of these alone would imply non-eligible Areas.\n* Port is uniquely identified by any of the following possible Tag combinations: `marketplace_area + ocean_area`; or `urban_sarn_area + ocean_area`; or `dock_area + ruined_area`.\n* A possible but weird/unlikely hypothesis could be: \"Area drop in an Area whose Boss has `matryoshka_boss`\".",
     "verifySources": [
       {
         "type": "Act",
@@ -4993,22 +4999,20 @@
         "type": "Map",
         "id": "Wharf Map",
         "kind": "source-with-member"
-      }
-    ],
-    "sourcesWithTagButNotOnWiki": "The Vinktar Square; Stagnation",
-    "notes": "Stagnation observed by SlipperyJim8 as a Kirac Mission drop\nVinktar Square verified in divcord",
-    "verifySources": [
-      {
-        "type": "Map",
-        "id": "The Vinktar Square",
-        "kind": "source-with-member"
       },
       {
         "type": "Map",
         "id": "Stagnation Map",
         "kind": "source-with-member"
+      },
+      {
+        "type": "Map",
+        "id": "The Vinktar Square",
+        "kind": "source-with-member"
       }
-    ]
+    ],
+    "notes": "Stagnation observed by SlipperyJim8 as a Kirac Mission drop\nVinktar Square verified in divcord",
+    "verifySources": []
   },
   {
     "id": 168,
@@ -5462,21 +5466,26 @@
         "type": "Map Boss",
         "id": "Sallazzang",
         "kind": "source-with-member"
+      },
+      {
+        "type": "Map Boss",
+        "id": "Avatar of Apocalypse",
+        "kind": "source-with-member"
+      },
+      {
+        "type": "Map Boss",
+        "id": "Maker of Mires",
+        "kind": "source-with-member"
+      },
+      {
+        "type": "Map Boss",
+        "id": "Merveil, the Returned",
+        "kind": "source-with-member"
       }
     ],
-    "sourcesWithTagButNotOnWiki": "Death and Taxes; Hallowed Ground; Haunted Mansion; Maelström of Chaos; Tower; Underground Sea",
-    "notes": "3.23: Removed Metamorph monster. \nNew patch noted maps: Death and Taxes, Gardens, Hallowed Ground, Haunted Mansion, Maelström of Chaos, Palace, Tower, Underground Sea (bosses?)\n\nPossibly governed by transform_boss\nSeems to still be a boss drop",
+    "sourcesWithTagButNotOnWiki": "Haunted Mansion; Maelström of Chaos; Tower",
+    "notes": "3.23: Removed Metamorph monster. \nNew patch noted maps: Death and Taxes, Gardens, Hallowed Ground, Haunted Mansion, Maelström of Chaos, Palace, Tower, Underground Sea (bosses?)\n\nPossibly governed by transform_boss\nSeems to still be a boss drop\n\n3.23: Avatar of the Apocalypse (Death and Taxes Boss) verified by kroIya\n3.23: Maker of Mires (Hallowed Ground Boss) verified by kroIya\n3.23: Merveil, the Returned (Underground Sea) verified by Zimzams",
     "verifySources": [
-      {
-        "type": "Map",
-        "id": "Death and Taxes",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map",
-        "id": "Hallowed Ground",
-        "kind": "source-with-member"
-      },
       {
         "type": "Map",
         "id": "Haunted Mansion Map",
@@ -5490,11 +5499,6 @@
       {
         "type": "Map",
         "id": "Tower Map",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map",
-        "id": "Underground Sea Map",
         "kind": "source-with-member"
       }
     ]
@@ -11169,6 +11173,11 @@
         "kind": "source-with-member"
       },
       {
+        "type": "Map",
+        "id": "Orchard Map",
+        "kind": "source-with-member"
+      },
+      {
         "type": "Act",
         "id": "2_7_7",
         "kind": "source-with-member"
@@ -11179,6 +11188,7 @@
         "kind": "source-with-member"
       }
     ],
+    "notes": "3.22 Patch notes: \"The Scarred Meadow and Tranquillity can now be found in the Orchard Map.\"\nVerified by Elinvynia\n\nThe current hypothesis is `fields_area`. We need a new hypothesis that explains Orchard.\n* Orchard has `has_road_area, garden_area, labyrinth_tileset_area, sun_nature_area`, but not `fields_area`.\n* Orchard cannot be explained by just one of `has_road_area`, `garden_area`, `labyrinth_tileset_area`, or `sun_nature_area`: any of these alone would imply non-eligible Areas.\n* `fields_area` correctly identifies all non-Orchard eligible Maps. No other single Tag does.",
     "verifySources": []
   },
   {
@@ -12084,7 +12094,7 @@
     ],
     "wikiDisagreements": "Port",
     "sourcesWithTagButNotOnWiki": "Forge of the Phoenix; Foundry",
-    "notes": "Factory, Silo\n\nThe only 3.18 verification we have is Factory (it's common there), and Factory's sole non-vacuous Tag is `warehouse_area`, which is why the Tag association here was originally set to that.\nThe Tireless Extractor does not drop in Arsenal, however, which has `warehouse_area`. Thus that Tag cannot be the governing factor.\n\nRe-verified as dropping in Silo in 3.18 using a legacy-series Silo Map on Standard.\nBut other Maps that have Silo's Tags do not seem to produce The Tireless Extractor.\n\nThere's something else special about Factory and Silo which govern the natural Card drop in those Areas. Forge_Area in 3.21 connected the two maps, but the actual relationship could be something else.\n\n3.21: Elinvynia found no cards in 56 cards in Foundry or 20 in Phoenix. This makes it more likely it's not related to Forge_Area\n3.23 - Added Port",
+    "notes": "Factory, Silo\n\nThe only 3.18 verification we have is Factory (it's common there), and Factory's sole non-vacuous Tag is `warehouse_area`, which is why the Tag association here was originally set to that.\nThe Tireless Extractor does not drop in Arsenal, however, which has `warehouse_area`. Thus that Tag cannot be the governing factor.\n\nRe-verified as dropping in Silo in 3.18 using a legacy-series Silo Map on Standard.\nBut other Maps that have Silo's Tags do not seem to produce The Tireless Extractor.\n\nThere's something else special about Factory and Silo which govern the natural Card drop in those Areas. Forge_Area in 3.21 connected the two maps, but the actual relationship could be something else.\n\n3.21: Elinvynia found no cards in 56 cards in Foundry or 20 in Phoenix. This makes it more likely it's not related to Forge_Area\n3.23 - Added Port\n\n3.23 patch notes: \"Azure Rage, Rats, The Tireless Extractor, The Return of the Rat, and Three Faces in the Dark can now be found in the Port Map.\"\nAt least some of these Cards have the current hypothesis of `warehouse_area`. Port does not have `warehouse_area`. We need new hypotheses that explain Port.\n* Port has `marketplace_area, urban_sarn_area, dock_area, ocean_area, ruined_area`, but not `warehouse_area`.\n* Azure Rage has no Tag hypothesis.\n* Rats has `warehouse_area`.\n* The Tireless Extractor has no Tag hypothesis.\n* Return of the Rat has `warehouse_area`. Verified in A9 The Refinery which has solely `warehouse_area`.\n* Three Faces in the Dark has `warehouse_area`. Verified in A9 The Refinery which has solely `warehouse_area`.\n\n* Port cannot be explained by just one of `marketplace_area`, `urban_sarn_area`, `dock_area`, `ocean_area`, or `ruined_area`: any of these alone would imply non-eligible Areas.\n* Port is uniquely identified by any of the following possible Tag combinations: `marketplace_area + ocean_area`; or `urban_sarn_area + ocean_area`; or `dock_area + ruined_area`.\n* A possible but weird/unlikely hypothesis could be: \"Area drop in an Area whose Boss has `matryoshka_boss`\".",
     "verifySources": []
   },
   {
@@ -12182,29 +12192,24 @@
         "type": "Map Boss",
         "id": "Sallazzang",
         "kind": "source-with-member"
+      },
+      {
+        "type": "Map Boss",
+        "id": "Maker of Mires",
+        "kind": "source-with-member"
+      },
+      {
+        "type": "Map Boss",
+        "id": "Avatar of Apocalypse",
+        "kind": "source-with-member"
       }
     ],
-    "sourcesWithTagButNotOnWiki": "Death and Taxes; Hallowed Ground; Haunted Mansion; Maelström of Chaos; Tower",
-    "notes": "3.23: Removed Metamorph monster. \nNew patch noted maps: Death and Taxes, Gardens, Hallowed Ground, Haunted Mansion, Maelström of Chaos, Palace, Tower, Underground Sea (bosses?)\n\n3.23: Merveil, the Returned in Underground Sea verified by Zimzams.\nPossibly governed by transform_boss\nSeems to still be a boss drop",
+    "sourcesWithTagButNotOnWiki": "Haunted Mansion; Tower",
+    "notes": "3.23: Removed Metamorph monster. \nNew patch noted maps: Death and Taxes, Gardens, Hallowed Ground, Haunted Mansion, Maelström of Chaos, Palace, Tower, Underground Sea (bosses?)\n\n3.23: Merveil, the Returned in Underground Sea verified by Zimzams.\nPossibly governed by transform_boss\nSeems to still be a boss drop\n3.23: Maker of Mires in Hallowed Ground verified by kroIya\n3.23: Avatar of the Apocalypse in Death and Taxes verified by kroIya\n3.23: Merveil, the Returned in Maelstrom of Chaos verified by kroIya",
     "verifySources": [
       {
         "type": "Map",
-        "id": "Death and Taxes",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map",
-        "id": "Hallowed Ground",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map",
         "id": "Haunted Mansion Map",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map",
-        "id": "Maelström of Chaos",
         "kind": "source-with-member"
       },
       {
@@ -13304,7 +13309,7 @@
       }
     ],
     "wikiDisagreements": "The Imperial Fields, The Marketplace",
-    "notes": "Arsenal and Factory added - not sure what \"hidden_monster\" is.\nTag clash with The Marketplace (Act 3) and The Imperial Fields (Act 8) - reverify/disprove.\nThe Marketplace may be a remnant of the old \"The Warehouse District\". Cannot be \"marketplace_area\" or \"urban_sarn_area\".\nNo sightings in either Imperial Fields or Marketplace in recent patches.\n3.23 - Added Port",
+    "notes": "Arsenal and Factory added - not sure what \"hidden_monster\" is.\nTag clash with The Marketplace (Act 3) and The Imperial Fields (Act 8) - reverify/disprove.\nThe Marketplace may be a remnant of the old \"The Warehouse District\". Cannot be \"marketplace_area\" or \"urban_sarn_area\".\nNo sightings in either Imperial Fields or Marketplace in recent patches.\n3.23 - Added Port\n\n3.23: kroIya disproved this Card in A8 The Quay, which has `marketplace_area, dock_area, urban_sarn_area, quay_area`.\n\n3.23 patch notes: \"Azure Rage, Rats, The Tireless Extractor, The Return of the Rat, and Three Faces in the Dark can now be found in the Port Map.\"\nAt least some of these Cards have the current hypothesis of `warehouse_area`. Port does not have `warehouse_area`. We need new hypotheses that explain Port.\r\n* Port has `marketplace_area, urban_sarn_area, dock_area, ocean_area, ruined_area`, but not `warehouse_area`.\r\n* Azure Rage has no Tag hypothesis.\r\n* Rats has `warehouse_area`.\r\n* The Tireless Extractor has no Tag hypothesis.\r\n* Return of the Rat has `warehouse_area`. Verified in A9 The Refinery which has solely `warehouse_area`.\r\n* Three Faces in the Dark has `warehouse_area`. Verified in A9 The Refinery which has solely `warehouse_area`.\r\n\r\n* Port cannot be explained by just one of `marketplace_area`, `urban_sarn_area`, `dock_area`, `ocean_area`, or `ruined_area`: any of these alone would imply non-eligible Areas.\r\n* Port is uniquely identified by any of the following possible Tag combinations: `marketplace_area + ocean_area`; or `urban_sarn_area + ocean_area`; or `dock_area + ruined_area`.\r\n* A possible but weird/unlikely hypothesis could be: \"Area drop in an Area whose Boss has `matryoshka_boss`\".",
     "verifySources": []
   },
   {
@@ -13486,12 +13491,17 @@
         "kind": "source-with-member"
       },
       {
+        "type": "Map",
+        "id": "Orchard Map",
+        "kind": "source-with-member"
+      },
+      {
         "type": "Act",
         "id": "2_7_7",
         "kind": "source-with-member"
       }
     ],
-    "notes": "Divcord: Peninsula verified\nPeninsula was legacy drop location; may have been reintroduced\n",
+    "notes": "Divcord: Peninsula verified\nPeninsula was legacy drop location; may have been reintroduced\n\n3.22 patch notes: \"The Scarred Meadow and Tranquillity can now be found in the Orchard Map.\"\n\nThe current hypothesis is `fields_area`. We need a new hypothesis that explains Orchard.\r\n* Orchard has `has_road_area, garden_area, labyrinth_tileset_area, sun_nature_area`, but not `fields_area`.\r\n* Orchard cannot be explained by just one of `has_road_area`, `garden_area`, `labyrinth_tileset_area`, or `sun_nature_area`: any of these alone would imply non-eligible Areas.\r\n* `fields_area` correctly identifies all non-Orchard eligible Maps. No other single Tag does.",
     "verifySources": []
   },
   {
@@ -14000,7 +14010,7 @@
       }
     ],
     "wikiDisagreements": "Port",
-    "notes": "verified multiple times in Factory.\n\nNo sightings in Arsenal or Silo (warehouse_area).\nLava Lake and Ashen Wood sightings possibly debunked (altar?)\nNo sightings in Villa (masked boss theory)\n\n3.20, zero hits in Courthouse (n=46; conf >99%), checking \"Boss uses Earthquake-based Skill\" hypothesis\n3.20, zero hits in The Vinktar Square (n=34; conf ~99%), considering `lightning_affinity` as well\n3.23 - Added Port",
+    "notes": "verified multiple times in Factory.\n\nNo sightings in Arsenal or Silo (warehouse_area).\nLava Lake and Ashen Wood sightings possibly debunked (altar?)\nNo sightings in Villa (masked boss theory)\n\n3.20, zero hits in Courthouse (n=46; conf >99%), checking \"Boss uses Earthquake-based Skill\" hypothesis\n3.20, zero hits in The Vinktar Square (n=34; conf ~99%), considering `lightning_affinity` as well\n3.23 - Added Port\n\n3.23 patch notes: \"Azure Rage, Rats, The Tireless Extractor, The Return of the Rat, and Three Faces in the Dark can now be found in the Port Map.\"\nAt least some of these Cards have the current hypothesis of `warehouse_area`. Port does not have `warehouse_area`. We need new hypotheses that explain Port.\r\n* Port has `marketplace_area, urban_sarn_area, dock_area, ocean_area, ruined_area`, but not `warehouse_area`.\r\n* Azure Rage has no Tag hypothesis.\r\n* Rats has `warehouse_area`.\r\n* The Tireless Extractor has no Tag hypothesis.\r\n* Return of the Rat has `warehouse_area`. Verified in A9 The Refinery which has solely `warehouse_area`.\r\n* Three Faces in the Dark has `warehouse_area`. Verified in A9 The Refinery which has solely `warehouse_area`.\r\n\r\n* Port cannot be explained by just one of `marketplace_area`, `urban_sarn_area`, `dock_area`, `ocean_area`, or `ruined_area`: any of these alone would imply non-eligible Areas.\r\n* Port is uniquely identified by any of the following possible Tag combinations: `marketplace_area + ocean_area`; or `urban_sarn_area + ocean_area`; or `dock_area + ruined_area`.\r\n* A possible but weird/unlikely hypothesis could be: \"Area drop in an Area whose Boss has `matryoshka_boss`\".",
     "verifySources": []
   },
   {
@@ -14536,7 +14546,7 @@
         "kind": "source-with-member"
       }
     ],
-    "notes": "Divcord: 3.20 The Grain Gate verified, A9 The Refinery verified, claim of Arsenal\nClaim of Factory on reddit\n3.23 - Added Port",
+    "notes": "Divcord: 3.20 The Grain Gate verified, A9 The Refinery verified, claim of Arsenal\nClaim of Factory on reddit\n3.23 - Added Port\n\n3.23 patch notes: \"Azure Rage, Rats, The Tireless Extractor, The Return of the Rat, and Three Faces in the Dark can now be found in the Port Map.\"\nAt least some of these Cards have the current hypothesis of `warehouse_area`. Port does not have `warehouse_area`. We need new hypotheses that explain Port.\r\n* Port has `marketplace_area, urban_sarn_area, dock_area, ocean_area, ruined_area`, but not `warehouse_area`.\r\n* Azure Rage has no Tag hypothesis.\r\n* Rats has `warehouse_area`.\r\n* The Tireless Extractor has no Tag hypothesis.\r\n* Return of the Rat has `warehouse_area`. Verified in A9 The Refinery which has solely `warehouse_area`.\r\n* Three Faces in the Dark has `warehouse_area`. Verified in A9 The Refinery which has solely `warehouse_area`.\r\n\r\n* Port cannot be explained by just one of `marketplace_area`, `urban_sarn_area`, `dock_area`, `ocean_area`, or `ruined_area`: any of these alone would imply non-eligible Areas.\r\n* Port is uniquely identified by any of the following possible Tag combinations: `marketplace_area + ocean_area`; or `urban_sarn_area + ocean_area`; or `dock_area + ruined_area`.\r\n* A possible but weird/unlikely hypothesis could be: \"Area drop in an Area whose Boss has `matryoshka_boss`\".",
     "verifySources": []
   },
   {
