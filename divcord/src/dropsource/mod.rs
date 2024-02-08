@@ -1,6 +1,8 @@
 pub mod area;
 pub mod monster;
+pub mod new_monster;
 pub mod parse;
+pub mod parse_id;
 
 use std::str::FromStr;
 
@@ -16,7 +18,7 @@ pub trait Identified {
         vec![]
     }
 
-    fn id_and_aliases<'a>(&'a self) -> Vec<&'a str> {
+    fn id_and_aliases(&self) -> Vec<&str> {
         let mut a = self.alises();
         a.push(self.id());
         a
