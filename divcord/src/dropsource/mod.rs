@@ -1,5 +1,4 @@
 pub mod area;
-pub mod monster;
 pub mod new_monster;
 pub mod parse;
 pub mod parse_id;
