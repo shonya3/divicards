@@ -105,6 +105,55 @@ impl FromStr for UniqueMonster {
     }
 }
 
+impl Identified for UniqueMonster {
+    fn id(&self) -> &str {
+        match self {
+            UniqueMonster::MavensInvitationTheFeared => "Maven's Invitation: The Feared",
+            UniqueMonster::UulNetolInBreachstones => {
+                "Uul-Netol, Unburdened Flesh (in Breachstones)"
+            }
+            UniqueMonster::VaalOmnitect => "The Vaal Omnitect",
+            UniqueMonster::Metamorph => "Metamorph",
+            UniqueMonster::NullPortal => "Null Portal",
+            UniqueMonster::VaalFleshMerchant => "Vaal Flesh Merchant",
+            UniqueMonster::AllIncursionArchitectsInAlvaMission => {
+                "All Incursion Architects in Alva missions or Alva's Memory"
+            }
+            UniqueMonster::AllIncursionArchitectsInTemple => {
+                "All Incursion Architects (The Temple of Atzoatl)"
+            }
+            UniqueMonster::AllAbyssMonsters => "All Abyss Monsters",
+            UniqueMonster::AllScourgeBeyondDemons => "All (Scourge) beyond demons",
+            UniqueMonster::AllRogueExiles => "All Rogue Exiles",
+            UniqueMonster::CortexVenarius => "Venarius",
+            UniqueMonster::Argus => "Argus",
+            UniqueMonster::AllInvasionBosses => "All Invasion Bosses",
+            UniqueMonster::AllVaalSideAreaBosses => "All Vaal Side Area Bosses",
+            UniqueMonster::BreachlordBossDomain(m) => m.id(),
+            UniqueMonster::Architect(m) => m.id(),
+            UniqueMonster::ShaperGuardianBoss(m) => m.id(),
+            UniqueMonster::SyndicateMember(m) => m.id(),
+            UniqueMonster::Elderslayer(m) => m.id(),
+            UniqueMonster::ElderGuardianBoss(m) => m.id(),
+            UniqueMonster::RogueExile(m) => m.id(),
+            UniqueMonster::FemaleRogueExile(m) => m.id(),
+            UniqueMonster::AbyssLichBoss(m) => m.id(),
+            UniqueMonster::MapsOnly(m) => m.id(),
+            UniqueMonster::HarbingerPortal(m) => m.id(),
+            UniqueMonster::EndgameBoss(m) => m.id(),
+            UniqueMonster::DelveBoss(m) => m.id(),
+            UniqueMonster::BeastBoss(m) => m.id(),
+            UniqueMonster::HeistBoss(m) => m.id(),
+            UniqueMonster::BeyondBoss(m) => m.id(),
+            UniqueMonster::ExpeditionLogbookBoss(m) => m.id(),
+            UniqueMonster::ShaperMiniBoss(m) => m.id(),
+            UniqueMonster::BetrayalCatarina(m) => m.id(),
+            UniqueMonster::OshabiBoss(m) => m.id(),
+            UniqueMonster::EldritchPerfectionMonster(m) => m.id(),
+        }
+    }
+}
+
 impl std::fmt::Display for UniqueMonster {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_str(self.id())
@@ -160,229 +209,6 @@ impl UniqueMonster {
             }
             UniqueMonster::OshabiBoss(_) => "Oshabi Boss",
             UniqueMonster::EldritchPerfectionMonster(_) => "Eldritch Perfection Monster",
-        }
-    }
-}
-
-impl Identified for UniqueMonster {
-    fn id(&self) -> &str {
-        match self {
-            UniqueMonster::MavensInvitationTheFeared => "Maven's Invitation: The Feared",
-            UniqueMonster::UulNetolInBreachstones => {
-                "Uul-Netol, Unburdened Flesh (in Breachstones)"
-            }
-            UniqueMonster::VaalOmnitect => "The Vaal Omnitect",
-            UniqueMonster::Metamorph => "Metamorph",
-            UniqueMonster::NullPortal => "Null Portal",
-            UniqueMonster::VaalFleshMerchant => "Vaal Flesh Merchant",
-            UniqueMonster::AllIncursionArchitectsInAlvaMission => {
-                "All Incursion Architects in Alva missions or Alva's Memory"
-            }
-            UniqueMonster::AllIncursionArchitectsInTemple => {
-                "All Incursion Architects (The Temple of Atzoatl)"
-            }
-            UniqueMonster::AllAbyssMonsters => "All Abyss Monsters",
-            UniqueMonster::AllScourgeBeyondDemons => "All (Scourge) beyond demons",
-            UniqueMonster::AllRogueExiles => "All Rogue Exiles",
-            UniqueMonster::CortexVenarius => "Venarius",
-            UniqueMonster::Argus => "Argus",
-            UniqueMonster::AllInvasionBosses => "All Invasion Bosses",
-            UniqueMonster::AllVaalSideAreaBosses => "All Vaal Side Area Bosses",
-            UniqueMonster::BreachlordBossDomain(breach_boss) => match breach_boss {
-                BreachlordBossDomain::Xoph => "Xoph, Dark Embers",
-                BreachlordBossDomain::Tul => "Tul, Creeping Avalanche",
-                BreachlordBossDomain::Esh => "Esh, Forked Thought",
-                BreachlordBossDomain::Chayula => "Chayula, Who Dreamt",
-                BreachlordBossDomain::UulNetol => "Uul-Netol, Unburdened Flesh",
-            },
-            UniqueMonster::Architect(architect) => match architect {
-                Architect::Zilquapa => "Zilquapa, Architect of the Breach",
-                Architect::Paquate => "Paquate, Architect of Corruption",
-                Architect::Ahuana => "Ahuana, Architect of Ceremonies",
-                Architect::Zalatl => "Zalatl, Architect of Thaumaturgy",
-            },
-            UniqueMonster::ShaperGuardianBoss(shaper_guardian) => match shaper_guardian {
-                ShaperGuardianBoss::Chimera => "Guardian of the Chimera",
-                ShaperGuardianBoss::Hydra => "Guardian of the Hydra",
-                ShaperGuardianBoss::Minotaur => "Guardian of the Minotaur",
-                ShaperGuardianBoss::Phoenix => "Guardian of the Phoenix",
-            },
-            UniqueMonster::SyndicateMember(syndicate_member) => match syndicate_member {
-                SyndicateMember::Haku => "Haku, Warmaster",
-                SyndicateMember::Elreon => "Elreon",
-                SyndicateMember::Tora => "Tora",
-                SyndicateMember::Vagan => "Vagan",
-                SyndicateMember::Vorici => "Vorici",
-                SyndicateMember::Hillock => "Hillock, the Blacksmith",
-                SyndicateMember::Leo => "Leo, Wolf of the Pits",
-                SyndicateMember::GuffTinyGrenn => "Guff \"Tiny\" Grenn",
-                SyndicateMember::JanusPerandus => "Janus Perandus",
-                SyndicateMember::ItThatFled => "It That Fled",
-                SyndicateMember::Gravicius => "Gravicius",
-                SyndicateMember::ThandeJorgin => "Thane Jorgin",
-                SyndicateMember::KorellGoya => "Korell Goya",
-                SyndicateMember::RinYuushu => "Rin Yuushu",
-                SyndicateMember::CameriaTheColdblooded => "Cameria the Coldblooded",
-                SyndicateMember::AislingLaffrey => "Aisling Laffrey",
-                SyndicateMember::RikerMaloney => "Riker Maloney",
-            },
-            UniqueMonster::Elderslayer(elderslayer) => match elderslayer {
-                Elderslayer::Baran => "Baran, The Crusader",
-                Elderslayer::Veritania => "Veritania, The Redeemer",
-                Elderslayer::AlHezmin => "Al-Hezmin, The Hunter",
-                Elderslayer::Drox => "Drox, The Warlord",
-                Elderslayer::Sirus => "Sirus, Awakener of Worlds",
-            },
-            UniqueMonster::ElderGuardianBoss(elder_guardian) => match elder_guardian {
-                ElderGuardianBoss::Enslaver => "The Enslaver",
-                ElderGuardianBoss::Eradicator => "The Eradicator",
-                ElderGuardianBoss::Constrictor => "The Constrictor",
-                ElderGuardianBoss::Purifier => "The Purifier",
-            },
-            UniqueMonster::RogueExile(rogue_exile) => match rogue_exile {
-                RogueExile::AshLessard => "Ash Lessard",
-                RogueExile::Magnus => "Magnus Stonethorn",
-                RogueExile::Minara => "Minara Anemina",
-            },
-            UniqueMonster::FemaleRogueExile(female_exile) => match female_exile {
-                FemaleRogueExile::DenaLorenni => "Dena Lorenni",
-                FemaleRogueExile::IgnaPhoenix => "Igna Phoenix",
-                FemaleRogueExile::MinaraAnemina => "Minara Anemina",
-                FemaleRogueExile::UltimaThule => "Ultima Thule",
-                FemaleRogueExile::KirmesOlli => "Kirmes Olli",
-                FemaleRogueExile::AilentiaRac => "Ailentia Rac",
-                FemaleRogueExile::AntalieNapora => "Antalie Napora",
-                FemaleRogueExile::OrraGreengate => "Orra Greengate",
-                FemaleRogueExile::ThenaMoga => "Thena Moga",
-                FemaleRogueExile::AugustinaSolaria => "Augustina Solaria",
-                FemaleRogueExile::VanthAgiel => "Vanth Agiel",
-                FemaleRogueExile::AshLessard => "Ash Lessard",
-                FemaleRogueExile::LaelFuria => "Lael Furia",
-            },
-            UniqueMonster::AbyssLichBoss(lich) => match lich {
-                AbyssLichBoss::Ulaman => "Ulaman, Sovereign of the Well",
-                AbyssLichBoss::Amanamu => "Amanamu, Liege of the Lightless",
-            },
-            UniqueMonster::MapsOnly(maps_only) => match maps_only {
-                MapsOnly::Omniphobia => "Omniphobia, Fear Manifest (maps only)",
-                MapsOnly::Kosis => "Kosis, The Revelation (maps only)",
-            },
-            UniqueMonster::HarbingerPortal(harbinger_portal) => match harbinger_portal {
-                HarbingerPortal::HarbingerPortal => "HarbingerPortal",
-                HarbingerPortal::HarbingerPortalDelve => "HarbingerPortalDelve",
-                HarbingerPortal::HarbingerPortalUber => "HarbingerPortalUber",
-            },
-            UniqueMonster::EndgameBoss(endgame_boss) => match endgame_boss {
-                EndgameBoss::Maven => "The Maven",
-                EndgameBoss::Elder => "The Elder",
-                EndgameBoss::UberElder => "Uber Elder",
-                EndgameBoss::SearingExarch => "The Searing Exarch",
-                EndgameBoss::EaterOfWorlds => "The Eater of Worlds",
-                EndgameBoss::InfiniteHunger => "The Infinite Hunger",
-                EndgameBoss::UberAtziri => "Atziri, Queen of the Vaal (Uber)",
-            },
-            UniqueMonster::DelveBoss(delve_boss) => match delve_boss {
-                DelveBoss::Aul => "Aul, the Crystal King",
-                DelveBoss::Kurgal => "Kurgal, the Blackblooded",
-            },
-            UniqueMonster::BeastBoss(beast_boss) => match beast_boss {
-                BeastBoss::Farrul => "Farrul, First of the Plains",
-                BeastBoss::Fenumus => "Fenumus, First of the Night",
-                BeastBoss::Saqawal => "Saqawal, First of the Sky",
-                BeastBoss::Craiceann => "Craiceann, First of the Deep",
-            },
-            UniqueMonster::HeistBoss(heist_boss) => match heist_boss {
-                HeistBoss::FleshSculptor => "Flesh Sculptor",
-                HeistBoss::CorpseStitcher => "Corpse Stitcher",
-            },
-            UniqueMonster::BeyondBoss(beyond_boss) => match beyond_boss {
-                BeyondBoss::Ghorr => "Ghorr, the Grasping Maw",
-                BeyondBoss::Ktash => "K'tash, the Hate Shepherd",
-            },
-            UniqueMonster::ExpeditionLogbookBoss(logbook_boss) => match logbook_boss {
-                ExpeditionLogbookBoss::Uhtred => "Uhtred, Covetous Traitor",
-            },
-            UniqueMonster::BetrayalCatarina(_) => "Catarina, Master of Undeath",
-            UniqueMonster::OshabiBoss(_) => "Oshabi, Avatar of the Grove",
-            UniqueMonster::EldritchPerfectionMonster(eldritch_monster) => match eldritch_monster {
-                EldritchPerfectionMonster::ConsumingBearer => "Consuming Bearer",
-                EldritchPerfectionMonster::ConsumingParasite => "Consuming Parasite",
-                EldritchPerfectionMonster::ConsumingThrall => "Consuming Thrall",
-                EldritchPerfectionMonster::GrotesqueCavedweller => "Grotesque Cavedweller",
-                EldritchPerfectionMonster::GrotesqueMangler => "Grotesque Mangler",
-                EldritchPerfectionMonster::GrotesqueMauler => "Grotesque Mauler",
-                EldritchPerfectionMonster::GrotesqueMaw => "Grotesque Maw",
-                EldritchPerfectionMonster::MoltenGolem => "Molten Golem",
-                EldritchPerfectionMonster::MoltenMinotaur => "Molten Minotaur",
-                EldritchPerfectionMonster::MoltenWretch => "Molten Wretch",
-                EldritchPerfectionMonster::VoidFlayer => "Void Flayer",
-                EldritchPerfectionMonster::VoidJaguar => "Void Jaguar",
-                EldritchPerfectionMonster::VoidSkulker => "Void Skulker",
-            },
-            UniqueMonster::ShaperMiniBoss(_) => "Entity of the Void",
-        }
-    }
-
-    fn alises(&self) -> Vec<&str> {
-        match self {
-            UniqueMonster::MavensInvitationTheFeared => vec![],
-            UniqueMonster::UulNetolInBreachstones => vec![],
-            UniqueMonster::VaalOmnitect => vec![],
-            UniqueMonster::Metamorph => vec![],
-            UniqueMonster::NullPortal => vec![],
-            UniqueMonster::VaalFleshMerchant => vec![],
-            UniqueMonster::AllIncursionArchitectsInAlvaMission => {
-                vec!["All Incursion Architects in Alva missions/Alva's Memory"]
-            }
-            UniqueMonster::AllIncursionArchitectsInTemple => vec![],
-            UniqueMonster::AllAbyssMonsters => vec![],
-            UniqueMonster::AllScourgeBeyondDemons => vec![],
-            UniqueMonster::AllRogueExiles => vec![],
-            UniqueMonster::CortexVenarius => vec![],
-            UniqueMonster::Argus => vec![],
-            UniqueMonster::AllInvasionBosses => vec![],
-            UniqueMonster::AllVaalSideAreaBosses => vec![],
-            UniqueMonster::BreachlordBossDomain(_) => vec![],
-            UniqueMonster::Architect(_) => vec![],
-            UniqueMonster::ShaperGuardianBoss(_) => vec![],
-            UniqueMonster::SyndicateMember(s) => match s {
-                SyndicateMember::Haku => vec!["Haku"],
-                _ => vec![],
-            },
-            UniqueMonster::Elderslayer(_) => vec![],
-            UniqueMonster::ElderGuardianBoss(_) => vec![],
-            UniqueMonster::RogueExile(_) => vec![],
-            UniqueMonster::FemaleRogueExile(_) => vec![],
-            UniqueMonster::AbyssLichBoss(_) => vec![],
-            UniqueMonster::MapsOnly(_) => vec![],
-            UniqueMonster::HarbingerPortal(_) => vec![],
-            UniqueMonster::EndgameBoss(endgame_boss) => match endgame_boss {
-                EndgameBoss::Maven => vec!["Maven"],
-                EndgameBoss::Elder => vec!["Elder"],
-                _ => vec![],
-            },
-            UniqueMonster::DelveBoss(delve_boss) => match delve_boss {
-                DelveBoss::Aul => vec!["Aul"],
-                DelveBoss::Kurgal => vec!["Kurgal"],
-            },
-            UniqueMonster::BeastBoss(beast_boss) => match beast_boss {
-                BeastBoss::Farrul => vec!["Farrul"],
-                BeastBoss::Fenumus => vec!["Fenumus"],
-                BeastBoss::Saqawal => vec!["Saqawal"],
-                BeastBoss::Craiceann => vec!["Craiceann"],
-            },
-            UniqueMonster::HeistBoss(_) => vec![],
-            UniqueMonster::BeyondBoss(beyond_boss) => match beyond_boss {
-                BeyondBoss::Ghorr => vec!["Ghorr"],
-                BeyondBoss::Ktash => vec!["K'tash"],
-            },
-            UniqueMonster::ExpeditionLogbookBoss(logbook_boss) => match logbook_boss {
-                ExpeditionLogbookBoss::Uhtred => vec!["Uhtred"],
-            },
-            UniqueMonster::BetrayalCatarina(_) => vec!["Catarina"],
-            UniqueMonster::OshabiBoss(_) => vec!["Oshabi"],
-            UniqueMonster::EldritchPerfectionMonster(_) => vec![],
-            UniqueMonster::ShaperMiniBoss(_) => vec![],
         }
     }
 }
@@ -761,11 +587,6 @@ impl Identified for EndgameBoss {
             EndgameBoss::InfiniteHunger => "The Infinite Hunger",
             EndgameBoss::UberAtziri => "Atziri, Queen of the Vaal (Uber)",
         }
-    }
-
-    fn alises(&self) -> Vec<&str> {
-        // match self {}
-        vec![]
     }
 }
 
