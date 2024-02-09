@@ -1,8 +1,6 @@
-use std::{fmt::Display, num::ParseIntError};
-
-use serde::Serialize;
-
 use crate::league::TradeLeague;
+use serde::Serialize;
+use std::{fmt::Display, num::ParseIntError};
 
 #[derive(Debug)]
 pub enum Error {

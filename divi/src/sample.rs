@@ -1,10 +1,3 @@
-use std::{collections::HashMap, fmt::Display, iter::zip};
-
-use csv::{ReaderBuilder, Trim};
-use googlesheets::sheet::ReadBatchResponse;
-use serde::{Deserialize, Serialize};
-use serde_json::{json, Value};
-
 use crate::{
     card_record::DivinationCardRecord,
     cards::Cards,
@@ -13,6 +6,11 @@ use crate::{
     prices::Prices,
     IsCard,
 };
+use csv::{ReaderBuilder, Trim};
+use googlesheets::sheet::ReadBatchResponse;
+use serde::{Deserialize, Serialize};
+use serde_json::{json, Value};
+use std::{collections::HashMap, fmt::Display, iter::zip};
 
 #[derive(Debug, Serialize, Deserialize, Clone, Default, PartialEq)]
 #[serde(rename_all = "camelCase")]

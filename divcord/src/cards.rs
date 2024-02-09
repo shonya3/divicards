@@ -1,12 +1,10 @@
-use std::collections::{HashMap, HashSet};
-
-use poe_data::{mapbosses::MapBoss, PoeData};
-use serde::Serialize;
-
 use crate::{
     dropsource::{id::Identified, Source},
     table::table_record::SourcefulDivcordTableRecord,
 };
+use poe_data::{mapbosses::MapBoss, PoeData};
+use serde::Serialize;
+use std::collections::{HashMap, HashSet};
 
 pub fn bosses_in_map(map: &str, poe_data: &PoeData) -> Vec<MapBoss> {
     let Some(map) = poe_data.maps.iter().find(|m| m.name == map) else {

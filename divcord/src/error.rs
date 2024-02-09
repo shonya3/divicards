@@ -1,6 +1,5 @@
-use std::fmt::Display;
-
 use crate::{dropsource::parse::ParseSourceError, table::rich::ParseCellError};
+use std::fmt::Display;
 
 #[derive(Debug)]
 pub enum Error {

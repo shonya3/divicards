@@ -7,7 +7,6 @@ pub mod parse;
 use self::id::Identified;
 pub use self::{area::Area, monster::UniqueMonster};
 pub use other::{Chest, Strongbox, Vendor};
-
 use serde::{de, ser::SerializeStruct, Deserialize, Serialize};
 use std::str::FromStr;
 use strum::IntoEnumIterator;

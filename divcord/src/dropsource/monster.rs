@@ -1,6 +1,5 @@
-use std::str::FromStr;
-
 use super::id::{parseid, Identified, UnknownVariant};
+use std::str::FromStr;
 use strum::IntoEnumIterator;
 use strum_macros::EnumIter;
 

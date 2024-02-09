@@ -1,11 +1,10 @@
-use serde::{Deserialize, Serialize};
-use serde_json::Value;
-
 use crate::{
     consts::{CARDS, CARDS_N},
     error::Error,
     league::TradeLeague,
 };
+use serde::{Deserialize, Serialize};
+use serde_json::Value;
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Default)]
 pub struct Sparkline {

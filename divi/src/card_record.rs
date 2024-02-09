@@ -1,9 +1,8 @@
-use serde::{Deserialize, Serialize};
-
 use crate::{
     consts::{CARDS, CONDENSE_FACTOR, LEGACY_CARDS},
     IsCard,
 };
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Default)]
 pub struct DivinationCardRecord {

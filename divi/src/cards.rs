@@ -1,8 +1,3 @@
-use std::{
-    slice::{Iter, IterMut},
-    vec::IntoIter,
-};
-
 use crate::{
     card_record::DivinationCardRecord,
     consts::{CARDS, CARDS_N},
@@ -10,6 +5,10 @@ use crate::{
     sample::{Column, Order},
 };
 use serde::{Deserialize, Serialize};
+use std::{
+    slice::{Iter, IterMut},
+    vec::IntoIter,
+};
 
 /// Holds an array of card records with length equal to the number of all divination cards(For example, 440 in 3.23 patch)
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]

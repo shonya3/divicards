@@ -1,10 +1,9 @@
+use std::fmt::Display;
 use std::{
     fs::{self, File},
     io::BufReader,
     path::PathBuf,
 };
-
-use std::fmt::Display;
 
 #[derive(Debug)]
 pub enum Error {
