@@ -136,11 +136,11 @@ pub fn parse_record_dropsources(
     sources.append(&mut parse_dropses_from(record, poe_data, column)?);
 
     // 3. Read from tags(3rd column)
-    if record.tag_hypothesis == Some(String::from("invasion_boss")) {
+    if record.tag_hypothesis.as_deref() == Some("invasion_boss") {
         sources.push(Source::UniqueMonster(UniqueMonster::AllInvasionBosses))
     }
 
-    if record.tag_hypothesis == Some(String::from("vaalsidearea_boss")) {
+    if record.tag_hypothesis.as_deref() == Some("vaalsidearea_boss") {
         sources.push(Source::UniqueMonster(UniqueMonster::AllVaalSideAreaBosses))
     }
 
@@ -162,21 +162,21 @@ pub fn parse_record_dropsources(
     };
 
     if record.greynote == GreyNote::Delirium {
-        if record.notes
-            == Some("Appears to drop from any source of Delirium Currency rewards".to_string())
+        if record.notes.as_deref()
+            == Some("Appears to drop from any source of Delirium Currency rewards")
         {
             sources.push(Source::DeliriumCurrencyRewards);
         }
     }
 
     if record.greynote == GreyNote::Vendor {
-        if record.notes == Some(String::from("Kirac shop")) {
+        if record.notes.as_deref() == Some("Kirac shop") {
             sources.push(Source::Vendor(Vendor::KiracShop));
         }
     }
 
     // 5. Read notes(last column)
-    if record.notes == Some(String::from("Redeemer influenced maps")) {
+    if record.notes.as_deref() == Some("Redeemer influenced maps") {
         sources.push(Source::Area(Area::RedeemerInfluencedMaps))
     }
 
