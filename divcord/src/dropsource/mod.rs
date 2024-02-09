@@ -1,14 +1,14 @@
 pub mod area;
 pub mod id;
 pub mod monster;
+mod other;
 pub mod parse;
 
-use std::str::FromStr;
-
-use serde::{de, ser::SerializeStruct, Deserialize, Serialize};
-use strum::IntoEnumIterator;
-
 use self::{area::Area, id::Identified, monster::UniqueMonster};
+pub use other::{Chest, Strongbox, Vendor};
+use serde::{de, ser::SerializeStruct, Deserialize, Serialize};
+use std::str::FromStr;
+use strum::IntoEnumIterator;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, strum_macros::EnumIter)]
 pub enum Source {
@@ -230,8 +230,6 @@ impl FromStr for Source {
 
         match s {
             "Disabled" => return Ok(Source::Disabled),
-            // "Unknown" => return Ok(Source::Unknown),
-            "Redeemer influenced maps" => return Ok(Source::Area(Area::RedeemerInfluencedMaps)),
             "Delirium Currency Rewards" => return Ok(Source::DeliriumCurrencyRewards),
             "Maelström of Chaos with Barrel Sextant" => {
                 return Ok(Source::MaelstromOfChaosWithBarrelSextant)
@@ -264,185 +262,6 @@ impl FromStr for Source {
 impl std::fmt::Display for Source {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.id())
-    }
-}
-
-#[derive(
-    Debug,
-    Clone,
-    Serialize,
-    Deserialize,
-    PartialEq,
-    Eq,
-    Hash,
-    strum_macros::EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
-pub enum Vendor {
-    #[default]
-    #[strum(serialize = "Kirac shop")]
-    #[serde(rename = "Kirac shop")]
-    KiracShop,
-}
-
-impl Identified for Vendor {
-    fn id(&self) -> &str {
-        match self {
-            Vendor::KiracShop => "Kirac shop",
-        }
-    }
-}
-
-#[derive(
-    Debug,
-    Clone,
-    Serialize,
-    Deserialize,
-    PartialEq,
-    Eq,
-    Hash,
-    strum_macros::EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
-pub enum Strongbox {
-    #[default]
-    #[strum(serialize = "Jeweller's Strongbox")]
-    #[serde(rename = "Jeweller's Strongbox")]
-    Jeweller,
-    #[strum(serialize = "Armourer's Strongbox")]
-    #[serde(rename = "Armourer's Strongbox")]
-    Armourer,
-    #[strum(serialize = "Cartographer's Strongbox")]
-    #[serde(rename = "Cartographer's Strongbox")]
-    Cartographer,
-    #[strum(serialize = "Gemcutter's Strongbox")]
-    #[serde(rename = "Gemcutter's Strongbox")]
-    Gemcutter,
-    #[strum(serialize = "Arcanist's Strongbox")]
-    #[serde(rename = "Arcanist's Strongbox")]
-    Arcanist,
-    #[strum(serialize = "Artisan's Strongbox")]
-    #[serde(rename = "Artisan's Strongbox")]
-    Artisan,
-}
-
-impl Identified for Strongbox {
-    fn id(&self) -> &str {
-        match self {
-            Strongbox::Jeweller => "Jeweller's Strongbox",
-            Strongbox::Armourer => "Armourer's Strongbox",
-            Strongbox::Cartographer => "Cartographer's Strongbox",
-            Strongbox::Gemcutter => "Gemcutter's Strongbox",
-            Strongbox::Arcanist => "Arcanist's Strongbox",
-            Strongbox::Artisan => "Artisan's Strongbox",
-        }
-    }
-}
-
-#[derive(
-    Debug,
-    Clone,
-    Serialize,
-    Deserialize,
-    PartialEq,
-    Eq,
-    Hash,
-    strum_macros::EnumString,
-    strum_macros::Display,
-    strum_macros::EnumIter,
-    Default,
-)]
-#[serde(tag = "name")]
-pub enum Chest {
-    #[default]
-    #[strum(serialize = "Abyssal Trove")]
-    #[serde(rename = "Abyssal Trove")]
-    AbyssalTrove,
-    #[strum(serialize = "Delve chest")]
-    #[serde(rename = "Delve chest")]
-    DelveChest,
-    #[strum(serialize = "Delve Gem Chests")]
-    #[serde(rename = "Delve Gem Chests")]
-    DelveGemChests,
-    #[strum(serialize = "Voltaxic Sulphite")]
-    #[serde(rename = "Voltaxic Sulphite")]
-    VoltaxicSulphite,
-    #[strum(serialize = "Delve Interactables behind Fractured Wall")]
-    #[serde(rename = "Delve Interactables behind Fractured Wall")]
-    DelveInteractablesBehindFracturedWall,
-    #[strum(serialize = "Light Jewellery chest (Primeval Ruins, Abyssal City, Vaal Outpost)")]
-    #[serde(rename = "Light Jewellery chest (Primeval Ruins, Abyssal City, Vaal Outpost)")]
-    DelveCityLightJewelleryChest,
-    #[strum(serialize = "The Maven's Crucible")]
-    #[serde(rename = "The Maven's Crucible")]
-    MavenCrucible,
-    #[strum(serialize = "Map Reward Heist Chests")]
-    #[serde(rename = "Map Reward Heist Chests")]
-    HeistMapChest,
-    #[strum(serialize = "Breach Clasped Hand")]
-    #[serde(rename = "Breach Clasped Hand")]
-    BreachClaspedHand,
-    #[strum(serialize = "Izaro's Treasure")]
-    #[serde(rename = "Izaro's Treasure")]
-    IzaroTreasure,
-    #[strum(serialize = "Vaal Vessel (Vaal Side Areas)")]
-    #[serde(rename = "Vaal Vessel (Vaal Side Areas)")]
-    VaalVessel,
-    #[strum(
-        serialize = "Uber Labyrinth/Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)",
-        to_string = "Uber Labyrinth or Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)"
-    )]
-    #[serde(
-        rename = "Uber Labyrinth or Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)",
-        alias = "Uber Labyrinth/Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)"
-    )]
-    UberlabChests,
-    #[strum(
-        serialize = "Merciless Labyrinth",
-        to_string = "Merciless Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox, Hidden Coffer)"
-    )]
-    #[serde(
-        rename = "Merciless Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox, Hidden Coffer)",
-        alias = "Merciless Labyrinth"
-    )]
-    MercilessChests,
-    #[serde(rename = "Hidden Coffer")]
-    #[strum(to_string = "Hidden Coffer")]
-    HiddenCoffer,
-    #[strum(serialize = "Labyrinth Darkshrines")]
-    #[serde(rename = "Labyrinth Darkshrines")]
-    Darkshrine,
-    #[strum(serialize = "Booty Chest (Mao Kun)")]
-    #[serde(rename = "Booty Chest (Mao Kun)")]
-    BootyChestMaoKun,
-}
-
-impl Identified for Chest {
-    fn id(&self) -> &str {
-        match self {
-            Chest::AbyssalTrove => "Abyssal Trove",
-            Chest::DelveChest => "Delve chest",
-            Chest::DelveGemChests => "Delve Gem Chests",
-            Chest::VoltaxicSulphite => "Voltaxic Sulphite",
-            Chest::DelveInteractablesBehindFracturedWall => "Delve Interactables behind Fractured Wall",
-            Chest::DelveCityLightJewelleryChest => "Light Jewellery chest (Primeval Ruins, Abyssal City, Vaal Outpost)",
-            Chest::MavenCrucible => "The Maven's Crucible",
-            Chest::HeistMapChest => "Map Reward Heist Chests",
-            Chest::BreachClaspedHand => "Breach Clasped Hand",
-            Chest::IzaroTreasure => "Izaro's Treasure",
-            Chest::VaalVessel => "Vaal Vessel (Vaal Side Areas)",
-            Chest::UberlabChests => "Uber Labyrinth or Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)",
-            Chest::Darkshrine => "Labyrinth Darkshrines",
-            Chest::BootyChestMaoKun => "Booty Chest (Mao Kun)",
-            Chest::MercilessChests => "Merciless Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox, Hidden Coffer)",
-            Chest::HiddenCoffer => "Hidden Coffer",
-        }
     }
 }
 

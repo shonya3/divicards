@@ -1,5 +1,4 @@
 use std::{fmt::Display, marker::PhantomData};
-
 use strum::IntoEnumIterator;
 
 pub trait Identified {
