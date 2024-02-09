@@ -1,18 +1,16 @@
 use divi::IsCard;
 use std::fmt::Display;
 
+use super::{Area, Source, UniqueMonster, Vendor};
 use crate::table::{
     rich::DropsFrom,
     table_record::{Confidence, DivcordTableRecord, GreyNote},
 };
-
 use poe_data::{
     act::{ActArea, ActAreaName},
     cards::Card,
     PoeData,
 };
-
-use super::{area::Area, monster::UniqueMonster, Source, Vendor};
 
 #[derive(Debug)]
 pub enum ParseSourceError {
