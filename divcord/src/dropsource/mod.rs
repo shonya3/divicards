@@ -1,6 +1,7 @@
 pub mod area;
 pub mod id;
 pub mod monster;
+pub mod new_area;
 pub mod parse;
 
 use std::str::FromStr;
