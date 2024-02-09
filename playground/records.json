@@ -13464,6 +13464,13 @@
     "tagHypothesis": "expedition_common_remnant_logbook",
     "confidence": "done",
     "remainingWork": "n/a",
+    "sources": [
+      {
+        "type": "Expedition Logbook",
+        "id": "Expedition Logbook",
+        "kind": "empty-source"
+      }
+    ],
     "notes": "Also found in all Expedition Areas; any Tag or Area relationship for these...?",
     "verifySources": []
   },

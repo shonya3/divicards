@@ -1,5 +1,6 @@
 use super::id::{parseid, Identified, UnknownVariant};
 use std::str::FromStr;
+use strum::IntoEnumIterator;
 use strum_macros::EnumIter;
 
 #[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
@@ -17,6 +18,27 @@ pub enum Area {
     UniqueHeistContractOrBoss(UniqueHeistContractOrBoss),
 }
 
+impl Area {
+    pub fn _type(&self) -> &str {
+        match self {
+            Area::TrialOfStingingDoubt => "Trial of Stinging Doubt",
+            Area::TempleOfAtzoatl => "The Temple of Atzoatl",
+            Area::AllVaalSideAreas => "All Vaal side areas (need specific information)",
+            Area::VaalSideAreas => "Vaal Side Areas",
+            Area::AtziriArea(_) => "Atziri Area",
+            Area::AreaSpecific(_) => "Area-Specific",
+            Area::RedeemerInfluencedMaps => "Redeemer influenced maps",
+            Area::ExpeditionLogbook => "Expedition Logbook",
+            Area::LabyrinthTrialAreas => "Labyrinth Trial Areas",
+            Area::UniqueHeistContractOrBoss(_) => "Unique heist contract or boss",
+        }
+    }
+
+    pub fn _types() -> impl Iterator<Item = String> {
+        Area::iter().map(|a| a._type().to_string())
+    }
+}
+
 impl FromStr for Area {
     type Err = strum::ParseError;
 
@@ -28,6 +50,7 @@ impl FromStr for Area {
             "All Vaal side areas (need specific information)" => Ok(Self::AllVaalSideAreas),
             "Vaal Side Areas" => Ok(Self::VaalSideAreas),
             "Labyrinth Trial Areas" => Ok(Self::LabyrinthTrialAreas),
+            "Expedition Logbook" => Ok(Self::ExpeditionLogbook),
             _ => AreaSpecific::from_str(s)
                 .map(|a| Self::AreaSpecific(a))
                 .or_else(|_| AtziriArea::from_str(s).map(|a| Self::AtziriArea(a)))
