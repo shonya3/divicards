@@ -144,6 +144,10 @@ pub fn parse_record_dropsources(
         sources.push(Source::UniqueMonster(UniqueMonster::AllVaalSideAreaBosses))
     }
 
+    if record.tag_hypothesis.as_deref() == Some("expedition_common_remnant_logbook") {
+        sources.push(Source::Area(Area::ExpeditionLogbook))
+    }
+
     // 4. Read greynotes(first column)
     if record.greynote == GreyNote::GlobalDrop {
         let Card {
