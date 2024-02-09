@@ -1,9 +1,6 @@
 use std::str::FromStr;
 
-use super::{
-    parse_id::{parseid, UnknownVariant},
-    Identified,
-};
+use super::id::{parseid, Identified, UnknownVariant};
 use strum::IntoEnumIterator;
 use strum_macros::EnumIter;
 
@@ -344,7 +341,7 @@ impl Identified for SyndicateMember {
         }
     }
 
-    fn alises(&self) -> Vec<&str> {
+    fn aliases(&self) -> Vec<&str> {
         match self {
             SyndicateMember::Haku => vec!["Haku"],
             _ => vec![],
@@ -751,7 +748,7 @@ impl Identified for OshabiBoss {
         "Oshabi, Avatar of the Grove"
     }
 
-    fn alises(&self) -> Vec<&str> {
+    fn aliases(&self) -> Vec<&str> {
         vec!["Oshabi"]
     }
 }

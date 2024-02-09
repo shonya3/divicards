@@ -1,28 +1,14 @@
 pub mod area;
+pub mod id;
 pub mod monster;
 pub mod parse;
-pub mod parse_id;
 
 use std::str::FromStr;
 
 use serde::{de, ser::SerializeStruct, Deserialize, Serialize};
 use strum::IntoEnumIterator;
 
-use self::{area::Area, monster::UniqueMonster};
-
-pub trait Identified {
-    fn id(&self) -> &str;
-
-    fn alises(&self) -> Vec<&str> {
-        vec![]
-    }
-
-    // fn id_and_aliases(&self) -> Vec<&str> {
-    //     let mut a = self.alises();
-    //     a.push(self.id());
-    //     a
-    // }
-}
+use self::{area::Area, id::Identified, monster::UniqueMonster};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, strum_macros::EnumIter)]
 pub enum Source {

@@ -2,7 +2,13 @@ use std::{fmt::Display, marker::PhantomData};
 
 use strum::IntoEnumIterator;
 
-use super::Identified;
+pub trait Identified {
+    fn id(&self) -> &str;
+
+    fn aliases(&self) -> Vec<&str> {
+        vec![]
+    }
+}
 
 #[derive(Debug)]
 pub struct UnknownVariant<T>(pub String, PhantomData<T>);
@@ -25,7 +31,7 @@ where
     T: Identified + IntoEnumIterator,
 {
     for variant in T::iter() {
-        if s == variant.id() || variant.alises().iter().any(|alias| s == *alias) {
+        if s == variant.id() || variant.aliases().iter().any(|alias| s == *alias) {
             return Ok(variant);
         }
     }
@@ -65,7 +71,7 @@ mod test {
                 }
             }
 
-            fn alises(&self) -> Vec<&'static str> {
+            fn aliases(&self) -> Vec<&'static str> {
                 match self {
                     TestEnum::A => vec!["aa"],
                     _ => vec![],

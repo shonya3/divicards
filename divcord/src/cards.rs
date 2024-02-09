@@ -4,7 +4,7 @@ use poe_data::{mapbosses::MapBoss, PoeData};
 use serde::Serialize;
 
 use crate::{
-    dropsource::{Identified, Source},
+    dropsource::{id::Identified, Source},
     table::table_record::SourcefulDivcordTableRecord,
 };
 
