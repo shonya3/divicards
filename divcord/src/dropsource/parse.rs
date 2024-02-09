@@ -12,7 +12,7 @@ use poe_data::{
     PoeData,
 };
 
-use super::{area::Area, monster::UniqueMonster, Source, Vendor};
+use super::{monster::UniqueMonster, new_area::Area, Source, Vendor};
 
 #[derive(Debug)]
 pub enum ParseSourceError {

@@ -1,4 +1,3 @@
-pub mod area;
 pub mod id;
 pub mod monster;
 pub mod new_area;
@@ -9,7 +8,7 @@ use std::str::FromStr;
 use serde::{de, ser::SerializeStruct, Deserialize, Serialize};
 use strum::IntoEnumIterator;
 
-use self::{area::Area, id::Identified, monster::UniqueMonster};
+use self::{id::Identified, monster::UniqueMonster, new_area::Area};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, strum_macros::EnumIter)]
 pub enum Source {
