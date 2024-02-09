@@ -121,10 +121,6 @@ impl Source {
         }
     }
 
-    pub fn _id(&self) -> &str {
-        self.id()
-    }
-
     pub fn types() -> Vec<String> {
         let mut vec: Vec<String> = vec![];
         Source::iter().for_each(|source| match source {
@@ -174,18 +170,15 @@ impl Serialize for Source {
     {
         let mut source = serializer.serialize_struct("Source", 5)?;
         let _type = self._type();
-        let _id = self._id();
+        let id = self.id();
 
         source.serialize_field("type", _type)?;
-        match _type == _id {
-            true => {
-                source.serialize_field("id", &self._id())?;
-                source.serialize_field("kind", "empty-source")?;
-            }
-            false => {
-                source.serialize_field("id", &self._id())?;
-                source.serialize_field("kind", "source-with-member")?;
-            }
+        source.serialize_field("id", &id)?;
+
+        if _type == id {
+            source.serialize_field("kind", "empty-source")?;
+        } else {
+            source.serialize_field("kind", "source-with-member")?;
         }
 
         if let Source::GlobalDrop {
