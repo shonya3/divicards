@@ -1,5 +1,5 @@
 pub mod area;
-pub mod new_monster;
+pub mod monster;
 pub mod parse;
 pub mod parse_id;
 
@@ -8,7 +8,7 @@ use std::str::FromStr;
 use serde::{de, ser::SerializeStruct, Deserialize, Serialize};
 use strum::IntoEnumIterator;
 
-use self::{area::Area, new_monster::UniqueMonster};
+use self::{area::Area, monster::UniqueMonster};
 
 pub trait Identified {
     fn id(&self) -> &str;
