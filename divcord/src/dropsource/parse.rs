@@ -253,6 +253,25 @@ pub fn parse_dropses_from(
     Ok(sources)
 }
 
+fn strip_comment(input: &str) -> String {
+    let mut result = String::new();
+    let mut inside_brackets = false;
+
+    for c in input.chars() {
+        match c {
+            '(' => inside_brackets = true,
+            ')' => inside_brackets = false,
+            _ => {
+                if !inside_brackets {
+                    result.push(c);
+                }
+            }
+        }
+    }
+
+    result.trim().to_owned()
+}
+
 pub fn parse_one_drops_from(
     d: &DropsFrom,
     record: &DivcordTableRecord,
@@ -352,7 +371,7 @@ pub fn parse_one_drops_from(
             return Ok(vec![Source::Map(map.name.to_owned())]);
         }
 
-        let s = s.split("(").next().unwrap().trim().to_string();
+        let s = strip_comment(&s);
         if let Some(_) = mapbosses.iter().find(|b| b.name == s) {
             return Ok(vec![Source::MapBoss(s)]);
         }

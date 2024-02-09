@@ -1,0 +1,12 @@
+[package]
+name = "divcord_test"
+version.workspace = true
+edition.workspace = true
+repository.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+divcord = {path = "../"}
+tokio = { workspace = true, features = ["full"] }
+poe_data = {path = "../../poe_data", features = ["fetch"]}
