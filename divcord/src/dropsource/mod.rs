@@ -74,6 +74,39 @@ impl<'de> Deserialize<'de> for Source {
     }
 }
 
+impl FromStr for Source {
+    type Err = strum::ParseError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "Disabled" => return Ok(Source::Disabled),
+            "Delirium Currency Rewards" => return Ok(Source::DeliriumCurrencyRewards),
+            "Maelström of Chaos with Barrel Sextant" => {
+                return Ok(Source::MaelstromOfChaosWithBarrelSextant)
+            }
+            "Global Drop" => {
+                return Ok(Source::GlobalDrop {
+                    min_level: None,
+                    max_level: None,
+                })
+            }
+            _ => UniqueMonster::from_str(s)
+                .map(|monster| Self::UniqueMonster(monster))
+                .or_else(|_| Area::from_str(s).map(|area| Self::Area(area)))
+                .or_else(|_| Vendor::from_str(s).map(|vendor| Self::Vendor(vendor)))
+                .or_else(|_| Strongbox::from_str(s).map(|strongbox| Self::Strongbox(strongbox)))
+                .or_else(|_| Chest::from_str(s).map(|chest| Self::Chest(chest)))
+                .or_else(|_| Err(strum::ParseError::VariantNotFound)),
+        }
+    }
+}
+
+impl std::fmt::Display for Source {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.id())
+    }
+}
+
 impl Identified for Source {
     fn id(&self) -> &str {
         match self {
@@ -201,60 +234,6 @@ impl Serialize for Source {
         }
 
         source.end()
-    }
-}
-
-impl FromStr for Source {
-    type Err = strum::ParseError;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        if s == "Redeemer influenced maps" {
-            return Ok(Source::Area(Area::RedeemerInfluencedMaps));
-        }
-        if s == "Delirium Currency Rewards" {
-            return Ok(Source::DeliriumCurrencyRewards);
-        }
-        if s == "Global Drop" {
-            return Ok(Source::GlobalDrop {
-                min_level: None,
-                max_level: None,
-            });
-        }
-
-        match s {
-            "Disabled" => return Ok(Source::Disabled),
-            "Delirium Currency Rewards" => return Ok(Source::DeliriumCurrencyRewards),
-            "Maelström of Chaos with Barrel Sextant" => {
-                return Ok(Source::MaelstromOfChaosWithBarrelSextant)
-            }
-            "Global Drop" => {
-                return Ok(Source::GlobalDrop {
-                    min_level: None,
-                    max_level: None,
-                })
-            }
-            _ => {}
-        };
-
-        if let Ok(uniquemonster) = UniqueMonster::from_str(s) {
-            return Ok(Source::UniqueMonster(uniquemonster));
-        } else if let Ok(area) = Area::from_str(s) {
-            return Ok(Source::Area(area));
-        } else if let Ok(vendor) = Vendor::from_str(s) {
-            return Ok(Source::Vendor(vendor));
-        } else if let Ok(strongbox) = Strongbox::from_str(s) {
-            return Ok(Source::Strongbox(strongbox));
-        } else if let Ok(chest) = Chest::from_str(s) {
-            return Ok(Source::Chest(chest));
-        }
-
-        Err(strum::ParseError::VariantNotFound)
-    }
-}
-
-impl std::fmt::Display for Source {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.id())
     }
 }
 
