@@ -55,7 +55,7 @@ impl DataLoader<CardsData, Error> for CardsLoader {
     }
 
     async fn fetch(&self) -> Result<CardsData, Error> {
-        crate::cards::fetch().await
+        crate::cards::fetch::fetch().await
     }
 }
 
