@@ -1,8 +1,6 @@
-use std::collections::HashMap;
-
-use serde::{Deserialize, Serialize};
-
 use crate::league::LeagueReleaseInfo;
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 
 pub const POE_CDN_CARDS: &'static str = "https://web.poecdn.com/image/divination-card/";
 
@@ -91,51 +89,12 @@ pub async fn fetch() -> Result<CardsData, crate::error::Error> {
     vec.sort_by(|a, b| {
         let a_weight = a.weight.unwrap_or(big_value);
         let b_weight = b.weight.unwrap_or(big_value);
-        return a_weight.partial_cmp(&b_weight).unwrap();
+        a_weight.partial_cmp(&b_weight).unwrap()
     });
-    // dbg!(vec.into_iter().map(|c| c.name).collect::<Vec<String>>());
-
-    // HashMap::from_iter(vec.into_iter())
 
     return Ok(CardsData(HashMap::from_iter(
         vec.into_iter().map(|c| (c.name.clone(), c)),
     )));
-    // return Ok(CardsData(HashMap::new()));
-
-    // return Ok(CardsData(
-    //     sample
-    //         .cards
-    //         .into_iter()
-    //         .map(|card| {
-    //             let (min_level, max_level, release_version) = wiki_vec
-    //                 .iter()
-    //                 .position(|w| w.name == card.name)
-    //                 .and_then(|index| Some(wiki_vec.swap_remove(index)))
-    //                 .map(|w| (w.min_level, w.max_level, w.release_version))
-    //                 .unwrap_or_default();
-
-    //             let league = release_version
-    //                 .map(|version| {
-    //                     league_info_vec
-    //                         .iter()
-    //                         .find(|info| info.version.same_league(&version))
-    //                 })
-    //                 .flatten()
-    //                 .cloned();
-
-    //             (
-    //                 card.name.clone(),
-    //                 Card {
-    //                     name: card.name,
-    //                     min_level,
-    //                     max_level,
-    //                     weight: card.weight,
-    //                     price: card.price,
-    //                     league,
-    //                 },
-    //             )
-    //         })
-    //         .collect(),
 
     #[derive(Serialize, Deserialize, Debug, Clone)]
     pub struct WikiCard {
