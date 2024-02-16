@@ -25,7 +25,7 @@ impl DataLoader<Vec<Map>, Error> for MapsLoader {
     }
 
     fn reload(&self) -> bool {
-        return false;
+        false
     }
 
     async fn fetch(&self) -> Result<Vec<Map>, Error> {
