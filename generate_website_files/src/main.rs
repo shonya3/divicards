@@ -10,21 +10,31 @@ use serde::Serialize;
 
 #[tokio::main]
 async fn main() {
+    // Prepare paths
     let dir = PathBuf::from("../../divicards-site/src/gen");
-    if !dir.exists() {
-        std::fs::create_dir_all(&dir).unwrap();
+    let json_dir = dir.join("json");
+    if !json_dir.exists() {
+        std::fs::create_dir_all(&json_dir).unwrap();
     }
 
+    // 1. Compile WASM Divcord
     divcord_wasm_pkg(&dir, "divcordWasm");
 
+    // 2. Write data jsons
     let divcord_table = DivcordTable::load().await.unwrap();
     let poe_data = PoeData::load().await.unwrap();
     let card_element = DivinationCardElementData::load().await.unwrap();
     let records = divcord_table.sourceful_records(&poe_data).unwrap();
 
-    write(&records, &dir, "records.json");
-    write(&poe_data, &dir, PoeData::filename());
-    write(&card_element, &dir, DivinationCardElementData::filename());
+    write(&records, &json_dir, "records.json");
+    write(&poe_data, &json_dir, PoeData::filename());
+    write(
+        &card_element,
+        &json_dir,
+        DivinationCardElementData::filename(),
+    );
+
+    // 3. Generate TypeScript
     std::fs::write(
         dir.join("Source.ts"),
         &divcord::dropsource::Source::typescript_types(),
