@@ -26,7 +26,7 @@ async fn main() {
     write(&poe_data, &dir, PoeData::filename());
     write(&card_element, &dir, DivinationCardElementData::filename());
     std::fs::write(
-        dir.join("ISource.interface.ts"),
+        dir.join("Source.ts"),
         &divcord::dropsource::Source::typescript_types(),
     )
     .unwrap();

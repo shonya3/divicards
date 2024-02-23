@@ -178,7 +178,7 @@ export type EmptySourceKind = 'empty-source';
 export type SourceWithMemberKind = 'source-with-member';
 export type Kind = EmptySourceKind | SourceWithMemberKind;
 export type EmptySource = {{ type: SourceType; id: string; kind: EmptySourceKind; min_level?: number; max_level?: number}};
-export type ISource = SourceWithMember | EmptySource;
+export type Source = SourceWithMember | EmptySource;
 export const SOURCE_TYPE_VARIANTS = {_types} as const;
 
 export type SourceType = (typeof SOURCE_TYPE_VARIANTS)[number];
