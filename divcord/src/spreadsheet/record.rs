@@ -4,6 +4,29 @@ use divi::{sample::fix_name, IsCard};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
+#[derive(Debug, Serialize, Clone, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Record {
+    pub id: usize,
+    #[serde(default)]
+    pub greynote: GreyNote,
+    pub card: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tag_hypothesis: Option<String>,
+    pub confidence: Confidence,
+    #[serde(default)]
+    pub remaining_work: RemainingWork,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub sources: Vec<Source>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub wiki_disagreements: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub sources_with_tag_but_not_on_wiki: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub notes: Option<String>,
+    pub verify_sources: Vec<Source>,
+}
+
 #[derive(Debug, Serialize, Deserialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Dumb {
@@ -67,29 +90,6 @@ impl Dumb {
             id: row_index + 3,
         })
     }
-}
-
-#[derive(Debug, Serialize, Clone, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Record {
-    pub id: usize,
-    #[serde(default)]
-    pub greynote: GreyNote,
-    pub card: String,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag_hypothesis: Option<String>,
-    pub confidence: Confidence,
-    #[serde(default)]
-    pub remaining_work: RemainingWork,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub sources: Vec<Source>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub wiki_disagreements: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub sources_with_tag_but_not_on_wiki: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub notes: Option<String>,
-    pub verify_sources: Vec<Source>,
 }
 
 pub fn parse_card_name(val: &Value) -> Result<String, Error> {
