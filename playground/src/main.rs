@@ -4,7 +4,7 @@ use std::{clone, path::Display};
 
 use divcord::{
     dropsource::Source,
-    table::{rich::RichColumn, table_record::SourcefulDivcordTableRecord, DivcordTable},
+    spreadsheet::{record::Record, rich::RichColumn, Spreadsheet},
 };
 use error::Error;
 use poe_data::{consts::WIKI_API_URL, league::LeagueReleaseInfo, PoeData};
@@ -13,7 +13,7 @@ use serde_json::Value;
 
 mod error;
 
-fn check_deserialize() -> Result<Vec<SourcefulDivcordTableRecord>, Error> {
+fn check_deserialize() -> Result<Vec<Record>, Error> {
     let json = std::fs::read_to_string("records.json")?;
     let records = serde_json::from_str(&json)?;
     Ok(records)
@@ -21,15 +21,15 @@ fn check_deserialize() -> Result<Vec<SourcefulDivcordTableRecord>, Error> {
 
 #[tokio::main]
 async fn main() {
-    let divcord_table = DivcordTable::load().await.unwrap();
+    let spreadsheet = Spreadsheet::load().await.unwrap();
     let poe_data = PoeData::load().await.unwrap();
-    let records = divcord_table.sourceful_records(&poe_data).unwrap();
+    let records = divcord::records(&spreadsheet, &poe_data).unwrap();
     let json = serde_json::to_string_pretty(&records).unwrap();
     std::fs::write("records.json", &json).unwrap();
 
     let records = check_deserialize().unwrap();
 
-    let empty: Vec<SourcefulDivcordTableRecord> = records
+    let empty: Vec<Record> = records
         .clone()
         .into_iter()
         .filter(|r| r.sources.is_empty())
@@ -39,10 +39,7 @@ async fn main() {
 
     // Source::write_typescript_file().unwrap();
 
-    for (index, record) in divcord_table
-        .sourceful_records_iter(poe_data.clone())
-        .enumerate()
-    {
+    for (index, record) in divcord::records_iter(&spreadsheet, &poe_data).enumerate() {
         // if index == 63 {
         //     println!("{record:#?}");
         // }
@@ -66,7 +63,7 @@ fn h_column() -> RichColumn {
     serde_json::from_str(&std::fs::read_to_string("H.json").unwrap()).unwrap()
 }
 
-pub async fn inspect_h_column(divcord_table: DivcordTable) {
+pub async fn inspect_h_column(spreadsheet: Spreadsheet) {
     fetch_h().await;
     let mut erroneus_cell_indexes = vec![];
     for (index, cell) in h_column().cells().enumerate() {
@@ -81,7 +78,7 @@ pub async fn inspect_h_column(divcord_table: DivcordTable) {
     }
     println!("Erroneus cells: {erroneus_cell_indexes:?}");
 
-    for record in divcord_table.records() {
+    for record in spreadsheet.dumb_records() {
         let record = record.unwrap();
 
         if record.id == 66 {
@@ -130,15 +127,15 @@ pub async fn fetch_f_h() -> RichColumn {
 
 // #[tokio::main]
 // async fn main() {
-//     let divcord_table = DivcordTable::load().await.unwrap();
+//     let spreadsheet = DivcordTable::load().await.unwrap();
 //     let poe_data = PoeData::load().await.unwrap();
-//     let records = divcord_table.sourceful_records(&poe_data).unwrap();
+//     let records = spreadsheet.sourceful_records(&poe_data).unwrap();
 //     let json = serde_json::to_string_pretty(&records).unwrap();
 //     std::fs::write("records.json", &json).unwrap();
 
 //     let records = check_deserialize().unwrap();
 
-//     let empty: Vec<SourcefulDivcordTableRecord> = records
+//     let empty: Vec<SourcefulRecord> = records
 //         .clone()
 //         .into_iter()
 //         .filter(|r| r.sources.is_empty())

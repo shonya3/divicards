@@ -1,7 +1,11 @@
 use super::{Area, Source, UniqueMonster, Vendor};
-use crate::table::{
-    rich::DropsFrom,
-    table_record::{Confidence, DivcordTableRecord, GreyNote},
+use crate::{
+    error::Error,
+    spreadsheet::{
+        record::{Confidence, Dumb, GreyNote, Record},
+        rich::DropsFrom,
+        Spreadsheet,
+    },
 };
 use divi::IsCard;
 use poe_data::{
@@ -10,6 +14,37 @@ use poe_data::{
     PoeData,
 };
 use std::fmt::Display;
+
+pub fn records_iter<'a>(
+    spreadsheet: &'a Spreadsheet,
+    poe_data: &'a PoeData,
+) -> impl Iterator<Item = Result<Record, Error>> + 'a {
+    spreadsheet
+        .dumb_records()
+        .map(|dumb| Ok(Record::from_dumb(dumb?, poe_data)?))
+}
+
+pub fn records(spreadsheet: &Spreadsheet, poe_data: &PoeData) -> Result<Vec<Record>, Error> {
+    records_iter(spreadsheet, poe_data).collect()
+}
+
+impl Record {
+    pub fn from_dumb(dumb: Dumb, poe_data: &PoeData) -> Result<Self, ParseSourceError> {
+        Ok(Record {
+            sources: parse_record_dropsources(&dumb, poe_data)?,
+            verify_sources: parse_dropses_from(&dumb, poe_data, RichColumnVariant::Verify)?,
+            id: dumb.id,
+            greynote: dumb.greynote,
+            card: dumb.card,
+            tag_hypothesis: dumb.tag_hypothesis,
+            confidence: dumb.confidence,
+            remaining_work: dumb.remaining_work,
+            wiki_disagreements: dumb.wiki_disagreements,
+            sources_with_tag_but_not_on_wiki: dumb.sources_with_tag_but_not_on_wiki,
+            notes: dumb.notes,
+        })
+    }
+}
 
 #[derive(Debug)]
 pub enum ParseSourceError {
@@ -104,25 +139,24 @@ pub fn record_url(id: usize, column: DivcordColumn) -> String {
 }
 
 pub fn parse_record_dropsources(
-    record: &DivcordTableRecord,
+    dumb: &Dumb,
     poe_data: &PoeData,
-    column: RichColumnVariant,
 ) -> Result<Vec<Source>, ParseSourceError> {
     let mut sources: Vec<Source> = vec![];
 
     // 1. Legacy cards rules
-    if record.card.as_str().is_legacy_card() && record.greynote != GreyNote::Disabled {
+    if dumb.card.as_str().is_legacy_card() && dumb.greynote != GreyNote::Disabled {
         return Err(ParseSourceError::LegacyCardShouldBeMarkedAsDisabled {
-            record_id: record.id,
-            card: record.card.to_owned(),
+            record_id: dumb.id,
+            card: dumb.card.to_owned(),
         });
     }
 
-    if record.greynote == GreyNote::Disabled {
-        if !record.card.as_str().is_legacy_card() {
+    if dumb.greynote == GreyNote::Disabled {
+        if !dumb.card.as_str().is_legacy_card() {
             return Err(ParseSourceError::GreynoteDisabledCardShouldBeLegacy {
-                record_id: record.id,
-                card: record.card.to_owned(),
+                record_id: dumb.id,
+                card: dumb.card.to_owned(),
             });
         }
         sources.push(Source::Disabled);
@@ -130,65 +164,67 @@ pub fn parse_record_dropsources(
     }
 
     // 2. Parse sources from "Wiki Map/Monster Agreements" column(the main part)
-    sources.append(&mut parse_dropses_from(record, poe_data, column)?);
+    sources.append(&mut parse_dropses_from(
+        dumb,
+        poe_data,
+        RichColumnVariant::Sources,
+    )?);
 
     // 3. Read from tags(3rd column)
-    if record.tag_hypothesis.as_deref() == Some("invasion_boss") {
+    if dumb.tag_hypothesis.as_deref() == Some("invasion_boss") {
         sources.push(Source::UniqueMonster(UniqueMonster::AllInvasionBosses))
     }
 
-    if record.tag_hypothesis.as_deref() == Some("vaalsidearea_boss") {
+    if dumb.tag_hypothesis.as_deref() == Some("vaalsidearea_boss") {
         sources.push(Source::UniqueMonster(UniqueMonster::AllVaalSideAreaBosses))
     }
 
-    if record.tag_hypothesis.as_deref() == Some("expedition_common_remnant_logbook") {
+    if dumb.tag_hypothesis.as_deref() == Some("expedition_common_remnant_logbook") {
         sources.push(Source::Area(Area::ExpeditionLogbook))
     }
 
     // 4. Read greynotes(first column)
-    if record.greynote == GreyNote::GlobalDrop {
+    if dumb.greynote == GreyNote::GlobalDrop {
         let Card {
             min_level,
             max_level,
             ..
-        } = poe_data.cards.card(&record.card).to_owned();
+        } = poe_data.cards.card(&dumb.card).to_owned();
         sources.push(Source::GlobalDrop {
             min_level,
             max_level,
         });
     };
 
-    if record.greynote == GreyNote::Delirium {
-        if record.notes.as_deref()
+    if dumb.greynote == GreyNote::Delirium {
+        if dumb.notes.as_deref()
             == Some("Appears to drop from any source of Delirium Currency rewards")
         {
             sources.push(Source::DeliriumCurrencyRewards);
         }
     }
 
-    if record.greynote == GreyNote::Vendor {
-        if record.notes.as_deref() == Some("Kirac shop") {
+    if dumb.greynote == GreyNote::Vendor {
+        if dumb.notes.as_deref() == Some("Kirac shop") {
             sources.push(Source::Vendor(Vendor::KiracShop));
         }
     }
 
     // 5. Read notes(last column)
-    if record.notes.as_deref() == Some("Redeemer influenced maps") {
+    if dumb.notes.as_deref() == Some("Redeemer influenced maps") {
         sources.push(Source::Area(Area::RedeemerInfluencedMaps))
     }
 
     // 6. Final rules
-    if record.confidence == Confidence::None && sources.len() > 0 {
+    if dumb.confidence == Confidence::None && sources.len() > 0 {
         // println!("{} {} {sources:?}", record.id, record.card);
     }
 
-    if record.greynote != GreyNote::Empty
-        && sources.is_empty()
-        && record.confidence == Confidence::Done
+    if dumb.greynote != GreyNote::Empty && sources.is_empty() && dumb.confidence == Confidence::Done
     {
         return Err(ParseSourceError::SourceIsExptectedButEmpty {
-            record_id: record.id,
-            card: record.card.to_owned(),
+            record_id: dumb.id,
+            card: dumb.card.to_owned(),
         });
     }
 
@@ -211,7 +247,7 @@ impl RichColumnVariant {
 
 /// Parses all instances of record's drops_from and collects it into one Vec<Source>
 pub fn parse_dropses_from(
-    record: &DivcordTableRecord,
+    dumb: &Dumb,
     poe_data: &PoeData,
     column: RichColumnVariant,
 ) -> Result<Vec<Source>, ParseSourceError> {
@@ -219,11 +255,11 @@ pub fn parse_dropses_from(
 
     match column {
         RichColumnVariant::Sources => {
-            for d in &record.sources_drops_from {
-                let Ok(mut inner_sources) = parse_one_drops_from(d, &record, poe_data) else {
+            for d in &dumb.sources_drops_from {
+                let Ok(mut inner_sources) = parse_one_drops_from(d, &dumb, poe_data) else {
                     return Err(ParseSourceError::UnknownVariant {
-                        card: record.card.to_owned(),
-                        record_id: record.id,
+                        card: dumb.card.to_owned(),
+                        record_id: dumb.id,
                         drops_from: d.to_owned(),
                     });
                 };
@@ -231,17 +267,17 @@ pub fn parse_dropses_from(
             }
         }
         RichColumnVariant::Verify => {
-            if record.greynote == GreyNote::Disabled {
+            if dumb.greynote == GreyNote::Disabled {
                 return Ok(vec![]);
             }
 
-            for d in &record.verify_drops_from {
-                let Ok(mut inner_sources) = parse_one_drops_from(d, &record, poe_data) else {
+            for d in &dumb.verify_drops_from {
+                let Ok(mut inner_sources) = parse_one_drops_from(d, &dumb, poe_data) else {
                     println!("parse_one_drops_from Unknown variant {d:#?}");
 
                     return Err(ParseSourceError::UnknownVariant {
-                        card: record.card.to_owned(),
-                        record_id: record.id,
+                        card: dumb.card.to_owned(),
+                        record_id: dumb.id,
                         drops_from: d.to_owned(),
                     });
                 };
@@ -274,7 +310,7 @@ fn strip_comment(input: &str) -> String {
 
 pub fn parse_one_drops_from(
     d: &DropsFrom,
-    record: &DivcordTableRecord,
+    dumb: &Dumb,
     poe_data: &PoeData,
 ) -> Result<Vec<Source>, ParseSourceError> {
     if d.styles.strikethrough == true {
@@ -288,10 +324,10 @@ pub fn parse_one_drops_from(
         mapbosses,
     } = poe_data;
 
-    let card = cards.card(&record.card);
+    let card = cards.card(&dumb.card);
     let card_drop_level_requirement = card.min_level.unwrap_or_default();
-    let card_name = &record.card;
-    let row = record.id;
+    let card_name = &dumb.card;
+    let row = dumb.id;
     if let Ok(source) = d.name.parse::<Source>() {
         match source.to_string().as_str() {
             "The Alluring Abyss" => {
@@ -317,7 +353,7 @@ pub fn parse_one_drops_from(
 
     // Acts areas or act area bosses
     if d.styles.italic == true
-        && (d.styles.color.as_str() == "#FFFFFF" || record.greynote == GreyNote::Story)
+        && (d.styles.color.as_str() == "#FFFFFF" || dumb.greynote == GreyNote::Story)
     {
         let ids = parse_act_areas(d, &acts, card_drop_level_requirement.try_into().unwrap());
         if ids.is_empty() {
@@ -353,7 +389,7 @@ pub fn parse_one_drops_from(
 
     // Maps or MapBosses
     if (d.styles.italic == false && d.styles.color.as_str() == "#FFFFFF")
-        || record.greynote == GreyNote::AreaSpecific
+        || dumb.greynote == GreyNote::AreaSpecific
     {
         let s = &d.name;
 
@@ -378,8 +414,8 @@ pub fn parse_one_drops_from(
     }
 
     Err(ParseSourceError::UnknownVariant {
-        card: record.card.to_owned(),
-        record_id: record.id,
+        card: dumb.card.to_owned(),
+        record_id: dumb.id,
         drops_from: d.to_owned(),
     })
 }

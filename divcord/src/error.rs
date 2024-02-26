@@ -1,4 +1,4 @@
-use crate::{dropsource::parse::ParseSourceError, table::rich::ParseCellError};
+use crate::{dropsource::parse::ParseSourceError, spreadsheet::rich::ParseCellError};
 use std::fmt::Display;
 
 #[derive(Debug)]
@@ -14,7 +14,7 @@ pub enum Error {
     ParseSourceError(ParseSourceError),
     #[cfg(feature = "fetch")]
     LoaderError(loader::Error),
-    ParseCellError(crate::table::rich::ParseCellError),
+    ParseCellError(crate::spreadsheet::rich::ParseCellError),
 }
 
 impl Display for Error {

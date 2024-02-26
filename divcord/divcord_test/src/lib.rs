@@ -1,18 +1,18 @@
 #[cfg(test)]
 mod tests {
-    use divcord::table::{rich::DropsFrom, table_record::DivcordTableRecord};
+    use divcord::spreadsheet::{record::Dumb, rich::DropsFrom};
     use poe_data::PoeData;
 
     #[tokio::test]
     async fn two_dropsources_should_throw_error() {
         use divcord::dropsource::parse::*;
-        use divcord::table::{
+        use divcord::spreadsheet::{
+            record::{Confidence, GreyNote, RemainingWork},
             rich::{FontStyles, HexColor},
-            table_record::{Confidence, GreyNote, RemainingWork},
         };
 
         let poe_data = PoeData::load().await.unwrap();
-        let record =  DivcordTableRecord {
+        let record =  Dumb {
     id: 230,
     greynote: GreyNote::Empty,
     card: "The Demon".to_owned(),

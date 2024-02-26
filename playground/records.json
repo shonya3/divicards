@@ -4301,7 +4301,7 @@
     "card": "Rats",
     "tagHypothesis": "warehouse_area",
     "confidence": "done",
-    "remainingWork": "story only",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Map",
@@ -4322,18 +4322,16 @@
         "type": "Act",
         "id": "2_8_9",
         "kind": "source-with-member"
-      }
-    ],
-    "wikiDisagreements": "The Imperial Fields",
-    "sourcesWithTagButNotOnWiki": "The Refinery",
-    "notes": "3.21 - disproved Rats 99% in Imperial Fields\n3.23 - Added Port\n\n3.23 patch notes: \"Azure Rage, Rats, The Tireless Extractor, The Return of the Rat, and Three Faces in the Dark can now be found in the Port Map.\"\nAt least some of these Cards have the current hypothesis of `warehouse_area`. Port does not have `warehouse_area`. We need new hypotheses that explain Port.\n* Port has `marketplace_area, urban_sarn_area, dock_area, ocean_area, ruined_area`, but not `warehouse_area`.\n* Azure Rage has no Tag hypothesis.\n* Rats has `warehouse_area`.\n* The Tireless Extractor has no Tag hypothesis.\n* Return of the Rat has `warehouse_area`. Verified in A9 The Refinery which has solely `warehouse_area`.\n* Three Faces in the Dark has `warehouse_area`. Verified in A9 The Refinery which has solely `warehouse_area`.\n\n* Port cannot be explained by just one of `marketplace_area`, `urban_sarn_area`, `dock_area`, `ocean_area`, or `ruined_area`: any of these alone would imply non-eligible Areas.\n* Port is uniquely identified by any of the following possible Tag combinations: `marketplace_area + ocean_area`; or `urban_sarn_area + ocean_area`; or `dock_area + ruined_area`.\n* A possible but weird/unlikely hypothesis could be: \"Area drop in an Area whose Boss has `matryoshka_boss`\".",
-    "verifySources": [
+      },
       {
         "type": "Act",
         "id": "2_9_9",
         "kind": "source-with-member"
       }
-    ]
+    ],
+    "wikiDisagreements": "The Imperial Fields",
+    "notes": "3.21 - disproved Rats 99% in Imperial Fields\n3.23 - Added Port\n\n3.23 patch notes: \"Azure Rage, Rats, The Tireless Extractor, The Return of the Rat, and Three Faces in the Dark can now be found in the Port Map.\"\nAt least some of these Cards have the current hypothesis of `warehouse_area`. Port does not have `warehouse_area`. We need new hypotheses that explain Port.\n* Port has `marketplace_area, urban_sarn_area, dock_area, ocean_area, ruined_area`, but not `warehouse_area`.\n* Azure Rage has no Tag hypothesis.\n* Rats has `warehouse_area`.\n* The Tireless Extractor has no Tag hypothesis.\n* Return of the Rat has `warehouse_area`. Verified in A9 The Refinery which has solely `warehouse_area`.\n* Three Faces in the Dark has `warehouse_area`. Verified in A9 The Refinery which has solely `warehouse_area`.\n\n* Port cannot be explained by just one of `marketplace_area`, `urban_sarn_area`, `dock_area`, `ocean_area`, or `ruined_area`: any of these alone would imply non-eligible Areas.\n* Port is uniquely identified by any of the following possible Tag combinations: `marketplace_area + ocean_area`; or `urban_sarn_area + ocean_area`; or `dock_area + ruined_area`.\n* A possible but weird/unlikely hypothesis could be: \"Area drop in an Area whose Boss has `matryoshka_boss`\".",
+    "verifySources": []
   },
   {
     "id": 155,
@@ -5149,8 +5147,8 @@
     "greynote": "Empty",
     "card": "The Aesthete",
     "tagHypothesis": "shavronne_monster_story OR unholy_trio_combined_boss_story",
-    "confidence": "ok",
-    "remainingWork": "story only",
+    "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Act Boss",
@@ -5164,14 +5162,8 @@
       }
     ],
     "sourcesWithTagButNotOnWiki": "The Depraved Trinity",
-    "notes": "Possible parallel to The Depraved Trinity due to it being eligible from Amalgam of Nightmares?",
-    "verifySources": [
-      {
-        "type": "Act Boss",
-        "id": "The Depraved Trinity",
-        "kind": "source-with-member"
-      }
-    ]
+    "notes": "Possible parallel to The Depraved Trinity due to it being eligible from Amalgam of Nightmares?\nNo longer appears to drop from trio_combined bosses in 3.23",
+    "verifySources": []
   },
   {
     "id": 175,
@@ -5200,14 +5192,9 @@
         "type": "Map Boss",
         "id": "Shavronne the Sickening",
         "kind": "source-with-member"
-      },
-      {
-        "type": "Map Boss",
-        "id": "Amalgam of Nightmares",
-        "kind": "source-with-member"
       }
     ],
-    "notes": "3.20 patch notes: Added Carcass",
+    "notes": "3.20 patch notes: Added Carcass\n2.23 Amalgam of Nightmares disproven by Zimzams. Either is was removed again after 3.20, or never enabled despite the patch note.",
     "verifySources": []
   },
   {
@@ -5454,7 +5441,7 @@
     "greynote": "Empty",
     "card": "The Awakened",
     "tagHypothesis": "transform_boss",
-    "confidence": "low",
+    "confidence": "ok",
     "remainingWork": "confirm",
     "sources": [
       {
@@ -5483,17 +5470,12 @@
         "kind": "source-with-member"
       }
     ],
-    "sourcesWithTagButNotOnWiki": "Haunted Mansion; Maelström of Chaos; Tower",
-    "notes": "3.23: Removed Metamorph monster. \nNew patch noted maps: Death and Taxes, Gardens, Hallowed Ground, Haunted Mansion, Maelström of Chaos, Palace, Tower, Underground Sea (bosses?)\n\nPossibly governed by transform_boss\nSeems to still be a boss drop\n\n3.23: Avatar of the Apocalypse (Death and Taxes Boss) verified by kroIya\n3.23: Maker of Mires (Hallowed Ground Boss) verified by kroIya\n3.23: Merveil, the Returned (Underground Sea) verified by Zimzams",
+    "sourcesWithTagButNotOnWiki": "Haunted Mansion; Tower",
+    "notes": "3.23: Removed Metamorph monster. \nNew patch noted maps: Death and Taxes, Gardens, Hallowed Ground, Haunted Mansion, Maelström of Chaos, Palace, Tower, Underground Sea (bosses?)\n\nPossibly governed by transform_boss\nSeems to still be a boss drop\n\n3.23: Avatar of the Apocalypse (Death and Taxes Boss) verified by kroIya\n3.23: Maker of Mires (Hallowed Ground Boss) verified by kroIya\n3.23: Merveil, the Returned (Underground Sea) verified by Zimzams\n3.23: Merveil, the Returned (Maelstrom of Chaos) verified by Zimzams",
     "verifySources": [
       {
         "type": "Map",
         "id": "Haunted Mansion Map",
-        "kind": "source-with-member"
-      },
-      {
-        "type": "Map",
-        "id": "Maelström of Chaos",
         "kind": "source-with-member"
       },
       {
@@ -6862,6 +6844,11 @@
         "type": "Map Boss",
         "id": "Kitava, The Destroyer",
         "kind": "source-with-member"
+      },
+      {
+        "type": "Map Boss",
+        "id": "Lord of the Grey",
+        "kind": "source-with-member"
       }
     ],
     "wikiDisagreements": "Megaera",
@@ -6922,19 +6909,19 @@
         "type": "Map",
         "id": "Fungal Hollow Map",
         "kind": "source-with-member"
-      }
-    ],
-    "sourcesWithTagButNotOnWiki": "Peninsula; Channel; Waterways",
-    "notes": "Beach verified in Divcord\nShore verified in Divcord\n3.21: Fungal Hollow verified by Pan (Kirac div card mission)",
-    "verifySources": [
-      {
-        "type": "Map",
-        "id": "Peninsula Map",
-        "kind": "source-with-member"
       },
       {
         "type": "Map",
         "id": "Channel Map",
+        "kind": "source-with-member"
+      }
+    ],
+    "sourcesWithTagButNotOnWiki": "Peninsula; Waterways",
+    "notes": "Beach verified in Divcord\nShore verified in Divcord\n3.21: Fungal Hollow verified by Pan (Kirac div card mission)\n3.23: Channel verified by Zimzams",
+    "verifySources": [
+      {
+        "type": "Map",
+        "id": "Peninsula Map",
         "kind": "source-with-member"
       },
       {
@@ -9804,8 +9791,8 @@
     "greynote": "Empty",
     "card": "The Offering",
     "tagHypothesis": "shavronne_monster_story OR unholy_trio_combined_boss_story",
-    "confidence": "ok",
-    "remainingWork": "story only",
+    "confidence": "done",
+    "remainingWork": "n/a",
     "sources": [
       {
         "type": "Act Boss",
@@ -9819,14 +9806,8 @@
       }
     ],
     "sourcesWithTagButNotOnWiki": "The Depraved Trinity",
-    "notes": "Possible parallel to The Depraved Trinity due to it being eligible from Amalgam of Nightmares?",
-    "verifySources": [
-      {
-        "type": "Act Boss",
-        "id": "The Depraved Trinity",
-        "kind": "source-with-member"
-      }
-    ]
+    "notes": "Possible parallel to The Depraved Trinity due to it being eligible from Amalgam of Nightmares?\nNo longer appears to drop from trio_combined bosses in 3.23",
+    "verifySources": []
   },
   {
     "id": 334,
@@ -9855,14 +9836,9 @@
         "type": "Map Boss",
         "id": "Shavronne the Sickening",
         "kind": "source-with-member"
-      },
-      {
-        "type": "Map Boss",
-        "id": "Amalgam of Nightmares",
-        "kind": "source-with-member"
       }
     ],
-    "notes": "3.20 patch notes: Added Carcass",
+    "notes": "3.20 patch notes: Added Carcass\n2.23 The Aesthete from Amalgam of Nightmares disproven by Zimzams. Either is was removed again after 3.20, or never enabled despite the patch note. No The Offering drops recorded in that test and the enabling condition is likely the same.",
     "verifySources": []
   },
   {
@@ -12175,7 +12151,7 @@
     "greynote": "Empty",
     "card": "The Transformation",
     "tagHypothesis": "transform_boss",
-    "confidence": "low",
+    "confidence": "ok",
     "remainingWork": "confirm",
     "sources": [
       {

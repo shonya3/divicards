@@ -5,10 +5,10 @@ use loader::DataLoader;
 
 use crate::{dropsource::parse::RichColumnVariant, error::Error};
 
-use super::{rich::RichColumn, DivcordTable};
+use super::{rich::RichColumn, Spreadsheet};
 
-pub struct DivcordTableLoader(reqwest::Client);
-impl DivcordTableLoader {
+pub struct SpreadsheetLoader(reqwest::Client);
+impl SpreadsheetLoader {
     pub fn new() -> Self {
         Self(reqwest::Client::new())
     }
@@ -37,7 +37,7 @@ impl DivcordTableLoader {
         Ok(value_range)
     }
 
-    pub async fn _fetch(&self) -> Result<DivcordTable, Error> {
+    pub async fn _fetch(&self) -> Result<Spreadsheet, Error> {
         let sheet = self.fetch_table_sheet(&self.0).await?;
         let number_of_rows = sheet.values.len();
         let rich_sources_column = RichColumn::new(
@@ -53,7 +53,7 @@ impl DivcordTableLoader {
             number_of_rows,
         );
 
-        Ok(DivcordTable {
+        Ok(Spreadsheet {
             sheet,
             rich_sources_column,
             rich_verify_column,
@@ -61,12 +61,12 @@ impl DivcordTableLoader {
     }
 }
 
-impl DataLoader<DivcordTable, Error> for DivcordTableLoader {
+impl DataLoader<Spreadsheet, Error> for SpreadsheetLoader {
     fn filename() -> &'static str {
-        "divcord_table.json"
+        "spreadsheet.json"
     }
 
-    async fn fetch(&self) -> Result<DivcordTable, Error> {
+    async fn fetch(&self) -> Result<Spreadsheet, Error> {
         self._fetch().await
     }
 }

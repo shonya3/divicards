@@ -4,7 +4,7 @@ use std::{
 };
 
 use card_element::DivinationCardElementData;
-use divcord::table::DivcordTable;
+use divcord::spreadsheet::Spreadsheet;
 use poe_data::PoeData;
 use serde::Serialize;
 
@@ -21,10 +21,10 @@ async fn main() {
     divcord_wasm_pkg(&dir, "divcordWasm");
 
     // 2. Write data jsons
-    let divcord_table = DivcordTable::load().await.unwrap();
+    let spreadsheet = Spreadsheet::load().await.unwrap();
     let poe_data = PoeData::load().await.unwrap();
     let card_element = DivinationCardElementData::load().await.unwrap();
-    let records = divcord_table.sourceful_records(&poe_data).unwrap();
+    let records = divcord::records(&spreadsheet, &poe_data).unwrap();
 
     write(&records, &json_dir, "records.json");
     write(&poe_data, &json_dir, PoeData::filename());

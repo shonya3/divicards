@@ -1,21 +1,12 @@
+use super::rich::DropsFrom;
+use crate::{dropsource::Source, error::Error};
 use divi::{sample::fix_name, IsCard};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-use crate::{
-    dropsource::{
-        parse::{self, ParseSourceError, RichColumnVariant},
-        Source,
-    },
-    error::Error,
-};
-use poe_data::PoeData;
-
-use super::rich::DropsFrom;
-
 #[derive(Debug, Serialize, Deserialize, Clone)]
 #[serde(rename_all = "camelCase")]
-pub struct DivcordTableRecord {
+pub struct Dumb {
     pub id: usize,
     #[serde(default)]
     pub greynote: GreyNote,
@@ -37,32 +28,32 @@ pub struct DivcordTableRecord {
     pub notes: Option<String>,
 }
 
-impl DivcordTableRecord {
+impl Dumb {
     pub fn create(
         row_index: usize,
-        divcord_table_row: &[Value],
+        spreadsheet_row: &[Value],
         sources_drops_from: Vec<DropsFrom>,
         verify_drops_from: Vec<DropsFrom>,
     ) -> Result<Self, Error> {
-        let greynote = GreyNote::parse(&divcord_table_row[0])?;
-        let card = parse_card_name(&divcord_table_row[1])?;
-        let tag_hypothesis = parse_string_cell(&divcord_table_row[2]);
-        let confidence = Confidence::parse(&divcord_table_row[3])?;
-        let remaining_work = RemainingWork::parse(&divcord_table_row[4])?;
-        let wiki_disagreements = divcord_table_row
+        let greynote = GreyNote::parse(&spreadsheet_row[0])?;
+        let card = parse_card_name(&spreadsheet_row[1])?;
+        let tag_hypothesis = parse_string_cell(&spreadsheet_row[2]);
+        let confidence = Confidence::parse(&spreadsheet_row[3])?;
+        let remaining_work = RemainingWork::parse(&spreadsheet_row[4])?;
+        let wiki_disagreements = spreadsheet_row
             .get(6)
             .map(|val| parse_string_cell(val))
             .flatten();
-        let sources_with_tag_but_not_on_wiki = divcord_table_row
+        let sources_with_tag_but_not_on_wiki = spreadsheet_row
             .get(7)
             .map(|val| parse_string_cell(val))
             .flatten();
-        let notes = divcord_table_row
+        let notes = spreadsheet_row
             .get(8)
             .map(|val| parse_string_cell(val))
             .flatten();
 
-        Ok(DivcordTableRecord {
+        Ok(Self {
             greynote,
             card,
             tag_hypothesis,
@@ -80,7 +71,7 @@ impl DivcordTableRecord {
 
 #[derive(Debug, Serialize, Clone, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct SourcefulDivcordTableRecord {
+pub struct Record {
     pub id: usize,
     #[serde(default)]
     pub greynote: GreyNote,
@@ -99,35 +90,6 @@ pub struct SourcefulDivcordTableRecord {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub notes: Option<String>,
     pub verify_sources: Vec<Source>,
-}
-
-impl SourcefulDivcordTableRecord {
-    pub fn from_record(
-        record: DivcordTableRecord,
-        poe_data: &PoeData,
-    ) -> Result<Self, ParseSourceError> {
-        Ok(SourcefulDivcordTableRecord {
-            sources: parse::parse_record_dropsources(
-                &record,
-                poe_data,
-                RichColumnVariant::Sources,
-            )?,
-            verify_sources: parse::parse_dropses_from(
-                &record,
-                poe_data,
-                RichColumnVariant::Verify,
-            )?,
-            id: record.id,
-            greynote: record.greynote,
-            card: record.card,
-            tag_hypothesis: record.tag_hypothesis,
-            confidence: record.confidence,
-            remaining_work: record.remaining_work,
-            wiki_disagreements: record.wiki_disagreements,
-            sources_with_tag_but_not_on_wiki: record.sources_with_tag_but_not_on_wiki,
-            notes: record.notes,
-        })
-    }
 }
 
 pub fn parse_card_name(val: &Value) -> Result<String, Error> {

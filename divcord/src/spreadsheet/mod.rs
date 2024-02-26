@@ -1,28 +1,23 @@
 #[cfg(feature = "fetch")]
 pub mod load;
+pub mod record;
 pub mod rich;
-pub mod table_record;
 
+use self::{record::Dumb, rich::RichColumn};
+use crate::{dropsource::Source, error::Error};
+use googlesheets::sheet::ValueRange;
+use poe_data::PoeData;
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-use googlesheets::sheet::ValueRange;
-use serde::{Deserialize, Serialize};
-
-use self::{
-    rich::RichColumn,
-    table_record::{DivcordTableRecord, SourcefulDivcordTableRecord},
-};
-use crate::{dropsource::Source, error::Error};
-use poe_data::PoeData;
-
 #[derive(Debug, Serialize, Deserialize, Clone)]
-pub struct DivcordTable {
+pub struct Spreadsheet {
     pub sheet: ValueRange,
     pub rich_sources_column: RichColumn,
     pub rich_verify_column: RichColumn,
 }
 
-impl DivcordTable {
+impl Spreadsheet {
     pub const fn new(
         sheet: ValueRange,
         rich_sources_column: RichColumn,
@@ -39,12 +34,12 @@ impl DivcordTable {
     pub async fn load() -> Result<Self, Error> {
         use loader::DataLoader;
 
-        load::DivcordTableLoader::new().load().await
+        load::SpreadsheetLoader::new().load().await
     }
 
-    pub fn records_by_card(&self) -> Result<HashMap<String, Vec<DivcordTableRecord>>, Error> {
-        let mut map: HashMap<String, Vec<DivcordTableRecord>> = HashMap::new();
-        for record in self.records() {
+    pub fn records_by_card(&self) -> Result<HashMap<String, Vec<Dumb>>, Error> {
+        let mut map: HashMap<String, Vec<Dumb>> = HashMap::new();
+        for record in self.dumb_records() {
             let record = record?;
             map.entry(record.card.clone())
                 .and_modify(|vec| vec.push(record.clone()))
@@ -54,27 +49,7 @@ impl DivcordTable {
         Ok(map)
     }
 
-    pub fn sourceful_records(
-        &self,
-        poe_data: &PoeData,
-    ) -> Result<Vec<SourcefulDivcordTableRecord>, Error> {
-        self.records()
-            .map(|r| Ok(SourcefulDivcordTableRecord::from_record(r?, poe_data)?))
-            .collect()
-    }
-
-    pub fn sourceful_records_iter(
-        &self,
-        poe_data: PoeData,
-    ) -> impl Iterator<Item = Result<SourcefulDivcordTableRecord, Error>> + '_ {
-        self.records().map(move |record| {
-            Ok(SourcefulDivcordTableRecord::from_record(
-                record?, &poe_data,
-            )?)
-        })
-    }
-
-    pub fn records(&self) -> impl Iterator<Item = Result<DivcordTableRecord, Error>> + '_ {
+    pub fn dumb_records(&self) -> impl Iterator<Item = Result<Dumb, Error>> + '_ {
         self.sheet
             .values
             .iter()
@@ -82,10 +57,10 @@ impl DivcordTable {
             .zip(self.rich_verify_column.cells())
             .enumerate()
             .map(
-                |(row_index, ((divcord_table_row, sources_cell), verify_cell))| {
-                    DivcordTableRecord::create(
+                |(row_index, ((spreadsheet_row, sources_cell), verify_cell))| {
+                    Dumb::create(
                         row_index,
-                        divcord_table_row,
+                        spreadsheet_row,
                         sources_cell.drops_from()?,
                         verify_cell.drops_from()?,
                     )
@@ -95,11 +70,11 @@ impl DivcordTable {
 }
 
 pub fn sources_by_card(
-    divcord_table: &DivcordTable,
+    spreadsheet: &Spreadsheet,
     poe_data: &PoeData,
 ) -> Result<HashMap<String, Vec<Source>>, Error> {
     let mut map: HashMap<String, Vec<Source>> = HashMap::new();
-    for record in divcord_table.records() {
+    for record in spreadsheet.dumb_records() {
         let record = record?;
         for _d in &record.sources_drops_from {
             let sources = crate::dropsource::parse::parse_dropses_from(

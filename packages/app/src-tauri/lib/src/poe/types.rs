@@ -68,17 +68,3 @@ impl From<TabWithItems> for SampleData {
         SampleData::CardNameAmountList(cards)
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use std::fs::read_to_string;
-
-    use super::TabWithItems;
-
-    #[test]
-    fn ser_stash() {
-        let json = read_to_string("stash.json").unwrap();
-        let stash: TabWithItems = serde_json::from_str(&json).unwrap();
-        dbg!(stash);
-    }
-}
