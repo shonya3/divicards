@@ -5,4 +5,6 @@ pub mod error;
 pub mod parse;
 pub mod spreadsheet;
 
-pub use crate::parse::{records, records_iter};
+pub use dropsource::Source;
+pub use parse::{records, records_iter};
+pub use spreadsheet::{record::Record, Spreadsheet};

@@ -1,6 +1,6 @@
 mod utils;
 
-use divcord::spreadsheet::{record::Record, Spreadsheet};
+use divcord::{Record, Spreadsheet};
 use poe_data::PoeData;
 use utils::set_panic_hook;
 use wasm_bindgen::{prelude::wasm_bindgen, JsValue};
