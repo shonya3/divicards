@@ -4,9 +4,8 @@ pub mod record;
 pub mod rich;
 
 use self::{record::Dumb, rich::RichColumn};
-use crate::{dropsource::Source, error::Error};
+use crate::error::Error;
 use googlesheets::sheet::ValueRange;
-use poe_data::PoeData;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
@@ -69,25 +68,25 @@ impl Spreadsheet {
     }
 }
 
-pub fn sources_by_card(
-    spreadsheet: &Spreadsheet,
-    poe_data: &PoeData,
-) -> Result<HashMap<String, Vec<Source>>, Error> {
-    let mut map: HashMap<String, Vec<Source>> = HashMap::new();
-    for record in spreadsheet.dumb_records() {
-        let record = record?;
-        for _d in &record.sources_drops_from {
-            let sources = crate::dropsource::parse::parse_dropses_from(
-                &record,
-                &poe_data,
-                crate::dropsource::parse::RichColumnVariant::Sources,
-            )
-            .unwrap();
-            for source in sources {
-                map.entry(record.card.clone()).or_default().push(source);
-            }
-        }
-    }
+// pub fn sources_by_card(
+//     spreadsheet: &Spreadsheet,
+//     poe_data: &PoeData,
+// ) -> Result<HashMap<String, Vec<Source>>, Error> {
+//     let mut map: HashMap<String, Vec<Source>> = HashMap::new();
+//     for record in spreadsheet.dumb_records() {
+//         let record = record?;
+//         for _d in &record.sources_drops_from {
+//             let sources = crate::dropsource::parse::parse_dropses_from(
+//                 &record,
+//                 &poe_data,
+//                 crate::dropsource::parse::RichColumnVariant::Sources,
+//             )
+//             .unwrap();
+//             for source in sources {
+//                 map.entry(record.card.clone()).or_default().push(source);
+//             }
+//         }
+//     }
 
-    Ok(map)
-}
+//     Ok(map)
+// }

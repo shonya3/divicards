@@ -1,4 +1,4 @@
-use crate::{dropsource::parse::ParseSourceError, spreadsheet::rich::ParseCellError};
+use crate::{parse::ParseSourceError, spreadsheet::rich::ParseCellError};
 use std::fmt::Display;
 
 #[derive(Debug)]

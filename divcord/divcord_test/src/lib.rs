@@ -5,7 +5,7 @@ mod tests {
 
     #[tokio::test]
     async fn two_dropsources_should_throw_error() {
-        use divcord::dropsource::parse::*;
+        use divcord::parse::*;
         use divcord::spreadsheet::{
             record::{Confidence, GreyNote, RemainingWork},
             rich::{FontStyles, HexColor},

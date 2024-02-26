@@ -3,7 +3,7 @@
 use googlesheets::sheet::ValueRange;
 use loader::DataLoader;
 
-use crate::{dropsource::parse::RichColumnVariant, error::Error};
+use crate::{error::Error, parse::RichColumnVariant};
 
 use super::{rich::RichColumn, Spreadsheet};
 

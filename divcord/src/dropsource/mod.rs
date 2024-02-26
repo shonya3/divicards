@@ -2,7 +2,6 @@ pub mod area;
 pub mod id;
 pub mod monster;
 mod other;
-pub mod parse;
 
 use self::id::Identified;
 pub use self::{area::Area, monster::UniqueMonster};
