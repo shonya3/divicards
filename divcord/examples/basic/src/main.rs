@@ -1,3 +1,10 @@
+//!
+//! Activate "fetch" feature
+//! ```Cargo.toml
+//! divcord = {path = "../divcord", features = ["fetch"]}
+//! poe_data = {path = "../poe_data", features = ["fetch"]}
+//! ```
+
 use divcord::{error::Error, Source, Spreadsheet};
 use poe_data::PoeData;
 use std::fs;
