@@ -2,6 +2,8 @@
 
 A library for loading and parsing the [divcord spreadsheet](https://docs.google.com/spreadsheets/d/1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU/edit?pli=1#gid=0)
 
+Check example dir.
+
 ## Example
 
 Add divcord and poe_data to Cargo.toml. You'll also need "fetch" features and tokio, if you need to load data first.
