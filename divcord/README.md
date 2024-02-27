@@ -10,6 +10,7 @@ Add divcord and poe_data to Cargo.toml. You'll also need "fetch" features and to
 divcord = {path = "../divcord", features = ["fetch"]}
 poe_data = {path = "../poe_data", features = ["fetch"]}
 tokio = { version = "1", features = ["full"] }
+serde_json = "1.0"
 ```
 
 And then get started in your `main.rs`:
