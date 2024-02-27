@@ -246,13 +246,13 @@ impl ProtobufColor {
         let green = (green_frac * 255.0).floor() as u8;
         let blue = (blue_frac * 255.0).floor() as u8;
 
-        return Self::rgb_to_css_color(red, green, blue);
+        Self::rgb_to_css_color(red, green, blue)
     }
 
     pub fn rgb_to_css_color(red: u8, green: u8, blue: u8) -> String {
         let rgb_number = (red as u32) << 16 | (green as u32) << 8 | blue as u32;
         let hex_string = format!("{:06X}", rgb_number);
-        return format!("#{}", hex_string);
+        format!("#{}", hex_string)
     }
 
     pub fn as_hex(&self) -> String {
