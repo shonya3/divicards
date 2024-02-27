@@ -1,10 +1,10 @@
 #![cfg(feature = "fetch")]
 
 use crate::{act::ActArea, cards::CardsData, error::Error, mapbosses::MapBoss, maps::Map, PoeData};
-use loader::DataLoader;
+use fetcher::DataFetcher;
 
-pub struct MapBossesLoader;
-impl DataLoader<Vec<MapBoss>, Error> for MapBossesLoader {
+pub struct MapBossesFetcher;
+impl DataFetcher<Vec<MapBoss>, Error> for MapBossesFetcher {
     fn filename() -> &'static str {
         "mapBosses.json"
     }
@@ -18,8 +18,8 @@ impl DataLoader<Vec<MapBoss>, Error> for MapBossesLoader {
     }
 }
 
-pub struct MapsLoader;
-impl DataLoader<Vec<Map>, Error> for MapsLoader {
+pub struct MapsFetcher;
+impl DataFetcher<Vec<Map>, Error> for MapsFetcher {
     fn filename() -> &'static str {
         "maps.json"
     }
@@ -33,8 +33,8 @@ impl DataLoader<Vec<Map>, Error> for MapsLoader {
     }
 }
 
-pub struct ActsLoader;
-impl DataLoader<Vec<ActArea>, Error> for ActsLoader {
+pub struct ActsFetcher;
+impl DataFetcher<Vec<ActArea>, Error> for ActsFetcher {
     fn filename() -> &'static str {
         "acts.json"
     }
@@ -48,8 +48,8 @@ impl DataLoader<Vec<ActArea>, Error> for ActsLoader {
     }
 }
 
-pub struct CardsLoader;
-impl DataLoader<CardsData, Error> for CardsLoader {
+pub struct CardsFetcher;
+impl DataFetcher<CardsData, Error> for CardsFetcher {
     fn filename() -> &'static str {
         "cards.json"
     }
@@ -59,18 +59,18 @@ impl DataLoader<CardsData, Error> for CardsLoader {
     }
 }
 
-pub struct PoeDataLoader;
-impl DataLoader<PoeData, Error> for PoeDataLoader {
+pub struct PoeDataFetcher;
+impl DataFetcher<PoeData, Error> for PoeDataFetcher {
     fn filename() -> &'static str {
         "poeData.json"
     }
 
     async fn fetch(&self) -> Result<PoeData, Error> {
         Ok(PoeData {
-            acts: ActsLoader.load().await?,
-            cards: CardsLoader.load().await?,
-            maps: MapsLoader.load().await?,
-            mapbosses: MapBossesLoader.load().await?,
+            acts: ActsFetcher.load().await?,
+            cards: CardsFetcher.load().await?,
+            maps: MapsFetcher.load().await?,
+            mapbosses: MapBossesFetcher.load().await?,
         })
     }
 }

@@ -11,7 +11,7 @@ members = [
     "divcord",
     "divcord/examples/*",
     "divcord_wasm",
-    "loader",
+    "fetcher",
     "generate_website_files",
     "divcord/divcord_test"
 ]

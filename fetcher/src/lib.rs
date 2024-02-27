@@ -33,7 +33,7 @@ impl From<serde_json::Error> for Error {
 }
 
 #[allow(async_fn_in_trait)]
-pub trait DataLoader<T, E>
+pub trait DataFetcher<T, E>
 where
     T: serde::Serialize + serde::de::DeserializeOwned,
     E: From<Error>,

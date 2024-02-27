@@ -1,14 +1,14 @@
 #![cfg(feature = "fetch")]
 
+use fetcher::DataFetcher;
 use googlesheets::sheet::ValueRange;
-use loader::DataLoader;
 
 use crate::{error::Error, parse::RichColumnVariant};
 
 use super::{rich::RichColumn, Spreadsheet};
 
-pub struct SpreadsheetLoader(reqwest::Client);
-impl SpreadsheetLoader {
+pub struct SpreadsheetFetcher(reqwest::Client);
+impl SpreadsheetFetcher {
     pub fn new() -> Self {
         Self(reqwest::Client::new())
     }
@@ -61,7 +61,7 @@ impl SpreadsheetLoader {
     }
 }
 
-impl DataLoader<Spreadsheet, Error> for SpreadsheetLoader {
+impl DataFetcher<Spreadsheet, Error> for SpreadsheetFetcher {
     fn filename() -> &'static str {
         "spreadsheet.json"
     }

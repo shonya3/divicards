@@ -4,7 +4,7 @@ pub mod reward;
 
 use divi::{league::TradeLeague, prices::NinjaCardData};
 pub use error::Error;
-use loader::DataLoader;
+use fetcher::DataFetcher;
 use serde::{Deserialize, Serialize};
 
 use self::reward::reward_to_html;
@@ -21,11 +21,11 @@ pub struct DivinationCardElementData {
 
 impl DivinationCardElementData {
     pub fn filename() -> &'static str {
-        CardElementDataLoader::filename()
+        CardElementDataFetcher::filename()
     }
 
     pub async fn load() -> Result<Vec<DivinationCardElementData>, Error> {
-        CardElementDataLoader.load().await
+        CardElementDataFetcher.load().await
     }
 }
 
@@ -56,9 +56,9 @@ pub async fn fetch() -> Result<Vec<DivinationCardElementData>, Error> {
     Ok(v)
 }
 
-pub struct CardElementDataLoader;
+pub struct CardElementDataFetcher;
 
-impl DataLoader<Vec<DivinationCardElementData>, Error> for CardElementDataLoader {
+impl DataFetcher<Vec<DivinationCardElementData>, Error> for CardElementDataFetcher {
     fn filename() -> &'static str {
         "cardElementData.json"
     }

@@ -4,11 +4,9 @@ pub mod consts;
 
 #[cfg(feature = "fetch")]
 pub mod error;
-pub mod league;
 #[cfg(feature = "fetch")]
-// pub mod loader;
-// #[cfg(feature = "fetch")]
-pub mod loaders;
+pub mod fetchers;
+pub mod league;
 pub mod mapbosses;
 pub mod maps;
 
@@ -27,13 +25,13 @@ pub struct PoeData {
 impl PoeData {
     #[cfg(feature = "fetch")]
     pub async fn load() -> Result<Self, crate::error::Error> {
-        use loader::DataLoader;
-        crate::loaders::PoeDataLoader.load().await
+        use fetcher::DataFetcher;
+        crate::fetchers::PoeDataFetcher.load().await
     }
 
     #[cfg(feature = "fetch")]
     pub fn filename() -> &'static str {
-        use loader::DataLoader;
-        crate::loaders::PoeDataLoader::filename()
+        use fetcher::DataFetcher;
+        crate::fetchers::PoeDataFetcher::filename()
     }
 }

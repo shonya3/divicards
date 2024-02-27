@@ -15,7 +15,7 @@ pub enum Error {
     IoError(std::io::Error),
     SerdeError(serde_json::Error),
     #[cfg(feature = "fetch")]
-    LoaderError(loader::Error),
+    FetcherError(fetcher::Error),
     #[cfg(feature = "fetch")]
     UnexpectedLeagueInfoShapeError(UnexpectedLeagueInfoShapeError),
 }
@@ -32,7 +32,7 @@ impl Display for Error {
             #[cfg(feature = "fetch")]
             Error::DiviError(err) => err.fmt(f),
             #[cfg(feature = "fetch")]
-            Error::LoaderError(err) => err.fmt(f),
+            Error::FetcherError(err) => err.fmt(f),
             Error::UnexpectedLeagueInfoShapeError(err) => err.fmt(f),
         }
     }
@@ -72,9 +72,9 @@ impl From<divi::error::Error> for Error {
 }
 
 #[cfg(feature = "fetch")]
-impl From<loader::Error> for Error {
-    fn from(value: loader::Error) -> Self {
-        Error::LoaderError(value)
+impl From<fetcher::Error> for Error {
+    fn from(value: fetcher::Error) -> Self {
+        Error::FetcherError(value)
     }
 }
 

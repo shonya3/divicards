@@ -16,8 +16,8 @@ reqwest = { workspace = true }
 strum_macros = "0.25.3"
 strum = "0.25.0"
 poe_data = {path = "../poe_data"}
-loader = {path = "../loader", optional = true}
+fetcher = {path = "../fetcher", optional = true}
 
 [features]
 default = []
-fetch = ["dep:loader"]
+fetch = ["dep:fetcher"]

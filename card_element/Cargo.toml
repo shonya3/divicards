@@ -14,4 +14,4 @@ regex = "1.10.2"
 reqwest = { workspace = true, features = ["blocking"]}
 divi = {path = "../divi"}
 async-trait = {version = "0.1.77"}
-loader = {path = "../loader"}
+fetcher = {path = "../fetcher"}

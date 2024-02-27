@@ -583,7 +583,7 @@ version = "0.5.4"
 dependencies = [
  "async-trait",
  "divi",
- "loader",
+ "fetcher",
  "regex",
  "reqwest",
  "serde",
@@ -1094,8 +1094,8 @@ version = "0.5.4"
 dependencies = [
  "divi",
  "dotenv",
+ "fetcher",
  "googlesheets",
- "loader",
  "poe_data",
  "reqwest",
  "serde",
@@ -1310,6 +1310,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "209098dd6dfc4445aa6111f0e98653ac323eaa4dfd212c9ca3931bf9955c31bd"
 dependencies = [
  "simd-adler32",
+]
+
+[[package]]
+name = "fetcher"
+version = "0.1.0"
+dependencies = [
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
@@ -2449,14 +2457,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c4cd1a83af159aa67994778be9070f0ae1bd732942279cabb14f86f986a21456"
 
 [[package]]
-name = "loader"
-version = "0.1.0"
-dependencies = [
- "serde",
- "serde_json",
-]
-
-[[package]]
 name = "lock_api"
 version = "0.4.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3295,8 +3295,8 @@ version = "0.5.4"
 dependencies = [
  "divi",
  "dotenv",
+ "fetcher",
  "googlesheets",
- "loader",
  "playwright",
  "reqwest",
  "serde",
