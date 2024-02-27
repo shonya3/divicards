@@ -5,7 +5,7 @@
 //! poe_data = {path = "../poe_data", features = ["fetch"]}
 //! ```
 
-use divcord::{error::Error, Source, Spreadsheet};
+use divcord::{Error, Source, Spreadsheet};
 use poe_data::PoeData;
 use std::fs;
 

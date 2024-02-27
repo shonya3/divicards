@@ -15,7 +15,7 @@ tokio = { version = "1", features = ["full"] }
 And then get started in your `main.rs`:
 
 ```rust
-use divcord::{error::Error, Source, Spreadsheet};
+use divcord::{Error, Source, Spreadsheet};
 use poe_data::PoeData;
 use std::fs;
 
