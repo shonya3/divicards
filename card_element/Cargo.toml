@@ -13,5 +13,4 @@ serde_json = {workspace = true}
 regex = "1.10.2"
 reqwest = { workspace = true, features = ["blocking"]}
 divi = {path = "../divi"}
-async-trait = {version = "0.1.77"}
 fetcher = {path = "../fetcher"}

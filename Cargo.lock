@@ -571,7 +571,6 @@ dependencies = [
 name = "card_element"
 version = "0.5.4"
 dependencies = [
- "async-trait",
  "divi",
  "fetcher",
  "regex",
