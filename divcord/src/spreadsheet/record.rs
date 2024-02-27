@@ -1,9 +1,12 @@
+//! Structs for pre-parsed and parsed spreadsheet's row
+
 use super::rich::DropsFrom;
 use crate::{dropsource::Source, error::Error};
 use divi::{sample::fix_name, IsCard};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
+/// "Sourceful" record, with figured out dropsources and need-to-verify-sources.
 #[derive(Debug, Serialize, Clone, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Record {
@@ -27,6 +30,7 @@ pub struct Record {
     pub verify_sources: Vec<Source>,
 }
 
+/// Represents spreadsheet's row after the initial preparation.
 #[derive(Debug, Serialize, Deserialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Dumb {

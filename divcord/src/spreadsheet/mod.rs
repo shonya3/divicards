@@ -1,3 +1,5 @@
+//! Defines and loads [Divcord Spreadsheet](https://docs.google.com/spreadsheets/d/1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU/edit?pli=1#gid=0)
+
 #[cfg(feature = "fetch")]
 pub mod load;
 pub mod record;
@@ -8,6 +10,13 @@ use crate::error::Error;
 use googlesheets::sheet::ValueRange;
 use serde::{Deserialize, Serialize};
 
+#[allow(unused_imports)]
+use self::rich::DropsFrom;
+
+/// [Divcord Spreadsheet](https://docs.google.com/spreadsheets/d/1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU/edit?pli=1#gid=0)
+/// This simple struct consist of api results:
+/// - whole sheet in simplest possible form
+/// - font styles data for two columns: "Wiki Map/Monster Agreements (F) and  Need to verify (H)"
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Spreadsheet {
     pub sheet: ValueRange,
@@ -35,6 +44,9 @@ impl Spreadsheet {
         load::SpreadsheetLoader::new().load().await
     }
 
+    /// iterator over dumb records - initial preparation of data for each spreadsheet row.
+    /// Zips each row of simple format with rich format [`DropsFrom`] for 'F' and 'H' columns
+    /// to produce a [`Dumb`]
     pub fn dumb_records(&self) -> impl Iterator<Item = Result<Dumb, Error>> + '_ {
         self.sheet
             .values

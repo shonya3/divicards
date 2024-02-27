@@ -1,5 +1,17 @@
+//! Break a spreadsheet cell into styled text fragments
+
 use serde::{Deserialize, Serialize};
 use std::fmt::Display;
+
+/// Text content of pre-parsed dropsourse + styles.
+/// One struct can produce multiple dropsources(for example, The Ossuary (A5/A10))
+///
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct DropsFrom {
+    pub name: String,
+    pub styles: FontStyles,
+}
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(rename_all = "camelCase")]
@@ -313,13 +325,6 @@ impl Text {
             })
             .collect()
     }
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
-#[serde(rename_all = "camelCase")]
-pub struct DropsFrom {
-    pub name: String,
-    pub styles: FontStyles,
 }
 
 fn strip_comment(input: &str) -> String {
