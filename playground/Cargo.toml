@@ -1,5 +1,5 @@
 [package]
-name = "scripts"
+name = "playground"
 version.workspace = true
 edition.workspace = true
 repository.workspace = true

@@ -3238,6 +3238,19 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "69d3587f8a9e599cc7ec2c00e331f71c4e69a5f9a4b8a6efd5b07466b9736f9a"
 
 [[package]]
+name = "playground"
+version = "0.5.4"
+dependencies = [
+ "divcord",
+ "dotenv",
+ "poe_data",
+ "reqwest",
+ "serde",
+ "serde_json",
+ "tokio",
+]
+
+[[package]]
 name = "playwright"
 version = "0.0.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3788,19 +3801,6 @@ name = "scopeguard"
 version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "94143f37725109f92c262ed2cf5e59bce7498c01bcc1502d7b9afe439a4e9f49"
-
-[[package]]
-name = "scripts"
-version = "0.5.4"
-dependencies = [
- "divcord",
- "dotenv",
- "poe_data",
- "reqwest",
- "serde",
- "serde_json",
- "tokio",
-]
 
 [[package]]
 name = "sct"
