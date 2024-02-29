@@ -47,7 +47,8 @@ pub use fetch::fetch;
 mod fetch {
     use super::ActArea;
     use crate::error::Error;
-    use playwright::api::Page;
+    use playwright::{api::Page, Playwright};
+    use std::sync::Arc;
 
     pub async fn fetch() -> Result<Vec<ActArea>, crate::error::Error> {
         let script = format!(
@@ -58,19 +59,23 @@ mod fetch {
         let mut act_areas: Vec<ActArea> = Vec::new();
         let mut tasks = vec![];
 
+        let playwright = Playwright::initialize().await.unwrap();
+        playwright.install_chromium().unwrap();
+        let chrome = playwright.chromium();
+        let browser = chrome.launcher().headless(false).launch().await.unwrap();
+        let context = browser
+            .context_builder()
+            .clear_user_agent()
+            .build()
+            .await
+            .unwrap();
+        let context = Arc::new(context);
+
         for act in 1..=10 {
             let script = script.clone();
+            let context = context.clone();
+
             let task = tokio::spawn(async move {
-                let playwright = playwright::Playwright::initialize().await.unwrap();
-                playwright.install_chromium().unwrap();
-                let chrome = playwright.chromium();
-                let browser = chrome.launcher().headless(false).launch().await.unwrap();
-                let context = browser
-                    .context_builder()
-                    .clear_user_agent()
-                    .build()
-                    .await
-                    .unwrap();
                 let page = context.new_page().await.unwrap();
                 fetch_specific_act(act, &page, &script).await.unwrap()
             });
