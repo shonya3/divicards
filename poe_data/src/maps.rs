@@ -21,6 +21,7 @@ pub mod fetch {
     use crate::consts::{POEDB_MAPS_URL, WIKI_API_URL};
     use playwright::Playwright;
     use serde::{Deserialize, Serialize};
+    use std::sync::Arc;
 
     #[derive(Debug, Clone, Serialize, Deserialize)]
     pub struct MapDataFromWiki {
@@ -32,29 +33,61 @@ pub mod fetch {
         let mut maps: Vec<Map> = vec![];
         let wiki_maps = load_from_wiki().await?;
 
+        let chunks = wiki_maps
+            .chunks(20)
+            .map(|chunk| chunk.to_vec())
+            .collect::<Vec<_>>();
+
         let playwright = Playwright::initialize().await.unwrap();
-        let chrome = launch_chrome_page(&playwright).await;
+        let chrome = playwright.chromium();
+        let browser = chrome.launcher().headless(false).launch().await.unwrap();
+        let context = browser
+            .context_builder()
+            .clear_user_agent()
+            .build()
+            .await
+            .unwrap();
 
-        let available_maps = load_poedb_non_unique_available_maplist(&chrome).await?;
+        let available_maps =
+            load_poedb_non_unique_available_maplist(&context.new_page().await.unwrap()).await?;
+        let mut tasks = vec![];
+        let context = Arc::new(context);
+        let available_maps = Arc::new(available_maps);
 
-        for MapDataFromWiki { name, tier } in wiki_maps.into_iter() {
-            let unique = !name.ends_with(" Map");
-            let available = unique || available_maps.contains(&name);
-            let icon = match get_map_icon_url(&name, &chrome).await {
-                Ok(icon) => icon,
-                Err(err) => {
-                    eprintln!("{err}");
-                    err
+        for wiki_maps_chunk in chunks {
+            let context = context.clone();
+            let available_maps = available_maps.clone();
+
+            let task = tokio::spawn(async move {
+                let mut vec = vec![];
+                let page = context.new_page().await.unwrap();
+                for MapDataFromWiki { name, tier } in wiki_maps_chunk {
+                    let unique = !name.ends_with(" Map");
+                    let available = unique || available_maps.contains(&name);
+                    let icon = match get_map_icon_url(&name, &page).await {
+                        Ok(icon) => icon,
+                        Err(err) => {
+                            eprintln!("{err}");
+                            err
+                        }
+                    };
+
+                    vec.push(Map {
+                        name,
+                        tier,
+                        available,
+                        unique,
+                        icon,
+                    });
                 }
-            };
+                vec
+            });
 
-            maps.push(Map {
-                name,
-                tier,
-                available,
-                unique,
-                icon,
-            })
+            tasks.push(task);
+        }
+
+        for task in tasks {
+            maps.extend(task.await.unwrap());
         }
 
         Ok(maps)
@@ -89,20 +122,6 @@ pub mod fetch {
                 tier: title.title.tier.parse().unwrap(),
             })
             .collect::<Vec<MapDataFromWiki>>())
-    }
-
-    async fn launch_chrome_page(playwright: &Playwright) -> playwright::api::Page {
-        playwright.install_chromium().unwrap();
-        let chrome = playwright.chromium();
-        let browser = chrome.launcher().headless(false).launch().await.unwrap();
-        let context = browser
-            .context_builder()
-            .clear_user_agent()
-            .build()
-            .await
-            .unwrap();
-        let page = context.new_page().await.unwrap();
-        page
     }
 
     pub async fn load_poedb_non_unique_available_maplist(
