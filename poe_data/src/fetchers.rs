@@ -66,11 +66,18 @@ impl DataFetcher<PoeData, Error> for PoeDataFetcher {
     }
 
     async fn fetch(&self) -> Result<PoeData, Error> {
+        let (acts, cards, maps, mapbosses) = tokio::join!(
+            ActsFetcher.load(),
+            CardsFetcher.load(),
+            MapsFetcher.load(),
+            MapBossesFetcher.load()
+        );
+
         Ok(PoeData {
-            acts: ActsFetcher.load().await?,
-            cards: CardsFetcher.load().await?,
-            maps: MapsFetcher.load().await?,
-            mapbosses: MapBossesFetcher.load().await?,
+            acts: acts?,
+            cards: cards?,
+            maps: maps?,
+            mapbosses: mapbosses?,
         })
     }
 }

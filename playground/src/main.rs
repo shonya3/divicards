@@ -21,43 +21,48 @@ fn check_deserialize() -> Result<Vec<Record>, Error> {
 
 #[tokio::main]
 async fn main() {
-    let spreadsheet = Spreadsheet::load().await.unwrap();
     let poe_data = PoeData::load().await.unwrap();
-    let records = divcord::records(&spreadsheet, &poe_data).unwrap();
-    let json = serde_json::to_string_pretty(&records).unwrap();
-    std::fs::write("records.json", &json).unwrap();
-
-    let records = check_deserialize().unwrap();
-
-    let empty: Vec<Record> = records
-        .clone()
-        .into_iter()
-        .filter(|r| r.sources.is_empty())
-        .collect();
-    let json = serde_json::to_string_pretty(&empty).unwrap();
-    std::fs::write("empty.json", &json).unwrap();
-
-    // Source::write_typescript_file().unwrap();
-
-    for (index, record) in divcord::records_iter(&spreadsheet, &poe_data).enumerate() {
-        // if index == 63 {
-        //     println!("{record:#?}");
-        // }
-
-        // if let Ok(record) = record {
-        //     if record.id == 66 {
-        //         println!("here");
-        //         println!("{record:#?}");
-        //     }
-        // }
-
-        let record = record.unwrap();
-
-        for verify in record.verify_sources {
-            // println!("{verify:?}");
-        }
-    }
 }
+
+// #[tokio::main]
+// async fn main() {
+//     let spreadsheet = Spreadsheet::load().await.unwrap();
+//     let poe_data = PoeData::load().await.unwrap();
+//     let records = divcord::records(&spreadsheet, &poe_data).unwrap();
+//     let json = serde_json::to_string_pretty(&records).unwrap();
+//     std::fs::write("records.json", &json).unwrap();
+
+//     let records = check_deserialize().unwrap();
+
+//     let empty: Vec<Record> = records
+//         .clone()
+//         .into_iter()
+//         .filter(|r| r.sources.is_empty())
+//         .collect();
+//     let json = serde_json::to_string_pretty(&empty).unwrap();
+//     std::fs::write("empty.json", &json).unwrap();
+
+//     // Source::write_typescript_file().unwrap();
+
+//     for (index, record) in divcord::records_iter(&spreadsheet, &poe_data).enumerate() {
+//         // if index == 63 {
+//         //     println!("{record:#?}");
+//         // }
+
+//         // if let Ok(record) = record {
+//         //     if record.id == 66 {
+//         //         println!("here");
+//         //         println!("{record:#?}");
+//         //     }
+//         // }
+
+//         let record = record.unwrap();
+
+//         for verify in record.verify_sources {
+//             // println!("{verify:?}");
+//         }
+//     }
+// }
 
 fn h_column() -> RichColumn {
     serde_json::from_str(&std::fs::read_to_string("H.json").unwrap()).unwrap()
