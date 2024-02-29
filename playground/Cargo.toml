@@ -14,3 +14,4 @@ poe_data = {path = "../poe_data", features = ["fetch"]}
 tokio = {workspace = true}
 reqwest.workspace = true
 dotenv = "0.15.0"
+fetcher = {path ="../fetcher"}

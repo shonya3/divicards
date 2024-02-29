@@ -1,6 +1,11 @@
 #![allow(unused)]
 
-use std::{clone, path::Display};
+use std::{
+    clone,
+    ops::{Sub, SubAssign},
+    path::{Display, PathBuf},
+    time::{Duration, Instant, SystemTime, UNIX_EPOCH},
+};
 
 use divcord::{
     dropsource::Source,
@@ -20,9 +25,7 @@ fn check_deserialize() -> Result<Vec<Record>, Error> {
 }
 
 #[tokio::main]
-async fn main() {
-    let poe_data = PoeData::load().await.unwrap();
-}
+async fn main() {}
 
 // #[tokio::main]
 // async fn main() {

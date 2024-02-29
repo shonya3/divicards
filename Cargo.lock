@@ -3243,6 +3243,7 @@ version = "0.5.4"
 dependencies = [
  "divcord",
  "dotenv",
+ "fetcher",
  "poe_data",
  "reqwest",
  "serde",
