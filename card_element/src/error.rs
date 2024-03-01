@@ -6,7 +6,7 @@ pub enum Error {
     DiviError(divi::error::Error),
     IoError(std::io::Error),
     SerdeError(serde_json::Error),
-    FetcherError(fetcher::experimental::FetcherError),
+    FetcherError(fetcher::FetcherError),
 }
 
 impl Display for Error {
@@ -45,8 +45,8 @@ impl From<serde_json::Error> for Error {
     }
 }
 
-impl From<fetcher::experimental::FetcherError> for Error {
-    fn from(value: fetcher::experimental::FetcherError) -> Self {
+impl From<fetcher::FetcherError> for Error {
+    fn from(value: fetcher::FetcherError) -> Self {
         Error::FetcherError(value)
     }
 }

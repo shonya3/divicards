@@ -1,6 +1,6 @@
 #![cfg(feature = "fetch")]
 
-use fetcher::experimental::{Config, Stale, WithConfig};
+use fetcher::{Config, Stale, WithConfig};
 use googlesheets::sheet::ValueRange;
 
 use crate::{error::Error, parse::RichColumnVariant};
@@ -74,7 +74,7 @@ impl SpreadsheetFetcher {
     }
 }
 
-impl fetcher::experimental::DataFetcher<Spreadsheet, Error> for SpreadsheetFetcher {
+impl fetcher::DataFetcher<Spreadsheet, Error> for SpreadsheetFetcher {
     async fn fetch(&self) -> Result<Spreadsheet, Error> {
         self._fetch().await
     }

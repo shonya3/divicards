@@ -3,7 +3,7 @@
 use std::time::Duration;
 
 use crate::{act::ActArea, cards::CardsData, error::Error, mapbosses::MapBoss, maps::Map, PoeData};
-use fetcher::experimental::{Config, Stale, WithConfig};
+use fetcher::{Config, Stale, WithConfig};
 
 pub struct MapBossesFetcher(Config);
 
@@ -23,7 +23,7 @@ impl Default for MapBossesFetcher {
     }
 }
 
-impl fetcher::experimental::DataFetcher<Vec<MapBoss>, Error> for MapBossesFetcher {
+impl fetcher::DataFetcher<Vec<MapBoss>, Error> for MapBossesFetcher {
     async fn fetch(&self) -> Result<Vec<MapBoss>, Error> {
         crate::mapbosses::fetch().await
     }
@@ -47,7 +47,7 @@ impl Default for MapsFetcher {
     }
 }
 
-impl fetcher::experimental::DataFetcher<Vec<Map>, Error> for MapsFetcher {
+impl fetcher::DataFetcher<Vec<Map>, Error> for MapsFetcher {
     async fn fetch(&self) -> Result<Vec<Map>, Error> {
         crate::maps::fetch::fetch().await
     }
@@ -71,7 +71,7 @@ impl Default for ActsFetcher {
     }
 }
 
-impl fetcher::experimental::DataFetcher<Vec<ActArea>, Error> for ActsFetcher {
+impl fetcher::DataFetcher<Vec<ActArea>, Error> for ActsFetcher {
     async fn fetch(&self) -> Result<Vec<ActArea>, Error> {
         crate::act::fetch().await
     }
@@ -95,7 +95,7 @@ impl Default for CardsFetcher {
     }
 }
 
-impl fetcher::experimental::DataFetcher<CardsData, Error> for CardsFetcher {
+impl fetcher::DataFetcher<CardsData, Error> for CardsFetcher {
     async fn fetch(&self) -> Result<CardsData, Error> {
         crate::cards::fetch::fetch().await
     }
@@ -131,7 +131,7 @@ impl Default for PoeDataFetcher {
     }
 }
 
-impl fetcher::experimental::DataFetcher<PoeData, Error> for PoeDataFetcher {
+impl fetcher::DataFetcher<PoeData, Error> for PoeDataFetcher {
     async fn fetch(&self) -> Result<PoeData, Error> {
         let (acts, cards, maps, mapbosses) = tokio::join!(
             self.acts.load(),

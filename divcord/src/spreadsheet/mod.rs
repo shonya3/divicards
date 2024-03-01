@@ -40,7 +40,7 @@ impl Spreadsheet {
     #[cfg(feature = "fetch")]
     pub async fn load() -> Result<Self, Error> {
         use crate::spreadsheet::load::SpreadsheetFetcher;
-        use fetcher::experimental::DataFetcher;
+        use fetcher::DataFetcher;
         SpreadsheetFetcher::default().load().await
     }
 

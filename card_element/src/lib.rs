@@ -3,7 +3,7 @@ pub mod fetcher;
 pub mod images;
 pub mod reward;
 
-use ::fetcher::experimental::{DataFetcher, WithConfig};
+use ::fetcher::{DataFetcher, WithConfig};
 pub use error::Error;
 use fetcher::Fetcher;
 use serde::{Deserialize, Serialize};
