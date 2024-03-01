@@ -15,39 +15,6 @@ where
 {
     async fn fetch(&self) -> Result<T, E>;
 
-    fn filename(&self) -> &'static str {
-        self.config().filename
-    }
-
-    fn file_path(&self) -> PathBuf {
-        let dir = std::env::current_dir().unwrap().join("data");
-        if !dir.exists() {
-            std::fs::create_dir(&dir).unwrap();
-        }
-
-        dir.join(self.filename())
-    }
-
-    async fn update(&self) -> Result<(), E> {
-        let t = self.fetch().await?;
-        self.save(&t)?;
-        Ok(())
-    }
-    fn save(&self, data: &T) -> Result<(), E> {
-        if !self.config().save {
-            return Ok(());
-        }
-
-        let json = serde_json::to_string(data).map_err(FetcherError::SerdeError)?;
-        fs::write(self.file_path(), &json).map_err(|err| FetcherError::IoError(err))?;
-
-        Ok(())
-    }
-
-    fn up_to_date(&self) -> bool {
-        up_to_date(&self.file_path(), &self.config().stale).unwrap_or(false)
-    }
-
     async fn load(&self) -> Result<T, E> {
         let config = self.config();
         match up_to_date(&self.file_path(), &config.stale).unwrap_or(false) {
@@ -65,6 +32,40 @@ where
                 Ok(fetched)
             }
         }
+    }
+
+    fn filename(&self) -> &'static str {
+        self.config().filename
+    }
+
+    fn file_path(&self) -> PathBuf {
+        let dir = std::env::current_dir().unwrap().join("data");
+        if !dir.exists() {
+            std::fs::create_dir_all(&dir).unwrap();
+        }
+
+        dir.join(self.filename())
+    }
+
+    fn up_to_date(&self) -> bool {
+        up_to_date(&self.file_path(), &self.config().stale).unwrap_or(false)
+    }
+
+    async fn update(&self) -> Result<(), E> {
+        let t = self.fetch().await?;
+        self.save(&t)?;
+        Ok(())
+    }
+
+    fn save(&self, data: &T) -> Result<(), E> {
+        if !self.config().save {
+            return Ok(());
+        }
+
+        let json = serde_json::to_string(data).map_err(FetcherError::SerdeError)?;
+        fs::write(self.file_path(), &json).map_err(|err| FetcherError::IoError(err))?;
+
+        Ok(())
     }
 }
 
