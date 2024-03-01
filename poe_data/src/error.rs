@@ -2,6 +2,8 @@
 
 use std::fmt::Display;
 
+use fetcher::experimental::FetcherError;
+
 use crate::league::UnexpectedLeagueInfoShapeError;
 
 #[derive(Debug)]
@@ -18,6 +20,7 @@ pub enum Error {
     FetcherError(fetcher::Error),
     #[cfg(feature = "fetch")]
     UnexpectedLeagueInfoShapeError(UnexpectedLeagueInfoShapeError),
+    ExperimentalFetcherError(fetcher::experimental::FetcherError),
 }
 
 impl Display for Error {
@@ -34,6 +37,7 @@ impl Display for Error {
             #[cfg(feature = "fetch")]
             Error::FetcherError(err) => err.fmt(f),
             Error::UnexpectedLeagueInfoShapeError(err) => err.fmt(f),
+            Error::ExperimentalFetcherError(err) => err.fmt(f),
         }
     }
 }
@@ -82,5 +86,12 @@ impl From<fetcher::Error> for Error {
 impl From<UnexpectedLeagueInfoShapeError> for Error {
     fn from(value: UnexpectedLeagueInfoShapeError) -> Self {
         Error::UnexpectedLeagueInfoShapeError(value)
+    }
+}
+
+#[cfg(feature = "fetch")]
+impl From<FetcherError> for Error {
+    fn from(value: FetcherError) -> Self {
+        Error::ExperimentalFetcherError(value)
     }
 }

@@ -39,8 +39,9 @@ impl Spreadsheet {
 
     #[cfg(feature = "fetch")]
     pub async fn load() -> Result<Self, Error> {
-        use fetcher::DataFetcher;
-        load::SpreadsheetFetcher::new().load().await
+        use crate::spreadsheet::load::SpreadsheetFetcher;
+        use fetcher::experimental::DataFetcher;
+        SpreadsheetFetcher::default().load().await
     }
 
     /// iterator over dumb records - initial preparation of data for each spreadsheet row.

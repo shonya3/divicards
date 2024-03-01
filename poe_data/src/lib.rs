@@ -25,13 +25,13 @@ pub struct PoeData {
 impl PoeData {
     #[cfg(feature = "fetch")]
     pub async fn load() -> Result<Self, crate::error::Error> {
-        use fetcher::DataFetcher;
-        crate::fetchers::PoeDataFetcher.load().await
+        use fetcher::experimental::DataFetcher;
+        crate::fetchers::PoeDataFetcher::default().load().await
     }
 
     #[cfg(feature = "fetch")]
     pub fn filename() -> &'static str {
-        use fetcher::DataFetcher;
-        crate::fetchers::PoeDataFetcher::filename()
+        use fetcher::experimental::WithConfig;
+        crate::fetchers::PoeDataFetcher::default().config().filename
     }
 }

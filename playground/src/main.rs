@@ -25,7 +25,11 @@ fn check_deserialize() -> Result<Vec<Record>, Error> {
 }
 
 #[tokio::main]
-async fn main() {}
+async fn main() {
+    let (poe_data, spreadsheet) = tokio::join!(PoeData::load(), Spreadsheet::load());
+    let poe_data = poe_data.unwrap();
+    let spreadsheet = spreadsheet.unwrap();
+}
 
 // #[tokio::main]
 // async fn main() {

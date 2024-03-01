@@ -1,18 +1,31 @@
 #![cfg(feature = "fetch")]
 
-use fetcher::DataFetcher;
+use fetcher::experimental::{Config, Stale, WithConfig};
 use googlesheets::sheet::ValueRange;
 
 use crate::{error::Error, parse::RichColumnVariant};
 
 use super::{rich::RichColumn, Spreadsheet};
 
-pub struct SpreadsheetFetcher(reqwest::Client);
-impl SpreadsheetFetcher {
-    pub fn new() -> Self {
-        Self(reqwest::Client::new())
-    }
+pub struct SpreadsheetFetcher(Config);
 
+impl Default for SpreadsheetFetcher {
+    fn default() -> Self {
+        Self(Config {
+            save: true,
+            filename: "spreadsheet.json",
+            stale: Stale::ReloadEveryTime,
+        })
+    }
+}
+
+impl WithConfig for SpreadsheetFetcher {
+    fn config(&self) -> Config {
+        self.0.clone()
+    }
+}
+
+impl SpreadsheetFetcher {
     pub async fn fetch_rich_column(&self, variant: RichColumnVariant) -> Result<RichColumn, Error> {
         dotenv::dotenv().ok();
         let key = std::env::var("GOOGLE_API_KEY").expect("No google api key");
@@ -20,10 +33,10 @@ impl SpreadsheetFetcher {
         let sheet = "Cards_and_Hypotheses";
         let column = variant.column_letter();
         let url = format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}?&ranges={sheet}!{column}3:{column}&includeGridData=true&key={key}");
-        Ok(self.0.get(url).send().await?.json().await?)
+        Ok(reqwest::get(url).await?.json().await?)
     }
 
-    pub async fn fetch_table_sheet(&self, client: &reqwest::Client) -> Result<ValueRange, Error> {
+    pub async fn fetch_table_sheet(&self) -> Result<ValueRange, Error> {
         dotenv::dotenv().ok();
         let key = std::env::var("GOOGLE_API_KEY").expect("No google api key");
         let spreadsheet_id = "1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU";
@@ -33,12 +46,12 @@ impl SpreadsheetFetcher {
         let url = format!(
             "https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{range}?key={key}"
         );
-        let value_range: ValueRange = client.get(url).send().await?.json().await?;
+        let value_range: ValueRange = reqwest::get(url).await?.json().await?;
         Ok(value_range)
     }
 
     pub async fn _fetch(&self) -> Result<Spreadsheet, Error> {
-        let sheet = self.fetch_table_sheet(&self.0).await?;
+        let sheet = self.fetch_table_sheet().await?;
         let number_of_rows = sheet.values.len();
         let rich_sources_column = RichColumn::new(
             self.fetch_rich_column(RichColumnVariant::Sources)
@@ -61,11 +74,7 @@ impl SpreadsheetFetcher {
     }
 }
 
-impl DataFetcher<Spreadsheet, Error> for SpreadsheetFetcher {
-    fn filename() -> &'static str {
-        "spreadsheet.json"
-    }
-
+impl fetcher::experimental::DataFetcher<Spreadsheet, Error> for SpreadsheetFetcher {
     async fn fetch(&self) -> Result<Spreadsheet, Error> {
         self._fetch().await
     }

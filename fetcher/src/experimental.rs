@@ -6,8 +6,13 @@ use std::{
     path::PathBuf,
 };
 
+#[derive(Debug)]
 pub struct FileNotExists(PathBuf);
 fn up_to_date(path: &PathBuf, stale: &Stale) -> Result<bool, FileNotExists> {
+    if !path.exists() {
+        return Ok(false);
+    }
+
     match stale {
         Stale::Never => Ok(true),
         Stale::After(duration) => {
@@ -139,7 +144,7 @@ where
         }
 
         let json = serde_json::to_string(data).map_err(FetcherError::SerdeError)?;
-        fs::write(self.file_path(), &json).map_err(FetcherError::IoError)?;
+        fs::write(self.file_path(), &json).map_err(|err| FetcherError::IoError(err))?;
 
         Ok(())
     }

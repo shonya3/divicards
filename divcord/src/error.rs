@@ -13,7 +13,7 @@ pub enum Error {
     StrumParseError(strum::ParseError),
     ParseSourceError(ParseSourceError),
     #[cfg(feature = "fetch")]
-    FetcherError(fetcher::Error),
+    FetcherError(fetcher::experimental::FetcherError),
     ParseCellError(crate::spreadsheet::rich::ParseCellError),
 }
 
@@ -37,8 +37,8 @@ impl Display for Error {
 }
 
 #[cfg(feature = "fetch")]
-impl From<fetcher::Error> for Error {
-    fn from(value: fetcher::Error) -> Self {
+impl From<fetcher::experimental::FetcherError> for Error {
+    fn from(value: fetcher::experimental::FetcherError) -> Self {
         Error::FetcherError(value)
     }
 }
