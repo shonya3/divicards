@@ -172,5 +172,5 @@ impl ConfigBuilder {
 }
 
 pub trait WithConfig {
-    fn config(&self) -> Config;
+    fn config(&self) -> &Config;
 }

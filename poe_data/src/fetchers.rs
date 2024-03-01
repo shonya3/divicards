@@ -8,8 +8,8 @@ use fetcher::experimental::{Config, Stale, WithConfig};
 pub struct MapBossesFetcher(Config);
 
 impl WithConfig for MapBossesFetcher {
-    fn config(&self) -> Config {
-        self.0.clone()
+    fn config(&self) -> &Config {
+        &self.0
     }
 }
 
@@ -32,8 +32,8 @@ impl fetcher::experimental::DataFetcher<Vec<MapBoss>, Error> for MapBossesFetche
 pub struct MapsFetcher(Config);
 
 impl WithConfig for MapsFetcher {
-    fn config(&self) -> Config {
-        self.0.clone()
+    fn config(&self) -> &Config {
+        &self.0
     }
 }
 
@@ -56,8 +56,8 @@ impl fetcher::experimental::DataFetcher<Vec<Map>, Error> for MapsFetcher {
 pub struct ActsFetcher(Config);
 
 impl WithConfig for ActsFetcher {
-    fn config(&self) -> Config {
-        self.0.clone()
+    fn config(&self) -> &Config {
+        &self.0
     }
 }
 
@@ -80,8 +80,8 @@ impl fetcher::experimental::DataFetcher<Vec<ActArea>, Error> for ActsFetcher {
 pub struct CardsFetcher(Config);
 
 impl WithConfig for CardsFetcher {
-    fn config(&self) -> Config {
-        self.0.clone()
+    fn config(&self) -> &Config {
+        &self.0
     }
 }
 
@@ -110,8 +110,8 @@ pub struct PoeDataFetcher {
 }
 
 impl WithConfig for PoeDataFetcher {
-    fn config(&self) -> Config {
-        self.config.clone()
+    fn config(&self) -> &Config {
+        &self.config
     }
 }
 

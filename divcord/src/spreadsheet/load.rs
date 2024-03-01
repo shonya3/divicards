@@ -20,8 +20,8 @@ impl Default for SpreadsheetFetcher {
 }
 
 impl WithConfig for SpreadsheetFetcher {
-    fn config(&self) -> Config {
-        self.0.clone()
+    fn config(&self) -> &Config {
+        &self.0
     }
 }
 
