@@ -17,9 +17,8 @@ pub enum Error {
     IoError(std::io::Error),
     SerdeError(serde_json::Error),
     #[cfg(feature = "fetch")]
-    FetcherError(fetcher::Error),
-    #[cfg(feature = "fetch")]
     UnexpectedLeagueInfoShapeError(UnexpectedLeagueInfoShapeError),
+    #[cfg(feature = "fetch")]
     ExperimentalFetcherError(fetcher::experimental::FetcherError),
 }
 
@@ -35,7 +34,6 @@ impl Display for Error {
             #[cfg(feature = "fetch")]
             Error::DiviError(err) => err.fmt(f),
             #[cfg(feature = "fetch")]
-            Error::FetcherError(err) => err.fmt(f),
             Error::UnexpectedLeagueInfoShapeError(err) => err.fmt(f),
             Error::ExperimentalFetcherError(err) => err.fmt(f),
         }
@@ -72,13 +70,6 @@ impl From<googlesheets::error::Error> for Error {
 impl From<divi::error::Error> for Error {
     fn from(value: divi::error::Error) -> Self {
         Error::DiviError(value)
-    }
-}
-
-#[cfg(feature = "fetch")]
-impl From<fetcher::Error> for Error {
-    fn from(value: fetcher::Error) -> Self {
-        Error::FetcherError(value)
     }
 }
 
