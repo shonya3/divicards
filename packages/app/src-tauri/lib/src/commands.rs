@@ -7,7 +7,7 @@ use divi::{
 use tauri::{command, State, Window};
 use tracing::instrument;
 
-use crate::{error::Error, prices::AppCardPrices};
+use crate::{error::Error, prices::AppCardPrices, version::AppVersion};
 
 #[command]
 #[instrument(skip(data, state, window))]
@@ -51,4 +51,9 @@ pub async fn sample_into_csv(
     preferences: TablePreferences,
 ) -> String {
     sample.into_csv(Some(preferences))
+}
+
+#[command]
+pub async fn version(version: State<'_, AppVersion>) -> Result<AppVersion, Error> {
+    Ok(version.inner().clone())
 }

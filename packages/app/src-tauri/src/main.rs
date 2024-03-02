@@ -29,6 +29,7 @@ async fn main() {
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
+            commands::version,
             commands::sample,
             commands::merge,
             commands::open_url,

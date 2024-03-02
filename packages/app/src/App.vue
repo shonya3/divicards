@@ -26,6 +26,8 @@ import { Props as FormExportProps } from '@divicards/wc/src/wc/form-export-sampl
 import { BasePopupElement } from '@divicards/wc/src/wc/base-popup';
 import UpdateButton from './components/UpdateButton.vue';
 import UpdateChangelog from './components/UpdateChangelog.vue';
+import NativeBrowserLink from './components/NativeBrowserLink.vue';
+import { useAppVersion } from './composables/useAppVersion';
 
 const sampleStore = useSampleStore();
 const authStore = useAuthStore();
@@ -33,6 +35,7 @@ const googleAuthStore = useGoogleAuthStore();
 const exportSample = useExportSampleStore();
 const tablePreferences = useTablePreferencesStore();
 const stashVisible = ref(false);
+const { releaseUrl, tag } = useAppVersion();
 
 const changelogPopupRef = ref<BasePopupElement | null>(null);
 const formPopupExportRef = ref<BasePopupElement | null>(null);
@@ -231,6 +234,10 @@ const onSubmit = async ({
 			@submit="onSubmit"
 		></FormExportSample>
 	</wc-base-popup>
+
+	<div class="version">
+		<NativeBrowserLink :href="releaseUrl">{{ tag }}</NativeBrowserLink>
+	</div>
 </template>
 
 <style scoped>
@@ -275,5 +282,13 @@ const onSubmit = async ({
 	margin-left: 2rem;
 	padding: 0.4rem;
 	font-size: 1.4rem;
+}
+
+.version {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 0.3rem;
+	padding-right: 1rem;
 }
 </style>
