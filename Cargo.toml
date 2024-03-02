@@ -17,7 +17,7 @@ members = [
 ]
 
 [workspace.package]
-version = "0.5.5"
+version = "0.5.6"
 edition = "2021"
 repository = "https://github.com/shonya3/divicards"
 
