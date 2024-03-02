@@ -21,7 +21,7 @@ tauri-build = { version = "1.5", features = [] }
 divi = {path = "../../../divi"}
 googlesheets = {path = "../../../googlesheets"}
 
-tauri = { version = "1.5", features = [ "api-all"] }
+tauri = { version = "1.5", features = [ "updater", "api-all"] }
 
 tokio = {version = "1", features = ["full"] }
 tracing.workspace = true

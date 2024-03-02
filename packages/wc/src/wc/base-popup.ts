@@ -1,6 +1,6 @@
 import { html, css } from 'lit';
 import { BaseElement } from './base-element';
-import { property, query } from 'lit/decorators.js';
+import { query } from 'lit/decorators.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -22,7 +22,13 @@ export class BasePopupElement extends BaseElement {
 	}
 
 	open() {
-		return this.dialog.showModal();
+		if (!this.dialog) {
+			this.updateComplete.then(() => {
+				return this.dialog.showModal();
+			});
+		} else {
+			return this.dialog.showModal();
+		}
 	}
 
 	show() {

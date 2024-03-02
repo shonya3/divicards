@@ -11,6 +11,12 @@
 		"version": "0.5.4"
 	},
 	"tauri": {
+		"updater": {
+			"active": true,
+			"dialog": false,
+			"endpoints": ["https://github.com/shonya3/divicards/releases/latest/download/update.json"],
+			"pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDk3QTM3NkQyN0ZBRjRBREQKUldUZFNxOS8wbmFqbDRMUFhFQi9aWngrbG5PMzB6TmY2djE1YzZ6VWNYTmpQS3AvOWMwRGdGVGwK"
+		},
 		"allowlist": {
 			"all": true
 		},

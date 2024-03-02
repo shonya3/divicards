@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 import { StashLoader } from './StashLoader';
 import { command } from './command';
@@ -16,6 +16,7 @@ import { useGoogleAuthStore } from './stores/googleAuth';
 import { useAuthStore } from './stores/auth';
 import { useTablePreferencesStore } from './stores/tablePreferences';
 import { useAutoAnimate } from './composables/useAutoAnimate';
+import { useTauriUpdater } from './composables/useTauriUpdater';
 
 import SampleCard from './components/SampleCard.vue';
 import StashesView from './components/StashesView.vue';
@@ -23,6 +24,8 @@ import FormExportSample from './components/FormExportSample.vue';
 
 import { Props as FormExportProps } from '@divicards/wc/src/wc/form-export-sample/form-export-sample';
 import { BasePopupElement } from '@divicards/wc/src/wc/base-popup';
+import UpdateButton from './components/UpdateButton.vue';
+import UpdateChangelog from './components/UpdateChangelog.vue';
 
 const sampleStore = useSampleStore();
 const authStore = useAuthStore();
@@ -31,9 +34,12 @@ const exportSample = useExportSampleStore();
 const tablePreferences = useTablePreferencesStore();
 const stashVisible = ref(false);
 
+const changelogPopupRef = ref<BasePopupElement | null>(null);
 const formPopupExportRef = ref<BasePopupElement | null>(null);
 const samplesContainerRef = ref<HTMLElement | null>(null);
 useAutoAnimate(samplesContainerRef);
+
+const { shouldUpdate, manifest, installUpdate } = useTauriUpdater();
 
 const stashLoader = new StashLoader();
 
@@ -153,7 +159,12 @@ const onSubmit = async ({
 				:loggedIn="authStore.loggedIn"
 				v-if="authStore.loggedIn"
 			></wc-poe-auth>
+			<UpdateButton v-if="shouldUpdate" @click="() => changelogPopupRef?.open()">Update is ready</UpdateButton>
 		</header>
+
+		<wc-base-popup v-if="manifest" ref="changelogPopupRef">
+			<UpdateChangelog @update-clicked="installUpdate" :manifest="manifest" />
+		</wc-base-popup>
 
 		<div v-show="authStore.loggedIn && stashVisible">
 			<StashesView
