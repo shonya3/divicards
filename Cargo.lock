@@ -3248,6 +3248,7 @@ name = "playground"
 version = "0.5.6"
 dependencies = [
  "divcord",
+ "divi",
  "dotenv",
  "fetcher",
  "poe_data",

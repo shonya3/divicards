@@ -34,7 +34,7 @@ pub mod fetch {
     use super::CardsData;
     use crate::{
         cards::Card,
-        consts::{WEIGHT_RANGES, WIKI_API_URL},
+        consts::{WEIGHT_RANGES, WEIGHT_SPREADSHEET_ID, WIKI_API_URL},
         error::Error,
         league::ReleaseVersion,
     };
@@ -116,12 +116,13 @@ pub mod fetch {
         )));
     }
 
+    /// Loads Total amounts from latest league, constructs Sample from them https://docs.google.com/spreadsheets/d/1PmGES_e1on6K7O5ghHuoorEjruAVb7dQ5m7PGrW7t80/edit#gid=898101079
     async fn load_total_sample(
         api_key: String,
         prices: Option<Prices>,
     ) -> Result<DivinationCardsSample, Error> {
         let batch_read = googlesheets::read_batch(
-            "1NDTZqLcwrKjR3CflLU7B7IGJtzynNoWTe7AVQ-gUA-c",
+            WEIGHT_SPREADSHEET_ID,
             WEIGHT_RANGES,
             Credential::ApiKey(api_key),
         )
