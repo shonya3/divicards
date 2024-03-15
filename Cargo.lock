@@ -1609,6 +1609,7 @@ version = "0.5.6"
 dependencies = [
  "card_element",
  "divcord",
+ "dotenv",
  "poe_data",
  "reqwest",
  "serde",

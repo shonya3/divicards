@@ -1,3 +1,4 @@
+mod avatars;
 use std::{
     path::{Path, PathBuf},
     process::{Command, Stdio},
@@ -10,6 +11,7 @@ use serde::Serialize;
 
 #[tokio::main]
 async fn main() {
+    dotenv::dotenv().ok();
     // Prepare paths
     let dir = PathBuf::from("../../divicards-site/src/gen");
     let json_dir = dir.join("json");
@@ -33,6 +35,11 @@ async fn main() {
         &json_dir,
         DivinationCardElementData::filename(),
     );
+    std::fs::write(
+        &dir.join("avatars.ts"),
+        &avatars::prepare_avatars_ts().await,
+    )
+    .unwrap();
 
     // 3. Generate TypeScript
     std::fs::write(
