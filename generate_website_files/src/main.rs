@@ -71,13 +71,16 @@ pub fn divcord_wasm_pkg(path: &Path, dirname: &str) {
                 &path.display().to_string(),
             ])
             .current_dir(&dir_path)
-            .stdout(Stdio::inherit())
-            .stderr(Stdio::inherit())
+            .stdout(Stdio::piped())
+            .stderr(Stdio::piped())
             .output();
 
         match output {
             Ok(output) => {
                 if output.status.success() {
+                    println!("{}", String::from_utf8_lossy(&output.stdout)); // Print wasm-pack's stdout
+                    eprintln!("{}", String::from_utf8_lossy(&output.stderr)); // Print wasm-pack's stderr
+
                     println!("Command executed successfully!");
                 } else {
                     eprintln!("Error executing command");
