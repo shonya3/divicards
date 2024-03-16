@@ -192,17 +192,15 @@ const onSubmit = async ({
 
 		<div v-if="sampleStore.sampleCards.length >= 2">
 			<h2>Select samples you want to merge</h2>
-			<button :disabled="sampleStore.samples.length < 2" class="btn" @click="sampleStore.mergeAll">
-				Merge All
-			</button>
-			<button
-				:disabled="sampleStore.selectedSampleCards.length < 2"
-				class="btn"
-				@click="sampleStore.mergeSelected"
-			>
-				Merge selected
-			</button>
-			<button class="btn" @click="sampleStore.deleteAllFiles">Remove samples</button>
+			<div class="sample-buttons">
+				<sl-button :disabled="sampleStore.samples.length < 2" @click="sampleStore.mergeAll">
+					Merge All
+				</sl-button>
+				<sl-button :disabled="sampleStore.selectedSampleCards.length < 2" @click="sampleStore.mergeSelected">
+					Merge selected
+				</sl-button>
+				<sl-button @click="sampleStore.deleteAllFiles">Remove samples</sl-button>
+			</div>
 		</div>
 
 		<Transition>
@@ -279,10 +277,10 @@ const onSubmit = async ({
 	gap: 2rem;
 }
 
-.btn {
-	margin-left: 2rem;
-	padding: 0.4rem;
-	font-size: 1.4rem;
+.sample-buttons {
+	margin-top: 0.4rem;
+	display: flex;
+	gap: 0.2rem;
 }
 
 .version {
