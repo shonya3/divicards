@@ -1,12 +1,4 @@
-<style>
-	:root {
-		color-scheme: dark;
-	}
-	body {
-		background-color: #242424;
-	}
-</style>
-<style>:host,
+:host,
 .sl-theme-dark {
   color-scheme: dark;
 
@@ -486,8 +478,3 @@
 .sl-toast-stack sl-alert::part(base) {
   box-shadow: var(--sl-shadow-large);
 }
-</style>
-
-<body class="sl-theme-dark">
-    
-</body>

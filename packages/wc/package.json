@@ -1,42 +1,40 @@
 {
-	"name": "@divicards/wc",
-	"private": true,
-	"version": "0.0.0",
-	"type": "module",
-	"scripts": {
-		"dev": "vite",
-		"build": "tsc && vite build",
-		"preview": "vite preview",
-		"storybook": "storybook dev -p 6006",
-		"build-storybook": "storybook build",
-		"test": "web-test-runner --node-resolve",
-		"test:watch": "web-test-runner --watch --group default"
-	},
-	"devDependencies": {
-		"@esm-bundle/chai": "4.3.4-fix.0",
-		"@open-wc/testing": "4.0.0",
-		"@storybook/addon-essentials": "7.6.8",
-		"@storybook/addon-links": "7.6.8",
-		"@storybook/blocks": "7.6.8",
-		"@storybook/web-components": "7.6.8",
-		"@storybook/web-components-vite": "7.6.8",
-		"@types/mocha": "^10.0.6",
-		"@types/sinon": "^17.0.3",
-		"@web/test-runner": "^0.18.0",
-		"@web/test-runner-commands": "^0.9.0",
-		"globby": "^14.0.0",
-		"react": "18.2.0",
-		"react-dom": "18.2.0",
-		"sinon": "^17.0.1",
-		"storybook": "7.6.8",
-		"typescript": "^5.3.3",
-		"vite": "5.0.11"
-	},
-	"dependencies": {
-		"@divicards/shared": "workspace:^",
-		"@shoelace-style/shoelace": "2.13.1",
-		"@web/dev-server-esbuild": "^1.0.1",
-		"@web/test-runner-playwright": "^0.11.0",
-		"lit": "^3.1.1"
-	}
+  "name": "@divicards/wc",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "test": "web-test-runner --node-resolve",
+    "test:watch": "web-test-runner --watch --group default"
+  },
+  "devDependencies": {
+    "@esm-bundle/chai": "4.3.4-fix.0",
+    "@open-wc/testing": "4.0.0",
+    "@storybook/addon-essentials": "^8.0.0",
+    "@storybook/addon-links": "^8.0.0",
+    "@storybook/blocks": "^8.0.0",
+    "@storybook/web-components": "^8.0.0",
+    "@storybook/web-components-vite": "^8.0.0",
+    "@types/mocha": "^10.0.6",
+    "@types/sinon": "^17.0.3",
+    "@web/test-runner": "^0.18.0",
+    "@web/test-runner-commands": "^0.9.0",
+    "globby": "^14.0.0",
+    "sinon": "^17.0.1",
+    "storybook": "^8.0.0",
+    "typescript": "^5.3.3",
+    "vite": "5.0.11"
+  },
+  "dependencies": {
+    "@divicards/shared": "workspace:^",
+    "@shoelace-style/shoelace": "2.13.1",
+    "@web/dev-server-esbuild": "^1.0.1",
+    "@web/test-runner-playwright": "^0.11.0",
+    "lit": "^3.1.1"
+  }
 }
