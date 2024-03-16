@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { UpdateManifest } from '@tauri-apps/api/updater';
-import UpdateButton from './UpdateButton.vue';
 import { command } from '../command';
 defineProps<{
 	manifest: UpdateManifest;
@@ -22,7 +21,7 @@ const LATEST_RELEASE = 'https://github.com/shonya3/divicards/releases/latest';
 			>Check release notes</a
 		>
 
-		<UpdateButton class="update-btn" @click="$emit('update-clicked')">Update</UpdateButton>
+		<sl-button variant="success" class="update-btn" @click="$emit('update-clicked')">Update</sl-button>
 	</div>
 </template>
 

@@ -24,7 +24,6 @@ import FormExportSample from './components/FormExportSample.vue';
 
 import { Props as FormExportProps } from '@divicards/wc/src/wc/form-export-sample/form-export-sample';
 import { BasePopupElement } from '@divicards/wc/src/wc/base-popup';
-import UpdateButton from './components/UpdateButton.vue';
 import UpdateChangelog from './components/UpdateChangelog.vue';
 import NativeBrowserLink from './components/NativeBrowserLink.vue';
 import { useAppVersion } from './composables/useAppVersion';
@@ -146,7 +145,7 @@ const onSubmit = async ({
 	>
 		<header class="header">
 			<wc-drop-files-message></wc-drop-files-message>
-			<button @click="openStashWindow()">Load from stash</button>
+			<sl-button @click="openStashWindow()">Load from stash</sl-button>
 			<wc-google-auth
 				@login="googleAuthStore.login"
 				@logout="googleAuthStore.logout"
@@ -162,7 +161,9 @@ const onSubmit = async ({
 				:loggedIn="authStore.loggedIn"
 				v-if="authStore.loggedIn"
 			></wc-poe-auth>
-			<UpdateButton v-if="shouldUpdate" @click="() => changelogPopupRef?.open()">Update is ready</UpdateButton>
+			<sl-button variant="success" v-if="shouldUpdate" @click="() => changelogPopupRef?.open()"
+				>Update is ready</sl-button
+			>
 		</header>
 
 		<wc-base-popup v-if="manifest" ref="changelogPopupRef">

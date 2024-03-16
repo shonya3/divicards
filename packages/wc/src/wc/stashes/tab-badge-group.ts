@@ -256,8 +256,5 @@ function styles() {
 			gap: 5px;
 			margin-inline: 1rem;
 		}
-
-		#filter-stashes-by-name::part(form-control-label) {
-		}
 	`;
 }
