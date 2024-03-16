@@ -1,6 +1,7 @@
 import { html, css } from 'lit';
 import { BaseElement } from './base-element';
 import { property } from 'lit/decorators.js';
+import '@shoelace-style/shoelace/dist/components/button/button.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -15,14 +16,14 @@ export class PoeAuthElement extends BaseElement {
 	@property({ reflect: true }) name: string = '';
 	@property({ type: Boolean, reflect: true }) loggedIn: boolean = false;
 	protected override render() {
-		const logoutButton = html`<button @click=${this.#emitLogout}>Logout</button>`;
-		const loginButton = html`<button @click=${this.#emitLogin}>Login</button>`;
+		const logoutButton = html`<sl-button @click=${this.#emitLogout}>Logout</sl-button>`;
+		const loginButton = html`<sl-button @click=${this.#emitLogin}>Login</sl-button>`;
 
 		const template = this.loggedIn
 			? html`<div class="logged-in">
 					<p>${this.name}</p>
 					${logoutButton}
-			  </div>`
+				</div>`
 			: html`<div>${loginButton}</div>`;
 
 		return html`<div class="poe-auth">${template}</div>`;

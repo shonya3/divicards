@@ -3,6 +3,9 @@ import { BaseElement } from '../base-element';
 import { property, state, query } from 'lit/decorators.js';
 import { OrderTriangleElement } from '../order-triangle';
 import { toOrderedBy } from '@divicards/shared/toOrderedBy';
+import '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
+import '@shoelace-style/shoelace/dist/components/input/input.js';
+import '@shoelace-style/shoelace/dist/components/range/range.js';
 
 import { Column, DivinationCardRecord, Order } from '@divicards/shared/types';
 
@@ -35,7 +38,7 @@ export class DivTableElement extends BaseElement {
 	@state() nameQuery = '';
 	@state() hideZeroSum = false;
 
-	@query('input#hide-zero-sum-checkbox') checkboxHideZeroSum!: HTMLInputElement;
+	@query('sl-checkbox#hide-zero-sum-checkbox') checkboxHideZeroSum!: HTMLInputElement;
 
 	override willUpdate(map: PropertyValues<this>) {
 		if (map.has('cards')) {
@@ -118,13 +121,14 @@ export class DivTableElement extends BaseElement {
 	protected header() {
 		return html`<header class="header">
 			<label for="filter-card-name">Enter name</label>
-			<input
+			<sl-input
 				autofocus
 				type="text"
 				id="filter-card-name"
 				.value=${this.nameQuery}
 				@input=${this.#onNameQueryInput}
-			/>
+			></sl-input>
+
 			<span class="stats"
 				>found
 				<span class="ch-6">${this.filteredRecords.length} </span>
@@ -136,28 +140,23 @@ export class DivTableElement extends BaseElement {
 			>
 			<label class="slider-box">
 				<label for="min-price-slider">min price </label>
-				<input
-					class="slider"
-					type="range"
-					name=""
+				<sl-range
 					id="min-price-slider"
 					min="0"
 					max="500"
-					.value=${String(this.minPrice)}
+					.value=${this.minPrice}
 					@input=${this.#onMinPriceSlider}
-				/>
+				></sl-range>
 				<span class="ch-3">${this.minPrice}</span>
 				<img width="20" height="20" class="chaos-img" src="/chaos.png" alt="chaos" />
 			</label>
 			<div style="display: flex; gap: 0.8rem">
-				<label for="hide-zero-sum-checkbox">hide nullish rows</label>
-				<input
-					type="checkbox"
-					name=""
+				<sl-checkbox
 					id="hide-zero-sum-checkbox"
 					.checked=${this.hideZeroSum}
-					@change=${this.#onHideZeroCheckbox}
-				/>
+					@sl-change=${this.#onHideZeroCheckbox}
+					>hide nullish rows</sl-checkbox
+				>
 			</div>
 			<!-- <div>download filtered file</div> -->
 		</header>`;
@@ -304,10 +303,15 @@ function styles() {
 
 			&:hover {
 				outline: 1px black solid;
-				box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
-					rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px 0px,
-					rgba(0, 0, 0, 0.09) 0px 4px 2px 0px, rgba(0, 0, 0, 0.09) 0px 8px 4px 0px,
-					rgba(0, 0, 0, 0.09) 0px 16px 8px 0px, rgba(0, 0, 0, 0.09) 0px 32px 16px 0px;
+				box-shadow:
+					rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+					rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+					rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset,
+					rgba(0, 0, 0, 0.06) 0px 2px 1px 0px,
+					rgba(0, 0, 0, 0.09) 0px 4px 2px 0px,
+					rgba(0, 0, 0, 0.09) 0px 8px 4px 0px,
+					rgba(0, 0, 0, 0.09) 0px 16px 8px 0px,
+					rgba(0, 0, 0, 0.09) 0px 32px 16px 0px;
 			}
 		}
 
