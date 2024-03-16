@@ -10,6 +10,8 @@ import { DivinationCardsSample, League } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { TabBadgeGroupElement } from './tab-badge-group';
 import { classMap } from 'lit/directives/class-map.js';
+import '@shoelace-style/shoelace/dist/components/input/input.js';
+import '@shoelace-style/shoelace/dist/components/button/button.js';
 
 class CustomLeagueStorage {
 	static #key = 'CUSTOM_LEAGUE';
@@ -149,33 +151,40 @@ export class StashesViewElement extends BaseElement {
 		return html`<div class="main-stashes-component">
 			<div class="controls">
 				<div class="league-stashes">
-					<wc-league-select .league=${this.league} @upd:league=${this.#onLeagueSelected}></wc-league-select>
-					<div class="custom-league">
-						<label for="custom-league-input">Custom league (for private leagues)</label>
-						<input
+					<fieldset>
+						<legend>Choose league</legend>
+						<wc-league-select
+							.league=${this.league}
+							@upd:league=${this.#onLeagueSelected}
+						></wc-league-select>
+
+						<sl-input
 							.value=${this.customLeague}
 							@input=${this.#onCustomLeagueInput}
 							id="custom-league-input"
 							type="text"
-						/>
-					</div>
-					<button id="stashes-btn" @click=${this.#onLoadStashesList}>Stashes</button>
+							label="Custom league (for private leagues)"
+						></sl-input>
+					</fieldset>
+
+					<div class="custom-league"></div>
+					<sl-button id="stashes-btn" @click=${this.#onLoadStashesList}>Load Stashes</sl-button>
 					<wc-help-tip>
 						<p>Select tabs by clicking on them. Then click LOAD ITEMS button</p>
 					</wc-help-tip>
 					<div>Loads available: ${this.stashLoadsAvailable}</div>
 				</div>
 
-				<button
+				<sl-button
 					id="get-data-btn"
 					class=${classMap({ 'not-visible': this.selectedTabs.size === 0, 'btn-load-items': true })}
 					.disabled=${this.selectedTabs.size === 0 || this.fetchingStash || this.stashLoadsAvailable === 0}
 					@click=${this.#onLoadItemsClicked}
 				>
 					load items
-				</button>
+				</sl-button>
 
-				<button @click=${this.#onCloseClicked} class="btn-close">Close</button>
+				<sl-button @click=${this.#onCloseClicked} class="btn-close">Close</sl-button>
 			</div>
 
 			<div class="messages">
@@ -314,6 +323,11 @@ function styles() {
 		.controls {
 			display: flex;
 			justify-content: space-between;
+			align-items: center;
+		}
+
+		fieldset {
+			border: none;
 		}
 	`;
 }
