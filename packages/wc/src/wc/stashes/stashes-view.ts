@@ -160,7 +160,7 @@ export class StashesViewElement extends BaseElement {
 
 						<sl-input
 							.value=${this.customLeague}
-							@input=${this.#onCustomLeagueInput}
+							@sl-input=${this.#onCustomLeagueInput}
 							id="custom-league-input"
 							type="text"
 							label="Custom league (for private leagues)"

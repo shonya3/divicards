@@ -5,6 +5,9 @@ import { TabBadgeElement } from './tab-badge';
 import { NoItemsTab } from '@divicards/shared/poe.types';
 import { League, permanentLeagues } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
+import '@shoelace-style/shoelace/dist/components/input/input.js';
+import '@shoelace-style/shoelace/dist/components/button/button.js';
+import '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -69,10 +72,10 @@ export class TabBadgeGroupElement extends BaseElement {
 
 	@state() hideRemoveOnly = false;
 
-	@query('input[type="checkbox"]') checkbox!: HTMLInputElement;
-	@query('input#per-page') perPageInput!: HTMLInputElement;
-	@query('input#page') pageInput!: HTMLInputElement;
-	@query('input#filter-stashes-by-name') nameQueryInput!: HTMLInputElement;
+	@query('sl-checkbox') checkbox!: HTMLInputElement;
+	@query('sl-input#per-page') perPageInput!: HTMLInputElement;
+	@query('sl-input#page') pageInput!: HTMLInputElement;
+	@query('sl-input#filter-stashes-by-name') nameQueryInput!: HTMLInputElement;
 
 	constructor() {
 		super();
@@ -131,14 +134,13 @@ export class TabBadgeGroupElement extends BaseElement {
 	protected override render() {
 		const ifWithHideRemoveOnly = this.withHideRemoveOnly
 			? html` <div class="hide-remove-only">
-					<label for="hide-remove-only">Hide remove-only</label>
-					<input
-						type="checkbox"
+					<sl-checkbox
 						id="hide-remove-only"
+						@sl-change=${() => (this.hideRemoveOnly = this.checkbox.checked)}
 						.checked=${this.hideRemoveOnly}
-						@change=${() => (this.hideRemoveOnly = this.checkbox.checked)}
-					/>
-			  </div>`
+						>Hide remove-only</sl-checkbox
+					>
+				</div>`
 			: nothing;
 
 		const filtersSection = this.shouldFilter
@@ -146,32 +148,37 @@ export class TabBadgeGroupElement extends BaseElement {
 					<div>
 						<div class="filter">
 							<label for="filter-stashes-by-name">Filter by name</label>
-							<input
+							<sl-input
 								type="text"
 								id="filter-stashes-by-name"
 								.value=${this.nameQuery}
 								@input=${this.#onNameQueryInput}
-							/>
+							></sl-input>
 						</div>
 					</div>
 					<div class="page-controls">
-						<button ?disabled=${this.page === 1} @click=${this.decreasePage}>prev</button>
-						<input id="page" type="text" .value=${String(this.page)} @input=${this.#onPageInput} />
-						<button @click=${this.increasePage}>next</button>
+						<sl-button ?disabled=${this.page === 1} @click=${this.decreasePage}>prev</sl-button>
+						<sl-input
+							id="page"
+							type="text"
+							.value=${String(this.page)}
+							@sl-input=${this.#onPageInput}
+						></sl-input>
+						<sl-button @click=${this.increasePage}>next</sl-button>
 						<label for="per-page">per page</label>
-						<input
+						<sl-input
 							id="per-page"
 							type="number"
 							min="0"
 							.value=${String(this.perPage)}
-							@input=${this.#onPerPageInput}
-						/>
+							@sl-input=${this.#onPerPageInput}
+						></sl-input>
 					</div>
 
 					${ifWithHideRemoveOnly}
 
 					<div class="tabs-total"><span>${this.tabsTotal}</span> stash tabs</div>
-			  </div>`
+				</div>`
 			: nothing;
 
 		return html`<div class="tab-badge-group">${filtersSection} ${this.paginatedTabs()}</div>`;
@@ -216,6 +223,7 @@ function styles() {
 		.filter {
 			display: flex;
 			gap: 0.4rem;
+			align-items: center;
 		}
 
 		.page-controls {
@@ -224,8 +232,8 @@ function styles() {
 			align-items: center;
 		}
 
-		.page-controls > input {
-			width: 5ch;
+		.page-controls > sl-input {
+			width: 9ch;
 			text-align: center;
 		}
 
@@ -247,6 +255,9 @@ function styles() {
 			list-style: none;
 			gap: 5px;
 			margin-inline: 1rem;
+		}
+
+		#filter-stashes-by-name::part(form-control-label) {
 		}
 	`;
 }
