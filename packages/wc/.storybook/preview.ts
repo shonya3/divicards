@@ -1,12 +1,7 @@
 import type { Preview } from "@storybook/web-components";
-
-
-import * as styles from './dark.css'
-
-console.log(styles)
+import  '@shoelace-style/shoelace/dist/themes/dark.css'
 
 const preview: Preview = {
-    h: styles,
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
