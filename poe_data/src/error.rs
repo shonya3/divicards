@@ -1,10 +1,7 @@
 #![cfg(feature = "fetch")]
-
-use std::fmt::Display;
-
-use fetcher::FetcherError;
-
 use crate::league::UnexpectedLeagueInfoShapeError;
+use fetcher::FetcherError;
+use std::fmt::Display;
 
 #[derive(Debug)]
 pub enum Error {
