@@ -7,11 +7,15 @@ use std::{
     time::{Duration, Instant, SystemTime, UNIX_EPOCH},
 };
 
+use fetcher::DataFetcher;
+
 use divcord::{
+    cardsnew::cards_by_source,
     dropsource::Source,
-    spreadsheet::{record::Record, rich::RichColumn, Spreadsheet},
+    spreadsheet::{load::SpreadsheetFetcher, record::Record, rich::RichColumn, Spreadsheet},
 };
 use error::Error;
+use fetcher::Config;
 use poe_data::{consts::WIKI_API_URL, league::LeagueReleaseInfo, PoeData};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
@@ -26,9 +30,35 @@ fn check_deserialize() -> Result<Vec<Record>, Error> {
 
 #[tokio::main]
 async fn main() {
-    let (poe_data, spreadsheet) = tokio::join!(PoeData::load(), Spreadsheet::load());
+    let spreadsheet_fetcher = SpreadsheetFetcher(Config {
+        save: true,
+        filename: "spreadsheet.json",
+        stale: fetcher::Stale::Never,
+    });
+
+    let (poe_data, spreadsheet) = tokio::join!(PoeData::load(), spreadsheet_fetcher.load());
     let poe_data = poe_data.unwrap();
     let spreadsheet = spreadsheet.unwrap();
+
+    let records = divcord::records(&spreadsheet, &poe_data).unwrap();
+
+    /* bench
+    // let now = Instant::now();
+    // println!("{c:#?}");
+    // println!("{}", c.len());
+    // let core_map = Source::Map(String::from("Core Map"));
+    // for _ in 1..10 {
+    // cards_by_source(&core_map, &records, &poe_data);
+    // }
+    // println!("{}", now.elapsed().as_micros());
+     */
+
+    let core_map = Source::Map(String::from("Core Map"));
+    let the_harvest = Source::Act("1_4_6_3".to_owned());
+
+    let cards = cards_by_source(&the_harvest, &records, &poe_data);
+    println!("{cards:#?}");
+    println!("{}", cards.len());
 }
 
 // #[tokio::main]

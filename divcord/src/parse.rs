@@ -231,6 +231,7 @@ pub fn parse_record_dropsources(
     Ok(sources)
 }
 
+#[derive(Debug, PartialEq, Eq, Hash)]
 pub enum RichColumnVariant {
     Sources,
     Verify,

@@ -7,7 +7,7 @@ use crate::{error::Error, parse::RichColumnVariant};
 
 use super::{rich::RichColumn, Spreadsheet};
 
-pub struct SpreadsheetFetcher(Config);
+pub struct SpreadsheetFetcher(pub Config);
 
 impl Default for SpreadsheetFetcher {
     fn default() -> Self {

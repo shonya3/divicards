@@ -34,4 +34,28 @@ impl PoeData {
         use fetcher::WithConfig;
         crate::fetchers::PoeDataFetcher::default().config().filename
     }
+
+    pub fn mapboss(&self, name: &str) -> Option<&MapBoss> {
+        self.mapbosses
+            .iter()
+            .find(|map_boss| map_boss.name.to_lowercase() == name.to_lowercase())
+    }
+
+    pub fn act_area(&self, name: &str) -> Option<&ActArea> {
+        self.acts
+            .iter()
+            .find(|act_area| act_area.name.to_lowercase() == name.to_lowercase())
+    }
+
+    pub fn bosses_of_map(&self, map: &str) -> Vec<&MapBoss> {
+        self.mapbosses
+            .iter()
+            .filter(|map_boss| {
+                map_boss
+                    .maps
+                    .iter()
+                    .any(|m| m.to_lowercase() == map.to_lowercase())
+            })
+            .collect()
+    }
 }
