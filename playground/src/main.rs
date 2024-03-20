@@ -72,9 +72,12 @@ async fn main() {
 
     // for _ in 0..1 {
     cards_by_source_types(&source_types, &records, &poe_data);
+
     // }
 
     println!("{}", now.elapsed().as_millis());
+
+    // let map = cards_by_source_types(&source_types, &records, &poe_data)
     //     .into_iter()
     //     .map(|(key, vec)| (key.id().to_owned(), vec))
     //     .collect::<HashMap<String, Vec<CardBySource>>>();
