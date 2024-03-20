@@ -27,10 +27,10 @@ impl From<poe_data::act::ActArea> for Source {
     }
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash)]
 pub struct SourceAndCards {
-    source: Source,
-    cards: Vec<CardBySource>,
+    pub source: Source,
+    pub cards: Vec<CardBySource>,
 }
 
 #[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -187,9 +187,13 @@ pub fn cards_by_source_types(
     if source_types.contains(&"Map".to_owned()) {
         poe_data.maps.clone().into_iter().for_each(|map| {
             let source = Source::from(map);
-            hash_map.entry(source.clone()).or_default().extend(
-                cards_by_source_from_transitive_sources(&source, &records, &poe_data),
-            );
+
+            let cards = cards_by_source_from_transitive_sources(&source, &records, &poe_data);
+            if cards.is_empty() {
+                return;
+            }
+
+            hash_map.entry(source.clone()).or_default().extend(cards);
         })
     };
 
@@ -200,9 +204,12 @@ pub fn cards_by_source_types(
             }
 
             let source = Source::from(act_area);
-            hash_map.entry(source.clone()).or_default().extend(
-                cards_by_source_from_transitive_sources(&source, &records, &poe_data),
-            )
+            let cards = cards_by_source_from_transitive_sources(&source, &records, &poe_data);
+            if cards.is_empty() {
+                return;
+            }
+
+            hash_map.entry(source.clone()).or_default().extend(cards)
         })
     };
 

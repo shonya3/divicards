@@ -2,7 +2,7 @@
 
 use std::{
     clone,
-    collections::HashMap,
+    collections::{HashMap, HashSet},
     ops::{Sub, SubAssign},
     path::{Display, PathBuf},
     time::{Duration, Instant, SystemTime, UNIX_EPOCH},
@@ -11,7 +11,7 @@ use std::{
 use fetcher::DataFetcher;
 
 use divcord::{
-    cardsnew::{cards_by_source, cards_by_source_types, CardBySource},
+    cardsnew::{cards_by_source, cards_by_source_types, CardBySource, SourceAndCards},
     dropsource::{id::Identified, Source},
     parse::RichColumnVariant,
     spreadsheet::{load::SpreadsheetFetcher, record::Record, rich::RichColumn, Spreadsheet},
@@ -71,31 +71,33 @@ async fn main() {
     let now = Instant::now();
 
     let mut i = 1;
-    for _ in 0..10 {
-        cards_by_source_types(&source_types, &records, &poe_data);
-    }
+    // for _ in 0..10 {
+    cards_by_source_types(&source_types, &records, &poe_data);
+    // }
 
-    println!("{}", now.elapsed().as_millis());
+    // println!("{}", now.elapsed().as_millis());
 
     // let map = cards_by_source_types(&source_types, &records, &poe_data)
     //     .into_iter()
     //     .map(|(key, vec)| (key.id().to_owned(), vec))
     //     .collect::<HashMap<String, Vec<CardBySource>>>();
 
-    let map = cards_by_source_types(&source_types, &records, &poe_data);
+    let from_rust = cards_by_source_types(&source_types, &records, &poe_data);
+    let from_wasm: Vec<SourceAndCards> =
+        serde_json::from_str(&std::fs::read_to_string("from_wasm.json").unwrap()).unwrap();
 
-    let json = serde_json::to_string(&map).unwrap();
+    let rust_set: HashSet<_> = from_rust
+        .into_iter()
+        .map(|source_and_cards| source_and_cards.source)
+        .collect();
+    let wasm_set: HashSet<_> = from_wasm
+        .into_iter()
+        .map(|source_and_cards| source_and_cards.source)
+        .collect();
 
-    std::fs::write("mapjson.json", &json).unwrap();
-
-    println!("{}", map.len());
-
-    // let map: HashMap<Source, CardBySource> = serde_json::from_str(&json).unwrap();
-    //
-    // println!("{}", map.keys().len());
-
-    // let cards = map.get(&Source::Map("Wasteland Map".to_owned()));
-    // println!("{cards:#?}");
+    // let diff = rust_set.difference(&wasm_set);
+    let diff = wasm_set.difference(&rust_set);
+    println!("{diff:#?}");
 }
 
 // #[tokio::main]
