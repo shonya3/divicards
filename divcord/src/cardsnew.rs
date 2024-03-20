@@ -27,6 +27,12 @@ impl From<poe_data::act::ActArea> for Source {
     }
 }
 
+#[derive(Debug, Serialize, Deserialize)]
+pub struct SourceAndCards {
+    source: Source,
+    cards: Vec<CardBySource>,
+}
+
 #[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 /// Card name with verification status and possible transitive source. Being used in context of drop source
 pub struct CardBySource {
@@ -154,12 +160,10 @@ pub fn cards_by_source_types(
     source_types: &[String],
     records: &[Record],
     poe_data: &PoeData,
-) -> HashMap<Source, Vec<CardBySource>> {
+) -> Vec<SourceAndCards> {
     let mut hash_map: HashMap<Source, Vec<CardBySource>> = HashMap::new();
 
-    // 1. filter sources by source types and push to entry
     records.iter().for_each(|record| {
-        //for each source, get its entry and push to it
         record
             .sources
             .iter()
@@ -191,6 +195,10 @@ pub fn cards_by_source_types(
 
     if source_types.contains(&"Act".to_owned()) {
         poe_data.acts.clone().into_iter().for_each(|act_area| {
+            if act_area.is_town {
+                return;
+            }
+
             let source = Source::from(act_area);
             hash_map.entry(source.clone()).or_default().extend(
                 cards_by_source_from_transitive_sources(&source, &records, &poe_data),
@@ -199,4 +207,7 @@ pub fn cards_by_source_types(
     };
 
     hash_map
+        .into_iter()
+        .map(|(source, cards)| SourceAndCards { source, cards })
+        .collect()
 }

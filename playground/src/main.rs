@@ -70,10 +70,10 @@ async fn main() {
 
     let now = Instant::now();
 
-    // for _ in 0..1 {
-    cards_by_source_types(&source_types, &records, &poe_data);
-
-    // }
+    let mut i = 1;
+    for _ in 0..10 {
+        cards_by_source_types(&source_types, &records, &poe_data);
+    }
 
     println!("{}", now.elapsed().as_millis());
 
@@ -82,9 +82,13 @@ async fn main() {
     //     .map(|(key, vec)| (key.id().to_owned(), vec))
     //     .collect::<HashMap<String, Vec<CardBySource>>>();
 
-    // let json = serde_json::to_string(&map).unwrap();
+    let map = cards_by_source_types(&source_types, &records, &poe_data);
 
-    // std::fs::write("mapjson.json", &json).unwrap();
+    let json = serde_json::to_string(&map).unwrap();
+
+    std::fs::write("mapjson.json", &json).unwrap();
+
+    println!("{}", map.len());
 
     // let map: HashMap<Source, CardBySource> = serde_json::from_str(&json).unwrap();
     //
