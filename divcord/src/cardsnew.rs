@@ -87,6 +87,46 @@ impl CardBySource {
             return false;
         }
     }
+
+    fn extract(self) -> (Source, String, RichColumnVariant) {
+        match self {
+            CardBySource::Direct {
+                source,
+                card,
+                column,
+            } => (source, card, column),
+            CardBySource::FromChildSource {
+                source,
+                card,
+                column,
+                ..
+            } => (source, card, column),
+        }
+    }
+
+    pub fn from_child_source(by_child: Self, direct_source: Source) -> Self {
+        match by_child {
+            Self::Direct { .. } => {
+                let (child_source, card, column) = by_child.extract();
+                Self::FromChildSource {
+                    source: direct_source,
+                    card,
+                    column,
+                    child: child_source,
+                }
+            }
+            // not expect scenario, but ok...
+            Self::FromChildSource { .. } => {
+                let (child_source, card, column) = by_child.extract();
+                Self::FromChildSource {
+                    source: direct_source,
+                    card,
+                    column,
+                    child: child_source,
+                }
+            }
+        }
+    }
 }
 
 pub fn child_sources(source: &Source, poe_data: &PoeData) -> Vec<Source> {
@@ -120,12 +160,7 @@ pub fn cards_from_child_sources(
         .flat_map(|child| {
             cards_by_source_directly(&child, &records)
                 .into_iter()
-                .map(|child| CardBySource::FromChildSource {
-                    source: direct_source.to_owned(),
-                    card: child.card().to_owned(),
-                    child: child.source().to_owned(),
-                    column: child.column().to_owned(),
-                })
+                .map(|by_child| CardBySource::from_child_source(by_child, direct_source.to_owned()))
         })
         .collect()
 }
