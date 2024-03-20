@@ -34,39 +34,62 @@ pub struct SourceAndCards {
 }
 
 #[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
-/// Card name with verification status and possible transitive source. Being used in context of drop source
-pub struct CardBySource {
-    pub source: Source,
-    pub card: String,
-    pub transitive_source: Option<Source>,
-    pub column: RichColumnVariant,
+#[serde(untagged)]
+pub enum CardBySource {
+    Direct {
+        source: Source,
+        card: String,
+        column: RichColumnVariant,
+    },
+    #[serde(rename = "child")]
+    FromChildSource {
+        source: Source,
+        card: String,
+        column: RichColumnVariant,
+        child: Source,
+    },
 }
 
 impl CardBySource {
-    pub const fn new(
-        source: Source,
-        card: String,
-        transitive_source: Option<Source>,
-        column: RichColumnVariant,
-    ) -> Self {
-        Self {
-            source,
-            card,
-            transitive_source,
-            column,
+    pub fn source(&self) -> &Source {
+        match self {
+            CardBySource::Direct { source, .. } => &source,
+            CardBySource::FromChildSource { source, .. } => &source,
         }
     }
 
-    pub const fn new_without_transitive(
-        source: Source,
-        card: String,
-        column: RichColumnVariant,
-    ) -> Self {
-        Self::new(source, card, None, column)
+    pub fn card(&self) -> &String {
+        match self {
+            CardBySource::Direct { card, .. } => &card,
+            CardBySource::FromChildSource { card, .. } => &card,
+        }
+    }
+
+    pub fn column(&self) -> &RichColumnVariant {
+        match self {
+            CardBySource::Direct { column, .. } => &column,
+            CardBySource::FromChildSource { column, .. } => &column,
+        }
+    }
+
+    pub fn is_direct(&self) -> bool {
+        if let Self::Direct { .. } = self {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    pub fn is_child(&self) -> bool {
+        if let Self::FromChildSource { .. } = self {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
-pub fn transitive_sources(source: &Source, poe_data: &PoeData) -> Vec<Source> {
+pub fn child_sources(source: &Source, poe_data: &PoeData) -> Vec<Source> {
     match source {
         Source::Act(act) => poe_data
             .act_area(act)
@@ -87,21 +110,21 @@ pub fn transitive_sources(source: &Source, poe_data: &PoeData) -> Vec<Source> {
     }
 }
 
-pub fn cards_by_source_from_transitive_sources(
+pub fn cards_from_child_sources(
     direct_source: &Source,
     records: &[Record],
     poe_data: &PoeData,
 ) -> Vec<CardBySource> {
-    transitive_sources(&direct_source, &poe_data)
+    child_sources(&direct_source, &poe_data)
         .iter()
-        .flat_map(|transitive| {
-            cards_by_source_directly(&transitive, &records)
+        .flat_map(|child| {
+            cards_by_source_directly(&child, &records)
                 .into_iter()
-                .map(|by_transitive| CardBySource {
+                .map(|child| CardBySource::FromChildSource {
                     source: direct_source.to_owned(),
-                    card: by_transitive.card,
-                    transitive_source: Some(by_transitive.source),
-                    column: by_transitive.column,
+                    card: child.card().to_owned(),
+                    child: child.source().to_owned(),
+                    column: child.column().to_owned(),
                 })
         })
         .collect()
@@ -116,10 +139,9 @@ pub fn cards_by_source_directly(direct_source: &Source, records: &[Record]) -> V
                 .sources
                 .iter()
                 .filter(|source| *source == direct_source)
-                .map(|source| CardBySource {
+                .map(|source| CardBySource::Direct {
                     source: source.to_owned(),
                     card: record.card.to_owned(),
-                    transitive_source: None,
                     column: RichColumnVariant::Sources,
                 })
                 .chain(
@@ -128,10 +150,9 @@ pub fn cards_by_source_directly(direct_source: &Source, records: &[Record]) -> V
                         .verify_sources
                         .iter()
                         .filter(|verify| *verify == direct_source)
-                        .map(|source| CardBySource {
+                        .map(|source| CardBySource::Direct {
                             source: source.to_owned(),
                             card: record.card.to_owned(),
-                            transitive_source: None,
                             column: RichColumnVariant::Verify,
                         }),
                 )
@@ -146,9 +167,7 @@ pub fn cards_by_source(
     poe_data: &PoeData,
 ) -> Vec<CardBySource> {
     let mut direct_cards = cards_by_source_directly(&source, &records);
-    direct_cards.extend(cards_by_source_from_transitive_sources(
-        &source, &records, &poe_data,
-    ));
+    direct_cards.extend(cards_from_child_sources(&source, &records, &poe_data));
     direct_cards
         .into_iter()
         .collect::<HashSet<CardBySource>>()
@@ -176,11 +195,11 @@ pub fn cards_by_source_types(
             )
             .for_each(|source| {
                 let entry = hash_map.entry(source.clone()).or_default();
-                entry.push(CardBySource::new_without_transitive(
-                    source.clone(),
-                    record.card.clone(),
-                    RichColumnVariant::Sources,
-                ));
+                entry.push(CardBySource::Direct {
+                    source: source.clone(),
+                    card: record.card.clone(),
+                    column: RichColumnVariant::Sources,
+                });
             })
     });
 
@@ -188,7 +207,7 @@ pub fn cards_by_source_types(
         poe_data.maps.clone().into_iter().for_each(|map| {
             let source = Source::from(map);
 
-            let cards = cards_by_source_from_transitive_sources(&source, &records, &poe_data);
+            let cards = cards_from_child_sources(&source, &records, &poe_data);
             if cards.is_empty() {
                 return;
             }
@@ -204,7 +223,7 @@ pub fn cards_by_source_types(
             }
 
             let source = Source::from(act_area);
-            let cards = cards_by_source_from_transitive_sources(&source, &records, &poe_data);
+            let cards = cards_from_child_sources(&source, &records, &poe_data);
             if cards.is_empty() {
                 return;
             }

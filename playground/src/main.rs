@@ -72,8 +72,25 @@ async fn main() {
 
     let mut i = 1;
     // for _ in 0..10 {
-    cards_by_source_types(&source_types, &records, &poe_data);
+    let cards = cards_by_source_types(&source_types, &records, &poe_data)
+        .into_iter()
+        .filter_map(|SourceAndCards { cards, .. }| {
+            let cards = cards
+                .into_iter()
+                .filter(|card| card.is_child())
+                .collect::<Vec<_>>();
+            if cards.is_empty() {
+                None
+            } else {
+                Some(cards)
+            }
+        })
+        .collect::<Vec<_>>();
     // }
+
+    println!("{cards:#?}");
+
+    std::fs::write("cards.json", &serde_json::to_string(&cards).unwrap()).unwrap();
 
     // println!("{}", now.elapsed().as_millis());
 
@@ -81,23 +98,6 @@ async fn main() {
     //     .into_iter()
     //     .map(|(key, vec)| (key.id().to_owned(), vec))
     //     .collect::<HashMap<String, Vec<CardBySource>>>();
-
-    let from_rust = cards_by_source_types(&source_types, &records, &poe_data);
-    let from_wasm: Vec<SourceAndCards> =
-        serde_json::from_str(&std::fs::read_to_string("from_wasm.json").unwrap()).unwrap();
-
-    let rust_set: HashSet<_> = from_rust
-        .into_iter()
-        .map(|source_and_cards| source_and_cards.source)
-        .collect();
-    let wasm_set: HashSet<_> = from_wasm
-        .into_iter()
-        .map(|source_and_cards| source_and_cards.source)
-        .collect();
-
-    // let diff = rust_set.difference(&wasm_set);
-    let diff = wasm_set.difference(&rust_set);
-    println!("{diff:#?}");
 }
 
 // #[tokio::main]
