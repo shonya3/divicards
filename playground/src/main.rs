@@ -72,12 +72,12 @@ async fn main() {
 
     let mut i = 1;
     // for _ in 0..10 {
-    let cards = cards_by_source_types(&source_types, &records, &poe_data)
+    let cards = cards_by_source_types(&["Act Boss".to_owned()], &records, &poe_data)
         .into_iter()
         .filter_map(|SourceAndCards { cards, .. }| {
             let cards = cards
                 .into_iter()
-                .filter(|card| card.is_child())
+                // .filter(|card| card.is_child())
                 .collect::<Vec<_>>();
             if cards.is_empty() {
                 None

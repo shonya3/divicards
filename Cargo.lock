@@ -1108,6 +1108,7 @@ name = "divcord_test"
 version = "0.5.6"
 dependencies = [
  "divcord",
+ "dotenv",
  "poe_data",
  "tokio",
 ]

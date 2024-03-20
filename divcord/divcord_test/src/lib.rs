@@ -1,6 +1,11 @@
 #[cfg(test)]
 mod tests {
-    use divcord::spreadsheet::{record::Dumb, rich::DropsFrom};
+    use divcord::{
+        cards::FromChild,
+        records,
+        spreadsheet::{record::Dumb, rich::DropsFrom},
+        Source, Spreadsheet,
+    };
     use poe_data::PoeData;
 
     #[tokio::test]
@@ -45,5 +50,26 @@ mod tests {
 
         let source = parse_one_drops_from(&record.sources_drops_from[0], &record, &poe_data);
         assert!(source.is_err());
+    }
+
+    #[tokio::test]
+    async fn child_sources_for_acts() {
+        let poe_data = PoeData::load().await.unwrap();
+        let spreadsheet = Spreadsheet::load().await.unwrap();
+
+        let records = records(&spreadsheet, &poe_data).unwrap();
+        let dried_lake = Source::Act("1_4_2".to_owned());
+
+        let vec_from_child =
+            divcord::cards::cards_from_child_sources(&dried_lake, &records, &poe_data);
+
+        // println!("{vec_from_child:#?}");
+
+        assert!(vec_from_child.contains(&FromChild {
+            source: dried_lake.to_owned(),
+            card: "The Fletcher".to_owned(),
+            column: divcord::parse::RichColumnVariant::Sources,
+            child: Source::ActBoss("Nightwane".to_owned())
+        }))
     }
 }
