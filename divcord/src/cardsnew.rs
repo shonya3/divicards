@@ -156,7 +156,7 @@ pub fn cards_by_source_types(
     poe_data: &PoeData,
 ) -> HashMap<Source, Vec<CardBySource>> {
     let mut hash_map: HashMap<Source, Vec<CardBySource>> = HashMap::new();
-    let mut visited_transitive_sources: HashSet<Source> = HashSet::new();
+    let mut visited_parent_sources: HashSet<Source> = HashSet::new();
 
     // 1. filter sources by source types and push to entry
     records.iter().for_each(|record| {
@@ -179,19 +179,23 @@ pub fn cards_by_source_types(
                     RichColumnVariant::Sources,
                 ));
 
-                for transitive in transitive_sources(&source, &poe_data) {
-                    if !visited_transitive_sources.contains(&transitive) {
-                        for by_transitive in cards_by_source_directly(&transitive, &records) {
-                            entry.push(CardBySource {
-                                source: source.to_owned(),
-                                card: by_transitive.card.to_owned(),
-                                transitive_source: Some(by_transitive.source.to_owned()),
-                                column: by_transitive.column.to_owned(),
-                            })
-                        }
+                match source._type() {
+                    "Map" | "Act" if !visited_parent_sources.contains(&source) => {
+                        for transitive in transitive_sources(&source, &poe_data) {
+                            for by_transitive in cards_by_source_directly(&transitive, &records) {
+                                entry.push(CardBySource {
+                                    source: source.to_owned(),
+                                    card: by_transitive.card.to_owned(),
+                                    transitive_source: Some(by_transitive.source.to_owned()),
+                                    column: by_transitive.column.to_owned(),
+                                })
+                            }
 
-                        visited_transitive_sources.insert(transitive);
+                            visited_parent_sources.insert(source.to_owned());
+                        }
                     }
+
+                    _ => {}
                 }
             })
     });
@@ -200,7 +204,7 @@ pub fn cards_by_source_types(
     if source_types.contains(&"Map".to_owned()) {
         poe_data.maps.clone().into_iter().for_each(|map| {
             let source = Source::from(map);
-            if !visited_transitive_sources.contains(&source) {
+            if !visited_parent_sources.contains(&source) {
                 hash_map.entry(source.clone()).or_default().extend(
                     cards_by_source_from_transitive_sources(&source, &records, &poe_data),
                 );
@@ -212,7 +216,7 @@ pub fn cards_by_source_types(
     if source_types.contains(&"Act".to_owned()) {
         poe_data.acts.clone().into_iter().for_each(|act_area| {
             let source = Source::from(act_area);
-            if !visited_transitive_sources.contains(&source) {
+            if !visited_parent_sources.contains(&source) {
                 hash_map.entry(source.clone()).or_default().extend(
                     cards_by_source_from_transitive_sources(&source, &records, &poe_data),
                 )
