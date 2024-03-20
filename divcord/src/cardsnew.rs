@@ -1,8 +1,6 @@
-use std::collections::HashSet;
-
-use poe_data::{act::Bossfight, mapbosses::MapBoss, maps::Map, PoeData};
-
 use crate::{parse::RichColumnVariant, Record, Source};
+use poe_data::{act::Bossfight, mapbosses::MapBoss, maps::Map, PoeData};
+use std::collections::{HashMap, HashSet};
 
 impl From<MapBoss> for Source {
     fn from(value: MapBoss) -> Self {
@@ -19,6 +17,12 @@ impl From<Bossfight> for Source {
 impl From<poe_data::maps::Map> for Source {
     fn from(value: Map) -> Self {
         Source::Map(value.name)
+    }
+}
+
+impl From<poe_data::act::ActArea> for Source {
+    fn from(value: poe_data::act::ActArea) -> Self {
+        Source::Act(value.id)
     }
 }
 
@@ -134,24 +138,86 @@ pub fn cards_by_source(
     records: &[Record],
     poe_data: &PoeData,
 ) -> Vec<CardBySource> {
-    let set: HashSet<_> = cards_by_source_directly(&source, &records)
+    let mut direct_cards = cards_by_source_directly(&source, &records);
+    direct_cards.extend(cards_by_source_from_transitive_sources(
+        &source, &records, &poe_data,
+    ));
+    direct_cards
         .into_iter()
-        // add cards by transitive sources(bosses for acts and maps, maybe something else)
-        .chain(
-            transitive_sources(&source, &poe_data)
-                .iter()
-                .flat_map(|transitive| {
-                    cards_by_source_directly(transitive, records)
-                        .into_iter()
-                        .map(|by_transitive_source| CardBySource {
-                            source: source.to_owned(),
-                            transitive_source: Some(by_transitive_source.source),
-                            card: by_transitive_source.card,
-                            column: by_transitive_source.column,
-                        })
-                })
-                .collect::<Vec<CardBySource>>(),
-        )
-        .collect();
-    set.into_iter().collect()
+        .collect::<HashSet<CardBySource>>()
+        .into_iter()
+        .collect::<Vec<CardBySource>>()
+}
+
+pub fn cards_by_source_types(
+    source_types: &[&str],
+    records: &[Record],
+    poe_data: &PoeData,
+) -> HashMap<Source, Vec<CardBySource>> {
+    let mut hash_map: HashMap<Source, Vec<CardBySource>> = HashMap::new();
+    let mut visited_transitive_sources: HashSet<Source> = HashSet::new();
+
+    // 1. filter sources by source types and push to entry
+    records.iter().for_each(|record| {
+        //for each source, get its entry and push to it
+        record
+            .sources
+            .iter()
+            .filter(|source| source_types.iter().any(|s| source._type() == *s))
+            .chain(
+                record
+                    .verify_sources
+                    .iter()
+                    .filter(|verify| source_types.iter().any(|s| verify._type() == *s)),
+            )
+            .for_each(|source| {
+                let entry = hash_map.entry(source.clone()).or_default();
+                entry.push(CardBySource::new_without_transitive(
+                    source.clone(),
+                    record.card.clone(),
+                    RichColumnVariant::Sources,
+                ));
+
+                for transitive in transitive_sources(&source, &poe_data) {
+                    if !visited_transitive_sources.contains(&transitive) {
+                        for by_transitive in cards_by_source_directly(&transitive, &records) {
+                            entry.push(CardBySource {
+                                source: source.to_owned(),
+                                card: by_transitive.card.to_owned(),
+                                transitive_source: Some(by_transitive.source.to_owned()),
+                                column: by_transitive.column.to_owned(),
+                            })
+                        }
+
+                        visited_transitive_sources.insert(transitive);
+                    }
+                }
+            })
+    });
+
+    // If map area directly drops no cards, but some of it's bosses can
+    if source_types.contains(&"Map") {
+        poe_data.maps.clone().into_iter().for_each(|map| {
+            let source = Source::from(map);
+            if !visited_transitive_sources.contains(&source) {
+                hash_map.entry(source.clone()).or_default().extend(
+                    cards_by_source_from_transitive_sources(&source, &records, &poe_data),
+                );
+            }
+        })
+    };
+
+    // If act area directly drops no cards, but some of it's bosses can
+    if source_types.contains(&"Act") {
+        poe_data.acts.clone().into_iter().for_each(|act_area| {
+            let source = Source::from(act_area);
+            if !visited_transitive_sources.contains(&source) {
+                hash_map.entry(source.clone()).or_default().extend(
+                    cards_by_source_from_transitive_sources(&source, &records, &poe_data),
+                )
+            }
+        })
+    };
+
+    hash_map
 }

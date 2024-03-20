@@ -10,8 +10,9 @@ use std::{
 use fetcher::DataFetcher;
 
 use divcord::{
-    cardsnew::cards_by_source,
+    cardsnew::{cards_by_source, CardBySource},
     dropsource::Source,
+    parse::RichColumnVariant,
     spreadsheet::{load::SpreadsheetFetcher, record::Record, rich::RichColumn, Spreadsheet},
 };
 use error::Error;
@@ -55,8 +56,12 @@ async fn main() {
 
     let core_map = Source::Map(String::from("Core Map"));
     let the_harvest = Source::Act("1_4_6_3".to_owned());
+    let mao_kun = Source::Map("Mao Kun".to_owned());
 
-    let cards = cards_by_source(&the_harvest, &records, &poe_data);
+    let cards: Vec<CardBySource> = cards_by_source(&mao_kun, &records, &poe_data)
+        .into_iter()
+        .filter(|s| s.column == RichColumnVariant::Verify)
+        .collect();
     println!("{cards:#?}");
     println!("{}", cards.len());
 }
