@@ -48,7 +48,7 @@ pub fn find_cards_by_source_types(types: JsValue, records: JsValue, poe_data: St
     let types: Vec<String> = serde_wasm_bindgen::from_value(types).unwrap();
     let records: Vec<Record> = serde_wasm_bindgen::from_value(records).unwrap();
 
-    let cards = divcord::cardsnew::cards_by_source_types(&types, &records, &poe_data);
+    let cards = divcord::cards::cards_by_source_types(&types, &records, &poe_data);
 
     log(&format!("{}", cards.len()));
 

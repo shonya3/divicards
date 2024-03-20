@@ -11,7 +11,7 @@ use std::{
 use fetcher::DataFetcher;
 
 use divcord::{
-    cardsnew::{cards_by_source, cards_by_source_types, CardBySource, SourceAndCards},
+    cards::{cards_by_source, cards_by_source_types, CardBySource, SourceAndCards},
     dropsource::{id::Identified, Source},
     parse::RichColumnVariant,
     spreadsheet::{load::SpreadsheetFetcher, record::Record, rich::RichColumn, Spreadsheet},
