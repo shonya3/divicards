@@ -1,7 +1,137 @@
 use crate::{parse::RichColumnVariant, Record, Source};
 use poe_data::{act::Bossfight, mapbosses::MapBoss, maps::Map, PoeData};
 use serde::{Deserialize, Serialize};
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
+
+pub fn cards_by_source(
+    source: &Source,
+    records: &[Record],
+    poe_data: &PoeData,
+) -> Vec<CardBySource> {
+    let mut direct_cards = cards_by_source_directly(&source, &records)
+        .into_iter()
+        .map(|direct| CardBySource::Direct(direct))
+        .collect::<Vec<_>>();
+    let from_children = cards_from_child_sources(&source, &records, &poe_data)
+        .into_iter()
+        .map(|from_child| CardBySource::FromChild(from_child));
+    direct_cards.extend(from_children);
+    direct_cards
+}
+
+pub fn cards_by_source_types(
+    source_types: &[String],
+    records: &[Record],
+    poe_data: &PoeData,
+) -> Vec<SourceAndCards> {
+    let mut hash_map: HashMap<Source, Vec<CardBySource>> = HashMap::new();
+
+    records.iter().for_each(|record| {
+        record
+            .sources
+            .iter()
+            .filter(|source| source_types.iter().any(|s| source._type() == *s))
+            .chain(
+                record
+                    .verify_sources
+                    .iter()
+                    .filter(|verify| source_types.iter().any(|s| verify._type() == *s)),
+            )
+            .for_each(|source| {
+                let entry = hash_map.entry(source.clone()).or_default();
+                entry.push(CardBySource::Direct(Direct {
+                    source: source.clone(),
+                    card: record.card.clone(),
+                    column: RichColumnVariant::Sources,
+                }));
+            })
+    });
+
+    if source_types.contains(&"Map".to_owned()) {
+        poe_data.maps.clone().into_iter().for_each(|map| {
+            let source = Source::from(map);
+
+            let cards = cards_from_child_sources(&source, &records, &poe_data)
+                .into_iter()
+                .map(|from_child| CardBySource::FromChild(from_child))
+                .collect::<Vec<_>>();
+            if cards.is_empty() {
+                return;
+            }
+
+            hash_map.entry(source.clone()).or_default().extend(cards);
+        })
+    };
+
+    if source_types.contains(&"Act".to_owned()) {
+        poe_data.acts.clone().into_iter().for_each(|act_area| {
+            if act_area.is_town {
+                return;
+            }
+
+            let source = Source::from(act_area);
+            let cards = cards_from_child_sources(&source, &records, &poe_data)
+                .into_iter()
+                .map(|from_child| CardBySource::FromChild(from_child))
+                .collect::<Vec<_>>();
+            if cards.is_empty() {
+                return;
+            }
+
+            hash_map.entry(source.clone()).or_default().extend(cards)
+        })
+    };
+
+    hash_map
+        .into_iter()
+        .map(|(source, cards)| SourceAndCards { source, cards })
+        .collect()
+}
+
+#[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct Direct {
+    pub source: Source,
+    pub card: String,
+    pub column: RichColumnVariant,
+}
+
+#[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct FromChild {
+    pub source: Source,
+    pub card: String,
+    pub column: RichColumnVariant,
+    pub child: Source,
+}
+
+#[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum CardBySource {
+    Direct(Direct),
+    #[serde(rename = "child")]
+    FromChild(FromChild),
+}
+
+impl CardBySource {
+    pub fn is_child(&self) -> bool {
+        match self {
+            CardBySource::Direct(_) => false,
+            CardBySource::FromChild(_) => true,
+        }
+    }
+
+    pub fn is_direct(&self) -> bool {
+        match self {
+            CardBySource::Direct(_) => true,
+            CardBySource::FromChild(_) => false,
+        }
+    }
+}
+
+#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash)]
+pub struct SourceAndCards {
+    pub source: Source,
+    pub cards: Vec<CardBySource>,
+}
 
 impl From<MapBoss> for Source {
     fn from(value: MapBoss) -> Self {
@@ -24,108 +154,6 @@ impl From<poe_data::maps::Map> for Source {
 impl From<poe_data::act::ActArea> for Source {
     fn from(value: poe_data::act::ActArea) -> Self {
         Source::Act(value.id)
-    }
-}
-
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash)]
-pub struct SourceAndCards {
-    pub source: Source,
-    pub cards: Vec<CardBySource>,
-}
-
-#[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum CardBySource {
-    Direct {
-        source: Source,
-        card: String,
-        column: RichColumnVariant,
-    },
-    #[serde(rename = "child")]
-    FromChildSource {
-        source: Source,
-        card: String,
-        column: RichColumnVariant,
-        child: Source,
-    },
-}
-
-impl CardBySource {
-    pub fn source(&self) -> &Source {
-        match self {
-            CardBySource::Direct { source, .. } => &source,
-            CardBySource::FromChildSource { source, .. } => &source,
-        }
-    }
-
-    pub fn card(&self) -> &String {
-        match self {
-            CardBySource::Direct { card, .. } => &card,
-            CardBySource::FromChildSource { card, .. } => &card,
-        }
-    }
-
-    pub fn column(&self) -> &RichColumnVariant {
-        match self {
-            CardBySource::Direct { column, .. } => &column,
-            CardBySource::FromChildSource { column, .. } => &column,
-        }
-    }
-
-    pub fn is_direct(&self) -> bool {
-        if let Self::Direct { .. } = self {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    pub fn is_child(&self) -> bool {
-        if let Self::FromChildSource { .. } = self {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    fn extract(self) -> (Source, String, RichColumnVariant) {
-        match self {
-            CardBySource::Direct {
-                source,
-                card,
-                column,
-            } => (source, card, column),
-            CardBySource::FromChildSource {
-                source,
-                card,
-                column,
-                ..
-            } => (source, card, column),
-        }
-    }
-
-    pub fn from_child_source(by_child: Self, direct_source: Source) -> Self {
-        match by_child {
-            Self::Direct { .. } => {
-                let (child_source, card, column) = by_child.extract();
-                Self::FromChildSource {
-                    source: direct_source,
-                    card,
-                    column,
-                    child: child_source,
-                }
-            }
-            // not expect scenario, but ok...
-            Self::FromChildSource { .. } => {
-                let (child_source, card, column) = by_child.extract();
-                Self::FromChildSource {
-                    source: direct_source,
-                    card,
-                    column,
-                    child: child_source,
-                }
-            }
-        }
     }
 }
 
@@ -154,18 +182,23 @@ pub fn cards_from_child_sources(
     direct_source: &Source,
     records: &[Record],
     poe_data: &PoeData,
-) -> Vec<CardBySource> {
+) -> Vec<FromChild> {
     child_sources(&direct_source, &poe_data)
         .iter()
         .flat_map(|child| {
             cards_by_source_directly(&child, &records)
                 .into_iter()
-                .map(|by_child| CardBySource::from_child_source(by_child, direct_source.to_owned()))
+                .map(|by_child| FromChild {
+                    source: direct_source.to_owned(),
+                    card: by_child.card,
+                    column: by_child.column,
+                    child: by_child.source,
+                })
         })
         .collect()
 }
 
-pub fn cards_by_source_directly(direct_source: &Source, records: &[Record]) -> Vec<CardBySource> {
+pub fn cards_by_source_directly(direct_source: &Source, records: &[Record]) -> Vec<Direct> {
     records
         .iter()
         .flat_map(|record| {
@@ -174,7 +207,7 @@ pub fn cards_by_source_directly(direct_source: &Source, records: &[Record]) -> V
                 .sources
                 .iter()
                 .filter(|source| *source == direct_source)
-                .map(|source| CardBySource::Direct {
+                .map(|source| Direct {
                     source: source.to_owned(),
                     card: record.card.to_owned(),
                     column: RichColumnVariant::Sources,
@@ -185,90 +218,25 @@ pub fn cards_by_source_directly(direct_source: &Source, records: &[Record]) -> V
                         .verify_sources
                         .iter()
                         .filter(|verify| *verify == direct_source)
-                        .map(|source| CardBySource::Direct {
+                        .map(|source| Direct {
                             source: source.to_owned(),
                             card: record.card.to_owned(),
                             column: RichColumnVariant::Verify,
                         }),
                 )
-                .collect::<Vec<CardBySource>>()
+                .collect::<Vec<Direct>>()
         })
         .collect()
 }
 
-pub fn cards_by_source(
-    source: &Source,
-    records: &[Record],
-    poe_data: &PoeData,
-) -> Vec<CardBySource> {
-    let mut direct_cards = cards_by_source_directly(&source, &records);
-    direct_cards.extend(cards_from_child_sources(&source, &records, &poe_data));
-    direct_cards
-        .into_iter()
-        .collect::<HashSet<CardBySource>>()
-        .into_iter()
-        .collect::<Vec<CardBySource>>()
+impl From<FromChild> for CardBySource {
+    fn from(value: FromChild) -> Self {
+        Self::FromChild(value)
+    }
 }
 
-pub fn cards_by_source_types(
-    source_types: &[String],
-    records: &[Record],
-    poe_data: &PoeData,
-) -> Vec<SourceAndCards> {
-    let mut hash_map: HashMap<Source, Vec<CardBySource>> = HashMap::new();
-
-    records.iter().for_each(|record| {
-        record
-            .sources
-            .iter()
-            .filter(|source| source_types.iter().any(|s| source._type() == *s))
-            .chain(
-                record
-                    .verify_sources
-                    .iter()
-                    .filter(|verify| source_types.iter().any(|s| verify._type() == *s)),
-            )
-            .for_each(|source| {
-                let entry = hash_map.entry(source.clone()).or_default();
-                entry.push(CardBySource::Direct {
-                    source: source.clone(),
-                    card: record.card.clone(),
-                    column: RichColumnVariant::Sources,
-                });
-            })
-    });
-
-    if source_types.contains(&"Map".to_owned()) {
-        poe_data.maps.clone().into_iter().for_each(|map| {
-            let source = Source::from(map);
-
-            let cards = cards_from_child_sources(&source, &records, &poe_data);
-            if cards.is_empty() {
-                return;
-            }
-
-            hash_map.entry(source.clone()).or_default().extend(cards);
-        })
-    };
-
-    if source_types.contains(&"Act".to_owned()) {
-        poe_data.acts.clone().into_iter().for_each(|act_area| {
-            if act_area.is_town {
-                return;
-            }
-
-            let source = Source::from(act_area);
-            let cards = cards_from_child_sources(&source, &records, &poe_data);
-            if cards.is_empty() {
-                return;
-            }
-
-            hash_map.entry(source.clone()).or_default().extend(cards)
-        })
-    };
-
-    hash_map
-        .into_iter()
-        .map(|(source, cards)| SourceAndCards { source, cards })
-        .collect()
+impl From<Direct> for CardBySource {
+    fn from(value: Direct) -> Self {
+        Self::Direct(value)
+    }
 }
