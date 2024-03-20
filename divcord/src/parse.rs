@@ -13,6 +13,7 @@ use poe_data::{
     cards::Card,
     PoeData,
 };
+use serde::{Deserialize, Serialize};
 use std::fmt::Display;
 
 pub fn records_iter<'a>(
@@ -231,7 +232,8 @@ pub fn parse_record_dropsources(
     Ok(sources)
 }
 
-#[derive(Debug, PartialEq, Eq, Hash, Clone)]
+#[derive(Debug, PartialEq, Eq, Hash, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub enum RichColumnVariant {
     Sources,
     Verify,

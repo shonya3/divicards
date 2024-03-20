@@ -2,6 +2,7 @@
 
 use std::{
     clone,
+    collections::HashMap,
     ops::{Sub, SubAssign},
     path::{Display, PathBuf},
     time::{Duration, Instant, SystemTime, UNIX_EPOCH},
@@ -11,7 +12,7 @@ use fetcher::DataFetcher;
 
 use divcord::{
     cardsnew::{cards_by_source, cards_by_source_types, CardBySource},
-    dropsource::Source,
+    dropsource::{id::Identified, Source},
     parse::RichColumnVariant,
     spreadsheet::{load::SpreadsheetFetcher, record::Record, rich::RichColumn, Spreadsheet},
 };
@@ -67,9 +68,24 @@ async fn main() {
 
     let source_types = Source::types();
 
-    let map = cards_by_source_types(&source_types, &records, &poe_data);
+    let now = Instant::now();
 
-    println!("{}", map.keys().len());
+    // for _ in 0..1 {
+    cards_by_source_types(&source_types, &records, &poe_data);
+    // }
+
+    println!("{}", now.elapsed().as_millis());
+    //     .into_iter()
+    //     .map(|(key, vec)| (key.id().to_owned(), vec))
+    //     .collect::<HashMap<String, Vec<CardBySource>>>();
+
+    // let json = serde_json::to_string(&map).unwrap();
+
+    // std::fs::write("mapjson.json", &json).unwrap();
+
+    // let map: HashMap<Source, CardBySource> = serde_json::from_str(&json).unwrap();
+    //
+    // println!("{}", map.keys().len());
 
     // let cards = map.get(&Source::Map("Wasteland Map".to_owned()));
     // println!("{cards:#?}");

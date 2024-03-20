@@ -1,5 +1,6 @@
 use crate::{parse::RichColumnVariant, Record, Source};
 use poe_data::{act::Bossfight, mapbosses::MapBoss, maps::Map, PoeData};
+use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, HashSet};
 
 impl From<MapBoss> for Source {
@@ -26,7 +27,7 @@ impl From<poe_data::act::ActArea> for Source {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Hash)]
+#[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 /// Card name with verification status and possible transitive source. Being used in context of drop source
 pub struct CardBySource {
     pub source: Source,

@@ -41,14 +41,16 @@ extern "C" {
 }
 
 #[wasm_bindgen]
-pub fn find_cards_by_source_types(types: JsValue, records: JsValue, poe_data: JsValue) -> JsValue {
+pub fn find_cards_by_source_types(types: JsValue, records: JsValue, poe_data: String) -> JsValue {
     set_panic_hook();
-    let poe_data: PoeData = serde_wasm_bindgen::from_value(poe_data).unwrap();
+    let poe_data: PoeData = serde_json::from_str(&poe_data).unwrap();
 
     let types: Vec<String> = serde_wasm_bindgen::from_value(types).unwrap();
     let records: Vec<Record> = serde_wasm_bindgen::from_value(records).unwrap();
 
-    let cards = divcord::cards::find_cards_by_source_types(&types, &records, &poe_data);
+    let cards = divcord::cardsnew::cards_by_source_types(&types, &records, &poe_data);
+
+    log(&format!("{}", cards.len()));
 
     serde_wasm_bindgen::to_value(&cards).unwrap()
 }
