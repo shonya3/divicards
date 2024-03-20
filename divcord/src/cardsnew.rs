@@ -150,7 +150,7 @@ pub fn cards_by_source(
 }
 
 pub fn cards_by_source_types(
-    source_types: &[&str],
+    source_types: &[String],
     records: &[Record],
     poe_data: &PoeData,
 ) -> HashMap<Source, Vec<CardBySource>> {
@@ -196,7 +196,7 @@ pub fn cards_by_source_types(
     });
 
     // If map area directly drops no cards, but some of it's bosses can
-    if source_types.contains(&"Map") {
+    if source_types.contains(&"Map".to_owned()) {
         poe_data.maps.clone().into_iter().for_each(|map| {
             let source = Source::from(map);
             if !visited_transitive_sources.contains(&source) {
@@ -208,7 +208,7 @@ pub fn cards_by_source_types(
     };
 
     // If act area directly drops no cards, but some of it's bosses can
-    if source_types.contains(&"Act") {
+    if source_types.contains(&"Act".to_owned()) {
         poe_data.acts.clone().into_iter().for_each(|act_area| {
             let source = Source::from(act_area);
             if !visited_transitive_sources.contains(&source) {

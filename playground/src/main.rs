@@ -10,7 +10,7 @@ use std::{
 use fetcher::DataFetcher;
 
 use divcord::{
-    cardsnew::{cards_by_source, CardBySource},
+    cardsnew::{cards_by_source, cards_by_source_types, CardBySource},
     dropsource::Source,
     parse::RichColumnVariant,
     spreadsheet::{load::SpreadsheetFetcher, record::Record, rich::RichColumn, Spreadsheet},
@@ -54,16 +54,25 @@ async fn main() {
     // println!("{}", now.elapsed().as_micros());
      */
 
-    let core_map = Source::Map(String::from("Core Map"));
-    let the_harvest = Source::Act("1_4_6_3".to_owned());
-    let mao_kun = Source::Map("Mao Kun".to_owned());
+    // let core_map = Source::Map(String::from("Core Map"));
+    // let the_harvest = Source::Act("1_4_6_3".to_owned());
+    // let mao_kun = Source::Map("Mao Kun".to_owned());
 
-    let cards: Vec<CardBySource> = cards_by_source(&mao_kun, &records, &poe_data)
-        .into_iter()
-        .filter(|s| s.column == RichColumnVariant::Verify)
-        .collect();
-    println!("{cards:#?}");
-    println!("{}", cards.len());
+    // let cards: Vec<CardBySource> = cards_by_source(&mao_kun, &records, &poe_data)
+    //     .into_iter()
+    //     .filter(|s| s.column == RichColumnVariant::Verify)
+    //     .collect();
+    // println!("{cards:#?}");
+    // println!("{}", cards.len());
+
+    let source_types = Source::types();
+
+    let map = cards_by_source_types(&source_types, &records, &poe_data);
+
+    println!("{}", map.keys().len());
+
+    // let cards = map.get(&Source::Map("Wasteland Map".to_owned()));
+    // println!("{cards:#?}");
 }
 
 // #[tokio::main]
