@@ -81,4 +81,24 @@ mod tests {
             child: Source::ActBoss("Nightwane".to_owned())
         }))
     }
+
+    #[tokio::test]
+    async fn child_sources_for_maps() {
+        let poe_data = PoeData::load().await.unwrap();
+        let spreadsheet = load_spreadsheet().await;
+
+        let records = records(&spreadsheet, &poe_data).unwrap();
+        let wasteland = Source::Map("Wasteland Map".to_owned());
+
+        assert!(
+            divcord::cards::cards_from_child_sources(&wasteland, &records, &poe_data).contains(
+                &FromChild {
+                    source: wasteland,
+                    card: "The Brittle Emperor".to_owned(),
+                    column: divcord::parse::RichColumnVariant::Sources,
+                    child: Source::MapBoss("The Brittle Emperor".to_owned())
+                }
+            )
+        )
+    }
 }
