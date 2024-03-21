@@ -149,6 +149,16 @@ export class StashesViewElement extends BaseElement {
 
 	protected override render() {
 		return html`<div class="main-stashes-component">
+			<div class="top-right-corner">
+				<div class=${classMap({ tips: true, hidden: this.stashes.length === 0 })}>
+					<wc-help-tip>
+						<p>Select tabs by clicking on them. Then click LOAD ITEMS button</p>
+					</wc-help-tip>
+					<div>Loads available: ${this.stashLoadsAvailable}</div>
+				</div>
+				<sl-button @click=${this.#onCloseClicked} class="btn-close">Close</sl-button>
+			</div>
+
 			<div class="controls">
 				<fieldset>
 					<legend>Choose league</legend>
@@ -162,19 +172,14 @@ export class StashesViewElement extends BaseElement {
 						label="Custom league (for private leagues)"
 					></sl-input>
 				</fieldset>
-				<div class="league-stashes">
+				<div class="load-stashes-section">
 					<sl-button id="stashes-btn" @click=${this.#onLoadStashesList}>Load Stash</sl-button>
-					<wc-help-tip>
-						<p>Select tabs by clicking on them. Then click LOAD ITEMS button</p>
-					</wc-help-tip>
-					<div>Loads available: ${this.stashLoadsAvailable}</div>
 				</div>
-
-				<sl-button @click=${this.#onCloseClicked} class="btn-close">Close</sl-button>
 			</div>
+
 			<sl-button
 				id="get-data-btn"
-				class=${classMap({ 'not-visible': this.selectedTabs.size === 0, 'btn-load-items': true })}
+				class=${classMap({ 'not-visible': this.stashes.length === 0, 'btn-load-items': true })}
 				.disabled=${this.selectedTabs.size === 0 || this.fetchingStash || this.stashLoadsAvailable === 0}
 				@click=${this.#onLoadItemsClicked}
 			>
@@ -274,33 +279,38 @@ function styles() {
 
 		.controls {
 			display: flex;
-			align-items: center;
-			max-width: 70%;
+			max-width: 60%;
 			justify-content: space-between;
 		}
 
-		.btn-close {
+		.tips {
+			display: flex;
+			gap: 0.5rem;
+		}
+
+		.top-right-corner {
 			position: absolute;
 			top: 1rem;
 			right: 1rem;
+			display: flex;
+			align-items: center;
+			gap: 2rem;
+		}
+
+		.btn-close {
+			margin-left: auto;
 		}
 
 		.btn-load-items {
-			border: 2px solid transparent;
 			text-transform: uppercase;
 			margin: auto;
 			display: block;
 			width: fit-content;
+			margin-top: 1rem;
 		}
 
 		.btn-load-items:not(:disabled) {
 			transform: scale(1.45);
-		}
-
-		.league-stashes {
-			display: flex;
-			gap: 1rem;
-			align-items: center;
 		}
 
 		.messages {
@@ -326,6 +336,10 @@ function styles() {
 
 		.not-visible {
 			visibility: hidden;
+		}
+
+		.hidden {
+			display: none;
 		}
 
 		fieldset {
