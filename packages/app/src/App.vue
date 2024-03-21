@@ -244,7 +244,7 @@ const onSubmit = async ({
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 3rem;
+	margin-bottom: 1.2rem;
 }
 
 .v-enter-active,
@@ -265,7 +265,7 @@ const onSubmit = async ({
 
 	display: flex;
 	flex-direction: column;
-	gap: 2rem;
+	gap: 0.8rem;
 }
 .drag--active {
 	filter: hue-rotate(120deg);

@@ -36,6 +36,6 @@ export async function mockCheckUpdate(): Promise<UpdateResult> {
 			date: '2024-03-01 9:10:51.791 +00:00:00',
 			body: 'Release notes',
 		},
-		shouldUpdate: true,
+		shouldUpdate: false,
 	};
 }

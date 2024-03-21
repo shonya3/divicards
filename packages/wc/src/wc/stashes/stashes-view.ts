@@ -310,7 +310,7 @@ function styles() {
 			margin: auto;
 			display: block;
 			width: fit-content;
-			margin-top: 1rem;
+			margin-top: 0.4rem;
 		}
 
 		.btn-load-items:not(:disabled) {
