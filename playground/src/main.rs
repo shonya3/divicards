@@ -24,9 +24,8 @@ mod error;
 #[tokio::main]
 async fn main() {
     let spreadsheet_fetcher = SpreadsheetFetcher(Config {
-        save: true,
-        filename: "spreadsheet.json",
         stale: fetcher::Stale::After(Duration::from_secs(81400)),
+        ..Default::default()
     });
 
     let (poe_data, spreadsheet) = tokio::join!(PoeData::load(), spreadsheet_fetcher.load());
