@@ -160,7 +160,7 @@ impl From<poe_data::act::ActArea> for Source {
 pub fn child_sources(source: &Source, poe_data: &PoeData) -> Vec<Source> {
     match source {
         Source::Act(act) => poe_data
-            .act_area_id(act)
+            .act_area(act)
             .map(|act_area| {
                 act_area
                     .bossfights

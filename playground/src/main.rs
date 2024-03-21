@@ -31,7 +31,7 @@ async fn main() {
     let spreadsheet = spreadsheet.unwrap();
     let records = divcord::records(&spreadsheet, &poe_data).unwrap();
 
-    let dried_lake = Source::Act("1_4_2".to_owned());
+    let dried_lake = Source::Act("The Dried Lake".to_owned());
     let cards = divcord::cards::cards_by_source_types(&["Act".to_owned()], &records, &poe_data)
         .into_iter()
         .flat_map(|card| {
