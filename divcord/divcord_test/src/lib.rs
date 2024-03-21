@@ -2,10 +2,16 @@
 mod tests {
     use std::time::Duration;
 
+    use divcord::parse::*;
+    use divcord::spreadsheet::{
+        record::{Confidence, GreyNote, RemainingWork},
+        rich::{FontStyles, HexColor},
+    };
     use divcord::{
         cards::FromChild,
         records,
         spreadsheet::{
+            self,
             load::{Config, DataFetcher, SpreadsheetFetcher, Stale},
             record::Dumb,
             rich::DropsFrom,
@@ -14,14 +20,14 @@ mod tests {
     };
     use poe_data::PoeData;
 
+    async fn load_spreadsheet() -> divcord::Spreadsheet {
+        let mut fetcher = SpreadsheetFetcher::default();
+        fetcher.0.stale = Stale::After(Duration::from_secs(81400));
+        fetcher.load().await.unwrap()
+    }
+
     #[tokio::test]
     async fn two_dropsources_should_throw_error() {
-        use divcord::parse::*;
-        use divcord::spreadsheet::{
-            record::{Confidence, GreyNote, RemainingWork},
-            rich::{FontStyles, HexColor},
-        };
-
         let poe_data = PoeData::load().await.unwrap();
         let record =  Dumb {
     id: 230,
@@ -61,23 +67,13 @@ mod tests {
     #[tokio::test]
     async fn child_sources_for_acts() {
         let poe_data = PoeData::load().await.unwrap();
-        let spreadsheet = SpreadsheetFetcher(Config {
-            stale: Stale::After(Duration::from_secs(81_400)),
-            ..Default::default()
-        })
-        .load()
-        .await
-        .unwrap();
+        let spreadsheet = load_spreadsheet().await;
 
         let records = records(&spreadsheet, &poe_data).unwrap();
         let dried_lake = Source::Act("1_4_2".to_owned());
 
         let vec_from_child =
             divcord::cards::cards_from_child_sources(&dried_lake, &records, &poe_data);
-
-        // println!("{vec_from_child:#?}");
-
-        println!("{vec_from_child:#?}");
 
         assert!(vec_from_child.contains(&FromChild {
             source: dried_lake.to_owned(),

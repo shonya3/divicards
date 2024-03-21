@@ -41,10 +41,8 @@ impl PoeData {
             .find(|map_boss| map_boss.name.to_lowercase() == name.to_lowercase())
     }
 
-    pub fn act_area(&self, name: &str) -> Option<&ActArea> {
-        self.acts
-            .iter()
-            .find(|act_area| act_area.name.to_lowercase() == name.to_lowercase())
+    pub fn act_area_id(&self, id: &str) -> Option<&ActArea> {
+        self.acts.iter().find(|act_area| act_area.id == id)
     }
 
     pub fn bosses_of_map(&self, map: &str) -> Vec<&MapBoss> {
