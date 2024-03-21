@@ -150,42 +150,36 @@ export class StashesViewElement extends BaseElement {
 	protected override render() {
 		return html`<div class="main-stashes-component">
 			<div class="controls">
+				<fieldset>
+					<legend>Choose league</legend>
+					<wc-league-select .league=${this.league} @upd:league=${this.#onLeagueSelected}></wc-league-select>
+
+					<sl-input
+						.value=${this.customLeague}
+						@sl-input=${this.#onCustomLeagueInput}
+						id="custom-league-input"
+						type="text"
+						label="Custom league (for private leagues)"
+					></sl-input>
+				</fieldset>
 				<div class="league-stashes">
-					<fieldset>
-						<legend>Choose league</legend>
-						<wc-league-select
-							.league=${this.league}
-							@upd:league=${this.#onLeagueSelected}
-						></wc-league-select>
-
-						<sl-input
-							.value=${this.customLeague}
-							@sl-input=${this.#onCustomLeagueInput}
-							id="custom-league-input"
-							type="text"
-							label="Custom league (for private leagues)"
-						></sl-input>
-					</fieldset>
-
-					<div class="custom-league"></div>
-					<sl-button id="stashes-btn" @click=${this.#onLoadStashesList}>Load Stashes</sl-button>
+					<sl-button id="stashes-btn" @click=${this.#onLoadStashesList}>Load Stash</sl-button>
 					<wc-help-tip>
 						<p>Select tabs by clicking on them. Then click LOAD ITEMS button</p>
 					</wc-help-tip>
 					<div>Loads available: ${this.stashLoadsAvailable}</div>
 				</div>
 
-				<sl-button
-					id="get-data-btn"
-					class=${classMap({ 'not-visible': this.selectedTabs.size === 0, 'btn-load-items': true })}
-					.disabled=${this.selectedTabs.size === 0 || this.fetchingStash || this.stashLoadsAvailable === 0}
-					@click=${this.#onLoadItemsClicked}
-				>
-					load items
-				</sl-button>
-
 				<sl-button @click=${this.#onCloseClicked} class="btn-close">Close</sl-button>
 			</div>
+			<sl-button
+				id="get-data-btn"
+				class=${classMap({ 'not-visible': this.selectedTabs.size === 0, 'btn-load-items': true })}
+				.disabled=${this.selectedTabs.size === 0 || this.fetchingStash || this.stashLoadsAvailable === 0}
+				@click=${this.#onLoadItemsClicked}
+			>
+				Load Tabs Contents
+			</sl-button>
 
 			<div class="messages">
 				<p class=${classMap({ visible: this.msg.length > 0, msg: true })}>${this.msg}</p>
@@ -274,25 +268,39 @@ function styles() {
 		.main-stashes-component {
 			position: relative;
 			padding: 1rem;
-			border: 2px solid #000;
+			border: 2px solid rgba(0, 0, 0, 0.6);
 			border-radius: 0.25rem;
+		}
+
+		.controls {
+			display: flex;
+			align-items: center;
+			max-width: 70%;
+			justify-content: space-between;
+		}
+
+		.btn-close {
+			position: absolute;
+			top: 1rem;
+			right: 1rem;
 		}
 
 		.btn-load-items {
 			border: 2px solid transparent;
 			text-transform: uppercase;
+			margin: auto;
+			display: block;
+			width: fit-content;
 		}
 
 		.btn-load-items:not(:disabled) {
-			transform: scale(1.25);
-			border-color: purple;
+			transform: scale(1.45);
 		}
 
 		.league-stashes {
-			max-width: max-content;
 			display: flex;
-			align-items: center;
 			gap: 1rem;
+			align-items: center;
 		}
 
 		.messages {
@@ -318,12 +326,6 @@ function styles() {
 
 		.not-visible {
 			visibility: hidden;
-		}
-
-		.controls {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
 		}
 
 		fieldset {
