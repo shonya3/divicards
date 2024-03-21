@@ -191,7 +191,7 @@ const onSubmit = async ({
 		</Transition>
 
 		<div v-if="sampleStore.sampleCards.length >= 2">
-			<h2>Select samples you want to merge</h2>
+			<h3>Select samples you want to merge</h3>
 			<div class="sample-buttons">
 				<sl-button :disabled="sampleStore.samples.length < 2" @click="sampleStore.mergeAll">
 					Merge All
