@@ -1,6 +1,6 @@
 #![cfg(feature = "fetch")]
 
-use fetcher::{Config, Stale, WithConfig};
+pub use fetcher::{Config, DataFetcher, Stale, WithConfig};
 use googlesheets::sheet::ValueRange;
 
 use crate::{error::Error, parse::RichColumnVariant};

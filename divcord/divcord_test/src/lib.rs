@@ -1,10 +1,16 @@
 #[cfg(test)]
 mod tests {
+    use std::time::Duration;
+
     use divcord::{
         cards::FromChild,
         records,
-        spreadsheet::{record::Dumb, rich::DropsFrom},
-        Source, Spreadsheet,
+        spreadsheet::{
+            load::{Config, DataFetcher, SpreadsheetFetcher, Stale},
+            record::Dumb,
+            rich::DropsFrom,
+        },
+        Source,
     };
     use poe_data::PoeData;
 
@@ -55,7 +61,13 @@ mod tests {
     #[tokio::test]
     async fn child_sources_for_acts() {
         let poe_data = PoeData::load().await.unwrap();
-        let spreadsheet = Spreadsheet::load().await.unwrap();
+        let spreadsheet = SpreadsheetFetcher(Config {
+            stale: Stale::After(Duration::from_secs(81_400)),
+            ..Default::default()
+        })
+        .load()
+        .await
+        .unwrap();
 
         let records = records(&spreadsheet, &poe_data).unwrap();
         let dried_lake = Source::Act("1_4_2".to_owned());
