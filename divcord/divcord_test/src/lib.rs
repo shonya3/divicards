@@ -77,6 +77,8 @@ mod tests {
 
         // println!("{vec_from_child:#?}");
 
+        println!("{vec_from_child:#?}");
+
         assert!(vec_from_child.contains(&FromChild {
             source: dried_lake.to_owned(),
             card: "The Fletcher".to_owned(),
