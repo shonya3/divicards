@@ -39,7 +39,9 @@ where
     }
 
     fn file_path(&self) -> PathBuf {
-        let dir = std::env::current_dir().unwrap().join("data");
+        let dir = project_root::get_project_root()
+            .unwrap_or_else(|_| std::env::current_dir().unwrap())
+            .join("data");
         if !dir.exists() {
             std::fs::create_dir_all(&dir).unwrap();
         }

@@ -1316,6 +1316,7 @@ dependencies = [
 name = "fetcher"
 version = "0.1.0"
 dependencies = [
+ "project-root",
  "serde",
  "serde_json",
 ]
@@ -3430,6 +3431,12 @@ checksum = "95fc56cda0b5c3325f5fbbd7ff9fda9e02bb00bb3dac51252d2f1bfa1cb8cc8c"
 dependencies = [
  "unicode-ident",
 ]
+
+[[package]]
+name = "project-root"
+version = "0.2.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8bccbff07d5ed689c4087d20d7307a52ab6141edeedf487c3876a55b86cf63df"
 
 [[package]]
 name = "quick-xml"

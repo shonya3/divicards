@@ -48,4 +48,6 @@ async fn main() {
         })
         .collect::<Vec<_>>();
     println!("{cards:#?}");
+
+    println!("{}", std::env::var("CARGO_MANIFEST_DIR").unwrap());
 }

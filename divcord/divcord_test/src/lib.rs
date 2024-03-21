@@ -11,8 +11,7 @@ mod tests {
         cards::FromChild,
         records,
         spreadsheet::{
-            self,
-            load::{Config, DataFetcher, SpreadsheetFetcher, Stale},
+            load::{DataFetcher, SpreadsheetFetcher, Stale},
             record::Dumb,
             rich::DropsFrom,
         },
