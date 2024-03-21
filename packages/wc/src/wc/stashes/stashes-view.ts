@@ -277,6 +277,10 @@ function styles() {
 			border-radius: 0.25rem;
 		}
 
+		wc-help-tip::part(tooltip) {
+			right: 5px;
+		}
+
 		.controls {
 			display: flex;
 			max-width: 60%;
