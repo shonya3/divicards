@@ -1,7 +1,7 @@
 pub const CONDENSE_FACTOR: f32 = 2.0 / 3.0;
 pub const RAIN_OF_CHAOS_WEIGHT: f32 = 2452.65513;
 
-pub const LEGACY_CARDS_N: usize = 18;
+pub const LEGACY_CARDS_N: usize = 12;
 pub const LEGACY_CARDS: [&'static str; LEGACY_CARDS_N] = [
     "Friendship",
     "Squandered Prosperity",
@@ -15,12 +15,6 @@ pub const LEGACY_CARDS: [&'static str; LEGACY_CARDS_N] = [
     "The Bargain",
     "The Long Watch",
     "The Sustenance",
-    "Divine Justice",
-    "Doryani's Epiphany",
-    "Dying Anguish",
-    "Terrible Secret of Space",
-    "The Blessing of Moosh",
-    "The Hook",
 ];
 
 pub const NEVER_EXISTED: [&'static str; 3] = [
