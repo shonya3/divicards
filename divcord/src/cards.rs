@@ -125,6 +125,27 @@ impl CardBySource {
             CardBySource::FromChild(_) => false,
         }
     }
+
+    pub fn column(&self) -> &RichColumnVariant {
+        match self {
+            CardBySource::Direct(d) => &d.column,
+            CardBySource::FromChild(c) => &c.column,
+        }
+    }
+
+    pub fn card(&self) -> &String {
+        match self {
+            CardBySource::Direct(d) => &d.card,
+            CardBySource::FromChild(c) => &c.card,
+        }
+    }
+
+    pub fn source(&self) -> &Source {
+        match self {
+            CardBySource::Direct(d) => &d.source,
+            CardBySource::FromChild(c) => &c.source,
+        }
+    }
 }
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash)]
