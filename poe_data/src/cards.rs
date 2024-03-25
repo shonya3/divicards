@@ -34,7 +34,9 @@ pub mod fetch {
     use super::CardsData;
     use crate::{
         cards::Card,
-        consts::{WEIGHT_RANGES, WEIGHT_SPREADSHEET_ID, WIKI_API_URL},
+        consts::{
+            SHEET_RANGES_OF_TOTAL_CARDS_FROM_LATEST_LEAGUE, WEIGHT_SPREADSHEET_ID, WIKI_API_URL,
+        },
         error::Error,
         league::ReleaseVersion,
     };
@@ -123,7 +125,7 @@ pub mod fetch {
     ) -> Result<DivinationCardsSample, Error> {
         let batch_read = googlesheets::read_batch(
             WEIGHT_SPREADSHEET_ID,
-            WEIGHT_RANGES,
+            SHEET_RANGES_OF_TOTAL_CARDS_FROM_LATEST_LEAGUE,
             Credential::ApiKey(api_key),
         )
         .await?;
