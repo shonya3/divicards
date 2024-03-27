@@ -25,15 +25,19 @@ impl WithConfig for SpreadsheetFetcher {
     }
 }
 
+pub async fn fetch_rich_column(letter: char) -> Result<RichColumn, reqwest::Error> {
+    dotenv::dotenv().ok();
+    let key = std::env::var("GOOGLE_API_KEY").expect("No google api key");
+    let spreadsheet_id = "1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU";
+    let sheet = "Cards_and_Hypotheses";
+    let column = letter;
+    let url = format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}?&ranges={sheet}!{column}3:{column}&includeGridData=true&key={key}");
+    Ok(reqwest::get(url).await?.json().await?)
+}
+
 impl SpreadsheetFetcher {
     pub async fn fetch_rich_column(&self, variant: RichColumnVariant) -> Result<RichColumn, Error> {
-        dotenv::dotenv().ok();
-        let key = std::env::var("GOOGLE_API_KEY").expect("No google api key");
-        let spreadsheet_id = "1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU";
-        let sheet = "Cards_and_Hypotheses";
-        let column = variant.column_letter();
-        let url = format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}?&ranges={sheet}!{column}3:{column}&includeGridData=true&key={key}");
-        Ok(reqwest::get(url).await?.json().await?)
+        Ok(fetch_rich_column(variant.column_letter()).await?)
     }
 
     pub async fn fetch_table_sheet(&self) -> Result<ValueRange, Error> {

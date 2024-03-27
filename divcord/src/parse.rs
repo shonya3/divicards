@@ -240,10 +240,10 @@ pub enum RichColumnVariant {
 }
 
 impl RichColumnVariant {
-    pub fn column_letter(&self) -> &'static str {
+    pub fn column_letter(&self) -> char {
         match self {
-            RichColumnVariant::Sources => "F",
-            RichColumnVariant::Verify => "H",
+            RichColumnVariant::Sources => 'F',
+            RichColumnVariant::Verify => 'H',
         }
     }
 }
