@@ -223,9 +223,9 @@ impl Cell {
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct EffectiveFormat {
-    background_color: ProtobufColor,
+    pub background_color: ProtobufColor,
     #[serde(alias = "textFormat")]
-    text_format: TextFormat,
+    pub text_format: TextFormat,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
