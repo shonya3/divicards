@@ -9,6 +9,7 @@ pub enum Error {
     MissingHeaders,
     NoPricesForLeagueOnNinja(TradeLeague),
     ParseIntError(ParseIntError),
+    CsvError(csv::Error),
 }
 
 impl Display for Error {
@@ -21,6 +22,7 @@ impl Display for Error {
                 write!(f, "Prices for {} league do not exist on poe.ninja.", league)
             }
             Error::ParseIntError(err) => err.fmt(f),
+            Error::CsvError(err) => err.fmt(f),
         }
     }
 }
@@ -49,5 +51,11 @@ impl From<serde_json::Error> for Error {
 impl From<ParseIntError> for Error {
     fn from(value: ParseIntError) -> Self {
         Error::ParseIntError(value)
+    }
+}
+
+impl From<csv::Error> for Error {
+    fn from(value: csv::Error) -> Self {
+        Error::CsvError(value)
     }
 }

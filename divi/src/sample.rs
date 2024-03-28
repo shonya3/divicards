@@ -20,6 +20,39 @@ pub struct DivinationCardsSample {
     pub csv: String,
 }
 
+pub fn parse_csv(csv_data: &str) -> Result<Vec<CardNameAmount>, Error> {
+    let data = remove_lines_before_headers(&csv_data)?;
+    let mut rdr = ReaderBuilder::new()
+        .trim(Trim::All)
+        .from_reader(data.as_bytes());
+
+    let mut vec = vec![];
+    for result in rdr.deserialize::<CardNameAmount>() {
+        let name_amount_pair = result?;
+        vec.push(name_amount_pair);
+    }
+
+    Ok(vec)
+}
+
+/// Parsing helper. Uses for CSV data
+fn remove_lines_before_headers(s: &str) -> Result<String, Error> {
+    match s.lines().enumerate().into_iter().find(|(_index, line)| {
+        line.contains("name")
+            && ["amount", "stackSize"]
+                .iter()
+                .any(|variant| line.contains(variant))
+    }) {
+        Some((index, _line)) => Ok(s
+            .lines()
+            .into_iter()
+            .skip(index)
+            .collect::<Vec<&str>>()
+            .join("\r\n")),
+        None => Err(Error::MissingHeaders),
+    }
+}
+
 impl DivinationCardsSample {
     pub fn new(
         cards: Cards,
