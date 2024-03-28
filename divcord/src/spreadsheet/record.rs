@@ -2,7 +2,7 @@
 
 use super::rich::DropsFrom;
 use crate::{dropsource::Source, error::Error};
-use divi::{sample::fix_name, IsCard};
+use divi::{cards::fix_name, IsCard};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 

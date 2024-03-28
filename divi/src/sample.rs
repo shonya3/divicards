@@ -1,16 +1,15 @@
 use crate::{
     card_record::DivinationCardRecord,
-    cards::Cards,
-    consts::{CARDS, RAIN_OF_CHAOS_WEIGHT},
+    cards::{fix_name, Cards, FixedCardName},
+    consts::RAIN_OF_CHAOS_WEIGHT,
     error::Error,
     prices::Prices,
-    IsCard,
 };
 use csv::{ReaderBuilder, Trim};
 use googlesheets::sheet::ReadBatchResponse;
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
-use std::{collections::HashMap, fmt::Display, iter::zip};
+use std::{fmt::Display, iter::zip};
 
 #[derive(Debug, Serialize, Deserialize, Clone, Default, PartialEq)]
 #[serde(rename_all = "camelCase")]
@@ -338,57 +337,6 @@ fn preserve_column_order(columns: &[Column]) -> Vec<Column> {
         .and_then(|_| Some(vec.push(Column::Sum)));
 
     vec
-}
-
-pub fn fix_name(name: &str) -> Option<String> {
-    if name.is_card() {
-        return None;
-    }
-
-    let (most_similar, score) = most_similar_card(name);
-
-    match score >= 0.75 {
-        true => Some(String::from(most_similar)),
-        false => {
-            // Try to prefix name with "The" - a lot of cards start with "The"
-            let the = format!("The {name}");
-            let (most_similar, score) = most_similar_card(&the);
-            match score >= 0.75 {
-                true => Some(String::from(most_similar)),
-                false => None,
-            }
-        }
-    }
-}
-
-fn most_similar_card(name: &str) -> (&str, f64) {
-    let mut similarity_map = HashMap::<&str, f64>::new();
-    for card in CARDS {
-        let similarity = strsim::normalized_damerau_levenshtein(name, card);
-        similarity_map.insert(card, similarity);
-    }
-
-    let most_similar = similarity_map
-        .iter()
-        .max_by(|a, b| a.1.partial_cmp(b.1).unwrap())
-        .unwrap();
-
-    (most_similar.0, most_similar.1.to_owned())
-}
-
-#[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
-pub struct FixedCardName {
-    pub old: String,
-    pub fixed: String,
-}
-
-impl FixedCardName {
-    pub fn new(old: &str, fixed: &str) -> FixedCardName {
-        FixedCardName {
-            old: String::from(old),
-            fixed: String::from(fixed),
-        }
-    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
