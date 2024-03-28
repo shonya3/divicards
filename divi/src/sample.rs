@@ -112,14 +112,7 @@ impl DivinationCardsSample {
     }
 
     pub fn remove_nullish_cards(&mut self) -> &mut Self {
-        let cards: Vec<DivinationCardRecord> = self
-            .cards
-            .clone()
-            .into_iter()
-            .filter(|c| c.amount > 0)
-            .collect();
-        self.cards = Cards(cards);
-
+        self.cards.0.retain(|c| c.amount > 0);
         self
     }
 
