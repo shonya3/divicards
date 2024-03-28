@@ -111,11 +111,6 @@ impl DivinationCardsSample {
         merged
     }
 
-    pub fn remove_nullish_cards(&mut self) -> &mut Self {
-        self.cards.0.retain(|c| c.amount > 0);
-        self
-    }
-
     pub fn into_not_nullish(mut self) -> Self {
         let cards: Vec<DivinationCardRecord> =
             self.cards.into_iter().filter(|c| c.amount > 0).collect();
@@ -235,7 +230,7 @@ impl DivinationCardsSample {
         let preferences = preferences.unwrap_or_default();
 
         if preferences.cards_must_have_amount {
-            self.remove_nullish_cards();
+            self.cards.0.retain(|c| c.amount > 0);
         }
 
         self.cards
