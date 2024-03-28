@@ -121,7 +121,7 @@ impl Cards {
         };
 
         match fix_name(&name) {
-            Some(fixed) => GetCardRecord::Fixed(
+            Some(fixed) => GetCardRecord::TypoFixed(
                 self._get(name).unwrap(),
                 FixedCardName {
                     old: name.to_owned(),
@@ -133,9 +133,29 @@ impl Cards {
     }
 }
 
+pub fn check_card_name(card: &str) -> CheckCardName {
+    if card.is_card() {
+        return CheckCardName::Valid;
+    };
+
+    match fix_name(&card) {
+        Some(fixed) => CheckCardName::TypoFixed(FixedCardName {
+            old: card.to_owned(),
+            fixed,
+        }),
+        None => CheckCardName::NotACard,
+    }
+}
+
+pub enum CheckCardName {
+    Valid,
+    TypoFixed(FixedCardName),
+    NotACard,
+}
+
 pub enum GetCardRecord<'a> {
     Some(&'a DivinationCardRecord),
-    Fixed(&'a DivinationCardRecord, FixedCardName),
+    TypoFixed(&'a DivinationCardRecord, FixedCardName),
     NotACard(String),
 }
 
