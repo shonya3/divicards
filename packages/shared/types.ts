@@ -9,21 +9,16 @@ export type TablePreferences = {
 };
 
 export const leagues = [
-	'Affliction',
+	'Necropolis',
 	'Standard',
-	'Hardcore Affliction',
+	'Hardcore Necropolis',
 	'Hardcore',
 	'Solo Self-Found',
-	'SSF Affliction',
-	'HC SSF Affliction',
+	'SSF Necropolis',
+	'HC SSF Necropolis',
 ] as const;
-export const tradeLeagues = ['Affliction', 'Standard', 'Hardcore Affliction', 'Hardcore'] as const;
-export const permanentLeagues: Readonly<League[]> = [
-	'Standard',
-	'Hardcore',
-	'Solo Self-Found',
-	'Hardcore SSF',
-] as const;
+export const tradeLeagues = ['Necropolis', 'Standard', 'Hardcore Necropolis', 'Hardcore'] as const;
+export const permanentLeagues = ['Standard', 'Hardcore', 'Solo Self-Found', 'Hardcore SSF'] as const;
 
 export type League = (typeof leagues)[number] | string;
 export type TradeLeague = (typeof tradeLeagues)[number];

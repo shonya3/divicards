@@ -9,13 +9,13 @@ pub enum League {
     SSFStandard,
     #[serde(alias = "SSF Hardcore", alias = "Hardcore SSF")]
     SSFHardcore,
-    Affliction,
-    #[serde(alias = "Hardcore Affliction")]
-    HardcoreAffliction,
-    #[serde(alias = "SSF Affliction")]
-    SSFAffliction,
-    #[serde(alias = "HC SSF Affliction")]
-    SSFHCAffliction,
+    Necropolis,
+    #[serde(alias = "Hardcore Necropolis")]
+    HardcoreNecropolis,
+    #[serde(alias = "SSF Necropolis")]
+    SSFNecropolis,
+    #[serde(alias = "HC SSF Necropolis")]
+    SSFHCNecropolis,
     #[serde(untagged)]
     Custom(String),
 }
@@ -31,7 +31,7 @@ impl League {
 
 impl Default for League {
     fn default() -> Self {
-        League::Affliction
+        League::Necropolis
     }
 }
 
@@ -42,10 +42,10 @@ impl Display for League {
             League::Hardcore => write!(f, "Hardcore"),
             League::SSFStandard => write!(f, "Solo Self-Found"),
             League::SSFHardcore => write!(f, "Hardcore SSF"),
-            League::Affliction => write!(f, "Affliction"),
-            League::HardcoreAffliction => write!(f, "Hardcore Affliction"),
-            League::SSFAffliction => write!(f, "SSF Affliction"),
-            League::SSFHCAffliction => write!(f, "HC SSF Affliction"),
+            League::Necropolis => write!(f, "Necropolis"),
+            League::HardcoreNecropolis => write!(f, "Hardcore Necropolis"),
+            League::SSFNecropolis => write!(f, "SSF Necropolis"),
+            League::SSFHCNecropolis => write!(f, "HC SSF Necropolis"),
             League::Custom(league) => write!(f, "{}", league),
         }
     }
@@ -56,8 +56,8 @@ impl From<TradeLeague> for League {
         match value {
             TradeLeague::Standard => League::Standard,
             TradeLeague::Hardcore => League::Hardcore,
-            TradeLeague::Affliction => League::Affliction,
-            TradeLeague::HardcoreAffliction => League::HardcoreAffliction,
+            TradeLeague::Necropolis => League::Necropolis,
+            TradeLeague::HardcoreNecropolis => League::HardcoreNecropolis,
         }
     }
 }
@@ -66,9 +66,9 @@ impl From<TradeLeague> for League {
 pub enum TradeLeague {
     Standard,
     Hardcore,
-    Affliction,
-    #[serde(alias = "Hardcore Affliction", rename = "Hardcore Affliction")]
-    HardcoreAffliction,
+    Necropolis,
+    #[serde(alias = "Hardcore Necropolis", rename = "Hardcore Necropolis")]
+    HardcoreNecropolis,
 }
 
 impl Display for TradeLeague {
@@ -76,14 +76,14 @@ impl Display for TradeLeague {
         match self {
             TradeLeague::Standard => write!(f, "Standard"),
             TradeLeague::Hardcore => write!(f, "Hardcore"),
-            TradeLeague::Affliction => write!(f, "Affliction"),
-            TradeLeague::HardcoreAffliction => write!(f, "Hardcore Affliction"),
+            TradeLeague::Necropolis => write!(f, "Necropolis"),
+            TradeLeague::HardcoreNecropolis => write!(f, "Hardcore Necropolis"),
         }
     }
 }
 impl Default for TradeLeague {
     fn default() -> Self {
-        TradeLeague::Affliction
+        TradeLeague::Necropolis
     }
 }
 
@@ -98,10 +98,10 @@ impl TryFrom<League> for TradeLeague {
             League::Hardcore => Ok(TradeLeague::Hardcore),
             League::SSFStandard => Err(msg),
             League::SSFHardcore => Err(msg),
-            League::Affliction => Ok(TradeLeague::Affliction),
-            League::HardcoreAffliction => Ok(TradeLeague::HardcoreAffliction),
-            League::SSFAffliction => Err(msg),
-            League::SSFHCAffliction => Err(msg),
+            League::Necropolis => Ok(TradeLeague::Necropolis),
+            League::HardcoreNecropolis => Ok(TradeLeague::HardcoreNecropolis),
+            League::SSFNecropolis => Err(msg),
+            League::SSFHCNecropolis => Err(msg),
             League::Custom(_) => Err(msg),
         }
     }
