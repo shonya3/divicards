@@ -1,6 +1,6 @@
 use crate::{
     card_record::DivinationCardRecord,
-    cards::{self, Cards, CheckCardName, FixedCardName},
+    cards::{Cards, FixedCardName, GetRecordMut},
     consts::RAIN_OF_CHAOS_WEIGHT,
     error::Error,
     prices::Prices,
@@ -77,13 +77,13 @@ impl DivinationCardsSample {
         };
 
         for CardNameAmount { name, amount } in name_amount_pairs {
-            match cards::check_card_name(&name) {
-                CheckCardName::Valid => sample.cards.get_card_mut(&name).add_amount(amount),
-                CheckCardName::TypoFixed(fixed) => {
-                    sample.cards.get_card_mut(&fixed.fixed).add_amount(amount);
+            match sample.cards.get_record_mut(&name) {
+                GetRecordMut::Valid(record) => record.add_amount(amount),
+                GetRecordMut::TypoFixed(record, fixed) => {
+                    record.add_amount(amount);
                     sample.fixed_names.push(fixed);
                 }
-                CheckCardName::NotACard => sample.not_cards.push(name.to_owned()),
+                GetRecordMut::NotACard => sample.not_cards.push(name),
             }
         }
 
@@ -149,10 +149,7 @@ impl DivinationCardsSample {
 
     /// Helper function for write_weight
     fn weight_multiplier(&self) -> f32 {
-        let rain_of_chaos = self
-            .cards
-            .get("Rain of Chaos")
-            .expect("no rain of chaos card");
+        let rain_of_chaos = self.cards.get_card("Rain of Chaos");
         RAIN_OF_CHAOS_WEIGHT / rain_of_chaos.amount as f32
     }
 

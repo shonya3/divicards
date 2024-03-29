@@ -17,12 +17,32 @@ use std::{
 pub struct Cards(pub Vec<DivinationCardRecord>);
 
 impl Cards {
-    fn _get(&self, name: &str) -> Option<&DivinationCardRecord> {
+    pub fn get(&self, name: &str) -> Option<&DivinationCardRecord> {
         self.0.iter().find(|c| c.name == name)
     }
 
     pub fn get_mut(&mut self, name: &str) -> Option<&mut DivinationCardRecord> {
         self.0.iter_mut().find(|c| c.name == name)
+    }
+
+    pub fn get_record(&self, name: &str) -> GetRecord {
+        match check_card_name(&name) {
+            CheckCardName::Valid => GetRecord::Valid(self.get_card(&name)),
+            CheckCardName::TypoFixed(fixed) => {
+                GetRecord::TypoFixed(self.get_card(&fixed.fixed), fixed)
+            }
+            CheckCardName::NotACard => GetRecord::NotACard,
+        }
+    }
+
+    pub fn get_record_mut(&mut self, name: &str) -> GetRecordMut {
+        match check_card_name(&name) {
+            CheckCardName::Valid => GetRecordMut::Valid(self.get_card_mut(&name)),
+            CheckCardName::TypoFixed(fixed) => {
+                GetRecordMut::TypoFixed(self.get_card_mut(&fixed.fixed), fixed)
+            }
+            CheckCardName::NotACard => GetRecordMut::NotACard,
+        }
     }
 
     /// Use only with trusted card name(item of CARDS const). Otherwise, use get
@@ -101,36 +121,6 @@ impl Cards {
             },
         }
     }
-
-    pub fn get(&self, name: &str) -> Option<&DivinationCardRecord> {
-        self._get(&name).or_else(|| {
-            fix_name(&name)
-                .map(|fixed_name| self._get(&fixed_name))
-                .flatten()
-        })
-    }
-
-    pub fn get2<'a>(&'a self, name: &str) -> GetCardRecord<'a> {
-        // match self._get(&name) {
-        //     Some(record) => GetCardRecord::Some(record),
-        //     None => match fix_name(name),
-        // }
-
-        if let Some(record) = self._get(name) {
-            return GetCardRecord::Some(&record);
-        };
-
-        match fix_name(&name) {
-            Some(fixed) => GetCardRecord::TypoFixed(
-                self._get(name).unwrap(),
-                FixedCardName {
-                    old: name.to_owned(),
-                    fixed,
-                },
-            ),
-            None => GetCardRecord::NotACard(name.to_owned()),
-        }
-    }
 }
 
 pub fn check_card_name(card: &str) -> CheckCardName {
@@ -153,10 +143,16 @@ pub enum CheckCardName {
     NotACard,
 }
 
-pub enum GetCardRecord<'a> {
-    Some(&'a DivinationCardRecord),
+pub enum GetRecord<'a> {
+    Valid(&'a DivinationCardRecord),
     TypoFixed(&'a DivinationCardRecord, FixedCardName),
-    NotACard(String),
+    NotACard,
+}
+
+pub enum GetRecordMut<'a> {
+    Valid(&'a mut DivinationCardRecord),
+    TypoFixed(&'a mut DivinationCardRecord, FixedCardName),
+    NotACard,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
