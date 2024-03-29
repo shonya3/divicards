@@ -3,7 +3,7 @@ import { BaseElement } from '../base-element';
 import { property, state, query } from 'lit/decorators.js';
 import { TabBadgeElement } from './tab-badge';
 import { NoItemsTab } from '@divicards/shared/poe.types';
-import { League, permanentLeagues } from '@divicards/shared/types';
+import { League, isPermanentLeague, permanentLeagues } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
@@ -40,7 +40,7 @@ const paginate = (stashes: NoItemsTab[], page: number, perPage: number) => {
 };
 
 const shouldUnlockHideRemoveOnly = (league: League, stashes: NoItemsTab[]) => {
-	return permanentLeagues.includes(league) && stashes.some(({ name }) => name.includes(REMOVE_ONLY));
+	return isPermanentLeague(league) && stashes.some(({ name }) => name.includes(REMOVE_ONLY));
 };
 
 export interface Events {
