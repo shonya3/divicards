@@ -202,7 +202,7 @@ impl From<[&'static str; CARDS_N]> for Cards {
     }
 }
 
-pub fn fix_name(name: &str) -> Option<String> {
+fn fix_name(name: &str) -> Option<String> {
     if name.is_card() {
         return None;
     }

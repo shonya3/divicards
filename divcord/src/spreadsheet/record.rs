@@ -2,7 +2,7 @@
 
 use super::rich::DropsFrom;
 use crate::{dropsource::Source, error::Error};
-use divi::{cards::fix_name, IsCard};
+use divi::cards::CheckCardName;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
@@ -101,14 +101,12 @@ pub fn parse_card_name(val: &Value) -> Result<String, Error> {
         return Err(Error::ValueNotStr(val.to_owned()));
     };
 
-    match second_column_contents.is_card() {
-        true => Ok(second_column_contents.to_string()),
-        false => match fix_name(second_column_contents) {
-            Some(s) => Ok(s),
-            None => Err(Error::ParseCardNameError(
-                second_column_contents.to_string(),
-            )),
-        },
+    match divi::cards::check_card_name(&second_column_contents) {
+        CheckCardName::Valid => Ok(second_column_contents.to_owned()),
+        CheckCardName::TypoFixed(fixed) => Ok(fixed.fixed),
+        CheckCardName::NotACard => {
+            Err(Error::ParseCardNameError(second_column_contents.to_owned()))
+        }
     }
 }
 
