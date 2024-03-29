@@ -56,7 +56,6 @@
 //!    Ok(())
 //!}
 
-use consts::{CARDS, LEGACY_CARDS};
 pub mod card_record;
 pub mod cards;
 pub mod consts;
@@ -68,6 +67,7 @@ pub mod sample;
 pub use crate::{
     card_record::DivinationCardRecord,
     cards::{check_card_name, Cards, CheckCardName, GetRecordMut},
+    consts::{CARDS, CONDENSE_FACTOR, LEGACY_CARDS},
     prices::{DivinationCardPrice, Prices},
     sample::{CardNameAmount, Column, DivinationCardsSample, Order, SampleData, TablePreferences},
 };
