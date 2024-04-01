@@ -58,8 +58,7 @@ pub async fn prepare_avatars_ts() -> String {
         .collect::<Vec<_>>()
         .join("\n");
 
-    format!("export type DiscordUser = keyof typeof DISCORD_AVATARS;\n");
-    format!("export const DISCORD_AVATARS = {{\n{entries}\n}};")
+    format!("export type DiscordUsername = keyof typeof DISCORD_AVATARS;\nexport const DISCORD_AVATARS = {{\n{entries}\n}};")
 }
 
 pub async fn fetch_user_avatar(user: &InitialUserData) -> Result<UserAvatar, reqwest::Error> {
