@@ -59,7 +59,7 @@ pub enum ParseSourceError {
         record_id: usize,
     },
 
-    GreynoteDisabledCardShouldBeLegacy {
+    GreynoteDisabledButCardNotLegacy {
         card: String,
         record_id: usize,
     },
@@ -92,7 +92,7 @@ impl Display for ParseSourceError {
                     record_url(*record_id, DivcordColumn::Source)
                 )
             }
-            ParseSourceError::GreynoteDisabledCardShouldBeLegacy { record_id, card } => {
+            ParseSourceError::GreynoteDisabledButCardNotLegacy { record_id, card } => {
                 write!(
                     f,
                     "{record_id}. Card {card} has greynote Disabled, but this is not a legacy card {}", record_url(*record_id, DivcordColumn::GreyNote)
@@ -155,7 +155,7 @@ pub fn parse_record_dropsources(
 
     if dumb.greynote == GreyNote::Disabled {
         if !dumb.card.as_str().is_legacy_card() {
-            return Err(ParseSourceError::GreynoteDisabledCardShouldBeLegacy {
+            return Err(ParseSourceError::GreynoteDisabledButCardNotLegacy {
                 record_id: dumb.id,
                 card: dumb.card.to_owned(),
             });
