@@ -26,6 +26,16 @@ const USERS: &[InitialUserData] = &[
         id: "636016169148481547",
         role: Role::Admin,
     },
+    InitialUserData {
+        username: "Zimzams",
+        id: "157685236337999872",
+        role: Role::LeadResearcher,
+    },
+    InitialUserData {
+        username: "Elinvynia",
+        id: "701549610795008080",
+        role: Role::LeadResearcher,
+    },
 ];
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
