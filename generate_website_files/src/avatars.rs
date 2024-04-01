@@ -58,6 +58,7 @@ pub async fn prepare_avatars_ts() -> String {
         .collect::<Vec<_>>()
         .join("\n");
 
+    format!("export type DiscordUser = keyof typeof DISCORD_AVATARS;\n");
     format!("export const DISCORD_AVATARS = {{\n{entries}\n}};")
 }
 
