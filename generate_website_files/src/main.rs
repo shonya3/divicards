@@ -26,7 +26,16 @@ async fn main() {
     let spreadsheet = Spreadsheet::load().await.unwrap();
     let poe_data = PoeData::load().await.unwrap();
     let card_element = DivinationCardElementData::load().await.unwrap();
-    let records = divcord::records(&spreadsheet, &poe_data).unwrap();
+    let Ok(records) = divcord::records(&spreadsheet, &poe_data) else {
+        eprintln!("divcord::records parse Err. Scanning all possible errors with records_iter...");
+        for result in divcord::records_iter(&spreadsheet, &poe_data) {
+            if let Err(err) = result {
+                eprintln!("{err:?}");
+            }
+        }
+
+        std::process::exit(0);
+    };
 
     write(&records, &json_dir, "records.json");
     write(&poe_data, &json_dir, PoeData::filename());
