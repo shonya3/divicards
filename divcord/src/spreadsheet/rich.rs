@@ -199,8 +199,6 @@ impl Cell {
                     self.to_owned(),
                     len,
                 ));
-                println!("{err:#?}");
-                println!("{self:#?}");
                 err
             }
         }
