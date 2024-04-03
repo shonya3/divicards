@@ -10,6 +10,7 @@ use divcord::{
 use error::Error;
 use fetcher::DataFetcher;
 use fetcher::{Config, Stale};
+use poe_data::fetchers::MapsFetcher;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::{
@@ -23,45 +24,19 @@ use std::{
 mod error;
 
 #[tokio::main]
-async fn main() -> Result<(), divcord::Error> {
-    let mut spreadsheet_fetcher = SpreadsheetFetcher::default();
-    spreadsheet_fetcher.0.stale = Stale::After(Duration::from_secs(81400));
+async fn main() {
+    let maps = MapsFetcher::default().load().await.unwrap();
 
-    let (poe_data, spreadsheet) = tokio::join!(PoeData::load(), spreadsheet_fetcher.load());
-    let poe_data = poe_data?;
-    let spreadsheet = spreadsheet?;
+    let spreadsheet = Spreadsheet::load().await.unwrap();
+    let poe_data = PoeData::load().await.unwrap();
+    let Ok(records) = divcord::records(&spreadsheet, &poe_data) else {
+        eprintln!("divcord::records parse Err. Scanning all possible errors with records_iter...");
+        for result in divcord::records_iter(&spreadsheet, &poe_data) {
+            if let Err(err) = result {
+                eprintln!("{err:?}");
+            }
+        }
 
-    println!("{:#?}", poe_data.mapbosses);
-
-    Ok(())
-
-    // for result in divcord::records_iter(&spreadsheet, &poe_data) {
-    //     if let Err(err) = result {
-    //         println!("{err:?}");
-    //     }
-    // }
-
-    // let poe_data = poe_data.unwrap();
-    // let spreadsheet = spreadsheet.unwrap();
-    // let records = divcord::records(&spreadsheet, &poe_data).unwrap();
-
-    // let dried_lake = Source::Act("The Dried Lake".to_owned());
-    // let cards = divcord::cards::cards_by_source_types(&["Act".to_owned()], &records, &poe_data)
-    //     .into_iter()
-    //     .flat_map(|card| {
-    //         let cards = card
-    //             .cards
-    //             .into_iter()
-    //             .filter(|card| card.is_child())
-    //             .collect::<Vec<_>>();
-
-    //         match cards.is_empty() {
-    //             true => None,
-    //             false => Some(cards),
-    //         }
-    //     })
-    //     .collect::<Vec<_>>();
-    // println!("{cards:#?}");
-
-    // println!("{}", std::env::var("CARGO_MANIFEST_DIR").unwrap());
+        std::process::exit(0);
+    };
 }

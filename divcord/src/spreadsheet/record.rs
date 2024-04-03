@@ -56,6 +56,10 @@ pub struct Dumb {
 }
 
 impl Dumb {
+    pub fn record_id(row_index: usize) -> usize {
+        row_index + 3
+    }
+
     pub fn create(
         row_index: usize,
         spreadsheet_row: &[Value],
@@ -91,7 +95,7 @@ impl Dumb {
             wiki_disagreements,
             sources_with_tag_but_not_on_wiki,
             notes,
-            id: row_index + 3,
+            id: Dumb::record_id(row_index),
         })
     }
 }

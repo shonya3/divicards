@@ -1,10 +1,14 @@
-use crate::{parse::ParseSourceError, spreadsheet::rich::ParseCellError};
+use crate::{
+    parse::ParseSourceError,
+    spreadsheet::{rich::ParseCellError, ParseDumbError},
+};
 use std::fmt::Display;
 
 #[derive(Debug)]
 pub enum Error {
     HttpError(reqwest::Error),
     IoError(std::io::Error),
+    ParseDumbError(ParseDumbError),
     SerdeError(serde_json::Error),
     ParseCardNameError(String),
     ValueNotStr(serde_json::Value),
@@ -36,6 +40,7 @@ impl Display for Error {
             Error::FetcherError(err) => err.fmt(f),
             #[cfg(feature = "fetch")]
             Error::PoeDataError(err) => err.fmt(f),
+            Error::ParseDumbError(err) => err.fmt(f),
         }
     }
 }
@@ -99,5 +104,11 @@ impl From<ParseSourceError> for Error {
 impl From<ParseCellError> for Error {
     fn from(value: ParseCellError) -> Self {
         Error::ParseCellError(value)
+    }
+}
+
+impl From<ParseDumbError> for Error {
+    fn from(value: ParseDumbError) -> Self {
+        Error::ParseDumbError(value)
     }
 }
