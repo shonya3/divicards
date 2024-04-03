@@ -30,7 +30,7 @@ where
     T: Identified + IntoEnumIterator,
 {
     for variant in T::iter() {
-        if s == variant.id() || variant.aliases().iter().any(|alias| s == *alias) {
+        if s == variant.id() || variant.aliases().contains(&s) {
             return Ok(variant);
         }
     }
