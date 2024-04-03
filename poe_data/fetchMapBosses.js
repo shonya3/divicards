@@ -60,6 +60,7 @@ const fetchMapBosses = () => {
 	const vindicatedQueen = { name: 'The Vindicated Queen', maps: ['Caldera Map'] };
 
 	mapBosses.push(cleansingLight, opid, vindicatedQueen);
+	mapBosses.push({ name: 'Nightmare of the Depraved Trinity', maps: ['Abomination Map'] });
 
 	return mapBosses;
 };
