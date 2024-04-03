@@ -6,52 +6,27 @@ Check example dir.
 
 ## Example
 
-Add divcord and poe_data to Cargo.toml. You'll also need "fetch" features and tokio, if you need to load data first.
-
 ```toml
-divcord = {path = "../divcord", features = ["fetch"]}
+[dependencies]
+divcord = { git = "https://github.com/shonya3/divicards.git", features = ["fetch"]}
+serde_json = "1"
 tokio = { version = "1", features = ["full"] }
-serde_json = "1.0"
 ```
 
-And then get started in your `main.rs`:
+In project root, create .env file.
+GOOGLE_API_KEY=
 
 ```rust
-use divcord::{Error, Source, Spreadsheet, PoeData};
-use std::fs;
+use divcord::{PoeData, Spreadsheet};
 
 #[tokio::main]
-async fn main() -> Result<(), Error> {
+async fn main() {
     let (poe_data, spreadsheet) = tokio::join!(PoeData::load(), Spreadsheet::load());
-    let poe_data = poe_data?;
-    let spreadsheet = spreadsheet?;
+    let poe_data = poe_data.unwrap();
+    let spreadsheet = spreadsheet.unwrap();
 
-    // parse and write to json, that's all
-    let records = divcord::records(&spreadsheet, &poe_data)?;
-    fs::write("records.json", serde_json::to_string_pretty(&records)?)?;
-
-    // iterate the records and do something
-    for record in divcord::records_iter(&spreadsheet, &poe_data) {
-        let record = record?;
-        let boxes_and_chests_string = record
-            .sources
-            .iter()
-            .filter_map(|source| match source {
-                Source::Strongbox(..) | Source::Chest(..) => Some(source.to_string()),
-                Source::GlobalDrop { .. } => {
-                    println!("GlobalDrop #{} {} {source:?}", record.id, record.card);
-                    None
-                }
-                _ => None,
-            })
-            .collect::<Vec<String>>()
-            .join("; ");
-
-        if !boxes_and_chests_string.is_empty() {
-            println!("#{} {} {}", record.id, record.card, boxes_and_chests_string)
-        }
-    }
-
-    Ok(())
+    let records = divcord::records(&spreadsheet, &poe_data).unwrap();
+    let json = serde_json::to_string(&records).unwrap();
+    std::fs::write("records.json", &json).unwrap();
 }
 ```
