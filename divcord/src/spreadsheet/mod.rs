@@ -5,10 +5,7 @@ pub mod load;
 pub mod record;
 pub mod rich;
 
-use self::{
-    record::Dumb,
-    rich::{ParseCellError, RichColumn},
-};
+use self::{record::Dumb, rich::RichColumn};
 use crate::error::Error;
 use googlesheets::sheet::ValueRange;
 use serde::{Deserialize, Serialize};
@@ -25,18 +22,6 @@ pub struct Spreadsheet {
     pub sheet: ValueRange,
     pub rich_sources_column: RichColumn,
     pub rich_verify_column: RichColumn,
-}
-
-#[derive(Debug)]
-pub struct ParseDumbError {
-    pub record_id: usize,
-    pub parse_cell_error: ParseCellError,
-}
-
-impl std::fmt::Display for ParseDumbError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}. {}", &self.record_id, &self.parse_cell_error)
-    }
 }
 
 impl Spreadsheet {
@@ -71,18 +56,7 @@ impl Spreadsheet {
             .enumerate()
             .map(
                 |(row_index, ((spreadsheet_row, sources_cell), verify_cell))| {
-                    Dumb::create(
-                        row_index,
-                        spreadsheet_row,
-                        sources_cell.drops_from().map_err(|err| ParseDumbError {
-                            record_id: Dumb::record_id(row_index),
-                            parse_cell_error: err,
-                        })?,
-                        verify_cell.drops_from().map_err(|err| ParseDumbError {
-                            record_id: Dumb::record_id(row_index),
-                            parse_cell_error: err,
-                        })?,
-                    )
+                    Dumb::create(row_index, spreadsheet_row, sources_cell, verify_cell)
                 },
             )
     }

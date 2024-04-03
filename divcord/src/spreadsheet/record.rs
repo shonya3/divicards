@@ -1,6 +1,6 @@
 //! Structs for pre-parsed and parsed spreadsheet's row
 
-use super::rich::DropsFrom;
+use super::rich::{Cell, DropsFrom, ParseCellError};
 use crate::{dropsource::Source, error::Error};
 use divi::cards::CheckCardName;
 use serde::{Deserialize, Serialize};
@@ -55,6 +55,18 @@ pub struct Dumb {
     pub notes: Option<String>,
 }
 
+#[derive(Debug)]
+pub struct ParseDumbError {
+    pub record_id: usize,
+    pub parse_cell_error: ParseCellError,
+}
+
+impl std::fmt::Display for ParseDumbError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}. {}", &self.record_id, &self.parse_cell_error)
+    }
+}
+
 impl Dumb {
     pub fn record_id(row_index: usize) -> usize {
         row_index + 3
@@ -63,9 +75,23 @@ impl Dumb {
     pub fn create(
         row_index: usize,
         spreadsheet_row: &[Value],
-        sources_drops_from: Vec<DropsFrom>,
-        verify_drops_from: Vec<DropsFrom>,
+        sources_rich_cell: &Cell,
+        verify_rich_cell: &Cell,
     ) -> Result<Self, Error> {
+        let sources_drops_from = sources_rich_cell
+            .drops_from()
+            .map_err(|err| ParseDumbError {
+                record_id: Dumb::record_id(row_index),
+                parse_cell_error: err,
+            })?;
+
+        let verify_drops_from = verify_rich_cell
+            .drops_from()
+            .map_err(|err| ParseDumbError {
+                record_id: Dumb::record_id(row_index),
+                parse_cell_error: err,
+            })?;
+
         let greynote = GreyNote::parse(&spreadsheet_row[0])?;
         let card = parse_card_name(&spreadsheet_row[1])?;
         let tag_hypothesis = parse_string_cell(&spreadsheet_row[2]);

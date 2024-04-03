@@ -1,6 +1,6 @@
 use crate::{
     parse::ParseSourceError,
-    spreadsheet::{rich::ParseCellError, ParseDumbError},
+    spreadsheet::{record::ParseDumbError, rich::ParseCellError},
 };
 use std::fmt::Display;
 
