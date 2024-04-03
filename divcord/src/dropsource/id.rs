@@ -41,7 +41,7 @@ where
 mod test {
 
     #[test]
-    fn parse_id_aliase() {
+    fn parse_id_alias() {
         use super::*;
         use std::str::FromStr;
         use strum_macros::EnumIter;
