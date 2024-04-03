@@ -2,17 +2,16 @@
 //! Activate "fetch" feature
 //! ```Cargo.toml
 //! divcord = {path = "../divcord", features = ["fetch"]}
-//! poe_data = {path = "../poe_data", features = ["fetch"]}
 //! ```
 
-use divcord::{Error, Source, Spreadsheet};
-use poe_data::PoeData;
+use divcord::{Error, PoeData, Source, Spreadsheet};
 use std::fs;
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
-    let spreadsheet = Spreadsheet::load().await.unwrap();
-    let poe_data = PoeData::load().await.unwrap();
+    let (poe_data, spreadsheet) = tokio::join!(PoeData::load(), Spreadsheet::load());
+    let poe_data = poe_data?;
+    let spreadsheet = spreadsheet?;
 
     // parse and write to json
     let records = divcord::records(&spreadsheet, &poe_data)?;

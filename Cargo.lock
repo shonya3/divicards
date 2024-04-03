@@ -1098,7 +1098,6 @@ name = "divcord-example"
 version = "0.1.0"
 dependencies = [
  "divcord",
- "poe_data",
  "serde_json",
  "tokio",
 ]

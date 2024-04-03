@@ -7,6 +7,5 @@ edition = "2021"
 
 [dependencies]
 divcord = {path = "../", features = ["fetch"]}
-poe_data = {path = "../../poe_data", features = ["fetch"]}
 serde_json.workspace = true
 tokio = { workspace = true, features = ["full"] }
