@@ -7,7 +7,10 @@ pub mod error;
 pub mod parse;
 pub mod spreadsheet;
 
-pub use dropsource::Source;
-pub use error::Error;
-pub use parse::{records, records_iter};
-pub use spreadsheet::{record::Record, Spreadsheet};
+pub use crate::{
+    cards::{cards_by_source, cards_by_source_types, CardBySource},
+    dropsource::Source,
+    error::Error,
+    parse::{records, records_iter},
+    spreadsheet::{record::Record, Spreadsheet},
+};
