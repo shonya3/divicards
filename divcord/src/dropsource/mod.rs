@@ -70,7 +70,9 @@ impl<'de> Deserialize<'de> for Source {
                 ))),
             },
             SourceKind::SourceWithMember => {
-                let id = id.unwrap();
+                let Some(id) = id else {
+                    return Err(de::Error::custom(format!("No id field")));
+                };
                 match id.parse::<Source>() {
                     Ok(source) => Ok(source),
                     Err(_) => match _type.as_str() {
