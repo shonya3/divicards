@@ -5,11 +5,11 @@ use divcord::{
     parse::RichColumnVariant,
     records_iter,
     spreadsheet::{self, load::SpreadsheetFetcher, record::Record, rich::RichColumn, Spreadsheet},
+    PoeData,
 };
 use error::Error;
 use fetcher::DataFetcher;
 use fetcher::{Config, Stale};
-use poe_data::{consts::WIKI_API_URL, league::LeagueReleaseInfo, PoeData};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::{
@@ -24,18 +24,20 @@ mod error;
 
 #[tokio::main]
 async fn main() {
-    let mut spreadsheet_fetcher = SpreadsheetFetcher::default();
-    spreadsheet_fetcher.0.stale = Stale::After(Duration::from_secs(81400));
+    let poe_data = PoeData::load().await.unwrap();
 
-    let (poe_data, spreadsheet) = tokio::join!(PoeData::load(), spreadsheet_fetcher.load());
-    let poe_data = poe_data.unwrap();
-    let spreadsheet = spreadsheet.unwrap();
+    // let mut spreadsheet_fetcher = SpreadsheetFetcher::default();
+    // spreadsheet_fetcher.0.stale = Stale::After(Duration::from_secs(81400));
 
-    for result in divcord::records_iter(&spreadsheet, &poe_data) {
-        if let Err(err) = result {
-            println!("{err:?}");
-        }
-    }
+    // let (poe_data, spreadsheet) = tokio::join!(PoeData::load(), spreadsheet_fetcher.load());
+    // let poe_data = poe_data.unwrap();
+    // let spreadsheet = spreadsheet.unwrap();
+
+    // for result in divcord::records_iter(&spreadsheet, &poe_data) {
+    //     if let Err(err) = result {
+    //         println!("{err:?}");
+    //     }
+    // }
 
     // let poe_data = poe_data.unwrap();
     // let spreadsheet = spreadsheet.unwrap();

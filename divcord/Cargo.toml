@@ -20,4 +20,4 @@ fetcher = {path = "../fetcher", optional = true}
 
 [features]
 default = []
-fetch = ["dep:fetcher"]
+fetch = ["dep:fetcher", "poe_data/fetch"]

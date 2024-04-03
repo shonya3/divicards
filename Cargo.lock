@@ -3254,7 +3254,6 @@ dependencies = [
  "divi",
  "dotenv",
  "fetcher",
- "poe_data",
  "reqwest",
  "serde",
  "serde_json",

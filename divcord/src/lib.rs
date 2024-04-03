@@ -14,3 +14,5 @@ pub use crate::{
     parse::{records, records_iter},
     spreadsheet::{record::Record, Spreadsheet},
 };
+
+pub use poe_data::PoeData;
