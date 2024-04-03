@@ -11,7 +11,7 @@ use googlesheets::sheet::ValueRange;
 use serde::{Deserialize, Serialize};
 
 #[allow(unused_imports)]
-use self::rich::DropsFrom;
+use self::rich::Cell;
 
 /// [Divcord Spreadsheet](https://docs.google.com/spreadsheets/d/1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU/edit?pli=1#gid=0)
 /// This simple struct consist of api results:
@@ -45,7 +45,7 @@ impl Spreadsheet {
     }
 
     /// iterator over dumb records - initial preparation of data for each spreadsheet row.
-    /// Zips each row of simple format with rich format [`crate::spreadsheet::rich::Cell`] for 'F' and 'H' columns
+    /// Zips each row of simple format with rich format [`Cell`] for 'F' and 'H' columns
     /// to produce a [`Dumb`]
     pub fn dumb_records(&self) -> impl Iterator<Item = Result<Dumb, Error>> + '_ {
         self.sheet
