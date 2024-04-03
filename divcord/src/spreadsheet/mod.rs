@@ -45,7 +45,7 @@ impl Spreadsheet {
     }
 
     /// iterator over dumb records - initial preparation of data for each spreadsheet row.
-    /// Zips each row of simple format with rich format [`DropsFrom`] for 'F' and 'H' columns
+    /// Zips each row of simple format with rich format [`crate::spreadsheet::rich::Cell`] for 'F' and 'H' columns
     /// to produce a [`Dumb`]
     pub fn dumb_records(&self) -> impl Iterator<Item = Result<Dumb, Error>> + '_ {
         self.sheet
