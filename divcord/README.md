@@ -26,7 +26,7 @@ async fn main() {
     let spreadsheet = spreadsheet.unwrap();
 
     let records = divcord::records(&spreadsheet, &poe_data).unwrap();
-    let json = serde_json::to_string(&records).unwrap();
+    let json = serde_json::to_string_pretty(&records).unwrap();
     std::fs::write("records.json", &json).unwrap();
 }
 ```
