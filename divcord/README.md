@@ -10,7 +10,6 @@ Add divcord and poe_data to Cargo.toml. You'll also need "fetch" features and to
 
 ```toml
 divcord = {path = "../divcord", features = ["fetch"]}
-poe_data = {path = "../poe_data", features = ["fetch"]}
 tokio = { version = "1", features = ["full"] }
 serde_json = "1.0"
 ```
@@ -18,14 +17,14 @@ serde_json = "1.0"
 And then get started in your `main.rs`:
 
 ```rust
-use divcord::{Error, Source, Spreadsheet};
-use poe_data::PoeData;
+use divcord::{Error, Source, Spreadsheet, PoeData};
 use std::fs;
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
-    let spreadsheet = Spreadsheet::load().await.unwrap();
-    let poe_data = PoeData::load().await.unwrap();
+    let (poe_data, spreadsheet) = tokio::join!(PoeData::load(), Spreadsheet::load());
+    let poe_data = poe_data?;
+    let spreadsheet = spreadsheet?;
 
     // parse and write to json, that's all
     let records = divcord::records(&spreadsheet, &poe_data)?;

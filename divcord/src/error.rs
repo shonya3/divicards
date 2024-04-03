@@ -12,9 +12,11 @@ pub enum Error {
     DiviError(divi::error::Error),
     StrumParseError(strum::ParseError),
     ParseSourceError(ParseSourceError),
+    ParseCellError(crate::spreadsheet::rich::ParseCellError),
     #[cfg(feature = "fetch")]
     FetcherError(fetcher::FetcherError),
-    ParseCellError(crate::spreadsheet::rich::ParseCellError),
+    #[cfg(feature = "fetch")]
+    PoeDataError(poe_data::error::Error),
 }
 
 impl Display for Error {
@@ -29,9 +31,11 @@ impl Display for Error {
             Error::DiviError(err) => err.fmt(f),
             Error::StrumParseError(err) => err.fmt(f),
             Error::ParseSourceError(err) => err.fmt(f),
+            Error::ParseCellError(err) => err.fmt(f),
             #[cfg(feature = "fetch")]
             Error::FetcherError(err) => err.fmt(f),
-            Error::ParseCellError(err) => err.fmt(f),
+            #[cfg(feature = "fetch")]
+            Error::PoeDataError(err) => err.fmt(f),
         }
     }
 }
@@ -40,6 +44,13 @@ impl Display for Error {
 impl From<fetcher::FetcherError> for Error {
     fn from(value: fetcher::FetcherError) -> Self {
         Error::FetcherError(value)
+    }
+}
+
+#[cfg(feature = "fetch")]
+impl From<poe_data::error::Error> for Error {
+    fn from(value: poe_data::error::Error) -> Self {
+        Error::PoeDataError(value)
     }
 }
 

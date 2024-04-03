@@ -23,15 +23,15 @@ use std::{
 mod error;
 
 #[tokio::main]
-async fn main() {
-    let poe_data = PoeData::load().await.unwrap();
-
+async fn main() -> Result<(), divcord::Error> {
     // let mut spreadsheet_fetcher = SpreadsheetFetcher::default();
     // spreadsheet_fetcher.0.stale = Stale::After(Duration::from_secs(81400));
 
-    // let (poe_data, spreadsheet) = tokio::join!(PoeData::load(), spreadsheet_fetcher.load());
-    // let poe_data = poe_data.unwrap();
-    // let spreadsheet = spreadsheet.unwrap();
+    let (poe_data, spreadsheet) = tokio::join!(PoeData::load(), Spreadsheet::load());
+    let poe_data = poe_data?;
+    let spreadsheet = spreadsheet?;
+
+    Ok(())
 
     // for result in divcord::records_iter(&spreadsheet, &poe_data) {
     //     if let Err(err) = result {
