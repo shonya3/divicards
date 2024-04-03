@@ -45,12 +45,26 @@ impl<'de> Deserialize<'de> for Source {
             #[serde(rename = "type")]
             _type: String,
             kind: SourceKind,
+            min_level: Option<u32>,
+            max_level: Option<u32>,
         }
 
-        let JSSource { id, _type, kind } = JSSource::deserialize(deserializer)?;
+        let JSSource {
+            id,
+            _type,
+            kind,
+            max_level,
+            min_level,
+        } = JSSource::deserialize(deserializer)?;
         match kind {
             SourceKind::EmptySource => match _type.parse::<Source>() {
-                Ok(source) => Ok(source),
+                Ok(source) => match source {
+                    Source::GlobalDrop { .. } => Ok(Source::GlobalDrop {
+                        min_level,
+                        max_level,
+                    }),
+                    _ => Ok(source),
+                },
                 Err(_) => Err(de::Error::custom(format!(
                     "Could not deserialize Source. {_type}"
                 ))),
@@ -242,4 +256,27 @@ pub fn poedb_page_url(boss: &str) {
     let name = name.replace(" ", "_");
     let name = name.replace(",", "%2C");
     format!("https://poedb.tw/us/{name}");
+}
+
+#[cfg(test)]
+mod tests {
+
+    use crate::Source;
+
+    #[test]
+    pub fn deserialize_global_drop() {
+        let json = r#"{"type":"Global Drop","id":"Global Drop","kind":"empty-source","max_level":68,"min_level":68}"#;
+        let source = serde_json::from_str::<Source>(&json).unwrap();
+
+        let Source::GlobalDrop {
+            min_level,
+            max_level,
+        } = source
+        else {
+            panic!("Source is not type of Global Drop")
+        };
+
+        assert_eq!(min_level, Some(68));
+        assert_eq!(max_level, Some(68));
+    }
 }
