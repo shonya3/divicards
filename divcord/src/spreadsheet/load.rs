@@ -23,6 +23,9 @@ impl WithConfig for SpreadsheetFetcher {
     fn config(&self) -> &Config {
         &self.0
     }
+    fn config_mut(&mut self) -> &mut Config {
+        &mut self.0
+    }
 }
 
 pub async fn fetch_rich_column(letter: char) -> Result<RichColumn, reqwest::Error> {

@@ -15,6 +15,9 @@ impl WithConfig for PoeDataFetcher {
     fn config(&self) -> &Config {
         &self.config
     }
+    fn config_mut(&mut self) -> &mut Config {
+        &mut self.config
+    }
 }
 
 impl Default for PoeDataFetcher {
@@ -57,6 +60,9 @@ impl WithConfig for MapBossesFetcher {
     fn config(&self) -> &Config {
         &self.0
     }
+    fn config_mut(&mut self) -> &mut Config {
+        &mut self.0
+    }
 }
 impl Default for MapBossesFetcher {
     fn default() -> Self {
@@ -78,6 +84,9 @@ pub struct MapsFetcher(Config);
 impl WithConfig for MapsFetcher {
     fn config(&self) -> &Config {
         &self.0
+    }
+    fn config_mut(&mut self) -> &mut Config {
+        &mut self.0
     }
 }
 impl Default for MapsFetcher {
@@ -101,6 +110,9 @@ impl WithConfig for ActsFetcher {
     fn config(&self) -> &Config {
         &self.0
     }
+    fn config_mut(&mut self) -> &mut Config {
+        &mut self.0
+    }
 }
 impl Default for ActsFetcher {
     fn default() -> Self {
@@ -122,6 +134,9 @@ pub struct CardsFetcher(Config);
 impl WithConfig for CardsFetcher {
     fn config(&self) -> &Config {
         &self.0
+    }
+    fn config_mut(&mut self) -> &mut Config {
+        &mut self.0
     }
 }
 impl Default for CardsFetcher {

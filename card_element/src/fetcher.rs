@@ -18,6 +18,9 @@ impl WithConfig for Fetcher {
     fn config(&self) -> &Config {
         &self.0
     }
+    fn config_mut(&mut self) -> &mut Config {
+        &mut self.0
+    }
 }
 
 impl DataFetcher<Vec<DivinationCardElementData>, Error> for Fetcher {

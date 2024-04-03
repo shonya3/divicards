@@ -11,9 +11,15 @@ pub trait DataFetcher<T, E>
 where
     T: serde::Serialize + serde::de::DeserializeOwned,
     E: From<FetcherError>,
-    Self: WithConfig,
+    Self: WithConfig + Default,
 {
     async fn fetch(&self) -> Result<T, E>;
+
+    async fn load_with_mut_default_config(f: impl Fn(&mut Config)) -> Result<T, E> {
+        let mut default = Self::default();
+        f(&mut default.config_mut());
+        default.load().await
+    }
 
     async fn load(&self) -> Result<T, E> {
         let config = self.config();
@@ -132,6 +138,21 @@ impl Config {
     pub fn builder() -> ConfigBuilder {
         ConfigBuilder::default()
     }
+
+    pub fn stale(&mut self, stale: Stale) -> &mut Self {
+        self.stale = stale;
+        self
+    }
+
+    pub fn save(&mut self, save: bool) -> &mut Self {
+        self.save = save;
+        self
+    }
+
+    pub fn filename(&mut self, filename: &'static str) -> &mut Self {
+        self.filename = filename;
+        self
+    }
 }
 
 #[derive(Default, Clone)]
@@ -176,4 +197,5 @@ impl ConfigBuilder {
 
 pub trait WithConfig {
     fn config(&self) -> &Config;
+    fn config_mut(&mut self) -> &mut Config;
 }
