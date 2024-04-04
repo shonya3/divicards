@@ -13,10 +13,9 @@ use serde::Serialize;
 async fn main() {
     dotenv::dotenv().ok();
 
-    // 1. Write data jsons
+    // load and parse
     let spreadsheet = Spreadsheet::load().await.unwrap();
     let poe_data = PoeData::load().await.unwrap();
-    let card_element = DivinationCardElementData::load().await.unwrap();
     let Ok(records) = divcord::records(&spreadsheet, &poe_data) else {
         eprintln!("divcord::records parse Err. Scanning all possible errors with records_iter...");
         for result in divcord::records_iter(&spreadsheet, &poe_data) {
@@ -28,6 +27,9 @@ async fn main() {
         std::process::exit(0);
     };
 
+    let card_element = DivinationCardElementData::load().await.unwrap();
+
+    // 1. Write data jsons
     // Prepare paths
     let dir = PathBuf::from("../../divicards-site/src/gen");
     let json_dir = dir.join("json");
