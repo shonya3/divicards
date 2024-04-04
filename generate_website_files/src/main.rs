@@ -19,10 +19,7 @@ async fn main() {
         std::fs::create_dir_all(&json_dir).unwrap();
     }
 
-    // 1. Compile WASM Divcord
-    divcord_wasm_pkg(&dir, "divcordWasm");
-
-    // 2. Write data jsons
+    // 1. Write data jsons
     let spreadsheet = Spreadsheet::load().await.unwrap();
     let poe_data = PoeData::load().await.unwrap();
     let card_element = DivinationCardElementData::load().await.unwrap();
@@ -50,12 +47,15 @@ async fn main() {
     )
     .unwrap();
 
-    // 3. Generate TypeScript
+    // 2. Generate TypeScript
     std::fs::write(
         dir.join("Source.ts"),
         &divcord::dropsource::Source::typescript_types(),
     )
     .unwrap();
+
+    // 3. Compile WASM Divcord
+    divcord_wasm_pkg(&dir, "divcordWasm");
 }
 
 pub fn divcord_wasm_pkg(path: &Path, dirname: &str) {
