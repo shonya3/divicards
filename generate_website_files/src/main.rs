@@ -12,12 +12,6 @@ use serde::Serialize;
 #[tokio::main]
 async fn main() {
     dotenv::dotenv().ok();
-    // Prepare paths
-    let dir = PathBuf::from("../../divicards-site/src/gen");
-    let json_dir = dir.join("json");
-    if !json_dir.exists() {
-        std::fs::create_dir_all(&json_dir).unwrap();
-    }
 
     // 1. Write data jsons
     let spreadsheet = Spreadsheet::load().await.unwrap();
@@ -33,6 +27,13 @@ async fn main() {
 
         std::process::exit(0);
     };
+
+    // Prepare paths
+    let dir = PathBuf::from("../../divicards-site/src/gen");
+    let json_dir = dir.join("json");
+    if !json_dir.exists() {
+        std::fs::create_dir_all(&json_dir).unwrap();
+    }
 
     write(&records, &json_dir, "records.json");
     write(&poe_data, &json_dir, PoeData::filename());
