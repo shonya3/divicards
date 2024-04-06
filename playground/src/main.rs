@@ -24,19 +24,4 @@ use std::{
 mod error;
 
 #[tokio::main]
-async fn main() {
-    let maps = MapsFetcher::default().load().await.unwrap();
-
-    let spreadsheet = Spreadsheet::load().await.unwrap();
-    let poe_data = PoeData::load().await.unwrap();
-    let Ok(records) = divcord::records(&spreadsheet, &poe_data) else {
-        eprintln!("divcord::records parse Err. Scanning all possible errors with records_iter...\n\n\n\n\n");
-        for result in divcord::records_iter(&spreadsheet, &poe_data) {
-            if let Err(err) = result {
-                eprintln!("{err:#?}\n\n\n\n");
-            }
-        }
-
-        std::process::exit(0);
-    };
-}
+async fn main() {}
