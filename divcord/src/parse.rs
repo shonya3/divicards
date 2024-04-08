@@ -9,11 +9,7 @@ use crate::{
 };
 use divi::IsCard;
 use poe_data::act::ActAreaId;
-use poe_data::{
-    act::{ActArea, ActAreaName},
-    cards::Card,
-    PoeData,
-};
+use poe_data::{act::ActArea, cards::Card, PoeData};
 use serde::{Deserialize, Serialize};
 use std::fmt::Display;
 
@@ -432,12 +428,12 @@ pub fn parse_act_areas(drops_from: &DropsFrom, acts: &[ActArea], min_level: u8) 
     let s = &drops_from.name;
     let names = match is_act_notation(s) {
         true if s == "The Belly of the Beast (A4/A9)" => vec![
-            ActAreaName::NameWithAct(("The Belly of the Beast Level 1".to_string(), 4)),
-            ActAreaName::NameWithAct(("The Belly of the Beast Level 2".to_string(), 4)),
-            ActAreaName::NameWithAct(("The Belly of the Beast".to_string(), 9)),
+            ActAreaDivcordNotation::NameWithAct(("The Belly of the Beast Level 1".to_string(), 4)),
+            ActAreaDivcordNotation::NameWithAct(("The Belly of the Beast Level 2".to_string(), 4)),
+            ActAreaDivcordNotation::NameWithAct(("The Belly of the Beast".to_string(), 9)),
         ],
         true => parse_act_notation(s),
-        false => vec![ActAreaName::Name(s.to_owned())],
+        false => vec![ActAreaDivcordNotation::Name(s.to_owned())],
     };
 
     let areas = names
@@ -456,7 +452,7 @@ pub fn is_act_notation(s: &str) -> bool {
     }
 }
 
-pub fn parse_act_notation(s: &str) -> Vec<ActAreaName> {
+pub fn parse_act_notation(s: &str) -> Vec<ActAreaDivcordNotation> {
     if !s.contains("(") && !s.contains("/") {
         panic!("Expected act notation, got {s}");
     };
@@ -510,23 +506,25 @@ pub fn parse_act_notation(s: &str) -> Vec<ActAreaName> {
                 .into_iter()
                 .flat_map(|name| {
                     [
-                        ActAreaName::NameWithAct((name.clone(), left)),
-                        ActAreaName::NameWithAct((name, right)),
+                        ActAreaDivcordNotation::NameWithAct((name.clone(), left)),
+                        ActAreaDivcordNotation::NameWithAct((name, right)),
                     ]
                 })
                 .collect()
         } else {
-            let f: Box<dyn Fn(String) -> ActAreaName> = match acts
+            let f: Box<dyn Fn(String) -> ActAreaDivcordNotation> = match acts
                 .chars()
                 .into_iter()
                 .filter(|c| c.is_digit(10))
                 .collect::<String>()
                 .parse::<u8>()
             {
-                Ok(act) => Box::new(move |name: String| ActAreaName::NameWithAct((name, act))),
+                Ok(act) => {
+                    Box::new(move |name: String| ActAreaDivcordNotation::NameWithAct((name, act)))
+                }
                 Err(_) => Box::new(|name: String| {
                     println!("No act notation in brackets {acts}");
-                    ActAreaName::Name(name)
+                    ActAreaDivcordNotation::Name(name)
                 }),
             };
 
@@ -535,19 +533,19 @@ pub fn parse_act_notation(s: &str) -> Vec<ActAreaName> {
     } else {
         names
             .into_iter()
-            .map(|name| ActAreaName::Name(name))
+            .map(|name| ActAreaDivcordNotation::Name(name))
             .collect()
     }
 }
 
-pub fn find_ids(name: &ActAreaName, acts: &[ActArea], min_level: u8) -> Vec<ActAreaId> {
+pub fn find_ids(name: &ActAreaDivcordNotation, acts: &[ActArea], min_level: u8) -> Vec<ActAreaId> {
     match name {
-        ActAreaName::Name(name) => acts
+        ActAreaDivcordNotation::Name(name) => acts
             .iter()
             .filter(|a| &a.name == name && a.is_town == false && (a.area_level + 2) >= min_level)
             .map(|a| a.id.to_owned())
             .collect(),
-        ActAreaName::NameWithAct((name, act)) => {
+        ActAreaDivcordNotation::NameWithAct((name, act)) => {
             let mut v = vec![];
             if let Some(a) = acts
                 .iter()
@@ -558,5 +556,47 @@ pub fn find_ids(name: &ActAreaName, acts: &[ActArea], min_level: u8) -> Vec<ActA
 
             v
         }
+    }
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
+pub enum ActAreaDivcordNotation {
+    #[serde(untagged)]
+    Name(String),
+    #[serde(untagged)]
+    NameWithAct((String, u8)),
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::parse::ActAreaDivcordNotation;
+
+    use super::parse_act_notation;
+
+    #[test]
+    fn act_area_notation() {
+        assert_eq!(
+            parse_act_notation("The Solaris Temple Level 1/2 (A8)"),
+            vec![
+                ActAreaDivcordNotation::NameWithAct(("The Solaris Temple Level 1".to_owned(), 8)),
+                ActAreaDivcordNotation::NameWithAct(("The Solaris Temple Level 2".to_owned(), 8))
+            ]
+        );
+
+        assert_eq!(
+            parse_act_notation("The Ossuary (A5/A10)"),
+            vec![
+                ActAreaDivcordNotation::NameWithAct(("The Ossuary".to_owned(), 5)),
+                ActAreaDivcordNotation::NameWithAct(("The Ossuary".to_owned(), 10))
+            ]
+        );
+
+        assert_eq!(
+            parse_act_notation("The Riverways (A6)"),
+            vec![ActAreaDivcordNotation::NameWithAct((
+                "The Riverways".to_owned(),
+                6
+            ))]
+        );
     }
 }

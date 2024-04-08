@@ -41,18 +41,6 @@ impl ActArea {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[serde(rename_all = "camelCase")]
-pub struct ActAreaDivcordNotation(pub String);
-
-#[derive(Debug, Serialize, Deserialize, Clone)]
-pub enum ActAreaName {
-    #[serde(untagged)]
-    Name(String),
-    #[serde(untagged)]
-    NameWithAct((String, u8)),
-}
-
 #[cfg(feature = "fetch")]
 pub use fetch::fetch;
 
