@@ -424,8 +424,13 @@ mod acts {
     use poe_data::act::{ActArea, ActAreaId};
     use serde::{Deserialize, Serialize};
 
+    /// Examples of acts areas in divcord spreadsheet:
+    /// - "The Blood Aqueduct"
+    /// - "The Solaris Temple Level 1/2 (A8)"
+    /// - "The Ossuary (A5/A10)"
+    /// - "The Riverways (A6)"
     #[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
-    pub enum ActAreaDivcordNotation {
+    enum ActAreaDivcordNotation {
         #[serde(untagged)]
         Name(String),
         #[serde(untagged)]
@@ -560,11 +565,7 @@ mod acts {
         }
     }
 
-    pub fn find_ids(
-        name: &ActAreaDivcordNotation,
-        acts: &[ActArea],
-        min_level: u8,
-    ) -> Vec<ActAreaId> {
+    fn find_ids(name: &ActAreaDivcordNotation, acts: &[ActArea], min_level: u8) -> Vec<ActAreaId> {
         match name {
             ActAreaDivcordNotation::Name(name) => acts
                 .iter()
