@@ -8,8 +8,7 @@ use crate::{
     },
 };
 use divi::IsCard;
-use poe_data::act::ActAreaId;
-use poe_data::{act::ActArea, cards::Card, PoeData};
+use poe_data::{cards::Card, PoeData};
 use serde::{Deserialize, Serialize};
 use std::fmt::Display;
 
@@ -289,25 +288,6 @@ pub fn parse_dropses_from(
     Ok(sources)
 }
 
-fn strip_comment(input: &str) -> String {
-    let mut result = String::new();
-    let mut inside_brackets = false;
-
-    for c in input.chars() {
-        match c {
-            '(' => inside_brackets = true,
-            ')' => inside_brackets = false,
-            _ => {
-                if !inside_brackets {
-                    result.push(c);
-                }
-            }
-        }
-    }
-
-    result.trim().to_owned()
-}
-
 pub fn parse_one_drops_from(
     d: &DropsFrom,
     dumb: &Dumb,
@@ -355,7 +335,7 @@ pub fn parse_one_drops_from(
     if d.styles.italic == true
         && (d.styles.color.as_str() == "#FFFFFF" || dumb.greynote == GreyNote::Story)
     {
-        let ids = parse_act_areas(d, &acts, card_drop_level_requirement.try_into().unwrap());
+        let ids = acts::parse_act_areas(d, &acts, card_drop_level_requirement.try_into().unwrap());
         if ids.is_empty() {
             if acts.iter().any(|a| {
                 a.bossfights.iter().any(|b| {
@@ -420,183 +400,227 @@ pub fn parse_one_drops_from(
     })
 }
 
-pub fn parse_act_areas(drops_from: &DropsFrom, acts: &[ActArea], min_level: u8) -> Vec<ActAreaId> {
-    if !drops_from.styles.italic {
-        panic!("Act areas should be italic");
-    }
+fn strip_comment(input: &str) -> String {
+    let mut result = String::new();
+    let mut inside_brackets = false;
 
-    let s = &drops_from.name;
-    let names = match is_act_notation(s) {
-        true if s == "The Belly of the Beast (A4/A9)" => vec![
-            ActAreaDivcordNotation::NameWithAct(("The Belly of the Beast Level 1".to_string(), 4)),
-            ActAreaDivcordNotation::NameWithAct(("The Belly of the Beast Level 2".to_string(), 4)),
-            ActAreaDivcordNotation::NameWithAct(("The Belly of the Beast".to_string(), 9)),
-        ],
-        true => parse_act_notation(s),
-        false => vec![ActAreaDivcordNotation::Name(s.to_owned())],
-    };
-
-    let areas = names
-        .iter()
-        .flat_map(|name| find_ids(&name, acts, min_level))
-        .collect();
-
-    areas
-}
-
-pub fn is_act_notation(s: &str) -> bool {
-    match s {
-        s if s.contains("(") && s.contains(")") => true,
-        s if s.contains("1/2") => true,
-        _ => false,
-    }
-}
-
-pub fn parse_act_notation(s: &str) -> Vec<ActAreaDivcordNotation> {
-    if !s.contains("(") && !s.contains("/") {
-        panic!("Expected act notation, got {s}");
-    };
-
-    let mut split = s.split("(");
-
-    let name = split.next().expect("No name, {s}");
-    let mut names: Vec<String> = Vec::new();
-
-    if name.contains("1/2") {
-        let name = name.replace("1/2", "");
-        let name = name.trim();
-        for n in [1, 2] {
-            let name = format!("{name} {n}");
-            names.push(name);
+    for c in input.chars() {
+        match c {
+            '(' => inside_brackets = true,
+            ')' => inside_brackets = false,
+            _ => {
+                if !inside_brackets {
+                    result.push(c);
+                }
+            }
         }
-    } else {
-        names.push(name.to_string());
     }
 
-    let names = match name.contains("1/2") {
-        true => {
+    result.trim().to_owned()
+}
+
+mod acts {
+    use crate::spreadsheet::rich::DropsFrom;
+    use poe_data::act::{ActArea, ActAreaId};
+    use serde::{Deserialize, Serialize};
+
+    #[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
+    pub enum ActAreaDivcordNotation {
+        #[serde(untagged)]
+        Name(String),
+        #[serde(untagged)]
+        NameWithAct((String, u8)),
+    }
+
+    pub fn parse_act_areas(
+        drops_from: &DropsFrom,
+        acts: &[ActArea],
+        min_level: u8,
+    ) -> Vec<ActAreaId> {
+        if !drops_from.styles.italic {
+            panic!("Act areas should be italic");
+        }
+
+        let s = &drops_from.name;
+        let names = match are_act_numbers_specified(s) {
+            true if s == "The Belly of the Beast (A4/A9)" => vec![
+                ActAreaDivcordNotation::NameWithAct((
+                    "The Belly of the Beast Level 1".to_string(),
+                    4,
+                )),
+                ActAreaDivcordNotation::NameWithAct((
+                    "The Belly of the Beast Level 2".to_string(),
+                    4,
+                )),
+                ActAreaDivcordNotation::NameWithAct(("The Belly of the Beast".to_string(), 9)),
+            ],
+            true => parse_with_act_numbers(s),
+            false => vec![ActAreaDivcordNotation::Name(s.to_owned())],
+        };
+
+        let areas = names
+            .iter()
+            .flat_map(|name| find_ids(&name, acts, min_level))
+            .collect();
+
+        areas
+    }
+
+    fn are_act_numbers_specified(s: &str) -> bool {
+        match s {
+            s if s.contains("(") && s.contains(")") => true,
+            s if s.contains("1/2") => true,
+            _ => false,
+        }
+    }
+
+    fn parse_with_act_numbers(s: &str) -> Vec<ActAreaDivcordNotation> {
+        if !s.contains("(") && !s.contains("/") {
+            panic!("Expected act notation, got {s}");
+        };
+
+        let mut split = s.split("(");
+
+        let name = split.next().expect("No name, {s}");
+        let mut names: Vec<String> = Vec::new();
+
+        if name.contains("1/2") {
             let name = name.replace("1/2", "");
             let name = name.trim();
-            [1, 2].iter().map(|n| format!("{name} {n}")).collect()
+            for n in [1, 2] {
+                let name = format!("{name} {n}");
+                names.push(name);
+            }
+        } else {
+            names.push(name.to_string());
         }
-        false => vec![name.trim().to_string()],
-    };
 
-    if let Some(acts) = split.next() {
-        if acts.contains("/") {
-            let (left, right) = acts.split_once("/").unwrap();
+        let names = match name.contains("1/2") {
+            true => {
+                let name = name.replace("1/2", "");
+                let name = name.trim();
+                [1, 2].iter().map(|n| format!("{name} {n}")).collect()
+            }
+            false => vec![name.trim().to_string()],
+        };
 
-            let left = left
-                .chars()
-                .into_iter()
-                .filter(|c| c.is_digit(10))
-                .collect::<String>()
-                .parse::<u8>()
-                .unwrap();
+        if let Some(acts) = split.next() {
+            if acts.contains("/") {
+                let (left, right) = acts.split_once("/").unwrap();
 
-            let right = right
-                .chars()
-                .into_iter()
-                .filter(|c| c.is_digit(10))
-                .collect::<String>()
-                .parse::<u8>()
-                .unwrap();
+                let left = left
+                    .chars()
+                    .into_iter()
+                    .filter(|c| c.is_digit(10))
+                    .collect::<String>()
+                    .parse::<u8>()
+                    .unwrap();
 
+                let right = right
+                    .chars()
+                    .into_iter()
+                    .filter(|c| c.is_digit(10))
+                    .collect::<String>()
+                    .parse::<u8>()
+                    .unwrap();
+
+                names
+                    .into_iter()
+                    .flat_map(|name| {
+                        [
+                            ActAreaDivcordNotation::NameWithAct((name.clone(), left)),
+                            ActAreaDivcordNotation::NameWithAct((name, right)),
+                        ]
+                    })
+                    .collect()
+            } else {
+                let f: Box<dyn Fn(String) -> ActAreaDivcordNotation> = match acts
+                    .chars()
+                    .into_iter()
+                    .filter(|c| c.is_digit(10))
+                    .collect::<String>()
+                    .parse::<u8>()
+                {
+                    Ok(act) => Box::new(move |name: String| {
+                        ActAreaDivcordNotation::NameWithAct((name, act))
+                    }),
+                    Err(_) => Box::new(|name: String| {
+                        println!("No act notation in brackets {acts}");
+                        ActAreaDivcordNotation::Name(name)
+                    }),
+                };
+
+                names.into_iter().map(f).collect()
+            }
+        } else {
             names
                 .into_iter()
-                .flat_map(|name| {
-                    [
-                        ActAreaDivcordNotation::NameWithAct((name.clone(), left)),
-                        ActAreaDivcordNotation::NameWithAct((name, right)),
-                    ]
-                })
+                .map(|name| ActAreaDivcordNotation::Name(name))
                 .collect()
-        } else {
-            let f: Box<dyn Fn(String) -> ActAreaDivcordNotation> = match acts
-                .chars()
-                .into_iter()
-                .filter(|c| c.is_digit(10))
-                .collect::<String>()
-                .parse::<u8>()
-            {
-                Ok(act) => {
-                    Box::new(move |name: String| ActAreaDivcordNotation::NameWithAct((name, act)))
-                }
-                Err(_) => Box::new(|name: String| {
-                    println!("No act notation in brackets {acts}");
-                    ActAreaDivcordNotation::Name(name)
-                }),
-            };
-
-            names.into_iter().map(f).collect()
         }
-    } else {
-        names
-            .into_iter()
-            .map(|name| ActAreaDivcordNotation::Name(name))
-            .collect()
     }
-}
 
-pub fn find_ids(name: &ActAreaDivcordNotation, acts: &[ActArea], min_level: u8) -> Vec<ActAreaId> {
-    match name {
-        ActAreaDivcordNotation::Name(name) => acts
-            .iter()
-            .filter(|a| &a.name == name && a.is_town == false && (a.area_level + 2) >= min_level)
-            .map(|a| a.id.to_owned())
-            .collect(),
-        ActAreaDivcordNotation::NameWithAct((name, act)) => {
-            let mut v = vec![];
-            if let Some(a) = acts
+    pub fn find_ids(
+        name: &ActAreaDivcordNotation,
+        acts: &[ActArea],
+        min_level: u8,
+    ) -> Vec<ActAreaId> {
+        match name {
+            ActAreaDivcordNotation::Name(name) => acts
                 .iter()
-                .find(|a| &a.name == name && &a.act == act && (a.area_level + 2) >= min_level)
-            {
-                v.push(a.id.to_owned())
-            };
+                .filter(|a| {
+                    &a.name == name && a.is_town == false && (a.area_level + 2) >= min_level
+                })
+                .map(|a| a.id.to_owned())
+                .collect(),
+            ActAreaDivcordNotation::NameWithAct((name, act)) => {
+                let mut v = vec![];
+                if let Some(a) = acts
+                    .iter()
+                    .find(|a| &a.name == name && &a.act == act && (a.area_level + 2) >= min_level)
+                {
+                    v.push(a.id.to_owned())
+                };
 
-            v
+                v
+            }
         }
     }
-}
 
-#[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
-pub enum ActAreaDivcordNotation {
-    #[serde(untagged)]
-    Name(String),
-    #[serde(untagged)]
-    NameWithAct((String, u8)),
-}
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        #[test]
+        fn act_area_notation() {
+            assert_eq!(
+                parse_with_act_numbers("The Solaris Temple Level 1/2 (A8)"),
+                vec![
+                    ActAreaDivcordNotation::NameWithAct((
+                        "The Solaris Temple Level 1".to_owned(),
+                        8
+                    )),
+                    ActAreaDivcordNotation::NameWithAct((
+                        "The Solaris Temple Level 2".to_owned(),
+                        8
+                    ))
+                ]
+            );
 
-#[cfg(test)]
-mod tests {
-    use crate::parse::ActAreaDivcordNotation;
+            assert_eq!(
+                parse_with_act_numbers("The Ossuary (A5/A10)"),
+                vec![
+                    ActAreaDivcordNotation::NameWithAct(("The Ossuary".to_owned(), 5)),
+                    ActAreaDivcordNotation::NameWithAct(("The Ossuary".to_owned(), 10))
+                ]
+            );
 
-    use super::parse_act_notation;
-
-    #[test]
-    fn act_area_notation() {
-        assert_eq!(
-            parse_act_notation("The Solaris Temple Level 1/2 (A8)"),
-            vec![
-                ActAreaDivcordNotation::NameWithAct(("The Solaris Temple Level 1".to_owned(), 8)),
-                ActAreaDivcordNotation::NameWithAct(("The Solaris Temple Level 2".to_owned(), 8))
-            ]
-        );
-
-        assert_eq!(
-            parse_act_notation("The Ossuary (A5/A10)"),
-            vec![
-                ActAreaDivcordNotation::NameWithAct(("The Ossuary".to_owned(), 5)),
-                ActAreaDivcordNotation::NameWithAct(("The Ossuary".to_owned(), 10))
-            ]
-        );
-
-        assert_eq!(
-            parse_act_notation("The Riverways (A6)"),
-            vec![ActAreaDivcordNotation::NameWithAct((
-                "The Riverways".to_owned(),
-                6
-            ))]
-        );
+            assert_eq!(
+                parse_with_act_numbers("The Riverways (A6)"),
+                vec![ActAreaDivcordNotation::NameWithAct((
+                    "The Riverways".to_owned(),
+                    6
+                ))]
+            );
+        }
     }
 }
