@@ -21,6 +21,12 @@ where
         default.load().await
     }
 
+    fn default_with_mut_config(f: impl Fn(&mut Config)) -> Self {
+        let mut default = Self::default();
+        f(&mut default.config_mut());
+        default
+    }
+
     async fn load(&self) -> Result<T, E> {
         let config = self.config();
         match up_to_date(&self.file_path(), &config.stale).unwrap_or(false) {
