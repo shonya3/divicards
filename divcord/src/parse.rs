@@ -8,6 +8,7 @@ use crate::{
     },
 };
 use divi::IsCard;
+use poe_data::act::ActAreaId;
 use poe_data::{
     act::{ActArea, ActAreaName},
     cards::Card,
@@ -423,7 +424,7 @@ pub fn parse_one_drops_from(
     })
 }
 
-pub fn parse_act_areas(drops_from: &DropsFrom, acts: &[ActArea], min_level: u8) -> Vec<String> {
+pub fn parse_act_areas(drops_from: &DropsFrom, acts: &[ActArea], min_level: u8) -> Vec<ActAreaId> {
     if !drops_from.styles.italic {
         panic!("Act areas should be italic");
     }
@@ -539,7 +540,7 @@ pub fn parse_act_notation(s: &str) -> Vec<ActAreaName> {
     }
 }
 
-pub fn find_ids(name: &ActAreaName, acts: &[ActArea], min_level: u8) -> Vec<String> {
+pub fn find_ids(name: &ActAreaName, acts: &[ActArea], min_level: u8) -> Vec<ActAreaId> {
     match name {
         ActAreaName::Name(name) => acts
             .iter()

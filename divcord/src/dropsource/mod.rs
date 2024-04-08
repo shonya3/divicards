@@ -6,13 +6,14 @@ mod other;
 use self::id::Identified;
 pub use self::{area::Area, monster::UniqueMonster};
 pub use other::{Chest, Strongbox, Vendor};
+use poe_data::act::ActAreaId;
 use serde::{de, ser::SerializeStruct, Deserialize, Serialize};
 use std::str::FromStr;
 use strum::IntoEnumIterator;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, strum_macros::EnumIter)]
 pub enum Source {
-    Act(String),
+    Act(ActAreaId),
     Map(String),
     ActBoss(String),
     MapBoss(String),
@@ -78,7 +79,7 @@ impl<'de> Deserialize<'de> for Source {
                     Err(_) => match _type.as_str() {
                         "Map" => Ok(Source::Map(id)),
                         "Map Boss" => Ok(Source::MapBoss(id)),
-                        "Act" => Ok(Source::Act(id)),
+                        "Act" => Ok(Source::Act(ActAreaId::new(id))),
                         "Act Boss" => Ok(Source::ActBoss(id)),
                         _ => Err(de::Error::custom(format!(
                             "Could not deserialize Source. {_type} {id}"

@@ -25,5 +25,19 @@ mod error;
 
 #[tokio::main]
 async fn main() {
-    card_element::images::download_card_images().await.unwrap();
+    // card_element::images::download_card_images().await.unwrap();
+    let spreadsheet = Spreadsheet::load().await.unwrap();
+    let poe_data = PoeData::load().await.unwrap();
+    let Ok(records) = divcord::records(&spreadsheet, &poe_data) else {
+        eprintln!("divcord::records parse Err. Scanning all possible errors with records_iter...");
+        for result in divcord::records_iter(&spreadsheet, &poe_data) {
+            if let Err(err) = result {
+                eprintln!("{err:?}");
+            }
+        }
+
+        std::process::exit(0);
+    };
+
+    std::fs::write("records.json", &serde_json::to_string(&records).unwrap()).unwrap();
 }

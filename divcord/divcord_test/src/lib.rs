@@ -17,6 +17,7 @@ mod tests {
         },
         Source,
     };
+    use poe_data::act::ActAreaId;
     use poe_data::PoeData;
 
     async fn load_spreadsheet() -> divcord::Spreadsheet {
@@ -69,7 +70,7 @@ mod tests {
         let spreadsheet = load_spreadsheet().await;
 
         let records = records(&spreadsheet, &poe_data).unwrap();
-        let dried_lake = Source::Act("1_4_2".to_owned());
+        let dried_lake = Source::Act(ActAreaId::new("1_4_2".to_owned()));
 
         let vec_from_child =
             divcord::cards::cards_from_child_sources(&dried_lake, &records, &poe_data);
