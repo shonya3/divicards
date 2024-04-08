@@ -19,7 +19,6 @@ pub struct Record {
     pub confidence: Confidence,
     #[serde(default)]
     pub remaining_work: RemainingWork,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub sources: Vec<Source>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub wiki_disagreements: Option<String>,

@@ -24,4 +24,6 @@ use std::{
 mod error;
 
 #[tokio::main]
-async fn main() {}
+async fn main() {
+    card_element::images::download_card_images().await.unwrap();
+}

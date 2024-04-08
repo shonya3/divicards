@@ -16,3 +16,4 @@ dotenv = "0.15.0"
 fetcher = {path ="../fetcher"}
 divi = {path ="../divi"}
 poe_data = {path  = "../poe_data", features = ["fetch"]}
+card_element = {path = "../card_element"}
