@@ -485,21 +485,7 @@ mod acts {
         };
 
         let mut split = s.split("(");
-
         let name = split.next().expect("No name, {s}");
-        let mut names: Vec<String> = Vec::new();
-
-        if name.contains("1/2") {
-            let name = name.replace("1/2", "");
-            let name = name.trim();
-            for n in [1, 2] {
-                let name = format!("{name} {n}");
-                names.push(name);
-            }
-        } else {
-            names.push(name.to_string());
-        }
-
         let names = match name.contains("1/2") {
             true => {
                 let name = name.replace("1/2", "");
