@@ -18,8 +18,6 @@ pub enum Error {
     ParseSourceError(ParseSourceError),
     ParseCellError(crate::spreadsheet::rich::ParseCellError),
     #[cfg(feature = "fetch")]
-    FetcherError(fetcher::FetcherError),
-    #[cfg(feature = "fetch")]
     PoeDataError(poe_data::error::Error),
 }
 
@@ -37,18 +35,9 @@ impl Display for Error {
             Error::ParseSourceError(err) => err.fmt(f),
             Error::ParseCellError(err) => err.fmt(f),
             #[cfg(feature = "fetch")]
-            Error::FetcherError(err) => err.fmt(f),
-            #[cfg(feature = "fetch")]
             Error::PoeDataError(err) => err.fmt(f),
             Error::ParseDumbError(err) => err.fmt(f),
         }
-    }
-}
-
-#[cfg(feature = "fetch")]
-impl From<fetcher::FetcherError> for Error {
-    fn from(value: fetcher::FetcherError) -> Self {
-        Error::FetcherError(value)
     }
 }
 

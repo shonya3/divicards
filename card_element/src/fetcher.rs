@@ -1,6 +1,6 @@
 use crate::{reward::reward_to_html, DivinationCardElementData, Error};
 use divi::{league::TradeLeague, prices::NinjaCardData};
-use fetcher::{Config, DataFetcher, Stale, WithConfig};
+use fetcher::{Config, DataFetcher, Stale};
 
 pub struct Fetcher(Config);
 
@@ -14,16 +14,10 @@ impl Default for Fetcher {
     }
 }
 
-impl WithConfig for Fetcher {
-    fn config(&self) -> &Config {
-        &self.0
-    }
-    fn config_mut(&mut self) -> &mut Config {
-        &mut self.0
-    }
-}
+impl DataFetcher for Fetcher {
+    type Item = Vec<DivinationCardElementData>;
+    type Error = Error;
 
-impl DataFetcher<Vec<DivinationCardElementData>, Error> for Fetcher {
     async fn fetch(&self) -> Result<Vec<DivinationCardElementData>, Error> {
         let vec: Vec<NinjaCardData> = NinjaCardData::fetch(&TradeLeague::default()).await?;
         let v: Vec<DivinationCardElementData> = vec
@@ -49,5 +43,12 @@ impl DataFetcher<Vec<DivinationCardElementData>, Error> for Fetcher {
             .collect();
 
         Ok(v)
+    }
+
+    fn config(&self) -> &Config {
+        &self.0
+    }
+    fn config_mut(&mut self) -> &mut Config {
+        &mut self.0
     }
 }

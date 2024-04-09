@@ -1,6 +1,6 @@
 #![cfg(feature = "fetch")]
 
-pub use fetcher::{Config, DataFetcher, Stale, WithConfig};
+pub use fetcher::{Config, DataFetcher, Stale};
 use googlesheets::sheet::ValueRange;
 
 use crate::{error::Error, parse::RichColumnVariant};
@@ -18,8 +18,12 @@ impl Default for SpreadsheetFetcher {
         })
     }
 }
-
-impl WithConfig for SpreadsheetFetcher {
+impl DataFetcher for SpreadsheetFetcher {
+    type Item = Spreadsheet;
+    type Error = Error;
+    async fn fetch(&self) -> Result<Spreadsheet, Error> {
+        self._fetch().await
+    }
     fn config(&self) -> &Config {
         &self.0
     }
@@ -78,11 +82,5 @@ impl SpreadsheetFetcher {
             rich_sources_column,
             rich_verify_column,
         })
-    }
-}
-
-impl fetcher::DataFetcher<Spreadsheet, Error> for SpreadsheetFetcher {
-    async fn fetch(&self) -> Result<Spreadsheet, Error> {
-        self._fetch().await
     }
 }

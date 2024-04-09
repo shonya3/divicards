@@ -32,7 +32,7 @@ impl PoeData {
 
     #[cfg(feature = "fetch")]
     pub fn filename() -> &'static str {
-        use fetcher::WithConfig;
+        use fetcher::DataFetcher;
         crate::fetchers::PoeDataFetcher::default().config().filename
     }
 

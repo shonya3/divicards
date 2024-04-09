@@ -1,4 +1,3 @@
-use std::fmt::Display;
 use std::time::{Duration, SystemTime};
 use std::{
     fs::{self, File},
@@ -7,15 +6,19 @@ use std::{
 };
 
 #[allow(async_fn_in_trait)]
-pub trait DataFetcher<T, E>
+pub trait DataFetcher
 where
-    T: serde::Serialize + serde::de::DeserializeOwned,
-    E: From<FetcherError>,
-    Self: WithConfig + Default,
+    Self: Default,
 {
-    async fn fetch(&self) -> Result<T, E>;
+    type Item: serde::Serialize + serde::de::DeserializeOwned;
+    type Error: From<serde_json::Error> + From<std::io::Error>;
+    async fn fetch(&self) -> Result<Self::Item, Self::Error>;
+    fn config(&self) -> &Config;
+    fn config_mut(&mut self) -> &mut Config;
 
-    async fn load_with_mut_default_config(f: impl Fn(&mut Config)) -> Result<T, E> {
+    async fn load_with_mut_default_config(
+        f: impl Fn(&mut Config),
+    ) -> Result<Self::Item, Self::Error> {
         let mut default = Self::default();
         f(&mut default.config_mut());
         default.load().await
@@ -27,14 +30,14 @@ where
         default
     }
 
-    async fn load(&self) -> Result<T, E> {
+    async fn load(&self) -> Result<Self::Item, Self::Error> {
         let config = self.config();
         match up_to_date(&self.file_path(), &config.stale).unwrap_or(false) {
             true => {
-                let file = File::open(&self.file_path()).map_err(FetcherError::IoError)?;
+                let file = File::open(&self.file_path())?;
                 let reader = BufReader::new(file);
 
-                Ok(serde_json::from_reader(reader).map_err(FetcherError::SerdeError)?)
+                Ok(serde_json::from_reader(reader)?)
             }
             false => {
                 let fetched = self.fetch().await?;
@@ -65,19 +68,19 @@ where
         up_to_date(&self.file_path(), &self.config().stale).unwrap_or(false)
     }
 
-    async fn update(&self) -> Result<(), E> {
+    async fn update(&self) -> Result<(), Self::Error> {
         let t = self.fetch().await?;
         self.save(&t)?;
         Ok(())
     }
 
-    fn save(&self, data: &T) -> Result<(), E> {
+    fn save(&self, data: &Self::Item) -> Result<(), Self::Error> {
         if !self.config().save {
             return Ok(());
         }
 
-        let json = serde_json::to_string(data).map_err(FetcherError::SerdeError)?;
-        fs::write(self.file_path(), &json).map_err(|err| FetcherError::IoError(err))?;
+        let json = serde_json::to_string(data)?;
+        fs::write(self.file_path(), &json)?;
 
         Ok(())
     }
@@ -103,33 +106,6 @@ fn up_to_date(path: &PathBuf, stale: &Stale) -> Result<bool, FileNotExists> {
             Ok(until > SystemTime::now())
         }
         Stale::ReloadEveryTime => Ok(false),
-    }
-}
-
-#[derive(Debug)]
-pub enum FetcherError {
-    IoError(std::io::Error),
-    SerdeError(serde_json::Error),
-}
-
-impl Display for FetcherError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::IoError(err) => err.fmt(f),
-            Self::SerdeError(err) => err.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for FetcherError {
-    fn from(value: std::io::Error) -> Self {
-        Self::IoError(value)
-    }
-}
-
-impl From<serde_json::Error> for FetcherError {
-    fn from(value: serde_json::Error) -> Self {
-        Self::SerdeError(value)
     }
 }
 
@@ -199,9 +175,4 @@ impl ConfigBuilder {
             stale: self.stale,
         }
     }
-}
-
-pub trait WithConfig {
-    fn config(&self) -> &Config;
-    fn config_mut(&mut self) -> &mut Config;
 }

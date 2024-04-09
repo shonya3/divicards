@@ -1,6 +1,6 @@
 #![cfg(feature = "fetch")]
 use crate::{act::ActArea, cards::CardsData, error::Error, mapbosses::MapBoss, maps::Map, PoeData};
-use fetcher::{Config, Stale, WithConfig};
+use fetcher::{Config, DataFetcher, Stale};
 use std::time::Duration;
 
 pub struct PoeDataFetcher {
@@ -10,16 +10,6 @@ pub struct PoeDataFetcher {
     maps: MapsFetcher,
     mapbosses: MapBossesFetcher,
 }
-
-impl WithConfig for PoeDataFetcher {
-    fn config(&self) -> &Config {
-        &self.config
-    }
-    fn config_mut(&mut self) -> &mut Config {
-        &mut self.config
-    }
-}
-
 impl Default for PoeDataFetcher {
     fn default() -> Self {
         Self {
@@ -35,8 +25,9 @@ impl Default for PoeDataFetcher {
         }
     }
 }
-
-impl fetcher::DataFetcher<PoeData, Error> for PoeDataFetcher {
+impl DataFetcher for PoeDataFetcher {
+    type Item = PoeData;
+    type Error = Error;
     async fn fetch(&self) -> Result<PoeData, Error> {
         let (acts, cards, maps, mapbosses) = tokio::join!(
             self.acts.load(),
@@ -52,18 +43,16 @@ impl fetcher::DataFetcher<PoeData, Error> for PoeDataFetcher {
             mapbosses: mapbosses?,
         })
     }
+    fn config(&self) -> &Config {
+        &self.config
+    }
+    fn config_mut(&mut self) -> &mut Config {
+        &mut self.config
+    }
 }
 
 // 1. Map Bosses
 pub struct MapBossesFetcher(Config);
-impl WithConfig for MapBossesFetcher {
-    fn config(&self) -> &Config {
-        &self.0
-    }
-    fn config_mut(&mut self) -> &mut Config {
-        &mut self.0
-    }
-}
 impl Default for MapBossesFetcher {
     fn default() -> Self {
         Self(Config {
@@ -73,15 +62,12 @@ impl Default for MapBossesFetcher {
         })
     }
 }
-impl fetcher::DataFetcher<Vec<MapBoss>, Error> for MapBossesFetcher {
+impl DataFetcher for MapBossesFetcher {
+    type Item = Vec<MapBoss>;
+    type Error = Error;
     async fn fetch(&self) -> Result<Vec<MapBoss>, Error> {
         crate::mapbosses::fetch().await
     }
-}
-
-// 2. Maps
-pub struct MapsFetcher(Config);
-impl WithConfig for MapsFetcher {
     fn config(&self) -> &Config {
         &self.0
     }
@@ -89,6 +75,9 @@ impl WithConfig for MapsFetcher {
         &mut self.0
     }
 }
+
+// 2. Maps
+pub struct MapsFetcher(Config);
 impl Default for MapsFetcher {
     fn default() -> Self {
         Self(Config {
@@ -98,15 +87,12 @@ impl Default for MapsFetcher {
         })
     }
 }
-impl fetcher::DataFetcher<Vec<Map>, Error> for MapsFetcher {
+impl DataFetcher for MapsFetcher {
+    type Item = Vec<Map>;
+    type Error = Error;
     async fn fetch(&self) -> Result<Vec<Map>, Error> {
         crate::maps::fetch::fetch().await
     }
-}
-
-// 3. Acts
-pub struct ActsFetcher(Config);
-impl WithConfig for ActsFetcher {
     fn config(&self) -> &Config {
         &self.0
     }
@@ -114,6 +100,9 @@ impl WithConfig for ActsFetcher {
         &mut self.0
     }
 }
+
+// 3. Acts
+pub struct ActsFetcher(Config);
 impl Default for ActsFetcher {
     fn default() -> Self {
         Self(Config {
@@ -123,15 +112,12 @@ impl Default for ActsFetcher {
         })
     }
 }
-impl fetcher::DataFetcher<Vec<ActArea>, Error> for ActsFetcher {
+impl DataFetcher for ActsFetcher {
+    type Item = Vec<ActArea>;
+    type Error = Error;
     async fn fetch(&self) -> Result<Vec<ActArea>, Error> {
         crate::act::fetch().await
     }
-}
-
-// 4. Cards
-pub struct CardsFetcher(Config);
-impl WithConfig for CardsFetcher {
     fn config(&self) -> &Config {
         &self.0
     }
@@ -139,6 +125,9 @@ impl WithConfig for CardsFetcher {
         &mut self.0
     }
 }
+
+// 4. Cards
+pub struct CardsFetcher(Config);
 impl Default for CardsFetcher {
     fn default() -> Self {
         Self(Config {
@@ -148,8 +137,16 @@ impl Default for CardsFetcher {
         })
     }
 }
-impl fetcher::DataFetcher<CardsData, Error> for CardsFetcher {
+impl DataFetcher for CardsFetcher {
+    type Item = CardsData;
+    type Error = Error;
     async fn fetch(&self) -> Result<CardsData, Error> {
         crate::cards::fetch::fetch().await
+    }
+    fn config(&self) -> &Config {
+        &self.0
+    }
+    fn config_mut(&mut self) -> &mut Config {
+        &mut self.0
     }
 }

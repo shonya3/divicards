@@ -1,6 +1,5 @@
 #![cfg(feature = "fetch")]
 use crate::league::UnexpectedLeagueInfoShapeError;
-use fetcher::FetcherError;
 use std::fmt::Display;
 
 #[derive(Debug)]
@@ -15,8 +14,6 @@ pub enum Error {
     SerdeError(serde_json::Error),
     #[cfg(feature = "fetch")]
     UnexpectedLeagueInfoShapeError(UnexpectedLeagueInfoShapeError),
-    #[cfg(feature = "fetch")]
-    FetcherError(fetcher::FetcherError),
 }
 
 impl Display for Error {
@@ -32,7 +29,6 @@ impl Display for Error {
             Error::DiviError(err) => err.fmt(f),
             #[cfg(feature = "fetch")]
             Error::UnexpectedLeagueInfoShapeError(err) => err.fmt(f),
-            Error::FetcherError(err) => err.fmt(f),
         }
     }
 }
@@ -74,12 +70,5 @@ impl From<divi::error::Error> for Error {
 impl From<UnexpectedLeagueInfoShapeError> for Error {
     fn from(value: UnexpectedLeagueInfoShapeError) -> Self {
         Error::UnexpectedLeagueInfoShapeError(value)
-    }
-}
-
-#[cfg(feature = "fetch")]
-impl From<FetcherError> for Error {
-    fn from(value: FetcherError) -> Self {
-        Error::FetcherError(value)
     }
 }
