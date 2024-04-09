@@ -18,8 +18,6 @@ pub use crate::{
 pub use poe_data::PoeData;
 
 #[cfg(feature = "fetch")]
-pub use crate::spreadsheet::load::SpreadsheetFetcher;
-#[cfg(feature = "fetch")]
-pub use fetcher::DataFetcher;
-#[cfg(feature = "fetch")]
-pub use poe_data::fetchers::PoeDataFetcher;
+pub use {
+    fetcher::DataFetcher, poe_data::fetchers::PoeDataFetcher, spreadsheet::load::SpreadsheetFetcher,
+};
