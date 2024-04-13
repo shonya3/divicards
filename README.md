@@ -19,8 +19,9 @@ Also, check out [Website](https://divicards-site.pages.dev/) [repo](https://gith
 Install the latest release (https://github.com/shonya3/divicards/releases)
 
 ## Notable crates in repo:
-- [Divi](https://github.com/shonya3/divicards/tree/main/divi) - parse divination cards sets and calculate real weight
-- [Divcord](https://github.com/shonya3/divicards/tree/main/divcord) - parse [divcord spreadsheet](https://docs.google.com/spreadsheets/d/1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU/edit?pli=1#gid=0)
+
+-   [Divi](https://github.com/shonya3/divicards/tree/main/divi) - parse divination cards sets and calculate real weight
+-   [Divcord](https://github.com/shonya3/divicards/tree/main/divcord) - parse [divcord spreadsheet](https://docs.google.com/spreadsheets/d/1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU/edit?pli=1#gid=0)
 
 ## Platform
 
