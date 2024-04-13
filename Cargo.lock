@@ -571,8 +571,8 @@ dependencies = [
 name = "card_element"
 version = "0.5.9"
 dependencies = [
- "divi",
  "fetcher",
+ "ninja",
  "poe",
  "regex",
  "reqwest",

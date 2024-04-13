@@ -1,5 +1,4 @@
 use crate::{reward::reward_to_html, DivinationCardElementData, Error};
-use divi::{prices::NinjaCardData, TradeLeague};
 use fetcher::{Config, DataFetcher, Stale};
 
 pub struct Fetcher(Config);
@@ -19,8 +18,8 @@ impl DataFetcher for Fetcher {
     type Error = Error;
 
     async fn fetch(&self) -> Result<Vec<DivinationCardElementData>, Error> {
-        let vec: Vec<NinjaCardData> = NinjaCardData::fetch(&TradeLeague::default()).await?;
-        let v: Vec<DivinationCardElementData> = vec
+        let vec_card_data = ninja::fetch_card_data(&poe::TradeLeague::default()).await?;
+        let v: Vec<DivinationCardElementData> = vec_card_data
             .into_iter()
             .map(|data| {
                 let mut fl = data.flavour_text;
