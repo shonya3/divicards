@@ -108,14 +108,3 @@ impl NinjaCardData {
         Ok(data.lines)
     }
 }
-
-#[test]
-pub fn fetch_ninja() {
-    let data: Vec<NinjaCardData> =
-        serde_json::from_str(&std::fs::read_to_string("ninja-data.json").unwrap()).unwrap();
-    for card in data.iter() {
-        if card.stack_size.is_none() {
-            dbg!(&card.name);
-        }
-    }
-}
