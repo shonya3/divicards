@@ -1,15 +1,6 @@
-use crate::{
-    consts::{CARDS, CARDS_N},
-    error::Error,
-    league::TradeLeague,
-};
+use crate::{consts::CARDS, error::Error, league::TradeLeague};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Default)]
-pub struct Sparkline {
-    pub data: Vec<Option<f32>>,
-}
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct DivinationCardPrice {
@@ -19,7 +10,6 @@ pub struct DivinationCardPrice {
     pub sparkline: Sparkline,
 }
 
-/// Holds an array of card prices with length equal to the number of all divination cards(For example, 440 in 3.23 patch)
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(transparent)]
 pub struct Prices(pub Vec<DivinationCardPrice>);
@@ -30,9 +20,8 @@ impl Prices {
             lines: Vec<DivinationCardPrice>,
         }
 
-        let client = reqwest::Client::new();
         let url = format!("https://poe.ninja/api/data/itemoverview?league={league}&type=DivinationCard&language=en");
-        let json = client.get(url).send().await?.text().await?;
+        let json = reqwest::get(url).await?.text().await?;
         let data = serde_json::from_str::<PriceData>(&json)?;
         if data.lines.len() == 0 {
             return Err(Error::NoPricesForLeagueOnNinja(league.to_owned()));
@@ -43,21 +32,16 @@ impl Prices {
 
 impl Default for Prices {
     fn default() -> Self {
-        Prices::from(CARDS)
-    }
-}
-
-impl From<[&'static str; CARDS_N]> for Prices {
-    fn from(arr: [&'static str; CARDS_N]) -> Self {
-        let prices = arr
-            .into_iter()
-            .map(|name| DivinationCardPrice {
-                name: name.to_string(),
-                price: Default::default(),
-                sparkline: Default::default(),
-            })
-            .collect::<Vec<DivinationCardPrice>>();
-        Prices(prices)
+        Prices::from(
+            CARDS
+                .into_iter()
+                .map(|name| DivinationCardPrice {
+                    name: name.to_string(),
+                    price: Default::default(),
+                    sparkline: Default::default(),
+                })
+                .collect::<Vec<DivinationCardPrice>>(),
+        )
     }
 }
 
@@ -72,26 +56,6 @@ impl From<Vec<DivinationCardPrice>> for Prices {
             }
         }
         prices
-    }
-}
-
-// #[tokio::test]
-// async fn testfetch() {
-//     let p = Prices::fetch(&TradeLeague::Standard).await.unwrap();
-//     std::fs::write("p.json", serde_json::to_string(&p).unwrap()).unwrap();
-// }
-
-impl From<Vec<NinjaCardData>> for Prices {
-    fn from(vec: Vec<NinjaCardData>) -> Self {
-        Prices(
-            vec.into_iter()
-                .map(|data| DivinationCardPrice {
-                    name: data.name,
-                    price: data.chaos_value,
-                    sparkline: data.sparkline,
-                })
-                .collect(),
-        )
     }
 }
 
@@ -117,7 +81,10 @@ pub struct NinjaCardData {
     pub trade_info: Vec<Value>,
     pub listing_count: usize,
 }
-
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Default)]
+pub struct Sparkline {
+    pub data: Vec<Option<f32>>,
+}
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ExpilicitModifier {
     pub optional: bool,
