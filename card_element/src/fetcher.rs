@@ -1,5 +1,5 @@
 use crate::{reward::reward_to_html, DivinationCardElementData, Error};
-use divi::{league::TradeLeague, prices::NinjaCardData};
+use divi::{prices::NinjaCardData, TradeLeague};
 use fetcher::{Config, DataFetcher, Stale};
 
 pub struct Fetcher(Config);

@@ -14,7 +14,7 @@ members = [
     "fetcher",
     "generate_website_files",
     "divcord/divcord_test"
-]
+, "ninja", "poe"]
 
 [workspace.package]
 version = "0.5.9"

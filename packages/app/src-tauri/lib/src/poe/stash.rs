@@ -13,9 +13,9 @@ use crate::{
 };
 
 use divi::{
-    league::{League, TradeLeague},
     prices::Prices,
     sample::{DivinationCardsSample, SampleData},
+    {League, TradeLeague},
 };
 
 #[instrument(skip(prices, window))]

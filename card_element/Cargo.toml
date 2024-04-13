@@ -14,3 +14,4 @@ regex = "1.10.2"
 reqwest = { workspace = true, features = ["blocking"]}
 divi = {path = "../divi"}
 fetcher = {path = "../fetcher"}
+poe = { path = "../poe" }

@@ -3,7 +3,7 @@ use crate::{
     event::{Event, ToastVariant},
     paths,
 };
-use divi::{league::TradeLeague, prices::Prices};
+use divi::{prices::Prices, TradeLeague};
 use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, fs, path::PathBuf};
 use tauri::Window;

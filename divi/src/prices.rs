@@ -1,4 +1,4 @@
-use crate::{consts::CARDS, error::Error, league::TradeLeague};
+use crate::{consts::CARDS, error::Error};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
@@ -14,7 +14,7 @@ pub struct DivinationCardPrice {
 #[serde(transparent)]
 pub struct Prices(pub Vec<DivinationCardPrice>);
 impl Prices {
-    pub async fn fetch(league: &TradeLeague) -> Result<Prices, Error> {
+    pub async fn fetch(league: &poe::TradeLeague) -> Result<Prices, Error> {
         #[derive(Deserialize, Debug, Serialize)]
         struct PriceData {
             lines: Vec<DivinationCardPrice>,
@@ -92,7 +92,7 @@ pub struct ExpilicitModifier {
 }
 
 impl NinjaCardData {
-    pub async fn fetch(league: &TradeLeague) -> Result<Vec<NinjaCardData>, Error> {
+    pub async fn fetch(league: &poe::TradeLeague) -> Result<Vec<NinjaCardData>, Error> {
         #[derive(Deserialize, Debug, Serialize)]
         struct PriceData {
             lines: Vec<NinjaCardData>,

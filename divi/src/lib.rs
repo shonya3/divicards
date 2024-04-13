@@ -60,7 +60,6 @@ pub mod card_record;
 pub mod cards;
 pub mod consts;
 pub mod error;
-pub mod league;
 pub mod prices;
 pub mod sample;
 
@@ -71,6 +70,7 @@ pub use crate::{
     prices::{DivinationCardPrice, Prices},
     sample::{CardNameAmount, Column, DivinationCardsSample, Order, SampleData, TablePreferences},
 };
+pub use poe::league::{League, TradeLeague};
 
 impl IsCard for &str {
     fn is_card(&self) -> bool {

@@ -18,7 +18,7 @@ async fn main() -> Result<(), divi::error::Error> {
         Some(Prices::default()),
     )?;
 
-    let prices = Prices::fetch(&divi::league::TradeLeague::Standard).await?;
+    let prices = Prices::fetch(&divi::TradeLeague::Standard).await?;
     let merged = DivinationCardsSample::merge(Some(prices), &[simple_sample, sample_from_file]);
 
     let rain_of_chaos = merged.cards.get_card("Rain of Chaos").to_owned();

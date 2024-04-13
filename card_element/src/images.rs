@@ -1,6 +1,6 @@
 use std::{env, fs::File};
 
-use divi::{league::TradeLeague, prices::NinjaCardData};
+use divi::{prices::NinjaCardData, TradeLeague};
 use tokio::task::spawn_blocking;
 
 pub const POE_CDN_CARDS: &'static str = "https://web.poecdn.com/image/divination-card/";

@@ -573,6 +573,7 @@ version = "0.5.9"
 dependencies = [
  "divi",
  "fetcher",
+ "poe",
  "regex",
  "reqwest",
  "serde",
@@ -1132,6 +1133,7 @@ version = "0.1.0"
 dependencies = [
  "csv",
  "googlesheets",
+ "poe",
  "reqwest",
  "serde",
  "serde_json",
@@ -2661,6 +2663,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e4a24736216ec316047a1fc4252e27dabb04218aa4a3f37c6e7ddbf1f9782b54"
 
 [[package]]
+name = "ninja"
+version = "0.5.9"
+dependencies = [
+ "poe",
+ "reqwest",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "nix"
 version = "0.26.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3254,6 +3266,7 @@ dependencies = [
  "divi",
  "dotenv",
  "fetcher",
+ "poe",
  "poe_data",
  "reqwest",
  "serde",
@@ -3310,6 +3323,14 @@ dependencies = [
  "fdeflate",
  "flate2",
  "miniz_oxide",
+]
+
+[[package]]
+name = "poe"
+version = "0.5.9"
+dependencies = [
+ "serde",
+ "serde_json",
 ]
 
 [[package]]

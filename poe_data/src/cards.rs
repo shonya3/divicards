@@ -68,7 +68,7 @@ pub mod fetch {
         println!("Fetching cards");
         dotenv::dotenv().ok();
         let key = std::env::var("GOOGLE_API_KEY").expect("No google api key");
-        let prices = Prices::fetch(&divi::league::TradeLeague::Standard).await?;
+        let prices = Prices::fetch(&divi::TradeLeague::Standard).await?;
         let sample = load_total_sample(key, Some(prices)).await?;
         let mut wiki_vec = load_wiki().await?;
 

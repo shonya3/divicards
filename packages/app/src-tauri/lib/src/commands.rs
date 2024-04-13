@@ -1,8 +1,8 @@
 use tokio::sync::Mutex;
 
 use divi::{
-    league::TradeLeague,
     sample::{DivinationCardsSample, SampleData, TablePreferences},
+    TradeLeague,
 };
 use tauri::{command, State, Window};
 use tracing::instrument;

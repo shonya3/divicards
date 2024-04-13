@@ -1,5 +1,5 @@
 use chrono::Utc;
-use divi::{league::League, sample::DivinationCardsSample};
+use divi::{sample::DivinationCardsSample, League};
 use googlesheets::sheet::{Credential, Dimension, ReadBatchResponse, SheetUrl, ValueRange};
 use serde_json::json;
 use tracing::debug;

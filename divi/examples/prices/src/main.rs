@@ -1,7 +1,7 @@
 use divi::{
-    league::TradeLeague,
     prices::Prices,
     sample::{DivinationCardsSample, SampleData},
+    TradeLeague,
 };
 
 #[tokio::main]

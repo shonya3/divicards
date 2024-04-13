@@ -1,4 +1,4 @@
-use crate::league::TradeLeague;
+use crate::TradeLeague;
 use serde::Serialize;
 use std::{fmt::Display, num::ParseIntError};
 
