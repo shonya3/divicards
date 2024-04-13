@@ -15,7 +15,7 @@ pub async fn fetch_by_item_category(
     league: &TradeLeague,
 ) -> Result<Vec<Value>, Error> {
     #[derive(Deserialize, Debug, Serialize)]
-    struct PriceData {
+    struct ResponseShape {
         lines: Vec<Value>,
     }
 
@@ -23,7 +23,7 @@ pub async fn fetch_by_item_category(
         "https://poe.ninja/api/data/itemoverview?league={league}&type={item_category}&language=en"
     );
     let json = reqwest::get(url).await?.text().await?;
-    let data = serde_json::from_str::<PriceData>(&json)?;
+    let data = serde_json::from_str::<ResponseShape>(&json)?;
     if data.lines.len() == 0 {
         return Err(Error::NoItemsBadRequest);
     }

@@ -1,10 +1,5 @@
-// export type SheetsError = {
-// 	error: { code: number; message: string; status: string };
-// };
-
-use std::fmt::Display;
-
 use serde::{Deserialize, Serialize};
+use std::fmt::Display;
 
 #[derive(Debug, Serialize, Clone, Deserialize)]
 pub struct GoogleError {
