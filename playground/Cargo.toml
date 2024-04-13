@@ -18,3 +18,4 @@ divi = {path ="../divi"}
 poe_data = {path  = "../poe_data", features = ["fetch"]}
 card_element = {path = "../card_element"}
 poe = { path = "../poe" }
+ninja = { path = "../ninja" }

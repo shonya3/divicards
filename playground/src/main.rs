@@ -47,6 +47,10 @@ async fn main() {
 
     // std::fs::write("records.json", &serde_json::to_string(&records).unwrap()).unwrap();
 
-    let prices = Prices::fetch(&poe::TradeLeague::Necropolis).await.unwrap();
-    println!("{prices:#?}");
+    let items = ninja::fetch_by_item_category("Scarab", &ninja::TradeLeague::Necropolis)
+        .await
+        .unwrap();
+    for item in &items[0..5] {
+        println!("{:#?}", item)
+    }
 }
