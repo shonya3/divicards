@@ -155,7 +155,7 @@ impl DivinationCardsSample {
 
         let columns = preserve_column_order(&preferences.columns);
         let mut values: Vec<Vec<Value>> = vec![];
-        let headers: Vec<Value> = columns.iter().map(|c| json!(c)).collect();
+        let headers: Vec<Value> = columns.iter().map(|c| json!(&c)).collect();
         values.push(headers);
 
         for card in self.cards.iter() {
@@ -166,11 +166,11 @@ impl DivinationCardsSample {
                 columns
                     .iter()
                     .map(|column| match column {
-                        Column::Name => json!(&card.name),
-                        Column::Amount => json!(card.amount),
-                        Column::Weight => json!(card.weight),
-                        Column::Price => json!(card.price),
-                        Column::Sum => json!(card.sum),
+                        Column::Name => Value::from(card.name.clone()),
+                        Column::Amount => Value::from(card.amount),
+                        Column::Weight => Value::from(card.weight),
+                        Column::Price => Value::from(card.price),
+                        Column::Sum => Value::from(card.sum),
                     })
                     .collect::<Vec<Value>>(),
             );
