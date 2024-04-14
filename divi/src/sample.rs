@@ -17,7 +17,6 @@ pub struct DivinationCardsSample {
     pub cards: Cards,
     pub not_cards: Vec<String>,
     pub fixed_names: Vec<FixedCardName>,
-    pub csv: String,
 }
 
 impl DivinationCardsSample {
@@ -25,13 +24,11 @@ impl DivinationCardsSample {
         cards: Cards,
         not_cards: Vec<String>,
         fixed_names: Vec<FixedCardName>,
-        csv: String,
     ) -> DivinationCardsSample {
         DivinationCardsSample {
             cards,
             not_cards,
             fixed_names,
-            csv,
         }
     }
 
@@ -144,7 +141,7 @@ impl DivinationCardsSample {
 
     /// Writes weights for cards and writes final csv - write_weight and write_csv in one function
     fn finalize_write_weight_and_csv(&mut self) -> &mut Self {
-        self.write_weight().write_csv()
+        self.write_weight()
     }
 
     /// Helper function for write_weight
@@ -161,17 +158,6 @@ impl DivinationCardsSample {
             card.set_weight(weight_multiplier);
         }
 
-        self
-    }
-
-    /// (After weight) Sets .csv field. Must be used when everything is set and ready.
-    fn write_csv(&mut self) -> &mut Self {
-        let mut writer = csv::Writer::from_writer(vec![]);
-        for card in self.cards.iter() {
-            writer.serialize(card).unwrap();
-        }
-        self.csv = String::from_utf8(writer.into_inner().expect("Error with csv serialize"))
-            .expect("Error");
         self
     }
 
