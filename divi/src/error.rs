@@ -1,5 +1,6 @@
 use crate::TradeLeague;
 use csv::Error as CsvError;
+use ninja::Error as NinjaError;
 use reqwest::Error as ReqwestError;
 use serde::Serialize;
 use serde_json::Error as SerdeError;
@@ -13,6 +14,7 @@ pub enum Error {
     NoPricesForLeagueOnNinja(TradeLeague),
     ParseIntError(ParseIntError),
     CsvError(CsvError),
+    NinjaError(NinjaError),
 }
 
 impl Display for Error {
@@ -26,6 +28,7 @@ impl Display for Error {
             }
             Error::ParseIntError(err) => err.fmt(f),
             Error::CsvError(err) => err.fmt(f),
+            Error::NinjaError(err) => err.fmt(f),
         }
     }
 }
@@ -60,5 +63,11 @@ impl From<ParseIntError> for Error {
 impl From<CsvError> for Error {
     fn from(value: CsvError) -> Self {
         Error::CsvError(value)
+    }
+}
+
+impl From<NinjaError> for Error {
+    fn from(value: NinjaError) -> Self {
+        Error::NinjaError(value)
     }
 }

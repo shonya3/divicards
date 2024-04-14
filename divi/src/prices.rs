@@ -1,5 +1,5 @@
 use crate::{consts::CARDS, error::Error};
-use ninja::{card::Sparkline, CardData};
+use ninja::{card::Sparkline, CardData as NinjaCardData};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -15,14 +15,14 @@ pub struct DivinationCardPrice {
 pub struct Prices(pub Vec<DivinationCardPrice>);
 impl Prices {
     pub async fn fetch(league: &poe::TradeLeague) -> Result<Prices, Error> {
-        let ninja_card_data = ninja::fetch_card_data(&league).await.unwrap();
+        let ninja_card_data = ninja::fetch_card_data(&league).await?;
         let mut prices = Prices::default();
         prices.0.iter_mut().for_each(|price| {
             ninja_card_data
                 .iter()
                 .find(|ninja_data| ninja_data.name == price.name)
                 .map(
-                    |CardData {
+                    |NinjaCardData {
                          sparkline,
                          chaos_value,
                          ..
