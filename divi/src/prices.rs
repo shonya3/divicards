@@ -1,7 +1,4 @@
-use crate::{
-    consts::{CARDS, CARDS_N},
-    error::Error,
-};
+use crate::{consts::CARDS, error::Error};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -39,21 +36,16 @@ impl Prices {
 
 impl Default for Prices {
     fn default() -> Self {
-        Prices::from(CARDS)
-    }
-}
-
-impl From<[&'static str; CARDS_N]> for Prices {
-    fn from(arr: [&'static str; CARDS_N]) -> Self {
-        let prices = arr
-            .into_iter()
-            .map(|name| DivinationCardPrice {
-                name: name.to_string(),
-                price: Default::default(),
-                sparkline: Default::default(),
-            })
-            .collect::<Vec<DivinationCardPrice>>();
-        Prices(prices)
+        Prices(
+            CARDS
+                .into_iter()
+                .map(|name| DivinationCardPrice {
+                    name: name.to_string(),
+                    price: Default::default(),
+                    sparkline: Default::default(),
+                })
+                .collect::<Vec<DivinationCardPrice>>(),
+        )
     }
 }
 
