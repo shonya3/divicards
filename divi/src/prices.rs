@@ -1,5 +1,5 @@
 use crate::{consts::CARDS, error::Error};
-use ninja::{card::Sparkline, CardData as NinjaCardData};
+use ninja::CardData as NinjaCardData;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -7,7 +7,6 @@ pub struct DivinationCardPrice {
     pub name: String,
     #[serde(alias = "chaosValue")]
     pub price: Option<f32>,
-    pub sparkline: Sparkline,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -28,7 +27,7 @@ impl Prices {
                          ..
                      }| {
                         if sparkline.data.len() > 0 {
-                            price.price = *chaos_value
+                            price.price = *chaos_value;
                         }
                     },
                 );
@@ -46,7 +45,6 @@ impl Default for Prices {
                 .map(|name| DivinationCardPrice {
                     name: name.to_string(),
                     price: Default::default(),
-                    sparkline: Default::default(),
                 })
                 .collect::<Vec<DivinationCardPrice>>(),
         )
