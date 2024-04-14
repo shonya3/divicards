@@ -67,6 +67,7 @@ pub use crate::{
     card_record::DivinationCardRecord,
     cards::{check_card_name, Cards, CheckCardName, GetRecordMut},
     consts::{CARDS, CONDENSE_FACTOR, LEGACY_CARDS},
+    error::Error,
     prices::{DivinationCardPrice, Prices},
     sample::{CardNameAmount, Column, DivinationCardsSample, Order, SampleData, TablePreferences},
 };
