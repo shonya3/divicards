@@ -1,3 +1,4 @@
+use crate::sample::MissingHeadersError;
 use crate::TradeLeague;
 use csv::Error as CsvError;
 use ninja::Error as NinjaError;
@@ -10,7 +11,7 @@ use std::{fmt::Display, num::ParseIntError};
 pub enum Error {
     ReqwestError(ReqwestError),
     SerdeError(SerdeError),
-    MissingHeaders,
+    MissingHeaders(MissingHeadersError),
     NoPricesForLeagueOnNinja(TradeLeague),
     ParseIntError(ParseIntError),
     CsvError(CsvError),
@@ -22,7 +23,7 @@ impl Display for Error {
         match self {
             Error::ReqwestError(err) => err.fmt(f),
             Error::SerdeError(err) => err.fmt(f),
-            Error::MissingHeaders => write!(f, "File should contain headers: name, amount."),
+            Error::MissingHeaders(err) => err.fmt(f),
             Error::NoPricesForLeagueOnNinja(league) => {
                 write!(f, "Prices for {} league do not exist on poe.ninja.", league)
             }
@@ -69,5 +70,11 @@ impl From<CsvError> for Error {
 impl From<NinjaError> for Error {
     fn from(value: NinjaError) -> Self {
         Error::NinjaError(value)
+    }
+}
+
+impl From<MissingHeadersError> for Error {
+    fn from(value: MissingHeadersError) -> Self {
+        Self::MissingHeaders(value)
     }
 }

@@ -3,7 +3,7 @@ use crate::{
     event::{Event, ToastVariant},
     paths,
 };
-use divi::{prices::Prices, TradeLeague};
+use divi::{prices::Prices, Error as DiviError, TradeLeague};
 use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, fs, path::PathBuf};
 use tauri::Window;
@@ -124,7 +124,9 @@ impl AppCardPrices {
         league: &TradeLeague,
         window: &Window,
     ) -> Result<Prices, Error> {
-        let prices = Prices::fetch(league).await?;
+        let prices = Prices::fetch(league)
+            .await
+            .map_err(|err| DiviError::NinjaError(err))?;
         debug!("fetch_and_update: fetched. Serializing to json");
         let json = serde_json::to_string(&prices)?;
 

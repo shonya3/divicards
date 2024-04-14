@@ -43,6 +43,7 @@ pub mod fetch {
     use divi::{
         prices::Prices,
         sample::{DivinationCardsSample, SampleData},
+        Error as DiviError,
     };
     use googlesheets::sheet::Credential;
     use reqwest::Client;
@@ -68,7 +69,9 @@ pub mod fetch {
         println!("Fetching cards");
         dotenv::dotenv().ok();
         let key = std::env::var("GOOGLE_API_KEY").expect("No google api key");
-        let prices = Prices::fetch(&divi::TradeLeague::Standard).await?;
+        let prices = Prices::fetch(&divi::TradeLeague::Standard)
+            .await
+            .map_err(|err| DiviError::NinjaError(err))?;
         let sample = load_total_sample(key, Some(prices)).await?;
         let mut wiki_vec = load_wiki().await?;
 

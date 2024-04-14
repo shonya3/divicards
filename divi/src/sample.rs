@@ -215,8 +215,16 @@ fn parse_csv(csv_data: &str) -> Result<Vec<CardNameAmount>, Error> {
     Ok(vec)
 }
 
+#[derive(Debug)]
+pub struct MissingHeadersError;
+impl Display for MissingHeadersError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str("File should contain headers: name, amount.")
+    }
+}
+
 /// Parsing helper. Uses for CSV data
-fn remove_lines_before_headers(s: &str) -> Result<String, Error> {
+fn remove_lines_before_headers(s: &str) -> Result<String, MissingHeadersError> {
     match s.lines().enumerate().into_iter().find(|(_index, line)| {
         line.contains("name")
             && ["amount", "stackSize"]
@@ -229,7 +237,7 @@ fn remove_lines_before_headers(s: &str) -> Result<String, Error> {
             .skip(index)
             .collect::<Vec<&str>>()
             .join("\r\n")),
-        None => Err(Error::MissingHeaders),
+        None => Err(MissingHeadersError),
     }
 }
 
