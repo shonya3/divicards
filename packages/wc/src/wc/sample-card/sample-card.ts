@@ -60,7 +60,7 @@ export class SampleCardElement extends BaseElement {
 	@property({ type: Boolean, reflect: true }) selected: boolean | null = false;
 	@property({ reflect: true }) uuid: string = 'NO ID';
 	@property({ type: Number, reflect: true, attribute: 'minimum-card-price' }) minimumCardPrice: number = 0;
-	@property({ type: Object }) sample: DivinationCardsSample = { csv: '', notCards: [], fixedNames: [], cards: [] };
+	@property({ type: Object }) sample: DivinationCardsSample = { notCards: [], fixedNames: [], cards: [] };
 
 	@query('wc-base-popup#table-popup') tablePopup!: BasePopupElement;
 	@query('input#selected-checkbox') selectedCheckbox!: HTMLInputElement;
@@ -149,10 +149,6 @@ export class SampleCardElement extends BaseElement {
 		</div>`;
 	}
 
-	get urlObject() {
-		return URL.createObjectURL(new File([this.sample.csv ?? ''], this.filename));
-	}
-
 	protected chunk() {
 		return html`<div class="minor-icons">
 				${this.sample.fixedNames.length > 0
@@ -205,7 +201,7 @@ export class SampleCardElement extends BaseElement {
 						.checked=${this.selected}
 						id="selected-checkbox"
 						@change=${this.#onSelectedClicked}
-				  />`}
+					/>`}
 
 			<wc-base-popup id="table-popup">
 				<wc-div-table .cards=${this.sample.cards}> </wc-div-table>
@@ -260,7 +256,9 @@ export class SampleCardElement extends BaseElement {
 				justify-content: space-between;
 				gap: 1rem;
 				width: fit-content;
-				box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+				box-shadow:
+					rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+					rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 
 				/* max-height: 320px; */
 				width: 250px;

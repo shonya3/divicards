@@ -36,7 +36,6 @@ export interface DivinationCardsSample {
 	cards: DivinationCardRecord[];
 	notCards: string[];
 	fixedNames: FixedName[];
-	csv: string;
 }
 
 export interface DivinationCardRecord {
