@@ -71,14 +71,6 @@ impl Cards {
         self.0.into_iter()
     }
 
-    pub fn into_not_nullish(self) -> Vec<DivinationCardRecord> {
-        self.into_iter().filter(|card| card.amount > 0).collect()
-    }
-
-    pub fn sort_by_amount(&mut self) {
-        self.0.sort_by(|a, b| a.amount.cmp(&b.amount));
-    }
-
     pub fn order_by(&mut self, ordered_by: Column, order: Order) {
         let vec = &mut self.0;
         match ordered_by {

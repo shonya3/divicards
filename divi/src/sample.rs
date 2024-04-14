@@ -1,5 +1,4 @@
 use crate::{
-    card_record::DivinationCardRecord,
     cards::{Cards, FixedCardName, GetRecordMut},
     consts::RAIN_OF_CHAOS_WEIGHT,
     error::Error,
@@ -120,15 +119,6 @@ impl DivinationCardsSample {
 
         merged.write_weight();
         merged
-    }
-
-    pub fn into_not_nullish(mut self) -> Self {
-        let cards: Vec<DivinationCardRecord> =
-            self.cards.into_iter().filter(|c| c.amount > 0).collect();
-
-        self.cards = Cards(cards);
-
-        self
     }
 
     /// Consumes Prices structure to set prices for Cards
