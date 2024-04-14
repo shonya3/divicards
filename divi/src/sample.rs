@@ -379,7 +379,7 @@ mod tests {
 
     #[test]
     fn into_serde_values() {
-        let csv = read_to_string("example-2.csv").unwrap();
+        let csv = read_to_string("examples/example-2.csv").unwrap();
         let prices = Prices::default();
         let sample = DivinationCardsSample::create(SampleData::Csv(csv), Some(prices)).unwrap();
         let values = sample.into_serde_values(Some(TablePreferences {
@@ -451,9 +451,9 @@ Encroaching Darkness,5\r\nThe Endless Darkness,1\r\nThe Endurance,19\r\nThe Enfo
     fn merge() {
         use std::fs::read_to_string;
 
-        let csv1 = read_to_string("example-1.csv").unwrap();
-        let csv2 = read_to_string("example-2.csv").unwrap();
-        let csv3 = read_to_string("example-3.csv").unwrap();
+        let csv1 = read_to_string("examples/example-1.csv").unwrap();
+        let csv2 = read_to_string("examples/example-2.csv").unwrap();
+        let csv3 = read_to_string("examples/example-3.csv").unwrap();
 
         let s1 = DivinationCardsSample::create(SampleData::Csv(csv1), None).unwrap();
         let s2 = DivinationCardsSample::create(SampleData::Csv(csv2), None).unwrap();

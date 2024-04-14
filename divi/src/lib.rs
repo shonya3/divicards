@@ -3,7 +3,7 @@
 //!
 //!```
 //!use divi::{
-//!    league::TradeLeague,
+//!    TradeLeague,
 //!    prices::Prices,
 //!    sample::{DivinationCardsSample, SampleData},
 //!};
@@ -32,7 +32,7 @@
 //!};
 //!
 //!fn main() -> Result<(), divi::error::Error> {
-//!let csv = read_to_string("sample.csv").expect("Could not read sample.csv");
+//!let csv = read_to_string("examples/sample.csv").expect("Could not read sample.csv");
 //!    let sample = DivinationCardsSample::create(SampleData::Csv(csv), Some(Prices::default()))?;
 //!
 //!    let preferences = TablePreferences {
@@ -131,7 +131,7 @@ mod weight_tests {
 
     #[test]
     fn huge_sample() {
-        let data = SampleData::Csv(fs::read_to_string("example-2.csv").unwrap());
+        let data = SampleData::Csv(fs::read_to_string("examples/example-2.csv").unwrap());
         let sample = DivinationCardsSample::create(data, None).unwrap();
 
         let fox = sample.cards.get_card("The Fox in the Brambles");
@@ -145,7 +145,7 @@ mod fix_typos {
     use std::fs;
     #[test]
     fn fix_typos() {
-        let sample_data = SampleData::Csv(fs::read_to_string("example-3.csv").unwrap());
+        let sample_data = SampleData::Csv(fs::read_to_string("examples/example-3.csv").unwrap());
         let sample = DivinationCardsSample::create(sample_data, None).unwrap();
         assert_eq!(sample.fixed_names.len(), 26);
     }

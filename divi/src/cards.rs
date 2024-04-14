@@ -1,6 +1,6 @@
 use crate::{
     card_record::DivinationCardRecord,
-    consts::{CARDS, CARDS_N},
+    consts::CARDS,
     prices::Prices,
     sample::{Column, Order},
     IsCard,
@@ -123,6 +123,29 @@ impl Cards {
     }
 }
 
+impl Default for Cards {
+    fn default() -> Self {
+        Cards(
+            CARDS
+                .into_iter()
+                .map(|name| DivinationCardRecord::new(name.to_owned(), 0, None))
+                .collect::<Vec<DivinationCardRecord>>(),
+        )
+    }
+}
+
+impl From<Prices> for Cards {
+    fn from(prices: Prices) -> Self {
+        Cards(
+            prices
+                .0
+                .into_iter()
+                .map(|p| DivinationCardRecord::new(p.name, 0, p.price))
+                .collect::<Vec<DivinationCardRecord>>(),
+        )
+    }
+}
+
 pub fn check_card_name(card: &str) -> CheckCardName {
     if card.is_card() {
         return CheckCardName::Valid;
@@ -167,38 +190,6 @@ impl FixedCardName {
             old: String::from(old),
             fixed: String::from(fixed),
         }
-    }
-}
-
-impl Default for Cards {
-    fn default() -> Self {
-        Cards::from(CARDS)
-    }
-}
-
-impl From<Prices> for Cards {
-    fn from(prices: Prices) -> Self {
-        Cards(
-            prices
-                .0
-                .into_iter()
-                .map(|p| DivinationCardRecord::new(p.name, 0, p.price))
-                .collect::<Vec<DivinationCardRecord>>()
-                .try_into()
-                .unwrap(),
-        )
-    }
-}
-
-impl From<[&'static str; CARDS_N]> for Cards {
-    fn from(arr: [&'static str; CARDS_N]) -> Self {
-        Self(
-            arr.into_iter()
-                .map(|name| DivinationCardRecord::new(String::from(name), 0, None))
-                .collect::<Vec<DivinationCardRecord>>()
-                .try_into()
-                .unwrap(),
-        )
     }
 }
 
