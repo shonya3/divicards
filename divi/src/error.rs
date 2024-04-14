@@ -1,21 +1,24 @@
 use crate::TradeLeague;
+use csv::Error as CsvError;
+use reqwest::Error as ReqwestError;
 use serde::Serialize;
+use serde_json::Error as SerdeError;
 use std::{fmt::Display, num::ParseIntError};
 
 #[derive(Debug)]
 pub enum Error {
-    HttpError(reqwest::Error),
-    SerdeError(serde_json::Error),
+    ReqwestError(ReqwestError),
+    SerdeError(SerdeError),
     MissingHeaders,
     NoPricesForLeagueOnNinja(TradeLeague),
     ParseIntError(ParseIntError),
-    CsvError(csv::Error),
+    CsvError(CsvError),
 }
 
 impl Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Error::HttpError(err) => err.fmt(f),
+            Error::ReqwestError(err) => err.fmt(f),
             Error::SerdeError(err) => err.fmt(f),
             Error::MissingHeaders => write!(f, "File should contain headers: name, amount."),
             Error::NoPricesForLeagueOnNinja(league) => {
@@ -36,14 +39,14 @@ impl Serialize for Error {
     }
 }
 
-impl From<reqwest::Error> for Error {
-    fn from(value: reqwest::Error) -> Self {
-        Error::HttpError(value)
+impl From<ReqwestError> for Error {
+    fn from(value: ReqwestError) -> Self {
+        Error::ReqwestError(value)
     }
 }
 
-impl From<serde_json::Error> for Error {
-    fn from(value: serde_json::Error) -> Self {
+impl From<SerdeError> for Error {
+    fn from(value: SerdeError) -> Self {
         Error::SerdeError(value)
     }
 }
@@ -54,8 +57,8 @@ impl From<ParseIntError> for Error {
     }
 }
 
-impl From<csv::Error> for Error {
-    fn from(value: csv::Error) -> Self {
+impl From<CsvError> for Error {
+    fn from(value: CsvError) -> Self {
         Error::CsvError(value)
     }
 }

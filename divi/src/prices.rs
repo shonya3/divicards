@@ -1,4 +1,5 @@
 use crate::{consts::CARDS, error::Error};
+use ninja::{card::Sparkline, CardData};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -9,28 +10,31 @@ pub struct DivinationCardPrice {
     pub sparkline: Sparkline,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Default)]
-pub struct Sparkline {
-    pub data: Vec<Option<f32>>,
-}
-
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(transparent)]
 pub struct Prices(pub Vec<DivinationCardPrice>);
 impl Prices {
     pub async fn fetch(league: &poe::TradeLeague) -> Result<Prices, Error> {
-        #[derive(Deserialize, Debug, Serialize)]
-        struct PriceData {
-            lines: Vec<DivinationCardPrice>,
-        }
+        let ninja_card_data = ninja::fetch_card_data(&league).await.unwrap();
+        let mut prices = Prices::default();
+        prices.0.iter_mut().for_each(|price| {
+            ninja_card_data
+                .iter()
+                .find(|ninja_data| ninja_data.name == price.name)
+                .map(
+                    |CardData {
+                         sparkline,
+                         chaos_value,
+                         ..
+                     }| {
+                        if sparkline.data.len() > 0 {
+                            price.price = *chaos_value
+                        }
+                    },
+                );
+        });
 
-        let url = format!("https://poe.ninja/api/data/itemoverview?league={league}&type=DivinationCard&language=en");
-        let json = reqwest::get(url).await?.text().await?;
-        let data = serde_json::from_str::<PriceData>(&json)?;
-        if data.lines.len() == 0 {
-            return Err(Error::NoPricesForLeagueOnNinja(league.to_owned()));
-        }
-        Ok(Prices::from(data.lines))
+        Ok(prices)
     }
 }
 
@@ -46,19 +50,5 @@ impl Default for Prices {
                 })
                 .collect::<Vec<DivinationCardPrice>>(),
         )
-    }
-}
-
-impl From<Vec<DivinationCardPrice>> for Prices {
-    fn from(value: Vec<DivinationCardPrice>) -> Self {
-        let mut prices = Prices::default();
-        for card in prices.0.iter_mut() {
-            if let Some(found) = value.iter().find(|c| card.name == c.name) {
-                if found.sparkline.data.len() > 0 {
-                    card.price = found.price;
-                }
-            }
-        }
-        prices
     }
 }
