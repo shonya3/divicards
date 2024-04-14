@@ -84,7 +84,7 @@ impl DivinationCardsSample {
             }
         }
 
-        sample.finalize_write_weight_and_csv();
+        sample.write_weight();
         Ok(sample)
     }
 
@@ -118,7 +118,7 @@ impl DivinationCardsSample {
             card.set_amount(amount);
         }
 
-        merged.finalize_write_weight_and_csv();
+        merged.write_weight();
         merged
     }
 
@@ -139,11 +139,6 @@ impl DivinationCardsSample {
         }
     }
 
-    /// Writes weights for cards and writes final csv - write_weight and write_csv in one function
-    fn finalize_write_weight_and_csv(&mut self) -> &mut Self {
-        self.write_weight()
-    }
-
     /// Helper function for write_weight
     fn weight_multiplier(&self) -> f32 {
         let rain_of_chaos = self.cards.get_card("Rain of Chaos");
@@ -151,14 +146,11 @@ impl DivinationCardsSample {
     }
 
     /// (After parsing) Calculates special weight for each card and mutates it. Runs at the end of parsing.
-    fn write_weight(&mut self) -> &mut Self {
+    fn write_weight(&mut self) {
         let weight_multiplier = self.weight_multiplier();
-
-        for card in self.cards.iter_mut() {
-            card.set_weight(weight_multiplier);
-        }
-
-        self
+        self.cards
+            .iter_mut()
+            .for_each(|card| card.set_weight(weight_multiplier));
     }
 
     pub fn into_serde_values(mut self, preferences: Option<TablePreferences>) -> Vec<Vec<Value>> {
