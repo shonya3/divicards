@@ -44,6 +44,16 @@ pub async fn sample_from_tab(
 
 #[instrument]
 #[command]
+pub async fn tab_with_items(
+    league: League,
+    stash_id: String,
+    version: State<'_, AppVersion>,
+) -> Result<TabWithItems, Error> {
+    StashAPI::tab_with_items(&league, stash_id, None, version.inner()).await
+}
+
+#[instrument]
+#[command]
 pub async fn stashes(league: League, version: State<'_, AppVersion>) -> Result<Value, Error> {
     StashAPI::stashes(league, version.inner()).await
 }

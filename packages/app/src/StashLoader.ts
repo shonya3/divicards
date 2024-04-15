@@ -1,9 +1,13 @@
 import { IStashLoader } from '@divicards/shared/IStashLoader';
-import { NoItemsTab } from '@divicards/shared/poe.types';
+import { NoItemsTab, TabWithItems } from '@divicards/shared/poe.types';
 import { DivinationCardsSample, League } from '@divicards/shared/types';
 import { command } from './command';
 
 export class StashLoader implements IStashLoader {
+	tab(tabId: string, league: string): Promise<TabWithItems> {
+		return command('tab_with_items', { league, stashId: tabId });
+	}
+
 	sampleFromTab(tabId: string, league: League): Promise<DivinationCardsSample> {
 		return command('sample_from_tab', { league, stashId: tabId });
 	}

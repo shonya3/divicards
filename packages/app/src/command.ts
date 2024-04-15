@@ -8,7 +8,7 @@ import {
 	TablePreferences,
 	Column,
 } from '@divicards/shared/types';
-import { NoItemsTab } from '@divicards/shared/poe.types';
+import { NoItemsTab, TabWithItems } from '@divicards/shared/poe.types';
 
 export type SampleData = string | CardNameAmount[];
 export type ValueRange = {
@@ -41,6 +41,7 @@ export interface Commands {
 	stashes: (args: { league: League }) => { stashes: NoItemsTab[] };
 	sample_into_csv: (args: { sample: DivinationCardsSample; preferences: Preferences }) => string;
 	sample_from_tab: (args: { league: League; stashId: string; subStashId?: string }) => DivinationCardsSample;
+	tab_with_items: (args: { league: League; stashId: string }) => TabWithItems;
 }
 
 const { format } = new Intl.NumberFormat();

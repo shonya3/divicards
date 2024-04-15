@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, Ref } from 'vue';
 
 import { StashLoader } from './StashLoader';
 import { command } from './command';
@@ -27,6 +27,7 @@ import { BasePopupElement } from '@divicards/wc/src/wc/base-popup';
 import UpdateChangelog from './components/UpdateChangelog.vue';
 import NativeBrowserLink from './components/NativeBrowserLink.vue';
 import { useAppVersion } from './composables/useAppVersion';
+import { TabWithItems } from '@divicards/shared/poe.types';
 
 const sampleStore = useSampleStore();
 const authStore = useAuthStore();
@@ -35,6 +36,8 @@ const exportSample = useExportSampleStore();
 const tablePreferences = useTablePreferencesStore();
 const stashVisible = ref(false);
 const { releaseUrl, tag } = useAppVersion();
+
+const tabsWithItems: Ref<TabWithItems[]> = ref<TabWithItems[]>([]);
 
 const changelogPopupRef = ref<BasePopupElement | null>(null);
 const formPopupExportRef = ref<BasePopupElement | null>(null);
@@ -134,6 +137,12 @@ const onSubmit = async ({
 		formPopupExportRef.value?.hide();
 	}
 };
+
+const onTabWithItemsLoaded = (name: string, tab: TabWithItems, league: League) => {
+	console.log({ name, tab, league });
+	tab.items.sort((a, b) => (b.stackSize ?? 0) - (a.stackSize ?? 0));
+	tabsWithItems.value.push(tab);
+};
 </script>
 
 <template>
@@ -174,6 +183,7 @@ const onSubmit = async ({
 			<StashesView
 				:stashLoader="stashLoader"
 				@sample-from-tab="sampleStore.addSample"
+				@tab-with-items-loaded="onTabWithItemsLoaded"
 				@close="stashVisible = false"
 			/>
 		</div>
@@ -202,6 +212,29 @@ const onSubmit = async ({
 				<sl-button @click="sampleStore.deleteAllFiles">Remove samples</sl-button>
 			</div>
 		</div>
+
+		<ul v-for="tab in tabsWithItems">
+			<li>
+				{{ tab.name }}
+				<details>
+					<summary>{{ tab.name }}</summary>
+					<table id="cards" class="table is-bordered is-narrow is-hoverable">
+						<thead>
+							<tr>
+								<th>Card</th>
+								<th>Count</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="item in tab.items">
+								<td>{{ item.baseType }}</td>
+								<td>{{ item.stackSize }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</details>
+			</li>
+		</ul>
 
 		<Transition>
 			<div ref="filesTemplateRef" class="samples" v-show="sampleStore.sampleCards.length">

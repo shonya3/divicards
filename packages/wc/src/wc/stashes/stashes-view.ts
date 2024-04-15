@@ -5,13 +5,15 @@ import { HelpTipElement } from '../help-tip';
 import { TabBadgeElement } from './tab-badge';
 import { LeagueSelectElement } from '../league-select';
 import { property, state, query } from 'lit/decorators.js';
-import { NoItemsTab } from '@divicards/shared/poe.types';
+import { NoItemsTab, TabWithItems } from '@divicards/shared/poe.types';
 import { DivinationCardsSample, League } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { TabBadgeGroupElement } from './tab-badge-group';
 import { classMap } from 'lit/directives/class-map.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
+import '@shoelace-style/shoelace/dist/components/radio-button/radio-button.js';
+import '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js';
 
 class CustomLeagueStorage {
 	static #key = 'CUSTOM_LEAGUE';
@@ -49,6 +51,7 @@ export class Events {
 	'upd:page': number;
 
 	'sample-from-tab': { sample: DivinationCardsSample; league: League; name: TabBadgeElement['name'] };
+	'tab-with-items-loaded': { tab: TabWithItems; league: League; name: string };
 	'tabs': NoItemsTab[];
 
 	// ---
@@ -61,6 +64,9 @@ export interface StashesViewProps {
 	stashLoader: IStashLoader;
 }
 
+type DownloadAs = (typeof DOWNLOAD_AS_VARIANTS)[number];
+const DOWNLOAD_AS_VARIANTS = ['divination-cards-sample', 'general-tab'] as const;
+
 export class StashesViewElement extends BaseElement {
 	static override get defineList() {
 		return [HelpTipElement, LeagueSelectElement, TabBadgeElement, TabBadgeGroupElement];
@@ -70,6 +76,7 @@ export class StashesViewElement extends BaseElement {
 
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
 	@property() customLeague: string = CustomLeagueStorage.load() ?? '';
+	@property() downloadAs: DownloadAs = 'divination-cards-sample';
 
 	@state() selectedTabs: Map<
 		TabBadgeElement['tabId'],
@@ -101,52 +108,6 @@ export class StashesViewElement extends BaseElement {
 		}
 	}
 
-	async #onLoadItemsClicked() {
-		await this.loadSelectedTabs(this.league);
-	}
-
-	#onCloseClicked() {
-		this.emit('close');
-	}
-
-	async #onLoadStashesList() {
-		if (!this.stashLoader) {
-			throw new Error('No stash loader');
-		}
-		this.noStashesMessage = '';
-
-		try {
-			this.stashes = await this.stashLoader.tabs(this.league);
-			this.emit<Events['tabs']>('tabs', this.stashes);
-			this.stashes;
-			if (!this.stashes.length) {
-				this.noStashesMessage = 'No stashes here. Try to change the league';
-			}
-		} catch (err) {
-			if (err instanceof Error) {
-				this.noStashesMessage = err.message;
-			} else if (typeof err === 'string') {
-				this.noStashesMessage = err;
-			} else {
-				throw err;
-			}
-		}
-	}
-
-	#onLeagueSelected(e: CustomEvent<League>) {
-		this.league = e.detail;
-	}
-
-	#onUpdSelectedTabs(e: CustomEvent<Events['upd:selectedTabs']>) {
-		const map = (e as CustomEvent<Events['upd:selectedTabs']>).detail;
-		this.selectedTabs = new Map(map);
-	}
-
-	#onCustomLeagueInput(e: InputEvent) {
-		const target = e.target as HTMLInputElement;
-		this.customLeague = target.value;
-	}
-
 	protected override render() {
 		return html`<div class="main-stashes-component">
 			<div class="top-right-corner">
@@ -171,6 +132,17 @@ export class StashesViewElement extends BaseElement {
 						type="text"
 						label="Custom league (for private leagues)"
 					></sl-input>
+
+					<sl-radio-group
+						class="mt-16"
+						@sl-change=${this.#onDownloadAsChanged}
+						label="Download as"
+						value=${this.downloadAs}
+					>
+						${DOWNLOAD_AS_VARIANTS.map(
+							variant => html`<sl-radio-button value=${variant}>${variant}</sl-radio-button>`
+						)}
+					</sl-radio-group>
 				</fieldset>
 				<div class="load-stashes-section">
 					<sl-button id="stashes-btn" @click=${this.#onLoadStashesList}>Load Stash</sl-button>
@@ -202,6 +174,55 @@ export class StashesViewElement extends BaseElement {
 		</div>`;
 	}
 
+	async #onLoadItemsClicked() {
+		await this.loadSelectedTabs(this.league);
+	}
+
+	#onCloseClicked() {
+		this.emit('close');
+	}
+
+	#onDownloadAsChanged(e: InputEvent) {
+		this.downloadAs = (e.target as HTMLInputElement).value as DownloadAs;
+	}
+
+	async #onLoadStashesList() {
+		if (!this.stashLoader) {
+			throw new Error('No stash loader');
+		}
+		this.noStashesMessage = '';
+
+		try {
+			this.stashes = await this.stashLoader.tabs(this.league);
+			this.emit<Events['tabs']>('tabs', this.stashes);
+			if (!this.stashes.length) {
+				this.noStashesMessage = 'No stashes here. Try to change the league';
+			}
+		} catch (err) {
+			if (err instanceof Error) {
+				this.noStashesMessage = err.message;
+			} else if (typeof err === 'string') {
+				this.noStashesMessage = err;
+			} else {
+				throw err;
+			}
+		}
+	}
+
+	#onLeagueSelected(e: CustomEvent<League>) {
+		this.league = e.detail;
+	}
+
+	#onUpdSelectedTabs(e: CustomEvent<Events['upd:selectedTabs']>) {
+		const map = (e as CustomEvent<Events['upd:selectedTabs']>).detail;
+		this.selectedTabs = new Map(map);
+	}
+
+	#onCustomLeagueInput(e: InputEvent) {
+		const target = e.target as HTMLInputElement;
+		this.customLeague = target.value;
+	}
+
 	/**
 	 * For each tab, loads sample and emits it
 	 */
@@ -220,8 +241,25 @@ export class StashesViewElement extends BaseElement {
 						await sleepSecs(0.5);
 						continue;
 					}
-					const sample = await this.#loadSample(id, name, league);
-					this.emit<Events['sample-from-tab']>('sample-from-tab', { name, sample, league });
+					switch (this.downloadAs) {
+						case 'divination-cards-sample': {
+							const sample = await this.#loadSingleTabContent(id, league, this.stashLoader.sampleFromTab);
+							this.emit<Events['sample-from-tab']>('sample-from-tab', {
+								name,
+								sample,
+								league,
+							});
+
+							break;
+						}
+						case 'general-tab': {
+							const tab = await this.#loadSingleTabContent(id, league, this.stashLoader.tab);
+							tab.name = name;
+							this.emit<Events['tab-with-items-loaded']>('tab-with-items-loaded', { tab, name, league });
+
+							break;
+						}
+					}
 				}
 			} catch (err) {
 				await this.#handleLoadTabError(err);
@@ -232,14 +270,19 @@ export class StashesViewElement extends BaseElement {
 		this.msg = '';
 	}
 
-	async #loadSample(id: string, name: string, league: League): Promise<DivinationCardsSample> {
+	async #loadSingleTabContent<T>(
+		id: string,
+		league: League,
+		loadFunction: (id: string, league: League) => T
+	): Promise<T> {
 		if (!this.stashLoader) {
 			throw new Error('No stash loader');
 		}
 
 		this.msg = '';
 
-		const sample = await this.stashLoader.sampleFromTab(id, league);
+		// const loadFunction = mode === 'sample' ? this.stashLoader.sampleFromTab : this.stashLoader.tab;
+		const singleTabContent = await loadFunction(id, league);
 		this.selectedTabs.delete(id);
 		this.selectedTabs = new Map(this.selectedTabs);
 
@@ -253,7 +296,7 @@ export class StashesViewElement extends BaseElement {
 			this.availableInTenSeconds++;
 		}, SECS_10);
 
-		return sample;
+		return singleTabContent;
 	}
 
 	async #handleLoadTabError(err: unknown): Promise<void> {
@@ -344,6 +387,10 @@ function styles() {
 
 		.hidden {
 			display: none;
+		}
+
+		.mt-16 {
+			margin-top: 1rem;
 		}
 
 		fieldset {

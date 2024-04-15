@@ -38,6 +38,7 @@ async fn main() {
             poe::auth::poe_logout,
             poe::stash::stashes,
             poe::stash::sample_from_tab,
+            poe::stash::tab_with_items,
             google::auth::google_auth,
             google::auth::google_logout,
             google::auth::google_identity,
