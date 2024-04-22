@@ -218,7 +218,15 @@ const onTabWithItemsLoaded = (name: string, tab: TabWithItems, league: League) =
 			<li>
 				{{ tab.name }}
 				<details>
-					<summary>Amounts table</summary>
+					<summary>
+						Amounts table
+						<sl-copy-button
+							:value="
+								'name\tamount\n' +
+								tab.items.map(({ baseType, stackSize }) => `${baseType}\t${stackSize}`).join('\n')
+							"
+						></sl-copy-button>
+					</summary>
 					<table id="cards" class="table is-bordered is-narrow is-hoverable">
 						<thead>
 							<tr>
