@@ -4,7 +4,9 @@ import { CardNameAmount } from '@divicards/shared/types';
 import { Ref, computed, ref, watch } from 'vue';
 const props = defineProps<{ tab: TabWithItems }>();
 const nameAmountPairs: Ref<CardNameAmount[]> = ref([]);
-const merged = ref(false);
+const mergeable = computed(() => {
+	return Object.values(Object.groupBy(nameAmountPairs.value, ({ name }) => name)).some((arr = []) => arr.length > 1);
+});
 const tableAsClipboardString = computed(
 	() => 'name\tamount\n' + nameAmountPairs.value.map(({ name, amount = '' }) => `${name}\t${amount}`).join('\n')
 );
@@ -12,7 +14,6 @@ const tableAsClipboardString = computed(
 watch(
 	() => props.tab.items,
 	items => {
-		merged.value = false;
 		nameAmountPairs.value = items.map(({ baseType, stackSize }) => ({ name: baseType, amount: stackSize ?? 0 }));
 	},
 	{ immediate: true }
@@ -25,7 +26,6 @@ const onMergeStacksClick = () => {
 			amount: pairs.reduce((sum, { amount = 0 }) => (sum += amount), 0),
 		})
 	);
-	merged.value = true;
 };
 </script>
 
@@ -35,7 +35,7 @@ const onMergeStacksClick = () => {
 		<summary>
 			Amounts table
 			<sl-copy-button :value="tableAsClipboardString"></sl-copy-button>
-			<sl-button v-if="!merged" @click="onMergeStacksClick"> Merge stacks </sl-button>
+			<sl-button v-if="mergeable" @click="onMergeStacksClick"> Merge stacks </sl-button>
 		</summary>
 		<table id="cards" class="table is-bordered is-narrow is-hoverable">
 			<thead>
