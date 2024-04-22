@@ -29,6 +29,7 @@ import UpdateChangelog from './components/UpdateChangelog.vue';
 import NativeBrowserLink from './components/NativeBrowserLink.vue';
 import { useAppVersion } from './composables/useAppVersion';
 import { TabWithItems } from '@divicards/shared/poe.types';
+import GeneralTabWithItems from './components/GeneralTabWithItems.vue';
 
 const sampleStore = useSampleStore();
 const authStore = useAuthStore();
@@ -216,45 +217,7 @@ const onTabWithItemsLoaded = (name: string, tab: TabWithItems, league: League) =
 
 		<ul v-for="tab in tabsWithItems">
 			<li>
-				{{ tab.name }}
-				<details>
-					<summary>
-						Amounts table
-						<sl-copy-button
-							:value="
-								'name\tamount\n' +
-								tab.items.map(({ baseType, stackSize = '' }) => `${baseType}\t${stackSize}`).join('\n')
-							"
-						></sl-copy-button>
-					</summary>
-					<sl-button
-						@click="
-							() => {
-								tab.items = [];
-							}
-						"
-					>
-						Merge stacks
-					</sl-button>
-					<table id="cards" class="table is-bordered is-narrow is-hoverable">
-						<thead>
-							<tr>
-								<th>Card</th>
-								<th>Count</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr v-for="item in tab.items">
-								<td>{{ item.baseType }}</td>
-								<td>{{ item.stackSize }}</td>
-							</tr>
-						</tbody>
-					</table>
-				</details>
-				<details>
-					<summary>Json <sl-copy-button :value="JSON.stringify(tab)"></sl-copy-button></summary>
-					<pre>{{ tab }}</pre>
-				</details>
+				<GeneralTabWithItems :tab="tab" />
 			</li>
 		</ul>
 
