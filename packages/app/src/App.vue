@@ -23,6 +23,7 @@ import StashesView from './components/StashesView.vue';
 import FormExportSample from './components/FormExportSample.vue';
 
 import { Props as FormExportProps } from '@divicards/wc/src/wc/form-export-sample/form-export-sample';
+import '@shoelace-style/shoelace/dist/components/copy-button/copy-button.js';
 import { BasePopupElement } from '@divicards/wc/src/wc/base-popup';
 import UpdateChangelog from './components/UpdateChangelog.vue';
 import NativeBrowserLink from './components/NativeBrowserLink.vue';
@@ -217,7 +218,7 @@ const onTabWithItemsLoaded = (name: string, tab: TabWithItems, league: League) =
 			<li>
 				{{ tab.name }}
 				<details>
-					<summary>{{ tab.name }}</summary>
+					<summary>Amounts table</summary>
 					<table id="cards" class="table is-bordered is-narrow is-hoverable">
 						<thead>
 							<tr>
@@ -232,6 +233,10 @@ const onTabWithItemsLoaded = (name: string, tab: TabWithItems, league: League) =
 							</tr>
 						</tbody>
 					</table>
+				</details>
+				<details>
+					<summary>Json <sl-copy-button :value="JSON.stringify(tab)"></sl-copy-button></summary>
+					<pre>{{ tab }}</pre>
 				</details>
 			</li>
 		</ul>
