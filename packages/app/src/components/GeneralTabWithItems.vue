@@ -35,8 +35,8 @@ const onMergeStacksClick = () => {
 		<summary>
 			Amounts table
 			<sl-copy-button :value="tableAsClipboardString"></sl-copy-button>
+			<sl-button v-if="!merged" @click="onMergeStacksClick"> Merge stacks </sl-button>
 		</summary>
-		<sl-button v-if="!merged" @click="onMergeStacksClick"> Merge stacks </sl-button>
 		<table id="cards" class="table is-bordered is-narrow is-hoverable">
 			<thead>
 				<tr>
