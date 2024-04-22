@@ -10,7 +10,7 @@ import {
 } from '@divicards/shared/types';
 import { NoItemsTab, TabWithItems } from '@divicards/shared/poe.types';
 
-export type SampleData = string | CardNameAmount[];
+export type SampleData = string | CardNameAmount[] | DivinationCardsSample;
 export type ValueRange = {
 	majorDimension: 'ROWS' | 'COLUMNS';
 	range: string;

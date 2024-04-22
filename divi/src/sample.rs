@@ -70,6 +70,7 @@ impl DivinationCardsSample {
         let name_amount_pairs = match source {
             SampleData::Csv(csv_data) => parse_csv(&csv_data)?,
             SampleData::CardNameAmountList(vec) => vec,
+            SampleData::Sample(sample) => sample.to_name_amount_pairs(),
         };
 
         for CardNameAmount { name, amount } in name_amount_pairs {
@@ -187,6 +188,17 @@ impl DivinationCardsSample {
         }
 
         String::from_utf8(writer.into_inner().unwrap()).unwrap()
+    }
+
+    fn to_name_amount_pairs(self: DivinationCardsSample) -> Vec<CardNameAmount> {
+        self.cards
+            .0
+            .into_iter()
+            .map(|record| CardNameAmount {
+                name: record.name,
+                amount: record.amount,
+            })
+            .collect()
     }
 }
 
@@ -316,6 +328,7 @@ impl CardNameAmount {
 pub enum SampleData {
     Csv(String),
     CardNameAmountList(Vec<CardNameAmount>),
+    Sample(DivinationCardsSample),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]

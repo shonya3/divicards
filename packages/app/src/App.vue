@@ -223,10 +223,19 @@ const onTabWithItemsLoaded = (name: string, tab: TabWithItems, league: League) =
 						<sl-copy-button
 							:value="
 								'name\tamount\n' +
-								tab.items.map(({ baseType, stackSize }) => `${baseType}\t${stackSize}`).join('\n')
+								tab.items.map(({ baseType, stackSize = '' }) => `${baseType}\t${stackSize}`).join('\n')
 							"
 						></sl-copy-button>
 					</summary>
+					<sl-button
+						@click="
+							() => {
+								tab.items = [];
+							}
+						"
+					>
+						Merge stacks
+					</sl-button>
 					<table id="cards" class="table is-bordered is-narrow is-hoverable">
 						<thead>
 							<tr>

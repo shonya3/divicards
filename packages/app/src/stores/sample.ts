@@ -138,12 +138,12 @@ export const useSampleStore = defineStore('sampleCards', {
 
 			const index = this.sampleCards.findIndex(c => c.uuid === oldSampleCard.uuid);
 			if (index === -1) return;
-			this.sampleCards[index] = await createSampleCard(oldSampleCard.filename, oldSampleCard.sample.csv, league);
+			this.sampleCards[index] = await createSampleCard(oldSampleCard.filename, oldSampleCard.sample, league);
 		},
 
 		async replaceMerged(league: League): Promise<void> {
 			if (this.merged && isTradeLeague(league)) {
-				this.merged = await createSampleCard(this.merged.filename, this.merged.sample.csv, league);
+				this.merged = await createSampleCard(this.merged.filename, this.merged.sample, league);
 			}
 		},
 	},
