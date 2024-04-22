@@ -12,7 +12,8 @@
 		"esModuleInterop": true,
 		"lib": ["ESNext", "DOM"],
 		"skipLibCheck": true,
-		"experimentalDecorators": true
+		"experimentalDecorators": true,
+		"types": ["./node_modules/@shoelace-style/shoelace/dist/types/vue/index.d.ts"]
 	},
 	"include": [
 		"src/**/*.ts",
