@@ -41,7 +41,8 @@ pub struct TabNoItems {}
 /// Tab from /stash poe api route, contains items field
 #[derive(Serialize, Deserialize, Clone, Debug, Default)]
 pub struct TabWithItems {
-    pub items: Option<Vec<Item>>,
+    #[serde(default)]
+    pub items: Vec<Item>,
     #[serde(rename = "type")]
     pub kind: Option<StashType>,
 }
@@ -67,7 +68,6 @@ impl From<TabWithItems> for SampleData {
     fn from(tab: TabWithItems) -> Self {
         let cards: Vec<CardNameAmount> = tab
             .items
-            .unwrap_or_default()
             .into_iter()
             .filter(|item| item.is_card())
             .map(|item| CardNameAmount {
