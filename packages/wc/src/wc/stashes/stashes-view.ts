@@ -132,31 +132,35 @@ export class StashesViewElement extends BaseElement {
 						type="text"
 						label="Custom league (for private leagues)"
 					></sl-input>
-
-					<sl-radio-group
-						class="mt-16"
-						@sl-change=${this.#onDownloadAsChanged}
-						label="Download as"
-						value=${this.downloadAs}
-					>
-						${DOWNLOAD_AS_VARIANTS.map(
-							variant => html`<sl-radio-button value=${variant}>${variant}</sl-radio-button>`
-						)}
-					</sl-radio-group>
 				</fieldset>
 				<div class="load-stashes-section">
 					<sl-button id="stashes-btn" @click=${this.#onLoadStashesList}>Load Stash</sl-button>
 				</div>
 			</div>
 
-			<sl-button
-				id="get-data-btn"
-				class=${classMap({ 'not-visible': this.stashes.length === 0, 'btn-load-items': true })}
-				.disabled=${this.selectedTabs.size === 0 || this.fetchingStash || this.stashLoadsAvailable === 0}
-				@click=${this.#onLoadItemsClicked}
-			>
-				Load Tabs Contents
-			</sl-button>
+			<div class=${classMap({ 'not-visible': this.stashes.length === 0, 'load-tab-contents': true })}>
+				<sl-button
+					id="get-data-btn"
+					class="btn-load-items"
+					.disabled=${this.selectedTabs.size === 0 || this.fetchingStash || this.stashLoadsAvailable === 0}
+					@click=${this.#onLoadItemsClicked}
+				>
+					Load Tabs Contents
+				</sl-button>
+				<sl-radio-group
+					class="mt-16"
+					@sl-change=${this.#onDownloadAsChanged}
+					label="Download as"
+					value=${this.downloadAs}
+				>
+					${DOWNLOAD_AS_VARIANTS.map(
+						variant =>
+							html`<sl-radio-button value=${variant}
+								>${variant === 'divination-cards-sample' ? 'sample' : 'general tab'}</sl-radio-button
+							>`
+					)}
+				</sl-radio-group>
+			</div>
 
 			<div class="messages">
 				<p class=${classMap({ visible: this.msg.length > 0, msg: true })}>${this.msg}</p>
@@ -350,14 +354,22 @@ function styles() {
 
 		.btn-load-items {
 			text-transform: uppercase;
-			margin: auto;
 			display: block;
 			width: fit-content;
 			margin-top: 0.4rem;
 		}
 
-		.btn-load-items:not(:disabled) {
-			transform: scale(1.45);
+		.btn-load-items:not([disabled]) {
+			transform: scale(1.4);
+		}
+
+		.load-tab-contents {
+			display: flex;
+			margin-inline: auto;
+			align-items: center;
+			gap: 1rem;
+			justify-content: center;
+			gap: 5rem;
 		}
 
 		.messages {
