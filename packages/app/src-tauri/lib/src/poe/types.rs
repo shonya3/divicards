@@ -22,10 +22,16 @@ pub enum StashType {
 
 /// Any item from stash tab
 #[derive(Serialize, Deserialize, Clone, Debug)]
-#[serde(rename_all = "camelCase")]
-pub struct Item {
-    pub base_type: String,
-    pub stack_size: Option<u32>,
+#[serde(transparent)]
+pub struct Item(serde_json::Value);
+
+impl Item {
+    pub fn base_type(&self) -> Option<&str> {
+        self.0["baseType"].as_str()
+    }
+    pub fn stack_size(&self) -> Option<u32> {
+        self.0["stackSize"].as_u64().map(|v| v as u32)
+    }
 }
 
 /// Tab from /stashes poe api route, contains only metadata and not items
@@ -42,13 +48,18 @@ pub struct TabWithItems {
 
 impl IsCard for Item {
     fn is_card(&self) -> bool {
-        let name = self.base_type.as_str();
+        let Some(name) = self.base_type() else {
+            return false;
+        };
         // Fire of Unknown Origin casing bug https://www.pathofexile.com/forum/view-thread/3411333
         name == "Fire Of Unknown Origin" || CARDS.contains(&name)
     }
 
     fn is_legacy_card(&self) -> bool {
-        LEGACY_CARDS.contains(&self.base_type.as_str())
+        let Some(name) = self.base_type() else {
+            return false;
+        };
+        LEGACY_CARDS.contains(&name)
     }
 }
 
@@ -60,8 +71,8 @@ impl From<TabWithItems> for SampleData {
             .into_iter()
             .filter(|item| item.is_card())
             .map(|item| CardNameAmount {
-                name: item.base_type,
-                amount: item.stack_size.unwrap_or_default(),
+                name: item.base_type().unwrap_or_default().to_owned(),
+                amount: item.stack_size().unwrap_or_default(),
             })
             .collect();
 
