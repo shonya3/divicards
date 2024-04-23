@@ -189,7 +189,7 @@ export class TabBadgeGroupElement extends BaseElement {
 			${this.paginated.map(tab => {
 				return html`<li>
 					<wc-tab-badge
-						colour=${tab.metadata?.colour ?? '#fff'}
+						hexish-color=${tab.metadata?.colour ?? '#fff'}
 						name=${tab.name}
 						.tabId=${tab.id}
 						index=${tab.index}

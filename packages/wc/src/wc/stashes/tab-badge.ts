@@ -16,17 +16,20 @@ export interface Events {
 
 export class TabBadgeElement extends BaseElement {
 	static override tag = 'wc-tab-badge';
-	static override styles = [this.baseStyles, styles()];
-	@property({ reflect: true }) colour: string = '7c5436';
-	@property({ reflect: true }) name = 'Heist';
+	/** Color from Poe API. Examples: ff, 80b3ff, #f0f80, cc009a, 7c5436 */
+	@property({ reflect: true, attribute: 'hexish-color' }) hexishColor: string = '7c5436';
+	/** Any valid CSS color */
+	@property({ reflect: true, attribute: 'color' }) color?: string;
+	@property({ reflect: true })
+	name = 'Heist';
 	@property({ reflect: true }) tabId: string = 'e07f5f2946';
 	@property({ type: Boolean, reflect: true }) selected = false;
 	@property({ type: Number, reflect: true }) index: number = 0;
 
 	@query('input') checkbox!: HTMLInputElement;
 
-	get color(): string {
-		return `#${this.colour.padStart(6, '0')}`;
+	get computedColor(): string {
+		return this.color ? this.color : `#${this.hexishColor.padStart(6, '0')}`;
 	}
 
 	protected nameLabel() {
@@ -42,7 +45,7 @@ export class TabBadgeElement extends BaseElement {
 
 	protected override render() {
 		const cssProps = styleMap({
-			'--badge-color': `${this.color}`,
+			'--badge-color': `${this.computedColor}`,
 			'--tab-index': `' ${this.index} '`,
 		});
 
@@ -67,11 +70,8 @@ export class TabBadgeElement extends BaseElement {
 			name: this.name,
 		});
 	}
-}
 
-export type TabSelectEvent = CustomEvent<{ tabId: string; selected: boolean }>;
-function styles() {
-	return css`
+	static styles = css`
 		.tab-badge {
 			width: 8rem;
 			height: 4rem;
@@ -128,3 +128,5 @@ function styles() {
 		}
 	`;
 }
+
+export type TabSelectEvent = CustomEvent<{ tabId: string; selected: boolean }>;
