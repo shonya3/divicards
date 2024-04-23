@@ -5,7 +5,6 @@ import { DivTableElement } from '../div-table/div-table';
 import { BasePopupElement } from '../base-popup';
 import { FixedNamesElement } from './fixed-names/fixed-names';
 import { NotCardsElement } from './not-cards/not-cards';
-import { IconButtonElement } from '../icon-button/icon-button';
 import { DivinationCardsSample, League, TradeLeague, isTradeLeague } from '@divicards/shared/types';
 import { property, query } from 'lit/decorators.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
@@ -45,14 +44,7 @@ export interface Events {
 
 export class SampleCardElement extends BaseElement {
 	static override get defineList() {
-		return [
-			LeagueSelectElement,
-			DivTableElement,
-			BasePopupElement,
-			FixedNamesElement,
-			NotCardsElement,
-			IconButtonElement,
-		];
+		return [LeagueSelectElement, DivTableElement, BasePopupElement, FixedNamesElement, NotCardsElement];
 	}
 	static override tag = 'wc-sample-card';
 
