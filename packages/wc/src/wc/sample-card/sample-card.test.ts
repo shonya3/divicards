@@ -84,7 +84,6 @@ describe('<wc-sample-card>', () => {
 				cards: [{ name: 'Rain of Chaos', price: 1, amount: 1, sum: 1, weight: 0 }],
 				notCards: [],
 				fixedNames: [],
-				csv: '',
 			},
 		};
 

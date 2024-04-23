@@ -13,6 +13,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/range/range.js';
 import '@shoelace-style/shoelace/dist/components/icon/icon.js';
+import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 
 import SlRange from '@shoelace-style/shoelace/dist/components/range/range.js';
 
@@ -142,9 +143,12 @@ export class SampleCardElement extends BaseElement {
 		>
 			<p class="filename">${this.filename}</p>
 
-			<wc-icon-button @click=${this.#onBtnDeleteClicked} id="btn-delete" class="btn-delete " name="close"
-				>Here</wc-icon-button
-			>
+			<sl-icon-button
+				@click=${this.#onBtnDeleteClicked}
+				id="btn-delete"
+				class="btn-delete"
+				name="x-lg"
+			></sl-icon-button>
 			${this.chunk()}
 		</div>`;
 	}
@@ -224,7 +228,6 @@ export class SampleCardElement extends BaseElement {
 
 	static override styles = [
 		this.baseStyles,
-		iconButtonStyles(),
 		css`
 			:host {
 				--border-color: rgba(255, 255, 255, 0.3);
@@ -362,60 +365,4 @@ export class SampleCardElement extends BaseElement {
 			}
 		`,
 	];
-}
-
-function iconButtonStyles() {
-	return css`
-		.icon-button {
-			/* Focus rings */
-			--sl-focus-ring-color: rgb(105, 208, 255);
-			--sl-focus-ring-style: solid;
-			--sl-focus-ring-width: 3px;
-			--sl-focus-ring: var(--sl-focus-ring-style) var(--sl-focus-ring-width) var(--sl-focus-ring-color);
-			--sl-focus-ring-offset: 1px;
-
-			display: inline-block;
-			color: rgb(142, 142, 154);
-
-			flex: 0 0 auto;
-			display: flex;
-			align-items: center;
-			background: none;
-			border: none;
-			border-radius: var(--sl-border-radius-medium);
-			font-size: inherit;
-			color: inherit;
-			padding: var(--sl-spacing-x-small);
-			cursor: pointer;
-			transition: var(--sl-transition-x-fast) color;
-			-webkit-appearance: none;
-		}
-
-		.icon-button:hover:not(.icon-button--disabled),
-		.icon-button:focus-visible:not(.icon-button--disabled) {
-			color: rgb(39, 186, 253);
-		}
-
-		.icon-button:active:not(.icon-button--disabled) {
-			color: rgb(105, 208, 255);
-		}
-
-		.icon-button:focus {
-			outline: none;
-		}
-
-		.icon-button--disabled {
-			opacity: 0.5;
-			cursor: not-allowed;
-		}
-
-		.icon-button:focus-visible {
-			outline: var(--sl-focus-ring);
-			outline-offset: var(--sl-focus-ring-offset);
-		}
-
-		.icon-button__icon {
-			pointer-events: none;
-		}
-	`;
 }
