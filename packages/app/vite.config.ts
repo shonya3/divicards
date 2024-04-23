@@ -49,6 +49,10 @@ export default defineConfig({
 					src: 'node_modules/@shoelace-style/shoelace/dist/assets/icons/file-earmark-spreadsheet.svg',
 					dest: 'assets/icons',
 				},
+				{
+					src: 'node_modules/@shoelace-style/shoelace/dist/assets/icons/x-lg.svg',
+					dest: 'assets/icons',
+				},
 			],
 		}),
 	],

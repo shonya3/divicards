@@ -215,7 +215,7 @@ const onTabWithItemsLoaded = (name: string, tab: TabWithItems, league: League) =
 			</div>
 		</div>
 
-		<ul v-for="tab in tabsWithItems">
+		<ul class="general-tabs" v-for="tab in tabsWithItems">
 			<li>
 				<GeneralTabWithItems :tab="tab" />
 			</li>
@@ -287,6 +287,10 @@ const onTabWithItemsLoaded = (name: string, tab: TabWithItems, league: League) =
 }
 .drag--active {
 	filter: hue-rotate(120deg);
+}
+
+.general-tabs {
+	list-style: none;
 }
 
 .samples {
