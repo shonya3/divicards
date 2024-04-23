@@ -6,7 +6,6 @@ import { toOrderedBy } from '@divicards/shared/toOrderedBy';
 import '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/range/range.js';
-
 import { Column, DivinationCardRecord, Order } from '@divicards/shared/types';
 
 declare global {
@@ -34,9 +33,11 @@ export class DivTableElement extends BaseElement {
 	@property({ reflect: true, attribute: 'column' }) column: Column = 'sum';
 	@property({ reflect: true, attribute: 'order' }) order: Order = 'desc';
 
-	@state() protected _cards: DivinationCardRecord[] = [];
+	@state() _cards: DivinationCardRecord[] = [];
 	@state() nameQuery = '';
 	@state() hideZeroSum = false;
+	@state() filteredRecords: DivinationCardRecord[] = [];
+	@state() summary: { amount: number; sum: number } = Object.create({});
 
 	@query('sl-checkbox#hide-zero-sum-checkbox') checkboxHideZeroSum!: HTMLInputElement;
 
@@ -45,33 +46,28 @@ export class DivTableElement extends BaseElement {
 			this._cards = Array.from(this.cards);
 		}
 
-		const needToOrder =
-			map.has('cards') || map.has('column') || map.has('minPrice') || map.has('nameQuery') || map.has('order');
-		if (needToOrder) {
+		if (map.has('cards') || map.has('column') || map.has('minPrice') || map.has('nameQuery') || map.has('order')) {
 			this._cards = toOrderedBy(this._cards, this.column, this.order);
+
+			this.filteredRecords = this._cards.filter(({ name, price, sum }) => {
+				if (this.hideZeroSum) {
+					if (sum === 0 || sum === null) return false;
+				}
+
+				return (
+					name.toLowerCase().includes(this.nameQuery.trim().toLowerCase()) && (price ?? 0) >= this.minPrice
+				);
+			});
+
+			this.summary = this.filteredRecords.reduce(
+				(summary, record) => {
+					summary.sum += record.sum ?? 0;
+					summary.amount += record.amount ?? 0;
+					return summary;
+				},
+				{ sum: 0, amount: 0 }
+			);
 		}
-	}
-
-	get filteredRecords(): DivinationCardRecord[] {
-		return this._cards.filter(({ name, price, sum }) => {
-			if (this.hideZeroSum) {
-				if (sum === 0 || sum === null) return false;
-			}
-
-			return name.toLowerCase().includes(this.nameQuery.trim().toLowerCase()) && (price ?? 0) >= this.minPrice;
-		});
-	}
-
-	get summary(): { amount: number; sum: number } {
-		let sum = 0;
-		let amount = 0;
-
-		for (const record of this.filteredRecords) {
-			sum += record.sum ?? 0;
-			amount += record.amount ?? 0;
-		}
-
-		return { amount, sum };
 	}
 
 	protected override render() {
