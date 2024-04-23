@@ -72,7 +72,7 @@ export class StashesViewElement extends BaseElement {
 		return [HelpTipElement, LeagueSelectElement, TabBadgeElement, TabBadgeGroupElement];
 	}
 	static override tag = 'wc-stashes-view';
-	static override styles = [this.baseStyles, styles()];
+	static override styles = [styles()];
 
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
 	@property() customLeague: string = CustomLeagueStorage.load() ?? '';

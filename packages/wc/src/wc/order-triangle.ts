@@ -29,7 +29,7 @@ const degree = (order: Order): number => {
 
 export class OrderTriangleElement extends BaseElement {
 	static override tag = 'wc-order-triangle';
-	static override styles = [this.baseStyles, styles()];
+	static override styles = [styles()];
 
 	@property({ reflect: true }) size: Size = '1rem';
 	@property({ reflect: true }) order: Order = 'unordered';

@@ -11,7 +11,6 @@ declare global {
 export class FixedIconElement extends BaseElement {
 	static override tag = 'wc-fixed-icon';
 	static override styles = [
-		this.baseStyles,
 		css`
 			svg {
 				cursor: pointer;

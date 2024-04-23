@@ -35,7 +35,7 @@ export class SlConverter {
 
 export class LeagueSelectElement extends BaseElement {
 	static override tag = 'wc-league-select';
-	static override styles = [this.baseStyles, styles];
+	static override styles = [styles];
 
 	@property({ type: Boolean, reflect: true }) trade = false;
 	@property({ type: String, reflect: true }) league: League = ACTIVE_LEAGUE;

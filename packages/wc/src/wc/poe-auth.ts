@@ -11,7 +11,7 @@ declare global {
 
 export class PoeAuthElement extends BaseElement {
 	static override tag = 'wc-poe-auth';
-	static override styles = [this.baseStyles, styles()];
+	static override styles = [styles()];
 
 	@property({ reflect: true }) name: string = '';
 	@property({ type: Boolean, reflect: true }) loggedIn: boolean = false;

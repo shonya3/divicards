@@ -14,7 +14,7 @@ export class NotCardsElement extends BaseElement {
 		return [BasePopupElement];
 	}
 	static override tag = 'wc-not-cards';
-	static override styles = [this.baseStyles, styles()];
+	static override styles = [styles()];
 
 	@property({ type: Array }) notCards: string[] = [];
 	@query('wc-base-popup') popup!: BasePopupElement;

@@ -64,7 +64,7 @@ export class StashLoaderElement extends BaseElement {
 		return [HelpTipElement, LeagueSelectElement, TabBadgeElement, TabBadgeGroupElement];
 	}
 	static override tag = 'e-stash-loader';
-	static override styles = [this.baseStyles, styles()];
+	static override styles = [styles()];
 
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
 	@property() customLeague: string = CustomLeagueStorage.load() ?? '';

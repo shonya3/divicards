@@ -232,6 +232,7 @@ function styles() {
 			display: block;
 			max-width: 1220px;
 			min-height: 100vh;
+			background-color: var(--bg-color, #242424);
 		}
 
 		.slider-box {
@@ -250,8 +251,8 @@ function styles() {
 			height: 100%;
 			max-width: 1220px;
 
-			color: var(--color);
-			background-color: var(--bg-color);
+			color: var(--color, rgba(255, 255, 255, 0.87));
+			background-color: var(--bg-color, #242424);
 			padding: 1rem;
 		}
 
@@ -263,7 +264,7 @@ function styles() {
 			align-items: center;
 			flex-wrap: wrap;
 			z-index: 2;
-			background-color: var(--bg-color);
+			background-color: var(--bg-color, #242424);
 			padding-top: 20px;
 			padding-bottom: 20px;
 			border-bottom: 1px solid black;

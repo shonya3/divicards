@@ -56,7 +56,6 @@ export class FixedNamesElement extends BaseElement {
 	}
 
 	static override styles = [
-		this.baseStyles,
 		css`
 			.fixed-names-list {
 				margin-top: 2rem;

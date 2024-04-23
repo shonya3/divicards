@@ -1,12 +1,11 @@
-import { html, css, PropertyValues, nothing } from 'lit';
+import { html, css, nothing } from 'lit';
 import { BaseElement } from '../base-element';
-import { property, state, query } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
+import { property } from 'lit/decorators.js';
+import '@shoelace-style/shoelace/dist/components/button/button.js';
 import { Column, Order, TablePreferences } from '@divicards/shared/types';
 import { HelpTipElement } from '../help-tip';
 
 export type To = 'file' | 'sheets';
-
 const isColumn = (s: unknown): s is Column => {
 	return s === 'name' || s === 'amount' || s === 'weight' || s === 'price';
 };
@@ -46,7 +45,7 @@ export class FormExportSampleElement extends BaseElement {
 		return [HelpTipElement];
 	}
 	static override tag = 'wc-form-export-sample';
-	static override styles = [this.baseStyles, styles()];
+	static override styles = [styles()];
 
 	@property({ reflect: true, attribute: 'spreadsheet-id' }) spreadsheetId: string = '';
 	@property({ reflect: true, attribute: 'sheet-title' }) sheetTitle: string = '';
@@ -289,7 +288,7 @@ export class FormExportSampleElement extends BaseElement {
 					</fieldset>
 				</fieldset>
 				${this.error && html`<div id="error">${this.error}</div>`}
-				<button id="submit">Submit</button>
+				<sl-button id="submit">Submit</sl-button>
 			</form>
 		</div>`;
 	}

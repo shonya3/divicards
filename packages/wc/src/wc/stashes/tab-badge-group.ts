@@ -58,7 +58,7 @@ export class TabBadgeGroupElement extends BaseElement {
 		return [TabBadgeElement];
 	}
 	static override tag = 'wc-tab-badge-group';
-	static override styles = [this.baseStyles, styles()];
+	static override styles = [styles()];
 
 	@property({ type: Array }) stashes: NoItemsTab[] = [];
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;

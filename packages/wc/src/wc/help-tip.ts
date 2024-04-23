@@ -13,7 +13,7 @@ declare global {
  */
 export class HelpTipElement extends BaseElement {
 	static override tag: string = 'wc-help-tip';
-	static override styles = [this.baseStyles, styles()];
+	static override styles = [styles()];
 	override render() {
 		return html`<div class="help-tip">
 			<div part="tooltip" class="tooltip">

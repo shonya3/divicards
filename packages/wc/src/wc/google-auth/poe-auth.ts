@@ -10,7 +10,7 @@ declare global {
 
 export class GoogleAuthElement extends BaseElement {
 	static override tag = 'wc-google-auth';
-	static override styles = [this.baseStyles, styles()];
+	static override styles = [styles()];
 
 	@property({ reflect: true }) name: string = '';
 	@property({ reflect: true }) picture: string = '';
@@ -24,7 +24,7 @@ export class GoogleAuthElement extends BaseElement {
 					<img src=${this.picture} alt="user avatar" width="32" height="32" />
 					<p>${this.name}</p>
 					${logoutButton}
-			  </div>`
+				</div>`
 			: html`<div>${loginButton}</div>`;
 
 		return html`<div class="auth">${template}</div>`;

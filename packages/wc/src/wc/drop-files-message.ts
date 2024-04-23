@@ -8,20 +8,6 @@ declare global {
 	}
 }
 
-const styles = css`
-	:host {
-		display: block;
-	}
-	.drop {
-		font-size: 3rem;
-	}
-
-	.drop > span {
-		color: deeppink;
-		font-weight: 700;
-	}
-`;
-
 /**
  * @summary Message to drop files for main app screen
  */
@@ -30,7 +16,6 @@ export class DropFilesMessageElement extends BaseElement {
 		return [HelpTipElement];
 	}
 	static override tag: string = 'wc-drop-files-message';
-	static override styles = [this.baseStyles, styles];
 	protected override render() {
 		return html`<div style="display: flex; gap: 1rem">
 			<div class="drop">Drop files <span>Here!</span></div>
@@ -41,4 +26,17 @@ export class DropFilesMessageElement extends BaseElement {
 			/></wc-help-tip>
 		</div>`;
 	}
+	static override styles = css`
+		:host {
+			display: block;
+		}
+		.drop {
+			font-size: 3rem;
+		}
+
+		.drop > span {
+			color: deeppink;
+			font-weight: 700;
+		}
+	`;
 }
