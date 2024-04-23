@@ -71,7 +71,7 @@ export class DivTableElement extends BaseElement {
 	}
 
 	protected override render() {
-		return html`<div class="table-container">
+		return html`<div class="div-table">
 			<!-- Header -->
 			<header class="header">
 				<label for="filter-card-name">Enter name</label>
@@ -244,7 +244,7 @@ function styles() {
 			display: flex;
 			align-items: center;
 		}
-		.table-container {
+		.div-table {
 			display: flex;
 			flex-direction: column;
 			height: 100%;
@@ -252,6 +252,7 @@ function styles() {
 
 			color: var(--color);
 			background-color: var(--bg-color);
+			padding: 1rem;
 		}
 
 		.header {
@@ -265,6 +266,7 @@ function styles() {
 			background-color: var(--bg-color);
 			padding-top: 20px;
 			padding-bottom: 20px;
+			border-bottom: 1px solid black;
 		}
 
 		.column-name {

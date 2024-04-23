@@ -1,6 +1,7 @@
 import { html, css } from 'lit';
 import { BaseElement } from './base-element';
 import { query } from 'lit/decorators.js';
+import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -10,14 +11,16 @@ declare global {
 
 export class BasePopupElement extends BaseElement {
 	static override tag = 'wc-base-popup';
-	static override styles = [this.baseStyles, styles()];
+	static override styles = [styles()];
 
 	@query('dialog') dialog!: HTMLDialogElement;
 
 	protected override render() {
 		return html`<dialog>
-			<slot></slot>
-			<button @click=${() => this.dialog.close()} class="btn-close">X</button>
+			<div class="slot-parent">
+				<slot></slot>
+			</div>
+			<sl-icon-button name="x-lg" @click=${() => this.dialog.close()} class="btn-close">X</sl-icon-button>
 		</dialog> `;
 	}
 
@@ -56,15 +59,14 @@ function styles() {
 			margin: auto;
 			border: none;
 			border-radius: 10px;
-			animation: content-fade-in 800ms forwards ease-out;
+			animation: content-fade-in 300ms forwards ease-out;
 		}
 
 		dialog::backdrop {
-			background-color: darkorange;
-			background-image: linear-gradient(130deg, #ff7a18, #af002d 41.07%, #319197 76.05%);
 			filter: blur(0px);
-			animation: backdrop-fade-in 800ms forwards ease-out;
-			backdrop-filter: blur(20px);
+			animation: backdrop-fade-in 300ms forwards ease-out;
+			max-width: 100%;
+			backdrop-filter: blur(100px);
 		}
 
 		dialog::slotted(*) {
@@ -74,8 +76,8 @@ function styles() {
 		}
 
 		@media (min-width: 800px) {
-			::slotted(*) {
-				padding-inline: 2rem;
+			.slot-parent {
+				padding: 2rem;
 			}
 		}
 
