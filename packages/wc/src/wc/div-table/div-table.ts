@@ -27,7 +27,7 @@ export class DivTableElement extends BaseElement {
 		return [OrderTriangleElement];
 	}
 	static override tag = 'wc-div-table';
-	static override styles = [this.baseStyles, styles()];
+	static override styles = [styles()];
 
 	@property({ type: Array }) cards: Readonly<DivinationCardRecord[]> = [];
 	@property({ reflect: true, type: Number, attribute: 'min-price' }) minPrice: number = 0;
@@ -52,19 +52,6 @@ export class DivTableElement extends BaseElement {
 		}
 	}
 
-	toggleOrder(newActivecolumn: Column) {
-		if (this.column === newActivecolumn) {
-			this.order = this.order === 'asc' ? 'desc' : 'asc';
-		}
-		// if column is unordered
-		else {
-			// if by name, start from A. Otherwise, start from the bigger values
-			this.order = newActivecolumn === 'name' ? 'asc' : 'desc';
-		}
-
-		this.column = newActivecolumn;
-	}
-
 	get filteredRecords(): DivinationCardRecord[] {
 		return this._cards.filter(({ name, price, sum }) => {
 			if (this.hideZeroSum) {
@@ -85,6 +72,134 @@ export class DivTableElement extends BaseElement {
 		}
 
 		return { amount, sum };
+	}
+
+	protected override render() {
+		return html`<div class="table-container">
+			<!-- Header -->
+			<header class="header">
+				<label for="filter-card-name">Enter name</label>
+				<sl-input
+					autofocus
+					type="text"
+					id="filter-card-name"
+					.value=${this.nameQuery}
+					@input=${this.#onNameQueryInput}
+				></sl-input>
+
+				<span class="stats"
+					>found
+					<span class="ch-6">${this.filteredRecords.length} </span>
+					card names
+					<span class="ch-6">${this.summary.amount}</span>
+					cards,
+					<span class="ch-7">${format(this.summary.sum)}</span>
+					<img width="20" height="20" class="chaos-img" src="/chaos.png" alt="chaos" />)</span
+				>
+				<label class="slider-box">
+					<label for="min-price-slider">min price </label>
+					<sl-range
+						id="min-price-slider"
+						min="0"
+						max="500"
+						.value=${this.minPrice}
+						@input=${this.#onMinPriceSlider}
+					></sl-range>
+					<span class="ch-3">${this.minPrice}</span>
+					<img width="20" height="20" class="chaos-img" src="/chaos.png" alt="chaos" />
+				</label>
+				<div style="display: flex; gap: 0.8rem">
+					<sl-checkbox
+						id="hide-zero-sum-checkbox"
+						.checked=${this.hideZeroSum}
+						@sl-change=${this.#onHideZeroCheckbox}
+						>hide nullish rows</sl-checkbox
+					>
+				</div>
+			</header>
+
+			<!-- Table -->
+			<table class="table">
+				<colgroup>
+					<col span="1" class="col" />
+					<col span="1" class="col" />
+					<col span="1" class="col-name" />
+					<col span="1" class="col" />
+					<col span="1" class="col" />
+					<col span="1" class="col" />
+				</colgroup>
+				<thead>
+					<tr>
+						<th>&numero;</th>
+						<th>
+							<span class="column-name"> Amount </span>
+							<wc-order-triangle
+								?active=${this.column === 'amount'}
+								order=${this.column === 'amount' ? this.order : 'unordered'}
+								@click=${() => this.#onOrderTriangleClicked('amount')}
+							></wc-order-triangle>
+						</th>
+						<th>
+							<span class="column-name"> Name </span>
+							<wc-order-triangle
+								?active=${this.column === 'name'}
+								order=${this.column === 'name' ? this.order : 'unordered'}
+								@click=${() => this.#onOrderTriangleClicked('name')}
+							></wc-order-triangle>
+						</th>
+						<th>
+							<span class="column-name"> Price </span>
+							<wc-order-triangle
+								?active=${this.column === 'price'}
+								order=${this.column === 'price' ? this.order : 'unordered'}
+								@click=${() => this.#onOrderTriangleClicked('price')}
+							></wc-order-triangle>
+						</th>
+						<th>
+							<span class="column-name"> Sum </span>
+							<wc-order-triangle
+								?active=${this.column === 'sum'}
+								order=${this.column === 'sum' ? this.order : 'unordered'}
+								@click=${() => this.#onOrderTriangleClicked('sum')}
+							></wc-order-triangle>
+						</th>
+						<th>
+							<span class="column-name"> Weight </span>
+							<wc-order-triangle
+								?active=${this.column === 'weight'}
+								order=${this.column === 'weight' ? this.order : 'unordered'}
+								@click=${() => this.#onOrderTriangleClicked('weight')}
+							></wc-order-triangle>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					${this.filteredRecords.map(({ amount, name, price, sum, weight }, index) => {
+						return html`<tr>
+							<td class="row">${index + 1}</td>
+							<td class="row">${amount}</td>
+							<td class="name-row">${name}</td>
+							<td class="row">${price === null ? 'no price' : format(price)}</td>
+							<td class="row">${format(sum ?? 0)}</td>
+							<td class="row">${format(weight ?? 0)}</td>
+						</tr>`;
+					})}
+				</tbody>
+			</table>
+		</div>`;
+	}
+
+	toggleOrder(newActivecolumn: Column) {
+		if (this.column === newActivecolumn) {
+			this.order = this.order === 'asc' ? 'desc' : 'asc';
+		}
+		// if column is unordered
+		else {
+			// if by name, start from A. Otherwise, start from the bigger values
+			this.order = newActivecolumn === 'name' ? 'asc' : 'desc';
+		}
+
+		this.column = newActivecolumn;
 	}
 
 	#onNameQueryInput(e: InputEvent) {
@@ -111,132 +226,6 @@ export class DivTableElement extends BaseElement {
 		this.emit<Events['column-order-changed']>('column-order-changed', {
 			column: this.column,
 			order: this.order,
-		});
-	}
-
-	protected override render() {
-		return html`<div class="table-container">${this.header()}${this.table()}</div>`;
-	}
-
-	protected header() {
-		return html`<header class="header">
-			<label for="filter-card-name">Enter name</label>
-			<sl-input
-				autofocus
-				type="text"
-				id="filter-card-name"
-				.value=${this.nameQuery}
-				@input=${this.#onNameQueryInput}
-			></sl-input>
-
-			<span class="stats"
-				>found
-				<span class="ch-6">${this.filteredRecords.length} </span>
-				card names
-				<span class="ch-6">${this.summary.amount}</span>
-				cards,
-				<span class="ch-7">${format(this.summary.sum)}</span>
-				<img width="20" height="20" class="chaos-img" src="/chaos.png" alt="chaos" />)</span
-			>
-			<label class="slider-box">
-				<label for="min-price-slider">min price </label>
-				<sl-range
-					id="min-price-slider"
-					min="0"
-					max="500"
-					.value=${this.minPrice}
-					@input=${this.#onMinPriceSlider}
-				></sl-range>
-				<span class="ch-3">${this.minPrice}</span>
-				<img width="20" height="20" class="chaos-img" src="/chaos.png" alt="chaos" />
-			</label>
-			<div style="display: flex; gap: 0.8rem">
-				<sl-checkbox
-					id="hide-zero-sum-checkbox"
-					.checked=${this.hideZeroSum}
-					@sl-change=${this.#onHideZeroCheckbox}
-					>hide nullish rows</sl-checkbox
-				>
-			</div>
-			<!-- <div>download filtered file</div> -->
-		</header>`;
-	}
-
-	protected table() {
-		return html`<table class="table">
-			<colgroup>
-				<col span="1" class="col" />
-				<col span="1" class="col" />
-				<col span="1" class="col-name" />
-				<col span="1" class="col" />
-				<col span="1" class="col" />
-				<col span="1" class="col" />
-			</colgroup>
-			${this.thead()}
-			<tbody>
-				${this.rows()}
-			</tbody>
-		</table>`;
-	}
-
-	protected thead() {
-		return html`<thead>
-			<tr>
-				<th>&numero;</th>
-				<th>
-					<span class="column-name"> Amount </span>
-					<wc-order-triangle
-						?active=${this.column === 'amount'}
-						order=${this.column === 'amount' ? this.order : 'unordered'}
-						@click=${() => this.#onOrderTriangleClicked('amount')}
-					></wc-order-triangle>
-				</th>
-				<th>
-					<span class="column-name"> Name </span>
-					<wc-order-triangle
-						?active=${this.column === 'name'}
-						order=${this.column === 'name' ? this.order : 'unordered'}
-						@click=${() => this.#onOrderTriangleClicked('name')}
-					></wc-order-triangle>
-				</th>
-				<th>
-					<span class="column-name"> Price </span>
-					<wc-order-triangle
-						?active=${this.column === 'price'}
-						order=${this.column === 'price' ? this.order : 'unordered'}
-						@click=${() => this.#onOrderTriangleClicked('price')}
-					></wc-order-triangle>
-				</th>
-				<th>
-					<span class="column-name"> Sum </span>
-					<wc-order-triangle
-						?active=${this.column === 'sum'}
-						order=${this.column === 'sum' ? this.order : 'unordered'}
-						@click=${() => this.#onOrderTriangleClicked('sum')}
-					></wc-order-triangle>
-				</th>
-				<th>
-					<span class="column-name"> Weight </span>
-					<wc-order-triangle
-						?active=${this.column === 'weight'}
-						order=${this.column === 'weight' ? this.order : 'unordered'}
-						@click=${() => this.#onOrderTriangleClicked('weight')}
-					></wc-order-triangle>
-				</th>
-			</tr>
-		</thead>`;
-	}
-
-	protected rows() {
-		return this.filteredRecords.map(({ amount, name, price, sum, weight }, index) => {
-			return html`<tr>
-				<td class="row">${index + 1}</td>
-				<td class="row">${amount}</td>
-				<td class="name-row">${name}</td>
-				<td class="row">${price === null ? 'no price' : format(price)}</td>
-				<td class="row">${format(sum ?? 0)}</td>
-				<td class="row">${format(weight ?? 0)}</td>
-			</tr>`;
 		});
 	}
 }
