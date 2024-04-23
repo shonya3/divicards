@@ -4,6 +4,7 @@ use divi::{
     IsCard,
 };
 use serde::{Deserialize, Serialize};
+use serde_json::Value;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum StashType {
@@ -23,10 +24,10 @@ pub enum StashType {
 /// Any item from stash tab
 #[derive(Serialize, Deserialize, Clone, Debug)]
 #[serde(transparent)]
-pub struct Item(serde_json::Value);
+pub struct Item(Value);
 impl Item {
-    pub fn new(json: serde_json::Value) -> Self {
-        Self(json)
+    pub fn new(value: Value) -> Self {
+        Self(value)
     }
 }
 
@@ -42,24 +43,47 @@ impl Item {
 /// Tab from /stashes poe api route, contains only metadata and not items
 #[derive(Serialize, Deserialize, Clone, Debug)]
 #[serde(transparent)]
-pub struct TabNoItems(serde_json::Value);
+pub struct TabNoItems(Value);
 
 /// Tab from /stash poe api route, contains items field
-#[derive(Serialize, Deserialize, Clone, Debug, Default)]
+#[derive(Clone, Debug, Default, Serialize)]
 #[serde(transparent)]
-pub struct TabWithItems(serde_json::Value);
+pub struct TabWithItems(Value);
 impl TabWithItems {
     pub fn items(&self) -> impl Iterator<Item = Item> {
         self.0["items"]
             .as_array()
             .cloned()
             .unwrap_or_default()
-            .to_owned()
             .into_iter()
             .map(|v| Item::new(v))
     }
     pub fn kind(&self) -> Result<StashType, serde_json::Error> {
         serde_json::from_value(self.0["type"].clone())
+    }
+}
+impl TabWithItems {
+    pub fn new(value: Value) -> Self {
+        Self(value)
+    }
+}
+
+impl<'de> Deserialize<'de> for TabWithItems {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        let mut value = Value::deserialize(deserializer)?;
+        match value.get_mut("items") {
+            Some(items) => {
+                if !items.is_array() {
+                    *items = Value::Array(vec![]);
+                }
+            }
+            None => value["items"] = Value::Array(vec![]),
+        };
+
+        Ok(Self::new(value))
     }
 }
 
