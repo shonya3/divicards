@@ -139,14 +139,6 @@ export class StashesViewElement extends BaseElement {
 			</div>
 
 			<div class=${classMap({ 'not-visible': this.stashes.length === 0, 'load-tab-contents': true })}>
-				<sl-button
-					id="get-data-btn"
-					class="btn-load-items"
-					.disabled=${this.selectedTabs.size === 0 || this.fetchingStash || this.stashLoadsAvailable === 0}
-					@click=${this.#onLoadItemsClicked}
-				>
-					Load Tabs Contents
-				</sl-button>
 				<sl-radio-group
 					class="mt-16"
 					@sl-change=${this.#onDownloadAsChanged}
@@ -160,6 +152,14 @@ export class StashesViewElement extends BaseElement {
 							>`
 					)}
 				</sl-radio-group>
+				<sl-button
+					id="get-data-btn"
+					class="btn-load-items"
+					.disabled=${this.selectedTabs.size === 0 || this.fetchingStash || this.stashLoadsAvailable === 0}
+					@click=${this.#onLoadItemsClicked}
+				>
+					Load Tabs Contents
+				</sl-button>
 			</div>
 
 			<div class="messages">
@@ -365,11 +365,11 @@ function styles() {
 
 		.load-tab-contents {
 			display: flex;
+			flex-direction: column;
 			margin-inline: auto;
 			align-items: center;
 			gap: 1rem;
 			justify-content: center;
-			gap: 5rem;
 		}
 
 		.messages {
