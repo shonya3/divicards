@@ -13,10 +13,7 @@ import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/range/range.js';
 import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
-
 import SlRange from '@shoelace-style/shoelace/dist/components/range/range.js';
-
-const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -42,6 +39,7 @@ export interface Events {
 	'save-to-file-clicked': { sample: DivinationCardsSample; league: League; filename: string };
 }
 
+const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 export class SampleCardElement extends BaseElement {
 	static override get defineList() {
 		return [LeagueSelectElement, DivTableElement, BasePopupElement, FixedNamesElement, NotCardsElement];
@@ -205,7 +203,6 @@ export class SampleCardElement extends BaseElement {
 	}
 
 	static override styles = [
-		this.baseStyles,
 		css`
 			:host {
 				--border-color: rgba(255, 255, 255, 0.3);
