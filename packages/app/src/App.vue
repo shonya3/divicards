@@ -217,7 +217,14 @@ const onTabWithItemsLoaded = (name: string, tab: TabWithItems, league: League) =
 
 		<ul class="general-tabs" v-for="tab in tabsWithItems">
 			<li>
-				<GeneralTabWithItems :tab="tab" />
+				<GeneralTabWithItems
+					@close="
+						() => {
+							tabsWithItems = tabsWithItems.filter(({ id }) => id !== tab.id);
+						}
+					"
+					:tab="tab"
+				/>
 			</li>
 		</ul>
 

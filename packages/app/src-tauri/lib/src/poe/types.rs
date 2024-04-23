@@ -24,6 +24,11 @@ pub enum StashType {
 #[derive(Serialize, Deserialize, Clone, Debug)]
 #[serde(transparent)]
 pub struct Item(serde_json::Value);
+impl Item {
+    pub fn new(json: serde_json::Value) -> Self {
+        Self(json)
+    }
+}
 
 impl Item {
     pub fn base_type(&self) -> Option<&str> {
@@ -36,15 +41,26 @@ impl Item {
 
 /// Tab from /stashes poe api route, contains only metadata and not items
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct TabNoItems {}
+#[serde(transparent)]
+pub struct TabNoItems(serde_json::Value);
 
 /// Tab from /stash poe api route, contains items field
 #[derive(Serialize, Deserialize, Clone, Debug, Default)]
-pub struct TabWithItems {
-    #[serde(default)]
-    pub items: Vec<Item>,
-    #[serde(rename = "type")]
-    pub kind: Option<StashType>,
+#[serde(transparent)]
+pub struct TabWithItems(serde_json::Value);
+impl TabWithItems {
+    pub fn items(&self) -> impl Iterator<Item = Item> {
+        self.0["items"]
+            .as_array()
+            .cloned()
+            .unwrap_or_default()
+            .to_owned()
+            .into_iter()
+            .map(|v| Item::new(v))
+    }
+    pub fn kind(&self) -> Result<StashType, serde_json::Error> {
+        serde_json::from_value(self.0["type"].clone())
+    }
 }
 
 impl IsCard for Item {
@@ -67,7 +83,7 @@ impl IsCard for Item {
 impl From<TabWithItems> for SampleData {
     fn from(tab: TabWithItems) -> Self {
         let cards: Vec<CardNameAmount> = tab
-            .items
+            .items()
             .into_iter()
             .filter(|item| item.is_card())
             .map(|item| CardNameAmount {

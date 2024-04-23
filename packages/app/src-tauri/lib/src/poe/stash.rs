@@ -1,22 +1,20 @@
-use reqwest::{Client, RequestBuilder};
-use serde::Deserialize;
-use serde_json::Value;
-use tauri::{command, State, Window};
-use tokio::sync::Mutex;
-use tracing::instrument;
-
+use super::types::TabNoItems;
 use crate::{
     error::Error,
     poe::{types::TabWithItems, AccessTokenStorage, Persist, API_URL},
     prices::AppCardPrices,
     version::AppVersion,
 };
-
 use divi::{
     prices::Prices,
     sample::{DivinationCardsSample, SampleData},
     {League, TradeLeague},
 };
+use reqwest::{Client, RequestBuilder};
+use serde::Deserialize;
+use tauri::{command, State, Window};
+use tokio::sync::Mutex;
+use tracing::instrument;
 
 #[instrument(skip(prices, window))]
 #[command]
@@ -54,7 +52,7 @@ pub async fn tab_with_items(
 
 #[instrument]
 #[command]
-pub async fn stashes(league: League, version: State<'_, AppVersion>) -> Result<Value, Error> {
+pub async fn stashes(league: League, version: State<'_, AppVersion>) -> Result<TabNoItems, Error> {
     StashAPI::stashes(league, version.inner()).await
 }
 
@@ -98,11 +96,10 @@ impl StashAPI {
         Ok(response_shape.stash)
     }
 
-    async fn stashes(league: League, version: &AppVersion) -> Result<Value, Error> {
+    async fn stashes(league: League, version: &AppVersion) -> Result<TabNoItems, Error> {
         let url = format!("{}/stash/{}", API_URL, league);
         let response = StashAPI::with_auth_headers(&url, version).send().await?;
-        let value = response.json::<Value>().await?;
-        Ok(value)
+        Ok(response.json().await?)
     }
 
     fn with_auth_headers(url: &str, version: &AppVersion) -> RequestBuilder {
