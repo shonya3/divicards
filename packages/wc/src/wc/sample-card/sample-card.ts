@@ -62,6 +62,84 @@ export class SampleCardElement extends BaseElement {
 	@query('wc-div-table') table!: DivTableElement;
 	@query('sl-range') rangeEl!: SlRange;
 
+	protected override render() {
+		return html`<div
+			class=${classMap({
+				file: true,
+				'file-selected': Boolean(this.selected),
+			})}
+		>
+			<p class="filename">${this.filename}</p>
+
+			<sl-icon-button
+				@click=${this.#onBtnDeleteClicked}
+				id="btn-delete"
+				class="btn-delete"
+				name="x-lg"
+			></sl-icon-button>
+			<div class="minor-icons">
+				${this.sample.fixedNames.length > 0
+					? html`<wc-fixed-names .fixedNames=${this.sample.fixedNames}></wc-fixed-names>`
+					: nothing}
+				${this.sample.notCards.length > 0
+					? html`<wc-not-cards .notCards=${this.sample.notCards}></wc-not-cards>`
+					: nothing}
+			</div>
+			<svg
+				class="grid-icon"
+				@click=${this.#onGridIconClicked}
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 512 512"
+			>
+				<path
+					fill="currentColor"
+					d="M47.547 63.547v384.906a16 16 0 0 0 16 16h384.906a16 16 0 0 0 16-16V63.547a16 16 0 0 0-16-16H63.547a16 16 0 0 0-16 16Zm288.6 16h96.3v96.3h-96.3Zm0 128.3h96.3v96.3h-96.3Zm0 128.3h96.3v96.3h-96.3Zm-128.3-256.6h96.3v96.3h-96.3Zm0 128.3h96.3v96.3h-96.3Zm0 128.3h96.3v96.3h-96.3Zm-128.3-256.6h96.3v96.3h-96.3Zm0 128.3h96.3v96.3h-96.3Zm0 128.3h96.3v96.3h-96.3Z"
+				/>
+			</svg>
+			<sl-range
+				id="minimum-card-price-slider"
+				class="slider"
+				name=""
+				id=""
+				min="0"
+				max="500"
+				.value=${this.minimumCardPrice}
+				@sl-input=${this.#onMinPriceRange}
+			></sl-range>
+			<div class="total-price">
+				<p>${format(this.filteredSummary.value)}</p>
+				<img width="35" height="35" class="chaos-img" src="/chaos.png" alt="chaos" />
+			</div>
+			<div class="cards-amount">
+				<p>${this.filteredSummary.amount}</p>
+				<img width="35" height="35" src="/divination-card.png" alt="Divination card" />
+			</div>
+			<wc-league-select trade .league=${this.league} @upd:league=${this.#onLeagueSelected}></wc-league-select>
+			<div class="export-buttons">
+				<sl-button size="large" @click=${this.#onSaveToFileClicked}>
+					<sl-icon style="font-size:1.6rem" name="filetype-csv"></sl-icon>
+					Save to file</sl-button
+				>
+				<sl-button @click=${this.#onSheetsIconClicked} size="large">
+					<sl-icon style="font-size:1.6rem" name="file-earmark-spreadsheet"></sl-icon>
+					Export to Google Sheets</sl-button
+				>
+			</div>
+			${this.selected === null
+				? nothing
+				: html`<input
+						class="checkbox"
+						type="checkbox"
+						.checked=${this.selected}
+						id="selected-checkbox"
+						@change=${this.#onSelectedClicked}
+					/>`}
+			<wc-base-popup id="table-popup">
+				<wc-div-table .cards=${this.sample.cards}> </wc-div-table>
+			</wc-base-popup>
+		</div>`;
+	}
+
 	get filteredCards() {
 		return this.sample.cards.filter(card => {
 			return (card.price ?? 0) >= this.minimumCardPrice;
@@ -124,98 +202,6 @@ export class SampleCardElement extends BaseElement {
 	#onMinPriceRange() {
 		this.minimumCardPrice = Number(this.rangeEl.value);
 		this.emit<Events['upd:minimumCardPrice']>('upd:minimumCardPrice', this.minimumCardPrice);
-	}
-
-	protected override render() {
-		return html`<div
-			class=${classMap({
-				file: true,
-				'file-selected': Boolean(this.selected),
-			})}
-		>
-			<p class="filename">${this.filename}</p>
-
-			<sl-icon-button
-				@click=${this.#onBtnDeleteClicked}
-				id="btn-delete"
-				class="btn-delete"
-				name="x-lg"
-			></sl-icon-button>
-			${this.chunk()}
-		</div>`;
-	}
-
-	protected chunk() {
-		return html`<div class="minor-icons">
-				${this.sample.fixedNames.length > 0
-					? html`<wc-fixed-names .fixedNames=${this.sample.fixedNames}></wc-fixed-names>`
-					: nothing}
-				${this.sample.notCards.length > 0
-					? html`<wc-not-cards .notCards=${this.sample.notCards}></wc-not-cards>`
-					: nothing}
-			</div>
-			${this.gridIcon()}
-
-			<sl-range
-				id="minimum-card-price-slider"
-				class="slider"
-				name=""
-				id=""
-				min="0"
-				max="500"
-				.value=${this.minimumCardPrice}
-				@sl-input=${this.#onMinPriceRange}
-			></sl-range>
-
-			<div class="total-price">
-				<p>${format(this.filteredSummary.value)}</p>
-				<img width="35" height="35" class="chaos-img" src="/chaos.png" alt="chaos" />
-			</div>
-			<div class="cards-amount">
-				<p>${this.filteredSummary.amount}</p>
-				<img width="35" height="35" src="/divination-card.png" alt="Divination card" />
-			</div>
-
-			<wc-league-select trade .league=${this.league} @upd:league=${this.#onLeagueSelected}></wc-league-select>
-
-			<div class="export-buttons">
-				<sl-button size="large" @click=${this.#onSaveToFileClicked}>
-					<sl-icon style="font-size:1.6rem" name="filetype-csv"></sl-icon>
-					Save to file</sl-button
-				>
-				<sl-button @click=${this.#onSheetsIconClicked} size="large">
-					<sl-icon style="font-size:1.6rem" name="file-earmark-spreadsheet"></sl-icon>
-					Export to Google Sheets</sl-button
-				>
-			</div>
-
-			${this.selected === null
-				? nothing
-				: html`<input
-						class="checkbox"
-						type="checkbox"
-						.checked=${this.selected}
-						id="selected-checkbox"
-						@change=${this.#onSelectedClicked}
-					/>`}
-
-			<wc-base-popup id="table-popup">
-				<wc-div-table .cards=${this.sample.cards}> </wc-div-table>
-			</wc-base-popup>`;
-	}
-
-	protected gridIcon() {
-		return html`<svg
-			class="grid-icon"
-			@click=${this.#onGridIconClicked}
-			xmlns="http://www.w3.org/2000/svg"
-			viewBox="0 0 512 512"
-		>
-			<path
-				fill="currentColor"
-				d="M47.547 63.547v384.906a16 16 0 0 0 16 16h384.906a16 16 0 0 0 16-16V63.547a16 16 0 0 0-16-16H63.547a16 16 0 0 0-16 16Zm288.6 16h96.3v96.3h-96.3Zm0 128.3h96.3v96.3h-96.3Zm0 128.3h96.3v96.3h-96.3Zm-128.3-256.6h96.3v96.3h-96.3Zm0 128.3h96.3v96.3h-96.3Zm0 128.3h96.3v96.3h-96.3Zm-128.3-256.6h96.3v96.3h-96.3Zm0 128.3h96.3v96.3h-96.3Zm0 128.3h96.3v96.3h-96.3Z"
-			/>
-		</svg>`;
 	}
 
 	static override styles = [
