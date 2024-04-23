@@ -33,7 +33,7 @@ function onMergeStacksClick() {
 
 <template>
 	<div class="component">
-		{{ tab.name }} {{ tab.id }}
+		{{ tab.name }}
 		<details>
 			<summary>
 				Amounts table
