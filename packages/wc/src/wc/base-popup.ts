@@ -12,46 +12,48 @@ declare global {
 export class BasePopupElement extends BaseElement {
 	static override tag = 'wc-base-popup';
 	static override styles = [styles()];
-	/** Instead of dialog, runs showModal() if true */
+	/** Instead of dialog's non-modal open, runs showModal() if true https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#open */
 	@property({ type: Boolean }) open = false;
 
 	protected async willUpdate(map: PropertyValueMap<this>): Promise<void> {
 		if (map.has('open')) {
-			if (!this.dialog) {
-				await this.updateComplete;
-			}
-
 			if (this.open) {
-				this.showModal();
+				await this.showModal();
 			} else {
-				this.close();
+				await this.close();
 			}
 		}
 	}
 
-	@query('dialog') dialog!: HTMLDialogElement;
+	async dialog(): Promise<HTMLDialogElement> {
+		const query = () => this.shadowRoot!.querySelector('dialog');
+		const dialog = query();
+
+		if (dialog) {
+			return dialog;
+		} else {
+			await this.updateComplete;
+			return query()!;
+		}
+	}
 
 	protected override render() {
 		return html`<dialog>
 			<div class="slot-parent">
 				<slot></slot>
 			</div>
-			<sl-icon-button name="x-lg" @click=${() => this.dialog.close()} class="btn-close">X</sl-icon-button>
+			<sl-icon-button name="x-lg" @click=${() => (this.open = false)} class="btn-close">X</sl-icon-button>
 		</dialog> `;
 	}
 
-	showModal(): void {
-		if (!this.dialog) {
-			this.updateComplete.then(() => {
-				this.dialog.showModal();
-			});
-		} else {
-			this.dialog.showModal();
-		}
+	async showModal(): Promise<void> {
+		const dialog = await this.dialog();
+		dialog.showModal();
 	}
 
-	close(): void {
-		this.dialog.close();
+	async close(): Promise<void> {
+		const dialog = await this.dialog();
+		dialog.close();
 	}
 }
 
