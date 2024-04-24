@@ -34,8 +34,8 @@ declare global {
 	}
 }
 
-export class Events {
-	'close': void;
+export type Events = {
+	close: void;
 	// ---
 	/** from tab-badge-group */
 	'upd:selectedTabs': Map<TabBadgeElement['tabId'], { id: TabBadgeElement['tabId']; name: TabBadgeElement['name'] }>;
@@ -46,13 +46,13 @@ export class Events {
 	/** from tab-badge-group */
 	'upd:page': number;
 
-	'tab': { tab: TabWithItems; league: League; name: TabBadgeElement['name'] };
-	'tabs': NoItemsTab[];
+	tab: { tab: TabWithItems; league: League; name: TabBadgeElement['name'] };
+	tabs: NoItemsTab[];
 
 	// ---
 	/**  event from TabBadgeElement */
 	'tab-select': { tabId: TabBadgeElement['tabId']; name: TabBadgeElement['name']; selected: boolean };
-}
+};
 
 export interface Props {
 	league?: League;

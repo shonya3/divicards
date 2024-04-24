@@ -1,6 +1,6 @@
 import { html, css, PropertyValueMap } from 'lit';
 import { BaseElement } from './base-element';
-import { property, query } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 
 declare global {

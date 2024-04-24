@@ -1,0 +1,4487 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "main.ts",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/base-element.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "BaseElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "description": "Element tag name"
+            },
+            {
+              "kind": "field",
+              "name": "defineList",
+              "type": {
+                "text": "(typeof BaseElement)[]"
+              },
+              "static": true,
+              "default": "[]",
+              "description": "list of classes of custom elements needed for this element."
+            },
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "this.tag"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "parameters": [
+                {
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "optional": true,
+                  "type": {
+                    "text": "T"
+                  }
+                },
+                {
+                  "name": "options",
+                  "default": "{ bubbles: true, composed: true, cancelable: true }",
+                  "type": {
+                    "text": "EventInit"
+                  }
+                }
+              ]
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "wc-base-element",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "BaseElement",
+          "declaration": {
+            "name": "BaseElement",
+            "module": "src/wc/base-element.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "tag",
+          "declaration": {
+            "name": "anonymous_0",
+            "module": "src/wc/base-element.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/base-popup.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\r\n\trender() {\r\n\t\tBasePopupElement.define();\r\n\t\tDivTableElement.define();\r\n\r\n\t\tconst popup = document.createElement('wc-base-popup');\r\n\t\tpopup.open = true;\r\n\t\tconst table = document.createElement('wc-div-table');\r\n\t\ttable.cards = cards;\r\n\t\tpopup.append(table);\r\n\r\n\t\treturn html`<button @click=${() => popup.showModal()}>Open</button>${popup}`;\r\n\t},\r\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/base-popup.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/base-popup.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/base-popup.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "BasePopupElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "description": "Element tag name",
+              "default": "'wc-base-popup'",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Instead of dialog's non-modal open, runs showModal() if true https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#open",
+              "attribute": "open"
+            },
+            {
+              "kind": "method",
+              "name": "#dialog",
+              "return": {
+                "type": {
+                  "text": "Promise<HTMLDialogElement>"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "showModal",
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "onEscape",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "defineList",
+              "type": {
+                "text": "(typeof BaseElement)[]"
+              },
+              "static": true,
+              "default": "[]",
+              "description": "list of classes of custom elements needed for this element.",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "this.tag"
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "parameters": [
+                {
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "optional": true,
+                  "type": {
+                    "text": "T"
+                  }
+                },
+                {
+                  "name": "options",
+                  "default": "{ bubbles: true, composed: true, cancelable: true }",
+                  "type": {
+                    "text": "EventInit"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Instead of dialog's non-modal open, runs showModal() if true https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#open",
+              "fieldName": "open"
+            }
+          ],
+          "superclass": {
+            "name": "BaseElement",
+            "module": "/src/wc/base-element"
+          },
+          "tagName": "wc-base-popup",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "BasePopupElement",
+          "declaration": {
+            "name": "BasePopupElement",
+            "module": "src/wc/base-popup.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/drop-files-message.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\r\n\trender() {\r\n\t\tDropFilesMessageElement.define();\r\n\t\treturn html`<wc-drop-files-message></wc-drop-files-message>`;\r\n\t},\r\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/drop-files-message.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/drop-files-message.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/drop-files-message.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "DropFilesMessageElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "defineList",
+              "type": {
+                "text": "(typeof BaseElement)[]"
+              },
+              "static": true,
+              "default": "[]",
+              "description": "list of classes of custom elements needed for this element.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "description": "Element tag name",
+              "default": "'wc-drop-files-message'",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "this.tag"
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "parameters": [
+                {
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "optional": true,
+                  "type": {
+                    "text": "T"
+                  }
+                },
+                {
+                  "name": "options",
+                  "default": "{ bubbles: true, composed: true, cancelable: true }",
+                  "type": {
+                    "text": "EventInit"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "BaseElement",
+            "module": "/src/wc/base-element"
+          },
+          "summary": "Message to drop files for main app screen",
+          "tagName": "wc-drop-files-message",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DropFilesMessageElement",
+          "declaration": {
+            "name": "DropFilesMessageElement",
+            "module": "src/wc/drop-files-message.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/help-tip.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\r\n\trender() {\r\n\t\tconst styles = styleMap({ 'margin-left': '500px' });\r\n\t\tHelpTipElement.define();\r\n\t\treturn html`<wc-help-tip style=${styles}>\r\n\t\t\t<p>Excel, .csv or just .txt</p>\r\n\t\t\t<p>Required headers: name and amount</p>\r\n\t\t\t<img src=\"/simple.png\" alt=\"Example of simple .txt file\"\r\n\t\t/></wc-help-tip>`;\r\n\t},\r\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/help-tip.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/help-tip.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/help-tip.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "HelpTipElement",
+          "slots": [
+            {
+              "description": "tip's main content",
+              "name": "The"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "description": "Element tag name",
+              "default": "'wc-help-tip'",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "defineList",
+              "type": {
+                "text": "(typeof BaseElement)[]"
+              },
+              "static": true,
+              "default": "[]",
+              "description": "list of classes of custom elements needed for this element.",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "this.tag"
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "parameters": [
+                {
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "optional": true,
+                  "type": {
+                    "text": "T"
+                  }
+                },
+                {
+                  "name": "options",
+                  "default": "{ bubbles: true, composed: true, cancelable: true }",
+                  "type": {
+                    "text": "EventInit"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "BaseElement",
+            "module": "/src/wc/base-element"
+          },
+          "summary": "A questionmark logo with hoverable tip content",
+          "tagName": "wc-help-tip",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HelpTipElement",
+          "declaration": {
+            "name": "HelpTipElement",
+            "module": "src/wc/help-tip.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/league-select.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\r\n\trender({ trade, league }: { trade: boolean; league: League }) {\r\n\t\tLeagueSelectElement.define();\r\n\t\treturn html`<wc-league-select ?trade=${trade} league=${league}></wc-league-select>`;\r\n\t},\r\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/league-select.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/league-select.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/league-select.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SlConverter",
+          "members": [
+            {
+              "kind": "field",
+              "name": "#SL_DELIMETER",
+              "privacy": "private",
+              "static": true,
+              "default": "'sl-v'",
+              "type": {
+                "text": "'sl-v'"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "toSlValue",
+              "static": true,
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "s",
+                  "type": {
+                    "text": "T"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "fromSlValue",
+              "static": true,
+              "return": {
+                "type": {
+                  "text": "T"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "s",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            }
+          ],
+          "tagName": "wc-league-select",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LeagueSelectElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "description": "Element tag name",
+              "default": "'wc-league-select'",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "trade",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "trade",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "league",
+              "type": {
+                "text": "League"
+              },
+              "default": "ACTIVE_LEAGUE",
+              "attribute": "league",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "select",
+              "type": {
+                "text": "HTMLSelectElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "focus"
+            },
+            {
+              "kind": "method",
+              "name": "#emitLeagueChange"
+            },
+            {
+              "kind": "field",
+              "name": "defineList",
+              "type": {
+                "text": "(typeof BaseElement)[]"
+              },
+              "static": true,
+              "default": "[]",
+              "description": "list of classes of custom elements needed for this element.",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "this.tag"
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "parameters": [
+                {
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "optional": true,
+                  "type": {
+                    "text": "T"
+                  }
+                },
+                {
+                  "name": "options",
+                  "default": "{ bubbles: true, composed: true, cancelable: true }",
+                  "type": {
+                    "text": "EventInit"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "trade",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "trade"
+            },
+            {
+              "name": "league",
+              "type": {
+                "text": "League"
+              },
+              "default": "ACTIVE_LEAGUE",
+              "fieldName": "league"
+            }
+          ],
+          "superclass": {
+            "name": "BaseElement",
+            "module": "/src/wc/base-element"
+          },
+          "tagName": "wc-league-select",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SlConverter",
+          "declaration": {
+            "name": "SlConverter",
+            "module": "src/wc/league-select.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LeagueSelectElement",
+          "declaration": {
+            "name": "LeagueSelectElement",
+            "module": "src/wc/league-select.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/order-triangle.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\r\n\trender({ order, active, size }: { order: Order; active: boolean; size: Size }) {\r\n\t\tOrderTriangleElement.define();\r\n\t\treturn html`<wc-order-triangle order=${order} size=${size} ?active=${active}></wc-order-triangle>`;\r\n\t},\r\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/order-triangle.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/order-triangle.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/order-triangle.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "OrderTriangleElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "description": "Element tag name",
+              "default": "'wc-order-triangle'",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "Size"
+              },
+              "default": "'1rem'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "order",
+              "type": {
+                "text": "Order"
+              },
+              "default": "'unordered'",
+              "attribute": "order",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "active"
+            },
+            {
+              "kind": "field",
+              "name": "defineList",
+              "type": {
+                "text": "(typeof BaseElement)[]"
+              },
+              "static": true,
+              "default": "[]",
+              "description": "list of classes of custom elements needed for this element.",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "this.tag"
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "parameters": [
+                {
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "optional": true,
+                  "type": {
+                    "text": "T"
+                  }
+                },
+                {
+                  "name": "options",
+                  "default": "{ bubbles: true, composed: true, cancelable: true }",
+                  "type": {
+                    "text": "EventInit"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "Size"
+              },
+              "default": "'1rem'",
+              "fieldName": "size"
+            },
+            {
+              "name": "order",
+              "type": {
+                "text": "Order"
+              },
+              "default": "'unordered'",
+              "fieldName": "order"
+            },
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "active"
+            }
+          ],
+          "superclass": {
+            "name": "BaseElement",
+            "module": "/src/wc/base-element"
+          },
+          "tagName": "wc-order-triangle",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "OrderTriangleElement",
+          "declaration": {
+            "name": "OrderTriangleElement",
+            "module": "src/wc/order-triangle.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/poe-auth.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\r\n\trender({ name, loggedIn }: { name: string; loggedIn: boolean }) {\r\n\t\tPoeAuthElement.define();\r\n\t\treturn html`<wc-poe-auth ?loggedIn=${loggedIn} .name=${name}></wc-poe-auth>`;\r\n\t},\r\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/poe-auth.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/poe-auth.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/poe-auth.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "PoeAuthElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "description": "Element tag name",
+              "default": "'wc-poe-auth'",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loggedIn",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "loggedIn",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "#emitLogin"
+            },
+            {
+              "kind": "method",
+              "name": "#emitLogout"
+            },
+            {
+              "kind": "field",
+              "name": "defineList",
+              "type": {
+                "text": "(typeof BaseElement)[]"
+              },
+              "static": true,
+              "default": "[]",
+              "description": "list of classes of custom elements needed for this element.",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "this.tag"
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "parameters": [
+                {
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "optional": true,
+                  "type": {
+                    "text": "T"
+                  }
+                },
+                {
+                  "name": "options",
+                  "default": "{ bubbles: true, composed: true, cancelable: true }",
+                  "type": {
+                    "text": "EventInit"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "name"
+            },
+            {
+              "name": "loggedIn",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "loggedIn"
+            }
+          ],
+          "superclass": {
+            "name": "BaseElement",
+            "module": "/src/wc/base-element"
+          },
+          "tagName": "wc-poe-auth",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "PoeAuthElement",
+          "declaration": {
+            "name": "PoeAuthElement",
+            "module": "src/wc/poe-auth.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/div-table/data.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "cards",
+          "type": {
+            "text": "DivinationCardRecord[]"
+          },
+          "default": "cardsData"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "cards",
+          "declaration": {
+            "name": "cards",
+            "module": "src/wc/div-table/data.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/div-table/div-table.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\r\n\trender() {\r\n\t\tDivTableElement.define();\r\n\t\treturn html`<wc-div-table .cards=${cards}></wc-div-table>`;\r\n\t},\r\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/div-table/div-table.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/div-table/div-table.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/div-table/div-table.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "DivTableElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "defineList",
+              "type": {
+                "text": "(typeof BaseElement)[]"
+              },
+              "static": true,
+              "default": "[]",
+              "description": "list of classes of custom elements needed for this element.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "description": "Element tag name",
+              "default": "'wc-div-table'",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "cards",
+              "type": {
+                "text": "Readonly<DivinationCardRecord[]>"
+              },
+              "default": "[]",
+              "attribute": "cards"
+            },
+            {
+              "kind": "field",
+              "name": "minPrice",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "min-price",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "column",
+              "type": {
+                "text": "Column"
+              },
+              "default": "'sum'",
+              "attribute": "column",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "order",
+              "type": {
+                "text": "Order"
+              },
+              "default": "'desc'",
+              "attribute": "order",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "_cards",
+              "type": {
+                "text": "DivinationCardRecord[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "nameQuery",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "hideZeroSum",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "filteredRecords",
+              "type": {
+                "text": "DivinationCardRecord[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "summary",
+              "type": {
+                "text": "{ amount: number; sum: number }"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "checkboxHideZeroSum",
+              "type": {
+                "text": "HTMLInputElement"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "toggleOrder",
+              "parameters": [
+                {
+                  "name": "newActivecolumn",
+                  "type": {
+                    "text": "Column"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onNameQueryInput",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onHideZeroCheckbox"
+            },
+            {
+              "kind": "method",
+              "name": "#onMinPriceSlider",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onOrderTriangleClicked",
+              "parameters": [
+                {
+                  "name": "newActiveColumn",
+                  "type": {
+                    "text": "Column"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "this.tag"
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "parameters": [
+                {
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "optional": true,
+                  "type": {
+                    "text": "T"
+                  }
+                },
+                {
+                  "name": "options",
+                  "default": "{ bubbles: true, composed: true, cancelable: true }",
+                  "type": {
+                    "text": "EventInit"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "cards",
+              "type": {
+                "text": "Readonly<DivinationCardRecord[]>"
+              },
+              "default": "[]",
+              "fieldName": "cards"
+            },
+            {
+              "name": "min-price",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "fieldName": "minPrice"
+            },
+            {
+              "name": "column",
+              "type": {
+                "text": "Column"
+              },
+              "default": "'sum'",
+              "fieldName": "column"
+            },
+            {
+              "name": "order",
+              "type": {
+                "text": "Order"
+              },
+              "default": "'desc'",
+              "fieldName": "order"
+            }
+          ],
+          "superclass": {
+            "name": "BaseElement",
+            "module": "/src/wc/base-element"
+          },
+          "tagName": "wc-div-table",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DivTableElement",
+          "declaration": {
+            "name": "DivTableElement",
+            "module": "src/wc/div-table/div-table.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/div-table/types.ts",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/form-export-sample/form-export-sample.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\r\n\trender() {\r\n\t\tFormExportSampleElement.define();\r\n\t\treturn html`<wc-form-export-sample></wc-form-export-sample>`;\r\n\t},\r\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/form-export-sample/form-export-sample.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/form-export-sample/form-export-sample.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/form-export-sample/form-export-sample.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FormExportSampleElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "defineList",
+              "type": {
+                "text": "(typeof BaseElement)[]"
+              },
+              "static": true,
+              "default": "[]",
+              "description": "list of classes of custom elements needed for this element.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "description": "Element tag name",
+              "default": "'wc-form-export-sample'",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "spreadsheetId",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "spreadsheet-id",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "sheetTitle",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "sheet-title",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "order",
+              "type": {
+                "text": "Order"
+              },
+              "default": "'desc'",
+              "attribute": "order",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "orderedBy",
+              "type": {
+                "text": "Column"
+              },
+              "default": "'amount'",
+              "attribute": "orderedBy",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "columns",
+              "type": {
+                "text": "Set<Column>"
+              },
+              "default": "new Set(['name', 'amount'])"
+            },
+            {
+              "kind": "field",
+              "name": "cardsMustHaveAmount",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "cardsMustHaveAmount"
+            },
+            {
+              "kind": "field",
+              "name": "minPrice",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "minPrice"
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "to",
+              "type": {
+                "text": "To"
+              },
+              "default": "'sheets'",
+              "attribute": "to",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tablePreferences",
+              "type": {
+                "text": "TablePreferences"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "#onColumnCheckbox",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                },
+                {
+                  "name": "column",
+                  "type": {
+                    "text": "Column"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onOrderRadio",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onOrderedBySelected",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onCardsMustHaveAmountCheckbox",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onMinPriceSlider",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onSheetTitleInput",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onSpreadsheetIdInput",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onSubmit",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "SubmitEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "sheetsFieldset",
+              "privacy": "protected"
+            },
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "this.tag"
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "parameters": [
+                {
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "optional": true,
+                  "type": {
+                    "text": "T"
+                  }
+                },
+                {
+                  "name": "options",
+                  "default": "{ bubbles: true, composed: true, cancelable: true }",
+                  "type": {
+                    "text": "EventInit"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "spreadsheet-id",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "spreadsheetId"
+            },
+            {
+              "name": "sheet-title",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "sheetTitle"
+            },
+            {
+              "name": "order",
+              "type": {
+                "text": "Order"
+              },
+              "default": "'desc'",
+              "fieldName": "order"
+            },
+            {
+              "name": "orderedBy",
+              "type": {
+                "text": "Column"
+              },
+              "default": "'amount'",
+              "fieldName": "orderedBy"
+            },
+            {
+              "name": "cardsMustHaveAmount",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "cardsMustHaveAmount"
+            },
+            {
+              "name": "minPrice",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "fieldName": "minPrice"
+            },
+            {
+              "name": "to",
+              "type": {
+                "text": "To"
+              },
+              "default": "'sheets'",
+              "fieldName": "to"
+            }
+          ],
+          "superclass": {
+            "name": "BaseElement",
+            "module": "/src/wc/base-element"
+          },
+          "tagName": "wc-form-export-sample",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FormExportSampleElement",
+          "declaration": {
+            "name": "FormExportSampleElement",
+            "module": "src/wc/form-export-sample/form-export-sample.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/google-auth/poe-auth.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "GoogleAuthElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "description": "Element tag name",
+              "default": "'wc-google-auth'",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "picture",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "picture",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loggedIn",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "loggedIn",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "#emitLogin"
+            },
+            {
+              "kind": "method",
+              "name": "#emitLogout"
+            },
+            {
+              "kind": "field",
+              "name": "defineList",
+              "type": {
+                "text": "(typeof BaseElement)[]"
+              },
+              "static": true,
+              "default": "[]",
+              "description": "list of classes of custom elements needed for this element.",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "this.tag"
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "parameters": [
+                {
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "optional": true,
+                  "type": {
+                    "text": "T"
+                  }
+                },
+                {
+                  "name": "options",
+                  "default": "{ bubbles: true, composed: true, cancelable: true }",
+                  "type": {
+                    "text": "EventInit"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "name"
+            },
+            {
+              "name": "picture",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "picture"
+            },
+            {
+              "name": "loggedIn",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "loggedIn"
+            }
+          ],
+          "superclass": {
+            "name": "BaseElement",
+            "module": "/src/wc/base-element"
+          },
+          "tagName": "wc-poe-auth",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "GoogleAuthElement",
+          "declaration": {
+            "name": "GoogleAuthElement",
+            "module": "src/wc/google-auth/poe-auth.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/sample-card/data.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "props",
+          "type": {
+            "text": "Props"
+          },
+          "default": "json"
+        },
+        {
+          "kind": "variable",
+          "name": "{ league, filename, selected, uuid, minimumCardPrice, sample }",
+          "default": "props"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "props",
+          "declaration": {
+            "name": "props",
+            "module": "src/wc/sample-card/data.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "{ league, filename, selected, uuid, minimumCardPrice, sample }",
+          "declaration": {
+            "name": "{ league, filename, selected, uuid, minimumCardPrice, sample }",
+            "module": "src/wc/sample-card/data.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/sample-card/sample-card.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\r\n\trender() {\r\n\t\tSampleCardElement.define();\r\n\t\treturn html`<wc-sample-card\r\n\t\t\tleague=${league}\r\n\t\t\tfilename=${filename}\r\n\t\t\t?selected=${selected}\r\n\t\t\tuuid=${uuid}\r\n\t\t\tminimum-card-price=${minimumCardPrice}\r\n\t\t\t.sample=${sample}\r\n\t\t></wc-sample-card>`;\r\n\t},\r\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/sample-card/sample-card.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/sample-card/sample-card.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/sample-card/sample-card.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SampleCardElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "defineList",
+              "type": {
+                "text": "(typeof BaseElement)[]"
+              },
+              "static": true,
+              "default": "[]",
+              "description": "list of classes of custom elements needed for this element.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "description": "Element tag name",
+              "default": "'wc-sample-card'",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "league",
+              "type": {
+                "text": "TradeLeague"
+              },
+              "default": "ACTIVE_LEAGUE",
+              "attribute": "league",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "filename",
+              "type": {
+                "text": "string"
+              },
+              "default": "'NO FILE NAMENO FILE NAME'",
+              "attribute": "filename",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean | null"
+              },
+              "default": "false",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "uuid",
+              "type": {
+                "text": "string"
+              },
+              "default": "'NO ID'",
+              "attribute": "uuid",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "minimumCardPrice",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "minimum-card-price",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "sample",
+              "type": {
+                "text": "DivinationCardsSample"
+              },
+              "default": "{ notCards: [], fixedNames: [], cards: [] }",
+              "attribute": "sample"
+            },
+            {
+              "kind": "field",
+              "name": "tablePopup",
+              "type": {
+                "text": "BasePopupElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "selectedCheckbox",
+              "type": {
+                "text": "HTMLInputElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "leagueSelect",
+              "type": {
+                "text": "LeagueSelectElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "priceSlider",
+              "type": {
+                "text": "HTMLInputElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "table",
+              "type": {
+                "text": "DivTableElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "rangeEl",
+              "type": {
+                "text": "SlRange"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "filteredCards",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "filteredSummary",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "#onSaveToFileClicked"
+            },
+            {
+              "kind": "method",
+              "name": "#onSheetsIconClicked"
+            },
+            {
+              "kind": "method",
+              "name": "#onGridIconClicked"
+            },
+            {
+              "kind": "method",
+              "name": "#onSelectedClicked"
+            },
+            {
+              "kind": "method",
+              "name": "#onLeagueSelected",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "CustomEvent<League>"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onBtnDeleteClicked"
+            },
+            {
+              "kind": "method",
+              "name": "#onMinPriceRange"
+            },
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "this.tag"
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "parameters": [
+                {
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "optional": true,
+                  "type": {
+                    "text": "T"
+                  }
+                },
+                {
+                  "name": "options",
+                  "default": "{ bubbles: true, composed: true, cancelable: true }",
+                  "type": {
+                    "text": "EventInit"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "league",
+              "type": {
+                "text": "TradeLeague"
+              },
+              "default": "ACTIVE_LEAGUE",
+              "fieldName": "league"
+            },
+            {
+              "name": "filename",
+              "type": {
+                "text": "string"
+              },
+              "default": "'NO FILE NAMENO FILE NAME'",
+              "fieldName": "filename"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean | null"
+              },
+              "default": "false",
+              "fieldName": "selected"
+            },
+            {
+              "name": "uuid",
+              "type": {
+                "text": "string"
+              },
+              "default": "'NO ID'",
+              "fieldName": "uuid"
+            },
+            {
+              "name": "minimum-card-price",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "fieldName": "minimumCardPrice"
+            },
+            {
+              "name": "sample",
+              "type": {
+                "text": "DivinationCardsSample"
+              },
+              "default": "{ notCards: [], fixedNames: [], cards: [] }",
+              "fieldName": "sample"
+            }
+          ],
+          "superclass": {
+            "name": "BaseElement",
+            "module": "/src/wc/base-element"
+          },
+          "tagName": "wc-sample-card",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SampleCardElement",
+          "declaration": {
+            "name": "SampleCardElement",
+            "module": "src/wc/sample-card/sample-card.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/starter/starter.ts",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/stashes/data.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "stashes",
+          "type": {
+            "text": "NoItemsTab[]"
+          },
+          "default": "stashesData"
+        },
+        {
+          "kind": "variable",
+          "name": "league",
+          "type": {
+            "text": "League"
+          },
+          "default": "'Standard'"
+        },
+        {
+          "kind": "variable",
+          "name": "sample",
+          "type": {
+            "text": "DivinationCardsSample"
+          },
+          "default": "sampleData"
+        },
+        {
+          "kind": "class",
+          "description": "",
+          "name": "MockStashLoader",
+          "members": [
+            {
+              "kind": "method",
+              "name": "tab",
+              "return": {
+                "type": {
+                  "text": "Promise<TabWithItems>"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "_tabId",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "_league",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "sampleFromTab",
+              "return": {
+                "type": {
+                  "text": "Promise<DivinationCardsSample>"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "_tabId",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "_league",
+                  "type": {
+                    "text": "League"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "tabs",
+              "return": {
+                "type": {
+                  "text": "Promise<NoItemsTab[]>"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "_league",
+                  "type": {
+                    "text": "League"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "stashes",
+          "declaration": {
+            "name": "stashes",
+            "module": "src/wc/stashes/data.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "league",
+          "declaration": {
+            "name": "league",
+            "module": "src/wc/stashes/data.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "sample",
+          "declaration": {
+            "name": "sample",
+            "module": "src/wc/stashes/data.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "MockStashLoader",
+          "declaration": {
+            "name": "MockStashLoader",
+            "module": "src/wc/stashes/data.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/stashes/stash-loader.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "StashLoaderElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "defineList",
+              "type": {
+                "text": "(typeof BaseElement)[]"
+              },
+              "static": true,
+              "default": "[]",
+              "description": "list of classes of custom elements needed for this element.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "description": "Element tag name",
+              "default": "'e-stash-loader'",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "league",
+              "type": {
+                "text": "League"
+              },
+              "default": "ACTIVE_LEAGUE",
+              "attribute": "league",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "customLeague",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "customLeague"
+            },
+            {
+              "kind": "field",
+              "name": "selectedTabs",
+              "type": {
+                "text": "Map<\r\n\t\tTabBadgeElement['tabId'],\r\n\t\t{ id: TabBadgeElement['tabId']; name: TabBadgeElement['name'] }\r\n\t>"
+              },
+              "default": "new Map()"
+            },
+            {
+              "kind": "field",
+              "name": "stashes",
+              "type": {
+                "text": "NoItemsTab[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "noStashesMessage",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "msg",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "fetchingStash",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "stashLoader",
+              "type": {
+                "text": "IDefaultStashLoader"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "stashLoadsAvailable",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "30"
+            },
+            {
+              "kind": "field",
+              "name": "availableInTenSeconds",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "15"
+            },
+            {
+              "kind": "field",
+              "name": "stashesButton",
+              "type": {
+                "text": "HTMLButtonElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "getDataButton",
+              "type": {
+                "text": "HTMLButtonElement"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onLoadItemsClicked"
+            },
+            {
+              "kind": "method",
+              "name": "#onCloseClicked"
+            },
+            {
+              "kind": "method",
+              "name": "#onLoadStashesList"
+            },
+            {
+              "kind": "method",
+              "name": "#onLeagueSelected",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "CustomEvent<League>"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onUpdSelectedTabs",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "CustomEvent<Events['upd:selectedTabs']>"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onCustomLeagueInput",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "loadSelectedTabs",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "league",
+                  "type": {
+                    "text": "League"
+                  }
+                }
+              ],
+              "description": "For each tab, loads sample and emits it"
+            },
+            {
+              "kind": "method",
+              "name": "#loadSample",
+              "return": {
+                "type": {
+                  "text": "Promise<TabWithItems>"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "id",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "league",
+                  "type": {
+                    "text": "League"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#handleLoadTabError",
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "err",
+                  "type": {
+                    "text": "unknown"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "this.tag"
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "parameters": [
+                {
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "optional": true,
+                  "type": {
+                    "text": "T"
+                  }
+                },
+                {
+                  "name": "options",
+                  "default": "{ bubbles: true, composed: true, cancelable: true }",
+                  "type": {
+                    "text": "EventInit"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "league",
+              "type": {
+                "text": "League"
+              },
+              "default": "ACTIVE_LEAGUE",
+              "fieldName": "league"
+            },
+            {
+              "name": "customLeague",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "customLeague"
+            }
+          ],
+          "superclass": {
+            "name": "BaseElement",
+            "module": "/src/wc/base-element"
+          },
+          "tagName": "wc-stash-loader",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "StashLoaderElement",
+          "declaration": {
+            "name": "StashLoaderElement",
+            "module": "src/wc/stashes/stash-loader.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/stashes/stashes-view.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\r\n\trender() {\r\n\t\tStashesViewElement.define();\r\n\r\n\t\treturn html`<wc-stashes-view .stashLoader=${new MockStashLoader()}></wc-stashes-view>`;\r\n\t},\r\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/stashes/stashes-view.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/stashes/stashes-view.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/stashes/stashes-view.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "StashesViewElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "defineList",
+              "type": {
+                "text": "(typeof BaseElement)[]"
+              },
+              "static": true,
+              "default": "[]",
+              "description": "list of classes of custom elements needed for this element.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "description": "Element tag name",
+              "default": "'wc-stashes-view'",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "league",
+              "type": {
+                "text": "League"
+              },
+              "default": "ACTIVE_LEAGUE",
+              "attribute": "league",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "customLeague",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "customLeague"
+            },
+            {
+              "kind": "field",
+              "name": "downloadAs",
+              "type": {
+                "text": "DownloadAs"
+              },
+              "default": "'divination-cards-sample'",
+              "attribute": "downloadAs"
+            },
+            {
+              "kind": "field",
+              "name": "selectedTabs",
+              "type": {
+                "text": "Map<\r\n\t\tTabBadgeElement['tabId'],\r\n\t\t{ id: TabBadgeElement['tabId']; name: TabBadgeElement['name'] }\r\n\t>"
+              },
+              "default": "new Map()"
+            },
+            {
+              "kind": "field",
+              "name": "stashes",
+              "type": {
+                "text": "NoItemsTab[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "noStashesMessage",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "msg",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "fetchingStash",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "stashLoader",
+              "type": {
+                "text": "IStashLoader"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "stashLoadsAvailable",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "30"
+            },
+            {
+              "kind": "field",
+              "name": "availableInTenSeconds",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "15"
+            },
+            {
+              "kind": "field",
+              "name": "stashesButton",
+              "type": {
+                "text": "HTMLButtonElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "getDataButton",
+              "type": {
+                "text": "HTMLButtonElement"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onLoadItemsClicked"
+            },
+            {
+              "kind": "method",
+              "name": "#onCloseClicked"
+            },
+            {
+              "kind": "method",
+              "name": "#onDownloadAsChanged",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onLoadStashesList"
+            },
+            {
+              "kind": "method",
+              "name": "#onLeagueSelected",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "CustomEvent<League>"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onUpdSelectedTabs",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "CustomEvent<Events['upd:selectedTabs']>"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onCustomLeagueInput",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "loadSelectedTabs",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "league",
+                  "type": {
+                    "text": "League"
+                  }
+                }
+              ],
+              "description": "For each tab, loads sample and emits it"
+            },
+            {
+              "kind": "method",
+              "name": "#loadSingleTabContent",
+              "return": {
+                "type": {
+                  "text": "Promise<T>"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "id",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "league",
+                  "type": {
+                    "text": "League"
+                  }
+                },
+                {
+                  "name": "loadFunction",
+                  "type": {
+                    "text": "(id: string, league: League) => T"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#handleLoadTabError",
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "err",
+                  "type": {
+                    "text": "unknown"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "this.tag"
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "parameters": [
+                {
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "optional": true,
+                  "type": {
+                    "text": "T"
+                  }
+                },
+                {
+                  "name": "options",
+                  "default": "{ bubbles: true, composed: true, cancelable: true }",
+                  "type": {
+                    "text": "EventInit"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "league",
+              "type": {
+                "text": "League"
+              },
+              "default": "ACTIVE_LEAGUE",
+              "fieldName": "league"
+            },
+            {
+              "name": "customLeague",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "customLeague"
+            },
+            {
+              "name": "downloadAs",
+              "type": {
+                "text": "DownloadAs"
+              },
+              "default": "'divination-cards-sample'",
+              "fieldName": "downloadAs"
+            }
+          ],
+          "superclass": {
+            "name": "BaseElement",
+            "module": "/src/wc/base-element"
+          },
+          "tagName": "wc-stashes-view",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "StashesViewElement",
+          "declaration": {
+            "name": "StashesViewElement",
+            "module": "src/wc/stashes/stashes-view.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/stashes/tab-badge-group.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\r\n\trender() {\r\n\t\tTabBadgeGroupElement.define();\r\n\t\treturn html`<wc-tab-badge-group .stashes=${stashes} .league=${league}></wc-tab-badge-group>`;\r\n\t},\r\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/stashes/tab-badge-group.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/stashes/tab-badge-group.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/stashes/tab-badge-group.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "REMOVE_ONLY",
+          "type": {
+            "text": "string"
+          },
+          "default": "'(Remove-only)'"
+        },
+        {
+          "kind": "class",
+          "description": "",
+          "name": "TabBadgeGroupElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "defineList",
+              "type": {
+                "text": "(typeof BaseElement)[]"
+              },
+              "static": true,
+              "default": "[]",
+              "description": "list of classes of custom elements needed for this element.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "description": "Element tag name",
+              "default": "'wc-tab-badge-group'",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "stashes",
+              "type": {
+                "text": "NoItemsTab[]"
+              },
+              "default": "[]",
+              "attribute": "stashes"
+            },
+            {
+              "kind": "field",
+              "name": "league",
+              "type": {
+                "text": "League"
+              },
+              "default": "ACTIVE_LEAGUE",
+              "attribute": "league",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "perPage",
+              "type": {
+                "text": "number"
+              },
+              "default": "50",
+              "attribute": "perPage",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "page",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "page",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "nameQuery",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "nameQuery"
+            },
+            {
+              "kind": "field",
+              "name": "selectedTabs",
+              "type": {
+                "text": "Map<\r\n\t\tTabBadgeElement['tabId'],\r\n\t\t{ id: TabBadgeElement['tabId']; name: TabBadgeElement['name'] }\r\n\t>"
+              },
+              "default": "new Map()"
+            },
+            {
+              "kind": "field",
+              "name": "hideRemoveOnly",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "checkbox",
+              "type": {
+                "text": "HTMLInputElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "perPageInput",
+              "type": {
+                "text": "HTMLInputElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "pageInput",
+              "type": {
+                "text": "HTMLInputElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "nameQueryInput",
+              "type": {
+                "text": "HTMLInputElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "shouldFilter",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "withHideRemoveOnly",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "filtered",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "paginated",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "tabsTotal",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "#onPageInput"
+            },
+            {
+              "kind": "method",
+              "name": "#onPerPageInput"
+            },
+            {
+              "kind": "method",
+              "name": "#onNameQueryInput"
+            },
+            {
+              "kind": "method",
+              "name": "#onTabSelect",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "CustomEvent<Events['tab-select']>"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "paginatedTabs",
+              "privacy": "protected"
+            },
+            {
+              "kind": "method",
+              "name": "decreasePage"
+            },
+            {
+              "kind": "method",
+              "name": "increasePage"
+            },
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "this.tag"
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "parameters": [
+                {
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "optional": true,
+                  "type": {
+                    "text": "T"
+                  }
+                },
+                {
+                  "name": "options",
+                  "default": "{ bubbles: true, composed: true, cancelable: true }",
+                  "type": {
+                    "text": "EventInit"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "stashes",
+              "type": {
+                "text": "NoItemsTab[]"
+              },
+              "default": "[]",
+              "fieldName": "stashes"
+            },
+            {
+              "name": "league",
+              "type": {
+                "text": "League"
+              },
+              "default": "ACTIVE_LEAGUE",
+              "fieldName": "league"
+            },
+            {
+              "name": "perPage",
+              "type": {
+                "text": "number"
+              },
+              "default": "50",
+              "fieldName": "perPage"
+            },
+            {
+              "name": "page",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "fieldName": "page"
+            },
+            {
+              "name": "nameQuery",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "nameQuery"
+            }
+          ],
+          "superclass": {
+            "name": "BaseElement",
+            "module": "/src/wc/base-element"
+          },
+          "tagName": "wc-tab-badge-group",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "REMOVE_ONLY",
+          "declaration": {
+            "name": "REMOVE_ONLY",
+            "module": "src/wc/stashes/tab-badge-group.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TabBadgeGroupElement",
+          "declaration": {
+            "name": "TabBadgeGroupElement",
+            "module": "src/wc/stashes/tab-badge-group.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/stashes/tab-badge.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\r\n\trender(d: { color: string; name: string; tabId: string; selected: boolean; index: number }) {\r\n\t\tTabBadgeElement.define();\r\n\t\treturn html`<wc-tab-badge tabId=\"e07f5f2946\" colour=\"7c5436\" index=\"5\"></wc-tab-badge>`;\r\n\t},\r\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/stashes/tab-badge.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/stashes/tab-badge.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/stashes/tab-badge.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "TabBadgeElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "description": "Element tag name",
+              "default": "'wc-tab-badge'",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "hexishColor",
+              "type": {
+                "text": "string"
+              },
+              "default": "'7c5436'",
+              "description": "Color from Poe API. Examples: ff, 80b3ff, #f0f80, cc009a, 7c5436",
+              "attribute": "hexish-color",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "color",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Any valid CSS color",
+              "attribute": "color",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Heist'",
+              "attribute": "name",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tabId",
+              "type": {
+                "text": "string"
+              },
+              "default": "'e07f5f2946'",
+              "attribute": "tabId",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "index",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "index",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "checkbox",
+              "type": {
+                "text": "HTMLInputElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "computedColor",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "nameLabel",
+              "privacy": "protected"
+            },
+            {
+              "kind": "method",
+              "name": "#onCheckbox"
+            },
+            {
+              "kind": "field",
+              "name": "defineList",
+              "type": {
+                "text": "(typeof BaseElement)[]"
+              },
+              "static": true,
+              "default": "[]",
+              "description": "list of classes of custom elements needed for this element.",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "this.tag"
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "parameters": [
+                {
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "optional": true,
+                  "type": {
+                    "text": "T"
+                  }
+                },
+                {
+                  "name": "options",
+                  "default": "{ bubbles: true, composed: true, cancelable: true }",
+                  "type": {
+                    "text": "EventInit"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "hexish-color",
+              "type": {
+                "text": "string"
+              },
+              "default": "'7c5436'",
+              "description": "Color from Poe API. Examples: ff, 80b3ff, #f0f80, cc009a, 7c5436",
+              "fieldName": "hexishColor"
+            },
+            {
+              "name": "color",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Any valid CSS color",
+              "fieldName": "color"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Heist'",
+              "fieldName": "name"
+            },
+            {
+              "name": "tabId",
+              "type": {
+                "text": "string"
+              },
+              "default": "'e07f5f2946'",
+              "fieldName": "tabId"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "selected"
+            },
+            {
+              "name": "index",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "fieldName": "index"
+            }
+          ],
+          "superclass": {
+            "name": "BaseElement",
+            "module": "/src/wc/base-element"
+          },
+          "tagName": "wc-tab-badge",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TabBadgeElement",
+          "declaration": {
+            "name": "TabBadgeElement",
+            "module": "src/wc/stashes/tab-badge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/sample-card/fixed-names/data.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "fixedNames",
+          "type": {
+            "text": "FixedName[]"
+          },
+          "default": "names"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "fixedNames",
+          "declaration": {
+            "name": "fixedNames",
+            "module": "src/wc/sample-card/fixed-names/data.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/sample-card/fixed-names/fixed-icon.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FixedIconElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "description": "Element tag name",
+              "default": "'wc-fixed-icon'",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "32",
+              "attribute": "width",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "32",
+              "attribute": "height",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "defineList",
+              "type": {
+                "text": "(typeof BaseElement)[]"
+              },
+              "static": true,
+              "default": "[]",
+              "description": "list of classes of custom elements needed for this element.",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "this.tag"
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "parameters": [
+                {
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "optional": true,
+                  "type": {
+                    "text": "T"
+                  }
+                },
+                {
+                  "name": "options",
+                  "default": "{ bubbles: true, composed: true, cancelable: true }",
+                  "type": {
+                    "text": "EventInit"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "32",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "32",
+              "fieldName": "height"
+            }
+          ],
+          "superclass": {
+            "name": "BaseElement",
+            "module": "/src/wc/base-element"
+          },
+          "tagName": "wc-fixed-icon",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FixedIconElement",
+          "declaration": {
+            "name": "FixedIconElement",
+            "module": "src/wc/sample-card/fixed-names/fixed-icon.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/sample-card/fixed-names/fixed-names.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\r\n\trender({ fixedNames }: { fixedNames: FixedName[] }) {\r\n\t\tFixedNamesElement.define();\r\n\t\treturn html`<wc-fixed-names .fixedNames=${fixedNames}></wc-fixed-names>`;\r\n\t},\r\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/sample-card/fixed-names/fixed-names.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/sample-card/fixed-names/fixed-names.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/sample-card/fixed-names/fixed-names.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FixedNamesElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "defineList",
+              "type": {
+                "text": "(typeof BaseElement)[]"
+              },
+              "static": true,
+              "default": "[]",
+              "description": "list of classes of custom elements needed for this element.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "description": "Element tag name",
+              "default": "'wc-fixed-names'",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "24",
+              "attribute": "width",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "24",
+              "attribute": "height",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "fixedNames",
+              "type": {
+                "text": "FixedName[]"
+              },
+              "default": "[]",
+              "attribute": "fixedNames"
+            },
+            {
+              "kind": "field",
+              "name": "popup",
+              "type": {
+                "text": "BasePopupElement"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onIconClicked"
+            },
+            {
+              "kind": "method",
+              "name": "arrowIcon",
+              "privacy": "protected"
+            },
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "this.tag"
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "parameters": [
+                {
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "optional": true,
+                  "type": {
+                    "text": "T"
+                  }
+                },
+                {
+                  "name": "options",
+                  "default": "{ bubbles: true, composed: true, cancelable: true }",
+                  "type": {
+                    "text": "EventInit"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "24",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "24",
+              "fieldName": "height"
+            },
+            {
+              "name": "fixedNames",
+              "type": {
+                "text": "FixedName[]"
+              },
+              "default": "[]",
+              "fieldName": "fixedNames"
+            }
+          ],
+          "superclass": {
+            "name": "BaseElement",
+            "module": "/src/wc/base-element"
+          },
+          "tagName": "wc-fixed-names",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FixedNamesElement",
+          "declaration": {
+            "name": "FixedNamesElement",
+            "module": "src/wc/sample-card/fixed-names/fixed-names.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/sample-card/not-cards/data.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "notCards",
+          "type": {
+            "text": "array"
+          },
+          "default": "['The Iron Bard']"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "notCards",
+          "declaration": {
+            "name": "notCards",
+            "module": "src/wc/sample-card/not-cards/data.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/sample-card/not-cards/not-cards.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\r\n\trender() {\r\n\t\tNotCardsElement.define();\r\n\t\treturn html`<wc-not-cards .notCards=${notCards}></wc-not-cards>`;\r\n\t},\r\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/sample-card/not-cards/not-cards.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/sample-card/not-cards/not-cards.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/sample-card/not-cards/not-cards.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "NotCardsElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "defineList",
+              "type": {
+                "text": "(typeof BaseElement)[]"
+              },
+              "static": true,
+              "default": "[]",
+              "description": "list of classes of custom elements needed for this element.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "description": "Element tag name",
+              "default": "'wc-not-cards'",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "notCards",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "attribute": "notCards"
+            },
+            {
+              "kind": "field",
+              "name": "popup",
+              "type": {
+                "text": "BasePopupElement"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onIconClicked"
+            },
+            {
+              "kind": "method",
+              "name": "warningIcon",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "size",
+                  "default": "20",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "this.tag"
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "parameters": [
+                {
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "optional": true,
+                  "type": {
+                    "text": "T"
+                  }
+                },
+                {
+                  "name": "options",
+                  "default": "{ bubbles: true, composed: true, cancelable: true }",
+                  "type": {
+                    "text": "EventInit"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "notCards",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "fieldName": "notCards"
+            }
+          ],
+          "superclass": {
+            "name": "BaseElement",
+            "module": "/src/wc/base-element"
+          },
+          "tagName": "wc-not-cards",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "NotCardsElement",
+          "declaration": {
+            "name": "NotCardsElement",
+            "module": "src/wc/sample-card/not-cards/not-cards.ts"
+          }
+        }
+      ]
+    }
+  ]
+}
