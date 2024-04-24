@@ -13,11 +13,6 @@ export const Default = {
 		BasePopupElement.define();
 		DivTableElement.define();
 
-		requestAnimationFrame(() => {
-			const popup = document.querySelector('wc-base-popup');
-			popup?.showModal();
-		});
-
-		return html`<wc-base-popup><wc-div-table .cards=${cards}></wc-div-table></wc-base-popup>`;
+		return html`<wc-base-popup open><wc-div-table .cards=${cards}></wc-div-table></wc-base-popup>`;
 	},
 };

@@ -1,4 +1,4 @@
-import { html, css } from 'lit';
+import { html, css, PropertyValueMap } from 'lit';
 import { BaseElement } from './base-element';
 import { property, query } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
@@ -12,6 +12,22 @@ declare global {
 export class BasePopupElement extends BaseElement {
 	static override tag = 'wc-base-popup';
 	static override styles = [styles()];
+	/** Instead of dialog, runs showModal() if true */
+	@property({ type: Boolean }) open = false;
+
+	protected async willUpdate(map: PropertyValueMap<this>): Promise<void> {
+		if (map.has('open')) {
+			if (!this.dialog) {
+				await this.updateComplete;
+			}
+
+			if (this.open) {
+				this.showModal();
+			} else {
+				this.close();
+			}
+		}
+	}
 
 	@query('dialog') dialog!: HTMLDialogElement;
 
@@ -24,18 +40,18 @@ export class BasePopupElement extends BaseElement {
 		</dialog> `;
 	}
 
-	showModal() {
+	showModal(): void {
 		if (!this.dialog) {
 			this.updateComplete.then(() => {
-				return this.dialog.showModal();
+				this.dialog.showModal();
 			});
 		} else {
-			return this.dialog.showModal();
+			this.dialog.showModal();
 		}
 	}
 
-	close() {
-		return this.dialog.close();
+	close(): void {
+		this.dialog.close();
 	}
 }
 
