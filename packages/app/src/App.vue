@@ -119,7 +119,7 @@ const onSubmit = async ({
 			});
 
 			toast('success', 'New sheet created successfully');
-			formPopupExportRef.value?.hide();
+			formPopupExportRef.value?.close();
 			command('open_url', { url });
 
 			tablePreferences.rememberSpreadsheetId(spreadsheetId);
@@ -129,14 +129,14 @@ const onSubmit = async ({
 				exportSample.sheetsError = err.message;
 			} else {
 				console.log(err);
-				formPopupExportRef.value?.hide();
+				formPopupExportRef.value?.close();
 				throw err;
 			}
 		}
 	} else if (exportSample.to === 'file') {
 		const csv = await command('sample_into_csv', { sample, preferences });
 		downloadText(exportSample.filename, csv);
-		formPopupExportRef.value?.hide();
+		formPopupExportRef.value?.close();
 	}
 };
 

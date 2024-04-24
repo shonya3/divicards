@@ -34,7 +34,7 @@ export class BasePopupElement extends BaseElement {
 		}
 	}
 
-	hide() {
+	close() {
 		return this.dialog.close();
 	}
 }
