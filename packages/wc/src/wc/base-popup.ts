@@ -17,7 +17,7 @@ export class BasePopupElement extends BaseElement {
 
 	protected async willUpdate(map: PropertyValueMap<this>): Promise<void> {
 		if (map.has('open')) {
-			const dialog = await this.dialog();
+			const dialog = await this.#dialog();
 			if (this.open) {
 				dialog.showModal();
 			} else {
@@ -26,7 +26,16 @@ export class BasePopupElement extends BaseElement {
 		}
 	}
 
-	async dialog(): Promise<HTMLDialogElement> {
+	protected override render() {
+		return html`<dialog>
+			<div class="slot-parent">
+				<slot></slot>
+			</div>
+			<sl-icon-button name="x-lg" @click=${this.close} class="btn-close">X</sl-icon-button>
+		</dialog> `;
+	}
+
+	async #dialog(): Promise<HTMLDialogElement> {
 		const queryDialog = () => this.shadowRoot!.querySelector('dialog');
 		const dialog = queryDialog();
 
@@ -36,15 +45,6 @@ export class BasePopupElement extends BaseElement {
 			await this.updateComplete;
 			return queryDialog()!;
 		}
-	}
-
-	protected override render() {
-		return html`<dialog>
-			<div class="slot-parent">
-				<slot></slot>
-			</div>
-			<sl-icon-button name="x-lg" @click=${() => (this.open = false)} class="btn-close">X</sl-icon-button>
-		</dialog> `;
 	}
 
 	async showModal(): Promise<void> {
