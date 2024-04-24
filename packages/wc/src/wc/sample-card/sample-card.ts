@@ -175,7 +175,7 @@ export class SampleCardElement extends BaseElement {
 	}
 
 	#onGridIconClicked() {
-		this.tablePopup.open();
+		this.tablePopup.showModal();
 	}
 
 	#onSelectedClicked() {

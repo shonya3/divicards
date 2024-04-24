@@ -15,8 +15,7 @@ export const Default = {
 
 		requestAnimationFrame(() => {
 			const popup = document.querySelector('wc-base-popup');
-			console.log(popup);
-			popup?.open();
+			popup?.showModal();
 		});
 
 		return html`<wc-base-popup><wc-div-table .cards=${cards}></wc-div-table></wc-base-popup>`;

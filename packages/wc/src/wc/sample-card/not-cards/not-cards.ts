@@ -34,7 +34,7 @@ export class NotCardsElement extends BaseElement {
 	}
 
 	#onIconClicked() {
-		this.popup.open();
+		this.popup.showModal();
 	}
 
 	protected warningIcon(size: number = 20) {

@@ -1,6 +1,6 @@
 import { html, css } from 'lit';
 import { BaseElement } from './base-element';
-import { query } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 
 declare global {
@@ -24,7 +24,7 @@ export class BasePopupElement extends BaseElement {
 		</dialog> `;
 	}
 
-	open() {
+	showModal() {
 		if (!this.dialog) {
 			this.updateComplete.then(() => {
 				return this.dialog.showModal();
@@ -32,10 +32,6 @@ export class BasePopupElement extends BaseElement {
 		} else {
 			return this.dialog.showModal();
 		}
-	}
-
-	show() {
-		return this.dialog.showModal();
 	}
 
 	hide() {

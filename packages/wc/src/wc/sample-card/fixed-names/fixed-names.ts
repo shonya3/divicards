@@ -24,7 +24,7 @@ export class FixedNamesElement extends BaseElement {
 	@query('wc-base-popup') popup!: BasePopupElement;
 
 	#onIconClicked() {
-		this.popup.open();
+		this.popup.showModal();
 	}
 
 	protected override render() {

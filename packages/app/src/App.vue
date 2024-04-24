@@ -65,7 +65,7 @@ const onSaveToFileClicked = (sample: DivinationCardsSample, league: League, file
 	exportSample.filename = name;
 	exportSample.sample = sample;
 	exportSample.league = league;
-	formPopupExportRef.value.open();
+	formPopupExportRef.value.showModal();
 };
 
 const onGoogleSheetsClicked = (sample: DivinationCardsSample, league: League) => {
@@ -73,7 +73,7 @@ const onGoogleSheetsClicked = (sample: DivinationCardsSample, league: League) =>
 	exportSample.to = 'sheets';
 	exportSample.sample = sample;
 	exportSample.league = league;
-	formPopupExportRef.value.open();
+	formPopupExportRef.value.showModal();
 };
 
 const onSubmit = async ({
@@ -172,7 +172,7 @@ const onTabWithItemsLoaded = (name: string, tab: TabWithItems, league: League) =
 				:loggedIn="authStore.loggedIn"
 				v-if="authStore.loggedIn"
 			></wc-poe-auth>
-			<sl-button variant="success" v-if="shouldUpdate" @click="() => changelogPopupRef?.open()"
+			<sl-button variant="success" v-if="shouldUpdate" @click="() => changelogPopupRef?.showModal()"
 				>Update is ready</sl-button
 			>
 		</header>
