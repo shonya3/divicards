@@ -13,6 +13,12 @@ export const Default = {
 		BasePopupElement.define();
 		DivTableElement.define();
 
-		return html`<wc-base-popup open><wc-div-table .cards=${cards}></wc-div-table></wc-base-popup>`;
+		const popup = document.createElement('wc-base-popup');
+		popup.open = true;
+		const table = document.createElement('wc-div-table');
+		table.cards = cards;
+		popup.append(table);
+
+		return html`<button @click=${() => popup.showModal()}>Open</button>${popup}`;
 	},
 };
