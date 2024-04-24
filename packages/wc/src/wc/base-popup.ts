@@ -15,6 +15,15 @@ export class BasePopupElement extends BaseElement {
 	/** Instead of dialog's non-modal open, runs showModal() if true https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#open */
 	@property({ type: Boolean }) open = false;
 
+	constructor() {
+		super();
+		this.addEventListener('click', e => {
+			if (e.target === this) {
+				this.close();
+			}
+		});
+	}
+
 	protected async willUpdate(map: PropertyValueMap<this>): Promise<void> {
 		if (map.has('open')) {
 			const dialog = await this.#dialog();
