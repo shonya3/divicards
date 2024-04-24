@@ -37,7 +37,7 @@ export interface Metadata {
 
 export interface IProperty {
 	name: string;
-	values: Array<Array<string>>;
+	values: Array<Array<string | number>>;
 	displayMode: number;
 	progress?: number;
 	type: number;
@@ -45,13 +45,14 @@ export interface IProperty {
 
 export interface IRequirement {
 	name: string;
-	values: Array<Array<string>>;
+	values: Array<Array<string | number>>;
 	displayMode: number;
+	type?: number;
 }
 
 export interface ISocket {
 	group: number;
-	attr: boolean;
+	attr: string;
 	sColour: string;
 }
 
@@ -70,32 +71,32 @@ export interface IItem {
 	league: string;
 	sockets: Array<ISocket>;
 	name: string;
-	shaper: boolean;
-	elder: boolean;
+	shaper?: boolean;
+	elder?: boolean;
 	baseType: string;
-	fractured: boolean;
-	synthesised: boolean;
+	fractured?: boolean;
+	synthesised?: boolean;
 	typeLine: string;
 	identified: boolean;
-	corrupted: boolean;
-	lockedToCharacter: boolean;
+	corrupted?: boolean;
+	lockedToCharacter?: boolean;
 	requirements: Array<IRequirement>;
-	implicitMods: Array<string>;
+	implicitMods?: Array<string>;
 	explicitMods: Array<string>;
-	fracturedMods: Array<string>;
+	fracturedMods?: Array<string>;
 	frameType: number;
 	x: number;
 	y: number;
 	inventoryId: string;
 	socketedItems: Array<ISocketedItem>;
 	properties: Array<IProperty>;
-	flavourText: Array<string>;
+	flavourText?: Array<string>;
 	craftedMods: Array<string>;
-	enchantMods: Array<string>;
-	utilityMods: Array<string>;
-	descrText: string;
-	prophecyText: string;
-	socket: number;
+	enchantMods?: Array<string>;
+	utilityMods?: Array<string>;
+	descrText?: string;
+	prophecyText?: string;
+	socket?: number;
 	stackSize?: number;
 	maxStackSize?: number;
 }
@@ -110,7 +111,7 @@ export interface ISocketedItem {
 	name: string;
 	typeLine: string;
 	corrupted: boolean;
-	lockedToCharacter: boolean;
+	lockedToCharacter?: boolean;
 	category: ICategory;
 	requirements: Array<IRequirement>;
 	nextLevelRequirements: Array<IRequirement>;
