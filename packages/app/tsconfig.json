@@ -13,7 +13,10 @@
 		"lib": ["ESNext", "DOM"],
 		"skipLibCheck": true,
 		"experimentalDecorators": true,
-		"types": ["./node_modules/@shoelace-style/shoelace/dist/types/vue/index.d.ts"]
+		"types": [
+			"./node_modules/@shoelace-style/shoelace/dist/types/vue/index.d.ts",
+			"./node_modules/@divicards/wc/types/web-components.vue.d.ts"
+		]
 	},
 	"include": [
 		"src/**/*.ts",

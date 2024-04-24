@@ -64,7 +64,7 @@ export interface StashesViewProps {
 	stashLoader: IStashLoader;
 }
 
-type DownloadAs = (typeof DOWNLOAD_AS_VARIANTS)[number];
+export type DownloadAs = (typeof DOWNLOAD_AS_VARIANTS)[number];
 const DOWNLOAD_AS_VARIANTS = ['divination-cards-sample', 'general-tab'] as const;
 
 export class StashesViewElement extends BaseElement {
