@@ -17,23 +17,24 @@ export class BasePopupElement extends BaseElement {
 
 	protected async willUpdate(map: PropertyValueMap<this>): Promise<void> {
 		if (map.has('open')) {
+			const dialog = await this.dialog();
 			if (this.open) {
-				await this.showModal();
+				dialog.showModal();
 			} else {
-				await this.close();
+				dialog.close();
 			}
 		}
 	}
 
 	async dialog(): Promise<HTMLDialogElement> {
-		const query = () => this.shadowRoot!.querySelector('dialog');
-		const dialog = query();
+		const queryDialog = () => this.shadowRoot!.querySelector('dialog');
+		const dialog = queryDialog();
 
 		if (dialog) {
 			return dialog;
 		} else {
 			await this.updateComplete;
-			return query()!;
+			return queryDialog()!;
 		}
 	}
 
@@ -47,13 +48,13 @@ export class BasePopupElement extends BaseElement {
 	}
 
 	async showModal(): Promise<void> {
-		const dialog = await this.dialog();
-		dialog.showModal();
+		this.open = true;
+		await this.updateComplete;
 	}
 
 	async close(): Promise<void> {
-		const dialog = await this.dialog();
-		dialog.close();
+		this.open = false;
+		await this.updateComplete;
 	}
 }
 
