@@ -22,6 +22,8 @@ export class BasePopupElement extends BaseElement {
 				this.close();
 			}
 		});
+
+		this.onEscape = this.onEscape.bind(this);
 	}
 
 	protected async willUpdate(map: PropertyValueMap<this>): Promise<void> {
@@ -64,6 +66,20 @@ export class BasePopupElement extends BaseElement {
 	async close(): Promise<void> {
 		this.open = false;
 		await this.updateComplete;
+	}
+
+	private onEscape() {
+		this.open = false;
+	}
+
+	connectedCallback(): void {
+		super.connectedCallback();
+		this.addEventListener('keydown', this.onEscape);
+	}
+
+	disconnectedCallback(): void {
+		super.disconnectedCallback();
+		this.removeEventListener('keydown', this.onEscape);
 	}
 }
 
