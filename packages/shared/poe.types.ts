@@ -1,5 +1,5 @@
 export interface TabWithItems extends NoItemsTab {
-	items: IItem[];
+	items: PoeItem[];
 }
 
 export interface NoItemsTab {
@@ -40,7 +40,7 @@ export interface IProperty {
 	values: Array<Array<string | number>>;
 	displayMode: number;
 	progress?: number;
-	type: number;
+	type?: number;
 }
 
 export interface IRequirement {
@@ -61,16 +61,20 @@ export interface ICategory {
 	jewels: Array<string>;
 }
 
-export interface IItem {
+export type PoeItem = {
 	id: string;
+	name: string;
 	verified: boolean;
+	inventoryId: string;
+	frameType: number;
+	x: number;
+	y: number;
 	w: number;
 	h: number;
 	ilvl: number;
 	icon: string;
 	league: string;
-	sockets: Array<ISocket>;
-	name: string;
+	sockets?: Array<ISocket>;
 	shaper?: boolean;
 	elder?: boolean;
 	baseType: string;
@@ -80,18 +84,14 @@ export interface IItem {
 	identified: boolean;
 	corrupted?: boolean;
 	lockedToCharacter?: boolean;
-	requirements: Array<IRequirement>;
+	requirements?: Array<IRequirement>;
 	implicitMods?: Array<string>;
-	explicitMods: Array<string>;
+	explicitMods?: Array<string>;
 	fracturedMods?: Array<string>;
-	frameType: number;
-	x: number;
-	y: number;
-	inventoryId: string;
-	socketedItems: Array<ISocketedItem>;
-	properties: Array<IProperty>;
+	socketedItems?: Array<ISocketedItem>;
+	properties?: Array<IProperty>;
 	flavourText?: Array<string>;
-	craftedMods: Array<string>;
+	craftedMods?: Array<string>;
 	enchantMods?: Array<string>;
 	utilityMods?: Array<string>;
 	descrText?: string;
@@ -99,7 +99,7 @@ export interface IItem {
 	socket?: number;
 	stackSize?: number;
 	maxStackSize?: number;
-}
+};
 
 export interface ISocketedItem {
 	id: string;
@@ -110,17 +110,17 @@ export interface ISocketedItem {
 	icon: string;
 	name: string;
 	typeLine: string;
-	corrupted: boolean;
+	corrupted?: boolean;
 	lockedToCharacter?: boolean;
-	category: ICategory;
+	category?: ICategory;
 	requirements: Array<IRequirement>;
-	nextLevelRequirements: Array<IRequirement>;
+	nextLevelRequirements?: Array<IRequirement>;
 	explicitMods: Array<string>;
 	frameType: number;
-	x: number;
-	y: number;
+	x?: number;
+	y?: number;
 	properties: Array<IProperty>;
-	additionalProperties: Array<IProperty>;
+	additionalProperties?: Array<IProperty>;
 	descrText: string;
 	secDescrText: string;
 	socket: number;

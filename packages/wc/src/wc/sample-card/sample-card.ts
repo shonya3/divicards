@@ -131,7 +131,7 @@ export class SampleCardElement extends BaseElement {
 						.checked=${this.selected}
 						id="selected-checkbox"
 						@change=${this.#onSelectedClicked}
-					/>`}
+				  />`}
 			<wc-base-popup id="table-popup">
 				<wc-div-table .cards=${this.sample.cards}> </wc-div-table>
 			</wc-base-popup>
@@ -234,9 +234,7 @@ export class SampleCardElement extends BaseElement {
 				justify-content: space-between;
 				gap: 1rem;
 				width: fit-content;
-				box-shadow:
-					rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-					rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+				box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 
 				/* max-height: 320px; */
 				width: 250px;
