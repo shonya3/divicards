@@ -87,7 +87,7 @@ where
 }
 
 #[derive(Debug)]
-pub struct FileNotExists(PathBuf);
+pub struct FileNotExists(pub PathBuf);
 fn up_to_date(path: &PathBuf, stale: &Stale) -> Result<bool, FileNotExists> {
     if !path.exists() {
         return Ok(false);
