@@ -102,7 +102,7 @@ impl Sample {
     pub fn merge(prices: Option<Prices>, samples: &[Sample]) -> Sample {
         let mut merged = Sample::from_prices(prices);
 
-        for card in merged.cards.iter_mut() {
+        for card in &mut merged.cards {
             let amount = samples
                 .iter()
                 .map(|sample| sample.cards.get_card(&card.name).amount)
@@ -152,7 +152,7 @@ impl Sample {
         let headers: Vec<Value> = columns.iter().map(|c| json!(&c)).collect();
         values.push(headers);
 
-        for card in self.cards.iter() {
+        for card in &self.cards {
             if card.price.unwrap_or_default() < preferences.min_price {
                 continue;
             }
