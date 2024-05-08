@@ -102,6 +102,7 @@ mod weight_tests {
     };
 
     #[test]
+    #[allow(clippy::float_cmp)]
     fn calc_real_rain_of_chaos_weight() {
         let sample = Sample::create(
             Input::Csv(String::from("name,amount\rRain of Chaos,1")),
@@ -118,6 +119,7 @@ mod weight_tests {
     }
 
     #[test]
+    #[allow(clippy::float_cmp)]
     fn card_weight_in_three_cards_sample() {
         let sample = Sample::create(
             Input::Csv(String::from("name,amount\rRain of Chaos,2\rThe Doctor,1")),
@@ -134,6 +136,7 @@ mod weight_tests {
     }
 
     #[test]
+    #[allow(clippy::float_cmp)]
     fn huge_sample() {
         let data = Input::Csv(fs::read_to_string("examples/example-2.csv").unwrap());
         let sample = Sample::create(data, None).unwrap();
