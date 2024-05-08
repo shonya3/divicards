@@ -13,6 +13,9 @@ pub struct DivinationCardPrice {
 #[serde(transparent)]
 pub struct Prices(pub Vec<DivinationCardPrice>);
 impl Prices {
+    ///
+    /// ## Errors
+    /// Returns `ninja::Error` when cannot fetch from ninja
     pub async fn fetch(league: &poe::TradeLeague) -> Result<Prices, ninja::Error> {
         let ninja_card_data = ninja::fetch_card_data(league).await?;
         let mut prices = Prices::default();
