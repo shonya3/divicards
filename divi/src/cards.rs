@@ -7,6 +7,7 @@ use crate::{
 };
 use serde::{Deserialize, Serialize};
 use std::{
+    cmp::Ordering,
     collections::HashMap,
     slice::{Iter, IterMut},
 };
@@ -83,20 +84,32 @@ impl Cards {
                 Order::Unordered => {}
             },
             Column::Weight => match order {
-                Order::Asc => vec.sort_by(|a, b| a.weight.partial_cmp(&b.weight).unwrap()),
-                Order::Desc => vec.sort_by(|a, b| b.weight.partial_cmp(&a.weight).unwrap()),
+                Order::Asc => {
+                    vec.sort_by(|a, b| a.weight.partial_cmp(&b.weight).unwrap_or(Ordering::Less));
+                }
+                Order::Desc => {
+                    vec.sort_by(|a, b| b.weight.partial_cmp(&a.weight).unwrap_or(Ordering::Less));
+                }
                 Order::Unordered => {}
             },
             Column::Price => match order {
-                Order::Asc => vec.sort_by(|a, b| a.price.partial_cmp(&b.price).unwrap()),
-                Order::Desc => vec.sort_by(|a, b| b.price.partial_cmp(&a.price).unwrap()),
+                Order::Asc => {
+                    vec.sort_by(|a, b| a.price.partial_cmp(&b.price).unwrap_or(Ordering::Less));
+                }
+                Order::Desc => {
+                    vec.sort_by(|a, b| b.price.partial_cmp(&a.price).unwrap_or(Ordering::Less));
+                }
                 Order::Unordered => {}
             },
-            Column::Sum => match order {
-                Order::Asc => vec.sort_by(|a, b| a.weight.partial_cmp(&b.weight).unwrap()),
-                Order::Desc => vec.sort_by(|a, b| b.weight.partial_cmp(&a.weight).unwrap()),
-                Order::Unordered => {}
-            },
+            Column::Sum => {
+                match order {
+                    Order::Asc => vec
+                        .sort_by(|a, b| a.weight.partial_cmp(&b.weight).unwrap_or(Ordering::Less)),
+                    Order::Desc => vec
+                        .sort_by(|a, b| b.weight.partial_cmp(&a.weight).unwrap_or(Ordering::Less)),
+                    Order::Unordered => {}
+                }
+            }
         }
     }
 }
