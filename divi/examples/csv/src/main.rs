@@ -28,7 +28,7 @@ async fn main() -> Result<(), divi::error::Error> {
         cards_must_have_amount: true,
         min_price: 200.,
     };
-    let csv = merged.into_csv(Some(preferences));
+    let csv = merged.into_csv(Some(preferences))?;
 
     // uncomment and write to file
     // std::fs::write("sample.csv", &csv).unwrap();

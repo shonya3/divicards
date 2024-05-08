@@ -46,8 +46,11 @@ pub async fn open_url(url: String) {
 }
 
 #[command]
-pub async fn sample_into_csv(sample: Sample, preferences: TablePreferences) -> String {
-    sample.into_csv(Some(preferences))
+pub async fn sample_into_csv(
+    sample: Sample,
+    preferences: TablePreferences,
+) -> Result<String, divi::Error> {
+    Ok(sample.into_csv(Some(preferences))?)
 }
 
 #[command]

@@ -173,15 +173,15 @@ impl Sample {
         values
     }
 
-    #[must_use]
-    pub fn into_csv(self, preferences: Option<TablePreferences>) -> String {
+    pub fn into_csv(self, preferences: Option<TablePreferences>) -> Result<String, CsvError> {
         let values = self.into_serde_values(preferences);
         let mut writer = csv::Writer::from_writer(vec![]);
         for val in values {
-            writer.serialize(val);
+            writer.serialize(val).map_err(CsvError::Parse)?;
         }
 
-        String::from_utf8(writer.into_inner().unwrap()).unwrap()
+        String::from_utf8(writer.into_inner().map_err(|_| CsvError::WriterFlush)?)
+            .map_err(CsvError::FromUtf8)
     }
 
     fn to_name_amount_pairs(self: Sample) -> Vec<CardNameAmount> {
@@ -193,6 +193,30 @@ impl Sample {
                 amount: record.amount,
             })
             .collect()
+    }
+}
+
+#[allow(clippy::large_enum_variant)]
+#[derive(Debug)]
+pub enum CsvError {
+    Parse(csv::Error),
+    FromUtf8(std::string::FromUtf8Error),
+    WriterFlush,
+}
+
+impl Display for CsvError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            CsvError::Parse(err) => err.fmt(f),
+            CsvError::FromUtf8(err) => err.fmt(f),
+            CsvError::WriterFlush => f.write_str("Internal csv writer error"),
+        }
+    }
+}
+
+impl From<csv::Error> for Error {
+    fn from(value: csv::Error) -> Self {
+        Self::CsvError(CsvError::Parse(value))
     }
 }
 
