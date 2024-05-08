@@ -1,7 +1,7 @@
 use tokio::sync::Mutex;
 
 use divi::{
-    sample::{DivinationCardsSample, SampleData, TablePreferences},
+    sample::{Input, Sample, TablePreferences},
     TradeLeague,
 };
 use tauri::{command, State, Window};
@@ -12,11 +12,11 @@ use crate::{error::Error, prices::AppCardPrices, version::AppVersion};
 #[command]
 #[instrument(skip(data, state, window))]
 pub async fn sample(
-    data: SampleData,
+    data: Input,
     league: Option<TradeLeague>,
     state: State<'_, Mutex<AppCardPrices>>,
     window: Window,
-) -> Result<DivinationCardsSample, Error> {
+) -> Result<Sample, Error> {
     let prices = match league {
         Some(league) => {
             let mut guard = state.lock().await;
@@ -25,19 +25,19 @@ pub async fn sample(
         None => None,
     };
 
-    let sample = DivinationCardsSample::create(data, prices)?;
+    let sample = Sample::create(data, prices)?;
     Ok(sample)
 }
 
 #[command]
 pub async fn merge(
-    samples: Vec<DivinationCardsSample>,
+    samples: Vec<Sample>,
     state: State<'_, Mutex<AppCardPrices>>,
     window: Window,
-) -> Result<DivinationCardsSample, Error> {
+) -> Result<Sample, Error> {
     let mut guard = state.lock().await;
     let prices = guard.get_price(&TradeLeague::default(), &window).await;
-    Ok(DivinationCardsSample::merge(Some(prices), &samples))
+    Ok(Sample::merge(Some(prices), &samples))
 }
 
 #[command]
@@ -46,10 +46,7 @@ pub async fn open_url(url: String) {
 }
 
 #[command]
-pub async fn sample_into_csv(
-    sample: DivinationCardsSample,
-    preferences: TablePreferences,
-) -> String {
+pub async fn sample_into_csv(sample: Sample, preferences: TablePreferences) -> String {
     sample.into_csv(Some(preferences))
 }
 

@@ -5,7 +5,7 @@ use crate::{
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Default)]
-pub struct DivinationCardRecord {
+pub struct CardRecord {
     pub name: String,
     #[serde(alias = "stackSize")]
     pub amount: u32,
@@ -15,9 +15,10 @@ pub struct DivinationCardRecord {
     pub weight: Option<f32>,
 }
 
-impl DivinationCardRecord {
-    pub fn new(name: String, amount: u32, price: Option<f32>) -> DivinationCardRecord {
-        DivinationCardRecord {
+impl CardRecord {
+    #[must_use]
+    pub fn new(name: String, amount: u32, price: Option<f32>) -> CardRecord {
+        CardRecord {
             name,
             price,
             amount,
@@ -28,7 +29,7 @@ impl DivinationCardRecord {
 
     pub fn set_amount(&mut self, amount: u32) {
         self.amount = amount;
-        self.sum = Some(self.amount as f32 * self.price.unwrap_or_default())
+        self.sum = Some(self.amount as f32 * self.price.unwrap_or_default());
     }
 
     pub fn add_amount(&mut self, amount: u32) {
@@ -40,7 +41,7 @@ impl DivinationCardRecord {
     }
 }
 
-impl IsCard for DivinationCardRecord {
+impl IsCard for CardRecord {
     fn is_card(&self) -> bool {
         CARDS.contains(&self.name.as_str())
     }
@@ -56,13 +57,13 @@ mod tests {
 
     #[test]
     fn is_card() {
-        let record = DivinationCardRecord::new("Rain of Chaos".to_string(), 1, None);
+        let record = CardRecord::new("Rain of Chaos".to_string(), 1, None);
         assert!(record.is_card());
     }
 
     #[test]
     fn is_legacy_card() {
-        let record = DivinationCardRecord::new("Friendship".to_string(), 1, None);
+        let record = CardRecord::new("Friendship".to_string(), 1, None);
         assert!(record.is_legacy_card());
     }
 }

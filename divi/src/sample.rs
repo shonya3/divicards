@@ -12,19 +12,16 @@ use std::{fmt::Display, iter::zip};
 
 #[derive(Debug, Serialize, Deserialize, Clone, Default, PartialEq)]
 #[serde(rename_all = "camelCase")]
-pub struct DivinationCardsSample {
+pub struct Sample {
     pub cards: Cards,
     pub not_cards: Vec<String>,
     pub fixed_names: Vec<FixedCardName>,
 }
 
-impl DivinationCardsSample {
-    pub fn new(
-        cards: Cards,
-        not_cards: Vec<String>,
-        fixed_names: Vec<FixedCardName>,
-    ) -> DivinationCardsSample {
-        DivinationCardsSample {
+impl Sample {
+    #[must_use]
+    pub fn new(cards: Cards, not_cards: Vec<String>, fixed_names: Vec<FixedCardName>) -> Sample {
+        Sample {
             cards,
             not_cards,
             fixed_names,
@@ -34,12 +31,12 @@ impl DivinationCardsSample {
     /// Create a new sample.
     /// # Examples
     /// ```
-    /// # use divi::sample::{DivinationCardsSample, SampleData, CardNameAmount};
+    /// # use divi::sample::{Sample, Input, CardNameAmount};
     /// # use divi::prices::Prices;
     /// # fn main() -> Result<(), divi::error::Error> {
     ///     // create sample from csv
-    ///     let sample = DivinationCardsSample::create(
-    ///         SampleData::Csv(String::from("name,amount\rRain of Chaos,2\rThe Doctor,1")),
+    ///     let sample = Sample::create(
+    ///         Input::Csv(String::from("name,amount\rRain of Chaos,2\rThe Doctor,1")),
     ///         None,
     ///     )?;
     /// #    Ok(())
@@ -47,12 +44,12 @@ impl DivinationCardsSample {
     /// ```
     ///
     /// ```
-    /// # use divi::sample::{DivinationCardsSample, SampleData, CardNameAmount};
+    /// # use divi::sample::{Sample, Input, CardNameAmount};
     /// # use divi::prices::Prices;
     /// # fn main() -> Result<(), divi::error::Error> {
     ///     // create sample from name-amount list
-    ///    let sample = DivinationCardsSample::create(
-    ///        SampleData::CardNameAmountList(vec![
+    ///    let sample = Sample::create(
+    ///        Input::CardNameAmountList(vec![
     ///             CardNameAmount::new(String::from("Rain of Chaos"), 25),
     ///             CardNameAmount::new(String::from("The Doctor"), 1),
     ///        ]),
@@ -62,15 +59,12 @@ impl DivinationCardsSample {
     /// # }
     /// ```
     #[tracing::instrument(skip(source, prices))]
-    pub fn create(
-        source: SampleData,
-        prices: Option<Prices>,
-    ) -> Result<DivinationCardsSample, Error> {
+    pub fn create(source: Input, prices: Option<Prices>) -> Result<Sample, Error> {
         let mut sample = Self::from_prices(prices);
         let name_amount_pairs = match source {
-            SampleData::Csv(csv_data) => parse_csv(&csv_data)?,
-            SampleData::CardNameAmountList(vec) => vec,
-            SampleData::Sample(sample) => sample.to_name_amount_pairs(),
+            Input::Csv(csv_data) => parse_csv(&csv_data)?,
+            Input::CardNameAmountList(vec) => vec,
+            Input::Sample(sample) => sample.to_name_amount_pairs(),
         };
 
         for CardNameAmount { name, amount } in name_amount_pairs {
@@ -91,24 +85,22 @@ impl DivinationCardsSample {
     /// Merge samples into one sample
     /// # Examples
     /// ```
-    ///# use divi::sample::{CardNameAmount, DivinationCardsSample, SampleData};
+    ///# use divi::sample::{CardNameAmount, Sample, Input};
     ///# fn main() -> Result<(), divi::error::Error> {
-    ///     let s1 = DivinationCardsSample::create(
-    ///         SampleData::Csv(String::from("name,amount\rRain of Chaos,30")),
+    ///     let s1 = Sample::create(
+    ///         Input::Csv(String::from("name,amount\rRain of Chaos,30")),
     ///         None,
     ///     )?;
     ///     let vec: Vec<CardNameAmount> = vec![CardNameAmount::new(String::from("Rain of Caos"), 25)];
-    ///     let s2 = DivinationCardsSample::create(SampleData::CardNameAmountList(vec), None)?;
-    ///     let merged = DivinationCardsSample::merge(None, &[s1, s2]);
+    ///     let s2 = Sample::create(Input::CardNameAmountList(vec), None)?;
+    ///     let merged = Sample::merge(None, &[s1, s2]);
     ///     assert_eq!(merged.cards.get_card("Rain of Chaos").amount, 55);
     ///#     Ok(())
     ///# }
     /// ```
-    pub fn merge(
-        prices: Option<Prices>,
-        samples: &[DivinationCardsSample],
-    ) -> DivinationCardsSample {
-        let mut merged = DivinationCardsSample::from_prices(prices);
+    #[must_use]
+    pub fn merge(prices: Option<Prices>, samples: &[Sample]) -> Sample {
+        let mut merged = Sample::from_prices(prices);
 
         for card in merged.cards.iter_mut() {
             let amount = samples
@@ -124,13 +116,13 @@ impl DivinationCardsSample {
 
     /// Consumes Prices structure to set prices for Cards
     fn from_prices(prices: Option<Prices>) -> Self {
-        DivinationCardsSample {
+        Sample {
             cards: Cards::from(prices.unwrap_or_default()),
             ..Default::default()
         }
     }
 
-    /// Helper function for write_weight
+    /// Helper function for `write_weight`
     fn weight_multiplier(&self) -> f32 {
         let rain_of_chaos = self.cards.get_card("Rain of Chaos");
         RAIN_OF_CHAOS_WEIGHT / rain_of_chaos.amount as f32
@@ -144,6 +136,7 @@ impl DivinationCardsSample {
             .for_each(|card| card.set_weight(weight_multiplier));
     }
 
+    #[must_use]
     pub fn into_serde_values(mut self, preferences: Option<TablePreferences>) -> Vec<Vec<Value>> {
         let preferences = preferences.unwrap_or_default();
 
@@ -180,17 +173,18 @@ impl DivinationCardsSample {
         values
     }
 
+    #[must_use]
     pub fn into_csv(self, preferences: Option<TablePreferences>) -> String {
         let values = self.into_serde_values(preferences);
         let mut writer = csv::Writer::from_writer(vec![]);
         for val in values {
-            writer.serialize(val).unwrap();
+            writer.serialize(val);
         }
 
         String::from_utf8(writer.into_inner().unwrap()).unwrap()
     }
 
-    fn to_name_amount_pairs(self: DivinationCardsSample) -> Vec<CardNameAmount> {
+    fn to_name_amount_pairs(self: Sample) -> Vec<CardNameAmount> {
         self.cards
             .0
             .into_iter()
@@ -260,7 +254,7 @@ impl Default for TablePreferences {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, Default)]
+#[derive(Serialize, Deserialize, Debug, Clone, Default, Copy)]
 #[serde(rename_all = "camelCase")]
 pub enum Order {
     Asc,
@@ -274,19 +268,19 @@ fn preserve_column_order(columns: &[Column]) -> Vec<Column> {
     let mut vec: Vec<Column> = vec![];
 
     if columns.iter().any(|c| c == &Column::Name) {
-        vec.push(Column::Name)
+        vec.push(Column::Name);
     };
     if columns.iter().any(|c| c == &Column::Amount) {
-        vec.push(Column::Amount)
+        vec.push(Column::Amount);
     };
     if columns.iter().any(|c| c == &Column::Weight) {
-        vec.push(Column::Weight)
+        vec.push(Column::Weight);
     };
     if columns.iter().any(|c| c == &Column::Price) {
-        vec.push(Column::Price)
+        vec.push(Column::Price);
     };
     if columns.iter().any(|c| c == &Column::Sum) {
-        vec.push(Column::Sum)
+        vec.push(Column::Sum);
     };
 
     vec
@@ -300,20 +294,22 @@ pub struct CardNameAmount {
 }
 
 impl CardNameAmount {
+    #[must_use]
     pub const fn new(name: String, amount: u32) -> CardNameAmount {
         CardNameAmount { name, amount }
     }
 }
 
+/// Input to construct Sample
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum SampleData {
+pub enum Input {
     Csv(String),
     CardNameAmountList(Vec<CardNameAmount>),
-    Sample(DivinationCardsSample),
+    Sample(Sample),
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Default, Copy)]
 #[serde(rename_all = "camelCase")]
 pub enum Column {
     Name,
@@ -336,7 +332,7 @@ impl Display for Column {
     }
 }
 
-impl TryFrom<ReadBatchResponse> for SampleData {
+impl TryFrom<ReadBatchResponse> for Input {
     type Error = crate::error::Error;
 
     fn try_from(response: ReadBatchResponse) -> Result<Self, Self::Error> {
@@ -351,7 +347,7 @@ impl TryFrom<ReadBatchResponse> for SampleData {
                 Ok(CardNameAmount { name, amount })
             })
             .collect::<Result<Vec<CardNameAmount>, Error>>()?;
-        Ok(SampleData::CardNameAmountList(v))
+        Ok(Input::CardNameAmountList(v))
     }
 }
 
@@ -366,7 +362,7 @@ mod tests {
     fn into_serde_values() {
         let csv = read_to_string("examples/example-2.csv").unwrap();
         let prices = Prices::default();
-        let sample = DivinationCardsSample::create(SampleData::Csv(csv), Some(prices)).unwrap();
+        let sample = Sample::create(Input::Csv(csv), Some(prices)).unwrap();
         let values = sample.into_serde_values(Some(TablePreferences {
             columns: vec![
                 Column::Sum,
@@ -407,8 +403,8 @@ mod tests {
 
     #[test]
     fn into_serde_values_2() {
-        let sample = DivinationCardsSample::create(
-            SampleData::Csv(String::from("name,amount\rRain of Chaos,1\rThe Doctor,1")),
+        let sample = Sample::create(
+            Input::Csv(String::from("name,amount\rRain of Chaos,1\rThe Doctor,1")),
             None,
         )
         .unwrap();
@@ -440,11 +436,11 @@ Encroaching Darkness,5\r\nThe Endless Darkness,1\r\nThe Endurance,19\r\nThe Enfo
         let csv2 = read_to_string("examples/example-2.csv").unwrap();
         let csv3 = read_to_string("examples/example-3.csv").unwrap();
 
-        let s1 = DivinationCardsSample::create(SampleData::Csv(csv1), None).unwrap();
-        let s2 = DivinationCardsSample::create(SampleData::Csv(csv2), None).unwrap();
-        let s3 = DivinationCardsSample::create(SampleData::Csv(csv3), None).unwrap();
+        let s1 = Sample::create(Input::Csv(csv1), None).unwrap();
+        let s2 = Sample::create(Input::Csv(csv2), None).unwrap();
+        let s3 = Sample::create(Input::Csv(csv3), None).unwrap();
 
-        let s = DivinationCardsSample::merge(None, &[s1, s2, s3]);
+        let s = Sample::merge(None, &[s1, s2, s3]);
         let rain_of_chaos = s
             .cards
             .iter()

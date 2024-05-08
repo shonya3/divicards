@@ -7,7 +7,7 @@ use crate::{
 };
 use divi::{
     prices::Prices,
-    sample::{DivinationCardsSample, SampleData},
+    sample::{Input, Sample},
     {League, TradeLeague},
 };
 use reqwest::{Client, RequestBuilder};
@@ -25,7 +25,7 @@ pub async fn sample_from_tab(
     prices: State<'_, Mutex<AppCardPrices>>,
     version: State<'_, AppVersion>,
     window: Window,
-) -> Result<DivinationCardsSample, Error> {
+) -> Result<Sample, Error> {
     let tab = StashAPI::tab_with_items(&league, stash_id, substash_id, version.inner()).await?;
 
     let prices = match TradeLeague::try_from(league) {
@@ -36,7 +36,7 @@ pub async fn sample_from_tab(
         Err(_) => Prices::default(),
     };
 
-    let sample = DivinationCardsSample::create(SampleData::from(tab), Some(prices))?;
+    let sample = Sample::create(Input::from(tab), Some(prices))?;
     Ok(sample)
 }
 
@@ -136,7 +136,7 @@ pub async fn sample_from_tab_with_items(
     tab: TabWithItems,
     prices: State<'_, Mutex<AppCardPrices>>,
     window: Window,
-) -> Result<DivinationCardsSample, Error> {
+) -> Result<Sample, Error> {
     let prices = match TradeLeague::try_from(league) {
         Ok(league) => {
             let mut guard = prices.lock().await;
@@ -145,6 +145,6 @@ pub async fn sample_from_tab_with_items(
         Err(_) => Prices::default(),
     };
 
-    let sample = DivinationCardsSample::create(SampleData::from(tab), Some(prices))?;
+    let sample = Sample::create(Input::from(tab), Some(prices))?;
     Ok(sample)
 }

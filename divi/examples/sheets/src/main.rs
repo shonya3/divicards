@@ -2,12 +2,12 @@ use std::fs::read_to_string;
 
 use divi::{
     prices::Prices,
-    sample::{Column, DivinationCardsSample, Order, SampleData, TablePreferences},
+    sample::{Column, Input, Order, Sample, TablePreferences},
 };
 
 fn main() -> Result<(), divi::error::Error> {
     let csv = read_to_string("sample.csv").expect("Could not read sample.csv");
-    let sample = DivinationCardsSample::create(SampleData::Csv(csv), Some(Prices::default()))?;
+    let sample = Sample::create(Input::Csv(csv), Some(Prices::default()))?;
 
     let preferences = TablePreferences {
         columns: vec![

@@ -1,3 +1,6 @@
+#![warn(clippy::pedantic)]
+#![allow(clippy::cast_precision_loss)]
+
 //! A library for parsing sets of divination cards(samples) and calculating the real weight for each card
 //!
 //!
@@ -5,7 +8,7 @@
 //!use divi::{
 //!    TradeLeague,
 //!    prices::Prices,
-//!    sample::{DivinationCardsSample, SampleData},
+//!    sample::{Sample, Input},
 //!};
 //!
 //!#[tokio::main]
@@ -14,7 +17,7 @@
 //!    let csv = r#"name,amount
 //!    The Doctor,2
 //!    Rain of Chaos,30"#;
-//!    let sample = DivinationCardsSample::create(SampleData::Csv(String::from(csv)), Some(prices))?;
+//!    let sample = Sample::create(Input::Csv(String::from(csv)), Some(prices))?;
 //!    // output: The Doctor: DivinationCardRecord { name: "The Doctor", amount: 2, price: Some(869.1), sum: Some(1738.2), weight: Some(2090.8254) }
 //!    println!("The Doctor: {:?}", sample.cards.get_card("The Doctor"));
 //!    Ok(())
@@ -28,12 +31,12 @@
 //!
 //!use divi::{
 //!    prices::Prices,
-//!    sample::{Column, DivinationCardsSample, Order, SampleData, TablePreferences},
+//!    sample::{Column, Sample, Order, Input, TablePreferences},
 //!};
 //!
 //!fn main() -> Result<(), divi::error::Error> {
 //!let csv = read_to_string("examples/sample.csv").expect("Could not read sample.csv");
-//!    let sample = DivinationCardsSample::create(SampleData::Csv(csv), Some(Prices::default()))?;
+//!    let sample = Sample::create(Input::Csv(csv), Some(Prices::default()))?;
 //!
 //!    let preferences = TablePreferences {
 //!        columns: vec![
@@ -64,12 +67,12 @@ pub mod prices;
 pub mod sample;
 
 pub use crate::{
-    card_record::DivinationCardRecord,
+    card_record::CardRecord,
     cards::{check_card_name, Cards, CheckCardName, GetRecordMut},
     consts::{CARDS, CONDENSE_FACTOR, LEGACY_CARDS},
     error::Error,
     prices::{DivinationCardPrice, Prices},
-    sample::{CardNameAmount, Column, DivinationCardsSample, Order, SampleData, TablePreferences},
+    sample::{CardNameAmount, Column, Input, Order, Sample, TablePreferences},
 };
 pub use poe::league::{League, TradeLeague};
 
@@ -95,13 +98,13 @@ mod weight_tests {
     use crate::{
         consts::{CONDENSE_FACTOR, RAIN_OF_CHAOS_WEIGHT},
         prices::Prices,
-        sample::{DivinationCardsSample, SampleData},
+        sample::{Input, Sample},
     };
 
     #[test]
     fn calc_real_rain_of_chaos_weight() {
-        let sample = DivinationCardsSample::create(
-            SampleData::Csv(String::from("name,amount\rRain of Chaos,1")),
+        let sample = Sample::create(
+            Input::Csv(String::from("name,amount\rRain of Chaos,1")),
             Some(Prices::default()),
         )
         .unwrap();
@@ -116,8 +119,8 @@ mod weight_tests {
 
     #[test]
     fn card_weight_in_three_cards_sample() {
-        let sample = DivinationCardsSample::create(
-            SampleData::Csv(String::from("name,amount\rRain of Chaos,2\rThe Doctor,1")),
+        let sample = Sample::create(
+            Input::Csv(String::from("name,amount\rRain of Chaos,2\rThe Doctor,1")),
             None,
         )
         .unwrap();
@@ -132,8 +135,8 @@ mod weight_tests {
 
     #[test]
     fn huge_sample() {
-        let data = SampleData::Csv(fs::read_to_string("examples/example-2.csv").unwrap());
-        let sample = DivinationCardsSample::create(data, None).unwrap();
+        let data = Input::Csv(fs::read_to_string("examples/example-2.csv").unwrap());
+        let sample = Sample::create(data, None).unwrap();
 
         let fox = sample.cards.get_card("The Fox in the Brambles");
         assert_eq!(557.44556, fox.weight.unwrap());
@@ -142,12 +145,12 @@ mod weight_tests {
 
 #[cfg(test)]
 mod fix_typos {
-    use crate::sample::{DivinationCardsSample, SampleData};
+    use crate::sample::{Input, Sample};
     use std::fs;
     #[test]
     fn fix_typos() {
-        let sample_data = SampleData::Csv(fs::read_to_string("examples/example-3.csv").unwrap());
-        let sample = DivinationCardsSample::create(sample_data, None).unwrap();
+        let sample_data = Input::Csv(fs::read_to_string("examples/example-3.csv").unwrap());
+        let sample = Sample::create(sample_data, None).unwrap();
         assert_eq!(sample.fixed_names.len(), 26);
     }
 }

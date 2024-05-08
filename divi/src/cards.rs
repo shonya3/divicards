@@ -1,5 +1,5 @@
 use crate::{
-    card_record::DivinationCardRecord,
+    card_record::CardRecord,
     consts::CARDS,
     prices::Prices,
     sample::{Column, Order},
@@ -12,8 +12,8 @@ use std::{
 };
 
 impl IntoIterator for Cards {
-    type Item = DivinationCardRecord;
-    type IntoIter = std::vec::IntoIter<DivinationCardRecord>;
+    type Item = CardRecord;
+    type IntoIter = std::vec::IntoIter<CardRecord>;
 
     fn into_iter(self) -> Self::IntoIter {
         self.0.into_iter()
@@ -22,17 +22,19 @@ impl IntoIterator for Cards {
 
 /// Holds an array of card records with length equal to the number of all divination cards(For example, 440 in 3.23 patch)
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
-pub struct Cards(pub Vec<DivinationCardRecord>);
+pub struct Cards(pub Vec<CardRecord>);
 
 impl Cards {
-    pub fn get(&self, name: &str) -> Option<&DivinationCardRecord> {
+    #[must_use]
+    pub fn get(&self, name: &str) -> Option<&CardRecord> {
         self.0.iter().find(|c| c.name == name)
     }
 
-    pub fn get_mut(&mut self, name: &str) -> Option<&mut DivinationCardRecord> {
+    pub fn get_mut(&mut self, name: &str) -> Option<&mut CardRecord> {
         self.0.iter_mut().find(|c| c.name == name)
     }
 
+    #[must_use]
     pub fn get_record(&self, name: &str) -> GetRecord {
         match check_card_name(name) {
             CheckCardName::Valid => GetRecord::Valid(self.get_card(name)),
@@ -56,22 +58,23 @@ impl Cards {
     /// Use only with trusted card name(item of CARDS const). Otherwise, use get
     ///  # Panics
     /// If name is not a member of CARDS
-    pub fn get_card(&self, name: &str) -> &DivinationCardRecord {
+    #[must_use]
+    pub fn get_card(&self, name: &str) -> &CardRecord {
         self.get(name).unwrap()
     }
 
-    /// Use only with trusted card name(item of CARDS const). Otherwise, use get_mut
+    /// Use only with trusted card name(item of CARDS const). Otherwise, use `get_mut`
     /// # Panics
     /// If name is not a member of CARDS
-    pub fn get_card_mut(&mut self, name: &str) -> &mut DivinationCardRecord {
+    pub fn get_card_mut(&mut self, name: &str) -> &mut CardRecord {
         self.get_mut(name).unwrap()
     }
 
-    pub fn iter(&self) -> Iter<'_, DivinationCardRecord> {
+    pub fn iter(&self) -> Iter<'_, CardRecord> {
         self.0.iter()
     }
 
-    pub fn iter_mut(&mut self) -> IterMut<'_, DivinationCardRecord> {
+    pub fn iter_mut(&mut self) -> IterMut<'_, CardRecord> {
         self.0.iter_mut()
     }
 
@@ -112,8 +115,8 @@ impl Default for Cards {
         Cards(
             CARDS
                 .into_iter()
-                .map(|name| DivinationCardRecord::new(name.to_owned(), 0, None))
-                .collect::<Vec<DivinationCardRecord>>(),
+                .map(|name| CardRecord::new(name.to_owned(), 0, None))
+                .collect::<Vec<CardRecord>>(),
         )
     }
 }
@@ -124,12 +127,13 @@ impl From<Prices> for Cards {
             prices
                 .0
                 .into_iter()
-                .map(|p| DivinationCardRecord::new(p.name, 0, p.price))
-                .collect::<Vec<DivinationCardRecord>>(),
+                .map(|p| CardRecord::new(p.name, 0, p.price))
+                .collect::<Vec<CardRecord>>(),
         )
     }
 }
 
+#[must_use]
 pub fn check_card_name(card: &str) -> CheckCardName {
     if card.is_card() {
         return CheckCardName::Valid;
@@ -151,14 +155,14 @@ pub enum CheckCardName {
 }
 
 pub enum GetRecord<'a> {
-    Valid(&'a DivinationCardRecord),
-    TypoFixed(&'a DivinationCardRecord, FixedCardName),
+    Valid(&'a CardRecord),
+    TypoFixed(&'a CardRecord, FixedCardName),
     NotACard,
 }
 
 pub enum GetRecordMut<'a> {
-    Valid(&'a mut DivinationCardRecord),
-    TypoFixed(&'a mut DivinationCardRecord, FixedCardName),
+    Valid(&'a mut CardRecord),
+    TypoFixed(&'a mut CardRecord, FixedCardName),
     NotACard,
 }
 
@@ -169,6 +173,7 @@ pub struct FixedCardName {
 }
 
 impl FixedCardName {
+    #[must_use]
     pub fn new(old: &str, fixed: &str) -> FixedCardName {
         FixedCardName {
             old: String::from(old),

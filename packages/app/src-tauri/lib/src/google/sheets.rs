@@ -1,5 +1,5 @@
 use chrono::Utc;
-use divi::{sample::DivinationCardsSample, League};
+use divi::{sample::Sample, League};
 use googlesheets::sheet::{Credential, Dimension, ReadBatchResponse, SheetUrl, ValueRange};
 use serde_json::json;
 use tracing::debug;
@@ -14,7 +14,7 @@ use crate::{
 pub async fn new_sheet_with_sample(
     spreadsheet_id: &str,
     title: &str,
-    sample: DivinationCardsSample,
+    sample: Sample,
     league: League,
     preferences: Option<divi::sample::TablePreferences>,
 ) -> Result<SheetUrl, Error> {

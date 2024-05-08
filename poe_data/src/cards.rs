@@ -42,7 +42,7 @@ pub mod fetch {
     };
     use divi::{
         prices::Prices,
-        sample::{DivinationCardsSample, SampleData},
+        sample::{Input, Sample},
         Error as DiviError,
     };
     use googlesheets::sheet::Credential;
@@ -121,18 +121,15 @@ pub mod fetch {
     }
 
     /// Loads Total amounts from latest league, constructs Sample from them https://docs.google.com/spreadsheets/d/1PmGES_e1on6K7O5ghHuoorEjruAVb7dQ5m7PGrW7t80/edit#gid=898101079
-    async fn load_total_sample(
-        api_key: String,
-        prices: Option<Prices>,
-    ) -> Result<DivinationCardsSample, Error> {
+    async fn load_total_sample(api_key: String, prices: Option<Prices>) -> Result<Sample, Error> {
         let batch_read = googlesheets::read_batch(
             WEIGHT_SPREADSHEET_ID,
             SHEET_RANGES_OF_TOTAL_CARDS_FROM_LATEST_LEAGUE,
             Credential::ApiKey(api_key),
         )
         .await?;
-        let data = SampleData::try_from(batch_read)?;
-        let sample = DivinationCardsSample::create(data, prices)?;
+        let data = Input::try_from(batch_read)?;
+        let sample = Sample::create(data, prices)?;
         Ok(sample)
     }
 

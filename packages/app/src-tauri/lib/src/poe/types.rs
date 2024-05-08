@@ -1,6 +1,6 @@
 use divi::{
     consts::{CARDS, LEGACY_CARDS},
-    sample::{CardNameAmount, SampleData},
+    sample::{CardNameAmount, Input},
     IsCard,
 };
 use serde::{Deserialize, Serialize};
@@ -104,7 +104,7 @@ impl IsCard for Item {
     }
 }
 
-impl From<TabWithItems> for SampleData {
+impl From<TabWithItems> for Input {
     fn from(tab: TabWithItems) -> Self {
         let cards: Vec<CardNameAmount> = tab
             .items()
@@ -115,6 +115,6 @@ impl From<TabWithItems> for SampleData {
             })
             .collect();
 
-        SampleData::CardNameAmountList(cards)
+        Input::CardNameAmountList(cards)
     }
 }

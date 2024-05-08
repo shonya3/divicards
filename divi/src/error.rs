@@ -25,7 +25,7 @@ impl Display for Error {
             Error::SerdeError(err) => err.fmt(f),
             Error::MissingHeaders(err) => err.fmt(f),
             Error::NoPricesForLeagueOnNinja(league) => {
-                write!(f, "Prices for {} league do not exist on poe.ninja.", league)
+                write!(f, "Prices for {league} league do not exist on poe.ninja.")
             }
             Error::ParseIntError(err) => err.fmt(f),
             Error::CsvError(err) => err.fmt(f),

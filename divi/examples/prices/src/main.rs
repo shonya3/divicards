@@ -1,6 +1,6 @@
 use divi::{
     prices::Prices,
-    sample::{DivinationCardsSample, SampleData},
+    sample::{Input, Sample},
     TradeLeague,
 };
 
@@ -10,7 +10,7 @@ async fn main() -> Result<(), divi::error::Error> {
     let csv = r#"name,amount
     The Doctor,2
     Rain of Chaos,30"#;
-    let sample = DivinationCardsSample::create(SampleData::Csv(String::from(csv)), Some(prices))?;
+    let sample = Sample::create(Input::Csv(String::from(csv)), Some(prices))?;
     println!(
         "Total price of The Doctor cards: {}",
         sample.cards.get_card("The Doctor").sum.unwrap_or_default()

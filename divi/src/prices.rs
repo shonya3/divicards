@@ -42,7 +42,7 @@ impl Default for Prices {
                 .into_iter()
                 .map(|name| DivinationCardPrice {
                     name: name.to_string(),
-                    price: Default::default(),
+                    price: None,
                 })
                 .collect::<Vec<DivinationCardPrice>>(),
         )
