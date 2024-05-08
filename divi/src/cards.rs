@@ -11,15 +11,6 @@ use std::{
     slice::{Iter, IterMut},
 };
 
-impl IntoIterator for Cards {
-    type Item = CardRecord;
-    type IntoIter = std::vec::IntoIter<CardRecord>;
-
-    fn into_iter(self) -> Self::IntoIter {
-        self.0.into_iter()
-    }
-}
-
 /// Holds an array of card records with length equal to the number of all divination cards(For example, 440 in 3.23 patch)
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub struct Cards(pub Vec<CardRecord>);
@@ -107,6 +98,33 @@ impl Cards {
                 Order::Unordered => {}
             },
         }
+    }
+}
+
+impl IntoIterator for Cards {
+    type Item = CardRecord;
+    type IntoIter = std::vec::IntoIter<CardRecord>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.0.into_iter()
+    }
+}
+
+impl<'a> IntoIterator for &'a Cards {
+    type Item = &'a CardRecord;
+    type IntoIter = std::slice::Iter<'a, CardRecord>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.iter()
+    }
+}
+
+impl<'a> IntoIterator for &'a mut Cards {
+    type Item = &'a mut CardRecord;
+    type IntoIter = std::slice::IterMut<'a, CardRecord>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.iter_mut()
     }
 }
 
