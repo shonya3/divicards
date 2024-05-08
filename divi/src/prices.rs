@@ -14,23 +14,21 @@ pub struct DivinationCardPrice {
 pub struct Prices(pub Vec<DivinationCardPrice>);
 impl Prices {
     pub async fn fetch(league: &poe::TradeLeague) -> Result<Prices, ninja::Error> {
-        let ninja_card_data = ninja::fetch_card_data(&league).await?;
+        let ninja_card_data = ninja::fetch_card_data(league).await?;
         let mut prices = Prices::default();
         prices.0.iter_mut().for_each(|price| {
-            ninja_card_data
+            if let Some(NinjaCardData {
+                sparkline,
+                chaos_value,
+                ..
+            }) = ninja_card_data
                 .iter()
                 .find(|ninja_data| ninja_data.name == price.name)
-                .map(
-                    |NinjaCardData {
-                         sparkline,
-                         chaos_value,
-                         ..
-                     }| {
-                        if sparkline.data.len() > 0 {
-                            price.price = *chaos_value;
-                        }
-                    },
-                );
+            {
+                if sparkline.data.is_empty() {
+                    price.price = *chaos_value;
+                }
+            }
         });
 
         Ok(prices)

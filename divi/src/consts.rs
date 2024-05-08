@@ -1,8 +1,8 @@
 pub const CONDENSE_FACTOR: f32 = 2.0 / 3.0;
-pub const RAIN_OF_CHAOS_WEIGHT: f32 = 2452.65513;
+pub const RAIN_OF_CHAOS_WEIGHT: f32 = 2_452.655;
 
 pub const LEGACY_CARDS_N: usize = 16;
-pub const LEGACY_CARDS: [&'static str; LEGACY_CARDS_N] = [
+pub const LEGACY_CARDS: [&str; LEGACY_CARDS_N] = [
     "Friendship",
     "Squandered Prosperity",
     "Blessing of God",
@@ -21,14 +21,14 @@ pub const LEGACY_CARDS: [&'static str; LEGACY_CARDS_N] = [
     "Underground Forest",
 ];
 
-pub const NEVER_EXISTED: [&'static str; 3] = [
+pub const NEVER_EXISTED: [&str; 3] = [
     "The Devastator",
     "Treasures of the Vaal",
     "Luck of the Vaal",
 ];
 
 pub const CARDS_N: usize = 444;
-pub const CARDS: [&'static str; CARDS_N] = [
+pub const CARDS: [&str; CARDS_N] = [
     "Who Asked",
     "I See Brothers",
     "Assassin's Gift",

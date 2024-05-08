@@ -3,7 +3,6 @@ use std::fmt::{Debug, Display};
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
-use tracing::debug;
 
 use crate::error::{Error, GoogleErrorResponse};
 
@@ -35,21 +34,17 @@ pub async fn read_batch(
         Credential::AccessToken(token) => {
             let url =
         format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values:batchGet?{formatted_ranges}");
-            debug!(url);
-            let response = Client::new()
+            Client::new()
                 .get(url)
                 .header("Authorization", format!("Bearer {token}"))
                 .send()
-                .await?;
-            response
+                .await?
         }
         Credential::ApiKey(api_key) => {
             dbg!(&api_key);
             let url =
         format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values:batchGet?{formatted_ranges}&key={api_key}");
-            debug!(url);
-            let response = Client::new().get(url).send().await?;
-            response
+            Client::new().get(url).send().await?
         }
     };
 
@@ -73,22 +68,18 @@ pub async fn read(
                 "https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{range}"
             );
 
-            dbg!(&url);
-            let response = Client::new()
+            Client::new()
                 .get(url)
                 .header("Authorization", format!("Bearer {token}"))
                 .send()
-                .await?;
-            response
+                .await?
         }
         Credential::ApiKey(api_key) => {
             let url = format!(
                 "https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{range}?key={api_key}"
             );
 
-            dbg!(&url);
-            let response = Client::new().get(url).send().await?;
-            response
+            Client::new().get(url).send().await?
         }
     };
 
@@ -101,18 +92,13 @@ pub async fn read(
     }
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone, Default)]
 pub enum Dimension {
+    #[default]
     #[serde(rename = "ROWS")]
     Rows,
     #[serde(rename = "COLUMNS")]
     Columns,
-}
-
-impl Default for Dimension {
-    fn default() -> Self {
-        Dimension::Rows
-    }
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -171,8 +157,8 @@ pub async fn add_sheet_with_values<T: Serialize + Debug>(
     values: Vec<Vec<Value>>,
     token: &str,
 ) -> Result<SheetUrl, Error> {
-    let add_sheet_data = add_sheet(spreadsheet_id, title, &token).await?;
-    let _ = write_values_into_sheet(spreadsheet_id, title, &token, values).await?;
+    let add_sheet_data = add_sheet(spreadsheet_id, title, token).await?;
+    let _ = write_values_into_sheet(spreadsheet_id, title, token, values).await?;
 
     Ok(SheetUrl::create(
         spreadsheet_id,
@@ -404,4 +390,4 @@ pub struct GridProperties {
 // }
 
 #[allow(dead_code)]
-const SPREADSHEET_ID: &'static str = "1sDXpbG2bkqrOYScnvjMXTTg718dEc0LMDVHzllbAgmM";
+const SPREADSHEET_ID: &str = "1sDXpbG2bkqrOYScnvjMXTTg718dEc0LMDVHzllbAgmM";

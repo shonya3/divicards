@@ -203,7 +203,7 @@ impl DivinationCardsSample {
 }
 
 fn parse_csv(csv_data: &str) -> Result<Vec<CardNameAmount>, Error> {
-    let data = remove_lines_before_headers(&csv_data)?;
+    let data = remove_lines_before_headers(csv_data)?;
     let mut rdr = ReaderBuilder::new()
         .trim(Trim::All)
         .from_reader(data.as_bytes());
@@ -227,18 +227,13 @@ impl Display for MissingHeadersError {
 
 /// Parsing helper. Uses for CSV data
 fn remove_lines_before_headers(s: &str) -> Result<String, MissingHeadersError> {
-    match s.lines().enumerate().into_iter().find(|(_index, line)| {
+    match s.lines().enumerate().find(|(_index, line)| {
         line.contains("name")
             && ["amount", "stackSize"]
                 .iter()
                 .any(|variant| line.contains(variant))
     }) {
-        Some((index, _line)) => Ok(s
-            .lines()
-            .into_iter()
-            .skip(index)
-            .collect::<Vec<&str>>()
-            .join("\r\n")),
+        Some((index, _line)) => Ok(s.lines().skip(index).collect::<Vec<&str>>().join("\r\n")),
         None => Err(MissingHeadersError),
     }
 }
@@ -265,47 +260,34 @@ impl Default for TablePreferences {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone, Default)]
 #[serde(rename_all = "camelCase")]
 pub enum Order {
     Asc,
+    #[default]
     Desc,
     Unordered,
-}
-
-impl Default for Order {
-    fn default() -> Self {
-        Order::Desc
-    }
 }
 
 /// name > amount > weight > price > sum
 fn preserve_column_order(columns: &[Column]) -> Vec<Column> {
     let mut vec: Vec<Column> = vec![];
-    columns
-        .iter()
-        .find(|c| c == &&Column::Name)
-        .and_then(|_| Some(vec.push(Column::Name)));
 
-    columns
-        .iter()
-        .find(|c| c == &&Column::Amount)
-        .and_then(|_| Some(vec.push(Column::Amount)));
-
-    columns
-        .iter()
-        .find(|c| c == &&Column::Weight)
-        .and_then(|_| Some(vec.push(Column::Weight)));
-
-    columns
-        .iter()
-        .find(|c| c == &&Column::Price)
-        .and_then(|_| Some(vec.push(Column::Price)));
-
-    columns
-        .iter()
-        .find(|c| c == &&Column::Sum)
-        .and_then(|_| Some(vec.push(Column::Sum)));
+    if columns.iter().any(|c| c == &Column::Name) {
+        vec.push(Column::Name)
+    };
+    if columns.iter().any(|c| c == &Column::Amount) {
+        vec.push(Column::Amount)
+    };
+    if columns.iter().any(|c| c == &Column::Weight) {
+        vec.push(Column::Weight)
+    };
+    if columns.iter().any(|c| c == &Column::Price) {
+        vec.push(Column::Price)
+    };
+    if columns.iter().any(|c| c == &Column::Sum) {
+        vec.push(Column::Sum)
+    };
 
     vec
 }
@@ -331,20 +313,15 @@ pub enum SampleData {
     Sample(DivinationCardsSample),
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Default)]
 #[serde(rename_all = "camelCase")]
 pub enum Column {
     Name,
+    #[default]
     Amount,
     Weight,
     Price,
     Sum,
-}
-
-impl Default for Column {
-    fn default() -> Self {
-        Column::Amount
-    }
 }
 
 impl Display for Column {
@@ -356,6 +333,25 @@ impl Display for Column {
             Column::Price => write!(f, "price"),
             Column::Sum => write!(f, "sum"),
         }
+    }
+}
+
+impl TryFrom<ReadBatchResponse> for SampleData {
+    type Error = crate::error::Error;
+
+    fn try_from(response: ReadBatchResponse) -> Result<Self, Self::Error> {
+        let names = response.value_ranges[0].values.clone();
+        let amounts = response.value_ranges[1].values.clone();
+
+        let v = zip(names, amounts)
+            .map(|(name, amount)| {
+                let name: String = serde_json::from_str(&name[0].to_string())?;
+                let amount: u32 =
+                    serde_json::from_str::<String>(&amount[0].to_string())?.parse::<u32>()?;
+                Ok(CardNameAmount { name, amount })
+            })
+            .collect::<Result<Vec<CardNameAmount>, Error>>()?;
+        Ok(SampleData::CardNameAmountList(v))
     }
 }
 
@@ -456,25 +452,5 @@ Encroaching Darkness,5\r\nThe Endless Darkness,1\r\nThe Endurance,19\r\nThe Enfo
             .unwrap();
 
         assert_eq!(rain_of_chaos.amount, 1779);
-    }
-}
-
-impl TryFrom<ReadBatchResponse> for SampleData {
-    type Error = crate::error::Error;
-
-    fn try_from(response: ReadBatchResponse) -> Result<Self, Self::Error> {
-        let names = response.value_ranges[0].values.clone();
-        let amounts = response.value_ranges[1].values.clone();
-
-        let v = zip(names, amounts)
-            .into_iter()
-            .map(|(name, amount)| {
-                let name: String = serde_json::from_str(&name[0].to_string())?;
-                let amount: u32 =
-                    serde_json::from_str::<String>(&amount[0].to_string())?.parse::<u32>()?;
-                Ok(CardNameAmount { name, amount })
-            })
-            .collect::<Result<Vec<CardNameAmount>, Error>>()?;
-        Ok(SampleData::CardNameAmountList(v))
     }
 }

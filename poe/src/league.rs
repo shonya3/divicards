@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::fmt::Display;
 
-#[derive(Debug, Serialize, Deserialize, Clone, Hash, PartialEq, Eq)]
+#[derive(Debug, Serialize, Deserialize, Clone, Hash, PartialEq, Eq, Default)]
 pub enum League {
     Standard,
     Hardcore,
@@ -9,6 +9,7 @@ pub enum League {
     SSFStandard,
     #[serde(alias = "SSF Hardcore", alias = "Hardcore SSF")]
     SSFHardcore,
+    #[default]
     Necropolis,
     #[serde(alias = "Hardcore Necropolis")]
     HardcoreNecropolis,
@@ -22,16 +23,7 @@ pub enum League {
 
 impl League {
     pub fn is_trade(&self) -> bool {
-        match TradeLeague::try_from(self.to_owned()) {
-            Ok(_) => true,
-            Err(_) => false,
-        }
-    }
-}
-
-impl Default for League {
-    fn default() -> Self {
-        League::Necropolis
+        TradeLeague::try_from(self.to_owned()).is_ok()
     }
 }
 
@@ -62,10 +54,11 @@ impl From<TradeLeague> for League {
     }
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone, Hash, Eq, PartialEq)]
+#[derive(Debug, Serialize, Deserialize, Clone, Hash, Eq, PartialEq, Default)]
 pub enum TradeLeague {
     Standard,
     Hardcore,
+    #[default]
     Necropolis,
     #[serde(alias = "Hardcore Necropolis", rename = "Hardcore Necropolis")]
     HardcoreNecropolis,
@@ -79,11 +72,6 @@ impl Display for TradeLeague {
             TradeLeague::Necropolis => write!(f, "Necropolis"),
             TradeLeague::HardcoreNecropolis => write!(f, "Hardcore Necropolis"),
         }
-    }
-}
-impl Default for TradeLeague {
-    fn default() -> Self {
-        TradeLeague::Necropolis
     }
 }
 

@@ -14,7 +14,7 @@ pub async fn fetch_card_data(league: &TradeLeague) -> Result<Vec<CardData>, Erro
     );
     let json = reqwest::get(url).await?.text().await?;
     let data = serde_json::from_str::<ResponseShape>(&json)?;
-    if data.lines.len() == 0 {
+    if data.lines.is_empty() {
         return Err(Error::NoItemsBadRequest);
     }
     Ok(data.lines)
@@ -54,6 +54,6 @@ pub struct ExpilicitModifier {
 
 impl CardData {
     pub async fn fetch(league: &TradeLeague) -> Result<Vec<CardData>, Error> {
-        fetch_card_data(&league).await
+        fetch_card_data(league).await
     }
 }

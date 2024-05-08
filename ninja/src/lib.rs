@@ -24,7 +24,7 @@ pub async fn fetch_by_item_category(
     );
     let json = reqwest::get(url).await?.text().await?;
     let data = serde_json::from_str::<ResponseShape>(&json)?;
-    if data.lines.len() == 0 {
+    if data.lines.is_empty() {
         return Err(Error::NoItemsBadRequest);
     }
     Ok(data.lines)

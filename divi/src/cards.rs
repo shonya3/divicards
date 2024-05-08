@@ -9,8 +9,16 @@ use serde::{Deserialize, Serialize};
 use std::{
     collections::HashMap,
     slice::{Iter, IterMut},
-    vec::IntoIter,
 };
+
+impl IntoIterator for Cards {
+    type Item = DivinationCardRecord;
+    type IntoIter = std::vec::IntoIter<DivinationCardRecord>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.0.into_iter()
+    }
+}
 
 /// Holds an array of card records with length equal to the number of all divination cards(For example, 440 in 3.23 patch)
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
@@ -26,8 +34,8 @@ impl Cards {
     }
 
     pub fn get_record(&self, name: &str) -> GetRecord {
-        match check_card_name(&name) {
-            CheckCardName::Valid => GetRecord::Valid(self.get_card(&name)),
+        match check_card_name(name) {
+            CheckCardName::Valid => GetRecord::Valid(self.get_card(name)),
             CheckCardName::TypoFixed(fixed) => {
                 GetRecord::TypoFixed(self.get_card(&fixed.fixed), fixed)
             }
@@ -36,8 +44,8 @@ impl Cards {
     }
 
     pub fn get_record_mut(&mut self, name: &str) -> GetRecordMut {
-        match check_card_name(&name) {
-            CheckCardName::Valid => GetRecordMut::Valid(self.get_card_mut(&name)),
+        match check_card_name(name) {
+            CheckCardName::Valid => GetRecordMut::Valid(self.get_card_mut(name)),
             CheckCardName::TypoFixed(fixed) => {
                 GetRecordMut::TypoFixed(self.get_card_mut(&fixed.fixed), fixed)
             }
@@ -67,48 +75,32 @@ impl Cards {
         self.0.iter_mut()
     }
 
-    pub fn into_iter(self) -> IntoIter<DivinationCardRecord> {
-        self.0.into_iter()
-    }
-
     pub fn order_by(&mut self, ordered_by: Column, order: Order) {
         let vec = &mut self.0;
         match ordered_by {
             Column::Name => match order {
-                Order::Asc => vec.sort_by(|a, b| a.name.cmp(&b.name)).to_owned(),
-                Order::Desc => vec.sort_by(|a, b| b.name.cmp(&a.name)).to_owned(),
+                Order::Asc => vec.sort_by(|a, b| a.name.cmp(&b.name)),
+                Order::Desc => vec.sort_by(|a, b| b.name.cmp(&a.name)),
                 Order::Unordered => {}
             },
             Column::Amount => match order {
-                Order::Asc => vec.sort_by(|a, b| a.amount.cmp(&b.amount)).to_owned(),
-                Order::Desc => vec.sort_by(|a, b| b.amount.cmp(&a.amount)).to_owned(),
+                Order::Asc => vec.sort_by(|a, b| a.amount.cmp(&b.amount)),
+                Order::Desc => vec.sort_by(|a, b| b.amount.cmp(&a.amount)),
                 Order::Unordered => {}
             },
             Column::Weight => match order {
-                Order::Asc => vec
-                    .sort_by(|a, b| a.weight.partial_cmp(&b.weight).unwrap())
-                    .to_owned(),
-                Order::Desc => vec
-                    .sort_by(|a, b| b.weight.partial_cmp(&a.weight).unwrap())
-                    .to_owned(),
+                Order::Asc => vec.sort_by(|a, b| a.weight.partial_cmp(&b.weight).unwrap()),
+                Order::Desc => vec.sort_by(|a, b| b.weight.partial_cmp(&a.weight).unwrap()),
                 Order::Unordered => {}
             },
             Column::Price => match order {
-                Order::Asc => vec
-                    .sort_by(|a, b| a.price.partial_cmp(&b.price).unwrap())
-                    .to_owned(),
-                Order::Desc => vec
-                    .sort_by(|a, b| b.price.partial_cmp(&a.price).unwrap())
-                    .to_owned(),
+                Order::Asc => vec.sort_by(|a, b| a.price.partial_cmp(&b.price).unwrap()),
+                Order::Desc => vec.sort_by(|a, b| b.price.partial_cmp(&a.price).unwrap()),
                 Order::Unordered => {}
             },
             Column::Sum => match order {
-                Order::Asc => vec
-                    .sort_by(|a, b| a.weight.partial_cmp(&b.weight).unwrap())
-                    .to_owned(),
-                Order::Desc => vec
-                    .sort_by(|a, b| b.weight.partial_cmp(&a.weight).unwrap())
-                    .to_owned(),
+                Order::Asc => vec.sort_by(|a, b| a.weight.partial_cmp(&b.weight).unwrap()),
+                Order::Desc => vec.sort_by(|a, b| b.weight.partial_cmp(&a.weight).unwrap()),
                 Order::Unordered => {}
             },
         }
@@ -143,7 +135,7 @@ pub fn check_card_name(card: &str) -> CheckCardName {
         return CheckCardName::Valid;
     };
 
-    match fix_name(&card) {
+    match fix_name(card) {
         Some(fixed) => CheckCardName::TypoFixed(FixedCardName {
             old: card.to_owned(),
             fixed,
