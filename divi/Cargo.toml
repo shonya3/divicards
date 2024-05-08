@@ -19,3 +19,7 @@ ninja = { path = "../ninja" }
 [dev-dependencies]
 tokio = {workspace = true}
 
+[lints.clippy]
+pedantic = "warn"
+match_bool = "allow"
+cast_precision_loss = "allow"

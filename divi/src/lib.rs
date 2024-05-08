@@ -1,7 +1,3 @@
-#![warn(clippy::pedantic)]
-#![allow(clippy::cast_precision_loss)]
-#![allow(match_bool)]
-
 //! A library for parsing sets of divination cards(samples) and calculating the real weight for each card
 //!
 //!
