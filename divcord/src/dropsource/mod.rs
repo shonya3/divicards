@@ -72,7 +72,7 @@ impl<'de> Deserialize<'de> for Source {
             },
             SourceKind::SourceWithMember => {
                 let Some(id) = id else {
-                    return Err(de::Error::custom(format!("No id field")));
+                    return Err(de::Error::custom("No id field"));
                 };
                 match id.parse::<Source>() {
                     Ok(source) => Ok(source),
@@ -96,24 +96,22 @@ impl FromStr for Source {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "Disabled" => return Ok(Source::Disabled),
-            "Delirium Currency Rewards" => return Ok(Source::DeliriumCurrencyRewards),
+            "Disabled" => Ok(Source::Disabled),
+            "Delirium Currency Rewards" => Ok(Source::DeliriumCurrencyRewards),
             "Maelström of Chaos with Barrel Sextant" => {
-                return Ok(Source::MaelstromOfChaosWithBarrelSextant)
+                Ok(Source::MaelstromOfChaosWithBarrelSextant)
             }
-            "Global Drop" => {
-                return Ok(Source::GlobalDrop {
-                    min_level: None,
-                    max_level: None,
-                })
-            }
+            "Global Drop" => Ok(Source::GlobalDrop {
+                min_level: None,
+                max_level: None,
+            }),
             _ => UniqueMonster::from_str(s)
-                .map(|monster| Self::UniqueMonster(monster))
-                .or_else(|_| Area::from_str(s).map(|area| Self::Area(area)))
-                .or_else(|_| Vendor::from_str(s).map(|vendor| Self::Vendor(vendor)))
-                .or_else(|_| Strongbox::from_str(s).map(|strongbox| Self::Strongbox(strongbox)))
-                .or_else(|_| Chest::from_str(s).map(|chest| Self::Chest(chest)))
-                .or_else(|_| Err(strum::ParseError::VariantNotFound)),
+                .map(Self::UniqueMonster)
+                .or_else(|_| Area::from_str(s).map(Self::Area))
+                .or_else(|_| Vendor::from_str(s).map(Self::Vendor))
+                .or_else(|_| Strongbox::from_str(s).map(Self::Strongbox))
+                .or_else(|_| Chest::from_str(s).map(Self::Chest))
+                .map_err(|_| strum::ParseError::VariantNotFound),
         }
     }
 }
@@ -255,9 +253,9 @@ impl Serialize for Source {
 }
 
 pub fn poedb_page_url(boss: &str) {
-    let name = boss.split("(").next().unwrap().trim();
-    let name = name.replace(" ", "_");
-    let name = name.replace(",", "%2C");
+    let name = boss.split('(').next().unwrap().trim();
+    let name = name.replace(' ', "_");
+    let name = name.replace(',', "%2C");
     format!("https://poedb.tw/us/{name}");
 }
 
@@ -269,7 +267,7 @@ mod tests {
     #[test]
     pub fn deserialize_global_drop() {
         let json = r#"{"type":"Global Drop","id":"Global Drop","kind":"empty-source","max_level":68,"min_level":68}"#;
-        let source = serde_json::from_str::<Source>(&json).unwrap();
+        let source = serde_json::from_str::<Source>(json).unwrap();
 
         let Source::GlobalDrop {
             min_level,

@@ -96,18 +96,9 @@ impl Dumb {
         let tag_hypothesis = parse_string_cell(&spreadsheet_row[2]);
         let confidence = Confidence::parse(&spreadsheet_row[3])?;
         let remaining_work = RemainingWork::parse(&spreadsheet_row[4])?;
-        let wiki_disagreements = spreadsheet_row
-            .get(6)
-            .map(|val| parse_string_cell(val))
-            .flatten();
-        let sources_with_tag_but_not_on_wiki = spreadsheet_row
-            .get(7)
-            .map(|val| parse_string_cell(val))
-            .flatten();
-        let notes = spreadsheet_row
-            .get(8)
-            .map(|val| parse_string_cell(val))
-            .flatten();
+        let wiki_disagreements = spreadsheet_row.get(6).and_then(parse_string_cell);
+        let sources_with_tag_but_not_on_wiki = spreadsheet_row.get(7).and_then(parse_string_cell);
+        let notes = spreadsheet_row.get(8).and_then(parse_string_cell);
 
         Ok(Self {
             greynote,
@@ -130,7 +121,7 @@ pub fn parse_card_name(val: &Value) -> Result<String, Error> {
         return Err(Error::ValueNotStr(val.to_owned()));
     };
 
-    match divi::cards::check_card_name(&second_column_contents) {
+    match divi::cards::check_card_name(second_column_contents) {
         CheckCardName::Valid => Ok(second_column_contents.to_owned()),
         CheckCardName::TypoFixed(fixed) => Ok(fixed.fixed),
         CheckCardName::NotACard => {
@@ -148,10 +139,18 @@ pub fn parse_string_cell(val: &Value) -> Option<String> {
 }
 
 #[derive(
-    Serialize, Deserialize, Clone, Debug, PartialEq, strum_macros::EnumString, strum_macros::Display,
+    Serialize,
+    Deserialize,
+    Clone,
+    Default,
+    Debug,
+    PartialEq,
+    strum_macros::EnumString,
+    strum_macros::Display,
 )]
 #[serde(rename_all = "camelCase")]
 pub enum GreyNote {
+    #[default]
     #[strum(to_string = "Empty")]
     #[serde(rename = "Empty")]
     Empty,
@@ -182,12 +181,6 @@ pub enum GreyNote {
     #[strum(to_string = "Vendor")]
     #[serde(rename = "Vendor")]
     Vendor,
-}
-
-impl Default for GreyNote {
-    fn default() -> Self {
-        GreyNote::Empty
-    }
 }
 
 impl GreyNote {
@@ -235,10 +228,18 @@ impl Confidence {
 }
 
 #[derive(
-    Serialize, Deserialize, Clone, Debug, PartialEq, strum_macros::EnumString, strum_macros::Display,
+    Serialize,
+    Deserialize,
+    Clone,
+    Debug,
+    Default,
+    PartialEq,
+    strum_macros::EnumString,
+    strum_macros::Display,
 )]
 #[serde(rename_all = "camelCase")]
 pub enum RemainingWork {
+    #[default]
     #[strum(serialize = "n/a")]
     #[serde(rename = "n/a")]
     NotApplicable,
@@ -260,12 +261,6 @@ pub enum RemainingWork {
     #[strum(serialize = "open ended")]
     #[serde(rename = "open ended")]
     OpenEnded,
-}
-
-impl Default for RemainingWork {
-    fn default() -> Self {
-        RemainingWork::NotApplicable
-    }
 }
 
 impl RemainingWork {

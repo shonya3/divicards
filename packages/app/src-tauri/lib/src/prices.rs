@@ -65,7 +65,7 @@ impl AppCardPrices {
                 _ => LeagueFileState::TooOld,
             }
         } else {
-            return LeagueFileState::NoFile;
+            LeagueFileState::NoFile
         }
     }
 
@@ -100,7 +100,7 @@ impl AppCardPrices {
             variant: ToastVariant::Warning,
             message: format!("{err} Unable to load prices for league {league}. Skip price-dependant calculations."),
         }
-        .emit(&window);
+        .emit(window);
         Prices::default()
     }
 
@@ -124,15 +124,13 @@ impl AppCardPrices {
         league: &TradeLeague,
         window: &Window,
     ) -> Result<Prices, Error> {
-        let prices = Prices::fetch(league)
-            .await
-            .map_err(|err| DiviError::NinjaError(err))?;
+        let prices = Prices::fetch(league).await.map_err(DiviError::NinjaError)?;
         debug!("fetch_and_update: fetched. Serializing to json");
         let json = serde_json::to_string(&prices)?;
 
         debug!("fetch_and_update: Serialized. Next write to file");
 
-        std::fs::write(self.league_path(league), &json)?;
+        std::fs::write(self.league_path(league), json)?;
 
         debug!("fetch_and_update: wrote to file");
         self.prices_by_league
@@ -142,7 +140,7 @@ impl AppCardPrices {
             variant: ToastVariant::Neutral,
             message: format!("Prices for {league} league have been updated"),
         }
-        .emit(&window);
+        .emit(window);
 
         Ok(prices)
     }

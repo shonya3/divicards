@@ -2,7 +2,7 @@ use crate::league::LeagueReleaseInfo;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-pub const POE_CDN_CARDS: &'static str = "https://web.poecdn.com/image/divination-card/";
+pub const POE_CDN_CARDS: &str = "https://web.poecdn.com/image/divination-card/";
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -71,7 +71,7 @@ pub mod fetch {
         let key = std::env::var("GOOGLE_API_KEY").expect("No google api key");
         let prices = Prices::fetch(&divi::TradeLeague::Standard)
             .await
-            .map_err(|err| DiviError::NinjaError(err))?;
+            .map_err(DiviError::NinjaError)?;
         let sample = load_total_sample(key, Some(prices)).await?;
         let mut wiki_vec = load_wiki().await?;
 
@@ -85,17 +85,16 @@ pub mod fetch {
                 let (min_level, max_level, release_version) = wiki_vec
                     .iter()
                     .position(|w| w.name == card.name)
-                    .and_then(|index| Some(wiki_vec.swap_remove(index)))
+                    .map(|index| wiki_vec.swap_remove(index))
                     .map(|w| (w.min_level, w.max_level, w.release_version))
                     .unwrap_or_default();
 
                 let league = release_version
-                    .map(|version| {
+                    .and_then(|version| {
                         league_info_vec
                             .iter()
                             .find(|info| info.version.same_league(&version))
                     })
-                    .flatten()
                     .cloned();
 
                 Card {
@@ -116,9 +115,9 @@ pub mod fetch {
             a_weight.partial_cmp(&b_weight).unwrap()
         });
 
-        return Ok(CardsData(HashMap::from_iter(
+        Ok(CardsData(HashMap::from_iter(
             vec.into_iter().map(|c| (c.name.clone(), c)),
-        )));
+        )))
     }
 
     /// Loads Total amounts from latest league, constructs Sample from them https://docs.google.com/spreadsheets/d/1PmGES_e1on6K7O5ghHuoorEjruAVb7dQ5m7PGrW7t80/edit#gid=898101079
@@ -180,10 +179,10 @@ pub mod fetch {
                     min_level: raw.min_level.map(|s| s.parse().unwrap()),
                     drop_areas: raw
                         .drop_areas
-                        .map(|s| s.split(",").into_iter().map(|s| s.to_string()).collect()),
+                        .map(|s| s.split(',').map(|s| s.to_string()).collect()),
                     drop_monsters: raw
                         .drop_monsters
-                        .map(|s| s.split(",").into_iter().map(|s| s.to_string()).collect()),
+                        .map(|s| s.split(',').map(|s| s.to_string()).collect()),
                     max_level: raw.max_level.map(|s| s.parse().unwrap()),
                     release_version: raw.release_version,
                 }

@@ -104,7 +104,7 @@ impl Cell {
             .flat_map(|t| {
                 t.drops_from().into_iter().filter_map(|d| {
                     // try to strip comment if there is some
-                    let drops_from = if d.name.contains("[") {
+                    let drops_from = if d.name.contains('[') {
                         DropsFrom {
                             name: strip_comment(&d.name),
                             styles: d.styles,
@@ -139,7 +139,7 @@ impl Cell {
             .unwrap_or_default();
 
         // Check if cell is just one comment
-        if cell_text_content.starts_with("[") && cell_text_content.ends_with("]") {
+        if cell_text_content.starts_with('[') && cell_text_content.ends_with(']') {
             let mut open_brackets_occurences = 0;
             let mut close_brackets_occurences = 0;
             for ch in cell_text_content.chars() {
@@ -186,7 +186,7 @@ impl Cell {
                     },
                 ];
 
-                if vec[0].styles.italic == true && vec[1].styles.italic == false {
+                if vec[0].styles.italic && !vec[1].styles.italic {
                     return Err(ParseCellError::ItalicTextCannotPrecedeNormalText(
                         self.to_owned(),
                     ));
@@ -194,13 +194,10 @@ impl Cell {
 
                 Ok(vec)
             }
-            len => {
-                let err = Err(ParseCellError::InvalidNumberOfTextFragments(
-                    self.to_owned(),
-                    len,
-                ));
-                err
-            }
+            len => Err(ParseCellError::InvalidNumberOfTextFragments(
+                self.to_owned(),
+                len,
+            )),
         }
     }
 
@@ -310,7 +307,7 @@ pub struct Text {
 impl Text {
     pub fn items(&self) -> impl Iterator<Item = &str> {
         self.content
-            .split(";")
+            .split(';')
             .map(|s| s.trim())
             .filter(|s| *s != "n/a" && !s.is_empty())
     }
@@ -369,17 +366,11 @@ impl TextFormatRun {
     pub fn is_italic(&self, parent_styles: &FontStyles) -> bool {
         match &parent_styles.italic {
             true => match &self.format {
-                Some(format) => match format.italic {
-                    Some(italic) => italic,
-                    None => true,
-                },
+                Some(format) => format.italic.unwrap_or(true),
                 None => true,
             },
             false => match &self.format {
-                Some(format) => match format.italic {
-                    Some(italic) => italic,
-                    None => false,
-                },
+                Some(format) => format.italic.unwrap_or(false),
                 None => false,
             },
         }
@@ -388,17 +379,11 @@ impl TextFormatRun {
     pub fn is_strikethrough(&self, parent_styles: &FontStyles) -> bool {
         match &parent_styles.strikethrough {
             true => match &self.format {
-                Some(format) => match format.strikethrough {
-                    Some(strikethrough) => strikethrough,
-                    None => true,
-                },
+                Some(format) => format.strikethrough.unwrap_or(true),
                 None => true,
             },
             false => match &self.format {
-                Some(format) => match format.strikethrough {
-                    Some(strikethrough) => strikethrough,
-                    None => false,
-                },
+                Some(format) => format.strikethrough.unwrap_or(false),
                 None => false,
             },
         }

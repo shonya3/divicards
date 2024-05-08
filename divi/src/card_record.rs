@@ -57,12 +57,12 @@ mod tests {
     #[test]
     fn is_card() {
         let record = DivinationCardRecord::new("Rain of Chaos".to_string(), 1, None);
-        assert_eq!(record.is_card(), true);
+        assert!(record.is_card());
     }
 
     #[test]
     fn is_legacy_card() {
         let record = DivinationCardRecord::new("Friendship".to_string(), 1, None);
-        assert_eq!(record.is_legacy_card(), true);
+        assert!(record.is_legacy_card());
     }
 }

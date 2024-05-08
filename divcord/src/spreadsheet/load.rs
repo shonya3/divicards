@@ -39,7 +39,7 @@ pub async fn fetch_rich_column(letter: char) -> Result<RichColumn, reqwest::Erro
     let sheet = "Cards_and_Hypotheses";
     let column = letter;
     let url = format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}?&ranges={sheet}!{column}3:{column}&includeGridData=true&key={key}");
-    Ok(reqwest::get(url).await?.json().await?)
+    reqwest::get(url).await?.json().await
 }
 
 impl SpreadsheetFetcher {

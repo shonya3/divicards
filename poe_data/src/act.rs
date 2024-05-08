@@ -117,7 +117,7 @@ mod fetch {
                     .unwrap()
                     .unwrap();
 
-                let a: ActArea = page.evaluate(&script, tippy_content).await.unwrap();
+                let a: ActArea = page.evaluate(script, tippy_content).await.unwrap();
                 areas.push(a);
             }
         }

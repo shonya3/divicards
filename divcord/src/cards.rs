@@ -8,13 +8,13 @@ pub fn cards_by_source(
     records: &[Record],
     poe_data: &PoeData,
 ) -> Vec<CardBySource> {
-    let mut direct_cards = cards_by_source_directly(&source, &records)
+    let mut direct_cards = cards_by_source_directly(source, records)
         .into_iter()
-        .map(|direct| CardBySource::Direct(direct))
+        .map(CardBySource::Direct)
         .collect::<Vec<_>>();
-    let from_children = cards_from_child_sources(&source, &records, &poe_data)
+    let from_children = cards_from_child_sources(source, records, poe_data)
         .into_iter()
-        .map(|from_child| CardBySource::FromChild(from_child));
+        .map(CardBySource::FromChild);
     direct_cards.extend(from_children);
     direct_cards
 }
@@ -51,15 +51,13 @@ pub fn cards_by_source_types(
         poe_data.maps.clone().into_iter().for_each(|map| {
             let source = Source::from(map);
 
-            let cards = cards_from_child_sources(&source, &records, &poe_data)
+            let cards = cards_from_child_sources(&source, records, poe_data)
                 .into_iter()
-                .map(|from_child| CardBySource::FromChild(from_child))
+                .map(CardBySource::FromChild)
                 .collect::<Vec<_>>();
-            if cards.is_empty() {
-                return;
+            if !cards.is_empty() {
+                hash_map.entry(source.clone()).or_default().extend(cards);
             }
-
-            hash_map.entry(source.clone()).or_default().extend(cards);
         })
     };
 
@@ -70,15 +68,13 @@ pub fn cards_by_source_types(
             }
 
             let source = Source::from(act_area);
-            let cards = cards_from_child_sources(&source, &records, &poe_data)
+            let cards = cards_from_child_sources(&source, records, poe_data)
                 .into_iter()
-                .map(|from_child| CardBySource::FromChild(from_child))
+                .map(CardBySource::FromChild)
                 .collect::<Vec<_>>();
-            if cards.is_empty() {
-                return;
+            if !cards.is_empty() {
+                hash_map.entry(source.clone()).or_default().extend(cards)
             }
-
-            hash_map.entry(source.clone()).or_default().extend(cards)
         })
     };
 
@@ -204,10 +200,10 @@ pub fn cards_from_child_sources(
     records: &[Record],
     poe_data: &PoeData,
 ) -> Vec<FromChild> {
-    child_sources(&direct_source, &poe_data)
+    child_sources(direct_source, poe_data)
         .iter()
         .flat_map(|child| {
-            cards_by_source_directly(&child, &records)
+            cards_by_source_directly(child, records)
                 .into_iter()
                 .map(|by_child| FromChild {
                     source: direct_source.to_owned(),

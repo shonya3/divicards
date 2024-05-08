@@ -5,11 +5,11 @@ pub mod error;
 pub mod stash;
 pub mod types;
 
-pub const API_URL: &'static str = "https://api.pathofexile.com";
-pub const PROVIDER_LABEL: &'static str = "poe";
-const CLIENT_ID: &'static str = "divicards";
-const AUTH_URL: &'static str = "https://www.pathofexile.com/oauth/authorize";
-const TOKEN_URL: &'static str = "https://www.pathofexile.com/oauth/token";
+pub const API_URL: &str = "https://api.pathofexile.com";
+pub const PROVIDER_LABEL: &str = "poe";
+const CLIENT_ID: &str = "divicards";
+const AUTH_URL: &str = "https://www.pathofexile.com/oauth/authorize";
+const TOKEN_URL: &str = "https://www.pathofexile.com/oauth/token";
 
 #[derive(Debug)]
 pub struct AccessTokenStorage(Entry);
@@ -43,7 +43,7 @@ impl Persist for AccessTokenStorage {
 
 pub trait Persist {
     const KEY_NAME: &'static str;
-    fn get(self: &Self) -> Result<String, keyring::Error>;
-    fn set(self: &Self, value: &str) -> Result<(), keyring::Error>;
-    fn delete(self: &Self) -> Result<(), keyring::Error>;
+    fn get(&self) -> Result<String, keyring::Error>;
+    fn set(&self, value: &str) -> Result<(), keyring::Error>;
+    fn delete(&self) -> Result<(), keyring::Error>;
 }

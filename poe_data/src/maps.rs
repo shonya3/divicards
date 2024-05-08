@@ -145,8 +145,7 @@ pub mod fetch {
                 .await
                 .unwrap()
                 .into_iter()
-                .skip(3)
-                .next()
+                .nth(3)
                 .unwrap();
             let map = mapname_column
                 .text_content()
@@ -166,14 +165,14 @@ pub mod fetch {
     }
 
     fn poedb_page_url(boss: &str) -> String {
-        let name = boss.split("(").next().unwrap().trim();
-        let name = name.replace(" ", "_");
-        let name = name.replace(",", "%2C");
+        let name = boss.split('(').next().unwrap().trim();
+        let name = name.replace(' ', "_");
+        let name = name.replace(',', "%2C");
         format!("https://poedb.tw/us/{name}")
     }
 
     async fn get_map_icon_url(map: &str, page: &playwright::api::Page) -> Result<String, String> {
-        let url = poedb_page_url(&map);
+        let url = poedb_page_url(map);
         let Ok(_) = page
             .goto_builder(&url)
             .wait_until(playwright::api::DocumentLoadState::DomContentLoaded)

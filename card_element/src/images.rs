@@ -1,7 +1,7 @@
 use std::{env, fs::File};
 use tokio::task::spawn_blocking;
 
-pub const POE_CDN_CARDS: &'static str = "https://web.poecdn.com/image/divination-card/";
+pub const POE_CDN_CARDS: &str = "https://web.poecdn.com/image/divination-card/";
 
 pub async fn download_card_images() -> Result<(), ninja::Error> {
     let data = ninja::fetch_card_data(&poe::TradeLeague::Standard).await?;
@@ -45,7 +45,7 @@ pub fn download_images(urls: Vec<String>) {
 
     tokio::task::spawn_blocking(move || {
         for url in urls {
-            let (_, filename) = url.rsplit_once("/").unwrap();
+            let (_, filename) = url.rsplit_once('/').unwrap();
             let path = act_images_dir.join(filename);
             let mut file = File::create(path).unwrap();
             let _ = reqwest::blocking::get(url)

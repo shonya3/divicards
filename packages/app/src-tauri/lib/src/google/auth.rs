@@ -112,7 +112,7 @@ pub async fn google_auth(version: State<'_, AppVersion>, window: Window) -> Resu
             .unwrap();
 
             AccessTokenStorage::new()
-                .set(&token_data.access_token.secret())
+                .set(token_data.access_token.secret())
                 .unwrap();
             Ok(())
 
@@ -135,10 +135,7 @@ pub async fn google_auth(version: State<'_, AppVersion>, window: Window) -> Resu
 pub fn google_logout() {
     debug!("logout");
 
-    match AccessTokenStorage::new().delete() {
-        Ok(_) => {}
-        Err(_) => {}
-    }
+    AccessTokenStorage::new().delete().ok();
 }
 
 #[derive(Debug, Serialize, Deserialize)]

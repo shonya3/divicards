@@ -64,10 +64,7 @@ impl Role {
 
 pub async fn prepare_avatars_ts() -> String {
     let mut user_avatars = vec![];
-    let futures = USERS
-        .into_iter()
-        .map(|user| fetch_user_avatar(user))
-        .collect::<Vec<_>>();
+    let futures = USERS.iter().map(fetch_user_avatar).collect::<Vec<_>>();
     for fut in futures {
         user_avatars.push(fut.await.unwrap());
     }

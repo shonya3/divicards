@@ -52,13 +52,12 @@ impl FromStr for Area {
             "Labyrinth Trial Areas" => Ok(Self::LabyrinthTrialAreas),
             "Expedition Logbook" => Ok(Self::ExpeditionLogbook),
             _ => AreaSpecific::from_str(s)
-                .map(|a| Self::AreaSpecific(a))
-                .or_else(|_| AtziriArea::from_str(s).map(|a| Self::AtziriArea(a)))
+                .map(Self::AreaSpecific)
+                .or_else(|_| AtziriArea::from_str(s).map(Self::AtziriArea))
                 .or_else(|_| {
-                    UniqueHeistContractOrBoss::from_str(s)
-                        .map(|a| Self::UniqueHeistContractOrBoss(a))
+                    UniqueHeistContractOrBoss::from_str(s).map(Self::UniqueHeistContractOrBoss)
                 })
-                .or_else(|_| return Err(strum::ParseError::VariantNotFound)),
+                .map_err(|_| strum::ParseError::VariantNotFound),
         }
     }
 }

@@ -90,7 +90,7 @@ pub async fn poe_auth(version: State<'_, AppVersion>, window: Window) -> Result<
             .unwrap();
 
             AccessTokenStorage::new()
-                .set(&access_token.secret())
+                .set(access_token.secret())
                 .unwrap();
 
             Ok(username)
@@ -112,10 +112,7 @@ pub async fn poe_auth(version: State<'_, AppVersion>, window: Window) -> Result<
 pub fn poe_logout() {
     debug!("logout");
 
-    match AccessTokenStorage::new().delete() {
-        Ok(_) => {}
-        Err(_) => {}
-    }
+    AccessTokenStorage::new().delete().ok();
 }
 
 #[derive(Debug, Serialize, Deserialize)]

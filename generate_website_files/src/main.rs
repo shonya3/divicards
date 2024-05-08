@@ -44,16 +44,12 @@ async fn main() {
         &json_dir,
         DivinationCardElementData::filename(),
     );
-    std::fs::write(
-        &dir.join("avatars.ts"),
-        &avatars::prepare_avatars_ts().await,
-    )
-    .unwrap();
+    std::fs::write(&dir.join("avatars.ts"), avatars::prepare_avatars_ts().await).unwrap();
 
     // 2. Generate TypeScript
     std::fs::write(
         dir.join("Source.ts"),
-        &divcord::dropsource::Source::typescript_types(),
+        divcord::dropsource::Source::typescript_types(),
     )
     .unwrap();
 
@@ -75,14 +71,14 @@ pub fn divcord_wasm_pkg(path: &Path, dirname: &str) {
 
     if dir_path.exists() && dir_path.is_dir() {
         let output = Command::new("wasm-pack")
-            .args(&[
+            .args([
                 "build",
                 "--target",
                 "web",
                 "--out-dir",
                 &path.display().to_string(),
             ])
-            .current_dir(&dir_path)
+            .current_dir(dir_path)
             .stdout(Stdio::piped())
             .stderr(Stdio::piped())
             .output();
@@ -131,20 +127,11 @@ impl Config {
     }
 }
 
-impl Default for Config {
-    fn default() -> Self {
-        Self {
-            dir: Default::default(),
-            filename: Default::default(),
-        }
-    }
-}
-
 pub fn write<T>(value: &T, dir: &Path, filename: &str)
 where
     T: Serialize,
 {
     let json = serde_json::to_string(&value).unwrap();
     let p = dir.join(filename);
-    std::fs::write(p, &json).unwrap();
+    std::fs::write(p, json).unwrap();
 }

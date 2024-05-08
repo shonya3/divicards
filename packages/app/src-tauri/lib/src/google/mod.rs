@@ -4,11 +4,9 @@ pub mod sheets;
 use keyring::Entry;
 use serde::{Deserialize, Serialize};
 
-// const PROVIDER_LABEL: &'static str = "google";
-const CLIENT_ID: &'static str =
-    "752206000922-1gpkcoplrjqpfgg8pr4sb4tnrlvauomp.apps.googleusercontent.com";
-const AUTH_URL: &'static str = "https://accounts.google.com/o/oauth2/auth";
-const TOKEN_URL: &'static str = "https://oauth2.googleapis.com/token";
+const CLIENT_ID: &str = "752206000922-1gpkcoplrjqpfgg8pr4sb4tnrlvauomp.apps.googleusercontent.com";
+const AUTH_URL: &str = "https://accounts.google.com/o/oauth2/auth";
+const TOKEN_URL: &str = "https://oauth2.googleapis.com/token";
 
 #[derive(Debug)]
 pub struct AccessTokenStorage(Entry);
@@ -42,9 +40,9 @@ impl Persist for AccessTokenStorage {
 
 pub trait Persist {
     const KEY_NAME: &'static str;
-    fn get(self: &Self) -> Result<String, keyring::Error>;
-    fn set(self: &Self, value: &str) -> Result<(), keyring::Error>;
-    fn delete(self: &Self) -> Result<(), keyring::Error>;
+    fn get(&self) -> Result<String, keyring::Error>;
+    fn set(&self, value: &str) -> Result<(), keyring::Error>;
+    fn delete(&self) -> Result<(), keyring::Error>;
 }
 
 #[derive(Debug, Serialize, Deserialize)]

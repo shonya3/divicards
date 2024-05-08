@@ -42,27 +42,15 @@ impl ReleaseVersion {
     }
 
     pub fn major(&self) -> Option<u16> {
-        self.0
-            .split(".")
-            .next()
-            .map(|v| v.parse::<u16>().ok())
-            .flatten()
+        self.0.split('.').next().and_then(|v| v.parse::<u16>().ok())
     }
 
     pub fn minor(&self) -> Option<u16> {
-        self.0
-            .split(".")
-            .nth(1)
-            .map(|v| v.parse::<u16>().ok())
-            .flatten()
+        self.0.split('.').nth(1).and_then(|v| v.parse::<u16>().ok())
     }
 
     pub fn patch(&self) -> Option<u16> {
-        self.0
-            .split(".")
-            .nth(2)
-            .map(|v| v.parse::<u16>().ok())
-            .flatten()
+        self.0.split('.').nth(2).and_then(|v| v.parse::<u16>().ok())
     }
 }
 
@@ -106,12 +94,7 @@ impl LeagueReleaseInfo {
 
             let valid_league_name = info
                 .get("name")
-                .map(|v| {
-                    v.as_str()
-                        .map(|n| n.contains("league").then_some(n))
-                        .flatten()
-                })
-                .flatten();
+                .and_then(|v| v.as_str().and_then(|n| n.contains("league").then_some(n)));
 
             if valid_league_name.is_some() {
                 let info: LeagueReleaseInfo = serde_json::from_value(info_value.to_owned())?;

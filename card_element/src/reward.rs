@@ -97,11 +97,11 @@ pub struct HighlightedExpression {
 impl HighlightedExpression {
     pub fn parse(s: &str) -> Vec<HighlightedExpression> {
         let angle_open_ocurrences: Vec<usize> =
-            s.match_indices("<").map(|(index, _)| index).collect();
+            s.match_indices('<').map(|(index, _)| index).collect();
         // dbg!(&angle_open_ocurrences);
 
         let mut sizes: Vec<(Size, usize, usize)> = vec![];
-        let newlines: Vec<usize> = s.match_indices("\n").map(|(index, _)| index).collect();
+        let newlines: Vec<usize> = s.match_indices('\n').map(|(index, _)| index).collect();
         // dbg!(&newlines);
 
         let mut exprs = vec![];
@@ -114,7 +114,7 @@ impl HighlightedExpression {
                     serde_json::from_str(&json!(modifier_str).to_string()).unwrap();
                 match modifier {
                     Modifier::Size(size) => {
-                        let open_curly = s[closing_angle..].find("{").unwrap() + closing_angle;
+                        let open_curly = s[closing_angle..].find('{').unwrap() + closing_angle;
                         let closing_curly = s[open_curly..].find("}}").unwrap() + open_curly;
                         // let contents = s[open_curly + 1..closing_curly + 1].to_string();
                         sizes.push((size, open_curly + 1, closing_curly + 1));
@@ -124,8 +124,8 @@ impl HighlightedExpression {
                         let line = Self::which_line(open_angle, &newlines);
                         // println!("{line}:  {modifier}");
 
-                        let open_curly = s[closing_angle..].find("{").unwrap() + closing_angle;
-                        let closing_curly = s[closing_angle..].find("}").unwrap() + closing_angle;
+                        let open_curly = s[closing_angle..].find('{').unwrap() + closing_angle;
+                        let closing_curly = s[closing_angle..].find('}').unwrap() + closing_angle;
 
                         // println!("closing_angle: {closing_angle}");
                         // println!("{open_curly} {closing_curly}");
@@ -150,7 +150,7 @@ impl HighlightedExpression {
         }
 
         for expr in exprs.iter_mut() {
-            let size = Self::find_expr_size(&expr, &sizes);
+            let size = Self::find_expr_size(expr, &sizes);
             expr.size = size;
         }
 
@@ -220,7 +220,7 @@ impl Span {
     pub fn as_html(&self) -> String {
         // dbg!(&self.0.modifier.to_string());
         let classlist = match &self.0.size {
-            Some(size) => format!("\"{} {}\"", &self.0.modifier.to_string(), size.to_string()),
+            Some(size) => format!("\"{} {}\"", &self.0.modifier.to_string(), size),
             None => self.0.modifier.to_string(),
         };
 
@@ -277,12 +277,12 @@ impl Div {
         let inside_angle_brackets_re = Regex::new(r"<([^>]+)>").unwrap();
         let inside_curly_brackets_re = Regex::new(r"\{([^}]+)\}").unwrap();
 
-        let mut _html = format!(r#"<div class="reward">"#);
+        let mut _html = r#"<div class="reward">"#;
 
         let mut div = Div(vec![], size);
         for (line_n, line) in s.lines().enumerate() {
             let mut paragraph = Paragraph(vec![]);
-            for (order_n, exp) in re.find_iter(&line).enumerate() {
+            for (order_n, exp) in re.find_iter(line).enumerate() {
                 let modifier_str = inside_angle_brackets_re
                     .captures(exp.as_str())
                     .unwrap()
@@ -330,7 +330,7 @@ mod test {
 
     #[test]
     fn parses_reward_to_html() {
-        for (_index, s) in [
+        for s in [
         "<uniqueitem>{Skin of the Loyal}\n<size:26>{<default>{Item Level:} <normal>{25}\n<corrupted>{Two-Implicit}\n<corrupted>{Corrupted}}",
         "<size:30>{<gemitem>{Level 6 Awakened Support Gem}}\n<default>{Quality:} <augmented>{+20%}\n<corrupted>{Corrupted}",
         "<size:29>{<gemitem>{Level 6 Awakened Support Gem}}\n<default>{Quality:} <augmented>{+23%}\n<corrupted>{Corrupted}",
@@ -345,7 +345,7 @@ mod test {
         "<size:31>{<magicitem>{Merciless One-Hand Weapon}\n<default>{Item Level:} <normal>{100}}",
         "<size:31>{<magicitem>{Bloodthirsty Eternal Sword}\n<default>{Item Level:} <normal>{66}}",
         "<size:26>{<rareitem>{Map}}\n<size:26>{<default>{Map Tier:} <normal>{13}\n<default>{Quality:} <augmented>{+13%}\n<default>{Delirium:} <normal>{100%}\n<default>{Modifiers:} <normal>{8}\n<corrupted>{Corrupted}}"
-    ].iter().enumerate(){
+    ].iter(){
 //    std::fs::write(std::env::current_dir().unwrap().join("html").join(format!("reward{index}.html")), reward_to_html(s)).unwrap();
             reward_to_html(s);
         }

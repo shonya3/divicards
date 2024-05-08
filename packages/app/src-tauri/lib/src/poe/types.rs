@@ -56,7 +56,7 @@ impl TabWithItems {
             .cloned()
             .unwrap_or_default()
             .into_iter()
-            .map(|v| Item::new(v))
+            .map(Item::new)
     }
     pub fn kind(&self) -> Result<StashType, serde_json::Error> {
         serde_json::from_value(self.0["type"].clone())
@@ -108,7 +108,6 @@ impl From<TabWithItems> for SampleData {
     fn from(tab: TabWithItems) -> Self {
         let cards: Vec<CardNameAmount> = tab
             .items()
-            .into_iter()
             .filter(|item| item.is_card())
             .map(|item| CardNameAmount {
                 name: item.base_type().unwrap_or_default().to_owned(),

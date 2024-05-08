@@ -193,18 +193,15 @@ pub fn parse_record_dropsources(
         });
     };
 
-    if dumb.greynote == GreyNote::Delirium {
-        if dumb.notes.as_deref()
+    if dumb.greynote == GreyNote::Delirium
+        && dumb.notes.as_deref()
             == Some("Appears to drop from any source of Delirium Currency rewards")
-        {
-            sources.push(Source::DeliriumCurrencyRewards);
-        }
+    {
+        sources.push(Source::DeliriumCurrencyRewards);
     }
 
-    if dumb.greynote == GreyNote::Vendor {
-        if dumb.notes.as_deref() == Some("Kirac shop") {
-            sources.push(Source::Vendor(Vendor::KiracShop));
-        }
+    if dumb.greynote == GreyNote::Vendor && dumb.notes.as_deref() == Some("Kirac shop") {
+        sources.push(Source::Vendor(Vendor::KiracShop));
     }
 
     // 5. Read notes(last column)
@@ -213,7 +210,7 @@ pub fn parse_record_dropsources(
     }
 
     // 6. Final rules
-    if dumb.confidence == Confidence::None && sources.len() > 0 {
+    if dumb.confidence == Confidence::None && !sources.is_empty() {
         // println!("{} {} {sources:?}", record.id, record.card);
     }
 
@@ -255,7 +252,7 @@ pub fn parse_dropses_from(
     match column {
         RichColumnVariant::Sources => {
             for d in &dumb.sources_drops_from {
-                let Ok(mut inner_sources) = parse_one_drops_from(d, &dumb, poe_data) else {
+                let Ok(mut inner_sources) = parse_one_drops_from(d, dumb, poe_data) else {
                     return Err(ParseSourceError::UnknownVariant {
                         card: dumb.card.to_owned(),
                         record_id: dumb.id,
@@ -271,7 +268,7 @@ pub fn parse_dropses_from(
             }
 
             for d in &dumb.verify_drops_from {
-                let Ok(mut inner_sources) = parse_one_drops_from(d, &dumb, poe_data) else {
+                let Ok(mut inner_sources) = parse_one_drops_from(d, dumb, poe_data) else {
                     println!("parse_one_drops_from Unknown variant {d:#?}");
 
                     return Err(ParseSourceError::UnknownVariant {
@@ -293,7 +290,7 @@ pub fn parse_one_drops_from(
     dumb: &Dumb,
     poe_data: &PoeData,
 ) -> Result<Vec<Source>, ParseSourceError> {
-    if d.styles.strikethrough == true {
+    if d.styles.strikethrough {
         return Ok(vec![]);
     }
 
@@ -313,16 +310,16 @@ pub fn parse_one_drops_from(
             "The Alluring Abyss" => {
                 if card_drop_level_requirement > 80 {
                     println!(
-                        "Row: {row} Card: {card_name} Warning. Min level of card({card_drop_level_requirement}) is higher than Map level({}). Map: {}",
-                        80, "The Alluring Abyss"
+                        "Row: {row} Card: {card_name} Warning. Min level of card({card_drop_level_requirement}) is higher than Map level({}). Map: The Alluring Abyss",
+                        80
                     );
                 }
             }
             "The Apex of Sacrifice" => {
                 if card_drop_level_requirement > 70 {
                     println!(
-                        "Row: {row} Card: {card_name} Warning. Min level of card({card_drop_level_requirement}) is higher than Map level({}). Map: {}",
-                        70, "The Apex of Sacrifice"
+                        "Row: {row} Card: {card_name} Warning. Min level of card({card_drop_level_requirement}) is higher than Map level({}). Map: The Apex of Sacrifice",
+                        70
                     );
                 }
             }
@@ -332,10 +329,9 @@ pub fn parse_one_drops_from(
     }
 
     // Acts areas or act area bosses
-    if d.styles.italic == true
-        && (d.styles.color.as_str() == "#FFFFFF" || dumb.greynote == GreyNote::Story)
+    if d.styles.italic && (d.styles.color.as_str() == "#FFFFFF" || dumb.greynote == GreyNote::Story)
     {
-        let ids = acts::parse_act_areas(d, &acts, card_drop_level_requirement.try_into().unwrap());
+        let ids = acts::parse_act_areas(d, acts, card_drop_level_requirement.try_into().unwrap());
         if ids.is_empty() {
             if acts.iter().any(|a| {
                 a.bossfights.iter().any(|b| {
@@ -364,11 +360,11 @@ pub fn parse_one_drops_from(
         }
 
         // return Some(Source::Acts { ids });
-        return Ok(ids.into_iter().map(|id| Source::Act(id)).collect());
+        return Ok(ids.into_iter().map(Source::Act).collect());
     }
 
     // Maps or MapBosses
-    if (d.styles.italic == false && d.styles.color.as_str() == "#FFFFFF")
+    if (!d.styles.italic && d.styles.color.as_str() == "#FFFFFF")
         || dumb.greynote == GreyNote::AreaSpecific
     {
         let s = &d.name;
@@ -387,8 +383,8 @@ pub fn parse_one_drops_from(
             return Ok(vec![Source::Map(map.name.to_owned())]);
         }
 
-        let s = strip_comment(&s);
-        if let Some(_) = mapbosses.iter().find(|b| b.name == s) {
+        let s = strip_comment(s);
+        if mapbosses.iter().any(|b| b.name == s) {
             return Ok(vec![Source::MapBoss(s)]);
         }
     }
@@ -465,7 +461,7 @@ mod acts {
 
         let areas = names
             .iter()
-            .flat_map(|name| find_ids(&name, acts, min_level))
+            .flat_map(|name| find_ids(name, acts, min_level))
             .collect();
 
         areas
@@ -473,18 +469,18 @@ mod acts {
 
     fn are_act_numbers_specified(s: &str) -> bool {
         match s {
-            s if s.contains("(") && s.contains(")") => true,
+            s if s.contains('(') && s.contains(')') => true,
             s if s.contains("1/2") => true,
             _ => false,
         }
     }
 
     fn parse_with_act_numbers(s: &str) -> Vec<ActAreaDivcordNotation> {
-        if !s.contains("(") && !s.contains("/") {
+        if !s.contains('(') && !s.contains('/') {
             panic!("Expected act notation, got {s}");
         };
 
-        let mut split = s.split("(");
+        let mut split = s.split('(');
         let name = split.next().expect("No name, {s}");
         let names = match name.contains("1/2") {
             true => {
@@ -496,21 +492,19 @@ mod acts {
         };
 
         if let Some(acts) = split.next() {
-            if acts.contains("/") {
-                let (left, right) = acts.split_once("/").unwrap();
+            if acts.contains('/') {
+                let (left, right) = acts.split_once('/').unwrap();
 
                 let left = left
                     .chars()
-                    .into_iter()
-                    .filter(|c| c.is_digit(10))
+                    .filter(|c| c.is_ascii_digit())
                     .collect::<String>()
                     .parse::<u8>()
                     .unwrap();
 
                 let right = right
                     .chars()
-                    .into_iter()
-                    .filter(|c| c.is_digit(10))
+                    .filter(|c| c.is_ascii_digit())
                     .collect::<String>()
                     .parse::<u8>()
                     .unwrap();
@@ -527,8 +521,7 @@ mod acts {
             } else {
                 let f: Box<dyn Fn(String) -> ActAreaDivcordNotation> = match acts
                     .chars()
-                    .into_iter()
-                    .filter(|c| c.is_digit(10))
+                    .filter(|c| c.is_ascii_digit())
                     .collect::<String>()
                     .parse::<u8>()
                 {
@@ -546,7 +539,7 @@ mod acts {
         } else {
             names
                 .into_iter()
-                .map(|name| ActAreaDivcordNotation::Name(name))
+                .map(ActAreaDivcordNotation::Name)
                 .collect()
         }
     }
@@ -555,9 +548,7 @@ mod acts {
         match name {
             ActAreaDivcordNotation::Name(name) => acts
                 .iter()
-                .filter(|a| {
-                    &a.name == name && a.is_town == false && (a.area_level + 2) >= min_level
-                })
+                .filter(|a| &a.name == name && !a.is_town && (a.area_level + 2) >= min_level)
                 .map(|a| a.id.to_owned())
                 .collect(),
             ActAreaDivcordNotation::NameWithAct((name, act)) => {

@@ -20,13 +20,13 @@ where
         f: impl Fn(&mut Config),
     ) -> Result<Self::Item, Self::Error> {
         let mut default = Self::default();
-        f(&mut default.config_mut());
+        f(default.config_mut());
         default.load().await
     }
 
     fn default_with_mut_config(f: impl Fn(&mut Config)) -> Self {
         let mut default = Self::default();
-        f(&mut default.config_mut());
+        f(default.config_mut());
         default
     }
 
@@ -34,7 +34,7 @@ where
         let config = self.config();
         match up_to_date(&self.file_path(), &config.stale).unwrap_or(false) {
             true => {
-                let file = File::open(&self.file_path())?;
+                let file = File::open(self.file_path())?;
                 let reader = BufReader::new(file);
 
                 Ok(serde_json::from_reader(reader)?)
@@ -80,7 +80,7 @@ where
         }
 
         let json = serde_json::to_string(data)?;
-        fs::write(self.file_path(), &json)?;
+        fs::write(self.file_path(), json)?;
 
         Ok(())
     }
@@ -98,7 +98,7 @@ fn up_to_date(path: &PathBuf, stale: &Stale) -> Result<bool, FileNotExists> {
         Stale::After(stale_after) => {
             let file_not_exists = |_| FileNotExists(path.to_owned());
 
-            let last_modified = fs::metadata(&path)
+            let last_modified = fs::metadata(path)
                 .map_err(file_not_exists)?
                 .modified()
                 .map_err(file_not_exists)?;
