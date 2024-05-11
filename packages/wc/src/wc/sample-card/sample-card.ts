@@ -22,7 +22,7 @@ declare global {
 }
 
 export interface Props {
-	league: League;
+	league?: TradeLeague;
 	filename: string;
 	selected: boolean | null;
 	uuid: string;
