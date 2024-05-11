@@ -5,6 +5,8 @@ type BaseElementProps = {};
 type BasePopupElementProps = {
   /** Instead of dialog's non-modal open, runs showModal() if true https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#open */
   open?: boolean;
+  /**  */
+  onEscape?: string;
 };
 
 type DropFilesMessageElementProps = {};
@@ -40,29 +42,6 @@ type PoeAuthElementProps = {
   loggedIn?: boolean;
 };
 
-type DivTableElementProps = {
-  /**  */
-  cards?: Readonly<DivinationCardRecord[]>;
-  /**  */
-  "min-price"?: number;
-  /**  */
-  column?: Column;
-  /**  */
-  order?: Order;
-  /**  */
-  _cards?: DivinationCardRecord[];
-  /**  */
-  nameQuery?: string;
-  /**  */
-  hideZeroSum?: boolean;
-  /**  */
-  filteredRecords?: DivinationCardRecord[];
-  /**  */
-  summary?: { amount: number; sum: number };
-  /**  */
-  checkboxHideZeroSum?: HTMLInputElement;
-};
-
 type FormExportSampleElementProps = {
   /**  */
   "spreadsheet-id"?: string;
@@ -84,6 +63,29 @@ type FormExportSampleElementProps = {
   error?: string | null;
   /**  */
   tablePreferences?: TablePreferences;
+};
+
+type DivTableElementProps = {
+  /**  */
+  cards?: Readonly<DivinationCardRecord[]>;
+  /**  */
+  "min-price"?: number;
+  /**  */
+  column?: Column;
+  /**  */
+  order?: Order;
+  /**  */
+  _cards?: DivinationCardRecord[];
+  /**  */
+  nameQuery?: string;
+  /**  */
+  hideZeroSum?: boolean;
+  /**  */
+  filteredRecords?: DivinationCardRecord[];
+  /**  */
+  summary?: { amount: number; sum: number };
+  /**  */
+  checkboxHideZeroSum?: HTMLInputElement;
 };
 
 type GoogleAuthElementProps = {
@@ -318,14 +320,14 @@ export type CustomElements = {
    * ---
    *
    */
-  "wc-div-table": DefineComponent<DivTableElementProps>;
+  "wc-form-export-sample": DefineComponent<FormExportSampleElementProps>;
 
   /**
    *
    * ---
    *
    */
-  "wc-form-export-sample": DefineComponent<FormExportSampleElementProps>;
+  "wc-div-table": DefineComponent<DivTableElementProps>;
 
   /**
    *
