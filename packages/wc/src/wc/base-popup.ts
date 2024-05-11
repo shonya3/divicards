@@ -13,7 +13,7 @@ export class BasePopupElement extends BaseElement {
 	static override tag = 'wc-base-popup';
 	static override styles = [styles()];
 	/** Instead of dialog's non-modal open, runs showModal() if true https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#open */
-	@property({ type: Boolean }) open = false;
+	@property({ type: Boolean, reflect: true }) open = false;
 
 	constructor() {
 		super();
