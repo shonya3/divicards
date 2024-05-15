@@ -15,6 +15,7 @@ pub struct Card {
     pub price: Option<f32>,
     #[serde(alias = "release version")]
     pub league: Option<LeagueReleaseInfo>,
+    pub pre_rework_weight: Option<f32>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -35,7 +36,9 @@ pub mod fetch {
     use crate::{
         cards::Card,
         consts::{
-            SHEET_RANGES_OF_TOTAL_CARDS_FROM_LATEST_LEAGUE, WEIGHT_SPREADSHEET_ID, WIKI_API_URL,
+            SHEET_RANGES_OF_TOTAL_CARDS_FROM_LATEST_LEAGUE,
+            SHEET_RANGES_OF_TOTAL_CARDS_FROM_PRE_REWORK_WEIGHT_LEAGUE, WEIGHT_SPREADSHEET_ID,
+            WIKI_API_URL,
         },
         error::Error,
         league::ReleaseVersion,
@@ -72,7 +75,8 @@ pub mod fetch {
         let prices = Prices::fetch(&divi::TradeLeague::Standard)
             .await
             .map_err(DiviError::NinjaError)?;
-        let sample = load_total_sample(key, Some(prices)).await?;
+        let sample = load_total_sample(key.clone(), Some(prices)).await?;
+        let pre_rework_weight_sample = load_sample_with_pre_rework_weight(key).await?;
         let mut wiki_vec = load_wiki().await?;
 
         let league_info_vec = crate::league::LeagueReleaseInfo::fetch().await?;
@@ -98,10 +102,11 @@ pub mod fetch {
                     .cloned();
 
                 Card {
-                    name: card.name,
+                    name: card.name.clone(),
                     min_level,
                     max_level,
                     weight: card.weight,
+                    pre_rework_weight: pre_rework_weight_sample.cards.get_card(&card.name).weight,
                     price: card.price,
                     league,
                 }
@@ -130,6 +135,18 @@ pub mod fetch {
         .await?;
         let data = Input::try_from(batch_read)?;
         let sample = Sample::create(data, prices)?;
+        Ok(sample)
+    }
+
+    async fn load_sample_with_pre_rework_weight(api_key: String) -> Result<Sample, Error> {
+        let batch_read = googlesheets::read_batch(
+            WEIGHT_SPREADSHEET_ID,
+            SHEET_RANGES_OF_TOTAL_CARDS_FROM_PRE_REWORK_WEIGHT_LEAGUE,
+            Credential::ApiKey(api_key),
+        )
+        .await?;
+        let data = Input::try_from(batch_read)?;
+        let sample = Sample::create(data, None)?;
         Ok(sample)
     }
 
