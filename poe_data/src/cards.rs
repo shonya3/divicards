@@ -42,7 +42,7 @@ pub mod fetch {
             WIKI_API_URL,
         },
         error::Error,
-        league::ReleaseVersion,
+        league::{LeagueReleaseInfo, ReleaseVersion},
     };
     use divi::{
         prices::Prices,
@@ -73,14 +73,19 @@ pub mod fetch {
         println!("Fetching cards");
         dotenv::dotenv().ok();
         let key = std::env::var("GOOGLE_API_KEY").expect("No google api key");
-        let prices = Prices::fetch(&divi::TradeLeague::Standard)
-            .await
-            .map_err(DiviError::NinjaError)?;
-        let sample = load_total_sample(key.clone(), Some(prices)).await?;
-        let pre_rework_weight_sample = load_sample_with_pre_rework_weight(key).await?;
-        let mut wiki_vec = load_wiki().await?;
 
-        let league_info_vec = crate::league::LeagueReleaseInfo::fetch().await?;
+        let (prices, pre_rework_weight_sample, wiki_vec, league_info_vec) = tokio::join!(
+            Prices::fetch(&divi::TradeLeague::Standard),
+            load_sample_with_pre_rework_weight(key.clone()),
+            load_wiki(),
+            LeagueReleaseInfo::fetch()
+        );
+        let prices = prices.map_err(DiviError::NinjaError)?;
+        let pre_rework_weight_sample = pre_rework_weight_sample?;
+        let mut wiki_vec = wiki_vec?;
+        let league_info_vec = league_info_vec?;
+        let sample = load_total_sample(key.clone(), Some(prices)).await?;
+
         let vec_json = serde_json::to_string(&league_info_vec).unwrap();
         println!("{vec_json}");
         let mut vec: Vec<Card> = sample
