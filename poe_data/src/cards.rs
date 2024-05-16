@@ -16,6 +16,7 @@ pub struct Card {
     #[serde(alias = "release version")]
     pub league: Option<LeagueReleaseInfo>,
     pub pre_rework_weight: Option<f32>,
+    pub disabled: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -46,7 +47,7 @@ pub mod fetch {
     use divi::{
         prices::Prices,
         sample::{Input, Sample},
-        Error as DiviError,
+        Error as DiviError, IsCard,
     };
     use googlesheets::sheet::Credential;
     use reqwest::Client;
@@ -109,6 +110,7 @@ pub mod fetch {
                     pre_rework_weight: pre_rework_weight_sample.cards.get_card(&card.name).weight,
                     price: card.price,
                     league,
+                    disabled: card.is_legacy_card(),
                 }
             })
             .collect();
