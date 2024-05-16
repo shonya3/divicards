@@ -103,7 +103,6 @@ pub mod fetch {
                     .cloned();
 
                 Card {
-                    name: card.name.clone(),
                     min_level,
                     max_level,
                     weight: card.weight,
@@ -111,6 +110,7 @@ pub mod fetch {
                     price: card.price,
                     league,
                     disabled: card.is_legacy_card(),
+                    name: card.name,
                 }
             })
             .collect();
