@@ -21,7 +21,7 @@ console_error_panic_hook = { version = "0.1.7", optional = true }
 serde-wasm-bindgen = "0.6.3"
 divcord = { path = "../divcord"}
 poe_data = {path = "../poe_data"}
-wasm-bindgen = "0.2.90"
+wasm-bindgen = "0.2.92"
 # wasm-bindgen-futures = "0.4.37"
 
 js-sys = "0.3.67"
