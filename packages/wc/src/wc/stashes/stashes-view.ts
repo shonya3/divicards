@@ -109,6 +109,7 @@ export class StashesViewElement extends BaseElement {
 	}
 
 	protected override render() {
+		console.log(this.stashes.length);
 		return html`<div class="main-stashes-component">
 			<div class="top-right-corner">
 				<div class=${classMap({ tips: true, hidden: this.stashes.length === 0 })}>
@@ -133,33 +134,37 @@ export class StashesViewElement extends BaseElement {
 						label="Custom league (for private leagues)"
 					></sl-input>
 				</fieldset>
-				<div class="load-stashes-section">
-					<sl-button id="stashes-btn" @click=${this.#onLoadStashesList}>Load Stash</sl-button>
-				</div>
-			</div>
-
-			<div class=${classMap({ 'not-visible': this.stashes.length === 0, 'load-tab-contents': true })}>
-				<sl-radio-group
-					class="mt-16"
-					@sl-change=${this.#onDownloadAsChanged}
-					label="Download as"
-					value=${this.downloadAs}
-				>
-					${DOWNLOAD_AS_VARIANTS.map(
-						variant =>
-							html`<sl-radio-button value=${variant}
-								>${variant === 'divination-cards-sample' ? 'sample' : 'general tab'}</sl-radio-button
-							>`
-					)}
-				</sl-radio-group>
-				<sl-button
-					id="get-data-btn"
-					class="btn-load-items"
-					.disabled=${this.selectedTabs.size === 0 || this.fetchingStash || this.stashLoadsAvailable === 0}
-					@click=${this.#onLoadItemsClicked}
-				>
-					Load Tabs Contents
-				</sl-button>
+				${this.stashes.length
+					? html`<div class="load-tab-contents">
+							<sl-radio-group
+								class="mt-16"
+								@sl-change=${this.#onDownloadAsChanged}
+								label="Download as"
+								value=${this.downloadAs}
+							>
+								${DOWNLOAD_AS_VARIANTS.map(
+									variant =>
+										html`<sl-radio-button value=${variant}
+											>${variant === 'divination-cards-sample'
+												? 'sample'
+												: 'general tab'}</sl-radio-button
+										>`
+								)}
+							</sl-radio-group>
+							<sl-button
+								id="get-data-btn"
+								class="btn-load-items"
+								.disabled=${this.selectedTabs.size === 0 ||
+								this.fetchingStash ||
+								this.stashLoadsAvailable === 0}
+								@click=${this.#onLoadItemsClicked}
+							>
+								Load Tabs Contents
+							</sl-button>
+					  </div>`
+					: html`<div class="load-stashes-section">
+							<sl-button id="stashes-btn" @click=${this.#onLoadStashesList}>Load Stash</sl-button>
+					  </div>`}
 			</div>
 
 			<div class="messages">
