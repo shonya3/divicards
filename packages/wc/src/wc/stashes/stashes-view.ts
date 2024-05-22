@@ -109,7 +109,6 @@ export class StashesViewElement extends BaseElement {
 	}
 
 	protected override render() {
-		console.log(this.stashes.length);
 		return html`<div class="main-stashes-component">
 			<div class="top-right-corner">
 				<div class=${classMap({ tips: true, hidden: this.stashes.length === 0 })}>
@@ -120,12 +119,10 @@ export class StashesViewElement extends BaseElement {
 				</div>
 				<sl-button @click=${this.#onCloseClicked} class="btn-close">Close</sl-button>
 			</div>
-
 			<div class="controls">
 				<fieldset>
 					<legend>Choose league</legend>
 					<wc-league-select .league=${this.league} @upd:league=${this.#onLeagueSelected}></wc-league-select>
-
 					<sl-input
 						.value=${this.customLeague}
 						@sl-input=${this.#onCustomLeagueInput}
@@ -166,14 +163,12 @@ export class StashesViewElement extends BaseElement {
 							<sl-button id="stashes-btn" @click=${this.#onLoadStashesList}>Load Stash</sl-button>
 					  </div>`}
 			</div>
-
 			<div class="messages">
 				<p class=${classMap({ visible: this.msg.length > 0, msg: true })}>${this.msg}</p>
 				<p class=${classMap({ visible: this.noStashesMessage.length > 0, msg: true })}>
 					${this.noStashesMessage}
 				</p>
 			</div>
-
 			<wc-tab-badge-group
 				league=${this.league}
 				.stashes=${this.stashes}
@@ -186,15 +181,12 @@ export class StashesViewElement extends BaseElement {
 	async #onLoadItemsClicked() {
 		await this.loadSelectedTabs(this.league);
 	}
-
 	#onCloseClicked() {
 		this.emit('close');
 	}
-
 	#onDownloadAsChanged(e: InputEvent) {
 		this.downloadAs = (e.target as HTMLInputElement).value as DownloadAs;
 	}
-
 	async #onLoadStashesList() {
 		if (!this.stashLoader) {
 			throw new Error('No stash loader');
@@ -217,16 +209,13 @@ export class StashesViewElement extends BaseElement {
 			}
 		}
 	}
-
 	#onLeagueSelected(e: CustomEvent<League>) {
 		this.league = e.detail;
 	}
-
 	#onUpdSelectedTabs(e: CustomEvent<Events['upd:selectedTabs']>) {
 		const map = (e as CustomEvent<Events['upd:selectedTabs']>).detail;
 		this.selectedTabs = new Map(map);
 	}
-
 	#onCustomLeagueInput(e: InputEvent) {
 		const target = e.target as HTMLInputElement;
 		this.customLeague = target.value;
@@ -258,14 +247,12 @@ export class StashesViewElement extends BaseElement {
 								sample,
 								league,
 							});
-
 							break;
 						}
 						case 'general-tab': {
 							const tab = await this.#loadSingleTabContent(id, league, this.stashLoader.tab);
 							tab.name = name;
 							this.emit<Events['tab-with-items-loaded']>('tab-with-items-loaded', { tab, name, league });
-
 							break;
 						}
 					}
@@ -274,7 +261,6 @@ export class StashesViewElement extends BaseElement {
 				await this.#handleLoadTabError(err);
 			}
 		}
-
 		this.fetchingStash = false;
 		this.msg = '';
 	}
@@ -289,22 +275,18 @@ export class StashesViewElement extends BaseElement {
 		}
 
 		this.msg = '';
-
-		// const loadFunction = mode === 'sample' ? this.stashLoader.sampleFromTab : this.stashLoader.tab;
 		const singleTabContent = await loadFunction(id, league);
 		this.selectedTabs.delete(id);
 		this.selectedTabs = new Map(this.selectedTabs);
 
 		this.stashLoadsAvailable--;
+		this.availableInTenSeconds--;
 		setTimeout(() => {
 			this.stashLoadsAvailable++;
 		}, SECS_300);
-
-		this.availableInTenSeconds--;
 		setTimeout(() => {
 			this.availableInTenSeconds++;
 		}, SECS_10);
-
 		return singleTabContent;
 	}
 
