@@ -3,7 +3,7 @@ import { BaseElement } from '../base-element';
 import { property, state, query } from 'lit/decorators.js';
 import { TabBadgeElement } from './tab-badge';
 import { NoItemsTab } from '@divicards/shared/poe.types';
-import { League, isPermanentLeague, permanentLeagues } from '@divicards/shared/types';
+import { League, isPermanentLeague } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
@@ -16,32 +16,6 @@ declare global {
 }
 
 export const REMOVE_ONLY = '(Remove-only)';
-
-const filter = (
-	stashes: NoItemsTab[],
-	nameQuery: string,
-	shouldFilter: boolean,
-	hideRemoveOnly: boolean
-): NoItemsTab[] => {
-	if (!shouldFilter) return stashes;
-
-	return stashes.filter(({ name }) => {
-		if (hideRemoveOnly) {
-			if (name.includes(REMOVE_ONLY)) return false;
-		}
-		return name.toLowerCase().includes(nameQuery.toLowerCase());
-	});
-};
-
-const paginate = (stashes: NoItemsTab[], page: number, perPage: number) => {
-	const start = (page - 1) * perPage;
-	const end = start + perPage;
-	return stashes.slice(start, end);
-};
-
-const shouldUnlockHideRemoveOnly = (league: League, stashes: NoItemsTab[]) => {
-	return isPermanentLeague(league) && stashes.some(({ name }) => name.includes(REMOVE_ONLY));
-};
 
 export interface Events {
 	'upd:nameQuery': string;
@@ -86,19 +60,15 @@ export class TabBadgeGroupElement extends BaseElement {
 	get shouldFilter() {
 		return this.stashes.length > 50;
 	}
-
 	get withHideRemoveOnly() {
 		return shouldUnlockHideRemoveOnly(this.league, this.stashes);
 	}
-
 	get filtered() {
 		return filter(this.stashes, this.nameQuery, this.shouldFilter, this.hideRemoveOnly);
 	}
-
 	get paginated() {
 		return paginate(this.filtered, this.page, this.perPage);
 	}
-
 	get tabsTotal() {
 		return this.stashes.length;
 	}
@@ -109,103 +79,91 @@ export class TabBadgeGroupElement extends BaseElement {
 		}
 	}
 
+	protected override render() {
+		return html`<div class="tab-badge-group">
+			${this.shouldFilter
+				? html`<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 2rem">
+						<div>
+							<div class="filter">
+								<label for="filter-stashes-by-name">Filter by name</label>
+								<sl-input
+									type="text"
+									id="filter-stashes-by-name"
+									.value=${this.nameQuery}
+									@input=${this.#onNameQueryInput}
+								></sl-input>
+							</div>
+						</div>
+						<div class="page-controls">
+							<sl-button ?disabled=${this.page === 1} @click=${this.decreasePage}>prev</sl-button>
+							<sl-input
+								id="page"
+								type="text"
+								.value=${String(this.page)}
+								@sl-input=${this.#onPageInput}
+							></sl-input>
+							<sl-button @click=${this.increasePage}>next</sl-button>
+							<label for="per-page">per page</label>
+							<sl-input
+								id="per-page"
+								type="number"
+								min="0"
+								.value=${String(this.perPage)}
+								@sl-input=${this.#onPerPageInput}
+							></sl-input>
+						</div>
+						${this.withHideRemoveOnly
+							? html` <div class="hide-remove-only">
+									<sl-checkbox
+										id="hide-remove-only"
+										@sl-change=${() => (this.hideRemoveOnly = this.checkbox.checked)}
+										.checked=${this.hideRemoveOnly}
+										>Hide remove-only</sl-checkbox
+									>
+							  </div>`
+							: nothing}
+						<div class="tabs-total"><span>${this.tabsTotal}</span> stash tabs</div>
+				  </div>`
+				: nothing}
+			<ul class="list">
+				${this.paginated.map(tab => {
+					return html`<li>
+						<wc-tab-badge
+							hexish-color=${tab.metadata?.colour ?? '#fff'}
+							name=${tab.name}
+							.tabId=${tab.id}
+							index=${tab.index}
+							.selected=${this.selectedTabs.has(tab.id)}
+						></wc-tab-badge>
+					</li>`;
+				})}
+			</ul>
+		</div>`;
+	}
+
 	#onPageInput() {
 		this.page = Number(this.pageInput.value);
 		this.emit<Events['upd:page']>('upd:page', this.page);
 	}
-
 	#onPerPageInput() {
 		this.perPage = Number(this.perPageInput.value);
 		this.emit<Events['upd:PerPage']>('upd:PerPage', this.perPage);
 	}
-
 	#onNameQueryInput() {
 		this.nameQuery = this.nameQueryInput.value;
 		this.emit<Events['upd:nameQuery']>('upd:nameQuery', this.nameQuery);
 	}
-
 	#onTabSelect(e: CustomEvent<Events['tab-select']>) {
 		const { selected, tabId, name } = e.detail;
 		selected ? this.selectedTabs.set(tabId, { id: tabId, name }) : this.selectedTabs.delete(tabId);
 		this.selectedTabs = new Map(this.selectedTabs);
 		this.emit<Events['upd:selectedTabs']>('upd:selectedTabs', this.selectedTabs);
 	}
-
-	protected override render() {
-		const ifWithHideRemoveOnly = this.withHideRemoveOnly
-			? html` <div class="hide-remove-only">
-					<sl-checkbox
-						id="hide-remove-only"
-						@sl-change=${() => (this.hideRemoveOnly = this.checkbox.checked)}
-						.checked=${this.hideRemoveOnly}
-						>Hide remove-only</sl-checkbox
-					>
-				</div>`
-			: nothing;
-
-		const filtersSection = this.shouldFilter
-			? html`<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 2rem">
-					<div>
-						<div class="filter">
-							<label for="filter-stashes-by-name">Filter by name</label>
-							<sl-input
-								type="text"
-								id="filter-stashes-by-name"
-								.value=${this.nameQuery}
-								@input=${this.#onNameQueryInput}
-							></sl-input>
-						</div>
-					</div>
-					<div class="page-controls">
-						<sl-button ?disabled=${this.page === 1} @click=${this.decreasePage}>prev</sl-button>
-						<sl-input
-							id="page"
-							type="text"
-							.value=${String(this.page)}
-							@sl-input=${this.#onPageInput}
-						></sl-input>
-						<sl-button @click=${this.increasePage}>next</sl-button>
-						<label for="per-page">per page</label>
-						<sl-input
-							id="per-page"
-							type="number"
-							min="0"
-							.value=${String(this.perPage)}
-							@sl-input=${this.#onPerPageInput}
-						></sl-input>
-					</div>
-
-					${ifWithHideRemoveOnly}
-
-					<div class="tabs-total"><span>${this.tabsTotal}</span> stash tabs</div>
-				</div>`
-			: nothing;
-
-		return html`<div class="tab-badge-group">${filtersSection} ${this.paginatedTabs()}</div>`;
-	}
-
-	protected paginatedTabs() {
-		return html`<ul class="list">
-			${this.paginated.map(tab => {
-				return html`<li>
-					<wc-tab-badge
-						hexish-color=${tab.metadata?.colour ?? '#fff'}
-						name=${tab.name}
-						.tabId=${tab.id}
-						index=${tab.index}
-						.selected=${this.selectedTabs.has(tab.id)}
-					></wc-tab-badge>
-				</li>`;
-			})}
-		</ul>`;
-	}
-
 	decreasePage() {
 		if (this.page > 1) {
 			this.page--;
 		}
 	}
-
 	increasePage() {
 		this.page++;
 	}
@@ -257,4 +215,30 @@ function styles() {
 			margin-inline: 1rem;
 		}
 	`;
+}
+
+function filter(
+	stashes: NoItemsTab[],
+	nameQuery: string,
+	shouldFilter: boolean,
+	hideRemoveOnly: boolean
+): NoItemsTab[] {
+	if (!shouldFilter) return stashes;
+
+	return stashes.filter(({ name }) => {
+		if (hideRemoveOnly) {
+			if (name.includes(REMOVE_ONLY)) return false;
+		}
+		return name.toLowerCase().includes(nameQuery.toLowerCase());
+	});
+}
+
+function paginate(stashes: NoItemsTab[], page: number, perPage: number) {
+	const start = (page - 1) * perPage;
+	const end = start + perPage;
+	return stashes.slice(start, end);
+}
+
+function shouldUnlockHideRemoveOnly(league: League, stashes: NoItemsTab[]) {
+	return isPermanentLeague(league) && stashes.some(({ name }) => name.includes(REMOVE_ONLY));
 }
