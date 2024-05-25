@@ -36,7 +36,7 @@ export class TabBadgeGroupElement extends BaseElement {
 
 	@property({ type: Array }) stashes: NoItemsTab[] = [];
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
-	@property({ type: Number, reflect: true }) perPage = 50;
+	@property({ type: Number, reflect: true }) perPage = 24;
 	@property({ type: Number, reflect: true }) page = 1;
 	@property() nameQuery = '';
 	@property({ attribute: false }) selectedTabs: Map<
@@ -134,11 +134,17 @@ export class TabBadgeGroupElement extends BaseElement {
 							.tabId=${tab.id}
 							index=${tab.index}
 							.selected=${this.selectedTabs.has(tab.id)}
+							@click=${this.#onBadgeClick}
 						></wc-tab-badge>
 					</li>`;
 				})}
 			</ul>
 		</div>`;
+	}
+
+	#onBadgeClick(e: Event) {
+		const target = e.target as TabBadgeElement;
+		this.emit('tab-click', { tabId: target.tabId });
 	}
 
 	#onPageInput() {

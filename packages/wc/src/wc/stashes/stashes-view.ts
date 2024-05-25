@@ -1,5 +1,5 @@
 import { IStashLoader } from '@divicards/shared/IStashLoader';
-import { html, css, PropertyValues } from 'lit';
+import { html, css, PropertyValues, nothing } from 'lit';
 import { BaseElement } from '../base-element';
 import { HelpTipElement } from '../help-tip';
 import { TabBadgeElement } from './tab-badge';
@@ -14,6 +14,9 @@ import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/radio-button/radio-button.js';
 import '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js';
+import '../poe-stash-tab.js';
+import { Task } from '@lit/task';
+import '@shoelace-style/shoelace/dist/components/spinner/spinner.js';
 
 class CustomLeagueStorage {
 	static #key = 'CUSTOM_LEAGUE';
@@ -89,6 +92,7 @@ export class StashesViewElement extends BaseElement {
 	@state() stashLoader!: IStashLoader;
 	@state() private stashLoadsAvailable = 30;
 	@state() private availableInTenSeconds = 15;
+	@state() openTabId: string | null = null;
 
 	@query('button#stashes-btn') stashesButton!: HTMLButtonElement;
 	@query('button#get-data-btn') getDataButton!: HTMLButtonElement;
@@ -107,6 +111,17 @@ export class StashesViewElement extends BaseElement {
 			}
 		}
 	}
+
+	#tabTask = new Task(this, {
+		task: async ([openTabId]) => {
+			console.log({ openTabId });
+			if (!openTabId) {
+				return null;
+			}
+			return await this.stashLoader.tab(openTabId, this.league);
+		},
+		args: () => [this.openTabId],
+	});
 
 	protected override render() {
 		return html`<div class="main-stashes-component">
@@ -174,12 +189,40 @@ export class StashesViewElement extends BaseElement {
 				.stashes=${this.stashes}
 				.selectedTabs=${this.selectedTabs}
 				@upd:selectedTabs=${this.#onUpdSelectedTabs}
+				@tab-click=${this.#onTabClick}
 			></wc-tab-badge-group>
+			<div class="open-tab">
+				${this.#tabTask.render({
+					pending: () => {
+						console.log('pending');
+						return html`<sl-spinner></sl-spinner>`;
+					},
+					initial: () => {
+						console.log('initial');
+					},
+					complete: tab => {
+						console.log('complete');
+						if (!tab) {
+							return nothing;
+						}
+
+						console.log(tab);
+
+						return html`<poe-stash-tab .tab=${tab}></poe-stash-tab>`;
+					},
+				})}
+			</div>
 		</div>`;
 	}
 
 	async #onLoadItemsClicked() {
 		await this.loadSelectedTabs(this.league);
+	}
+	async #onTabClick(e: CustomEvent<{ tabId: string }>) {
+		this.openTabId = e.detail.tabId;
+		// this.tab = await this.stashLoader.tab(e.detail.tabId, this.league);
+		// console.log(this.tab);
+		// this.requestUpdate();
 	}
 	#onCloseClicked() {
 		this.emit('close');
@@ -304,6 +347,9 @@ export class StashesViewElement extends BaseElement {
 
 function styles() {
 	return css`
+		:host {
+			max-width: 1200px;
+		}
 		.main-stashes-component {
 			position: relative;
 			padding: 1rem;
@@ -374,6 +420,16 @@ function styles() {
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
+		}
+
+		.open-tab {
+			width: 570px;
+			height: 570px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			margin: auto;
 		}
 
 		.visible {
