@@ -1,5 +1,5 @@
 use crate::{
-    consts::{CARDS, CONDENSE_FACTOR, LEGACY_CARDS},
+    consts::{CARDS, LEGACY_CARDS},
     IsCard,
 };
 use serde::{Deserialize, Serialize};
@@ -34,10 +34,6 @@ impl CardRecord {
 
     pub fn add_amount(&mut self, amount: u32) {
         self.set_amount(self.amount + amount);
-    }
-
-    pub fn set_weight(&mut self, weight_multiplier: f32) {
-        self.weight = Some((weight_multiplier * self.amount as f32).powf(1.0 / CONDENSE_FACTOR));
     }
 }
 

@@ -93,7 +93,7 @@ mod weight_tests {
     use std::fs;
 
     use crate::{
-        consts::{CONDENSE_FACTOR, RAIN_OF_CHAOS_WEIGHT},
+        consts::{CONDENSE_FACTOR, RAIN_OF_CHAOS_CONDENSED_WEIGHT},
         prices::Prices,
         sample::{Input, Sample},
     };
@@ -110,7 +110,7 @@ mod weight_tests {
         let card = sample.cards.get_card("Rain of Chaos");
         assert_eq!(
             //121465.99-ish
-            RAIN_OF_CHAOS_WEIGHT.powf(1.0 / CONDENSE_FACTOR),
+            RAIN_OF_CHAOS_CONDENSED_WEIGHT.powf(1.0 / CONDENSE_FACTOR),
             card.weight.unwrap()
         );
     }
@@ -127,7 +127,7 @@ mod weight_tests {
         let doctor = sample.cards.get_card("The Doctor");
         assert_eq!(
             //42944.715-ish
-            (RAIN_OF_CHAOS_WEIGHT / 2.0).powf(1.0 / CONDENSE_FACTOR),
+            (RAIN_OF_CHAOS_CONDENSED_WEIGHT / 2.0).powf(1.0 / CONDENSE_FACTOR),
             doctor.weight.unwrap()
         );
     }

@@ -1,6 +1,6 @@
 use crate::{
     cards::{Cards, FixedCardName, GetRecordMut},
-    consts::RAIN_OF_CHAOS_WEIGHT,
+    consts::{CONDENSE_FACTOR, RAIN_OF_CHAOS_CONDENSED_WEIGHT},
     error::Error,
     prices::Prices,
 };
@@ -122,18 +122,14 @@ impl Sample {
         }
     }
 
-    /// Helper function for `write_weight`
-    fn weight_multiplier(&self) -> f32 {
-        let rain_of_chaos = self.cards.get_card("Rain of Chaos");
-        RAIN_OF_CHAOS_WEIGHT / rain_of_chaos.amount as f32
-    }
-
     /// (After parsing) Calculates special weight for each card and mutates it. Runs at the end of parsing.
     fn write_weight(&mut self) {
-        let weight_multiplier = self.weight_multiplier();
-        self.cards
-            .iter_mut()
-            .for_each(|card| card.set_weight(weight_multiplier));
+        let weight_multiplier =
+            RAIN_OF_CHAOS_CONDENSED_WEIGHT / self.cards.get_card("Rain of Chaos").amount as f32;
+        self.cards.iter_mut().for_each(|card| {
+            card.weight =
+                Some((weight_multiplier * card.amount as f32).powf(1.0 / CONDENSE_FACTOR));
+        });
     }
 
     #[must_use]
