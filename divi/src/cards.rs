@@ -27,39 +27,28 @@ impl Cards {
     }
 
     #[must_use]
+    /// ## Panics
+    /// Intended to never panic
     pub fn get_record(&self, name: &str) -> GetRecord {
         match check_card_name(name) {
-            CheckCardName::Valid => GetRecord::Valid(self.get_card(name)),
+            CheckCardName::Valid => GetRecord::Valid(self.get(name).unwrap()),
             CheckCardName::TypoFixed(fixed) => {
-                GetRecord::TypoFixed(self.get_card(&fixed.fixed), fixed)
+                GetRecord::TypoFixed(self.get(&fixed.fixed).unwrap(), fixed)
             }
             CheckCardName::NotACard => GetRecord::NotACard,
         }
     }
 
+    /// ## Panics
+    /// Intended to never panic
     pub fn get_record_mut(&mut self, name: &str) -> GetRecordMut {
         match check_card_name(name) {
-            CheckCardName::Valid => GetRecordMut::Valid(self.get_card_mut(name)),
+            CheckCardName::Valid => GetRecordMut::Valid(self.get_mut(name).unwrap()),
             CheckCardName::TypoFixed(fixed) => {
-                GetRecordMut::TypoFixed(self.get_card_mut(&fixed.fixed), fixed)
+                GetRecordMut::TypoFixed(self.get_mut(&fixed.fixed).unwrap(), fixed)
             }
             CheckCardName::NotACard => GetRecordMut::NotACard,
         }
-    }
-
-    /// Use only with trusted card name(item of CARDS const). Otherwise, use get
-    ///  # Panics
-    /// If name is not a member of CARDS
-    #[must_use]
-    pub fn get_card(&self, name: &str) -> &CardRecord {
-        self.get(name).unwrap()
-    }
-
-    /// Use only with trusted card name(item of CARDS const). Otherwise, use `get_mut`
-    /// # Panics
-    /// If name is not a member of CARDS
-    pub fn get_card_mut(&mut self, name: &str) -> &mut CardRecord {
-        self.get_mut(name).unwrap()
     }
 
     pub fn iter(&self) -> Iter<'_, CardRecord> {

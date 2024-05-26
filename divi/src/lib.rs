@@ -16,7 +16,7 @@
 //!    Rain of Chaos,30"#;
 //!    let sample = Sample::create(Input::Csv(String::from(csv)), Some(prices))?;
 //!    // output: The Doctor: DivinationCardRecord { name: "The Doctor", amount: 2, price: Some(869.1), sum: Some(1738.2), weight: Some(2090.8254) }
-//!    println!("The Doctor: {:?}", sample.cards.get_card("The Doctor"));
+//!    println!("The Doctor: {:?}", sample.cards.get("The Doctor").unwrap());
 //!    Ok(())
 //!}
 //! ```
@@ -107,7 +107,7 @@ mod weight_tests {
         )
         .unwrap();
 
-        let card = sample.cards.get_card("Rain of Chaos");
+        let card = sample.cards.get("Rain of Chaos").unwrap();
         assert_eq!(
             //121465.99-ish
             RAIN_OF_CHAOS_CONDENSED_WEIGHT.powf(1.0 / CONDENSE_FACTOR),
@@ -124,7 +124,7 @@ mod weight_tests {
         )
         .unwrap();
 
-        let doctor = sample.cards.get_card("The Doctor");
+        let doctor = sample.cards.get("The Doctor").unwrap();
         assert_eq!(
             //42944.715-ish
             (RAIN_OF_CHAOS_CONDENSED_WEIGHT / 2.0).powf(1.0 / CONDENSE_FACTOR),
@@ -138,7 +138,7 @@ mod weight_tests {
         let data = Input::Csv(fs::read_to_string("examples/example-2.csv").unwrap());
         let sample = Sample::create(data, None).unwrap();
 
-        let fox = sample.cards.get_card("The Fox in the Brambles");
+        let fox = sample.cards.get("The Fox in the Brambles").unwrap();
         assert_eq!(557.44556, fox.weight.unwrap());
     }
 }

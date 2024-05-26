@@ -94,7 +94,7 @@ impl Sample {
     ///     let vec: Vec<CardNameAmount> = vec![CardNameAmount::new(String::from("Rain of Caos"), 25)];
     ///     let s2 = Sample::create(Input::CardNameAmountList(vec), None)?;
     ///     let merged = Sample::merge(None, &[s1, s2])?;
-    ///     assert_eq!(merged.cards.get_card("Rain of Chaos").amount, 55);
+    ///     assert_eq!(merged.cards.get("Rain of Chaos").unwrap().amount, 55);
     ///#     Ok(())
     ///# }
     /// ```
@@ -104,7 +104,10 @@ impl Sample {
         for card in &mut merged.cards {
             let amount = samples
                 .iter()
-                .map(|sample| sample.cards.get_card(&card.name).amount)
+                .map(|sample| match sample.cards.get(&card.name) {
+                    Some(card) => card.amount,
+                    None => 0,
+                })
                 .sum::<u32>();
             card.set_amount(amount);
         }
