@@ -78,7 +78,7 @@ impl Sample {
             }
         }
 
-        sample.write_weight();
+        sample.write_weight()?;
         Ok(sample)
     }
 
@@ -93,13 +93,12 @@ impl Sample {
     ///     )?;
     ///     let vec: Vec<CardNameAmount> = vec![CardNameAmount::new(String::from("Rain of Caos"), 25)];
     ///     let s2 = Sample::create(Input::CardNameAmountList(vec), None)?;
-    ///     let merged = Sample::merge(None, &[s1, s2]);
+    ///     let merged = Sample::merge(None, &[s1, s2])?;
     ///     assert_eq!(merged.cards.get_card("Rain of Chaos").amount, 55);
     ///#     Ok(())
     ///# }
     /// ```
-    #[must_use]
-    pub fn merge(prices: Option<Prices>, samples: &[Sample]) -> Sample {
+    pub fn merge(prices: Option<Prices>, samples: &[Sample]) -> Result<Sample, Error> {
         let mut merged = Sample::from_prices(prices);
 
         for card in &mut merged.cards {
@@ -110,8 +109,8 @@ impl Sample {
             card.set_amount(amount);
         }
 
-        merged.write_weight();
-        merged
+        merged.write_weight()?;
+        Ok(merged)
     }
 
     /// Consumes Prices structure to set prices for Cards
@@ -123,13 +122,22 @@ impl Sample {
     }
 
     /// (After parsing) Calculates special weight for each card and mutates it. Runs at the end of parsing.
-    fn write_weight(&mut self) {
-        let weight_multiplier =
-            RAIN_OF_CHAOS_CONDENSED_WEIGHT / self.cards.get_card("Rain of Chaos").amount as f32;
+    fn write_weight(&mut self) -> Result<(), Error> {
+        let rain_of_chaos_amount = self
+            .cards
+            .get("Rain of Chaos")
+            .ok_or(Error::SampleMustHaveRainOfChaos)?
+            .amount;
+        if rain_of_chaos_amount == 0 {
+            return Err(Error::SampleMustHaveRainOfChaos);
+        }
+        let weight_multiplier = RAIN_OF_CHAOS_CONDENSED_WEIGHT / rain_of_chaos_amount as f32;
         self.cards.iter_mut().for_each(|card| {
             card.weight =
                 Some((weight_multiplier * card.amount as f32).powf(1.0 / CONDENSE_FACTOR));
         });
+
+        Ok(())
     }
 
     #[must_use]
@@ -460,7 +468,7 @@ Encroaching Darkness,5\r\nThe Endless Darkness,1\r\nThe Endurance,19\r\nThe Enfo
         let s2 = Sample::create(Input::Csv(csv2), None).unwrap();
         let s3 = Sample::create(Input::Csv(csv3), None).unwrap();
 
-        let s = Sample::merge(None, &[s1, s2, s3]);
+        let s = Sample::merge(None, &[s1, s2, s3]).unwrap();
         let rain_of_chaos = s
             .cards
             .iter()
@@ -468,5 +476,11 @@ Encroaching Darkness,5\r\nThe Endless Darkness,1\r\nThe Endurance,19\r\nThe Enfo
             .unwrap();
 
         assert_eq!(rain_of_chaos.amount, 1779);
+    }
+
+    #[test]
+    fn must_have_rain_of_chaos() {
+        let result = Sample::create(Input::Csv("name,amount\nThe Doctor,1".to_owned()), None);
+        assert!(result.is_err());
     }
 }
