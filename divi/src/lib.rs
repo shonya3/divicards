@@ -66,7 +66,7 @@ pub mod sample;
 pub use crate::{
     card_record::CardRecord,
     cards::{check_card_name, Cards, CheckCardName, GetRecordMut},
-    consts::{CARDS, CONDENSE_FACTOR, LEGACY_CARDS},
+    consts::{CARDS, CONDENSING_FACTOR, LEGACY_CARDS},
     error::Error,
     prices::{DivinationCardPrice, Prices},
     sample::{CardNameAmount, Column, Input, Order, Sample, TablePreferences},
@@ -93,7 +93,7 @@ mod weight_tests {
     use std::fs;
 
     use crate::{
-        consts::{CONDENSE_FACTOR, RAIN_OF_CHAOS_CONDENSED_WEIGHT},
+        consts::{CONDENSING_FACTOR, RAIN_OF_CHAOS_CONDENSED_WEIGHT},
         prices::Prices,
         sample::{Input, Sample},
     };
@@ -110,7 +110,7 @@ mod weight_tests {
         let card = sample.cards.get("Rain of Chaos").unwrap();
         assert_eq!(
             //121465.99-ish
-            RAIN_OF_CHAOS_CONDENSED_WEIGHT.powf(1.0 / CONDENSE_FACTOR),
+            RAIN_OF_CHAOS_CONDENSED_WEIGHT.powf(1.0 / CONDENSING_FACTOR),
             card.weight.unwrap()
         );
     }
@@ -127,7 +127,7 @@ mod weight_tests {
         let doctor = sample.cards.get("The Doctor").unwrap();
         assert_eq!(
             //42944.715-ish
-            (RAIN_OF_CHAOS_CONDENSED_WEIGHT / 2.0).powf(1.0 / CONDENSE_FACTOR),
+            (RAIN_OF_CHAOS_CONDENSED_WEIGHT / 2.0).powf(1.0 / CONDENSING_FACTOR),
             doctor.weight.unwrap()
         );
     }

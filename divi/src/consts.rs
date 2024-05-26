@@ -1,4 +1,5 @@
-pub const CONDENSE_FACTOR: f32 = 2.0 / 3.0;
+/// Read about condensing factor <https://www.reddit.com/r/pathofexile/comments/vl52b6/comment/idt0ea3/>
+pub const CONDENSING_FACTOR: f32 = 2.0 / 3.0;
 pub const RAIN_OF_CHAOS_CONDENSED_WEIGHT: f32 = 2_452.655;
 
 pub const LEGACY_CARDS_N: usize = 16;

@@ -1,6 +1,6 @@
 use crate::{
     cards::{Cards, FixedCardName, GetRecordMut},
-    consts::{CONDENSE_FACTOR, RAIN_OF_CHAOS_CONDENSED_WEIGHT},
+    consts::{CONDENSING_FACTOR, RAIN_OF_CHAOS_CONDENSED_WEIGHT},
     error::Error,
     prices::Prices,
 };
@@ -137,7 +137,7 @@ impl Sample {
         let weight_multiplier = RAIN_OF_CHAOS_CONDENSED_WEIGHT / rain_of_chaos_amount as f32;
         self.cards.iter_mut().for_each(|card| {
             card.weight =
-                Some((weight_multiplier * card.amount as f32).powf(1.0 / CONDENSE_FACTOR));
+                Some((weight_multiplier * card.amount as f32).powf(1.0 / CONDENSING_FACTOR));
         });
 
         Ok(())
