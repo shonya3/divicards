@@ -18,10 +18,10 @@ fn main() -> Result<(), divi::error::Error> {
     let vec: Vec<CardNameAmount> = serde_json::from_str(json)?;
     let s2 = Sample::create(Input::CardNameAmountList(vec), None)?;
 
-    let merged = Sample::merge(Some(Prices::default()), &[s1, s2.clone()]);
+    let merged = Sample::merge(Some(Prices::default()), &[s1, s2.clone()])?;
 
     assert_eq!(s2.not_cards, vec![String::from("Not really a card")]);
-    assert_eq!(merged.cards.get_card("Rain of Chaos").amount, 55);
+    assert_eq!(merged.cards.get("Rain of Chaos").unwrap().amount, 55);
 
     Ok(())
 }

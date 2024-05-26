@@ -111,7 +111,10 @@ pub mod fetch {
                     min_level,
                     max_level,
                     weight: card.weight,
-                    pre_rework_weight: pre_rework_weight_sample.cards.get_card(&card.name).weight,
+                    pre_rework_weight: pre_rework_weight_sample
+                        .cards
+                        .get(&card.name)
+                        .and_then(|card| card.weight),
                     price: card.price,
                     league,
                     disabled: card.is_legacy_card(),

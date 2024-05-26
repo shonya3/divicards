@@ -16,9 +16,9 @@ async fn main() -> Result<(), divi::error::Error> {
     let sample_from_file = Sample::create(Input::Csv(csv_from_file), Some(Prices::default()))?;
 
     let prices = Prices::fetch(&divi::TradeLeague::Standard).await?;
-    let merged = Sample::merge(Some(prices), &[simple_sample, sample_from_file]);
+    let merged = Sample::merge(Some(prices), &[simple_sample, sample_from_file])?;
 
-    let rain_of_chaos = merged.cards.get_card("Rain of Chaos").to_owned();
+    let rain_of_chaos = merged.cards.get("Rain of Chaos").unwrap().to_owned();
     println!("Rain of Chaos amount: {}", rain_of_chaos.amount);
 
     let preferences = TablePreferences {

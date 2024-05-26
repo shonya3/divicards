@@ -13,13 +13,19 @@ async fn main() -> Result<(), divi::error::Error> {
     let sample = Sample::create(Input::Csv(String::from(csv)), Some(prices))?;
     println!(
         "Total price of The Doctor cards: {}",
-        sample.cards.get_card("The Doctor").sum.unwrap_or_default()
+        sample
+            .cards
+            .get("The Doctor")
+            .unwrap()
+            .sum
+            .unwrap_or_default()
     );
     println!(
         "Total price of Rain of Chaos cards: {}",
         sample
             .cards
-            .get_card("Rain of Chaos")
+            .get("Rain of Chaos")
+            .unwrap()
             .sum
             .unwrap_or_default()
     );
