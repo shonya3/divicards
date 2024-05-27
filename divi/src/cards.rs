@@ -12,7 +12,6 @@ use std::{
     slice::{Iter, IterMut},
 };
 
-/// Holds an array of card records with length equal to the number of all divination cards(For example, 440 in 3.23 patch)
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub struct Cards(pub Vec<CardRecord>);
 
