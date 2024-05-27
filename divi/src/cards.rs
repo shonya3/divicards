@@ -26,31 +26,6 @@ impl Cards {
         self.0.iter_mut().find(|c| c.name == name)
     }
 
-    #[must_use]
-    /// ## Panics
-    /// Intended to never panic
-    pub fn get_record(&self, name: &str) -> GetRecord {
-        match check_card_name(name) {
-            CheckCardName::Valid => GetRecord::Valid(self.get(name).unwrap()),
-            CheckCardName::TypoFixed(fixed) => {
-                GetRecord::TypoFixed(self.get(&fixed.fixed).unwrap(), fixed)
-            }
-            CheckCardName::NotACard => GetRecord::NotACard,
-        }
-    }
-
-    /// ## Panics
-    /// Intended to never panic
-    pub fn get_record_mut(&mut self, name: &str) -> GetRecordMut {
-        match check_card_name(name) {
-            CheckCardName::Valid => GetRecordMut::Valid(self.get_mut(name).unwrap()),
-            CheckCardName::TypoFixed(fixed) => {
-                GetRecordMut::TypoFixed(self.get_mut(&fixed.fixed).unwrap(), fixed)
-            }
-            CheckCardName::NotACard => GetRecordMut::NotACard,
-        }
-    }
-
     pub fn iter(&self) -> Iter<'_, CardRecord> {
         self.0.iter()
     }
@@ -171,18 +146,6 @@ pub fn check_card_name(card: &str) -> CheckCardName {
 pub enum CheckCardName {
     Valid,
     TypoFixed(FixedCardName),
-    NotACard,
-}
-
-pub enum GetRecord<'a> {
-    Valid(&'a CardRecord),
-    TypoFixed(&'a CardRecord, FixedCardName),
-    NotACard,
-}
-
-pub enum GetRecordMut<'a> {
-    Valid(&'a mut CardRecord),
-    TypoFixed(&'a mut CardRecord, FixedCardName),
     NotACard,
 }
 

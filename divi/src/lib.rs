@@ -65,7 +65,7 @@ pub mod sample;
 
 pub use crate::{
     card_record::CardRecord,
-    cards::{check_card_name, Cards, CheckCardName, GetRecordMut},
+    cards::{check_card_name, Cards, CheckCardName},
     consts::{CARDS, CONDENSING_FACTOR, LEGACY_CARDS},
     error::Error,
     prices::{DivinationCardPrice, Prices},

@@ -1,5 +1,6 @@
 use crate::{
-    cards::{Cards, FixedCardName, GetRecordMut},
+    cards::{Cards, CheckCardName, FixedCardName},
+    check_card_name,
     consts::{CONDENSING_FACTOR, RAIN_OF_CHAOS_CONDENSED_WEIGHT},
     error::Error,
     prices::Prices,
@@ -68,14 +69,20 @@ impl Sample {
         };
 
         for CardNameAmount { name, amount } in name_amount_pairs {
-            match sample.cards.get_record_mut(&name) {
-                GetRecordMut::Valid(record) => record.add_amount(amount),
-                GetRecordMut::TypoFixed(record, fixed) => {
-                    record.add_amount(amount);
-                    sample.fixed_names.push(fixed);
+            match check_card_name(&name) {
+                CheckCardName::Valid => {
+                    if let Some(record) = sample.cards.get_mut(&name) {
+                        record.add_amount(amount);
+                    }
                 }
-                GetRecordMut::NotACard => sample.not_cards.push(name),
-            }
+                CheckCardName::TypoFixed(fixed_name) => {
+                    if let Some(record) = sample.cards.get_mut(&fixed_name.fixed) {
+                        record.add_amount(amount);
+                    }
+                    sample.fixed_names.push(fixed_name);
+                }
+                CheckCardName::NotACard => sample.not_cards.push(name),
+            };
         }
 
         sample.write_weight()?;
