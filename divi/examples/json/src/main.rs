@@ -1,12 +1,12 @@
 use divi::{
     prices::Prices,
-    sample::{CardNameAmount, Input, Sample},
+    sample::{Input, NameAmount, Sample},
 };
 fn main() -> Result<(), divi::error::Error> {
     let s1 = Sample::create(
-        Input::CardNameAmountList(vec![
-            CardNameAmount::new(String::from("Rain of Chaos"), 25),
-            CardNameAmount::new(String::from("The Doctor"), 1),
+        Input::NameAmountPairs(vec![
+            NameAmount::new(String::from("Rain of Chaos"), 25),
+            NameAmount::new(String::from("The Doctor"), 1),
         ]),
         Some(Prices::default()),
     )?;
@@ -15,8 +15,8 @@ fn main() -> Result<(), divi::error::Error> {
         {"name": "Rain of Chaos", "amount": 30},
         {"name": "Not really a card", "amount": 1}
     ]"#;
-    let vec: Vec<CardNameAmount> = serde_json::from_str(json)?;
-    let s2 = Sample::create(Input::CardNameAmountList(vec), None)?;
+    let vec: Vec<NameAmount> = serde_json::from_str(json)?;
+    let s2 = Sample::create(Input::NameAmountPairs(vec), None)?;
 
     let merged = Sample::merge(Some(Prices::default()), &[s1, s2.clone()])?;
 

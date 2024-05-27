@@ -2,7 +2,7 @@ import { invoke } from '@tauri-apps/api';
 import {
 	DivinationCardsSample,
 	League,
-	CardNameAmount,
+	NameAmount,
 	TradeLeague,
 	GoogleIdentity,
 	TablePreferences,
@@ -10,7 +10,7 @@ import {
 } from '@divicards/shared/types';
 import { NoItemsTab, TabWithItems } from '@divicards/shared/poe.types';
 
-export type SampleData = string | CardNameAmount[] | DivinationCardsSample;
+export type SampleData = string | NameAmount[] | DivinationCardsSample;
 export type ValueRange = {
 	majorDimension: 'ROWS' | 'COLUMNS';
 	range: string;

@@ -51,7 +51,7 @@ export interface FixedName {
 	fixed: string;
 }
 
-export type CardNameAmount = Pick<DivinationCardRecord, 'name' | 'amount'>;
+export type NameAmount = Pick<DivinationCardRecord, 'name' | 'amount'>;
 export interface GoogleIdentity {
 	name: string;
 	id: string;

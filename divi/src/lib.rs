@@ -69,7 +69,7 @@ pub use crate::{
     consts::{CARDS, CONDENSING_FACTOR, LEGACY_CARDS},
     error::Error,
     prices::{DivinationCardPrice, Prices},
-    sample::{CardNameAmount, Column, Input, Order, Sample, TablePreferences},
+    sample::{Column, Input, NameAmount, Order, Sample, TablePreferences},
 };
 pub use poe::league::{League, TradeLeague};
 

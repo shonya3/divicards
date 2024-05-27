@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { TabWithItems } from '@divicards/shared/poe.types';
-import { CardNameAmount } from '@divicards/shared/types';
+import { NameAmount } from '@divicards/shared/types';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 import { Ref, computed, ref, watch } from 'vue';
 const props = defineProps<{ tab: TabWithItems }>();
 const emits = defineEmits(['close']);
-const nameAmountPairs: Ref<CardNameAmount[]> = ref([]);
+const nameAmountPairs: Ref<NameAmount[]> = ref([]);
 const mergeable = computed(() => {
 	return Object.values(Object.groupBy(nameAmountPairs.value, ({ name }) => name)).some((arr = []) => arr.length > 1);
 });
@@ -79,9 +79,7 @@ function onMergeStacksClick() {
 	padding-bottom: 0.4rem;
 	gap: 1rem;
 	width: fit-content;
-	box-shadow:
-		rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-		rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+	box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 
 	/* max-height: 320px; */
 

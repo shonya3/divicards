@@ -32,7 +32,7 @@ impl Sample {
     /// Create a new sample.
     /// # Examples
     /// ```
-    /// # use divi::sample::{Sample, Input, CardNameAmount};
+    /// # use divi::sample::{Sample, Input, NameAmount};
     /// # use divi::prices::Prices;
     /// # fn main() -> Result<(), divi::error::Error> {
     ///     // create sample from csv
@@ -45,14 +45,14 @@ impl Sample {
     /// ```
     ///
     /// ```
-    /// # use divi::sample::{Sample, Input, CardNameAmount};
+    /// # use divi::sample::{Sample, Input, NameAmount};
     /// # use divi::prices::Prices;
     /// # fn main() -> Result<(), divi::error::Error> {
     ///     // create sample from name-amount list
     ///    let sample = Sample::create(
-    ///        Input::CardNameAmountList(vec![
-    ///             CardNameAmount::new(String::from("Rain of Chaos"), 25),
-    ///             CardNameAmount::new(String::from("The Doctor"), 1),
+    ///        Input::NameAmountPairs(vec![
+    ///             NameAmount::new(String::from("Rain of Chaos"), 25),
+    ///             NameAmount::new(String::from("The Doctor"), 1),
     ///        ]),
     ///        Some(Prices::default()),
     ///    )?;
@@ -64,11 +64,11 @@ impl Sample {
         let mut sample = Self::from_prices(prices);
         let name_amount_pairs = match source {
             Input::Csv(csv_data) => parse_csv(&csv_data)?,
-            Input::CardNameAmountList(vec) => vec,
+            Input::NameAmountPairs(vec) => vec,
             Input::Sample(sample) => sample.to_name_amount_pairs(),
         };
 
-        for CardNameAmount { name, amount } in name_amount_pairs {
+        for NameAmount { name, amount } in name_amount_pairs {
             match check_card_name(&name) {
                 CheckCardName::Valid => {
                     if let Some(record) = sample.cards.get_mut(&name) {
@@ -92,14 +92,14 @@ impl Sample {
     /// Merge samples into one sample
     /// # Examples
     /// ```
-    ///# use divi::sample::{CardNameAmount, Sample, Input};
+    ///# use divi::sample::{NameAmount, Sample, Input};
     ///# fn main() -> Result<(), divi::error::Error> {
     ///     let s1 = Sample::create(
     ///         Input::Csv(String::from("name,amount\rRain of Chaos,30")),
     ///         None,
     ///     )?;
-    ///     let vec: Vec<CardNameAmount> = vec![CardNameAmount::new(String::from("Rain of Caos"), 25)];
-    ///     let s2 = Sample::create(Input::CardNameAmountList(vec), None)?;
+    ///     let vec: Vec<NameAmount> = vec![NameAmount::new(String::from("Rain of Caos"), 25)];
+    ///     let s2 = Sample::create(Input::NameAmountPairs(vec), None)?;
     ///     let merged = Sample::merge(None, &[s1, s2])?;
     ///     assert_eq!(merged.cards.get("Rain of Chaos").unwrap().amount, 55);
     ///#     Ok(())
@@ -198,11 +198,11 @@ impl Sample {
             .map_err(CsvError::FromUtf8)
     }
 
-    fn to_name_amount_pairs(self: Sample) -> Vec<CardNameAmount> {
+    fn to_name_amount_pairs(self: Sample) -> Vec<NameAmount> {
         self.cards
             .0
             .into_iter()
-            .map(|record| CardNameAmount {
+            .map(|record| NameAmount {
                 name: record.name,
                 amount: record.amount,
             })
@@ -234,14 +234,14 @@ impl From<csv::Error> for Error {
     }
 }
 
-fn parse_csv(csv_data: &str) -> Result<Vec<CardNameAmount>, Error> {
+fn parse_csv(csv_data: &str) -> Result<Vec<NameAmount>, Error> {
     let data = remove_lines_before_headers(csv_data)?;
     let mut rdr = ReaderBuilder::new()
         .trim(Trim::All)
         .from_reader(data.as_bytes());
 
     let mut vec = vec![];
-    for result in rdr.deserialize::<CardNameAmount>() {
+    for result in rdr.deserialize::<NameAmount>() {
         let name_amount_pair = result?;
         vec.push(name_amount_pair);
     }
@@ -325,16 +325,16 @@ fn preserve_column_order(columns: &[Column]) -> Vec<Column> {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct CardNameAmount {
+pub struct NameAmount {
     pub name: String,
     #[serde(alias = "stackSize")]
     pub amount: u32,
 }
 
-impl CardNameAmount {
+impl NameAmount {
     #[must_use]
-    pub const fn new(name: String, amount: u32) -> CardNameAmount {
-        CardNameAmount { name, amount }
+    pub const fn new(name: String, amount: u32) -> NameAmount {
+        NameAmount { name, amount }
     }
 }
 
@@ -343,7 +343,7 @@ impl CardNameAmount {
 #[serde(untagged)]
 pub enum Input {
     Csv(String),
-    CardNameAmountList(Vec<CardNameAmount>),
+    NameAmountPairs(Vec<NameAmount>),
     Sample(Sample),
 }
 
@@ -382,10 +382,10 @@ impl TryFrom<ReadBatchResponse> for Input {
                 let name: String = serde_json::from_str(&name[0].to_string())?;
                 let amount: u32 =
                     serde_json::from_str::<String>(&amount[0].to_string())?.parse::<u32>()?;
-                Ok(CardNameAmount { name, amount })
+                Ok(NameAmount { name, amount })
             })
-            .collect::<Result<Vec<CardNameAmount>, Error>>()?;
-        Ok(Input::CardNameAmountList(v))
+            .collect::<Result<Vec<NameAmount>, Error>>()?;
+        Ok(Input::NameAmountPairs(v))
     }
 }
 

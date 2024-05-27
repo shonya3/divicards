@@ -1,6 +1,6 @@
 use divi::{
     consts::{CARDS, LEGACY_CARDS},
-    sample::{CardNameAmount, Input},
+    sample::{Input, NameAmount},
     IsCard,
 };
 use serde::{Deserialize, Serialize};
@@ -106,15 +106,15 @@ impl IsCard for Item {
 
 impl From<TabWithItems> for Input {
     fn from(tab: TabWithItems) -> Self {
-        let cards: Vec<CardNameAmount> = tab
+        let cards: Vec<NameAmount> = tab
             .items()
             .filter(|item| item.is_card())
-            .map(|item| CardNameAmount {
+            .map(|item| NameAmount {
                 name: item.base_type().unwrap_or_default().to_owned(),
                 amount: item.stack_size().unwrap_or_default(),
             })
             .collect();
 
-        Input::CardNameAmountList(cards)
+        Input::NameAmountPairs(cards)
     }
 }
