@@ -288,7 +288,7 @@ export class FormExportSampleElement extends BaseElement {
 					</fieldset>
 				</fieldset>
 				${this.error && html`<div id="error">${this.error}</div>`}
-				<sl-button id="submit">Submit</sl-button>
+				<sl-button type="submit" id="submit">Submit</sl-button>
 			</form>
 		</div>`;
 	}
