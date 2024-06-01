@@ -37,7 +37,7 @@ pub async fn merge(
 ) -> Result<Sample, Error> {
     let mut guard = state.lock().await;
     let prices = guard.get_price(&TradeLeague::default(), &window).await;
-    Ok(Sample::merge(Some(prices), &samples))
+    Ok(Sample::merge(Some(prices), &samples)?)
 }
 
 #[command]
