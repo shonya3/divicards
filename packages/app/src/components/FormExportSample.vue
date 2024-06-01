@@ -41,7 +41,6 @@ const handlers = {
 		emit('update:minPrice', e.detail);
 	},
 	onSubmit(e: CustomEvent<Props>) {
-		console.log('Submit');
 		emit('submit', e.detail);
 	},
 };

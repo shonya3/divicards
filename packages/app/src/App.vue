@@ -85,7 +85,6 @@ const onSubmit = async ({
 	cardsMustHaveAmount,
 	minPrice,
 }: FormExportProps) => {
-	console.log('submit');
 	const sample = exportSample.sample;
 	const league = exportSample.league;
 
