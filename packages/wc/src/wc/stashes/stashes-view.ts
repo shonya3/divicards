@@ -1,5 +1,5 @@
 import { IStashLoader } from '@divicards/shared/IStashLoader';
-import { html, css, PropertyValues } from 'lit';
+import { html, css, PropertyValues, nothing } from 'lit';
 import { BaseElement } from '../base-element';
 import { HelpTipElement } from '../help-tip';
 import { TabBadgeElement } from './tab-badge';
@@ -14,23 +14,11 @@ import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/radio-button/radio-button.js';
 import '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js';
-
-class CustomLeagueStorage {
-	static #key = 'CUSTOM_LEAGUE';
-	static save(s: string) {
-		localStorage.setItem(this.#key, s);
-	}
-
-	static load(): string | null {
-		return localStorage.getItem(this.#key);
-	}
-}
+import '@shoelace-style/shoelace/dist/components/spinner/spinner.js';
+import { isStashTabError } from '@divicards/shared/error';
 
 const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
-const sleepSecs = async (secs: number): Promise<void> => {
-	return new Promise(r => setTimeout(r, secs * 1000));
-};
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -85,8 +73,9 @@ export class StashesViewElement extends BaseElement {
 	@state() stashes: NoItemsTab[] = [];
 	@state() noStashesMessage: string = '';
 	@state() msg: string = '';
-	@state() fetchingStash: boolean = false;
+	@state() fetchingStashTab: boolean = false;
 	@state() stashLoader!: IStashLoader;
+	@state() errors: Array<{ noItemsTab: NoItemsTab; message: string }> = [];
 	@state() private stashLoadsAvailable = 30;
 	@state() private availableInTenSeconds = 15;
 
@@ -148,16 +137,19 @@ export class StashesViewElement extends BaseElement {
 										>`
 								)}
 							</sl-radio-group>
-							<sl-button
-								id="get-data-btn"
-								class="btn-load-items"
-								.disabled=${this.selectedTabs.size === 0 ||
-								this.fetchingStash ||
-								this.stashLoadsAvailable === 0}
-								@click=${this.#onLoadItemsClicked}
-							>
-								Load Tabs Contents
-							</sl-button>
+							<div class="load-tab-contents__button-container">
+								<sl-button
+									id="get-data-btn"
+									class="btn-load-items"
+									.disabled=${this.selectedTabs.size === 0 ||
+									this.fetchingStashTab ||
+									this.stashLoadsAvailable === 0}
+									@click=${this.#onLoadItemsClicked}
+								>
+									Load Tabs Contents
+								</sl-button>
+								${this.fetchingStashTab ? html`<sl-spinner></sl-spinner>` : nothing}
+							</div>
 					  </div>`
 					: html`<div class="load-stashes-section">
 							<sl-button id="stashes-btn" @click=${this.#onLoadStashesList}>Load Stash</sl-button>
@@ -168,6 +160,22 @@ export class StashesViewElement extends BaseElement {
 				<p class=${classMap({ visible: this.noStashesMessage.length > 0, msg: true })}>
 					${this.noStashesMessage}
 				</p>
+				<ul>
+					${this.errors.map(
+						({ noItemsTab: tab, message }) => html`<li>
+							<div>
+								<wc-tab-badge
+									hexish-color=${tab.metadata?.colour ?? '#fff'}
+									name=${tab.name}
+									.tabId=${tab.id}
+									index=${tab.index}
+									.selected=${this.selectedTabs.has(tab.id)}
+								></wc-tab-badge>
+								<h3 style="color: red">${message}</h3>
+							</div>
+						</li>`
+					)}
+				</ul>
 			</div>
 			<wc-tab-badge-group
 				league=${this.league}
@@ -225,10 +233,10 @@ export class StashesViewElement extends BaseElement {
 	 * For each tab, loads sample and emits it
 	 */
 	protected async loadSelectedTabs(league: League): Promise<void> {
-		this.fetchingStash = true;
+		this.fetchingStashTab = true;
 		while (this.selectedTabs.size > 0) {
-			try {
-				for (const { id, name } of this.selectedTabs.values()) {
+			for (const { id, name } of this.selectedTabs.values()) {
+				try {
 					if (this.stashLoadsAvailable === 0) {
 						this.msg = 'Loads available: 0. Waiting for cooldown.';
 						await sleepSecs(1);
@@ -256,12 +264,36 @@ export class StashesViewElement extends BaseElement {
 							break;
 						}
 					}
+				} catch (err) {
+					if (!isStashTabError(err)) {
+						throw err;
+					}
+					console.log('Error');
+					console.log(this.stashes.find(stash => stash.id === id));
+					const noItemsTab = this.stashes.find(stash => stash.id === id);
+					if (noItemsTab) {
+						this.errors.push({
+							noItemsTab,
+							message: err.message,
+						});
+					}
+
+					// console.log(err);
+					// if (typeof err === 'object' && err !== null && 'message' in err) {
+					// 	if (typeof err.message === 'string') {
+					// 		this.msg = err.message;
+					// 		console.log(this.msg);
+					// 	}
+					// }
+					// this.fetchingStashTab = false;
+					// this.selectedTabs = new Map();
+				} finally {
+					this.selectedTabs.delete(id);
+					this.selectedTabs = new Map(this.selectedTabs);
 				}
-			} catch (err) {
-				await this.#handleLoadTabError(err);
 			}
 		}
-		this.fetchingStash = false;
+		this.fetchingStashTab = false;
 		this.msg = '';
 	}
 
@@ -276,8 +308,6 @@ export class StashesViewElement extends BaseElement {
 
 		this.msg = '';
 		const singleTabContent = await loadFunction(id, league);
-		this.selectedTabs.delete(id);
-		this.selectedTabs = new Map(this.selectedTabs);
 
 		this.stashLoadsAvailable--;
 		this.availableInTenSeconds--;
@@ -288,17 +318,6 @@ export class StashesViewElement extends BaseElement {
 			this.availableInTenSeconds++;
 		}, SECS_10);
 		return singleTabContent;
-	}
-
-	async #handleLoadTabError(err: unknown): Promise<void> {
-		if (typeof err === 'object' && err !== null && 'message' in err) {
-			if (typeof err.message === 'string') {
-				this.msg = err.message;
-			}
-		}
-		this.fetchingStash = false;
-		this.selectedTabs = new Map();
-		throw err;
 	}
 }
 
@@ -359,9 +378,14 @@ function styles() {
 			justify-content: center;
 		}
 
+		.load-tab-contents__button-container {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+		}
+
 		.messages {
 			position: relative;
-			height: 4rem;
 		}
 
 		.msg {
@@ -397,3 +421,17 @@ function styles() {
 		}
 	`;
 }
+
+class CustomLeagueStorage {
+	static #key = 'CUSTOM_LEAGUE';
+	static save(s: string) {
+		localStorage.setItem(this.#key, s);
+	}
+
+	static load(): string | null {
+		return localStorage.getItem(this.#key);
+	}
+}
+const sleepSecs = async (secs: number): Promise<void> => {
+	return new Promise(r => setTimeout(r, secs * 1000));
+};
