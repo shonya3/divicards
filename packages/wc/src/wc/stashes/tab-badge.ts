@@ -24,15 +24,6 @@ export class TabBadgeElement extends BaseElement {
 
 	@state() tabState!: NoItemsTab;
 
-	// /** Color from Poe API. Examples: ff, 80b3ff, #f0f80, cc009a, 7c5436 */
-	// @property({ reflect: true, attribute: 'hexish-color' }) hexishColor: string = '7c5436';
-
-	// @property({ reflect: true }) name = 'Heist';
-	// @property({ reflect: true }) tabId: string = 'e07f5f2946';
-	// @property({ type: Number, reflect: true }) index: number = 0;
-
-	@query('input') checkbox!: HTMLInputElement;
-
 	get computedColor(): string {
 		if (this.color) {
 			return this.color;
@@ -72,6 +63,7 @@ export class TabBadgeElement extends BaseElement {
 		</div>`;
 	}
 
+	@query('input') checkbox!: HTMLInputElement;
 	#onCheckbox() {
 		this.selected = this.checkbox.checked;
 
