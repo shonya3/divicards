@@ -12,13 +12,6 @@ declare global {
 	}
 }
 
-const styles = css`
-	.league-select {
-		display: flex;
-		gap: 0.2rem;
-	}
-`;
-
 export interface Events {
 	'upd:league': League;
 }
@@ -35,7 +28,6 @@ export class SlConverter {
 
 export class LeagueSelectElement extends BaseElement {
 	static override tag = 'wc-league-select';
-	static override styles = [styles];
 
 	@property({ type: Boolean, reflect: true }) trade = false;
 	@property({ type: String, reflect: true }) league: League = ACTIVE_LEAGUE;
@@ -77,6 +69,7 @@ export class LeagueSelectElement extends BaseElement {
 			</sl-select>
 			${this.withPrivateLeagueInput
 				? html`<sl-input
+						class="private-league-input"
 						.value=${this.privateLeague}
 						@sl-input=${this.#onPrivateLeagueInput}
 						id="custom-league-input"
@@ -104,6 +97,16 @@ export class LeagueSelectElement extends BaseElement {
 		await this.updateComplete;
 		this.emit<Events['upd:league']>('upd:league', this.league);
 	}
+
+	static styles = css`
+		.league-select {
+			display: flex;
+			gap: 0.2rem;
+		}
+		.private-league-input {
+			width: 10ch;
+		}
+	`;
 }
 
 class PrivateLeagueStorage {
