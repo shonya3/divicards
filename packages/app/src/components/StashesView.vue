@@ -36,3 +36,9 @@ const onTabWithItemsLoaded = (e: CustomEvent<Events['tab-with-items-loaded']>) =
 		@tab-with-items-loaded="onTabWithItemsLoaded"
 	></wc-stashes-view>
 </template>
+
+<style scoped>
+wc-stashes-view {
+	margin-inline: auto;
+}
+</style>

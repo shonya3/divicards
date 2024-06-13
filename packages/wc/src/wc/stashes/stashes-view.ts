@@ -16,6 +16,8 @@ import '@shoelace-style/shoelace/dist/components/radio-button/radio-button.js';
 import '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js';
 import '@shoelace-style/shoelace/dist/components/spinner/spinner.js';
 import { isStashTabError } from '@divicards/shared/error';
+import { StashTabErrorsElement } from './e-stash-tab-errors';
+import { ErrorLabel } from './types';
 
 const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
@@ -57,13 +59,12 @@ const DOWNLOAD_AS_VARIANTS = ['divination-cards-sample', 'general-tab'] as const
 
 export class StashesViewElement extends BaseElement {
 	static override get defineList() {
-		return [HelpTipElement, LeagueSelectElement, TabBadgeElement, TabBadgeGroupElement];
+		return [HelpTipElement, LeagueSelectElement, TabBadgeElement, TabBadgeGroupElement, StashTabErrorsElement];
 	}
 	static override tag = 'wc-stashes-view';
 	static override styles = [styles()];
 
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
-	@property() customLeague: string = CustomLeagueStorage.load() ?? '';
 	@property() downloadAs: DownloadAs = 'divination-cards-sample';
 
 	@state() selectedTabs: Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }> = new Map();
@@ -71,8 +72,9 @@ export class StashesViewElement extends BaseElement {
 	@state() noStashesMessage: string = '';
 	@state() msg: string = '';
 	@state() fetchingStashTab: boolean = false;
+	@state() fetchingStash: boolean = false;
 	@state() stashLoader!: IStashLoader;
-	@state() errors: Array<{ noItemsTab: NoItemsTab; message: string }> = [];
+	@state() errors: Array<ErrorLabel> = [];
 	@state() private stashLoadsAvailable = 30;
 	@state() private availableInTenSeconds = 15;
 
@@ -84,89 +86,72 @@ export class StashesViewElement extends BaseElement {
 			this.stashes = [];
 			this.msg = '';
 			this.selectedTabs = new Map();
-		}
-
-		if (map.has('customLeague')) {
-			CustomLeagueStorage.save(this.customLeague);
-			if (this.customLeague) {
-				this.league = this.customLeague;
-			}
+			this.errors = [];
 		}
 	}
 
 	protected override render() {
 		return html`<div class="main-stashes-component">
-			<div class="top-right-corner">
-				<div class=${classMap({ tips: true, hidden: this.stashes.length === 0 })}>
-					<wc-help-tip>
-						<p>Select tabs by clicking on them. Then click LOAD ITEMS button</p>
-					</wc-help-tip>
-					<div>Loads available: ${this.stashLoadsAvailable}</div>
-				</div>
-				<sl-button @click=${this.#onCloseClicked} class="btn-close">Close</sl-button>
-			</div>
-			<div class="controls">
-				<fieldset>
-					<legend>Choose league</legend>
-					<wc-league-select .league=${this.league} @upd:league=${this.#onLeagueSelected}></wc-league-select>
-					<sl-input
-						.value=${this.customLeague}
-						@sl-input=${this.#onCustomLeagueInput}
-						id="custom-league-input"
-						type="text"
-						label="Custom league (for private leagues)"
-					></sl-input>
-				</fieldset>
+			<header class="header">
+				<wc-league-select
+					with-private-league-input
+					.league=${this.league}
+					@upd:league=${this.#onLeagueSelected}
+				></wc-league-select>
 				${this.stashes.length
-					? html`<div class="load-tab-contents">
-							<sl-radio-group
-								class="mt-16"
-								@sl-change=${this.#onDownloadAsChanged}
-								label="Download as"
-								value=${this.downloadAs}
-							>
-								${DOWNLOAD_AS_VARIANTS.map(
-									variant =>
-										html`<sl-radio-button value=${variant}
-											>${variant === 'divination-cards-sample'
-												? 'sample'
-												: 'general tab'}</sl-radio-button
-										>`
-								)}
-							</sl-radio-group>
-							<div class="load-tab-contents__button-container">
-								<sl-button
-									id="get-data-btn"
-									class="btn-load-items"
-									.disabled=${this.selectedTabs.size === 0 ||
-									this.fetchingStashTab ||
-									this.stashLoadsAvailable === 0}
-									@click=${this.#onLoadItemsClicked}
-								>
-									Load Tabs Contents
-								</sl-button>
-								${this.fetchingStashTab ? html`<sl-spinner></sl-spinner>` : nothing}
+					? html`
+							<div>
+								${this.fetchingStashTab
+									? html`<sl-button><sl-spinner></sl-spinner></sl-button>`
+									: html`<sl-button
+											id="get-data-btn"
+											class="btn-load-items"
+											.disabled=${this.selectedTabs.size === 0 ||
+											this.fetchingStashTab ||
+											this.stashLoadsAvailable === 0}
+											@click=${this.#onLoadItemsClicked}
+									  >
+											Load Tabs Contents
+									  </sl-button>`}
 							</div>
-					  </div>`
-					: html`<div class="load-stashes-section">
-							<sl-button id="stashes-btn" @click=${this.#onLoadStashesList}>Load Stash</sl-button>
-					  </div>`}
-			</div>
+					  `
+					: html`<div>
+							${this.fetchingStash
+								? html`<sl-button><sl-spinner></sl-spinner></sl-button>`
+								: html`<sl-button id="stashes-btn" @click=${this.#loadStash}>Load Stash</sl-button>`}
+					  </div> `}
+				<div class="top-right-corner">
+					${this.stashes.length
+						? html`<sl-radio-group
+									@sl-change=${this.#onDownloadAsChanged}
+									.helpText=${`Download as`}
+									value=${this.downloadAs}
+								>
+									${DOWNLOAD_AS_VARIANTS.map(
+										variant =>
+											html`<sl-radio-button size="small" value=${variant}
+												>${variant === 'divination-cards-sample'
+													? 'sample'
+													: 'general tab'}</sl-radio-button
+											>`
+									)}
+								</sl-radio-group>
+								<div class="tips">
+									<wc-help-tip>
+										<p>Select tabs by clicking on them. Then click LOAD ITEMS button</p>
+									</wc-help-tip>
+									<div>Loads available: ${this.stashLoadsAvailable}</div>
+								</div> `
+						: nothing}
+					<sl-button @click=${this.#onCloseClicked} class="btn-close">Close</sl-button>
+				</div>
+			</header>
 			<div class="messages">
 				<p class=${classMap({ visible: this.msg.length > 0, msg: true })}>${this.msg}</p>
 				<p class=${classMap({ visible: this.noStashesMessage.length > 0, msg: true })}>
 					${this.noStashesMessage}
 				</p>
-				<ul>
-					${this.errors.map(
-						({ noItemsTab: tab, message }) => html`<li>
-							<div>
-								<wc-tab-badge .tab=${tab} .selected=${this.selectedTabs.has(tab.id)}></wc-tab-badge>
-								<h3 style="color: red">${message}</h3>
-							</div>
-						</li>`
-					)}
-				</ul>
+				<e-stash-tab-errors @upd:errors=${this.#handleUpdErrors} .errors=${this.errors}></e-stash-tab-errors>
 			</div>
 			<wc-tab-badge-group
 				league=${this.league}
@@ -175,6 +160,10 @@ export class StashesViewElement extends BaseElement {
 				@upd:selectedTabs=${this.#onUpdSelectedTabs}
 			></wc-tab-badge-group>
 		</div>`;
+	}
+
+	#handleUpdErrors(e: CustomEvent<Array<ErrorLabel>>) {
+		this.errors = e.detail;
 	}
 
 	async #onLoadItemsClicked() {
@@ -186,12 +175,12 @@ export class StashesViewElement extends BaseElement {
 	#onDownloadAsChanged(e: InputEvent) {
 		this.downloadAs = (e.target as HTMLInputElement).value as DownloadAs;
 	}
-	async #onLoadStashesList() {
+	async #loadStash() {
 		if (!this.stashLoader) {
 			throw new Error('No stash loader');
 		}
 		this.noStashesMessage = '';
-
+		this.fetchingStash = true;
 		try {
 			this.stashes = await this.stashLoader.tabs(this.league);
 			this.emit<Events['tabs']>('tabs', this.stashes);
@@ -206,6 +195,8 @@ export class StashesViewElement extends BaseElement {
 			} else {
 				throw err;
 			}
+		} finally {
+			this.fetchingStash = false;
 		}
 	}
 	#onLeagueSelected(e: CustomEvent<League>) {
@@ -214,10 +205,6 @@ export class StashesViewElement extends BaseElement {
 	#onUpdSelectedTabs(e: CustomEvent<Events['upd:selectedTabs']>) {
 		const map = (e as CustomEvent<Events['upd:selectedTabs']>).detail;
 		this.selectedTabs = new Map(map);
-	}
-	#onCustomLeagueInput(e: InputEvent) {
-		const target = e.target as HTMLInputElement;
-		this.customLeague = target.value;
 	}
 
 	/**
@@ -263,10 +250,7 @@ export class StashesViewElement extends BaseElement {
 					console.log(this.stashes.find(stash => stash.id === id));
 					const noItemsTab = this.stashes.find(stash => stash.id === id);
 					if (noItemsTab) {
-						this.errors.push({
-							noItemsTab,
-							message: err.message,
-						});
+						this.errors = [...this.errors, { noItemsTab, message: err.message }];
 					}
 
 					// console.log(err);
@@ -314,10 +298,16 @@ export class StashesViewElement extends BaseElement {
 
 function styles() {
 	return css`
+		:host {
+			display: block;
+			max-width: 1500px;
+		}
+
 		.main-stashes-component {
 			position: relative;
 			padding: 1rem;
-			border: 2px solid rgba(0, 0, 0, 0.6);
+			padding: 0.6rem;
+			border: 0.5px solid rgba(0, 0, 0, 0.6);
 			border-radius: 0.25rem;
 		}
 
@@ -325,54 +315,24 @@ function styles() {
 			right: 5px;
 		}
 
-		.controls {
+		.header {
 			display: flex;
-			max-width: 60%;
 			justify-content: space-between;
 		}
 
 		.tips {
 			display: flex;
 			gap: 0.5rem;
+			margin-top: 0.75rem;
 		}
 
 		.top-right-corner {
-			position: absolute;
-			top: 1rem;
-			right: 1rem;
 			display: flex;
-			align-items: center;
 			gap: 2rem;
 		}
 
-		.btn-close {
-			margin-left: auto;
-		}
-
-		.btn-load-items {
-			text-transform: uppercase;
-			display: block;
-			width: fit-content;
-			margin-top: 0.4rem;
-		}
-
 		.btn-load-items:not([disabled]) {
-			transform: scale(1.4);
-		}
-
-		.load-tab-contents {
-			display: flex;
-			flex-direction: column;
-			margin-inline: auto;
-			align-items: center;
-			gap: 1rem;
-			justify-content: center;
-		}
-
-		.load-tab-contents__button-container {
-			display: flex;
-			align-items: center;
-			gap: 1rem;
+			transform: scale(1.2);
 		}
 
 		.messages {
@@ -402,27 +362,9 @@ function styles() {
 		.hidden {
 			display: none;
 		}
-
-		.mt-16 {
-			margin-top: 1rem;
-		}
-
-		fieldset {
-			border: none;
-		}
 	`;
 }
 
-class CustomLeagueStorage {
-	static #key = 'CUSTOM_LEAGUE';
-	static save(s: string) {
-		localStorage.setItem(this.#key, s);
-	}
-
-	static load(): string | null {
-		return localStorage.getItem(this.#key);
-	}
-}
 const sleepSecs = async (secs: number): Promise<void> => {
 	return new Promise(r => setTimeout(r, secs * 1000));
 };

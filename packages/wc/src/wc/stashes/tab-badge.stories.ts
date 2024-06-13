@@ -6,9 +6,19 @@ export default {
 	title: 'Elements/stashes/tab-badge',
 } satisfies Meta<TabBadgeElement>;
 
+const noItemsTab = {
+	id: '7f967993bb',
+	index: 16,
+	metadata: {
+		colour: 'ff',
+	},
+	name: 'd (Remove-only)',
+	type: 'PremiumStash',
+};
+
 export const Default = {
-	render(d: { color: string; name: string; tabId: string; selected: boolean; index: number }) {
+	render() {
 		TabBadgeElement.define();
-		return html`<wc-tab-badge tabId="e07f5f2946" colour="7c5436" index="5"></wc-tab-badge>`;
+		return html`<wc-tab-badge .tab=${noItemsTab}></wc-tab-badge>`;
 	},
 };

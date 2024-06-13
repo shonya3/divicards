@@ -38,7 +38,7 @@ export type Events = {
 	close: void;
 	// ---
 	/** from tab-badge-group */
-	'upd:selectedTabs': Map<TabBadgeElement['tabId'], { id: TabBadgeElement['tabId']; name: TabBadgeElement['name'] }>;
+	'upd:selectedTabs': Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }>;
 	/** from tab-badge-group */
 	'upd:nameQuery': string;
 	/** from tab-badge-group */
@@ -46,12 +46,12 @@ export type Events = {
 	/** from tab-badge-group */
 	'upd:page': number;
 
-	tab: { tab: TabWithItems; league: League; name: TabBadgeElement['name'] };
+	tab: { tab: TabWithItems; league: League; name: NoItemsTab['name'] };
 	tabs: NoItemsTab[];
 
 	// ---
 	/**  event from TabBadgeElement */
-	'tab-select': { tabId: TabBadgeElement['tabId']; name: TabBadgeElement['name']; selected: boolean };
+	'tab-select': { tabId: NoItemsTab['id']; name: NoItemsTab['name']; selected: boolean };
 };
 
 export interface Props {
@@ -69,10 +69,7 @@ export class StashLoaderElement extends BaseElement {
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
 	@property() customLeague: string = CustomLeagueStorage.load() ?? '';
 
-	@state() selectedTabs: Map<
-		TabBadgeElement['tabId'],
-		{ id: TabBadgeElement['tabId']; name: TabBadgeElement['name'] }
-	> = new Map();
+	@state() selectedTabs: Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }> = new Map();
 	@state() stashes: NoItemsTab[] = [];
 	@state() noStashesMessage: string = '';
 	@state() msg: string = '';
