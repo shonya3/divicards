@@ -19,6 +19,18 @@ const errors = [
 		},
 		message: 'Sample must have rain of chaos cards.',
 	},
+	{
+		noItemsTab: {
+			id: '12321321',
+			index: 25,
+			metadata: {
+				colour: '7c5436',
+			},
+			name: 'Heist',
+			type: 'PremiumStash',
+		},
+		message: 'Sample must have rain of chaos cards.',
+	},
 ];
 
 export const Default = {
