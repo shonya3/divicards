@@ -8,6 +8,8 @@ import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
+import { ErrorLabel } from './types';
+import { classMap } from 'lit/directives/class-map.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -36,6 +38,7 @@ export class TabBadgeGroupElement extends BaseElement {
 
 	@property({ type: Array }) stashes: NoItemsTab[] = [];
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
+	@property({ type: Array }) errors: Array<ErrorLabel> = [];
 	@property({ type: Number, reflect: true }) perPage = 50;
 	@property({ type: Number, reflect: true }) page = 1;
 	@property() nameQuery = '';
@@ -127,7 +130,9 @@ export class TabBadgeGroupElement extends BaseElement {
 				: nothing}
 			<ul class="list">
 				${this.paginated.map(tab => {
-					return html`<li>
+					return html`<li
+						class=${classMap({ error: this.errors.some(({ noItemsTab }) => noItemsTab.id === tab.id) })}
+					>
 						<wc-tab-badge .tab=${tab} .selected=${this.selectedTabs.has(tab.id)}></wc-tab-badge>
 					</li>`;
 				})}
@@ -207,6 +212,14 @@ function styles() {
 			list-style: none;
 			gap: 5px;
 			margin-inline: 1rem;
+		}
+
+		li {
+			border: 1px solid transparent;
+		}
+
+		.error {
+			border-color: red;
 		}
 	`;
 }

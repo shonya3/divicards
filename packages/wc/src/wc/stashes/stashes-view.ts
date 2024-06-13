@@ -157,6 +157,7 @@ export class StashesViewElement extends BaseElement {
 				league=${this.league}
 				.stashes=${this.stashes}
 				.selectedTabs=${this.selectedTabs}
+				.errors=${this.errors}
 				@upd:selectedTabs=${this.#onUpdSelectedTabs}
 			></wc-tab-badge-group>
 		</div>`;
