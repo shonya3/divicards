@@ -1,17 +1,5 @@
 import { toast } from './toast';
-
-export type TauriError =
-	| {
-			appErrorFromTauri: true;
-			kind: 'httpError' | 'serdeError' | 'diviError';
-			message: string;
-	  }
-	| {
-			appErrorFromTauri: true;
-			kind: 'authError';
-			authError: 'userDenied' | 'otherWithDescription' | 'failed';
-			message: string;
-	  };
+import { TauriError } from '@divicards/shared/error';
 
 export const isTauriError = (e: unknown): e is TauriError => {
 	if (typeof e === 'object' && e !== null) {

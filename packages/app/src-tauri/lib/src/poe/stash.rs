@@ -26,9 +26,10 @@ pub async fn sample_from_tab(
     version: State<'_, AppVersion>,
     window: Window,
 ) -> Result<Sample, Error> {
-    let tab = StashAPI::tab_with_items(&league, stash_id, substash_id, version.inner()).await?;
+    let tab =
+        StashAPI::tab_with_items(&league, stash_id.clone(), substash_id, version.inner()).await?;
 
-    let prices = match TradeLeague::try_from(league) {
+    let prices = match TradeLeague::try_from(league.clone()) {
         Ok(league) => {
             let mut guard = prices.lock().await;
             guard.get_price(&league, &window).await
@@ -36,7 +37,13 @@ pub async fn sample_from_tab(
         Err(_) => Prices::default(),
     };
 
-    let sample = Sample::create(Input::from(tab), Some(prices))?;
+    let sample = Sample::create(Input::from(tab), Some(prices)).map_err(|divi_err| {
+        Error::StashTabError {
+            stash_id,
+            league,
+            message: divi_err.to_string(),
+        }
+    })?;
     Ok(sample)
 }
 

@@ -1,6 +1,7 @@
 use std::{fmt::Display, io};
 
 use crate::poe::error::AuthError;
+use divi::League;
 use serde::{ser::SerializeStruct, Serialize};
 
 #[derive(Debug)]
@@ -13,6 +14,11 @@ pub enum Error {
     RetryAfter(String),
     GoogleError(googlesheets::error::Error),
     ConfigDirNotExists,
+    StashTabError {
+        stash_id: String,
+        league: League,
+        message: String,
+    },
 }
 
 impl Error {
@@ -26,6 +32,7 @@ impl Error {
             Error::RetryAfter(_) => "retryAfterError",
             Error::GoogleError(_) => "googleError",
             Error::ConfigDirNotExists => "configDirNotExists",
+            Error::StashTabError { .. } => "stashTabError",
         }
     }
 }
@@ -43,6 +50,7 @@ impl Display for Error {
             }
             Error::GoogleError(err) => err.fmt(f),
             Error::ConfigDirNotExists => f.write_str("Config dir not exists"),
+            Error::StashTabError { message, .. } => f.write_str(message),
         }
     }
 }
@@ -54,6 +62,19 @@ impl Serialize for Error {
     {
         match self {
             Error::AuthError(err) => err.serialize(serializer),
+            Error::StashTabError {
+                stash_id,
+                league,
+                message,
+            } => {
+                let mut err = serializer.serialize_struct("Error", 5)?;
+                err.serialize_field("message", message)?;
+                err.serialize_field("kind", self.kind())?;
+                err.serialize_field("appErrorFromTauri", &true)?;
+                err.serialize_field("league", league)?;
+                err.serialize_field("stashId", stash_id)?;
+                err.end()
+            }
             _ => {
                 let mut err = serializer.serialize_struct("Error", 2)?;
                 err.serialize_field("message", self.to_string().as_str())?;
