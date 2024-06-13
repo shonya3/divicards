@@ -1,8 +1,9 @@
-import { html, css } from 'lit';
+import { html, css, PropertyValueMap } from 'lit';
 import { BaseElement } from '../base-element';
-import { property, query } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { REMOVE_ONLY } from './tab-badge-group';
+import { NoItemsTab } from '@divicards/shared/poe.types';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -11,42 +12,52 @@ declare global {
 }
 
 export interface Events {
-	'tab-select': { tabId: TabBadgeElement['tabId']; name: TabBadgeElement['name']; selected: boolean };
+	'tab-select': { tabId: string; name: string; selected: boolean };
 }
 
 export class TabBadgeElement extends BaseElement {
 	static override tag = 'wc-tab-badge';
-	/** Color from Poe API. Examples: ff, 80b3ff, #f0f80, cc009a, 7c5436 */
-	@property({ reflect: true, attribute: 'hexish-color' }) hexishColor: string = '7c5436';
-	/** Any valid CSS color */
-	@property({ reflect: true, attribute: 'color' }) color?: string;
-	/** Tab name */
-	@property({ reflect: true }) name = 'Heist';
-	@property({ reflect: true }) tabId: string = 'e07f5f2946';
+	@property({ type: Object }) tab!: NoItemsTab;
 	@property({ type: Boolean, reflect: true }) selected = false;
-	@property({ type: Number, reflect: true }) index: number = 0;
+	// /** Any valid CSS color */
+	@property({ reflect: true, attribute: 'color' }) color?: string;
+
+	@state() tabState!: NoItemsTab;
+
+	// /** Color from Poe API. Examples: ff, 80b3ff, #f0f80, cc009a, 7c5436 */
+	// @property({ reflect: true, attribute: 'hexish-color' }) hexishColor: string = '7c5436';
+
+	// @property({ reflect: true }) name = 'Heist';
+	// @property({ reflect: true }) tabId: string = 'e07f5f2946';
+	// @property({ type: Number, reflect: true }) index: number = 0;
 
 	@query('input') checkbox!: HTMLInputElement;
 
 	get computedColor(): string {
-		return this.color ? this.color : `#${this.hexishColor.padStart(6, '0')}`;
+		if (this.color) {
+			return this.color;
+		}
+		if (this.tab.metadata?.colour) {
+			return `#${this.tab.metadata?.colour?.padStart(6, '0')}`;
+		}
+		return '#fff';
 	}
 
 	protected nameLabel() {
-		const removeOnly = this.name.includes(REMOVE_ONLY);
+		const removeOnly = this.tab.name.includes(REMOVE_ONLY);
 
 		if (removeOnly) {
-			const [name] = this.name.split(REMOVE_ONLY);
-			return html`<label for=${this.tabId} class="name">${name}<span class="remove-only">R</span></label>`;
+			const [name] = this.tab.name.split(REMOVE_ONLY);
+			return html`<label for=${this.tab.id} class="name">${name}<span class="remove-only">R</span></label>`;
 		}
 
-		return html`<label for=${this.tabId} class="name">${this.name}</label>`;
+		return html`<label for=${this.tab.id} class="name">${this.tab.name}</label>`;
 	}
 
 	protected override render() {
 		const cssProps = styleMap({
 			'--badge-color': `${this.computedColor}`,
-			'--tab-index': `' ${this.index} '`,
+			'--tab-index': `' ${this.tab.index} '`,
 		});
 
 		return html`<div class="tab-badge" style=${cssProps}>
@@ -55,7 +66,7 @@ export class TabBadgeElement extends BaseElement {
 				@change=${this.#onCheckbox}
 				class="checkbox"
 				type="checkbox"
-				.tabId=${this.tabId}
+				.tabId=${this.tab.id}
 				.checked=${this.selected}
 			/>
 		</div>`;
@@ -65,9 +76,9 @@ export class TabBadgeElement extends BaseElement {
 		this.selected = this.checkbox.checked;
 
 		this.emit<Events['tab-select']>('tab-select', {
-			tabId: this.tabId,
+			tabId: this.tab.id,
 			selected: this.selected,
-			name: this.name,
+			name: this.tab.name,
 		});
 	}
 

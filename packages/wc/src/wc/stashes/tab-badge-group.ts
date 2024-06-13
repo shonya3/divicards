@@ -21,10 +21,10 @@ export interface Events {
 	'upd:nameQuery': string;
 	'upd:PerPage': number;
 	'upd:page': number;
-	'upd:selectedTabs': Map<TabBadgeElement['tabId'], { id: TabBadgeElement['tabId']; name: TabBadgeElement['name'] }>;
+	'upd:selectedTabs': Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }>;
 
 	/**  Event from TabBadgeElement */
-	'tab-select': { tabId: TabBadgeElement['tabId']; name: TabBadgeElement['name']; selected: boolean };
+	'tab-select': { tabId: NoItemsTab['id']; name: NoItemsTab['name']; selected: boolean };
 }
 
 export class TabBadgeGroupElement extends BaseElement {
@@ -40,8 +40,8 @@ export class TabBadgeGroupElement extends BaseElement {
 	@property({ type: Number, reflect: true }) page = 1;
 	@property() nameQuery = '';
 	@property({ attribute: false }) selectedTabs: Map<
-		TabBadgeElement['tabId'],
-		{ id: TabBadgeElement['tabId']; name: TabBadgeElement['name'] }
+		NoItemsTab['id'],
+		{ id: NoItemsTab['id']; name: NoItemsTab['name'] }
 	> = new Map();
 
 	@state() hideRemoveOnly = false;
@@ -128,13 +128,7 @@ export class TabBadgeGroupElement extends BaseElement {
 			<ul class="list">
 				${this.paginated.map(tab => {
 					return html`<li>
-						<wc-tab-badge
-							hexish-color=${tab.metadata?.colour ?? '#fff'}
-							name=${tab.name}
-							.tabId=${tab.id}
-							index=${tab.index}
-							.selected=${this.selectedTabs.has(tab.id)}
-						></wc-tab-badge>
+						<wc-tab-badge .tab=${tab} .selected=${this.selectedTabs.has(tab.id)}></wc-tab-badge>
 					</li>`;
 				})}
 			</ul>

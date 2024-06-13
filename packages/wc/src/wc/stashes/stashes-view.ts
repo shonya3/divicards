@@ -30,7 +30,7 @@ export type Events = {
 	close: void;
 	// ---
 	/** from tab-badge-group */
-	'upd:selectedTabs': Map<TabBadgeElement['tabId'], { id: TabBadgeElement['tabId']; name: TabBadgeElement['name'] }>;
+	'upd:selectedTabs': Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }>;
 	/** from tab-badge-group */
 	'upd:nameQuery': string;
 	/** from tab-badge-group */
@@ -38,13 +38,13 @@ export type Events = {
 	/** from tab-badge-group */
 	'upd:page': number;
 
-	'sample-from-tab': { sample: DivinationCardsSample; league: League; name: TabBadgeElement['name'] };
+	'sample-from-tab': { sample: DivinationCardsSample; league: League; name: NoItemsTab['name'] };
 	'tab-with-items-loaded': { tab: TabWithItems; league: League; name: string };
 	tabs: NoItemsTab[];
 
 	// ---
 	/**  event from TabBadgeElement */
-	'tab-select': { tabId: TabBadgeElement['tabId']; name: TabBadgeElement['name']; selected: boolean };
+	'tab-select': { tabId: NoItemsTab['id']; name: NoItemsTab['name']; selected: boolean };
 };
 
 export interface StashesViewProps {
@@ -66,10 +66,7 @@ export class StashesViewElement extends BaseElement {
 	@property() customLeague: string = CustomLeagueStorage.load() ?? '';
 	@property() downloadAs: DownloadAs = 'divination-cards-sample';
 
-	@state() selectedTabs: Map<
-		TabBadgeElement['tabId'],
-		{ id: TabBadgeElement['tabId']; name: TabBadgeElement['name'] }
-	> = new Map();
+	@state() selectedTabs: Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }> = new Map();
 	@state() stashes: NoItemsTab[] = [];
 	@state() noStashesMessage: string = '';
 	@state() msg: string = '';
@@ -164,13 +161,7 @@ export class StashesViewElement extends BaseElement {
 					${this.errors.map(
 						({ noItemsTab: tab, message }) => html`<li>
 							<div>
-								<wc-tab-badge
-									hexish-color=${tab.metadata?.colour ?? '#fff'}
-									name=${tab.name}
-									.tabId=${tab.id}
-									index=${tab.index}
-									.selected=${this.selectedTabs.has(tab.id)}
-								></wc-tab-badge>
+								<wc-tab-badge .tab=${tab} .selected=${this.selectedTabs.has(tab.id)}></wc-tab-badge>
 								<h3 style="color: red">${message}</h3>
 							</div>
 						</li>`
