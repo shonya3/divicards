@@ -57,13 +57,13 @@ function styles() {
 			/* The tooltip */
 			display: none;
 			text-align: left;
-			background-color: #1e2021;
+			background-color: var(--bg-color, #1e2021);
 			padding: 20px;
 			min-width: 300px;
 			position: absolute;
 			border-radius: 3px;
 			box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-			color: #fff;
+			color: var(--color, #fff);
 			font-size: 1rem;
 			line-height: 1.4;
 			z-index: 2;
@@ -76,7 +76,7 @@ function styles() {
 			width: 0;
 			height: 0;
 			border: 6px solid transparent;
-			border-bottom-color: #1e2021;
+			border-bottom-color: var(--bg-color, #1e2021);
 			right: 10px;
 			top: -12px;
 		}
