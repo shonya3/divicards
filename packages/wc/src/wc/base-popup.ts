@@ -115,7 +115,6 @@ function styles() {
 
 		@media (min-width: 800px) {
 			.slot-parent {
-				padding: 2rem;
 			}
 		}
 
