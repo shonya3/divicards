@@ -78,6 +78,7 @@ export class StashesViewElement extends BaseElement {
 	@state() errors: Array<ErrorLabel> = [];
 	@state() private stashLoadsAvailable = 30;
 	@state() private availableInTenSeconds = 15;
+	@state() hoveredErrorTabId: string | null = null;
 
 	@query('button#stashes-btn') stashesButton!: HTMLButtonElement;
 	@query('button#get-data-btn') getDataButton!: HTMLButtonElement;
@@ -151,18 +152,26 @@ export class StashesViewElement extends BaseElement {
 			<div class="messages">
 				<p class="msg">${this.msg}</p>
 				<p class="msg">${this.noStashesMessage}</p>
-				<e-stash-tab-errors @upd:errors=${this.#handleUpdErrors} .errors=${this.errors}></e-stash-tab-errors>
+				<e-stash-tab-errors
+					@upd:hoveredErrorTabId=${this.#handleUpdHoveredError}
+					@upd:errors=${this.#handleUpdErrors}
+					.errors=${this.errors}
+				></e-stash-tab-errors>
 			</div>
 			<wc-tab-badge-group
 				league=${this.league}
 				.stashes=${this.stashes}
 				.selectedTabs=${this.selectedTabs}
 				.errors=${this.errors}
+				.hoveredErrorTabId=${this.hoveredErrorTabId}
 				@upd:selectedTabs=${this.#onUpdSelectedTabs}
 			></wc-tab-badge-group>
 		</div>`;
 	}
 
+	#handleUpdHoveredError(e: CustomEvent<string | null>) {
+		this.hoveredErrorTabId = e.detail;
+	}
 	#handleUpdErrors(e: CustomEvent<Array<ErrorLabel>>) {
 		this.errors = e.detail;
 	}

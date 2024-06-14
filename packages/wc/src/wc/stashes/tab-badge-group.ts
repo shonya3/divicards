@@ -39,6 +39,7 @@ export class TabBadgeGroupElement extends BaseElement {
 	@property({ type: Array }) stashes: NoItemsTab[] = [];
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
 	@property({ type: Array }) errors: Array<ErrorLabel> = [];
+	@property() hoveredErrorTabId: string | null = null;
 	@property({ type: Number, reflect: true }) perPage = 50;
 	@property({ type: Number, reflect: true }) page = 1;
 	@property() nameQuery = '';
@@ -84,6 +85,7 @@ export class TabBadgeGroupElement extends BaseElement {
 
 	protected override render() {
 		return html`<div class="tab-badge-group">
+			<p>Hovered error tab id: ${this.hoveredErrorTabId}</p>
 			${this.shouldFilter
 				? html`<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 2rem">
 						<div>
@@ -131,7 +133,10 @@ export class TabBadgeGroupElement extends BaseElement {
 			<ul class="list">
 				${this.paginated.map(tab => {
 					return html`<li
-						class=${classMap({ error: this.errors.some(({ noItemsTab }) => noItemsTab.id === tab.id) })}
+						class=${classMap({
+							error: this.errors.some(({ noItemsTab }) => noItemsTab.id === tab.id),
+							'hovered-error': this.hoveredErrorTabId === tab.id,
+						})}
 					>
 						<wc-tab-badge .tab=${tab} .selected=${this.selectedTabs.has(tab.id)}></wc-tab-badge>
 					</li>`;
@@ -216,9 +221,12 @@ function styles() {
 
 		li {
 			border: 1px solid transparent;
+			border-radius: 4px;
 		}
 
 		.error {
+		}
+		.hovered-error {
 			border-color: red;
 		}
 	`;
