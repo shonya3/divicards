@@ -17,7 +17,7 @@ members = [
 , "ninja", "poe"]
 
 [workspace.package]
-version = "0.6.0"
+version = "0.6.1"
 edition = "2021"
 repository = "https://github.com/shonya3/divicards"
 
