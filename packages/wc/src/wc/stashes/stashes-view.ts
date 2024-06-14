@@ -132,8 +132,8 @@ export class StashesViewElement extends BaseElement {
 										variant =>
 											html`<sl-radio-button size="small" value=${variant}
 												>${variant === 'divination-cards-sample'
-													? 'sample'
-													: 'general tab'}</sl-radio-button
+													? 'cards'
+													: 'poe tab'}</sl-radio-button
 											>`
 									)}
 								</sl-radio-group>
