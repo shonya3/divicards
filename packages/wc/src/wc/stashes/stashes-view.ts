@@ -140,6 +140,7 @@ export class StashesViewElement extends BaseElement {
 								<div class="tips">
 									<wc-help-tip>
 										<p>Select tabs by clicking on them. Then click LOAD ITEMS button</p>
+										<p>PoE API allows 30 requests in 5 minutes</p>
 									</wc-help-tip>
 									<div>Loads available: ${this.stashLoadsAvailable}</div>
 								</div> `
