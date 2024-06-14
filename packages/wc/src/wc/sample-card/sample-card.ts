@@ -243,7 +243,7 @@ export class SampleCardElement extends BaseElement {
 				border: 1px solid black;
 				border-color: var(--border-color);
 				border-radius: var(--border-radius);
-				background-color: rgba(40, 40, 40, 1);
+				background-color: var(--sl-color-gray-100);
 				transition: 0.2s border-color;
 			}
 

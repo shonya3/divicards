@@ -175,6 +175,7 @@ const onTabWithItemsLoaded = (name: string, tab: TabWithItems, league: League) =
 			<sl-button variant="success" v-if="shouldUpdate" @click="() => changelogPopupRef?.showModal()"
 				>Update is ready</sl-button
 			>
+			<theme-toggle></theme-toggle>
 		</header>
 
 		<wc-base-popup v-if="manifest" ref="changelogPopupRef">
