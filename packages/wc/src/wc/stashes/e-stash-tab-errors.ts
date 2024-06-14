@@ -30,6 +30,7 @@ export class StashTabErrorsElement extends BaseElement {
 			return nothing;
 		}
 		return html`<ul>
+			<h3>Errors</h3>
 			${this.errors.map(
 				({ noItemsTab: tab, message }) =>
 					html`<li @mouseenter=${() => this.#handleMouseEnter(tab.id)} @mouseleave=${this.#handleMouseLeave}>
@@ -81,6 +82,9 @@ export class StashTabErrorsElement extends BaseElement {
 			justify-content: center;
 			align-items: center;
 			gap: 2rem;
+		}
+		h3 {
+			font-weight: 500;
 		}
 	`;
 }
