@@ -66,8 +66,10 @@ export class BasePopupElement extends BaseElement {
 		await this.updateComplete;
 	}
 
-	onEscape = () => {
-		this.open = false;
+	onEscape = (e: KeyboardEvent) => {
+		if (e.code === 'Escape') {
+			this.open = false;
+		}
 	};
 
 	connectedCallback(): void {
