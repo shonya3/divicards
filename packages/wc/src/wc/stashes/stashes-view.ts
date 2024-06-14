@@ -166,9 +166,8 @@ export class StashesViewElement extends BaseElement {
 	#handleUpdErrors(e: CustomEvent<Array<ErrorLabel>>) {
 		this.errors = e.detail;
 	}
-
-	async #onLoadItemsClicked() {
-		await this.loadSelectedTabs(this.league);
+	#onLoadItemsClicked() {
+		this.#loadSelectedTabs(this.league);
 	}
 	#onCloseClicked() {
 		this.emit('close');
@@ -176,6 +175,15 @@ export class StashesViewElement extends BaseElement {
 	#onDownloadAsChanged(e: InputEvent) {
 		this.downloadAs = (e.target as HTMLInputElement).value as DownloadAs;
 	}
+	#onLeagueSelected(e: CustomEvent<League>) {
+		this.league = e.detail;
+	}
+	#onUpdSelectedTabs(e: CustomEvent<Events['upd:selectedTabs']>) {
+		const map = (e as CustomEvent<Events['upd:selectedTabs']>).detail;
+		this.selectedTabs = new Map(map);
+	}
+
+	/** Load whole stash of Array<NoItemsTab> and emits it  */
 	async #loadStash() {
 		if (!this.stashLoader) {
 			throw new Error('No stash loader');
@@ -200,18 +208,9 @@ export class StashesViewElement extends BaseElement {
 			this.fetchingStash = false;
 		}
 	}
-	#onLeagueSelected(e: CustomEvent<League>) {
-		this.league = e.detail;
-	}
-	#onUpdSelectedTabs(e: CustomEvent<Events['upd:selectedTabs']>) {
-		const map = (e as CustomEvent<Events['upd:selectedTabs']>).detail;
-		this.selectedTabs = new Map(map);
-	}
 
-	/**
-	 * For each tab, loads sample and emits it
-	 */
-	protected async loadSelectedTabs(league: League): Promise<void> {
+	/** For each tab, loads sample and emits it */
+	async #loadSelectedTabs(league: League): Promise<void> {
 		this.fetchingStashTab = true;
 		while (this.selectedTabs.size > 0) {
 			for (const { id, name } of this.selectedTabs.values()) {
@@ -247,8 +246,6 @@ export class StashesViewElement extends BaseElement {
 					if (!isStashTabError(err)) {
 						throw err;
 					}
-					console.log('Error');
-					console.log(this.stashes.find(stash => stash.id === id));
 					const noItemsTab = this.stashes.find(stash => stash.id === id);
 					if (noItemsTab) {
 						this.errors = [...this.errors, { noItemsTab, message: err.message }];
@@ -256,11 +253,11 @@ export class StashesViewElement extends BaseElement {
 				} finally {
 					this.selectedTabs.delete(id);
 					this.selectedTabs = new Map(this.selectedTabs);
+					this.fetchingStashTab = false;
+					this.msg = '';
 				}
 			}
 		}
-		this.fetchingStashTab = false;
-		this.msg = '';
 	}
 
 	async #loadSingleTabContent<T>(
