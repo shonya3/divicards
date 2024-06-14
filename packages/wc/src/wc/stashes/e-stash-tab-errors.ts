@@ -46,6 +46,7 @@ export class StashTabErrorsElement extends BaseElement {
 	#handleCloseClick(id: string) {
 		const detail = this.errors.filter(error => error.noItemsTab.id !== id);
 		this.dispatchEvent(new CustomEvent('upd:errors', { detail }));
+		this.dispatchEvent(new CustomEvent('upd:hoveredErrorTabId', { detail: null }));
 	}
 	#handleMouseEnter(tabId: string) {
 		this.hoveredErrorTabId = tabId;
