@@ -10,7 +10,7 @@ export const styles = css`
 		position: relative;
 		padding: 1rem;
 		padding: 0.6rem;
-		border: 0.5px solid rgba(0, 0, 0, 0.6);
+		border: 0.5px solid var(--sl-color-gray-200);
 		border-radius: 0.25rem;
 	}
 

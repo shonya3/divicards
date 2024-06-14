@@ -206,7 +206,7 @@ function styles() {
 
 		.tabs-total {
 			> span {
-				color: yellow;
+				color: var(--sl-color-amber-800);
 			}
 		}
 
