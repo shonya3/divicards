@@ -85,7 +85,6 @@ export class TabBadgeGroupElement extends BaseElement {
 
 	protected override render() {
 		return html`<div class="tab-badge-group">
-			<p>Hovered error tab id: ${this.hoveredErrorTabId}</p>
 			${this.shouldFilter
 				? html`<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 2rem">
 						<div>

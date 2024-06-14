@@ -30,7 +30,6 @@ export class StashTabErrorsElement extends BaseElement {
 			return nothing;
 		}
 		return html`<ul>
-			<p>Active id: ${this.hoveredErrorTabId}</p>
 			${this.errors.map(
 				({ noItemsTab: tab, message }) =>
 					html`<li @mouseenter=${() => this.#handleMouseEnter(tab.id)} @mouseleave=${this.#handleMouseLeave}>
