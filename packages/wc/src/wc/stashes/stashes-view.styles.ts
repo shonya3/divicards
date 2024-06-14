@@ -39,30 +39,13 @@ export const styles = css`
 	}
 
 	.messages {
-		position: relative;
+		min-height: 2rem;
 	}
 
 	.msg {
-		position: absolute;
-		font-size: 2rem;
 		max-width: max-content;
 		margin-inline: auto;
-		visibility: hidden;
 		margin-block: 0;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-	}
-
-	.visible {
-		visibility: visible;
-	}
-
-	.not-visible {
-		visibility: hidden;
-	}
-
-	.hidden {
-		display: none;
+		font-size: 20px;
 	}
 `;

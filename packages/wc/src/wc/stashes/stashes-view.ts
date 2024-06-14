@@ -148,10 +148,8 @@ export class StashesViewElement extends BaseElement {
 				</div>
 			</header>
 			<div class="messages">
-				<p class=${classMap({ visible: this.msg.length > 0, msg: true })}>${this.msg}</p>
-				<p class=${classMap({ visible: this.noStashesMessage.length > 0, msg: true })}>
-					${this.noStashesMessage}
-				</p>
+				<p class="msg">${this.msg}</p>
+				<p class="msg">${this.noStashesMessage}</p>
 				<e-stash-tab-errors @upd:errors=${this.#handleUpdErrors} .errors=${this.errors}></e-stash-tab-errors>
 			</div>
 			<wc-tab-badge-group
@@ -254,16 +252,6 @@ export class StashesViewElement extends BaseElement {
 					if (noItemsTab) {
 						this.errors = [...this.errors, { noItemsTab, message: err.message }];
 					}
-
-					// console.log(err);
-					// if (typeof err === 'object' && err !== null && 'message' in err) {
-					// 	if (typeof err.message === 'string') {
-					// 		this.msg = err.message;
-					// 		console.log(this.msg);
-					// 	}
-					// }
-					// this.fetchingStashTab = false;
-					// this.selectedTabs = new Map();
 				} finally {
 					this.selectedTabs.delete(id);
 					this.selectedTabs = new Map(this.selectedTabs);

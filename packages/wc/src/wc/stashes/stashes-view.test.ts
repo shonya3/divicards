@@ -3,7 +3,7 @@ import { fixture, expect, html } from '@open-wc/testing';
 import sinon from 'sinon';
 import { MockStashLoader } from './data';
 
-describe('<wc-tab-badge-group>', async () => {
+describe('wc-tab-badge-group', async () => {
 	let el: StashesViewElement;
 	beforeEach(async () => {
 		StashesViewElement.define();
