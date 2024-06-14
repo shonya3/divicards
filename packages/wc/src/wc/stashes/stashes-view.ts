@@ -152,11 +152,13 @@ export class StashesViewElement extends BaseElement {
 			<div class="messages">
 				<p class="msg">${this.msg}</p>
 				<p class="msg">${this.noStashesMessage}</p>
-				<e-stash-tab-errors
-					@upd:hoveredErrorTabId=${this.#handleUpdHoveredError}
-					@upd:errors=${this.#handleUpdErrors}
-					.errors=${this.errors}
-				></e-stash-tab-errors>
+				${this.errors.length
+					? html`<e-stash-tab-errors
+							@upd:hoveredErrorTabId=${this.#handleUpdHoveredError}
+							@upd:errors=${this.#handleUpdErrors}
+							.errors=${this.errors}
+					  ></e-stash-tab-errors>`
+					: nothing}
 			</div>
 			<wc-tab-badge-group
 				league=${this.league}

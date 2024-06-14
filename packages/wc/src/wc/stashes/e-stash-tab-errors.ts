@@ -68,11 +68,12 @@ export class StashTabErrorsElement extends BaseElement {
 		}
 		ul {
 			list-style: none;
-			border: 0.5px solid red;
 			padding: 0.6rem 0.8rem;
 			max-width: fit-content;
 			display: grid;
 			gap: 1rem;
+			padding-block: 2rem;
+			padding-left: 2rem;
 		}
 		li {
 			display: flex;
