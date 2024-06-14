@@ -157,25 +157,27 @@ const onTabWithItemsLoaded = (name: string, tab: TabWithItems, league: League) =
 		<header class="header">
 			<wc-drop-files-message></wc-drop-files-message>
 			<sl-button @click="openStashWindow()">Load from stash</sl-button>
-			<wc-google-auth
-				@login="googleAuthStore.login"
-				@logout="googleAuthStore.logout"
-				:name="googleAuthStore.name"
-				:picture="googleAuthStore.picture"
-				:loggedIn="googleAuthStore.loggedIn"
-				v-if="googleAuthStore.loggedIn"
-			></wc-google-auth>
-			<wc-poe-auth
-				@login="authStore.login"
-				@logout="authStore.logout"
-				:name="authStore.name"
-				:loggedIn="authStore.loggedIn"
-				v-if="authStore.loggedIn"
-			></wc-poe-auth>
-			<sl-button variant="success" v-if="shouldUpdate" @click="() => changelogPopupRef?.showModal()"
-				>Update is ready</sl-button
-			>
-			<theme-toggle></theme-toggle>
+			<div class="header__right">
+				<wc-google-auth
+					@login="googleAuthStore.login"
+					@logout="googleAuthStore.logout"
+					:name="googleAuthStore.name"
+					:picture="googleAuthStore.picture"
+					:loggedIn="googleAuthStore.loggedIn"
+					v-if="googleAuthStore.loggedIn"
+				></wc-google-auth>
+				<wc-poe-auth
+					@login="authStore.login"
+					@logout="authStore.logout"
+					:name="authStore.name"
+					:loggedIn="authStore.loggedIn"
+					v-if="authStore.loggedIn"
+				></wc-poe-auth>
+				<sl-button variant="success" v-if="shouldUpdate" @click="() => changelogPopupRef?.showModal()"
+					>Update is ready</sl-button
+				>
+				<theme-toggle></theme-toggle>
+			</div>
 		</header>
 
 		<wc-base-popup v-if="manifest" ref="changelogPopupRef">
@@ -271,6 +273,11 @@ const onTabWithItemsLoaded = (name: string, tab: TabWithItems, league: League) =
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 1.2rem;
+}
+.header__right {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
 }
 
 .v-enter-active,
