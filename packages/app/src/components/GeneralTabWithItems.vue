@@ -72,7 +72,6 @@ function onMergeStacksClick() {
 	min-width: 400px;
 	max-width: 100%;
 	overflow-x: hidden;
-
 	position: relative;
 	padding-inline: 1rem;
 	padding-top: 1.4rem;
@@ -80,13 +79,10 @@ function onMergeStacksClick() {
 	gap: 1rem;
 	width: fit-content;
 	box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-
-	/* max-height: 320px; */
-
 	border: 1px solid black;
 	border-color: var(--border-color);
 	border-radius: var(--border-radius);
-	background-color: rgba(40, 40, 40, 1);
+	background-color: var(--bg-color);
 	transition: 0.2s border-color;
 }
 .btn-close {
@@ -94,7 +90,6 @@ function onMergeStacksClick() {
 	top: 0;
 	left: 400px;
 	transform: translateX(-100%);
-	/* transform: translate(-50%, 50%); */
 	padding: 0.2rem;
 	border: none;
 	background-color: transparent;
