@@ -90,6 +90,7 @@ dependencies = [
  "serde_json",
  "tauri",
  "tauri-build",
+ "tauri-plugin-process",
  "tauri-plugin-updater",
  "tokio",
  "tracing",
@@ -2126,7 +2127,7 @@ dependencies = [
  "httpdate",
  "itoa 1.0.11",
  "pin-project-lite",
- "socket2 0.5.7",
+ "socket2 0.4.10",
  "tokio",
  "tower-service",
  "tracing",
@@ -4956,6 +4957,15 @@ dependencies = [
  "tauri-utils",
  "toml 0.8.14",
  "walkdir",
+]
+
+[[package]]
+name = "tauri-plugin-process"
+version = "2.0.0-beta.6"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v2#29751ee939fc8d26df07e4da3ad7f5c2aa0926ba"
+dependencies = [
+ "tauri",
+ "tauri-plugin",
 ]
 
 [[package]]

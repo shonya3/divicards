@@ -34,12 +34,12 @@ const tablePreferences = useTablePreferencesStore();
 const stashVisible = ref(false);
 const { releaseUrl, tag } = useAppVersion();
 // const { shouldUpdate, manifest, installUpdate } = useTauriUpdater();
-const { update } = useTauriUpdater();
+const { update, installAndRelaunch } = useTauriUpdater();
 const stashLoader = new StashLoader();
 const tabsWithItems: Ref<TabWithItems[]> = ref<TabWithItems[]>([]);
 const changelogPopupRef = ref<BasePopupElement | null>(null);
 const formPopupExportRef = ref<BasePopupElement | null>(null);
-const samplesContainerRef = ref<HTMLElement | null>(null);
+const samplesContainerRef = ref<HTMLElement | null>(null) as Ref<HTMLElement | null>;
 useAutoAnimate(samplesContainerRef);
 
 const openStashWindow = async () => {
@@ -161,7 +161,7 @@ const onTabWithItemsLoaded = (name: string, tab: TabWithItems, league: League) =
 			</div>
 		</header>
 		<wc-base-popup v-if="update" ref="changelogPopupRef">
-			<UpdateChangelog @update-clicked="update.downloadAndInstall" :version="update.version" />
+			<UpdateChangelog @update-clicked="installAndRelaunch" :version="update.version" />
 		</wc-base-popup>
 		<div v-show="authStore.loggedIn && stashVisible">
 			<StashesView
