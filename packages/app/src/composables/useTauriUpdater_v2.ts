@@ -1,9 +1,9 @@
 import { relaunch } from '@tauri-apps/plugin-process';
 import { Update, check } from '@tauri-apps/plugin-updater';
-import { ref, watch } from 'vue';
+import { shallowRef } from 'vue';
 
 export function useTauriUpdater() {
-	const update = ref<Update | null>(null);
+	const update = shallowRef<Update | null>(null);
 	async function checkUpdate() {
 		update.value = await check();
 	}
