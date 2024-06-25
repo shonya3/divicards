@@ -1,7 +1,6 @@
 use crate::{
     error::Error,
     event::{Event, ToastVariant},
-    paths,
 };
 use divi::{prices::Prices, Error as DiviError, TradeLeague};
 use serde::{Deserialize, Serialize};
@@ -82,9 +81,9 @@ pub struct AppCardPrices {
     pub prices_by_league: HashMap<TradeLeague, Prices>,
 }
 impl AppCardPrices {
-    pub fn new() -> Result<Self, Error> {
+    pub fn new(dir: PathBuf) -> Result<Self, Error> {
         Ok(AppCardPrices {
-            dir: paths::appdata_dir()?,
+            dir,
             prices_by_league: HashMap::new(),
         })
     }

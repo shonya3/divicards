@@ -13,7 +13,6 @@ import { useGoogleAuthStore } from './stores/googleAuth';
 import { useAuthStore } from './stores/auth';
 import { useTablePreferencesStore } from './stores/tablePreferences';
 import { useAutoAnimate } from './composables/useAutoAnimate';
-import { useTauriUpdater } from './composables/useTauriUpdater';
 import SampleCard from './components/SampleCard.vue';
 import StashesView from './components/StashesView.vue';
 import FormExportSample from './components/FormExportSample.vue';
@@ -25,6 +24,7 @@ import NativeBrowserLink from './components/NativeBrowserLink.vue';
 import { useAppVersion } from './composables/useAppVersion';
 import { TabWithItems } from '@divicards/shared/poe.types';
 import GeneralTabWithItems from './components/GeneralTabWithItems.vue';
+import { useTauriUpdater } from './composables/useTauriUpdater_v2';
 
 const sampleStore = useSampleStore();
 const authStore = useAuthStore();
@@ -33,7 +33,8 @@ const exportSample = useExportSampleStore();
 const tablePreferences = useTablePreferencesStore();
 const stashVisible = ref(false);
 const { releaseUrl, tag } = useAppVersion();
-const { shouldUpdate, manifest, installUpdate } = useTauriUpdater();
+// const { shouldUpdate, manifest, installUpdate } = useTauriUpdater();
+const { update } = useTauriUpdater();
 const stashLoader = new StashLoader();
 const tabsWithItems: Ref<TabWithItems[]> = ref<TabWithItems[]>([]);
 const changelogPopupRef = ref<BasePopupElement | null>(null);
@@ -150,14 +151,17 @@ const onTabWithItemsLoaded = (name: string, tab: TabWithItems, league: League) =
 					:name="authStore.name"
 					:loggedIn="authStore.loggedIn"
 				></wc-poe-auth>
-				<sl-button variant="success" v-if="shouldUpdate" @click="() => changelogPopupRef?.showModal()"
+				<sl-button
+					variant="success"
+					v-if="update && update.available"
+					@click="() => changelogPopupRef?.showModal()"
 					>Update is ready</sl-button
 				>
 				<theme-toggle></theme-toggle>
 			</div>
 		</header>
-		<wc-base-popup v-if="manifest" ref="changelogPopupRef">
-			<UpdateChangelog @update-clicked="installUpdate" :manifest="manifest" />
+		<wc-base-popup v-if="update" ref="changelogPopupRef">
+			<UpdateChangelog @update-clicked="update.downloadAndInstall" :version="update.version" />
 		</wc-base-popup>
 		<div v-show="authStore.loggedIn && stashVisible">
 			<StashesView

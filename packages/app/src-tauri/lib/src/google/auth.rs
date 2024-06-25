@@ -1,4 +1,5 @@
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
+use tauri::Manager;
 
 use crate::{error::Error, event::Event, poe::error::AuthError, version::AppVersion};
 

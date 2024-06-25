@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import type { UpdateManifest } from '@tauri-apps/api/updater';
 import { command } from '../command';
 defineProps<{
-	manifest: UpdateManifest;
+	version: string;
 }>();
 defineEmits<{
 	'update-clicked': [];
@@ -13,7 +12,7 @@ const LATEST_RELEASE = 'https://github.com/shonya3/divicards/releases/latest';
 
 <template>
 	<div class="changelog">
-		<h1 class="heading">Divicards v{{ manifest?.version }}</h1>
+		<h1 class="heading">Divicards v{{ version }}</h1>
 		<a
 			class="link-release-notes"
 			@click.prevent="command('open_url', { url: LATEST_RELEASE })"

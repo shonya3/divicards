@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use tauri::Window;
+use tauri::{Manager, Window};
 use tracing::instrument;
 
 pub fn toast(variant: ToastVariant, message: String, window: &Window) {

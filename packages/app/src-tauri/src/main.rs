@@ -14,18 +14,26 @@ async fn main() {
     lib::dev::init_tracing();
     tracing::event!(tracing::Level::DEBUG, "app startup");
 
-    let app_prices = Mutex::new(AppCardPrices::new().unwrap());
-
     tauri::Builder::default()
         .setup(|app| {
-            let app_version = AppVersion(app.config().package.version.clone().unwrap());
+            println!("{}", app.path().app_local_data_dir().unwrap().display());
+            let app_dir = app
+                .path()
+                .app_local_data_dir()
+                .map_err(|_| lib::error::Error::ConfigDirNotExists)
+                .unwrap();
+            let app_prices = Mutex::new(AppCardPrices::new(app_dir).unwrap());
+            let app_version = AppVersion(app.config().version.clone().unwrap());
             app.manage(app_prices);
             app.manage(app_version);
             #[cfg(debug_assertions)] // only include this code on debug builds
             {
-                let window = app.get_window("main").unwrap();
+                let window = app.get_webview_window("main").unwrap();
                 window.open_devtools();
             }
+            #[cfg(desktop)]
+            app.handle()
+                .plugin(tauri_plugin_updater::Builder::new().build())?;
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![

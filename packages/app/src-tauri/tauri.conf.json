@@ -3,60 +3,50 @@
 	"build": {
 		"beforeBuildCommand": "npm run build",
 		"beforeDevCommand": "npm run dev",
-		"devPath": "http://localhost:5173",
-		"distDir": "../dist"
+		"frontendDist": "../dist",
+		"devUrl": "http://localhost:5173"
 	},
-	"package": {
-		"productName": "divicards",
-		"version": "0.6.1"
-	},
-	"tauri": {
-		"updater": {
-			"active": true,
-			"dialog": false,
-			"endpoints": ["https://github.com/shonya3/divicards/releases/latest/download/update.json"],
-			"pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDk3QTM3NkQyN0ZBRjRBREQKUldUZFNxOS8wbmFqbDRMUFhFQi9aWngrbG5PMzB6TmY2djE1YzZ6VWNYTmpQS3AvOWMwRGdGVGwK"
+	"bundle": {
+		"active": true,
+		"category": "DeveloperTool",
+		"copyright": "",
+		"targets": "all",
+		"externalBin": [],
+		"icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.icns", "icons/icon.ico"],
+		"windows": {
+			"certificateThumbprint": null,
+			"digestAlgorithm": "sha256",
+			"timestampUrl": ""
 		},
-		"allowlist": {
-			"all": true
+		"longDescription": "",
+		"macOS": {
+			"entitlements": null,
+			"exceptionDomain": "",
+			"frameworks": [],
+			"providerShortName": null,
+			"signingIdentity": null
 		},
-		"bundle": {
-			"active": true,
-			"category": "DeveloperTool",
-			"copyright": "",
+		"resources": [],
+		"shortDescription": "",
+		"linux": {
 			"deb": {
 				"depends": []
-			},
-			"externalBin": [],
-			"icon": [
-				"icons/32x32.png",
-				"icons/128x128.png",
-				"icons/128x128@2x.png",
-				"icons/icon.icns",
-				"icons/icon.ico"
-			],
-			"identifier": "divicards",
-			"longDescription": "",
-			"macOS": {
-				"entitlements": null,
-				"exceptionDomain": "",
-				"frameworks": [],
-				"providerShortName": null,
-				"signingIdentity": null
-			},
-			"resources": [],
-			"shortDescription": "",
-			"targets": "all",
-			"windows": {
-				"certificateThumbprint": null,
-				"digestAlgorithm": "sha256",
-				"timestampUrl": ""
 			}
-		},
+		}
+	},
+	"productName": "divicards",
+	"version": "0.6.1",
+	"identifier": "divicards",
+	"plugins": {
+		"updater": {
+			"endpoints": ["https://github.com/shonya3/divicards/releases/latest/download/latest.json"],
+			"pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDk3QTM3NkQyN0ZBRjRBREQKUldUZFNxOS8wbmFqbDRMUFhFQi9aWngrbG5PMzB6TmY2djE1YzZ6VWNYTmpQS3AvOWMwRGdGVGwK"
+		}
+	},
+	"app": {
 		"security": {
 			"csp": null
 		},
-
 		"windows": [
 			{
 				"fullscreen": false,
@@ -64,7 +54,7 @@
 				"resizable": true,
 				"title": "Divicards",
 				"width": 1400,
-				"fileDropEnabled": false,
+				"dragDropEnabled": false,
 				"theme": "Dark"
 			}
 		]
