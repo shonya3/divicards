@@ -222,9 +222,9 @@ export class StashesViewElement extends BaseElement {
 
 	/** For each tab, loads sample and emits it */
 	async #loadSelectedTabs(league: League): Promise<void> {
-		this.fetchingStashTab = true;
 		while (this.selectedTabs.size > 0) {
 			for (const { id, name } of this.selectedTabs.values()) {
+				this.fetchingStashTab = true;
 				try {
 					if (this.stashLoadsAvailable === 0) {
 						this.msg = 'Loads available: 0. Waiting for cooldown.';
@@ -262,6 +262,7 @@ export class StashesViewElement extends BaseElement {
 						this.errors = [...this.errors, { noItemsTab, message: err.message }];
 					}
 				} finally {
+					console.log('We here');
 					this.selectedTabs.delete(id);
 					this.selectedTabs = new Map(this.selectedTabs);
 					this.fetchingStashTab = false;
