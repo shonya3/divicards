@@ -2,9 +2,7 @@ pub mod act;
 pub mod cards;
 pub mod consts;
 
-#[cfg(feature = "fetch")]
 pub mod error;
-#[cfg(feature = "fetch")]
 pub mod fetchers;
 pub mod league;
 pub mod mapbosses;

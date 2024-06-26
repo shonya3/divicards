@@ -1,17 +1,15 @@
 //! Defines and loads [Divcord Spreadsheet](https://docs.google.com/spreadsheets/d/1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU/edit?pli=1#gid=0)
 
-#[cfg(feature = "fetch")]
 pub mod load;
 pub mod record;
 pub mod rich;
 
+#[allow(unused_imports)]
+use self::rich::Cell;
 use self::{record::Dumb, rich::RichColumn};
 use crate::error::Error;
 use googlesheets::sheet::ValueRange;
 use serde::{Deserialize, Serialize};
-
-#[allow(unused_imports)]
-use self::rich::Cell;
 
 /// [Divcord Spreadsheet](https://docs.google.com/spreadsheets/d/1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU/edit?pli=1#gid=0)
 /// This simple struct consist of api results:
