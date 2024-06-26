@@ -2,7 +2,7 @@ import { Meta } from '@storybook/web-components';
 import './e-stash-tab-container';
 import { html } from 'lit';
 import { StashTabContainerElement } from './e-stash-tab-container';
-import stash from 'poe-custom-elements/jsons/QuadStashStd.json';
+import stash from './json/QuadStashStd.json';
 
 export default {
 	title: 'Elements/stashes/e-stash-tab-container',
