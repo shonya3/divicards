@@ -21,7 +21,8 @@
 		"@vueuse/core": "^10.11.0",
 		"lit": "^3.1.4",
 		"pinia": "^2.1.7",
-		"vue": "^3.4.24"
+		"vue": "^3.4.24",
+		"poe-custom-elements": "link:..\\..\\..\\poe-custom-elements"
 	},
 	"devDependencies": {
 		"@tauri-apps/cli": "2.0.0-beta.20",

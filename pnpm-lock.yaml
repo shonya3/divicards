@@ -44,6 +44,9 @@ importers:
       pinia:
         specifier: ^2.1.7
         version: 2.1.7(typescript@5.5.2)(vue@3.4.27(typescript@5.5.2))
+      poe-custom-elements:
+        specifier: link:..\..\..\poe-custom-elements
+        version: link:../../../poe-custom-elements
       vue:
         specifier: ^3.4.24
         version: 3.4.27(typescript@5.5.2)
@@ -89,6 +92,9 @@ importers:
       lit:
         specifier: ^3.1.4
         version: 3.1.4
+      poe-custom-elements:
+        specifier: link:..\..\..\poe-custom-elements
+        version: link:../../../poe-custom-elements
     devDependencies:
       '@chromatic-com/storybook':
         specifier: 1.5.0
@@ -147,6 +153,9 @@ importers:
       vite:
         specifier: 5.3.1
         version: 5.3.1(@types/node@20.8.2)
+      vite-plugin-static-copy:
+        specifier: 1.0.5
+        version: 1.0.5(vite@5.3.1(@types/node@20.8.2))
       vue:
         specifier: ^3.4.30
         version: 3.4.30(typescript@5.5.2)

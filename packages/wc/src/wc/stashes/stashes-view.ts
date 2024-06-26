@@ -19,6 +19,8 @@ import { isStashTabError } from '@divicards/shared/error';
 import { StashTabErrorsElement } from './e-stash-tab-errors';
 import { ErrorLabel } from './types';
 import { styles } from './stashes-view.styles';
+import '../../../node_modules/poe-custom-elements/src/elements/poe-stash-tab';
+import stash from '../../../node_modules/poe-custom-elements/jsons/QuadStashStd.json';
 
 const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
@@ -93,6 +95,7 @@ export class StashesViewElement extends BaseElement {
 	}
 
 	protected override render() {
+		console.log(stash);
 		return html`<div class="main-stashes-component">
 			<header class="header">
 				<wc-league-select
