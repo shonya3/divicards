@@ -61,6 +61,9 @@ impl TabWithItems {
     pub fn kind(&self) -> Result<StashType, serde_json::Error> {
         serde_json::from_value(self.0["type"].clone())
     }
+    pub fn id(&self) -> Result<String, serde_json::Error> {
+        serde_json::from_value(self.0["id"].clone())
+    }
 }
 impl TabWithItems {
     pub fn new(value: Value) -> Self {

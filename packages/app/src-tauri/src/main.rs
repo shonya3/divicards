@@ -56,6 +56,7 @@ async fn main() {
             google::sheets::read_batch,
             poe::stash::sample_from_tab_with_items,
             poe::stash::tab,
+            poe::stash::extract_cards
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

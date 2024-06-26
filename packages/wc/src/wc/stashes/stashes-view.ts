@@ -9,7 +9,6 @@ import { NoItemsTab, TabWithItems } from '@divicards/shared/poe.types';
 import { DivinationCardsSample, League } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { TabBadgeGroupElement } from './tab-badge-group';
-import { classMap } from 'lit/directives/class-map.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/radio-button/radio-button.js';
@@ -19,9 +18,9 @@ import { isStashTabError } from '@divicards/shared/error';
 import { StashTabErrorsElement } from './e-stash-tab-errors';
 import { ErrorLabel } from './types';
 import { styles } from './stashes-view.styles';
-import '../../../node_modules/poe-custom-elements/src/elements/poe-stash-tab';
-import stash from '../../../node_modules/poe-custom-elements/jsons/QuadStashStd.json';
+import './e-stash-tab-container';
 import { Task } from '@lit/task';
+import { StashTabContainerElement } from './e-stash-tab-container';
 
 const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
@@ -44,6 +43,7 @@ export type Events = {
 	/** from tab-badge-group */
 	'upd:page': number;
 	'upd:multiselect': boolean;
+	'extract-cards': { tab: TabWithItems; league: League };
 
 	'sample-from-tab': { sample: DivinationCardsSample; league: League; name: NoItemsTab['name'] };
 	'tab-with-items-loaded': { tab: TabWithItems; league: League; name: string };
@@ -87,13 +87,15 @@ export class StashesViewElement extends BaseElement {
 	@state() hoveredErrorTabId: string | null = null;
 	@state() downloadedStashTabs: Array<TabWithItems> = [];
 	@state() openedTabId: string | null = null;
+	@state() openedTab: NoItemsTab | null = null;
 	private stashTabTask = new Task(this, {
 		task: async ([stashTabId]) => {
 			if (!stashTabId) {
-				return;
+				return null;
 			}
 
 			const tab = await this.stashLoader.tab(stashTabId, this.league);
+			this.#loadSingleTabContent(stashTabId, this.league, this.stashLoader.tab);
 			this.downloadedStashTabs.push(tab);
 			return tab;
 		},
@@ -110,10 +112,6 @@ export class StashesViewElement extends BaseElement {
 			this.selectedTabs = new Map();
 			this.errors = [];
 		}
-	}
-
-	constructor() {
-		super();
 	}
 
 	protected override render() {
@@ -195,15 +193,29 @@ export class StashesViewElement extends BaseElement {
 				@tab-click=${this.#onTabClick}
 				@upd:multiselect=${this.#handleUpdMultiselect}
 			></wc-tab-badge-group>
-			${this.stashTabTask.render({
-				pending: () => html`<sl-spinner></sl-spinner>`,
-				complete: tab =>
-					tab
-						? html`<div class="stash-tab-container">
-								<poe-stash-tab .tab=${tab}></poe-stash-tab>
-						  </div>`
-						: null,
-			})}
+			${this.openedTabId
+				? this.stashTabTask.render({
+						pending: () => {
+							return html`<e-stash-tab-container
+								.badge=${this.openedTab}
+								status="pending"
+								@close=${this.#handleTabContainerClose}
+							></e-stash-tab-container>`;
+						},
+						complete: tab =>
+							html`<e-stash-tab-container
+								@close=${this.#handleTabContainerClose}
+								@extract-cards=${this.#emitExtractCards}
+								.badge=${this.openedTab}
+								status="complete"
+								.tab=${tab}
+							></e-stash-tab-container>`,
+						initial: () => {
+							console.log('initial');
+							return html`initial`;
+						},
+				  })
+				: null}
 		</div>`;
 	}
 
@@ -231,9 +243,20 @@ export class StashesViewElement extends BaseElement {
 	}
 	#onTabClick(e: CustomEvent<Events['tab-click']>) {
 		this.openedTabId = e.detail.tabId;
+		this.openedTab = this.stashes.find(t => t.id === this.openedTabId) ?? null;
 	}
 	#handleUpdMultiselect(e: CustomEvent<boolean>) {
 		this.multiselect = e.detail;
+	}
+	#emitExtractCards(e: Event) {
+		const tab = (e.target as StashTabContainerElement)?.tab;
+		if (tab) {
+			this.emit<Events['extract-cards']>('extract-cards', { tab: tab, league: this.league });
+		}
+	}
+	#handleTabContainerClose() {
+		this.openedTab = null;
+		this.openedTabId = null;
 	}
 
 	/** Load whole stash of Array<NoItemsTab> and emits it  */

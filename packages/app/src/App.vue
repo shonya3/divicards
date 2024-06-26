@@ -123,6 +123,12 @@ const onTabWithItemsLoaded = (name: string, tab: TabWithItems, league: League) =
 	tab.items.sort((a, b) => (b.stackSize ?? 0) - (a.stackSize ?? 0));
 	tabsWithItems.value.push(tab);
 };
+
+const extractCards = async (tab: TabWithItems, league: League) => {
+	const sample = await command('extract_cards', { tab, league });
+	sampleStore.addSample(tab.id, sample, league);
+	toast('success', 'Cards successfully extracted');
+};
 </script>
 
 <template>
@@ -169,6 +175,7 @@ const onTabWithItemsLoaded = (name: string, tab: TabWithItems, league: League) =
 				@sample-from-tab="sampleStore.addSample"
 				@tab-with-items-loaded="onTabWithItemsLoaded"
 				@close="stashVisible = false"
+				@extract-cards="extractCards"
 			/>
 		</div>
 		<Transition>

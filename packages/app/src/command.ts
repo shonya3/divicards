@@ -42,6 +42,7 @@ export interface Commands {
 	sample_into_csv: (args: { sample: DivinationCardsSample; preferences: Preferences }) => string;
 	sample_from_tab: (args: { league: League; stashId: string; subStashId?: string }) => DivinationCardsSample;
 	tab_with_items: (args: { league: League; stashId: string }) => TabWithItems;
+	extract_cards: (args: { tab: TabWithItems; league: League }) => DivinationCardsSample;
 }
 
 const { format } = new Intl.NumberFormat();

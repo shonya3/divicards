@@ -11,6 +11,7 @@ const emit = defineEmits<{
 	'update:selectedTabs': [Set<string>];
 	'sample-from-tab': [string, DivinationCardsSample, League];
 	'tab-with-items-loaded': [string, TabWithItems, League];
+	'extract-cards': [TabWithItems, League];
 }>();
 
 const onUpdSelectedTabs = (e: CustomEvent<Set<string>>) => {
@@ -24,6 +25,10 @@ const onSampleFromTab = (e: CustomEvent<Events['sample-from-tab']>) => {
 const onTabWithItemsLoaded = (e: CustomEvent<Events['tab-with-items-loaded']>) => {
 	emit('tab-with-items-loaded', e.detail.name, e.detail.tab, e.detail.league);
 };
+
+const onExtractCards = (e: CustomEvent<Events['extract-cards']>) => {
+	emit('extract-cards', e.detail.tab, e.detail.league);
+};
 </script>
 
 <template>
@@ -34,6 +39,7 @@ const onTabWithItemsLoaded = (e: CustomEvent<Events['tab-with-items-loaded']>) =
 		@upd:selectedTabs="onUpdSelectedTabs"
 		@sample-from-tab="onSampleFromTab"
 		@tab-with-items-loaded="onTabWithItemsLoaded"
+		@extract-cards="onExtractCards"
 	></wc-stashes-view>
 </template>
 

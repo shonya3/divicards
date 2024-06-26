@@ -57,6 +57,32 @@ pub async fn tab_with_items(
     StashAPI::tab_with_items(&league, stash_id, None, version.inner()).await
 }
 
+#[command]
+pub async fn extract_cards(
+    tab: TabWithItems,
+    league: League,
+    prices: State<'_, Mutex<AppCardPrices>>,
+    window: Window,
+) -> Result<Sample, Error> {
+    let prices = match TradeLeague::try_from(league.clone()) {
+        Ok(league) => {
+            let mut guard = prices.lock().await;
+            guard.get_price(&league, &window).await
+        }
+        Err(_) => Prices::default(),
+    };
+
+    let tab_id = tab.id().unwrap_or_else(|_| "No tab id".to_string());
+    let sample = Sample::create(Input::from(tab), Some(prices)).map_err(|divi_err| {
+        Error::StashTabError {
+            stash_id: tab_id,
+            league,
+            message: divi_err.to_string(),
+        }
+    })?;
+    Ok(sample)
+}
+
 #[instrument]
 #[command]
 pub async fn stashes(league: League, version: State<'_, AppVersion>) -> Result<TabNoItems, Error> {

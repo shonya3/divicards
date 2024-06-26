@@ -49,9 +49,8 @@ export const styles = css`
 		font-size: 20px;
 	}
 
-	poe-stash-tab {
+	e-stash-tab-container {
 		display: block;
-		margin-top: 1.5rem;
 		margin-inline: auto;
 	}
 `;
