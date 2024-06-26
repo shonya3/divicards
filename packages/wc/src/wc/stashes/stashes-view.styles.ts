@@ -48,4 +48,10 @@ export const styles = css`
 		margin-block: 0;
 		font-size: 20px;
 	}
+
+	poe-stash-tab {
+		display: block;
+		margin-top: 1.5rem;
+		margin-inline: auto;
+	}
 `;

@@ -80,6 +80,9 @@ importers:
       '@divicards/shared':
         specifier: workspace:^
         version: link:../shared
+      '@lit/task':
+        specifier: ^1.0.1
+        version: 1.0.1
       '@shoelace-style/shoelace':
         specifier: 2.15.1
         version: 2.15.1(@types/react@18.2.24)
@@ -1354,6 +1357,9 @@ packages:
 
   '@lit/reactive-element@2.0.4':
     resolution: {integrity: sha512-GFn91inaUa2oHLak8awSIigYz0cU0Payr1rcFsrkf5OJ5eSPxElyZfKh0f2p9FsTiZWXQdWGJeXZICEfXXYSXQ==}
+
+  '@lit/task@1.0.1':
+    resolution: {integrity: sha512-fVLDtmwCau8NywnFIXaJxsCZjzaIxnVq+cFRKYC1Y4tA4/0rMTvF6DLZZ2JE51BwzOluaKtgJX8x1QDsQtAaIw==}
 
   '@mdn/browser-compat-data@4.2.1':
     resolution: {integrity: sha512-EWUguj2kd7ldmrF9F+vI5hUOralPd+sdsUnYbRy33vZTuZkduC1shE9TtEMEjAQwyfyMb4ole5KtjF8MsnQOlA==}
@@ -6171,6 +6177,10 @@ snapshots:
   '@lit/reactive-element@2.0.4':
     dependencies:
       '@lit-labs/ssr-dom-shim': 1.2.0
+
+  '@lit/task@1.0.1':
+    dependencies:
+      '@lit/reactive-element': 2.0.4
 
   '@mdn/browser-compat-data@4.2.1': {}
 

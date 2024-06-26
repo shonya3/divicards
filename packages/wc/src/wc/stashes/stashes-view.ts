@@ -21,6 +21,7 @@ import { ErrorLabel } from './types';
 import { styles } from './stashes-view.styles';
 import '../../../node_modules/poe-custom-elements/src/elements/poe-stash-tab';
 import stash from '../../../node_modules/poe-custom-elements/jsons/QuadStashStd.json';
+import { Task } from '@lit/task';
 
 const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
@@ -81,6 +82,20 @@ export class StashesViewElement extends BaseElement {
 	@state() private stashLoadsAvailable = 30;
 	@state() private availableInTenSeconds = 15;
 	@state() hoveredErrorTabId: string | null = null;
+	@state() downloadedStashTabs: Array<TabWithItems> = [];
+	@state() openedTabId: string | null = null;
+	private stashTabTask = new Task(this, {
+		task: async ([stashTabId]) => {
+			if (!stashTabId) {
+				return;
+			}
+
+			const tab = await this.stashLoader.tab(stashTabId, this.league);
+			this.downloadedStashTabs.push(tab);
+			return tab;
+		},
+		args: () => [this.openedTabId],
+	});
 
 	@query('button#stashes-btn') stashesButton!: HTMLButtonElement;
 	@query('button#get-data-btn') getDataButton!: HTMLButtonElement;
@@ -94,8 +109,11 @@ export class StashesViewElement extends BaseElement {
 		}
 	}
 
+	constructor() {
+		super();
+	}
+
 	protected override render() {
-		console.log(stash);
 		return html`<div class="main-stashes-component">
 			<header class="header">
 				<wc-league-select
@@ -170,7 +188,17 @@ export class StashesViewElement extends BaseElement {
 				.errors=${this.errors}
 				.hoveredErrorTabId=${this.hoveredErrorTabId}
 				@upd:selectedTabs=${this.#onUpdSelectedTabs}
+				@tab-select=${this.#onTabSelect}
 			></wc-tab-badge-group>
+			${this.stashTabTask.render({
+				pending: () => html`<sl-spinner></sl-spinner>`,
+				complete: tab =>
+					tab
+						? html`<div class="stash-tab-container">
+								<poe-stash-tab .tab=${tab}></poe-stash-tab>
+						  </div>`
+						: null,
+			})}
 		</div>`;
 	}
 
@@ -195,6 +223,11 @@ export class StashesViewElement extends BaseElement {
 	#onUpdSelectedTabs(e: CustomEvent<Events['upd:selectedTabs']>) {
 		const map = (e as CustomEvent<Events['upd:selectedTabs']>).detail;
 		this.selectedTabs = new Map(map);
+	}
+	#onTabSelect(e: CustomEvent<Events['tab-select']>) {
+		if (e.detail.selected) {
+			this.openedTabId = e.detail.tabId;
+		}
 	}
 
 	/** Load whole stash of Array<NoItemsTab> and emits it  */
