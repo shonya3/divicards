@@ -86,29 +86,26 @@ export class TabBadgeGroupElement extends BaseElement {
 	protected override render() {
 		return html`<div class="tab-badge-group">
 			${this.shouldFilter
-				? html`<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 2rem">
-						<div>
-							<div class="filter">
-								<label for="filter-stashes-by-name">Filter by name</label>
-								<sl-input
-									type="text"
-									id="filter-stashes-by-name"
-									.value=${this.nameQuery}
-									@input=${this.#onNameQueryInput}
-								></sl-input>
-							</div>
-						</div>
+				? html`<header class="header">
+						<sl-input
+							type="text"
+							id="filter-stashes-by-name"
+							.value=${this.nameQuery}
+							@input=${this.#onNameQueryInput}
+							.helpText=${`Search tab by name`}
+						></sl-input>
 						<div class="page-controls">
 							<sl-button ?disabled=${this.page === 1} @click=${this.decreasePage}>prev</sl-button>
 							<sl-input
+								.helpText=${`page`}
 								id="page"
 								type="text"
 								.value=${String(this.page)}
 								@sl-input=${this.#onPageInput}
 							></sl-input>
 							<sl-button @click=${this.increasePage}>next</sl-button>
-							<label for="per-page">per page</label>
 							<sl-input
+								.helpText=${`per page`}
 								id="per-page"
 								type="number"
 								min="0"
@@ -116,18 +113,22 @@ export class TabBadgeGroupElement extends BaseElement {
 								@sl-input=${this.#onPerPageInput}
 							></sl-input>
 						</div>
-						${this.withHideRemoveOnly
-							? html` <div class="hide-remove-only">
-									<sl-checkbox
-										id="hide-remove-only"
-										@sl-change=${() => (this.hideRemoveOnly = this.checkbox.checked)}
-										.checked=${this.hideRemoveOnly}
-										>Hide remove-only</sl-checkbox
-									>
-							  </div>`
-							: nothing}
-						<div class="tabs-total"><span>${this.tabsTotal}</span> stash tabs</div>
-				  </div>`
+						<div class="header__right">
+							${this.withHideRemoveOnly
+								? html` <div class="hide-remove-only">
+										<sl-checkbox
+											id="hide-remove-only"
+											@sl-change=${() => (this.hideRemoveOnly = this.checkbox.checked)}
+											.checked=${this.hideRemoveOnly}
+											>Hide remove-only</sl-checkbox
+										>
+								  </div>`
+								: nothing}
+							<div class="tabs-total">
+								<span class="tabs-total__count">${this.tabsTotal}</span> stash tabs
+							</div>
+						</div>
+				  </header>`
 				: nothing}
 			<ul class="list">
 				${this.paginated.map(tab => {
@@ -181,16 +182,28 @@ function styles() {
 			display: grid;
 			gap: 1rem;
 		}
-		.filter {
+
+		.header {
+			padding-inline: 2rem;
 			display: flex;
-			gap: 0.4rem;
+			flex-wrap: wrap;
+			justify-content: space-between;
 			align-items: center;
+			align-items: start;
+			gap: 2rem;
+
+			.header__right {
+				margin-top: 12px;
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+			}
 		}
 
 		.page-controls {
 			display: flex;
 			gap: 0.4rem;
-			align-items: center;
+			align-items: start;
 		}
 
 		.page-controls > sl-input {
@@ -204,10 +217,8 @@ function styles() {
 			gap: 0.2rem;
 		}
 
-		.tabs-total {
-			> span {
-				color: var(--sl-color-amber-800);
-			}
+		.tabs-total__count {
+			color: var(--sl-color-amber-800);
 		}
 
 		.list {
@@ -223,8 +234,6 @@ function styles() {
 			border-radius: 4px;
 		}
 
-		.error {
-		}
 		.hovered-error {
 			border-color: red;
 		}

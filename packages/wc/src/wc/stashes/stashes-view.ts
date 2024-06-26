@@ -262,7 +262,6 @@ export class StashesViewElement extends BaseElement {
 						this.errors = [...this.errors, { noItemsTab, message: err.message }];
 					}
 				} finally {
-					console.log('We here');
 					this.selectedTabs.delete(id);
 					this.selectedTabs = new Map(this.selectedTabs);
 					this.fetchingStashTab = false;
