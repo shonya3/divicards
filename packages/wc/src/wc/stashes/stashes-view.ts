@@ -43,6 +43,7 @@ export type Events = {
 	'upd:PerPage': number;
 	/** from tab-badge-group */
 	'upd:page': number;
+	'upd:multiselect': boolean;
 
 	'sample-from-tab': { sample: DivinationCardsSample; league: League; name: NoItemsTab['name'] };
 	'tab-with-items-loaded': { tab: TabWithItems; league: League; name: string };
@@ -51,6 +52,7 @@ export type Events = {
 	// ---
 	/**  event from TabBadgeElement */
 	'tab-select': { tabId: NoItemsTab['id']; name: NoItemsTab['name']; selected: boolean };
+	'tab-click': { tabId: string; name: string };
 };
 
 export interface StashesViewProps {
@@ -70,6 +72,7 @@ export class StashesViewElement extends BaseElement {
 
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
 	@property() downloadAs: DownloadAs = 'divination-cards-sample';
+	@property({ type: Boolean }) multiselect = false;
 
 	@state() selectedTabs: Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }> = new Map();
 	@state() stashes: NoItemsTab[] = [];
@@ -182,13 +185,15 @@ export class StashesViewElement extends BaseElement {
 					: nothing}
 			</div>
 			<wc-tab-badge-group
+				.multiselect=${this.multiselect}
 				league=${this.league}
 				.stashes=${this.stashes}
 				.selectedTabs=${this.selectedTabs}
 				.errors=${this.errors}
 				.hoveredErrorTabId=${this.hoveredErrorTabId}
 				@upd:selectedTabs=${this.#onUpdSelectedTabs}
-				@tab-select=${this.#onTabSelect}
+				@tab-click=${this.#onTabClick}
+				@upd:multiselect=${this.#handleUpdMultiselect}
 			></wc-tab-badge-group>
 			${this.stashTabTask.render({
 				pending: () => html`<sl-spinner></sl-spinner>`,
@@ -224,10 +229,11 @@ export class StashesViewElement extends BaseElement {
 		const map = (e as CustomEvent<Events['upd:selectedTabs']>).detail;
 		this.selectedTabs = new Map(map);
 	}
-	#onTabSelect(e: CustomEvent<Events['tab-select']>) {
-		if (e.detail.selected) {
-			this.openedTabId = e.detail.tabId;
-		}
+	#onTabClick(e: CustomEvent<Events['tab-click']>) {
+		this.openedTabId = e.detail.tabId;
+	}
+	#handleUpdMultiselect(e: CustomEvent<boolean>) {
+		this.multiselect = e.detail;
 	}
 
 	/** Load whole stash of Array<NoItemsTab> and emits it  */

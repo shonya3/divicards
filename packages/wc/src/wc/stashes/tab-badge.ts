@@ -13,6 +13,7 @@ declare global {
 
 export interface Events {
 	'tab-select': { tabId: string; name: string; selected: boolean };
+	'tab-click': { tabId: string; name: string };
 }
 
 export class TabBadgeElement extends BaseElement {
@@ -66,7 +67,9 @@ export class TabBadgeElement extends BaseElement {
 		}
 
 		if (this.as === 'button') {
-			return html`<button style=${cssProps} class="tab-badge-as-button">${this.nameLabel()}</button>`;
+			return html`<button @click=${this.#onButtonClick} style=${cssProps} class="tab-badge-as-button">
+				${this.nameLabel()}
+			</button>`;
 		}
 	}
 
@@ -77,6 +80,12 @@ export class TabBadgeElement extends BaseElement {
 		this.emit<Events['tab-select']>('tab-select', {
 			tabId: this.tab.id,
 			selected: this.selected,
+			name: this.tab.name,
+		});
+	}
+	#onButtonClick() {
+		this.emit<Events['tab-click']>('tab-click', {
+			tabId: this.tab.id,
 			name: this.tab.name,
 		});
 	}

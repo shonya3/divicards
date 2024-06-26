@@ -8,8 +8,10 @@ import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
+import { HelpTipElement } from '../help-tip';
 import { ErrorLabel } from './types';
 import { classMap } from 'lit/directives/class-map.js';
+import SlCheckbox from '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -23,19 +25,22 @@ export interface Events {
 	'upd:nameQuery': string;
 	'upd:PerPage': number;
 	'upd:page': number;
+	'upd:multiselect': boolean;
 	'upd:selectedTabs': Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }>;
 
 	/**  Event from TabBadgeElement */
 	'tab-select': { tabId: NoItemsTab['id']; name: NoItemsTab['name']; selected: boolean };
+	'tab-click': { tabId: string; name: string };
 }
 
 export class TabBadgeGroupElement extends BaseElement {
 	static override get defineList() {
-		return [TabBadgeElement];
+		return [TabBadgeElement, HelpTipElement];
 	}
 	static override tag = 'wc-tab-badge-group';
 	static override styles = [styles()];
 
+	@property({ type: Boolean }) multiselect = false;
 	@property({ type: Array }) stashes: NoItemsTab[] = [];
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
 	@property({ type: Array }) errors: Array<ErrorLabel> = [];
@@ -114,6 +119,12 @@ export class TabBadgeGroupElement extends BaseElement {
 							></sl-input>
 						</div>
 						<div class="header__right">
+							<div class="multiselect">
+								<sl-checkbox @sl-change=${this.#onMultiselectChange} .checked=${this.multiselect}
+									>Multiselect</sl-checkbox
+								>
+								<wc-help-tip>Select multiple tabs at once to download it in one go.</wc-help-tip>
+							</div>
 							${this.withHideRemoveOnly
 								? html` <div class="hide-remove-only">
 										<sl-checkbox
@@ -138,7 +149,11 @@ export class TabBadgeGroupElement extends BaseElement {
 							'hovered-error': this.hoveredErrorTabId === tab.id,
 						})}
 					>
-						<wc-tab-badge .tab=${tab} .selected=${this.selectedTabs.has(tab.id)}></wc-tab-badge>
+						<wc-tab-badge
+							.as=${this.multiselect ? 'checkbox' : 'button'}
+							.tab=${tab}
+							.selected=${this.selectedTabs.has(tab.id)}
+						></wc-tab-badge>
 					</li>`;
 				})}
 			</ul>
@@ -162,6 +177,10 @@ export class TabBadgeGroupElement extends BaseElement {
 		selected ? this.selectedTabs.set(tabId, { id: tabId, name }) : this.selectedTabs.delete(tabId);
 		this.selectedTabs = new Map(this.selectedTabs);
 		this.emit<Events['upd:selectedTabs']>('upd:selectedTabs', this.selectedTabs);
+	}
+	#onMultiselectChange(e: InputEvent) {
+		this.multiselect = (e.target as SlCheckbox).checked;
+		this.emit<Events['upd:multiselect']>('upd:multiselect', this.multiselect);
 	}
 	decreasePage() {
 		if (this.page > 1) {
@@ -219,6 +238,12 @@ function styles() {
 
 		.tabs-total__count {
 			color: var(--sl-color-amber-800);
+		}
+
+		.multiselect {
+			display: flex;
+			align-items: center;
+			gap: 4px;
 		}
 
 		.list {
