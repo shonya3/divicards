@@ -822,6 +822,7 @@
           ]
         },
         {
+          "description": "process:default -> This permission set configures which\nprocess feeatures are by default exposed.\n\n#### Granted Permissions\n\nThis enables to quit via `allow-exit` and restart via `allow-restart`\nthe application.\n",
           "type": "string",
           "enum": [
             "process:default"
@@ -1038,7 +1039,7 @@
           ]
         },
         {
-          "description": "updater:default -> Allows checking for new updates and installing them",
+          "description": "updater:default -> This permission set configures which kind of\nupdater functions are exposed to the frontend.\n\n#### Granted Permissions\n\nThe full workflow from checking for updates to installing them\nis enabled.\n\n",
           "type": "string",
           "enum": [
             "updater:default"
