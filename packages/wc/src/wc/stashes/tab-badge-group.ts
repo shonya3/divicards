@@ -103,7 +103,7 @@ export class TabBadgeGroupElement extends BaseElement {
 							.helpText=${`Search tab by name`}
 						></sl-input>
 						<e-pagination
-							.n=${this.stashes.length}
+							.n=${this.tabsTotal}
 							.page=${this.page}
 							.perPage=${this.perPage}
 							@page-change=${this.#onPageChange}
