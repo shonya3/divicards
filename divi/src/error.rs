@@ -15,7 +15,6 @@ pub enum Error {
     ParseIntError(ParseIntError),
     CsvError(CsvError),
     NinjaError(NinjaError),
-    SampleMustHaveRainOfChaos,
 }
 
 impl Display for Error {
@@ -30,9 +29,6 @@ impl Display for Error {
             Error::ParseIntError(err) => err.fmt(f),
             Error::CsvError(err) => err.fmt(f),
             Error::NinjaError(err) => err.fmt(f),
-            Error::SampleMustHaveRainOfChaos => {
-                f.write_str("Sample must have rain of chaos cards.")
-            }
         }
     }
 }
