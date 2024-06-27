@@ -19,6 +19,7 @@ export interface Events {
 export class TabBadgeElement extends BaseElement {
 	static override tag = 'wc-tab-badge';
 	@property({ type: Object }) tab!: NoItemsTab;
+	@property({ type: Boolean }) disabled = false;
 	@property({ type: Boolean, reflect: true }) selected = false;
 	// /** Any valid CSS color */
 	@property({ reflect: true, attribute: 'color' }) color?: string;
@@ -67,7 +68,12 @@ export class TabBadgeElement extends BaseElement {
 		}
 
 		if (this.as === 'button') {
-			return html`<button @click=${this.#onButtonClick} style=${cssProps} class="tab-badge-as-button">
+			return html`<button
+				.disabled=${this.disabled}
+				@click=${this.#onButtonClick}
+				style=${cssProps}
+				class="tab-badge-as-button"
+			>
 				${this.nameLabel()}
 			</button>`;
 		}
@@ -100,6 +106,9 @@ export class TabBadgeElement extends BaseElement {
 			cursor: pointer;
 			position: relative;
 			&:hover {
+			}
+			&:disabled {
+				filter: grayscale(0.6);
 			}
 			.name {
 				pointer-events: none;

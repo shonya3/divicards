@@ -82,8 +82,9 @@ export class StashesViewElement extends BaseElement {
 	@state() fetchingStash: boolean = false;
 	@state() stashLoader!: IStashLoader;
 	@state() errors: Array<ErrorLabel> = [];
-	@state() private stashLoadsAvailable = 30;
-	@state() private availableInTenSeconds = 15;
+	// @state() stashLoadsAvailable = 30;
+	@state() stashLoadsAvailable = 1;
+	@state() availableInTenSeconds = 15;
 	@state() hoveredErrorTabId: string | null = null;
 	@state() downloadedStashTabs: Array<TabWithItems> = [];
 	@state() openedTabId: string | null = null;
@@ -93,11 +94,7 @@ export class StashesViewElement extends BaseElement {
 			if (!stashTabId) {
 				return null;
 			}
-
-			const tab = await this.stashLoader.tab(stashTabId, this.league);
-			this.#loadSingleTabContent(stashTabId, this.league, this.stashLoader.tab);
-			this.downloadedStashTabs.push(tab);
-			return tab;
+			return await this.#loadSingleTabContent(stashTabId, this.league, this.stashLoader.tab);
 		},
 		args: () => [this.openedTabId],
 	});
@@ -197,6 +194,7 @@ export class StashesViewElement extends BaseElement {
 				@upd:selectedTabs=${this.#onUpdSelectedTabs}
 				@tab-click=${this.#onTabClick}
 				@upd:multiselect=${this.#handleUpdMultiselect}
+				.badgesDisabled=${this.stashLoadsAvailable === 0 || this.availableInTenSeconds === 0}
 			></wc-tab-badge-group>
 			${this.openedTabId
 				? this.stashTabTask.render({
@@ -216,8 +214,20 @@ export class StashesViewElement extends BaseElement {
 								.tab=${tab}
 							></e-stash-tab-container>`,
 						initial: () => {
-							console.log('initial');
 							return html`initial`;
+						},
+						error: (err: unknown) => {
+							if (
+								!(
+									typeof err === 'object' &&
+									err !== null &&
+									'message' in err &&
+									typeof err.message === 'string'
+								)
+							) {
+								return;
+							}
+							return html`<div>${err.message}</div>`;
 						},
 				  })
 				: null}
@@ -296,16 +306,6 @@ export class StashesViewElement extends BaseElement {
 			for (const { id, name } of this.selectedTabs.values()) {
 				this.fetchingStashTab = true;
 				try {
-					if (this.stashLoadsAvailable === 0) {
-						this.msg = 'Loads available: 0. Waiting for cooldown.';
-						await sleepSecs(1);
-						continue;
-					}
-					if (this.availableInTenSeconds === 0) {
-						this.msg = 'Sleep for short cooldown';
-						await sleepSecs(0.5);
-						continue;
-					}
 					switch (this.downloadAs) {
 						case 'divination-cards-sample': {
 							const sample = await this.#loadSingleTabContent(id, league, this.stashLoader.sampleFromTab);
@@ -341,6 +341,22 @@ export class StashesViewElement extends BaseElement {
 		}
 	}
 
+	async #waitForLoadsAvailable() {
+		while (this.stashLoadsAvailable === 0 || this.availableInTenSeconds === 0) {
+			if (this.stashLoadsAvailable === 0) {
+				this.msg = 'Loads available: 0. Waiting for cooldown.';
+				await sleepSecs(1);
+				continue;
+			}
+			if (this.availableInTenSeconds === 0) {
+				this.msg = 'Sleep for short cooldown';
+				await sleepSecs(0.5);
+				continue;
+			}
+		}
+		this.msg = '';
+	}
+
 	async #loadSingleTabContent<T>(
 		id: string,
 		league: League,
@@ -350,19 +366,21 @@ export class StashesViewElement extends BaseElement {
 			throw new Error('No stash loader');
 		}
 
-		this.msg = '';
+		await this.#waitForLoadsAvailable();
+		this.stashLoadsAvailable--;
+		this.availableInTenSeconds--;
+		setTimeout(() => {
+			this.stashLoadsAvailable++;
+		}, SECS_300);
+		setTimeout(() => {
+			this.availableInTenSeconds++;
+		}, SECS_10);
 		try {
 			const singleTabContent = await loadFunction(id, league);
 			return singleTabContent;
 		} finally {
-			this.stashLoadsAvailable--;
-			this.availableInTenSeconds--;
-			setTimeout(() => {
-				this.stashLoadsAvailable++;
-			}, SECS_300);
-			setTimeout(() => {
-				this.availableInTenSeconds++;
-			}, SECS_10);
+			// run again go clear wait-messages when time comes
+			this.#waitForLoadsAvailable();
 		}
 	}
 }

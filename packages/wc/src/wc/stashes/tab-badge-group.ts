@@ -40,6 +40,7 @@ export class TabBadgeGroupElement extends BaseElement {
 	static override tag = 'wc-tab-badge-group';
 	static override styles = [styles()];
 
+	@property({ type: Boolean, attribute: 'badges-disabled' }) badgesDisabled = false;
 	@property({ type: Boolean }) multiselect = false;
 	@property({ type: Array }) stashes: NoItemsTab[] = [];
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
@@ -153,6 +154,7 @@ export class TabBadgeGroupElement extends BaseElement {
 							.as=${this.multiselect ? 'checkbox' : 'button'}
 							.tab=${tab}
 							.selected=${this.selectedTabs.has(tab.id)}
+							.disabled=${this.badgesDisabled}
 						></wc-tab-badge>
 					</li>`;
 				})}
