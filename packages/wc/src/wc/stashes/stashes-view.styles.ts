@@ -26,12 +26,13 @@ export const styles = css`
 	.tips {
 		display: flex;
 		gap: 0.5rem;
-		margin-top: 0.75rem;
+		align-items: center;
 	}
 
 	.top-right-corner {
 		display: flex;
 		gap: 2rem;
+		align-items: baseline;
 	}
 
 	.btn-load-items:not([disabled]) {

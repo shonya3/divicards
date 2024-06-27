@@ -19,7 +19,6 @@
 
 	--border-color: #646cff;
 	font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-	line-height: 24px;
 	font-weight: 400;
 
 	font-synthesis: none;
@@ -62,8 +61,4 @@ button:hover {
 button:focus,
 button:focus-visible {
 	outline: 4px auto -webkit-focus-ring-color;
-}
-
-input {
-	font: inherit;
 }
