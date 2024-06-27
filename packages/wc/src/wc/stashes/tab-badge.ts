@@ -104,6 +104,7 @@ export class TabBadgeElement extends BaseElement {
 			border-radius: 0.4rem;
 			border: 1px solid #000;
 			cursor: pointer;
+			overflow: hidden;
 			position: relative;
 			&:hover {
 			}
