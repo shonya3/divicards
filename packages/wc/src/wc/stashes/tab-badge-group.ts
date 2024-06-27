@@ -8,10 +8,12 @@ import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
+import '../e-pagination';
 import { HelpTipElement } from '../help-tip';
 import { ErrorLabel } from './types';
 import { classMap } from 'lit/directives/class-map.js';
 import SlCheckbox from '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
+import { PaginationElement } from '../e-pagination';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -100,25 +102,13 @@ export class TabBadgeGroupElement extends BaseElement {
 							@input=${this.#onNameQueryInput}
 							.helpText=${`Search tab by name`}
 						></sl-input>
-						<div class="page-controls">
-							<sl-button ?disabled=${this.page === 1} @click=${this.decreasePage}>prev</sl-button>
-							<sl-input
-								.helpText=${`page`}
-								id="page"
-								type="text"
-								.value=${String(this.page)}
-								@sl-input=${this.#onPageInput}
-							></sl-input>
-							<sl-button @click=${this.increasePage}>next</sl-button>
-							<sl-input
-								.helpText=${`per page`}
-								id="per-page"
-								type="number"
-								min="0"
-								.value=${String(this.perPage)}
-								@sl-input=${this.#onPerPageInput}
-							></sl-input>
-						</div>
+						<e-pagination
+							.n=${this.stashes.length}
+							.page=${this.page}
+							.perPage=${this.perPage}
+							@page-change=${this.#onPageChange}
+							@per-page-change=${this.#onPerPageChange}
+						></e-pagination>
 						<div class="header__right">
 							<div class="multiselect">
 								<sl-checkbox @sl-change=${this.#onMultiselectChange} .checked=${this.multiselect}
@@ -162,13 +152,17 @@ export class TabBadgeGroupElement extends BaseElement {
 		</div>`;
 	}
 
-	#onPageInput() {
-		this.page = Number(this.pageInput.value);
+	#onPageChange(e: Event) {
+		if (e.target instanceof PaginationElement) {
+			this.page = e.target.page;
+		}
 		this.emit<Events['upd:page']>('upd:page', this.page);
 	}
-	#onPerPageInput() {
-		this.perPage = Number(this.perPageInput.value);
-		this.emit<Events['upd:PerPage']>('upd:PerPage', this.perPage);
+	#onPerPageChange(e: Event) {
+		if (e.target instanceof PaginationElement) {
+			this.perPage = e.target.perPage;
+		}
+		this.emit<Events['upd:PerPage']>('upd:PerPage', this.page);
 	}
 	#onNameQueryInput() {
 		this.nameQuery = this.nameQueryInput.value;
@@ -210,7 +204,6 @@ function styles() {
 			flex-wrap: wrap;
 			justify-content: space-between;
 			align-items: center;
-			align-items: start;
 			gap: 2rem;
 
 			.header__right {
@@ -219,17 +212,10 @@ function styles() {
 				align-items: center;
 				gap: 1rem;
 			}
-		}
 
-		.page-controls {
-			display: flex;
-			gap: 0.4rem;
-			align-items: start;
-		}
-
-		.page-controls > sl-input {
-			width: 9ch;
-			text-align: center;
+			> sl-input {
+				margin-top: 1rem;
+			}
 		}
 
 		.hide-remove-only {
