@@ -127,7 +127,8 @@ export class StashesViewElement extends BaseElement {
 							<div>
 								${this.fetchingStashTab
 									? html`<sl-button><sl-spinner></sl-spinner></sl-button>`
-									: html`<sl-button
+									: this.multiselect
+									? html`<sl-button
 											id="get-data-btn"
 											class="btn-load-items"
 											.disabled=${this.selectedTabs.size === 0 ||
@@ -136,7 +137,8 @@ export class StashesViewElement extends BaseElement {
 											@click=${this.#onLoadItemsClicked}
 									  >
 											Load Tabs Contents
-									  </sl-button>`}
+									  </sl-button>`
+									: null}
 							</div>
 					  `
 					: html`<div>
@@ -146,27 +148,30 @@ export class StashesViewElement extends BaseElement {
 					  </div> `}
 				<div class="top-right-corner">
 					${this.stashes.length
-						? html`<sl-radio-group
-									@sl-change=${this.#onDownloadAsChanged}
-									.helpText=${`Download as`}
-									value=${this.downloadAs}
-								>
-									${DOWNLOAD_AS_VARIANTS.map(
-										variant =>
-											html`<sl-radio-button size="small" value=${variant}
-												>${variant === 'divination-cards-sample'
-													? 'cards'
-													: 'poe tab'}</sl-radio-button
-											>`
-									)}
-								</sl-radio-group>
+						? html`
+								${this.multiselect
+									? html`<sl-radio-group
+											@sl-change=${this.#onDownloadAsChanged}
+											.helpText=${`Download as`}
+											value=${this.downloadAs}
+									  >
+											${DOWNLOAD_AS_VARIANTS.map(
+												variant =>
+													html`<sl-radio-button size="small" value=${variant}
+														>${variant === 'divination-cards-sample'
+															? 'cards'
+															: 'poe tab'}</sl-radio-button
+													>`
+											)}
+									  </sl-radio-group>`
+									: null}
 								<div class="tips">
 									<wc-help-tip>
-										<p>Select tabs by clicking on them. Then click LOAD ITEMS button</p>
 										<p>PoE API allows 30 requests in 5 minutes</p>
 									</wc-help-tip>
 									<div>Loads available: ${this.stashLoadsAvailable}</div>
-								</div> `
+								</div>
+						  `
 						: nothing}
 					<sl-button @click=${this.#onCloseClicked} class="btn-close">Close</sl-button>
 				</div>
