@@ -28,7 +28,7 @@ impl Prices {
                 .iter()
                 .find(|ninja_data| ninja_data.name == price.name)
             {
-                if sparkline.data.is_empty() {
+                if !sparkline.data.is_empty() {
                     price.price = *chaos_value;
                 }
             }
