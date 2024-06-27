@@ -84,6 +84,7 @@ export class StashTabContainerElement extends LitElement {
 			border-bottom: 1px solid var(--sl-color-gray-200);
 			align-items: center;
 			justify-content: space-between;
+			min-height: 75px;
 		}
 
 		sl-spinner {
