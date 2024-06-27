@@ -82,8 +82,7 @@ export class StashesViewElement extends BaseElement {
 	@state() fetchingStash: boolean = false;
 	@state() stashLoader!: IStashLoader;
 	@state() errors: Array<ErrorLabel> = [];
-	// @state() stashLoadsAvailable = 30;
-	@state() stashLoadsAvailable = 1;
+	@state() stashLoadsAvailable = 30;
 	@state() availableInTenSeconds = 15;
 	@state() hoveredErrorTabId: string | null = null;
 	@state() downloadedStashTabs: Array<TabWithItems> = [];
