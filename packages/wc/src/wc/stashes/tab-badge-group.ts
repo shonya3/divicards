@@ -58,7 +58,7 @@ export class TabBadgeGroupElement extends BaseElement {
 
 	@state() hideRemoveOnly = false;
 
-	@query('sl-checkbox') checkbox!: HTMLInputElement;
+	@query('sl-checkbox#hide-remove-only') checkbox!: HTMLInputElement;
 	@query('sl-input#per-page') perPageInput!: HTMLInputElement;
 	@query('sl-input#page') pageInput!: HTMLInputElement;
 	@query('sl-input#filter-stashes-by-name') nameQueryInput!: HTMLInputElement;
@@ -82,7 +82,7 @@ export class TabBadgeGroupElement extends BaseElement {
 		return paginate(this.filtered, this.page, this.perPage);
 	}
 	get tabsTotal() {
-		return this.stashes.length;
+		return this.filtered.length;
 	}
 
 	willUpdate(changed: Map<string, unknown>) {
@@ -120,7 +120,7 @@ export class TabBadgeGroupElement extends BaseElement {
 								? html` <div class="hide-remove-only">
 										<sl-checkbox
 											id="hide-remove-only"
-											@sl-change=${() => (this.hideRemoveOnly = this.checkbox.checked)}
+											@sl-change=${this.#onHideRemoveOnlyChange}
 											.checked=${this.hideRemoveOnly}
 											>Hide remove-only</sl-checkbox
 										>
@@ -152,6 +152,9 @@ export class TabBadgeGroupElement extends BaseElement {
 		</div>`;
 	}
 
+	#onHideRemoveOnlyChange() {
+		this.hideRemoveOnly = this.checkbox.checked;
+	}
 	#onPageChange(e: Event) {
 		if (e.target instanceof PaginationElement) {
 			this.page = e.target.page;
