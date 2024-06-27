@@ -4963,7 +4963,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-process"
 version = "2.0.0-beta.6"
-source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v2#757ab74c8e0e376c56331edbfdc93fd9dd027cbd"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v2#03d3cc3677bbebd3a8a4f1ab07f9a3bec671b7f5"
 dependencies = [
  "tauri",
  "tauri-plugin",
@@ -4972,7 +4972,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-updater"
 version = "2.0.0-beta.8"
-source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v2#757ab74c8e0e376c56331edbfdc93fd9dd027cbd"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v2#03d3cc3677bbebd3a8a4f1ab07f9a3bec671b7f5"
 dependencies = [
  "base64 0.22.1",
  "dirs-next",
