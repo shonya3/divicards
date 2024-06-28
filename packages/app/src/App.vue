@@ -135,13 +135,17 @@ const extractCards = async (tab: TabWithItems, league: League) => {
 <template>
 	<div
 		ref="dropZoneRef"
-		@drop.prevent="sampleStore.addFromDragAndDrop"
+		@drop.prevent="(e: DragEvent) => {
+            sampleStore.addFromDragAndDrop(e);
+            dropZoneRef?.classList.remove('drop-zone--active')
+        }"
 		@dragenter="(e: DragEvent) => {
             e.preventDefault();
             dropZoneRef?.classList.add('drop-zone--active');
         }"
 		@dragover="(e: DragEvent) => {
             e.preventDefault();
+            dropZoneRef?.classList.add('drop-zone--active');
         }"
 		@dragleave="(e: DragEvent) => {
             e.preventDefault();
