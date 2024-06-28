@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, Ref } from 'vue';
+import { ref, Ref, shallowRef } from 'vue';
 import { StashLoader } from './StashLoader';
 import { command } from './command';
 import { toast } from './toast';
@@ -26,6 +26,7 @@ import { TabWithItems } from '@divicards/shared/poe.types';
 import GeneralTabWithItems from './components/GeneralTabWithItems.vue';
 import { useTauriUpdater } from './composables/useTauriUpdater_v2';
 
+const dropZoneRef = shallowRef<HTMLElement | null>(null);
 const sampleStore = useSampleStore();
 const authStore = useAuthStore();
 const googleAuthStore = useGoogleAuthStore();
@@ -133,10 +134,20 @@ const extractCards = async (tab: TabWithItems, league: League) => {
 
 <template>
 	<div
+		ref="dropZoneRef"
 		@drop.prevent="sampleStore.addFromDragAndDrop"
-		@dragenter="(e: DragEvent) => e.preventDefault()"
-		@dragover="(e: DragEvent) => e.preventDefault()"
-		class="drag"
+		@dragenter="(e: DragEvent) => {
+            e.preventDefault();
+            dropZoneRef?.classList.add('drop-zone--active');
+        }"
+		@dragover="(e: DragEvent) => {
+            e.preventDefault();
+        }"
+		@dragleave="(e: DragEvent) => {
+            e.preventDefault();
+            dropZoneRef?.classList.remove('drop-zone--active');
+        }"
+		class="drop-zone"
 	>
 		<header class="header">
 			<wc-drop-files-message></wc-drop-files-message>
@@ -270,7 +281,7 @@ const extractCards = async (tab: TabWithItems, league: League) => {
 	opacity: 0;
 }
 
-.drag {
+.drop-zone {
 	height: 100vh;
 	position: relative;
 	padding: 1rem;
@@ -280,8 +291,9 @@ const extractCards = async (tab: TabWithItems, league: League) => {
 	flex-direction: column;
 	gap: 0.8rem;
 }
-.drag--active {
-	filter: hue-rotate(120deg);
+.drop-zone--active {
+	background-color: red;
+	background-color: var(--sl-color-cyan-400);
 }
 
 .general-tabs {
