@@ -127,7 +127,7 @@ const onTabWithItemsLoaded = (name: string, tab: TabWithItems, league: League) =
 
 const extractCards = async (tab: TabWithItems, league: League) => {
 	const sample = await command('extract_cards', { tab, league });
-	sampleStore.addSample(tab.id, sample, league);
+	sampleStore.addSample(tab.name, sample, league);
 	toast('success', 'Cards successfully extracted');
 };
 </script>
