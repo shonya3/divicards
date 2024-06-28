@@ -1,15 +1,13 @@
-use std::net::{IpAddr, Ipv4Addr, SocketAddr};
-use tauri::Manager;
-
-use crate::{error::Error, event::Event, poe::error::AuthError, version::AppVersion};
-
 use super::{AccessTokenStorage, Identity, Persist, AUTH_URL, CLIENT_ID, TOKEN_URL};
+use crate::{error::Error, event::Event, poe::error::AuthError, version::AppVersion};
 use axum::{extract::Query, response::Html, routing::get, Router};
 use oauth2::{
     basic::BasicClient, AccessToken, AuthUrl, AuthorizationCode, ClientId, ClientSecret, CsrfToken,
     PkceCodeChallenge, RedirectUrl, Scope, TokenUrl,
 };
 use serde::{Deserialize, Serialize};
+use std::net::{IpAddr, Ipv4Addr, SocketAddr};
+use tauri::Manager;
 use tauri::{command, State, Window};
 use tokio::{net::TcpListener, sync::mpsc};
 use tracing::debug;

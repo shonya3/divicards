@@ -1,13 +1,11 @@
-use tokio::sync::Mutex;
-
+use crate::{error::Error, prices::AppCardPrices, version::AppVersion};
 use divi::{
     sample::{Input, Sample, TablePreferences},
     TradeLeague,
 };
 use tauri::{command, State, Window};
+use tokio::sync::Mutex;
 use tracing::instrument;
-
-use crate::{error::Error, prices::AppCardPrices, version::AppVersion};
 
 #[command]
 #[instrument(skip(data, state, window))]

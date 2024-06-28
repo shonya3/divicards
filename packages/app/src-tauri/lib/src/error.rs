@@ -1,8 +1,7 @@
-use std::{fmt::Display, io};
-
 use crate::poe::error::AuthError;
 use divi::League;
 use serde::{ser::SerializeStruct, Serialize};
+use std::{fmt::Display, io};
 
 #[derive(Debug)]
 pub enum Error {

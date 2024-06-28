@@ -1,13 +1,12 @@
+use crate::{
+    error::Error,
+    google::{AccessTokenStorage, Persist},
+};
 use chrono::Utc;
 use divi::{sample::Sample, League};
 use googlesheets::sheet::{Credential, Dimension, ReadBatchResponse, SheetUrl, ValueRange};
 use serde_json::json;
 use tracing::debug;
-
-use crate::{
-    error::Error,
-    google::{AccessTokenStorage, Persist},
-};
 
 #[tauri::command]
 #[tracing::instrument(skip(sample))]

@@ -1,6 +1,5 @@
-use std::fmt::Display;
-
 use serde::{ser::SerializeStruct, Serialize};
+use std::fmt::Display;
 
 #[derive(Debug)]
 pub enum AuthError {

@@ -1,8 +1,8 @@
-pub mod auth;
-pub mod sheets;
-
 use keyring::Entry;
 use serde::{Deserialize, Serialize};
+
+pub mod auth;
+pub mod sheets;
 
 const CLIENT_ID: &str = "752206000922-1gpkcoplrjqpfgg8pr4sb4tnrlvauomp.apps.googleusercontent.com";
 const AUTH_URL: &str = "https://accounts.google.com/o/oauth2/auth";
