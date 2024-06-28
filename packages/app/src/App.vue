@@ -24,7 +24,7 @@ import NativeBrowserLink from './components/NativeBrowserLink.vue';
 import { useAppVersion } from './composables/useAppVersion';
 import { TabWithItems } from '@divicards/shared/poe.types';
 import GeneralTabWithItems from './components/GeneralTabWithItems.vue';
-import { useTauriUpdater } from './composables/useTauriUpdater_v2';
+import { useTauriUpdater } from './composables/useTauriUpdater';
 
 const dropZoneRef = shallowRef<HTMLElement | null>(null);
 const sampleStore = useSampleStore();
@@ -34,7 +34,6 @@ const exportSample = useExportSampleStore();
 const tablePreferences = useTablePreferencesStore();
 const stashVisible = ref(false);
 const { releaseUrl, tag } = useAppVersion();
-// const { shouldUpdate, manifest, installUpdate } = useTauriUpdater();
 const { update, installAndRelaunch } = useTauriUpdater();
 const stashLoader = new StashLoader();
 const tabsWithItems: Ref<TabWithItems[]> = ref<TabWithItems[]>([]);
