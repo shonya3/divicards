@@ -57,13 +57,7 @@ export class TabBadgeElement extends BaseElement {
 		if (this.as === 'checkbox') {
 			return html`<div class="tab-badge-as-checkbox" style=${cssProps}>
 				${this.nameLabel()}
-				<input
-					@change=${this.#onCheckbox}
-					class="checkbox"
-					type="checkbox"
-					.tabId=${this.tab.id}
-					.checked=${this.selected}
-				/>
+				<input @change=${this.#onCheckbox} class="checkbox" type="checkbox" .checked=${this.selected} />
 			</div>`;
 		}
 

@@ -11,7 +11,9 @@
 		"build-storybook": "storybook build",
 		"test": "web-test-runner --node-resolve",
 		"test:watch": "web-test-runner --watch --group default",
-		"cem": "cem"
+		"cem": "cem",
+		"checklit": "lit-analyzer --rules.no-invalid-css off",
+		"check": "tsc --noEmit"
 	},
 	"devDependencies": {
 		"@chromatic-com/storybook": "1.5.0",
@@ -29,6 +31,7 @@
 		"@web/test-runner-commands": "^0.9.0",
 		"custom-element-vuejs-integration": "^1.2.0",
 		"globby": "^14.0.1",
+		"lit-analyzer": "^2.0.3",
 		"sinon": "^18.0.0",
 		"storybook": "^8.1.10",
 		"typescript": "^5.5.2",

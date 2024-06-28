@@ -2,7 +2,7 @@ import { fixture, expect, html } from '@open-wc/testing';
 import sinon from 'sinon';
 import { TabBadgeElement } from './tab-badge';
 
-describe('<wc-tab-badge>', () => {
+describe('wc-tab-badge', () => {
 	let el: TabBadgeElement;
 
 	beforeEach(async () => {
@@ -17,8 +17,6 @@ describe('<wc-tab-badge>', () => {
 	it('should emit tab-select', async () => {
 		const tabSelectSpy = sinon.spy();
 		el.addEventListener('tab-select', tabSelectSpy);
-		el.tabId = 'Test id';
-		el.name = 'Heist';
 		el.selected = false;
 		el.checkbox.click();
 		await el.updateComplete;

@@ -11,7 +11,7 @@ export const Default = {
 	render() {
 		SampleCardElement.define();
 		return html`<wc-sample-card
-			league=${league}
+			league=${league ?? 'Standard'}
 			filename=${filename}
 			?selected=${selected}
 			uuid=${uuid}

@@ -5,6 +5,7 @@ import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { League, tradeLeagues, leagues as allLeagues } from '@divicards/shared/types';
 import '@shoelace-style/shoelace/dist/components/select/select.js';
 import '@shoelace-style/shoelace/dist/components/option/option.js';
+import '@shoelace-style/shoelace/dist/components/input/input.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
