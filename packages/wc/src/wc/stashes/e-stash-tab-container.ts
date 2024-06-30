@@ -1,5 +1,5 @@
 // import 'poe-custom-elements/src/elements/poe-stash-tab';
-import '../poe-custom-elements.js';
+import 'poe-custom-elements/stash-tab.js';
 import '@shoelace-style/shoelace/dist/components/spinner/spinner.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
@@ -7,7 +7,7 @@ import { TabBadgeElement } from './tab-badge';
 
 import { LitElement, html, css, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { NoItemsTab, TabWithItems } from '@divicards/shared/poe.types';
+import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
 
 declare global {
 	interface HTMLElementTagNameMap {

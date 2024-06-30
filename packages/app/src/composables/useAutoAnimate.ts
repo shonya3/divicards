@@ -1,3 +1,4 @@
+//@ts-ignore
 import autoAnimate from '@formkit/auto-animate';
 import { Ref, onMounted } from 'vue';
 

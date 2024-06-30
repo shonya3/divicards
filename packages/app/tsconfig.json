@@ -3,7 +3,7 @@
 		"target": "ESNext",
 		"useDefineForClassFields": false,
 		"module": "ESNext",
-		"moduleResolution": "Node",
+		"moduleResolution": "bundler",
 		"strict": true,
 		"jsx": "preserve",
 		"sourceMap": true,
