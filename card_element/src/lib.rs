@@ -1,9 +1,11 @@
+pub mod drop_level;
 pub mod error;
 pub mod fetcher;
 pub mod images;
 pub mod reward;
 
 use ::fetcher::DataFetcher;
+use drop_level::DropLevel;
 pub use error::Error;
 use fetcher::Fetcher;
 use serde::{Deserialize, Serialize};
@@ -16,6 +18,7 @@ pub struct DivinationCardElementData {
     pub reward_html: String,
     pub flavour_text: String,
     pub stack_size: Option<usize>,
+    pub drop_level: DropLevel,
 }
 
 impl DivinationCardElementData {
