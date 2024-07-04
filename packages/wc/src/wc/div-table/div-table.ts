@@ -116,76 +116,87 @@ export class DivTableElement extends BaseElement {
 			</header>
 
 			<!-- Table -->
-			<table class="table">
-				<colgroup>
-					<col span="1" class="col" />
-					<col span="1" class="col" />
-					<col span="1" class="col-name" />
-					<col span="1" class="col" />
-					<col span="1" class="col" />
-					<col span="1" class="col" />
-				</colgroup>
-				<thead>
-					<tr>
-						<th class="th">&numero;</th>
-						<th class="th">
-							<span> Amount </span>
-							<wc-order-triangle
-								?active=${this.column === 'amount'}
-								order=${this.column === 'amount' ? this.order : 'unordered'}
-								@click=${() => this.#onOrderTriangleClicked('amount')}
-							></wc-order-triangle>
-						</th>
-						<th class="th">
-							<span> Name </span>
-							<wc-order-triangle
-								?active=${this.column === 'name'}
-								order=${this.column === 'name' ? this.order : 'unordered'}
-								@click=${() => this.#onOrderTriangleClicked('name')}
-							></wc-order-triangle>
-						</th>
-						<th class="th">
-							<span> Price </span>
-							<wc-order-triangle
-								?active=${this.column === 'price'}
-								order=${this.column === 'price' ? this.order : 'unordered'}
-								@click=${() => this.#onOrderTriangleClicked('price')}
-							></wc-order-triangle>
-						</th>
-						<th class="th">
-							<span> Sum </span>
-							<wc-order-triangle
-								?active=${this.column === 'sum'}
-								order=${this.column === 'sum' ? this.order : 'unordered'}
-								@click=${() => this.#onOrderTriangleClicked('sum')}
-							></wc-order-triangle>
-						</th>
-						<th class="th">
-							<span> Weight </span>
-							<wc-order-triangle
-								?active=${this.column === 'weight'}
-								order=${this.column === 'weight' ? this.order : 'unordered'}
-								@click=${() => this.#onOrderTriangleClicked('weight')}
-							></wc-order-triangle>
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					${this.filteredRecords.map(({ amount, name, price, sum, weight }, index) => {
-						return html`<tr>
-							<td class="td">${index + 1}</td>
-							<td class="td">${amount}</td>
-							<td class="td td-name">
-								<poe-item-card .name=${name}></poe-item-card>
-								${name}
-							</td>
-							<td class="td">${price === null ? 'no price' : format(price)}</td>
-							<td class="td">${format(sum ?? 0)}</td>
-							<td class="td">${format(weight ?? 0)}</td>
-						</tr>`;
-					})}
-				</tbody>
-			</table>
+			<div class="table-wrapper">
+				<table class="table">
+					<colgroup>
+						<col span="1" class="col" />
+						<col span="1" class="col" />
+						<col span="1" class="col-name" />
+						<col span="1" class="col" />
+						<col span="1" class="col" />
+						<col span="1" class="col" />
+					</colgroup>
+					<thead>
+						<tr>
+							<th class="th"><div>&numero;</div></th>
+							<th class="th">
+								<div>
+									<span> Amount </span>
+									<wc-order-triangle
+										?active=${this.column === 'amount'}
+										order=${this.column === 'amount' ? this.order : 'unordered'}
+										@click=${() => this.#onOrderTriangleClicked('amount')}
+									></wc-order-triangle>
+								</div>
+							</th>
+							<th class="th">
+								<div>
+									<span> Name </span>
+									<wc-order-triangle
+										?active=${this.column === 'name'}
+										order=${this.column === 'name' ? this.order : 'unordered'}
+										@click=${() => this.#onOrderTriangleClicked('name')}
+									></wc-order-triangle>
+								</div>
+							</th>
+							<th class="th">
+								<div>
+									<span> Price </span>
+									<wc-order-triangle
+										?active=${this.column === 'price'}
+										order=${this.column === 'price' ? this.order : 'unordered'}
+										@click=${() => this.#onOrderTriangleClicked('price')}
+									></wc-order-triangle>
+								</div>
+							</th>
+							<th class="th">
+								<div>
+									<span> Sum </span>
+									<wc-order-triangle
+										?active=${this.column === 'sum'}
+										order=${this.column === 'sum' ? this.order : 'unordered'}
+										@click=${() => this.#onOrderTriangleClicked('sum')}
+									></wc-order-triangle>
+								</div>
+							</th>
+							<th class="th">
+								<div>
+									<span> Weight </span>
+									<wc-order-triangle
+										?active=${this.column === 'weight'}
+										order=${this.column === 'weight' ? this.order : 'unordered'}
+										@click=${() => this.#onOrderTriangleClicked('weight')}
+									></wc-order-triangle>
+								</div>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						${this.filteredRecords.map(({ amount, name, price, sum, weight }, index) => {
+							return html`<tr>
+								<td class="td">${index + 1}</td>
+								<td class="td">${amount}</td>
+								<td class="td td-name">
+									<div><poe-item-card .name=${name}></poe-item-card> ${name}</div>
+								</td>
+								<td class="td">${price === null ? 'no price' : format(price)}</td>
+								<td class="td">${format(sum ?? 0)}</td>
+								<td class="td">${format(weight ?? 0)}</td>
+							</tr>`;
+						})}
+					</tbody>
+				</table>
+			</div>
 		</div>`;
 	}
 
@@ -236,7 +247,6 @@ function styles() {
 			display: block;
 			max-width: 1220px;
 			min-height: 100vh;
-			background-color: var(--bg-color, #242424);
 		}
 
 		.slider-box {
@@ -271,7 +281,20 @@ function styles() {
 			background-color: var(--bg-color, #242424);
 			padding-top: 20px;
 			padding-bottom: 20px;
-			border-bottom: 1px solid black;
+			border-bottom: 1px solid var(--sl-color-gray-100);
+		}
+
+		.table-wrapper {
+			height: 80vh;
+			overflow: auto;
+			width: fit-content;
+		}
+
+		tbody {
+			max-width: 700px;
+			min-width: 610px;
+			height: 200px !important;
+			overflow-y: scroll;
 		}
 
 		.column-name {
@@ -279,36 +302,60 @@ function styles() {
 			white-space: nowrap;
 		}
 
+		table {
+			border-collapse: collapse;
+			min-width: 650px;
+            background-color: background-color: var(--sl-color-gray-50);
+		}
+
+		thead {
+			position: sticky;
+			top: -1px;
+			background-color: var(--sl-color-gray-50);
+			z-index: 10;
+			scroll-padding-top: 1000px;
+			border: 1px solid var(--sl-color-gray-300);
+		}
+
+		.th,
+		.td {
+			padding: 0.4rem;
+			border: 1px solid var(--sl-color-gray-300);
+			text-align: center;
+		}
+
 		.th {
-			gap: 0.5rem;
-			display: flex;
-			align-items: center;
 			font-weight: 500;
 			color: var(--sl-color-gray-800);
+
+			& > div {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				margin-inline: auto;
+				width: fit-content;
+			}
 		}
 
 		.td {
 			color: var(--sl-color-gray-700);
-		}
-
-		.td-name {
-			display: flex;
-			align-items: center;
-			gap: 0.5rem;
 			--poe-item-size: 1rem;
-		}
-
-		tbody > tr:first-of-type {
-			margin-top: 0.25rem;
+			& > div {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
 		}
 
 		tr {
-			display: grid;
-			grid-template-columns: 0.5fr 1.2fr 3fr 1fr 1fr 1fr;
-
 			&:hover {
-				outline: 1px var(--sl-color-gray-300) solid;
+				outline: 1px var(--sl-color-blue-500) solid;
 			}
+
+            &:hover .td {
+                background-color:  var(--sl-color-blue-100);
+
+            }
 		}
 
 		.ch-3 {
