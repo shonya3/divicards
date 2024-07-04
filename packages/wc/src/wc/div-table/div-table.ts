@@ -73,7 +73,7 @@ export class DivTableElement extends BaseElement {
 	}
 
 	protected override render() {
-		return html`<div class="div-table">
+		return html`<div class="layout">
 			<!-- Header -->
 			<header class="header">
 				<label for="filter-card-name">Enter name</label>
