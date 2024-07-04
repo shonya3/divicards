@@ -142,8 +142,8 @@ export class DivTableElement extends BaseElement {
 					</colgroup>
 					<thead>
 						<tr>
-							<th class="th"><div>&numero;</div></th>
-							<th class="th">
+							<th class="th th-number"><div>&numero;</div></th>
+							<th class="th th-amount">
 								<div>
 									<span> Amount </span>
 									<wc-order-triangle
@@ -153,7 +153,7 @@ export class DivTableElement extends BaseElement {
 									></wc-order-triangle>
 								</div>
 							</th>
-							<th class="th">
+							<th class="th th-name">
 								<div>
 									<span> Name </span>
 									<wc-order-triangle
@@ -163,7 +163,7 @@ export class DivTableElement extends BaseElement {
 									></wc-order-triangle>
 								</div>
 							</th>
-							<th class="th">
+							<th class="th th-price">
 								<div>
 									<span> Price </span>
 									<wc-order-triangle
@@ -173,7 +173,7 @@ export class DivTableElement extends BaseElement {
 									></wc-order-triangle>
 								</div>
 							</th>
-							<th class="th">
+							<th class="th th-sum">
 								<div>
 									<span> Sum </span>
 									<wc-order-triangle
@@ -183,7 +183,7 @@ export class DivTableElement extends BaseElement {
 									></wc-order-triangle>
 								</div>
 							</th>
-							<th class="th">
+							<th class="th th-weight">
 								<div>
 									<span> Weight </span>
 									<wc-order-triangle
@@ -198,14 +198,14 @@ export class DivTableElement extends BaseElement {
 					<tbody>
 						${this.filteredRecords.map(({ amount, name, price, sum, weight }, index) => {
 							return html`<tr>
-								<td class="td">${index + 1}</td>
-								<td class="td">${amount}</td>
+								<td class="td td-number">${index + 1}</td>
+								<td class="td td-amount">${amount}</td>
 								<td class="td td-name">
 									<div><poe-item-card .name=${name}></poe-item-card> ${name}</div>
 								</td>
-								<td class="td">${price === null ? 'no price' : format(price)}</td>
-								<td class="td">${format(sum ?? 0)}</td>
-								<td class="td">${format(weight ?? 0)}</td>
+								<td class="td td-price">${price === null ? 'no price' : format(price)}</td>
+								<td class="td td-sum">${format(sum ?? 0)}</td>
+								<td class="td td-weight">${format(weight ?? 0)}</td>
 							</tr>`;
 						})}
 					</tbody>

@@ -17,6 +17,27 @@ const table = css`
         background-color: background-color: var(--sl-color-gray-50);
 	}
 
+ 
+    .th-number, .td-number {
+        width: 40px;
+    }
+    .th-amount, .td-amount {
+        width: 70px;
+    }
+    .th-name, .td-name {
+        width: 240px;
+    }
+    .th-price{}
+    .th-sum{}
+    .th-weight, .td-weight{
+    }
+
+    thead, tbody tr {
+        display: table;
+        width: 750px;
+        table-layout: fixed;/* even columns width , fix width of table too*/
+    }
+
 	thead {
 		position: sticky;
 		top: -1px;
