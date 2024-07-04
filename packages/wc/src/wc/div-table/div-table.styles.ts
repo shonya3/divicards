@@ -9,15 +9,11 @@ const table = css`
 	}
     
     tbody {
-		max-width: 700px;
-		min-width: 610px;
-		height: 200px !important;
 		overflow-y: scroll;
 	}
 
 	table {
 		border-collapse: collapse;
-		min-width: 650px;
         background-color: background-color: var(--sl-color-gray-50);
 	}
 
@@ -92,7 +88,7 @@ export const styles = css`
 		padding: 1rem;
 		display: grid;
 		grid-template:
-			'header header'
+			'header not-header'
 			'table stats' auto / 750px 1fr;
 	}
 
@@ -101,7 +97,7 @@ export const styles = css`
 		position: sticky;
 		top: 0;
 		display: flex;
-		gap: 1rem;
+		justify-content: space-between;
 		align-items: center;
 		flex-wrap: wrap;
 		z-index: 2;

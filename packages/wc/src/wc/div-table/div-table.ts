@@ -76,8 +76,8 @@ export class DivTableElement extends BaseElement {
 		return html`<div class="layout">
 			<!-- Header -->
 			<header class="header">
-				<label for="filter-card-name">Enter name</label>
 				<sl-input
+					label="Enter name"
 					autofocus
 					type="text"
 					id="filter-card-name"
@@ -86,8 +86,8 @@ export class DivTableElement extends BaseElement {
 				></sl-input>
 
 				<label class="slider-box">
-					<label for="min-price-slider">min price </label>
 					<sl-range
+						label="Min price"
 						id="min-price-slider"
 						min="0"
 						max="500"
