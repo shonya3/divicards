@@ -8,6 +8,7 @@ import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/range/range.js';
 import 'poe-custom-elements/item-card.js';
 import { Column, DivinationCardRecord, Order } from '@divicards/shared/types';
+import { styles } from './div-table.styles';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -27,7 +28,7 @@ export class DivTableElement extends BaseElement {
 		return [OrderTriangleElement];
 	}
 	static override tag = 'wc-div-table';
-	static override styles = [styles()];
+	static override styles = [styles];
 
 	@property({ type: Array }) cards: Readonly<DivinationCardRecord[]> = [];
 	@property({ reflect: true, type: Number, attribute: 'min-price' }) minPrice: number = 0;
@@ -84,15 +85,6 @@ export class DivTableElement extends BaseElement {
 					@input=${this.#onNameQueryInput}
 				></sl-input>
 
-				<span class="stats"
-					>found
-					<span class="ch-6">${this.filteredRecords.length} </span>
-					card names
-					<span class="ch-6">${this.summary.amount}</span>
-					cards,
-					<span class="ch-7">${format(this.summary.sum)}</span>
-					<img width="20" height="20" class="chaos-img" src="/chaos.png" alt="chaos" />)</span
-				>
 				<label class="slider-box">
 					<label for="min-price-slider">min price </label>
 					<sl-range
@@ -114,6 +106,28 @@ export class DivTableElement extends BaseElement {
 					>
 				</div>
 			</header>
+
+			<ul class="stats">
+				<li>
+					<div class="stat">
+						<img width="40" height="40" class="chaos-img" src="/chaos.png" alt="chaos" />
+						${format(this.summary.sum)}
+					</div>
+				</li>
+				<li>
+					<div class="stat">
+						<img width="40" height="40" src="/divination-card.png" alt="Divination card" />
+						${this.summary.amount}
+					</div>
+				</li>
+				<li>
+					<div class="stat">
+						<!-- <img width="40" height="40" src="/divination-card.png" alt="Divination card" /> -->
+						<span>names</span>
+						${this.filteredRecords.length}
+					</div>
+				</li>
+			</ul>
 
 			<!-- Table -->
 			<div class="table-wrapper">
@@ -239,137 +253,4 @@ export class DivTableElement extends BaseElement {
 			order: this.order,
 		});
 	}
-}
-
-function styles() {
-	return css`
-		:host {
-			display: block;
-			max-width: 1220px;
-			min-height: 100vh;
-		}
-
-		.slider-box {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			gap: 0.5rem;
-		}
-		.stats {
-			display: flex;
-			align-items: center;
-		}
-		.div-table {
-			display: flex;
-			flex-direction: column;
-			height: 100%;
-			max-width: 1220px;
-
-			color: var(--color, rgba(255, 255, 255, 0.87));
-			background-color: var(--bg-color, #242424);
-			padding: 1rem;
-		}
-
-		.header {
-			position: sticky;
-			top: 0;
-			display: flex;
-			gap: 1rem;
-			align-items: center;
-			flex-wrap: wrap;
-			z-index: 2;
-			background-color: var(--bg-color, #242424);
-			padding-top: 20px;
-			padding-bottom: 20px;
-			border-bottom: 1px solid var(--sl-color-gray-100);
-		}
-
-		.table-wrapper {
-			height: 80vh;
-			overflow: auto;
-			width: fit-content;
-		}
-
-		tbody {
-			max-width: 700px;
-			min-width: 610px;
-			height: 200px !important;
-			overflow-y: scroll;
-		}
-
-		.column-name {
-			overflow-x: hidden;
-			white-space: nowrap;
-		}
-
-		table {
-			border-collapse: collapse;
-			min-width: 650px;
-            background-color: background-color: var(--sl-color-gray-50);
-		}
-
-		thead {
-			position: sticky;
-			top: -1px;
-			background-color: var(--sl-color-gray-50);
-			z-index: 10;
-			scroll-padding-top: 1000px;
-			border: 1px solid var(--sl-color-gray-300);
-		}
-
-		.th,
-		.td {
-			padding: 1rem;
-			border: 1px solid var(--sl-color-gray-300);
-			text-align: center;
-		}
-
-		.th {
-			font-weight: 500;
-			color: var(--sl-color-gray-800);
-
-			& > div {
-				display: flex;
-				align-items: center;
-				gap: 0.5rem;
-				margin-inline: auto;
-				width: fit-content;
-			}
-		}
-
-		.td {
-			color: var(--sl-color-gray-700);
-			--poe-item-size: 1rem;
-			& > div {
-				display: flex;
-				align-items: center;
-				gap: 0.5rem;
-			}
-		}
-
-		tr {
-			&:hover {
-				outline: 1px var(--sl-color-blue-500) solid;
-			}
-
-            &:hover .td {
-                background-color:  var(--sl-color-blue-100);
-
-            }
-		}
-
-		.ch-3 {
-			/* display: block; */
-			text-align: center;
-			min-width: 3ch;
-		}
-		.ch-6 {
-			text-align: center;
-			min-width: 6ch;
-		}
-		.ch-7 {
-			text-align: center;
-			min-width: 7ch;
-		}
-	`;
 }
