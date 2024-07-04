@@ -93,8 +93,8 @@ importers:
         specifier: ^3.1.4
         version: 3.1.4
       poe-custom-elements:
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^0.2.1
+        version: 0.2.1
     devDependencies:
       '@chromatic-com/storybook':
         specifier: 1.5.0
@@ -4112,8 +4112,8 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  poe-custom-elements@0.1.0:
-    resolution: {integrity: sha512-iVC0OES4OOX7G9FjmdoCBGeC9ZwFfh9mWTJ33+Q2qvjAgmfg9sNtk2qMdjwL3SmVG/S8Aq0mEw/i8M09UA7+tA==}
+  poe-custom-elements@0.2.1:
+    resolution: {integrity: sha512-0pXp9VniTxQIRsIPTz6dW+3BCktfHFlNHr0XihVrpSr7M/5HRVPrmtNZQVo/Bs18wHxJ7Rbmb9pr/hKzDlDrYw==}
 
   polished@4.2.2:
     resolution: {integrity: sha512-Sz2Lkdxz6F2Pgnpi9U5Ng/WdWAUZxmHrNPoVlm3aAemxoy2Qy7LGjQg4uf8qKelDAUW94F4np3iH2YPf2qefcQ==}
@@ -9714,7 +9714,7 @@ snapshots:
     dependencies:
       playwright-core: 1.36.1
 
-  poe-custom-elements@0.1.0:
+  poe-custom-elements@0.2.1:
     dependencies:
       '@floating-ui/dom': 1.6.5
       lit: 3.1.4

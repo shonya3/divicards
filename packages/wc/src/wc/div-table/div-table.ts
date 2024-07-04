@@ -6,6 +6,7 @@ import { toOrderedBy } from '@divicards/shared/toOrderedBy';
 import '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/range/range.js';
+import 'poe-custom-elements/item-card.js';
 import { Column, DivinationCardRecord, Order } from '@divicards/shared/types';
 
 declare global {
@@ -126,41 +127,41 @@ export class DivTableElement extends BaseElement {
 				</colgroup>
 				<thead>
 					<tr>
-						<th>&numero;</th>
-						<th>
-							<span class="column-name"> Amount </span>
+						<th class="th">&numero;</th>
+						<th class="th">
+							<span> Amount </span>
 							<wc-order-triangle
 								?active=${this.column === 'amount'}
 								order=${this.column === 'amount' ? this.order : 'unordered'}
 								@click=${() => this.#onOrderTriangleClicked('amount')}
 							></wc-order-triangle>
 						</th>
-						<th>
-							<span class="column-name"> Name </span>
+						<th class="th">
+							<span> Name </span>
 							<wc-order-triangle
 								?active=${this.column === 'name'}
 								order=${this.column === 'name' ? this.order : 'unordered'}
 								@click=${() => this.#onOrderTriangleClicked('name')}
 							></wc-order-triangle>
 						</th>
-						<th>
-							<span class="column-name"> Price </span>
+						<th class="th">
+							<span> Price </span>
 							<wc-order-triangle
 								?active=${this.column === 'price'}
 								order=${this.column === 'price' ? this.order : 'unordered'}
 								@click=${() => this.#onOrderTriangleClicked('price')}
 							></wc-order-triangle>
 						</th>
-						<th>
-							<span class="column-name"> Sum </span>
+						<th class="th">
+							<span> Sum </span>
 							<wc-order-triangle
 								?active=${this.column === 'sum'}
 								order=${this.column === 'sum' ? this.order : 'unordered'}
 								@click=${() => this.#onOrderTriangleClicked('sum')}
 							></wc-order-triangle>
 						</th>
-						<th>
-							<span class="column-name"> Weight </span>
+						<th class="th">
+							<span> Weight </span>
 							<wc-order-triangle
 								?active=${this.column === 'weight'}
 								order=${this.column === 'weight' ? this.order : 'unordered'}
@@ -172,12 +173,15 @@ export class DivTableElement extends BaseElement {
 				<tbody>
 					${this.filteredRecords.map(({ amount, name, price, sum, weight }, index) => {
 						return html`<tr>
-							<td class="row">${index + 1}</td>
-							<td class="row">${amount}</td>
-							<td class="name-row">${name}</td>
-							<td class="row">${price === null ? 'no price' : format(price)}</td>
-							<td class="row">${format(sum ?? 0)}</td>
-							<td class="row">${format(weight ?? 0)}</td>
+							<td class="td">${index + 1}</td>
+							<td class="td">${amount}</td>
+							<td class="td td-name">
+								<poe-item-card .name=${name}></poe-item-card>
+								${name}
+							</td>
+							<td class="td">${price === null ? 'no price' : format(price)}</td>
+							<td class="td">${format(sum ?? 0)}</td>
+							<td class="td">${format(weight ?? 0)}</td>
 						</tr>`;
 					})}
 				</tbody>
@@ -275,10 +279,23 @@ function styles() {
 			white-space: nowrap;
 		}
 
-		th {
+		.th {
 			gap: 0.5rem;
 			display: flex;
 			align-items: center;
+			font-weight: 500;
+			color: var(--sl-color-gray-800);
+		}
+
+		.td {
+			color: var(--sl-color-gray-700);
+		}
+
+		.td-name {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+			--poe-item-size: 1rem;
 		}
 
 		tbody > tr:first-of-type {
@@ -290,16 +307,7 @@ function styles() {
 			grid-template-columns: 0.5fr 1.2fr 3fr 1fr 1fr 1fr;
 
 			&:hover {
-				outline: 1px black solid;
-				box-shadow:
-					rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
-					rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
-					rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset,
-					rgba(0, 0, 0, 0.06) 0px 2px 1px 0px,
-					rgba(0, 0, 0, 0.09) 0px 4px 2px 0px,
-					rgba(0, 0, 0, 0.09) 0px 8px 4px 0px,
-					rgba(0, 0, 0, 0.09) 0px 16px 8px 0px,
-					rgba(0, 0, 0, 0.09) 0px 32px 16px 0px;
+				outline: 1px var(--sl-color-gray-300) solid;
 			}
 		}
 
