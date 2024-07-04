@@ -319,7 +319,7 @@ function styles() {
 
 		.th,
 		.td {
-			padding: 0.4rem;
+			padding: 1rem;
 			border: 1px solid var(--sl-color-gray-300);
 			text-align: center;
 		}
