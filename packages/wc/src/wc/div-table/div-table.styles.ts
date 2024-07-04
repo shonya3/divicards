@@ -25,7 +25,7 @@ const table = css`
         width: 70px;
     }
     .th-name, .td-name {
-        width: 240px;
+        width: 230px;
     }
     .th-price{}
     .th-sum{}
@@ -34,7 +34,7 @@ const table = css`
 
     thead, tbody tr {
         display: table;
-        width: 750px;
+        width: 730px;
         table-layout: fixed;/* even columns width , fix width of table too*/
     }
 
