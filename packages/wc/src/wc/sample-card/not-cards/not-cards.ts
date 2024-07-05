@@ -38,8 +38,8 @@ export class NotCardsElement extends BaseElement {
 				/>
 			</svg>
 			<wc-base-popup>
-				<div>
-					<h2>Probably not cards</h2>
+				<div class="content">
+					<h2 class="heading">Probably not cards</h2>
 					<ul class="list">
 						${this.notCards.map(notCard => html`<li>${notCard}</li>`)}
 					</ul>
@@ -55,6 +55,14 @@ export class NotCardsElement extends BaseElement {
 
 function styles() {
 	return css`
+		.heading {
+			font-weight: 500;
+		}
+
+		.content {
+			padding: 2rem;
+		}
+
 		.list {
 			margin-top: 1rem;
 		}

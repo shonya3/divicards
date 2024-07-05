@@ -92,7 +92,7 @@ export const styles = css`
 	:host {
 		display: block;
 		max-width: 1220px;
-		min-height: 100vh;
+		background-color: var(--bg-color, #242424);
 	}
 
 	.ch-3 {
@@ -103,10 +103,10 @@ export const styles = css`
 	.layout {
 		height: 100%;
 		max-width: 1220px;
-
-		color: var(--color, rgba(255, 255, 255, 0.87));
 		background-color: var(--bg-color, #242424);
-		padding: 1rem;
+		color: var(--color, rgba(255, 255, 255, 0.87));
+
+		padding: 2rem;
 		display: grid;
 		grid-template:
 			'header not-header'

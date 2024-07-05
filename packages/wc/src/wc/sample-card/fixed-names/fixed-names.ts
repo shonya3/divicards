@@ -34,9 +34,9 @@ export class FixedNamesElement extends BaseElement {
 				height=${this.height}
 			></wc-fixed-icon>
 			<wc-base-popup>
-				<div class="fixed-names">
-					<h2>Automatically fixed typos</h2>
-					<ul class="fixed-names">
+				<div class="content">
+					<h2 class="heading">Automatically fixed typos</h2>
+					<ul class="fixed-names-list">
 						${this.fixedNames.map(({ old, fixed }) => {
 							return html`<li class="list-item">
 								<span class="input-name">${old}</span>
@@ -57,6 +57,14 @@ export class FixedNamesElement extends BaseElement {
 
 	static override styles = [
 		css`
+			.heading {
+				font-weight: 500;
+			}
+
+			.content {
+				padding: 2rem;
+			}
+
 			.fixed-names-list {
 				margin-top: 2rem;
 			}

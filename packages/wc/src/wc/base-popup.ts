@@ -2,6 +2,7 @@ import { html, css, PropertyValueMap } from 'lit';
 import { BaseElement } from './base-element';
 import { customElement, property, query } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
+import '@shoelace-style/shoelace/dist/components/button/button.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -40,7 +41,7 @@ export class BasePopupElement extends BaseElement {
 			<div class="slot-parent">
 				<slot></slot>
 			</div>
-			<sl-icon-button name="x-lg" @click=${this.close} class="btn-close">X</sl-icon-button>
+			<sl-button @click=${this.close} class="btn-close">Close</sl-button>
 		</dialog> `;
 	}
 
@@ -107,17 +108,6 @@ function styles() {
 			animation: backdrop-fade-in 300ms forwards ease-out;
 			max-width: 100%;
 			backdrop-filter: blur(100px);
-		}
-
-		dialog::slotted(*) {
-			margin-inline: auto;
-			padding: 0.8rem;
-			padding-top: 1.6rem;
-		}
-
-		@media (min-width: 800px) {
-			.slot-parent {
-			}
 		}
 
 		@keyframes backdrop-fade-in {
