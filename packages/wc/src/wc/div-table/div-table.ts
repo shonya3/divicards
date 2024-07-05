@@ -37,7 +37,7 @@ export class DivTableElement extends BaseElement {
 
 	@state() _cards: DivinationCardRecord[] = [];
 	@state() nameQuery = '';
-	@state() hideZeroSum = false;
+	@state() hideZeroSum = true;
 	@state() filteredRecords: DivinationCardRecord[] = [];
 	@state() summary: { amount: number; sum: number } = Object.create({});
 
@@ -48,7 +48,14 @@ export class DivTableElement extends BaseElement {
 			this._cards = Array.from(this.cards);
 		}
 
-		if (map.has('cards') || map.has('column') || map.has('minPrice') || map.has('nameQuery') || map.has('order')) {
+		if (
+			map.has('cards') ||
+			map.has('column') ||
+			map.has('minPrice') ||
+			map.has('nameQuery') ||
+			map.has('order') ||
+			map.has('hideZeroSum')
+		) {
 			this._cards = toOrderedBy(this._cards, this.column, this.order);
 
 			this.filteredRecords = this._cards.filter(({ name, price, sum }) => {
