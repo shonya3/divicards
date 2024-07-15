@@ -93,8 +93,8 @@ importers:
         specifier: ^3.1.4
         version: 3.1.4
       poe-custom-elements:
-        specifier: ^0.2.1
-        version: 0.2.1
+        specifier: 0.3.0
+        version: 0.3.0
     devDependencies:
       '@chromatic-com/storybook':
         specifier: 1.5.0
@@ -1296,14 +1296,23 @@ packages:
   '@floating-ui/core@1.4.1':
     resolution: {integrity: sha512-jk3WqquEJRlcyu7997NtR5PibI+y5bi+LS3hPmguVClypenMsCY3CBa3LAQnozRCtCrYWSEtAdiskpamuJRFOQ==}
 
+  '@floating-ui/core@1.6.4':
+    resolution: {integrity: sha512-a4IowK4QkXl4SCWTGUR0INAfEOX3wtsYw3rKK5InQEHMGObkR8Xk44qYQD9P4r6HHw0iIfK6GUKECmY8sTkqRA==}
+
   '@floating-ui/dom@1.6.5':
     resolution: {integrity: sha512-Nsdud2X65Dz+1RHjAIP0t8z5e2ff/IRbei6BqFrl1urT8sDVzM1HMQ+R0XcU5ceRfyO3I6ayeqIfh+6Wb8LGTw==}
+
+  '@floating-ui/dom@1.6.7':
+    resolution: {integrity: sha512-wmVfPG5o2xnKDU4jx/m4w5qva9FWHcnZ8BvzEe90D/RpwsJaTAVYPEPdQ8sbr/N8zZTAHlZUTQdqg8ZUbzHmng==}
 
   '@floating-ui/utils@0.1.1':
     resolution: {integrity: sha512-m0G6wlnhm/AX0H12IOWtK8gASEMffnX08RtKkCgTdHb9JpHKGloI7icFfLg9ZmQeavcvR0PKmzxClyuFPSjKWw==}
 
   '@floating-ui/utils@0.2.2':
     resolution: {integrity: sha512-J4yDIIthosAsRZ5CPYP/jQvUAQtlZTTD/4suA08/FEnlxqW3sKS9iAhgsa9VYLZ6vDHn/ixJgIqRQPotoBjxIw==}
+
+  '@floating-ui/utils@0.2.4':
+    resolution: {integrity: sha512-dWO2pw8hhi+WrXq1YJy2yCuWoL20PddgGaqTgVe4cOS9Q6qklXCiA1tJEqX6BEwRNSCP84/afac9hd4MS+zEUA==}
 
   '@formkit/auto-animate@1.0.0-beta.6':
     resolution: {integrity: sha512-PVDhLAlr+B4Xb7e+1wozBUWmXa6BFU8xUPR/W/E+TsQhPS1qkAdAsJ25keEnFrcePSnXHrOsh3tiFbEToOzV9w==}
@@ -4112,8 +4121,8 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  poe-custom-elements@0.2.1:
-    resolution: {integrity: sha512-0pXp9VniTxQIRsIPTz6dW+3BCktfHFlNHr0XihVrpSr7M/5HRVPrmtNZQVo/Bs18wHxJ7Rbmb9pr/hKzDlDrYw==}
+  poe-custom-elements@0.3.0:
+    resolution: {integrity: sha512-1PCbrcHmoxkX+AuVhRqxDMAoQULOogppoClDzMx3o58Wc0U8v+2Wl18/gmSN1bIJQiQ0MOhq47/S6OhJzZw+GQ==}
 
   polished@4.2.2:
     resolution: {integrity: sha512-Sz2Lkdxz6F2Pgnpi9U5Ng/WdWAUZxmHrNPoVlm3aAemxoy2Qy7LGjQg4uf8qKelDAUW94F4np3iH2YPf2qefcQ==}
@@ -6164,14 +6173,25 @@ snapshots:
     dependencies:
       '@floating-ui/utils': 0.1.1
 
+  '@floating-ui/core@1.6.4':
+    dependencies:
+      '@floating-ui/utils': 0.2.4
+
   '@floating-ui/dom@1.6.5':
     dependencies:
       '@floating-ui/core': 1.4.1
       '@floating-ui/utils': 0.2.2
 
+  '@floating-ui/dom@1.6.7':
+    dependencies:
+      '@floating-ui/core': 1.6.4
+      '@floating-ui/utils': 0.2.4
+
   '@floating-ui/utils@0.1.1': {}
 
   '@floating-ui/utils@0.2.2': {}
+
+  '@floating-ui/utils@0.2.4': {}
 
   '@formkit/auto-animate@1.0.0-beta.6': {}
 
@@ -9714,9 +9734,9 @@ snapshots:
     dependencies:
       playwright-core: 1.36.1
 
-  poe-custom-elements@0.2.1:
+  poe-custom-elements@0.3.0:
     dependencies:
-      '@floating-ui/dom': 1.6.5
+      '@floating-ui/dom': 1.6.7
       lit: 3.1.4
 
   polished@4.2.2:
