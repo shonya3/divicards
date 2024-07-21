@@ -47,6 +47,6 @@ async fn main() {
 
     // std::fs::write("records.json", &serde_json::to_string(&records).unwrap()).unwrap();
 
-    // let p = Prices::fetch(&poe::TradeLeague::Necropolis).await.unwrap();
+    // let p = Prices::fetch(&poe::TradeLeague::Settlers).await.unwrap();
     // println!("{p:#?}");
 }

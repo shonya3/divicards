@@ -1,4 +1,4 @@
-export const ACTIVE_LEAGUE = 'Necropolis';
+export const ACTIVE_LEAGUE = 'Settlers';
 export const downloadText = (filename: string, text: string = 'empty') => {
 	const file = new File([text], filename);
 	const a = document.createElement('a');

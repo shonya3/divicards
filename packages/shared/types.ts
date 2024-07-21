@@ -9,15 +9,15 @@ export type TablePreferences = {
 };
 
 export const leagues = [
-	'Necropolis',
+	'Settlers',
 	'Standard',
-	'Hardcore Necropolis',
+	'Hardcore Settlers',
 	'Hardcore',
 	'Solo Self-Found',
-	'SSF Necropolis',
-	'HC SSF Necropolis',
+	'SSF Settlers',
+	'HC SSF Settlers',
 ] as const;
-export const tradeLeagues = ['Necropolis', 'Standard', 'Hardcore Necropolis', 'Hardcore'] as const;
+export const tradeLeagues = ['Settlers', 'Standard', 'Hardcore Settlers', 'Hardcore'] as const;
 export const permanentLeagues = ['Standard', 'Hardcore', 'Solo Self-Found', 'Hardcore SSF'] as const;
 
 export function isPermanentLeague(league: unknown): league is PermanentLeague | never {
