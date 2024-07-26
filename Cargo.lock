@@ -75,7 +75,7 @@ checksum = "b3d1d046238990b9cf5bcde22a3fb3584ee5cf65fb2765f454ed428c7a0063da"
 
 [[package]]
 name = "app"
-version = "0.7.6"
+version = "0.7.7"
 dependencies = [
  "async-trait",
  "axum",
@@ -565,7 +565,7 @@ dependencies = [
 
 [[package]]
 name = "card_element"
-version = "0.7.6"
+version = "0.7.7"
 dependencies = [
  "fetcher",
  "ninja",
@@ -1111,7 +1111,7 @@ dependencies = [
 
 [[package]]
 name = "divcord"
-version = "0.7.6"
+version = "0.7.7"
 dependencies = [
  "divi",
  "dotenv",
@@ -1136,7 +1136,7 @@ dependencies = [
 
 [[package]]
 name = "divcord_test"
-version = "0.7.6"
+version = "0.7.7"
 dependencies = [
  "divcord",
  "dotenv",
@@ -1708,7 +1708,7 @@ dependencies = [
 
 [[package]]
 name = "generate_website_files"
-version = "0.7.6"
+version = "0.7.7"
 dependencies = [
  "card_element",
  "divcord",
@@ -1871,7 +1871,7 @@ dependencies = [
 
 [[package]]
 name = "googlesheets"
-version = "0.7.6"
+version = "0.7.7"
 dependencies = [
  "reqwest 0.12.5",
  "serde",
@@ -2799,7 +2799,7 @@ checksum = "650eef8c711430f1a879fdd01d4745a7deea475becfb90269c06775983bbf086"
 
 [[package]]
 name = "ninja"
-version = "0.7.6"
+version = "0.7.7"
 dependencies = [
  "poe",
  "reqwest 0.12.5",
@@ -3442,7 +3442,7 @@ checksum = "d231b230927b5e4ad203db57bbcbee2802f6bce620b1e4a9024a07d94e2907ec"
 
 [[package]]
 name = "playground"
-version = "0.7.6"
+version = "0.7.7"
 dependencies = [
  "card_element",
  "divcord",
@@ -3511,7 +3511,7 @@ dependencies = [
 
 [[package]]
 name = "poe"
-version = "0.7.6"
+version = "0.7.7"
 dependencies = [
  "serde",
  "serde_json",
@@ -3519,7 +3519,7 @@ dependencies = [
 
 [[package]]
 name = "poe_data"
-version = "0.7.6"
+version = "0.7.7"
 dependencies = [
  "divi",
  "dotenv",
