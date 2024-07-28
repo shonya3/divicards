@@ -31,6 +31,8 @@ mod tests {
         let poe_data = PoeData::load().await.unwrap();
         let record =  Dumb {
     id: 230,
+    confidence_new_325: Confidence::Ok,
+    confirmations_new_325_drops_from: vec![],
     greynote: GreyNote::Empty,
     card: "The Demon".to_owned(),
     tag_hypothesis: Some(

@@ -39,9 +39,11 @@ pub struct Dumb {
     pub card: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub tag_hypothesis: Option<String>,
+    pub confidence_new_325: Confidence,
     pub confidence: Confidence,
     #[serde(default)]
     pub remaining_work: RemainingWork,
+    pub confirmations_new_325_drops_from: Vec<DropsFrom>,
     #[serde(skip_serializing)]
     pub sources_drops_from: Vec<DropsFrom>,
     #[serde(skip_serializing)]
@@ -74,6 +76,7 @@ impl Dumb {
     pub fn create(
         row_index: usize,
         spreadsheet_row: &[Value],
+        confirmations_new_325_cell: &Cell,
         sources_rich_cell: &Cell,
         verify_rich_cell: &Cell,
     ) -> Result<Self, Error> {
@@ -91,21 +94,53 @@ impl Dumb {
                 parse_cell_error: err,
             })?;
 
+        let confirmations_new_325_drops_from =
+            confirmations_new_325_cell
+                .drops_from()
+                .map_err(|err| ParseDumbError {
+                    record_id: Dumb::record_id(row_index),
+                    parse_cell_error: err,
+                })?;
+
+        // A 0 Greynote
         let greynote = GreyNote::parse(&spreadsheet_row[0])?;
+
+        // B 1 Card name
         let card = parse_card_name(&spreadsheet_row[1])?;
+
+        // C 2 Tag hypothesis
         let tag_hypothesis = parse_string_cell(&spreadsheet_row[2]);
+
+        // D 3 3.25 Confidence
+        let confidence_new_325 = Confidence::parse(&spreadsheet_row[4])?;
+
+        // E 4 Confidence
         let confidence = Confidence::parse(&spreadsheet_row[3])?;
-        let remaining_work = RemainingWork::parse(&spreadsheet_row[4])?;
-        let wiki_disagreements = spreadsheet_row.get(6).and_then(parse_string_cell);
-        let sources_with_tag_but_not_on_wiki = spreadsheet_row.get(7).and_then(parse_string_cell);
+
+        // F 5 Remaining work
+        let remaining_work = RemainingWork::parse(&spreadsheet_row[5])?;
+
+        // G 6 - New confirmations - confirmations_new_325_drops_from
+
+        // H 7 - Sources           - sources_drops_from
+
+        // I 8 - wiki disagreements
+        let wiki_disagreements = spreadsheet_row.get(8).and_then(parse_string_cell);
+
+        // J 9 - Verify Sources    - verify_drops_from
+        let sources_with_tag_but_not_on_wiki = spreadsheet_row.get(9).and_then(parse_string_cell);
+
+        // K 10 - Notes
         let notes = spreadsheet_row.get(8).and_then(parse_string_cell);
 
         Ok(Self {
             greynote,
             card,
             tag_hypothesis,
+            confidence_new_325,
             confidence,
             remaining_work,
+            confirmations_new_325_drops_from,
             sources_drops_from,
             verify_drops_from,
             wiki_disagreements,

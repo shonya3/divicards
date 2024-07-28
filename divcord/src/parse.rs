@@ -108,7 +108,9 @@ pub enum DivcordColumn {
     Card,
     TagHypothesis,
     Confidence,
+    ConfidenceNew325,
     RemainingWork,
+    New325Confirmations,
     Source,
     WikiDisagreements,
     SourcesWithTagButNotOnWiki,
@@ -121,12 +123,14 @@ impl DivcordColumn {
             DivcordColumn::GreyNote => "A",
             DivcordColumn::Card => "B",
             DivcordColumn::TagHypothesis => "C",
-            DivcordColumn::Confidence => "D",
-            DivcordColumn::RemainingWork => "E",
-            DivcordColumn::Source => "F",
-            DivcordColumn::WikiDisagreements => "G",
-            DivcordColumn::SourcesWithTagButNotOnWiki => "H",
-            DivcordColumn::Notes => "I",
+            DivcordColumn::ConfidenceNew325 => "D",
+            DivcordColumn::Confidence => "E",
+            DivcordColumn::RemainingWork => "F",
+            DivcordColumn::New325Confirmations => "G",
+            DivcordColumn::Source => "H",
+            DivcordColumn::WikiDisagreements => "I",
+            DivcordColumn::SourcesWithTagButNotOnWiki => "J",
+            DivcordColumn::Notes => "K",
         }
     }
 }
@@ -228,6 +232,7 @@ pub fn parse_record_dropsources(
 #[derive(Debug, PartialEq, Eq, Hash, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub enum RichColumnVariant {
+    ConfirmationsNew325,
     Sources,
     Verify,
 }
@@ -235,8 +240,9 @@ pub enum RichColumnVariant {
 impl RichColumnVariant {
     pub fn column_letter(&self) -> char {
         match self {
-            RichColumnVariant::Sources => 'F',
-            RichColumnVariant::Verify => 'H',
+            RichColumnVariant::ConfirmationsNew325 => 'G',
+            RichColumnVariant::Sources => 'H',
+            RichColumnVariant::Verify => 'J',
         }
     }
 }
@@ -250,6 +256,18 @@ pub fn parse_dropses_from(
     let mut sources: Vec<Source> = vec![];
 
     match column {
+        RichColumnVariant::ConfirmationsNew325 => {
+            for d in &dumb.confirmations_new_325_drops_from {
+                let Ok(mut inner_sources) = parse_one_drops_from(d, dumb, poe_data) else {
+                    return Err(ParseSourceError::UnknownVariant {
+                        card: dumb.card.to_owned(),
+                        record_id: dumb.id,
+                        drops_from: d.to_owned(),
+                    });
+                };
+                sources.append(&mut inner_sources);
+            }
+        }
         RichColumnVariant::Sources => {
             for d in &dumb.sources_drops_from {
                 let Ok(mut inner_sources) = parse_one_drops_from(d, dumb, poe_data) else {
