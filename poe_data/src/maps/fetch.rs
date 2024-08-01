@@ -47,7 +47,7 @@ pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
                     tier,
                     available: is_available,
                     unique: is_unique_map,
-                    icon,
+                    icon: super::icon::poecdn_icon_url(&icon),
                 };
                 task_maps.push(map);
             }
