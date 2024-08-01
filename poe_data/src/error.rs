@@ -14,6 +14,8 @@ pub enum Error {
     SerdeError(serde_json::Error),
     #[cfg(feature = "fetch")]
     UnexpectedLeagueInfoShapeError(UnexpectedLeagueInfoShapeError),
+    #[cfg(feature = "fetch")]
+    FetchMaps(crate::maps::FetchMapsError),
 }
 
 impl Display for Error {
@@ -29,7 +31,15 @@ impl Display for Error {
             Error::DiviError(err) => err.fmt(f),
             #[cfg(feature = "fetch")]
             Error::UnexpectedLeagueInfoShapeError(err) => err.fmt(f),
+            Error::FetchMaps(err) => write!(f, "{err:?}"),
         }
+    }
+}
+
+#[cfg(feature = "fetch")]
+impl From<crate::maps::FetchMapsError> for Error {
+    fn from(value: crate::maps::FetchMapsError) -> Self {
+        Error::FetchMaps(value)
     }
 }
 

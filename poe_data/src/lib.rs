@@ -8,10 +8,9 @@ pub mod league;
 pub mod mapbosses;
 pub mod maps;
 
+use self::{act::ActArea, cards::CardsData, mapbosses::MapBoss, maps::Map};
 use act::ActAreaId;
 use serde::{Deserialize, Serialize};
-
-use self::{act::ActArea, cards::CardsData, mapbosses::MapBoss, maps::Map};
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct PoeData {

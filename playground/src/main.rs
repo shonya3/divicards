@@ -26,14 +26,17 @@ mod error;
 
 #[tokio::main]
 async fn main() {
-    // // card_element::images::download_card_images().await.unwrap();
-    let spreadsheet = SpreadsheetFetcher::default_with_mut_config(|config| {
-        config.stale(Stale::Never);
-    })
-    .load()
-    .await
-    .unwrap();
-    let poe_data = PoeData::load().await.unwrap();
+    let maps_fetcher = MapsFetcher::default();
+    let maps = maps_fetcher.load().await.unwrap();
+
+    // // // card_element::images::download_card_images().await.unwrap();
+    // let spreadsheet = SpreadsheetFetcher::default_with_mut_config(|config| {
+    //     config.stale(Stale::Never);
+    // })
+    // .load()
+    // .await
+    // .unwrap();
+    // let poe_data = PoeData::load().await.unwrap();
     // let Ok(records) = divcord::records(&spreadsheet, &poe_data) else {
     //     eprintln!("divcord::records parse Err. Scanning all possible errors with records_iter...");
     //     for result in divcord::records_iter(&spreadsheet, &poe_data) {

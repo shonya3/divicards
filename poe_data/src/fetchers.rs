@@ -91,7 +91,7 @@ impl DataFetcher for MapsFetcher {
     type Item = Vec<Map>;
     type Error = Error;
     async fn fetch(&self) -> Result<Vec<Map>, Error> {
-        crate::maps::fetch::fetch().await
+        Ok(crate::maps::fetch_maps().await?)
     }
     fn config(&self) -> &Config {
         &self.0
