@@ -26,8 +26,13 @@ pub const NEVER_EXISTED: [&str; 3] = [
     "Luck of the Vaal",
 ];
 
-pub const CARDS_N: usize = 444;
+pub const CARDS_N: usize = 449;
 pub const CARDS: [&str; CARDS_N] = [
+    "Avian Pursuit",
+    "Father's Love",
+    "Lonely Warrior",
+    "Temperance",
+    "Toxic Tidings",
     "Who Asked",
     "I See Brothers",
     "Assassin's Gift",
