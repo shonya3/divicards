@@ -5,6 +5,7 @@ use strum_macros::EnumIter;
 
 #[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum UniqueMonster {
+    Allt3Andt4HarvestMonsters,
     #[default]
     MavensInvitationTheFeared,
     UulNetolInBreachstones,
@@ -49,6 +50,7 @@ impl FromStr for UniqueMonster {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "All T3/T4 (boss) Harvest monsters" => Ok(Self::Allt3Andt4HarvestMonsters),
             "Maven's Invitation: The Feared" => Ok(Self::MavensInvitationTheFeared),
             "Uul-Netol, Unburdened Flesh (in Breachstones)" => Ok(Self::UulNetolInBreachstones),
             "The Vaal Omnitect" => Ok(Self::VaalOmnitect),
@@ -106,6 +108,7 @@ impl FromStr for UniqueMonster {
 impl Identified for UniqueMonster {
     fn id(&self) -> &str {
         match self {
+            UniqueMonster::Allt3Andt4HarvestMonsters => "All T3/T4 (boss) Harvest monsters",
             UniqueMonster::MavensInvitationTheFeared => "Maven's Invitation: The Feared",
             UniqueMonster::UulNetolInBreachstones => {
                 "Uul-Netol, Unburdened Flesh (in Breachstones)"
@@ -165,6 +168,7 @@ impl UniqueMonster {
 
     pub fn _type(&self) -> &str {
         match self {
+            UniqueMonster::Allt3Andt4HarvestMonsters => "All T3/T4 (boss) Harvest monsters",
             UniqueMonster::MavensInvitationTheFeared => "Maven's Invitation: The Feared",
             UniqueMonster::UulNetolInBreachstones => {
                 "Uul-Netol, Unburdened Flesh (in Breachstones)"
