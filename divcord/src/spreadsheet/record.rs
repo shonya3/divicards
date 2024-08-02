@@ -39,7 +39,6 @@ pub struct Dumb {
     pub card: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub tag_hypothesis: Option<String>,
-    pub confidence_new_325: Confidence,
     pub confidence: Confidence,
     #[serde(default)]
     pub remaining_work: RemainingWork,
@@ -115,10 +114,9 @@ impl Dumb {
         let tag_hypothesis = parse_string_cell(&spreadsheet_row[2]);
 
         // D 3 3.25 Confidence
-        let confidence_new_325 = Confidence::parse(&spreadsheet_row[4])?;
+        let confidence = Confidence::parse(&spreadsheet_row[3]).unwrap();
 
-        // E 4 Confidence
-        let confidence = Confidence::parse(&spreadsheet_row[3])?;
+        // E 4 Old Confidence SKIP
 
         // F 5 Remaining work
         let remaining_work = RemainingWork::parse(&spreadsheet_row[5])?;
@@ -140,7 +138,6 @@ impl Dumb {
             greynote,
             card,
             tag_hypothesis,
-            confidence_new_325,
             confidence,
             remaining_work,
             confirmations_new_325_drops_from,
