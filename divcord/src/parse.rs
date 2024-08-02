@@ -175,7 +175,7 @@ pub fn parse_record_dropsources(
     sources.append(&mut parse_dropses_from(
         dumb,
         poe_data,
-        RichColumnVariant::ConfirmationsNew325,
+        RichColumnVariant::Sources,
     )?);
 
     // 3. Read from tags(3rd column)
@@ -330,17 +330,13 @@ pub fn parse_record_dropsources(
 #[derive(Debug, PartialEq, Eq, Hash, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub enum RichColumnVariant {
-    ConfirmationsNew325,
     Sources,
-    Verify,
 }
 
 impl RichColumnVariant {
     pub fn column_letter(&self) -> char {
         match self {
-            RichColumnVariant::ConfirmationsNew325 => 'G',
-            RichColumnVariant::Sources => 'H',
-            RichColumnVariant::Verify => 'J',
+            RichColumnVariant::Sources => 'G',
         }
     }
 }
@@ -354,7 +350,7 @@ pub fn parse_dropses_from(
     let mut sources: Vec<Source> = vec![];
 
     match column {
-        RichColumnVariant::ConfirmationsNew325 => {
+        RichColumnVariant::Sources => {
             for d in &dumb.confirmations_new_325_drops_from {
                 let Ok(mut inner_sources) = parse_one_drops_from(d, dumb, poe_data) else {
                     return Err(ParseSourceError::UnknownVariant {
@@ -366,37 +362,6 @@ pub fn parse_dropses_from(
                 sources.append(&mut inner_sources);
             }
         }
-        RichColumnVariant::Sources => {}
-        RichColumnVariant::Verify => {} // RichColumnVariant::Sources => {
-                                        //     for d in &dumb.sources_drops_from {
-                                        //         let Ok(mut inner_sources) = parse_one_drops_from(d, dumb, poe_data) else {
-                                        //             return Err(ParseSourceError::UnknownVariant {
-                                        //                 card: dumb.card.to_owned(),
-                                        //                 record_id: dumb.id,
-                                        //                 drops_from: d.to_owned(),
-                                        //             });
-                                        //         };
-                                        //         sources.append(&mut inner_sources);
-                                        //     }
-                                        // }
-                                        // RichColumnVariant::Verify => {
-                                        //     if dumb.greynote == GreyNote::Disabled {
-                                        //         return Ok(vec![]);
-                                        //     }
-
-                                        //     for d in &dumb.verify_drops_from {
-                                        //         let Ok(mut inner_sources) = parse_one_drops_from(d, dumb, poe_data) else {
-                                        //             println!("parse_one_drops_from Unknown variant {d:#?}");
-
-                                        //             return Err(ParseSourceError::UnknownVariant {
-                                        //                 card: dumb.card.to_owned(),
-                                        //                 record_id: dumb.id,
-                                        //                 drops_from: d.to_owned(),
-                                        //             });
-                                        //         };
-                                        //         sources.append(&mut inner_sources);
-                                        //     }
-                                        // }
     }
 
     Ok(sources)

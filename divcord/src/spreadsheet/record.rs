@@ -43,10 +43,6 @@ pub struct Dumb {
     #[serde(default)]
     pub remaining_work: RemainingWork,
     pub confirmations_new_325_drops_from: Vec<DropsFrom>,
-    #[serde(skip_serializing)]
-    pub sources_drops_from: Vec<DropsFrom>,
-    #[serde(skip_serializing)]
-    pub verify_drops_from: Vec<DropsFrom>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub wiki_disagreements: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -76,23 +72,7 @@ impl Dumb {
         row_index: usize,
         spreadsheet_row: &[Value],
         confirmations_new_325_cell: &Cell,
-        sources_rich_cell: &Cell,
-        verify_rich_cell: &Cell,
     ) -> Result<Self, Error> {
-        let sources_drops_from = sources_rich_cell
-            .drops_from()
-            .map_err(|err| ParseDumbError {
-                record_id: Dumb::record_id(row_index),
-                parse_cell_error: err,
-            })?;
-
-        let verify_drops_from = verify_rich_cell
-            .drops_from()
-            .map_err(|err| ParseDumbError {
-                record_id: Dumb::record_id(row_index),
-                parse_cell_error: err,
-            })?;
-
         let confirmations_new_325_drops_from =
             confirmations_new_325_cell
                 .drops_from()
@@ -141,8 +121,6 @@ impl Dumb {
             confidence,
             remaining_work,
             confirmations_new_325_drops_from,
-            sources_drops_from,
-            verify_drops_from,
             wiki_disagreements,
             sources_with_tag_but_not_on_wiki,
             notes,

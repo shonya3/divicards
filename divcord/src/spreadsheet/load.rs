@@ -65,19 +65,7 @@ impl SpreadsheetFetcher {
         let sheet = self.fetch_table_sheet().await?;
         let number_of_rows = sheet.values.len();
         let rich_confirmations_new_325 = RichColumn::new(
-            self.fetch_rich_column(RichColumnVariant::ConfirmationsNew325)
-                .await?
-                .sheets,
-            number_of_rows,
-        );
-        let rich_sources_column = RichColumn::new(
             self.fetch_rich_column(RichColumnVariant::Sources)
-                .await?
-                .sheets,
-            number_of_rows,
-        );
-        let rich_verify_column = RichColumn::new(
-            self.fetch_rich_column(RichColumnVariant::Verify)
                 .await?
                 .sheets,
             number_of_rows,
@@ -85,8 +73,6 @@ impl SpreadsheetFetcher {
 
         Ok(Spreadsheet {
             sheet,
-            rich_sources_column,
-            rich_verify_column,
             rich_confirmations_new_325,
         })
     }

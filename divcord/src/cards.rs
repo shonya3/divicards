@@ -229,18 +229,19 @@ pub fn cards_by_source_directly(direct_source: &Source, records: &[Record]) -> V
                     card: record.card.to_owned(),
                     column: RichColumnVariant::Sources,
                 })
-                .chain(
-                    // 2. by verify sources
-                    record
-                        .verify_sources
-                        .iter()
-                        .filter(|verify| *verify == direct_source)
-                        .map(|source| Direct {
-                            source: source.to_owned(),
-                            card: record.card.to_owned(),
-                            column: RichColumnVariant::Verify,
-                        }),
-                )
+                // // 3.25 SKIP. No verify sources for now
+                // .chain(
+                //     // 2. by verify sources
+                //     record
+                //         .verify_sources
+                //         .iter()
+                //         .filter(|verify| *verify == direct_source)
+                //         .map(|source| Direct {
+                //             source: source.to_owned(),
+                //             card: record.card.to_owned(),
+                //             column: RichColumnVariant::Verify,
+                //         }),
+                // )
                 .collect::<Vec<Direct>>()
         })
         .collect()

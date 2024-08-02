@@ -32,14 +32,13 @@ mod tests {
         let record =  Dumb {
     id: 230,
     confidence: Confidence::Ok,
-    confirmations_new_325_drops_from: vec![],
     greynote: GreyNote::Empty,
     card: "The Demon".to_owned(),
     tag_hypothesis: Some(
         "kitava_area".to_owned(),
     ),
     remaining_work: RemainingWork::UnclearHypothesis,
-    sources_drops_from: vec![
+    confirmations_new_325_drops_from: vec![
         DropsFrom {
             name: "Kitava, The Destroyer (The Destroyer's Heart), Lord of the Grey".to_owned(),
             styles: FontStyles {
@@ -51,7 +50,6 @@ mod tests {
             },
         },
     ],
-    verify_drops_from: vec![],
     wiki_disagreements: Some(
         "Megaera".to_owned(),
     ),
@@ -61,7 +59,11 @@ mod tests {
     ),
 };
 
-        let source = parse_one_drops_from(&record.sources_drops_from[0], &record, &poe_data);
+        let source = parse_one_drops_from(
+            &record.confirmations_new_325_drops_from[0],
+            &record,
+            &poe_data,
+        );
         assert!(source.is_err());
     }
 
