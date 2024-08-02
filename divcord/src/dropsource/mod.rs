@@ -25,6 +25,7 @@ pub enum Source {
     Strongbox(Strongbox),
     Vendor(Vendor),
 
+    KiracMissions,
     MaelstromOfChaosWithBarrelSextant,
     Delirium,
     DeliriumCurrencyRewards,
@@ -96,6 +97,7 @@ impl FromStr for Source {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "Kirac Missions" => Ok(Source::KiracMissions),
             "Disabled" => Ok(Source::Disabled),
             "Delirium Currency Rewards" => Ok(Source::DeliriumCurrencyRewards),
             "Maelström of Chaos with Barrel Sextant" => {
@@ -142,6 +144,7 @@ impl Identified for Source {
             Source::Disabled => "Disabled",
             Source::GlobalDrop { .. } => "Global Drop",
             Source::MaelstromOfChaosWithBarrelSextant => "Maelström of Chaos with Barrel Sextant",
+            Source::KiracMissions => "Kirac Missions",
         }
     }
 }
@@ -166,6 +169,7 @@ impl Source {
             Source::Disabled => "Disabled",
             Source::GlobalDrop { .. } => "Global Drop",
             Source::MaelstromOfChaosWithBarrelSextant => "Maelström of Chaos with Barrel Sextant",
+            Source::KiracMissions => "Kirac Missions",
         }
     }
 
