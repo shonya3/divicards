@@ -4,8 +4,14 @@ use divcord::{
     dropsource::{id::Identified, Source},
     parse::RichColumnVariant,
     records_iter,
-    spreadsheet::{self, load::SpreadsheetFetcher, record::Record, rich::RichColumn, Spreadsheet},
-    PoeData,
+    spreadsheet::{
+        self,
+        load::SpreadsheetFetcher,
+        record::Record,
+        rich::{DropsFrom, FontStyles, HexColor, RichColumn},
+        Spreadsheet,
+    },
+    PoeData, PoeDataFetcher,
 };
 use divi::Prices;
 use error::Error;
@@ -26,17 +32,14 @@ mod error;
 
 #[tokio::main]
 async fn main() {
-    let maps_fetcher = MapsFetcher::default();
-    let maps = maps_fetcher.load().await.unwrap();
-
-    // // // card_element::images::download_card_images().await.unwrap();
-    // let spreadsheet = SpreadsheetFetcher::default_with_mut_config(|config| {
-    //     config.stale(Stale::Never);
-    // })
-    // .load()
-    // .await
-    // .unwrap();
-    // let poe_data = PoeData::load().await.unwrap();
+    // // card_element::images::download_card_images().await.unwrap();
+    let spreadsheet = SpreadsheetFetcher::default_with_mut_config(|config| {
+        config.stale(Stale::Never);
+    })
+    .load()
+    .await
+    .unwrap();
+    let poe_data = PoeData::load().await.unwrap();
     // let Ok(records) = divcord::records(&spreadsheet, &poe_data) else {
     //     eprintln!("divcord::records parse Err. Scanning all possible errors with records_iter...");
     //     for result in divcord::records_iter(&spreadsheet, &poe_data) {
@@ -48,8 +51,31 @@ async fn main() {
     //     std::process::exit(0);
     // };
 
-    // std::fs::write("records.json", &serde_json::to_string(&records).unwrap()).unwrap();
+    // std::fs::write("records.json", serde_json::to_string(&records).unwrap()).unwrap();
 
     // let p = Prices::fetch(&poe::TradeLeague::Settlers).await.unwrap();
     // println!("{p:#?}");
+
+    let mut records = vec![];
+    for result in divcord::records_iter(&spreadsheet, &poe_data) {
+        // if let Err(err) = result {
+        //     eprintln!("{err:?}");
+        // }
+
+        match result {
+            Ok(record) => records.push(record),
+            Err(err) => eprintln!("{err:?}"),
+        }
+    }
+    std::fs::write("records.json", serde_json::to_string(&records).unwrap()).unwrap();
+
+    // let d = DropsFrom {
+    //     name: "The Chamber of Sins Level 1/2 (A7)".to_owned(),
+    //     styles: FontStyles {
+    //         color: HexColor("#FFFFFF".to_owned()),
+    //         italic: true,
+    //         strikethrough: false,
+    //     },
+    // };
+    // divcord::parse::parse_one_drops_from(&d, dumb, poe_data)
 }

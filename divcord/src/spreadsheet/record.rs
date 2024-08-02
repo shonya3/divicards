@@ -103,10 +103,13 @@ impl Dumb {
                 })?;
 
         // A 0 Greynote
-        let greynote = GreyNote::parse(&spreadsheet_row[0])?;
+        // let greynote = GreyNote::parse(&spreadsheet_row[0]);
+        let Ok(greynote) = GreyNote::parse(&spreadsheet_row[0]) else {
+            panic!("Could not parse greynote: {}", spreadsheet_row[0]);
+        };
 
         // B 1 Card name
-        let card = parse_card_name(&spreadsheet_row[1])?;
+        let card = parse_card_name(&spreadsheet_row[1]).expect("Card error");
 
         // C 2 Tag hypothesis
         let tag_hypothesis = parse_string_cell(&spreadsheet_row[2]);
@@ -216,6 +219,9 @@ pub enum GreyNote {
     #[strum(to_string = "Vendor")]
     #[serde(rename = "Vendor")]
     Vendor,
+    #[strum(to_string = "atlas")]
+    #[serde(rename = "atlas")]
+    Atlas,
 }
 
 impl GreyNote {

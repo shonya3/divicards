@@ -59,9 +59,8 @@ impl FromStr for UniqueMonster {
             | "All Incursion Architects in Alva missions or Alva's Memory" => {
                 Ok(Self::AllIncursionArchitectsInAlvaMission)
             }
-            "All Incursion Architects (The Temple of Atzoatl)" => {
-                Ok(Self::AllIncursionArchitectsInTemple)
-            }
+            "All Incursion Architects (The Temple of Atzoatl)"
+            | "Architects in Temple of Atzoatl" => Ok(Self::AllIncursionArchitectsInTemple),
             "All Abyss Monsters" => Ok(Self::AllAbyssMonsters),
             "All Rogue Exiles" => Ok(Self::AllRogueExiles),
             "All Invasion Bosses" => Ok(Self::AllInvasionBosses),

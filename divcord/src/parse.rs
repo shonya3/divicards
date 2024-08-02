@@ -29,7 +29,8 @@ impl Record {
     pub fn from_dumb(dumb: Dumb, poe_data: &PoeData) -> Result<Self, ParseSourceError> {
         Ok(Record {
             sources: parse_record_dropsources(&dumb, poe_data)?,
-            verify_sources: parse_dropses_from(&dumb, poe_data, RichColumnVariant::Verify)?,
+            // verify_sources: parse_dropses_from(&dumb, poe_data, RichColumnVariant::Verify)?,
+            verify_sources: vec![],
             id: dumb.id,
             greynote: dumb.greynote,
             card: dumb.card,
@@ -139,6 +140,12 @@ pub fn record_url(id: usize, column: DivcordColumn) -> String {
     format!("https://docs.google.com/spreadsheets/d/1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU/edit?pli=1#gid=0&range={}{id}", column.letter())
 }
 
+/// Add new sources:
+/// - Kirac Missions
+/// - All (Scourge) beyond demons, including from Settlers (Crimson Iron/Orichalcum)
+/// - Vaal side area bosses (including Vaal Temple)
+///
+
 pub fn parse_record_dropsources(
     dumb: &Dumb,
     poe_data: &PoeData,
@@ -168,7 +175,7 @@ pub fn parse_record_dropsources(
     sources.append(&mut parse_dropses_from(
         dumb,
         poe_data,
-        RichColumnVariant::Sources,
+        RichColumnVariant::ConfirmationsNew325,
     )?);
 
     // 3. Read from tags(3rd column)
@@ -218,16 +225,107 @@ pub fn parse_record_dropsources(
         // println!("{} {} {sources:?}", record.id, record.card);
     }
 
-    if dumb.greynote != GreyNote::Empty && sources.is_empty() && dumb.confidence == Confidence::Done
-    {
-        return Err(ParseSourceError::SourceIsExptectedButEmpty {
-            record_id: dumb.id,
-            card: dumb.card.to_owned(),
-        });
-    }
+    // if dumb.greynote != GreyNote::Empty && sources.is_empty() && dumb.confidence == Confidence::Done
+    // {
+    //     return Err(ParseSourceError::SourceIsExptectedButEmpty {
+    //         record_id: dumb.id,
+    //         card: dumb.card.to_owned(),
+    //     });
+    // }
 
     Ok(sources)
 }
+
+// PRE 3.25. Copy and create new one
+// pub fn parse_record_dropsources(
+//     dumb: &Dumb,
+//     poe_data: &PoeData,
+// ) -> Result<Vec<Source>, ParseSourceError> {
+//     let mut sources: Vec<Source> = vec![];
+
+//     // 1. Legacy cards rules
+//     if dumb.card.as_str().is_legacy_card() && dumb.greynote != GreyNote::Disabled {
+//         return Err(ParseSourceError::LegacyCardShouldBeMarkedAsDisabled {
+//             record_id: dumb.id,
+//             card: dumb.card.to_owned(),
+//         });
+//     }
+
+//     if dumb.greynote == GreyNote::Disabled {
+//         if !dumb.card.as_str().is_legacy_card() {
+//             return Err(ParseSourceError::GreynoteDisabledButCardNotLegacy {
+//                 record_id: dumb.id,
+//                 card: dumb.card.to_owned(),
+//             });
+//         }
+//         sources.push(Source::Disabled);
+//         return Ok(sources);
+//     }
+
+//     // 2. Parse sources from "Wiki Map/Monster Agreements" column(the main part)
+//     sources.append(&mut parse_dropses_from(
+//         dumb,
+//         poe_data,
+//         RichColumnVariant::Sources,
+//     )?);
+
+//     // 3. Read from tags(3rd column)
+//     if dumb.tag_hypothesis.as_deref() == Some("invasion_boss") {
+//         sources.push(Source::UniqueMonster(UniqueMonster::AllInvasionBosses))
+//     }
+
+//     if dumb.tag_hypothesis.as_deref() == Some("vaalsidearea_boss") {
+//         sources.push(Source::UniqueMonster(UniqueMonster::AllVaalSideAreaBosses))
+//     }
+
+//     if dumb.tag_hypothesis.as_deref() == Some("expedition_common_remnant_logbook") {
+//         sources.push(Source::Area(Area::ExpeditionLogbook))
+//     }
+
+//     // 4. Read greynotes(first column)
+//     if dumb.greynote == GreyNote::GlobalDrop {
+//         let Card {
+//             min_level,
+//             max_level,
+//             ..
+//         } = poe_data.cards.card(&dumb.card).to_owned();
+//         sources.push(Source::GlobalDrop {
+//             min_level,
+//             max_level,
+//         });
+//     };
+
+//     if dumb.greynote == GreyNote::Delirium
+//         && dumb.notes.as_deref()
+//             == Some("Appears to drop from any source of Delirium Currency rewards")
+//     {
+//         sources.push(Source::DeliriumCurrencyRewards);
+//     }
+
+//     if dumb.greynote == GreyNote::Vendor && dumb.notes.as_deref() == Some("Kirac shop") {
+//         sources.push(Source::Vendor(Vendor::KiracShop));
+//     }
+
+//     // 5. Read notes(last column)
+//     if dumb.notes.as_deref() == Some("Redeemer influenced maps") {
+//         sources.push(Source::Area(Area::RedeemerInfluencedMaps))
+//     }
+
+//     // 6. Final rules
+//     if dumb.confidence == Confidence::None && !sources.is_empty() {
+//         // println!("{} {} {sources:?}", record.id, record.card);
+//     }
+
+//     if dumb.greynote != GreyNote::Empty && sources.is_empty() && dumb.confidence == Confidence::Done
+//     {
+//         return Err(ParseSourceError::SourceIsExptectedButEmpty {
+//             record_id: dumb.id,
+//             card: dumb.card.to_owned(),
+//         });
+//     }
+
+//     Ok(sources)
+// }
 
 #[derive(Debug, PartialEq, Eq, Hash, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -268,36 +366,37 @@ pub fn parse_dropses_from(
                 sources.append(&mut inner_sources);
             }
         }
-        RichColumnVariant::Sources => {
-            for d in &dumb.sources_drops_from {
-                let Ok(mut inner_sources) = parse_one_drops_from(d, dumb, poe_data) else {
-                    return Err(ParseSourceError::UnknownVariant {
-                        card: dumb.card.to_owned(),
-                        record_id: dumb.id,
-                        drops_from: d.to_owned(),
-                    });
-                };
-                sources.append(&mut inner_sources);
-            }
-        }
-        RichColumnVariant::Verify => {
-            if dumb.greynote == GreyNote::Disabled {
-                return Ok(vec![]);
-            }
+        RichColumnVariant::Sources => {}
+        RichColumnVariant::Verify => {} // RichColumnVariant::Sources => {
+                                        //     for d in &dumb.sources_drops_from {
+                                        //         let Ok(mut inner_sources) = parse_one_drops_from(d, dumb, poe_data) else {
+                                        //             return Err(ParseSourceError::UnknownVariant {
+                                        //                 card: dumb.card.to_owned(),
+                                        //                 record_id: dumb.id,
+                                        //                 drops_from: d.to_owned(),
+                                        //             });
+                                        //         };
+                                        //         sources.append(&mut inner_sources);
+                                        //     }
+                                        // }
+                                        // RichColumnVariant::Verify => {
+                                        //     if dumb.greynote == GreyNote::Disabled {
+                                        //         return Ok(vec![]);
+                                        //     }
 
-            for d in &dumb.verify_drops_from {
-                let Ok(mut inner_sources) = parse_one_drops_from(d, dumb, poe_data) else {
-                    println!("parse_one_drops_from Unknown variant {d:#?}");
+                                        //     for d in &dumb.verify_drops_from {
+                                        //         let Ok(mut inner_sources) = parse_one_drops_from(d, dumb, poe_data) else {
+                                        //             println!("parse_one_drops_from Unknown variant {d:#?}");
 
-                    return Err(ParseSourceError::UnknownVariant {
-                        card: dumb.card.to_owned(),
-                        record_id: dumb.id,
-                        drops_from: d.to_owned(),
-                    });
-                };
-                sources.append(&mut inner_sources);
-            }
-        }
+                                        //             return Err(ParseSourceError::UnknownVariant {
+                                        //                 card: dumb.card.to_owned(),
+                                        //                 record_id: dumb.id,
+                                        //                 drops_from: d.to_owned(),
+                                        //             });
+                                        //         };
+                                        //         sources.append(&mut inner_sources);
+                                        //     }
+                                        // }
     }
 
     Ok(sources)
@@ -371,8 +470,8 @@ pub fn parse_one_drops_from(
                 return Ok(vec![Source::ActBoss(d.name.to_string())]);
             } else {
                 println!(
-                    "From acts parsing. Could not resolve the source of the name: {} {d:#?} ",
-                    &d.name
+                    "From acts parsing. Could not resolve the source of the name: {} {d:#?} dumb_id: {}",
+                    &d.name, dumb.id
                 );
             }
         }
