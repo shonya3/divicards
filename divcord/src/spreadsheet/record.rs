@@ -112,7 +112,7 @@ impl Dumb {
         let sources_with_tag_but_not_on_wiki = spreadsheet_row.get(9).and_then(parse_string_cell);
 
         // K 10 - Notes
-        let notes = spreadsheet_row.get(8).and_then(parse_string_cell);
+        let notes = spreadsheet_row.get(10).and_then(parse_string_cell);
 
         Ok(Self {
             greynote,
