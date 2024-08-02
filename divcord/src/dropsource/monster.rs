@@ -64,8 +64,14 @@ impl FromStr for UniqueMonster {
             "All Abyss Monsters" => Ok(Self::AllAbyssMonsters),
             "All Rogue Exiles" => Ok(Self::AllRogueExiles),
             "All Invasion Bosses" => Ok(Self::AllInvasionBosses),
-            "All Vaal Side Area Bosses" => Ok(Self::AllVaalSideAreaBosses),
-            "All (Scourge) beyond demons" => Ok(Self::AllScourgeBeyondDemons),
+            "All Vaal Side Area Bosses" | "Vaal side area bosses (including Vaal Temple)" => {
+                Ok(Self::AllVaalSideAreaBosses)
+            }
+            "All (Scourge) beyond demons"
+            | "All (Scourge) beyond demons, including from Settlers Crimson Iron/Orichalcum"
+            | "All (Scourge) beyond demons, including from Settlers (Crimson Iron/Orichalcum)" => {
+                Ok(Self::AllScourgeBeyondDemons)
+            }
             "Venarius" => Ok(Self::CortexVenarius),
             "Argus" => Ok(Self::Argus),
             _ => BreachlordBossDomain::from_str(s)
