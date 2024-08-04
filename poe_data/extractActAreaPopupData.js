@@ -107,6 +107,12 @@ const extractActAreaPopupData = actAreaPopup => {
 		});
 	}
 
+	if (name === 'The Upper Sceptre of God') {
+		bossfights.push({
+			name: 'Dominus, Ascendant',
+			url: '',
+		});
+	}
 	if (!id) throw new Error(`==${name}== No id`);
 	if (!act) throw new Error(`==${name}== no act`);
 	if (!areaLevel) throw new Error(`==${name}== no area level`);
