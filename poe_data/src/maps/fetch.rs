@@ -43,6 +43,7 @@ pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
                 let is_available = is_unique_map || poedb_available_maps.contains(&name);
                 let icon = super::icon::get_map_icon(&name, &page).await?;
                 let map = Map {
+                    slug: slug::slugify(&name),
                     name,
                     tier,
                     available: is_available,

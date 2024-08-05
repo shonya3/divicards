@@ -42,6 +42,7 @@ impl DataFetcher for Fetcher {
 
                 let card = cards.0.get(&data.name);
                 DivinationCardElementData {
+                    slug: slug::slugify(&data.name),
                     name: data.name,
                     art_filename: data.art_filename,
                     flavour_text: fl,

@@ -18,6 +18,7 @@ playwright = {version = "0.0.20", optional = true}
 serde_json = {workspace = true, optional = true}
 fetcher = {path = "../fetcher", optional = true}
 tokio = {workspace = true, optional = true}
+slug = "0.1.5"
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }

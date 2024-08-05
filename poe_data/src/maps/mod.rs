@@ -16,6 +16,7 @@ pub struct Map {
     pub available: bool,
     pub unique: bool,
     pub icon: String,
+    pub slug: String,
 }
 
 impl Map {

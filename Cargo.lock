@@ -575,6 +575,7 @@ dependencies = [
  "reqwest 0.12.5",
  "serde",
  "serde_json",
+ "slug",
  "tokio",
 ]
 
@@ -1018,6 +1019,12 @@ dependencies = [
  "rustc_version",
  "syn 2.0.68",
 ]
+
+[[package]]
+name = "deunicode"
+version = "1.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "339544cc9e2c4dc3fc7149fd630c5f22263a4fdf18a98afd0075784968b5cf00"
 
 [[package]]
 name = "digest"
@@ -3529,6 +3536,7 @@ dependencies = [
  "reqwest 0.12.5",
  "serde",
  "serde_json",
+ "slug",
  "tokio",
 ]
 
@@ -4510,6 +4518,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8f92a496fb766b417c996b9c5e57daf2f7ad3b0bebe1ccfca4856390e3d3bb67"
 dependencies = [
  "autocfg",
+]
+
+[[package]]
+name = "slug"
+version = "0.1.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3bd94acec9c8da640005f8e135a39fc0372e74535e6b368b7a04b875f784c8c4"
+dependencies = [
+ "deunicode",
+ "wasm-bindgen",
 ]
 
 [[package]]

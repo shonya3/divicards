@@ -7,6 +7,7 @@ pub const POE_CDN_CARDS: &str = "https://web.poecdn.com/image/divination-card/";
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Card {
+    pub slug: String,
     pub name: String,
     pub min_level: Option<u32>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -108,6 +109,7 @@ pub mod fetch {
                     .cloned();
 
                 Card {
+                    slug: slug::slugify(&card.name),
                     min_level,
                     max_level,
                     weight: card.weight,
