@@ -5,6 +5,7 @@ use strum_macros::EnumIter;
 
 #[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum UniqueMonster {
+    BreachMonsters,
     Allt3Andt4HarvestMonsters,
     #[default]
     MavensInvitationTheFeared,
@@ -50,8 +51,9 @@ impl FromStr for UniqueMonster {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "Breach monsters" => Ok(Self::BreachMonsters),
             "All T3/T4 (boss) Harvest monsters" => Ok(Self::Allt3Andt4HarvestMonsters),
-            "Maven's Invitation: The Feared" => Ok(Self::MavensInvitationTheFeared),
+            "Maven's Invitation: The Feared" | "The Feared" => Ok(Self::MavensInvitationTheFeared),
             "Uul-Netol, Unburdened Flesh (in Breachstones)" => Ok(Self::UulNetolInBreachstones),
             "The Vaal Omnitect" => Ok(Self::VaalOmnitect),
             "Metamorph" => Ok(Self::Metamorph),
@@ -108,6 +110,7 @@ impl FromStr for UniqueMonster {
 impl Identified for UniqueMonster {
     fn id(&self) -> &str {
         match self {
+            UniqueMonster::BreachMonsters => "Breach monsters",
             UniqueMonster::Allt3Andt4HarvestMonsters => "All T3/T4 (boss) Harvest monsters",
             UniqueMonster::MavensInvitationTheFeared => "Maven's Invitation: The Feared",
             UniqueMonster::UulNetolInBreachstones => {
@@ -168,6 +171,7 @@ impl UniqueMonster {
 
     pub fn _type(&self) -> &str {
         match self {
+            UniqueMonster::BreachMonsters => "Breach monsters",
             UniqueMonster::Allt3Andt4HarvestMonsters => "All T3/T4 (boss) Harvest monsters",
             UniqueMonster::MavensInvitationTheFeared => "Maven's Invitation: The Feared",
             UniqueMonster::UulNetolInBreachstones => {
@@ -588,6 +592,13 @@ impl Identified for EndgameBoss {
             EndgameBoss::EaterOfWorlds => "The Eater of Worlds",
             EndgameBoss::InfiniteHunger => "The Infinite Hunger",
             EndgameBoss::UberAtziri => "Atziri, Queen of the Vaal (Uber)",
+        }
+    }
+
+    fn aliases(&self) -> Vec<&str> {
+        match self {
+            Self::UberAtziri => vec!["Uber Atziri"],
+            _ => vec![],
         }
     }
 }

@@ -99,7 +99,9 @@ impl FromStr for Source {
         match s {
             "Kirac Missions" => Ok(Source::KiracMissions),
             "Disabled" => Ok(Source::Disabled),
-            "Delirium Currency Rewards" => Ok(Source::DeliriumCurrencyRewards),
+            "Delirium Currency Rewards" | "Delirium Currency reward" => {
+                Ok(Source::DeliriumCurrencyRewards)
+            }
             "Maelström of Chaos with Barrel Sextant" => {
                 Ok(Source::MaelstromOfChaosWithBarrelSextant)
             }

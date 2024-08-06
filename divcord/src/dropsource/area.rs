@@ -47,7 +47,9 @@ impl FromStr for Area {
             "Trial of Stinging Doubt" => Ok(Self::TrialOfStingingDoubt),
             "The Temple of Atzoatl" => Ok(Self::TempleOfAtzoatl),
             "Redeemer influenced maps" => Ok(Self::RedeemerInfluencedMaps),
-            "All Vaal side areas (need specific information)" => Ok(Self::AllVaalSideAreas),
+            "All Vaal side areas" | "All Vaal side areas (need specific information)" => {
+                Ok(Self::AllVaalSideAreas)
+            }
             "Vaal Side Areas" => Ok(Self::VaalSideAreas),
             "Labyrinth Trial Areas" => Ok(Self::LabyrinthTrialAreas),
             "Expedition Logbook" => Ok(Self::ExpeditionLogbook),
@@ -67,7 +69,7 @@ impl Identified for Area {
         match self {
             Area::TrialOfStingingDoubt => "Trial of Stinging Doubt",
             Area::TempleOfAtzoatl => "The Temple of Atzoatl",
-            Area::AllVaalSideAreas => "All Vaal side areas (need specific information)",
+            Area::AllVaalSideAreas => "All Vaal side areas",
             Area::VaalSideAreas => "Vaal Side Areas",
             Area::RedeemerInfluencedMaps => "Redeemer influenced maps",
             Area::ExpeditionLogbook => "Expedition Logbook",

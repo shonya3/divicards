@@ -446,7 +446,7 @@ pub fn parse_one_drops_from(
                 return Ok(vec![Source::ActBoss(d.name.to_string())]);
             } else {
                 println!(
-                    "From acts parsing. Could not resolve the source of the name: {} {d:#?} dumb_id: {}",
+                    "From acts parsing. Could not resolve the source of the name: {} {d:#?} dumb_id: {}.",
                     &d.name, dumb.id
                 );
             }

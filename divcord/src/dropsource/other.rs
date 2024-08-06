@@ -102,7 +102,7 @@ impl Identified for Chest {
     fn aliases(&self) -> Vec<&str> {
         match self {
             Chest::AbyssalTrove => vec![],
-            Chest::DelveChest => vec![],
+            Chest::DelveChest => vec!["Delve Chest"],
             Chest::DelveGemChests => vec![],
             Chest::VoltaxicSulphite => vec![],
             Chest::DelveInteractablesBehindFracturedWall => vec![],
