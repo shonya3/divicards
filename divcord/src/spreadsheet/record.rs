@@ -277,6 +277,12 @@ pub enum RemainingWork {
     #[strum(serialize = "open ended")]
     #[serde(rename = "open ended")]
     OpenEnded,
+    #[strum(serialize = "reverify")]
+    #[serde(rename = "reverify")]
+    Reverify,
+    #[strum(serialize = "story")]
+    #[serde(rename = "story")]
+    Story,
 }
 
 impl RemainingWork {
