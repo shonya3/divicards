@@ -29,16 +29,13 @@ impl Record {
     pub fn from_dumb(dumb: Dumb, poe_data: &PoeData) -> Result<Self, ParseSourceError> {
         Ok(Record {
             sources: parse_record_dropsources(&dumb, poe_data)?,
-            // verify_sources: parse_dropses_from(&dumb, poe_data, RichColumnVariant::Verify)?,
-            verify_sources: vec![],
+            verify_sources: parse_dropses_from(&dumb, poe_data, RichColumnVariant::Verify)?,
             id: dumb.id,
             greynote: dumb.greynote,
             card: dumb.card,
             tag_hypothesis: dumb.tag_hypothesis,
             confidence: dumb.confidence,
             remaining_work: dumb.remaining_work,
-            wiki_disagreements: dumb.wiki_disagreements,
-            sources_with_tag_but_not_on_wiki: dumb.sources_with_tag_but_not_on_wiki,
             notes: dumb.notes,
         })
     }
@@ -331,12 +328,14 @@ pub fn parse_record_dropsources(
 #[serde(rename_all = "camelCase")]
 pub enum RichColumnVariant {
     Sources,
+    Verify,
 }
 
 impl RichColumnVariant {
     pub fn column_letter(&self) -> char {
         match self {
             RichColumnVariant::Sources => 'G',
+            RichColumnVariant::Verify => 'H',
         }
     }
 }
@@ -352,6 +351,18 @@ pub fn parse_dropses_from(
     match column {
         RichColumnVariant::Sources => {
             for d in &dumb.confirmations_new_325_drops_from {
+                let Ok(mut inner_sources) = parse_one_drops_from(d, dumb, poe_data) else {
+                    return Err(ParseSourceError::UnknownVariant {
+                        card: dumb.card.to_owned(),
+                        record_id: dumb.id,
+                        drops_from: d.to_owned(),
+                    });
+                };
+                sources.append(&mut inner_sources);
+            }
+        }
+        RichColumnVariant::Verify => {
+            for d in &dumb.to_confirm_or_reverify_drops_from {
                 let Ok(mut inner_sources) = parse_one_drops_from(d, dumb, poe_data) else {
                     return Err(ParseSourceError::UnknownVariant {
                         card: dumb.card.to_owned(),

@@ -70,10 +70,17 @@ impl SpreadsheetFetcher {
                 .sheets,
             number_of_rows,
         );
+        let rich_to_confirm_or_reverify = RichColumn::new(
+            self.fetch_rich_column(RichColumnVariant::Verify)
+                .await?
+                .sheets,
+            number_of_rows,
+        );
 
         Ok(Spreadsheet {
             sheet,
             rich_confirmations_new_325,
+            rich_to_confirm_or_reverify,
         })
     }
 }

@@ -21,10 +21,6 @@ pub struct Record {
     pub remaining_work: RemainingWork,
     pub sources: Vec<Source>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub wiki_disagreements: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub sources_with_tag_but_not_on_wiki: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub notes: Option<String>,
     pub verify_sources: Vec<Source>,
 }
@@ -35,18 +31,22 @@ pub struct Record {
 pub struct Dumb {
     pub id: usize,
     #[serde(default)]
+    // A
     pub greynote: GreyNote,
+    // B
     pub card: String,
     #[serde(skip_serializing_if = "Option::is_none")]
+    // C
     pub tag_hypothesis: Option<String>,
-    pub confidence: Confidence,
+    pub confidence: Confidence, // D
     #[serde(default)]
+    // F
     pub remaining_work: RemainingWork,
+    // G
     pub confirmations_new_325_drops_from: Vec<DropsFrom>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub wiki_disagreements: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub sources_with_tag_but_not_on_wiki: Option<String>,
+    // H
+    pub to_confirm_or_reverify_drops_from: Vec<DropsFrom>,
+    // I
     #[serde(skip_serializing_if = "Option::is_none")]
     pub notes: Option<String>,
 }
@@ -72,15 +72,8 @@ impl Dumb {
         row_index: usize,
         spreadsheet_row: &[Value],
         confirmations_new_325_cell: &Cell,
+        to_confirm_or_verify_cell: &Cell,
     ) -> Result<Self, Error> {
-        let confirmations_new_325_drops_from =
-            confirmations_new_325_cell
-                .drops_from()
-                .map_err(|err| ParseDumbError {
-                    record_id: Dumb::record_id(row_index),
-                    parse_cell_error: err,
-                })?;
-
         // A 0 Greynote
         // let greynote = GreyNote::parse(&spreadsheet_row[0]);
         let Ok(greynote) = GreyNote::parse(&spreadsheet_row[0]) else {
@@ -102,29 +95,44 @@ impl Dumb {
         let remaining_work = RemainingWork::parse(&spreadsheet_row[5])?;
 
         // G 6 - New confirmations - confirmations_new_325_drops_from
+        let confirmations_new_325_drops_from =
+            confirmations_new_325_cell
+                .drops_from()
+                .map_err(|err| ParseDumbError {
+                    record_id: Dumb::record_id(row_index),
+                    parse_cell_error: err,
+                })?;
+
+        // UPDATE
+        // H 7 - To Confirm or Verify
+        let to_confirm_or_reverify_drops_from =
+            to_confirm_or_verify_cell
+                .drops_from()
+                .map_err(|err| ParseDumbError {
+                    record_id: Dumb::record_id(row_index),
+                    parse_cell_error: err,
+                })?;
+
+        // I 8 - Notes
+        let notes = spreadsheet_row.get(8).and_then(parse_string_cell);
+        // J 9 - Old Sources - SKIP
+        // K 10 - Old Wiki Disagreements - SKIP
+        // L 11 - Old Need to verify - SKIP
 
         // H 7 - Sources           - sources_drops_from
 
-        // I 8 - wiki disagreements
-        let wiki_disagreements = spreadsheet_row.get(8).and_then(parse_string_cell);
-
-        // J 9 - Verify Sources    - verify_drops_from
-        let sources_with_tag_but_not_on_wiki = spreadsheet_row.get(9).and_then(parse_string_cell);
-
         // K 10 - Notes
-        let notes = spreadsheet_row.get(10).and_then(parse_string_cell);
 
         Ok(Self {
+            id: Dumb::record_id(row_index),
             greynote,
             card,
             tag_hypothesis,
             confidence,
             remaining_work,
             confirmations_new_325_drops_from,
-            wiki_disagreements,
-            sources_with_tag_but_not_on_wiki,
+            to_confirm_or_reverify_drops_from,
             notes,
-            id: Dumb::record_id(row_index),
         })
     }
 }

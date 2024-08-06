@@ -19,13 +19,19 @@ use serde::{Deserialize, Serialize};
 pub struct Spreadsheet {
     pub sheet: ValueRange,
     pub rich_confirmations_new_325: RichColumn,
+    pub rich_to_confirm_or_reverify: RichColumn,
 }
 
 impl Spreadsheet {
-    pub const fn new(sheet: ValueRange, rich_confirmations_new_325: RichColumn) -> Self {
+    pub const fn new(
+        sheet: ValueRange,
+        rich_confirmations_new_325: RichColumn,
+        rich_to_confirm_or_reverify: RichColumn,
+    ) -> Self {
         Self {
             sheet,
             rich_confirmations_new_325,
+            rich_to_confirm_or_reverify,
         }
     }
 
@@ -44,11 +50,25 @@ impl Spreadsheet {
             .values
             .iter()
             .zip(self.rich_confirmations_new_325.cells())
+            .zip(self.rich_to_confirm_or_reverify.cells())
             .enumerate()
             .map(
-                |(row_index, (spreadsheet_row, confirmations_new_325_cell))| {
-                    Dumb::create(row_index, spreadsheet_row, confirmations_new_325_cell)
+                |(
+                    row_index,
+                    ((spreadsheet_row, confirmations_new_325_cell), to_confirm_or_reverify_cell),
+                )| {
+                    Dumb::create(
+                        row_index,
+                        spreadsheet_row,
+                        confirmations_new_325_cell,
+                        to_confirm_or_reverify_cell,
+                    )
                 },
             )
+        // .map(
+        //     |(row_index, (spreadsheet_row, confirmations_new_325_cell))| {
+        //         Dumb::create(row_index, spreadsheet_row, confirmations_new_325_cell)
+        //     },
+        // )
     }
 }

@@ -50,10 +50,7 @@ mod tests {
             },
         },
     ],
-    wiki_disagreements: Some(
-        "Megaera".to_owned(),
-    ),
-    sources_with_tag_but_not_on_wiki: None,
+    to_confirm_or_reverify_drops_from: vec![],
     notes: Some(
         "We recently got video evidence of The Demon dropping from Kitava, the Destroyer in Lava Lake Map.\nBut Lava Lake Map was not on-Atlas in 3.17 Archnemesis.\nSo following GGG's rule, it must have had a secondary drop location -- presumably via `kitava_map_boss`, which applies to \"The Destroyer's Heart\" (the heart of Kitava, the Destroyer in Lava Lake) and \"Lord of the Grey\" in Belfry.\n\nSo presumably The Demon should also drop from Lord of the Grey, as some people had speculated in the past.\n3.23: Added Crater - is this now kitava_area? Or new tag? Patch notes indirectly confirmed that The Wrath and The Demon most likely share tags - is this an area tag or boss tag?".to_owned(),
     ),
