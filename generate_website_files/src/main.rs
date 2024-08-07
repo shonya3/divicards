@@ -5,7 +5,7 @@ use std::{
 };
 
 use card_element::DivinationCardElementData;
-use divcord::spreadsheet::Spreadsheet;
+use divcord::{spreadsheet::Spreadsheet, Record};
 use poe_data::PoeData;
 use serde::Serialize;
 
@@ -16,16 +16,17 @@ async fn main() {
     // load and parse
     let spreadsheet = Spreadsheet::load().await.unwrap();
     let poe_data = PoeData::load().await.unwrap();
-    let Ok(records) = divcord::records(&spreadsheet, &poe_data) else {
-        eprintln!("divcord::records parse Err. Scanning all possible errors with records_iter...");
-        for result in divcord::records_iter(&spreadsheet, &poe_data) {
-            if let Err(err) = result {
-                eprintln!("{err:?}");
-            }
-        }
 
-        std::process::exit(0);
-    };
+    println!("Parse divcord records");
+    let records = divcord::records_iter(&spreadsheet, &poe_data)
+        .filter_map(|result| match result {
+            Ok(record) => Some(record),
+            Err(err) => {
+                eprintln!("{err:?}");
+                None
+            }
+        })
+        .collect::<Vec<Record>>();
 
     let card_element = DivinationCardElementData::load().await.unwrap();
 
