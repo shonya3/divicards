@@ -1128,6 +1128,7 @@ dependencies = [
  "reqwest 0.12.5",
  "serde",
  "serde_json",
+ "slug",
  "strum",
  "strum_macros",
 ]

@@ -193,11 +193,11 @@ impl Source {
         let _types = String::from_utf8(buf).unwrap();
 
         let s = format!(
-            r#"export type SourceWithMember = {{ type: SourceType; id: string; kind: SourceWithMemberKind; min_level?: number; max_level?: number }};
+            r#"export type SourceWithMember = {{ type: SourceType; id: string; kind: SourceWithMemberKind; min_level?: number; max_level?: number; idSlug: string; typeSlug: string }};
 export type EmptySourceKind = 'empty-source';
 export type SourceWithMemberKind = 'source-with-member';
 export type Kind = EmptySourceKind | SourceWithMemberKind;
-export type EmptySource = {{ type: SourceType; id: string; kind: EmptySourceKind; min_level?: number; max_level?: number}};
+export type EmptySource = {{ type: SourceType; id: string; kind: EmptySourceKind; min_level?: number; max_level?: number; idSlug: string; typeSlug: string }};
 export type Source = SourceWithMember | EmptySource;
 export const SOURCE_TYPE_VARIANTS = {_types} as const;
 
@@ -222,12 +222,14 @@ impl Serialize for Source {
     where
         S: serde::Serializer,
     {
-        let mut source = serializer.serialize_struct("Source", 5)?;
+        let mut source = serializer.serialize_struct("Source", 7)?;
         let _type = self._type();
         let id = self.id();
 
         source.serialize_field("type", _type)?;
         source.serialize_field("id", &id)?;
+        source.serialize_field("idSlug", &slug::slugify(id))?;
+        source.serialize_field("typeSlug", &slug::slugify(_type))?;
 
         if _type == id {
             source.serialize_field("kind", "empty-source")?;
