@@ -5,10 +5,12 @@ import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 import '@shoelace-style/shoelace/dist/components/copy-button/copy-button.js';
 import { TabBadgeElement } from './tab-badge';
+import '@shoelace-style/shoelace/dist/components/alert/alert.js';
 
 import { LitElement, html, css, TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
+import SlAlert from '@shoelace-style/shoelace/dist/components/alert/alert.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -28,6 +30,8 @@ export class StashTabContainerElement extends LitElement {
 	@property() status: 'pending' | 'complete' = 'pending';
 	@property({ type: Object }) badge: NoItemsTab | null = null;
 
+	@query('sl-alert') scarabsSuccessAlert!: SlAlert;
+
 	constructor() {
 		super();
 		TabBadgeElement.define();
@@ -35,29 +39,57 @@ export class StashTabContainerElement extends LitElement {
 
 	protected render(): TemplateResult {
 		return html`<header class="header">
-				<div class="badge-and-copy">
-					${this.badge ? html`<wc-tab-badge as="button" .tab=${this.badge}></wc-tab-badge>` : null}
-					${this.tab
-						? html`<sl-copy-button
-								.value=${JSON.stringify(this.tab, null, 4)}
-								.copyLabel=${`Click to copy JSON of the tab`}
-								.successLabel=${`You copied JSON of the tab`}
-								.errorLabel=${`Whoops, your browser doesn't support this!`}
-						  ></sl-copy-button>`
+				<div class="header-main">
+					<div class="badge-and-copy">
+						${this.badge ? html`<wc-tab-badge as="button" .tab=${this.badge}></wc-tab-badge>` : null}
+						${this.tab
+							? html`<sl-copy-button
+									.value=${JSON.stringify(this.tab, null, 4)}
+									.copyLabel=${`Click to copy JSON of the tab`}
+									.successLabel=${`You copied JSON of the tab`}
+									.errorLabel=${`Whoops, your browser doesn't support this!`}
+							  ></sl-copy-button>`
+							: null}
+					</div>
+					${this.status === 'complete' && this.tab
+						? this.tab.type === 'FragmentStash'
+							? html`<div>
+									<sl-button @click=${this.#onExtractScarabs}>Copy Scarabs</sl-button>
+							  </div>`
+							: html`<sl-button @click=${this.#emitExtractCards}>Extract cards sample</sl-button>`
 						: null}
+					<sl-icon-button name="x-lg" @click=${this.#emitClose} class="btn-close">X</sl-icon-button>
 				</div>
-				${this.status === 'complete'
-					? html`<sl-button @click=${this.#emitExtractCards}>Extract cards sample</sl-button>`
-					: null}
-				<sl-icon-button name="x-lg" @click=${this.#emitClose} class="btn-close">X</sl-icon-button>
+				<div class="alerts">
+					<sl-alert variant="success" duration="2000" closable>
+						<sl-icon slot="icon" name="info-circle"></sl-icon>
+						Scarabs copied to your cliboard!
+					</sl-alert>
+				</div>
 			</header>
 			<div class="tab-box">
 				${this.tab && this.status === 'complete'
 					? html`<poe-stash-tab .tab=${this.tab}></poe-stash-tab>`
 					: html`<sl-spinner></sl-spinner>`}
-			</div>`;
+			</div> `;
 	}
 
+	#onExtractScarabs() {
+		if (!this.tab) {
+			console.error('Cannot extract scarabs because there is no tab data');
+			return;
+		}
+		const s = this.tab.items
+			.filter(item => item.baseType.includes('Scarab'))
+			.sort((a, b) => (b.stackSize ?? 0) - (a.stackSize ?? 0))
+			.map(scarab => {
+				return `${scarab.baseType},${scarab.stackSize}`;
+			})
+			.join('\n');
+		navigator.clipboard.writeText(s).then(() => {
+			this.scarabsSuccessAlert.show();
+		});
+	}
 	#emitExtractCards() {
 		this.dispatchEvent(new Event('extract-cards'));
 	}
@@ -88,7 +120,7 @@ export class StashTabContainerElement extends LitElement {
 			justify-content: center;
 		}
 
-		.header {
+		.header-main {
 			padding: 1rem;
 			display: flex;
 			background-color: var(--sl-color-gray-50);

@@ -1,0 +1,3544 @@
+{
+	"id": "0e418275c4",
+	"index": 16,
+	"items": [
+		{
+			"baseType": "Influencing Scarab of Hordes",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Influenced Monster Packs in Area have 40% increased Pack Size"],
+			"flavourText": ["Ideas cannot be contained."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiRWxkZXIiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/2bd3ed1eca/GreaterScarabElder.png",
+			"id": "99e5f089023beb0e75ebc82fecfbdea66ed1c5dbabbefbc0a6081c9b0c157c34",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["8/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 8,
+			"typeLine": "Influencing Scarab of Hordes",
+			"verified": false,
+			"w": 1,
+			"x": 178,
+			"y": 0
+		},
+		{
+			"baseType": "Legion Scarab of Command",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Legion Factions in Area are accompanied by a General"],
+			"flavourText": ["Cut off the head and the snake will perish."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9BbHROb3JtYWxTY2FyYWJMZWdpb24iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/8c2976d5a7/AltNormalScarabLegion.png",
+			"id": "8c8d7ec4acddb0fd0b092afec85786a84c0793ec2c2c3d9475ae2ad19be3482f",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Legion Scarab of Command",
+			"verified": false,
+			"w": 1,
+			"x": 205,
+			"y": 0
+		},
+		{
+			"baseType": "Scarab of Bisection",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"You can select the Nullify Prefixes or Nullify Suffixes crafting options on the Map Device"
+			],
+			"flavourText": ["When something is cut in half, which half is the original?"],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiTWlzYzIiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/b0c70fb6c8/GreaterScarabMisc2.png",
+			"id": "b4dd6a38f03a5867088400ebb9de7c6a4f6753f6d871dd0332998e4aa9c31b2b",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Scarab of Bisection",
+			"verified": false,
+			"w": 1,
+			"x": 241,
+			"y": 1
+		},
+		{
+			"baseType": "Anarchy Scarab of Partnership",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Wild Rogue Exiles in Area have a 50% chance to appear in pairs"],
+			"flavourText": ["Among exiles, alliances shift and change constantly."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiQW5hcmNoeSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/08125ce822/GreaterScarabAnarchy.png",
+			"id": "2bee6fe5933d4a56ff1c2cc4d31678abc81780690b850e55edbf0bd886ac8700",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Anarchy Scarab of Partnership",
+			"verified": false,
+			"w": 1,
+			"x": 214,
+			"y": 0
+		},
+		{
+			"baseType": "Harvest Scarab of Cornucopia",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"If Area contains the Sacred Grove, it will contain up to 1 additional Tier 4 seed of each type, if possible"
+			],
+			"flavourText": ["The taller the tree, the better the fruit."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9UaWVyNFNjYXJhYkhhcnZlc3QiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/a32654b789/Tier4ScarabHarvest.png",
+			"id": "d1f8eb0205fc6732ee028adb05cc72289cd0aa4a4ff3aa985f5debd44d5e9143",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Harvest Scarab of Cornucopia",
+			"verified": false,
+			"w": 1,
+			"x": 228,
+			"y": 0
+		},
+		{
+			"baseType": "Essence Scarab of Adaptation",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Imprisoned Monsters released in Areas grant a random Essence Modifier to another Imprisoned Monster in the Area\nImprisoned Monsters in Areas have increased Difficulty and Reward for\neach Essence Modifier"
+			],
+			"flavourText": ["The crystalline lattice expands in directions alien to the mortal mind."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9BbHRUaWVyNFNjYXJhYkVzc2VuY2UiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/8dbe247549/AltTier4ScarabEssence.png",
+			"id": "b3f71f67a36f74b79a63b9d3fe8a7976536fdc37b76415453646747a98653df9",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Essence Scarab of Adaptation",
+			"verified": false,
+			"w": 1,
+			"x": 218,
+			"y": 1
+		},
+		{
+			"baseType": "Sulphite Scarab of Fumes",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Sulphite found in Map Area releases Enraging Fumes\nMonsters affected by Enraging Fumes have 50% increased Item Quantity\nSulphite in your maps is guarded by Monsters from the Azurite Mine"
+			],
+			"flavourText": ["When the land itself is sick, even the very ground rots and spills forth."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiU3VscGhpdGUiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/2a3855535e/GreaterScarabSulphite.png",
+			"id": "5e0e6f5d6072815071898ab1ac22dce9d143b317e931f82a58f004a045d488cf",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["2/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 2,
+			"typeLine": "Sulphite Scarab of Fumes",
+			"verified": false,
+			"w": 1,
+			"x": 182,
+			"y": 0
+		},
+		{
+			"baseType": "Sacrifice at Midnight",
+			"descrText": "Can be used in a personal Map Device.",
+			"flavourText": ["Look to our Queen, for she will lead us into the light."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9WYWFsMDEiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/005d9c56bb/Vaal01.png",
+			"id": "dede2bec5e19aa49f2ae0b609e86534e84e2a2a10c3b37fe5d0bac739af2ab0f",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/10", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Sacrifice at Midnight",
+			"verified": false,
+			"w": 1,
+			"x": 0,
+			"y": 0
+		},
+		{
+			"baseType": "Beyond Scarab of Resurgence",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Beyond Bosses in Area are enraged on low life\nBeyond Bosses in Area drop 100% increased Tainted Currency\nBeyond Portals in Area have 30% increased chance to spawn a Unique Boss"
+			],
+			"flavourText": ["They hunger."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9BbHRHcmVhdGVyU2NhcmFiQmV5b25kIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d007f87e7b/AltGreaterScarabBeyond.png",
+			"id": "bd334cb2050127acd646830278c46a57945343a71aa2567fcb14eb5de22e20d7",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Beyond Scarab of Resurgence",
+			"verified": false,
+			"w": 1,
+			"x": 240,
+			"y": 0
+		},
+		{
+			"baseType": "Offering to the Goddess",
+			"descrText": "Travel to the Aspirants' Plaza and spend this item to open the Eternal Labyrinth.",
+			"flavourText": [
+				"It is time for the Goddess to give her final verdict.\r",
+				"Your fate rests in her even hands."
+			],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9MYWJ5cmludGgiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/fb891dc265/Labyrinth.png",
+			"id": "d15a50c905ba06b812073ba169d2b964c0dbba97c46ed64aaf5ee7df716b9560",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"stackSize": 6,
+			"typeLine": "Offering to the Goddess",
+			"verified": false,
+			"w": 1,
+			"x": 27,
+			"y": 0
+		},
+		{
+			"baseType": "Delirium Scarab of Delusions",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Maps found in Area have layers of Delirium"],
+			"flavourText": ["What are you talking about?\r", "The Atlas was always like this."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9UaWVyNFNjYXJhYkRlbGlyaXVtIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/6416ee8493/Tier4ScarabDelirium.png",
+			"id": "f55b6f9257a2b25b33465fff2ff7625bfc077f3db95a666ed2aa1a5491b940db",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Delirium Scarab of Delusions",
+			"verified": false,
+			"w": 1,
+			"x": 251,
+			"y": 0
+		},
+		{
+			"baseType": "Splinter of Chayula",
+			"descrText": "Combine 100 splinters to create Chayula's Breachstone.",
+			"frameType": 5,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQnJlYWNoL0JyZWFjaFNoYXJkQ2hhb3MiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/873da59e9c/BreachShardChaos.png",
+			"id": "50c688152c8e00d0de8ab456402cbc99c4018459089e36dcacd17cfaee596256",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 100,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["26/100", 0]]
+				}
+			],
+			"stackSize": 26,
+			"typeLine": "Splinter of Chayula",
+			"verified": false,
+			"w": 1,
+			"x": 26,
+			"y": 0
+		},
+		{
+			"baseType": "Titanic Scarab of Legend",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Unique Monsters in Area have 2 additional Monster Modifiers"],
+			"flavourText": ["Power accumulates."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiVW5pcXVlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/6ec6815d00/GreaterScarabUnique.png",
+			"id": "0c9eb733bc301055773f44121965de5a90a3d52d7b1530c03681b8236d8fb20e",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["2", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Titanic Scarab of Legend",
+			"verified": false,
+			"w": 1,
+			"x": 171,
+			"y": 0
+		},
+		{
+			"baseType": "Scarab of Divinity",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Up to 2 additional Rare Monsters in Area will be Pantheon-Touched\nApparitions spawned by Pantheon-Touched Monsters deal 100% increased damage"
+			],
+			"flavourText": ["Faith transforms."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJNaXNjIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/a4e827f718/NormalScarabMisc.png",
+			"id": "80706926e4a1e87d2d889c42ed6f2e8fdeae840e91d745ed09fdc7d243a143b5",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["2/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["2", 0]]
+				}
+			],
+			"stackSize": 2,
+			"typeLine": "Scarab of Divinity",
+			"verified": false,
+			"w": 1,
+			"x": 251,
+			"y": 1
+		},
+		{
+			"baseType": "Splinter of Uul-Netol",
+			"descrText": "Combine 100 Splinters to create Uul-Netol's Breachstone.",
+			"frameType": 5,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQnJlYWNoL0JyZWFjaFNoYXJkUGh5c2ljYWwiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/310aff1de6/BreachShardPhysical.png",
+			"id": "dad7873b60daef99fa5452445dae10ce6fbde2c9779d3d7a9c18d7558fdcc99c",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 100,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["63/100", 0]]
+				}
+			],
+			"stackSize": 63,
+			"typeLine": "Splinter of Uul-Netol",
+			"verified": false,
+			"w": 1,
+			"x": 25,
+			"y": 0
+		},
+		{
+			"baseType": "Essence Scarab of Ascent",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Essences found in Area are a tier higher"],
+			"flavourText": ["A more perfect facet cannot be achieved."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJFc3NlbmNlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/3f918a4115/NormalScarabEssence.png",
+			"id": "3930bf7003bb5a1c0718a823aaed6d57a7275d88dbff00ed11c4fabfce6a7fcc",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["2/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 2,
+			"typeLine": "Essence Scarab of Ascent",
+			"verified": false,
+			"w": 1,
+			"x": 216,
+			"y": 0
+		},
+		{
+			"baseType": "Abyss Scarab of Edifice",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Abysses in Area that do not lead to an Abyssal Depths lead to a Stygian Spire\nAbysses in Area spawn Hoards as they travel"
+			],
+			"flavourText": ["Their empires ghastly and gaunt glitter with gold."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiQWJ5c3MiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/e6bcf6b93d/GreaterScarabAbyss.png",
+			"id": "51154e2e411e3124b320f631c5b1be019efc69ac753c697a8f2193e9e3e90d79",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Abyss Scarab of Edifice",
+			"verified": false,
+			"w": 1,
+			"x": 211,
+			"y": 0
+		},
+		{
+			"baseType": "Ultimatum Scarab of Catalysing",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Ultimatum Encounters in Area will only offer Catalysts\nas Rewards to the Map Owner"],
+			"flavourText": ["Most regret finding out how the powder is made."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9UaWVyNFNjYXJhYlVsdGltYXR1bSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/67b8b8b39c/Tier4ScarabUltimatum.png",
+			"id": "9d32fa29cea948b33a313609e0b99341b00a24c7cc1a4e6c2f5cc76bd8b6b79e",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Ultimatum Scarab of Catalysing",
+			"verified": false,
+			"w": 1,
+			"x": 245,
+			"y": 0
+		},
+		{
+			"baseType": "Essence Scarab",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains 2 additional Imprisoned Monsters"],
+			"flavourText": ["It is perfectly safe, the creatures trapped inside couldn't possibly still be living."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJFc3NlbmNlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/c9f153a8cf/LesserScarabEssence.png",
+			"id": "25a4a4bfac0ae81c0128f2b4713f8511b6fe8ac31bf6987504b7b4443d79c9aa",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["8/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["5", 0]]
+				}
+			],
+			"stackSize": 8,
+			"typeLine": "Essence Scarab",
+			"verified": false,
+			"w": 1,
+			"x": 215,
+			"y": 0
+		},
+		{
+			"baseType": "Scarab of Wisps",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Monsters in Area have a chance to be Empowered by 2000 Wildwood Wisps"],
+			"flavourText": ["The Draíocht connects everything that lives."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiTWlzYzEiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/b96cb43b23/GreaterScarabMisc1.png",
+			"id": "75c6826eb5d180d7be63faa399b8b892bc3724e82f82de381ff43dc4ea5943bc",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["2/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["2", 0]]
+				}
+			],
+			"stackSize": 2,
+			"typeLine": "Scarab of Wisps",
+			"verified": false,
+			"w": 1,
+			"x": 239,
+			"y": 1
+		},
+		{
+			"baseType": "Harbinger Scarab",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains 3 additional Harbingers"],
+			"flavourText": ["Their troops came in numbers uncountable and from lands unknown."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJIYXJiaW5nZXJzIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/1940157b44/LesserScarabHarbingers.png",
+			"id": "207ea979ac43b71fb8eb036e6d0b744a6ef97e8abdaa10986c5719f9d36c6d58",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["4/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["4", 0]]
+				}
+			],
+			"stackSize": 4,
+			"typeLine": "Harbinger Scarab",
+			"verified": false,
+			"w": 1,
+			"x": 194,
+			"y": 0
+		},
+		{
+			"baseType": "Scarab of Stability",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Portals to Area have a 50% chance to not be consumed on use"],
+			"flavourText": ["Astonishing! A means to sustain the connection..."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9UaWVyNFNjYXJhYk1pc2MiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/42e3a0fccd/Tier4ScarabMisc.png",
+			"id": "cc1a4f6be7e53a137ef206a1de36e57f30c37f3ea26373d4d37d836def53a0c4",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["2/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 2,
+			"typeLine": "Scarab of Stability",
+			"verified": false,
+			"w": 1,
+			"x": 249,
+			"y": 1
+		},
+		{
+			"baseType": "Torment Scarab",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Area is haunted by 3 additional Tormented Spirits\nTormented Spirits in Area have a 25% chance to\nbe set free when Possessed Monsters are slain"
+			],
+			"flavourText": ["Their crimes in life haunt you in death."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJUb3JtZW50IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/b4e843a49b/LesserScarabTorment.png",
+			"id": "395e52c7ba4800e7dc51fb273e5df3204fc02e7cda0878724d562a7b56f6f0d6",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["4/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["2", 0]]
+				}
+			],
+			"stackSize": 4,
+			"typeLine": "Torment Scarab",
+			"verified": false,
+			"w": 1,
+			"x": 186,
+			"y": 0
+		},
+		{
+			"baseType": "Legion Scarab of Officers",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Legion Factions in Area have 5 additional Sergeants"],
+			"flavourText": ["Even a battlefield has middle management."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJMZWdpb24iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/0edb9242f1/NormalScarabLegion.png",
+			"id": "2406c73e262e7726c5747f6d7b2824cd6c27a3e74f3329d33b1a94b44f428bf2",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Legion Scarab of Officers",
+			"verified": false,
+			"w": 1,
+			"x": 204,
+			"y": 0
+		},
+		{
+			"baseType": "Breach Scarab of Splintering",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Breach Monsters in Area drop 50% more Breach Splinters\nClasped Hands in Area drop 50% more Breach Splinters"
+			],
+			"flavourText": ["Bit by bit."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9BbHRHcmVhdGVyU2NhcmFiQnJlYWNoIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/e324a54cdc/AltGreaterScarabBreach.png",
+			"id": "ffdaf60917acb50036836a4c6cc4eafca423516d5091d7273bfc28ab823fc6e1",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["5/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["2", 0]]
+				}
+			],
+			"stackSize": 5,
+			"typeLine": "Breach Scarab of Splintering",
+			"verified": false,
+			"w": 1,
+			"x": 162,
+			"y": 0
+		},
+		{
+			"baseType": "Ambush Scarab of Hidden Compartments",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["15% Chance for Strongboxes in Area to be openable again"],
+			"flavourText": ["Beneath the obvious lies the real treasure..."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJTdHJvbmdib3hlcyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/46451362bc/NormalScarabStrongboxes.png",
+			"id": "0a54d8ed31716cd6d3904156f5dadc46460d0fd2bb71848eeb1b4604f35d4a0d",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["13/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 13,
+			"typeLine": "Ambush Scarab of Hidden Compartments",
+			"verified": false,
+			"w": 1,
+			"x": 190,
+			"y": 0
+		},
+		{
+			"baseType": "Ultimatum Scarab of Inscription",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Ultimatum Encounter rewards in Area offering Catalysts\nwill offer Inscribed Ultimatums to the Map Owner instead"
+			],
+			"flavourText": ["There is always a wager to be made... if you can afford it."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9BbHRUaWVyNFNjYXJhYlVsdGltYXR1bSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/6c6731cf8d/AltTier4ScarabUltimatum.png",
+			"id": "edebdbec33ddf30b1a112a37e92b5c076ee7c7dde6871dccb91b5e44d6ae84f2",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["2/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 2,
+			"typeLine": "Ultimatum Scarab of Inscription",
+			"verified": false,
+			"w": 1,
+			"x": 246,
+			"y": 0
+		},
+		{
+			"baseType": "Expedition Scarab of Runefinding",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Expedition Encounters in Area have 100% increased\nnumber of Runic Monster Markers"],
+			"flavourText": ["That which came from the stars longs to return."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJFeHBlZGl0aW9uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/a1f5997c7d/NormalScarabExpedition.png",
+			"id": "a9e4f92c7691b2b68b29044726847d9966f4a397da4886da39db06ac08ea79fa",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["5/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["2", 0]]
+				}
+			],
+			"stackSize": 5,
+			"typeLine": "Expedition Scarab of Runefinding",
+			"verified": false,
+			"w": 1,
+			"x": 199,
+			"y": 0
+		},
+		{
+			"baseType": "Horned Scarab of Glittering",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Players in Area gain increased Item Rarity and Item Quantity for each Monster slain recently, up to 200% and 100% respectively"
+			],
+			"flavourText": ["Wealth flows to those that shine brightest."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9TdXBlclNjYXJhYjYiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/0f282b3a1e/SuperScarab6.png",
+			"id": "58a74741055bfb833687038739860d8b6816912a9dbc8f97a5ee88dc42ee983d",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Horned Scarab of Glittering",
+			"verified": false,
+			"w": 1,
+			"x": 243,
+			"y": 1
+		},
+		{
+			"baseType": "Beyond Scarab of the Invasion",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Rare and Unique Monsters slain in Area create 8 to 12 additional Beyond Portals"],
+			"flavourText": ["The fated hour is almost nigh."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9UaWVyNFNjYXJhYkJleW9uZCIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/f3d0278af1/Tier4ScarabBeyond.png",
+			"id": "d5df93de567ef8aee043b1f883553518ec69c91d21670c117b1c97a98e8b385f",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["3/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 3,
+			"typeLine": "Beyond Scarab of the Invasion",
+			"verified": false,
+			"w": 1,
+			"x": 241,
+			"y": 0
+		},
+		{
+			"baseType": "Horned Scarab of Nemeses",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Rare Monsters in Area have 2 additional Modifiers"],
+			"flavourText": ["Glory draws ever tighter its own doom."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9TdXBlclNjYXJhYjIiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/f4c8c526ba/SuperScarab2.png",
+			"id": "a2a04b19f01773fc2c22ec6b8e084933e7ed8563e223b2632b74e75cdd256670",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Horned Scarab of Nemeses",
+			"verified": false,
+			"w": 1,
+			"x": 247,
+			"y": 1
+		},
+		{
+			"baseType": "Delirium Scarab of Paranoia",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Delirium Encounters in Area generate 2 additional Reward types"],
+			"flavourText": ["If it seems too good to be true..."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiRGVsaXJpdW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/c723c51ba6/GreaterScarabDelirium.png",
+			"id": "1763c72d6c5b26724288dd06b170c2664814fb3c55bb474234fc56f2e7a713dd",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["3/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["5", 0]]
+				}
+			],
+			"stackSize": 3,
+			"typeLine": "Delirium Scarab of Paranoia",
+			"verified": false,
+			"w": 1,
+			"x": 249,
+			"y": 0
+		},
+		{
+			"baseType": "Incursion Scarab of Champions",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Incursions in Area have a 35% chance for all Monsters to be at least Magic\nIncursions in Area have 15% increased Pack Size"
+			],
+			"flavourText": ["Only the best served in Atzoatl."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiSW5jdXJzaW9uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f6b60e9be1/GreaterScarabIncursion.png",
+			"id": "3324a4a5a475810867a2c5ad6eae00af2103b83193094b9b73e4f2538330373d",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["4/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["2", 0]]
+				}
+			],
+			"stackSize": 4,
+			"typeLine": "Incursion Scarab of Champions",
+			"verified": false,
+			"w": 1,
+			"x": 231,
+			"y": 0
+		},
+		{
+			"baseType": "Ultimatum Scarab",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains an Ultimatum Encounter"],
+			"flavourText": ["A challenge may be requested at any time."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJVbHRpbWF0dW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/e0bf2875db/LesserScarabUltimatum.png",
+			"id": "2b70182aabd72cba52438e44b2f962b12edf3af55c50e88183710e89c59b3f1a",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["5/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 5,
+			"typeLine": "Ultimatum Scarab",
+			"verified": false,
+			"w": 1,
+			"x": 242,
+			"y": 0
+		},
+		{
+			"baseType": "Betrayal Scarab of Intelligence",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["150% Increased Intelligence gained from\nImmortal Syndicate targets encountered in Area"],
+			"flavourText": ["Those that can never die fear only pain."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJCZXRyYXlhbCIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/01b158342c/NormalScarabBetrayal.png",
+			"id": "8166ca603f1bb6d2a4c731a7e89111404949874eb4444a3e5490efe388bdd093",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["4/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 4,
+			"typeLine": "Betrayal Scarab of Intelligence",
+			"verified": false,
+			"w": 1,
+			"x": 234,
+			"y": 0
+		},
+		{
+			"baseType": "Bestiary Scarab of the Herd",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains 5 additional Red Beasts if it contains Einhar"],
+			"flavourText": ["The First Ones ran rampant and free in the forests of old."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJCZWFzdHMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/0f4dc83dc5/NormalScarabBeasts.png",
+			"id": "3c9472eff87d95fd589583a9f90bdcc100c5c422cb25968bf079c3f673962411",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["2/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["2", 0]]
+				}
+			],
+			"stackSize": 2,
+			"typeLine": "Bestiary Scarab of the Herd",
+			"verified": false,
+			"w": 1,
+			"x": 173,
+			"y": 0
+		},
+		{
+			"baseType": "Anarchy Scarab of Gigantification",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Wild Rogue Exiles in Area have a 30% chance to be replaced with a Rogue Giant"],
+			"flavourText": ["The consumption of sulphite can cause strange growth."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJBbmFyY2h5IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/4165090d5d/NormalScarabAnarchy.png",
+			"id": "e86020a19f8c33b7836e125c1c2230482c9058f5a4990027aecf988f43701333",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["3/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["2", 0]]
+				}
+			],
+			"stackSize": 3,
+			"typeLine": "Anarchy Scarab of Gigantification",
+			"verified": false,
+			"w": 1,
+			"x": 213,
+			"y": 0
+		},
+		{
+			"baseType": "Incursion Scarab",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains Alva"],
+			"flavourText": ["Uncover the secrets of the Vaal one incursion at a time."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJJbmN1cnNpb24iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/44cc3c3c34/LesserScarabIncursion.png",
+			"id": "21a7ce222d9db1537d5b786ab45fb68b7b77f4797731828bb3cac6901e2646bb",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["6/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 6,
+			"typeLine": "Incursion Scarab",
+			"verified": false,
+			"w": 1,
+			"x": 229,
+			"y": 0
+		},
+		{
+			"baseType": "Timeless Vaal Splinter",
+			"descrText": "Combine 100 Splinters to create a Timeless Vaal Emblem.",
+			"frameType": 5,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9WYWFsU2hhcmQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/02b4b4473c/VaalShard.png",
+			"id": "aacfc646725e7be0dc3c488380bb68444509f1fe62f7d87e828385bdf77ea6f6",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 100,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["76/100", 0]]
+				}
+			],
+			"stackSize": 76,
+			"typeLine": "Timeless Vaal Splinter",
+			"verified": false,
+			"w": 1,
+			"x": 73,
+			"y": 0
+		},
+		{
+			"baseType": "Influencing Scarab of Conversion",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Tier 14+ Maps found in Area have a chance to drop as Shaper Guardian, Elder Guardian, Conqueror or Unique Synthesised Maps instead"
+			],
+			"flavourText": ["Memories resound in the Atlas, echoing forever."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9UaWVyNFNjYXJhYlNoYXBlciIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/1c759412df/Tier4ScarabShaper.png",
+			"id": "ed31ba2b60e898b4210852554f1ebb46c1b3522f5f2988fe6e60332dee61f459",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Influencing Scarab of Conversion",
+			"verified": false,
+			"w": 1,
+			"x": 179,
+			"y": 0
+		},
+		{
+			"baseType": "Influencing Scarab of the Elder",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Adds Elder Influence outcome to Area"],
+			"flavourText": ["Beyond the light lies only the void."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJFbGRlciIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/11cabe4d12/LesserScarabElder.png",
+			"id": "503754a39a6b44ac0a59e38bbf1a8153da530a8132d4149ec1e9a6541bc1c323",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["6/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 6,
+			"typeLine": "Influencing Scarab of the Elder",
+			"verified": false,
+			"w": 1,
+			"x": 177,
+			"y": 0
+		},
+		{
+			"baseType": "Essence Scarab of Calcification",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Rare monsters that are natural inhabitants of the Area are imprisoned by Essences"],
+			"flavourText": ["The crystals... can spread?"],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9UaWVyNFNjYXJhYkVzc2VuY2UiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/c12e415ec2/Tier4ScarabEssence.png",
+			"id": "f3c83973c3707dff2da0b1c42ba7c5009b3238b931eaf3da3cf8f05b8f0948e0",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Essence Scarab of Calcification",
+			"verified": false,
+			"w": 1,
+			"x": 218,
+			"y": 0
+		},
+		{
+			"baseType": "Timeless Eternal Empire Splinter",
+			"descrText": "Combine 100 Splinters to create a Timeless Eternal Emblem.",
+			"frameType": 5,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9FdGVybmFsRW1waXJlU2hhcmQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/ee92812083/EternalEmpireShard.png",
+			"id": "ac57ee05c7ca3f8503068c81f3c2c23f112b37db4e596bbac4dc2bafe0b829a0",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 100,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["53/100", 0]]
+				}
+			],
+			"stackSize": 53,
+			"typeLine": "Timeless Eternal Empire Splinter",
+			"verified": false,
+			"w": 1,
+			"x": 71,
+			"y": 0
+		},
+		{
+			"baseType": "Titanic Scarab",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Unique Monsters have 2% increased Toughness, Damage, Rarity and Quantity of items dropped per 1% increased Pack Size of Area"
+			],
+			"flavourText": ["What power lies in a name?"],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJVbmlxdWUiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/72516960f1/LesserScarabUnique.png",
+			"id": "94b131a80ca02559e4902076ec1e71b8c2036cd2ccc0e0c12068cb8c43a55854",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["8/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 8,
+			"typeLine": "Titanic Scarab",
+			"verified": false,
+			"w": 1,
+			"x": 169,
+			"y": 0
+		},
+		{
+			"baseType": "Cartography Scarab of Risk",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area has an additional random Modifier"],
+			"flavourText": ["What we see in the mirror can only be our own reflection."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJNYXBzIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/0baaf413d0/NormalScarabMaps.png",
+			"id": "3a65fbe36c3697ea25986425d3591db990736a7ece7c77b2fc9f35c853a6b0d4",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["2/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["5", 0]]
+				}
+			],
+			"stackSize": 2,
+			"typeLine": "Cartography Scarab of Risk",
+			"verified": false,
+			"w": 1,
+			"x": 165,
+			"y": 0
+		},
+		{
+			"baseType": "Breach Scarab of Resonant Cascade",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Breaches in Areas open and close 10% faster for each Breach already opened\nMonsters from Breaches in Areas have increased Difficulty and Reward for\neach Breach already opened"
+			],
+			"flavourText": ["Reality weakens with each new wound."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9BbHRUaWVyNFNjYXJhYkJyZWFjaCIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/aa58715219/AltTier4ScarabBreach.png",
+			"id": "5c8cdb97bb733cc73b2d5330313a8486a77dd51f77d9e3ccd0ce108ea0c5b5b9",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Breach Scarab of Resonant Cascade",
+			"verified": false,
+			"w": 1,
+			"x": 163,
+			"y": 1
+		},
+		{
+			"baseType": "Ultimatum Scarab of Bribing",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Ultimatum Monsters grant 150% increased Experience\nUltimatum Encounters grant rewards as though you completed 2 additional Rounds"
+			],
+			"flavourText": ["A trial is only as incorruptible as its judge."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJVbHRpbWF0dW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/f7845be27d/NormalScarabUltimatum.png",
+			"id": "b5caa18f01d5d7ed940ff55cbb54d946c84a06b184285acf12b62d1e86112bdf",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["4/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["2", 0]]
+				}
+			],
+			"stackSize": 4,
+			"typeLine": "Ultimatum Scarab of Bribing",
+			"verified": false,
+			"w": 1,
+			"x": 243,
+			"y": 0
+		},
+		{
+			"baseType": "Divination Scarab of Plenty",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Up to 3 Packs of Magic Monsters in Area have 800% increased\nchance to drop Divination Cards"
+			],
+			"flavourText": ["We create a thousand futures with every action."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJEaXZpbmF0aW9uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/7fb7abf05a/NormalScarabDivination.png",
+			"id": "c07ed8ffce0b531f0a71ca2eb464ff38efb2fcf7a7efbe97e34b776f95640cb5",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["2/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 2,
+			"typeLine": "Divination Scarab of Plenty",
+			"verified": false,
+			"w": 1,
+			"x": 184,
+			"y": 0
+		},
+		{
+			"baseType": "Breach Scarab of Lordship",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Breaches in Area each contain a Breachlord"],
+			"flavourText": ["Their kingdoms always seek expansion."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiQnJlYWNoIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/6c012fae5c/GreaterScarabBreach.png",
+			"id": "26dd5377830ac0c8c499984849f3bd2c84cf7d33c3ce431fdbfe555422db60a3",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Breach Scarab of Lordship",
+			"verified": false,
+			"w": 1,
+			"x": 161,
+			"y": 0
+		},
+		{
+			"baseType": "Splinter of Esh",
+			"descrText": "Combine 100 Splinters to create Esh's Breachstone.",
+			"frameType": 5,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQnJlYWNoL0JyZWFjaFNoYXJkTGlnaHRuaW5nIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/de619878b0/BreachShardLightning.png",
+			"id": "8eccabb5a613f8c472d4ac310a43d0946bcea072722149a1fefff7cfd61c52d1",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 100,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["71/100", 0]]
+				}
+			],
+			"stackSize": 71,
+			"typeLine": "Splinter of Esh",
+			"verified": false,
+			"w": 1,
+			"x": 24,
+			"y": 0
+		},
+		{
+			"baseType": "Divine Vessel",
+			"descrText": "Can be used in a personal Map Device, allowing you to capture the Soul of the Map's Boss. The Vessel containing the captured Soul can be retrieved from the Map Device. You must be in the Map when the boss is defeated.",
+			"explicitMods": [
+				"Unique Boss deals 10% increased Damage\r\nUnique Boss has 10% increased Attack and Cast Speed\r\nUnique Boss has 10% increased Life\r\nUnique Boss has 20% increased Area of Effect"
+			],
+			"flavourText": [
+				"Power is a curious thing. \r",
+				"It can be contained, hidden, locked away, \r",
+				"and yet it always breaks free."
+			],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9TaW5GbGFza0VtcHR5IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/65ed329fe5/SinFlaskEmpty.png",
+			"id": "3120c54f091b5d82eba584a78487c523ae012c02d96cf6948c37720e2a70e9e4",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"stackSize": 12,
+			"typeLine": "Divine Vessel",
+			"verified": false,
+			"w": 1,
+			"x": 16,
+			"y": 0
+		},
+		{
+			"baseType": "Sacrifice at Dusk",
+			"descrText": "Can be used in a personal Map Device.",
+			"flavourText": ["The Vaal shall never fear the setting of our sun."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9WYWFsMDQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/6c797c0f93/Vaal04.png",
+			"id": "b195dd5a52fe7c28e3cca7cb15745aa1c6bb3a31daac7c0cc401279a36f5c537",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["7/10", 0]]
+				}
+			],
+			"stackSize": 7,
+			"typeLine": "Sacrifice at Dusk",
+			"verified": false,
+			"w": 1,
+			"x": 3,
+			"y": 0
+		},
+		{
+			"baseType": "Sacrifice at Dawn",
+			"descrText": "Can be used in a personal Map Device.",
+			"flavourText": ["Only those who aspire can dare to hope."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9WYWFsMDIiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/2e0739455f/Vaal02.png",
+			"id": "b2ae5f42e17f7b258c8afc98c2ea9cf3021c188c37ccf569185d480cd6ed00a2",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["8/10", 0]]
+				}
+			],
+			"stackSize": 8,
+			"typeLine": "Sacrifice at Dawn",
+			"verified": false,
+			"w": 1,
+			"x": 1,
+			"y": 0
+		},
+		{
+			"baseType": "Domination Scarab of Apparitions",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains 2 additional Apparition Shrines"],
+			"flavourText": ["Some paths to power lead only to madness."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJEb21pbmF0aW9uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/9ef9fd8595/NormalScarabDomination.png",
+			"id": "f08c352e4e6e943926cf1705d7fcdbac098ad3351914ff18b4e8fce21c652b4f",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["2/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 2,
+			"typeLine": "Domination Scarab of Apparitions",
+			"verified": false,
+			"w": 1,
+			"x": 220,
+			"y": 0
+		},
+		{
+			"baseType": "Blight Scarab of the Blightheart",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Blight Encounters in Area have one Blighted Chest\nBlight Encounters in Area spawn many more waves of Enemies\nBlighted Chests in Area grow larger and more\nrewarding the more Blighted Enemies are slain"
+			],
+			"flavourText": ["The core grows larger with each cycle, doomed to spill forth..."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiQmxpZ2h0IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/cf36f28d45/GreaterScarabBlight.png",
+			"id": "9716ceba907225203715491bfc1c549153ee7f31f1d1c4d75465e49a49efd0eb",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Blight Scarab of the Blightheart",
+			"verified": false,
+			"w": 1,
+			"x": 254,
+			"y": 0
+		},
+		{
+			"baseType": "Sacrifice at Noon",
+			"descrText": "Can be used in a personal Map Device.",
+			"flavourText": ["The light without pales in comparison to the light within."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9WYWFsMDMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/85d03a6bbf/Vaal03.png",
+			"id": "5babc603b47d54aa5a34336c644a20d294dae8e94d019d3c57535db2f6c09c48",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["3/10", 0]]
+				}
+			],
+			"stackSize": 3,
+			"typeLine": "Sacrifice at Noon",
+			"verified": false,
+			"w": 1,
+			"x": 2,
+			"y": 0
+		},
+		{
+			"baseType": "Ritual Scarab of Wisps",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Ritual Altars in Area spawn a Wildwood Wisp\nWildwood Wisps grant 70% increased Tribute Gained to nearby Players"
+			],
+			"flavourText": ["Trust in the Draíocht, and you shall never be alone."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJSaXR1YWwiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/45dba85b5a/NormalScarabRitual.png",
+			"id": "edb55aad8b111b74cf39e85ea45702f781a7ac1b402293276b6cf979f56a685c",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["3/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 3,
+			"typeLine": "Ritual Scarab of Wisps",
+			"verified": false,
+			"w": 1,
+			"x": 224,
+			"y": 0
+		},
+		{
+			"baseType": "Ritual Scarab of Abundance",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Rituals in Area offer 100% increased Favours"],
+			"flavourText": ["He draws ever closer..."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiUml0dWFsIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/2e76a61fb9/GreaterScarabRitual.png",
+			"id": "81c8410697f412884a57cc1f84c94296ff19c63f8eb9a187cd4b829beefa8eef",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["3/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["2", 0]]
+				}
+			],
+			"stackSize": 3,
+			"typeLine": "Ritual Scarab of Abundance",
+			"verified": false,
+			"w": 1,
+			"x": 225,
+			"y": 0
+		},
+		{
+			"baseType": "Scarab of Adversaries",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains 4 additional Packs with Mirrored Rare Monsters"],
+			"flavourText": ["They stand against you with equal enmity."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9BbHRMZXNzZXJTY2FyYWJNaXNjIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/b51199868c/AltLesserScarabMisc.png",
+			"id": "25ad8f962e282131e8dbf99177029061cc435ca80bf81a36b79809259d5e6d18",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["4/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["2", 0]]
+				}
+			],
+			"stackSize": 4,
+			"typeLine": "Scarab of Adversaries",
+			"verified": false,
+			"w": 1,
+			"x": 252,
+			"y": 1
+		},
+		{
+			"baseType": "Cartography Scarab of the Multitude",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Area contains 8 to 12 additional packs of\nDifficult and Rewarding Monsters which drop 300% increased Maps"
+			],
+			"flavourText": ["There is no end, no horizon."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9BbHROb3JtYWxTY2FyYWJNYXBzIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/95a7a8097c/AltNormalScarabMaps.png",
+			"id": "c7446f651d1db9f01ed077d1b22676ed3b204534d282ea35e7dd396c20a73d8a",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["6/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["3", 0]]
+				}
+			],
+			"stackSize": 6,
+			"typeLine": "Cartography Scarab of the Multitude",
+			"verified": false,
+			"w": 1,
+			"x": 168,
+			"y": 0
+		},
+		{
+			"baseType": "Beyond Scarab of Haemophilia",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Beyond Portals in Area have 30% increased Merging Radius"],
+			"flavourText": ["Reality itself begins to bleed."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJCZXlvbmQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/66114ee2e9/NormalScarabBeyond.png",
+			"id": "20a8b2aa712ce233d512d1d67f85545d347bb71ab3a8242a7e4bdfabcb98a1e4",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["6/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["2", 0]]
+				}
+			],
+			"stackSize": 6,
+			"typeLine": "Beyond Scarab of Haemophilia",
+			"verified": false,
+			"w": 1,
+			"x": 238,
+			"y": 0
+		},
+		{
+			"baseType": "Splinter of Tul",
+			"descrText": "Combine 100 Splinters to create Tul's Breachstone.",
+			"frameType": 5,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQnJlYWNoL0JyZWFjaFNoYXJkQ29sZCIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/ef894cc215/BreachShardCold.png",
+			"id": "b9b678bb1e09b08d0da2b6de7d92a812aa27b04141c089dbe03d63795aafa525",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 100,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["92/100", 0]]
+				}
+			],
+			"stackSize": 92,
+			"typeLine": "Splinter of Tul",
+			"verified": false,
+			"w": 1,
+			"x": 23,
+			"y": 0
+		},
+		{
+			"baseType": "Sulphite Scarab",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains Niko\nMap owner gains 150% more Sulphite"],
+			"flavourText": ["Delve into darkness in search of the truth..."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJTdWxwaGl0ZSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/1e18c30014/LesserScarabSulphite.png",
+			"id": "bd9fba4af8e581bfca1f266e94c7e37ca33a5b763873fc2914db05126a3ce257",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["8/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 8,
+			"typeLine": "Sulphite Scarab",
+			"verified": false,
+			"w": 1,
+			"x": 180,
+			"y": 0
+		},
+		{
+			"baseType": "Harbinger Scarab of Obelisks",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Harbingers in Area spawn Empowered Obelisks\nEmpowered Obelisks drop Currency Shards when defeated"
+			],
+			"flavourText": ["They seek to establish an unknown pattern."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJIYXJiaW5nZXJzIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/640ad00ede/NormalScarabHarbingers.png",
+			"id": "484ca4ed4a8832bf62ccaa7c12daef52d8f3e25951a8443a5021aabb763388d9",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["2/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 2,
+			"typeLine": "Harbinger Scarab of Obelisks",
+			"verified": false,
+			"w": 1,
+			"x": 195,
+			"y": 0
+		},
+		{
+			"baseType": "Influencing Scarab of the Shaper",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Adds Shaper Influence outcome to Area"],
+			"flavourText": ["A sea of stars awaits those who dare imagine."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJTaGFwZXIiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/9e83e315c9/LesserScarabShaper.png",
+			"id": "288612e4f9ee1b2a7e649ca6af384193cc693371b1ed3a6984118cc9a989915f",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["9/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 9,
+			"typeLine": "Influencing Scarab of the Shaper",
+			"verified": false,
+			"w": 1,
+			"x": 176,
+			"y": 0
+		},
+		{
+			"baseType": "Delirium Scarab of Neuroses",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Delirium Encounters in Area contain all Unique Delirium Bosses\nCan only be used with Tier 11+ Maps"
+			],
+			"flavourText": ["Toothy grins shine in the dark."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9BbHRHcmVhdGVyU2NhcmFiRGVsaXJpdW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/e311aea0b6/AltGreaterScarabDelirium.png",
+			"id": "ff3d54b058f733ef5fc4e2769eecd0e7c79294589cc1ab32e26304c9912cbd9d",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["4/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 4,
+			"typeLine": "Delirium Scarab of Neuroses",
+			"verified": false,
+			"w": 1,
+			"x": 250,
+			"y": 0
+		},
+		{
+			"baseType": "Ritual Scarab of Selectiveness",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Rerolling Favours at Ritual Altars in Area has no cost the first 2 times\nRitual Altars in Area allow rerolling Favours 1 additional time"
+			],
+			"flavourText": ["Pick and choose which sacred tenets you prefer..."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJSaXR1YWwiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/744a25b9f9/LesserScarabRitual.png",
+			"id": "1c16687602d6c1eee469dfe83efaf343d8f616f80b6dd4a8800df2c380534fa2",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["9/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["2", 0]]
+				}
+			],
+			"stackSize": 9,
+			"typeLine": "Ritual Scarab of Selectiveness",
+			"verified": false,
+			"w": 1,
+			"x": 223,
+			"y": 0
+		},
+		{
+			"baseType": "Blight Scarab",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains a Blight Encounter"],
+			"flavourText": ["The tendrils creep and grow..."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJCbGlnaHQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/c35814598b/LesserScarabBlight.png",
+			"id": "82fd14bd3215d397e8ed5aa4b48e699ddfc6e3679c772c343160bd3285310a3d",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["11/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 11,
+			"typeLine": "Blight Scarab",
+			"verified": false,
+			"w": 1,
+			"x": 252,
+			"y": 0
+		},
+		{
+			"baseType": "Timeless Karui Splinter",
+			"descrText": "Combine 100 Splinters to create a Timeless Karui Emblem.",
+			"frameType": 5,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9LYXJ1aVNoYXJkIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/e9c55ce439/KaruiShard.png",
+			"id": "b8ef03a5f336c592e514848e7da16f07eca0f426a489f2a0b24d63b61858afa3",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 100,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["76/100", 0]]
+				}
+			],
+			"stackSize": 76,
+			"typeLine": "Timeless Karui Splinter",
+			"verified": false,
+			"w": 1,
+			"x": 69,
+			"y": 0
+		},
+		{
+			"baseType": "Cartography Scarab of Escalation",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["10% increased Maps found in Area for each Map Modifier affecting Area"],
+			"flavourText": ["Opportunity thrives where dreams are most perilous."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJNYXBzIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/c982c28d52/LesserScarabMaps.png",
+			"id": "4959dbdeeb8469838eda3f4c086847f2098d846221c7ecdcc26089d65d855cfc",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["7/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 7,
+			"typeLine": "Cartography Scarab of Escalation",
+			"verified": false,
+			"w": 1,
+			"x": 164,
+			"y": 0
+		},
+		{
+			"baseType": "Abyss Scarab",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains an additional Abyss"],
+			"flavourText": ["They search forever for more souls to drag to the dark."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJBYnlzcyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/5afc346c84/LesserScarabAbyss.png",
+			"id": "069e4040f8e54a4ac201055c16c1a98cf174bd49dec63d82a5fd91bf2e28ebff",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["8/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["2", 0]]
+				}
+			],
+			"stackSize": 8,
+			"typeLine": "Abyss Scarab",
+			"verified": false,
+			"w": 1,
+			"x": 208,
+			"y": 0
+		},
+		{
+			"baseType": "Bestiary Scarab",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains Einhar"],
+			"flavourText": ["The Beastmaster answers the call."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJCZWFzdHMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/ea23afd0ff/LesserScarabBeasts.png",
+			"id": "abf68aa1dc4ea0decb0030cc13add47b446e23f0ceaeacdf6bd3c337a76c82ac",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["8/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 8,
+			"typeLine": "Bestiary Scarab",
+			"verified": false,
+			"w": 1,
+			"x": 172,
+			"y": 0
+		},
+		{
+			"baseType": "Scarab of Monstrous Lineage",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["40% increased Magic Pack Size"],
+			"flavourText": ["The bloodlines evolve faster than they can be culled."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJNaXNjIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d89cac7adf/LesserScarabMisc.png",
+			"id": "aa2824119a1f37a1c07d91710cf751374eec76fd4bc1c1cc62a0ba412983fbe8",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["14/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 14,
+			"typeLine": "Scarab of Monstrous Lineage",
+			"verified": false,
+			"w": 1,
+			"x": 253,
+			"y": 1
+		},
+		{
+			"baseType": "Incursion Scarab of Invasion",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains 12-16 additional packs of Incursion Monsters"],
+			"flavourText": ["A gate, once opened, may swing in either direction."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJJbmN1cnNpb24iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/992c5f7548/NormalScarabIncursion.png",
+			"id": "6b15c20a49a1612240907e0824dde85e99bbdff45791fa14ef8215bc8c5ecbca",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["4/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["3", 0]]
+				}
+			],
+			"stackSize": 4,
+			"typeLine": "Incursion Scarab of Invasion",
+			"verified": false,
+			"w": 1,
+			"x": 230,
+			"y": 0
+		},
+		{
+			"baseType": "Harvest Scarab",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains the Sacred Grove"],
+			"flavourText": ["Hidden routes lead to vales of shadow and light..."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJIYXJ2ZXN0IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/0951fed47e/LesserScarabHarvest.png",
+			"id": "f327b1cb84469a398b3e9e0992a0d7b3c93ffc0b4cf8b17fbf554ee62661ba20",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["6/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 6,
+			"typeLine": "Harvest Scarab",
+			"verified": false,
+			"w": 1,
+			"x": 226,
+			"y": 0
+		},
+		{
+			"baseType": "Beyond Scarab",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Slaying enemies close together in Area can attract monsters from Beyond this realm"],
+			"flavourText": ["The silent wall and the raging storm oppose the endless swarm."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJCZXlvbmQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/ff67da07b4/LesserScarabBeyond.png",
+			"id": "9f5b01f70ec434838ba1b9c3981a7ab510c9ac1902d78dc12cfa40911377ea7a",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["5/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 5,
+			"typeLine": "Beyond Scarab",
+			"verified": false,
+			"w": 1,
+			"x": 237,
+			"y": 0
+		},
+		{
+			"baseType": "Harbinger Scarab of Warhoards",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Currency shards dropped by Harbingers in Area are duplicated"],
+			"flavourText": ["For those who can leverage it, war can be as much a machine of profit as it is death."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9UaWVyNFNjYXJhYkhhcmJpbmdlcnMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/81caefbf3f/Tier4ScarabHarbingers.png",
+			"id": "3856b9d911c99b39062a894b5c15c909764db29aef15f977de19275fa8a1255c",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["4/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 4,
+			"typeLine": "Harbinger Scarab of Warhoards",
+			"verified": false,
+			"w": 1,
+			"x": 197,
+			"y": 0
+		},
+		{
+			"baseType": "Delirium Scarab",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains a Mirror of Delirium"],
+			"flavourText": ["A perfectly innocuous Scarab that does nothing at all."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJEZWxpcml1bSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/ccb0e23ff2/LesserScarabDelirium.png",
+			"id": "4128fb7a4e1b3e3d0f3edfd25f2a35721b75abcaac8d928136f585caf7cc560c",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["10/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 10,
+			"typeLine": "Delirium Scarab",
+			"verified": false,
+			"w": 1,
+			"x": 247,
+			"y": 0
+		},
+		{
+			"baseType": "Legion Scarab",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains an additional Legion Encounter"],
+			"flavourText": ["What good is peace to a warrior?"],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJMZWdpb24iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/0006525c3c/LesserScarabLegion.png",
+			"id": "1f6d01bb9b0db731665cdf3a816fd271ef078c24c38ef325192cefaa9fce702c",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["5/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["5", 0]]
+				}
+			],
+			"stackSize": 5,
+			"typeLine": "Legion Scarab",
+			"verified": false,
+			"w": 1,
+			"x": 203,
+			"y": 0
+		},
+		{
+			"baseType": "Delirium Scarab of Mania",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Delirium Reward Meters fill 100% faster in Area\nDelirium in Area increases 50% faster with distance from the mirror"
+			],
+			"flavourText": ["They're so loud! Why are they so loud?!\r", "All you can do is scream!"],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJEZWxpcml1bSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/9f8ae4cdb7/NormalScarabDelirium.png",
+			"id": "ea3fcf9a4bdab2ce6b78e888b30cbaf347f0192881e537db9714e99b02c6fc75",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["3/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["2", 0]]
+				}
+			],
+			"stackSize": 3,
+			"typeLine": "Delirium Scarab of Mania",
+			"verified": false,
+			"w": 1,
+			"x": 248,
+			"y": 0
+		},
+		{
+			"baseType": "Scarab of Hunted Traitors",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains Hunted Traitors"],
+			"flavourText": ["Nothing is as unforgiveable."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiTWlzYyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/dfed2f59a3/GreaterScarabMisc.png",
+			"id": "b557e4e1db6ab62b5de815924267780d5c0861aea602222ecb61de93d36ba90e",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["4/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 4,
+			"typeLine": "Scarab of Hunted Traitors",
+			"verified": false,
+			"w": 1,
+			"x": 250,
+			"y": 1
+		},
+		{
+			"baseType": "Betrayal Scarab",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains Jun"],
+			"flavourText": ["The Syndicate must pay for what they have done."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJCZXRyYXlhbCIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/26d3ff70f1/LesserScarabBetrayal.png",
+			"id": "01f4deceff999e38cc20af0b20d5a45f88d49461a8b4f3c6e9b77e677d431b36",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["6/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 6,
+			"typeLine": "Betrayal Scarab",
+			"verified": false,
+			"w": 1,
+			"x": 233,
+			"y": 0
+		},
+		{
+			"baseType": "Domination Scarab",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains 2 additional Shrines"],
+			"flavourText": ["A simple exchange. Blood for power."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJEb21pbmF0aW9uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/56e13db37d/LesserScarabDomination.png",
+			"id": "4cfc4a0ee506156bfc522866070e4221df07d1e8ad8050157d3db97d873f6168",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["12/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["4", 0]]
+				}
+			],
+			"stackSize": 12,
+			"typeLine": "Domination Scarab",
+			"verified": false,
+			"w": 1,
+			"x": 219,
+			"y": 0
+		},
+		{
+			"baseType": "Torment Scarab of Peculiarity",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Tormented Spirits in Area are replaced with unusual variants"],
+			"flavourText": ["Now there's a blood-curdling wail I haven't heard before!"],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJUb3JtZW50IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/b93daed118/NormalScarabTorment.png",
+			"id": "d4cc7fb437974962511cc5d7b6318112b29f5d11b4c7b4c4009aeaa832e5c891",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["5/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 5,
+			"typeLine": "Torment Scarab of Peculiarity",
+			"verified": false,
+			"w": 1,
+			"x": 187,
+			"y": 0
+		},
+		{
+			"baseType": "Titanic Scarab of Treasures",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Unique Monsters in Area have 2 additional Rewards\nUnique Monsters in Area have 30% increased Toughness"
+			],
+			"flavourText": ["Greed is a trap of the mind."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJVbmlxdWUiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/774d92ac8e/NormalScarabUnique.png",
+			"id": "5473ca2ab7605259f014a47e420b7c297e0cfcf898dadbfeab58bd5cfff83e6f",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["2/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["3", 0]]
+				}
+			],
+			"stackSize": 2,
+			"typeLine": "Titanic Scarab of Treasures",
+			"verified": false,
+			"w": 1,
+			"x": 170,
+			"y": 0
+		},
+		{
+			"baseType": "Ambush Scarab of Potency",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["75% Increased effect of Explicit Modifiers on Strongboxes in Area"],
+			"flavourText": ["The locksmith dreams of building a better box."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiU3Ryb25nYm94ZXMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/8b46f6270a/GreaterScarabStrongboxes.png",
+			"id": "274811e44e00d48dc3065454fcf00331e22a18f35390f002b9e2aa0d8034f28d",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["3/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 3,
+			"typeLine": "Ambush Scarab of Potency",
+			"verified": false,
+			"w": 1,
+			"x": 191,
+			"y": 0
+		},
+		{
+			"baseType": "Divination Scarab of The Cloister",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Area contains 8 to 12 additional packs of Doedre's Devoted\nDoedre's Devoted have 1% additional chance to drop a Stacked Deck"
+			],
+			"flavourText": ["No disease can be contained forever."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJEaXZpbmF0aW9uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/ac84db8246/LesserScarabDivination.png",
+			"id": "4d9fc3c1fffdeccd4e065faea00c25900a2a6b35b26114047977cbf50efbaadc",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["11/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["5", 0]]
+				}
+			],
+			"stackSize": 11,
+			"typeLine": "Divination Scarab of The Cloister",
+			"verified": false,
+			"w": 1,
+			"x": 183,
+			"y": 0
+		},
+		{
+			"baseType": "Anarchy Scarab",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains 4 additional Rogue Exiles"],
+			"flavourText": ["On Wraeclast, it's kill or be killed."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJBbmFyY2h5IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/89174f2e33/LesserScarabAnarchy.png",
+			"id": "f2c796cdbf2123b4a7df3e1e345147b129773c7a92e2789bebd33731bc634b08",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["7/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["5", 0]]
+				}
+			],
+			"stackSize": 7,
+			"typeLine": "Anarchy Scarab",
+			"verified": false,
+			"w": 1,
+			"x": 212,
+			"y": 0
+		},
+		{
+			"baseType": "Harbinger Scarab of Regency",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Harbingers in Area have a 50% chance to be replaced by a powerful Harbinger Boss"],
+			"flavourText": ["The truly noble wage war from the front."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiSGFyYmluZ2VycyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/ce393cfd58/GreaterScarabHarbingers.png",
+			"id": "d1ab10f6cb897a2d502a2b4bcaa5b1a3bb34478c6d79b5203f593da7a7797289",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Harbinger Scarab of Regency",
+			"verified": false,
+			"w": 1,
+			"x": 196,
+			"y": 0
+		},
+		{
+			"baseType": "Expedition Scarab",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains an Expedition Encounter"],
+			"flavourText": ["They come from across the sea in search of ancient truth."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJFeHBlZGl0aW9uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/e9bb9fa480/LesserScarabExpedition.png",
+			"id": "399db0ad7121bf6e547a6028eacaea5244b74e981cdd64628b059e64303aba12",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["14/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 14,
+			"typeLine": "Expedition Scarab",
+			"verified": false,
+			"w": 1,
+			"x": 198,
+			"y": 0
+		},
+		{
+			"baseType": "Betrayal Scarab of Reinforcements",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Immortal Syndicate Members in Area have 50% increased chance to be accompanied by reinforcements"
+			],
+			"flavourText": ["Move and countermove."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiQmV0cmF5YWwiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/85f51a19b8/GreaterScarabBetrayal.png",
+			"id": "e976b724239f7eb5de31f68478cbf26c8fe8d8ccb10d47502fe4300d2b36aaed",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["6/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 6,
+			"typeLine": "Betrayal Scarab of Reinforcements",
+			"verified": false,
+			"w": 1,
+			"x": 235,
+			"y": 0
+		},
+		{
+			"baseType": "Essence Scarab of Stability",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Using a Remnant of Corruption in Area can only result in\nupgrading or transforming Essences"
+			],
+			"flavourText": [
+				"With the right tools and a precise hand, the manipulation of the crystals",
+				"can be made predictable."
+			],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiRXNzZW5jZSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/f476efd29d/GreaterScarabEssence.png",
+			"id": "a62efa67e3676e80f6cb86f996ecd46262cdd0feb0186db24d1038db22bf35f3",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["3/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 3,
+			"typeLine": "Essence Scarab of Stability",
+			"verified": false,
+			"w": 1,
+			"x": 217,
+			"y": 0
+		},
+		{
+			"baseType": "Ambush Scarab",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains 5 additional Strongboxes"],
+			"flavourText": ["Is it still an ambush if you're expecting it?"],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJTdHJvbmdib3hlcyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/5600ee7971/LesserScarabStrongboxes.png",
+			"id": "2f9ef84ebddde8c70db794319728e179ab5b318a5d85934434adc63ae530c2b0",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["7/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["3", 0]]
+				}
+			],
+			"stackSize": 7,
+			"typeLine": "Ambush Scarab",
+			"verified": false,
+			"w": 1,
+			"x": 189,
+			"y": 0
+		},
+		{
+			"baseType": "Timeless Templar Splinter",
+			"descrText": "Combine 100 Splinters to create a Timeless Templar Emblem.",
+			"frameType": 5,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9UZW1wbGFyU2hhcmQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/1c070c1aa4/TemplarShard.png",
+			"id": "17e75342495d290f0ed05c17a7be3818a330d4ff02b4184546f123d01578bfeb",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 100,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["16/100", 0]]
+				}
+			],
+			"stackSize": 16,
+			"typeLine": "Timeless Templar Splinter",
+			"verified": false,
+			"w": 1,
+			"x": 72,
+			"y": 0
+		},
+		{
+			"baseType": "Splinter of Xoph",
+			"descrText": "Combine 100 Splinters to create Xoph's Breachstone.",
+			"frameType": 5,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQnJlYWNoL0JyZWFjaFNoYXJkRmlyZSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/c0deb5799d/BreachShardFire.png",
+			"id": "46c7451895f5b4e49aaca3bbff3981023da29d79779e6073d5199f7e4c21ef4a",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 100,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["79/100", 0]]
+				}
+			],
+			"stackSize": 79,
+			"typeLine": "Splinter of Xoph",
+			"verified": false,
+			"w": 1,
+			"x": 22,
+			"y": 0
+		},
+		{
+			"baseType": "Timeless Maraketh Splinter",
+			"descrText": "Combine 100 Splinters to create a Timeless Maraketh Emblem.",
+			"frameType": 5,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9NYXJha2V0aFNoYXJkIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/06ccc00c64/MarakethShard.png",
+			"id": "6076e00bb9163b0468a0b788ddc8096379f91a2a8435aa24d786201142ba3f3d",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 100,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["4/100", 0]]
+				}
+			],
+			"stackSize": 4,
+			"typeLine": "Timeless Maraketh Splinter",
+			"verified": false,
+			"w": 1,
+			"x": 70,
+			"y": 0
+		},
+		{
+			"baseType": "Abyss Scarab of Multitudes",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Abysses in Area spawn 75% increased Monsters"],
+			"flavourText": ["They ceaselessly sprout from the murderous earth."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJBYnlzcyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/c78d645398/NormalScarabAbyss.png",
+			"id": "ac57d347382f85d012621d5a8944dfa4adeb3bef6872dc6a4abb6264b1b83b94",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["4/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["2", 0]]
+				}
+			],
+			"stackSize": 4,
+			"typeLine": "Abyss Scarab of Multitudes",
+			"verified": false,
+			"w": 1,
+			"x": 209,
+			"y": 0
+		},
+		{
+			"baseType": "Expedition Scarab of Verisium Powder",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": [
+				"Expedition Encounters in Area have 20% increased number of Explosives\n80% increased Explosive Radius"
+			],
+			"flavourText": ["A properly refined pinch makes all the difference."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiRXhwZWRpdGlvbiIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/19a2dff87d/GreaterScarabExpedition.png",
+			"id": "e6a112f0a6643c2b003c63132a685972df13c4692cf4b454ce73a83559c4fff2",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["5/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 5,
+			"typeLine": "Expedition Scarab of Verisium Powder",
+			"verified": false,
+			"w": 1,
+			"x": 200,
+			"y": 0
+		},
+		{
+			"baseType": "Cartography Scarab of Corruption",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Non-Unique Maps found in Area are Corrupted with 8 Modifiers"],
+			"flavourText": ["Corruption bleeds between realities."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiTWFwcyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/2567494a92/GreaterScarabMaps.png",
+			"id": "f992b453306f8a29cd57ce6e5642e0dc270ccce8bd80df9e63d7fc04ef5c3999",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["1/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["1", 0]]
+				}
+			],
+			"stackSize": 1,
+			"typeLine": "Cartography Scarab of Corruption",
+			"verified": false,
+			"w": 1,
+			"x": 167,
+			"y": 0
+		},
+		{
+			"baseType": "Breach Scarab",
+			"descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
+			"explicitMods": ["Area contains 2 additional Breaches"],
+			"flavourText": ["They are never far."],
+			"frameType": 0,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJCcmVhY2giLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/37bd40da6c/LesserScarabBreach.png",
+			"id": "096bfe09c4997e07f40a234fe2facdd9017c7e284d71f13060dfe26bd2cf3013",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Settlers",
+			"maxStackSize": 5000,
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 0,
+					"name": "Stack Size",
+					"type": 32,
+					"values": [["13/20", 0]]
+				},
+				{
+					"displayMode": 0,
+					"name": "Limit",
+					"type": 87,
+					"values": [["5", 0]]
+				}
+			],
+			"stackSize": 13,
+			"typeLine": "Breach Scarab",
+			"verified": false,
+			"w": 1,
+			"x": 159,
+			"y": 0
+		}
+	],
+	"metadata": {
+		"colour": "ffff99"
+	},
+	"name": "F",
+	"type": "FragmentStash"
+}
