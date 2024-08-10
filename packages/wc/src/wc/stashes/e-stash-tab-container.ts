@@ -53,9 +53,7 @@ export class StashTabContainerElement extends LitElement {
 					</div>
 					${this.status === 'complete' && this.tab
 						? this.tab.type === 'FragmentStash'
-							? html`<div>
-									<sl-button @click=${this.#onExtractScarabs}>Copy Scarabs</sl-button>
-							  </div>`
+							? html` <sl-button @click=${this.#onExtractScarabs}>Copy Scarabs</sl-button> `
 							: html`<sl-button @click=${this.#emitExtractCards}>Extract cards sample</sl-button>`
 						: null}
 					<sl-icon-button name="x-lg" @click=${this.#emitClose} class="btn-close">X</sl-icon-button>
@@ -63,7 +61,7 @@ export class StashTabContainerElement extends LitElement {
 				<div class="alerts">
 					<sl-alert variant="success" duration="2000" closable>
 						<sl-icon slot="icon" name="info-circle"></sl-icon>
-						Scarabs copied to your cliboard!
+						Scarabs copied to your clipboard!
 					</sl-alert>
 				</div>
 			</header>
