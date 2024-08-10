@@ -3,6 +3,7 @@ import 'poe-custom-elements/stash-tab.js';
 import '@shoelace-style/shoelace/dist/components/spinner/spinner.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
+import '@shoelace-style/shoelace/dist/components/copy-button/copy-button.js';
 import { TabBadgeElement } from './tab-badge';
 
 import { LitElement, html, css, TemplateResult } from 'lit';
@@ -34,7 +35,17 @@ export class StashTabContainerElement extends LitElement {
 
 	protected render(): TemplateResult {
 		return html`<header class="header">
-				${this.badge ? html`<wc-tab-badge as="button" .tab=${this.badge}></wc-tab-badge>` : null}
+				<div class="badge-and-copy">
+					${this.badge ? html`<wc-tab-badge as="button" .tab=${this.badge}></wc-tab-badge>` : null}
+					${this.tab
+						? html`<sl-copy-button
+								.value=${JSON.stringify(this.tab, null, 4)}
+								.copyLabel=${`Click to copy JSON of the tab`}
+								.successLabel=${`You copied JSON of the tab`}
+								.errorLabel=${`Whoops, your browser doesn't support this!`}
+						  ></sl-copy-button>`
+						: null}
+				</div>
 				${this.status === 'complete'
 					? html`<sl-button @click=${this.#emitExtractCards}>Extract cards sample</sl-button>`
 					: null}
@@ -85,6 +96,12 @@ export class StashTabContainerElement extends LitElement {
 			align-items: center;
 			justify-content: space-between;
 			min-height: 75px;
+		}
+
+		.badge-and-copy {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
 		}
 
 		sl-spinner {
