@@ -80,9 +80,7 @@ export class StashTabContainerElement extends LitElement {
 		const s = this.tab.items
 			.filter(item => item.baseType.includes('Scarab'))
 			.sort((a, b) => (b.stackSize ?? 0) - (a.stackSize ?? 0))
-			.map(scarab => {
-				return `${scarab.baseType},${scarab.stackSize}`;
-			})
+			.map(scarab => `${scarab.baseType},${scarab.stackSize}`)
 			.join('\n');
 		navigator.clipboard.writeText(s).then(() => {
 			this.scarabsSuccessAlert.show();
