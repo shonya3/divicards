@@ -35,42 +35,54 @@ async fn main() {
     // // card_element::images::download_card_images().await.unwrap();
     let spreadsheet = Spreadsheet::load().await.unwrap();
     let poe_data = PoeData::load().await.unwrap();
-    // let Ok(records) = divcord::records(&spreadsheet, &poe_data) else {
-    //     eprintln!("divcord::records parse Err. Scanning all possible errors with records_iter...");
-    //     for result in divcord::records_iter(&spreadsheet, &poe_data) {
-    //         if let Err(err) = result {
-    //             eprintln!("{err:?}");
-    //         }
-    //     }
-
-    //     std::process::exit(0);
-    // };
-
-    // std::fs::write("records.json", serde_json::to_string(&records).unwrap()).unwrap();
-
-    // let p = Prices::fetch(&poe::TradeLeague::Settlers).await.unwrap();
-    // println!("{p:#?}");
-
-    let mut records = vec![];
-    for result in divcord::records_iter(&spreadsheet, &poe_data) {
-        // if let Err(err) = result {
-        //     eprintln!("{err:?}");
-        // }
-
-        match result {
-            Ok(record) => records.push(record),
-            Err(err) => eprintln!("{err:?}"),
+    let Ok(records) = divcord::records(&spreadsheet, &poe_data) else {
+        eprintln!("divcord::records parse Err. Scanning all possible errors with records_iter...");
+        for result in divcord::records_iter(&spreadsheet, &poe_data) {
+            if let Err(err) = result {
+                eprintln!("{err:?}");
+            }
         }
-    }
+
+        std::process::exit(0);
+    };
+
     std::fs::write("records.json", serde_json::to_string(&records).unwrap()).unwrap();
 
-    // let d = DropsFrom {
-    //     name: "The Chamber of Sins Level 1/2 (A7)".to_owned(),
-    //     styles: FontStyles {
-    //         color: HexColor("#FFFFFF".to_owned()),
-    //         italic: true,
-    //         strikethrough: false,
-    //     },
-    // };
-    // divcord::parse::parse_one_drops_from(&d, dumb, poe_data)
+    let sources_hashmap: HashMap<String, Source> = records
+        .clone()
+        .into_iter()
+        .flat_map(|record| record.sources.into_iter().chain(record.verify_sources))
+        .collect::<HashSet<Source>>()
+        .into_iter()
+        .map(|source| (source.slug(), source))
+        .collect();
+
+    let sources_vec = records
+        .into_iter()
+        .flat_map(|record| record.sources.into_iter().chain(record.verify_sources))
+        .collect::<HashSet<Source>>();
+
+    std::fs::write(
+        "sources_obj.json",
+        serde_json::to_string(&sources_hashmap).unwrap(),
+    )
+    .unwrap();
+    std::fs::write(
+        "sources_arr.json",
+        serde_json::to_string(&sources_vec).unwrap(),
+    )
+    .unwrap();
+
+    // let mut records = vec![];
+    // for result in divcord::records_iter(&spreadsheet, &poe_data) {
+    //     // if let Err(err) = result {
+    //     //     eprintln!("{err:?}");
+    //     // }
+
+    //     match result {
+    //         Ok(record) => records.push(record),
+    //         Err(err) => eprintln!("{err:?}"),
+    //     }
+    // }
+    // std::fs::write("records.json", serde_json::to_string(&records).unwrap()).unwrap();
 }

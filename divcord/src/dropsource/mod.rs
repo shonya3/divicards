@@ -175,6 +175,10 @@ impl Source {
         }
     }
 
+    pub fn slug(&self) -> String {
+        slug::slugify(self.id())
+    }
+
     pub fn types() -> Vec<String> {
         let mut vec: Vec<String> = vec![];
         Source::iter().for_each(|source| match source {
