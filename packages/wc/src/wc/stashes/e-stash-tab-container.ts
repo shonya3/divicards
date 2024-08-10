@@ -53,7 +53,7 @@ export class StashTabContainerElement extends LitElement {
 					</div>
 					${this.status === 'complete' && this.tab
 						? this.tab.type === 'FragmentStash'
-							? html` <sl-button @click=${this.#onExtractScarabs}>Copy Scarabs</sl-button> `
+							? html` <sl-button @click=${this.#copyScarabs}>Copy Scarabs</sl-button> `
 							: html`<sl-button @click=${this.#emitExtractCards}>Extract cards sample</sl-button>`
 						: null}
 					<sl-icon-button name="x-lg" @click=${this.#emitClose} class="btn-close">X</sl-icon-button>
@@ -72,7 +72,7 @@ export class StashTabContainerElement extends LitElement {
 			</div> `;
 	}
 
-	#onExtractScarabs() {
+	#copyScarabs() {
 		if (!this.tab) {
 			console.error('Cannot extract scarabs because there is no tab data');
 			return;
