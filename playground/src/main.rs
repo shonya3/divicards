@@ -57,13 +57,45 @@ async fn main() {
         .map(|source| (source.slug(), source))
         .collect();
 
+    let map = sources_hashmap
+        .into_iter()
+        .map(|(source_slug, source)| {
+            (
+                source_slug,
+                EntryData {
+                    cards: cards_by_source(&source, &records, &poe_data),
+                    source,
+                },
+            )
+        })
+        .collect::<HashMap<_, _>>();
+
+    std::fs::write("sources.json", serde_json::to_string(&map).unwrap());
+}
+
+#[derive(Serialize, Debug)]
+struct EntryData {
+    source: Source,
+    cards: Vec<CardBySource>,
+}
+
+fn write_sources(records: Vec<Record>) {
+    let sources_hashmap: HashMap<String, Source> = records
+        .clone()
+        .into_iter()
+        .flat_map(|record| record.sources.into_iter().chain(record.verify_sources))
+        .collect::<HashSet<Source>>()
+        .into_iter()
+        .map(|source| (source.slug(), source))
+        .collect();
+
     let sources_vec = records
         .into_iter()
         .flat_map(|record| record.sources.into_iter().chain(record.verify_sources))
         .collect::<HashSet<Source>>();
 
     std::fs::write(
-        "sources_obj.json",
+        "sources.json",
         serde_json::to_string(&sources_hashmap).unwrap(),
     )
     .unwrap();
@@ -72,17 +104,4 @@ async fn main() {
         serde_json::to_string(&sources_vec).unwrap(),
     )
     .unwrap();
-
-    // let mut records = vec![];
-    // for result in divcord::records_iter(&spreadsheet, &poe_data) {
-    //     // if let Err(err) = result {
-    //     //     eprintln!("{err:?}");
-    //     // }
-
-    //     match result {
-    //         Ok(record) => records.push(record),
-    //         Err(err) => eprintln!("{err:?}"),
-    //     }
-    // }
-    // std::fs::write("records.json", serde_json::to_string(&records).unwrap()).unwrap();
 }
