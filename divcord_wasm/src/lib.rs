@@ -54,3 +54,8 @@ pub fn find_cards_by_source_types(types: JsValue, records: JsValue, poe_data: St
 
     serde_wasm_bindgen::to_value(&cards).unwrap()
 }
+
+#[wasm_bindgen]
+pub fn slug(s: String) -> String {
+    slug::slugify(s)
+}

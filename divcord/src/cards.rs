@@ -86,6 +86,7 @@ pub fn cards_by_source_types(
 
 #[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct Direct {
+    #[serde(skip_serializing)]
     pub source: Source,
     pub card: String,
     pub column: RichColumnVariant,
@@ -93,6 +94,7 @@ pub struct Direct {
 
 #[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct FromChild {
+    #[serde(skip_serializing)]
     pub source: Source,
     pub card: String,
     pub column: RichColumnVariant,
