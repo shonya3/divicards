@@ -19,6 +19,7 @@ serde_json = {workspace = true, optional = true}
 fetcher = {path = "../fetcher", optional = true}
 tokio = {workspace = true, optional = true}
 slug = "0.1.5"
+regex = "1.10.6"
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }

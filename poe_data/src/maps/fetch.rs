@@ -2,7 +2,10 @@ use super::icon::FetchMapIconError;
 use super::Map;
 use crate::consts::POEDB_MAPS_URL;
 use crate::maps::wiki::MapDataFromWiki;
+use playwright::api::{DocumentLoadState, ElementHandle, Page};
 use playwright::Playwright;
+use regex::Regex;
+use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use tokio::task::JoinHandle;
 
@@ -12,6 +15,7 @@ pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
 
     // Prepare Playwright context
     let playwright = Playwright::initialize().await.unwrap();
+    let playwright = Arc::new(playwright);
     let chrome = playwright.chromium();
     let browser = chrome.launcher().headless(false).launch().await.unwrap();
     let context = browser
@@ -23,7 +27,7 @@ pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
     let context = Arc::new(context);
 
     let poedb_available_maps =
-        load_poedb_non_unique_available_maplist(&context.new_page().await.unwrap()).await?;
+        load_poedb_non_unique_name_tier_list(&context.new_page().await?, &playwright).await?;
     let poedb_available_maps = Arc::new(poedb_available_maps);
     let mut tasks = vec![];
 
@@ -34,19 +38,31 @@ pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
     {
         let context = Arc::clone(&context);
         let poedb_available_maps = Arc::clone(&poedb_available_maps);
+        let playwright = Arc::clone(&playwright);
 
         let task: JoinHandle<Result<Vec<Map>, FetchMapsError>> = tokio::spawn(async move {
             let mut task_maps: Vec<Map> = vec![];
             let page = context.new_page().await.unwrap();
-            for MapDataFromWiki { name, tier } in wiki_maps_chunked {
+            for MapDataFromWiki { name, mut tier } in wiki_maps_chunked {
+                if name.as_str() == "Crater Map" {
+                    println!("Crater Map tier: {tier}");
+                }
                 let is_unique_map = !name.ends_with(" Map");
-                let is_available = is_unique_map || poedb_available_maps.contains(&name);
-                let icon = super::icon::get_map_icon(&name, &page).await?;
+
+                let poedb = poedb_available_maps
+                    .iter()
+                    .find(|poedb| poedb.name == name.as_str())
+                    .cloned();
+                if let Some(poedb) = &poedb {
+                    tier = poedb.tier;
+                }
+
+                let icon = super::icon::get_map_icon(&name, &page, &playwright).await?;
                 let map = Map {
                     slug: slug::slugify(&name),
                     name,
                     tier,
-                    available: is_available,
+                    available: is_unique_map || poedb.is_some(),
                     unique: is_unique_map,
                     icon: super::icon::poecdn_icon_url(&icon),
                 };
@@ -59,8 +75,9 @@ pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
         tasks.push(task);
     }
 
-    for task in tasks {
-        maps.extend(task.await.unwrap().unwrap());
+    for task_handle in tasks {
+        let task_maps = task_handle.await.unwrap()?;
+        maps.extend(task_maps);
     }
 
     Ok(maps)
@@ -72,6 +89,8 @@ pub enum FetchMapsError {
     FetchMapIcon(FetchMapIconError),
     Reqwest(reqwest::Error),
     MapsItemContainerNotFound,
+    NameElementNotFound,
+    ParseMapTier { name: String, tier_string: String },
 }
 
 impl From<Arc<playwright::Error>> for FetchMapsError {
@@ -92,27 +111,104 @@ impl From<reqwest::Error> for FetchMapsError {
     }
 }
 
-/// Loads map names from poedb
-async fn load_poedb_non_unique_available_maplist(
-    page: &playwright::api::Page,
-) -> Result<Vec<String>, FetchMapsError> {
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+pub struct MapNameTier {
+    pub name: String,
+    pub tier: u32,
+}
+
+/// Loads map names and tiers from poedb https://poedb.tw/us/Maps#MapsItem
+/// Skip the maps with no tier(i.e. not in current atlas).
+async fn load_poedb_non_unique_name_tier_list(
+    page: &Page,
+    _playwright: &Playwright,
+) -> Result<Vec<MapNameTier>, FetchMapsError> {
     page.goto_builder(POEDB_MAPS_URL)
-        .wait_until(playwright::api::DocumentLoadState::DomContentLoaded)
+        .wait_until(DocumentLoadState::DomContentLoaded)
         .goto()
         .await?;
-    let mut maps: Vec<String> = vec![];
+    println!("IN FUCN");
 
-    for map_block in page
+    async fn extract_map_name_tier(
+        map_container: &ElementHandle,
+    ) -> Result<Option<MapNameTier>, FetchMapsError> {
+        let Some(name) = map_container
+            .query_selector(".itemclass_map")
+            .await?
+            .ok_or(FetchMapsError::NameElementNotFound)?
+            .text_content()
+            .await?
+            .map(|text| text.trim().to_string())
+        else {
+            return Ok(None);
+        };
+
+        for property_block in map_container.query_selector_all(".property").await? {
+            let Some(text) = property_block.text_content().await? else {
+                continue;
+            };
+            let text = text.trim();
+            if !text.starts_with("Map Tier") {
+                continue;
+            }
+            let re = Regex::new(r"\d+").unwrap();
+            if let Some(first_match) = re.find(text) {
+                let tier: u32 =
+                    first_match
+                        .as_str()
+                        .parse()
+                        .map_err(|_| FetchMapsError::ParseMapTier {
+                            name: name.clone(),
+                            tier_string: text.to_owned(),
+                        })?;
+                return Ok(Some(MapNameTier { name, tier }));
+            }
+        }
+
+        Ok(None)
+    }
+
+    let mut vec: Vec<MapNameTier> = vec![];
+    for map_container in page
         .query_selector("#MapsItem")
         .await?
         .ok_or(FetchMapsError::MapsItemContainerNotFound)?
-        .query_selector_all(".itemclass_map")
+        .query_selector_all(".col")
         .await?
     {
-        if let Some(map_name) = map_block.text_content().await.unwrap() {
-            maps.push(map_name);
+        if let Some(name_tier) = extract_map_name_tier(&map_container).await? {
+            vec.push(name_tier);
         };
     }
-    maps.sort();
-    Ok(maps)
+
+    Ok(vec)
+}
+
+// Run with cargo test --features "fetch"
+#[cfg(test)]
+#[cfg(feature = "fetch")]
+mod tests {
+    use playwright::{api::Page, Playwright};
+
+    async fn create_playwright() -> (Page, Playwright) {
+        let playwright = Playwright::initialize().await.unwrap();
+        let chrome = playwright.chromium();
+        let browser = chrome.launcher().headless(false).launch().await.unwrap();
+        let context = browser
+            .context_builder()
+            .clear_user_agent()
+            .build()
+            .await
+            .unwrap();
+        let page = context.new_page().await.unwrap();
+        (page, playwright)
+    }
+
+    #[tokio::test]
+    #[cfg(feature = "fetch")]
+    async fn poedb_available_maps() {
+        let (page, playwright) = create_playwright().await;
+        let result = super::load_poedb_non_unique_name_tier_list(&page, &playwright).await;
+        assert!(result.unwrap().len() > 80);
+    }
 }
