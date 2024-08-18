@@ -49,8 +49,7 @@ pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
 
                 let poedb = poedb_available_maps
                     .iter()
-                    .find(|poedb| poedb.name == name.as_str())
-                    .cloned();
+                    .find(|poedb| poedb.name == name.as_str());
                 if let Some(poedb) = &poedb {
                     tier = poedb.tier;
                 }
