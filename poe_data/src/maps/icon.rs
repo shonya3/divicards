@@ -1,3 +1,4 @@
+use playwright::{api::Page, Playwright};
 use std::sync::Arc;
 
 #[derive(Debug)]
@@ -17,7 +18,8 @@ impl From<Arc<playwright::Error>> for FetchMapIconError {
 /// if you need a url.
 pub async fn get_map_icon(
     map: &str,
-    page: &playwright::api::Page,
+    page: &Page,
+    _playwright: &Playwright,
 ) -> Result<String, FetchMapIconError> {
     let url = poedb_page_url(map);
 
@@ -71,29 +73,31 @@ fn poedb_page_url(boss: &str) -> String {
     format!("https://poedb.tw/us/{name}")
 }
 
+// Run with cargo test --features "fetch"
 #[cfg(test)]
 #[cfg(feature = "fetch")]
 mod tests {
     use playwright::{api::Page, Playwright};
 
-    async fn create_page() -> Page {
+    async fn create_playwright() -> (Page, Playwright) {
         let playwright = Playwright::initialize().await.unwrap();
         let chrome = playwright.chromium();
-        let browser = chrome.launcher().headless(true).launch().await.unwrap();
+        let browser = chrome.launcher().headless(false).launch().await.unwrap();
         let context = browser
             .context_builder()
             .clear_user_agent()
             .build()
             .await
             .unwrap();
-        context.new_page().await.unwrap()
+        let page = context.new_page().await.unwrap();
+        (page, playwright)
     }
 
     #[tokio::test]
     #[cfg(feature = "fetch")]
     async fn map_icon() {
-        let page = create_page().await;
-        let icon = super::get_map_icon("Arachnid Tomb Map", &page)
+        let (page, playwright) = create_playwright().await;
+        let icon = super::get_map_icon("Arachnid Tomb Map", &page, &playwright)
             .await
             .unwrap();
         assert_eq!(icon.as_str(), "Art/2DItems/Maps/Atlas2Maps/New/Arachnid")
