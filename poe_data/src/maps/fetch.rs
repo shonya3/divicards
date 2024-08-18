@@ -27,7 +27,8 @@ pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
     let context = Arc::new(context);
 
     let poedb_available_maps =
-        load_poedb_non_unique_name_tier_list(&context.new_page().await?, &playwright).await?;
+        load_poedb_available_non_unique_name_tier_list(&context.new_page().await?, &playwright)
+            .await?;
     let poedb_available_maps = Arc::new(poedb_available_maps);
     let mut tasks = vec![];
 
@@ -119,7 +120,7 @@ pub struct MapNameTier {
 
 /// Loads map names and tiers from poedb https://poedb.tw/us/Maps#MapsItem
 /// Skip the maps with no tier(i.e. not in current atlas).
-async fn load_poedb_non_unique_name_tier_list(
+async fn load_poedb_available_non_unique_name_tier_list(
     page: &Page,
     _playwright: &Playwright,
 ) -> Result<Vec<MapNameTier>, FetchMapsError> {
@@ -127,7 +128,6 @@ async fn load_poedb_non_unique_name_tier_list(
         .wait_until(DocumentLoadState::DomContentLoaded)
         .goto()
         .await?;
-    println!("IN FUCN");
 
     async fn extract_map_name_tier(
         map_container: &ElementHandle,
@@ -208,7 +208,8 @@ mod tests {
     #[cfg(feature = "fetch")]
     async fn poedb_available_maps() {
         let (page, playwright) = create_playwright().await;
-        let result = super::load_poedb_non_unique_name_tier_list(&page, &playwright).await;
+        let result =
+            super::load_poedb_available_non_unique_name_tier_list(&page, &playwright).await;
         assert!(result.unwrap().len() > 80);
     }
 }
