@@ -45,9 +45,6 @@ pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
             let mut task_maps: Vec<Map> = vec![];
             let page = context.new_page().await.unwrap();
             for MapDataFromWiki { name, mut tier } in wiki_maps_chunked {
-                if name.as_str() == "Crater Map" {
-                    println!("Crater Map tier: {tier}");
-                }
                 let is_unique_map = !name.ends_with(" Map");
 
                 let poedb = poedb_available_maps
