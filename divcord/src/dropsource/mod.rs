@@ -212,9 +212,9 @@ impl Serialize for Source {
         source.serialize_field("typeSlug", &slug::slugify(_type))?;
 
         if _type == id {
-            source.serialize_field("kind", "empty-source")?;
+            source.serialize_field("kind", "category")?;
         } else {
-            source.serialize_field("kind", "source-with-member")?;
+            source.serialize_field("kind", "source")?;
         }
 
         source.end()
