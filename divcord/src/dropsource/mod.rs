@@ -42,18 +42,18 @@ impl<'de> Deserialize<'de> for Source {
             id: Option<String>,
             #[serde(rename = "type")]
             _type: String,
-            kind: SourceKind,
+            kind: Kind,
         }
 
         let JSSource { id, _type, kind } = JSSource::deserialize(deserializer)?;
         match kind {
-            SourceKind::EmptySource => match _type.parse::<Source>() {
+            Kind::Category => match _type.parse::<Source>() {
                 Ok(source) => Ok(source),
                 Err(_) => Err(de::Error::custom(format!(
                     "Could not deserialize Source. {_type}"
                 ))),
             },
-            SourceKind::SourceWithMember => {
+            Kind::Source => {
                 let Some(id) = id else {
                     return Err(de::Error::custom("No id field"));
                 };
@@ -177,12 +177,8 @@ impl Source {
         let _types = String::from_utf8(buf).unwrap();
 
         let s = format!(
-            r#"export type SourceWithMember = {{ type: SourceType; id: string; kind: SourceWithMemberKind; idSlug: string; typeSlug: string }};
-export type EmptySourceKind = 'empty-source';
-export type SourceWithMemberKind = 'source-with-member';
-export type Kind = EmptySourceKind | SourceWithMemberKind;
-export type EmptySource = {{ type: SourceType; id: string; kind: EmptySourceKind; idSlug: string; typeSlug: string }};
-export type Source = SourceWithMember | EmptySource;
+            r#"export type Source = {{ type: SourceType; typeSlug: string; idSlug: string; id: string; kind: Kind }};
+export type Kind = 'category' | 'source';
 export const SOURCE_TYPE_VARIANTS = {_types} as const;
 
 export type SourceType = (typeof SOURCE_TYPE_VARIANTS)[number];
@@ -194,11 +190,11 @@ export type SourceType = (typeof SOURCE_TYPE_VARIANTS)[number];
 }
 
 #[derive(Deserialize, Serialize)]
-pub enum SourceKind {
-    #[serde(rename = "empty-source")]
-    EmptySource,
-    #[serde(rename = "source-with-member")]
-    SourceWithMember,
+pub enum Kind {
+    #[serde(rename = "category")]
+    Category,
+    #[serde(rename = "source")]
+    Source,
 }
 
 impl Serialize for Source {
