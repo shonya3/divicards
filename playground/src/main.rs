@@ -46,31 +46,47 @@ async fn main() {
         std::process::exit(0);
     };
 
-    std::fs::write("records.json", serde_json::to_string(&records).unwrap()).unwrap();
+    let mut map: HashMap<String, Vec<SourceAndCards>> = HashMap::new();
+    for sourcetype in Source::types() {
+        let cards = cards_by_source_types(&[sourcetype.clone()], &records, &poe_data);
+        if cards.is_empty() {
+            println!("No cards for sourcetype {sourcetype}");
+            continue;
+        }
+        let mut entry = map.entry(cards[0].source.type_slug()).or_default();
+        entry.extend(cards);
+    }
 
-    let sources_hashmap: HashMap<String, Source> = records
-        .clone()
-        .into_iter()
-        .flat_map(|record| record.sources.into_iter().chain(record.verify_sources))
-        .collect::<HashSet<Source>>()
-        .into_iter()
-        .map(|source| (source.slug(), source))
-        .collect();
+    // let source_types = cards_by_source_types(&Source::types(), &records, &poe_data);
+    std::fs::write("source_types.json", serde_json::to_string(&map).unwrap()).unwrap();
 
-    let map = sources_hashmap
-        .into_iter()
-        .map(|(source_slug, source)| {
-            (
-                source_slug,
-                EntryData {
-                    cards: cards_by_source(&source, &records, &poe_data),
-                    source,
-                },
-            )
-        })
-        .collect::<HashMap<_, _>>();
+    // let mut sourcetypes_map: HashMap<String, >
 
-    std::fs::write("sources.json", serde_json::to_string(&map).unwrap());
+    // std::fs::write("records.json", serde_json::to_string(&records).unwrap()).unwrap();
+
+    // let sources_hashmap: HashMap<String, Source> = records
+    //     .clone()
+    //     .into_iter()
+    //     .flat_map(|record| record.sources.into_iter().chain(record.verify_sources))
+    //     .collect::<HashSet<Source>>()
+    //     .into_iter()
+    //     .map(|source| (source.slug(), source))
+    //     .collect();
+
+    // let map = sources_hashmap
+    //     .into_iter()
+    //     .map(|(source_slug, source)| {
+    //         (
+    //             source_slug,
+    //             EntryData {
+    //                 cards: cards_by_source(&source, &records, &poe_data),
+    //                 source,
+    //             },
+    //         )
+    //     })
+    //     .collect::<HashMap<_, _>>();
+
+    // std::fs::write("sources.json", serde_json::to_string(&map).unwrap());
 }
 
 #[derive(Serialize, Debug)]

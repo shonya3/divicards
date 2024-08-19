@@ -8,7 +8,7 @@ use crate::{
     },
 };
 use divi::IsCard;
-use poe_data::{cards::Card, PoeData};
+use poe_data::PoeData;
 use serde::{Deserialize, Serialize};
 use std::fmt::Display;
 
@@ -189,17 +189,6 @@ pub fn parse_record_dropsources(
     }
 
     // 4. Read greynotes(first column)
-    if dumb.greynote == GreyNote::GlobalDrop {
-        let Card {
-            min_level,
-            max_level,
-            ..
-        } = poe_data.cards.card(&dumb.card).to_owned();
-        sources.push(Source::GlobalDrop {
-            min_level,
-            max_level,
-        });
-    };
 
     if dumb.greynote == GreyNote::Delirium
         && dumb.notes.as_deref()

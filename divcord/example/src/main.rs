@@ -25,10 +25,6 @@ async fn main() -> Result<(), Error> {
             .iter()
             .filter_map(|source| match source {
                 Source::Strongbox(..) | Source::Chest(..) => Some(source.to_string()),
-                Source::GlobalDrop { .. } => {
-                    println!("GlobalDrop #{} {} {source:?}", record.id, record.card);
-                    None
-                }
                 _ => None,
             })
             .collect::<Vec<String>>()

@@ -30,10 +30,6 @@ pub enum Source {
     Delirium,
     DeliriumCurrencyRewards,
     Disabled,
-    GlobalDrop {
-        min_level: Option<u32>,
-        max_level: Option<u32>,
-    },
 }
 
 impl<'de> Deserialize<'de> for Source {
@@ -47,26 +43,12 @@ impl<'de> Deserialize<'de> for Source {
             #[serde(rename = "type")]
             _type: String,
             kind: SourceKind,
-            min_level: Option<u32>,
-            max_level: Option<u32>,
         }
 
-        let JSSource {
-            id,
-            _type,
-            kind,
-            max_level,
-            min_level,
-        } = JSSource::deserialize(deserializer)?;
+        let JSSource { id, _type, kind } = JSSource::deserialize(deserializer)?;
         match kind {
             SourceKind::EmptySource => match _type.parse::<Source>() {
-                Ok(source) => match source {
-                    Source::GlobalDrop { .. } => Ok(Source::GlobalDrop {
-                        min_level,
-                        max_level,
-                    }),
-                    _ => Ok(source),
-                },
+                Ok(source) => Ok(source),
                 Err(_) => Err(de::Error::custom(format!(
                     "Could not deserialize Source. {_type}"
                 ))),
@@ -105,10 +87,6 @@ impl FromStr for Source {
             "Maelström of Chaos with Barrel Sextant" => {
                 Ok(Source::MaelstromOfChaosWithBarrelSextant)
             }
-            "Global Drop" => Ok(Source::GlobalDrop {
-                min_level: None,
-                max_level: None,
-            }),
             _ => UniqueMonster::from_str(s)
                 .map(Self::UniqueMonster)
                 .or_else(|_| Area::from_str(s).map(Self::Area))
@@ -144,7 +122,6 @@ impl Identified for Source {
             Source::Delirium => "Delirium",
             Source::DeliriumCurrencyRewards => "Delirium Currency Rewards",
             Source::Disabled => "Disabled",
-            Source::GlobalDrop { .. } => "Global Drop",
             Source::MaelstromOfChaosWithBarrelSextant => "Maelström of Chaos with Barrel Sextant",
             Source::KiracMissions => "Kirac Missions",
         }
@@ -169,7 +146,6 @@ impl Source {
             Source::Delirium => "Delirium",
             Source::DeliriumCurrencyRewards => "Delirium Currency Rewards",
             Source::Disabled => "Disabled",
-            Source::GlobalDrop { .. } => "Global Drop",
             Source::MaelstromOfChaosWithBarrelSextant => "Maelström of Chaos with Barrel Sextant",
             Source::KiracMissions => "Kirac Missions",
         }
@@ -201,11 +177,11 @@ impl Source {
         let _types = String::from_utf8(buf).unwrap();
 
         let s = format!(
-            r#"export type SourceWithMember = {{ type: SourceType; id: string; kind: SourceWithMemberKind; min_level?: number; max_level?: number; idSlug: string; typeSlug: string }};
+            r#"export type SourceWithMember = {{ type: SourceType; id: string; kind: SourceWithMemberKind; idSlug: string; typeSlug: string }};
 export type EmptySourceKind = 'empty-source';
 export type SourceWithMemberKind = 'source-with-member';
 export type Kind = EmptySourceKind | SourceWithMemberKind;
-export type EmptySource = {{ type: SourceType; id: string; kind: EmptySourceKind; min_level?: number; max_level?: number; idSlug: string; typeSlug: string }};
+export type EmptySource = {{ type: SourceType; id: string; kind: EmptySourceKind; idSlug: string; typeSlug: string }};
 export type Source = SourceWithMember | EmptySource;
 export const SOURCE_TYPE_VARIANTS = {_types} as const;
 
@@ -245,25 +221,6 @@ impl Serialize for Source {
             source.serialize_field("kind", "source-with-member")?;
         }
 
-        if let Source::GlobalDrop {
-            min_level,
-            max_level,
-        } = self
-        {
-            match max_level {
-                Some(max_level) => source.serialize_field("max_level", max_level)?,
-                None => source.skip_field("max_level")?,
-            };
-
-            match min_level {
-                Some(min_level) => source.serialize_field("min_level", min_level)?,
-                None => source.skip_field("min_level")?,
-            };
-        } else {
-            source.skip_field("min_level")?;
-            source.skip_field("max_level")?;
-        }
-
         source.end()
     }
 }
@@ -273,27 +230,4 @@ pub fn poedb_page_url(boss: &str) {
     let name = name.replace(' ', "_");
     let name = name.replace(',', "%2C");
     format!("https://poedb.tw/us/{name}");
-}
-
-#[cfg(test)]
-mod tests {
-
-    use crate::Source;
-
-    #[test]
-    pub fn deserialize_global_drop() {
-        let json = r#"{"type":"Global Drop","id":"Global Drop","kind":"empty-source","max_level":68,"min_level":68}"#;
-        let source = serde_json::from_str::<Source>(json).unwrap();
-
-        let Source::GlobalDrop {
-            min_level,
-            max_level,
-        } = source
-        else {
-            panic!("Source is not type of Global Drop")
-        };
-
-        assert_eq!(min_level, Some(68));
-        assert_eq!(max_level, Some(68));
-    }
 }
