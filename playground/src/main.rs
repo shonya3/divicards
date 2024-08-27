@@ -1,4 +1,5 @@
 #![allow(unused)]
+use card_element::DivinationCardElementData;
 use divcord::{
     cards::{cards_by_source, cards_by_source_types, CardBySource, SourceAndCards},
     dropsource::{id::Identified, Source},
@@ -87,6 +88,8 @@ async fn main() {
     //     .collect::<HashMap<_, _>>();
 
     // std::fs::write("sources.json", serde_json::to_string(&map).unwrap());
+
+    write_sources(records);
 }
 
 #[derive(Serialize, Debug)]

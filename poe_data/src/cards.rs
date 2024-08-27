@@ -60,10 +60,6 @@ pub mod fetch {
         name: String,
         #[serde(alias = "drop level")]
         min_level: Option<u32>,
-        #[serde(alias = "drop areas")]
-        drop_areas: Option<Vec<String>>,
-        #[serde(alias = "drop monsters")]
-        drop_monsters: Option<Vec<String>>,
         #[serde(alias = "drop level maximum")]
         max_level: Option<u32>,
         #[serde(alias = "release version")]
@@ -173,10 +169,6 @@ pub mod fetch {
             name: String,
             #[serde(alias = "drop level")]
             min_level: Option<String>,
-            #[serde(alias = "drop areas")]
-            drop_areas: Option<String>,
-            #[serde(alias = "drop monsters")]
-            drop_monsters: Option<String>,
             #[serde(alias = "drop level maximum")]
             max_level: Option<String>,
             #[serde(alias = "release version")]
@@ -198,17 +190,11 @@ pub mod fetch {
         let vec: Vec<WikiCard> = wiki_maps
             .cargoquery
             .into_iter()
-            .map(|wrapper| {
-                let raw = wrapper.title;
+            .map(|WikiCardWrapper { title }| {
+                let raw = title;
                 WikiCard {
                     name: raw.name.clone(),
                     min_level: raw.min_level.map(|s| s.parse().unwrap()),
-                    drop_areas: raw
-                        .drop_areas
-                        .map(|s| s.split(',').map(|s| s.to_string()).collect()),
-                    drop_monsters: raw
-                        .drop_monsters
-                        .map(|s| s.split(',').map(|s| s.to_string()).collect()),
                     max_level: raw.max_level.map(|s| s.parse().unwrap()),
                     release_version: raw.release_version,
                 }
