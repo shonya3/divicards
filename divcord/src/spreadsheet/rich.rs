@@ -258,8 +258,9 @@ impl ProtobufColor {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Default)]
 pub enum HexColor {
+    #[default]
     #[serde(rename = "#FFFFFF")]
     White,
     #[serde(rename = "#666666")]
@@ -293,7 +294,7 @@ pub struct TextFormat {
     strikethrough: bool,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct FontStyles {
     pub color: HexColor,
