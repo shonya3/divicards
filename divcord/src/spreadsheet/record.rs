@@ -43,9 +43,9 @@ pub struct Dumb {
     // F
     pub remaining_work: RemainingWork,
     // G
-    pub confirmations_new_325_drops_from: Vec<DropsFrom>,
+    pub drops: Vec<DropsFrom>,
     // H
-    pub to_confirm_or_reverify_drops_from: Vec<DropsFrom>,
+    pub drops_to_verify: Vec<DropsFrom>,
     // I
     #[serde(skip_serializing_if = "Option::is_none")]
     pub notes: Option<String>,
@@ -94,18 +94,17 @@ impl Dumb {
         // F 5 Remaining work
         let remaining_work = RemainingWork::parse(&spreadsheet_row[5])?;
 
-        // G 6 - New confirmations - confirmations_new_325_drops_from
-        let confirmations_new_325_drops_from =
-            confirmations_new_325_cell
-                .drops_from()
-                .map_err(|err| ParseDumbError {
-                    record_id: Dumb::record_id(row_index),
-                    parse_cell_error: err,
-                })?;
+        // G 6 - New confirmations - drops
+        let drops = confirmations_new_325_cell
+            .drops_from()
+            .map_err(|err| ParseDumbError {
+                record_id: Dumb::record_id(row_index),
+                parse_cell_error: err,
+            })?;
 
         // UPDATE
         // H 7 - To Confirm or Verify
-        let to_confirm_or_reverify_drops_from =
+        let drops_to_verify =
             to_confirm_or_verify_cell
                 .drops_from()
                 .map_err(|err| ParseDumbError {
@@ -130,8 +129,8 @@ impl Dumb {
             tag_hypothesis,
             confidence,
             remaining_work,
-            confirmations_new_325_drops_from,
-            to_confirm_or_reverify_drops_from,
+            drops,
+            drops_to_verify,
             notes,
         })
     }

@@ -340,7 +340,7 @@ pub fn parse_dropses_from(
 
     match column {
         RichColumnVariant::Sources => {
-            for d in &dumb.confirmations_new_325_drops_from {
+            for d in &dumb.drops {
                 let Ok(mut inner_sources) = parse_one_drops_from(d, dumb, poe_data) else {
                     return Err(ParseSourceError::UnknownVariant {
                         card: dumb.card.to_owned(),
@@ -352,7 +352,7 @@ pub fn parse_dropses_from(
             }
         }
         RichColumnVariant::Verify => {
-            for d in &dumb.to_confirm_or_reverify_drops_from {
+            for d in &dumb.drops_to_verify {
                 let Ok(mut inner_sources) = parse_one_drops_from(d, dumb, poe_data) else {
                     return Err(ParseSourceError::UnknownVariant {
                         card: dumb.card.to_owned(),
