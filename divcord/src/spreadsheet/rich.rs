@@ -232,7 +232,7 @@ pub struct ProtobufColor {
 }
 
 impl ProtobufColor {
-    pub fn into_hexcolor(self) -> String {
+    pub fn into_hexcolor(self) -> HexColor {
         let red_frac = self.red.unwrap_or(0.0);
         let green_frac = self.green.unwrap_or(0.0);
         let blue_frac = self.blue.unwrap_or(0.0);
@@ -244,30 +244,43 @@ impl ProtobufColor {
         Self::rgb_to_css_color(red, green, blue)
     }
 
-    pub fn rgb_to_css_color(red: u8, green: u8, blue: u8) -> String {
+    pub fn rgb_to_css_color(red: u8, green: u8, blue: u8) -> HexColor {
         let rgb_number = (red as u32) << 16 | (green as u32) << 8 | blue as u32;
-        let hex_string = format!("{:06X}", rgb_number);
-        format!("#{}", hex_string)
+        match format!("{:06X}", rgb_number).as_str() {
+            "FFFFFF" => HexColor::White,
+            "666666" => HexColor::Grey,
+            six_digits => HexColor::Other(format!("#{six_digits}")),
+        }
     }
 
-    pub fn as_hex(&self) -> String {
-        self.clone().into_hexcolor()
+    pub fn as_hex(&self) -> HexColor {
+        self.to_owned().into_hexcolor()
     }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
-#[serde(rename_all = "camelCase")]
-pub struct HexColor(pub String);
+pub enum HexColor {
+    #[serde(rename = "#FFFFFF")]
+    White,
+    #[serde(rename = "#666666")]
+    Grey,
+    #[serde(untagged)]
+    Other(String),
+}
 
-impl HexColor {
-    pub fn as_str(&self) -> &str {
-        self.0.as_str()
+impl Display for HexColor {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            HexColor::White => f.write_str("#FFFFFF"),
+            HexColor::Grey => f.write_str("#666666"),
+            HexColor::Other(hex_color) => f.write_str(hex_color),
+        }
     }
 }
 
 impl From<ProtobufColor> for HexColor {
     fn from(value: ProtobufColor) -> Self {
-        HexColor(value.into_hexcolor())
+        value.into_hexcolor()
     }
 }
 

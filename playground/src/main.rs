@@ -20,7 +20,7 @@ use fetcher::DataFetcher;
 use fetcher::{Config, Stale};
 use poe_data::fetchers::MapsFetcher;
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
+use serde_json::{json, Value};
 use std::{
     clone,
     collections::{HashMap, HashSet},
@@ -46,6 +46,8 @@ async fn main() {
 
         std::process::exit(0);
     };
+
+    std::fs::write("records.json", serde_json::to_string(&records).unwrap()).unwrap();
 
     let mut map: HashMap<String, Vec<SourceAndCards>> = HashMap::new();
     for sourcetype in Source::types() {

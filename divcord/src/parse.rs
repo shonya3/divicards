@@ -1,4 +1,5 @@
 use crate::dropsource::{Area, Source, UniqueMonster, Vendor};
+use crate::spreadsheet::rich::HexColor;
 use crate::{
     error::Error,
     spreadsheet::{
@@ -411,8 +412,7 @@ pub fn parse_one_drops_from(
     }
 
     // Acts areas or act area bosses
-    if d.styles.italic && (d.styles.color.as_str() == "#FFFFFF" || dumb.greynote == GreyNote::Story)
-    {
+    if d.styles.italic && (d.styles.color == HexColor::White || dumb.greynote == GreyNote::Story) {
         let ids = acts::parse_act_areas(d, acts, card_drop_level_requirement.try_into().unwrap());
         if ids.is_empty() {
             if acts.iter().any(|a| {
@@ -446,7 +446,7 @@ pub fn parse_one_drops_from(
     }
 
     // Maps or MapBosses
-    if (!d.styles.italic && d.styles.color.as_str() == "#FFFFFF")
+    if (!d.styles.italic && d.styles.color == HexColor::White)
         || dumb.greynote == GreyNote::AreaSpecific
     {
         let s = &d.name;
