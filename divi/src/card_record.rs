@@ -59,7 +59,7 @@ mod tests {
 
     #[test]
     fn is_legacy_card() {
-        let record = CardRecord::new("Friendship".to_string(), 1, None);
+        let record = CardRecord::new(LEGACY_CARDS[0].to_owned(), 1, None);
         assert!(record.is_legacy_card());
     }
 }
