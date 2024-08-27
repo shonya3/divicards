@@ -27,7 +27,7 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn two_dropsources_should_throw_error() {
+    async fn dropsources_comma_separated_produce_error() {
         let poe_data = PoeData::load().await.unwrap();
         let record =  Dumb {
     id: 230,
