@@ -6,8 +6,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Default)]
 pub struct CardRecord {
+    #[serde(alias = "Name")]
     pub name: String,
-    #[serde(alias = "stackSize")]
+    #[serde(alias = "Quantity")]
     pub amount: u32,
     #[serde(alias = "calculated")]
     pub price: Option<f32>,

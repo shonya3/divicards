@@ -254,8 +254,10 @@ impl Display for MissingHeadersError {
 /// Parsing helper. Uses for CSV data
 fn remove_lines_before_headers(s: &str) -> Result<String, MissingHeadersError> {
     match s.lines().enumerate().find(|(_index, line)| {
-        line.contains("name")
-            && ["amount", "stackSize"]
+        ["Name", "name"]
+            .iter()
+            .any(|variant| line.contains(variant))
+            && ["amount", "stackSize", "Quantity"]
                 .iter()
                 .any(|variant| line.contains(variant))
     }) {
@@ -320,8 +322,9 @@ fn preserve_column_order(columns: &[Column]) -> Vec<Column> {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct NameAmount {
+    #[serde(alias = "Name")]
     pub name: String,
-    #[serde(alias = "stackSize")]
+    #[serde(alias = "stackSize", alias = "Quantity")]
     pub amount: u32,
 }
 
