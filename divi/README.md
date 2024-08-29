@@ -17,7 +17,7 @@ And then get started in your `main.rs`:
 use divi::{
     league::TradeLeague,
     prices::Prices,
-    sample::{DivinationCardsSample, SampleData},
+    sample::{Sample, Input},
 };
 
 #[tokio::main]
@@ -26,7 +26,7 @@ async fn main() -> Result<(), divi::error::Error> {
     let csv = r#"name,amount
     The Doctor,2
     Rain of Chaos,30"#;
-    let sample = DivinationCardsSample::create(SampleData::Csv(String::from(csv)), Some(prices))?;
+    let sample = Sample::create(Input::Csv(String::from(csv)), Some(prices))?;
     // output: The Doctor: DivinationCardRecord { name: "The Doctor", amount: 2, price: Some(869.1), sum: Some(1738.2), weight: Some(2090.8254) }
     println!("The Doctor: {:?}", sample.cards.get_card("The Doctor"));
     Ok(())
@@ -42,12 +42,12 @@ use std::fs::read_to_string;
 
 use divi::{
     prices::Prices,
-    sample::{Column, DivinationCardsSample, Order, SampleData, TablePreferences},
+    sample::{Column, Sample, Order, Input, TablePreferences},
 };
 
 fn main() -> Result<(), divi::error::Error> {
     let csv = read_to_string("sample.csv").expect("Could not read sample.csv");
-    let sample = DivinationCardsSample::create(SampleData::Csv(csv), Some(Prices::default()))?;
+    let sample = Sample::create(Input::Csv(csv), Some(Prices::default()))?;
 
     let preferences = TablePreferences {
         columns: vec![
