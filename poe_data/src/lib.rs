@@ -1,7 +1,6 @@
 pub mod act;
 pub mod cards;
 pub mod consts;
-
 pub mod error;
 pub mod fetchers;
 pub mod league;
