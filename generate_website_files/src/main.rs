@@ -1,11 +1,12 @@
 mod avatars;
 use std::{
+    collections::{HashMap, HashSet},
     path::{Path, PathBuf},
     process::{Command, Stdio},
 };
 
 use card_element::DivinationCardElementData;
-use divcord::{spreadsheet::Spreadsheet, Record};
+use divcord::{spreadsheet::Spreadsheet, Record, Source};
 use poe_data::PoeData;
 use serde::Serialize;
 
@@ -38,6 +39,15 @@ async fn main() {
         std::fs::create_dir_all(&json_dir).unwrap();
     }
 
+    let sources_hashmap: HashMap<String, Source> = records
+        .clone()
+        .into_iter()
+        .flat_map(|record| record.sources.into_iter().chain(record.verify_sources))
+        .collect::<HashSet<Source>>()
+        .into_iter()
+        .map(|source| (source.slug(), source))
+        .collect();
+    write(&sources_hashmap, &json_dir, "sources2.json");
     write(&records, &json_dir, "records.json");
     write(&poe_data, &json_dir, PoeData::filename());
     write(
