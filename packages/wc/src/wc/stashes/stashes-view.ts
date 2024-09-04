@@ -5,7 +5,6 @@ import { HelpTipElement } from '../help-tip';
 import { TabBadgeElement } from './tab-badge';
 import { LeagueSelectElement } from '../league-select';
 import { property, state, query } from 'lit/decorators.js';
-import { NoItemsTab, TabWithItems } from '@divicards/shared/poe.types';
 import { DivinationCardsSample, League } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { TabBadgeGroupElement } from './tab-badge-group';
@@ -21,6 +20,7 @@ import { styles } from './stashes-view.styles';
 import './e-stash-tab-container';
 import { Task } from '@lit/task';
 import { StashTabContainerElement } from './e-stash-tab-container';
+import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
 
 const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
@@ -318,7 +318,11 @@ export class StashesViewElement extends BaseElement {
 						case 'general-tab': {
 							const tab = await this.#loadSingleTabContent(id, league, this.stashLoader.tab);
 							tab.name = name;
-							this.emit<Events['tab-with-items-loaded']>('tab-with-items-loaded', { tab, name, league });
+							this.emit<Events['tab-with-items-loaded']>('tab-with-items-loaded', {
+								tab,
+								name,
+								league,
+							});
 							break;
 						}
 					}

@@ -1,4 +1,4 @@
-import { DivinationCardRecord, Order } from './types';
+import { DivinationCardRecord, Order } from './types.js';
 
 export const byPrice = (order: Order, cards: readonly DivinationCardRecord[]) => {
 	return Array.from(cards).sort((a, b) => {

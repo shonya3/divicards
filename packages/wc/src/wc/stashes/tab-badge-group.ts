@@ -2,7 +2,6 @@ import { html, css, nothing } from 'lit';
 import { BaseElement } from '../base-element';
 import { property, state, query } from 'lit/decorators.js';
 import { TabBadgeElement } from './tab-badge';
-import { NoItemsTab } from '@divicards/shared/poe.types';
 import { League, isPermanentLeague } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
@@ -14,6 +13,7 @@ import { ErrorLabel } from './types';
 import { classMap } from 'lit/directives/class-map.js';
 import SlCheckbox from '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
 import { PaginationElement } from '../e-pagination';
+import { NoItemsTab } from 'poe-custom-elements/types.js';
 
 declare global {
 	interface HTMLElementTagNameMap {

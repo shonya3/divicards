@@ -8,7 +8,7 @@ import {
 	TablePreferences,
 	Column,
 } from '@divicards/shared/types';
-import { NoItemsTab, TabWithItems } from '@divicards/shared/poe.types';
+import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
 
 export type SampleData = string | NameAmount[] | DivinationCardsSample;
 export type ValueRange = {

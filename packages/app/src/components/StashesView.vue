@@ -3,7 +3,7 @@ import { StashesViewElement, Events } from '@divicards/wc/src/wc/stashes/stashes
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import type { StashesViewProps } from '@divicards/wc/src/wc/stashes/stashes-view';
 import type { DivinationCardsSample, League } from '@divicards/shared/types';
-import { TabWithItems } from '@divicards/shared/poe.types';
+import { TabWithItems } from 'poe-custom-elements/types.js';
 StashesViewElement.define();
 withDefaults(defineProps<StashesViewProps>(), { league: ACTIVE_LEAGUE });
 const emit = defineEmits<{

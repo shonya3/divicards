@@ -1,6 +1,5 @@
-import type { NoItemsTab } from '@divicards/shared/poe.types';
-import { LitElement, html, css, TemplateResult, nothing } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { html, css, nothing } from 'lit';
+import { property, state } from 'lit/decorators.js';
 import { BaseElement } from '../base-element';
 import { TabBadgeElement } from './tab-badge';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { TabWithItems } from '@divicards/shared/poe.types';
 import { NameAmount } from '@divicards/shared/types';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
+import { TabWithItems } from 'poe-custom-elements/types.js';
 import { Ref, computed, ref, watch } from 'vue';
 const props = defineProps<{ tab: TabWithItems }>();
 const emits = defineEmits(['close']);

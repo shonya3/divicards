@@ -3,7 +3,7 @@ import { BaseElement } from '../base-element';
 import { property, query, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { REMOVE_ONLY } from './tab-badge-group';
-import { NoItemsTab } from '@divicards/shared/poe.types';
+import { NoItemsTab } from 'poe-custom-elements/types.js';
 
 declare global {
 	interface HTMLElementTagNameMap {

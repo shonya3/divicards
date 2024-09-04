@@ -1,17 +1,17 @@
-export interface TabWithItems extends NoItemsTab {
-	items: PoeItem[];
-}
+// export interface TabWithItems extends NoItemsTab {
+// 	items: PoeItem[];
+// }
 
-export interface NoItemsTab {
-	id: string;
-	index: number;
-	name: string;
-	type: StashType;
-	folder?: string;
-	metadata?: Metadata;
-	children?: NoItemsTab[];
-	parent?: string;
-}
+// export interface NoItemsTab {
+// 	id: string;
+// 	index: number;
+// 	name: string;
+// 	type: StashType;
+// 	folder?: string;
+// 	metadata?: Metadata;
+// 	children?: NoItemsTab[];
+// 	parent?: string;
+// }
 
 export type StashType =
 	| 'PremiumStash'
