@@ -13,11 +13,14 @@ import fragmentsStash from './json/fragmentsTab.json';
 const quad = quadStash as TabWithItems;
 const fragments = fragmentsStash as TabWithItems;
 
+const sleepSecs = (secs: number): Promise<void> => new Promise(resolve => setTimeout(resolve, secs * 1000));
+
 let stash: 'quad' | 'fragments' = 'quad';
 export class MockStashLoader implements IStashLoader {
 	async tab(_tabId: string, _league: string): Promise<TabWithItems> {
 		const nextStash = stash === 'quad' ? fragments : quad;
 		stash = stash === 'quad' ? 'fragments' : 'quad';
+		await sleepSecs(0.2);
 		return nextStash;
 	}
 	sampleFromTab(_tabId: string, _league: League): Promise<DivinationCardsSample> {
