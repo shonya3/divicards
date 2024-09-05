@@ -8,14 +8,16 @@ export class BaseElement extends LitElement {
 	 */
 	static defineList: (typeof BaseElement)[] = [];
 	static define(tag = this.tag) {
-		if (!customElements.get(tag)) {
-			if (!this.tag) {
-				throw new Error(`${this.name} should have static tag field to define custom element`);
-			}
-			customElements.define(tag, this);
-			for (const ElementClass of this.defineList) {
-				ElementClass.define();
-			}
+		if (customElements.get(tag)) {
+			return;
+		}
+		if (!this.tag) {
+			throw new Error(`${this.name} should have static tag field to define custom element`);
+		}
+
+		customElements.define(tag, this);
+		for (const ElementClass of this.defineList) {
+			ElementClass.define();
 		}
 	}
 

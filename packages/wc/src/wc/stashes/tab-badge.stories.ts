@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/web-components';
 import { TabBadgeElement } from './tab-badge';
 import { html } from 'lit';
+import { NoItemsTab } from 'poe-custom-elements/types.js';
 
 export default {
 	title: 'Elements/stashes/tab-badge',
@@ -14,7 +15,7 @@ const noItemsTab = {
 	},
 	name: 'd (Remove-only)',
 	type: 'PremiumStash',
-};
+} as const satisfies NoItemsTab;
 
 export const Default = {
 	render() {

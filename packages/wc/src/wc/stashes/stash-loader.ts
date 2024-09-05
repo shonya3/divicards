@@ -5,11 +5,11 @@ import { HelpTipElement } from '../help-tip';
 import { TabBadgeElement } from './tab-badge';
 import { LeagueSelectElement } from '../league-select';
 import { property, state, query } from 'lit/decorators.js';
-import { NoItemsTab, TabWithItems } from '@divicards/shared/poe.types';
 import { League } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { TabBadgeGroupElement } from './tab-badge-group';
 import { classMap } from 'lit/directives/class-map.js';
+import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
 
 class CustomLeagueStorage {
 	static #key = 'CUSTOM_LEAGUE';

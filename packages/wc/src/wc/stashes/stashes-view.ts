@@ -199,7 +199,6 @@ export class StashesViewElement extends BaseElement {
 				? this.stashTabTask.render({
 						pending: () => {
 							return html`<e-stash-tab-container
-								.badge=${this.openedTab}
 								status="pending"
 								@close=${this.#handleTabContainerClose}
 							></e-stash-tab-container>`;
@@ -208,7 +207,6 @@ export class StashesViewElement extends BaseElement {
 							html`<e-stash-tab-container
 								@close=${this.#handleTabContainerClose}
 								@extract-cards=${this.#emitExtractCards}
-								.badge=${this.openedTab}
 								status="complete"
 								.tab=${tab}
 							></e-stash-tab-container>`,

@@ -6,10 +6,11 @@ import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 import '@shoelace-style/shoelace/dist/components/copy-button/copy-button.js';
 import { TabBadgeElement } from './tab-badge';
 import '@shoelace-style/shoelace/dist/components/alert/alert.js';
+import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 
 import { LitElement, html, css, TemplateResult } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
+import { TabWithItems } from 'poe-custom-elements/types.js';
 import SlAlert from '@shoelace-style/shoelace/dist/components/alert/alert.js';
 
 declare global {
@@ -28,7 +29,7 @@ export class StashTabContainerElement extends LitElement {
 	/** PoE API tab data https://www.pathofexile.com/developer/docs/reference#stashes-get */
 	@property({ type: Object }) tab: TabWithItems | null = null;
 	@property() status: 'pending' | 'complete' = 'pending';
-	@property({ type: Object }) badge: NoItemsTab | null = null;
+	// @property({ type: Object }) badge: NoItemsTab | null = null;
 
 	@query('sl-alert') scarabsSuccessAlert!: SlAlert;
 
@@ -41,7 +42,7 @@ export class StashTabContainerElement extends LitElement {
 		return html`<header class="header">
 				<div class="header-main">
 					<div class="badge-and-copy">
-						${this.badge ? html`<wc-tab-badge as="button" .tab=${this.badge}></wc-tab-badge>` : null}
+						${this.tab ? html`<wc-tab-badge as="button" .tab=${this.tab}></wc-tab-badge>` : null}
 						${this.tab
 							? html`<sl-copy-button
 									.value=${JSON.stringify(this.tab, null, 4)}

@@ -31,7 +31,7 @@ const errors = [
 		},
 		message: 'Sample must have rain of chaos cards.',
 	},
-];
+] as const;
 
 export const Default = {
 	render() {
