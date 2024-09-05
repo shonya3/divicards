@@ -13,7 +13,11 @@ export default defineConfig({
 			template: {
 				compilerOptions: {
 					isCustomElement(tag: string) {
-						return tag.startsWith('wc') || tag.startsWith('sl');
+						if (!tag.includes('-')) {
+							return false;
+						}
+
+						return tag.startsWith('wc') || tag.startsWith('sl') || tag === 'theme-toggle';
 					},
 				},
 			},
