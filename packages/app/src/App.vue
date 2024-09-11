@@ -22,9 +22,9 @@ import { BasePopupElement } from '@divicards/wc/src/wc/base-popup';
 import UpdateChangelog from './components/UpdateChangelog.vue';
 import NativeBrowserLink from './components/NativeBrowserLink.vue';
 import { useAppVersion } from './composables/useAppVersion';
-import { TabWithItems } from '@divicards/shared/poe.types';
 import GeneralTabWithItems from './components/GeneralTabWithItems.vue';
 import { useTauriUpdater } from './composables/useTauriUpdater';
+import { TabWithItems } from 'poe-custom-elements/types.js';
 
 const dropZoneRef = shallowRef<HTMLElement | null>(null);
 const sampleStore = useSampleStore();
