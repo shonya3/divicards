@@ -7,7 +7,7 @@ import { template as themeToggleTemplate } from './template';
 const sunmoonCss = new CSSStyleSheet();
 sunmoonCss.replaceSync(sunmoonStyles);
 
-type ColorTheme = 'light' | 'dark';
+export type ColorTheme = 'light' | 'dark';
 
 const themeUtils = Object.freeze({
 	LOCAL_STORAGE_KEY: 'theme-preference',

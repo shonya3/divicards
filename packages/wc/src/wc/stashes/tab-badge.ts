@@ -16,6 +16,32 @@ export interface Events {
 	'tab-click': { tabId: string; name: string };
 }
 
+export class TabSelectEvent extends Event {
+	tab: NoItemsTab;
+	selected: boolean;
+	constructor({ tab, selected }: { tab: NoItemsTab; selected: boolean }, eventInitDict?: EventInit) {
+		super('tab-select', eventInitDict);
+		this.tab = tab;
+		this.selected = selected;
+	}
+}
+
+export class TabClickEvent extends Event {
+	tab: NoItemsTab;
+	constructor({ tab }: { tab: NoItemsTab }, eventInitDict?: EventInit) {
+		super('tab-select', eventInitDict);
+		this.tab = tab;
+	}
+}
+
+export type ElementEvents = {
+	'tab-select': TabSelectEvent;
+	'tab-click': TabClickEvent;
+};
+
+/**
+ *
+ */
 export class TabBadgeElement extends BaseElement {
 	static override tag = 'wc-tab-badge';
 	@property({ type: Object }) tab!: NoItemsTab;
@@ -178,4 +204,4 @@ export class TabBadgeElement extends BaseElement {
 	`;
 }
 
-export type TabSelectEvent = CustomEvent<{ tabId: string; selected: boolean }>;
+// export type TabSelectEvent = CustomEvent<{ tabId: string; selected: boolean }>;

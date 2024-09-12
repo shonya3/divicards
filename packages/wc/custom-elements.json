@@ -111,7 +111,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{\r\n\trender() {\r\n\t\tBasePopupElement.define();\r\n\t\tDivTableElement.define();\r\n\r\n\t\tconst popup = document.createElement('wc-base-popup');\r\n\t\tpopup.open = true;\r\n\t\tconst table = document.createElement('wc-div-table');\r\n\t\ttable.cards = cards;\r\n\t\tpopup.append(table);\r\n\r\n\t\treturn html`<button @click=${() => popup.showModal()}>Open</button>${popup}`;\r\n\t},\r\n}"
+          "default": "{ render() { BasePopupElement.define(); DivTableElement.define(); const popup = document.createElement('wc-base-popup'); popup.open = true; const table = document.createElement('wc-div-table'); table.cards = cards; popup.append(table); return html`<button @click=${() => popup.showModal()}>Open</button>${popup}`; }, }"
         }
       ],
       "exports": [
@@ -163,11 +163,13 @@
               },
               "default": "false",
               "description": "Instead of dialog's non-modal open, runs showModal() if true https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#open",
-              "attribute": "open"
+              "attribute": "open",
+              "reflects": true
             },
             {
               "kind": "method",
               "name": "#dialog",
+              "privacy": "private",
               "return": {
                 "type": {
                   "text": "Promise<HTMLDialogElement>"
@@ -193,9 +195,8 @@
               }
             },
             {
-              "kind": "method",
-              "name": "onEscape",
-              "privacy": "private"
+              "kind": "field",
+              "name": "onEscape"
             },
             {
               "kind": "field",
@@ -297,7 +298,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{\r\n\trender() {\r\n\t\tDropFilesMessageElement.define();\r\n\t\treturn html`<wc-drop-files-message></wc-drop-files-message>`;\r\n\t},\r\n}"
+          "default": "{ render() { DropFilesMessageElement.define(); return html`<wc-drop-files-message></wc-drop-files-message>`; }, }"
         }
       ],
       "exports": [
@@ -424,6 +425,224 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/wc/e-pagination.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{ render() { return html`<e-pagination .n=${50}></e-pagination>`; }, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/e-pagination.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/e-pagination.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/e-pagination.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "PaginationElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "page",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "page",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "perPage",
+              "type": {
+                "text": "number"
+              },
+              "default": "10",
+              "attribute": "per-page",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "n",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Number of items",
+              "attribute": "n"
+            },
+            {
+              "kind": "method",
+              "name": "#onPageInput",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onPerPageInput",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "increasePage",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "lastPageNumber",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "toLastPage",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "showingRange",
+              "return": {
+                "type": {
+                  "text": "[number, number] | null"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isLastPage",
+              "type": {
+                "text": "boolean"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "decreasePage",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "page-change",
+              "type": {
+                "text": "Event"
+              }
+            },
+            {
+              "name": "per-page-change",
+              "type": {
+                "text": "Event"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "page",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "fieldName": "page"
+            },
+            {
+              "name": "per-page",
+              "type": {
+                "text": "number"
+              },
+              "default": "10",
+              "fieldName": "perPage"
+            },
+            {
+              "name": "n",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Number of items",
+              "fieldName": "n"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "wc-e-pagination",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "PaginationElement",
+          "declaration": {
+            "name": "PaginationElement",
+            "module": "src/wc/e-pagination.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "e-pagination",
+          "declaration": {
+            "name": "PaginationElement",
+            "module": "src/wc/e-pagination.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/wc/help-tip.stories.ts",
       "declarations": [
         {
@@ -432,7 +651,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{\r\n\trender() {\r\n\t\tconst styles = styleMap({ 'margin-left': '500px' });\r\n\t\tHelpTipElement.define();\r\n\t\treturn html`<wc-help-tip style=${styles}>\r\n\t\t\t<p>Excel, .csv or just .txt</p>\r\n\t\t\t<p>Required headers: name and amount</p>\r\n\t\t\t<img src=\"/simple.png\" alt=\"Example of simple .txt file\"\r\n\t\t/></wc-help-tip>`;\r\n\t},\r\n}"
+          "default": "{ render() { const styles = styleMap({ 'margin-left': '500px' }); HelpTipElement.define(); return html`<wc-help-tip style=${styles}> <p>Excel, .csv or just .txt</p> <p>Required headers: name and amount</p> <img src=\"/simple.png\" alt=\"Example of simple .txt file\" /></wc-help-tip>`; }, }"
         }
       ],
       "exports": [
@@ -572,7 +791,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{\r\n\trender({ trade, league }: { trade: boolean; league: League }) {\r\n\t\tLeagueSelectElement.define();\r\n\t\treturn html`<wc-league-select ?trade=${trade} league=${league}></wc-league-select>`;\r\n\t},\r\n}"
+          "default": "{ render({ trade, league }: { trade: boolean; league: League }) { LeagueSelectElement.define(); return html`<wc-league-select ?trade=${trade} league=${league}></wc-league-select>`; }, }"
         }
       ],
       "exports": [
@@ -693,6 +912,24 @@
             },
             {
               "kind": "field",
+              "name": "privateLeague",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "privateLeague"
+            },
+            {
+              "kind": "field",
+              "name": "withPrivateLeagueInput",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "with-private-league-input",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "select",
               "type": {
                 "text": "HTMLSelectElement"
@@ -709,7 +946,21 @@
             },
             {
               "kind": "method",
-              "name": "#emitLeagueChange"
+              "name": "#onPrivateLeagueInput",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#emitLeagueChange",
+              "privacy": "private"
             },
             {
               "kind": "field",
@@ -787,6 +1038,21 @@
               },
               "default": "ACTIVE_LEAGUE",
               "fieldName": "league"
+            },
+            {
+              "name": "privateLeague",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "privateLeague"
+            },
+            {
+              "name": "with-private-league-input",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "withPrivateLeagueInput"
             }
           ],
           "superclass": {
@@ -826,7 +1092,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{\r\n\trender({ order, active, size }: { order: Order; active: boolean; size: Size }) {\r\n\t\tOrderTriangleElement.define();\r\n\t\treturn html`<wc-order-triangle order=${order} size=${size} ?active=${active}></wc-order-triangle>`;\r\n\t},\r\n}"
+          "default": "{ render({ order, active, size }: { order: Order; active: boolean; size: Size }) { OrderTriangleElement.define(); return html`<wc-order-triangle order=${order} size=${size} ?active=${active}></wc-order-triangle>`; }, }"
         }
       ],
       "exports": [
@@ -1014,7 +1280,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{\r\n\trender({ name, loggedIn }: { name: string; loggedIn: boolean }) {\r\n\t\tPoeAuthElement.define();\r\n\t\treturn html`<wc-poe-auth ?loggedIn=${loggedIn} .name=${name}></wc-poe-auth>`;\r\n\t},\r\n}"
+          "default": "{ render({ name, loggedIn }: { name: string; loggedIn: boolean }) { PoeAuthElement.define(); return html`<wc-poe-auth ?loggedIn=${loggedIn} .name=${name}></wc-poe-auth>`; }, }"
         }
       ],
       "exports": [
@@ -1080,11 +1346,13 @@
             },
             {
               "kind": "method",
-              "name": "#emitLogin"
+              "name": "#emitLogin",
+              "privacy": "private"
             },
             {
               "kind": "method",
-              "name": "#emitLogout"
+              "name": "#emitLogout",
+              "privacy": "private"
             },
             {
               "kind": "field",
@@ -1209,6 +1477,42 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/wc/div-table/div-table-stat.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "DivTableStatElement",
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "wc-div-table-stat",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DivTableStatElement",
+          "declaration": {
+            "name": "DivTableStatElement",
+            "module": "src/wc/div-table/div-table-stat.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "wc-div-table-stat",
+          "declaration": {
+            "name": "DivTableStatElement",
+            "module": "src/wc/div-table/div-table-stat.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/wc/div-table/div-table.stories.ts",
       "declarations": [
         {
@@ -1217,7 +1521,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{\r\n\trender() {\r\n\t\tDivTableElement.define();\r\n\t\treturn html`<wc-div-table .cards=${cards}></wc-div-table>`;\r\n\t},\r\n}"
+          "default": "{ render() { DivTableElement.define(); return html`<wc-div-table .cards=${cards}></wc-div-table>`; }, }"
         }
       ],
       "exports": [
@@ -1234,6 +1538,27 @@
           "declaration": {
             "name": "Default",
             "module": "src/wc/div-table/div-table.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/div-table/div-table.styles.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "styles",
+          "default": "css` :host { display: block; max-width: 1220px; background-color: var(--bg-color, #242424); } .ch-3 { text-align: center; min-width: 3ch; } .layout { height: 100%; max-width: 1220px; background-color: var(--bg-color, #242424); color: var(--color, rgba(255, 255, 255, 0.87)); padding: 2rem; display: grid; grid-template: 'header not-header' 'table stats' auto / 750px 1fr; } .header { grid-area: header; position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; z-index: 2; background-color: var(--bg-color, #242424); padding-top: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--sl-color-gray-100); } .slider-box { display: flex; justify-content: center; align-items: center; gap: 0.5rem; } .stats { grid-area: stats; display: flex; flex-direction: column; align-items: center; list-style: none; gap: 2rem; padding: 1rem; } .stat { padding: 2rem; display: flex; align-items: center; width: 200px; border: 1px solid var(--sl-color-gray-300); border-radius: 0.25rem; font-size: 2rem; font-weight: 500; gap: 1.5rem; } ${table} `"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "styles",
+          "declaration": {
+            "name": "styles",
+            "module": "src/wc/div-table/div-table.styles.ts"
           }
         }
       ]
@@ -1337,7 +1662,7 @@
               "type": {
                 "text": "boolean"
               },
-              "default": "false"
+              "default": "true"
             },
             {
               "kind": "field",
@@ -1376,6 +1701,7 @@
             {
               "kind": "method",
               "name": "#onNameQueryInput",
+              "privacy": "private",
               "parameters": [
                 {
                   "name": "e",
@@ -1387,11 +1713,13 @@
             },
             {
               "kind": "method",
-              "name": "#onHideZeroCheckbox"
+              "name": "#onHideZeroCheckbox",
+              "privacy": "private"
             },
             {
               "kind": "method",
               "name": "#onMinPriceSlider",
+              "privacy": "private",
               "parameters": [
                 {
                   "name": "e",
@@ -1404,6 +1732,7 @@
             {
               "kind": "method",
               "name": "#onOrderTriangleClicked",
+              "privacy": "private",
               "parameters": [
                 {
                   "name": "newActiveColumn",
@@ -1528,7 +1857,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{\r\n\trender() {\r\n\t\tFormExportSampleElement.define();\r\n\t\treturn html`<wc-form-export-sample></wc-form-export-sample>`;\r\n\t},\r\n}"
+          "default": "{ render() { FormExportSampleElement.define(); return html`<wc-form-export-sample></wc-form-export-sample>`; }, }"
         }
       ],
       "exports": [
@@ -1682,6 +2011,7 @@
             {
               "kind": "method",
               "name": "#onColumnCheckbox",
+              "privacy": "private",
               "parameters": [
                 {
                   "name": "e",
@@ -1700,6 +2030,7 @@
             {
               "kind": "method",
               "name": "#onOrderRadio",
+              "privacy": "private",
               "parameters": [
                 {
                   "name": "e",
@@ -1712,6 +2043,7 @@
             {
               "kind": "method",
               "name": "#onOrderedBySelected",
+              "privacy": "private",
               "parameters": [
                 {
                   "name": "e",
@@ -1724,6 +2056,7 @@
             {
               "kind": "method",
               "name": "#onCardsMustHaveAmountCheckbox",
+              "privacy": "private",
               "parameters": [
                 {
                   "name": "e",
@@ -1736,6 +2069,7 @@
             {
               "kind": "method",
               "name": "#onMinPriceSlider",
+              "privacy": "private",
               "parameters": [
                 {
                   "name": "e",
@@ -1748,6 +2082,7 @@
             {
               "kind": "method",
               "name": "#onSheetTitleInput",
+              "privacy": "private",
               "parameters": [
                 {
                   "name": "e",
@@ -1760,6 +2095,7 @@
             {
               "kind": "method",
               "name": "#onSpreadsheetIdInput",
+              "privacy": "private",
               "parameters": [
                 {
                   "name": "e",
@@ -1772,6 +2108,7 @@
             {
               "kind": "method",
               "name": "#onSubmit",
+              "privacy": "private",
               "parameters": [
                 {
                   "name": "e",
@@ -1964,11 +2301,13 @@
             },
             {
               "kind": "method",
-              "name": "#emitLogin"
+              "name": "#emitLogin",
+              "privacy": "private"
             },
             {
               "kind": "method",
-              "name": "#emitLogout"
+              "name": "#emitLogout",
+              "privacy": "private"
             },
             {
               "kind": "field",
@@ -2122,7 +2461,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{\r\n\trender() {\r\n\t\tSampleCardElement.define();\r\n\t\treturn html`<wc-sample-card\r\n\t\t\tleague=${league}\r\n\t\t\tfilename=${filename}\r\n\t\t\t?selected=${selected}\r\n\t\t\tuuid=${uuid}\r\n\t\t\tminimum-card-price=${minimumCardPrice}\r\n\t\t\t.sample=${sample}\r\n\t\t></wc-sample-card>`;\r\n\t},\r\n}"
+          "default": "{ render() { SampleCardElement.define(); return html`<wc-sample-card league=${league ?? 'Standard'} filename=${filename} ?selected=${selected} uuid=${uuid} minimum-card-price=${minimumCardPrice} .sample=${sample} ></wc-sample-card>`; }, }"
         }
       ],
       "exports": [
@@ -2294,23 +2633,28 @@
             },
             {
               "kind": "method",
-              "name": "#onSaveToFileClicked"
+              "name": "#onSaveToFileClicked",
+              "privacy": "private"
             },
             {
               "kind": "method",
-              "name": "#onSheetsIconClicked"
+              "name": "#onSheetsIconClicked",
+              "privacy": "private"
             },
             {
               "kind": "method",
-              "name": "#onGridIconClicked"
+              "name": "#onGridIconClicked",
+              "privacy": "private"
             },
             {
               "kind": "method",
-              "name": "#onSelectedClicked"
+              "name": "#onSelectedClicked",
+              "privacy": "private"
             },
             {
               "kind": "method",
               "name": "#onLeagueSelected",
+              "privacy": "private",
               "parameters": [
                 {
                   "name": "e",
@@ -2322,11 +2666,13 @@
             },
             {
               "kind": "method",
-              "name": "#onBtnDeleteClicked"
+              "name": "#onBtnDeleteClicked",
+              "privacy": "private"
             },
             {
               "kind": "method",
-              "name": "#onMinPriceRange"
+              "name": "#onMinPriceRange",
+              "privacy": "private"
             },
             {
               "kind": "method",
@@ -2456,9 +2802,6 @@
         {
           "kind": "variable",
           "name": "stashes",
-          "type": {
-            "text": "NoItemsTab[]"
-          },
           "default": "stashesData"
         },
         {
@@ -2585,6 +2928,401 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/wc/stashes/e-stash-tab-container.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{ render() { return html`<e-stash-tab-container status=\"complete\" .tab=${quadStash as TabWithItems} ></e-stash-tab-container>`; }, }"
+        },
+        {
+          "kind": "variable",
+          "name": "Fragments",
+          "type": {
+            "text": "object"
+          },
+          "default": "{ render() { return html`<e-stash-tab-container status=\"complete\" .tab=${fragmentsTab as TabWithItems} ></e-stash-tab-container>`; }, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/stashes/e-stash-tab-container.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/stashes/e-stash-tab-container.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Fragments",
+          "declaration": {
+            "name": "Fragments",
+            "module": "src/wc/stashes/e-stash-tab-container.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/stashes/e-stash-tab-container.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "StashTabContainerElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "tab",
+              "type": {
+                "text": "TabWithItems | null"
+              },
+              "default": "null",
+              "description": "PoE API tab data https://www.pathofexile.com/developer/docs/reference#stashes-get",
+              "attribute": "tab"
+            },
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "'pending' | 'complete'"
+              },
+              "default": "'pending'",
+              "attribute": "status"
+            },
+            {
+              "kind": "field",
+              "name": "scarabsSuccessAlert",
+              "type": {
+                "text": "SlAlert"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#copyScarabs",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "#emitExtractCards",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "#emitClose",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "extract-cards",
+              "type": {
+                "text": "Event"
+              },
+              "description": "Emitted on \"Extract cards sample\" button click."
+            },
+            {
+              "name": "close",
+              "type": {
+                "text": "Event"
+              },
+              "description": "Emitted on \"X\" button click."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "tab",
+              "type": {
+                "text": "TabWithItems | null"
+              },
+              "default": "null",
+              "description": "PoE API tab data https://www.pathofexile.com/developer/docs/reference#stashes-get",
+              "fieldName": "tab"
+            },
+            {
+              "name": "status",
+              "type": {
+                "text": "'pending' | 'complete'"
+              },
+              "default": "'pending'",
+              "fieldName": "status"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "summary": "Container for poe stash tab with header with actions.",
+          "tagName": "wc-e-stash-tab-container",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "StashTabContainerElement",
+          "declaration": {
+            "name": "StashTabContainerElement",
+            "module": "src/wc/stashes/e-stash-tab-container.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "e-stash-tab-container",
+          "declaration": {
+            "name": "StashTabContainerElement",
+            "module": "src/wc/stashes/e-stash-tab-container.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/stashes/e-stash-tab-errors.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{ render() { StashTabErrorsElement.define(); return html`<e-stash-tab-errors .errors=${errors}></e-stash-tab-errors>`; }, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/stashes/e-stash-tab-errors.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/stashes/e-stash-tab-errors.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/stashes/e-stash-tab-errors.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "StashTabErrorsElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "description": "Element tag name",
+              "default": "'e-stash-tab-errors'",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "defineList",
+              "type": {
+                "text": "(typeof BaseElement)[]"
+              },
+              "static": true,
+              "default": "[]",
+              "description": "list of classes of custom elements needed for this element.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "errors",
+              "type": {
+                "text": "Array<ErrorLabel>"
+              },
+              "default": "[]",
+              "attribute": "errors"
+            },
+            {
+              "kind": "field",
+              "name": "hoveredErrorTabId",
+              "type": {
+                "text": "ErrorLabel['noItemsTab']['id'] | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "method",
+              "name": "#handleCloseClick",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "id",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#handleMouseEnter",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "tabId",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#handleMouseLeave",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "this.tag"
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "parameters": [
+                {
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "optional": true,
+                  "type": {
+                    "text": "T"
+                  }
+                },
+                {
+                  "name": "options",
+                  "default": "{ bubbles: true, composed: true, cancelable: true }",
+                  "type": {
+                    "text": "EventInit"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "src/wc/base-element.ts"
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "upd:errors",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "CustomEvent<Array<{ noItemsTab: NoItemsTab; message: string }>> - Emitted when the errors array changes due to user interaction."
+            },
+            {
+              "name": "upd:hoveredErrorTabId",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "CustomEvent<string | null> - Emitted on Error block mouseenter or mouseleave"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "errors",
+              "type": {
+                "text": "Array<ErrorLabel>"
+              },
+              "default": "[]",
+              "fieldName": "errors"
+            }
+          ],
+          "superclass": {
+            "name": "BaseElement",
+            "module": "/src/wc/base-element"
+          },
+          "summary": "Represents a block of possible stash tab errors during loading.",
+          "tagName": "wc-e-stash-tab-errors",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "StashTabErrorsElement",
+          "declaration": {
+            "name": "StashTabErrorsElement",
+            "module": "src/wc/stashes/e-stash-tab-errors.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/stashes/event.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "UpdateEvent",
+          "superclass": {
+            "name": "Event",
+            "module": "src/wc/stashes/event.ts"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "UpdateEvent",
+          "declaration": {
+            "name": "UpdateEvent",
+            "module": "src/wc/stashes/event.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/wc/stashes/stash-loader.ts",
       "declarations": [
         {
@@ -2643,7 +3381,7 @@
               "kind": "field",
               "name": "selectedTabs",
               "type": {
-                "text": "Map<\r\n\t\tTabBadgeElement['tabId'],\r\n\t\t{ id: TabBadgeElement['tabId']; name: TabBadgeElement['name'] }\r\n\t>"
+                "text": "Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }>"
               },
               "default": "new Map()"
             },
@@ -2720,19 +3458,23 @@
             },
             {
               "kind": "method",
-              "name": "#onLoadItemsClicked"
+              "name": "#onLoadItemsClicked",
+              "privacy": "private"
             },
             {
               "kind": "method",
-              "name": "#onCloseClicked"
+              "name": "#onCloseClicked",
+              "privacy": "private"
             },
             {
               "kind": "method",
-              "name": "#onLoadStashesList"
+              "name": "#onLoadStashesList",
+              "privacy": "private"
             },
             {
               "kind": "method",
               "name": "#onLeagueSelected",
+              "privacy": "private",
               "parameters": [
                 {
                   "name": "e",
@@ -2745,6 +3487,7 @@
             {
               "kind": "method",
               "name": "#onUpdSelectedTabs",
+              "privacy": "private",
               "parameters": [
                 {
                   "name": "e",
@@ -2757,6 +3500,7 @@
             {
               "kind": "method",
               "name": "#onCustomLeagueInput",
+              "privacy": "private",
               "parameters": [
                 {
                   "name": "e",
@@ -2788,6 +3532,7 @@
             {
               "kind": "method",
               "name": "#loadSample",
+              "privacy": "private",
               "return": {
                 "type": {
                   "text": "Promise<TabWithItems>"
@@ -2811,6 +3556,7 @@
             {
               "kind": "method",
               "name": "#handleLoadTabError",
+              "privacy": "private",
               "return": {
                 "type": {
                   "text": "Promise<void>"
@@ -2917,7 +3663,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{\r\n\trender() {\r\n\t\tStashesViewElement.define();\r\n\r\n\t\treturn html`<wc-stashes-view .stashLoader=${new MockStashLoader()}></wc-stashes-view>`;\r\n\t},\r\n}"
+          "default": "{ render() { StashesViewElement.define(); return html`<wc-stashes-view .stashLoader=${new MockStashLoader()}></wc-stashes-view>`; }, }"
         }
       ],
       "exports": [
@@ -2934,6 +3680,27 @@
           "declaration": {
             "name": "Default",
             "module": "src/wc/stashes/stashes-view.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/stashes/stashes-view.styles.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "styles",
+          "default": "css` :host { display: block; max-width: 1500px; } .main-stashes-component { position: relative; padding: 1rem; padding: 0.6rem; border: 0.5px solid var(--sl-color-gray-200); border-radius: 0.25rem; } wc-help-tip::part(tooltip) { right: 5px; } .header { display: flex; justify-content: space-between; } .tips { display: flex; gap: 0.5rem; align-items: center; } .top-right-corner { display: flex; gap: 2rem; align-items: baseline; } .btn-load-items:not([disabled]) { transform: scale(1.2); } .messages { min-height: 2rem; } .msg { max-width: max-content; margin-inline: auto; margin-block: 0; font-size: 20px; } e-stash-tab-container { display: block; margin-inline: auto; } `"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "styles",
+          "declaration": {
+            "name": "styles",
+            "module": "src/wc/stashes/stashes-view.styles.ts"
           }
         }
       ]
@@ -2988,14 +3755,6 @@
             },
             {
               "kind": "field",
-              "name": "customLeague",
-              "type": {
-                "text": "string"
-              },
-              "attribute": "customLeague"
-            },
-            {
-              "kind": "field",
               "name": "downloadAs",
               "type": {
                 "text": "DownloadAs"
@@ -3005,9 +3764,18 @@
             },
             {
               "kind": "field",
+              "name": "multiselect",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "multiselect"
+            },
+            {
+              "kind": "field",
               "name": "selectedTabs",
               "type": {
-                "text": "Map<\r\n\t\tTabBadgeElement['tabId'],\r\n\t\t{ id: TabBadgeElement['tabId']; name: TabBadgeElement['name'] }\r\n\t>"
+                "text": "Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }>"
               },
               "default": "new Map()"
             },
@@ -3037,6 +3805,14 @@
             },
             {
               "kind": "field",
+              "name": "fetchingStashTab",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
               "name": "fetchingStash",
               "type": {
                 "text": "boolean"
@@ -3052,11 +3828,18 @@
             },
             {
               "kind": "field",
+              "name": "errors",
+              "type": {
+                "text": "Array<ErrorLabel>"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
               "name": "stashLoadsAvailable",
               "type": {
                 "text": "number"
               },
-              "privacy": "private",
               "default": "30"
             },
             {
@@ -3065,8 +3848,45 @@
               "type": {
                 "text": "number"
               },
-              "privacy": "private",
               "default": "15"
+            },
+            {
+              "kind": "field",
+              "name": "hoveredErrorTabId",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "downloadedStashTabs",
+              "type": {
+                "text": "Array<TabWithItems>"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "openedTabId",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "openedTab",
+              "type": {
+                "text": "NoItemsTab | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "stashTabTask",
+              "privacy": "private",
+              "default": "new Task(this, { task: async ([stashTabId]) => { if (!stashTabId) { return null; } return await this.#loadSingleTabContent(stashTabId, this.league, this.stashLoader.tab); }, args: () => [this.openedTabId], })"
             },
             {
               "kind": "field",
@@ -3084,15 +3904,44 @@
             },
             {
               "kind": "method",
-              "name": "#onLoadItemsClicked"
+              "name": "#handleUpdHoveredError",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "CustomEvent<string | null>"
+                  }
+                }
+              ]
             },
             {
               "kind": "method",
-              "name": "#onCloseClicked"
+              "name": "#handleUpdErrors",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "CustomEvent<Array<ErrorLabel>>"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onLoadItemsClicked",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "#onCloseClicked",
+              "privacy": "private"
             },
             {
               "kind": "method",
               "name": "#onDownloadAsChanged",
+              "privacy": "private",
               "parameters": [
                 {
                   "name": "e",
@@ -3104,11 +3953,8 @@
             },
             {
               "kind": "method",
-              "name": "#onLoadStashesList"
-            },
-            {
-              "kind": "method",
               "name": "#onLeagueSelected",
+              "privacy": "private",
               "parameters": [
                 {
                   "name": "e",
@@ -3121,6 +3967,7 @@
             {
               "kind": "method",
               "name": "#onUpdSelectedTabs",
+              "privacy": "private",
               "parameters": [
                 {
                   "name": "e",
@@ -3132,20 +3979,58 @@
             },
             {
               "kind": "method",
-              "name": "#onCustomLeagueInput",
+              "name": "#onTabClick",
+              "privacy": "private",
               "parameters": [
                 {
                   "name": "e",
                   "type": {
-                    "text": "InputEvent"
+                    "text": "CustomEvent<Events['tab-click']>"
                   }
                 }
               ]
             },
             {
               "kind": "method",
-              "name": "loadSelectedTabs",
-              "privacy": "protected",
+              "name": "#handleUpdMultiselect",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "CustomEvent<boolean>"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#emitExtractCards",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#handleTabContainerClose",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "#loadStash",
+              "privacy": "private",
+              "description": "Load whole stash of Array<NoItemsTab> and emits it"
+            },
+            {
+              "kind": "method",
+              "name": "#loadSelectedTabs",
+              "privacy": "private",
               "return": {
                 "type": {
                   "text": "Promise<void>"
@@ -3163,7 +4048,13 @@
             },
             {
               "kind": "method",
+              "name": "#waitForLoadsAvailable",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
               "name": "#loadSingleTabContent",
+              "privacy": "private",
               "return": {
                 "type": {
                   "text": "Promise<T>"
@@ -3186,23 +4077,6 @@
                   "name": "loadFunction",
                   "type": {
                     "text": "(id: string, league: League) => T"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "#handleLoadTabError",
-              "return": {
-                "type": {
-                  "text": "Promise<void>"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "err",
-                  "type": {
-                    "text": "unknown"
                   }
                 }
               ]
@@ -3263,19 +4137,20 @@
               "fieldName": "league"
             },
             {
-              "name": "customLeague",
-              "type": {
-                "text": "string"
-              },
-              "fieldName": "customLeague"
-            },
-            {
               "name": "downloadAs",
               "type": {
                 "text": "DownloadAs"
               },
               "default": "'divination-cards-sample'",
               "fieldName": "downloadAs"
+            },
+            {
+              "name": "multiselect",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "multiselect"
             }
           ],
           "superclass": {
@@ -3307,7 +4182,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{\r\n\trender() {\r\n\t\tTabBadgeGroupElement.define();\r\n\t\treturn html`<wc-tab-badge-group .stashes=${stashes} .league=${league}></wc-tab-badge-group>`;\r\n\t},\r\n}"
+          "default": "{ render() { TabBadgeGroupElement.define(); return html`<wc-tab-badge-group .stashes=${stashes} .league=${league}></wc-tab-badge-group>`; }, }"
         }
       ],
       "exports": [
@@ -3339,6 +4214,27 @@
             "text": "string"
           },
           "default": "'(Remove-only)'"
+        },
+        {
+          "kind": "class",
+          "description": "",
+          "name": "UpdateEvent",
+          "members": [
+            {
+              "kind": "field",
+              "name": "field",
+              "type": {
+                "text": "string"
+              },
+              "default": "field"
+            }
+          ],
+          "superclass": {
+            "name": "Event",
+            "module": "src/wc/stashes/tab-badge-group.ts"
+          },
+          "tagName": "wc-tab-badge-group",
+          "customElement": true
         },
         {
           "kind": "class",
@@ -3376,6 +4272,24 @@
             },
             {
               "kind": "field",
+              "name": "badgesDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "badges-disabled"
+            },
+            {
+              "kind": "field",
+              "name": "multiselect",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "multiselect"
+            },
+            {
+              "kind": "field",
               "name": "stashes",
               "type": {
                 "text": "NoItemsTab[]"
@@ -3392,6 +4306,24 @@
               "default": "ACTIVE_LEAGUE",
               "attribute": "league",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "errors",
+              "type": {
+                "text": "Array<ErrorLabel>"
+              },
+              "default": "[]",
+              "attribute": "errors"
+            },
+            {
+              "kind": "field",
+              "name": "hoveredErrorTabId",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "attribute": "hoveredErrorTabId"
             },
             {
               "kind": "field",
@@ -3426,7 +4358,7 @@
               "kind": "field",
               "name": "selectedTabs",
               "type": {
-                "text": "Map<\r\n\t\tTabBadgeElement['tabId'],\r\n\t\t{ id: TabBadgeElement['tabId']; name: TabBadgeElement['name'] }\r\n\t>"
+                "text": "Map<\r\n\t\tNoItemsTab['id'],\r\n\t\t{ id: NoItemsTab['id']; name: NoItemsTab['name'] }\r\n\t>"
               },
               "default": "new Map()"
             },
@@ -3493,19 +4425,44 @@
             },
             {
               "kind": "method",
-              "name": "#onPageInput"
+              "name": "#onHideRemoveOnlyChange",
+              "privacy": "private"
             },
             {
               "kind": "method",
-              "name": "#onPerPageInput"
+              "name": "#onPageChange",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
             },
             {
               "kind": "method",
-              "name": "#onNameQueryInput"
+              "name": "#onPerPageChange",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onNameQueryInput",
+              "privacy": "private"
             },
             {
               "kind": "method",
               "name": "#onTabSelect",
+              "privacy": "private",
               "parameters": [
                 {
                   "name": "e",
@@ -3517,8 +4474,16 @@
             },
             {
               "kind": "method",
-              "name": "paginatedTabs",
-              "privacy": "protected"
+              "name": "#onMultiselectChange",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
             },
             {
               "kind": "method",
@@ -3576,6 +4541,22 @@
           ],
           "attributes": [
             {
+              "name": "badges-disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "badgesDisabled"
+            },
+            {
+              "name": "multiselect",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "multiselect"
+            },
+            {
               "name": "stashes",
               "type": {
                 "text": "NoItemsTab[]"
@@ -3590,6 +4571,22 @@
               },
               "default": "ACTIVE_LEAGUE",
               "fieldName": "league"
+            },
+            {
+              "name": "errors",
+              "type": {
+                "text": "Array<ErrorLabel>"
+              },
+              "default": "[]",
+              "fieldName": "errors"
+            },
+            {
+              "name": "hoveredErrorTabId",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "fieldName": "hoveredErrorTabId"
             },
             {
               "name": "perPage",
@@ -3635,6 +4632,14 @@
         },
         {
           "kind": "js",
+          "name": "UpdateEvent",
+          "declaration": {
+            "name": "UpdateEvent",
+            "module": "src/wc/stashes/tab-badge-group.ts"
+          }
+        },
+        {
+          "kind": "js",
           "name": "TabBadgeGroupElement",
           "declaration": {
             "name": "TabBadgeGroupElement",
@@ -3653,7 +4658,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{\r\n\trender(d: { color: string; name: string; tabId: string; selected: boolean; index: number }) {\r\n\t\tTabBadgeElement.define();\r\n\t\treturn html`<wc-tab-badge tabId=\"e07f5f2946\" colour=\"7c5436\" index=\"5\"></wc-tab-badge>`;\r\n\t},\r\n}"
+          "default": "{ render() { TabBadgeElement.define(); return html`<wc-tab-badge .tab=${noItemsTab}></wc-tab-badge>`; }, }"
         }
       ],
       "exports": [
@@ -3681,6 +4686,56 @@
         {
           "kind": "class",
           "description": "",
+          "name": "TabSelectEvent",
+          "members": [
+            {
+              "kind": "field",
+              "name": "tab",
+              "type": {
+                "text": "NoItemsTab"
+              },
+              "default": "tab"
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "selected"
+            }
+          ],
+          "superclass": {
+            "name": "Event",
+            "module": "src/wc/stashes/tab-badge.ts"
+          },
+          "tagName": "wc-tab-badge",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "",
+          "name": "TabClickEvent",
+          "members": [
+            {
+              "kind": "field",
+              "name": "tab",
+              "type": {
+                "text": "NoItemsTab"
+              },
+              "default": "tab"
+            }
+          ],
+          "superclass": {
+            "name": "Event",
+            "module": "src/wc/stashes/tab-badge.ts"
+          },
+          "tagName": "wc-tab-badge",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "",
           "name": "TabBadgeElement",
           "members": [
             {
@@ -3699,44 +4754,20 @@
             },
             {
               "kind": "field",
-              "name": "hexishColor",
+              "name": "tab",
               "type": {
-                "text": "string"
+                "text": "NoItemsTab"
               },
-              "default": "'7c5436'",
-              "description": "Color from Poe API. Examples: ff, 80b3ff, #f0f80, cc009a, 7c5436",
-              "attribute": "hexish-color",
-              "reflects": true
+              "attribute": "tab"
             },
             {
               "kind": "field",
-              "name": "color",
+              "name": "disabled",
               "type": {
-                "text": "string | undefined"
+                "text": "boolean"
               },
-              "description": "Any valid CSS color",
-              "attribute": "color",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "name",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Heist'",
-              "attribute": "name",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "tabId",
-              "type": {
-                "text": "string"
-              },
-              "default": "'e07f5f2946'",
-              "attribute": "tabId",
-              "reflects": true
+              "default": "false",
+              "attribute": "disabled"
             },
             {
               "kind": "field",
@@ -3750,19 +4781,27 @@
             },
             {
               "kind": "field",
-              "name": "index",
+              "name": "color",
               "type": {
-                "text": "number"
+                "text": "string | undefined"
               },
-              "default": "0",
-              "attribute": "index",
+              "attribute": "color",
               "reflects": true
             },
             {
               "kind": "field",
-              "name": "checkbox",
+              "name": "as",
               "type": {
-                "text": "HTMLInputElement"
+                "text": "'button' | 'checkbox'"
+              },
+              "default": "'button'",
+              "attribute": "as"
+            },
+            {
+              "kind": "field",
+              "name": "tabState",
+              "type": {
+                "text": "NoItemsTab"
               }
             },
             {
@@ -3779,8 +4818,21 @@
               "privacy": "protected"
             },
             {
+              "kind": "field",
+              "name": "checkbox",
+              "type": {
+                "text": "HTMLInputElement"
+              }
+            },
+            {
               "kind": "method",
-              "name": "#onCheckbox"
+              "name": "#onCheckbox",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "#onButtonClick",
+              "privacy": "private"
             },
             {
               "kind": "field",
@@ -3844,37 +4896,19 @@
           ],
           "attributes": [
             {
-              "name": "hexish-color",
+              "name": "tab",
               "type": {
-                "text": "string"
+                "text": "NoItemsTab"
               },
-              "default": "'7c5436'",
-              "description": "Color from Poe API. Examples: ff, 80b3ff, #f0f80, cc009a, 7c5436",
-              "fieldName": "hexishColor"
+              "fieldName": "tab"
             },
             {
-              "name": "color",
+              "name": "disabled",
               "type": {
-                "text": "string | undefined"
+                "text": "boolean"
               },
-              "description": "Any valid CSS color",
-              "fieldName": "color"
-            },
-            {
-              "name": "name",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Heist'",
-              "fieldName": "name"
-            },
-            {
-              "name": "tabId",
-              "type": {
-                "text": "string"
-              },
-              "default": "'e07f5f2946'",
-              "fieldName": "tabId"
+              "default": "false",
+              "fieldName": "disabled"
             },
             {
               "name": "selected",
@@ -3885,12 +4919,19 @@
               "fieldName": "selected"
             },
             {
-              "name": "index",
+              "name": "color",
               "type": {
-                "text": "number"
+                "text": "string | undefined"
               },
-              "default": "0",
-              "fieldName": "index"
+              "fieldName": "color"
+            },
+            {
+              "name": "as",
+              "type": {
+                "text": "'button' | 'checkbox'"
+              },
+              "default": "'button'",
+              "fieldName": "as"
             }
           ],
           "superclass": {
@@ -3904,10 +4945,148 @@
       "exports": [
         {
           "kind": "js",
+          "name": "TabSelectEvent",
+          "declaration": {
+            "name": "TabSelectEvent",
+            "module": "src/wc/stashes/tab-badge.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TabClickEvent",
+          "declaration": {
+            "name": "TabClickEvent",
+            "module": "src/wc/stashes/tab-badge.ts"
+          }
+        },
+        {
+          "kind": "js",
           "name": "TabBadgeElement",
           "declaration": {
             "name": "TabBadgeElement",
             "module": "src/wc/stashes/tab-badge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/stashes/types.ts",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/theme-toggle/template.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "template",
+          "default": "String.raw` <button class=\"theme-toggle\" id=\"theme-toggle\" title=\"Toggles light & dark\" aria-label=\"auto\" aria-live=\"polite\"> <svg class=\"sun-and-moon\" aria-hidden=\"true\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <mask class=\"moon\" id=\"moon-mask\"> <rect x=\"0\" y=\"0\" width=\"100%\" height=\"100%\" fill=\"white\" /> <circle cx=\"24\" cy=\"10\" r=\"6\" fill=\"black\" /> </mask> <circle class=\"sun\" cx=\"12\" cy=\"12\" r=\"6\" mask=\"url(#moon-mask)\" fill=\"currentColor\" /> <g class=\"sun-beams\" stroke=\"currentColor\"> <line x1=\"12\" y1=\"1\" x2=\"12\" y2=\"3\" /> <line x1=\"12\" y1=\"21\" x2=\"12\" y2=\"23\" /> <line x1=\"4.22\" y1=\"4.22\" x2=\"5.64\" y2=\"5.64\" /> <line x1=\"18.36\" y1=\"18.36\" x2=\"19.78\" y2=\"19.78\" /> <line x1=\"1\" y1=\"12\" x2=\"3\" y2=\"12\" /> <line x1=\"21\" y1=\"12\" x2=\"23\" y2=\"12\" /> <line x1=\"4.22\" y1=\"19.78\" x2=\"5.64\" y2=\"18.36\" /> <line x1=\"18.36\" y1=\"5.64\" x2=\"19.78\" y2=\"4.22\" /> </g> </svg> </button>`"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "template",
+          "declaration": {
+            "name": "template",
+            "module": "src/wc/theme-toggle/template.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/theme-toggle/theme-toggle.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "ThemeToggle",
+          "cssProperties": [
+            {
+              "name": "--size"
+            },
+            {
+              "name": "--icon-fill"
+            },
+            {
+              "name": "--icon-fill"
+            }
+          ],
+          "members": [
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "'theme-toggle'"
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "theme",
+              "type": {
+                "text": "ColorTheme"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "$button",
+              "type": {
+                "text": "HTMLButtonElement | null"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "#shadowRoot",
+              "privacy": "private",
+              "type": {
+                "text": "ShadowRoot"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "toggleTheme",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "theme"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "wc-theme-toggle",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ThemeToggle",
+          "declaration": {
+            "name": "ThemeToggle",
+            "module": "src/wc/theme-toggle/theme-toggle.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "theme-toggle",
+          "declaration": {
+            "name": "ThemeToggle",
+            "module": "src/wc/theme-toggle/theme-toggle.ts"
           }
         }
       ]
@@ -4086,7 +5265,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{\r\n\trender({ fixedNames }: { fixedNames: FixedName[] }) {\r\n\t\tFixedNamesElement.define();\r\n\t\treturn html`<wc-fixed-names .fixedNames=${fixedNames}></wc-fixed-names>`;\r\n\t},\r\n}"
+          "default": "{ render({ fixedNames }: { fixedNames: FixedName[] }) { FixedNamesElement.define(); return html`<wc-fixed-names .fixedNames=${fixedNames}></wc-fixed-names>`; }, }"
         }
       ],
       "exports": [
@@ -4183,7 +5362,8 @@
             },
             {
               "kind": "method",
-              "name": "#onIconClicked"
+              "name": "#onIconClicked",
+              "privacy": "private"
             },
             {
               "kind": "method",
@@ -4315,7 +5495,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{\r\n\trender() {\r\n\t\tNotCardsElement.define();\r\n\t\treturn html`<wc-not-cards .notCards=${notCards}></wc-not-cards>`;\r\n\t},\r\n}"
+          "default": "{ render() { NotCardsElement.define(); return html`<wc-not-cards .notCards=${notCards}></wc-not-cards>`; }, }"
         }
       ],
       "exports": [
@@ -4392,21 +5572,8 @@
             },
             {
               "kind": "method",
-              "name": "#onIconClicked"
-            },
-            {
-              "kind": "method",
-              "name": "warningIcon",
-              "privacy": "protected",
-              "parameters": [
-                {
-                  "name": "size",
-                  "default": "20",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
+              "name": "#onIconClicked",
+              "privacy": "private"
             },
             {
               "kind": "method",

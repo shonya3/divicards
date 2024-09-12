@@ -35,6 +35,14 @@ export interface Events {
 	'tab-click': { tabId: string; name: string };
 }
 
+export class UpdateEvent extends Event {
+	field: string;
+	constructor({ field }: { field: string }, eventInitDict: EventInit) {
+		super('f-update', eventInitDict);
+		this.field = field;
+	}
+}
+
 export class TabBadgeGroupElement extends BaseElement {
 	static override get defineList() {
 		return [TabBadgeElement, HelpTipElement];
