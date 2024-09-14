@@ -35,13 +35,24 @@ export interface Events {
 	'tab-click': { tabId: string; name: string };
 }
 
-export class UpdateEvent extends Event {
-	field: string;
-	constructor({ field }: { field: string }, eventInitDict: EventInit) {
-		super('f-update', eventInitDict);
+export abstract class AbstractChange<
+	CE, // Custom Element type
+	T extends keyof CE = keyof CE, // Default T to keyof CE if not provided
+	V = CE[T] // Infer the value type from the CE's field type
+> extends Event {
+	readonly field: T;
+	readonly value: V;
+
+	constructor(field: T, value: V, options?: EventInit) {
+		super('event-field-change', options);
 		this.field = field;
+		this.value = value;
 	}
 }
+
+export class ChangeEvent<
+	T extends 'nameQuery' | 'perPage' | 'page' | 'multiselect' | 'selectedTabs' // Default to keyof TabBadgeGroupElement if no union provided
+> extends AbstractChange<TabBadgeGroupElement, T> {}
 
 export class TabBadgeGroupElement extends BaseElement {
 	static override get defineList() {
