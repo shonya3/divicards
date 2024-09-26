@@ -20,6 +20,7 @@ import { Size } from '../wc/order-triangle';
 import { DownloadAs } from '../wc/stashes/stashes-view';
 import { ErrorLabel } from '../wc/stashes/types';
 import { ColorTheme } from '../wc/theme-toggle/theme-toggle';
+import { ChangeEvent } from '../wc/stashes/tab-badge-group';
 
 type BaseElementProps = {};
 
@@ -304,6 +305,8 @@ type TabBadgeGroupElementProps = {
 	paginated?: string;
 	/**  */
 	tabsTotal?: string;
+
+	onChange?: ChangeEvent;
 };
 
 type TabSelectEventProps = {
