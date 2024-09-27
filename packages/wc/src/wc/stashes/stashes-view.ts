@@ -1,7 +1,7 @@
 import { IStashLoader } from '@divicards/shared/IStashLoader';
 import { html, css, PropertyValues, nothing } from 'lit';
 import { BaseElement } from '../base-element';
-import { HelpTipElement } from '../help-tip';
+import '../e-help-tip';
 import { TabBadgeElement } from './tab-badge';
 import { LeagueSelectElement } from '../league-select';
 import { property, state, query } from 'lit/decorators.js';
@@ -65,7 +65,7 @@ const DOWNLOAD_AS_VARIANTS = ['divination-cards-sample', 'general-tab'] as const
 
 export class StashesViewElement extends BaseElement {
 	static override get defineList() {
-		return [HelpTipElement, LeagueSelectElement, TabBadgeElement, TabBadgeGroupElement, StashTabErrorsElement];
+		return [LeagueSelectElement, TabBadgeElement, TabBadgeGroupElement, StashTabErrorsElement];
 	}
 	static override tag = 'wc-stashes-view';
 	static override styles = styles;
@@ -124,24 +124,24 @@ export class StashesViewElement extends BaseElement {
 								${this.fetchingStashTab
 									? html`<sl-button><sl-spinner></sl-spinner></sl-button>`
 									: this.multiselect
-									? html`<sl-button
-											id="get-data-btn"
-											class="btn-load-items"
-											.disabled=${this.selectedTabs.size === 0 ||
-											this.fetchingStashTab ||
-											this.stashLoadsAvailable === 0}
-											@click=${this.#onLoadItemsClicked}
-									  >
-											Load Tabs Contents
-									  </sl-button>`
-									: null}
+										? html`<sl-button
+												id="get-data-btn"
+												class="btn-load-items"
+												.disabled=${this.selectedTabs.size === 0 ||
+												this.fetchingStashTab ||
+												this.stashLoadsAvailable === 0}
+												@click=${this.#onLoadItemsClicked}
+											>
+												Load Tabs Contents
+											</sl-button>`
+										: null}
 							</div>
-					  `
+						`
 					: html`<div>
 							${this.fetchingStash
 								? html`<sl-button><sl-spinner></sl-spinner></sl-button>`
 								: html`<sl-button id="stashes-btn" @click=${this.#loadStash}>Load Stash</sl-button>`}
-					  </div> `}
+						</div> `}
 				<div class="top-right-corner">
 					${this.stashes.length
 						? html`
@@ -150,7 +150,7 @@ export class StashesViewElement extends BaseElement {
 											@sl-change=${this.#onDownloadAsChanged}
 											.helpText=${`Download as`}
 											value=${this.downloadAs}
-									  >
+										>
 											${DOWNLOAD_AS_VARIANTS.map(
 												variant =>
 													html`<sl-radio-button size="small" value=${variant}
@@ -159,15 +159,15 @@ export class StashesViewElement extends BaseElement {
 															: 'poe tab'}</sl-radio-button
 													>`
 											)}
-									  </sl-radio-group>`
+										</sl-radio-group>`
 									: null}
 								<div class="tips">
-									<wc-help-tip>
+									<e-help-tip>
 										<p>PoE API allows 30 requests in 5 minutes</p>
-									</wc-help-tip>
+									</e-help-tip>
 									<div>Loads available: ${this.stashLoadsAvailable}</div>
 								</div>
-						  `
+							`
 						: nothing}
 					<sl-button @click=${this.#onCloseClicked} class="btn-close">Close</sl-button>
 				</div>
@@ -180,7 +180,7 @@ export class StashesViewElement extends BaseElement {
 							@upd:hoveredErrorTabId=${this.#handleUpdHoveredError}
 							@upd:errors=${this.#handleUpdErrors}
 							.errors=${this.errors}
-					  ></e-stash-tab-errors>`
+						></e-stash-tab-errors>`
 					: nothing}
 			</div>
 			<wc-tab-badge-group
@@ -226,7 +226,7 @@ export class StashesViewElement extends BaseElement {
 							}
 							return html`<div>${err.message}</div>`;
 						},
-				  })
+					})
 				: null}
 		</div>`;
 	}

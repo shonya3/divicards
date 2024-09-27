@@ -3,7 +3,7 @@ import { BaseElement } from '../../base-element';
 import { property } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import { Column, Order, TablePreferences } from '@divicards/shared/types';
-import { HelpTipElement } from '../../help-tip';
+import '../../e-help-tip';
 
 export type To = 'file' | 'sheets';
 const isColumn = (s: unknown): s is Column => {
@@ -41,9 +41,6 @@ export interface Events {
 }
 
 export class FormExportSampleElement extends BaseElement {
-	static override get defineList() {
-		return [HelpTipElement];
-	}
 	static override tag = 'wc-form-export-sample';
 	static override styles = [styles()];
 
@@ -309,13 +306,13 @@ export class FormExportSampleElement extends BaseElement {
 								.value=${this.spreadsheetId}
 								@input=${this.#onSpreadsheetIdInput}
 							/>
-							<wc-help-tip>
+							<e-help-tip>
 								<img src="spreadsheetid.png" alt="screenshot of google sheet url">
 									https://docs.google.com/spreadsheets/d/1sDXpbG2bkqrOYScnvjMXTTg718dEc0LMDVHzllbAgmM/edit#gid=562350311
 								</img>
 
 								<p>spreadsheet id here is: 1sDXpbG2bkqrOYScnvjMXTTg718dEc0LMDVHzllbAgmM</p>
-							</wc-help-tip>
+							</e-help-tip>
 						</div>
 					</fieldset>
 

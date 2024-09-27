@@ -8,7 +8,7 @@ import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
 import '../e-pagination';
-import { HelpTipElement } from '../help-tip';
+import '../e-help-tip';
 import { ErrorLabel } from './types';
 import { classMap } from 'lit/directives/class-map.js';
 import SlCheckbox from '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
@@ -38,7 +38,7 @@ export interface Events {
 export abstract class AbstractChange<
 	CE, // Custom Element type
 	T extends keyof CE = keyof CE, // Default T to keyof CE if not provided
-	V = CE[T] // Infer the value type from the CE's field type
+	V = CE[T], // Infer the value type from the CE's field type
 > extends Event {
 	readonly field: T;
 	readonly value: V;
@@ -51,13 +51,10 @@ export abstract class AbstractChange<
 }
 
 export class ChangeEvent<
-	T extends 'nameQuery' | 'perPage' | 'page' | 'multiselect' | 'selectedTabs' // Default to keyof TabBadgeGroupElement if no union provided
+	T extends 'nameQuery' | 'perPage' | 'page' | 'multiselect' | 'selectedTabs', // Default to keyof TabBadgeGroupElement if no union provided
 > extends AbstractChange<TabBadgeGroupElement, T> {}
 
 export class TabBadgeGroupElement extends BaseElement {
-	static override get defineList() {
-		return [TabBadgeElement, HelpTipElement];
-	}
 	static override tag = 'wc-tab-badge-group';
 	static override styles = [styles()];
 
@@ -133,7 +130,7 @@ export class TabBadgeGroupElement extends BaseElement {
 								<sl-checkbox @sl-change=${this.#onMultiselectChange} .checked=${this.multiselect}
 									>Multiselect</sl-checkbox
 								>
-								<wc-help-tip>Select multiple tabs at once to download it in one go.</wc-help-tip>
+								<e-help-tip>Select multiple tabs at once to download it in one go.</e-help-tip>
 							</div>
 							${this.withHideRemoveOnly
 								? html` <div class="hide-remove-only">
@@ -143,13 +140,13 @@ export class TabBadgeGroupElement extends BaseElement {
 											.checked=${this.hideRemoveOnly}
 											>Hide remove-only</sl-checkbox
 										>
-								  </div>`
+									</div>`
 								: nothing}
 							<div class="tabs-total">
 								<span class="tabs-total__count">${this.tabsTotal}</span> stash tabs
 							</div>
 						</div>
-				  </header>`
+					</header>`
 				: nothing}
 			<ul class="list">
 				${this.paginated.map(tab => {

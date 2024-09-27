@@ -1,6 +1,7 @@
 import { html } from 'lit';
-import { DropFilesMessageElement } from './drop-files-message';
+import { DropFilesMessageElement } from './e-drop-files-message';
 import { Meta } from '@storybook/web-components';
+import './e-drop-files-message';
 
 export default {
 	title: 'Elements/drop-files-message',
@@ -8,7 +9,6 @@ export default {
 
 export const Default = {
 	render() {
-		DropFilesMessageElement.define();
-		return html`<wc-drop-files-message></wc-drop-files-message>`;
+		return html`<e-drop-files-message></e-drop-files-message>`;
 	},
 };

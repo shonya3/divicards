@@ -1,7 +1,7 @@
 import { IDefaultStashLoader } from '@divicards/shared/IStashLoader';
 import { html, css, PropertyValues } from 'lit';
 import { BaseElement } from '../base-element';
-import { HelpTipElement } from '../help-tip';
+import '../e-help-tip';
 import { TabBadgeElement } from './tab-badge';
 import { LeagueSelectElement } from '../league-select';
 import { property, state, query } from 'lit/decorators.js';
@@ -61,7 +61,7 @@ export interface Props {
 
 export class StashLoaderElement extends BaseElement {
 	static override get defineList() {
-		return [HelpTipElement, LeagueSelectElement, TabBadgeElement, TabBadgeGroupElement];
+		return [LeagueSelectElement, TabBadgeElement, TabBadgeGroupElement];
 	}
 	static override tag = 'e-stash-loader';
 	static override styles = [styles()];
@@ -156,9 +156,9 @@ export class StashLoaderElement extends BaseElement {
 						/>
 					</div>
 					<button id="stashes-btn" @click=${this.#onLoadStashesList}>Stashes</button>
-					<wc-help-tip>
+					<e-help-tip>
 						<p>Select tabs by clicking on them. Then click LOAD ITEMS button</p>
-					</wc-help-tip>
+					</e-help-tip>
 					<div>Loads available: ${this.stashLoadsAvailable}</div>
 				</div>
 

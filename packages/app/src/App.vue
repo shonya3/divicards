@@ -161,7 +161,7 @@ const extractCards = async (tab: TabWithItems, league: League) => {
 		class="drop-zone"
 	>
 		<header class="header">
-			<wc-drop-files-message></wc-drop-files-message>
+			<e-drop-files-message></e-drop-files-message>
 			<sl-button v-if="!stashVisible" @click="openStashWindow()">Load from stash</sl-button>
 			<div class="header__right">
 				<e-google-auth

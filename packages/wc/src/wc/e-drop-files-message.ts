@@ -1,29 +1,26 @@
-import { html, css } from 'lit';
-import { BaseElement } from './base-element';
-import { HelpTipElement } from './help-tip';
+import { html, css, LitElement } from 'lit';
+import './e-help-tip';
+import { customElement } from 'lit/decorators.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
-		'wc-drop-files-message': DropFilesMessageElement;
+		'e-drop-files-message': DropFilesMessageElement;
 	}
 }
 
 /**
  * @summary Message to drop files for main app screen
  */
-export class DropFilesMessageElement extends BaseElement {
-	static override get defineList() {
-		return [HelpTipElement];
-	}
-	static override tag: string = 'wc-drop-files-message';
+@customElement('e-drop-files-message')
+export class DropFilesMessageElement extends LitElement {
 	protected override render() {
 		return html`<div style="display: flex; gap: 1rem">
 			<div class="drop">Drop files <span>Here!</span></div>
-			<wc-help-tip>
+			<e-help-tip>
 				<p>Excel, .csv or just .txt</p>
 				<p>Required headers: name and amount</p>
 				<img src="/simple.png" alt="Example of simple .txt file"
-			/></wc-help-tip>
+			/></e-help-tip>
 		</div>`;
 	}
 	static override styles = css`

@@ -1,9 +1,9 @@
-import { BaseElement } from './base-element';
-import { css, html } from 'lit';
+import { css, html, LitElement } from 'lit';
+import { customElement } from 'lit/decorators.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
-		'wc-help-tip': HelpTipElement;
+		'e-help-tip': HelpTipElement;
 	}
 }
 
@@ -11,8 +11,8 @@ declare global {
  * @summary A questionmark logo with hoverable tip content
  * @slot  The tip's main content
  */
-export class HelpTipElement extends BaseElement {
-	static override tag: string = 'wc-help-tip';
+@customElement('e-help-tip')
+export class HelpTipElement extends LitElement {
 	static override styles = [styles()];
 	override render() {
 		return html`<div class="help-tip">

@@ -18,14 +18,13 @@ SlAlrt.define('sl-alert');
 SlButton.define('sl-button');
 SlIcon.define('sl-icon');
 
-import { DropFilesMessageElement } from '@divicards/wc/src/wc/drop-files-message';
 import { BasePopupElement } from '@divicards/wc/src/wc/base-popup';
 import { ThemeToggle } from '@divicards/wc/src/wc/theme-toggle/theme-toggle';
-DropFilesMessageElement.define();
 ThemeToggle.define();
 
 import '@divicards/wc/src/wc/e-poe-auth';
 import '@divicards/wc/src/wc/e-google-auth';
+import '@divicards/wc/src/wc/e-drop-files-message';
 
 BasePopupElement.define();
 
