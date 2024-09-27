@@ -1,6 +1,5 @@
-import { html, css, nothing } from 'lit';
-import { property, state } from 'lit/decorators.js';
-import { BaseElement } from '../base-element';
+import { html, css, nothing, LitElement } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
 import './e-tab-badge';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 import { ErrorLabel } from './types';
@@ -16,8 +15,8 @@ declare global {
  * @event upd:errors CustomEvent<Array<{ noItemsTab: NoItemsTab; message: string }>> - Emitted when the errors array changes due to user interaction.
  * @event upd:hoveredErrorTabId CustomEvent<string | null> - Emitted on Error block mouseenter or mouseleave
  */
-export class StashTabErrorsElement extends BaseElement {
-	static override tag = 'e-stash-tab-errors';
+@customElement('e-stash-tab-errors')
+export class StashTabErrorsElement extends LitElement {
 	@property({ type: Array }) errors: Array<ErrorLabel> = [];
 	@state() hoveredErrorTabId: ErrorLabel['noItemsTab']['id'] | null = null;
 

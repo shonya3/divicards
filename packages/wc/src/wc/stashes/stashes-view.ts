@@ -4,6 +4,7 @@ import { BaseElement } from '../base-element';
 import '../e-help-tip';
 import '../e-league-select';
 import './e-tab-badge-group';
+import './e-stash-tab-errors';
 import { property, state, query } from 'lit/decorators.js';
 import { DivinationCardsSample, League } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
@@ -13,7 +14,6 @@ import '@shoelace-style/shoelace/dist/components/radio-button/radio-button.js';
 import '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js';
 import '@shoelace-style/shoelace/dist/components/spinner/spinner.js';
 import { isStashTabError } from '@divicards/shared/error';
-import { StashTabErrorsElement } from './e-stash-tab-errors';
 import { ErrorLabel } from './types';
 import { styles } from './stashes-view.styles';
 import './e-stash-tab-container';
@@ -63,9 +63,6 @@ export type DownloadAs = (typeof DOWNLOAD_AS_VARIANTS)[number];
 const DOWNLOAD_AS_VARIANTS = ['divination-cards-sample', 'general-tab'] as const;
 
 export class StashesViewElement extends BaseElement {
-	static override get defineList() {
-		return [StashTabErrorsElement];
-	}
 	static override tag = 'wc-stashes-view';
 	static override styles = styles;
 

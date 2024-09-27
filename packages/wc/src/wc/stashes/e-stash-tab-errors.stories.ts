@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/web-components';
 import { html } from 'lit';
 import { StashTabErrorsElement } from './e-stash-tab-errors';
+import './e-stash-tab-errors';
 
 export default {
 	title: 'Elements/stashes/e-stash-tab-errors',
@@ -35,7 +36,6 @@ const errors = [
 
 export const Default = {
 	render() {
-		StashTabErrorsElement.define();
 		return html`<e-stash-tab-errors .errors=${errors}></e-stash-tab-errors>`;
 	},
 };
