@@ -2,6 +2,7 @@ import { html, css } from 'lit';
 import { BaseElement } from '../../base-element';
 import { property, query } from 'lit/decorators.js';
 import { BasePopupElement } from '../../base-popup';
+import '../../base-popup';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -10,9 +11,6 @@ declare global {
 }
 
 export class NotCardsElement extends BaseElement {
-	static override get defineList() {
-		return [BasePopupElement];
-	}
 	static override tag = 'wc-not-cards';
 	static override styles = [styles()];
 
@@ -37,14 +35,14 @@ export class NotCardsElement extends BaseElement {
 					d="M15.583 28.953a2.421 2.421 0 0 1 2.419-2.418a2.421 2.421 0 0 1 2.418 2.418a2.422 2.422 0 0 1-2.418 2.419a2.422 2.422 0 0 1-2.419-2.419zm.186-18.293c0-1.302.961-2.108 2.232-2.108c1.241 0 2.233.837 2.233 2.108v11.938c0 1.271-.992 2.108-2.233 2.108c-1.271 0-2.232-.807-2.232-2.108V10.66z"
 				/>
 			</svg>
-			<wc-base-popup>
+			<e-base-popup>
 				<div class="content">
 					<h2 class="heading">Probably not cards</h2>
 					<ul class="list">
 						${this.notCards.map(notCard => html`<li>${notCard}</li>`)}
 					</ul>
 				</div>
-			</wc-base-popup>
+			</e-base-popup>
 		`;
 	}
 

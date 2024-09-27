@@ -188,9 +188,9 @@ const extractCards = async (tab: TabWithItems, league: League) => {
 				<theme-toggle></theme-toggle>
 			</div>
 		</header>
-		<wc-base-popup v-if="update" ref="changelogPopupRef">
+		<e-base-popup v-if="update" ref="changelogPopupRef">
 			<UpdateChangelog @update-clicked="installAndRelaunch" :version="update.version" />
-		</wc-base-popup>
+		</e-base-popup>
 		<div v-show="authStore.loggedIn && stashVisible">
 			<StashesView
 				:stashLoader="stashLoader"
@@ -250,7 +250,7 @@ const extractCards = async (tab: TabWithItems, league: League) => {
 			</div>
 		</Transition>
 	</div>
-	<wc-base-popup ref="formPopupExportRef">
+	<e-base-popup ref="formPopupExportRef">
 		<FormExportSample
 			:error="exportSample.sheetsError"
 			:to="exportSample.to"
@@ -263,7 +263,7 @@ const extractCards = async (tab: TabWithItems, league: League) => {
 			:spreadsheetId="tablePreferences.spreadsheetId"
 			@submit="onSubmit"
 		></FormExportSample>
-	</wc-base-popup>
+	</e-base-popup>
 	<div class="version">
 		<NativeBrowserLink :href="releaseUrl">{{ tag }}</NativeBrowserLink>
 	</div>

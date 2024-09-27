@@ -1,4 +1,4 @@
-import { html, css, PropertyValueMap } from 'lit';
+import { html, css, PropertyValueMap, LitElement } from 'lit';
 import { BaseElement } from './base-element';
 import { customElement, property, query } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
@@ -6,12 +6,12 @@ import '@shoelace-style/shoelace/dist/components/button/button.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
-		'wc-base-popup': BasePopupElement;
+		'e-base-popup': BasePopupElement;
 	}
 }
 
-export class BasePopupElement extends BaseElement {
-	static override tag = 'wc-base-popup';
+@customElement('e-base-popup')
+export class BasePopupElement extends LitElement {
 	static override styles = [styles()];
 	/** Instead of dialog's non-modal open, runs showModal() if true https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#open */
 	@property({ type: Boolean, reflect: true }) open = false;

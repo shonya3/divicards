@@ -14,6 +14,7 @@ import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 import SlRange from '@shoelace-style/shoelace/dist/components/range/range.js';
 import './e-sample-table/e-sample-table';
+import '../base-popup';
 import { SampleTableElement } from './e-sample-table/e-sample-table';
 
 declare global {
@@ -43,7 +44,7 @@ export interface Events {
 const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 export class SampleCardElement extends BaseElement {
 	static override get defineList() {
-		return [LeagueSelectElement, BasePopupElement, FixedNamesElement, NotCardsElement];
+		return [LeagueSelectElement, FixedNamesElement, NotCardsElement];
 	}
 	static override tag = 'wc-sample-card';
 
@@ -133,9 +134,9 @@ export class SampleCardElement extends BaseElement {
 						id="selected-checkbox"
 						@change=${this.#onSelectedClicked}
 					/>`}
-			<wc-base-popup id="table-popup">
+			<e-base-popup id="table-popup">
 				<e-sample-table .cards=${this.sample.cards}> </e-sample-table>
-			</wc-base-popup>
+			</e-base-popup>
 		</div>`;
 	}
 

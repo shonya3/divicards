@@ -3,6 +3,7 @@ import { BaseElement } from '../../base-element';
 import { property, query } from 'lit/decorators.js';
 import { FixedName } from '@divicards/shared/types';
 import { BasePopupElement } from '../../base-popup';
+import '../../base-popup';
 import { FixedIconElement } from './fixed-icon';
 
 declare global {
@@ -13,7 +14,7 @@ declare global {
 
 export class FixedNamesElement extends BaseElement {
 	static override get defineList() {
-		return [BasePopupElement, FixedIconElement];
+		return [FixedIconElement];
 	}
 	static override tag = 'wc-fixed-names';
 
@@ -33,7 +34,7 @@ export class FixedNamesElement extends BaseElement {
 				width=${this.width}
 				height=${this.height}
 			></wc-fixed-icon>
-			<wc-base-popup>
+			<e-base-popup>
 				<div class="content">
 					<h2 class="heading">Automatically fixed typos</h2>
 					<ul class="fixed-names-list">
@@ -46,7 +47,7 @@ export class FixedNamesElement extends BaseElement {
 						})}
 					</ul>
 				</div>
-			</wc-base-popup> `;
+			</e-base-popup> `;
 	}
 
 	protected arrowIcon() {
