@@ -1,6 +1,7 @@
 import { html, css, nothing } from 'lit';
 import { BaseElement } from '../base-element';
-import { LeagueSelectElement } from '../league-select';
+import { LeagueSelectElement } from '../e-league-select';
+import '../e-league-select';
 import { BasePopupElement } from '../e-base-popup';
 import { FixedNamesElement } from './fixed-names/fixed-names';
 import { NotCardsElement } from './not-cards/not-cards';
@@ -44,7 +45,7 @@ export interface Events {
 const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 export class SampleCardElement extends BaseElement {
 	static override get defineList() {
-		return [LeagueSelectElement, FixedNamesElement, NotCardsElement];
+		return [FixedNamesElement, NotCardsElement];
 	}
 	static override tag = 'wc-sample-card';
 
@@ -114,7 +115,7 @@ export class SampleCardElement extends BaseElement {
 				<p>${this.filteredSummary.amount}</p>
 				<img width="35" height="35" src="/divination-card.png" alt="Divination card" />
 			</div>
-			<wc-league-select trade .league=${this.league} @upd:league=${this.#onLeagueSelected}></wc-league-select>
+			<e-league-select trade .league=${this.league} @upd:league=${this.#onLeagueSelected}></e-league-select>
 			<div class="export-buttons">
 				<sl-button size="large" @click=${this.#onSaveToFileClicked}>
 					<sl-icon style="font-size:1.6rem" name="filetype-csv"></sl-icon>

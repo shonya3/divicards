@@ -18,7 +18,7 @@ import StashesView from './components/StashesView.vue';
 import FormExportSample from './components/FormExportSample.vue';
 import { Props as FormExportProps } from '@divicards/wc/src/wc/sample-card/form-export-sample/form-export-sample';
 import '@shoelace-style/shoelace/dist/components/copy-button/copy-button.js';
-import { BasePopupElement } from '@divicards/wc/src/wc/base-popup';
+import { BasePopupElement } from '@divicards/wc/src/wc/e-base-popup';
 import UpdateChangelog from './components/UpdateChangelog.vue';
 import NativeBrowserLink from './components/NativeBrowserLink.vue';
 import { useAppVersion } from './composables/useAppVersion';

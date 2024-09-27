@@ -1,15 +1,16 @@
 import { BaseElement } from './base-element';
-import { PropertyValueMap, css, html, nothing } from 'lit';
-import { property, query } from 'lit/decorators.js';
+import { LitElement, PropertyValueMap, css, html, nothing } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { League, tradeLeagues, leagues as allLeagues } from '@divicards/shared/types';
 import '@shoelace-style/shoelace/dist/components/select/select.js';
 import '@shoelace-style/shoelace/dist/components/option/option.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
+import { emit } from '../utils';
 
 declare global {
 	interface HTMLElementTagNameMap {
-		'wc-league-select': LeagueSelectElement;
+		'e-league-select': LeagueSelectElement;
 	}
 }
 
@@ -27,9 +28,8 @@ export class SlConverter {
 	}
 }
 
-export class LeagueSelectElement extends BaseElement {
-	static override tag = 'wc-league-select';
-
+@customElement('e-league-select')
+export class LeagueSelectElement extends LitElement {
 	@property({ type: Boolean, reflect: true }) trade = false;
 	@property({ type: String, reflect: true }) league: League = ACTIVE_LEAGUE;
 	@property() privateLeague: string = PrivateLeagueStorage.load() ?? '';
@@ -77,7 +77,7 @@ export class LeagueSelectElement extends BaseElement {
 						type="text"
 						.helpText=${`Private league`}
 						size="small"
-				  ></sl-input>`
+					></sl-input>`
 				: nothing}
 		</div>`;
 	}
@@ -86,7 +86,7 @@ export class LeagueSelectElement extends BaseElement {
 		const target = e.target as HTMLInputElement;
 		this.privateLeague = target.value;
 		this.league = this.privateLeague;
-		this.emit<Events['upd:league']>('upd:league', this.league);
+		emit<Events['upd:league']>(this, 'upd:league', this.league);
 	}
 
 	override firstUpdated() {
@@ -96,7 +96,7 @@ export class LeagueSelectElement extends BaseElement {
 	async #emitLeagueChange() {
 		this.league = SlConverter.fromSlValue<League>(this.select.value);
 		await this.updateComplete;
-		this.emit<Events['upd:league']>('upd:league', this.league);
+		emit<Events['upd:league']>(this, 'upd:league', this.league);
 	}
 
 	static styles = css`

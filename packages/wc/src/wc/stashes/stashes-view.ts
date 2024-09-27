@@ -3,7 +3,7 @@ import { html, css, PropertyValues, nothing } from 'lit';
 import { BaseElement } from '../base-element';
 import '../e-help-tip';
 import { TabBadgeElement } from './tab-badge';
-import { LeagueSelectElement } from '../league-select';
+import '../e-league-select';
 import { property, state, query } from 'lit/decorators.js';
 import { DivinationCardsSample, League } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
@@ -65,7 +65,7 @@ const DOWNLOAD_AS_VARIANTS = ['divination-cards-sample', 'general-tab'] as const
 
 export class StashesViewElement extends BaseElement {
 	static override get defineList() {
-		return [LeagueSelectElement, TabBadgeElement, TabBadgeGroupElement, StashTabErrorsElement];
+		return [TabBadgeElement, TabBadgeGroupElement, StashTabErrorsElement];
 	}
 	static override tag = 'wc-stashes-view';
 	static override styles = styles;
@@ -113,11 +113,11 @@ export class StashesViewElement extends BaseElement {
 	protected override render() {
 		return html`<div class="main-stashes-component">
 			<header class="header">
-				<wc-league-select
+				<e-league-select
 					with-private-league-input
 					.league=${this.league}
 					@upd:league=${this.#onLeagueSelected}
-				></wc-league-select>
+				></e-league-select>
 				${this.stashes.length
 					? html`
 							<div>

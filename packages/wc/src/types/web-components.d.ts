@@ -15,7 +15,7 @@ import type { DefineComponent } from 'vue';
 import { BasePopupElement } from '../wc/e-base-popup';
 import { DivTableElement } from '../wc/sample-card/e-sample-table/e-sample-table';
 import { To } from '../wc/sample-card/form-export-sample/form-export-sample';
-import { LeagueSelectElement } from '../wc/league-select';
+import { LeagueSelectElement } from '../wc/e-league-select';
 import { Size } from '../wc/e-order-triangle';
 import { DownloadAs } from '../wc/stashes/stashes-view';
 import { ErrorLabel } from '../wc/stashes/types';

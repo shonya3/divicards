@@ -1,10 +1,11 @@
 import { Meta } from '@storybook/web-components';
-import { LeagueSelectElement } from './league-select';
+import { LeagueSelectElement } from './e-league-select';
+import './e-league-select';
 import { html } from 'lit';
 import { League, tradeLeagues } from '@divicards/shared/types';
 
 export default {
-	title: 'Elements/league-select',
+	title: 'Elements/e-league-select',
 	args: {
 		trade: false,
 		league: 'Standard',
@@ -20,7 +21,6 @@ export default {
 
 export const Default = {
 	render({ trade, league }: { trade: boolean; league: League }) {
-		LeagueSelectElement.define();
-		return html`<wc-league-select ?trade=${trade} league=${league}></wc-league-select>`;
+		return html`<e-league-select ?trade=${trade} league=${league}></e-league-select>`;
 	},
 };
