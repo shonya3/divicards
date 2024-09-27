@@ -1,10 +1,11 @@
 import { Meta } from '@storybook/web-components';
-import { TabBadgeElement } from './tab-badge';
+import { TabBadgeElement } from './e-tab-badge';
+import './e-tab-badge';
 import { html } from 'lit';
 import { NoItemsTab } from 'poe-custom-elements/types.js';
 
 export default {
-	title: 'Elements/stashes/tab-badge',
+	title: 'Elements/stashes/e-tab-badge',
 } satisfies Meta<TabBadgeElement>;
 
 const noItemsTab = {
@@ -19,7 +20,6 @@ const noItemsTab = {
 
 export const Default = {
 	render() {
-		TabBadgeElement.define();
-		return html`<wc-tab-badge .tab=${noItemsTab}></wc-tab-badge>`;
+		return html`<e-tab-badge .tab=${noItemsTab}></e-tab-badge>`;
 	},
 };

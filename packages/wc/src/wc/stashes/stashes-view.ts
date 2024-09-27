@@ -2,7 +2,7 @@ import { IStashLoader } from '@divicards/shared/IStashLoader';
 import { html, css, PropertyValues, nothing } from 'lit';
 import { BaseElement } from '../base-element';
 import '../e-help-tip';
-import { TabBadgeElement } from './tab-badge';
+import { TabBadgeElement } from './e-tab-badge';
 import '../e-league-select';
 import { property, state, query } from 'lit/decorators.js';
 import { DivinationCardsSample, League } from '@divicards/shared/types';
@@ -65,7 +65,7 @@ const DOWNLOAD_AS_VARIANTS = ['divination-cards-sample', 'general-tab'] as const
 
 export class StashesViewElement extends BaseElement {
 	static override get defineList() {
-		return [TabBadgeElement, TabBadgeGroupElement, StashTabErrorsElement];
+		return [TabBadgeGroupElement, StashTabErrorsElement];
 	}
 	static override tag = 'wc-stashes-view';
 	static override styles = styles;

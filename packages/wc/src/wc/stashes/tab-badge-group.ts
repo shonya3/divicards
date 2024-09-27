@@ -1,7 +1,7 @@
 import { html, css, nothing } from 'lit';
 import { BaseElement } from '../base-element';
 import { property, state, query } from 'lit/decorators.js';
-import { TabBadgeElement } from './tab-badge';
+import './e-tab-badge';
 import { League, isPermanentLeague } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
@@ -156,12 +156,12 @@ export class TabBadgeGroupElement extends BaseElement {
 							'hovered-error': this.hoveredErrorTabId === tab.id,
 						})}
 					>
-						<wc-tab-badge
+						<e-tab-badge
 							.as=${this.multiselect ? 'checkbox' : 'button'}
 							.tab=${tab}
 							.selected=${this.selectedTabs.has(tab.id)}
 							.disabled=${this.badgesDisabled}
-						></wc-tab-badge>
+						></e-tab-badge>
 					</li>`;
 				})}
 			</ul>

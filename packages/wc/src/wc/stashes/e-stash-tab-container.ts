@@ -4,7 +4,8 @@ import '@shoelace-style/shoelace/dist/components/spinner/spinner.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 import '@shoelace-style/shoelace/dist/components/copy-button/copy-button.js';
-import { TabBadgeElement } from './tab-badge';
+import { TabBadgeElement } from './e-tab-badge';
+import './e-tab-badge';
 import '@shoelace-style/shoelace/dist/components/alert/alert.js';
 import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 
@@ -33,23 +34,18 @@ export class StashTabContainerElement extends LitElement {
 
 	@query('sl-alert') scarabsSuccessAlert!: SlAlert;
 
-	constructor() {
-		super();
-		TabBadgeElement.define();
-	}
-
 	protected render(): TemplateResult {
 		return html`<header class="header">
 				<div class="header-main">
 					<div class="badge-and-copy">
-						${this.tab ? html`<wc-tab-badge as="button" .tab=${this.tab}></wc-tab-badge>` : null}
+						${this.tab ? html`<e-tab-badge as="button" .tab=${this.tab}></e-tab-badge>` : null}
 						${this.tab
 							? html`<sl-copy-button
 									.value=${JSON.stringify(this.tab, null, 4)}
 									.copyLabel=${`Click to copy JSON of the tab`}
 									.successLabel=${`You copied JSON of the tab`}
 									.errorLabel=${`Whoops, your browser doesn't support this!`}
-							  ></sl-copy-button>`
+								></sl-copy-button>`
 							: null}
 					</div>
 					${this.status === 'complete' && this.tab

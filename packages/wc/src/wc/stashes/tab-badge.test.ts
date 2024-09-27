@@ -1,13 +1,13 @@
 import { fixture, expect, html } from '@open-wc/testing';
 import sinon from 'sinon';
-import { TabBadgeElement } from './tab-badge';
+import { TabBadgeElement } from './e-tab-badge';
+import './e-tab-badge';
 
-describe('wc-tab-badge', () => {
+describe('e-tab-badge', () => {
 	let el: TabBadgeElement;
 
 	beforeEach(async () => {
-		TabBadgeElement.define();
-		el = await fixture(html`<wc-tab-badge></wc-tab-badge>`);
+		el = await fixture(html`<e-tab-badge></e-tab-badge>`);
 	});
 
 	it('should render a component', () => {

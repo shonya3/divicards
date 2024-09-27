@@ -1,7 +1,7 @@
 import { html, css, nothing } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { BaseElement } from '../base-element';
-import { TabBadgeElement } from './tab-badge';
+import './e-tab-badge';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 import { ErrorLabel } from './types';
 
@@ -18,9 +18,6 @@ declare global {
  */
 export class StashTabErrorsElement extends BaseElement {
 	static override tag = 'e-stash-tab-errors';
-	static override get defineList() {
-		return [TabBadgeElement];
-	}
 	@property({ type: Array }) errors: Array<ErrorLabel> = [];
 	@state() hoveredErrorTabId: ErrorLabel['noItemsTab']['id'] | null = null;
 
@@ -33,7 +30,7 @@ export class StashTabErrorsElement extends BaseElement {
 			${this.errors.map(
 				({ noItemsTab: tab, message }) =>
 					html`<li @mouseenter=${() => this.#handleMouseEnter(tab.id)} @mouseleave=${this.#handleMouseLeave}>
-						<wc-tab-badge .tab=${tab}></wc-tab-badge>
+						<e-tab-badge .tab=${tab}></e-tab-badge>
 						<p>${message}</p>
 						<sl-icon-button name="x-lg" @click=${() => this.#handleCloseClick(tab.id)} class="btn-close"
 							>X</sl-icon-button

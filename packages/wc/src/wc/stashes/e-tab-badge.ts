@@ -1,13 +1,13 @@
-import { html, css, PropertyValueMap } from 'lit';
-import { BaseElement } from '../base-element';
-import { property, query, state } from 'lit/decorators.js';
+import { html, css, PropertyValueMap, LitElement } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { REMOVE_ONLY } from './tab-badge-group';
 import { NoItemsTab } from 'poe-custom-elements/types.js';
+import { emit } from '../../utils';
 
 declare global {
 	interface HTMLElementTagNameMap {
-		'wc-tab-badge': TabBadgeElement;
+		'e-tab-badge': TabBadgeElement;
 	}
 }
 
@@ -39,11 +39,8 @@ export type ElementEvents = {
 	'tab-click': TabClickEvent;
 };
 
-/**
- *
- */
-export class TabBadgeElement extends BaseElement {
-	static override tag = 'wc-tab-badge';
+@customElement('e-tab-badge')
+export class TabBadgeElement extends LitElement {
 	@property({ type: Object }) tab!: NoItemsTab;
 	@property({ type: Boolean }) disabled = false;
 	@property({ type: Boolean, reflect: true }) selected = false;
@@ -103,14 +100,14 @@ export class TabBadgeElement extends BaseElement {
 	#onCheckbox() {
 		this.selected = this.checkbox.checked;
 
-		this.emit<Events['tab-select']>('tab-select', {
+		emit<Events['tab-select']>(this, 'tab-select', {
 			tabId: this.tab.id,
 			selected: this.selected,
 			name: this.tab.name,
 		});
 	}
 	#onButtonClick() {
-		this.emit<Events['tab-click']>('tab-click', {
+		emit<Events['tab-click']>(this, 'tab-click', {
 			tabId: this.tab.id,
 			name: this.tab.name,
 		});
