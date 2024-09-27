@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { StashesViewElement, Events } from '@divicards/wc/src/wc/stashes/stashes-view';
+import { Events } from '@divicards/wc/src/wc/stashes/e-stashes-view';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
-import type { StashesViewProps } from '@divicards/wc/src/wc/stashes/stashes-view';
+import type { StashesViewProps } from '@divicards/wc/src/wc/stashes/e-stashes-view';
+import '@divicards/wc/src/wc/stashes/e-stashes-view';
 import type { DivinationCardsSample, League } from '@divicards/shared/types';
 import { TabWithItems } from 'poe-custom-elements/types.js';
-StashesViewElement.define();
 withDefaults(defineProps<StashesViewProps>(), { league: ACTIVE_LEAGUE });
 const emit = defineEmits<{
 	close: [];
@@ -32,7 +32,7 @@ const onExtractCards = (e: CustomEvent<Events['extract-cards']>) => {
 </script>
 
 <template>
-	<wc-stashes-view
+	<e-stashes-view
 		:league="league"
 		:stashLoader="stashLoader"
 		@close="$emit('close')"
@@ -40,7 +40,7 @@ const onExtractCards = (e: CustomEvent<Events['extract-cards']>) => {
 		@sample-from-tab="onSampleFromTab"
 		@tab-with-items-loaded="onTabWithItemsLoaded"
 		@extract-cards="onExtractCards"
-	></wc-stashes-view>
+	></e-stashes-view>
 </template>
 
 <style scoped>

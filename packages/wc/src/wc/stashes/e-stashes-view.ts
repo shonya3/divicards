@@ -1,11 +1,10 @@
 import { IStashLoader } from '@divicards/shared/IStashLoader';
-import { html, PropertyValues, nothing } from 'lit';
-import { BaseElement } from '../base-element';
+import { html, PropertyValues, nothing, LitElement } from 'lit';
 import '../e-help-tip';
 import '../e-league-select';
 import './e-tab-badge-group';
 import './e-stash-tab-errors';
-import { property, state, query } from 'lit/decorators.js';
+import { property, state, query, customElement } from 'lit/decorators.js';
 import { DivinationCardsSample, League } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
@@ -15,20 +14,15 @@ import '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js';
 import '@shoelace-style/shoelace/dist/components/spinner/spinner.js';
 import { isStashTabError } from '@divicards/shared/error';
 import { ErrorLabel } from './types';
-import { styles } from './stashes-view.styles';
+import { styles } from './e-stashes-view.styles';
 import './e-stash-tab-container';
 import { Task } from '@lit/task';
 import { StashTabContainerElement } from './e-stash-tab-container';
 import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
+import { emit } from '../../utils';
 
 const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
-
-declare global {
-	interface HTMLElementTagNameMap {
-		'wc-stashes-view': StashesViewElement;
-	}
-}
 
 export type Events = {
 	close: void;
@@ -62,8 +56,8 @@ export interface StashesViewProps {
 export type DownloadAs = (typeof DOWNLOAD_AS_VARIANTS)[number];
 const DOWNLOAD_AS_VARIANTS = ['divination-cards-sample', 'general-tab'] as const;
 
-export class StashesViewElement extends BaseElement {
-	static override tag = 'wc-stashes-view';
+@customElement('e-stashes-view')
+export class StashesViewElement extends LitElement {
 	static override styles = styles;
 
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
@@ -237,7 +231,7 @@ export class StashesViewElement extends BaseElement {
 		this.#loadSelectedTabs(this.league);
 	}
 	#onCloseClicked() {
-		this.emit('close');
+		emit(this, 'close');
 	}
 	#onDownloadAsChanged(e: InputEvent) {
 		this.downloadAs = (e.target as HTMLInputElement).value as DownloadAs;
@@ -259,7 +253,7 @@ export class StashesViewElement extends BaseElement {
 	#emitExtractCards(e: Event) {
 		const tab = (e.target as StashTabContainerElement)?.tab;
 		if (tab) {
-			this.emit<Events['extract-cards']>('extract-cards', { tab: tab, league: this.league });
+			emit<Events['extract-cards']>(this, 'extract-cards', { tab: tab, league: this.league });
 		}
 	}
 	#handleTabContainerClose() {
@@ -276,7 +270,7 @@ export class StashesViewElement extends BaseElement {
 		this.fetchingStash = true;
 		try {
 			this.stashes = await this.stashLoader.tabs(this.league);
-			this.emit<Events['tabs']>('tabs', this.stashes);
+			emit<Events['tabs']>(this, 'tabs', this.stashes);
 			if (!this.stashes.length) {
 				this.noStashesMessage = 'No stashes here. Try to change the league';
 			}
@@ -302,7 +296,7 @@ export class StashesViewElement extends BaseElement {
 					switch (this.downloadAs) {
 						case 'divination-cards-sample': {
 							const sample = await this.#loadSingleTabContent(id, league, this.stashLoader.sampleFromTab);
-							this.emit<Events['sample-from-tab']>('sample-from-tab', {
+							emit<Events['sample-from-tab']>(this, 'sample-from-tab', {
 								name,
 								sample,
 								league,
@@ -312,7 +306,7 @@ export class StashesViewElement extends BaseElement {
 						case 'general-tab': {
 							const tab = await this.#loadSingleTabContent(id, league, this.stashLoader.tab);
 							tab.name = name;
-							this.emit<Events['tab-with-items-loaded']>('tab-with-items-loaded', {
+							emit<Events['tab-with-items-loaded']>(this, 'tab-with-items-loaded', {
 								tab,
 								name,
 								league,
@@ -385,3 +379,9 @@ export class StashesViewElement extends BaseElement {
 const sleepSecs = async (secs: number): Promise<void> => {
 	return new Promise(r => setTimeout(r, secs * 1000));
 };
+
+declare global {
+	interface HTMLElementTagNameMap {
+		'e-stashes-view': StashesViewElement;
+	}
+}

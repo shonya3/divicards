@@ -1,13 +1,13 @@
-import { StashesViewElement } from './stashes-view';
+import { StashesViewElement } from './e-stashes-view';
 import { fixture, expect, html } from '@open-wc/testing';
 import sinon from 'sinon';
+import './e-stashes-view';
 import { MockStashLoader } from './data';
 
 describe('e-tab-badge-group', async () => {
 	let el: StashesViewElement;
 	beforeEach(async () => {
-		StashesViewElement.define();
-		el = await fixture(html`<wc-stashes-view .stashLoader=${new MockStashLoader()}></wc-stashes-view>`);
+		el = await fixture(html`<e-stashes-view .stashLoader=${new MockStashLoader()}></e-stashes-view>`);
 	});
 
 	it('should render a component', () => {

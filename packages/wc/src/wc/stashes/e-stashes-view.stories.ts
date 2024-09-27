@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { StashesViewElement } from './stashes-view';
+import './e-stashes-view';
 import { MockStashLoader } from './data';
 
 export default {
@@ -8,8 +8,6 @@ export default {
 
 export const Default = {
 	render() {
-		StashesViewElement.define();
-
-		return html`<wc-stashes-view .stashLoader=${new MockStashLoader()}></wc-stashes-view>`;
+		return html`<e-stashes-view .stashLoader=${new MockStashLoader()}></e-stashes-view>`;
 	},
 };

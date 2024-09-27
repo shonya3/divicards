@@ -6,7 +6,7 @@ import { LeagueSelectElement } from './src/wc/e-league-select';
 import { OrderTriangleElement } from './src/wc/e-order-triangle';
 import { PoeAuthElement } from './src/wc/e-poe-auth';
 import { MockStashLoader, stashes } from './src/wc/stashes/data';
-import { StashesViewElement } from './src/wc/stashes/stashes-view';
+import { StashesViewElement } from './src/wc/stashes/e-stashes-view';
 
 // StashesViewElement.define();
 // const stashesView = document.createElement('wc-stashes-view');

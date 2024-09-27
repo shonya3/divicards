@@ -17,7 +17,7 @@ import { DivTableElement } from '../wc/sample-card/e-sample-table/e-sample-table
 import { To } from '../wc/sample-card/form-export-sample/form-export-sample';
 import { LeagueSelectElement } from '../wc/e-league-select';
 import { Size } from '../wc/e-order-triangle';
-import { DownloadAs } from '../wc/stashes/stashes-view';
+import { DownloadAs } from '../wc/stashes/e-stashes-view';
 import { ErrorLabel } from '../wc/stashes/types';
 import { ColorTheme } from '../wc/theme-toggle/theme-toggle';
 import { ChangeEvent } from '../wc/stashes/e-tab-badge-group';
