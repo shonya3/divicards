@@ -1,6 +1,5 @@
-import { html, css, nothing } from 'lit';
-import { BaseElement } from '../base-element';
-import { property, state, query } from 'lit/decorators.js';
+import { html, css, nothing, LitElement } from 'lit';
+import { property, state, query, customElement } from 'lit/decorators.js';
 import './e-tab-badge';
 import { League, isPermanentLeague } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
@@ -14,10 +13,11 @@ import { classMap } from 'lit/directives/class-map.js';
 import SlCheckbox from '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
 import { PaginationElement } from '../e-pagination';
 import { NoItemsTab } from 'poe-custom-elements/types.js';
+import { emit } from '../../utils';
 
 declare global {
 	interface HTMLElementTagNameMap {
-		'wc-tab-badge-group': TabBadgeGroupElement;
+		'e-tab-badge-group': TabBadgeGroupElement;
 	}
 }
 
@@ -54,8 +54,8 @@ export class ChangeEvent<
 	T extends 'nameQuery' | 'perPage' | 'page' | 'multiselect' | 'selectedTabs', // Default to keyof TabBadgeGroupElement if no union provided
 > extends AbstractChange<TabBadgeGroupElement, T> {}
 
-export class TabBadgeGroupElement extends BaseElement {
-	static override tag = 'wc-tab-badge-group';
+@customElement('e-tab-badge-group')
+export class TabBadgeGroupElement extends LitElement {
 	static override styles = [styles()];
 
 	@property({ type: Boolean, attribute: 'badges-disabled' }) badgesDisabled = false;
@@ -175,27 +175,27 @@ export class TabBadgeGroupElement extends BaseElement {
 		if (e.target instanceof PaginationElement) {
 			this.page = e.target.page;
 		}
-		this.emit<Events['upd:page']>('upd:page', this.page);
+		emit<Events['upd:page']>(this, 'upd:page', this.page);
 	}
 	#onPerPageChange(e: Event) {
 		if (e.target instanceof PaginationElement) {
 			this.perPage = e.target.perPage;
 		}
-		this.emit<Events['upd:PerPage']>('upd:PerPage', this.page);
+		emit<Events['upd:PerPage']>(this, 'upd:PerPage', this.page);
 	}
 	#onNameQueryInput() {
 		this.nameQuery = this.nameQueryInput.value;
-		this.emit<Events['upd:nameQuery']>('upd:nameQuery', this.nameQuery);
+		emit<Events['upd:nameQuery']>(this, 'upd:nameQuery', this.nameQuery);
 	}
 	#onTabSelect(e: CustomEvent<Events['tab-select']>) {
 		const { selected, tabId, name } = e.detail;
 		selected ? this.selectedTabs.set(tabId, { id: tabId, name }) : this.selectedTabs.delete(tabId);
 		this.selectedTabs = new Map(this.selectedTabs);
-		this.emit<Events['upd:selectedTabs']>('upd:selectedTabs', this.selectedTabs);
+		emit<Events['upd:selectedTabs']>(this, 'upd:selectedTabs', this.selectedTabs);
 	}
 	#onMultiselectChange(e: InputEvent) {
 		this.multiselect = (e.target as SlCheckbox).checked;
-		this.emit<Events['upd:multiselect']>('upd:multiselect', this.multiselect);
+		emit<Events['upd:multiselect']>(this, 'upd:multiselect', this.multiselect);
 	}
 	decreasePage() {
 		if (this.page > 1) {

@@ -20,7 +20,7 @@ import { Size } from '../wc/e-order-triangle';
 import { DownloadAs } from '../wc/stashes/stashes-view';
 import { ErrorLabel } from '../wc/stashes/types';
 import { ColorTheme } from '../wc/theme-toggle/theme-toggle';
-import { ChangeEvent } from '../wc/stashes/tab-badge-group';
+import { ChangeEvent } from '../wc/stashes/e-tab-badge-group';
 
 type BaseElementProps = {};
 

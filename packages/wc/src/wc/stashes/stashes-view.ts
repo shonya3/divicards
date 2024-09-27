@@ -1,13 +1,12 @@
 import { IStashLoader } from '@divicards/shared/IStashLoader';
-import { html, css, PropertyValues, nothing } from 'lit';
+import { html, PropertyValues, nothing } from 'lit';
 import { BaseElement } from '../base-element';
 import '../e-help-tip';
-import { TabBadgeElement } from './e-tab-badge';
 import '../e-league-select';
+import './e-tab-badge-group';
 import { property, state, query } from 'lit/decorators.js';
 import { DivinationCardsSample, League } from '@divicards/shared/types';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
-import { TabBadgeGroupElement } from './tab-badge-group';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/radio-button/radio-button.js';
@@ -65,7 +64,7 @@ const DOWNLOAD_AS_VARIANTS = ['divination-cards-sample', 'general-tab'] as const
 
 export class StashesViewElement extends BaseElement {
 	static override get defineList() {
-		return [TabBadgeGroupElement, StashTabErrorsElement];
+		return [StashTabErrorsElement];
 	}
 	static override tag = 'wc-stashes-view';
 	static override styles = styles;
@@ -183,7 +182,7 @@ export class StashesViewElement extends BaseElement {
 						></e-stash-tab-errors>`
 					: nothing}
 			</div>
-			<wc-tab-badge-group
+			<e-tab-badge-group
 				.multiselect=${this.multiselect}
 				league=${this.league}
 				.stashes=${this.stashes}
@@ -194,7 +193,7 @@ export class StashesViewElement extends BaseElement {
 				@tab-click=${this.#onTabClick}
 				@upd:multiselect=${this.#handleUpdMultiselect}
 				.badgesDisabled=${this.stashLoadsAvailable === 0 || this.availableInTenSeconds === 0}
-			></wc-tab-badge-group>
+			></e-tab-badge-group>
 			${this.openedTabId
 				? this.stashTabTask.render({
 						pending: () => {

@@ -3,7 +3,7 @@ import { fixture, expect, html } from '@open-wc/testing';
 import sinon from 'sinon';
 import { MockStashLoader } from './data';
 
-describe('wc-tab-badge-group', async () => {
+describe('e-tab-badge-group', async () => {
 	let el: StashesViewElement;
 	beforeEach(async () => {
 		StashesViewElement.define();
@@ -21,10 +21,10 @@ describe('wc-tab-badge-group', async () => {
 		el.stashesButton.click();
 		await el.updateComplete;
 
-		const group = el.shadowRoot!.querySelector('wc-tab-badge-group')!;
+		const group = el.shadowRoot!.querySelector('e-tab-badge-group')!;
 		await group.updateComplete;
 		await group.updateComplete;
-		const firstTabBadge = group.shadowRoot!.querySelector('wc-tab-badge')!;
+		const firstTabBadge = group.shadowRoot!.querySelector('e-tab-badge')!;
 		firstTabBadge.shadowRoot!.querySelector('input')!.click();
 		await el.updateComplete;
 		el.getDataButton.click();
