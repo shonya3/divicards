@@ -1,8 +1,8 @@
 import { html, css } from 'lit';
 import { BaseElement } from '../../base-element';
 import { property, query } from 'lit/decorators.js';
-import { BasePopupElement } from '../../base-popup';
-import '../../base-popup';
+import { BasePopupElement } from '../../e-base-popup';
+import '../../e-base-popup';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -15,7 +15,7 @@ export class NotCardsElement extends BaseElement {
 	static override styles = [styles()];
 
 	@property({ type: Array }) notCards: string[] = [];
-	@query('wc-base-popup') popup!: BasePopupElement;
+	@query('e-base-popup') popup!: BasePopupElement;
 
 	protected override render() {
 		return html`

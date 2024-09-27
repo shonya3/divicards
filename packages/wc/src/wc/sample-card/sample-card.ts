@@ -1,7 +1,7 @@
 import { html, css, nothing } from 'lit';
 import { BaseElement } from '../base-element';
 import { LeagueSelectElement } from '../league-select';
-import { BasePopupElement } from '../base-popup';
+import { BasePopupElement } from '../e-base-popup';
 import { FixedNamesElement } from './fixed-names/fixed-names';
 import { NotCardsElement } from './not-cards/not-cards';
 import { DivinationCardsSample, League, TradeLeague, isTradeLeague } from '@divicards/shared/types';
@@ -14,7 +14,7 @@ import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 import SlRange from '@shoelace-style/shoelace/dist/components/range/range.js';
 import './e-sample-table/e-sample-table';
-import '../base-popup';
+import '../e-base-popup';
 import { SampleTableElement } from './e-sample-table/e-sample-table';
 
 declare global {
@@ -55,7 +55,7 @@ export class SampleCardElement extends BaseElement {
 	@property({ type: Number, reflect: true, attribute: 'minimum-card-price' }) minimumCardPrice: number = 0;
 	@property({ type: Object }) sample: DivinationCardsSample = { notCards: [], fixedNames: [], cards: [] };
 
-	@query('wc-base-popup#table-popup') tablePopup!: BasePopupElement;
+	@query('e-base-popup#table-popup') tablePopup!: BasePopupElement;
 	@query('input#selected-checkbox') selectedCheckbox!: HTMLInputElement;
 	@query('wc-league-select') leagueSelect!: LeagueSelectElement;
 	@query('#minimum-card-price-slider') priceSlider!: HTMLInputElement;

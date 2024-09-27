@@ -24,7 +24,7 @@ ThemeToggle.define();
 import '@divicards/wc/src/wc/e-poe-auth';
 import '@divicards/wc/src/wc/e-google-auth';
 import '@divicards/wc/src/wc/e-drop-files-message';
-import '@divicards/wc/src/wc/base-popup';
+import '@divicards/wc/src/wc/e-base-popup';
 
 const pinia = createPinia();
 

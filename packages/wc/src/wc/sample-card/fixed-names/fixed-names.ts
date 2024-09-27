@@ -2,8 +2,8 @@ import { html, css, svg } from 'lit';
 import { BaseElement } from '../../base-element';
 import { property, query } from 'lit/decorators.js';
 import { FixedName } from '@divicards/shared/types';
-import { BasePopupElement } from '../../base-popup';
-import '../../base-popup';
+import { BasePopupElement } from '../../e-base-popup';
+import '../../e-base-popup';
 import { FixedIconElement } from './fixed-icon';
 
 declare global {
@@ -22,7 +22,7 @@ export class FixedNamesElement extends BaseElement {
 	@property({ reflect: true, type: Number }) height = 24;
 	@property({ type: Array }) fixedNames: FixedName[] = [];
 
-	@query('wc-base-popup') popup!: BasePopupElement;
+	@query('e-base-popup') popup!: BasePopupElement;
 
 	#onIconClicked() {
 		this.popup.showModal();

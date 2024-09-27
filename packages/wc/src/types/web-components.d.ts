@@ -12,7 +12,7 @@ import {
 import { SlRange, SlAlert } from '@shoelace-style/shoelace';
 import { TabWithItems, NoItemsTab } from 'poe-custom-elements/types.js';
 import type { DefineComponent } from 'vue';
-import { BasePopupElement } from '../wc/base-popup';
+import { BasePopupElement } from '../wc/e-base-popup';
 import { DivTableElement } from '../wc/sample-card/e-sample-table/e-sample-table';
 import { To } from '../wc/sample-card/form-export-sample/form-export-sample';
 import { LeagueSelectElement } from '../wc/league-select';
@@ -385,7 +385,7 @@ export type CustomElements = {
 	 * ---
 	 *
 	 */
-	'wc-base-popup': DefineComponent<BasePopupElementProps>;
+	'e-base-popup': DefineComponent<BasePopupElementProps>;
 
 	/**
 	 * Message to drop files for main app screen

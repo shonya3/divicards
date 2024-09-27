@@ -382,7 +382,7 @@ export type CustomElements = {
 	 * ---
 	 *
 	 */
-	'wc-base-popup': DefineComponent<BasePopupElementProps>;
+	'e-base-popup': DefineComponent<BasePopupElementProps>;
 
 	/**
 	 * Message to drop files for main app screen
