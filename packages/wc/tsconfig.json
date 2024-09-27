@@ -15,6 +15,6 @@
 		"experimentalDecorators": true,
 		"noEmit": true
 	},
-	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "main.ts"],
+	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "main.ts", "types/**/.d.ts"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

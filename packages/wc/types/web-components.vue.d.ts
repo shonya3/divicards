@@ -1,27 +1,25 @@
-import { IDefaultStashLoader, IStashLoader } from '@divicards/shared/IStashLoader';
+import { IStashLoader } from '@divicards/shared/IStashLoader';
 import {
-	League,
-	Order,
-	DivinationCardRecord,
 	Column,
-	TablePreferences,
-	TradeLeague,
+	DivinationCardRecord,
 	DivinationCardsSample,
 	FixedName,
+	League,
+	Order,
+	TablePreferences,
+	TradeLeague,
 } from '@divicards/shared/types';
 import { SlRange, SlAlert } from '@shoelace-style/shoelace';
 import { TabWithItems, NoItemsTab } from 'poe-custom-elements/types.js';
 import type { DefineComponent } from 'vue';
-import { BasePopupElement } from '../wc/base-popup';
-import { DivTableElement } from '../wc/div-table/div-table';
-import { To } from '../wc/form-export-sample/form-export-sample';
-import { LeagueSelectElement } from '../wc/league-select';
-import { Size } from '../wc/order-triangle';
-import { DownloadAs } from '../wc/stashes/stashes-view';
-import { ErrorLabel } from '../wc/stashes/types';
-import { ColorTheme } from '../wc/theme-toggle/theme-toggle';
-
-type BaseElementProps = {};
+import { BasePopupElement } from '../src/wc/e-base-popup';
+import { LeagueSelectElement } from '../src/wc/e-league-select';
+import { Size } from '../src/wc/e-order-triangle';
+import { To } from '../src/wc/e-sample-card/e-form-export-sample/e-form-export-sample';
+import { SampleTableElement } from '../src/wc/e-sample-card/e-sample-table/e-sample-table';
+import { ColorTheme } from '../src/wc/e-theme-toggle/e-theme-toggle';
+import { DownloadAs } from '../src/wc/stashes/e-stashes-view';
+import { ErrorLabel } from '../src/wc/stashes/types';
 
 type BasePopupElementProps = {
 	/** Instead of dialog's non-modal open, runs showModal() if true https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#open */
@@ -32,24 +30,16 @@ type BasePopupElementProps = {
 
 type DropFilesMessageElementProps = {};
 
-type PaginationElementProps = {
+type GoogleAuthElementProps = {
 	/**  */
-	page?: number;
+	name?: string;
 	/**  */
-	'per-page'?: number;
-	/** Number of items */
-	n?: number;
+	picture?: string;
 	/**  */
-	isLastPage?: boolean;
-	/**  */
-	onPageChange?: (e: CustomEvent<Event>) => void;
-	/**  */
-	onPerPageChange?: (e: CustomEvent<Event>) => void;
+	loggedIn?: boolean;
 };
 
 type HelpTipElementProps = {};
-
-type SlConverterProps = {};
 
 type LeagueSelectElementProps = {
 	/**  */
@@ -75,66 +65,24 @@ type OrderTriangleElementProps = {
 	active?: boolean;
 };
 
+type PaginationElementProps = {
+	/**  */
+	page?: number;
+	/**  */
+	'per-page'?: number;
+	/** Number of items */
+	n?: number;
+	/**  */
+	isLastPage?: boolean;
+	/**  */
+	'onpage-change'?: (e: CustomEvent<Event>) => void;
+	/**  */
+	'onper-page-change'?: (e: CustomEvent<Event>) => void;
+};
+
 type PoeAuthElementProps = {
 	/**  */
 	name?: string;
-	/**  */
-	loggedIn?: boolean;
-};
-
-type DivTableStatElementProps = {};
-
-type DivTableElementProps = {
-	/**  */
-	cards?: Readonly<DivinationCardRecord[]>;
-	/**  */
-	'min-price'?: number;
-	/**  */
-	column?: Column;
-	/**  */
-	order?: Order;
-	/**  */
-	_cards?: DivinationCardRecord[];
-	/**  */
-	nameQuery?: string;
-	/**  */
-	hideZeroSum?: boolean;
-	/**  */
-	filteredRecords?: DivinationCardRecord[];
-	/**  */
-	summary?: { amount: number; sum: number };
-	/**  */
-	checkboxHideZeroSum?: HTMLInputElement;
-};
-
-type FormExportSampleElementProps = {
-	/**  */
-	'spreadsheet-id'?: string;
-	/**  */
-	'sheet-title'?: string;
-	/**  */
-	order?: Order;
-	/**  */
-	orderedBy?: Column;
-	/**  */
-	cardsMustHaveAmount?: boolean;
-	/**  */
-	minPrice?: number;
-	/**  */
-	to?: To;
-	/**  */
-	columns?: Set<Column>;
-	/**  */
-	error?: string | null;
-	/**  */
-	tablePreferences?: TablePreferences;
-};
-
-type GoogleAuthElementProps = {
-	/**  */
-	name?: string;
-	/**  */
-	picture?: string;
 	/**  */
 	loggedIn?: boolean;
 };
@@ -161,13 +109,20 @@ type SampleCardElementProps = {
 	/**  */
 	priceSlider?: HTMLInputElement;
 	/**  */
-	table?: DivTableElement;
+	table?: SampleTableElement;
 	/**  */
 	rangeEl?: SlRange;
 	/**  */
 	filteredCards?: string;
 	/**  */
 	filteredSummary?: string;
+};
+
+type ThemeToggleProps = {
+	/**  */
+	theme?: ColorTheme;
+	/**  */
+	$button?: HTMLButtonElement | null;
 };
 
 type StashTabContainerElementProps = {
@@ -178,9 +133,9 @@ type StashTabContainerElementProps = {
 	/**  */
 	scarabsSuccessAlert?: SlAlert;
 	/** Emitted on "Extract cards sample" button click. */
-	onExtractCards?: (e: CustomEvent<Event>) => void;
+	'onextract-cards'?: (e: CustomEvent<Event>) => void;
 	/** Emitted on "X" button click. */
-	onClose?: (e: CustomEvent<Event>) => void;
+	onclose?: (e: CustomEvent<Event>) => void;
 };
 
 type StashTabErrorsElementProps = {
@@ -189,32 +144,9 @@ type StashTabErrorsElementProps = {
 	/**  */
 	hoveredErrorTabId?: ErrorLabel['noItemsTab']['id'] | null;
 	/** CustomEvent<Array<{ noItemsTab: NoItemsTab; message: string }>> - Emitted when the errors array changes due to user interaction. */
-	onUpderrors?: (e: CustomEvent<CustomEvent>) => void;
+	'onupd:errors'?: (e: CustomEvent<CustomEvent>) => void;
 	/** CustomEvent<string | null> - Emitted on Error block mouseenter or mouseleave */
-	onUpdhoverederrortabid?: (e: CustomEvent<CustomEvent>) => void;
-};
-
-type StashLoaderElementProps = {
-	/**  */
-	league?: League;
-	/**  */
-	customLeague?: string;
-	/**  */
-	selectedTabs?: Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }>;
-	/**  */
-	stashes?: NoItemsTab[];
-	/**  */
-	noStashesMessage?: string;
-	/**  */
-	msg?: string;
-	/**  */
-	fetchingStash?: boolean;
-	/**  */
-	stashLoader?: IDefaultStashLoader;
-	/**  */
-	stashesButton?: HTMLButtonElement;
-	/**  */
-	getDataButton?: HTMLButtonElement;
+	'onupd:hoveredErrorTabId'?: (e: CustomEvent<CustomEvent>) => void;
 };
 
 type StashesViewElementProps = {
@@ -256,11 +188,6 @@ type StashesViewElementProps = {
 	stashesButton?: HTMLButtonElement;
 	/**  */
 	getDataButton?: HTMLButtonElement;
-};
-
-type UpdateEventProps = {
-	/**  */
-	field?: string;
 };
 
 type TabBadgeGroupElementProps = {
@@ -306,18 +233,6 @@ type TabBadgeGroupElementProps = {
 	tabsTotal?: string;
 };
 
-type TabSelectEventProps = {
-	/**  */
-	tab?: NoItemsTab;
-	/**  */
-	selected?: boolean;
-};
-
-type TabClickEventProps = {
-	/**  */
-	tab?: NoItemsTab;
-};
-
 type TabBadgeElementProps = {
 	/**  */
 	tab?: NoItemsTab;
@@ -335,13 +250,6 @@ type TabBadgeElementProps = {
 	computedColor?: string;
 	/**  */
 	checkbox?: HTMLInputElement;
-};
-
-type ThemeToggleProps = {
-	/**  */
-	theme?: ColorTheme & string;
-	/**  */
-	$button?: HTMLButtonElement | null;
 };
 
 type FixedIconElementProps = {
@@ -362,6 +270,29 @@ type FixedNamesElementProps = {
 	popup?: BasePopupElement;
 };
 
+type FormExportSampleElementProps = {
+	/**  */
+	'spreadsheet-id'?: string;
+	/**  */
+	'sheet-title'?: string;
+	/**  */
+	order?: Order;
+	/**  */
+	orderedBy?: Column;
+	/**  */
+	cardsMustHaveAmount?: boolean;
+	/**  */
+	minPrice?: number;
+	/**  */
+	to?: To;
+	/**  */
+	columns?: Set<Column>;
+	/**  */
+	error?: string | null;
+	/**  */
+	tablePreferences?: TablePreferences;
+};
+
 type NotCardsElementProps = {
 	/**  */
 	notCards?: string[];
@@ -369,14 +300,32 @@ type NotCardsElementProps = {
 	popup?: BasePopupElement;
 };
 
-export type CustomElements = {
-	/**
-	 *
-	 * ---
-	 *
-	 */
-	'wc-base-element': DefineComponent<BaseElementProps>;
+type DivTableStatElementProps = {};
 
+type SampleTableElementProps = {
+	/**  */
+	cards?: Readonly<DivinationCardRecord[]>;
+	/**  */
+	'min-price'?: number;
+	/**  */
+	column?: Column;
+	/**  */
+	order?: Order;
+	/**  */
+	_cards?: DivinationCardRecord[];
+	/**  */
+	nameQuery?: string;
+	/**  */
+	hideZeroSum?: boolean;
+	/**  */
+	filteredRecords?: DivinationCardRecord[];
+	/**  */
+	summary?: { amount: number; sum: number };
+	/**  */
+	checkboxHideZeroSum?: HTMLInputElement;
+};
+
+export type CustomElements = {
 	/**
 	 *
 	 * ---
@@ -389,7 +338,38 @@ export type CustomElements = {
 	 * ---
 	 *
 	 */
-	'wc-drop-files-message': DefineComponent<DropFilesMessageElementProps>;
+	'e-drop-files-message': DefineComponent<DropFilesMessageElementProps>;
+
+	/**
+	 *
+	 * ---
+	 *
+	 */
+	'e-google-auth': DefineComponent<GoogleAuthElementProps>;
+
+	/**
+	 * A questionmark logo with hoverable tip content
+	 * ---
+	 *
+	 *
+	 * ### **Slots:**
+	 *  - **The** - tip's main content
+	 */
+	'e-help-tip': DefineComponent<HelpTipElementProps>;
+
+	/**
+	 *
+	 * ---
+	 *
+	 */
+	'e-league-select': DefineComponent<LeagueSelectElementProps>;
+
+	/**
+	 *
+	 * ---
+	 *
+	 */
+	'e-order-triangle': DefineComponent<OrderTriangleElementProps>;
 
 	/**
 	 *
@@ -403,70 +383,30 @@ export type CustomElements = {
 	'e-pagination': DefineComponent<PaginationElementProps>;
 
 	/**
-	 * A questionmark logo with hoverable tip content
+	 *
 	 * ---
 	 *
-	 *
-	 * ### **Slots:**
-	 *  - **The** - tip's main content
 	 */
-	'wc-help-tip': DefineComponent<HelpTipElementProps>;
+	'e-poe-auth': DefineComponent<PoeAuthElementProps>;
 
 	/**
 	 *
 	 * ---
 	 *
 	 */
-	'wc-league-select': DefineComponent<LeagueSelectElementProps>;
+	'e-sample-card': DefineComponent<SampleCardElementProps>;
 
 	/**
 	 *
 	 * ---
 	 *
+	 *
+	 * ### **CSS Properties:**
+	 *  - **--size** - undefined _(default: undefined)_
+	 * - **--icon-fill** - undefined _(default: undefined)_
+	 * - **--icon-fill** - undefined _(default: undefined)_
 	 */
-	'wc-order-triangle': DefineComponent<OrderTriangleElementProps>;
-
-	/**
-	 *
-	 * ---
-	 *
-	 */
-	'wc-poe-auth': DefineComponent<PoeAuthElementProps>;
-
-	/**
-	 *
-	 * ---
-	 *
-	 */
-	'e-sample-table-stat': DefineComponent<DivTableStatElementProps>;
-
-	/**
-	 *
-	 * ---
-	 *
-	 */
-	'e-sample-table': DefineComponent<DivTableElementProps>;
-
-	/**
-	 *
-	 * ---
-	 *
-	 */
-	'wc-form-export-sample': DefineComponent<FormExportSampleElementProps>;
-
-	/**
-	 *
-	 * ---
-	 *
-	 */
-	'wc-google-auth': DefineComponent<GoogleAuthElementProps>;
-
-	/**
-	 *
-	 * ---
-	 *
-	 */
-	'wc-sample-card': DefineComponent<SampleCardElementProps>;
+	'e-theme-toggle': DefineComponent<ThemeToggleProps>;
 
 	/**
 	 * Container for poe stash tab with header with actions.
@@ -494,65 +434,64 @@ export type CustomElements = {
 	 *
 	 * ---
 	 *
-	 *
-	 * ### **Methods:**
-	 *
 	 */
-	'wc-stash-loader': DefineComponent<StashLoaderElementProps>;
+	'e-stashes-view': DefineComponent<StashesViewElementProps>;
 
 	/**
 	 *
 	 * ---
 	 *
 	 */
-	'wc-stashes-view': DefineComponent<StashesViewElementProps>;
+	'e-tab-badge-group': DefineComponent<TabBadgeGroupElementProps>;
 
 	/**
 	 *
 	 * ---
 	 *
 	 */
-	'wc-tab-badge-group': DefineComponent<TabBadgeGroupElementProps>;
+	'e-tab-badge': DefineComponent<TabBadgeElementProps>;
 
 	/**
 	 *
 	 * ---
 	 *
 	 */
-	'wc-tab-badge': DefineComponent<TabBadgeElementProps>;
-
-	/**
-	 *
-	 * ---
-	 *
-	 *
-	 * ### **CSS Properties:**
-	 *  - **--size** - undefined _(default: undefined)_
-	 * - **--icon-fill** - undefined _(default: undefined)_
-	 * - **--icon-fill** - undefined _(default: undefined)_
-	 */
-	'wc-theme-toggle': DefineComponent<ThemeToggleProps>;
+	'e-fixed-icon': DefineComponent<FixedIconElementProps>;
 
 	/**
 	 *
 	 * ---
 	 *
 	 */
-	'wc-fixed-icon': DefineComponent<FixedIconElementProps>;
+	'e-fixed-names': DefineComponent<FixedNamesElementProps>;
 
 	/**
 	 *
 	 * ---
 	 *
 	 */
-	'wc-fixed-names': DefineComponent<FixedNamesElementProps>;
+	'e-form-export-sample': DefineComponent<FormExportSampleElementProps>;
 
 	/**
 	 *
 	 * ---
 	 *
 	 */
-	'wc-not-cards': DefineComponent<NotCardsElementProps>;
+	'e-not-cards': DefineComponent<NotCardsElementProps>;
+
+	/**
+	 *
+	 * ---
+	 *
+	 */
+	'e-sample-table-stat': DefineComponent<DivTableStatElementProps>;
+
+	/**
+	 *
+	 * ---
+	 *
+	 */
+	'e-sample-table': DefineComponent<SampleTableElementProps>;
 };
 
 declare module 'vue' {

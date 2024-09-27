@@ -29,7 +29,7 @@ export default {
 
 		customElementVuejsPlugin({
 			outdir: './types',
-			fileName: 'web-components.vue.d',
+			fileName: 'web-components.vue.d.ts',
 		}),
 	],
 };

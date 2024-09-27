@@ -10,100 +10,55 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/base-element.ts",
+      "path": "src/utils.ts",
       "declarations": [
         {
-          "kind": "class",
-          "description": "",
-          "name": "BaseElement",
-          "members": [
+          "kind": "function",
+          "name": "emit",
+          "parameters": [
             {
-              "kind": "field",
-              "name": "tag",
+              "name": "element",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "name": "eventName",
               "type": {
                 "text": "string"
-              },
-              "static": true,
-              "description": "Element tag name"
+              }
             },
             {
-              "kind": "field",
-              "name": "defineList",
+              "name": "detail",
+              "optional": true,
               "type": {
-                "text": "(typeof BaseElement)[]"
-              },
-              "static": true,
-              "default": "[]",
-              "description": "list of classes of custom elements needed for this element."
+                "text": "T"
+              }
             },
             {
-              "kind": "method",
-              "name": "define",
-              "static": true,
-              "parameters": [
-                {
-                  "name": "tag",
-                  "default": "this.tag"
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "emit",
-              "parameters": [
-                {
-                  "name": "eventName",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "detail",
-                  "optional": true,
-                  "type": {
-                    "text": "T"
-                  }
-                },
-                {
-                  "name": "options",
-                  "default": "{ bubbles: true, composed: true, cancelable: true }",
-                  "type": {
-                    "text": "EventInit"
-                  }
-                }
-              ]
+              "name": "options",
+              "default": "{ bubbles: true, composed: true, cancelable: true }",
+              "type": {
+                "text": "EventInit"
+              }
             }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "wc-base-element",
-          "customElement": true
+          ]
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "BaseElement",
+          "name": "emit",
           "declaration": {
-            "name": "BaseElement",
-            "module": "src/wc/base-element.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "tag",
-          "declaration": {
-            "name": "anonymous_0",
-            "module": "src/wc/base-element.ts"
+            "name": "emit",
+            "module": "src/utils.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/base-popup.stories.ts",
+      "path": "src/wc/e-base-popup.stories.ts",
       "declarations": [
         {
           "kind": "variable",
@@ -111,7 +66,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{ render() { BasePopupElement.define(); DivTableElement.define(); const popup = document.createElement('wc-base-popup'); popup.open = true; const table = document.createElement('wc-div-table'); table.cards = cards; popup.append(table); return html`<button @click=${() => popup.showModal()}>Open</button>${popup}`; }, }"
+          "default": "{ render() { const popup = document.createElement('e-base-popup'); popup.open = true; const table = document.createElement('e-sample-table'); table.cards = cards; popup.append(table); return html`<button @click=${() => popup.showModal()}>Open</button>${popup}`; }, }"
         }
       ],
       "exports": [
@@ -119,7 +74,7 @@
           "kind": "js",
           "name": "default",
           "declaration": {
-            "module": "src/wc/base-popup.stories.ts"
+            "module": "src/wc/e-base-popup.stories.ts"
           }
         },
         {
@@ -127,34 +82,20 @@
           "name": "Default",
           "declaration": {
             "name": "Default",
-            "module": "src/wc/base-popup.stories.ts"
+            "module": "src/wc/e-base-popup.stories.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/base-popup.ts",
+      "path": "src/wc/e-base-popup.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
           "name": "BasePopupElement",
           "members": [
-            {
-              "kind": "field",
-              "name": "tag",
-              "type": {
-                "text": "string"
-              },
-              "static": true,
-              "description": "Element tag name",
-              "default": "'wc-base-popup'",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
             {
               "kind": "field",
               "name": "open",
@@ -197,65 +138,6 @@
             {
               "kind": "field",
               "name": "onEscape"
-            },
-            {
-              "kind": "field",
-              "name": "defineList",
-              "type": {
-                "text": "(typeof BaseElement)[]"
-              },
-              "static": true,
-              "default": "[]",
-              "description": "list of classes of custom elements needed for this element.",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "define",
-              "static": true,
-              "parameters": [
-                {
-                  "name": "tag",
-                  "default": "this.tag"
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "emit",
-              "parameters": [
-                {
-                  "name": "eventName",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "detail",
-                  "optional": true,
-                  "type": {
-                    "text": "T"
-                  }
-                },
-                {
-                  "name": "options",
-                  "default": "{ bubbles: true, composed: true, cancelable: true }",
-                  "type": {
-                    "text": "EventInit"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
             }
           ],
           "attributes": [
@@ -270,10 +152,10 @@
             }
           ],
           "superclass": {
-            "name": "BaseElement",
-            "module": "/src/wc/base-element"
+            "name": "LitElement",
+            "package": "lit"
           },
-          "tagName": "wc-base-popup",
+          "tagName": "e-base-popup",
           "customElement": true
         }
       ],
@@ -283,14 +165,22 @@
           "name": "BasePopupElement",
           "declaration": {
             "name": "BasePopupElement",
-            "module": "src/wc/base-popup.ts"
+            "module": "src/wc/e-base-popup.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "e-base-popup",
+          "declaration": {
+            "name": "BasePopupElement",
+            "module": "src/wc/e-base-popup.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/drop-files-message.stories.ts",
+      "path": "src/wc/e-drop-files-message.stories.ts",
       "declarations": [
         {
           "kind": "variable",
@@ -298,7 +188,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{ render() { DropFilesMessageElement.define(); return html`<wc-drop-files-message></wc-drop-files-message>`; }, }"
+          "default": "{ render() { return html`<e-drop-files-message></e-drop-files-message>`; }, }"
         }
       ],
       "exports": [
@@ -306,7 +196,7 @@
           "kind": "js",
           "name": "default",
           "declaration": {
-            "module": "src/wc/drop-files-message.stories.ts"
+            "module": "src/wc/e-drop-files-message.stories.ts"
           }
         },
         {
@@ -314,101 +204,26 @@
           "name": "Default",
           "declaration": {
             "name": "Default",
-            "module": "src/wc/drop-files-message.stories.ts"
+            "module": "src/wc/e-drop-files-message.stories.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/drop-files-message.ts",
+      "path": "src/wc/e-drop-files-message.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
           "name": "DropFilesMessageElement",
-          "members": [
-            {
-              "kind": "field",
-              "name": "defineList",
-              "type": {
-                "text": "(typeof BaseElement)[]"
-              },
-              "static": true,
-              "default": "[]",
-              "description": "list of classes of custom elements needed for this element.",
-              "readonly": true,
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tag",
-              "type": {
-                "text": "string"
-              },
-              "static": true,
-              "description": "Element tag name",
-              "default": "'wc-drop-files-message'",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "define",
-              "static": true,
-              "parameters": [
-                {
-                  "name": "tag",
-                  "default": "this.tag"
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "emit",
-              "parameters": [
-                {
-                  "name": "eventName",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "detail",
-                  "optional": true,
-                  "type": {
-                    "text": "T"
-                  }
-                },
-                {
-                  "name": "options",
-                  "default": "{ bubbles: true, composed: true, cancelable: true }",
-                  "type": {
-                    "text": "EventInit"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            }
-          ],
+          "members": [],
           "superclass": {
-            "name": "BaseElement",
-            "module": "/src/wc/base-element"
+            "name": "LitElement",
+            "package": "lit"
           },
           "summary": "Message to drop files for main app screen",
-          "tagName": "wc-drop-files-message",
+          "tagName": "e-drop-files-message",
           "customElement": true
         }
       ],
@@ -418,7 +233,518 @@
           "name": "DropFilesMessageElement",
           "declaration": {
             "name": "DropFilesMessageElement",
-            "module": "src/wc/drop-files-message.ts"
+            "module": "src/wc/e-drop-files-message.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "e-drop-files-message",
+          "declaration": {
+            "name": "DropFilesMessageElement",
+            "module": "src/wc/e-drop-files-message.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/e-google-auth.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "GoogleAuthElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "picture",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "picture",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loggedIn",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "loggedIn",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "#emitLogin",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "#emitLogout",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "name"
+            },
+            {
+              "name": "picture",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "picture"
+            },
+            {
+              "name": "loggedIn",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "loggedIn"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "e-google-auth",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "GoogleAuthElement",
+          "declaration": {
+            "name": "GoogleAuthElement",
+            "module": "src/wc/e-google-auth.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "e-google-auth",
+          "declaration": {
+            "name": "GoogleAuthElement",
+            "module": "src/wc/e-google-auth.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/e-help-tip.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{ render() { const styles = styleMap({ 'margin-left': '500px' }); return html`<e-help-tip style=${styles}> <p>Excel, .csv or just .txt</p> <p>Required headers: name and amount</p> <img src=\"/simple.png\" alt=\"Example of simple .txt file\" /></e-help-tip>`; }, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/e-help-tip.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/e-help-tip.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/e-help-tip.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "HelpTipElement",
+          "slots": [
+            {
+              "description": "tip's main content",
+              "name": "The"
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "summary": "A questionmark logo with hoverable tip content",
+          "tagName": "e-help-tip",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HelpTipElement",
+          "declaration": {
+            "name": "HelpTipElement",
+            "module": "src/wc/e-help-tip.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "e-help-tip",
+          "declaration": {
+            "name": "HelpTipElement",
+            "module": "src/wc/e-help-tip.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/e-league-select.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{ render({ trade, league }: { trade: boolean; league: League }) { return html`<e-league-select ?trade=${trade} league=${league}></e-league-select>`; }, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/e-league-select.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/e-league-select.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/e-league-select.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SlConverter",
+          "members": [
+            {
+              "kind": "field",
+              "name": "#SL_DELIMETER",
+              "privacy": "private",
+              "static": true,
+              "default": "'sl-v'",
+              "type": {
+                "text": "'sl-v'"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "toSlValue",
+              "static": true,
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "s",
+                  "type": {
+                    "text": "T"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "fromSlValue",
+              "static": true,
+              "return": {
+                "type": {
+                  "text": "T"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "s",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LeagueSelectElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "trade",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "trade",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "league",
+              "type": {
+                "text": "League"
+              },
+              "default": "ACTIVE_LEAGUE",
+              "attribute": "league",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "privateLeague",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "privateLeague"
+            },
+            {
+              "kind": "field",
+              "name": "withPrivateLeagueInput",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "with-private-league-input",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "select",
+              "type": {
+                "text": "HTMLSelectElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "focus"
+            },
+            {
+              "kind": "method",
+              "name": "#onPrivateLeagueInput",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#emitLeagueChange",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "trade",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "trade"
+            },
+            {
+              "name": "league",
+              "type": {
+                "text": "League"
+              },
+              "default": "ACTIVE_LEAGUE",
+              "fieldName": "league"
+            },
+            {
+              "name": "privateLeague",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "privateLeague"
+            },
+            {
+              "name": "with-private-league-input",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "withPrivateLeagueInput"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "e-league-select",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SlConverter",
+          "declaration": {
+            "name": "SlConverter",
+            "module": "src/wc/e-league-select.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LeagueSelectElement",
+          "declaration": {
+            "name": "LeagueSelectElement",
+            "module": "src/wc/e-league-select.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "e-league-select",
+          "declaration": {
+            "name": "LeagueSelectElement",
+            "module": "src/wc/e-league-select.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/e-order-triangle.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "OrderTriangleElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "Size"
+              },
+              "default": "'1rem'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "order",
+              "type": {
+                "text": "Order"
+              },
+              "default": "'unordered'",
+              "attribute": "order",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "active"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "Size"
+              },
+              "default": "'1rem'",
+              "fieldName": "size"
+            },
+            {
+              "name": "order",
+              "type": {
+                "text": "Order"
+              },
+              "default": "'unordered'",
+              "fieldName": "order"
+            },
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "active"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "e-order-triangle",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "OrderTriangleElement",
+          "declaration": {
+            "name": "OrderTriangleElement",
+            "module": "src/wc/e-order-triangle.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "e-order-triangle",
+          "declaration": {
+            "name": "OrderTriangleElement",
+            "module": "src/wc/e-order-triangle.ts"
           }
         }
       ]
@@ -618,7 +944,7 @@
             "name": "LitElement",
             "package": "lit"
           },
-          "tagName": "wc-e-pagination",
+          "tagName": "e-pagination",
           "customElement": true
         }
       ],
@@ -643,7 +969,7 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/help-tip.stories.ts",
+      "path": "src/wc/e-poe-auth.stories.ts",
       "declarations": [
         {
           "kind": "variable",
@@ -651,7 +977,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{ render() { const styles = styleMap({ 'margin-left': '500px' }); HelpTipElement.define(); return html`<wc-help-tip style=${styles}> <p>Excel, .csv or just .txt</p> <p>Required headers: name and amount</p> <img src=\"/simple.png\" alt=\"Example of simple .txt file\" /></wc-help-tip>`; }, }"
+          "default": "{ render({ name, loggedIn }: { name: string; loggedIn: boolean }) { return html`<e-poe-auth ?loggedIn=${loggedIn} .name=${name}></e-poe-auth>`; }, }"
         }
       ],
       "exports": [
@@ -659,7 +985,7 @@
           "kind": "js",
           "name": "default",
           "declaration": {
-            "module": "src/wc/help-tip.stories.ts"
+            "module": "src/wc/e-poe-auth.stories.ts"
           }
         },
         {
@@ -667,417 +993,92 @@
           "name": "Default",
           "declaration": {
             "name": "Default",
-            "module": "src/wc/help-tip.stories.ts"
+            "module": "src/wc/e-poe-auth.stories.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/help-tip.ts",
+      "path": "src/wc/e-poe-auth.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "HelpTipElement",
-          "slots": [
-            {
-              "description": "tip's main content",
-              "name": "The"
-            }
-          ],
+          "name": "PoeAuthElement",
           "members": [
             {
               "kind": "field",
-              "name": "tag",
+              "name": "name",
               "type": {
                 "text": "string"
               },
-              "static": true,
-              "description": "Element tag name",
-              "default": "'wc-help-tip'",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
+              "default": "''",
+              "attribute": "name",
+              "reflects": true
             },
             {
               "kind": "field",
-              "name": "defineList",
-              "type": {
-                "text": "(typeof BaseElement)[]"
-              },
-              "static": true,
-              "default": "[]",
-              "description": "list of classes of custom elements needed for this element.",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "define",
-              "static": true,
-              "parameters": [
-                {
-                  "name": "tag",
-                  "default": "this.tag"
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "emit",
-              "parameters": [
-                {
-                  "name": "eventName",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "detail",
-                  "optional": true,
-                  "type": {
-                    "text": "T"
-                  }
-                },
-                {
-                  "name": "options",
-                  "default": "{ bubbles: true, composed: true, cancelable: true }",
-                  "type": {
-                    "text": "EventInit"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "BaseElement",
-            "module": "/src/wc/base-element"
-          },
-          "summary": "A questionmark logo with hoverable tip content",
-          "tagName": "wc-help-tip",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "HelpTipElement",
-          "declaration": {
-            "name": "HelpTipElement",
-            "module": "src/wc/help-tip.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/wc/league-select.stories.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "Default",
-          "type": {
-            "text": "object"
-          },
-          "default": "{ render({ trade, league }: { trade: boolean; league: League }) { LeagueSelectElement.define(); return html`<wc-league-select ?trade=${trade} league=${league}></wc-league-select>`; }, }"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "module": "src/wc/league-select.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Default",
-          "declaration": {
-            "name": "Default",
-            "module": "src/wc/league-select.stories.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/wc/league-select.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "SlConverter",
-          "members": [
-            {
-              "kind": "field",
-              "name": "#SL_DELIMETER",
-              "privacy": "private",
-              "static": true,
-              "default": "'sl-v'",
-              "type": {
-                "text": "'sl-v'"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "toSlValue",
-              "static": true,
-              "return": {
-                "type": {
-                  "text": "string"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "s",
-                  "type": {
-                    "text": "T"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "fromSlValue",
-              "static": true,
-              "return": {
-                "type": {
-                  "text": "T"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "s",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            }
-          ],
-          "tagName": "wc-league-select",
-          "customElement": true
-        },
-        {
-          "kind": "class",
-          "description": "",
-          "name": "LeagueSelectElement",
-          "members": [
-            {
-              "kind": "field",
-              "name": "tag",
-              "type": {
-                "text": "string"
-              },
-              "static": true,
-              "description": "Element tag name",
-              "default": "'wc-league-select'",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "trade",
+              "name": "loggedIn",
               "type": {
                 "text": "boolean"
               },
               "default": "false",
-              "attribute": "trade",
+              "attribute": "loggedIn",
               "reflects": true
             },
             {
-              "kind": "field",
-              "name": "league",
-              "type": {
-                "text": "League"
-              },
-              "default": "ACTIVE_LEAGUE",
-              "attribute": "league",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "privateLeague",
-              "type": {
-                "text": "string"
-              },
-              "attribute": "privateLeague"
-            },
-            {
-              "kind": "field",
-              "name": "withPrivateLeagueInput",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "with-private-league-input",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "select",
-              "type": {
-                "text": "HTMLSelectElement"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "value",
-              "readonly": true
-            },
-            {
               "kind": "method",
-              "name": "focus"
-            },
-            {
-              "kind": "method",
-              "name": "#onPrivateLeagueInput",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "InputEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "#emitLeagueChange",
+              "name": "#emitLogin",
               "privacy": "private"
             },
             {
-              "kind": "field",
-              "name": "defineList",
-              "type": {
-                "text": "(typeof BaseElement)[]"
-              },
-              "static": true,
-              "default": "[]",
-              "description": "list of classes of custom elements needed for this element.",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
               "kind": "method",
-              "name": "define",
-              "static": true,
-              "parameters": [
-                {
-                  "name": "tag",
-                  "default": "this.tag"
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "emit",
-              "parameters": [
-                {
-                  "name": "eventName",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "detail",
-                  "optional": true,
-                  "type": {
-                    "text": "T"
-                  }
-                },
-                {
-                  "name": "options",
-                  "default": "{ bubbles: true, composed: true, cancelable: true }",
-                  "type": {
-                    "text": "EventInit"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
+              "name": "#emitLogout",
+              "privacy": "private"
             }
           ],
           "attributes": [
             {
-              "name": "trade",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "trade"
-            },
-            {
-              "name": "league",
-              "type": {
-                "text": "League"
-              },
-              "default": "ACTIVE_LEAGUE",
-              "fieldName": "league"
-            },
-            {
-              "name": "privateLeague",
+              "name": "name",
               "type": {
                 "text": "string"
               },
-              "fieldName": "privateLeague"
+              "default": "''",
+              "fieldName": "name"
             },
             {
-              "name": "with-private-league-input",
+              "name": "loggedIn",
               "type": {
                 "text": "boolean"
               },
               "default": "false",
-              "fieldName": "withPrivateLeagueInput"
+              "fieldName": "loggedIn"
             }
           ],
           "superclass": {
-            "name": "BaseElement",
-            "module": "/src/wc/base-element"
+            "name": "LitElement",
+            "package": "lit"
           },
-          "tagName": "wc-league-select",
+          "tagName": "e-poe-auth",
           "customElement": true
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "SlConverter",
+          "name": "PoeAuthElement",
           "declaration": {
-            "name": "SlConverter",
-            "module": "src/wc/league-select.ts"
+            "name": "PoeAuthElement",
+            "module": "src/wc/e-poe-auth.ts"
           }
         },
         {
-          "kind": "js",
-          "name": "LeagueSelectElement",
+          "kind": "custom-element-definition",
+          "name": "e-poe-auth",
           "declaration": {
-            "name": "LeagueSelectElement",
-            "module": "src/wc/league-select.ts"
+            "name": "PoeAuthElement",
+            "module": "src/wc/e-poe-auth.ts"
           }
         }
       ]
@@ -1092,7 +1093,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{ render({ order, active, size }: { order: Order; active: boolean; size: Size }) { OrderTriangleElement.define(); return html`<wc-order-triangle order=${order} size=${size} ?active=${active}></wc-order-triangle>`; }, }"
+          "default": "{ render({ order, active, size }: { order: Order; active: boolean; size: Size }) { return html`<e-order-triangle order=${order} size=${size} ?active=${active}></e-order-triangle>`; }, }"
         }
       ],
       "exports": [
@@ -1115,1308 +1116,7 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/order-triangle.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "OrderTriangleElement",
-          "members": [
-            {
-              "kind": "field",
-              "name": "tag",
-              "type": {
-                "text": "string"
-              },
-              "static": true,
-              "description": "Element tag name",
-              "default": "'wc-order-triangle'",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "Size"
-              },
-              "default": "'1rem'",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "order",
-              "type": {
-                "text": "Order"
-              },
-              "default": "'unordered'",
-              "attribute": "order",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "active",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "active"
-            },
-            {
-              "kind": "field",
-              "name": "defineList",
-              "type": {
-                "text": "(typeof BaseElement)[]"
-              },
-              "static": true,
-              "default": "[]",
-              "description": "list of classes of custom elements needed for this element.",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "define",
-              "static": true,
-              "parameters": [
-                {
-                  "name": "tag",
-                  "default": "this.tag"
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "emit",
-              "parameters": [
-                {
-                  "name": "eventName",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "detail",
-                  "optional": true,
-                  "type": {
-                    "text": "T"
-                  }
-                },
-                {
-                  "name": "options",
-                  "default": "{ bubbles: true, composed: true, cancelable: true }",
-                  "type": {
-                    "text": "EventInit"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "size",
-              "type": {
-                "text": "Size"
-              },
-              "default": "'1rem'",
-              "fieldName": "size"
-            },
-            {
-              "name": "order",
-              "type": {
-                "text": "Order"
-              },
-              "default": "'unordered'",
-              "fieldName": "order"
-            },
-            {
-              "name": "active",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "active"
-            }
-          ],
-          "superclass": {
-            "name": "BaseElement",
-            "module": "/src/wc/base-element"
-          },
-          "tagName": "wc-order-triangle",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "OrderTriangleElement",
-          "declaration": {
-            "name": "OrderTriangleElement",
-            "module": "src/wc/order-triangle.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/wc/poe-auth.stories.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "Default",
-          "type": {
-            "text": "object"
-          },
-          "default": "{ render({ name, loggedIn }: { name: string; loggedIn: boolean }) { PoeAuthElement.define(); return html`<wc-poe-auth ?loggedIn=${loggedIn} .name=${name}></wc-poe-auth>`; }, }"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "module": "src/wc/poe-auth.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Default",
-          "declaration": {
-            "name": "Default",
-            "module": "src/wc/poe-auth.stories.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/wc/poe-auth.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "PoeAuthElement",
-          "members": [
-            {
-              "kind": "field",
-              "name": "tag",
-              "type": {
-                "text": "string"
-              },
-              "static": true,
-              "description": "Element tag name",
-              "default": "'wc-poe-auth'",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "name",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "name",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "loggedIn",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "loggedIn",
-              "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "#emitLogin",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "#emitLogout",
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "defineList",
-              "type": {
-                "text": "(typeof BaseElement)[]"
-              },
-              "static": true,
-              "default": "[]",
-              "description": "list of classes of custom elements needed for this element.",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "define",
-              "static": true,
-              "parameters": [
-                {
-                  "name": "tag",
-                  "default": "this.tag"
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "emit",
-              "parameters": [
-                {
-                  "name": "eventName",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "detail",
-                  "optional": true,
-                  "type": {
-                    "text": "T"
-                  }
-                },
-                {
-                  "name": "options",
-                  "default": "{ bubbles: true, composed: true, cancelable: true }",
-                  "type": {
-                    "text": "EventInit"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "name",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "name"
-            },
-            {
-              "name": "loggedIn",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "loggedIn"
-            }
-          ],
-          "superclass": {
-            "name": "BaseElement",
-            "module": "/src/wc/base-element"
-          },
-          "tagName": "wc-poe-auth",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "PoeAuthElement",
-          "declaration": {
-            "name": "PoeAuthElement",
-            "module": "src/wc/poe-auth.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/wc/div-table/data.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "cards",
-          "type": {
-            "text": "DivinationCardRecord[]"
-          },
-          "default": "cardsData"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "cards",
-          "declaration": {
-            "name": "cards",
-            "module": "src/wc/div-table/data.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/wc/div-table/div-table-stat.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "DivTableStatElement",
-          "members": [],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "wc-div-table-stat",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "DivTableStatElement",
-          "declaration": {
-            "name": "DivTableStatElement",
-            "module": "src/wc/div-table/div-table-stat.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "wc-div-table-stat",
-          "declaration": {
-            "name": "DivTableStatElement",
-            "module": "src/wc/div-table/div-table-stat.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/wc/div-table/div-table.stories.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "Default",
-          "type": {
-            "text": "object"
-          },
-          "default": "{ render() { DivTableElement.define(); return html`<wc-div-table .cards=${cards}></wc-div-table>`; }, }"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "module": "src/wc/div-table/div-table.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Default",
-          "declaration": {
-            "name": "Default",
-            "module": "src/wc/div-table/div-table.stories.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/wc/div-table/div-table.styles.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "styles",
-          "default": "css` :host { display: block; max-width: 1220px; background-color: var(--bg-color, #242424); } .ch-3 { text-align: center; min-width: 3ch; } .layout { height: 100%; max-width: 1220px; background-color: var(--bg-color, #242424); color: var(--color, rgba(255, 255, 255, 0.87)); padding: 2rem; display: grid; grid-template: 'header not-header' 'table stats' auto / 750px 1fr; } .header { grid-area: header; position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; z-index: 2; background-color: var(--bg-color, #242424); padding-top: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--sl-color-gray-100); } .slider-box { display: flex; justify-content: center; align-items: center; gap: 0.5rem; } .stats { grid-area: stats; display: flex; flex-direction: column; align-items: center; list-style: none; gap: 2rem; padding: 1rem; } .stat { padding: 2rem; display: flex; align-items: center; width: 200px; border: 1px solid var(--sl-color-gray-300); border-radius: 0.25rem; font-size: 2rem; font-weight: 500; gap: 1.5rem; } ${table} `"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "styles",
-          "declaration": {
-            "name": "styles",
-            "module": "src/wc/div-table/div-table.styles.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/wc/div-table/div-table.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "DivTableElement",
-          "members": [
-            {
-              "kind": "field",
-              "name": "defineList",
-              "type": {
-                "text": "(typeof BaseElement)[]"
-              },
-              "static": true,
-              "default": "[]",
-              "description": "list of classes of custom elements needed for this element.",
-              "readonly": true,
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tag",
-              "type": {
-                "text": "string"
-              },
-              "static": true,
-              "description": "Element tag name",
-              "default": "'wc-div-table'",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "cards",
-              "type": {
-                "text": "Readonly<DivinationCardRecord[]>"
-              },
-              "default": "[]",
-              "attribute": "cards"
-            },
-            {
-              "kind": "field",
-              "name": "minPrice",
-              "type": {
-                "text": "number"
-              },
-              "default": "0",
-              "attribute": "min-price",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "column",
-              "type": {
-                "text": "Column"
-              },
-              "default": "'sum'",
-              "attribute": "column",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "order",
-              "type": {
-                "text": "Order"
-              },
-              "default": "'desc'",
-              "attribute": "order",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "_cards",
-              "type": {
-                "text": "DivinationCardRecord[]"
-              },
-              "default": "[]"
-            },
-            {
-              "kind": "field",
-              "name": "nameQuery",
-              "type": {
-                "text": "string"
-              },
-              "default": "''"
-            },
-            {
-              "kind": "field",
-              "name": "hideZeroSum",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "true"
-            },
-            {
-              "kind": "field",
-              "name": "filteredRecords",
-              "type": {
-                "text": "DivinationCardRecord[]"
-              },
-              "default": "[]"
-            },
-            {
-              "kind": "field",
-              "name": "summary",
-              "type": {
-                "text": "{ amount: number; sum: number }"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "checkboxHideZeroSum",
-              "type": {
-                "text": "HTMLInputElement"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "toggleOrder",
-              "parameters": [
-                {
-                  "name": "newActivecolumn",
-                  "type": {
-                    "text": "Column"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "#onNameQueryInput",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "InputEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "#onHideZeroCheckbox",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "#onMinPriceSlider",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "InputEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "#onOrderTriangleClicked",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "newActiveColumn",
-                  "type": {
-                    "text": "Column"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "define",
-              "static": true,
-              "parameters": [
-                {
-                  "name": "tag",
-                  "default": "this.tag"
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "emit",
-              "parameters": [
-                {
-                  "name": "eventName",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "detail",
-                  "optional": true,
-                  "type": {
-                    "text": "T"
-                  }
-                },
-                {
-                  "name": "options",
-                  "default": "{ bubbles: true, composed: true, cancelable: true }",
-                  "type": {
-                    "text": "EventInit"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "cards",
-              "type": {
-                "text": "Readonly<DivinationCardRecord[]>"
-              },
-              "default": "[]",
-              "fieldName": "cards"
-            },
-            {
-              "name": "min-price",
-              "type": {
-                "text": "number"
-              },
-              "default": "0",
-              "fieldName": "minPrice"
-            },
-            {
-              "name": "column",
-              "type": {
-                "text": "Column"
-              },
-              "default": "'sum'",
-              "fieldName": "column"
-            },
-            {
-              "name": "order",
-              "type": {
-                "text": "Order"
-              },
-              "default": "'desc'",
-              "fieldName": "order"
-            }
-          ],
-          "superclass": {
-            "name": "BaseElement",
-            "module": "/src/wc/base-element"
-          },
-          "tagName": "wc-div-table",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "DivTableElement",
-          "declaration": {
-            "name": "DivTableElement",
-            "module": "src/wc/div-table/div-table.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/wc/div-table/types.ts",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/wc/form-export-sample/form-export-sample.stories.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "Default",
-          "type": {
-            "text": "object"
-          },
-          "default": "{ render() { FormExportSampleElement.define(); return html`<wc-form-export-sample></wc-form-export-sample>`; }, }"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "module": "src/wc/form-export-sample/form-export-sample.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Default",
-          "declaration": {
-            "name": "Default",
-            "module": "src/wc/form-export-sample/form-export-sample.stories.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/wc/form-export-sample/form-export-sample.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FormExportSampleElement",
-          "members": [
-            {
-              "kind": "field",
-              "name": "defineList",
-              "type": {
-                "text": "(typeof BaseElement)[]"
-              },
-              "static": true,
-              "default": "[]",
-              "description": "list of classes of custom elements needed for this element.",
-              "readonly": true,
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tag",
-              "type": {
-                "text": "string"
-              },
-              "static": true,
-              "description": "Element tag name",
-              "default": "'wc-form-export-sample'",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "spreadsheetId",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "spreadsheet-id",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "sheetTitle",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "sheet-title",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "order",
-              "type": {
-                "text": "Order"
-              },
-              "default": "'desc'",
-              "attribute": "order",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "orderedBy",
-              "type": {
-                "text": "Column"
-              },
-              "default": "'amount'",
-              "attribute": "orderedBy",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "columns",
-              "type": {
-                "text": "Set<Column>"
-              },
-              "default": "new Set(['name', 'amount'])"
-            },
-            {
-              "kind": "field",
-              "name": "cardsMustHaveAmount",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "cardsMustHaveAmount"
-            },
-            {
-              "kind": "field",
-              "name": "minPrice",
-              "type": {
-                "text": "number"
-              },
-              "default": "0",
-              "attribute": "minPrice"
-            },
-            {
-              "kind": "field",
-              "name": "error",
-              "type": {
-                "text": "string | null"
-              },
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "to",
-              "type": {
-                "text": "To"
-              },
-              "default": "'sheets'",
-              "attribute": "to",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "tablePreferences",
-              "type": {
-                "text": "TablePreferences"
-              },
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "#onColumnCheckbox",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "InputEvent"
-                  }
-                },
-                {
-                  "name": "column",
-                  "type": {
-                    "text": "Column"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "#onOrderRadio",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "InputEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "#onOrderedBySelected",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "InputEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "#onCardsMustHaveAmountCheckbox",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "InputEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "#onMinPriceSlider",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "InputEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "#onSheetTitleInput",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "InputEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "#onSpreadsheetIdInput",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "InputEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "#onSubmit",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "SubmitEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "sheetsFieldset",
-              "privacy": "protected"
-            },
-            {
-              "kind": "method",
-              "name": "define",
-              "static": true,
-              "parameters": [
-                {
-                  "name": "tag",
-                  "default": "this.tag"
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "emit",
-              "parameters": [
-                {
-                  "name": "eventName",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "detail",
-                  "optional": true,
-                  "type": {
-                    "text": "T"
-                  }
-                },
-                {
-                  "name": "options",
-                  "default": "{ bubbles: true, composed: true, cancelable: true }",
-                  "type": {
-                    "text": "EventInit"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "spreadsheet-id",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "spreadsheetId"
-            },
-            {
-              "name": "sheet-title",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "sheetTitle"
-            },
-            {
-              "name": "order",
-              "type": {
-                "text": "Order"
-              },
-              "default": "'desc'",
-              "fieldName": "order"
-            },
-            {
-              "name": "orderedBy",
-              "type": {
-                "text": "Column"
-              },
-              "default": "'amount'",
-              "fieldName": "orderedBy"
-            },
-            {
-              "name": "cardsMustHaveAmount",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "cardsMustHaveAmount"
-            },
-            {
-              "name": "minPrice",
-              "type": {
-                "text": "number"
-              },
-              "default": "0",
-              "fieldName": "minPrice"
-            },
-            {
-              "name": "to",
-              "type": {
-                "text": "To"
-              },
-              "default": "'sheets'",
-              "fieldName": "to"
-            }
-          ],
-          "superclass": {
-            "name": "BaseElement",
-            "module": "/src/wc/base-element"
-          },
-          "tagName": "wc-form-export-sample",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FormExportSampleElement",
-          "declaration": {
-            "name": "FormExportSampleElement",
-            "module": "src/wc/form-export-sample/form-export-sample.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/wc/google-auth/poe-auth.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "GoogleAuthElement",
-          "members": [
-            {
-              "kind": "field",
-              "name": "tag",
-              "type": {
-                "text": "string"
-              },
-              "static": true,
-              "description": "Element tag name",
-              "default": "'wc-google-auth'",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "name",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "name",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "picture",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "picture",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "loggedIn",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "loggedIn",
-              "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "#emitLogin",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "#emitLogout",
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "defineList",
-              "type": {
-                "text": "(typeof BaseElement)[]"
-              },
-              "static": true,
-              "default": "[]",
-              "description": "list of classes of custom elements needed for this element.",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "define",
-              "static": true,
-              "parameters": [
-                {
-                  "name": "tag",
-                  "default": "this.tag"
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "emit",
-              "parameters": [
-                {
-                  "name": "eventName",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "detail",
-                  "optional": true,
-                  "type": {
-                    "text": "T"
-                  }
-                },
-                {
-                  "name": "options",
-                  "default": "{ bubbles: true, composed: true, cancelable: true }",
-                  "type": {
-                    "text": "EventInit"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "name",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "name"
-            },
-            {
-              "name": "picture",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "picture"
-            },
-            {
-              "name": "loggedIn",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "loggedIn"
-            }
-          ],
-          "superclass": {
-            "name": "BaseElement",
-            "module": "/src/wc/base-element"
-          },
-          "tagName": "wc-poe-auth",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "GoogleAuthElement",
-          "declaration": {
-            "name": "GoogleAuthElement",
-            "module": "src/wc/google-auth/poe-auth.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/wc/sample-card/data.ts",
+      "path": "src/wc/e-sample-card/data.ts",
       "declarations": [
         {
           "kind": "variable",
@@ -2438,7 +1138,7 @@
           "name": "props",
           "declaration": {
             "name": "props",
-            "module": "src/wc/sample-card/data.ts"
+            "module": "src/wc/e-sample-card/data.ts"
           }
         },
         {
@@ -2446,14 +1146,14 @@
           "name": "{ league, filename, selected, uuid, minimumCardPrice, sample }",
           "declaration": {
             "name": "{ league, filename, selected, uuid, minimumCardPrice, sample }",
-            "module": "src/wc/sample-card/data.ts"
+            "module": "src/wc/e-sample-card/data.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/sample-card/sample-card.stories.ts",
+      "path": "src/wc/e-sample-card/e-sample-card.stories.ts",
       "declarations": [
         {
           "kind": "variable",
@@ -2461,7 +1161,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{ render() { SampleCardElement.define(); return html`<wc-sample-card league=${league ?? 'Standard'} filename=${filename} ?selected=${selected} uuid=${uuid} minimum-card-price=${minimumCardPrice} .sample=${sample} ></wc-sample-card>`; }, }"
+          "default": "{ render() { return html`<e-sample-card league=${league ?? 'Standard'} filename=${filename} ?selected=${selected} uuid=${uuid} minimum-card-price=${minimumCardPrice} .sample=${sample} ></e-sample-card>`; }, }"
         }
       ],
       "exports": [
@@ -2469,7 +1169,7 @@
           "kind": "js",
           "name": "default",
           "declaration": {
-            "module": "src/wc/sample-card/sample-card.stories.ts"
+            "module": "src/wc/e-sample-card/e-sample-card.stories.ts"
           }
         },
         {
@@ -2477,49 +1177,20 @@
           "name": "Default",
           "declaration": {
             "name": "Default",
-            "module": "src/wc/sample-card/sample-card.stories.ts"
+            "module": "src/wc/e-sample-card/e-sample-card.stories.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/sample-card/sample-card.ts",
+      "path": "src/wc/e-sample-card/e-sample-card.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
           "name": "SampleCardElement",
           "members": [
-            {
-              "kind": "field",
-              "name": "defineList",
-              "type": {
-                "text": "(typeof BaseElement)[]"
-              },
-              "static": true,
-              "default": "[]",
-              "description": "list of classes of custom elements needed for this element.",
-              "readonly": true,
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tag",
-              "type": {
-                "text": "string"
-              },
-              "static": true,
-              "description": "Element tag name",
-              "default": "'wc-sample-card'",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
             {
               "kind": "field",
               "name": "league",
@@ -2611,7 +1282,7 @@
               "kind": "field",
               "name": "table",
               "type": {
-                "text": "DivTableElement"
+                "text": "SampleTableElement"
               }
             },
             {
@@ -2673,51 +1344,6 @@
               "kind": "method",
               "name": "#onMinPriceRange",
               "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "define",
-              "static": true,
-              "parameters": [
-                {
-                  "name": "tag",
-                  "default": "this.tag"
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "emit",
-              "parameters": [
-                {
-                  "name": "eventName",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "detail",
-                  "optional": true,
-                  "type": {
-                    "text": "T"
-                  }
-                },
-                {
-                  "name": "options",
-                  "default": "{ bubbles: true, composed: true, cancelable: true }",
-                  "type": {
-                    "text": "EventInit"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
             }
           ],
           "attributes": [
@@ -2771,10 +1397,10 @@
             }
           ],
           "superclass": {
-            "name": "BaseElement",
-            "module": "/src/wc/base-element"
+            "name": "LitElement",
+            "package": "lit"
           },
-          "tagName": "wc-sample-card",
+          "tagName": "e-sample-card",
           "customElement": true
         }
       ],
@@ -2784,16 +1410,142 @@
           "name": "SampleCardElement",
           "declaration": {
             "name": "SampleCardElement",
-            "module": "src/wc/sample-card/sample-card.ts"
+            "module": "src/wc/e-sample-card/e-sample-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "e-sample-card",
+          "declaration": {
+            "name": "SampleCardElement",
+            "module": "src/wc/e-sample-card/e-sample-card.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/starter/starter.ts",
-      "declarations": [],
-      "exports": []
+      "path": "src/wc/e-theme-toggle/e-theme-toggle.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "ThemeToggle",
+          "cssProperties": [
+            {
+              "name": "--size"
+            },
+            {
+              "name": "--icon-fill"
+            },
+            {
+              "name": "--icon-fill"
+            }
+          ],
+          "members": [
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "'e-theme-toggle'"
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "theme",
+              "type": {
+                "text": "ColorTheme"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "$button",
+              "type": {
+                "text": "HTMLButtonElement | null"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "#shadowRoot",
+              "privacy": "private",
+              "type": {
+                "text": "ShadowRoot"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "toggleTheme",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "theme"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "e-theme-toggle",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ThemeToggle",
+          "declaration": {
+            "name": "ThemeToggle",
+            "module": "src/wc/e-theme-toggle/e-theme-toggle.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "e-theme-toggle",
+          "declaration": {
+            "name": "ThemeToggle",
+            "module": "src/wc/e-theme-toggle/e-theme-toggle.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "e-theme-toggle",
+          "declaration": {
+            "name": "ThemeToggle",
+            "module": "src/wc/e-theme-toggle/e-theme-toggle.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/e-theme-toggle/template.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "template",
+          "default": "String.raw` <button class=\"theme-toggle\" id=\"theme-toggle\" title=\"Toggles light & dark\" aria-label=\"auto\" aria-live=\"polite\"> <svg class=\"sun-and-moon\" aria-hidden=\"true\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <mask class=\"moon\" id=\"moon-mask\"> <rect x=\"0\" y=\"0\" width=\"100%\" height=\"100%\" fill=\"white\" /> <circle cx=\"24\" cy=\"10\" r=\"6\" fill=\"black\" /> </mask> <circle class=\"sun\" cx=\"12\" cy=\"12\" r=\"6\" mask=\"url(#moon-mask)\" fill=\"currentColor\" /> <g class=\"sun-beams\" stroke=\"currentColor\"> <line x1=\"12\" y1=\"1\" x2=\"12\" y2=\"3\" /> <line x1=\"12\" y1=\"21\" x2=\"12\" y2=\"23\" /> <line x1=\"4.22\" y1=\"4.22\" x2=\"5.64\" y2=\"5.64\" /> <line x1=\"18.36\" y1=\"18.36\" x2=\"19.78\" y2=\"19.78\" /> <line x1=\"1\" y1=\"12\" x2=\"3\" y2=\"12\" /> <line x1=\"21\" y1=\"12\" x2=\"23\" y2=\"12\" /> <line x1=\"4.22\" y1=\"19.78\" x2=\"5.64\" y2=\"18.36\" /> <line x1=\"18.36\" y1=\"5.64\" x2=\"19.78\" y2=\"4.22\" /> </g> </svg> </button>`"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "template",
+          "declaration": {
+            "name": "template",
+            "module": "src/wc/e-theme-toggle/template.ts"
+          }
+        }
+      ]
     },
     {
       "kind": "javascript-module",
@@ -3064,7 +1816,7 @@
             "package": "lit"
           },
           "summary": "Container for poe stash tab with header with actions.",
-          "tagName": "wc-e-stash-tab-container",
+          "tagName": "e-stash-tab-container",
           "customElement": true
         }
       ],
@@ -3097,7 +1849,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{ render() { StashTabErrorsElement.define(); return html`<e-stash-tab-errors .errors=${errors}></e-stash-tab-errors>`; }, }"
+          "default": "{ render() { return html`<e-stash-tab-errors .errors=${errors}></e-stash-tab-errors>`; }, }"
         }
       ],
       "exports": [
@@ -3127,35 +1879,6 @@
           "description": "",
           "name": "StashTabErrorsElement",
           "members": [
-            {
-              "kind": "field",
-              "name": "tag",
-              "type": {
-                "text": "string"
-              },
-              "static": true,
-              "description": "Element tag name",
-              "default": "'e-stash-tab-errors'",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "defineList",
-              "type": {
-                "text": "(typeof BaseElement)[]"
-              },
-              "static": true,
-              "default": "[]",
-              "description": "list of classes of custom elements needed for this element.",
-              "readonly": true,
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
             {
               "kind": "field",
               "name": "errors",
@@ -3203,51 +1926,6 @@
               "kind": "method",
               "name": "#handleMouseLeave",
               "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "define",
-              "static": true,
-              "parameters": [
-                {
-                  "name": "tag",
-                  "default": "this.tag"
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "emit",
-              "parameters": [
-                {
-                  "name": "eventName",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "detail",
-                  "optional": true,
-                  "type": {
-                    "text": "T"
-                  }
-                },
-                {
-                  "name": "options",
-                  "default": "{ bubbles: true, composed: true, cancelable: true }",
-                  "type": {
-                    "text": "EventInit"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
             }
           ],
           "events": [
@@ -3277,11 +1955,11 @@
             }
           ],
           "superclass": {
-            "name": "BaseElement",
-            "module": "/src/wc/base-element"
+            "name": "LitElement",
+            "package": "lit"
           },
           "summary": "Represents a block of possible stash tab errors during loading.",
-          "tagName": "wc-e-stash-tab-errors",
+          "tagName": "e-stash-tab-errors",
           "customElement": true
         }
       ],
@@ -3293,369 +1971,20 @@
             "name": "StashTabErrorsElement",
             "module": "src/wc/stashes/e-stash-tab-errors.ts"
           }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/wc/stashes/event.ts",
-      "declarations": [
+        },
         {
-          "kind": "class",
-          "description": "",
-          "name": "UpdateEvent",
-          "superclass": {
-            "name": "Event",
-            "module": "src/wc/stashes/event.ts"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "UpdateEvent",
+          "kind": "custom-element-definition",
+          "name": "e-stash-tab-errors",
           "declaration": {
-            "name": "UpdateEvent",
-            "module": "src/wc/stashes/event.ts"
+            "name": "StashTabErrorsElement",
+            "module": "src/wc/stashes/e-stash-tab-errors.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/stashes/stash-loader.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "StashLoaderElement",
-          "members": [
-            {
-              "kind": "field",
-              "name": "defineList",
-              "type": {
-                "text": "(typeof BaseElement)[]"
-              },
-              "static": true,
-              "default": "[]",
-              "description": "list of classes of custom elements needed for this element.",
-              "readonly": true,
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tag",
-              "type": {
-                "text": "string"
-              },
-              "static": true,
-              "description": "Element tag name",
-              "default": "'e-stash-loader'",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "league",
-              "type": {
-                "text": "League"
-              },
-              "default": "ACTIVE_LEAGUE",
-              "attribute": "league",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "customLeague",
-              "type": {
-                "text": "string"
-              },
-              "attribute": "customLeague"
-            },
-            {
-              "kind": "field",
-              "name": "selectedTabs",
-              "type": {
-                "text": "Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }>"
-              },
-              "default": "new Map()"
-            },
-            {
-              "kind": "field",
-              "name": "stashes",
-              "type": {
-                "text": "NoItemsTab[]"
-              },
-              "default": "[]"
-            },
-            {
-              "kind": "field",
-              "name": "noStashesMessage",
-              "type": {
-                "text": "string"
-              },
-              "default": "''"
-            },
-            {
-              "kind": "field",
-              "name": "msg",
-              "type": {
-                "text": "string"
-              },
-              "default": "''"
-            },
-            {
-              "kind": "field",
-              "name": "fetchingStash",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "stashLoader",
-              "type": {
-                "text": "IDefaultStashLoader"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "stashLoadsAvailable",
-              "type": {
-                "text": "number"
-              },
-              "privacy": "private",
-              "default": "30"
-            },
-            {
-              "kind": "field",
-              "name": "availableInTenSeconds",
-              "type": {
-                "text": "number"
-              },
-              "privacy": "private",
-              "default": "15"
-            },
-            {
-              "kind": "field",
-              "name": "stashesButton",
-              "type": {
-                "text": "HTMLButtonElement"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "getDataButton",
-              "type": {
-                "text": "HTMLButtonElement"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "#onLoadItemsClicked",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "#onCloseClicked",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "#onLoadStashesList",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "#onLeagueSelected",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "CustomEvent<League>"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "#onUpdSelectedTabs",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "CustomEvent<Events['upd:selectedTabs']>"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "#onCustomLeagueInput",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "InputEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "loadSelectedTabs",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "Promise<void>"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "league",
-                  "type": {
-                    "text": "League"
-                  }
-                }
-              ],
-              "description": "For each tab, loads sample and emits it"
-            },
-            {
-              "kind": "method",
-              "name": "#loadSample",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "Promise<TabWithItems>"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "id",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "league",
-                  "type": {
-                    "text": "League"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "#handleLoadTabError",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "Promise<void>"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "err",
-                  "type": {
-                    "text": "unknown"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "define",
-              "static": true,
-              "parameters": [
-                {
-                  "name": "tag",
-                  "default": "this.tag"
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "emit",
-              "parameters": [
-                {
-                  "name": "eventName",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "detail",
-                  "optional": true,
-                  "type": {
-                    "text": "T"
-                  }
-                },
-                {
-                  "name": "options",
-                  "default": "{ bubbles: true, composed: true, cancelable: true }",
-                  "type": {
-                    "text": "EventInit"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "league",
-              "type": {
-                "text": "League"
-              },
-              "default": "ACTIVE_LEAGUE",
-              "fieldName": "league"
-            },
-            {
-              "name": "customLeague",
-              "type": {
-                "text": "string"
-              },
-              "fieldName": "customLeague"
-            }
-          ],
-          "superclass": {
-            "name": "BaseElement",
-            "module": "/src/wc/base-element"
-          },
-          "tagName": "wc-stash-loader",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "StashLoaderElement",
-          "declaration": {
-            "name": "StashLoaderElement",
-            "module": "src/wc/stashes/stash-loader.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/wc/stashes/stashes-view.stories.ts",
+      "path": "src/wc/stashes/e-stashes-view.stories.ts",
       "declarations": [
         {
           "kind": "variable",
@@ -3663,7 +1992,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{ render() { StashesViewElement.define(); return html`<wc-stashes-view .stashLoader=${new MockStashLoader()}></wc-stashes-view>`; }, }"
+          "default": "{ render() { return html`<e-stashes-view .stashLoader=${new MockStashLoader()}></e-stashes-view>`; }, }"
         }
       ],
       "exports": [
@@ -3671,7 +2000,7 @@
           "kind": "js",
           "name": "default",
           "declaration": {
-            "module": "src/wc/stashes/stashes-view.stories.ts"
+            "module": "src/wc/stashes/e-stashes-view.stories.ts"
           }
         },
         {
@@ -3679,14 +2008,14 @@
           "name": "Default",
           "declaration": {
             "name": "Default",
-            "module": "src/wc/stashes/stashes-view.stories.ts"
+            "module": "src/wc/stashes/e-stashes-view.stories.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/stashes/stashes-view.styles.ts",
+      "path": "src/wc/stashes/e-stashes-view.styles.ts",
       "declarations": [
         {
           "kind": "variable",
@@ -3700,49 +2029,20 @@
           "name": "styles",
           "declaration": {
             "name": "styles",
-            "module": "src/wc/stashes/stashes-view.styles.ts"
+            "module": "src/wc/stashes/e-stashes-view.styles.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/stashes/stashes-view.ts",
+      "path": "src/wc/stashes/e-stashes-view.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
           "name": "StashesViewElement",
           "members": [
-            {
-              "kind": "field",
-              "name": "defineList",
-              "type": {
-                "text": "(typeof BaseElement)[]"
-              },
-              "static": true,
-              "default": "[]",
-              "description": "list of classes of custom elements needed for this element.",
-              "readonly": true,
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tag",
-              "type": {
-                "text": "string"
-              },
-              "static": true,
-              "description": "Element tag name",
-              "default": "'wc-stashes-view'",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
             {
               "kind": "field",
               "name": "league",
@@ -4080,51 +2380,6 @@
                   }
                 }
               ]
-            },
-            {
-              "kind": "method",
-              "name": "define",
-              "static": true,
-              "parameters": [
-                {
-                  "name": "tag",
-                  "default": "this.tag"
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "emit",
-              "parameters": [
-                {
-                  "name": "eventName",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "detail",
-                  "optional": true,
-                  "type": {
-                    "text": "T"
-                  }
-                },
-                {
-                  "name": "options",
-                  "default": "{ bubbles: true, composed: true, cancelable: true }",
-                  "type": {
-                    "text": "EventInit"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
             }
           ],
           "attributes": [
@@ -4154,10 +2409,10 @@
             }
           ],
           "superclass": {
-            "name": "BaseElement",
-            "module": "/src/wc/base-element"
+            "name": "LitElement",
+            "package": "lit"
           },
-          "tagName": "wc-stashes-view",
+          "tagName": "e-stashes-view",
           "customElement": true
         }
       ],
@@ -4167,14 +2422,22 @@
           "name": "StashesViewElement",
           "declaration": {
             "name": "StashesViewElement",
-            "module": "src/wc/stashes/stashes-view.ts"
+            "module": "src/wc/stashes/e-stashes-view.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "e-stashes-view",
+          "declaration": {
+            "name": "StashesViewElement",
+            "module": "src/wc/stashes/e-stashes-view.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/stashes/tab-badge-group.stories.ts",
+      "path": "src/wc/stashes/e-tab-badge-group.stories.ts",
       "declarations": [
         {
           "kind": "variable",
@@ -4182,7 +2445,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{ render() { TabBadgeGroupElement.define(); return html`<wc-tab-badge-group .stashes=${stashes} .league=${league}></wc-tab-badge-group>`; }, }"
+          "default": "{ render() { return html`<e-tab-badge-group .stashes=${stashes} .league=${league}></e-tab-badge-group>`; }, }"
         }
       ],
       "exports": [
@@ -4190,7 +2453,7 @@
           "kind": "js",
           "name": "default",
           "declaration": {
-            "module": "src/wc/stashes/tab-badge-group.stories.ts"
+            "module": "src/wc/stashes/e-tab-badge-group.stories.ts"
           }
         },
         {
@@ -4198,14 +2461,14 @@
           "name": "Default",
           "declaration": {
             "name": "Default",
-            "module": "src/wc/stashes/tab-badge-group.stories.ts"
+            "module": "src/wc/stashes/e-tab-badge-group.stories.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/stashes/tab-badge-group.ts",
+      "path": "src/wc/stashes/e-tab-badge-group.ts",
       "declarations": [
         {
           "kind": "variable",
@@ -4218,58 +2481,74 @@
         {
           "kind": "class",
           "description": "",
-          "name": "UpdateEvent",
+          "name": "AbstractChange",
           "members": [
             {
               "kind": "field",
               "name": "field",
               "type": {
-                "text": "string"
+                "text": "T"
               },
+              "readonly": true,
               "default": "field"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "V"
+              },
+              "readonly": true,
+              "default": "value"
             }
           ],
           "superclass": {
             "name": "Event",
-            "module": "src/wc/stashes/tab-badge-group.ts"
+            "module": "src/wc/stashes/e-tab-badge-group.ts"
+          }
+        },
+        {
+          "kind": "class",
+          "description": "",
+          "name": "ChangeEvent",
+          "superclass": {
+            "name": "AbstractChange",
+            "module": "src/wc/stashes/e-tab-badge-group.ts"
           },
-          "tagName": "wc-tab-badge-group",
-          "customElement": true
+          "members": [
+            {
+              "kind": "field",
+              "name": "field",
+              "type": {
+                "text": "T"
+              },
+              "readonly": true,
+              "default": "field",
+              "inheritedFrom": {
+                "name": "AbstractChange",
+                "module": "src/wc/stashes/e-tab-badge-group.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "V"
+              },
+              "readonly": true,
+              "default": "value",
+              "inheritedFrom": {
+                "name": "AbstractChange",
+                "module": "src/wc/stashes/e-tab-badge-group.ts"
+              }
+            }
+          ]
         },
         {
           "kind": "class",
           "description": "",
           "name": "TabBadgeGroupElement",
           "members": [
-            {
-              "kind": "field",
-              "name": "defineList",
-              "type": {
-                "text": "(typeof BaseElement)[]"
-              },
-              "static": true,
-              "default": "[]",
-              "description": "list of classes of custom elements needed for this element.",
-              "readonly": true,
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tag",
-              "type": {
-                "text": "string"
-              },
-              "static": true,
-              "description": "Element tag name",
-              "default": "'wc-tab-badge-group'",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
             {
               "kind": "field",
               "name": "badgesDisabled",
@@ -4492,51 +2771,6 @@
             {
               "kind": "method",
               "name": "increasePage"
-            },
-            {
-              "kind": "method",
-              "name": "define",
-              "static": true,
-              "parameters": [
-                {
-                  "name": "tag",
-                  "default": "this.tag"
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "emit",
-              "parameters": [
-                {
-                  "name": "eventName",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "detail",
-                  "optional": true,
-                  "type": {
-                    "text": "T"
-                  }
-                },
-                {
-                  "name": "options",
-                  "default": "{ bubbles: true, composed: true, cancelable: true }",
-                  "type": {
-                    "text": "EventInit"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
             }
           ],
           "attributes": [
@@ -4614,10 +2848,10 @@
             }
           ],
           "superclass": {
-            "name": "BaseElement",
-            "module": "/src/wc/base-element"
+            "name": "LitElement",
+            "package": "lit"
           },
-          "tagName": "wc-tab-badge-group",
+          "tagName": "e-tab-badge-group",
           "customElement": true
         }
       ],
@@ -4627,15 +2861,23 @@
           "name": "REMOVE_ONLY",
           "declaration": {
             "name": "REMOVE_ONLY",
-            "module": "src/wc/stashes/tab-badge-group.ts"
+            "module": "src/wc/stashes/e-tab-badge-group.ts"
           }
         },
         {
           "kind": "js",
-          "name": "UpdateEvent",
+          "name": "AbstractChange",
           "declaration": {
-            "name": "UpdateEvent",
-            "module": "src/wc/stashes/tab-badge-group.ts"
+            "name": "AbstractChange",
+            "module": "src/wc/stashes/e-tab-badge-group.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ChangeEvent",
+          "declaration": {
+            "name": "ChangeEvent",
+            "module": "src/wc/stashes/e-tab-badge-group.ts"
           }
         },
         {
@@ -4643,14 +2885,22 @@
           "name": "TabBadgeGroupElement",
           "declaration": {
             "name": "TabBadgeGroupElement",
-            "module": "src/wc/stashes/tab-badge-group.ts"
+            "module": "src/wc/stashes/e-tab-badge-group.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "e-tab-badge-group",
+          "declaration": {
+            "name": "TabBadgeGroupElement",
+            "module": "src/wc/stashes/e-tab-badge-group.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/stashes/tab-badge.stories.ts",
+      "path": "src/wc/stashes/e-tab-badge.stories.ts",
       "declarations": [
         {
           "kind": "variable",
@@ -4658,7 +2908,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{ render() { TabBadgeElement.define(); return html`<wc-tab-badge .tab=${noItemsTab}></wc-tab-badge>`; }, }"
+          "default": "{ render() { return html`<e-tab-badge .tab=${noItemsTab}></e-tab-badge>`; }, }"
         }
       ],
       "exports": [
@@ -4666,7 +2916,7 @@
           "kind": "js",
           "name": "default",
           "declaration": {
-            "module": "src/wc/stashes/tab-badge.stories.ts"
+            "module": "src/wc/stashes/e-tab-badge.stories.ts"
           }
         },
         {
@@ -4674,14 +2924,14 @@
           "name": "Default",
           "declaration": {
             "name": "Default",
-            "module": "src/wc/stashes/tab-badge.stories.ts"
+            "module": "src/wc/stashes/e-tab-badge.stories.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/stashes/tab-badge.ts",
+      "path": "src/wc/stashes/e-tab-badge.ts",
       "declarations": [
         {
           "kind": "class",
@@ -4707,10 +2957,8 @@
           ],
           "superclass": {
             "name": "Event",
-            "module": "src/wc/stashes/tab-badge.ts"
-          },
-          "tagName": "wc-tab-badge",
-          "customElement": true
+            "module": "src/wc/stashes/e-tab-badge.ts"
+          }
         },
         {
           "kind": "class",
@@ -4728,30 +2976,14 @@
           ],
           "superclass": {
             "name": "Event",
-            "module": "src/wc/stashes/tab-badge.ts"
-          },
-          "tagName": "wc-tab-badge",
-          "customElement": true
+            "module": "src/wc/stashes/e-tab-badge.ts"
+          }
         },
         {
           "kind": "class",
           "description": "",
           "name": "TabBadgeElement",
           "members": [
-            {
-              "kind": "field",
-              "name": "tag",
-              "type": {
-                "text": "string"
-              },
-              "static": true,
-              "description": "Element tag name",
-              "default": "'wc-tab-badge'",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
             {
               "kind": "field",
               "name": "tab",
@@ -4833,65 +3065,6 @@
               "kind": "method",
               "name": "#onButtonClick",
               "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "defineList",
-              "type": {
-                "text": "(typeof BaseElement)[]"
-              },
-              "static": true,
-              "default": "[]",
-              "description": "list of classes of custom elements needed for this element.",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "define",
-              "static": true,
-              "parameters": [
-                {
-                  "name": "tag",
-                  "default": "this.tag"
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "emit",
-              "parameters": [
-                {
-                  "name": "eventName",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "detail",
-                  "optional": true,
-                  "type": {
-                    "text": "T"
-                  }
-                },
-                {
-                  "name": "options",
-                  "default": "{ bubbles: true, composed: true, cancelable: true }",
-                  "type": {
-                    "text": "EventInit"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
             }
           ],
           "attributes": [
@@ -4935,10 +3108,10 @@
             }
           ],
           "superclass": {
-            "name": "BaseElement",
-            "module": "/src/wc/base-element"
+            "name": "LitElement",
+            "package": "lit"
           },
-          "tagName": "wc-tab-badge",
+          "tagName": "e-tab-badge",
           "customElement": true
         }
       ],
@@ -4948,7 +3121,7 @@
           "name": "TabSelectEvent",
           "declaration": {
             "name": "TabSelectEvent",
-            "module": "src/wc/stashes/tab-badge.ts"
+            "module": "src/wc/stashes/e-tab-badge.ts"
           }
         },
         {
@@ -4956,7 +3129,7 @@
           "name": "TabClickEvent",
           "declaration": {
             "name": "TabClickEvent",
-            "module": "src/wc/stashes/tab-badge.ts"
+            "module": "src/wc/stashes/e-tab-badge.ts"
           }
         },
         {
@@ -4964,7 +3137,40 @@
           "name": "TabBadgeElement",
           "declaration": {
             "name": "TabBadgeElement",
-            "module": "src/wc/stashes/tab-badge.ts"
+            "module": "src/wc/stashes/e-tab-badge.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "e-tab-badge",
+          "declaration": {
+            "name": "TabBadgeElement",
+            "module": "src/wc/stashes/e-tab-badge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/stashes/event.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "UpdateEvent",
+          "superclass": {
+            "name": "Event",
+            "module": "src/wc/stashes/event.ts"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "UpdateEvent",
+          "declaration": {
+            "name": "UpdateEvent",
+            "module": "src/wc/stashes/event.ts"
           }
         }
       ]
@@ -4977,123 +3183,7 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/theme-toggle/template.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "template",
-          "default": "String.raw` <button class=\"theme-toggle\" id=\"theme-toggle\" title=\"Toggles light & dark\" aria-label=\"auto\" aria-live=\"polite\"> <svg class=\"sun-and-moon\" aria-hidden=\"true\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <mask class=\"moon\" id=\"moon-mask\"> <rect x=\"0\" y=\"0\" width=\"100%\" height=\"100%\" fill=\"white\" /> <circle cx=\"24\" cy=\"10\" r=\"6\" fill=\"black\" /> </mask> <circle class=\"sun\" cx=\"12\" cy=\"12\" r=\"6\" mask=\"url(#moon-mask)\" fill=\"currentColor\" /> <g class=\"sun-beams\" stroke=\"currentColor\"> <line x1=\"12\" y1=\"1\" x2=\"12\" y2=\"3\" /> <line x1=\"12\" y1=\"21\" x2=\"12\" y2=\"23\" /> <line x1=\"4.22\" y1=\"4.22\" x2=\"5.64\" y2=\"5.64\" /> <line x1=\"18.36\" y1=\"18.36\" x2=\"19.78\" y2=\"19.78\" /> <line x1=\"1\" y1=\"12\" x2=\"3\" y2=\"12\" /> <line x1=\"21\" y1=\"12\" x2=\"23\" y2=\"12\" /> <line x1=\"4.22\" y1=\"19.78\" x2=\"5.64\" y2=\"18.36\" /> <line x1=\"18.36\" y1=\"5.64\" x2=\"19.78\" y2=\"4.22\" /> </g> </svg> </button>`"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "template",
-          "declaration": {
-            "name": "template",
-            "module": "src/wc/theme-toggle/template.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/wc/theme-toggle/theme-toggle.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "ThemeToggle",
-          "cssProperties": [
-            {
-              "name": "--size"
-            },
-            {
-              "name": "--icon-fill"
-            },
-            {
-              "name": "--icon-fill"
-            }
-          ],
-          "members": [
-            {
-              "kind": "method",
-              "name": "define",
-              "static": true,
-              "parameters": [
-                {
-                  "name": "tag",
-                  "default": "'theme-toggle'"
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "theme",
-              "type": {
-                "text": "ColorTheme"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "$button",
-              "type": {
-                "text": "HTMLButtonElement | null"
-              },
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "#shadowRoot",
-              "privacy": "private",
-              "type": {
-                "text": "ShadowRoot"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "toggleTheme",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "theme"
-            }
-          ],
-          "superclass": {
-            "name": "HTMLElement"
-          },
-          "tagName": "wc-theme-toggle",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "ThemeToggle",
-          "declaration": {
-            "name": "ThemeToggle",
-            "module": "src/wc/theme-toggle/theme-toggle.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "theme-toggle",
-          "declaration": {
-            "name": "ThemeToggle",
-            "module": "src/wc/theme-toggle/theme-toggle.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/wc/sample-card/fixed-names/data.ts",
+      "path": "src/wc/e-sample-card/e-fixed-names/data.ts",
       "declarations": [
         {
           "kind": "variable",
@@ -5110,34 +3200,20 @@
           "name": "fixedNames",
           "declaration": {
             "name": "fixedNames",
-            "module": "src/wc/sample-card/fixed-names/data.ts"
+            "module": "src/wc/e-sample-card/e-fixed-names/data.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/sample-card/fixed-names/fixed-icon.ts",
+      "path": "src/wc/e-sample-card/e-fixed-names/e-fixed-icon.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
           "name": "FixedIconElement",
           "members": [
-            {
-              "kind": "field",
-              "name": "tag",
-              "type": {
-                "text": "string"
-              },
-              "static": true,
-              "description": "Element tag name",
-              "default": "'wc-fixed-icon'",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
             {
               "kind": "field",
               "name": "width",
@@ -5157,65 +3233,6 @@
               "default": "32",
               "attribute": "height",
               "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "defineList",
-              "type": {
-                "text": "(typeof BaseElement)[]"
-              },
-              "static": true,
-              "default": "[]",
-              "description": "list of classes of custom elements needed for this element.",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "define",
-              "static": true,
-              "parameters": [
-                {
-                  "name": "tag",
-                  "default": "this.tag"
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "emit",
-              "parameters": [
-                {
-                  "name": "eventName",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "detail",
-                  "optional": true,
-                  "type": {
-                    "text": "T"
-                  }
-                },
-                {
-                  "name": "options",
-                  "default": "{ bubbles: true, composed: true, cancelable: true }",
-                  "type": {
-                    "text": "EventInit"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
             }
           ],
           "attributes": [
@@ -5237,10 +3254,10 @@
             }
           ],
           "superclass": {
-            "name": "BaseElement",
-            "module": "/src/wc/base-element"
+            "name": "LitElement",
+            "package": "lit"
           },
-          "tagName": "wc-fixed-icon",
+          "tagName": "e-fixed-icon",
           "customElement": true
         }
       ],
@@ -5250,14 +3267,22 @@
           "name": "FixedIconElement",
           "declaration": {
             "name": "FixedIconElement",
-            "module": "src/wc/sample-card/fixed-names/fixed-icon.ts"
+            "module": "src/wc/e-sample-card/e-fixed-names/e-fixed-icon.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "e-fixed-icon",
+          "declaration": {
+            "name": "FixedIconElement",
+            "module": "src/wc/e-sample-card/e-fixed-names/e-fixed-icon.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/sample-card/fixed-names/fixed-names.stories.ts",
+      "path": "src/wc/e-sample-card/e-fixed-names/e-fixed-names.stories.ts",
       "declarations": [
         {
           "kind": "variable",
@@ -5265,7 +3290,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{ render({ fixedNames }: { fixedNames: FixedName[] }) { FixedNamesElement.define(); return html`<wc-fixed-names .fixedNames=${fixedNames}></wc-fixed-names>`; }, }"
+          "default": "{ render({ fixedNames }: { fixedNames: FixedName[] }) { return html`<e-fixed-names .fixedNames=${fixedNames}></e-fixed-names>`; }, }"
         }
       ],
       "exports": [
@@ -5273,7 +3298,7 @@
           "kind": "js",
           "name": "default",
           "declaration": {
-            "module": "src/wc/sample-card/fixed-names/fixed-names.stories.ts"
+            "module": "src/wc/e-sample-card/e-fixed-names/e-fixed-names.stories.ts"
           }
         },
         {
@@ -5281,49 +3306,20 @@
           "name": "Default",
           "declaration": {
             "name": "Default",
-            "module": "src/wc/sample-card/fixed-names/fixed-names.stories.ts"
+            "module": "src/wc/e-sample-card/e-fixed-names/e-fixed-names.stories.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/sample-card/fixed-names/fixed-names.ts",
+      "path": "src/wc/e-sample-card/e-fixed-names/e-fixed-names.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
           "name": "FixedNamesElement",
           "members": [
-            {
-              "kind": "field",
-              "name": "defineList",
-              "type": {
-                "text": "(typeof BaseElement)[]"
-              },
-              "static": true,
-              "default": "[]",
-              "description": "list of classes of custom elements needed for this element.",
-              "readonly": true,
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tag",
-              "type": {
-                "text": "string"
-              },
-              "static": true,
-              "description": "Element tag name",
-              "default": "'wc-fixed-names'",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
             {
               "kind": "field",
               "name": "width",
@@ -5369,51 +3365,6 @@
               "kind": "method",
               "name": "arrowIcon",
               "privacy": "protected"
-            },
-            {
-              "kind": "method",
-              "name": "define",
-              "static": true,
-              "parameters": [
-                {
-                  "name": "tag",
-                  "default": "this.tag"
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "emit",
-              "parameters": [
-                {
-                  "name": "eventName",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "detail",
-                  "optional": true,
-                  "type": {
-                    "text": "T"
-                  }
-                },
-                {
-                  "name": "options",
-                  "default": "{ bubbles: true, composed: true, cancelable: true }",
-                  "type": {
-                    "text": "EventInit"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
             }
           ],
           "attributes": [
@@ -5443,10 +3394,10 @@
             }
           ],
           "superclass": {
-            "name": "BaseElement",
-            "module": "/src/wc/base-element"
+            "name": "LitElement",
+            "package": "lit"
           },
-          "tagName": "wc-fixed-names",
+          "tagName": "e-fixed-names",
           "customElement": true
         }
       ],
@@ -5456,14 +3407,355 @@
           "name": "FixedNamesElement",
           "declaration": {
             "name": "FixedNamesElement",
-            "module": "src/wc/sample-card/fixed-names/fixed-names.ts"
+            "module": "src/wc/e-sample-card/e-fixed-names/e-fixed-names.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "e-fixed-names",
+          "declaration": {
+            "name": "FixedNamesElement",
+            "module": "src/wc/e-sample-card/e-fixed-names/e-fixed-names.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/sample-card/not-cards/data.ts",
+      "path": "src/wc/e-sample-card/e-form-export-sample/e-form-export-sample.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{ render() { return html`<e-form-export-sample></e-form-export-sample>`; }, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/e-sample-card/e-form-export-sample/e-form-export-sample.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/e-sample-card/e-form-export-sample/e-form-export-sample.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/e-sample-card/e-form-export-sample/e-form-export-sample.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FormExportSampleElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "spreadsheetId",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "spreadsheet-id",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "sheetTitle",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "sheet-title",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "order",
+              "type": {
+                "text": "Order"
+              },
+              "default": "'desc'",
+              "attribute": "order",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "orderedBy",
+              "type": {
+                "text": "Column"
+              },
+              "default": "'amount'",
+              "attribute": "orderedBy",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "columns",
+              "type": {
+                "text": "Set<Column>"
+              },
+              "default": "new Set(['name', 'amount'])"
+            },
+            {
+              "kind": "field",
+              "name": "cardsMustHaveAmount",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "cardsMustHaveAmount"
+            },
+            {
+              "kind": "field",
+              "name": "minPrice",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "minPrice"
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "to",
+              "type": {
+                "text": "To"
+              },
+              "default": "'sheets'",
+              "attribute": "to",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tablePreferences",
+              "type": {
+                "text": "TablePreferences"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "#onColumnCheckbox",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                },
+                {
+                  "name": "column",
+                  "type": {
+                    "text": "Column"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onOrderRadio",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onOrderedBySelected",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onCardsMustHaveAmountCheckbox",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onMinPriceSlider",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onSheetTitleInput",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onSpreadsheetIdInput",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onSubmit",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "SubmitEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "sheetsFieldset",
+              "privacy": "protected"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "spreadsheet-id",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "spreadsheetId"
+            },
+            {
+              "name": "sheet-title",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "sheetTitle"
+            },
+            {
+              "name": "order",
+              "type": {
+                "text": "Order"
+              },
+              "default": "'desc'",
+              "fieldName": "order"
+            },
+            {
+              "name": "orderedBy",
+              "type": {
+                "text": "Column"
+              },
+              "default": "'amount'",
+              "fieldName": "orderedBy"
+            },
+            {
+              "name": "cardsMustHaveAmount",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "cardsMustHaveAmount"
+            },
+            {
+              "name": "minPrice",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "fieldName": "minPrice"
+            },
+            {
+              "name": "to",
+              "type": {
+                "text": "To"
+              },
+              "default": "'sheets'",
+              "fieldName": "to"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "e-form-export-sample",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FormExportSampleElement",
+          "declaration": {
+            "name": "FormExportSampleElement",
+            "module": "src/wc/e-sample-card/e-form-export-sample/e-form-export-sample.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "e-form-export-sample",
+          "declaration": {
+            "name": "FormExportSampleElement",
+            "module": "src/wc/e-sample-card/e-form-export-sample/e-form-export-sample.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/e-sample-card/e-not-cards/data.ts",
       "declarations": [
         {
           "kind": "variable",
@@ -5480,14 +3772,14 @@
           "name": "notCards",
           "declaration": {
             "name": "notCards",
-            "module": "src/wc/sample-card/not-cards/data.ts"
+            "module": "src/wc/e-sample-card/e-not-cards/data.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/sample-card/not-cards/not-cards.stories.ts",
+      "path": "src/wc/e-sample-card/e-not-cards/e-not-cards.stories.ts",
       "declarations": [
         {
           "kind": "variable",
@@ -5495,7 +3787,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{ render() { NotCardsElement.define(); return html`<wc-not-cards .notCards=${notCards}></wc-not-cards>`; }, }"
+          "default": "{ render() { return html`<e-not-cards .notCards=${notCards}></e-not-cards>`; }, }"
         }
       ],
       "exports": [
@@ -5503,7 +3795,7 @@
           "kind": "js",
           "name": "default",
           "declaration": {
-            "module": "src/wc/sample-card/not-cards/not-cards.stories.ts"
+            "module": "src/wc/e-sample-card/e-not-cards/e-not-cards.stories.ts"
           }
         },
         {
@@ -5511,49 +3803,20 @@
           "name": "Default",
           "declaration": {
             "name": "Default",
-            "module": "src/wc/sample-card/not-cards/not-cards.stories.ts"
+            "module": "src/wc/e-sample-card/e-not-cards/e-not-cards.stories.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/wc/sample-card/not-cards/not-cards.ts",
+      "path": "src/wc/e-sample-card/e-not-cards/e-not-cards.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
           "name": "NotCardsElement",
           "members": [
-            {
-              "kind": "field",
-              "name": "defineList",
-              "type": {
-                "text": "(typeof BaseElement)[]"
-              },
-              "static": true,
-              "default": "[]",
-              "description": "list of classes of custom elements needed for this element.",
-              "readonly": true,
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tag",
-              "type": {
-                "text": "string"
-              },
-              "static": true,
-              "description": "Element tag name",
-              "default": "'wc-not-cards'",
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
             {
               "kind": "field",
               "name": "notCards",
@@ -5574,51 +3837,6 @@
               "kind": "method",
               "name": "#onIconClicked",
               "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "define",
-              "static": true,
-              "parameters": [
-                {
-                  "name": "tag",
-                  "default": "this.tag"
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "emit",
-              "parameters": [
-                {
-                  "name": "eventName",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "detail",
-                  "optional": true,
-                  "type": {
-                    "text": "T"
-                  }
-                },
-                {
-                  "name": "options",
-                  "default": "{ bubbles: true, composed: true, cancelable: true }",
-                  "type": {
-                    "text": "EventInit"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "src/wc/base-element.ts"
-              }
             }
           ],
           "attributes": [
@@ -5632,10 +3850,10 @@
             }
           ],
           "superclass": {
-            "name": "BaseElement",
-            "module": "/src/wc/base-element"
+            "name": "LitElement",
+            "package": "lit"
           },
-          "tagName": "wc-not-cards",
+          "tagName": "e-not-cards",
           "customElement": true
         }
       ],
@@ -5645,10 +3863,348 @@
           "name": "NotCardsElement",
           "declaration": {
             "name": "NotCardsElement",
-            "module": "src/wc/sample-card/not-cards/not-cards.ts"
+            "module": "src/wc/e-sample-card/e-not-cards/e-not-cards.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "e-not-cards",
+          "declaration": {
+            "name": "NotCardsElement",
+            "module": "src/wc/e-sample-card/e-not-cards/e-not-cards.ts"
           }
         }
       ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/e-sample-card/e-sample-table/data.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "cards",
+          "type": {
+            "text": "DivinationCardRecord[]"
+          },
+          "default": "cardsData"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "cards",
+          "declaration": {
+            "name": "cards",
+            "module": "src/wc/e-sample-card/e-sample-table/data.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/e-sample-card/e-sample-table/e-sample-table-stat.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "DivTableStatElement",
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "e-sample-table-stat",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DivTableStatElement",
+          "declaration": {
+            "name": "DivTableStatElement",
+            "module": "src/wc/e-sample-card/e-sample-table/e-sample-table-stat.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "e-sample-table-stat",
+          "declaration": {
+            "name": "DivTableStatElement",
+            "module": "src/wc/e-sample-card/e-sample-table/e-sample-table-stat.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/e-sample-card/e-sample-table/e-sample-table.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "object"
+          },
+          "default": "{ render() { return html`<e-sample-table .cards=${cards}></e-sample-table>`; }, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/wc/e-sample-card/e-sample-table/e-sample-table.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/wc/e-sample-card/e-sample-table/e-sample-table.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/e-sample-card/e-sample-table/e-sample-table.styles.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "styles",
+          "default": "css` :host { display: block; max-width: 1220px; background-color: var(--bg-color, #242424); } .ch-3 { text-align: center; min-width: 3ch; } .layout { height: 100%; max-width: 1220px; background-color: var(--bg-color, #242424); color: var(--color, rgba(255, 255, 255, 0.87)); padding: 2rem; display: grid; grid-template: 'header not-header' 'table stats' auto / 750px 1fr; } .header { grid-area: header; position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; z-index: 2; background-color: var(--bg-color, #242424); padding-top: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--sl-color-gray-100); } .slider-box { display: flex; justify-content: center; align-items: center; gap: 0.5rem; } .stats { grid-area: stats; display: flex; flex-direction: column; align-items: center; list-style: none; gap: 2rem; padding: 1rem; } .stat { padding: 2rem; display: flex; align-items: center; width: 200px; border: 1px solid var(--sl-color-gray-300); border-radius: 0.25rem; font-size: 2rem; font-weight: 500; gap: 1.5rem; } ${table} `"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "styles",
+          "declaration": {
+            "name": "styles",
+            "module": "src/wc/e-sample-card/e-sample-table/e-sample-table.styles.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/e-sample-card/e-sample-table/e-sample-table.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SampleTableElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "cards",
+              "type": {
+                "text": "Readonly<DivinationCardRecord[]>"
+              },
+              "default": "[]",
+              "attribute": "cards"
+            },
+            {
+              "kind": "field",
+              "name": "minPrice",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "min-price",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "column",
+              "type": {
+                "text": "Column"
+              },
+              "default": "'sum'",
+              "attribute": "column",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "order",
+              "type": {
+                "text": "Order"
+              },
+              "default": "'desc'",
+              "attribute": "order",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "_cards",
+              "type": {
+                "text": "DivinationCardRecord[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "nameQuery",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "hideZeroSum",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true"
+            },
+            {
+              "kind": "field",
+              "name": "filteredRecords",
+              "type": {
+                "text": "DivinationCardRecord[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "summary",
+              "type": {
+                "text": "{ amount: number; sum: number }"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "checkboxHideZeroSum",
+              "type": {
+                "text": "HTMLInputElement"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "toggleOrder",
+              "parameters": [
+                {
+                  "name": "newActivecolumn",
+                  "type": {
+                    "text": "Column"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onNameQueryInput",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onHideZeroCheckbox",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "#onMinPriceSlider",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onOrderTriangleClicked",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "newActiveColumn",
+                  "type": {
+                    "text": "Column"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "cards",
+              "type": {
+                "text": "Readonly<DivinationCardRecord[]>"
+              },
+              "default": "[]",
+              "fieldName": "cards"
+            },
+            {
+              "name": "min-price",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "fieldName": "minPrice"
+            },
+            {
+              "name": "column",
+              "type": {
+                "text": "Column"
+              },
+              "default": "'sum'",
+              "fieldName": "column"
+            },
+            {
+              "name": "order",
+              "type": {
+                "text": "Order"
+              },
+              "default": "'desc'",
+              "fieldName": "order"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "e-sample-table",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SampleTableElement",
+          "declaration": {
+            "name": "SampleTableElement",
+            "module": "src/wc/e-sample-card/e-sample-table/e-sample-table.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "e-sample-table",
+          "declaration": {
+            "name": "SampleTableElement",
+            "module": "src/wc/e-sample-card/e-sample-table/e-sample-table.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/wc/e-sample-card/e-sample-table/types.ts",
+      "declarations": [],
+      "exports": []
     }
   ]
 }
