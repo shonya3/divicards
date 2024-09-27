@@ -17,7 +17,7 @@ export default defineConfig({
 							return false;
 						}
 
-						return tag.startsWith('wc') || tag.startsWith('sl') || tag === 'theme-toggle';
+						return tag.startsWith('e-') || tag.startsWith('sl-');
 					},
 				},
 			},
