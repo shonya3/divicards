@@ -16,7 +16,7 @@ import { useAutoAnimate } from './composables/useAutoAnimate';
 import SampleCard from './components/SampleCard.vue';
 import StashesView from './components/StashesView.vue';
 import FormExportSample from './components/FormExportSample.vue';
-import { Props as FormExportProps } from '@divicards/wc/src/wc/form-export-sample/form-export-sample';
+import { Props as FormExportProps } from '@divicards/wc/src/wc/sample-card/form-export-sample/form-export-sample';
 import '@shoelace-style/shoelace/dist/components/copy-button/copy-button.js';
 import { BasePopupElement } from '@divicards/wc/src/wc/base-popup';
 import UpdateChangelog from './components/UpdateChangelog.vue';
@@ -134,43 +134,51 @@ const extractCards = async (tab: TabWithItems, league: League) => {
 <template>
 	<div
 		ref="dropZoneRef"
-		@drop.prevent="(e: DragEvent) => {
-            sampleStore.addFromDragAndDrop(e);
-            dropZoneRef?.classList.remove('drop-zone--active')
-        }"
-		@dragenter="(e: DragEvent) => {
-            e.preventDefault();
-            dropZoneRef?.classList.add('drop-zone--active');
-        }"
-		@dragover="(e: DragEvent) => {
-            e.preventDefault();
-            dropZoneRef?.classList.add('drop-zone--active');
-        }"
-		@dragleave="(e: DragEvent) => {
-            e.preventDefault();
-            dropZoneRef?.classList.remove('drop-zone--active');
-        }"
+		@drop.prevent="
+			(e: DragEvent) => {
+				sampleStore.addFromDragAndDrop(e);
+				dropZoneRef?.classList.remove('drop-zone--active');
+			}
+		"
+		@dragenter="
+			(e: DragEvent) => {
+				e.preventDefault();
+				dropZoneRef?.classList.add('drop-zone--active');
+			}
+		"
+		@dragover="
+			(e: DragEvent) => {
+				e.preventDefault();
+				dropZoneRef?.classList.add('drop-zone--active');
+			}
+		"
+		@dragleave="
+			(e: DragEvent) => {
+				e.preventDefault();
+				dropZoneRef?.classList.remove('drop-zone--active');
+			}
+		"
 		class="drop-zone"
 	>
 		<header class="header">
 			<wc-drop-files-message></wc-drop-files-message>
 			<sl-button v-if="!stashVisible" @click="openStashWindow()">Load from stash</sl-button>
 			<div class="header__right">
-				<wc-google-auth
+				<e-google-auth
 					v-if="googleAuthStore.loggedIn"
 					@login="googleAuthStore.login"
 					@logout="googleAuthStore.logout"
 					:name="googleAuthStore.name"
 					:picture="googleAuthStore.picture"
 					:loggedIn="googleAuthStore.loggedIn"
-				></wc-google-auth>
-				<wc-poe-auth
+				></e-google-auth>
+				<e-poe-auth
 					v-if="authStore.loggedIn"
 					@login="authStore.login"
 					@logout="authStore.logout"
 					:name="authStore.name"
 					:loggedIn="authStore.loggedIn"
-				></wc-poe-auth>
+				></e-poe-auth>
 				<sl-button
 					variant="success"
 					v-if="update && update.available"

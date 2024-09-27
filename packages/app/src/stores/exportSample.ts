@@ -1,5 +1,5 @@
 import { DivinationCardsSample, League } from '@divicards/shared/types';
-import { To } from '@divicards/wc/src/wc/form-export-sample/form-export-sample';
+import { To } from '@divicards/wc/src/wc/sample-card/form-export-sample/form-export-sample';
 import { defineStore } from 'pinia';
 
 export interface ExportSampleState {

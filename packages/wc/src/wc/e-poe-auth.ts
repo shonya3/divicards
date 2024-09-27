@@ -1,16 +1,17 @@
-import { html, css } from 'lit';
+import { html, css, LitElement } from 'lit';
 import { BaseElement } from './base-element';
-import { property } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
+import { emit } from '../utils';
 
 declare global {
 	interface HTMLElementTagNameMap {
-		'wc-poe-auth': PoeAuthElement;
+		'e-poe-auth': PoeAuthElement;
 	}
 }
 
-export class PoeAuthElement extends BaseElement {
-	static override tag = 'wc-poe-auth';
+@customElement('e-poe-auth')
+export class PoeAuthElement extends LitElement {
 	static override styles = [styles()];
 
 	@property({ reflect: true }) name: string = '';
@@ -30,11 +31,11 @@ export class PoeAuthElement extends BaseElement {
 	}
 
 	#emitLogin() {
-		this.emit('login');
+		emit(this, 'login');
 	}
 
 	#emitLogout() {
-		this.emit('logout');
+		emit(this, 'logout');
 	}
 }
 

@@ -1,7 +1,7 @@
 import { Column, Order } from '@divicards/shared/types';
+import { To } from '@divicards/wc/src/wc/sample-card/form-export-sample/form-export-sample';
 
 import { RemovableRef, useLocalStorage } from '@vueuse/core';
-import { To } from '@divicards/wc/src/wc/form-export-sample/form-export-sample';
 import { defineStore } from 'pinia';
 
 export const useTablePreferencesStore = defineStore('tablePreferences', {

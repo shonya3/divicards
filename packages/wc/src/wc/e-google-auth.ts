@@ -1,15 +1,15 @@
-import { html, css } from 'lit';
-import { property } from 'lit/decorators.js';
-import { BaseElement } from '../base-element';
+import { html, css, LitElement } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { emit } from '../utils';
 
 declare global {
 	interface HTMLElementTagNameMap {
-		'wc-google-auth': GoogleAuthElement;
+		'e-google-auth': GoogleAuthElement;
 	}
 }
 
-export class GoogleAuthElement extends BaseElement {
-	static override tag = 'wc-google-auth';
+@customElement('e-google-auth')
+export class GoogleAuthElement extends LitElement {
 	static override styles = [styles()];
 
 	@property({ reflect: true }) name: string = '';
@@ -31,11 +31,11 @@ export class GoogleAuthElement extends BaseElement {
 	}
 
 	#emitLogin() {
-		this.emit('login');
+		emit(this, 'login');
 	}
 
 	#emitLogout() {
-		this.emit('logout');
+		emit(this, 'logout');
 	}
 }
 

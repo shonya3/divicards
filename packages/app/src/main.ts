@@ -19,14 +19,14 @@ SlButton.define('sl-button');
 SlIcon.define('sl-icon');
 
 import { DropFilesMessageElement } from '@divicards/wc/src/wc/drop-files-message';
-import { PoeAuthElement } from '@divicards/wc/src/wc/poe-auth';
-import { GoogleAuthElement } from '@divicards/wc/src/wc/google-auth/poe-auth';
 import { BasePopupElement } from '@divicards/wc/src/wc/base-popup';
 import { ThemeToggle } from '@divicards/wc/src/wc/theme-toggle/theme-toggle';
 DropFilesMessageElement.define();
 ThemeToggle.define();
-PoeAuthElement.define();
-GoogleAuthElement.define();
+
+import '@divicards/wc/src/wc/e-poe-auth';
+import '@divicards/wc/src/wc/e-google-auth';
+
 BasePopupElement.define();
 
 const pinia = createPinia();

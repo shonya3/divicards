@@ -1,6 +1,8 @@
 import { Meta } from '@storybook/web-components';
-import { PoeAuthElement } from './poe-auth';
+import { PoeAuthElement } from './e-poe-auth';
 import { html } from 'lit';
+import './e-poe-auth';
+
 export default {
 	title: 'Elements/poe-auth',
 	args: { name: 'Chris', loggedIn: false },
@@ -14,7 +16,6 @@ export default {
 
 export const Default = {
 	render({ name, loggedIn }: { name: string; loggedIn: boolean }) {
-		PoeAuthElement.define();
-		return html`<wc-poe-auth ?loggedIn=${loggedIn} .name=${name}></wc-poe-auth>`;
+		return html`<e-poe-auth ?loggedIn=${loggedIn} .name=${name}></e-poe-auth>`;
 	},
 };
