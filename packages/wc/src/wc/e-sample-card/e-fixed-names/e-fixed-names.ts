@@ -1,23 +1,18 @@
-import { html, css, svg } from 'lit';
-import { BaseElement } from '../../base-element';
-import { property, query } from 'lit/decorators.js';
+import { html, css, LitElement } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
 import { FixedName } from '@divicards/shared/types';
 import { BasePopupElement } from '../../e-base-popup';
 import '../../e-base-popup';
-import { FixedIconElement } from './fixed-icon';
+import './e-fixed-icon';
 
 declare global {
 	interface HTMLElementTagNameMap {
-		'wc-fixed-names': FixedNamesElement;
+		'e-fixed-names': FixedNamesElement;
 	}
 }
 
-export class FixedNamesElement extends BaseElement {
-	static override get defineList() {
-		return [FixedIconElement];
-	}
-	static override tag = 'wc-fixed-names';
-
+@customElement('e-fixed-names')
+export class FixedNamesElement extends LitElement {
 	@property({ reflect: true, type: Number }) width = 24;
 	@property({ reflect: true, type: Number }) height = 24;
 	@property({ type: Array }) fixedNames: FixedName[] = [];
@@ -29,11 +24,11 @@ export class FixedNamesElement extends BaseElement {
 	}
 
 	protected override render() {
-		return html`<wc-fixed-icon
+		return html`<e-fixed-icon
 				@click=${this.#onIconClicked}
 				width=${this.width}
 				height=${this.height}
-			></wc-fixed-icon>
+			></e-fixed-icon>
 			<e-base-popup>
 				<div class="content">
 					<h2 class="heading">Automatically fixed typos</h2>

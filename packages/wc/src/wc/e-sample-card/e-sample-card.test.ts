@@ -1,9 +1,9 @@
 import { expect, html, fixture } from '@open-wc/testing';
 import sinon from 'sinon';
-import { SampleCardElement } from './sample-card';
+import { SampleCardElement } from './e-sample-card';
 import { props } from './data';
 import { sendKeys } from '@web/test-runner-commands';
-import type { Props } from './sample-card';
+import type { Props } from './e-sample-card';
 
 describe('<wc-sample-card>', () => {
 	let el: SampleCardElement;

@@ -1,17 +1,10 @@
-import { html, css } from 'lit';
-import { BaseElement } from '../../base-element';
-import { property, query } from 'lit/decorators.js';
+import { html, css, LitElement } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
 import { BasePopupElement } from '../../e-base-popup';
 import '../../e-base-popup';
 
-declare global {
-	interface HTMLElementTagNameMap {
-		'wc-not-cards': NotCardsElement;
-	}
-}
-
-export class NotCardsElement extends BaseElement {
-	static override tag = 'wc-not-cards';
+@customElement('e-not-cards')
+export class NotCardsElement extends LitElement {
 	static override styles = [styles()];
 
 	@property({ type: Array }) notCards: string[] = [];
@@ -69,4 +62,10 @@ function styles() {
 			cursor: pointer;
 		}
 	`;
+}
+
+declare global {
+	interface HTMLElementTagNameMap {
+		'e-not-cards': NotCardsElement;
+	}
 }

@@ -1,11 +1,12 @@
 import { Meta } from '@storybook/web-components';
-import { FixedNamesElement } from './fixed-names';
+import { FixedNamesElement } from './e-fixed-names';
+import './e-fixed-names';
 import { html } from 'lit';
 import { fixedNames } from './data';
 import { FixedName } from '@divicards/shared/types';
 
 export default {
-	title: 'Elements/sample-card/fixed-names',
+	title: 'Elements/e-sample-card/e-fixed-names',
 	args: {
 		fixedNames,
 	},
@@ -13,7 +14,6 @@ export default {
 
 export const Default = {
 	render({ fixedNames }: { fixedNames: FixedName[] }) {
-		FixedNamesElement.define();
-		return html`<wc-fixed-names .fixedNames=${fixedNames}></wc-fixed-names>`;
+		return html`<e-fixed-names .fixedNames=${fixedNames}></e-fixed-names>`;
 	},
 };

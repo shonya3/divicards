@@ -2,8 +2,8 @@ import { html } from 'lit';
 import { Meta } from '@storybook/web-components';
 import { BasePopupElement } from './e-base-popup';
 import './e-base-popup';
-import { cards } from './sample-card/e-sample-table/data';
-import './sample-card/e-sample-table/e-sample-table';
+import { cards } from './e-sample-card/e-sample-table/data';
+import './e-sample-card/e-sample-table/e-sample-table';
 
 export default {
 	title: 'Elements/e-base-popup',

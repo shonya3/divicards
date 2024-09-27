@@ -1,16 +1,16 @@
 import { Meta } from '@storybook/web-components';
 NotCardsElement;
 import { html } from 'lit';
-import { NotCardsElement } from './not-cards';
+import { NotCardsElement } from './e-not-cards';
+import './e-not-cards';
 import { notCards } from './data';
 
 export default {
-	title: 'Elements/sample-card/not-cards',
+	title: 'Elements/e-sample-card/e-not-cards',
 } satisfies Meta<NotCardsElement>;
 
 export const Default = {
 	render() {
-		NotCardsElement.define();
-		return html`<wc-not-cards .notCards=${notCards}></wc-not-cards>`;
+		return html`<e-not-cards .notCards=${notCards}></e-not-cards>`;
 	},
 };

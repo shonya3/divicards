@@ -1,12 +1,12 @@
-import { html, css, nothing } from 'lit';
+import { html, css, nothing, LitElement } from 'lit';
 import { BaseElement } from '../base-element';
 import { LeagueSelectElement } from '../e-league-select';
 import '../e-league-select';
 import { BasePopupElement } from '../e-base-popup';
-import { FixedNamesElement } from './fixed-names/fixed-names';
-import { NotCardsElement } from './not-cards/not-cards';
+import './e-fixed-names/e-fixed-names';
+import './e-not-cards/e-not-cards';
 import { DivinationCardsSample, League, TradeLeague, isTradeLeague } from '@divicards/shared/types';
-import { property, query } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { classMap } from 'lit/directives/class-map.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
@@ -17,12 +17,7 @@ import SlRange from '@shoelace-style/shoelace/dist/components/range/range.js';
 import './e-sample-table/e-sample-table';
 import '../e-base-popup';
 import { SampleTableElement } from './e-sample-table/e-sample-table';
-
-declare global {
-	interface HTMLElementTagNameMap {
-		'wc-sample-card': SampleCardElement;
-	}
-}
+import { emit } from '../../utils';
 
 export interface Props {
 	league?: TradeLeague;
@@ -43,12 +38,9 @@ export interface Events {
 }
 
 const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
-export class SampleCardElement extends BaseElement {
-	static override get defineList() {
-		return [FixedNamesElement, NotCardsElement];
-	}
-	static override tag = 'wc-sample-card';
 
+@customElement('e-sample-card')
+export class SampleCardElement extends LitElement {
 	@property({ reflect: true }) league: TradeLeague = ACTIVE_LEAGUE;
 	@property({ reflect: true }) filename: string = 'NO FILE NAMENO FILE NAME';
 	@property({ type: Boolean, reflect: true }) selected: boolean | null = false;
@@ -80,10 +72,10 @@ export class SampleCardElement extends BaseElement {
 			></sl-icon-button>
 			<div class="minor-icons">
 				${this.sample.fixedNames.length > 0
-					? html`<wc-fixed-names .fixedNames=${this.sample.fixedNames}></wc-fixed-names>`
+					? html`<e-fixed-names .fixedNames=${this.sample.fixedNames}></e-fixed-names>`
 					: nothing}
 				${this.sample.notCards.length > 0
-					? html`<wc-not-cards .notCards=${this.sample.notCards}></wc-not-cards>`
+					? html`<e-not-cards .notCards=${this.sample.notCards}></e-not-cards>`
 					: nothing}
 			</div>
 			<svg
@@ -163,7 +155,7 @@ export class SampleCardElement extends BaseElement {
 	}
 
 	#onSaveToFileClicked() {
-		this.emit<Events['save-to-file-clicked']>('save-to-file-clicked', {
+		emit<Events['save-to-file-clicked']>(this, 'save-to-file-clicked', {
 			sample: this.sample,
 			league: this.league,
 			filename: this.filename,
@@ -171,7 +163,7 @@ export class SampleCardElement extends BaseElement {
 	}
 
 	#onSheetsIconClicked() {
-		this.emit<Events['google-sheets-clicked']>('google-sheets-clicked', {
+		emit<Events['google-sheets-clicked']>(this, 'google-sheets-clicked', {
 			sample: this.sample,
 			league: this.league,
 		});
@@ -184,7 +176,7 @@ export class SampleCardElement extends BaseElement {
 	#onSelectedClicked() {
 		if (this.selected === null) return;
 		this.selected = this.selectedCheckbox.checked;
-		this.emit<Events['upd:selected']>('upd:selected', this.selected);
+		emit<Events['upd:selected']>(this, 'upd:selected', this.selected);
 	}
 
 	#onLeagueSelected(e: CustomEvent<League>) {
@@ -197,12 +189,12 @@ export class SampleCardElement extends BaseElement {
 	}
 
 	#onBtnDeleteClicked() {
-		this.emit<Events['delete']>('delete', this.uuid);
+		emit<Events['delete']>(this, 'delete', this.uuid);
 	}
 
 	#onMinPriceRange() {
 		this.minimumCardPrice = Number(this.rangeEl.value);
-		this.emit<Events['upd:minimumCardPrice']>('upd:minimumCardPrice', this.minimumCardPrice);
+		emit<Events['upd:minimumCardPrice']>(this, 'upd:minimumCardPrice', this.minimumCardPrice);
 	}
 
 	static override styles = [
@@ -343,4 +335,10 @@ export class SampleCardElement extends BaseElement {
 			}
 		`,
 	];
+}
+
+declare global {
+	interface HTMLElementTagNameMap {
+		'e-sample-card': SampleCardElement;
+	}
 }

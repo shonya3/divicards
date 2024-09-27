@@ -3,7 +3,7 @@ import {
 	FormExportSampleElement,
 	Props,
 	Events,
-} from '@divicards/wc/src/wc/sample-card/form-export-sample/form-export-sample';
+} from '@divicards/wc/src/wc/e-sample-card/form-export-sample/form-export-sample';
 import { TablePreferences } from '@divicards/shared/types';
 FormExportSampleElement.define();
 const props = withDefaults(defineProps<Props>(), { to: 'sheets', spreadsheetId: '', sheetTitle: '' });

@@ -1,22 +1,22 @@
 import { Meta } from '@storybook/web-components';
-import { SampleCardElement } from './sample-card';
+import { SampleCardElement } from './e-sample-card';
+import './e-sample-card';
 import { league, filename, selected, uuid, minimumCardPrice, sample } from './data';
 import { html } from 'lit';
 
 export default {
-	title: 'Elements/sample-card/sample-card',
+	title: 'Elements/e-sample-card/e-sample-card',
 } satisfies Meta<SampleCardElement>;
 
 export const Default = {
 	render() {
-		SampleCardElement.define();
-		return html`<wc-sample-card
+		return html`<e-sample-card
 			league=${league ?? 'Standard'}
 			filename=${filename}
 			?selected=${selected}
 			uuid=${uuid}
 			minimum-card-price=${minimumCardPrice}
 			.sample=${sample}
-		></wc-sample-card>`;
+		></e-sample-card>`;
 	},
 };

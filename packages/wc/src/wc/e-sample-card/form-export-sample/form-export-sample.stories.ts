@@ -3,7 +3,7 @@ import { FormExportSampleElement } from './form-export-sample';
 import { Meta } from '@storybook/web-components';
 
 export default {
-	title: 'Elements/sample-card/e-form-export-sample',
+	title: 'Elements/e-sample-card/e-form-export-sample',
 } satisfies Meta<FormExportSampleElement>;
 
 export const Default = {

@@ -1,6 +1,5 @@
 import { html, css, PropertyValueMap, LitElement } from 'lit';
-import { BaseElement } from './base-element';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 

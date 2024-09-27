@@ -1,5 +1,5 @@
 import { Column, Order } from '@divicards/shared/types';
-import { To } from '@divicards/wc/src/wc/sample-card/form-export-sample/form-export-sample';
+import { To } from '@divicards/wc/src/wc/e-sample-card/form-export-sample/form-export-sample';
 
 import { RemovableRef, useLocalStorage } from '@vueuse/core';
 import { defineStore } from 'pinia';

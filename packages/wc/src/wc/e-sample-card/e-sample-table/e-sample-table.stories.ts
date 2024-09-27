@@ -3,7 +3,7 @@ import { cards } from './data';
 import './e-sample-table';
 
 export default {
-	title: 'Elements/sample-card/e-sample-table',
+	title: 'Elements/e-sample-card/e-sample-table',
 };
 
 export const Default = {

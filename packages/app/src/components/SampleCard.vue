@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { SampleCardElement, Props, Events } from '@divicards/wc/src/wc/sample-card/sample-card';
+import { SampleCardElement, Props, Events } from '@divicards/wc/src/wc/e-sample-card/e-sample-card';
+import '@divicards/wc/src/wc/e-sample-card/e-sample-card';
 import { DivinationCardsSample } from '@divicards/shared/types';
 import { League } from '@divicards/shared/types';
-SampleCardElement.define();
 const props = defineProps<Props>();
 const emit = defineEmits<{
 	'update:selected': [SampleCardElement['selected']];
@@ -39,7 +39,7 @@ const onSaveToFileClicked = (e: CustomEvent<Events['save-to-file-clicked']>) => 
 </script>
 
 <template>
-	<wc-sample-card
+	<e-sample-card
 		v-bind="props"
 		@google-sheets-clicked="onGoogleSheetsClicked"
 		@save-to-file-clicked="onSaveToFileClicked"
@@ -47,5 +47,5 @@ const onSaveToFileClicked = (e: CustomEvent<Events['save-to-file-clicked']>) => 
 		@upd:selected="onUpdSelected"
 		@upd:minimumCardPrice="onUpdPrice"
 		@delete="onDelete"
-	></wc-sample-card>
+	></e-sample-card>
 </template>

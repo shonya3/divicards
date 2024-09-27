@@ -1,15 +1,14 @@
-import { html, css, svg } from 'lit';
-import { BaseElement } from '../../base-element';
-import { property } from 'lit/decorators.js';
+import { html, css, svg, LitElement } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
-		'wc-fixed-icon': FixedIconElement;
+		'e-fixed-icon': FixedIconElement;
 	}
 }
 
-export class FixedIconElement extends BaseElement {
-	static override tag = 'wc-fixed-icon';
+@customElement('e-fixed-icon')
+export class FixedIconElement extends LitElement {
 	static override styles = [
 		css`
 			svg {
