@@ -13,7 +13,7 @@ import { SlRange, SlAlert } from '@shoelace-style/shoelace';
 import { TabWithItems, NoItemsTab } from 'poe-custom-elements/types.js';
 import type { DefineComponent } from 'vue';
 import { BasePopupElement } from '../wc/base-popup';
-import { DivTableElement } from '../wc/e-sample-table/e-sample-table';
+import { DivTableElement } from '../wc/sample-card/e-sample-table/e-sample-table';
 import { To } from '../wc/form-export-sample/form-export-sample';
 import { LeagueSelectElement } from '../wc/league-select';
 import { Size } from '../wc/e-order-triangle';

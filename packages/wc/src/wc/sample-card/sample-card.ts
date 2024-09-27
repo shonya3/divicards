@@ -13,8 +13,8 @@ import '@shoelace-style/shoelace/dist/components/range/range.js';
 import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 import SlRange from '@shoelace-style/shoelace/dist/components/range/range.js';
-import '../e-sample-table/e-sample-table';
-import { SampleTableElement } from '../e-sample-table/e-sample-table';
+import './e-sample-table/e-sample-table';
+import { SampleTableElement } from './e-sample-table/e-sample-table';
 
 declare global {
 	interface HTMLElementTagNameMap {
