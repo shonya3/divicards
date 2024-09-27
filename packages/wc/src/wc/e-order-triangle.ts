@@ -1,13 +1,13 @@
-import { html, css } from 'lit';
+import { html, css, LitElement } from 'lit';
 import { BaseElement } from './base-element';
-import { property } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { Order } from '@divicards/shared/types';
 
 declare global {
 	interface HTMLElementTagNameMap {
-		'wc-order-triangle': OrderTriangleElement;
+		'e-order-triangle': OrderTriangleElement;
 	}
 }
 
@@ -27,8 +27,8 @@ const degree = (order: Order): number => {
 	}
 };
 
-export class OrderTriangleElement extends BaseElement {
-	static override tag = 'wc-order-triangle';
+@customElement('e-order-triangle')
+export class OrderTriangleElement extends LitElement {
 	static override styles = [styles()];
 
 	@property({ reflect: true }) size: Size = '1rem';

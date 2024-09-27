@@ -3,11 +3,11 @@ import { customElement } from 'lit/decorators.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
-		'wc-div-table-stat': DivTableStatElement;
+		'e-sample-table-stat': DivTableStatElement;
 	}
 }
 
-@customElement('wc-div-table-stat')
+@customElement('e-sample-table-stat')
 export class DivTableStatElement extends LitElement {
 	protected render(): TemplateResult {
 		return html`content`;

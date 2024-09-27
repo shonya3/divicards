@@ -1,7 +1,6 @@
 import { html, css, nothing } from 'lit';
 import { BaseElement } from '../base-element';
 import { LeagueSelectElement } from '../league-select';
-import { DivTableElement } from '../div-table/div-table';
 import { BasePopupElement } from '../base-popup';
 import { FixedNamesElement } from './fixed-names/fixed-names';
 import { NotCardsElement } from './not-cards/not-cards';
@@ -14,6 +13,8 @@ import '@shoelace-style/shoelace/dist/components/range/range.js';
 import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 import SlRange from '@shoelace-style/shoelace/dist/components/range/range.js';
+import '../e-sample-table/e-sample-table';
+import { SampleTableElement } from '../e-sample-table/e-sample-table';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -42,7 +43,7 @@ export interface Events {
 const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 export class SampleCardElement extends BaseElement {
 	static override get defineList() {
-		return [LeagueSelectElement, DivTableElement, BasePopupElement, FixedNamesElement, NotCardsElement];
+		return [LeagueSelectElement, BasePopupElement, FixedNamesElement, NotCardsElement];
 	}
 	static override tag = 'wc-sample-card';
 
@@ -57,7 +58,7 @@ export class SampleCardElement extends BaseElement {
 	@query('input#selected-checkbox') selectedCheckbox!: HTMLInputElement;
 	@query('wc-league-select') leagueSelect!: LeagueSelectElement;
 	@query('#minimum-card-price-slider') priceSlider!: HTMLInputElement;
-	@query('wc-div-table') table!: DivTableElement;
+	@query('e-sample-table') table!: SampleTableElement;
 	@query('sl-range') rangeEl!: SlRange;
 
 	protected override render() {
@@ -131,9 +132,9 @@ export class SampleCardElement extends BaseElement {
 						.checked=${this.selected}
 						id="selected-checkbox"
 						@change=${this.#onSelectedClicked}
-				  />`}
+					/>`}
 			<wc-base-popup id="table-popup">
-				<wc-div-table .cards=${this.sample.cards}> </wc-div-table>
+				<e-sample-table .cards=${this.sample.cards}> </e-sample-table>
 			</wc-base-popup>
 		</div>`;
 	}
@@ -234,7 +235,9 @@ export class SampleCardElement extends BaseElement {
 				justify-content: space-between;
 				gap: 1rem;
 				width: fit-content;
-				box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+				box-shadow:
+					rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+					rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 
 				/* max-height: 320px; */
 				width: 250px;

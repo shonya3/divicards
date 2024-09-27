@@ -1,7 +1,8 @@
-import { OrderTriangleElement, Size } from './order-triangle';
+import { OrderTriangleElement, Size } from './e-order-triangle';
 import { Meta } from '@storybook/web-components';
 import { html } from 'lit';
 import { Order } from '@divicards/shared/types';
+import './e-order-triangle';
 
 export default {
 	title: 'Elements/order-triangle',
@@ -22,7 +23,6 @@ export default {
 
 export const Default = {
 	render({ order, active, size }: { order: Order; active: boolean; size: Size }) {
-		OrderTriangleElement.define();
-		return html`<wc-order-triangle order=${order} size=${size} ?active=${active}></wc-order-triangle>`;
+		return html`<e-order-triangle order=${order} size=${size} ?active=${active}></e-order-triangle>`;
 	},
 };

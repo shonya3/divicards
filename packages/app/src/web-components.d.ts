@@ -438,14 +438,14 @@ export type CustomElements = {
 	 * ---
 	 *
 	 */
-	'wc-div-table-stat': DefineComponent<DivTableStatElementProps>;
+	'e-sample-table-stat': DefineComponent<DivTableStatElementProps>;
 
 	/**
 	 *
 	 * ---
 	 *
 	 */
-	'wc-div-table': DefineComponent<DivTableElementProps>;
+	'e-sample-table': DefineComponent<DivTableElementProps>;
 
 	/**
 	 *

@@ -1,18 +1,18 @@
-import { html, css, PropertyValues } from 'lit';
-import { BaseElement } from '../base-element';
-import { property, state, query } from 'lit/decorators.js';
-import { OrderTriangleElement } from '../order-triangle';
+import { html, PropertyValues, LitElement } from 'lit';
+import { property, state, query, customElement } from 'lit/decorators.js';
 import { toOrderedBy } from '@divicards/shared/toOrderedBy';
 import '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/range/range.js';
 import 'poe-custom-elements/item-card.js';
 import { Column, DivinationCardRecord, Order } from '@divicards/shared/types';
-import { styles } from './div-table.styles';
+import { styles } from './e-sample-table.styles';
+import '../e-order-triangle';
+import { emit } from '../../utils';
 
 declare global {
 	interface HTMLElementTagNameMap {
-		'wc-div-table': DivTableElement;
+		'e-sample-table': SampleTableElement;
 	}
 }
 
@@ -23,11 +23,8 @@ export interface Events {
 	'column-order-changed': { column: Column; order: Order };
 }
 
-export class DivTableElement extends BaseElement {
-	static override get defineList() {
-		return [OrderTriangleElement];
-	}
-	static override tag = 'wc-div-table';
+@customElement('e-sample-table')
+export class SampleTableElement extends LitElement {
 	static override styles = [styles];
 
 	@property({ type: Array }) cards: Readonly<DivinationCardRecord[]> = [];
@@ -153,51 +150,51 @@ export class DivTableElement extends BaseElement {
 							<th class="th th-amount">
 								<div>
 									<span> Amount </span>
-									<wc-order-triangle
+									<e-order-triangle
 										?active=${this.column === 'amount'}
 										order=${this.column === 'amount' ? this.order : 'unordered'}
 										@click=${() => this.#onOrderTriangleClicked('amount')}
-									></wc-order-triangle>
+									></e-order-triangle>
 								</div>
 							</th>
 							<th class="th th-name">
 								<div>
 									<span> Name </span>
-									<wc-order-triangle
+									<e-order-triangle
 										?active=${this.column === 'name'}
 										order=${this.column === 'name' ? this.order : 'unordered'}
 										@click=${() => this.#onOrderTriangleClicked('name')}
-									></wc-order-triangle>
+									></e-order-triangle>
 								</div>
 							</th>
 							<th class="th th-price">
 								<div>
 									<span> Price </span>
-									<wc-order-triangle
+									<e-order-triangle
 										?active=${this.column === 'price'}
 										order=${this.column === 'price' ? this.order : 'unordered'}
 										@click=${() => this.#onOrderTriangleClicked('price')}
-									></wc-order-triangle>
+									></e-order-triangle>
 								</div>
 							</th>
 							<th class="th th-sum">
 								<div>
 									<span> Sum </span>
-									<wc-order-triangle
+									<e-order-triangle
 										?active=${this.column === 'sum'}
 										order=${this.column === 'sum' ? this.order : 'unordered'}
 										@click=${() => this.#onOrderTriangleClicked('sum')}
-									></wc-order-triangle>
+									></e-order-triangle>
 								</div>
 							</th>
 							<th class="th th-weight">
 								<div>
 									<span> Weight </span>
-									<wc-order-triangle
+									<e-order-triangle
 										?active=${this.column === 'weight'}
 										order=${this.column === 'weight' ? this.order : 'unordered'}
 										@click=${() => this.#onOrderTriangleClicked('weight')}
-									></wc-order-triangle>
+									></e-order-triangle>
 								</div>
 							</th>
 						</tr>
@@ -249,13 +246,13 @@ export class DivTableElement extends BaseElement {
 		const target = e.composedPath()[0];
 		if (target instanceof HTMLInputElement) {
 			this.minPrice = Number(target.value);
-			this.emit<Events['min-price-changed']>('min-price-changed', this.minPrice);
+			emit<Events['min-price-changed']>(this, 'min-price-changed', this.minPrice);
 		}
 	}
 
 	#onOrderTriangleClicked(newActiveColumn: Column) {
 		this.toggleOrder(newActiveColumn);
-		this.emit<Events['column-order-changed']>('column-order-changed', {
+		emit<Events['column-order-changed']>(this, 'column-order-changed', {
 			column: this.column,
 			order: this.order,
 		});

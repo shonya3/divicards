@@ -1,13 +1,13 @@
 import { fixture, expect, html } from '@open-wc/testing';
-import { DivTableElement } from './div-table';
+import { SampleTableElement } from './e-sample-table';
 import sinon from 'sinon';
+import './e-sample-table';
 
-describe('<wc-div-table>', () => {
-	let el: DivTableElement;
+describe('<e-sample-table>', () => {
+	let el: SampleTableElement;
 
 	beforeEach(async () => {
-		DivTableElement.define();
-		el = await fixture(html` <wc-div-table> </wc-div-table> `);
+		el = await fixture(html` <e-sample-table> </e-sample-table> `);
 	});
 
 	it('should render a component', () => {
@@ -18,7 +18,7 @@ describe('<wc-div-table>', () => {
 		const selectedChangeSpy = sinon.spy();
 		el.addEventListener('column-order-changed', selectedChangeSpy);
 
-		const node = el.shadowRoot!.querySelector('wc-order-triangle')!;
+		const node = el.shadowRoot!.querySelector('e-order-triangle')!;
 		node.click();
 		await el.updateComplete;
 		console.log(node);

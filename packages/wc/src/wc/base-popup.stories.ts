@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { Meta } from '@storybook/web-components';
 import { BasePopupElement } from './base-popup';
-import { DivTableElement } from './div-table/div-table';
-import { cards } from './div-table/data';
+import { cards } from './e-sample-table/data';
+import './e-sample-table/e-sample-table';
 
 export default {
 	title: 'Elements/base-popup',
@@ -11,11 +11,10 @@ export default {
 export const Default = {
 	render() {
 		BasePopupElement.define();
-		DivTableElement.define();
 
 		const popup = document.createElement('wc-base-popup');
 		popup.open = true;
-		const table = document.createElement('wc-div-table');
+		const table = document.createElement('e-sample-table');
 		table.cards = cards;
 		popup.append(table);
 
