@@ -1,5 +1,4 @@
 import { html, css, LitElement } from 'lit';
-import { BaseElement } from './base-element';
 import { customElement, property } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import { emit } from '../utils';

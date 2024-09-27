@@ -3,9 +3,9 @@ import {
 	FormExportSampleElement,
 	Props,
 	Events,
-} from '@divicards/wc/src/wc/e-sample-card/form-export-sample/form-export-sample';
+} from '@divicards/wc/src/wc/e-sample-card/e-form-export-sample/e-form-export-sample';
+import '@divicards/wc/src/wc/e-sample-card/e-form-export-sample/e-form-export-sample';
 import { TablePreferences } from '@divicards/shared/types';
-FormExportSampleElement.define();
 const props = withDefaults(defineProps<Props>(), { to: 'sheets', spreadsheetId: '', sheetTitle: '' });
 const emit = defineEmits<{
 	'update:columns': [FormExportSampleElement['columns']];
@@ -51,7 +51,7 @@ const handlers = {
 </script>
 
 <template>
-	<wc-form-export-sample
+	<e-form-export-sample
 		v-bind="props"
 		@upd:columns="handlers.onUpdColumns"
 		@upd:order="handlers.onUpdOrder"
@@ -61,7 +61,7 @@ const handlers = {
 		@upd:spreadsheetId="handlers.onUpdSpreedsheetId"
 		@upd:minPrice="handlers.onUpdMinPrice"
 		@submit="handlers.onSubmit"
-	></wc-form-export-sample>
+	></e-form-export-sample>
 </template>
 
 <style scoped>

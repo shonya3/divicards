@@ -1,20 +1,14 @@
-import { html, css, nothing } from 'lit';
-import { BaseElement } from '../../base-element';
-import { property } from 'lit/decorators.js';
+import { html, css, nothing, LitElement } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import { Column, Order, TablePreferences } from '@divicards/shared/types';
 import '../../e-help-tip';
+import { emit } from '../../../utils';
 
 export type To = 'file' | 'sheets';
 const isColumn = (s: unknown): s is Column => {
 	return s === 'name' || s === 'amount' || s === 'weight' || s === 'price';
 };
-
-declare global {
-	interface HTMLElementTagNameMap {
-		'wc-form-export-sample': FormExportSampleElement;
-	}
-}
 
 export interface Props {
 	spreadsheetId: string;
@@ -40,8 +34,8 @@ export interface Events {
 	submit: Props;
 }
 
-export class FormExportSampleElement extends BaseElement {
-	static override tag = 'wc-form-export-sample';
+@customElement('e-form-export-sample')
+export class FormExportSampleElement extends LitElement {
 	static override styles = [styles()];
 
 	@property({ reflect: true, attribute: 'spreadsheet-id' }) spreadsheetId: string = '';
@@ -77,8 +71,8 @@ export class FormExportSampleElement extends BaseElement {
 
 		console.log('#onColumnsCheckbox', this.columns);
 
-		this.emit<Events['upd:columns']>('upd:columns', this.columns);
-		this.emit<Events['upd:tablePreferences']>('upd:tablePreferences', this.tablePreferences);
+		emit<Events['upd:columns']>(this, 'upd:columns', this.columns);
+		emit<Events['upd:tablePreferences']>(this, 'upd:tablePreferences', this.tablePreferences);
 	}
 
 	#onOrderRadio(e: InputEvent) {
@@ -89,8 +83,8 @@ export class FormExportSampleElement extends BaseElement {
 			this.order = 'asc';
 		} else this.order = 'desc';
 
-		this.emit<Events['upd:order']>('upd:order', this.order);
-		this.emit<Events['upd:tablePreferences']>('upd:tablePreferences', this.tablePreferences);
+		emit<Events['upd:order']>(this, 'upd:order', this.order);
+		emit<Events['upd:tablePreferences']>(this, 'upd:tablePreferences', this.tablePreferences);
 	}
 
 	#onOrderedBySelected(e: InputEvent) {
@@ -99,8 +93,8 @@ export class FormExportSampleElement extends BaseElement {
 		if (!isColumn(target.value)) return;
 
 		this.orderedBy = target.value;
-		this.emit<Events['upd:orderedBy']>('upd:orderedBy', this.orderedBy);
-		this.emit<Events['upd:tablePreferences']>('upd:tablePreferences', this.tablePreferences);
+		emit<Events['upd:orderedBy']>(this, 'upd:orderedBy', this.orderedBy);
+		emit<Events['upd:tablePreferences']>(this, 'upd:tablePreferences', this.tablePreferences);
 	}
 
 	#onCardsMustHaveAmountCheckbox(e: InputEvent) {
@@ -108,8 +102,8 @@ export class FormExportSampleElement extends BaseElement {
 		if (!(target instanceof HTMLInputElement)) return;
 
 		this.cardsMustHaveAmount = target.checked;
-		this.emit<Events['upd:cardsMustHaveAmount']>('upd:cardsMustHaveAmount', this.cardsMustHaveAmount);
-		this.emit<Events['upd:tablePreferences']>('upd:tablePreferences', this.tablePreferences);
+		emit<Events['upd:cardsMustHaveAmount']>(this, 'upd:cardsMustHaveAmount', this.cardsMustHaveAmount);
+		emit<Events['upd:tablePreferences']>(this, 'upd:tablePreferences', this.tablePreferences);
 	}
 
 	#onMinPriceSlider(e: InputEvent) {
@@ -118,8 +112,8 @@ export class FormExportSampleElement extends BaseElement {
 
 		this.minPrice = Number(target.value);
 
-		this.emit<Events['upd:minPrice']>('upd:minPrice', this.minPrice);
-		this.emit<Events['upd:tablePreferences']>('upd:tablePreferences', this.tablePreferences);
+		emit<Events['upd:minPrice']>(this, 'upd:minPrice', this.minPrice);
+		emit<Events['upd:tablePreferences']>(this, 'upd:tablePreferences', this.tablePreferences);
 	}
 
 	#onSheetTitleInput(e: InputEvent) {
@@ -128,7 +122,7 @@ export class FormExportSampleElement extends BaseElement {
 		this.error = null;
 
 		this.sheetTitle = target.value;
-		this.emit<Events['upd:sheetTitle']>('upd:sheetTitle', this.sheetTitle);
+		emit<Events['upd:sheetTitle']>(this, 'upd:sheetTitle', this.sheetTitle);
 	}
 
 	#onSpreadsheetIdInput(e: InputEvent) {
@@ -137,7 +131,7 @@ export class FormExportSampleElement extends BaseElement {
 		this.error = null;
 
 		this.spreadsheetId = target.value;
-		this.emit<Events['upd:spreadsheetId']>('upd:spreadsheetId', this.spreadsheetId);
+		emit<Events['upd:spreadsheetId']>(this, 'upd:spreadsheetId', this.spreadsheetId);
 	}
 
 	#onSubmit(e: SubmitEvent) {
@@ -155,7 +149,7 @@ export class FormExportSampleElement extends BaseElement {
 			error: this.error,
 		};
 
-		this.emit<Events['submit']>('submit', props);
+		emit<Events['submit']>(this, 'submit', props);
 	}
 	protected override render() {
 		return html`<div id="root">
@@ -358,4 +352,10 @@ function styles() {
 			font-size: 0.7rem;
 		}
 	`;
+}
+
+declare global {
+	interface HTMLElementTagNameMap {
+		'e-form-export-sample': FormExportSampleElement;
+	}
 }

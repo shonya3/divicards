@@ -1,5 +1,6 @@
 import { html } from 'lit';
-import { FormExportSampleElement } from './form-export-sample';
+import { FormExportSampleElement } from './e-form-export-sample';
+import './e-form-export-sample';
 import { Meta } from '@storybook/web-components';
 
 export default {
@@ -8,7 +9,6 @@ export default {
 
 export const Default = {
 	render() {
-		FormExportSampleElement.define();
-		return html`<wc-form-export-sample></wc-form-export-sample>`;
+		return html`<e-form-export-sample></e-form-export-sample>`;
 	},
 };

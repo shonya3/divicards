@@ -1,5 +1,4 @@
 import { html, css, nothing, LitElement } from 'lit';
-import { BaseElement } from '../base-element';
 import { LeagueSelectElement } from '../e-league-select';
 import '../e-league-select';
 import { BasePopupElement } from '../e-base-popup';

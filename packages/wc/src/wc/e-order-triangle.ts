@@ -1,5 +1,4 @@
 import { html, css, LitElement } from 'lit';
-import { BaseElement } from './base-element';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';

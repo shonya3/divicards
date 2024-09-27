@@ -1,4 +1,3 @@
-import { BaseElement } from './base-element';
 import { LitElement, PropertyValueMap, css, html, nothing } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
