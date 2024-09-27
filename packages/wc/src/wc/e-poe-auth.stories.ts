@@ -4,7 +4,7 @@ import { html } from 'lit';
 import './e-poe-auth';
 
 export default {
-	title: 'Elements/poe-auth',
+	title: 'Elements/e-poe-auth',
 	args: { name: 'Chris', loggedIn: false },
 	argTypes: {
 		loggedIn: { control: { control: 'boolean' } },

@@ -5,7 +5,7 @@ import { Order } from '@divicards/shared/types';
 import './e-order-triangle';
 
 export default {
-	title: 'Elements/order-triangle',
+	title: 'Elements/e-order-triangle',
 	args: {
 		order: 'asc',
 		active: false,

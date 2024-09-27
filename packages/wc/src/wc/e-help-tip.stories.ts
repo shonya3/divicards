@@ -5,7 +5,7 @@ import './e-help-tip';
 import { styleMap } from 'lit/directives/style-map.js';
 
 export default {
-	title: 'Elements/help-tip',
+	title: 'Elements/e-help-tip',
 } satisfies Meta<HelpTipElement>;
 
 export const Default = {
