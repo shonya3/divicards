@@ -185,7 +185,7 @@ const extractCards = async (tab: TabWithItems, league: League) => {
 					@click="() => changelogPopupRef?.showModal()"
 					>Update is ready</sl-button
 				>
-				<theme-toggle></theme-toggle>
+				<e-theme-toggle></e-theme-toggle>
 			</div>
 		</header>
 		<e-base-popup v-if="update" ref="changelogPopupRef">

@@ -18,9 +18,7 @@ SlAlrt.define('sl-alert');
 SlButton.define('sl-button');
 SlIcon.define('sl-icon');
 
-import { ThemeToggle } from '@divicards/wc/src/wc/theme-toggle/theme-toggle';
-ThemeToggle.define();
-
+import '@divicards/wc/src/wc/e-theme-toggle/e-theme-toggle';
 import '@divicards/wc/src/wc/e-poe-auth';
 import '@divicards/wc/src/wc/e-google-auth';
 import '@divicards/wc/src/wc/e-drop-files-message';

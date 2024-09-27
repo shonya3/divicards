@@ -44,9 +44,9 @@ const themeUtils = Object.freeze({
  * @cssproperty	--icon-fill
  */
 export class ThemeToggle extends HTMLElement {
-	static define(tag = 'theme-toggle') {
+	static define(tag = 'e-theme-toggle') {
 		if (!customElements.get(tag)) {
-			customElements.define('theme-toggle', ThemeToggle);
+			customElements.define('e-theme-toggle', ThemeToggle);
 		}
 	}
 
@@ -106,8 +106,10 @@ export class ThemeToggle extends HTMLElement {
 	}
 }
 
+customElements.define('e-theme-toggle', ThemeToggle);
+
 declare global {
 	interface HTMLElementTagNameMap {
-		'theme-toggle': ThemeToggle;
+		'e-theme-toggle': ThemeToggle;
 	}
 }
