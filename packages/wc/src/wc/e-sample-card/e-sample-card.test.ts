@@ -3,14 +3,14 @@ import sinon from 'sinon';
 import { SampleCardElement } from './e-sample-card';
 import { props } from './data';
 import { sendKeys } from '@web/test-runner-commands';
+import './e-sample-card';
 import type { Props } from './e-sample-card';
 
 describe('<wc-sample-card>', () => {
 	let el: SampleCardElement;
 
 	beforeEach(async () => {
-		SampleCardElement.define();
-		el = await fixture(html`<wc-sample-card></wc-sample-card>`);
+		el = await fixture(html`<e-sample-card></e-sample-card>`);
 		Object.assign(el, { ...props });
 	});
 

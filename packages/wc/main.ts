@@ -1,7 +1,7 @@
 // import { LeagueSelectElement } from './src/wc/league-select';
 // import { SampleCardElement } from './src/wc/sample-card/sample-card';
 
-import { FormExportSampleElement } from './src/wc/sample-card/form-export-sample/form-export-sample';
+import { FormExportSampleElement } from './src/wc/e-sample-card/form-export-sample/form-export-sample';
 import { LeagueSelectElement } from './src/wc/e-league-select';
 import { OrderTriangleElement } from './src/wc/e-order-triangle';
 import { PoeAuthElement } from './src/wc/e-poe-auth';
