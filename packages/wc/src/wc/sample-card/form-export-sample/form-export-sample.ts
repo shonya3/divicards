@@ -1,9 +1,9 @@
 import { html, css, nothing } from 'lit';
-import { BaseElement } from '../base-element';
+import { BaseElement } from '../../base-element';
 import { property } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import { Column, Order, TablePreferences } from '@divicards/shared/types';
-import { HelpTipElement } from '../help-tip';
+import { HelpTipElement } from '../../help-tip';
 
 export type To = 'file' | 'sheets';
 const isColumn = (s: unknown): s is Column => {

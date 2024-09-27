@@ -3,7 +3,7 @@ import { FormExportSampleElement } from './form-export-sample';
 import { Meta } from '@storybook/web-components';
 
 export default {
-	title: 'Elements/to-google-sheets',
+	title: 'Elements/sample-card/e-form-export-sample',
 } satisfies Meta<FormExportSampleElement>;
 
 export const Default = {
