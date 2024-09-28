@@ -49,7 +49,7 @@ export class SampleCardElement extends LitElement {
 
 	@query('e-base-popup#table-popup') tablePopup!: BasePopupElement;
 	@query('input#selected-checkbox') selectedCheckbox!: HTMLInputElement;
-	@query('wc-league-select') leagueSelect!: LeagueSelectElement;
+	@query('e-league-select') leagueSelect!: LeagueSelectElement;
 	@query('#minimum-card-price-slider') priceSlider!: HTMLInputElement;
 	@query('e-sample-table') table!: SampleTableElement;
 	@query('sl-range') rangeEl!: SlRange;
@@ -57,18 +57,13 @@ export class SampleCardElement extends LitElement {
 	protected override render() {
 		return html`<div
 			class=${classMap({
-				file: true,
-				'file-selected': Boolean(this.selected),
+				'sample-card': true,
+				'sample-card--selected': Boolean(this.selected),
 			})}
 		>
 			<p class="filename">${this.filename}</p>
 
-			<sl-icon-button
-				@click=${this.#onBtnDeleteClicked}
-				id="btn-delete"
-				class="btn-delete"
-				name="x-lg"
-			></sl-icon-button>
+			<sl-icon-button @click=${this.#emitDelete} id="btn-delete" class="btn-delete" name="x-lg"></sl-icon-button>
 			<div class="minor-icons">
 				${this.sample.fixedNames.length > 0
 					? html`<e-fixed-names .fixedNames=${this.sample.fixedNames}></e-fixed-names>`
@@ -79,7 +74,7 @@ export class SampleCardElement extends LitElement {
 			</div>
 			<svg
 				class="grid-icon"
-				@click=${this.#onGridIconClicked}
+				@click=${this.#openSampleTablePopup}
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 512 512"
 			>
@@ -112,7 +107,7 @@ export class SampleCardElement extends LitElement {
 					<sl-icon style="font-size:1.6rem" name="filetype-csv"></sl-icon>
 					Save to file</sl-button
 				>
-				<sl-button @click=${this.#onSheetsIconClicked} size="large">
+				<sl-button @click=${this.#emitGoogleSheetsClicked} size="large">
 					<sl-icon style="font-size:1.6rem" name="file-earmark-spreadsheet"></sl-icon>
 					Export to Google Sheets</sl-button
 				>
@@ -161,14 +156,14 @@ export class SampleCardElement extends LitElement {
 		});
 	}
 
-	#onSheetsIconClicked() {
+	#emitGoogleSheetsClicked(): void {
 		emit<Events['google-sheets-clicked']>(this, 'google-sheets-clicked', {
 			sample: this.sample,
 			league: this.league,
 		});
 	}
 
-	#onGridIconClicked() {
+	#openSampleTablePopup(): void {
 		this.tablePopup.showModal();
 	}
 
@@ -178,7 +173,7 @@ export class SampleCardElement extends LitElement {
 		emit<Events['upd:selected']>(this, 'upd:selected', this.selected);
 	}
 
-	#onLeagueSelected(e: CustomEvent<League>) {
+	#onLeagueSelected(e: CustomEvent<League>): void {
 		const league = e.detail;
 		if (!isTradeLeague(league)) {
 			e.stopPropagation();
@@ -187,12 +182,16 @@ export class SampleCardElement extends LitElement {
 		this.league = league;
 	}
 
-	#onBtnDeleteClicked() {
+	#emitDelete(): void {
 		emit<Events['delete']>(this, 'delete', this.uuid);
 	}
 
-	#onMinPriceRange() {
-		this.minimumCardPrice = Number(this.rangeEl.value);
+	#onMinPriceRange(e: Event): void {
+		if (!(e.target && 'value' in e.target)) {
+			return;
+		}
+
+		this.minimumCardPrice = Number(e.target.value);
 		emit<Events['upd:minimumCardPrice']>(this, 'upd:minimumCardPrice', this.minimumCardPrice);
 	}
 
@@ -203,21 +202,7 @@ export class SampleCardElement extends LitElement {
 				--border-radius: 0.25rem;
 			}
 
-			.league {
-				display: flex;
-				gap: 0.4rem;
-			}
-
-			p {
-				margin: 0;
-			}
-
-			.minor-icons {
-				position: absolute;
-				top: 30%;
-				left: 20px;
-			}
-			.file {
+			.sample-card {
 				position: relative;
 				padding-inline: 1rem;
 				padding-top: 1.4rem;
@@ -243,16 +228,26 @@ export class SampleCardElement extends LitElement {
 				transition: 0.2s border-color;
 			}
 
+			.sample-card--selected {
+				border-color: var(--sl-color-green-600);
+			}
+
 			.icon {
 				cursor: pointer;
 			}
 
-			.file-error {
-				border-color: red;
+			p {
+				margin: 0;
 			}
 
-			.file-selected {
-				border-color: var(--sl-color-green-600);
+			.minor-icons {
+				position: absolute;
+				top: 30%;
+				left: 20px;
+			}
+
+			.file-error {
+				border-color: red;
 			}
 
 			.filename {
@@ -266,7 +261,6 @@ export class SampleCardElement extends LitElement {
 
 			.filename:hover {
 				overflow: visible;
-				/* position: absolute; */
 			}
 
 			.slider-box {
@@ -280,7 +274,6 @@ export class SampleCardElement extends LitElement {
 				position: absolute;
 				top: 0;
 				right: 0;
-				/* transform: translate(-50%, 50%); */
 				padding: 0.2rem;
 				border: none;
 				background-color: transparent;
