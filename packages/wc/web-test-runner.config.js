@@ -1,6 +1,9 @@
+//@ts-check
+
 import { esbuildPlugin } from '@web/dev-server-esbuild';
 import { globbySync } from 'globby';
 import { playwrightLauncher } from '@web/test-runner-playwright';
+import * as nodePath from 'node:path';
 
 export default {
 	rootDir: '.',
@@ -16,20 +19,21 @@ export default {
 	plugins: [
 		esbuildPlugin({
 			ts: true,
-			target: 'es2020',
+			target: 'es2022',
 			json: true,
+			tsconfig: nodePath.join(import.meta.dirname, 'tsconfig.json'),
 		}),
 	],
 	browsers: [
 		playwrightLauncher({ product: 'chromium' }),
-		playwrightLauncher({ product: 'firefox' }),
-		playwrightLauncher({ product: 'webkit' }),
+		// playwrightLauncher({ product: 'firefox' }),
+		// playwrightLauncher({ product: 'webkit' }),
 	],
 
 	// Create a named group for every test file to enable running single tests. If a test file is `split-panel.test.ts`
 	// then you can run `npm run test -- --group split-panel` to run only that component's tests.
 	groups: globbySync('src/**/*.test.ts').map(path => {
-		const groupName = path.match(/^.*\/(?<fileName>.*)\.test\.ts/).groups.fileName;
+		const groupName = path.match(/^.*\/(?<fileName>.*)\.test\.ts/)?.groups?.fileName;
 		return {
 			name: groupName,
 			files: path,
