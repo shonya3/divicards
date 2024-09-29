@@ -11,12 +11,12 @@ import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 @customElement('e-pagination')
 export class PaginationElement extends LitElement {
 	@property({ reflect: true, type: Number }) page = 1;
-	@property({ reflect: true, type: Number, attribute: 'per-page' }) perPage = 10;
+	@property({ reflect: true, type: Number, attribute: 'per-page' }) per_page = 10;
 	/** Number of items */
 	@property({ type: Number }) n: number = 0;
 
 	render(): TemplateResult {
-		const range = this.showingRange();
+		const range = this.get_active_pages_range();
 		return html`
 			<div class="page-controls">
 				<div class="buttons">
@@ -24,7 +24,7 @@ export class PaginationElement extends LitElement {
 						aria-label="prev"
 						name="chevron-left"
 						?disabled=${this.page === 1}
-						@click=${this.decreasePage}
+						@click=${this.decrease_page}
 						>prev</sl-icon-button
 					>
 					<sl-input
@@ -33,17 +33,20 @@ export class PaginationElement extends LitElement {
 						id="page"
 						type="number"
 						.value=${String(this.page)}
-						@input=${this.#onPageInput}
+						@input=${this.#handle_page_input}
 						min="1"
 					></sl-input>
 					<sl-icon-button
 						aria-label="next"
-						.disabled=${this.isLastPage}
+						.disabled=${this.is_last_page}
 						name="chevron-right"
-						@click=${this.increasePage}
+						@click=${this.increase_page}
 						>next</sl-icon-button
 					>
-					<sl-icon-button .disabled=${this.isLastPage} name="chevron-double-right" @click=${this.toLastPage}
+					<sl-icon-button
+						.disabled=${this.is_last_page}
+						name="chevron-double-right"
+						@click=${this.move_to_last_page}
 						>next</sl-icon-button
 					>
 					<sl-input
@@ -53,8 +56,8 @@ export class PaginationElement extends LitElement {
 						id="per-page"
 						type="number"
 						min="1"
-						.value=${String(this.perPage)}
-						@input=${this.#onPerPageInput}
+						.value=${String(this.per_page)}
+						@input=${this.#handle_per_page_input}
 					></sl-input>
 				</div>
 				${range !== null && this.n > 0 ? html` <p>${range[0]} - ${range[1]} of ${this.n}</p> ` : nothing}
@@ -62,30 +65,43 @@ export class PaginationElement extends LitElement {
 		`;
 	}
 
-	#onPageInput(e: InputEvent) {
+	#handle_page_input(e: InputEvent): void {
 		const target = e.composedPath()[0] as HTMLInputElement;
-		this.page = Number(target.value);
+		this.#set_page_and_emit(Number(target.value));
+	}
+	#handle_per_page_input(e: InputEvent): void {
+		const target = e.composedPath()[0] as HTMLInputElement;
+		this.#set_per_page_and_emit(Number(target.value));
+	}
+
+	#set_page_and_emit(page: number): void {
+		this.page = page;
 		this.dispatchEvent(new Event('page-change'));
 	}
-	#onPerPageInput(e: InputEvent) {
-		const target = e.composedPath()[0] as HTMLInputElement;
-		this.perPage = Number(target.value);
+	#set_per_page_and_emit(per_page: number): void {
+		this.per_page = per_page;
 		this.dispatchEvent(new Event('per-page-change'));
 	}
-	increasePage(): void {
-		this.page++;
-		this.dispatchEvent(new Event('page-change'));
+
+	decrease_page(): void {
+		if (this.page <= 1) {
+			return;
+		}
+
+		this.#set_page_and_emit(this.page - 1);
 	}
-	lastPageNumber(): number {
-		return Math.ceil(this.n / this.perPage);
+	increase_page(): void {
+		this.#set_page_and_emit(this.page + 1);
 	}
-	toLastPage(): void {
-		this.page = this.lastPageNumber();
-		this.dispatchEvent(new Event('page-change'));
+	get_last_page(): number {
+		return Math.ceil(this.n / this.per_page);
 	}
-	showingRange(): [number, number] | null {
-		const start = (this.page - 1) * this.perPage;
-		let end = start + this.perPage;
+	move_to_last_page(): void {
+		this.#set_page_and_emit(this.get_last_page());
+	}
+	get_active_pages_range(): [number, number] | null {
+		const start = (this.page - 1) * this.per_page;
+		let end = start + this.per_page;
 		if (start + 1 <= 0 || end <= 0) {
 			return null;
 		}
@@ -94,16 +110,8 @@ export class PaginationElement extends LitElement {
 		}
 		return [start + 1, end];
 	}
-
-	get isLastPage(): boolean {
-		return this.page === this.lastPageNumber();
-	}
-
-	decreasePage(): void {
-		if (this.page > 1) {
-			this.page--;
-			this.dispatchEvent(new Event('page-change'));
-		}
+	get is_last_page(): boolean {
+		return this.page === this.get_last_page();
 	}
 
 	static styles = css`

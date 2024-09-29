@@ -179,7 +179,7 @@ export class TabBadgeGroupElement extends LitElement {
 	}
 	#onPerPageChange(e: Event) {
 		if (e.target instanceof PaginationElement) {
-			this.perPage = e.target.perPage;
+			this.perPage = e.target.per_page;
 		}
 		emit<Events['upd:PerPage']>(this, 'upd:PerPage', this.page);
 	}
