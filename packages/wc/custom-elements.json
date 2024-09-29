@@ -801,7 +801,7 @@
             },
             {
               "kind": "field",
-              "name": "perPage",
+              "name": "per_page",
               "type": {
                 "text": "number"
               },
@@ -821,8 +821,13 @@
             },
             {
               "kind": "method",
-              "name": "#onPageInput",
+              "name": "#handle_page_input",
               "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "e",
@@ -834,8 +839,13 @@
             },
             {
               "kind": "method",
-              "name": "#onPerPageInput",
+              "name": "#handle_per_page_input",
               "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "e",
@@ -847,7 +857,43 @@
             },
             {
               "kind": "method",
-              "name": "increasePage",
+              "name": "#set_page_and_emit",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "page",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#set_per_page_and_emit",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "per_page",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "decrease_page",
               "return": {
                 "type": {
                   "text": "void"
@@ -856,7 +902,16 @@
             },
             {
               "kind": "method",
-              "name": "lastPageNumber",
+              "name": "increase_page",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "get_last_page",
               "return": {
                 "type": {
                   "text": "number"
@@ -865,7 +920,7 @@
             },
             {
               "kind": "method",
-              "name": "toLastPage",
+              "name": "move_to_last_page",
               "return": {
                 "type": {
                   "text": "void"
@@ -874,7 +929,7 @@
             },
             {
               "kind": "method",
-              "name": "showingRange",
+              "name": "get_active_pages_range",
               "return": {
                 "type": {
                   "text": "[number, number] | null"
@@ -883,33 +938,24 @@
             },
             {
               "kind": "field",
-              "name": "isLastPage",
+              "name": "is_last_page",
               "type": {
                 "text": "boolean"
               },
               "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "decreasePage",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
             }
           ],
           "events": [
             {
-              "name": "page-change",
+              "name": "page",
               "type": {
-                "text": "Event"
+                "text": "PageChangeEvent"
               }
             },
             {
-              "name": "per-page-change",
+              "name": "per_page",
               "type": {
-                "text": "Event"
+                "text": "PerPageChangeEvent"
               }
             }
           ],
@@ -928,7 +974,7 @@
                 "text": "number"
               },
               "default": "10",
-              "fieldName": "perPage"
+              "fieldName": "per_page"
             },
             {
               "name": "n",
@@ -946,6 +992,44 @@
           },
           "tagName": "e-pagination",
           "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "",
+          "name": "PerPageChangeEvent",
+          "members": [
+            {
+              "kind": "field",
+              "name": "per_page",
+              "type": {
+                "text": "number"
+              },
+              "default": "per_page"
+            }
+          ],
+          "superclass": {
+            "name": "Event",
+            "module": "src/wc/e-pagination.ts"
+          }
+        },
+        {
+          "kind": "class",
+          "description": "",
+          "name": "PageChangeEvent",
+          "members": [
+            {
+              "kind": "field",
+              "name": "page",
+              "type": {
+                "text": "number"
+              },
+              "default": "page"
+            }
+          ],
+          "superclass": {
+            "name": "Event",
+            "module": "src/wc/e-pagination.ts"
+          }
         }
       ],
       "exports": [
@@ -962,6 +1046,22 @@
           "name": "e-pagination",
           "declaration": {
             "name": "PaginationElement",
+            "module": "src/wc/e-pagination.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PerPageChangeEvent",
+          "declaration": {
+            "name": "PerPageChangeEvent",
+            "module": "src/wc/e-pagination.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PageChangeEvent",
+          "declaration": {
+            "name": "PageChangeEvent",
             "module": "src/wc/e-pagination.ts"
           }
         }
@@ -1309,13 +1409,23 @@
             },
             {
               "kind": "method",
-              "name": "#onSheetsIconClicked",
-              "privacy": "private"
+              "name": "#emitGoogleSheetsClicked",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
             },
             {
               "kind": "method",
-              "name": "#onGridIconClicked",
-              "privacy": "private"
+              "name": "#openSampleTablePopup",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
             },
             {
               "kind": "method",
@@ -1326,6 +1436,11 @@
               "kind": "method",
               "name": "#onLeagueSelected",
               "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "e",
@@ -1337,13 +1452,31 @@
             },
             {
               "kind": "method",
-              "name": "#onBtnDeleteClicked",
-              "privacy": "private"
+              "name": "#emitDelete",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
             },
             {
               "kind": "method",
               "name": "#onMinPriceRange",
-              "privacy": "private"
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
             }
           ],
           "attributes": [
