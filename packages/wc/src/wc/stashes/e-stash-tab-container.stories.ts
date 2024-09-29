@@ -10,16 +10,6 @@ export default {
 	title: 'Elements/stashes/e-stash-tab-container',
 } satisfies Meta<StashTabContainerElement>;
 
-const noItemsTab = {
-	id: '7f967993bb',
-	index: 16,
-	metadata: {
-		colour: 'ff',
-	},
-	name: 'd (Remove-only)',
-	type: 'PremiumStash',
-};
-
 export const Default = {
 	render() {
 		return html`<e-stash-tab-container

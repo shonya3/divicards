@@ -9,7 +9,7 @@ withDefaults(defineProps<StashesViewProps>(), { league: ACTIVE_LEAGUE });
 const emit = defineEmits<{
 	close: [];
 	'update:selectedTabs': [Set<string>];
-	'sample-from-tab': [string, DivinationCardsSample, League];
+	'sample-from-tab': [name: string, sample: DivinationCardsSample, league: League];
 	'tab-with-items-loaded': [string, TabWithItems, League];
 	'extract-cards': [TabWithItems, League];
 }>();

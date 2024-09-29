@@ -1,4 +1,4 @@
-import { html, css, PropertyValueMap, LitElement } from 'lit';
+import { html, css, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { REMOVE_ONLY } from './e-tab-badge-group';
