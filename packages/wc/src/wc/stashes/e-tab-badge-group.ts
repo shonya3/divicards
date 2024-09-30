@@ -11,7 +11,7 @@ import '../e-help-tip';
 import { ErrorLabel } from './types';
 import { classMap } from 'lit/directives/class-map.js';
 import SlCheckbox from '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
-import { PaginationElement } from '../e-pagination';
+import { PageChangeEvent, PaginationElement, PerPageChangeEvent } from '../e-pagination';
 import { NoItemsTab } from 'poe-custom-elements/types.js';
 import { emit } from '../../utils';
 
@@ -122,8 +122,8 @@ export class TabBadgeGroupElement extends LitElement {
 							.n=${this.tabsTotal}
 							.page=${this.page}
 							.perPage=${this.perPage}
-							@page-change=${this.#onPageChange}
-							@per-page-change=${this.#onPerPageChange}
+							@e-pagination--page-change=${this.#onPageChange}
+							@e-pagination--per-page-change=${this.#onPerPageChange}
 						></e-pagination>
 						<div class="header__right">
 							<div class="multiselect">
@@ -171,17 +171,13 @@ export class TabBadgeGroupElement extends LitElement {
 	#onHideRemoveOnlyChange() {
 		this.hideRemoveOnly = this.checkbox.checked;
 	}
-	#onPageChange(e: Event) {
-		if (e.target instanceof PaginationElement) {
-			this.page = e.target.page;
-		}
-		emit<Events['upd:page']>(this, 'upd:page', this.page);
+	#onPageChange({ page }: PageChangeEvent) {
+		this.page = page;
+		emit<Events['upd:page']>(this, 'upd:page', page);
 	}
-	#onPerPageChange(e: Event) {
-		if (e.target instanceof PaginationElement) {
-			this.perPage = e.target.per_page;
-		}
-		emit<Events['upd:PerPage']>(this, 'upd:PerPage', this.page);
+	#onPerPageChange({ per_page }: PerPageChangeEvent): void {
+		this.perPage = per_page;
+		emit<Events['upd:PerPage']>(this, 'upd:PerPage', per_page);
 	}
 	#onNameQueryInput() {
 		this.nameQuery = this.nameQueryInput.value;

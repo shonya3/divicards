@@ -4,10 +4,6 @@ import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 
-/**
- * @event page-change
- * @event per-page-change
- */
 @customElement('e-pagination')
 export class PaginationElement extends LitElement {
 	@property({ reflect: true, type: Number }) page = 1;
@@ -76,11 +72,11 @@ export class PaginationElement extends LitElement {
 
 	#set_page_and_emit(page: number): void {
 		this.page = page;
-		this.dispatchEvent(new Event('page-change'));
+		this.dispatchEvent(new PageChangeEvent(page));
 	}
 	#set_per_page_and_emit(per_page: number): void {
 		this.per_page = per_page;
-		this.dispatchEvent(new Event('per-page-change'));
+		this.dispatchEvent(new PerPageChangeEvent(per_page));
 	}
 
 	decrease_page(): void {
@@ -146,6 +142,36 @@ export class PaginationElement extends LitElement {
 			width: 10ch;
 		}
 	`;
+}
+
+export class PageChangeEvent extends Event {
+	static readonly tag = 'e-pagination--page-change';
+	page: number;
+	constructor(page: number, options?: EventInit) {
+		super(PageChangeEvent.tag, options);
+		this.page = page;
+	}
+}
+export class PerPageChangeEvent extends Event {
+	static readonly tag = 'e-pagination--per-page-change';
+	per_page: number;
+	constructor(per_page: number, options?: EventInit) {
+		super(PerPageChangeEvent.tag, options);
+		this.per_page = per_page;
+	}
+}
+
+declare global {
+	interface HTMLElementEventMap {
+		/**
+		 * Emits when page is changed on user interaction.
+		 */
+		'e-pagination--page-change': PageChangeEvent;
+		/**
+		 * Emits when per page is changed on user interaction.
+		 */
+		'e-pagination--per-page-change': PerPageChangeEvent;
+	}
 }
 
 declare global {

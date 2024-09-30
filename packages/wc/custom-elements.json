@@ -996,15 +996,25 @@
         {
           "kind": "class",
           "description": "",
-          "name": "PerPageChangeEvent",
+          "name": "PageChangeEvent",
           "members": [
             {
               "kind": "field",
-              "name": "per_page",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "readonly": true,
+              "default": "'e-pagination--page-change'"
+            },
+            {
+              "kind": "field",
+              "name": "page",
               "type": {
                 "text": "number"
               },
-              "default": "per_page"
+              "default": "page"
             }
           ],
           "superclass": {
@@ -1015,15 +1025,25 @@
         {
           "kind": "class",
           "description": "",
-          "name": "PageChangeEvent",
+          "name": "PerPageChangeEvent",
           "members": [
             {
               "kind": "field",
-              "name": "page",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "readonly": true,
+              "default": "'e-pagination--per-page-change'"
+            },
+            {
+              "kind": "field",
+              "name": "per_page",
               "type": {
                 "text": "number"
               },
-              "default": "page"
+              "default": "per_page"
             }
           ],
           "superclass": {
@@ -1051,17 +1071,17 @@
         },
         {
           "kind": "js",
-          "name": "PerPageChangeEvent",
+          "name": "PageChangeEvent",
           "declaration": {
-            "name": "PerPageChangeEvent",
+            "name": "PageChangeEvent",
             "module": "src/wc/e-pagination.ts"
           }
         },
         {
           "kind": "js",
-          "name": "PageChangeEvent",
+          "name": "PerPageChangeEvent",
           "declaration": {
-            "name": "PageChangeEvent",
+            "name": "PerPageChangeEvent",
             "module": "src/wc/e-pagination.ts"
           }
         }
@@ -2846,9 +2866,9 @@
               "privacy": "private",
               "parameters": [
                 {
-                  "name": "e",
+                  "name": "{ page }",
                   "type": {
-                    "text": "Event"
+                    "text": "PageChangeEvent"
                   }
                 }
               ]
@@ -2857,11 +2877,16 @@
               "kind": "method",
               "name": "#onPerPageChange",
               "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
-                  "name": "e",
+                  "name": "{ per_page }",
                   "type": {
-                    "text": "Event"
+                    "text": "PerPageChangeEvent"
                   }
                 }
               ]
