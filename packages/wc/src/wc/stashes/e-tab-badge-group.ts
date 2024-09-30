@@ -11,7 +11,7 @@ import '../e-help-tip';
 import { ErrorLabel } from './types';
 import { classMap } from 'lit/directives/class-map.js';
 import SlCheckbox from '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
-import { PageChangeEvent, PaginationElement, PerPageChangeEvent } from '../e-pagination';
+import { PageChangeEvent, PerPageChangeEvent } from '../e-pagination';
 import { NoItemsTab } from 'poe-custom-elements/types.js';
 import { emit } from '../../utils';
 
