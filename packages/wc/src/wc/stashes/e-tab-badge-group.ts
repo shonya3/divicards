@@ -108,64 +108,69 @@ export class TabBadgeGroupElement extends LitElement {
 	}
 
 	protected override render() {
-		return html`<div class="tab-badge-group">
-			${this.shouldFilter
-				? html`<header class="header">
-						<sl-input
-							type="text"
-							id="filter-stashes-by-name"
-							.value=${this.nameQuery}
-							@input=${this.#onNameQueryInput}
-							.helpText=${`Search tab by name`}
-						></sl-input>
-						<e-pagination
-							.n=${this.tabsTotal}
-							.page=${this.page}
-							.perPage=${this.perPage}
-							@e-pagination--page-change=${this.#onPageChange}
-							@e-pagination--per-page-change=${this.#onPerPageChange}
-						></e-pagination>
-						<div class="header__right">
-							<div class="multiselect">
-								<sl-checkbox @sl-change=${this.#onMultiselectChange} .checked=${this.multiselect}
-									>Multiselect</sl-checkbox
-								>
-								<e-help-tip>Select multiple tabs at once to download it in one go.</e-help-tip>
-							</div>
-							${this.withHideRemoveOnly
-								? html` <div class="hide-remove-only">
+		return html`</div>
+			<div class="tab-badge-group">
+				${
+					this.shouldFilter
+						? html`<header class="header">
+								<sl-input
+									type="text"
+									id="filter-stashes-by-name"
+									.value=${this.nameQuery}
+									@input=${this.#onNameQueryInput}
+									.helpText=${`Search tab by name`}
+								></sl-input>
+								<e-pagination
+									.n=${this.tabsTotal}
+									.page=${this.page}
+									.per_page=${this.perPage}
+									@e-pagination--page-change=${this.#onPageChange}
+									@e-pagination--per-page-change=${this.#onPerPageChange}
+								></e-pagination>
+								<div class="header__right">
+									<div class="multiselect">
 										<sl-checkbox
-											id="hide-remove-only"
-											@sl-change=${this.#onHideRemoveOnlyChange}
-											.checked=${this.hideRemoveOnly}
-											>Hide remove-only</sl-checkbox
+											@sl-change=${this.#onMultiselectChange}
+											.checked=${this.multiselect}
+											>Multiselect</sl-checkbox
 										>
-									</div>`
-								: nothing}
-							<div class="tabs-total">
-								<span class="tabs-total__count">${this.tabsTotal}</span> stash tabs
-							</div>
-						</div>
-					</header>`
-				: nothing}
-			<ul class="list">
-				${this.paginated.map(tab => {
-					return html`<li
-						class=${classMap({
-							error: this.errors.some(({ noItemsTab }) => noItemsTab.id === tab.id),
-							'hovered-error': this.hoveredErrorTabId === tab.id,
-						})}
-					>
-						<e-tab-badge
-							.as=${this.multiselect ? 'checkbox' : 'button'}
-							.tab=${tab}
-							.selected=${this.selectedTabs.has(tab.id)}
-							.disabled=${this.badgesDisabled}
-						></e-tab-badge>
-					</li>`;
-				})}
-			</ul>
-		</div>`;
+										<e-help-tip>Select multiple tabs at once to download it in one go.</e-help-tip>
+									</div>
+									${this.withHideRemoveOnly
+										? html` <div class="hide-remove-only">
+												<sl-checkbox
+													id="hide-remove-only"
+													@sl-change=${this.#onHideRemoveOnlyChange}
+													.checked=${this.hideRemoveOnly}
+													>Hide remove-only</sl-checkbox
+												>
+											</div>`
+										: nothing}
+									<div class="tabs-total">
+										<span class="tabs-total__count">${this.tabsTotal}</span> stash tabs
+									</div>
+								</div>
+							</header>`
+						: nothing
+				}
+				<ul class="list">
+					${this.paginated.map(tab => {
+						return html`<li
+							class=${classMap({
+								error: this.errors.some(({ noItemsTab }) => noItemsTab.id === tab.id),
+								'hovered-error': this.hoveredErrorTabId === tab.id,
+							})}
+						>
+							<e-tab-badge
+								.as=${this.multiselect ? 'checkbox' : 'button'}
+								.tab=${tab}
+								.selected=${this.selectedTabs.has(tab.id)}
+								.disabled=${this.badgesDisabled}
+							></e-tab-badge>
+						</li>`;
+					})}
+				</ul>
+			</div>`;
 	}
 
 	#onHideRemoveOnlyChange() {
