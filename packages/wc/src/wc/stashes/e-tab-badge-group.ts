@@ -35,7 +35,6 @@ export type Events = {
 
 	'upd:nameQuery': string;
 	'upd:multiselect': boolean;
-	'upd:selected_tabs': Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }>;
 };
 
 @customElement('e-tab-badge-group')
