@@ -32,10 +32,6 @@ export type Events = {
 	'upd:selectedTabs': Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }>;
 	/** from tab-badge-group */
 	'upd:nameQuery': string;
-	/** from tab-badge-group */
-	'upd:PerPage': number;
-	/** from tab-badge-group */
-	'upd:page': number;
 	'upd:multiselect': boolean;
 	'extract-cards': { tab: TabWithItems; league: League };
 

@@ -11,9 +11,10 @@ import '../e-help-tip';
 import { ErrorLabel } from './types';
 import { classMap } from 'lit/directives/class-map.js';
 import SlCheckbox from '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
-import { PageChangeEvent, PerPageChangeEvent } from '../e-pagination';
 import { NoItemsTab } from 'poe-custom-elements/types.js';
 import { emit } from '../../utils';
+import { PageChangeEvent } from '../events/change/page';
+import { PerPageChangeEvent } from '../events/change/per_page';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -24,9 +25,10 @@ declare global {
 export const REMOVE_ONLY = '(Remove-only)';
 
 export interface Events {
+	'change:page': PageChangeEvent;
+	'change:per_page': PerPageChangeEvent;
+
 	'upd:nameQuery': string;
-	'upd:PerPage': number;
-	'upd:page': number;
 	'upd:multiselect': boolean;
 	'upd:selectedTabs': Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }>;
 
@@ -105,8 +107,8 @@ export class TabBadgeGroupElement extends LitElement {
 									.n=${this.tabsTotal}
 									.page=${this.page}
 									.per_page=${this.perPage}
-									@e-pagination--page-change=${this.#onPageChange}
-									@e-pagination--per-page-change=${this.#onPerPageChange}
+									@change:page=${this.#handle_page_change}
+									@change:per_page=${this.#handle_per_page_change}
 								></e-pagination>
 								<div class="header__right">
 									<div class="multiselect">
@@ -157,13 +159,13 @@ export class TabBadgeGroupElement extends LitElement {
 	#onHideRemoveOnlyChange() {
 		this.hideRemoveOnly = this.checkbox.checked;
 	}
-	#onPageChange({ page }: PageChangeEvent) {
+	#handle_page_change({ page }: PageChangeEvent): void {
 		this.page = page;
-		emit<Events['upd:page']>(this, 'upd:page', page);
+		this.dispatchEvent(new PageChangeEvent(page));
 	}
-	#onPerPageChange({ per_page }: PerPageChangeEvent): void {
+	#handle_per_page_change({ per_page }: PerPageChangeEvent): void {
 		this.perPage = per_page;
-		emit<Events['upd:PerPage']>(this, 'upd:PerPage', per_page);
+		this.dispatchEvent(new PerPageChangeEvent(per_page));
 	}
 	#onNameQueryInput() {
 		this.nameQuery = this.nameQueryInput.value;

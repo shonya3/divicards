@@ -3,6 +3,13 @@ import { customElement, property } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
+import { PageChangeEvent } from './events/change/page';
+import { PerPageChangeEvent } from './events/change/per_page';
+
+export interface Events {
+	'change:page': PageChangeEvent;
+	'change:per_page': PerPageChangeEvent;
+}
 
 @customElement('e-pagination')
 export class PaginationElement extends LitElement {
@@ -144,35 +151,22 @@ export class PaginationElement extends LitElement {
 	`;
 }
 
-export class PageChangeEvent extends Event {
-	static readonly tag = 'e-pagination--page-change';
-	page: number;
-	constructor(page: number, options?: EventInit) {
-		super(PageChangeEvent.tag, options);
-		this.page = page;
-	}
-}
-export class PerPageChangeEvent extends Event {
-	static readonly tag = 'e-pagination--per-page-change';
-	per_page: number;
-	constructor(per_page: number, options?: EventInit) {
-		super(PerPageChangeEvent.tag, options);
-		this.per_page = per_page;
-	}
-}
-
-declare global {
-	interface HTMLElementEventMap {
-		/**
-		 * Emits when page is changed on user interaction.
-		 */
-		'e-pagination--page-change': PageChangeEvent;
-		/**
-		 * Emits when per page is changed on user interaction.
-		 */
-		'e-pagination--per-page-change': PerPageChangeEvent;
-	}
-}
+// export class PageChangeEvent extends Event {
+// 	static readonly tag = 'e-pagination--page-change';
+// 	page: number;
+// 	constructor(page: number, options?: EventInit) {
+// 		super(PageChangeEvent.tag, options);
+// 		this.page = page;
+// 	}
+// }
+// export class PerPageChangeEvent extends Event {
+// 	static readonly tag = 'e-pagination--per-page-change';
+// 	per_page: number;
+// 	constructor(per_page: number, options?: EventInit) {
+// 		super(PerPageChangeEvent.tag, options);
+// 		this.per_page = per_page;
+// 	}
+// }
 
 declare global {
 	interface HTMLElementTagNameMap {
