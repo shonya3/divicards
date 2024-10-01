@@ -17,6 +17,7 @@ import './e-sample-table/e-sample-table';
 import '../e-base-popup';
 import { SampleTableElement } from './e-sample-table/e-sample-table';
 import { emit } from '../../utils';
+import { LeagueChangeEvent } from '../events/change';
 
 export interface Props {
 	league?: TradeLeague;
@@ -29,7 +30,7 @@ export interface Props {
 
 export interface Events {
 	'upd:selected': SampleCardElement['selected'];
-	'upd:league': SampleCardElement['league'];
+	'change:league': LeagueChangeEvent;
 	'upd:minimumCardPrice': SampleCardElement['minimumCardPrice'];
 	delete: SampleCardElement['uuid'];
 	'google-sheets-clicked': { sample: DivinationCardsSample; league: League };
@@ -101,7 +102,11 @@ export class SampleCardElement extends LitElement {
 				<p>${this.filteredSummary.amount}</p>
 				<img width="35" height="35" src="/divination-card.png" alt="Divination card" />
 			</div>
-			<e-league-select trade .league=${this.league} @upd:league=${this.#onLeagueSelected}></e-league-select>
+			<e-league-select
+				trade
+				.league=${this.league}
+				@change:league=${this.#handle_league_change}
+			></e-league-select>
 			<div class="export-buttons">
 				<sl-button size="large" @click=${this.#onSaveToFileClicked}>
 					<sl-icon style="font-size:1.6rem" name="filetype-csv"></sl-icon>
@@ -173,13 +178,12 @@ export class SampleCardElement extends LitElement {
 		emit<Events['upd:selected']>(this, 'upd:selected', this.selected);
 	}
 
-	#onLeagueSelected(e: CustomEvent<League>): void {
-		const league = e.detail;
-		if (!isTradeLeague(league)) {
-			e.stopPropagation();
+	#handle_league_change(e: LeagueChangeEvent): void {
+		if (!isTradeLeague(e.league)) {
 			return;
 		}
-		this.league = league;
+		this.league = e.league;
+		this.dispatchEvent(new LeagueChangeEvent(e.league));
 	}
 
 	#emitDelete(): void {

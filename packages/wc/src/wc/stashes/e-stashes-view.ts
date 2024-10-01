@@ -20,6 +20,7 @@ import { Task } from '@lit/task';
 import { StashTabContainerElement } from './e-stash-tab-container';
 import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
 import { emit } from '../../utils';
+import { LeagueChangeEvent } from '../events/change';
 
 const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
@@ -106,7 +107,7 @@ export class StashesViewElement extends LitElement {
 				<e-league-select
 					with-private-league-input
 					.league=${this.league}
-					@upd:league=${this.#onLeagueSelected}
+					@change:league=${this.#handle_league_selected}
 				></e-league-select>
 				${this.stashes.length
 					? html`
@@ -236,8 +237,9 @@ export class StashesViewElement extends LitElement {
 	#onDownloadAsChanged(e: InputEvent) {
 		this.downloadAs = (e.target as HTMLInputElement).value as DownloadAs;
 	}
-	#onLeagueSelected(e: CustomEvent<League>) {
-		this.league = e.detail;
+	#handle_league_selected({ league }: LeagueChangeEvent): void {
+		this.league = league;
+		this.dispatchEvent(new LeagueChangeEvent(league));
 	}
 	#onUpdSelectedTabs(e: CustomEvent<Events['upd:selectedTabs']>) {
 		const map = (e as CustomEvent<Events['upd:selectedTabs']>).detail;

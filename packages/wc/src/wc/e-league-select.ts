@@ -5,7 +5,7 @@ import { League, tradeLeagues, leagues as allLeagues } from '@divicards/shared/t
 import '@shoelace-style/shoelace/dist/components/select/select.js';
 import '@shoelace-style/shoelace/dist/components/option/option.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
-import { emit } from '../utils';
+import { LeagueChangeEvent } from './events/change';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -14,7 +14,7 @@ declare global {
 }
 
 export interface Events {
-	'upd:league': League;
+	'change:league': LeagueChangeEvent;
 }
 
 export class SlConverter {
@@ -42,11 +42,11 @@ export class LeagueSelectElement extends LitElement {
 		}
 	}
 
-	get value() {
+	get value(): string {
 		return this.select.value;
 	}
 
-	focus() {
+	focus(): void {
 		this.select.focus();
 	}
 
@@ -85,7 +85,7 @@ export class LeagueSelectElement extends LitElement {
 		const target = e.target as HTMLInputElement;
 		this.privateLeague = target.value;
 		this.league = this.privateLeague;
-		emit<Events['upd:league']>(this, 'upd:league', this.league);
+		this.dispatchEvent(new LeagueChangeEvent(this.league));
 	}
 
 	override firstUpdated() {
@@ -95,7 +95,7 @@ export class LeagueSelectElement extends LitElement {
 	async #emitLeagueChange() {
 		this.league = SlConverter.fromSlValue<League>(this.select.value);
 		await this.updateComplete;
-		emit<Events['upd:league']>(this, 'upd:league', this.league);
+		this.dispatchEvent(new LeagueChangeEvent(this.league));
 	}
 
 	static styles = css`

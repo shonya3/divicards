@@ -7,7 +7,7 @@ import '@shoelace-style/shoelace/dist/components/range/range.js';
 import 'poe-custom-elements/item-card.js';
 import { Column, DivinationCardRecord, Order } from '@divicards/shared/types';
 import { styles } from './e-sample-table.styles';
-import '../../e-order-triangle';
+import './e-order-triangle';
 import { emit } from '../../../utils';
 
 declare global {

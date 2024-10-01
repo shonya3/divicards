@@ -3,18 +3,19 @@ import { SampleCardElement, Props, Events } from '@divicards/wc/src/wc/e-sample-
 import '@divicards/wc/src/wc/e-sample-card/e-sample-card';
 import { DivinationCardsSample } from '@divicards/shared/types';
 import { League } from '@divicards/shared/types';
+import { LeagueChangeEvent } from '@divicards/wc/src/wc/events/change';
 const props = defineProps<Props>();
 const emit = defineEmits<{
 	'update:selected': [SampleCardElement['selected']];
-	'update:league': [SampleCardElement['league']];
+	'update:league': [league: League];
 	'update:minimumCardPrice': [SampleCardElement['minimumCardPrice']];
 	delete: [SampleCardElement['uuid']];
 	'google-sheets-clicked': [DivinationCardsSample, League];
 	'save-to-file-clicked': [DivinationCardsSample, League, string];
 }>();
 
-const onUpdLeague = (e: CustomEvent<Events['upd:league']>) => {
-	emit('update:league', e.detail);
+const onUpdLeague = (e: LeagueChangeEvent) => {
+	emit('update:league', e.league);
 };
 
 const onUpdSelected = (e: CustomEvent<Events['upd:selected']>) => {
@@ -43,7 +44,7 @@ const onSaveToFileClicked = (e: CustomEvent<Events['save-to-file-clicked']>) => 
 		v-bind="props"
 		@google-sheets-clicked="onGoogleSheetsClicked"
 		@save-to-file-clicked="onSaveToFileClicked"
-		@upd:league="onUpdLeague"
+		@change:league="onUpdLeague"
 		@upd:selected="onUpdSelected"
 		@upd:minimumCardPrice="onUpdPrice"
 		@delete="onDelete"

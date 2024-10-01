@@ -28,10 +28,10 @@ describe('<wc-sample-card>', () => {
 		expect(checkboxSpy).to.be.calledOnce;
 	});
 
-	it('emits upd:league on selecting league', async () => {
+	it('emits change:league on selecting league', async () => {
 		await el.updateComplete;
 		const spy = sinon.spy();
-		el.addEventListener('upd:league', spy);
+		el.addEventListener('change:league', spy);
 
 		el.leagueSelect.focus();
 		await sendKeys({ press: 'ArrowDown' });
