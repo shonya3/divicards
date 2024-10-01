@@ -35,25 +35,6 @@ export interface Events {
 	'tab-click': { tabId: string; name: string };
 }
 
-export abstract class AbstractChange<
-	CE, // Custom Element type
-	T extends keyof CE = keyof CE, // Default T to keyof CE if not provided
-	V = CE[T], // Infer the value type from the CE's field type
-> extends Event {
-	readonly field: T;
-	readonly value: V;
-
-	constructor(field: T, value: V, options?: EventInit) {
-		super('event-field-change', options);
-		this.field = field;
-		this.value = value;
-	}
-}
-
-export class ChangeEvent<
-	T extends 'nameQuery' | 'perPage' | 'page' | 'multiselect' | 'selectedTabs', // Default to keyof TabBadgeGroupElement if no union provided
-> extends AbstractChange<TabBadgeGroupElement, T> {}
-
 @customElement('e-tab-badge-group')
 export class TabBadgeGroupElement extends LitElement {
 	static override styles = [styles()];
