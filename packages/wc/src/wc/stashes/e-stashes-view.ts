@@ -21,15 +21,13 @@ import { StashTabContainerElement } from './e-stash-tab-container';
 import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
 import { emit } from '../../utils';
 import { LeagueChangeEvent } from '../events/change/league';
+import { SelectedTabsChangeEvent, TabClickEvent, TabSelectEvent } from './events';
 
 const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
 
 export type Events = {
 	close: void;
-	// ---
-	/** from tab-badge-group */
-	'upd:selectedTabs': Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }>;
 	/** from tab-badge-group */
 	'upd:nameQuery': string;
 	'upd:multiselect': boolean;
@@ -38,11 +36,12 @@ export type Events = {
 	'sample-from-tab': { sample: DivinationCardsSample; league: League; name: NoItemsTab['name'] };
 	'tab-with-items-loaded': { tab: TabWithItems; league: League; name: string };
 	tabs: NoItemsTab[];
+};
 
-	// ---
-	/**  event from TabBadgeElement */
-	'tab-select': { tabId: NoItemsTab['id']; name: NoItemsTab['name']; selected: boolean };
-	'tab-click': { tabId: string; name: string };
+export type Events2 = {
+	[TabClickEvent.tag]: TabClickEvent;
+	[TabSelectEvent.tag]: TabSelectEvent;
+	[SelectedTabsChangeEvent.tag]: SelectedTabsChangeEvent;
 };
 
 export interface StashesViewProps {
@@ -61,7 +60,7 @@ export class StashesViewElement extends LitElement {
 	@property() downloadAs: DownloadAs = 'divination-cards-sample';
 	@property({ type: Boolean }) multiselect = false;
 
-	@state() selectedTabs: Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }> = new Map();
+	@state() selected_tabs: Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }> = new Map();
 	@state() stashes: NoItemsTab[] = [];
 	@state() noStashesMessage: string = '';
 	@state() msg: string = '';
@@ -73,17 +72,25 @@ export class StashesViewElement extends LitElement {
 	@state() availableInTenSeconds = 15;
 	@state() hoveredErrorTabId: string | null = null;
 	@state() downloadedStashTabs: Array<TabWithItems> = [];
-	@state() openedTabId: string | null = null;
-	@state() openedTab: NoItemsTab | null = null;
+	@state() opened_tab: NoItemsTab | null = null;
 	private stashTabTask = new Task(this, {
-		task: async ([stashTabId]) => {
-			if (!stashTabId) {
+		task: async ([tab]) => {
+			if (!tab) {
 				return null;
 			}
-			return await this.#loadSingleTabContent(stashTabId, this.league, this.stashLoader.tab);
+			return await this.#loadSingleTabContent(tab.id, this.league, this.stashLoader.tab);
 		},
-		args: () => [this.openedTabId],
+		args: () => [this.opened_tab],
 	});
+
+	constructor() {
+		super();
+
+		this.addEventListener('stashes__tab-click', e => {
+			this.#handle_tab_badge_click(e);
+			e.stopPropagation();
+		});
+	}
 
 	@query('button#stashes-btn') stashesButton!: HTMLButtonElement;
 	@query('button#get-data-btn') getDataButton!: HTMLButtonElement;
@@ -92,7 +99,7 @@ export class StashesViewElement extends LitElement {
 		if (map.has('league')) {
 			this.stashes = [];
 			this.msg = '';
-			this.selectedTabs = new Map();
+			this.selected_tabs = new Map();
 			this.errors = [];
 		}
 	}
@@ -114,7 +121,7 @@ export class StashesViewElement extends LitElement {
 										? html`<sl-button
 												id="get-data-btn"
 												class="btn-load-items"
-												.disabled=${this.selectedTabs.size === 0 ||
+												.disabled=${this.selected_tabs.size === 0 ||
 												this.fetchingStashTab ||
 												this.stashLoadsAvailable === 0}
 												@click=${this.#onLoadItemsClicked}
@@ -174,15 +181,14 @@ export class StashesViewElement extends LitElement {
 				.multiselect=${this.multiselect}
 				league=${this.league}
 				.stashes=${this.stashes}
-				.selectedTabs=${this.selectedTabs}
+				.selected_tabs=${this.selected_tabs}
 				.errors=${this.errors}
 				.hoveredErrorTabId=${this.hoveredErrorTabId}
-				@upd:selectedTabs=${this.#onUpdSelectedTabs}
-				@tab-click=${this.#onTabClick}
 				@upd:multiselect=${this.#handleUpdMultiselect}
+				@change:selected_tabs=${this.#handle_selected_tabs_change}
 				.badgesDisabled=${this.stashLoadsAvailable === 0 || this.availableInTenSeconds === 0}
 			></e-tab-badge-group>
-			${this.openedTabId
+			${this.opened_tab
 				? this.stashTabTask.render({
 						pending: () => {
 							return html`<e-stash-tab-container
@@ -225,7 +231,7 @@ export class StashesViewElement extends LitElement {
 		this.errors = e.detail;
 	}
 	#onLoadItemsClicked() {
-		this.#loadSelectedTabs(this.league);
+		this.#load_selected_tabs(this.league);
 	}
 	#onCloseClicked() {
 		emit(this, 'close');
@@ -237,13 +243,12 @@ export class StashesViewElement extends LitElement {
 		this.league = league;
 		this.dispatchEvent(new LeagueChangeEvent(league));
 	}
-	#onUpdSelectedTabs(e: CustomEvent<Events['upd:selectedTabs']>) {
-		const map = (e as CustomEvent<Events['upd:selectedTabs']>).detail;
-		this.selectedTabs = new Map(map);
+	#handle_selected_tabs_change(e: SelectedTabsChangeEvent): void {
+		this.selected_tabs = new Map(e.selected_tabs);
+		this.dispatchEvent(new SelectedTabsChangeEvent(this.selected_tabs));
 	}
-	#onTabClick(e: CustomEvent<Events['tab-click']>) {
-		this.openedTabId = e.detail.tabId;
-		this.openedTab = this.stashes.find(t => t.id === this.openedTabId) ?? null;
+	#handle_tab_badge_click(e: TabClickEvent): void {
+		this.opened_tab = e.tab;
 	}
 	#handleUpdMultiselect(e: CustomEvent<boolean>) {
 		this.multiselect = e.detail;
@@ -255,8 +260,7 @@ export class StashesViewElement extends LitElement {
 		}
 	}
 	#handleTabContainerClose() {
-		this.openedTab = null;
-		this.openedTabId = null;
+		this.opened_tab = null;
 	}
 
 	/** Load whole stash of Array<NoItemsTab> and emits it  */
@@ -286,9 +290,9 @@ export class StashesViewElement extends LitElement {
 	}
 
 	/** For each tab, loads sample and emits it */
-	async #loadSelectedTabs(league: League): Promise<void> {
-		while (this.selectedTabs.size > 0) {
-			for (const { id, name } of this.selectedTabs.values()) {
+	async #load_selected_tabs(league: League): Promise<void> {
+		while (this.selected_tabs.size > 0) {
+			for (const { id, name } of this.selected_tabs.values()) {
 				this.fetchingStashTab = true;
 				try {
 					switch (this.downloadAs) {
@@ -321,8 +325,13 @@ export class StashesViewElement extends LitElement {
 						this.errors = [...this.errors, { noItemsTab, message: err.message }];
 					}
 				} finally {
-					this.selectedTabs.delete(id);
-					this.selectedTabs = new Map(this.selectedTabs);
+					console.log('finally');
+					console.log(this.selected_tabs);
+					this.selected_tabs.delete(id);
+					console.log(this.selected_tabs);
+					this.selected_tabs = new Map(this.selected_tabs);
+					console.log(this.selected_tabs);
+					await this.requestUpdate();
 					this.fetchingStashTab = false;
 					this.msg = '';
 				}

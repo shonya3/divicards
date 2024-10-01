@@ -15,6 +15,7 @@ import { NoItemsTab } from 'poe-custom-elements/types.js';
 import { emit } from '../../utils';
 import { PageChangeEvent } from '../events/change/page';
 import { PerPageChangeEvent } from '../events/change/per_page';
+import { SelectedTabsChangeEvent, TabClickEvent, TabSelectEvent } from './events';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -24,18 +25,18 @@ declare global {
 
 export const REMOVE_ONLY = '(Remove-only)';
 
-export interface Events {
-	'change:page': PageChangeEvent;
-	'change:per_page': PerPageChangeEvent;
+export type Events = {
+	[PageChangeEvent.tag]: PageChangeEvent;
+	[PerPageChangeEvent.tag]: PerPageChangeEvent;
+	[SelectedTabsChangeEvent.tag]: SelectedTabsChangeEvent;
+
+	/** composed from e-tab-badge */
+	[TabClickEvent.tag]: TabClickEvent;
 
 	'upd:nameQuery': string;
 	'upd:multiselect': boolean;
-	'upd:selectedTabs': Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }>;
-
-	/**  Event from TabBadgeElement */
-	'tab-select': { tabId: NoItemsTab['id']; name: NoItemsTab['name']; selected: boolean };
-	'tab-click': { tabId: string; name: string };
-}
+	'upd:selected_tabs': Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }>;
+};
 
 @customElement('e-tab-badge-group')
 export class TabBadgeGroupElement extends LitElement {
@@ -50,7 +51,7 @@ export class TabBadgeGroupElement extends LitElement {
 	@property({ type: Number, reflect: true }) perPage = 50;
 	@property({ type: Number, reflect: true }) page = 1;
 	@property() nameQuery = '';
-	@property({ attribute: false }) selectedTabs: Map<
+	@property({ type: Object }) selected_tabs: Map<
 		NoItemsTab['id'],
 		{ id: NoItemsTab['id']; name: NoItemsTab['name'] }
 	> = new Map();
@@ -64,8 +65,9 @@ export class TabBadgeGroupElement extends LitElement {
 
 	constructor() {
 		super();
-		this.addEventListener('tab-select', e => {
-			this.#onTabSelect(e as CustomEvent<Events['tab-select']>);
+		this.addEventListener('stashes__tab-select', e => {
+			this.#handle_tab_select(e);
+			e.stopPropagation();
 		});
 	}
 	get shouldFilter() {
@@ -147,7 +149,7 @@ export class TabBadgeGroupElement extends LitElement {
 							<e-tab-badge
 								.as=${this.multiselect ? 'checkbox' : 'button'}
 								.tab=${tab}
-								.selected=${this.selectedTabs.has(tab.id)}
+								.selected=${this.selected_tabs.has(tab.id)}
 								.disabled=${this.badgesDisabled}
 							></e-tab-badge>
 						</li>`;
@@ -171,11 +173,11 @@ export class TabBadgeGroupElement extends LitElement {
 		this.nameQuery = this.nameQueryInput.value;
 		emit<Events['upd:nameQuery']>(this, 'upd:nameQuery', this.nameQuery);
 	}
-	#onTabSelect(e: CustomEvent<Events['tab-select']>) {
-		const { selected, tabId, name } = e.detail;
-		selected ? this.selectedTabs.set(tabId, { id: tabId, name }) : this.selectedTabs.delete(tabId);
-		this.selectedTabs = new Map(this.selectedTabs);
-		emit<Events['upd:selectedTabs']>(this, 'upd:selectedTabs', this.selectedTabs);
+	#handle_tab_select({ tab, selected }: TabSelectEvent): void {
+		const { id, name } = tab;
+		selected ? this.selected_tabs.set(id, { id, name }) : this.selected_tabs.delete(id);
+		this.selected_tabs = new Map(this.selected_tabs);
+		this.dispatchEvent(new SelectedTabsChangeEvent(this.selected_tabs));
 	}
 	#onMultiselectChange(e: InputEvent) {
 		this.multiselect = (e.target as SlCheckbox).checked;

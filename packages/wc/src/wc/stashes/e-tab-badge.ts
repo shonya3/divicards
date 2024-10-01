@@ -3,7 +3,7 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { REMOVE_ONLY } from './e-tab-badge-group';
 import { NoItemsTab } from 'poe-custom-elements/types.js';
-import { emit } from '../../utils';
+import { TabClickEvent, TabSelectEvent } from './events';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -11,32 +11,9 @@ declare global {
 	}
 }
 
-export interface Events {
-	'tab-select': { tabId: string; name: string; selected: boolean };
-	'tab-click': { tabId: string; name: string };
-}
-
-export class TabSelectEvent extends Event {
-	tab: NoItemsTab;
-	selected: boolean;
-	constructor({ tab, selected }: { tab: NoItemsTab; selected: boolean }, eventInitDict?: EventInit) {
-		super('tab-select', eventInitDict);
-		this.tab = tab;
-		this.selected = selected;
-	}
-}
-
-export class TabClickEvent extends Event {
-	tab: NoItemsTab;
-	constructor({ tab }: { tab: NoItemsTab }, eventInitDict?: EventInit) {
-		super('tab-select', eventInitDict);
-		this.tab = tab;
-	}
-}
-
-export type ElementEvents = {
-	'tab-select': TabSelectEvent;
-	'tab-click': TabClickEvent;
+export type Events = {
+	[TabSelectEvent.tag]: TabSelectEvent;
+	[TabClickEvent.tag]: TabClickEvent;
 };
 
 @customElement('e-tab-badge')
@@ -80,14 +57,19 @@ export class TabBadgeElement extends LitElement {
 		if (this.as === 'checkbox') {
 			return html`<div class="tab-badge-as-checkbox" style=${cssProps}>
 				${this.nameLabel()}
-				<input @change=${this.#onCheckbox} class="checkbox" type="checkbox" .checked=${this.selected} />
+				<input
+					@change=${this.#set_selected_and_emit}
+					class="checkbox"
+					type="checkbox"
+					.checked=${this.selected}
+				/>
 			</div>`;
 		}
 
 		if (this.as === 'button') {
 			return html`<button
 				.disabled=${this.disabled}
-				@click=${this.#onButtonClick}
+				@click=${this.#emit_tab_click}
 				style=${cssProps}
 				class="tab-badge-as-button"
 			>
@@ -97,20 +79,12 @@ export class TabBadgeElement extends LitElement {
 	}
 
 	@query('input') checkbox!: HTMLInputElement;
-	#onCheckbox() {
+	#set_selected_and_emit() {
 		this.selected = this.checkbox.checked;
-
-		emit<Events['tab-select']>(this, 'tab-select', {
-			tabId: this.tab.id,
-			selected: this.selected,
-			name: this.tab.name,
-		});
+		this.dispatchEvent(new TabSelectEvent(this.tab, this.selected, { composed: true }));
 	}
-	#onButtonClick() {
-		emit<Events['tab-click']>(this, 'tab-click', {
-			tabId: this.tab.id,
-			name: this.tab.name,
-		});
+	#emit_tab_click() {
+		this.dispatchEvent(new TabClickEvent(this.tab, { composed: true }));
 	}
 
 	static styles = css`
@@ -200,5 +174,3 @@ export class TabBadgeElement extends LitElement {
 		}
 	`;
 }
-
-// export type TabSelectEvent = CustomEvent<{ tabId: string; selected: boolean }>;
