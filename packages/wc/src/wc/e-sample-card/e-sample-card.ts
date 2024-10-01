@@ -17,7 +17,7 @@ import './e-sample-table/e-sample-table';
 import '../e-base-popup';
 import { SampleTableElement } from './e-sample-table/e-sample-table';
 import { emit } from '../../utils';
-import { LeagueChangeEvent } from '../events/change';
+import { LeagueChangeEvent } from '../events/change/league';
 
 export interface Props {
 	league?: TradeLeague;

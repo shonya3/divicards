@@ -20,7 +20,7 @@ import { Task } from '@lit/task';
 import { StashTabContainerElement } from './e-stash-tab-container';
 import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
 import { emit } from '../../utils';
-import { LeagueChangeEvent } from '../events/change';
+import { LeagueChangeEvent } from '../events/change/league';
 
 const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;

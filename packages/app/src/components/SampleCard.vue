@@ -3,7 +3,7 @@ import { SampleCardElement, Props, Events } from '@divicards/wc/src/wc/e-sample-
 import '@divicards/wc/src/wc/e-sample-card/e-sample-card';
 import { DivinationCardsSample } from '@divicards/shared/types';
 import { League } from '@divicards/shared/types';
-import { LeagueChangeEvent } from '@divicards/wc/src/wc/events/change';
+import { LeagueChangeEvent } from '@divicards/wc/src/wc/events/change/league';
 const props = defineProps<Props>();
 const emit = defineEmits<{
 	'update:selected': [SampleCardElement['selected']];

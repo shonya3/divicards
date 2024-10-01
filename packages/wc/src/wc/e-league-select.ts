@@ -5,7 +5,7 @@ import { League, tradeLeagues, leagues as allLeagues } from '@divicards/shared/t
 import '@shoelace-style/shoelace/dist/components/select/select.js';
 import '@shoelace-style/shoelace/dist/components/option/option.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
-import { LeagueChangeEvent } from './events/change';
+import { LeagueChangeEvent } from './events/change/league';
 
 declare global {
 	interface HTMLElementTagNameMap {
