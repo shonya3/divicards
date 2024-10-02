@@ -29,7 +29,6 @@ export interface Props {
 }
 
 export interface Events {
-	'upd:selected': SampleCardElement['selected'];
 	'change:league': LeagueChangeEvent;
 	'upd:minimumCardPrice': SampleCardElement['minimumCardPrice'];
 	'google-sheets-clicked': { sample: DivinationCardsSample; league: League };
@@ -38,6 +37,7 @@ export interface Events {
 
 export type Events2 = {
 	[DeleteThisSampleEvent.tag]: DeleteThisSampleEvent;
+	[SelectedChangeEvent.tag]: SelectedChangeEvent;
 };
 
 const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
@@ -132,7 +132,7 @@ export class SampleCardElement extends LitElement {
 						type="checkbox"
 						.checked=${this.selected}
 						id="selected-checkbox"
-						@change=${this.#onSelectedClicked}
+						@change=${this.#change_selected_and_emit}
 					/>`}
 			<e-base-popup id="table-popup">
 				<e-sample-table .cards=${this.sample.cards}> </e-sample-table>
@@ -180,10 +180,10 @@ export class SampleCardElement extends LitElement {
 		this.tablePopup.showModal();
 	}
 
-	#onSelectedClicked() {
+	#change_selected_and_emit() {
 		if (this.selected === null) return;
 		this.selected = this.selectedCheckbox.checked;
-		emit<Events['upd:selected']>(this, 'upd:selected', this.selected);
+		this.dispatchEvent(new SelectedChangeEvent(this.selected));
 	}
 
 	#handle_league_change(e: LeagueChangeEvent): void {
@@ -347,11 +347,30 @@ declare global {
 	}
 }
 
+declare global {
+	interface HTMLElementEventMap {
+		sample__delete: DeleteThisSampleEvent;
+	}
+}
 export class DeleteThisSampleEvent extends Event {
 	static readonly tag = 'sample__delete';
 	uuid: string;
 	constructor(uuid: string, options?: EventInit) {
 		super(DeleteThisSampleEvent.tag, options);
 		this.uuid = uuid;
+	}
+}
+
+declare global {
+	interface HTMLElementEventMap {
+		'sample__change:selected': SelectedChangeEvent;
+	}
+}
+export class SelectedChangeEvent extends Event {
+	static readonly tag = 'sample__change:selected';
+	selected: boolean | null;
+	constructor(selected: boolean | null, options?: EventInit) {
+		super(SelectedChangeEvent.tag, options);
+		this.selected = selected;
 	}
 }
