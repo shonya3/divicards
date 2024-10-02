@@ -28,7 +28,6 @@ const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
 
 export type Events = {
-	close: void;
 	'extract-cards': { tab: TabWithItems; league: League };
 
 	'sample-from-tab': { sample: DivinationCardsSample; league: League; name: NoItemsTab['name'] };
@@ -37,7 +36,9 @@ export type Events = {
 };
 
 export type Events2 = {
+	[CloseEvent.tag]: CloseEvent;
 	[SelectedTabsChangeEvent.tag]: SelectedTabsChangeEvent;
+	[StashtabsBadgesFetchedEvent.tag]: StashtabsBadgesFetchedEvent;
 };
 
 export interface StashesViewProps {
@@ -57,7 +58,8 @@ export class StashesViewElement extends LitElement {
 	@property({ type: Boolean }) multiselect = false;
 
 	@state() selected_tabs: Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }> = new Map();
-	@state() stashes: NoItemsTab[] = [];
+	/** PoE /stashes data about all stashtabs in stash (does not include items) */
+	@state() stashtabs_badges: NoItemsTab[] = [];
 	@state() noStashesMessage: string = '';
 	@state() msg: string = '';
 	@state() fetchingStashTab: boolean = false;
@@ -93,7 +95,7 @@ export class StashesViewElement extends LitElement {
 
 	protected willUpdate(map: PropertyValues<this>): void {
 		if (map.has('league')) {
-			this.stashes = [];
+			this.stashtabs_badges = [];
 			this.msg = '';
 			this.selected_tabs = new Map();
 			this.errors = [];
@@ -108,7 +110,7 @@ export class StashesViewElement extends LitElement {
 					.league=${this.league}
 					@change:league=${this.#handle_league_selected}
 				></e-league-select>
-				${this.stashes.length
+				${this.stashtabs_badges.length
 					? html`
 							<div>
 								${this.fetchingStashTab
@@ -133,7 +135,7 @@ export class StashesViewElement extends LitElement {
 								: html`<sl-button id="stashes-btn" @click=${this.#loadStash}>Load Stash</sl-button>`}
 						</div> `}
 				<div class="top-right-corner">
-					${this.stashes.length
+					${this.stashtabs_badges.length
 						? html`
 								${this.multiselect
 									? html`<sl-radio-group
@@ -176,7 +178,7 @@ export class StashesViewElement extends LitElement {
 			<e-tab-badge-group
 				.multiselect=${this.multiselect}
 				league=${this.league}
-				.stashes=${this.stashes}
+				.stashes=${this.stashtabs_badges}
 				.selected_tabs=${this.selected_tabs}
 				.errors=${this.errors}
 				.hoveredErrorTabId=${this.hoveredErrorTabId}
@@ -230,7 +232,7 @@ export class StashesViewElement extends LitElement {
 		this.#load_selected_tabs(this.league);
 	}
 	#onCloseClicked() {
-		emit(this, 'close');
+		this.dispatchEvent(new CloseEvent());
 	}
 	#onDownloadAsChanged(e: InputEvent) {
 		this.downloadAs = (e.target as HTMLInputElement).value as DownloadAs;
@@ -267,9 +269,9 @@ export class StashesViewElement extends LitElement {
 		this.noStashesMessage = '';
 		this.fetchingStash = true;
 		try {
-			this.stashes = await this.stashLoader.tabs(this.league);
-			emit<Events['tabs']>(this, 'tabs', this.stashes);
-			if (!this.stashes.length) {
+			this.stashtabs_badges = await this.stashLoader.tabs(this.league);
+			this.dispatchEvent(new StashtabsBadgesFetchedEvent(this.stashtabs_badges));
+			if (!this.stashtabs_badges.length) {
 				this.noStashesMessage = 'No stashes here. Try to change the league';
 			}
 		} catch (err) {
@@ -316,9 +318,15 @@ export class StashesViewElement extends LitElement {
 					if (!isStashTabError(err)) {
 						throw err;
 					}
-					const noItemsTab = this.stashes.find(stash => stash.id === id);
-					if (noItemsTab) {
-						this.errors = [...this.errors, { noItemsTab, message: err.message }];
+					const stashtab_badge = this.stashtabs_badges.find(stash => stash.id === id);
+					if (stashtab_badge) {
+						this.errors = [
+							...this.errors,
+							{
+								noItemsTab: stashtab_badge,
+								message: err.message,
+							},
+						];
 					}
 				} finally {
 					console.log('finally');
@@ -386,5 +394,31 @@ const sleepSecs = async (secs: number): Promise<void> => {
 declare global {
 	interface HTMLElementTagNameMap {
 		'e-stashes-view': StashesViewElement;
+	}
+}
+
+declare global {
+	interface HTMLElementEventMap {
+		stashes__close: CloseEvent;
+	}
+}
+export class CloseEvent extends Event {
+	static readonly tag = 'stashes__close';
+	constructor(options?: EventInit) {
+		super(CloseEvent.tag, options);
+	}
+}
+
+declare global {
+	interface HTMLElementEventMap {
+		'stashes__stashtabs-badges-fetched': StashtabsBadgesFetchedEvent;
+	}
+}
+export class StashtabsBadgesFetchedEvent extends Event {
+	static readonly tag = 'stashes__stashtabs-badges-fetched';
+	readonly stashtabs_badges: Array<NoItemsTab>;
+	constructor(stashtabs_badges: Array<NoItemsTab>, options?: EventInit) {
+		super(StashtabsBadgesFetchedEvent.tag, options);
+		this.stashtabs_badges = stashtabs_badges;
 	}
 }
