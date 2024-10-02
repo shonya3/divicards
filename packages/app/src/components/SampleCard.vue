@@ -22,7 +22,7 @@ const emit = defineEmits<{
 	'save-to-file-clicked': [sample: DivinationCardsSample, league: League, filename: string];
 }>();
 
-const onUpdLeague = (e: LeagueChangeEvent) => {
+const emit_change_league = (e: LeagueChangeEvent) => {
 	emit('update:league', e.league);
 };
 
@@ -52,7 +52,7 @@ const emit_save_to_file_click = ({ sample, league, filename }: SaveToFileClickEv
 		v-bind="props"
 		@sample__google-sheets-click="emit_google_sheets_click"
 		@sample__save-to-file-click="emit_save_to_file_click"
-		@change:league="onUpdLeague"
+		@change:league="emit_change_league"
 		@sample__change:selected="emit_change_selected"
 		@sample__change:minimum_card_price="emit_change_minimum_card_price"
 		@sample__delete="emit_delete_this_sample"
