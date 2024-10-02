@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import { SampleCardElement, Props, Events } from '@divicards/wc/src/wc/e-sample-card/e-sample-card';
+import {
+	SampleCardElement,
+	Props,
+	Events,
+	DeleteThisSampleEvent,
+} from '@divicards/wc/src/wc/e-sample-card/e-sample-card';
 import '@divicards/wc/src/wc/e-sample-card/e-sample-card';
 import { DivinationCardsSample } from '@divicards/shared/types';
 import { League } from '@divicards/shared/types';
@@ -9,7 +14,7 @@ const emit = defineEmits<{
 	'update:selected': [SampleCardElement['selected']];
 	'update:league': [league: League];
 	'update:minimumCardPrice': [SampleCardElement['minimumCardPrice']];
-	delete: [SampleCardElement['uuid']];
+	delete: [uuid: string];
 	'google-sheets-clicked': [DivinationCardsSample, League];
 	'save-to-file-clicked': [DivinationCardsSample, League, string];
 }>();
@@ -26,8 +31,8 @@ const onUpdPrice = (e: CustomEvent<Events['upd:minimumCardPrice']>) => {
 	emit('update:minimumCardPrice', e.detail);
 };
 
-const onDelete = (e: CustomEvent<Events['delete']>) => {
-	emit('delete', e.detail);
+const emit_delete_this_sample = ({ uuid }: DeleteThisSampleEvent) => {
+	emit('delete', uuid);
 };
 
 const onGoogleSheetsClicked = (e: CustomEvent<Events['google-sheets-clicked']>) => {
@@ -47,6 +52,6 @@ const onSaveToFileClicked = (e: CustomEvent<Events['save-to-file-clicked']>) => 
 		@change:league="onUpdLeague"
 		@upd:selected="onUpdSelected"
 		@upd:minimumCardPrice="onUpdPrice"
-		@delete="onDelete"
+		@sample__delete="emit_delete_this_sample"
 	></e-sample-card>
 </template>

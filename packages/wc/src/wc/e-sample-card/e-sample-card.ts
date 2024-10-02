@@ -32,10 +32,13 @@ export interface Events {
 	'upd:selected': SampleCardElement['selected'];
 	'change:league': LeagueChangeEvent;
 	'upd:minimumCardPrice': SampleCardElement['minimumCardPrice'];
-	delete: SampleCardElement['uuid'];
 	'google-sheets-clicked': { sample: DivinationCardsSample; league: League };
 	'save-to-file-clicked': { sample: DivinationCardsSample; league: League; filename: string };
 }
+
+export type Events2 = {
+	[DeleteThisSampleEvent.tag]: DeleteThisSampleEvent;
+};
 
 const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 
@@ -64,7 +67,12 @@ export class SampleCardElement extends LitElement {
 		>
 			<p class="filename">${this.filename}</p>
 
-			<sl-icon-button @click=${this.#emitDelete} id="btn-delete" class="btn-delete" name="x-lg"></sl-icon-button>
+			<sl-icon-button
+				@click=${this.#emit_delete_this_sample}
+				id="btn-delete"
+				class="btn-delete"
+				name="x-lg"
+			></sl-icon-button>
 			<div class="minor-icons">
 				${this.sample.fixedNames.length > 0
 					? html`<e-fixed-names .fixedNames=${this.sample.fixedNames}></e-fixed-names>`
@@ -186,8 +194,8 @@ export class SampleCardElement extends LitElement {
 		this.dispatchEvent(new LeagueChangeEvent(e.league));
 	}
 
-	#emitDelete(): void {
-		emit<Events['delete']>(this, 'delete', this.uuid);
+	#emit_delete_this_sample(): void {
+		this.dispatchEvent(new DeleteThisSampleEvent(this.uuid));
 	}
 
 	#onMinPriceRange(e: Event): void {
@@ -336,5 +344,14 @@ export class SampleCardElement extends LitElement {
 declare global {
 	interface HTMLElementTagNameMap {
 		'e-sample-card': SampleCardElement;
+	}
+}
+
+export class DeleteThisSampleEvent extends Event {
+	static readonly tag = 'sample__delete';
+	uuid: string;
+	constructor(uuid: string, options?: EventInit) {
+		super(DeleteThisSampleEvent.tag, options);
+		this.uuid = uuid;
 	}
 }
