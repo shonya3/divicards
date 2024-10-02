@@ -28,7 +28,6 @@ const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
 
 export type Events = {
-	'sample-from-tab': { sample: DivinationCardsSample; league: League; name: NoItemsTab['name'] };
 	'tab-with-items-loaded': { tab: TabWithItems; league: League; name: string };
 };
 
@@ -37,6 +36,7 @@ export type Events2 = {
 	[SelectedTabsChangeEvent.tag]: SelectedTabsChangeEvent;
 	[StashtabsBadgesFetchedEvent.tag]: StashtabsBadgesFetchedEvent;
 	[ExtractCardsEvent.tag]: ExtractCardsEvent;
+	[SampleFromStashtabEvent.tag]: SampleFromStashtabEvent;
 };
 
 export interface StashesViewProps {
@@ -252,7 +252,6 @@ export class StashesViewElement extends LitElement {
 	#emitExtractCards(e: Event) {
 		const tab = (e.target as StashTabContainerElement)?.tab;
 		if (tab) {
-			// emit<Events['extract-cards']>(this, 'extract-cards', { tab: tab, league: this.league });
 			this.dispatchEvent(new ExtractCardsEvent(tab, this.league));
 		}
 	}
@@ -289,25 +288,21 @@ export class StashesViewElement extends LitElement {
 	/** For each tab, loads sample and emits it */
 	async #load_selected_tabs(league: League): Promise<void> {
 		while (this.selected_tabs.size > 0) {
-			for (const { id, name } of this.selected_tabs.values()) {
+			for (const { id, name: stashtab_name } of this.selected_tabs.values()) {
 				this.fetchingStashTab = true;
 				try {
 					switch (this.downloadAs) {
 						case 'divination-cards-sample': {
 							const sample = await this.#loadSingleTabContent(id, league, this.stashLoader.sampleFromTab);
-							emit<Events['sample-from-tab']>(this, 'sample-from-tab', {
-								name,
-								sample,
-								league,
-							});
+							this.dispatchEvent(new SampleFromStashtabEvent({ stashtab_name, sample, league }));
 							break;
 						}
 						case 'general-tab': {
 							const tab = await this.#loadSingleTabContent(id, league, this.stashLoader.tab);
-							tab.name = name;
+							tab.name = stashtab_name;
 							emit<Events['tab-with-items-loaded']>(this, 'tab-with-items-loaded', {
 								tab,
-								name,
+								name: stashtab_name,
 								league,
 							});
 							break;
@@ -434,6 +429,35 @@ export class ExtractCardsEvent extends Event {
 	constructor(tab: TabWithItems, league: League, options?: EventInit) {
 		super(ExtractCardsEvent.tag, options);
 		this.tab = tab;
+		this.league = league;
+	}
+}
+
+declare global {
+	interface HTMLElementEventMap {
+		'stashes__sample-from-stashtab': SampleFromStashtabEvent;
+	}
+}
+export class SampleFromStashtabEvent extends Event {
+	static readonly tag = 'stashes__sample-from-stashtab';
+	readonly stashtab_name: string;
+	readonly sample: DivinationCardsSample;
+	readonly league: League;
+	constructor(
+		{
+			stashtab_name,
+			sample,
+			league,
+		}: {
+			stashtab_name: string;
+			sample: DivinationCardsSample;
+			league: League;
+		},
+		options?: EventInit
+	) {
+		super(SampleFromStashtabEvent.tag, options);
+		this.stashtab_name = stashtab_name;
+		this.sample = sample;
 		this.league = league;
 	}
 }
