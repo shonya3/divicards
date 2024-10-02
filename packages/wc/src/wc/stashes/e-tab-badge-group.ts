@@ -14,7 +14,8 @@ import SlCheckbox from '@shoelace-style/shoelace/dist/components/checkbox/checkb
 import { NoItemsTab } from 'poe-custom-elements/types.js';
 import { PageChangeEvent } from '../events/change/page';
 import { PerPageChangeEvent } from '../events/change/per_page';
-import { SelectedTabsChangeEvent, TabClickEvent, TabSelectEvent } from './events';
+import { SelectedTabsChangeEvent } from './events';
+import { TabClickEvent, TabSelectEvent } from './e-tab-badge';
 
 declare global {
 	interface HTMLElementTagNameMap {

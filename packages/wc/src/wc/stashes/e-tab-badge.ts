@@ -3,7 +3,6 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { REMOVE_ONLY } from './e-tab-badge-group';
 import { NoItemsTab } from 'poe-custom-elements/types.js';
-import { TabClickEvent, TabSelectEvent } from './events';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -173,4 +172,31 @@ export class TabBadgeElement extends LitElement {
 			}
 		}
 	`;
+}
+
+declare global {
+	interface HTMLElementEventMap {
+		'stashes__tab-select': TabSelectEvent;
+		'stashes__tab-click': TabClickEvent;
+	}
+}
+
+export class TabSelectEvent extends Event {
+	static readonly tag = 'stashes__tab-select';
+	tab: NoItemsTab;
+	selected: boolean;
+	constructor(tab: NoItemsTab, selected: boolean, options?: EventInit) {
+		super(TabSelectEvent.tag, options);
+		this.tab = tab;
+		this.selected = selected;
+	}
+}
+
+export class TabClickEvent extends Event {
+	static readonly tag = 'stashes__tab-click';
+	tab: NoItemsTab;
+	constructor(tab: NoItemsTab, options?: EventInit) {
+		super(TabClickEvent.tag, options);
+		this.tab = tab;
+	}
 }

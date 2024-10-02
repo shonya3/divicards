@@ -20,8 +20,9 @@ import { Task } from '@lit/task';
 import { StashTabContainerElement } from './e-stash-tab-container';
 import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
 import { LeagueChangeEvent } from '../events/change/league';
-import { SelectedTabsChangeEvent, TabClickEvent } from './events';
+import { SelectedTabsChangeEvent } from './events';
 import { MultiselectChangeEvent } from './e-tab-badge-group';
+import { TabClickEvent } from './e-tab-badge';
 
 const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
