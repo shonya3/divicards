@@ -16,7 +16,6 @@ import SlRange from '@shoelace-style/shoelace/dist/components/range/range.js';
 import './e-sample-table/e-sample-table';
 import '../e-base-popup';
 import { SampleTableElement } from './e-sample-table/e-sample-table';
-import { emit } from '../../utils';
 import { LeagueChangeEvent } from '../events/change/league';
 
 export interface Props {
@@ -28,16 +27,13 @@ export interface Props {
 	sample: DivinationCardsSample;
 }
 
-export interface Events {
-	'change:league': LeagueChangeEvent;
-	'upd:minimumCardPrice': SampleCardElement['minimumCardPrice'];
-	'google-sheets-clicked': { sample: DivinationCardsSample; league: League };
-	'save-to-file-clicked': { sample: DivinationCardsSample; league: League; filename: string };
-}
-
-export type Events2 = {
+export type Events = {
 	[DeleteThisSampleEvent.tag]: DeleteThisSampleEvent;
 	[SelectedChangeEvent.tag]: SelectedChangeEvent;
+	[LeagueChangeEvent.tag]: LeagueChangeEvent;
+	[SaveToFileClickEvent.tag]: SaveToFileClickEvent;
+	[GoogleSheetsClickEvent.tag]: GoogleSheetsClickEvent;
+	[MinimumCardsPriceChangeEvent.tag]: MinimumCardsPriceChangeEvent;
 };
 
 const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
@@ -48,7 +44,7 @@ export class SampleCardElement extends LitElement {
 	@property({ reflect: true }) filename: string = 'NO FILE NAMENO FILE NAME';
 	@property({ type: Boolean, reflect: true }) selected: boolean | null = false;
 	@property({ reflect: true }) uuid: string = 'NO ID';
-	@property({ type: Number, reflect: true, attribute: 'minimum-card-price' }) minimumCardPrice: number = 0;
+	@property({ type: Number, reflect: true, attribute: 'minimum-card-price' }) minimum_card_price: number = 0;
 	@property({ type: Object }) sample: DivinationCardsSample = { notCards: [], fixedNames: [], cards: [] };
 
 	@query('e-base-popup#table-popup') tablePopup!: BasePopupElement;
@@ -99,7 +95,7 @@ export class SampleCardElement extends LitElement {
 				id=""
 				min="0"
 				max="500"
-				.value=${this.minimumCardPrice}
+				.value=${this.minimum_card_price}
 				@sl-input=${this.#onMinPriceRange}
 			></sl-range>
 			<div class="total-price">
@@ -116,11 +112,11 @@ export class SampleCardElement extends LitElement {
 				@change:league=${this.#handle_league_change}
 			></e-league-select>
 			<div class="export-buttons">
-				<sl-button size="large" @click=${this.#onSaveToFileClicked}>
+				<sl-button size="large" @click=${this.#emit_save_to_file_click}>
 					<sl-icon style="font-size:1.6rem" name="filetype-csv"></sl-icon>
 					Save to file</sl-button
 				>
-				<sl-button @click=${this.#emitGoogleSheetsClicked} size="large">
+				<sl-button @click=${this.#emit_google_sheets_click} size="large">
 					<sl-icon style="font-size:1.6rem" name="file-earmark-spreadsheet"></sl-icon>
 					Export to Google Sheets</sl-button
 				>
@@ -142,7 +138,7 @@ export class SampleCardElement extends LitElement {
 
 	get filteredCards() {
 		return this.sample.cards.filter(card => {
-			return (card.price ?? 0) >= this.minimumCardPrice;
+			return (card.price ?? 0) >= this.minimum_card_price;
 		});
 	}
 
@@ -161,19 +157,18 @@ export class SampleCardElement extends LitElement {
 		};
 	}
 
-	#onSaveToFileClicked() {
-		emit<Events['save-to-file-clicked']>(this, 'save-to-file-clicked', {
-			sample: this.sample,
-			league: this.league,
-			filename: this.filename,
-		});
+	#emit_save_to_file_click() {
+		this.dispatchEvent(
+			new SaveToFileClickEvent({
+				sample: this.sample,
+				league: this.league,
+				filename: this.filename,
+			})
+		);
 	}
 
-	#emitGoogleSheetsClicked(): void {
-		emit<Events['google-sheets-clicked']>(this, 'google-sheets-clicked', {
-			sample: this.sample,
-			league: this.league,
-		});
+	#emit_google_sheets_click(): void {
+		this.dispatchEvent(new GoogleSheetsClickEvent(this.sample, this.league));
 	}
 
 	#openSampleTablePopup(): void {
@@ -202,9 +197,8 @@ export class SampleCardElement extends LitElement {
 		if (!(e.target && 'value' in e.target)) {
 			return;
 		}
-
-		this.minimumCardPrice = Number(e.target.value);
-		emit<Events['upd:minimumCardPrice']>(this, 'upd:minimumCardPrice', this.minimumCardPrice);
+		this.minimum_card_price = Number(e.target.value);
+		this.dispatchEvent(new MinimumCardsPriceChangeEvent(this.minimum_card_price));
 	}
 
 	static override styles = [
@@ -372,5 +366,63 @@ export class SelectedChangeEvent extends Event {
 	constructor(selected: boolean | null, options?: EventInit) {
 		super(SelectedChangeEvent.tag, options);
 		this.selected = selected;
+	}
+}
+
+declare global {
+	interface HTMLElementEventMap {
+		'sample__change:minimum_card_price': MinimumCardsPriceChangeEvent;
+	}
+}
+export class MinimumCardsPriceChangeEvent extends Event {
+	static readonly tag = 'sample__change:minimum_card_price';
+	minimum_card_price: number;
+
+	constructor(minimum_card_price: number, options?: EventInit) {
+		super(MinimumCardsPriceChangeEvent.tag, options);
+		this.minimum_card_price = minimum_card_price;
+	}
+}
+
+declare global {
+	interface HTMLElementEventMap {
+		'sample__google-sheets-click': GoogleSheetsClickEvent;
+	}
+}
+export class GoogleSheetsClickEvent extends Event {
+	static readonly tag = 'sample__google-sheets-click';
+	readonly sample: DivinationCardsSample;
+	readonly league: League;
+
+	constructor(sample: DivinationCardsSample, league: League, options?: EventInit) {
+		super(GoogleSheetsClickEvent.tag, options);
+		this.sample = sample;
+		this.league = league;
+	}
+}
+
+declare global {
+	interface HTMLElementEventMap {
+		'sample__save-to-file-click': SaveToFileClickEvent;
+	}
+}
+export class SaveToFileClickEvent extends Event {
+	static readonly tag = 'sample__save-to-file-click';
+	readonly sample: DivinationCardsSample;
+	readonly league: League;
+	readonly filename: string;
+
+	constructor(
+		args: {
+			sample: DivinationCardsSample;
+			league: League;
+			filename: string;
+		},
+		options?: EventInit
+	) {
+		super(SaveToFileClickEvent.tag, options);
+		this.sample = args.sample;
+		this.league = args.league;
+		this.filename = args.filename;
 	}
 }
