@@ -8,15 +8,10 @@ import { TabWithItems } from 'poe-custom-elements/types.js';
 withDefaults(defineProps<StashesViewProps>(), { league: ACTIVE_LEAGUE });
 const emit = defineEmits<{
 	close: [];
-	'update:selectedTabs': [Set<string>];
 	'sample-from-tab': [name: string, sample: DivinationCardsSample, league: League];
 	'tab-with-items-loaded': [string, TabWithItems, League];
 	'extract-cards': [TabWithItems, League];
 }>();
-
-const onUpdSelectedTabs = (e: CustomEvent<Set<string>>) => {
-	emit('update:selectedTabs', e.detail);
-};
 
 const onSampleFromTab = (e: CustomEvent<Events['sample-from-tab']>) => {
 	emit('sample-from-tab', e.detail.name, e.detail.sample, e.detail.league);
@@ -36,7 +31,6 @@ const onExtractCards = (e: CustomEvent<Events['extract-cards']>) => {
 		:league="league"
 		:stashLoader="stashLoader"
 		@close="$emit('close')"
-		@upd:selectedTabs="onUpdSelectedTabs"
 		@sample-from-tab="onSampleFromTab"
 		@tab-with-items-loaded="onTabWithItemsLoaded"
 		@extract-cards="onExtractCards"

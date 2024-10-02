@@ -21,16 +21,14 @@ import { StashTabContainerElement } from './e-stash-tab-container';
 import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
 import { emit } from '../../utils';
 import { LeagueChangeEvent } from '../events/change/league';
-import { SelectedTabsChangeEvent, TabClickEvent, TabSelectEvent } from './events';
+import { SelectedTabsChangeEvent, TabClickEvent } from './events';
+import { MultiselectChangeEvent } from './e-tab-badge-group';
 
 const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
 
 export type Events = {
 	close: void;
-	/** from tab-badge-group */
-	'upd:nameQuery': string;
-	'upd:multiselect': boolean;
 	'extract-cards': { tab: TabWithItems; league: League };
 
 	'sample-from-tab': { sample: DivinationCardsSample; league: League; name: NoItemsTab['name'] };
@@ -39,8 +37,6 @@ export type Events = {
 };
 
 export type Events2 = {
-	[TabClickEvent.tag]: TabClickEvent;
-	[TabSelectEvent.tag]: TabSelectEvent;
 	[SelectedTabsChangeEvent.tag]: SelectedTabsChangeEvent;
 };
 
@@ -184,7 +180,7 @@ export class StashesViewElement extends LitElement {
 				.selected_tabs=${this.selected_tabs}
 				.errors=${this.errors}
 				.hoveredErrorTabId=${this.hoveredErrorTabId}
-				@upd:multiselect=${this.#handleUpdMultiselect}
+				@change:multiselect=${this.#change_multiselect}
 				@change:selected_tabs=${this.#handle_selected_tabs_change}
 				.badgesDisabled=${this.stashLoadsAvailable === 0 || this.availableInTenSeconds === 0}
 			></e-tab-badge-group>
@@ -250,8 +246,8 @@ export class StashesViewElement extends LitElement {
 	#handle_tab_badge_click(e: TabClickEvent): void {
 		this.opened_tab = e.tab;
 	}
-	#handleUpdMultiselect(e: CustomEvent<boolean>) {
-		this.multiselect = e.detail;
+	#change_multiselect(e: MultiselectChangeEvent): void {
+		this.multiselect = e.multiselect;
 	}
 	#emitExtractCards(e: Event) {
 		const tab = (e.target as StashTabContainerElement)?.tab;

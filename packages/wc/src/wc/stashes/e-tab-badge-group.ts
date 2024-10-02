@@ -12,7 +12,6 @@ import { ErrorLabel } from './types';
 import { classMap } from 'lit/directives/class-map.js';
 import SlCheckbox from '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
 import { NoItemsTab } from 'poe-custom-elements/types.js';
-import { emit } from '../../utils';
 import { PageChangeEvent } from '../events/change/page';
 import { PerPageChangeEvent } from '../events/change/per_page';
 import { SelectedTabsChangeEvent, TabClickEvent, TabSelectEvent } from './events';
@@ -29,12 +28,10 @@ export type Events = {
 	[PageChangeEvent.tag]: PageChangeEvent;
 	[PerPageChangeEvent.tag]: PerPageChangeEvent;
 	[SelectedTabsChangeEvent.tag]: SelectedTabsChangeEvent;
+	[MultiselectChangeEvent.tag]: MultiselectChangeEvent;
 
 	/** composed from e-tab-badge */
 	[TabClickEvent.tag]: TabClickEvent;
-
-	'upd:nameQuery': string;
-	'upd:multiselect': boolean;
 };
 
 @customElement('e-tab-badge-group')
@@ -49,7 +46,8 @@ export class TabBadgeGroupElement extends LitElement {
 	@property() hoveredErrorTabId: string | null = null;
 	@property({ type: Number, reflect: true }) perPage = 50;
 	@property({ type: Number, reflect: true }) page = 1;
-	@property() nameQuery = '';
+	/** Query for searching stashtab by name */
+	@property() stashtab_name_query = '';
 	@property({ type: Object }) selected_tabs: Map<
 		NoItemsTab['id'],
 		{ id: NoItemsTab['id']; name: NoItemsTab['name'] }
@@ -76,7 +74,7 @@ export class TabBadgeGroupElement extends LitElement {
 		return shouldUnlockHideRemoveOnly(this.league, this.stashes);
 	}
 	get filtered() {
-		return filter(this.stashes, this.nameQuery, this.shouldFilter, this.hideRemoveOnly);
+		return filter(this.stashes, this.stashtab_name_query, this.shouldFilter, this.hideRemoveOnly);
 	}
 	get paginated() {
 		return paginate(this.filtered, this.page, this.perPage);
@@ -100,8 +98,8 @@ export class TabBadgeGroupElement extends LitElement {
 								<sl-input
 									type="text"
 									id="filter-stashes-by-name"
-									.value=${this.nameQuery}
-									@input=${this.#onNameQueryInput}
+									.value=${this.stashtab_name_query}
+									@input=${this.#change_query}
 									.helpText=${`Search tab by name`}
 								></sl-input>
 								<e-pagination
@@ -114,7 +112,7 @@ export class TabBadgeGroupElement extends LitElement {
 								<div class="header__right">
 									<div class="multiselect">
 										<sl-checkbox
-											@sl-change=${this.#onMultiselectChange}
+											@sl-change=${this.#change_multiselect_and_emit}
 											.checked=${this.multiselect}
 											>Multiselect</sl-checkbox
 										>
@@ -168,9 +166,8 @@ export class TabBadgeGroupElement extends LitElement {
 		this.perPage = per_page;
 		this.dispatchEvent(new PerPageChangeEvent(per_page));
 	}
-	#onNameQueryInput() {
-		this.nameQuery = this.nameQueryInput.value;
-		emit<Events['upd:nameQuery']>(this, 'upd:nameQuery', this.nameQuery);
+	#change_query(e: InputEvent): void {
+		this.stashtab_name_query = (e.target as HTMLInputElement).value;
 	}
 	#handle_tab_select({ tab, selected }: TabSelectEvent): void {
 		const { id, name } = tab;
@@ -178,9 +175,9 @@ export class TabBadgeGroupElement extends LitElement {
 		this.selected_tabs = new Map(this.selected_tabs);
 		this.dispatchEvent(new SelectedTabsChangeEvent(this.selected_tabs));
 	}
-	#onMultiselectChange(e: InputEvent) {
+	#change_multiselect_and_emit(e: InputEvent): void {
 		this.multiselect = (e.target as SlCheckbox).checked;
-		emit<Events['upd:multiselect']>(this, 'upd:multiselect', this.multiselect);
+		this.dispatchEvent(new MultiselectChangeEvent(this.multiselect));
 	}
 	decreasePage() {
 		if (this.page > 1) {
@@ -281,4 +278,18 @@ function paginate(stashes: NoItemsTab[], page: number, perPage: number) {
 
 function shouldUnlockHideRemoveOnly(league: League, stashes: NoItemsTab[]) {
 	return isPermanentLeague(league) && stashes.some(({ name }) => name.includes(REMOVE_ONLY));
+}
+
+declare global {
+	interface HTMLElementEventMap {
+		'change:multiselect': MultiselectChangeEvent;
+	}
+}
+export class MultiselectChangeEvent extends Event {
+	static readonly tag = 'change:multiselect';
+	readonly multiselect: boolean;
+	constructor(multiselect: boolean, options?: EventInit) {
+		super(MultiselectChangeEvent.tag, options);
+		this.multiselect = multiselect;
+	}
 }
