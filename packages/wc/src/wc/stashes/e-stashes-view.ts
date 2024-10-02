@@ -19,7 +19,6 @@ import './e-stash-tab-container';
 import { Task } from '@lit/task';
 import { StashTabContainerElement } from './e-stash-tab-container';
 import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
-import { emit } from '../../utils';
 import { LeagueChangeEvent } from '../events/change/league';
 import { SelectedTabsChangeEvent, TabClickEvent } from './events';
 import { MultiselectChangeEvent } from './e-tab-badge-group';
@@ -28,15 +27,12 @@ const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
 
 export type Events = {
-	'tab-with-items-loaded': { tab: TabWithItems; league: League; name: string };
-};
-
-export type Events2 = {
 	[CloseEvent.tag]: CloseEvent;
 	[SelectedTabsChangeEvent.tag]: SelectedTabsChangeEvent;
 	[StashtabsBadgesFetchedEvent.tag]: StashtabsBadgesFetchedEvent;
 	[ExtractCardsEvent.tag]: ExtractCardsEvent;
 	[SampleFromStashtabEvent.tag]: SampleFromStashtabEvent;
+	[StashtabFetchedEvent.tag]: StashtabFetchedEvent;
 };
 
 export interface StashesViewProps {
@@ -298,13 +294,14 @@ export class StashesViewElement extends LitElement {
 							break;
 						}
 						case 'general-tab': {
-							const tab = await this.#loadSingleTabContent(id, league, this.stashLoader.tab);
-							tab.name = stashtab_name;
-							emit<Events['tab-with-items-loaded']>(this, 'tab-with-items-loaded', {
-								tab,
-								name: stashtab_name,
-								league,
-							});
+							const stashtab = await this.#loadSingleTabContent(id, league, this.stashLoader.tab);
+							// emit<Events['tab-with-items-loaded']>(this, 'tab-with-items-loaded', {
+							// 	tab,
+							// 	name: stashtab_name,
+							// 	league,
+							// });
+							this.dispatchEvent(new StashtabFetchedEvent(stashtab, this.league));
+
 							break;
 						}
 					}
@@ -458,6 +455,23 @@ export class SampleFromStashtabEvent extends Event {
 		super(SampleFromStashtabEvent.tag, options);
 		this.stashtab_name = stashtab_name;
 		this.sample = sample;
+		this.league = league;
+	}
+}
+
+declare global {
+	interface HTMLElementEventMap {
+		'stashes__stashtab-fetched': StashtabFetchedEvent;
+	}
+}
+export class StashtabFetchedEvent extends Event {
+	static readonly tag = 'stashes__stashtab-fetched';
+	readonly stashtab: TabWithItems;
+	readonly league: League;
+
+	constructor(stashtab: TabWithItems, league: League, options?: EventInit) {
+		super(StashtabFetchedEvent.tag, options);
+		this.stashtab = stashtab;
 		this.league = league;
 	}
 }

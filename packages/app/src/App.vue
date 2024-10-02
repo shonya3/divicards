@@ -195,7 +195,7 @@ const extractCards = async (tab: TabWithItems, league: League) => {
 			<StashesView
 				:stashLoader="stashLoader"
 				@sample-from-tab="sampleStore.addSample"
-				@tab-with-items-loaded="onTabWithItemsLoaded"
+				@stashtab-fetched="onTabWithItemsLoaded"
 				@close="stashVisible = false"
 				@extract-cards="extractCards"
 			/>

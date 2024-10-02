@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Events } from '@divicards/wc/src/wc/stashes/e-stashes-view';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import type {
 	ExtractCardsEvent,
 	SampleFromStashtabEvent,
 	StashesViewProps,
+	StashtabFetchedEvent,
 } from '@divicards/wc/src/wc/stashes/e-stashes-view';
 import '@divicards/wc/src/wc/stashes/e-stashes-view';
 import type { DivinationCardsSample, League } from '@divicards/shared/types';
@@ -13,19 +13,19 @@ withDefaults(defineProps<StashesViewProps>(), { league: ACTIVE_LEAGUE });
 const emit = defineEmits<{
 	close: [];
 	'sample-from-tab': [stashtab_name: string, sample: DivinationCardsSample, league: League];
-	'tab-with-items-loaded': [string, TabWithItems, League];
+	'stashtab-fetched': [string, TabWithItems, League];
 	'extract-cards': [TabWithItems, League];
 }>();
 
-const onSampleFromTab = ({ stashtab_name, sample, league }: SampleFromStashtabEvent) => {
+const emit_sample_from_tab = ({ stashtab_name, sample, league }: SampleFromStashtabEvent) => {
 	emit('sample-from-tab', stashtab_name, sample, league);
 };
 
-const onTabWithItemsLoaded = (e: CustomEvent<Events['tab-with-items-loaded']>) => {
-	emit('tab-with-items-loaded', e.detail.name, e.detail.tab, e.detail.league);
+const emit_stashtabs_fetched = ({ stashtab, league }: StashtabFetchedEvent) => {
+	emit('stashtab-fetched', stashtab.name, stashtab, league);
 };
 
-const onExtractCards = ({ tab, league }: ExtractCardsEvent) => {
+const emit_extract_cards = ({ tab, league }: ExtractCardsEvent) => {
 	emit('extract-cards', tab, league);
 };
 </script>
@@ -35,9 +35,9 @@ const onExtractCards = ({ tab, league }: ExtractCardsEvent) => {
 		:league="league"
 		:stashLoader="stashLoader"
 		@stashes__close="$emit('close')"
-		@stashes__sample-from-stashtab="onSampleFromTab"
-		@tab-with-items-loaded="onTabWithItemsLoaded"
-		@stashes__extract-cards="onExtractCards"
+		@stashes__sample-from-stashtab="emit_sample_from_tab"
+		@stashes__stashtab-fetched="emit_stashtabs_fetched"
+		@stashes__extract-cards="emit_extract_cards"
 	></e-stashes-view>
 </template>
 
