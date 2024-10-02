@@ -28,11 +28,8 @@ const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
 
 export type Events = {
-	'extract-cards': { tab: TabWithItems; league: League };
-
 	'sample-from-tab': { sample: DivinationCardsSample; league: League; name: NoItemsTab['name'] };
 	'tab-with-items-loaded': { tab: TabWithItems; league: League; name: string };
-	tabs: NoItemsTab[];
 };
 
 export type Events2 = {
@@ -254,7 +251,8 @@ export class StashesViewElement extends LitElement {
 	#emitExtractCards(e: Event) {
 		const tab = (e.target as StashTabContainerElement)?.tab;
 		if (tab) {
-			emit<Events['extract-cards']>(this, 'extract-cards', { tab: tab, league: this.league });
+			// emit<Events['extract-cards']>(this, 'extract-cards', { tab: tab, league: this.league });
+			this.dispatchEvent(new ExtractCardsEvent(tab, this.league));
 		}
 	}
 	#handleTabContainerClose() {
@@ -420,5 +418,21 @@ export class StashtabsBadgesFetchedEvent extends Event {
 	constructor(stashtabs_badges: Array<NoItemsTab>, options?: EventInit) {
 		super(StashtabsBadgesFetchedEvent.tag, options);
 		this.stashtabs_badges = stashtabs_badges;
+	}
+}
+
+declare global {
+	interface HTMLElementEventMap {
+		'stashes__extract-cards': ExtractCardsEvent;
+	}
+}
+export class ExtractCardsEvent extends Event {
+	static readonly tag = 'stashes__extract-cards';
+	readonly tab: TabWithItems;
+	readonly league: League;
+	constructor(tab: TabWithItems, league: League, options?: EventInit) {
+		super(ExtractCardsEvent.tag, options);
+		this.tab = tab;
+		this.league = league;
 	}
 }

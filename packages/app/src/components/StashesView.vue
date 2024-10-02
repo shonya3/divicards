@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Events } from '@divicards/wc/src/wc/stashes/e-stashes-view';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
-import type { StashesViewProps } from '@divicards/wc/src/wc/stashes/e-stashes-view';
+import type { ExtractCardsEvent, StashesViewProps } from '@divicards/wc/src/wc/stashes/e-stashes-view';
 import '@divicards/wc/src/wc/stashes/e-stashes-view';
 import type { DivinationCardsSample, League } from '@divicards/shared/types';
 import { TabWithItems } from 'poe-custom-elements/types.js';
@@ -21,8 +21,8 @@ const onTabWithItemsLoaded = (e: CustomEvent<Events['tab-with-items-loaded']>) =
 	emit('tab-with-items-loaded', e.detail.name, e.detail.tab, e.detail.league);
 };
 
-const onExtractCards = (e: CustomEvent<Events['extract-cards']>) => {
-	emit('extract-cards', e.detail.tab, e.detail.league);
+const onExtractCards = ({ tab, league }: ExtractCardsEvent) => {
+	emit('extract-cards', tab, league);
 };
 </script>
 
