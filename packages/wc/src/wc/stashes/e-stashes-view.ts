@@ -36,6 +36,7 @@ export type Events2 = {
 	[CloseEvent.tag]: CloseEvent;
 	[SelectedTabsChangeEvent.tag]: SelectedTabsChangeEvent;
 	[StashtabsBadgesFetchedEvent.tag]: StashtabsBadgesFetchedEvent;
+	[ExtractCardsEvent.tag]: ExtractCardsEvent;
 };
 
 export interface StashesViewProps {
