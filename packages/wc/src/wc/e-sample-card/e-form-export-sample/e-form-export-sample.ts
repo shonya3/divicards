@@ -19,26 +19,12 @@ export interface Props {
 }
 
 export interface Events {
-	// 'upd:columns': FormExportSampleElement['columns'];
-	// 'upd:order': FormExportSampleElement['order'];
-	// 'upd:orderedBy': FormExportSampleElement['orderedBy'];
-	// 'upd:cardsMustHaveAmount': FormExportSampleElement['cardsMustHaveAmount'];
-	// 'upd:minPrice': FormExportSampleElement['minPrice'];
-	'upd:sheetTitle': FormExportSampleElement['sheetTitle'];
-	'upd:tablePreferences': TablePreferences;
-	'upd:spreadsheetId': FormExportSampleElement['spreadsheetId'];
 	submit: Props;
 }
 
 @customElement('e-form-export-sample')
 export class FormExportSampleElement extends LitElement {
 	static override styles = [styles()];
-
-	// @property({ reflect: true }) order: Order = 'desc';
-	// @property({ attribute: false }) columns: Set<Column> = new Set(['name', 'amount']);
-	// @property({ reflect: true }) orderedBy: Column = 'amount';
-	// @property({ type: Boolean }) cardsMustHaveAmount: boolean = false;
-	// @property({ type: Number }) minPrice = 0;
 
 	@property({ type: Object }) table_preferences: TablePreferences = {
 		order: 'desc',
@@ -47,21 +33,10 @@ export class FormExportSampleElement extends LitElement {
 		cardsMustHaveAmount: false,
 		minPrice: 0,
 	};
-
 	@property({ reflect: true, attribute: 'spreadsheet-id' }) spreadsheetId: string = '';
 	@property({ reflect: true, attribute: 'sheet-title' }) sheetTitle: string = '';
 	@property({ attribute: false, reflect: true }) error: string | null = null;
 	@property({ reflect: true }) to: To = 'sheets';
-
-	// get tablePreferences(): TablePreferences {
-	// 	return {
-	// 		order: this.order,
-	// 		columns: this.columns,
-	// 		orderedBy: this.orderedBy,
-	// 		cardsMustHaveAmount: this.cardsMustHaveAmount,
-	// 		minPrice: this.minPrice,
-	// 	};
-	// }
 
 	#onColumnCheckbox(e: InputEvent, column: Column) {
 		if (!(e.target instanceof HTMLInputElement)) {
