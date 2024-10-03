@@ -59,17 +59,17 @@ describe('<wc-sample-card>', () => {
 		expect(event.detail).to.be.equal(el.uuid);
 	});
 
-	it('emits upd:minimumCardPrice on slider', async () => {
+	it('emits upd:minimum_card_price on slider', async () => {
 		await el.updateComplete;
 		const spy = sinon.spy();
-		el.addEventListener('upd:minimumCardPrice', spy);
+		el.addEventListener('upd:minimum_card_price', spy);
 		el.priceSlider.focus();
 		await sendKeys({ press: 'ArrowRight' });
 		await el.updateComplete;
 
 		const event = spy.args[0][0];
 		expect(spy).to.be.calledOnce;
-		expect(event.detail).to.be.equal(el.minimumCardPrice);
+		expect(event.detail).to.be.equal(el.minimum_card_price);
 	});
 
 	it('table cards get updated when filecard cards get updated', async () => {
