@@ -19,7 +19,7 @@ import { SampleTableElement } from './e-sample-table/e-sample-table';
 import { LeagueChangeEvent } from '../events/change/league';
 import './e-form-export-sample/e-form-export-sample';
 import '../e-base-popup';
-// import { Props as ExportSampleState } from './e-form-export-sample/e-form-export-sample';
+import { ExportFormArgs, ExportSampleTo, PresubmitExportFormEvent } from './e-form-export-sample/e-form-export-sample';
 
 export interface Props {
 	league?: TradeLeague;
@@ -37,6 +37,7 @@ export type Events = {
 	[SaveToFileClickEvent.tag]: SaveToFileClickEvent;
 	[GoogleSheetsClickEvent.tag]: GoogleSheetsClickEvent;
 	[MinimumCardsPriceChangeEvent.tag]: MinimumCardsPriceChangeEvent;
+	[SubmitExportSampleEvent.tag]: SubmitExportSampleEvent;
 };
 
 const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
@@ -56,13 +57,22 @@ export class SampleCardElement extends LitElement {
 	@query('#minimum-card-price-slider') priceSlider!: HTMLInputElement;
 	@query('e-sample-table') table!: SampleTableElement;
 	@query('sl-range') rangeEl!: SlRange;
+	/** Export sample form popup. */
+	@query('#form_popup') form_popup!: BasePopupElement;
 
 	@state() export_sample_form_state = {};
+	/** Export the cards sample to file or to google sheets */
+	@state() export_sample_to: ExportSampleTo = 'file';
 
 	constructor() {
 		super();
-		this.addEventListener('sample__save-to-file-click', e => {
-			console.log(e);
+		this.addEventListener('sample__save-to-file-click', () => {
+			this.export_sample_to = 'file';
+			this.form_popup.open = true;
+		});
+		this.addEventListener('sample__google-sheets-click', () => {
+			this.export_sample_to = 'sheets';
+			this.form_popup.open = true;
 		});
 	}
 
@@ -73,8 +83,11 @@ export class SampleCardElement extends LitElement {
 				'sample-card--selected': Boolean(this.selected),
 			})}
 		>
-			<e-base-popup>
-				<e-form-export-sample></e-form-export-sample>
+			<e-base-popup id="form_popup">
+				<e-form-export-sample
+					.export_sample_to=${this.export_sample_to}
+					@sample__presubmit=${this.#handle_presubmit}
+				></e-form-export-sample>
 			</e-base-popup>
 
 			<p class="filename">${this.filename}</p>
@@ -171,6 +184,23 @@ export class SampleCardElement extends LitElement {
 			amount,
 			value,
 		};
+	}
+
+	#handle_presubmit(e: PresubmitExportFormEvent) {
+		this.dispatchEvent(
+			new SubmitExportSampleEvent({
+				form_args: {
+					error: e.error,
+					export_sample_to: e.export_sample_to,
+					preferences: e.preferences,
+					sheetTitle: e.sheetTitle,
+					spreadsheetId: e.spreadsheetId,
+				},
+				league: this.league,
+				sample: this.sample,
+				filename: this.filename,
+			})
+		);
 	}
 
 	#emit_save_to_file_click() {
@@ -440,5 +470,32 @@ export class SaveToFileClickEvent extends Event {
 		this.sample = args.sample;
 		this.league = args.league;
 		this.filename = args.filename;
+	}
+}
+
+declare global {
+	interface HTMLElementEventMap {
+		'sample__submit-export-sample': SubmitExportSampleEvent;
+	}
+}
+export class SubmitExportSampleEvent extends PresubmitExportFormEvent {
+	static readonly tag = 'sample__submit-export-sample';
+	sample: DivinationCardsSample;
+	league: League;
+	filename: string;
+
+	constructor(
+		{
+			form_args,
+			sample,
+			league,
+			filename,
+		}: { filename: string; form_args: ExportFormArgs; sample: DivinationCardsSample; league: League },
+		options?: EventInit
+	) {
+		super(form_args, SubmitExportSampleEvent.tag, options);
+		this.sample = sample;
+		this.league = league;
+		this.filename = filename;
 	}
 }

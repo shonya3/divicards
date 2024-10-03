@@ -3,18 +3,18 @@ import { customElement, property } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import { Column, TablePreferences } from '@divicards/shared/types';
 import '../../e-help-tip';
-import { emit } from '../../../utils';
+// import { emit } from '../../../utils';
 
-export type To = 'file' | 'sheets';
+export type ExportSampleTo = 'file' | 'sheets';
 const isColumn = (s: unknown): s is Column => {
 	return s === 'name' || s === 'amount' || s === 'weight' || s === 'price';
 };
 
 export interface Props {
-	spreadsheetId: string;
-	sheetTitle: string;
+	spreadsheetId?: string;
+	sheetTitle?: string;
 	preferences: TablePreferences;
-	to: To;
+	export_sample_to: ExportSampleTo;
 	error: string | null;
 }
 
@@ -36,7 +36,7 @@ export class FormExportSampleElement extends LitElement {
 	@property({ reflect: true, attribute: 'spreadsheet-id' }) spreadsheetId: string = '';
 	@property({ reflect: true, attribute: 'sheet-title' }) sheetTitle: string = '';
 	@property({ attribute: false, reflect: true }) error: string | null = null;
-	@property({ reflect: true }) to: To = 'sheets';
+	@property({ reflect: true }) export_sample_to: ExportSampleTo = 'sheets';
 
 	#onColumnCheckbox(e: InputEvent, column: Column) {
 		if (!(e.target instanceof HTMLInputElement)) {
@@ -98,19 +98,19 @@ export class FormExportSampleElement extends LitElement {
 	#onSubmit(e: SubmitEvent) {
 		e.preventDefault();
 
-		const props: Props = {
-			spreadsheetId: this.spreadsheetId,
-			sheetTitle: this.sheetTitle,
-			preferences: this.table_preferences,
-			to: this.to,
-			error: this.error,
-		};
-
-		emit<Events['submit']>(this, 'submit', props);
+		this.dispatchEvent(
+			new PresubmitExportFormEvent({
+				spreadsheetId: this.spreadsheetId,
+				sheetTitle: this.sheetTitle,
+				preferences: this.table_preferences,
+				export_sample_to: this.export_sample_to,
+				error: this.error,
+			})
+		);
 	}
 	protected override render() {
 		return html`<div id="root">
-			${this.to === 'sheets' ? this.sheetsFieldset() : nothing}
+			${this.export_sample_to === 'sheets' ? this.sheetsFieldset() : nothing}
 			<form @submit=${this.#onSubmit} id="form">
 				<fieldset style="margin-top: 0.5rem">
 					<legend>Table Preferences</legend>
@@ -314,5 +314,38 @@ function styles() {
 declare global {
 	interface HTMLElementTagNameMap {
 		'e-form-export-sample': FormExportSampleElement;
+	}
+}
+
+declare global {
+	interface HTMLElementEventMap {
+		sample__presubmit: PresubmitExportFormEvent;
+	}
+}
+export interface ExportFormArgs {
+	spreadsheetId?: string;
+	sheetTitle?: string;
+	preferences: TablePreferences;
+	export_sample_to: ExportSampleTo;
+	error: string | null;
+}
+export class PresubmitExportFormEvent extends Event {
+	readonly export_sample_to: ExportSampleTo;
+	readonly spreadsheetId?: string;
+	readonly sheetTitle?: string;
+	readonly preferences: TablePreferences;
+	readonly error: string | null = null;
+
+	constructor(
+		{ spreadsheetId, sheetTitle, preferences, export_sample_to, error }: ExportFormArgs,
+		tag = 'sample__presubmit',
+		options?: EventInit
+	) {
+		super(tag, options);
+		this.spreadsheetId = spreadsheetId;
+		this.sheetTitle = sheetTitle;
+		this.preferences = preferences;
+		this.export_sample_to = export_sample_to;
+		this.error = error;
 	}
 }

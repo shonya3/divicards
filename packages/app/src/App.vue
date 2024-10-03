@@ -5,18 +5,13 @@ import { command } from './command';
 import { toast } from './toast';
 import { isTauriError } from './error';
 import { League } from '@divicards/shared/types';
-import { DivinationCardsSample } from '@divicards/shared/types';
 import { downloadText } from '@divicards/shared/lib';
 import { useSampleStore } from './stores/sample';
-import { useExportSampleStore } from './stores/exportSample';
 import { useGoogleAuthStore } from './stores/googleAuth';
 import { useAuthStore } from './stores/auth';
-import { useTablePreferencesStore } from './stores/tablePreferences';
 import { useAutoAnimate } from './composables/useAutoAnimate';
 import SampleCard from './components/SampleCard.vue';
 import StashesView from './components/StashesView.vue';
-import FormExportSample from './components/FormExportSample.vue';
-import { Props as FormExportProps } from '@divicards/wc/src/wc/e-sample-card/e-form-export-sample/e-form-export-sample';
 import '@shoelace-style/shoelace/dist/components/copy-button/copy-button.js';
 import { BasePopupElement } from '@divicards/wc/src/wc/e-base-popup';
 import UpdateChangelog from './components/UpdateChangelog.vue';
@@ -25,20 +20,18 @@ import { useAppVersion } from './composables/useAppVersion';
 import GeneralTabWithItems from './components/GeneralTabWithItems.vue';
 import { useTauriUpdater } from './composables/useTauriUpdater';
 import { TabWithItems } from 'poe-custom-elements/types.js';
+import { SampleCardElement, SubmitExportSampleEvent } from '@divicards/wc/src/wc/e-sample-card/e-sample-card';
 
 const dropZoneRef = shallowRef<HTMLElement | null>(null);
 const sampleStore = useSampleStore();
 const authStore = useAuthStore();
 const googleAuthStore = useGoogleAuthStore();
-const exportSample = useExportSampleStore();
-const tablePreferences = useTablePreferencesStore();
 const stashVisible = ref(false);
 const { releaseUrl, tag } = useAppVersion();
 const { update, installAndRelaunch } = useTauriUpdater();
 const stashLoader = new StashLoader();
 const tabsWithItems: Ref<TabWithItems[]> = ref<TabWithItems[]>([]);
 const changelogPopupRef = ref<BasePopupElement | null>(null);
-const formPopupExportRef = ref<BasePopupElement | null>(null);
 const samplesContainerRef = ref<HTMLElement | null>(null) as Ref<HTMLElement | null>;
 useAutoAnimate(samplesContainerRef);
 
@@ -48,65 +41,57 @@ const openStashWindow = async () => {
 	}
 	stashVisible.value = true;
 };
-const onSaveToFileClicked = (sample: DivinationCardsSample, league: League, filename: string) => {
-	const name = filename.includes('.') ? filename : `${filename}.csv`;
-	if (!formPopupExportRef.value) return;
-	exportSample.to = 'file';
-	exportSample.filename = name;
-	exportSample.sample = sample;
-	exportSample.league = league;
-	formPopupExportRef.value.showModal();
-};
-const onGoogleSheetsClicked = (sample: DivinationCardsSample, league: League) => {
-	if (!formPopupExportRef.value) return;
-	exportSample.to = 'sheets';
-	exportSample.sample = sample;
-	exportSample.league = league;
-	formPopupExportRef.value.showModal();
-};
-const onSubmit = async ({ spreadsheetId, sheetTitle, preferences: table_preferences }: FormExportProps) => {
-	const sample = exportSample.sample;
-	const league = exportSample.league;
-	if (!sample) {
-		throw new Error('No sample to sheets');
-	}
-	if (!league) {
-		throw new Error('No league to sheets');
-	}
 
+async function export_sample({
+	spreadsheetId,
+	sheetTitle,
+	preferences: table_preferences,
+	sample,
+	league,
+	export_sample_to,
+	filename,
+	target,
+}: SubmitExportSampleEvent) {
 	const preferences = { ...table_preferences, columns: Array.from(table_preferences.columns) };
 
-	if (exportSample.to === 'sheets') {
-		if (!googleAuthStore.loggedIn) {
-			await googleAuthStore.login();
+	switch (export_sample_to) {
+		case 'file': {
+			const csv = await command('sample_into_csv', { sample, preferences });
+			downloadText(filename, csv);
+			(target as SampleCardElement).form_popup.open = false;
+			break;
 		}
-		try {
-			const url = await command('new_sheet_with_sample', {
-				spreadsheetId,
-				title: sheetTitle,
-				sample,
-				preferences,
-				league,
-			});
-			toast('success', 'New sheet created successfully');
-			formPopupExportRef.value?.close();
-			command('open_url', { url });
-			tablePreferences.rememberSpreadsheetId(spreadsheetId);
-		} catch (err) {
-			if (isTauriError(err)) {
-				exportSample.sheetsError = err.message;
-			} else {
-				console.log(err);
-				formPopupExportRef.value?.close();
-				throw err;
+
+		case 'sheets': {
+			if (!googleAuthStore.loggedIn) {
+				await googleAuthStore.login();
 			}
+			try {
+				const url = await command('new_sheet_with_sample', {
+					spreadsheetId: spreadsheetId ?? '',
+					title: sheetTitle ?? '',
+					sample,
+					preferences,
+					league,
+				});
+				toast('success', 'New sheet created successfully');
+				(target as SampleCardElement).form_popup.open = false;
+				command('open_url', { url });
+			} catch (err) {
+				if (isTauriError(err)) {
+					// TODO
+					// exportSample.sheetsError = err.message;
+				} else {
+					console.log(err);
+					(target as SampleCardElement).form_popup.open = false;
+					throw err;
+				}
+			}
+			break;
 		}
-	} else if (exportSample.to === 'file') {
-		const csv = await command('sample_into_csv', { sample, preferences });
-		downloadText(exportSample.filename, csv);
-		formPopupExportRef.value?.close();
 	}
-};
+}
+
 const onTabWithItemsLoaded = (name: string, tab: TabWithItems, league: League) => {
 	tab.items.sort((a, b) => (b.stackSize ?? 0) - (a.stackSize ?? 0));
 	tabsWithItems.value.push(tab);
@@ -193,10 +178,9 @@ const extractCards = async (tab: TabWithItems, league: League) => {
 				v-if="sampleStore.merged"
 				v-bind="sampleStore.merged"
 				@delete="sampleStore.deleteMerged"
-				@save-to-file-clicked="onSaveToFileClicked"
-				@google-sheets-clicked="onGoogleSheetsClicked"
 				@update:minimumCardPrice="price => sampleStore.merged && (sampleStore.merged.minimumCardPrice = price)"
 				@update:league="sampleStore.replaceMerged"
+				@submit-sample="export_sample"
 			/>
 		</Transition>
 		<div v-if="sampleStore.sampleCards.length >= 2">
@@ -228,26 +212,15 @@ const extractCards = async (tab: TabWithItems, league: League) => {
 				<SampleCard
 					v-for="fileCard in sampleStore.sampleCards"
 					v-bind="fileCard"
-					@save-to-file-clicked="onSaveToFileClicked"
-					@google-sheets-clicked="onGoogleSheetsClicked"
 					@delete="sampleStore.deleteFile"
 					v-model:selected="fileCard.selected"
 					v-model:minimumCardPrice="fileCard.minimumCardPrice"
 					@update:league="league => sampleStore.replaceFileCard(league, fileCard)"
+					@submit-sample="export_sample"
 				/>
 			</div>
 		</Transition>
 	</div>
-	<e-base-popup ref="formPopupExportRef">
-		<FormExportSample
-			:error="exportSample.sheetsError"
-			:to="exportSample.to"
-			:sheetTitle="tablePreferences.sheetTitle"
-			:spreadsheetId="tablePreferences.spreadsheetId"
-			:preferences="tablePreferences"
-			@submit="onSubmit"
-		></FormExportSample>
-	</e-base-popup>
 	<div class="version">
 		<NativeBrowserLink :href="releaseUrl">{{ tag }}</NativeBrowserLink>
 	</div>

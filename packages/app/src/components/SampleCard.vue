@@ -7,9 +7,10 @@ import {
 	GoogleSheetsClickEvent,
 	SaveToFileClickEvent,
 	MinimumCardsPriceChangeEvent,
+	SubmitExportSampleEvent,
 } from '@divicards/wc/src/wc/e-sample-card/e-sample-card';
 import '@divicards/wc/src/wc/e-sample-card/e-sample-card';
-import { DivinationCardsSample } from '@divicards/shared/types';
+import { DivinationCardsSample, TablePreferences } from '@divicards/shared/types';
 import { League } from '@divicards/shared/types';
 import { LeagueChangeEvent } from '@divicards/wc/src/wc/events/change/league';
 const props = defineProps<Props>();
@@ -20,6 +21,7 @@ const emit = defineEmits<{
 	delete: [uuid: string];
 	'google-sheets-clicked': [sample: DivinationCardsSample, league: League];
 	'save-to-file-clicked': [sample: DivinationCardsSample, league: League, filename: string];
+	'submit-sample': [event: SubmitExportSampleEvent];
 }>();
 
 const emit_change_league = (e: LeagueChangeEvent) => {
@@ -45,6 +47,10 @@ const emit_google_sheets_click = ({ sample, league }: GoogleSheetsClickEvent) =>
 const emit_save_to_file_click = ({ sample, league, filename }: SaveToFileClickEvent) => {
 	emit('save-to-file-clicked', sample, league, filename);
 };
+
+const emit_submit_sample = (e: SubmitExportSampleEvent) => {
+	emit('submit-sample', e);
+};
 </script>
 
 <template>
@@ -56,5 +62,6 @@ const emit_save_to_file_click = ({ sample, league, filename }: SaveToFileClickEv
 		@sample__change:selected="emit_change_selected"
 		@sample__change:minimum_card_price="emit_change_minimum_card_price"
 		@sample__delete="emit_delete_this_sample"
+		@sample__submit-export-sample="emit_submit_sample"
 	></e-sample-card>
 </template>
