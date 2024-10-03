@@ -1,7 +1,7 @@
 import { html, css, nothing, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
-import { Column, Order, TablePreferences } from '@divicards/shared/types';
+import { Column, TablePreferences } from '@divicards/shared/types';
 import '../../e-help-tip';
 import { emit } from '../../../utils';
 
@@ -13,21 +13,17 @@ const isColumn = (s: unknown): s is Column => {
 export interface Props {
 	spreadsheetId: string;
 	sheetTitle: string;
-	order: Order;
-	orderedBy: Column;
-	columns: Set<Column>;
-	cardsMustHaveAmount: boolean;
-	minPrice: number;
+	preferences: TablePreferences;
 	to: To;
 	error: string | null;
 }
 
 export interface Events {
-	'upd:columns': FormExportSampleElement['columns'];
-	'upd:order': FormExportSampleElement['order'];
-	'upd:orderedBy': FormExportSampleElement['orderedBy'];
-	'upd:cardsMustHaveAmount': FormExportSampleElement['cardsMustHaveAmount'];
-	'upd:minPrice': FormExportSampleElement['minPrice'];
+	// 'upd:columns': FormExportSampleElement['columns'];
+	// 'upd:order': FormExportSampleElement['order'];
+	// 'upd:orderedBy': FormExportSampleElement['orderedBy'];
+	// 'upd:cardsMustHaveAmount': FormExportSampleElement['cardsMustHaveAmount'];
+	// 'upd:minPrice': FormExportSampleElement['minPrice'];
 	'upd:sheetTitle': FormExportSampleElement['sheetTitle'];
 	'upd:tablePreferences': TablePreferences;
 	'upd:spreadsheetId': FormExportSampleElement['spreadsheetId'];
@@ -38,41 +34,45 @@ export interface Events {
 export class FormExportSampleElement extends LitElement {
 	static override styles = [styles()];
 
+	// @property({ reflect: true }) order: Order = 'desc';
+	// @property({ attribute: false }) columns: Set<Column> = new Set(['name', 'amount']);
+	// @property({ reflect: true }) orderedBy: Column = 'amount';
+	// @property({ type: Boolean }) cardsMustHaveAmount: boolean = false;
+	// @property({ type: Number }) minPrice = 0;
+
+	@property({ type: Object }) table_preferences: TablePreferences = {
+		order: 'desc',
+		columns: new Set(['name', 'amount']),
+		orderedBy: 'amount',
+		cardsMustHaveAmount: false,
+		minPrice: 0,
+	};
+
 	@property({ reflect: true, attribute: 'spreadsheet-id' }) spreadsheetId: string = '';
 	@property({ reflect: true, attribute: 'sheet-title' }) sheetTitle: string = '';
-	@property({ reflect: true }) order: Order = 'desc';
-	@property({ reflect: true }) orderedBy: Column = 'amount';
-	@property({ attribute: false }) columns: Set<Column> = new Set(['name', 'amount']);
-	@property({ type: Boolean }) cardsMustHaveAmount: boolean = false;
-	@property({ type: Number }) minPrice = 0;
 	@property({ attribute: false, reflect: true }) error: string | null = null;
 	@property({ reflect: true }) to: To = 'sheets';
 
-	get tablePreferences(): TablePreferences {
-		return {
-			order: this.order,
-			columns: this.columns,
-			orderedBy: this.orderedBy,
-			cardsMustHaveAmount: this.cardsMustHaveAmount,
-			minPrice: this.minPrice,
-		};
-	}
+	// get tablePreferences(): TablePreferences {
+	// 	return {
+	// 		order: this.order,
+	// 		columns: this.columns,
+	// 		orderedBy: this.orderedBy,
+	// 		cardsMustHaveAmount: this.cardsMustHaveAmount,
+	// 		minPrice: this.minPrice,
+	// 	};
+	// }
 
 	#onColumnCheckbox(e: InputEvent, column: Column) {
-		const target = e.target;
-		if (!(target instanceof HTMLInputElement)) return;
-
-		const checked = target.checked;
-		if (checked) {
-			this.columns.add(column);
-		} else {
-			this.columns.delete(column);
+		if (!(e.target instanceof HTMLInputElement)) {
+			return;
 		}
 
-		console.log('#onColumnsCheckbox', this.columns);
-
-		emit<Events['upd:columns']>(this, 'upd:columns', this.columns);
-		emit<Events['upd:tablePreferences']>(this, 'upd:tablePreferences', this.tablePreferences);
+		if (e.target.checked) {
+			this.table_preferences.columns.add(column);
+		} else {
+			this.table_preferences.columns.delete(column);
+		}
 	}
 
 	#onOrderRadio(e: InputEvent) {
@@ -80,11 +80,8 @@ export class FormExportSampleElement extends LitElement {
 		if (!(target instanceof HTMLInputElement)) return;
 
 		if (target.id === 'asc') {
-			this.order = 'asc';
-		} else this.order = 'desc';
-
-		emit<Events['upd:order']>(this, 'upd:order', this.order);
-		emit<Events['upd:tablePreferences']>(this, 'upd:tablePreferences', this.tablePreferences);
+			this.table_preferences.order = 'asc';
+		} else this.table_preferences.order = 'desc';
 	}
 
 	#onOrderedBySelected(e: InputEvent) {
@@ -92,46 +89,35 @@ export class FormExportSampleElement extends LitElement {
 		if (!(target instanceof HTMLSelectElement)) return;
 		if (!isColumn(target.value)) return;
 
-		this.orderedBy = target.value;
-		emit<Events['upd:orderedBy']>(this, 'upd:orderedBy', this.orderedBy);
-		emit<Events['upd:tablePreferences']>(this, 'upd:tablePreferences', this.tablePreferences);
+		this.table_preferences.orderedBy = target.value;
 	}
 
 	#onCardsMustHaveAmountCheckbox(e: InputEvent) {
-		const target = e.target;
-		if (!(target instanceof HTMLInputElement)) return;
+		if (!(e.target instanceof HTMLInputElement)) {
+			return;
+		}
 
-		this.cardsMustHaveAmount = target.checked;
-		emit<Events['upd:cardsMustHaveAmount']>(this, 'upd:cardsMustHaveAmount', this.cardsMustHaveAmount);
-		emit<Events['upd:tablePreferences']>(this, 'upd:tablePreferences', this.tablePreferences);
+		this.table_preferences.cardsMustHaveAmount = e.target.checked;
 	}
 
 	#onMinPriceSlider(e: InputEvent) {
-		const target = e.target;
-		if (!(target instanceof HTMLInputElement)) return;
+		if (!(e.target instanceof HTMLInputElement)) {
+			return;
+		}
 
-		this.minPrice = Number(target.value);
-
-		emit<Events['upd:minPrice']>(this, 'upd:minPrice', this.minPrice);
-		emit<Events['upd:tablePreferences']>(this, 'upd:tablePreferences', this.tablePreferences);
+		this.table_preferences.minPrice = Number(e.target.value);
 	}
 
 	#onSheetTitleInput(e: InputEvent) {
-		const target = e.target;
-		if (!(target instanceof HTMLInputElement)) return;
+		if (!(e.target instanceof HTMLInputElement)) return;
 		this.error = null;
-
-		this.sheetTitle = target.value;
-		emit<Events['upd:sheetTitle']>(this, 'upd:sheetTitle', this.sheetTitle);
+		this.sheetTitle = e.target.value;
 	}
 
 	#onSpreadsheetIdInput(e: InputEvent) {
-		const target = e.target;
-		if (!(target instanceof HTMLInputElement)) return;
+		if (!(e.target instanceof HTMLInputElement)) return;
 		this.error = null;
-
-		this.spreadsheetId = target.value;
-		emit<Events['upd:spreadsheetId']>(this, 'upd:spreadsheetId', this.spreadsheetId);
+		this.spreadsheetId = e.target.value;
 	}
 
 	#onSubmit(e: SubmitEvent) {
@@ -140,11 +126,7 @@ export class FormExportSampleElement extends LitElement {
 		const props: Props = {
 			spreadsheetId: this.spreadsheetId,
 			sheetTitle: this.sheetTitle,
-			order: this.order,
-			orderedBy: this.orderedBy,
-			columns: this.columns,
-			cardsMustHaveAmount: this.cardsMustHaveAmount,
-			minPrice: this.minPrice,
+			preferences: this.table_preferences,
 			to: this.to,
 			error: this.error,
 		};
@@ -164,7 +146,7 @@ export class FormExportSampleElement extends LitElement {
 							<input
 								id="input-title"
 								type="checkbox"
-								.checked=${this.cardsMustHaveAmount}
+								.checked=${this.table_preferences.cardsMustHaveAmount}
 								@input=${this.#onCardsMustHaveAmountCheckbox}
 							/>
 						</div>
@@ -175,7 +157,7 @@ export class FormExportSampleElement extends LitElement {
 							<label for="ordered-by">Ordered by</label>
 							<select
 								@input=${this.#onOrderedBySelected}
-								.value=${this.orderedBy}
+								.value=${this.table_preferences.orderedBy}
 								name=""
 								id="ordered-by"
 							>
@@ -192,7 +174,7 @@ export class FormExportSampleElement extends LitElement {
 								id="asc"
 								type="radio"
 								name="order"
-								.checked=${this.order === 'asc'}
+								.checked=${this.table_preferences.order === 'asc'}
 								@input=${this.#onOrderRadio}
 							/>
 						</div>
@@ -202,7 +184,7 @@ export class FormExportSampleElement extends LitElement {
 								id="desc"
 								type="radio"
 								name="order"
-								.checked=${this.order === 'desc'}
+								.checked=${this.table_preferences.order === 'desc'}
 								@input=${this.#onOrderRadio}
 							/>
 						</div>
@@ -216,7 +198,7 @@ export class FormExportSampleElement extends LitElement {
 								<input
 									id="column-name"
 									type="checkbox"
-									.checked=${this.columns.has('name')}
+									.checked=${this.table_preferences.columns.has('name')}
 									@input=${(e: InputEvent) => this.#onColumnCheckbox(e, 'name')}
 								/>
 							</div>
@@ -226,7 +208,7 @@ export class FormExportSampleElement extends LitElement {
 								<input
 									id="columnd-amount"
 									type="checkbox"
-									.checked=${this.columns.has('amount')}
+									.checked=${this.table_preferences.columns.has('amount')}
 									@input=${(e: InputEvent) => this.#onColumnCheckbox(e, 'amount')}
 								/>
 							</div>
@@ -236,7 +218,7 @@ export class FormExportSampleElement extends LitElement {
 								<input
 									id="column-weight"
 									type="checkbox"
-									.checked=${this.columns.has('weight')}
+									.checked=${this.table_preferences.columns.has('weight')}
 									@input=${(e: InputEvent) => this.#onColumnCheckbox(e, 'weight')}
 								/>
 							</div>
@@ -246,7 +228,7 @@ export class FormExportSampleElement extends LitElement {
 								<input
 									id="column-price"
 									type="checkbox"
-									.checked=${this.columns.has('price')}
+									.checked=${this.table_preferences.columns.has('price')}
 									@input=${(e: InputEvent) => this.#onColumnCheckbox(e, 'price')}
 								/>
 							</div>
@@ -256,7 +238,7 @@ export class FormExportSampleElement extends LitElement {
 								<input
 									id="column-sum"
 									type="checkbox"
-									.checked=${this.columns.has('sum')}
+									.checked=${this.table_preferences.columns.has('sum')}
 									@input=${(e: InputEvent) => this.#onColumnCheckbox(e, 'sum')}
 								/>
 							</div>
@@ -272,7 +254,7 @@ export class FormExportSampleElement extends LitElement {
 								type="number"
 								min="0"
 								max="10000"
-								.value=${String(this.minPrice)}
+								.value=${String(this.table_preferences.minPrice)}
 								@input=${this.#onMinPriceSlider}
 							/>
 						</div>

@@ -64,15 +64,7 @@ const onGoogleSheetsClicked = (sample: DivinationCardsSample, league: League) =>
 	exportSample.league = league;
 	formPopupExportRef.value.showModal();
 };
-const onSubmit = async ({
-	spreadsheetId,
-	sheetTitle,
-	order,
-	orderedBy,
-	columns,
-	cardsMustHaveAmount,
-	minPrice,
-}: FormExportProps) => {
+const onSubmit = async ({ spreadsheetId, sheetTitle, preferences: table_preferences }: FormExportProps) => {
 	const sample = exportSample.sample;
 	const league = exportSample.league;
 	if (!sample) {
@@ -81,13 +73,9 @@ const onSubmit = async ({
 	if (!league) {
 		throw new Error('No league to sheets');
 	}
-	const preferences = {
-		cardsMustHaveAmount,
-		order,
-		orderedBy,
-		columns: Array.from(columns),
-		minPrice,
-	};
+
+	const preferences = { ...table_preferences, columns: Array.from(table_preferences.columns) };
+
 	if (exportSample.to === 'sheets') {
 		if (!googleAuthStore.loggedIn) {
 			await googleAuthStore.login();
@@ -254,13 +242,9 @@ const extractCards = async (tab: TabWithItems, league: League) => {
 		<FormExportSample
 			:error="exportSample.sheetsError"
 			:to="exportSample.to"
-			v-model:columns="tablePreferences.columns"
-			v-model:order="tablePreferences.order"
-			v-model:orderedBy="tablePreferences.orderedBy"
-			v-model:cardsMustHaveAmount="tablePreferences.cardsMustHaveAmount"
-			v-model:sheetTitle="tablePreferences.sheetTitle"
-			v-model:minPrice="tablePreferences.minPrice"
+			:sheetTitle="tablePreferences.sheetTitle"
 			:spreadsheetId="tablePreferences.spreadsheetId"
+			:preferences="tablePreferences"
 			@submit="onSubmit"
 		></FormExportSample>
 	</e-base-popup>

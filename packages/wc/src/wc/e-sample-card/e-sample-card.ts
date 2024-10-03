@@ -5,7 +5,7 @@ import { BasePopupElement } from '../e-base-popup';
 import './e-fixed-names/e-fixed-names';
 import './e-not-cards/e-not-cards';
 import { DivinationCardsSample, League, TradeLeague, isTradeLeague } from '@divicards/shared/types';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
 import { classMap } from 'lit/directives/class-map.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
@@ -17,6 +17,9 @@ import './e-sample-table/e-sample-table';
 import '../e-base-popup';
 import { SampleTableElement } from './e-sample-table/e-sample-table';
 import { LeagueChangeEvent } from '../events/change/league';
+import './e-form-export-sample/e-form-export-sample';
+import '../e-base-popup';
+// import { Props as ExportSampleState } from './e-form-export-sample/e-form-export-sample';
 
 export interface Props {
 	league?: TradeLeague;
@@ -54,6 +57,15 @@ export class SampleCardElement extends LitElement {
 	@query('e-sample-table') table!: SampleTableElement;
 	@query('sl-range') rangeEl!: SlRange;
 
+	@state() export_sample_form_state = {};
+
+	constructor() {
+		super();
+		this.addEventListener('sample__save-to-file-click', e => {
+			console.log(e);
+		});
+	}
+
 	protected override render() {
 		return html`<div
 			class=${classMap({
@@ -61,6 +73,10 @@ export class SampleCardElement extends LitElement {
 				'sample-card--selected': Boolean(this.selected),
 			})}
 		>
+			<e-base-popup>
+				<e-form-export-sample></e-form-export-sample>
+			</e-base-popup>
+
 			<p class="filename">${this.filename}</p>
 
 			<sl-icon-button
