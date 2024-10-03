@@ -4,6 +4,7 @@ import { BasePopupElement } from './e-base-popup';
 import './e-base-popup';
 import { cards } from './e-sample-card/e-sample-table/data';
 import './e-sample-card/e-sample-table/e-sample-table';
+import './e-sample-card/e-form-export-sample/e-form-export-sample';
 
 export default {
 	title: 'Elements/e-base-popup',
@@ -18,5 +19,13 @@ export const Default = {
 		popup.append(table);
 
 		return html`<button @click=${() => popup.showModal()}>Open</button>${popup}`;
+	},
+};
+
+export const Form = {
+	render() {
+		return html`<e-base-popup open>
+			<e-form-export-sample></e-form-export-sample>
+		</e-base-popup>`;
 	},
 };
