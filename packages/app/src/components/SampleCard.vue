@@ -19,8 +19,6 @@ const emit = defineEmits<{
 	'update:league': [league: League];
 	'update:minimumCardPrice': [minimum_card_price: number];
 	delete: [uuid: string];
-	'google-sheets-clicked': [sample: DivinationCardsSample, league: League];
-	'save-to-file-clicked': [sample: DivinationCardsSample, league: League, filename: string];
 	'submit-sample': [event: SubmitExportSampleEvent];
 }>();
 
@@ -40,14 +38,6 @@ const emit_delete_this_sample = ({ uuid }: DeleteThisSampleEvent) => {
 	emit('delete', uuid);
 };
 
-const emit_google_sheets_click = ({ sample, league }: GoogleSheetsClickEvent) => {
-	emit('google-sheets-clicked', sample, league);
-};
-
-const emit_save_to_file_click = ({ sample, league, filename }: SaveToFileClickEvent) => {
-	emit('save-to-file-clicked', sample, league, filename);
-};
-
 const emit_submit_sample = (e: SubmitExportSampleEvent) => {
 	emit('submit-sample', e);
 };
@@ -56,8 +46,6 @@ const emit_submit_sample = (e: SubmitExportSampleEvent) => {
 <template>
 	<e-sample-card
 		v-bind="props"
-		@sample__google-sheets-click="emit_google_sheets_click"
-		@sample__save-to-file-click="emit_save_to_file_click"
 		@change:league="emit_change_league"
 		@sample__change:selected="emit_change_selected"
 		@sample__change:minimum_card_price="emit_change_minimum_card_price"
