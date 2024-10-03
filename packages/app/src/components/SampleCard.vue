@@ -4,13 +4,10 @@ import {
 	Props,
 	DeleteThisSampleEvent,
 	SelectedChangeEvent,
-	GoogleSheetsClickEvent,
-	SaveToFileClickEvent,
 	MinimumCardsPriceChangeEvent,
 	SubmitExportSampleEvent,
 } from '@divicards/wc/src/wc/e-sample-card/e-sample-card';
 import '@divicards/wc/src/wc/e-sample-card/e-sample-card';
-import { DivinationCardsSample, TablePreferences } from '@divicards/shared/types';
 import { League } from '@divicards/shared/types';
 import { LeagueChangeEvent } from '@divicards/wc/src/wc/events/change/league';
 const props = defineProps<Props>();
