@@ -29,7 +29,6 @@ export class StashTabContainerElement extends LitElement {
 	/** PoE API tab data https://www.pathofexile.com/developer/docs/reference#stashes-get */
 	@property({ type: Object }) tab: TabWithItems | null = null;
 	@property() status: 'pending' | 'complete' = 'pending';
-	// @property({ type: Object }) badge: NoItemsTab | null = null;
 
 	@query('sl-alert') scarabsSuccessAlert!: SlAlert;
 
@@ -50,7 +49,9 @@ export class StashTabContainerElement extends LitElement {
 					${this.status === 'complete' && this.tab
 						? this.tab.type === 'FragmentStash'
 							? html` <sl-button @click=${this.#copyScarabs}>Copy Scarabs</sl-button> `
-							: html`<sl-button @click=${this.#emitExtractCards}>Extract cards sample</sl-button>`
+							: stashtab_has_cards(this.tab)
+								? html`<sl-button @click=${this.#emitExtractCards}>Extract cards sample</sl-button>`
+								: null
 						: null}
 					<sl-icon-button name="x-lg" @click=${this.#emitClose} class="btn-close">X</sl-icon-button>
 				</div>
@@ -132,4 +133,12 @@ export class StashTabContainerElement extends LitElement {
 			font-size: 4rem;
 		}
 	`;
+}
+
+function stashtab_has_cards(stashtab: TabWithItems | null): boolean {
+	if (!stashtab) {
+		return false;
+	}
+
+	return stashtab.items.some(item => item.frameType === 6);
 }
