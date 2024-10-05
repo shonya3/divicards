@@ -151,23 +151,6 @@ export class PaginationElement extends LitElement {
 	`;
 }
 
-// export class PageChangeEvent extends Event {
-// 	static readonly tag = 'e-pagination--page-change';
-// 	page: number;
-// 	constructor(page: number, options?: EventInit) {
-// 		super(PageChangeEvent.tag, options);
-// 		this.page = page;
-// 	}
-// }
-// export class PerPageChangeEvent extends Event {
-// 	static readonly tag = 'e-pagination--per-page-change';
-// 	per_page: number;
-// 	constructor(per_page: number, options?: EventInit) {
-// 		super(PerPageChangeEvent.tag, options);
-// 		this.per_page = per_page;
-// 	}
-// }
-
 declare global {
 	interface HTMLElementTagNameMap {
 		'e-pagination': PaginationElement;
