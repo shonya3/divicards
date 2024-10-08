@@ -282,7 +282,7 @@ export class StashesViewElement extends LitElement {
 		}
 	}
 
-	/** For each tab, loads sample and emits it */
+	/** For each selected stashtab badge, load stashtab and emit it */
 	async #load_selected_tabs(league: League): Promise<void> {
 		while (this.selected_tabs.size > 0) {
 			for (const { id, name: stashtab_name } of this.selected_tabs.values()) {
@@ -296,13 +296,7 @@ export class StashesViewElement extends LitElement {
 						}
 						case 'general-tab': {
 							const stashtab = await this.#loadSingleTabContent(id, league, this.stashLoader.tab);
-							// emit<Events['tab-with-items-loaded']>(this, 'tab-with-items-loaded', {
-							// 	tab,
-							// 	name: stashtab_name,
-							// 	league,
-							// });
 							this.dispatchEvent(new StashtabFetchedEvent(stashtab, this.league));
-
 							break;
 						}
 					}
@@ -321,13 +315,8 @@ export class StashesViewElement extends LitElement {
 						];
 					}
 				} finally {
-					console.log('finally');
-					console.log(this.selected_tabs);
 					this.selected_tabs.delete(id);
-					console.log(this.selected_tabs);
 					this.selected_tabs = new Map(this.selected_tabs);
-					console.log(this.selected_tabs);
-					await this.requestUpdate();
 					this.fetchingStashTab = false;
 					this.msg = '';
 				}
