@@ -1,4 +1,3 @@
-// import 'poe-custom-elements/src/elements/poe-stash-tab';
 import 'poe-custom-elements/stash-tab.js';
 import '@shoelace-style/shoelace/dist/components/spinner/spinner.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
@@ -89,6 +88,30 @@ export class StashTabContainerElement extends LitElement {
 	#emitClose() {
 		this.dispatchEvent(new Event('close'));
 	}
+
+	connectedCallback(): void {
+		super.connectedCallback();
+		window.addEventListener('keydown', this.on_arrow_key_pressed);
+	}
+
+	disconnectedCallback(): void {
+		super.disconnectedCallback();
+		window.removeEventListener('keydown', this.on_arrow_key_pressed);
+	}
+
+	/**
+	 * Prevents scrolling when the arrow keys are pressed while focus is inside the stash tab.
+	 */
+	on_arrow_key_pressed = (e: KeyboardEvent) => {
+		const stash_tab_element = this.shadowRoot?.querySelector('poe-stash-tab');
+		if (!stash_tab_element?.matches(':focus-within')) {
+			return;
+		}
+
+		if (['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft'].includes(e.code)) {
+			e.preventDefault();
+		}
+	};
 
 	static styles = css`
 		* {
