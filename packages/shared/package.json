@@ -11,6 +11,6 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"poe-custom-elements": "0.3.2"
+		"poe-custom-elements": "0.3.14"
 	}
 }

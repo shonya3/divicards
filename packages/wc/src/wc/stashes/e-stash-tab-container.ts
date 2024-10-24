@@ -89,30 +89,6 @@ export class StashTabContainerElement extends LitElement {
 		this.dispatchEvent(new Event('close'));
 	}
 
-	connectedCallback(): void {
-		super.connectedCallback();
-		window.addEventListener('keydown', this.on_arrow_key_pressed);
-	}
-
-	disconnectedCallback(): void {
-		super.disconnectedCallback();
-		window.removeEventListener('keydown', this.on_arrow_key_pressed);
-	}
-
-	/**
-	 * Prevents scrolling when the arrow keys are pressed while focus is inside the stash tab.
-	 */
-	on_arrow_key_pressed = (e: KeyboardEvent) => {
-		const stash_tab_element = this.shadowRoot?.querySelector('poe-stash-tab');
-		if (!stash_tab_element?.matches(':focus-within')) {
-			return;
-		}
-
-		if (['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft'].includes(e.code)) {
-			e.preventDefault();
-		}
-	};
-
 	static styles = css`
 		* {
 			padding: 0;

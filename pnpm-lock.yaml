@@ -45,8 +45,8 @@ importers:
         specifier: ^2.2.4
         version: 2.2.4(typescript@5.6.2)(vue@3.5.12(typescript@5.6.2))
       poe-custom-elements:
-        specifier: 0.3.11
-        version: 0.3.11
+        specifier: 0.3.14
+        version: 0.3.14
       vue:
         specifier: 3.5.12
         version: 3.5.12(typescript@5.6.2)
@@ -76,8 +76,8 @@ importers:
   packages/shared:
     dependencies:
       poe-custom-elements:
-        specifier: 0.3.2
-        version: 0.3.2
+        specifier: 0.3.14
+        version: 0.3.14
 
   packages/wc:
     dependencies:
@@ -100,8 +100,8 @@ importers:
         specifier: ^3.2.1
         version: 3.2.1
       poe-custom-elements:
-        specifier: 0.3.11
-        version: 0.3.11
+        specifier: 0.3.14
+        version: 0.3.14
     devDependencies:
       '@chromatic-com/storybook':
         specifier: 2.0.2
@@ -658,11 +658,17 @@ packages:
   '@floating-ui/core@1.6.4':
     resolution: {integrity: sha512-a4IowK4QkXl4SCWTGUR0INAfEOX3wtsYw3rKK5InQEHMGObkR8Xk44qYQD9P4r6HHw0iIfK6GUKECmY8sTkqRA==}
 
+  '@floating-ui/dom@1.6.11':
+    resolution: {integrity: sha512-qkMCxSR24v2vGkhYDo/UzxfJN3D4syqSjyuTFz6C7XcpU1pASPRieNI0Kj5VP3/503mOfYiGY891ugBX1GlABQ==}
+
   '@floating-ui/dom@1.6.7':
     resolution: {integrity: sha512-wmVfPG5o2xnKDU4jx/m4w5qva9FWHcnZ8BvzEe90D/RpwsJaTAVYPEPdQ8sbr/N8zZTAHlZUTQdqg8ZUbzHmng==}
 
   '@floating-ui/utils@0.2.4':
     resolution: {integrity: sha512-dWO2pw8hhi+WrXq1YJy2yCuWoL20PddgGaqTgVe4cOS9Q6qklXCiA1tJEqX6BEwRNSCP84/afac9hd4MS+zEUA==}
+
+  '@floating-ui/utils@0.2.8':
+    resolution: {integrity: sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==}
 
   '@formkit/auto-animate@1.0.0-beta.6':
     resolution: {integrity: sha512-PVDhLAlr+B4Xb7e+1wozBUWmXa6BFU8xUPR/W/E+TsQhPS1qkAdAsJ25keEnFrcePSnXHrOsh3tiFbEToOzV9w==}
@@ -2917,11 +2923,8 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  poe-custom-elements@0.3.11:
-    resolution: {integrity: sha512-eQGgeckU1mLCFi6y9QBHthnr0A10rn8BNrjEBBBEXAmyw1mOsDPws7g9av54RzCtYHkwQXJRNDuaDO+OhIW5oQ==}
-
-  poe-custom-elements@0.3.2:
-    resolution: {integrity: sha512-AW3CgvTpHEPh9D7RAkW1lIdlhWE30LXEgXwLT1rChvMC7z9S4+pdPzMasJBPt7p8PIlro3dyYCxKvcNYAV6Row==}
+  poe-custom-elements@0.3.14:
+    resolution: {integrity: sha512-5Znvev5z3zmUsoTL4N9ozcpXjTYLPoUxYaBCiLVdzitgXMiPpkvhAMzM1OMWfxv+njGLHo7I9v2c1tSdq7i0pA==}
 
   polished@4.2.2:
     resolution: {integrity: sha512-Sz2Lkdxz6F2Pgnpi9U5Ng/WdWAUZxmHrNPoVlm3aAemxoy2Qy7LGjQg4uf8qKelDAUW94F4np3iH2YPf2qefcQ==}
@@ -4039,7 +4042,12 @@ snapshots:
 
   '@floating-ui/core@1.6.4':
     dependencies:
-      '@floating-ui/utils': 0.2.4
+      '@floating-ui/utils': 0.2.8
+
+  '@floating-ui/dom@1.6.11':
+    dependencies:
+      '@floating-ui/core': 1.6.4
+      '@floating-ui/utils': 0.2.8
 
   '@floating-ui/dom@1.6.7':
     dependencies:
@@ -4047,6 +4055,8 @@ snapshots:
       '@floating-ui/utils': 0.2.4
 
   '@floating-ui/utils@0.2.4': {}
+
+  '@floating-ui/utils@0.2.8': {}
 
   '@formkit/auto-animate@1.0.0-beta.6': {}
 
@@ -6605,14 +6615,9 @@ snapshots:
     dependencies:
       playwright-core: 1.36.1
 
-  poe-custom-elements@0.3.11:
+  poe-custom-elements@0.3.14:
     dependencies:
-      '@floating-ui/dom': 1.6.7
-      lit: 3.2.1
-
-  poe-custom-elements@0.3.2:
-    dependencies:
-      '@floating-ui/dom': 1.6.7
+      '@floating-ui/dom': 1.6.11
       lit: 3.2.1
 
   polished@4.2.2:
