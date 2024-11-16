@@ -1128,13 +1128,11 @@ dependencies = [
  "poe_data",
  "reqwest 0.12.5",
  "serde",
- "serde-wasm-bindgen",
  "serde_json",
  "slug",
  "strum",
  "strum_macros",
  "tokio",
- "wasm-bindgen",
 ]
 
 [[package]]

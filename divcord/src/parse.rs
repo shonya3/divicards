@@ -19,27 +19,26 @@ pub fn records_iter<'a>(
 ) -> impl Iterator<Item = Result<Record, Error>> + 'a {
     spreadsheet
         .dumb_records()
-        .map(|dumb| Ok(Record::from_dumb(dumb?, poe_data)?))
+        .map(|dumb| Ok(parse_dumb_into_record(dumb?, poe_data)?))
 }
 
 pub fn records(spreadsheet: &Spreadsheet, poe_data: &PoeData) -> Result<Vec<Record>, Error> {
     records_iter(spreadsheet, poe_data).collect()
 }
 
-impl Record {
-    pub fn from_dumb(dumb: Dumb, poe_data: &PoeData) -> Result<Self, ParseSourceError> {
-        Ok(Record {
-            sources: parse_record_dropsources(&dumb, poe_data)?,
-            verify_sources: parse_dropses_from(&dumb, poe_data, RichColumnVariant::Verify)?,
-            id: dumb.id,
-            greynote: dumb.greynote,
-            card: dumb.card,
-            tag_hypothesis: dumb.tag_hypothesis,
-            confidence: dumb.confidence,
-            remaining_work: dumb.remaining_work,
-            notes: dumb.notes,
-        })
-    }
+/// [Dumb] -> [Record]
+pub fn parse_dumb_into_record(dumb: Dumb, poe_data: &PoeData) -> Result<Record, ParseSourceError> {
+    Ok(Record {
+        sources: parse_record_dropsources(&dumb, poe_data)?,
+        verify_sources: parse_dropses_from(&dumb, poe_data, RichColumnVariant::Verify)?,
+        id: dumb.id,
+        greynote: dumb.greynote,
+        card: dumb.card,
+        tag_hypothesis: dumb.tag_hypothesis,
+        confidence: dumb.confidence,
+        remaining_work: dumb.remaining_work,
+        notes: dumb.notes,
+    })
 }
 
 #[derive(Debug)]
