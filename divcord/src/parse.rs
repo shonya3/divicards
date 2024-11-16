@@ -168,12 +168,9 @@ pub fn parse_record_dropsources(
         return Ok(sources);
     }
 
-    // 2. Parse sources from "Wiki Map/Monster Agreements" column(the main part)
-    sources.append(&mut parse_dropses_from(
-        dumb,
-        poe_data,
-        RichColumnVariant::Sources,
-    )?);
+    // 2. Parse the main sources column. Most drop sources come from here.
+    let main_column_sources = parse_dropses_from(dumb, poe_data, RichColumnVariant::Sources)?;
+    sources.extend(main_column_sources);
 
     // 3. Read from tags(3rd column)
     if dumb.tag_hypothesis.as_deref() == Some("invasion_boss") {
