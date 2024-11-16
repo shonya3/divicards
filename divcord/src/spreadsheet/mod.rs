@@ -74,10 +74,5 @@ impl Spreadsheet {
                     )
                 },
             )
-        // .map(
-        //     |(row_index, (spreadsheet_row, confirmations_new_325_cell))| {
-        //         Dumb::create(row_index, spreadsheet_row, confirmations_new_325_cell)
-        //     },
-        // )
     }
 }
