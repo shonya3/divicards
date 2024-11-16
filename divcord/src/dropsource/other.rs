@@ -75,6 +75,7 @@ pub enum Chest {
     HiddenCoffer,
     Darkshrine,
     BootyChestMaoKun,
+    MercilessOrUberOrEnrichedLabChests,
 }
 
 impl Identified for Chest {
@@ -96,6 +97,7 @@ impl Identified for Chest {
             Chest::BootyChestMaoKun => "Booty Chest (Mao Kun)",
             Chest::MercilessChests => "Merciless Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox, Hidden Coffer)",
             Chest::HiddenCoffer => "Hidden Coffer",
+            Chest::MercilessOrUberOrEnrichedLabChests => "Izaro's Treasure, Labyrinth Trove, Curious Lockbox (Merciless/Uber/Enriched Labyrinth)",
         }
     }
 
@@ -117,6 +119,7 @@ impl Identified for Chest {
             Chest::HiddenCoffer => vec![],
             Chest::Darkshrine => vec![],
             Chest::BootyChestMaoKun => vec![],
+            Chest::MercilessOrUberOrEnrichedLabChests => vec!["Merciless Labyrinth/Uber Labyrinth/Enriched Labyrinth (Izaro's Treasure, Labyrinth Trove, Curious Lockbox)"],
         }
     }
 }
