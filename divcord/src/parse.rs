@@ -137,12 +137,6 @@ pub fn record_url(id: usize, column: DivcordColumn) -> String {
     format!("https://docs.google.com/spreadsheets/d/1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU/edit?pli=1#gid=0&range={}{id}", column.letter())
 }
 
-/// Add new sources:
-/// - Kirac Missions
-/// - All (Scourge) beyond demons, including from Settlers (Crimson Iron/Orichalcum)
-/// - Vaal side area bosses (including Vaal Temple)
-///
-
 pub fn parse_record_dropsources(
     dumb: &Dumb,
     poe_data: &PoeData,
