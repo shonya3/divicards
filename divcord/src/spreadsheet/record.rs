@@ -25,7 +25,7 @@ pub struct Record {
     pub verify_sources: Vec<Source>,
 }
 
-/// Represents spreadsheet's row after the initial preparation.
+/// Represents spreadsheet's row after the initial preparation (but before the main parsing).
 #[derive(Debug, Serialize, Deserialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Dumb {
