@@ -567,6 +567,7 @@ dependencies = [
 name = "card_element"
 version = "0.7.10"
 dependencies = [
+ "dotenv",
  "fetcher",
  "ninja",
  "poe",
@@ -1127,11 +1128,13 @@ dependencies = [
  "poe_data",
  "reqwest 0.12.5",
  "serde",
+ "serde-wasm-bindgen",
  "serde_json",
  "slug",
  "strum",
  "strum_macros",
  "tokio",
+ "wasm-bindgen",
 ]
 
 [[package]]

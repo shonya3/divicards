@@ -17,3 +17,4 @@ poe = { path = "../poe" }
 ninja = { path = "../ninja" }
 poe_data = { path = "../poe_data", features = ["fetch"] }
 slug = "0.1.5"
+dotenv.workspace = true
