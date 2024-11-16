@@ -188,24 +188,6 @@ pub fn parse_record_dropsources(
         sources.push(Source::Area(Area::ExpeditionLogbook))
     }
 
-    // 4. Read greynotes(first column)
-
-    if dumb.greynote == GreyNote::Delirium
-        && dumb.notes.as_deref()
-            == Some("Appears to drop from any source of Delirium Currency rewards")
-    {
-        sources.push(Source::DeliriumCurrencyRewards);
-    }
-
-    if dumb.greynote == GreyNote::Vendor && dumb.notes.as_deref() == Some("Kirac shop") {
-        sources.push(Source::Vendor(Vendor::KiracShop));
-    }
-
-    // 5. Read notes(last column)
-    if dumb.notes.as_deref() == Some("Redeemer influenced maps") {
-        sources.push(Source::Area(Area::RedeemerInfluencedMaps))
-    }
-
     // 6. Final rules
     if dumb.confidence == Confidence::None && !sources.is_empty() {
         // println!("{} {} {sources:?}", record.id, record.card);
