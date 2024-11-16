@@ -35,11 +35,20 @@ impl Spreadsheet {
         }
     }
 
+    /// Load cached data or fetch fresh based on config conditions or if there is no cached data.
     #[cfg(feature = "fetch")]
     pub async fn load() -> Result<Self, Error> {
         use crate::spreadsheet::load::SpreadsheetFetcher;
         use fetcher::DataFetcher;
         SpreadsheetFetcher::default().load().await
+    }
+
+    /// Fetch fresh spreadsheet data.
+    #[cfg(feature = "fetch")]
+    pub async fn fetch() -> Result<Self, Error> {
+        use crate::spreadsheet::load::SpreadsheetFetcher;
+        use fetcher::DataFetcher;
+        SpreadsheetFetcher::default().fetch().await
     }
 
     /// iterator over dumb records - initial preparation of data for each spreadsheet row.

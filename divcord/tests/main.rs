@@ -7,6 +7,17 @@ use divcord::{
     PoeData,
 };
 
+#[tokio::test]
+#[cfg(feature = "fetch")] // cargo test --features fetch
+async fn parses_spreadsheet() {
+    use divcord::Spreadsheet;
+
+    let (poe_data, spreadsheet) = tokio::join!(PoeData::load(), Spreadsheet::fetch());
+    let poe_data = poe_data.unwrap();
+    let spreadsheet = spreadsheet.unwrap();
+    let _records = divcord::records(&spreadsheet, &poe_data).unwrap();
+}
+
 fn create_dumb(card: &str, drops_from: DropsFrom) -> Dumb {
     Dumb {
         id: 1,
