@@ -1,4 +1,4 @@
-use crate::dropsource::{Area, Source, UniqueMonster, Vendor};
+use crate::dropsource::{Area, Source, UniqueMonster};
 use crate::spreadsheet::rich::HexColor;
 use crate::{
     error::Error,
@@ -193,13 +193,21 @@ pub fn parse_record_dropsources(
         // println!("{} {} {sources:?}", record.id, record.card);
     }
 
-    // if dumb.greynote != GreyNote::Empty && sources.is_empty() && dumb.confidence == Confidence::Done
-    // {
-    //     return Err(ParseSourceError::SourceIsExptectedButEmpty {
-    //         record_id: dumb.id,
-    //         card: dumb.card.to_owned(),
-    //     });
-    // }
+    if dumb.greynote != GreyNote::Empty
+        && dumb.confidence == Confidence::Done
+        && sources.is_empty()
+        && dumb.drops_to_verify.is_empty()
+    {
+        // expected error case
+        if dumb.id == 501 {
+            eprintln!("Source is expected but empty. Record id: 501. Card: Wealth and Power");
+        } else {
+            return Err(ParseSourceError::SourceIsExptectedButEmpty {
+                record_id: dumb.id,
+                card: dumb.card.to_owned(),
+            });
+        }
+    }
 
     Ok(sources)
 }
