@@ -6,7 +6,7 @@ use divi::cards::CheckCardName;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-/// "Sourceful" record, with figured out dropsources and need-to-verify-sources.
+/// "Sourceful" spreadsheet row, with figured out dropsources and need-to-verify-sources.
 #[derive(Debug, Serialize, Clone, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Record {
