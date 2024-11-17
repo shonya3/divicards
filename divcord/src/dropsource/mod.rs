@@ -7,6 +7,8 @@ use self::id::Identified;
 pub use self::{area::Area, monster::UniqueMonster};
 pub use other::{Chest, Strongbox, Vendor};
 use poe_data::act::ActAreaId;
+#[allow(unused_imports)]
+use poe_data::PoeData;
 use serde::{de, ser::SerializeStruct, Deserialize, Serialize};
 use std::str::FromStr;
 use strum::IntoEnumIterator;
@@ -30,6 +32,36 @@ pub enum Source {
     Delirium,
     DeliriumCurrencyRewards,
     Disabled,
+}
+
+/// `s.parse::<Source>` validates only predefined sources.
+/// It does not account for [PoeData] and cannot be used independently.
+/// Use it solely as the initial step in drop source parsing.
+#[derive(Debug)]
+pub struct UnknownPredefinedSource(pub String);
+
+impl FromStr for Source {
+    type Err = UnknownPredefinedSource;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "Kirac Missions" => Ok(Source::KiracMissions),
+            "Disabled" => Ok(Source::Disabled),
+            "Delirium Currency Rewards" | "Delirium Currency reward" => {
+                Ok(Source::DeliriumCurrencyRewards)
+            }
+            "Maelström of Chaos with Barrel Sextant" => {
+                Ok(Source::MaelstromOfChaosWithBarrelSextant)
+            }
+            _ => UniqueMonster::from_str(s)
+                .map(Self::UniqueMonster)
+                .or_else(|_| Area::from_str(s).map(Self::Area))
+                .or_else(|_| Vendor::from_str(s).map(Self::Vendor))
+                .or_else(|_| Strongbox::from_str(s).map(Self::Strongbox))
+                .or_else(|_| Chest::from_str(s).map(Self::Chest))
+                .map_err(|_| UnknownPredefinedSource(s.to_owned())),
+        }
+    }
 }
 
 impl<'de> Deserialize<'de> for Source {
@@ -70,30 +102,6 @@ impl<'de> Deserialize<'de> for Source {
                     },
                 }
             }
-        }
-    }
-}
-
-impl FromStr for Source {
-    type Err = strum::ParseError;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        match s {
-            "Kirac Missions" => Ok(Source::KiracMissions),
-            "Disabled" => Ok(Source::Disabled),
-            "Delirium Currency Rewards" | "Delirium Currency reward" => {
-                Ok(Source::DeliriumCurrencyRewards)
-            }
-            "Maelström of Chaos with Barrel Sextant" => {
-                Ok(Source::MaelstromOfChaosWithBarrelSextant)
-            }
-            _ => UniqueMonster::from_str(s)
-                .map(Self::UniqueMonster)
-                .or_else(|_| Area::from_str(s).map(Self::Area))
-                .or_else(|_| Vendor::from_str(s).map(Self::Vendor))
-                .or_else(|_| Strongbox::from_str(s).map(Self::Strongbox))
-                .or_else(|_| Chest::from_str(s).map(Self::Chest))
-                .map_err(|_| strum::ParseError::VariantNotFound),
         }
     }
 }
