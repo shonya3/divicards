@@ -234,32 +234,14 @@ pub fn parse_dropses_from(
     column: RichColumnVariant,
 ) -> Result<Vec<Source>, UnknownDropsFrom> {
     let mut sources: Vec<Source> = vec![];
+    let drops_to_parse = match column {
+        RichColumnVariant::Sources => &dumb.drops,
+        RichColumnVariant::Verify => &dumb.drops_to_verify,
+    };
 
-    match column {
-        RichColumnVariant::Sources => {
-            for d in &dumb.drops {
-                let Ok(mut inner_sources) = parse_one_drops_from(d, dumb, poe_data) else {
-                    return Err(UnknownDropsFrom {
-                        card: dumb.card.to_owned(),
-                        record_id: dumb.id,
-                        drops_from: d.to_owned(),
-                    });
-                };
-                sources.append(&mut inner_sources);
-            }
-        }
-        RichColumnVariant::Verify => {
-            for d in &dumb.drops_to_verify {
-                let Ok(mut inner_sources) = parse_one_drops_from(d, dumb, poe_data) else {
-                    return Err(UnknownDropsFrom {
-                        card: dumb.card.to_owned(),
-                        record_id: dumb.id,
-                        drops_from: d.to_owned(),
-                    });
-                };
-                sources.append(&mut inner_sources);
-            }
-        }
+    for d in drops_to_parse {
+        let inner_sources = parse_one_drops_from(d, dumb, poe_data)?;
+        sources.extend(inner_sources);
     }
 
     Ok(sources)
