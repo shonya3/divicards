@@ -42,57 +42,62 @@ pub fn parse_dumb_into_record(dumb: Dumb, poe_data: &PoeData) -> Result<Record, 
 }
 
 #[derive(Debug)]
-pub enum ParseSourceError {
-    UnknownVariant {
-        card: String,
-        record_id: usize,
-        drops_from: DropsFrom,
-    },
-    SourceIsExptectedButEmpty {
-        card: String,
-        record_id: usize,
-    },
+pub struct ParseSourceError {
+    pub card: String,
+    pub record_id: usize,
+    pub kind: ParseSourceErrorKind,
+}
 
-    GreynoteDisabledButCardNotLegacy {
-        card: String,
-        record_id: usize,
-    },
+#[derive(Debug)]
+pub enum ParseSourceErrorKind {
+    UnknownDropSource(DropsFrom),
+    SourceIsExptectedButEmpty,
+    GreynoteDisabledButCardNotLegacy,
+    LegacyCardShouldBeMarkedAsDisabled,
+}
 
-    LegacyCardShouldBeMarkedAsDisabled {
-        card: String,
-        record_id: usize,
-    },
+impl From<UnknownDropsFrom> for ParseSourceError {
+    fn from(value: UnknownDropsFrom) -> Self {
+        ParseSourceError {
+            card: value.card,
+            record_id: value.record_id,
+            kind: ParseSourceErrorKind::UnknownDropSource(value.drops_from),
+        }
+    }
+}
+
+#[derive(Debug)]
+pub struct UnknownDropsFrom {
+    pub card: String,
+    pub record_id: usize,
+    pub drops_from: DropsFrom,
 }
 
 impl Display for ParseSourceError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            ParseSourceError::UnknownVariant {
-                record_id,
-                drops_from,
-                card,
-            } => {
-                write!(
-                    f,
-                    "{record_id}.{card}. Unknown variant of card source {}. {}",
-                    drops_from.name,
-                    record_url(*record_id, DivcordColumn::Source)
-                )
-            }
-            ParseSourceError::SourceIsExptectedButEmpty { record_id, card } => {
-                write!(
-                    f,
-                    "{record_id}.{card}.  Source is expected, but there is nothing. {}",
-                    record_url(*record_id, DivcordColumn::Source)
-                )
-            }
-            ParseSourceError::GreynoteDisabledButCardNotLegacy { record_id, card } => {
-                write!(
-                    f,
-                    "{record_id}. Card {card} has greynote Disabled, but this is not a legacy card {}", record_url(*record_id, DivcordColumn::GreyNote)
-                )
-            }
-            ParseSourceError::LegacyCardShouldBeMarkedAsDisabled { record_id, card } => write!(
+        let ParseSourceError {
+            card,
+            record_id,
+            kind,
+        } = self;
+        match kind {
+            ParseSourceErrorKind::UnknownDropSource(drops_from) => write!(
+                f,
+                "{record_id}.{card}. Unknown variant of card source {}. {}",
+                drops_from.name,
+                record_url(*record_id, DivcordColumn::Source)
+            ),
+            ParseSourceErrorKind::SourceIsExptectedButEmpty => write!(
+                f,
+                "{record_id}.{card}.  Source is expected, but there is nothing. {}",
+                record_url(*record_id, DivcordColumn::Source)
+            ),
+            ParseSourceErrorKind::GreynoteDisabledButCardNotLegacy => write!(
+                f,
+                "{record_id}. Card {card} has greynote Disabled, but this is not a legacy card {}",
+                record_url(*record_id, DivcordColumn::GreyNote)
+            ),
+            ParseSourceErrorKind::LegacyCardShouldBeMarkedAsDisabled => write!(
                 f,
                 "{record_id}. Card {card} is legacy, but not marked as disabled. {}",
                 record_url(*record_id, DivcordColumn::GreyNote)
@@ -145,17 +150,19 @@ pub fn parse_record_dropsources(
 
     // 1. Legacy cards rules
     if dumb.card.as_str().is_legacy_card() && dumb.greynote != GreyNote::Disabled {
-        return Err(ParseSourceError::LegacyCardShouldBeMarkedAsDisabled {
+        return Err(ParseSourceError {
             record_id: dumb.id,
             card: dumb.card.to_owned(),
+            kind: ParseSourceErrorKind::LegacyCardShouldBeMarkedAsDisabled,
         });
     }
 
     if dumb.greynote == GreyNote::Disabled {
         if !dumb.card.as_str().is_legacy_card() {
-            return Err(ParseSourceError::GreynoteDisabledButCardNotLegacy {
+            return Err(ParseSourceError {
                 record_id: dumb.id,
                 card: dumb.card.to_owned(),
+                kind: ParseSourceErrorKind::GreynoteDisabledButCardNotLegacy,
             });
         }
         sources.push(Source::Disabled);
@@ -193,9 +200,10 @@ pub fn parse_record_dropsources(
         if dumb.id == 501 {
             eprintln!("Source is expected but empty. Record id: 501. Card: Wealth and Power");
         } else {
-            return Err(ParseSourceError::SourceIsExptectedButEmpty {
+            return Err(ParseSourceError {
                 record_id: dumb.id,
                 card: dumb.card.to_owned(),
+                kind: ParseSourceErrorKind::SourceIsExptectedButEmpty,
             });
         }
     }
@@ -224,14 +232,14 @@ pub fn parse_dropses_from(
     dumb: &Dumb,
     poe_data: &PoeData,
     column: RichColumnVariant,
-) -> Result<Vec<Source>, ParseSourceError> {
+) -> Result<Vec<Source>, UnknownDropsFrom> {
     let mut sources: Vec<Source> = vec![];
 
     match column {
         RichColumnVariant::Sources => {
             for d in &dumb.drops {
                 let Ok(mut inner_sources) = parse_one_drops_from(d, dumb, poe_data) else {
-                    return Err(ParseSourceError::UnknownVariant {
+                    return Err(UnknownDropsFrom {
                         card: dumb.card.to_owned(),
                         record_id: dumb.id,
                         drops_from: d.to_owned(),
@@ -243,7 +251,7 @@ pub fn parse_dropses_from(
         RichColumnVariant::Verify => {
             for d in &dumb.drops_to_verify {
                 let Ok(mut inner_sources) = parse_one_drops_from(d, dumb, poe_data) else {
-                    return Err(ParseSourceError::UnknownVariant {
+                    return Err(UnknownDropsFrom {
                         card: dumb.card.to_owned(),
                         record_id: dumb.id,
                         drops_from: d.to_owned(),
@@ -261,7 +269,7 @@ pub fn parse_one_drops_from(
     d: &DropsFrom,
     dumb: &Dumb,
     poe_data: &PoeData,
-) -> Result<Vec<Source>, ParseSourceError> {
+) -> Result<Vec<Source>, UnknownDropsFrom> {
     if d.styles.strikethrough {
         return Ok(vec![]);
     }
@@ -360,7 +368,7 @@ pub fn parse_one_drops_from(
         }
     }
 
-    Err(ParseSourceError::UnknownVariant {
+    Err(UnknownDropsFrom {
         card: dumb.card.to_owned(),
         record_id: dumb.id,
         drops_from: d.to_owned(),

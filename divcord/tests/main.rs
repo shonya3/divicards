@@ -1,11 +1,51 @@
 use divcord::{
-    parse::parse_one_drops_from,
+    parse::{parse_dropses_from, parse_dropses_from2, parse_one_drops_from, RichColumnVariant},
     spreadsheet::{
+        self,
         record::{Confidence, Dumb, GreyNote, RemainingWork},
         rich::DropsFrom,
     },
-    PoeData,
+    PoeData, Source, Spreadsheet,
 };
+
+#[tokio::test]
+#[cfg(feature = "fetch")]
+async fn compare() {
+    let poe_data = PoeData::load().await.unwrap();
+    let spreadsheet = Spreadsheet::load().await.unwrap();
+
+    for dumb in spreadsheet.dumb_records() {
+        let dumb = dumb.unwrap();
+
+        let s1 = parse_dropses_from(&dumb, &poe_data, RichColumnVariant::Sources).unwrap();
+        let s2 = parse_dropses_from2(&dumb, &poe_data, RichColumnVariant::Sources).unwrap();
+        assert_eq!(s1, s2);
+
+        let v1 = parse_dropses_from(&dumb, &poe_data, RichColumnVariant::Verify).unwrap();
+        let v2 = parse_dropses_from(&dumb, &poe_data, RichColumnVariant::Verify).unwrap();
+        assert_eq!(v1, v2);
+    }
+}
+
+// /// Parses all instances of record's drops_from and collects it into one Vec<Source>
+// pub fn parse_dropses_from2(
+//     dumb: &Dumb,
+//     poe_data: &PoeData,
+//     column: RichColumnVariant,
+// ) -> Result<Vec<Source>, UnknownDropsFrom> {
+//     let mut sources: Vec<Source> = vec![];
+//     let drops_to_parse = match column {
+//         RichColumnVariant::Sources => &dumb.drops,
+//         RichColumnVariant::Verify => &dumb.drops_to_verify,
+//     };
+
+//     for d in drops_to_parse {
+//         let inner_sources = parse_one_drops_from(d, dumb, poe_data)?;
+//         sources.extend(inner_sources);
+//     }
+
+//     Ok(sources)
+// }
 
 #[tokio::test]
 #[cfg(feature = "fetch")] // cargo test --features fetch
@@ -36,7 +76,7 @@ pub fn parse_drop(
     card: &str,
     drops_from: DropsFrom,
     poe_data: &PoeData,
-) -> Result<Vec<divcord::Source>, divcord::parse::ParseSourceError> {
+) -> Result<Vec<divcord::Source>, divcord::parse::UnknownDropsFrom> {
     let clone = drops_from.clone();
     let dumb = create_dumb(card, drops_from);
     parse_one_drops_from(&clone, &dumb, poe_data)
