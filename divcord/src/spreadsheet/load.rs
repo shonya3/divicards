@@ -3,7 +3,7 @@
 pub use fetcher::{Config, DataFetcher, Stale};
 use googlesheets::sheet::ValueRange;
 
-use crate::{error::Error, parse::RichColumnVariant};
+use crate::parse::RichColumnVariant;
 
 use super::{rich::RichColumn, Spreadsheet};
 
@@ -20,9 +20,9 @@ impl Default for SpreadsheetFetcher {
 }
 impl DataFetcher for SpreadsheetFetcher {
     type Item = Spreadsheet;
-    type Error = Error;
-    async fn fetch(&self) -> Result<Spreadsheet, Error> {
-        self._fetch().await
+    type Error = FetcherError;
+    async fn fetch(&self) -> Result<Spreadsheet, FetcherError> {
+        Ok(self._fetch().await?)
     }
     fn config(&self) -> &Config {
         &self.0
@@ -43,11 +43,14 @@ pub async fn fetch_rich_column(letter: char) -> Result<RichColumn, reqwest::Erro
 }
 
 impl SpreadsheetFetcher {
-    pub async fn fetch_rich_column(&self, variant: RichColumnVariant) -> Result<RichColumn, Error> {
-        Ok(fetch_rich_column(variant.column_letter()).await?)
+    pub async fn fetch_rich_column(
+        &self,
+        variant: RichColumnVariant,
+    ) -> Result<RichColumn, reqwest::Error> {
+        fetch_rich_column(variant.column_letter()).await
     }
 
-    pub async fn fetch_table_sheet(&self) -> Result<ValueRange, Error> {
+    pub async fn fetch_table_sheet(&self) -> Result<ValueRange, reqwest::Error> {
         dotenv::dotenv().ok();
         let key = std::env::var("GOOGLE_API_KEY").expect("No google api key");
         let spreadsheet_id = "1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU";
@@ -61,7 +64,7 @@ impl SpreadsheetFetcher {
         Ok(value_range)
     }
 
-    pub async fn _fetch(&self) -> Result<Spreadsheet, Error> {
+    pub async fn _fetch(&self) -> Result<Spreadsheet, reqwest::Error> {
         let sheet = self.fetch_table_sheet().await?;
         let number_of_rows = sheet.values.len();
         let rich_confirmations_new_325 = RichColumn::new(
@@ -82,5 +85,30 @@ impl SpreadsheetFetcher {
             rich_confirmations_new_325,
             rich_to_confirm_or_reverify,
         })
+    }
+}
+
+#[derive(Debug)]
+pub enum FetcherError {
+    Serde(serde_json::Error),
+    Io(std::io::Error),
+    Reqwest(reqwest::Error),
+}
+
+impl From<serde_json::Error> for FetcherError {
+    fn from(value: serde_json::Error) -> Self {
+        FetcherError::Serde(value)
+    }
+}
+
+impl From<std::io::Error> for FetcherError {
+    fn from(value: std::io::Error) -> Self {
+        FetcherError::Io(value)
+    }
+}
+
+impl From<reqwest::Error> for FetcherError {
+    fn from(value: reqwest::Error) -> Self {
+        FetcherError::Reqwest(value)
     }
 }

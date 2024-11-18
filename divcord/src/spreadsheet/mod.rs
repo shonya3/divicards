@@ -7,7 +7,6 @@ pub mod rich;
 #[allow(unused_imports)]
 use self::rich::Cell;
 use self::{record::Dumb, rich::RichColumn};
-use crate::error::Error;
 use googlesheets::sheet::ValueRange;
 use record::ParseDumbError2;
 use serde::{Deserialize, Serialize};
@@ -38,7 +37,7 @@ impl Spreadsheet {
 
     /// Load cached data or fetch fresh based on config conditions or if there is no cached data.
     #[cfg(feature = "fetch")]
-    pub async fn load() -> Result<Self, Error> {
+    pub async fn load() -> Result<Self, load::FetcherError> {
         use crate::spreadsheet::load::SpreadsheetFetcher;
         use fetcher::DataFetcher;
         SpreadsheetFetcher::default().load().await
@@ -46,7 +45,7 @@ impl Spreadsheet {
 
     /// Fetch fresh spreadsheet data.
     #[cfg(feature = "fetch")]
-    pub async fn fetch() -> Result<Self, Error> {
+    pub async fn fetch() -> Result<Self, load::FetcherError> {
         use crate::spreadsheet::load::SpreadsheetFetcher;
         use fetcher::DataFetcher;
         SpreadsheetFetcher::default().fetch().await
