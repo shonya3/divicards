@@ -4,22 +4,26 @@
 //! divcord = {path = "../divcord", features = ["fetch"]}
 //! ```
 
-use divcord::{Error, PoeData, Source, Spreadsheet};
+use divcord::{PoeData, Source, Spreadsheet};
 use std::fs;
 
 #[tokio::main]
-async fn main() -> Result<(), Error> {
+async fn main() {
     let (poe_data, spreadsheet) = tokio::join!(PoeData::load(), Spreadsheet::load());
-    let poe_data = poe_data?;
-    let spreadsheet = spreadsheet?;
+    let poe_data = poe_data.unwrap();
+    let spreadsheet = spreadsheet.unwrap();
 
     // parse and write to json
-    let records = divcord::records(&spreadsheet, &poe_data)?;
-    fs::write("records.json", serde_json::to_string_pretty(&records)?)?;
+    let records = divcord::records(&spreadsheet, &poe_data).unwrap();
+    fs::write(
+        "records.json",
+        serde_json::to_string_pretty(&records).unwrap(),
+    )
+    .unwrap();
 
     // iterate the records and do something
     for record in divcord::records_iter(&spreadsheet, &poe_data) {
-        let record = record?;
+        let record = record.unwrap();
         let boxes_and_chests_string = record
             .sources
             .iter()
@@ -34,6 +38,4 @@ async fn main() -> Result<(), Error> {
             println!("#{} {} {}", record.id, record.card, boxes_and_chests_string)
         }
     }
-
-    Ok(())
 }

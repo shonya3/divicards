@@ -1,28 +1,56 @@
 use crate::dropsource::{Area, Source, UniqueMonster};
+use crate::spreadsheet::record::ParseDumbError2;
 use crate::spreadsheet::rich::HexColor;
-use crate::{
-    error::Error,
-    spreadsheet::{
-        record::{Confidence, Dumb, GreyNote, Record},
-        rich::DropsFrom,
-        Spreadsheet,
-    },
+use crate::spreadsheet::{
+    record::{Confidence, Dumb, GreyNote, Record},
+    rich::DropsFrom,
+    Spreadsheet,
 };
 use divi::IsCard;
 use poe_data::PoeData;
 use serde::{Deserialize, Serialize};
 use std::fmt::Display;
 
+#[derive(Debug)]
+pub enum ParseRecordError {
+    ParseDumb(ParseDumbError2),
+    ParseDropSource(ParseSourceError),
+}
+
+impl Display for ParseRecordError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            ParseRecordError::ParseDumb(parse_dumb_error2) => parse_dumb_error2.fmt(f),
+            ParseRecordError::ParseDropSource(parse_source_error) => parse_source_error.fmt(f),
+        }
+    }
+}
+
+impl From<ParseSourceError> for ParseRecordError {
+    fn from(value: ParseSourceError) -> Self {
+        ParseRecordError::ParseDropSource(value)
+    }
+}
+
+impl From<ParseDumbError2> for ParseRecordError {
+    fn from(value: ParseDumbError2) -> Self {
+        ParseRecordError::ParseDumb(value)
+    }
+}
+
 pub fn records_iter<'a>(
     spreadsheet: &'a Spreadsheet,
     poe_data: &'a PoeData,
-) -> impl Iterator<Item = Result<Record, Error>> + 'a {
+) -> impl Iterator<Item = Result<Record, ParseRecordError>> + 'a {
     spreadsheet
         .dumb_records()
         .map(|dumb| Ok(parse_dumb_into_record(dumb?, poe_data)?))
 }
 
-pub fn records(spreadsheet: &Spreadsheet, poe_data: &PoeData) -> Result<Vec<Record>, Error> {
+pub fn records(
+    spreadsheet: &Spreadsheet,
+    poe_data: &PoeData,
+) -> Result<Vec<Record>, ParseRecordError> {
     records_iter(spreadsheet, poe_data).collect()
 }
 

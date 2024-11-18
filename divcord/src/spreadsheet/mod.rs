@@ -9,6 +9,7 @@ use self::rich::Cell;
 use self::{record::Dumb, rich::RichColumn};
 use crate::error::Error;
 use googlesheets::sheet::ValueRange;
+use record::ParseDumbError2;
 use serde::{Deserialize, Serialize};
 
 /// [Divcord Spreadsheet](https://docs.google.com/spreadsheets/d/1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU/edit?pli=1#gid=0)
@@ -54,7 +55,7 @@ impl Spreadsheet {
     /// iterator over dumb records - initial preparation of data for each spreadsheet row.
     /// Zips each row of simple format with rich format [`Cell`] for sources column(s)
     /// to produce a [`Dumb`]
-    pub fn dumb_records(&self) -> impl Iterator<Item = Result<Dumb, Error>> + '_ {
+    pub fn dumb_records(&self) -> impl Iterator<Item = Result<Dumb, ParseDumbError2>> + '_ {
         self.sheet
             .values
             .iter()

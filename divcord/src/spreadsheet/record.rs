@@ -1,10 +1,12 @@
 //! Structs for pre-parsed and parsed spreadsheet's row
 
+use std::fmt::Display;
+
 use super::rich::{Cell, DropsFrom, ParseCellError};
-use crate::{dropsource::Source, error::Error};
+use crate::dropsource::Source;
 use divi::cards::CheckCardName;
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
+use serde_json::{Error as SerdeJsonError, Value};
 
 /// "Sourceful" spreadsheet row, with figured out dropsources and need-to-verify-sources.
 #[derive(Debug, Serialize, Clone, Deserialize)]
@@ -52,6 +54,62 @@ pub struct Dumb {
 }
 
 #[derive(Debug)]
+pub enum ParseDumbErrKind {
+    Greynote(SerdeJsonError),
+    CardName(ParseCardNameError),
+    Confidence(SerdeJsonError),
+    RemainingWork(SerdeJsonError),
+    StyledCell(ParseCellError),
+}
+
+impl Display for ParseDumbError2 {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let ParseDumbError2 {
+            record_id,
+            card,
+            kind,
+        } = self;
+
+        match kind {
+            ParseDumbErrKind::Greynote(error) => {
+                write!(f, "{record_id} {card}. Parse greynote error. {error}")
+            }
+            ParseDumbErrKind::CardName(parse_card_name_error) => write!(
+                f,
+                "{record_id}. Parse card name error. {parse_card_name_error}"
+            ),
+            ParseDumbErrKind::Confidence(error) => {
+                write!(f, "{record_id} {card}. Parse confidence error. {error}")
+            }
+            ParseDumbErrKind::RemainingWork(error) => {
+                write!(f, "{record_id} {card}. Parse remaining work error. {error}")
+            }
+            ParseDumbErrKind::StyledCell(parse_cell_error) => write!(
+                f,
+                "{record_id} {card} Could not parse styled cell into chunks. {parse_cell_error}"
+            ),
+        }
+    }
+}
+
+#[derive(Debug)]
+pub struct ParseDumbError2 {
+    pub record_id: usize,
+    pub card: String,
+    pub kind: ParseDumbErrKind,
+}
+
+impl ParseDumbError2 {
+    pub fn new(record_id: usize, card: String, kind: ParseDumbErrKind) -> ParseDumbError2 {
+        ParseDumbError2 {
+            record_id,
+            card,
+            kind,
+        }
+    }
+}
+
+#[derive(Debug)]
 pub struct ParseDumbError {
     pub record_id: usize,
     pub parse_cell_error: ParseCellError,
@@ -73,43 +131,81 @@ impl Dumb {
         spreadsheet_row: &[Value],
         confirmations_new_325_cell: &Cell,
         to_confirm_or_verify_cell: &Cell,
-    ) -> Result<Self, Error> {
-        // A 0 Greynote
-        // let greynote = GreyNote::parse(&spreadsheet_row[0]);
-        let Ok(greynote) = GreyNote::parse(&spreadsheet_row[0]) else {
-            panic!("Could not parse greynote: {}", spreadsheet_row[0]);
-        };
-
+    ) -> Result<Self, ParseDumbError2> {
+        let record_id = Dumb::record_id(row_index);
         // B 1 Card name
-        let card = parse_card_name(&spreadsheet_row[1]).expect("Card error");
+        let card = parse_card_name(&spreadsheet_row[1]).map_err(|parse_card_name_error| {
+            let card_name = match parse_card_name_error {
+                ParseCardNameError::CellValueIsNotStr(_) => {
+                    "Invalid card name cell value".to_owned()
+                }
+                ParseCardNameError::CardNameNotExists(ref name) => name.clone(),
+            };
+
+            ParseDumbError2::new(
+                record_id,
+                card_name,
+                ParseDumbErrKind::CardName(parse_card_name_error),
+            )
+        })?;
+
+        // A 0 Greynote
+        let greynote: GreyNote =
+            serde_json::from_value(spreadsheet_row[0].clone()).map_err(|parse_greynote_error| {
+                ParseDumbError2::new(
+                    record_id,
+                    card.clone(),
+                    ParseDumbErrKind::Greynote(parse_greynote_error),
+                )
+            })?;
 
         // C 2 Tag hypothesis
         let tag_hypothesis = parse_string_cell(&spreadsheet_row[2]);
 
         // D 3 3.25 Confidence
-        let confidence = Confidence::parse(&spreadsheet_row[3]).unwrap();
+        let confidence: Confidence = serde_json::from_value(spreadsheet_row[3].clone()).map_err(
+            |parse_confidence_error| {
+                ParseDumbError2::new(
+                    record_id,
+                    card.clone(),
+                    ParseDumbErrKind::Confidence(parse_confidence_error),
+                )
+            },
+        )?;
 
         // E 4 Old Confidence SKIP
 
         // F 5 Remaining work
-        let remaining_work = RemainingWork::parse(&spreadsheet_row[5])?;
+        let remaining_work: RemainingWork = serde_json::from_value(spreadsheet_row[5].clone())
+            .map_err(|parse_remaining_error| {
+                ParseDumbError2::new(
+                    record_id,
+                    card.clone(),
+                    ParseDumbErrKind::RemainingWork(parse_remaining_error),
+                )
+            })?;
 
         // G 6 - New confirmations - drops
         let drops = confirmations_new_325_cell
             .drops_from()
-            .map_err(|err| ParseDumbError {
-                record_id: Dumb::record_id(row_index),
-                parse_cell_error: err,
+            .map_err(|parse_styled_cell_error| {
+                ParseDumbError2::new(
+                    record_id,
+                    card.clone(),
+                    ParseDumbErrKind::StyledCell(parse_styled_cell_error),
+                )
             })?;
 
-        // UPDATE
         // H 7 - To Confirm or Verify
         let drops_to_verify =
             to_confirm_or_verify_cell
                 .drops_from()
-                .map_err(|err| ParseDumbError {
-                    record_id: Dumb::record_id(row_index),
-                    parse_cell_error: err,
+                .map_err(|parse_styled_cell_error| {
+                    ParseDumbError2::new(
+                        record_id,
+                        card.clone(),
+                        ParseDumbErrKind::StyledCell(parse_styled_cell_error),
+                    )
                 })?;
 
         // I 8 - Notes
@@ -118,12 +214,8 @@ impl Dumb {
         // K 10 - Old Wiki Disagreements - SKIP
         // L 11 - Old Need to verify - SKIP
 
-        // H 7 - Sources           - sources_drops_from
-
-        // K 10 - Notes
-
         Ok(Self {
-            id: Dumb::record_id(row_index),
+            id: record_id,
             greynote,
             card,
             tag_hypothesis,
@@ -136,17 +228,34 @@ impl Dumb {
     }
 }
 
-pub fn parse_card_name(val: &Value) -> Result<String, Error> {
+#[derive(Debug)]
+pub enum ParseCardNameError {
+    CellValueIsNotStr(Value),
+    CardNameNotExists(String),
+}
+
+impl Display for ParseCardNameError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            ParseCardNameError::CellValueIsNotStr(value) => {
+                write!(f, "Card name cell value is not a string. {value:#?}")
+            }
+            ParseCardNameError::CardNameNotExists(card) => write!(f, "Card {card} does not exist."),
+        }
+    }
+}
+
+pub fn parse_card_name(val: &Value) -> Result<String, ParseCardNameError> {
     let Some(second_column_contents) = val.as_str() else {
-        return Err(Error::ValueNotStr(val.to_owned()));
+        return Err(ParseCardNameError::CellValueIsNotStr(val.to_owned()));
     };
 
     match divi::cards::check_card_name(second_column_contents) {
         CheckCardName::Valid => Ok(second_column_contents.to_owned()),
         CheckCardName::TypoFixed(fixed) => Ok(fixed.fixed),
-        CheckCardName::NotACard => {
-            Err(Error::ParseCardNameError(second_column_contents.to_owned()))
-        }
+        CheckCardName::NotACard => Err(ParseCardNameError::CardNameNotExists(
+            second_column_contents.to_owned(),
+        )),
     }
 }
 
@@ -171,8 +280,8 @@ pub fn parse_string_cell(val: &Value) -> Option<String> {
 #[serde(rename_all = "camelCase")]
 pub enum GreyNote {
     #[default]
-    #[strum(to_string = "Empty")]
-    #[serde(rename = "Empty")]
+    #[strum(to_string = "Empty", serialize = "", serialize = "n/a")]
+    #[serde(rename = "Empty", alias = "", alias = "n/a")]
     Empty,
     #[strum(to_string = "Monster-specific")]
     #[serde(rename = "Monster-specific")]
@@ -206,16 +315,6 @@ pub enum GreyNote {
     Atlas,
 }
 
-impl GreyNote {
-    pub fn parse(val: &Value) -> Result<Self, Error> {
-        match val.as_str() {
-            Some(s) if s.is_empty() || s == "n/a" => Ok(Self::Empty),
-            Some(s) => Ok(s.parse()?),
-            None => Ok(Self::Empty),
-        }
-    }
-}
-
 #[derive(
     Serialize,
     Deserialize,
@@ -241,13 +340,6 @@ pub enum Confidence {
     #[strum(to_string = "Done", serialize = "DONE")]
     #[serde(alias = "Done", alias = "DONE")]
     Done,
-}
-
-impl Confidence {
-    pub fn parse(val: &Value) -> Result<Self, Error> {
-        let conf: Confidence = serde_json::from_value(val.to_owned())?;
-        Ok(conf)
-    }
 }
 
 #[derive(
@@ -290,117 +382,4 @@ pub enum RemainingWork {
     #[strum(serialize = "story")]
     #[serde(rename = "story")]
     Story,
-}
-
-impl RemainingWork {
-    pub fn parse(val: &Value) -> Result<Self, Error> {
-        match val.as_str() {
-            Some(s) if s.is_empty() || s == "n/a" => Ok(Self::NotApplicable),
-            Some(s) => Ok(s.parse()?),
-            None => Ok(Self::NotApplicable),
-        }
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use serde_json::json;
-
-    use super::*;
-
-    #[test]
-    fn test_parse_greynote() {
-        assert_eq!(
-            GreyNote::AreaSpecific,
-            GreyNote::parse(&json!("Area-specific")).unwrap()
-        );
-        assert_eq!(
-            GreyNote::MonsterSpecific,
-            GreyNote::parse(&json!("Monster-specific")).unwrap()
-        );
-        assert_eq!(
-            GreyNote::Disabled,
-            GreyNote::parse(&json!("disabled")).unwrap()
-        );
-        assert_eq!(
-            GreyNote::Disabled,
-            GreyNote::parse(&json!("disabled")).unwrap()
-        );
-        assert_eq!(
-            GreyNote::Disabled,
-            GreyNote::parse(&json!("Drop disabled")).unwrap()
-        );
-        assert_eq!(GreyNote::Story, GreyNote::parse(&json!("story")).unwrap());
-        assert_eq!(
-            GreyNote::Delirium,
-            GreyNote::parse(&json!("Delirium_reward")).unwrap()
-        );
-        assert_eq!(
-            GreyNote::ChestObject,
-            GreyNote::parse(&json!("Chest_object")).unwrap()
-        );
-        assert_eq!(
-            GreyNote::ChestObject,
-            GreyNote::parse(&json!("Chest_obkect")).unwrap()
-        );
-        assert_eq!(
-            GreyNote::Strongbox,
-            GreyNote::parse(&json!("strongbox")).unwrap()
-        );
-        assert_eq!(
-            GreyNote::GlobalDrop,
-            GreyNote::parse(&json!("Global Drop")).unwrap()
-        );
-        assert_eq!(GreyNote::Vendor, GreyNote::parse(&json!("Vendor")).unwrap());
-        assert_eq!(GreyNote::Empty, GreyNote::parse(&json!("")).unwrap());
-        assert_eq!(GreyNote::Empty, GreyNote::parse(&json!("n/a")).unwrap());
-    }
-
-    #[test]
-    fn test_parse_confidence() {
-        assert_eq!(Confidence::Done, Confidence::parse(&json!("DONE")).unwrap());
-        assert_eq!(Confidence::Low, Confidence::parse(&json!("Low")).unwrap());
-        assert_eq!(Confidence::Low, Confidence::parse(&json!("low")).unwrap());
-        assert_eq!(Confidence::None, Confidence::parse(&json!("none")).unwrap());
-        assert_eq!(Confidence::Ok, Confidence::parse(&json!("OK")).unwrap());
-        assert_eq!(Confidence::Ok, Confidence::parse(&json!("ok")).unwrap());
-    }
-
-    #[test]
-    fn test_parse_remaining_work() {
-        assert_eq!(
-            RemainingWork::Confirm,
-            RemainingWork::parse(&json!("confirm")).unwrap()
-        );
-        assert_eq!(
-            RemainingWork::UnclearHypothesis,
-            RemainingWork::parse(&json!("unclear hypothesis")).unwrap()
-        );
-        assert_eq!(
-            RemainingWork::NoHypothesis,
-            RemainingWork::parse(&json!("no hypothesis")).unwrap()
-        );
-        assert_eq!(
-            RemainingWork::StoryOnly,
-            RemainingWork::parse(&json!("story only")).unwrap()
-        );
-        assert_eq!(
-            RemainingWork::NotApplicable,
-            RemainingWork::parse(&json!("n/a")).unwrap()
-        );
-        assert_eq!(
-            RemainingWork::LegacyTag,
-            RemainingWork::parse(&json!("legacy tag")).unwrap()
-        );
-
-        assert_eq!(
-            RemainingWork::OpenEnded,
-            RemainingWork::parse(&json!("open ended")).unwrap()
-        );
-
-        assert_eq!(
-            RemainingWork::NotApplicable,
-            RemainingWork::parse(&json!("")).unwrap()
-        );
-    }
 }
