@@ -10,8 +10,7 @@ pub mod spreadsheet;
 pub use crate::{
     cards::{cards_by_source, cards_by_source_types, CardBySource},
     dropsource::Source,
-    error::Error,
-    parse::{records, records_iter},
+    parse::{records, records_iter, ParseRecordError},
     spreadsheet::{record::Record, Spreadsheet},
 };
 

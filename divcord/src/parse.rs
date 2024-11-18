@@ -11,6 +11,22 @@ use poe_data::PoeData;
 use serde::{Deserialize, Serialize};
 use std::fmt::Display;
 
+pub fn records_iter<'a>(
+    spreadsheet: &'a Spreadsheet,
+    poe_data: &'a PoeData,
+) -> impl Iterator<Item = Result<Record, ParseRecordError>> + 'a {
+    spreadsheet
+        .dumb_records()
+        .map(|dumb| Ok(parse_dumb_into_record(dumb?, poe_data)?))
+}
+
+pub fn records(
+    spreadsheet: &Spreadsheet,
+    poe_data: &PoeData,
+) -> Result<Vec<Record>, ParseRecordError> {
+    records_iter(spreadsheet, poe_data).collect()
+}
+
 #[derive(Debug)]
 pub enum ParseRecordError {
     ParseDumb(ParseDumbError2),
@@ -36,22 +52,6 @@ impl From<ParseDumbError2> for ParseRecordError {
     fn from(value: ParseDumbError2) -> Self {
         ParseRecordError::ParseDumb(value)
     }
-}
-
-pub fn records_iter<'a>(
-    spreadsheet: &'a Spreadsheet,
-    poe_data: &'a PoeData,
-) -> impl Iterator<Item = Result<Record, ParseRecordError>> + 'a {
-    spreadsheet
-        .dumb_records()
-        .map(|dumb| Ok(parse_dumb_into_record(dumb?, poe_data)?))
-}
-
-pub fn records(
-    spreadsheet: &Spreadsheet,
-    poe_data: &PoeData,
-) -> Result<Vec<Record>, ParseRecordError> {
-    records_iter(spreadsheet, poe_data).collect()
 }
 
 /// [Dumb] -> [Record]
