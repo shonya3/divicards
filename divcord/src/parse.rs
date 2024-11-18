@@ -219,10 +219,7 @@ pub fn parse_record_dropsources(
     //     // println!("{} {} {sources:?}", record.id, record.card);
     // }
 
-    if dumb.greynote != GreyNote::Empty
-        && dumb.confidence == Confidence::Done
-        && sources.is_empty()
-        && dumb.drops_to_verify.is_empty()
+    if dumb.confidence == Confidence::Done && sources.is_empty() && dumb.drops_to_verify.is_empty()
     {
         let err = ParseSourceError {
             record_id: dumb.id,
