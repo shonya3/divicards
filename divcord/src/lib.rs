@@ -21,20 +21,3 @@ pub use poe_data::PoeData;
 pub use {
     fetcher::DataFetcher, poe_data::fetchers::PoeDataFetcher, spreadsheet::load::SpreadsheetFetcher,
 };
-
-// // Final rules
-// if dumb.confidence == Confidence::None && !sources.is_empty() {
-//     println!("{} {} {sources:?}", dumb.id, dumb.card);
-// }
-
-// if dumb.greynote != GreyNote::Empty
-//     && dumb.confidence == Confidence::Done
-//     && sources.is_empty()
-//     && dumb.drops_to_verify.is_empty()
-//     && dumb.id != 501
-// {
-//     return Err(ParseSourceError::SourceIsExptectedButEmpty {
-//         record_id: dumb.id,
-//         card: dumb.card.to_owned(),
-//     });
-// }
