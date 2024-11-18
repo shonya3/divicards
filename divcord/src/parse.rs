@@ -79,7 +79,7 @@ pub struct ParseSourceError {
 #[derive(Debug)]
 pub enum ParseSourceErrorKind {
     UnknownDropSource(DropsFrom),
-    SourceIsExptectedButEmpty,
+    SourceOrVerifyIsExpectedButEmpty,
     GreynoteDisabledButCardNotLegacy,
     LegacyCardShouldBeMarkedAsDisabled,
 }
@@ -115,9 +115,9 @@ impl Display for ParseSourceError {
                 drops_from.name,
                 record_url(*record_id, DivcordColumn::Source)
             ),
-            ParseSourceErrorKind::SourceIsExptectedButEmpty => write!(
+            ParseSourceErrorKind::SourceOrVerifyIsExpectedButEmpty => write!(
                 f,
-                "{record_id}.{card}.  Source is expected, but there is nothing. {}",
+                "{record_id}.{card}. Source or need-to-verify source is expected, but there is none. {}",
                 record_url(*record_id, DivcordColumn::Source)
             ),
             ParseSourceErrorKind::GreynoteDisabledButCardNotLegacy => write!(
@@ -214,25 +214,27 @@ pub fn parse_record_dropsources(
         sources.push(Source::Area(Area::ExpeditionLogbook))
     }
 
-    // 6. Final rules
-    if dumb.confidence == Confidence::None && !sources.is_empty() {
-        // println!("{} {} {sources:?}", record.id, record.card);
-    }
+    //  Final checks
+    // if dumb.confidence == Confidence::None && !sources.is_empty() {
+    //     // println!("{} {} {sources:?}", record.id, record.card);
+    // }
 
     if dumb.greynote != GreyNote::Empty
         && dumb.confidence == Confidence::Done
         && sources.is_empty()
         && dumb.drops_to_verify.is_empty()
     {
-        // expected error case
+        let err = ParseSourceError {
+            record_id: dumb.id,
+            card: dumb.card.to_owned(),
+            kind: ParseSourceErrorKind::SourceOrVerifyIsExpectedButEmpty,
+        };
+
+        // expected err case
         if dumb.id == 501 {
-            eprintln!("Source is expected but empty. Record id: 501. Card: Wealth and Power");
+            eprintln!("{err}");
         } else {
-            return Err(ParseSourceError {
-                record_id: dumb.id,
-                card: dumb.card.to_owned(),
-                kind: ParseSourceErrorKind::SourceIsExptectedButEmpty,
-            });
+            return Err(err);
         }
     }
 
