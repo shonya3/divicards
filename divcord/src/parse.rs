@@ -180,9 +180,7 @@ pub fn parse_record_dropsources(
     dumb: &Dumb,
     poe_data: &PoeData,
 ) -> Result<Vec<Source>, ParseSourceError> {
-    let mut sources: Vec<Source> = vec![];
-
-    // 1. Legacy cards checks
+    // Legacy cards checks
     if dumb.greynote != GreyNote::Disabled && dumb.card.as_str().is_legacy_card() {
         return Err(ParseSourceError {
             record_id: dumb.id,
@@ -199,15 +197,13 @@ pub fn parse_record_dropsources(
                 kind: ParseSourceErrorKind::GreynoteDisabledButCardNotLegacy,
             });
         }
-        sources.push(Source::Disabled);
-        return Ok(sources);
+        return Ok(vec![Source::Disabled]);
     }
 
-    // 2. Parse the main sources column. Most drop sources come from here.
-    let main_column_sources = parse_dropses_from(dumb, poe_data, RichColumnVariant::Sources)?;
-    sources.extend(main_column_sources);
+    // Parse
+    let sources = parse_dropses_from(dumb, poe_data, RichColumnVariant::Sources)?;
 
-    // 3. Final checks
+    // Final checks
     if dumb.confidence == Confidence::None && !sources.is_empty() {
         return Err(ParseSourceError {
             record_id: dumb.id,
