@@ -1,4 +1,4 @@
-use crate::dropsource::{Area, Source, UniqueMonster};
+use crate::dropsource::Source;
 use crate::spreadsheet::record::ParseDumbError2;
 use crate::spreadsheet::rich::HexColor;
 use crate::spreadsheet::{
@@ -82,6 +82,7 @@ pub enum ParseSourceErrorKind {
     SourceOrVerifyIsExpectedButEmpty,
     GreynoteDisabledButCardNotLegacy,
     LegacyCardShouldBeMarkedAsDisabled,
+    ConfidenceNoneButHasSources,
 }
 
 impl From<UnknownDropsFrom> for ParseSourceError {
@@ -113,12 +114,12 @@ impl Display for ParseSourceError {
                 f,
                 "{record_id}.{card}. Unknown variant of card source {}. {}",
                 drops_from.name,
-                record_url(*record_id, DivcordColumn::Source)
+                record_url(*record_id, DivcordColumn::Sources)
             ),
             ParseSourceErrorKind::SourceOrVerifyIsExpectedButEmpty => write!(
                 f,
                 "{record_id}.{card}. Source or need-to-verify source is expected, but there is none. {}",
-                record_url(*record_id, DivcordColumn::Source)
+                record_url(*record_id, DivcordColumn::Sources)
             ),
             ParseSourceErrorKind::GreynoteDisabledButCardNotLegacy => write!(
                 f,
@@ -129,6 +130,11 @@ impl Display for ParseSourceError {
                 f,
                 "{record_id}. Card {card} is legacy, but not marked as disabled. {}",
                 record_url(*record_id, DivcordColumn::GreyNote)
+            ),
+            ParseSourceErrorKind::ConfidenceNoneButHasSources => write!(
+                f,
+                "{record_id}.{card}. Confidence is None, but sources not empty {}",
+                record_url(*record_id, DivcordColumn::Sources)
             ),
         }
     }
@@ -141,8 +147,8 @@ pub enum DivcordColumn {
     Confidence,
     ConfidenceNew325,
     RemainingWork,
-    New325Confirmations,
-    Source,
+    Sources,
+    Verify,
     WikiDisagreements,
     SourcesWithTagButNotOnWiki,
     Notes,
@@ -157,8 +163,8 @@ impl DivcordColumn {
             DivcordColumn::ConfidenceNew325 => "D",
             DivcordColumn::Confidence => "E",
             DivcordColumn::RemainingWork => "F",
-            DivcordColumn::New325Confirmations => "G",
-            DivcordColumn::Source => "H",
+            DivcordColumn::Sources => "G",
+            DivcordColumn::Verify => "H",
             DivcordColumn::WikiDisagreements => "I",
             DivcordColumn::SourcesWithTagButNotOnWiki => "J",
             DivcordColumn::Notes => "K",
@@ -176,8 +182,8 @@ pub fn parse_record_dropsources(
 ) -> Result<Vec<Source>, ParseSourceError> {
     let mut sources: Vec<Source> = vec![];
 
-    // 1. Legacy cards rules
-    if dumb.card.as_str().is_legacy_card() && dumb.greynote != GreyNote::Disabled {
+    // 1. Legacy cards checks
+    if dumb.greynote != GreyNote::Disabled && dumb.card.as_str().is_legacy_card() {
         return Err(ParseSourceError {
             record_id: dumb.id,
             card: dumb.card.to_owned(),
@@ -201,38 +207,22 @@ pub fn parse_record_dropsources(
     let main_column_sources = parse_dropses_from(dumb, poe_data, RichColumnVariant::Sources)?;
     sources.extend(main_column_sources);
 
-    // 3. Read from tags(3rd column)
-    if dumb.tag_hypothesis.as_deref() == Some("invasion_boss") {
-        sources.push(Source::UniqueMonster(UniqueMonster::AllInvasionBosses))
+    // 3. Final checks
+    if dumb.confidence == Confidence::None && !sources.is_empty() {
+        return Err(ParseSourceError {
+            record_id: dumb.id,
+            card: dumb.card.to_owned(),
+            kind: ParseSourceErrorKind::ConfidenceNoneButHasSources,
+        });
     }
-
-    if dumb.tag_hypothesis.as_deref() == Some("vaalsidearea_boss") {
-        sources.push(Source::UniqueMonster(UniqueMonster::AllVaalSideAreaBosses))
-    }
-
-    if dumb.tag_hypothesis.as_deref() == Some("expedition_common_remnant_logbook") {
-        sources.push(Source::Area(Area::ExpeditionLogbook))
-    }
-
-    //  Final checks
-    // if dumb.confidence == Confidence::None && !sources.is_empty() {
-    //     // println!("{} {} {sources:?}", record.id, record.card);
-    // }
 
     if dumb.confidence == Confidence::Done && sources.is_empty() && dumb.drops_to_verify.is_empty()
     {
-        let err = ParseSourceError {
+        return Err(ParseSourceError {
             record_id: dumb.id,
             card: dumb.card.to_owned(),
             kind: ParseSourceErrorKind::SourceOrVerifyIsExpectedButEmpty,
-        };
-
-        // expected err case
-        if dumb.id == 501 {
-            eprintln!("{err}");
-        } else {
-            return Err(err);
-        }
+        });
     }
 
     Ok(sources)

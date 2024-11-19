@@ -52,7 +52,7 @@ impl FromStr for Area {
             }
             "Vaal Side Areas" => Ok(Self::VaalSideAreas),
             "Labyrinth Trial Areas" => Ok(Self::LabyrinthTrialAreas),
-            "Expedition Logbook" => Ok(Self::ExpeditionLogbook),
+            "Expedition Logbook" | "Expedition Logbooks" => Ok(Self::ExpeditionLogbook),
             _ => AreaSpecific::from_str(s)
                 .map(Self::AreaSpecific)
                 .or_else(|_| AtziriArea::from_str(s).map(Self::AtziriArea))

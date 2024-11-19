@@ -10,9 +10,14 @@ use divcord::{
 #[tokio::test]
 #[cfg(feature = "fetch")] // cargo test --features fetch
 async fn parses_spreadsheet() {
-    use divcord::Spreadsheet;
+    use divcord::SpreadsheetFetcher;
+    use fetcher::{DataFetcher, Stale};
+    use std::time::Duration;
+    let load_spreadsheet = SpreadsheetFetcher::load_with_mut_default_config(|config| {
+        config.stale(Stale::After(Duration::from_secs(84000)));
+    });
 
-    let (poe_data, spreadsheet) = tokio::join!(PoeData::load(), Spreadsheet::fetch());
+    let (poe_data, spreadsheet) = tokio::join!(PoeData::load(), load_spreadsheet);
     let poe_data = poe_data.unwrap();
     let spreadsheet = spreadsheet.unwrap();
     let _records = divcord::records(&spreadsheet, &poe_data).unwrap();

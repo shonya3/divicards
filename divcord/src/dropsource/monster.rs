@@ -71,7 +71,7 @@ impl FromStr for UniqueMonster {
             | "Architects in Temple of Atzoatl" => Ok(Self::AllIncursionArchitectsInTemple),
             "All Abyss Monsters" => Ok(Self::AllAbyssMonsters),
             "All Rogue Exiles" => Ok(Self::AllRogueExiles),
-            "All Invasion Bosses" => Ok(Self::AllInvasionBosses),
+            "All Invasion Bosses" | "Invasion bosses" => Ok(Self::AllInvasionBosses),
             "All Vaal Side Area Bosses" | "Vaal side area bosses (including Vaal Temple)" => {
                 Ok(Self::AllVaalSideAreaBosses)
             }
