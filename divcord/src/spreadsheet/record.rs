@@ -109,18 +109,6 @@ impl ParseDumbError2 {
     }
 }
 
-#[derive(Debug)]
-pub struct ParseDumbError {
-    pub record_id: usize,
-    pub parse_cell_error: ParseCellError,
-}
-
-impl std::fmt::Display for ParseDumbError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}. {}", &self.record_id, &self.parse_cell_error)
-    }
-}
-
 impl Dumb {
     pub fn record_id(row_index: usize) -> usize {
         row_index + 3
@@ -214,7 +202,7 @@ impl Dumb {
         // K 10 - Old Wiki Disagreements - SKIP
         // L 11 - Old Need to verify - SKIP
 
-        Ok(Self {
+        Ok(Dumb {
             id: record_id,
             greynote,
             card,
