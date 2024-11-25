@@ -1,5 +1,5 @@
 use crate::dropsource::Source;
-use crate::spreadsheet::record::ParseDumbError2;
+use crate::spreadsheet::record::ParseDumbError;
 use crate::spreadsheet::rich::HexColor;
 use crate::spreadsheet::{
     record::{Confidence, Dumb, GreyNote, Record},
@@ -29,7 +29,7 @@ pub fn records(
 
 #[derive(Debug)]
 pub enum ParseRecordError {
-    ParseDumb(ParseDumbError2),
+    ParseDumb(ParseDumbError),
     ParseDropSource(ParseSourceError),
 }
 
@@ -48,8 +48,8 @@ impl From<ParseSourceError> for ParseRecordError {
     }
 }
 
-impl From<ParseDumbError2> for ParseRecordError {
-    fn from(value: ParseDumbError2) -> Self {
+impl From<ParseDumbError> for ParseRecordError {
+    fn from(value: ParseDumbError) -> Self {
         ParseRecordError::ParseDumb(value)
     }
 }

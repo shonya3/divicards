@@ -71,9 +71,9 @@ pub enum ParseDumbErrKind {
     StyledCell(ParseCellError),
 }
 
-impl Display for ParseDumbError2 {
+impl Display for ParseDumbError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let ParseDumbError2 {
+        let ParseDumbError {
             record_id,
             card,
             kind,
@@ -102,15 +102,15 @@ impl Display for ParseDumbError2 {
 }
 
 #[derive(Debug)]
-pub struct ParseDumbError2 {
+pub struct ParseDumbError {
     pub record_id: usize,
     pub card: String,
     pub kind: ParseDumbErrKind,
 }
 
-impl ParseDumbError2 {
-    pub fn new(record_id: usize, card: String, kind: ParseDumbErrKind) -> ParseDumbError2 {
-        ParseDumbError2 {
+impl ParseDumbError {
+    pub fn new(record_id: usize, card: String, kind: ParseDumbErrKind) -> ParseDumbError {
+        ParseDumbError {
             record_id,
             card,
             kind,
@@ -128,7 +128,7 @@ impl Dumb {
         spreadsheet_row: &[Value],
         confirmations_new_325_cell: &Cell,
         to_confirm_or_verify_cell: &Cell,
-    ) -> Result<Self, ParseDumbError2> {
+    ) -> Result<Self, ParseDumbError> {
         let record_id = Dumb::record_id(row_index);
         // B 1 Card name
         let card = parse_card_name(&spreadsheet_row[1]).map_err(|parse_card_name_error| {
@@ -139,7 +139,7 @@ impl Dumb {
                 ParseCardNameError::CardNameNotExists(ref name) => name.clone(),
             };
 
-            ParseDumbError2::new(
+            ParseDumbError::new(
                 record_id,
                 card_name,
                 ParseDumbErrKind::CardName(parse_card_name_error),
@@ -149,7 +149,7 @@ impl Dumb {
         // A 0 Greynote
         let greynote: GreyNote =
             serde_json::from_value(spreadsheet_row[0].clone()).map_err(|parse_greynote_error| {
-                ParseDumbError2::new(
+                ParseDumbError::new(
                     record_id,
                     card.clone(),
                     ParseDumbErrKind::Greynote(parse_greynote_error),
@@ -162,7 +162,7 @@ impl Dumb {
         // D 3 3.25 Confidence
         let confidence: Confidence = serde_json::from_value(spreadsheet_row[3].clone()).map_err(
             |parse_confidence_error| {
-                ParseDumbError2::new(
+                ParseDumbError::new(
                     record_id,
                     card.clone(),
                     ParseDumbErrKind::Confidence(parse_confidence_error),
@@ -175,7 +175,7 @@ impl Dumb {
         // F 5 Remaining work
         let remaining_work: RemainingWork = serde_json::from_value(spreadsheet_row[5].clone())
             .map_err(|parse_remaining_error| {
-                ParseDumbError2::new(
+                ParseDumbError::new(
                     record_id,
                     card.clone(),
                     ParseDumbErrKind::RemainingWork(parse_remaining_error),
@@ -186,7 +186,7 @@ impl Dumb {
         let drops = confirmations_new_325_cell
             .drops_from()
             .map_err(|parse_styled_cell_error| {
-                ParseDumbError2::new(
+                ParseDumbError::new(
                     record_id,
                     card.clone(),
                     ParseDumbErrKind::StyledCell(parse_styled_cell_error),
@@ -198,7 +198,7 @@ impl Dumb {
             to_confirm_or_verify_cell
                 .drops_from()
                 .map_err(|parse_styled_cell_error| {
-                    ParseDumbError2::new(
+                    ParseDumbError::new(
                         record_id,
                         card.clone(),
                         ParseDumbErrKind::StyledCell(parse_styled_cell_error),
