@@ -32,23 +32,32 @@ pub struct Record {
 #[serde(rename_all = "camelCase")]
 pub struct Dumb {
     pub id: usize,
+
+    /// A
     #[serde(default)]
-    // A
     pub greynote: GreyNote,
-    // B
+
+    /// B
     pub card: String,
+
+    /// C
     #[serde(skip_serializing_if = "Option::is_none")]
-    // C
     pub tag_hypothesis: Option<String>,
-    pub confidence: Confidence, // D
+
+    /// D
+    pub confidence: Confidence,
+
+    /// F
     #[serde(default)]
-    // F
     pub remaining_work: RemainingWork,
-    // G
+
+    /// G
     pub drops: Vec<DropsFrom>,
-    // H
+
+    /// H
     pub drops_to_verify: Vec<DropsFrom>,
-    // I
+
+    /// I
     #[serde(skip_serializing_if = "Option::is_none")]
     pub notes: Option<String>,
 }
