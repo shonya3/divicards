@@ -273,18 +273,16 @@ pub enum ParseDropsFromError {
 pub fn parse_one_drops_from(
     d: &DropsFrom,
     dumb: &Dumb,
-    poe_data: &PoeData,
-) -> Result<Vec<Source>, UnknownDropsFrom> {
-    if d.styles.strikethrough {
-        return Ok(vec![]);
-    }
-
-    let PoeData {
+    PoeData {
         acts,
         cards,
         maps,
         mapbosses,
-    } = poe_data;
+    }: &PoeData,
+) -> Result<Vec<Source>, UnknownDropsFrom> {
+    if d.styles.strikethrough {
+        return Ok(vec![]);
+    }
 
     let card_min_drop_level = cards.card(&dumb.card).min_level.unwrap_or_default();
 
