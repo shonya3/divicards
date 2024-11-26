@@ -334,18 +334,15 @@ pub fn parse_one_drops_from(
     if dumb.greynote == GreyNote::AreaSpecific
         || (d.styles.color == HexColor::White && !d.styles.italic)
     {
-        let s = &d.name;
-
-        if let Some(map) = maps.iter().find(|m| {
-            let shortname = m.name.replace(" Map", "");
-            s == &shortname || s == &m.name
-        }) {
+        if let Some(map) = maps
+            .iter()
+            .find(|m| d.name == m.name || d.name == m.name.replace(" Map", "").as_str())
+        {
             return Ok(vec![Source::Map(map.name.to_owned())]);
         }
 
-        let s = strip_comment(s);
-        if mapbosses.iter().any(|b| b.name == s) {
-            return Ok(vec![Source::MapBoss(s)]);
+        if let Some(boss) = mapbosses.iter().find(|b| b.name == strip_comment(&d.name)) {
+            return Ok(vec![Source::MapBoss(boss.name.to_owned())]);
         }
     }
 
