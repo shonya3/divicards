@@ -145,29 +145,23 @@ pub enum DivcordColumn {
     Card,
     TagHypothesis,
     Confidence,
-    ConfidenceNew325,
     RemainingWork,
     Sources,
     Verify,
-    WikiDisagreements,
-    SourcesWithTagButNotOnWiki,
     Notes,
 }
 
 impl DivcordColumn {
-    pub fn letter(&self) -> &str {
+    pub fn letter(&self) -> char {
         match self {
-            DivcordColumn::GreyNote => "A",
-            DivcordColumn::Card => "B",
-            DivcordColumn::TagHypothesis => "C",
-            DivcordColumn::ConfidenceNew325 => "D",
-            DivcordColumn::Confidence => "E",
-            DivcordColumn::RemainingWork => "F",
-            DivcordColumn::Sources => "G",
-            DivcordColumn::Verify => "H",
-            DivcordColumn::WikiDisagreements => "I",
-            DivcordColumn::SourcesWithTagButNotOnWiki => "J",
-            DivcordColumn::Notes => "K",
+            DivcordColumn::GreyNote => 'A',
+            DivcordColumn::Card => 'B',
+            DivcordColumn::TagHypothesis => 'C',
+            DivcordColumn::Confidence => 'D',
+            DivcordColumn::RemainingWork => 'F',
+            DivcordColumn::Sources => 'G',
+            DivcordColumn::Verify => 'H',
+            DivcordColumn::Notes => 'I',
         }
     }
 }
