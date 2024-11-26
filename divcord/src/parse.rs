@@ -1,4 +1,4 @@
-use crate::dropsource::Source;
+use crate::dropsource::{Area, Source};
 use crate::spreadsheet::record::ParseDumbError;
 use crate::spreadsheet::rich::HexColor;
 use crate::spreadsheet::{
@@ -260,6 +260,16 @@ pub fn parse_dropses_from(
     Ok(sources)
 }
 
+#[derive(Debug)]
+pub enum ParseDropsFromError {
+    Unknown(DropsFrom),
+    DropSourceLevelisLowerThanCardMinLevel {
+        level: u32,
+        card: String,
+        card_min_drop_level: u32,
+    },
+}
+
 pub fn parse_one_drops_from(
     d: &DropsFrom,
     dumb: &Dumb,
@@ -276,43 +286,35 @@ pub fn parse_one_drops_from(
         mapbosses,
     } = poe_data;
 
-    let card = cards.card(&dumb.card);
-    let card_drop_level_requirement = card.min_level.unwrap_or_default();
-    let card_name = &dumb.card;
-    let row = dumb.id;
+    let card_min_drop_level = cards.card(&dumb.card).min_level.unwrap_or_default();
+
     if let Ok(source) = d.name.parse::<Source>() {
-        match source.to_string().as_str() {
-            "The Alluring Abyss" => {
-                if card_drop_level_requirement > 80 {
-                    println!(
-                        "Row: {row} Card: {card_name} Warning. Min level of card({card_drop_level_requirement}) is higher than Map level({}). Map: The Alluring Abyss",
-                        80
-                    );
-                }
+        if let Source::Area(Area::AtziriArea(area)) = source.clone() {
+            let level = area.level();
+            if card_min_drop_level > level {
+                let err = ParseDropsFromError::DropSourceLevelisLowerThanCardMinLevel {
+                    level,
+                    card: dumb.card.clone(),
+                    card_min_drop_level,
+                };
+                dbg!(err); // TODO: Update err return type
             }
-            "The Apex of Sacrifice" => {
-                if card_drop_level_requirement > 70 {
-                    println!(
-                        "Row: {row} Card: {card_name} Warning. Min level of card({card_drop_level_requirement}) is higher than Map level({}). Map: The Apex of Sacrifice",
-                        70
-                    );
-                }
-            }
-            _ => {}
-        };
+        }
+
         return Ok(vec![source]);
     }
 
     // Acts areas or act area bosses
     if d.styles.italic && (d.styles.color == HexColor::White || dumb.greynote == GreyNote::Story) {
-        let ids = acts::parse_act_areas(d, acts, card_drop_level_requirement.try_into().unwrap());
+        let ids =
+            acts::parse_act_areas(d, acts, card_min_drop_level.try_into().unwrap_or_default());
         if ids.is_empty() {
             if acts.iter().any(|a| {
                 a.bossfights.iter().any(|b| {
                     let names_match = b.name == d.name;
                     if names_match {
                         let monster_level = a.area_level as u32 + 2u32;
-                        let level_matches = monster_level >= card_drop_level_requirement;
+                        let level_matches = monster_level >= card_min_drop_level;
                         if !level_matches {
                             println!("Level of monster level is lower than card drop requirement");
                         };
@@ -321,7 +323,7 @@ pub fn parse_one_drops_from(
                     } else {
                         false
                     }
-                    // b.name == d.name && a.area_level + 2 >= card_drop_level_requirement as u8
+                    // b.name == d.name && a.area_level + 2 >= card_min_drop_level as u8
                 })
             }) {
                 return Ok(vec![Source::ActBoss(d.name.to_string())]);
@@ -347,13 +349,6 @@ pub fn parse_one_drops_from(
             let shortname = m.name.replace(" Map", "");
             s == &shortname || s == &m.name
         }) {
-            // let maplevel = map.level();
-            // if maplevel < card_drop_level_requirement as u32 {
-            // let mapname = &map.name;
-            // println!(
-            //     "{row} {card_name}. {mapname}(lv{maplevel}), need lv{card_drop_level_requirement}"
-            // );
-            // }
             return Ok(vec![Source::Map(map.name.to_owned())]);
         }
 
