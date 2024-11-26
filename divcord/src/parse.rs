@@ -291,7 +291,7 @@ pub fn parse_one_drops_from(
     if let Ok(source) = d.name.parse::<Source>() {
         if let Source::Area(Area::AtziriArea(area)) = source.clone() {
             let level = area.level();
-            if card_min_drop_level > level {
+            if level < card_min_drop_level {
                 let err = ParseDropsFromError::DropSourceLevelisLowerThanCardMinLevel {
                     level,
                     card: dumb.card.clone(),
@@ -304,44 +304,35 @@ pub fn parse_one_drops_from(
         return Ok(vec![source]);
     }
 
-    // Acts areas or act area bosses
+    // Acts + bosses
     if d.styles.italic && (d.styles.color == HexColor::White || dumb.greynote == GreyNote::Story) {
-        let ids =
+        let act_areas_ids =
             acts::parse_act_areas(d, acts, card_min_drop_level.try_into().unwrap_or_default());
-        if ids.is_empty() {
-            if acts.iter().any(|a| {
-                a.bossfights.iter().any(|b| {
-                    let names_match = b.name == d.name;
-                    if names_match {
-                        let monster_level = a.area_level as u32 + 2u32;
-                        let level_matches = monster_level >= card_min_drop_level;
-                        if !level_matches {
-                            println!("Level of monster level is lower than card drop requirement");
-                        };
-
-                        level_matches
-                    } else {
-                        false
-                    }
-                    // b.name == d.name && a.area_level + 2 >= card_min_drop_level as u8
-                })
-            }) {
-                return Ok(vec![Source::ActBoss(d.name.to_string())]);
-            } else {
-                println!(
-                    "From acts parsing. Could not resolve the source of the name: {} {d:#?} dumb_id: {}.",
-                    &d.name, dumb.id
-                );
-            }
+        if !act_areas_ids.is_empty() {
+            return Ok(act_areas_ids.into_iter().map(Source::Act).collect());
         }
 
-        // return Some(Source::Acts { ids });
-        return Ok(ids.into_iter().map(Source::Act).collect());
+        if acts.iter().any(|a| {
+            a.bossfights.iter().any(|b| {
+                if b.name != d.name {
+                    return false;
+                }
+
+                if (a.area_level as u32 + 2) < card_min_drop_level {
+                    println!("Monster level is lower than card drop requirement");
+                    return false;
+                }
+
+                true
+            })
+        }) {
+            return Ok(vec![Source::ActBoss(d.name.to_string())]);
+        }
     }
 
-    // Maps or MapBosses
-    if (!d.styles.italic && d.styles.color == HexColor::White)
-        || dumb.greynote == GreyNote::AreaSpecific
+    // Maps + bosses
+    if dumb.greynote == GreyNote::AreaSpecific
+        || (d.styles.color == HexColor::White && !d.styles.italic)
     {
         let s = &d.name;
 
