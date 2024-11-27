@@ -20,7 +20,7 @@ async fn parses_spreadsheet() {
     let (poe_data, spreadsheet) = tokio::join!(PoeData::load(), load_spreadsheet);
     let poe_data = poe_data.unwrap();
     let spreadsheet = spreadsheet.unwrap();
-    let _records = divcord::records(&spreadsheet, &poe_data).unwrap();
+    let _records = divcord::records_with_collect_all_errors(&spreadsheet, &poe_data).unwrap();
 }
 
 fn create_dumb(card: &str, drops_from: DropsFrom) -> Dumb {
@@ -68,7 +68,7 @@ async fn main() {
     .unwrap();
     assert!(!sources.is_empty());
 
-    let sources = parse_drop(
+    let result = parse_drop(
         "The Endurance",
         DropsFrom {
             name: "The Mines Level 1/2, The Crystal Veins".to_owned(),
@@ -79,7 +79,6 @@ async fn main() {
             },
         },
         &poe_data,
-    )
-    .unwrap();
-    assert!(sources.is_empty());
+    );
+    assert!(result.is_err());
 }

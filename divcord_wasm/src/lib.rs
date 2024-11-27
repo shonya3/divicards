@@ -1,6 +1,6 @@
 mod utils;
 
-use divcord::{Record, Spreadsheet};
+use divcord::{ParseRecordError, Record, Spreadsheet};
 use poe_data::PoeData;
 use utils::set_panic_hook;
 use wasm_bindgen::{prelude::wasm_bindgen, JsValue};
@@ -19,7 +19,16 @@ pub fn parsed_records(
     let mut records: Vec<Record> = vec![];
     for record in divcord::records_iter(&spreadsheet, &poe_data) {
         match record {
-            Ok(record) => records.push(record),
+            Ok(record_result) => {
+                records.push(record_result.record);
+                if !record_result.errors.is_empty() {
+                    let errors_string =
+                        ParseRecordError::ParseDropSources(record_result.errors).to_string();
+                    toast
+                        .call1(&JsValue::null(), &JsValue::from_str(&errors_string))
+                        .unwrap();
+                }
+            }
             Err(err) => {
                 toast
                     .call1(

@@ -11,40 +11,86 @@ use poe_data::PoeData;
 use serde::{Deserialize, Serialize};
 use std::fmt::Display;
 
+/// Go-to function for records
+pub fn records_with_collect_all_errors(
+    spreadsheet: &Spreadsheet,
+    poe_data: &PoeData,
+) -> Result<Vec<Record>, Vec<ParseRecordError>> {
+    let mut records: Vec<Record> = Vec::new();
+    let mut errors: Vec<ParseRecordError> = Vec::new();
+    records_iter(spreadsheet, poe_data).for_each(|result| match result {
+        Ok(record_result) => {
+            records.push(record_result.record);
+            if !record_result.errors.is_empty() {
+                errors.push(ParseRecordError::ParseDropSources(record_result.errors));
+            }
+        }
+        Err(parse_dumb_err) => {
+            errors.push(ParseRecordError::ParseDumb(parse_dumb_err));
+        }
+    });
+
+    if !errors.is_empty() {
+        return Err(errors);
+    };
+
+    Ok(records)
+}
+
+/// More low-level function for records.
 pub fn records_iter<'a>(
     spreadsheet: &'a Spreadsheet,
     poe_data: &'a PoeData,
-) -> impl Iterator<Item = Result<Record, ParseRecordError>> + 'a {
+) -> impl Iterator<Item = Result<ParseRecordResult, ParseDumbError>> + 'a {
     spreadsheet
         .dumb_records()
-        .map(|dumb| Ok(parse_dumb_into_record(dumb?, poe_data)?))
+        .map(|dumb| Ok(parse_record(dumb?, poe_data)))
 }
 
+/// Parse till first error. Maybe delete this one later.
 pub fn records(
     spreadsheet: &Spreadsheet,
     poe_data: &PoeData,
 ) -> Result<Vec<Record>, ParseRecordError> {
-    records_iter(spreadsheet, poe_data).collect()
+    records_iter(spreadsheet, poe_data)
+        .map(|result| match result {
+            Ok(record_result) => match record_result.errors.is_empty() {
+                true => Ok(record_result.record),
+                false => {
+                    let errors = ParseRecordError::ParseDropSources(record_result.errors);
+                    Err(errors)
+                }
+            },
+            Err(parse_dumb_err) => Err(ParseRecordError::ParseDumb(parse_dumb_err)),
+        })
+        .collect()
 }
 
 #[derive(Debug)]
 pub enum ParseRecordError {
     ParseDumb(ParseDumbError),
-    ParseDropSource(ParseSourceError),
+    ParseDropSources(Vec<ParseSourceError>),
 }
 
 impl Display for ParseRecordError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             ParseRecordError::ParseDumb(parse_dumb_error2) => parse_dumb_error2.fmt(f),
-            ParseRecordError::ParseDropSource(parse_source_error) => parse_source_error.fmt(f),
+            ParseRecordError::ParseDropSources(errors) => {
+                let errors_string = errors
+                    .iter()
+                    .map(|err| err.to_string())
+                    .collect::<Vec<_>>()
+                    .join("\n");
+                f.write_str(&errors_string)
+            }
         }
     }
 }
 
-impl From<ParseSourceError> for ParseRecordError {
-    fn from(value: ParseSourceError) -> Self {
-        ParseRecordError::ParseDropSource(value)
+impl From<Vec<ParseSourceError>> for ParseRecordError {
+    fn from(value: Vec<ParseSourceError>) -> Self {
+        ParseRecordError::ParseDropSources(value)
     }
 }
 
@@ -54,19 +100,38 @@ impl From<ParseDumbError> for ParseRecordError {
     }
 }
 
+#[derive(Debug)]
+pub struct ParseRecordResult {
+    pub record: Record,
+    pub errors: Vec<ParseSourceError>,
+}
+
 /// [Dumb] -> [Record]
-pub fn parse_dumb_into_record(dumb: Dumb, poe_data: &PoeData) -> Result<Record, ParseSourceError> {
-    Ok(Record {
-        sources: parse_record_dropsources(&dumb, poe_data)?,
-        verify_sources: parse_dropses_from(&dumb, poe_data, RichColumnVariant::Verify)?,
-        id: dumb.id,
-        greynote: dumb.greynote,
-        card: dumb.card,
-        tag_hypothesis: dumb.tag_hypothesis,
-        confidence: dumb.confidence,
-        remaining_work: dumb.remaining_work,
-        notes: dumb.notes,
-    })
+pub fn parse_record(dumb: Dumb, poe_data: &PoeData) -> ParseRecordResult {
+    let (sources, mut errors) = parse_record_dropsources(&dumb, poe_data);
+    let (verify_sources, errors_verify_drops_from) =
+        parse_dropses_from(&dumb, poe_data, RichColumnVariant::Verify);
+
+    errors.extend(
+        errors_verify_drops_from
+            .into_iter()
+            .map(ParseSourceError::from),
+    );
+
+    ParseRecordResult {
+        record: Record {
+            sources,
+            verify_sources,
+            id: dumb.id,
+            greynote: dumb.greynote,
+            card: dumb.card,
+            tag_hypothesis: dumb.tag_hypothesis,
+            confidence: dumb.confidence,
+            remaining_work: dumb.remaining_work,
+            notes: dumb.notes,
+        },
+        errors,
+    }
 }
 
 #[derive(Debug)]
@@ -173,33 +238,37 @@ pub fn record_url(id: usize, column: DivcordColumn) -> String {
 pub fn parse_record_dropsources(
     dumb: &Dumb,
     poe_data: &PoeData,
-) -> Result<Vec<Source>, ParseSourceError> {
+) -> (Vec<Source>, Vec<ParseSourceError>) {
     // Legacy cards checks
     if dumb.greynote != GreyNote::Disabled && dumb.card.as_str().is_legacy_card() {
-        return Err(ParseSourceError {
+        let err = ParseSourceError {
             record_id: dumb.id,
             card: dumb.card.to_owned(),
             kind: ParseSourceErrorKind::LegacyCardShouldBeMarkedAsDisabled,
-        });
+        };
+        return (vec![Source::Disabled], vec![err]);
     }
 
+    let mut errors: Vec<ParseSourceError> = Vec::new();
     if dumb.greynote == GreyNote::Disabled {
         if !dumb.card.as_str().is_legacy_card() {
-            return Err(ParseSourceError {
+            errors.push(ParseSourceError {
                 record_id: dumb.id,
                 card: dumb.card.to_owned(),
                 kind: ParseSourceErrorKind::GreynoteDisabledButCardNotLegacy,
             });
         }
-        return Ok(vec![Source::Disabled]);
+        return (vec![Source::Disabled], vec![]);
     }
 
     // Parse
-    let sources = parse_dropses_from(dumb, poe_data, RichColumnVariant::Sources)?;
+    let (sources, drops_from_errors) =
+        parse_dropses_from(dumb, poe_data, RichColumnVariant::Sources);
+    errors.extend(drops_from_errors.into_iter().map(ParseSourceError::from));
 
     // Final checks
     if dumb.confidence == Confidence::None && !sources.is_empty() {
-        return Err(ParseSourceError {
+        errors.push(ParseSourceError {
             record_id: dumb.id,
             card: dumb.card.to_owned(),
             kind: ParseSourceErrorKind::ConfidenceNoneButHasSources,
@@ -208,14 +277,14 @@ pub fn parse_record_dropsources(
 
     if dumb.confidence == Confidence::Done && sources.is_empty() && dumb.drops_to_verify.is_empty()
     {
-        return Err(ParseSourceError {
+        errors.push(ParseSourceError {
             record_id: dumb.id,
             card: dumb.card.to_owned(),
             kind: ParseSourceErrorKind::SourceOrVerifyIsExpectedButEmpty,
         });
     }
 
-    Ok(sources)
+    (sources, errors)
 }
 
 #[derive(Debug, PartialEq, Eq, Hash, Clone, Serialize, Deserialize)]
@@ -239,19 +308,22 @@ pub fn parse_dropses_from(
     dumb: &Dumb,
     poe_data: &PoeData,
     column: RichColumnVariant,
-) -> Result<Vec<Source>, UnknownDropsFrom> {
+) -> (Vec<Source>, Vec<UnknownDropsFrom>) {
     let mut sources: Vec<Source> = vec![];
+    let mut unknowns: Vec<UnknownDropsFrom> = Vec::new();
     let drops_to_parse = match column {
         RichColumnVariant::Sources => &dumb.drops,
         RichColumnVariant::Verify => &dumb.drops_to_verify,
     };
 
     for d in drops_to_parse {
-        let inner_sources = parse_one_drops_from(d, dumb, poe_data)?;
-        sources.extend(inner_sources);
+        match parse_one_drops_from(d, dumb, poe_data) {
+            Ok(inner_sources) => sources.extend(inner_sources),
+            Err(err) => unknowns.push(err),
+        };
     }
 
-    Ok(sources)
+    (sources, unknowns)
 }
 
 #[derive(Debug)]

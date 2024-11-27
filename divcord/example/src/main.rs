@@ -14,16 +14,22 @@ async fn main() {
     let spreadsheet = spreadsheet.unwrap();
 
     // parse and write to json
-    let records = divcord::records(&spreadsheet, &poe_data).unwrap();
+    let records = divcord::records_with_collect_all_errors(&spreadsheet, &poe_data).unwrap();
     fs::write(
         "records.json",
         serde_json::to_string_pretty(&records).unwrap(),
     )
     .unwrap();
 
-    // iterate the records and do something
-    for record in divcord::records_iter(&spreadsheet, &poe_data) {
-        let record = record.unwrap();
+    // More low-level function. Iterate the records and do something
+    for result in divcord::records_iter(&spreadsheet, &poe_data) {
+        let record_result = result.unwrap();
+        let record = record_result.record;
+        let errors = record_result.errors;
+        if !errors.is_empty() {
+            println!("{errors:#?}");
+        }
+
         let boxes_and_chests_string = record
             .sources
             .iter()

@@ -9,7 +9,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::{Error as SerdeJsonError, Value};
 
 /// "Sourceful" spreadsheet row, with figured out dropsources and need-to-verify-sources.
-#[derive(Debug, Serialize, Clone, Deserialize)]
+#[derive(Debug, Serialize, Clone, Deserialize, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct Record {
     pub id: usize,
