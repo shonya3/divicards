@@ -9,9 +9,15 @@ use wasm_bindgen::{prelude::wasm_bindgen, JsValue};
 pub fn parsed_records(
     spreadsheet: String,
     poe_data: String,
-    toast: &js_sys::Function,
+    on_error: &js_sys::Function,
 ) -> Result<JsValue, JsValue> {
     set_panic_hook();
+
+    let on_err = |s: &str| {
+        on_error
+            .call1(&JsValue::null(), &JsValue::from_str(s))
+            .unwrap()
+    };
 
     let spreadsheet: Spreadsheet = serde_json::from_str(&spreadsheet).unwrap();
     let poe_data: PoeData = serde_json::from_str(&poe_data).unwrap();
@@ -24,18 +30,11 @@ pub fn parsed_records(
                 if !record_result.errors.is_empty() {
                     let errors_string =
                         ParseRecordError::ParseDropSources(record_result.errors).to_string();
-                    toast
-                        .call1(&JsValue::null(), &JsValue::from_str(&errors_string))
-                        .unwrap();
+                    on_err(&errors_string);
                 }
             }
             Err(err) => {
-                toast
-                    .call1(
-                        &JsValue::null(),
-                        &JsValue::from_str(err.to_string().as_str()),
-                    )
-                    .unwrap();
+                on_err(err.to_string().as_str());
             }
         }
     }
