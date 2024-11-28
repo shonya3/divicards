@@ -18,7 +18,9 @@ impl DataFetcher for SpreadsheetFetcher {
     type Item = Spreadsheet;
     type Error = FetcherError;
     async fn fetch(&self) -> Result<Spreadsheet, FetcherError> {
-        Ok(super::fetch_spreadsheet().await?)
+        dotenv::dotenv().ok();
+        let key = std::env::var("GOOGLE_API_KEY").expect("No google api key");
+        Ok(super::fetch_spreadsheet(&key).await?)
     }
     fn config(&self) -> &Config {
         &self.0
