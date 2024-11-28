@@ -17,5 +17,6 @@ pub use poe_data::PoeData;
 
 #[cfg(feature = "fetch")]
 pub use {
-    fetcher::DataFetcher, poe_data::fetchers::PoeDataFetcher, spreadsheet::load::SpreadsheetFetcher,
+    fetcher::DataFetcher, poe_data::fetchers::PoeDataFetcher,
+    spreadsheet::fetcher::SpreadsheetFetcher,
 };

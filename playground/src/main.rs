@@ -7,7 +7,7 @@ use divcord::{
     records_iter,
     spreadsheet::{
         self,
-        load::SpreadsheetFetcher,
+        fetcher::SpreadsheetFetcher,
         record::Record,
         rich::{DropsFrom, FontStyles, HexColor, RichColumn},
         Spreadsheet,
