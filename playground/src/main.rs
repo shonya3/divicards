@@ -16,8 +16,8 @@ use divcord::{
 };
 use divi::Prices;
 use error::Error;
-use fetcher::DataFetcher;
-use fetcher::{Config, Stale};
+use fs_cache_fetcher::DataFetcher;
+use fs_cache_fetcher::{Config, Stale};
 use poe_data::fetchers::MapsFetcher;
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};

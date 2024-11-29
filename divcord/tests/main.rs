@@ -11,7 +11,7 @@ use divcord::{
 #[cfg(feature = "fs_cache_fetcher")] // cargo test --features fetch
 async fn parses_spreadsheet() {
     use divcord::SpreadsheetFetcher;
-    use fetcher::{DataFetcher, Stale};
+    use fs_cache_fetcher::{DataFetcher, Stale};
     use std::time::Duration;
     let load_spreadsheet = SpreadsheetFetcher::load_with_mut_default_config(|config| {
         config.stale(Stale::After(Duration::from_secs(84000)));

@@ -1,7 +1,7 @@
 #![cfg(feature = "fs_cache_fetcher")]
 
 use super::Spreadsheet;
-pub use fetcher::{Config, DataFetcher, Stale};
+pub use fs_cache_fetcher::{Config, DataFetcher, Stale};
 
 pub struct SpreadsheetFetcher(pub Config);
 

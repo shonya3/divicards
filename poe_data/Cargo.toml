@@ -16,7 +16,7 @@ dotenv = { version = "0.15.0", optional = true}
 divi = {path = "../divi", optional = true}
 playwright = {version = "0.0.20", optional = true}
 serde_json = {workspace = true, optional = true}
-fetcher = {path = "../fetcher", optional = true}
+fs_cache_fetcher = {path = "../fs_cache_fetcher", optional = true}
 tokio = {workspace = true, optional = true}
 slug = "0.1.5"
 regex = "1.10.6"
@@ -28,4 +28,4 @@ playwright = {version = "0.0.20"}
 
 [features]
 default = []
-fetch = ["dep:serde_json", "dep:playwright", "dep:divi", "dep:dotenv", "dep:googlesheets", "dep:reqwest", "dep:fetcher", "dep:tokio"]
+fetch = ["dep:serde_json", "dep:playwright", "dep:divi", "dep:dotenv", "dep:googlesheets", "dep:reqwest", "dep:fs_cache_fetcher", "dep:tokio"]

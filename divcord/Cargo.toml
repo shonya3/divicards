@@ -16,12 +16,12 @@ reqwest = { workspace = true }
 strum_macros = "0.25.3"
 strum = "0.25.0"
 poe_data = {path = "../poe_data"}
-fetcher = {path = "../fetcher", optional = true}
+fs_cache_fetcher = {path = "../fs_cache_fetcher", optional = true}
 slug = "0.1.5"
 
 [features]
 default = []
-fs_cache_fetcher = ["dep:fetcher", "poe_data/fetch"]
+fs_cache_fetcher = ["dep:fs_cache_fetcher", "poe_data/fetch"]
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }

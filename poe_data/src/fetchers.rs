@@ -1,6 +1,6 @@
 #![cfg(feature = "fetch")]
 use crate::{act::ActArea, cards::CardsData, error::Error, mapbosses::MapBoss, maps::Map, PoeData};
-use fetcher::{Config, DataFetcher, Stale};
+use fs_cache_fetcher::{Config, DataFetcher, Stale};
 use std::time::Duration;
 
 pub struct PoeDataFetcher {

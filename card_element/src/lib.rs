@@ -4,10 +4,10 @@ pub mod fetcher;
 pub mod images;
 pub mod reward;
 
-use ::fetcher::DataFetcher;
 use drop_level::DropLevel;
 pub use error::Error;
 use fetcher::Fetcher;
+use fs_cache_fetcher::DataFetcher;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Clone, Debug)]

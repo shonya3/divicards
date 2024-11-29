@@ -11,7 +11,7 @@ members = [
     "divcord",
     "divcord/example",
     "divcord_wasm",
-    "fetcher",
+    "fs_cache_fetcher",
     "generate_website_files",
     "divcord/divcord_test"
 , "ninja", "poe"]

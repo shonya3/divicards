@@ -13,7 +13,7 @@ divcord = {path = "../divcord", features = ["fs_cache_fetcher"]}
 tokio = {workspace = true}
 reqwest.workspace = true
 dotenv = "0.15.0"
-fetcher = {path ="../fetcher"}
+fs_cache_fetcher = {path ="../fs_cache_fetcher"}
 divi = {path ="../divi"}
 poe_data = {path  = "../poe_data", features = ["fetch"]}
 card_element = {path = "../card_element"}

@@ -1,5 +1,5 @@
 [package]
-name = "fetcher"
+name = "fs_cache_fetcher"
 version = "0.1.0"
 edition = "2021"
 

@@ -1,6 +1,6 @@
 use crate::drop_level;
 use crate::{reward::reward_to_html, DivinationCardElementData, Error};
-use fetcher::{Config, DataFetcher, Stale};
+use fs_cache_fetcher::{Config, DataFetcher, Stale};
 use poe::TradeLeague;
 use poe_data::fetchers::CardsFetcher;
 
