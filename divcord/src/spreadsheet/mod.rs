@@ -114,7 +114,7 @@ mod fetch {
         let url = format!(
         "https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{range}?key={google_api_key}"
     );
-        let value_range: ValueRange = reqwest::get(url).await?.json().await?;
+        let value_range: ValueRange = reqwest::get(url).await?.error_for_status()?.json().await?;
         Ok(value_range)
     }
 
@@ -126,7 +126,7 @@ mod fetch {
         let sheet = "Cards_and_Hypotheses";
         let column = letter;
         let url = format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}?&ranges={sheet}!{column}3:{column}&includeGridData=true&key={google_api_key}");
-        reqwest::get(url).await?.json().await
+        reqwest::get(url).await?.error_for_status()?.json().await
     }
 
     async fn fetch_rich_column(
