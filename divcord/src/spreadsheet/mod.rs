@@ -46,11 +46,8 @@ impl Spreadsheet {
     }
 
     /// Fetch fresh spreadsheet data.
-    #[cfg(feature = "fetch")]
-    pub async fn fetch() -> Result<Self, fetcher::FetcherError> {
-        use crate::spreadsheet::fetcher::SpreadsheetFetcher;
-        use fetcher::DataFetcher;
-        SpreadsheetFetcher::default().fetch().await
+    pub async fn fetch(google_api_key: &str) -> Result<Spreadsheet, reqwest::Error> {
+        fetch_spreadsheet(google_api_key).await
     }
 
     /// iterator over dumb records - initial preparation of data for each spreadsheet row.
@@ -83,6 +80,7 @@ mod fetch {
     use super::{rich::RichColumn, Spreadsheet};
     use googlesheets::sheet::ValueRange;
 
+    /// Fetch fresh spreadsheet data.
     pub async fn fetch_spreadsheet(google_api_key: &str) -> Result<Spreadsheet, reqwest::Error> {
         let sheet = fetch_table_sheet(google_api_key).await?;
         let number_of_rows = sheet.values.len();
