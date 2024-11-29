@@ -1,3 +1,5 @@
+//! Parse drop sources.
+
 use crate::dropsource::{Area, Source};
 use crate::spreadsheet::record::ParseDumbError;
 use crate::spreadsheet::rich::HexColor;

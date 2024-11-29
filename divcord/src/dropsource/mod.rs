@@ -1,3 +1,5 @@
+//! Big fat enum with all drop sources.
+
 pub mod area;
 pub mod id;
 pub mod monster;
