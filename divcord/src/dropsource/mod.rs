@@ -13,13 +13,22 @@ use serde::{de, ser::SerializeStruct, Deserialize, Serialize};
 use std::str::FromStr;
 use strum::IntoEnumIterator;
 
+/// First group of variants of 4 (Act, Map, ActBoss, MapBoss)
+/// is being resolved after s.parse::<Source> fails.
+/// Data goes from scrapped [PoeData]. And there are some color and font style rules
+/// for differentiating acts (acts are written with italic font-style in spreadsheet).
+///
+/// Other enum variants hold hardcoded dropsources
+/// and are getting parsed with simple [Source::from_str] (s.parse::<Source>)
 #[derive(Debug, Clone, PartialEq, Eq, Hash, strum_macros::EnumIter)]
 pub enum Source {
+    // These 4 are being resolved after s.parse::<Source> fails.
     Act(ActAreaId),
     Map(String),
     ActBoss(String),
     MapBoss(String),
 
+    // Everything below is predefined and gets parsed with simple s.parse::<Source>
     UniqueMonster(UniqueMonster),
     Area(Area),
 
