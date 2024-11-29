@@ -21,7 +21,7 @@ slug = "0.1.5"
 
 [features]
 default = []
-fetch = ["dep:fetcher", "poe_data/fetch"]
+fs_cache_fetcher = ["dep:fetcher", "poe_data/fetch"]
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }

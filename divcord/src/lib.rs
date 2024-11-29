@@ -15,8 +15,8 @@ pub use crate::{
 
 pub use poe_data::PoeData;
 
-#[cfg(feature = "fetch")]
+#[cfg(feature = "fs_cache_fetcher")]
 pub use {
     fetcher::DataFetcher, poe_data::fetchers::PoeDataFetcher,
-    spreadsheet::fetcher::SpreadsheetFetcher,
+    spreadsheet::fs_cache_fetcher::SpreadsheetFetcher,
 };

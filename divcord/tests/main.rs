@@ -8,7 +8,7 @@ use divcord::{
 };
 
 #[tokio::test]
-#[cfg(feature = "fetch")] // cargo test --features fetch
+#[cfg(feature = "fs_cache_fetcher")] // cargo test --features fetch
 async fn parses_spreadsheet() {
     use divcord::SpreadsheetFetcher;
     use fetcher::{DataFetcher, Stale};
@@ -48,7 +48,7 @@ pub fn parse_drop(
 }
 
 #[tokio::test]
-#[cfg(feature = "fetch")]
+#[cfg(feature = "fs_cache_fetcher")]
 async fn main() {
     use divcord::spreadsheet::rich::{FontStyles, HexColor};
     let poe_data = PoeData::load().await.unwrap();

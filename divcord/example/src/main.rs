@@ -9,6 +9,8 @@ use std::fs;
 
 #[tokio::main]
 async fn main() {
+    // Keep in mind, PoeData needs Playwright for data scrapping and requires special feature(check Cargo.toml).
+    // Spreadsheet is just 3 http requests, and can be loaded without special conditions and features.
     let (poe_data, spreadsheet) = tokio::join!(PoeData::load(), Spreadsheet::load());
     let poe_data = poe_data.unwrap();
     let spreadsheet = spreadsheet.unwrap();

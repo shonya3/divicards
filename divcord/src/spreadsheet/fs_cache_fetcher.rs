@@ -1,4 +1,4 @@
-#![cfg(feature = "fetch")]
+#![cfg(feature = "fs_cache_fetcher")]
 
 use super::Spreadsheet;
 pub use fetcher::{Config, DataFetcher, Stale};

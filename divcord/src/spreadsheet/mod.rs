@@ -1,6 +1,6 @@
 //! Defines and loads [Divcord Spreadsheet](https://docs.google.com/spreadsheets/d/1Pf2KNuGguZLyf6eu_R0E503U0QNyfMZqaRETsN5g6kU/edit?pli=1#gid=0)
 
-pub mod fetcher;
+pub mod fs_cache_fetcher;
 pub mod record;
 pub mod rich;
 
@@ -38,10 +38,10 @@ impl Spreadsheet {
     }
 
     /// Load cached data or fetch fresh based on config conditions or if there is no cached data.
-    #[cfg(feature = "fetch")]
-    pub async fn load() -> Result<Self, fetcher::FetcherError> {
-        use crate::spreadsheet::fetcher::SpreadsheetFetcher;
-        use fetcher::DataFetcher;
+    #[cfg(feature = "fs_cache_fetcher")]
+    pub async fn load() -> Result<Self, fs_cache_fetcher::FetcherError> {
+        use crate::spreadsheet::fs_cache_fetcher::SpreadsheetFetcher;
+        use fs_cache_fetcher::DataFetcher;
         SpreadsheetFetcher::default().load().await
     }
 
