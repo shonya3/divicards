@@ -79,23 +79,34 @@ impl Display for ParseDumbError {
             kind,
         } = self;
 
+        let preparsing_phase = "Preparsing phase";
+
         match kind {
             ParseDumbErrKind::Greynote(error) => {
-                write!(f, "{record_id} {card}. Parse greynote error. {error}")
+                write!(
+                    f,
+                    "{preparsing_phase} {record_id} {card}. Parse greynote error. {error}"
+                )
             }
             ParseDumbErrKind::CardName(parse_card_name_error) => write!(
                 f,
-                "{record_id}. Parse card name error. {parse_card_name_error}"
+                "{preparsing_phase} {record_id}. Parse card name error. {parse_card_name_error}"
             ),
             ParseDumbErrKind::Confidence(error) => {
-                write!(f, "{record_id} {card}. Parse confidence error. {error}")
+                write!(
+                    f,
+                    "{preparsing_phase} {record_id} {card}. Parse confidence error. {error}"
+                )
             }
             ParseDumbErrKind::RemainingWork(error) => {
-                write!(f, "{record_id} {card}. Parse remaining work error. {error}")
+                write!(
+                    f,
+                    "{preparsing_phase} {record_id} {card}. Parse remaining work error. {error}"
+                )
             }
             ParseDumbErrKind::StyledCell(parse_cell_error) => write!(
                 f,
-                "{record_id} {card} Could not parse styled cell into chunks. {parse_cell_error}"
+                "{preparsing_phase} {record_id} {card} Could not parse styled cell into chunks. {parse_cell_error}"
             ),
         }
     }
