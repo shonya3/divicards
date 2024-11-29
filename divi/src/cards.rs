@@ -171,16 +171,15 @@ fn fix_name(name: &str) -> Option<String> {
 
     let (most_similar, score) = most_similar_card(name);
 
-    match score >= 0.75 {
-        true => Some(String::from(most_similar)),
-        false => {
-            // Try to prefix name with "The" - a lot of cards start with "The"
-            let the = format!("The {name}");
-            let (most_similar, score) = most_similar_card(&the);
-            match score >= 0.75 {
-                true => Some(String::from(most_similar)),
-                false => None,
-            }
+    if score >= 0.75 {
+        Some(String::from(most_similar))
+    } else {
+        // Try to prefix name with "The" - a lot of cards start with "The"
+        let the = format!("The {name}");
+        let (most_similar, score) = most_similar_card(&the);
+        match score >= 0.75 {
+            true => Some(String::from(most_similar)),
+            false => None,
         }
     }
 }
