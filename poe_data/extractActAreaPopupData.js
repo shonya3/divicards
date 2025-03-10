@@ -68,7 +68,7 @@ const extractActAreaPopupData = actAreaPopup => {
 
 		const text = prop.innerText;
 
-		const valueElement = prop.querySelector('.text-type0');
+		const valueElement = prop.querySelector('.colourDefault');
 		if (!(valueElement instanceof HTMLElement)) {
 			continue;
 		}
