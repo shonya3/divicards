@@ -38,7 +38,7 @@ impl ReleaseVersion {
         let major = self.major();
         let minor = self.minor();
 
-        major.map_or(false, |_| major == other.major() && minor == other.minor())
+        major.is_some_and(|_| major == other.major() && minor == other.minor())
     }
 
     pub fn major(&self) -> Option<u16> {
