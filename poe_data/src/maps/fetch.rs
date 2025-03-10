@@ -139,6 +139,7 @@ async fn load_poedb_available_non_unique_name_tier_list(
             return Ok(None);
         };
 
+        let re = Regex::new(r"\d+").unwrap();
         for property_block in map_container.query_selector_all(".property").await? {
             let Some(text) = property_block.text_content().await? else {
                 continue;
@@ -147,7 +148,6 @@ async fn load_poedb_available_non_unique_name_tier_list(
             if !text.starts_with("Map Tier") {
                 continue;
             }
-            let re = Regex::new(r"\d+").unwrap();
             if let Some(first_match) = re.find(text) {
                 let tier: u32 =
                     first_match
