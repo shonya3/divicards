@@ -61,6 +61,7 @@ const fetchMapBosses = () => {
 
 	mapBosses.push(cleansingLight, opid, vindicatedQueen);
 	mapBosses.push({ name: 'Nightmare of the Depraved Trinity', maps: ['Abomination Map'] });
+	mapBosses.push({ name: 'Nightmare of Catarina', maps: ['Ziggurat Map'] });
 
 	return mapBosses;
 };
