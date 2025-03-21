@@ -47,7 +47,11 @@ async fn main() {
         &json_dir,
         DivinationCardElementData::filename(),
     );
-    std::fs::write(dir.join("avatars.ts"), avatars::prepare_avatars_ts().await).unwrap();
+
+    match avatars::prepare_avatars_ts().await {
+        Ok(avatars_string) => std::fs::write(dir.join("avatars.ts"), avatars_string).unwrap(),
+        Err(err) => println!("Preparing avatars error: {err:?}"),
+    }
 
     // 2. Generate TypeScript
     std::fs::write(

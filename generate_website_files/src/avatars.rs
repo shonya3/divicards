@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use tokio::time::{timeout, Duration};
 
 const USERS: &[InitialUserData] = &[
     InitialUserData {
@@ -62,11 +63,23 @@ impl Role {
     }
 }
 
-pub async fn prepare_avatars_ts() -> String {
+#[allow(dead_code)]
+#[derive(Debug)]
+pub enum PrepareAvatarsError {
+    Reqwest(reqwest::Error),
+    Timeout,
+}
+
+pub async fn prepare_avatars_ts() -> Result<String, PrepareAvatarsError> {
     let mut user_avatars = vec![];
     let futures = USERS.iter().map(fetch_user_avatar).collect::<Vec<_>>();
+
     for fut in futures {
-        user_avatars.push(fut.await.unwrap());
+        match timeout(Duration::from_secs(2), fut).await {
+            Ok(Ok(avatar)) => user_avatars.push(avatar),
+            Ok(Err(err)) => return Err(PrepareAvatarsError::Reqwest(err)),
+            Err(_) => return Err(PrepareAvatarsError::Timeout),
+        }
     }
 
     let entries = user_avatars
@@ -85,7 +98,7 @@ pub async fn prepare_avatars_ts() -> String {
         .collect::<Vec<_>>()
         .join("\n");
 
-    format!("export type DiscordUsername = keyof typeof DISCORD_AVATARS;\nexport const DISCORD_AVATARS = {{\n{entries}\n}};")
+    Ok(format!("export type DiscordUsername = keyof typeof DISCORD_AVATARS;\nexport const DISCORD_AVATARS = {{\n{entries}\n}};"))
 }
 
 pub async fn fetch_user_avatar(user: &InitialUserData) -> Result<UserAvatar, reqwest::Error> {

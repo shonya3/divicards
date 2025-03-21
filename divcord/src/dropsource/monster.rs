@@ -743,11 +743,15 @@ impl FromStr for ExpeditionLogbookBoss {
 pub enum BetrayalCatarina {
     #[default]
     Catarina,
+    Nightmare,
 }
 
 impl Identified for BetrayalCatarina {
     fn id(&self) -> &str {
-        "Catarina, Master of Undeath"
+        match self {
+            BetrayalCatarina::Catarina => "Catarina, Master of Undeath",
+            BetrayalCatarina::Nightmare => "Nightmare of Catarina",
+        }
     }
 }
 
