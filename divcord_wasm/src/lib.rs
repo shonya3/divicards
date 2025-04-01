@@ -67,3 +67,13 @@ pub fn find_cards_by_source_types(types: JsValue, records: JsValue, poe_data: St
 pub fn slug(s: String) -> String {
     slug::slugify(s)
 }
+
+#[wasm_bindgen]
+pub async fn fetch_spreadsheet() -> Result<JsValue, JsValue> {
+    let api_key = env!("GOOGLE_API_KEY");
+
+    match divcord::spreadsheet::fetch_spreadsheet(api_key).await {
+        Ok(spreadsheet) => Ok(serde_wasm_bindgen::to_value(&spreadsheet)?),
+        Err(e) => Err(JsValue::from_str(&e.to_string())),
+    }
+}
