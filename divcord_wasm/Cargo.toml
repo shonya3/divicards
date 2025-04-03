@@ -23,9 +23,10 @@ divcord = { path = "../divcord"}
 poe_data = {path = "../poe_data"}
 wasm-bindgen = "0.2.92"
 # wasm-bindgen-futures = "0.4.37"
+# web-sys = { version = "0.3", features = ["Window", "Performance", "console"] }
 
 js-sys = "0.3.67"
-serde_json.workspace = true
+# serde_json.workspace = true
 slug = "0.1.5"
 wasm-bindgen-futures = "0.4.50"
 # [dependencies.web-sys]
@@ -38,6 +39,8 @@ wasm-bindgen-futures = "0.4.50"
 #   'Response',
 #   'Window',
 # ]
+
+
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3.40"

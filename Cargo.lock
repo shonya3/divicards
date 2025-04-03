@@ -1163,7 +1163,6 @@ dependencies = [
  "js-sys",
  "poe_data",
  "serde-wasm-bindgen",
- "serde_json",
  "slug",
  "wasm-bindgen",
  "wasm-bindgen-futures",
