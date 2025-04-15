@@ -6,7 +6,7 @@ pub struct MapBoss {
     pub maps: Vec<String>,
 }
 
-#[cfg(feature = "fetch")]
+#[cfg(feature = "fs_cache_fetcher")]
 pub async fn fetch() -> Result<Vec<MapBoss>, crate::error::Error> {
     use crate::consts::MAPBOSSES_POEWIKI_URL;
     use playwright::Playwright;

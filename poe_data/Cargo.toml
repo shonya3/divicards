@@ -28,4 +28,4 @@ playwright = {version = "0.0.20"}
 
 [features]
 default = []
-fetch = ["dep:serde_json", "dep:playwright", "dep:divi", "dep:dotenv", "dep:googlesheets", "dep:reqwest", "dep:fs_cache_fetcher", "dep:tokio"]
+fs_cache_fetcher = ["dep:serde_json", "dep:playwright", "dep:divi", "dep:dotenv", "dep:googlesheets", "dep:reqwest", "dep:fs_cache_fetcher", "dep:tokio"]

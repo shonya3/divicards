@@ -9,6 +9,7 @@ use crate::spreadsheet::{
     Spreadsheet,
 };
 use divi::IsCard;
+use poe_data::act::ActArea;
 use poe_data::PoeData;
 use serde::{Deserialize, Serialize};
 use std::fmt::Display;
@@ -146,18 +147,26 @@ pub struct ParseSourceError {
 #[derive(Debug)]
 pub enum ParseSourceErrorKind {
     UnknownDropSource(DropsFrom),
+    ActsMustBeItalic(DropsFrom),
     SourceOrVerifyIsExpectedButEmpty,
     GreynoteDisabledButCardNotLegacy,
     LegacyCardShouldBeMarkedAsDisabled,
     ConfidenceNoneButHasSources,
 }
 
-impl From<UnknownDropsFrom> for ParseSourceError {
-    fn from(value: UnknownDropsFrom) -> Self {
+impl From<ParseDropsFromError> for ParseSourceError {
+    fn from(value: ParseDropsFromError) -> Self {
         ParseSourceError {
             card: value.card,
             record_id: value.record_id,
-            kind: ParseSourceErrorKind::UnknownDropSource(value.drops_from),
+            kind: match value.kind {
+                ParseDropsFromErrorKind::Unknown => {
+                    ParseSourceErrorKind::UnknownDropSource(value.drops_from)
+                }
+                ParseDropsFromErrorKind::ActsMustBeItalic => {
+                    ParseSourceErrorKind::ActsMustBeItalic(value.drops_from)
+                }
+            },
         }
     }
 }
@@ -178,31 +187,37 @@ impl Display for ParseSourceError {
         } = self;
         match kind {
             ParseSourceErrorKind::UnknownDropSource(drops_from) => write!(
-                f,
-                "{record_id}.{card}. Unknown variant of card source {}. {}",
-                drops_from.name,
-                record_url(*record_id, DivcordColumn::Sources)
-            ),
+                        f,
+                        "{record_id}.{card}. Unknown variant of card source {}. {}",
+                        drops_from.name,
+                        record_url(*record_id, DivcordColumn::Sources)
+                    ),
+            ParseSourceErrorKind::ActsMustBeItalic(drops_from) => write!(
+                        f,
+                        "{record_id}.{card}. Spreadsheet styling error: If {} refers to acts, it's font-style must be italic. {}",
+                        drops_from.name,
+                        record_url(*record_id, DivcordColumn::Sources)
+                    ),
             ParseSourceErrorKind::SourceOrVerifyIsExpectedButEmpty => write!(
-                f,
-                "{record_id}.{card}. Source or need-to-verify source is expected, but there is none. {}",
-                record_url(*record_id, DivcordColumn::Sources)
-            ),
+                        f,
+                        "{record_id}.{card}. Source or need-to-verify source is expected, but there is none. {}",
+                        record_url(*record_id, DivcordColumn::Sources)
+                    ),
             ParseSourceErrorKind::GreynoteDisabledButCardNotLegacy => write!(
-                f,
-                "{record_id}. Card {card} has greynote Disabled, but this is not a legacy card {}",
-                record_url(*record_id, DivcordColumn::GreyNote)
-            ),
+                        f,
+                        "{record_id}. Card {card} has greynote Disabled, but this is not a legacy card {}",
+                        record_url(*record_id, DivcordColumn::GreyNote)
+                    ),
             ParseSourceErrorKind::LegacyCardShouldBeMarkedAsDisabled => write!(
-                f,
-                "{record_id}. Card {card} is legacy, but not marked as disabled. {}",
-                record_url(*record_id, DivcordColumn::GreyNote)
-            ),
+                        f,
+                        "{record_id}. Card {card} is legacy, but not marked as disabled. {}",
+                        record_url(*record_id, DivcordColumn::GreyNote)
+                    ),
             ParseSourceErrorKind::ConfidenceNoneButHasSources => write!(
-                f,
-                "{record_id}.{card}. Confidence is None, but sources not empty {}",
-                record_url(*record_id, DivcordColumn::Sources)
-            ),
+                        f,
+                        "{record_id}.{card}. Confidence is None, but sources not empty {}",
+                        record_url(*record_id, DivcordColumn::Sources)
+                    ),
         }
     }
 }
@@ -310,9 +325,9 @@ pub fn parse_dropses_from(
     dumb: &Dumb,
     poe_data: &PoeData,
     column: RichColumnVariant,
-) -> (Vec<Source>, Vec<UnknownDropsFrom>) {
+) -> (Vec<Source>, Vec<ParseDropsFromError>) {
     let mut sources: Vec<Source> = vec![];
-    let mut unknowns: Vec<UnknownDropsFrom> = Vec::new();
+    let mut errors: Vec<ParseDropsFromError> = Vec::new();
     let drops_to_parse = match column {
         RichColumnVariant::Sources => &dumb.drops,
         RichColumnVariant::Verify => &dumb.drops_to_verify,
@@ -321,21 +336,29 @@ pub fn parse_dropses_from(
     for d in drops_to_parse {
         match parse_one_drops_from(d, dumb, poe_data) {
             Ok(inner_sources) => sources.extend(inner_sources),
-            Err(err) => unknowns.push(err),
+            Err(err) => errors.push(err),
         };
     }
 
-    (sources, unknowns)
+    (sources, errors)
+}
+
+#[derive(Debug, PartialEq)]
+pub enum ParseDropsFromErrorKind {
+    Unknown,
+    ActsMustBeItalic, // DropSourceLevelisLowerThanCardMinLevel {
+                      //     level: u32,
+                      //     card: String,
+                      //     card_min_drop_level: u32,
+                      // },
 }
 
 #[derive(Debug)]
-pub enum ParseDropsFromError {
-    Unknown(DropsFrom),
-    DropSourceLevelisLowerThanCardMinLevel {
-        level: u32,
-        card: String,
-        card_min_drop_level: u32,
-    },
+pub struct ParseDropsFromError {
+    pub card: String,
+    pub record_id: usize,
+    pub drops_from: DropsFrom,
+    pub kind: ParseDropsFromErrorKind,
 }
 
 pub fn parse_one_drops_from(
@@ -347,7 +370,7 @@ pub fn parse_one_drops_from(
         maps,
         mapbosses,
     }: &PoeData,
-) -> Result<Vec<Source>, UnknownDropsFrom> {
+) -> Result<Vec<Source>, ParseDropsFromError> {
     if d.styles.strikethrough {
         return Ok(vec![]);
     }
@@ -358,12 +381,12 @@ pub fn parse_one_drops_from(
         if let Source::Area(Area::AtziriArea(area)) = source.clone() {
             let level = area.level();
             if level < card_min_drop_level {
-                let err = ParseDropsFromError::DropSourceLevelisLowerThanCardMinLevel {
-                    level,
-                    card: dumb.card.clone(),
-                    card_min_drop_level,
-                };
-                dbg!(err); // TODO: Update err return type
+                // let err = ParseDropsFromError::DropSourceLevelisLowerThanCardMinLevel {
+                //     level,
+                //     card: dumb.card.clone(),
+                //     card_min_drop_level,
+                // };
+                // dbg!(err); // TODO: Update err return type
             }
         }
 
@@ -371,28 +394,11 @@ pub fn parse_one_drops_from(
     }
 
     // Acts + bosses
-    if d.styles.italic && (d.styles.color == HexColor::White || dumb.greynote == GreyNote::Story) {
-        let act_areas_ids =
-            acts::parse_act_areas(d, acts, card_min_drop_level.try_into().unwrap_or_default());
-        if !act_areas_ids.is_empty() {
-            return Ok(act_areas_ids.into_iter().map(Source::Act).collect());
-        }
-
-        if acts.iter().any(|a| {
-            a.bossfights.iter().any(|b| {
-                if b.name != d.name {
-                    return false;
-                }
-
-                if (a.area_level as u32 + 2) < card_min_drop_level {
-                    println!("Monster level is lower than card drop requirement");
-                    return false;
-                }
-
-                true
-            })
-        }) {
-            return Ok(vec![Source::ActBoss(d.name.to_string())]);
+    if d.styles.italic {
+        if let Some(sources) =
+            find_in_acts_or_act_bosses(d, acts, card_min_drop_level.try_into().unwrap_or_default())
+        {
+            return Ok(sources);
         }
     }
 
@@ -412,11 +418,55 @@ pub fn parse_one_drops_from(
         }
     }
 
-    Err(UnknownDropsFrom {
+    // Check for acts if it was not before.
+    // If acts are found at this point, it is styled incorrectly in spreadsheet.
+    if find_in_acts_or_act_bosses(d, acts, card_min_drop_level.try_into().unwrap_or_default())
+        .is_some()
+    {
+        return Err(ParseDropsFromError {
+            card: dumb.card.to_owned(),
+            record_id: dumb.id,
+            drops_from: d.to_owned(),
+            kind: ParseDropsFromErrorKind::ActsMustBeItalic,
+        });
+    }
+
+    Err(ParseDropsFromError {
         card: dumb.card.to_owned(),
         record_id: dumb.id,
         drops_from: d.to_owned(),
+        kind: ParseDropsFromErrorKind::Unknown,
     })
+}
+
+fn find_in_acts_or_act_bosses(
+    d: &DropsFrom,
+    acts: &[ActArea],
+    card_min_drop_level: u8,
+) -> Option<Vec<Source>> {
+    let act_areas_ids = acts::parse_act_areas(d, acts, card_min_drop_level);
+    if !act_areas_ids.is_empty() {
+        return Some(act_areas_ids.into_iter().map(Source::Act).collect());
+    }
+
+    if acts.iter().any(|a| {
+        a.bossfights.iter().any(|b| {
+            if b.name != d.name {
+                return false;
+            }
+
+            if (a.area_level + 2) < card_min_drop_level {
+                println!("Monster level is lower than card drop requirement");
+                return false;
+            }
+
+            true
+        })
+    }) {
+        return Some(vec![Source::ActBoss(d.name.to_string())]);
+    }
+
+    None
 }
 
 fn strip_comment(input: &str) -> String {
@@ -461,10 +511,6 @@ mod acts {
         acts: &[ActArea],
         min_level: u8,
     ) -> Vec<ActAreaId> {
-        if !drops_from.styles.italic {
-            panic!("Act areas should be italic");
-        }
-
         let s = &drops_from.name;
         let names = match are_act_numbers_specified(s) {
             true if s == "The Belly of the Beast (A4/A9)" => vec![

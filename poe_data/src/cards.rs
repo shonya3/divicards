@@ -32,7 +32,7 @@ impl CardsData {
     }
 }
 
-#[cfg(feature = "fetch")]
+#[cfg(feature = "fs_cache_fetcher")]
 pub mod fetch {
     use super::CardsData;
     use crate::{

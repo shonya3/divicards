@@ -21,13 +21,13 @@ pub struct PoeData {
 
 impl PoeData {
     /// Load cached data or fetch fresh based on config conditions or if there is no cached data.
-    #[cfg(feature = "fetch")]
+    #[cfg(feature = "fs_cache_fetcher")]
     pub async fn load() -> Result<Self, crate::error::Error> {
         use fs_cache_fetcher::DataFetcher;
         crate::fetchers::PoeDataFetcher::default().load().await
     }
 
-    #[cfg(feature = "fetch")]
+    #[cfg(feature = "fs_cache_fetcher")]
     pub fn filename() -> &'static str {
         use fs_cache_fetcher::DataFetcher;
         crate::fetchers::PoeDataFetcher::default().config().filename

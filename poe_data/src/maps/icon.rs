@@ -75,7 +75,7 @@ fn poedb_page_url(boss: &str) -> String {
 
 // Run with cargo test --features "fetch"
 #[cfg(test)]
-#[cfg(feature = "fetch")]
+#[cfg(feature = "fs_cache_fetcher")]
 mod tests {
     use playwright::{api::Page, Playwright};
 
@@ -94,7 +94,7 @@ mod tests {
     }
 
     #[tokio::test]
-    #[cfg(feature = "fetch")]
+    #[cfg(feature = "fs_cache_fetcher")]
     async fn map_icon() {
         let (page, playwright) = create_playwright().await;
         let icon = super::get_map_icon("Arachnid Tomb Map", &page, &playwright)

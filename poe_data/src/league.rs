@@ -74,7 +74,7 @@ impl Display for UnexpectedLeagueInfoShapeError {
 }
 
 impl LeagueReleaseInfo {
-    #[cfg(feature = "fetch")]
+    #[cfg(feature = "fs_cache_fetcher")]
     pub async fn fetch() -> Result<Vec<LeagueReleaseInfo>, crate::error::Error> {
         use crate::consts::WIKI_API_URL;
         use serde_json::Value;

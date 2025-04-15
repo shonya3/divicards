@@ -15,7 +15,7 @@ reqwest.workspace = true
 dotenv = "0.15.0"
 fs_cache_fetcher = {path ="../fs_cache_fetcher"}
 divi = {path ="../divi"}
-poe_data = {path  = "../poe_data", features = ["fetch"]}
+poe_data = {path  = "../poe_data", features = ["fs_cache_fetcher"]}
 card_element = {path = "../card_element"}
 poe = { path = "../poe" }
 ninja = { path = "../ninja" }

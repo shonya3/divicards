@@ -41,10 +41,33 @@ pub fn parse_drop(
     card: &str,
     drops_from: DropsFrom,
     poe_data: &PoeData,
-) -> Result<Vec<divcord::Source>, divcord::parse::UnknownDropsFrom> {
+) -> Result<Vec<divcord::Source>, divcord::parse::ParseDropsFromError> {
     let clone = drops_from.clone();
     let dumb = create_dumb(card, drops_from);
     parse_one_drops_from(&clone, &dumb, poe_data)
+}
+
+#[tokio::test]
+#[cfg(feature = "fs_cache_fetcher")]
+async fn acts_should_be_italic() {
+    use divcord::parse::ParseDropsFromErrorKind;
+    use divcord::spreadsheet::rich::{FontStyles, HexColor};
+
+    let poe_data = PoeData::load().await.unwrap();
+    let drops_from = DropsFrom {
+        name: "Innocence, God-Emperor of Eternity".to_owned(),
+        styles: FontStyles {
+            color: HexColor::White,
+            italic: false,
+            strikethrough: false,
+        },
+    };
+
+    let res = parse_drop("Demigod's Wager", drops_from, &poe_data);
+    assert!(res.is_err());
+    if let Err(err) = res {
+        assert_eq!(ParseDropsFromErrorKind::ActsMustBeItalic, err.kind)
+    }
 }
 
 #[tokio::test]

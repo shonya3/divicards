@@ -41,10 +41,10 @@ impl ActArea {
     }
 }
 
-#[cfg(feature = "fetch")]
+#[cfg(feature = "fs_cache_fetcher")]
 pub use fetch::fetch;
 
-#[cfg(feature = "fetch")]
+#[cfg(feature = "fs_cache_fetcher")]
 mod fetch {
     use super::ActArea;
     use crate::error::Error;

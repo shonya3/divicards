@@ -15,6 +15,6 @@ reqwest = { workspace = true, features = ["blocking"]}
 fs_cache_fetcher = {path = "../fs_cache_fetcher"}
 poe = { path = "../poe" }
 ninja = { path = "../ninja" }
-poe_data = { path = "../poe_data", features = ["fetch"] }
+poe_data = { path = "../poe_data", features = ["fs_cache_fetcher"] }
 slug = "0.1.5"
 dotenv.workspace = true

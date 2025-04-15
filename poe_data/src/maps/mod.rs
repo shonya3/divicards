@@ -1,11 +1,11 @@
-#[cfg(feature = "fetch")]
+#[cfg(feature = "fs_cache_fetcher")]
 pub mod fetch;
-#[cfg(feature = "fetch")]
+#[cfg(feature = "fs_cache_fetcher")]
 pub mod icon;
-#[cfg(feature = "fetch")]
+#[cfg(feature = "fs_cache_fetcher")]
 pub mod wiki;
 
-#[cfg(feature = "fetch")]
+#[cfg(feature = "fs_cache_fetcher")]
 pub use fetch::{fetch_maps, FetchMapsError};
 use serde::{Deserialize, Serialize};
 

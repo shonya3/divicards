@@ -182,7 +182,7 @@ async fn load_poedb_available_non_unique_name_tier_list(
 
 // Run with cargo test --features "fetch"
 #[cfg(test)]
-#[cfg(feature = "fetch")]
+#[cfg(feature = "fs_cache_fetcher")]
 mod tests {
     use playwright::{api::Page, Playwright};
 
@@ -201,7 +201,7 @@ mod tests {
     }
 
     #[tokio::test]
-    #[cfg(feature = "fetch")]
+    #[cfg(feature = "fs_cache_fetcher")]
     async fn poedb_available_maps() {
         let (page, playwright) = create_playwright().await;
         let result =

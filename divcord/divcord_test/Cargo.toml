@@ -9,5 +9,5 @@ repository.workspace = true
 [dependencies]
 divcord = {path = "../", features = ["fs_cache_fetcher"]}
 tokio = { workspace = true, features = ["full"] }
-poe_data = {path = "../../poe_data", features = ["fetch"]}
+poe_data = {path = "../../poe_data", features = ["fs_cache_fetcher"]}
 dotenv.workspace = true
