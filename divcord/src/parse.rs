@@ -418,8 +418,8 @@ pub fn parse_one_drops_from(
         }
     }
 
-    // Check for acts if it was not before.
-    // If acts are found at this point, it is styled incorrectly in spreadsheet.
+    // Check for acts if they were not checked before.
+    // If acts are found now, they are styled incorrectly in the spreadsheet.
     if find_in_acts_or_act_bosses(d, acts, card_min_drop_level.try_into().unwrap_or_default())
         .is_some()
     {
