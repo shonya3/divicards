@@ -5,7 +5,7 @@ use poe_data::PoeData;
 use utils::set_panic_hook;
 use wasm_bindgen::{prelude::wasm_bindgen, JsValue};
 
-// Fetch spreadsheet and parse.
+/// Fetch spreadsheet and parse.
 #[wasm_bindgen]
 pub async fn fetch_divcord_records(
     poe_data: JsValue,
