@@ -6,7 +6,7 @@ use std::{
 };
 
 use card_element::DivinationCardElementData;
-use divcord::{spreadsheet::Spreadsheet, Source};
+use divcord::{spreadsheet::Spreadsheet, ParseRecordError, Record, Source};
 use poe_data::PoeData;
 use serde::Serialize;
 
@@ -18,8 +18,7 @@ async fn main() {
     let spreadsheet = Spreadsheet::load().await.unwrap();
     let poe_data = PoeData::load().await.unwrap();
 
-    println!("Parse divcord records");
-    let records = divcord::parse::records_with_collect_all_errors(&spreadsheet, &poe_data).unwrap();
+    let records = parse_divcord_records(&spreadsheet, &poe_data);
 
     let card_element = DivinationCardElementData::load().await.unwrap();
 
@@ -62,6 +61,31 @@ async fn main() {
 
     // 3. Compile WASM Divcord
     divcord_wasm_pkg(&dir, "divcordWasm");
+}
+
+fn parse_divcord_records(spreadsheet: &Spreadsheet, poe_data: &PoeData) -> Vec<Record> {
+    println!("Parse divcord records");
+    let on_err = |s: &str| {
+        println!("Error parsing divcord records: {s}");
+    };
+
+    let mut records: Vec<Record> = vec![];
+    for record in divcord::records_iter(spreadsheet, poe_data) {
+        match record {
+            Ok(record_result) => {
+                records.push(record_result.record);
+                if !record_result.errors.is_empty() {
+                    let errors_string =
+                        ParseRecordError::ParseDropSources(record_result.errors).to_string();
+                    on_err(&errors_string);
+                }
+            }
+            Err(err) => {
+                on_err(&err.to_string());
+            }
+        }
+    }
+    records
 }
 
 pub fn divcord_wasm_pkg(path: &Path, dirname: &str) {
