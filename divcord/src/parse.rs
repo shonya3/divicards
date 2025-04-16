@@ -376,12 +376,11 @@ pub fn parse_one_drops_from(
         return Ok(vec![]);
     }
 
-    let card_min_drop_level = cards.card(&dumb.card).min_level.unwrap_or_default();
-
     if let Ok(predefined_source) = d.name.parse::<PredefinedSource>() {
         return Ok(vec![Source::Predefined(predefined_source)]);
     }
 
+    let card_min_drop_level = cards.card(&dumb.card).min_level.unwrap_or_default();
     // Acts + bosses
     if d.styles.italic {
         if let Some(sources) =
