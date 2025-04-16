@@ -12,15 +12,15 @@ pub mod id;
 pub mod predefined;
 
 /// First group of variants of 4 (Act, Map, ActBoss, MapBoss)
-/// is being resolved after s.parse::<Source> fails.
+/// is being resolved after s.parse::<PredefinedSource> fails.
 /// Data goes from scrapped [PoeData]. And there are some color and font style rules
 /// for differentiating acts (acts are written with italic font-style in spreadsheet).
 ///
-/// Other enum variants hold hardcoded dropsources
-/// and are getting parsed with simple [Source::from_str] (s.parse::<Source>)
+/// [PredefinedSource] variant holds hardcoded dropsources
+/// and gets parsed with simple [PredefinedSource::from_str] (s.parse::<PredefinedSource>)
 #[derive(Debug, Clone, PartialEq, Eq, Hash, strum_macros::EnumIter)]
 pub enum Source {
-    // These 4 are being resolved after s.parse::<Source> fails.
+    // These 4 are being resolved after s.parse::<PredefinedSource> fails.
     Act(ActAreaId),
     Map(String),
     ActBoss(String),
