@@ -1,6 +1,6 @@
 //! Parse drop sources.
 
-use crate::dropsource::{Area, Source};
+use crate::dropsource::Source;
 use crate::spreadsheet::record::ParseDumbError;
 use crate::spreadsheet::rich::HexColor;
 use crate::spreadsheet::{
@@ -378,18 +378,6 @@ pub fn parse_one_drops_from(
     let card_min_drop_level = cards.card(&dumb.card).min_level.unwrap_or_default();
 
     if let Ok(source) = d.name.parse::<Source>() {
-        if let Source::Area(Area::AtziriArea(area)) = source.clone() {
-            let level = area.level();
-            if level < card_min_drop_level {
-                // let err = ParseDropsFromError::DropSourceLevelisLowerThanCardMinLevel {
-                //     level,
-                //     card: dumb.card.clone(),
-                //     card_min_drop_level,
-                // };
-                // dbg!(err); // TODO: Update err return type
-            }
-        }
-
         return Ok(vec![source]);
     }
 
