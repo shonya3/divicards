@@ -1,4 +1,4 @@
-use super::id::{parseid, Identified, UnknownVariant};
+use super::super::id::{parseid, Identified, UnknownVariant};
 use std::str::FromStr;
 use strum_macros::EnumIter;
 
@@ -60,13 +60,13 @@ impl FromStr for Strongbox {
 pub enum Chest {
     #[default]
     AbyssalTrove,
-    DelveChest,
+    Delve,
     DelveGemChests,
     VoltaxicSulphite,
     DelveInteractablesBehindFracturedWall,
-    DelveCityLightJewelleryChest,
+    DelveCityLightJewellery,
     MavenCrucible,
-    HeistMapChest,
+    HeistMap,
     BreachClaspedHand,
     IzaroTreasure,
     VaalVessel,
@@ -82,13 +82,13 @@ impl Identified for Chest {
     fn id(&self) -> &str {
         match self {
             Chest::AbyssalTrove => "Abyssal Trove",
-            Chest::DelveChest => "Delve chest",
+            Chest::Delve => "Delve chest",
             Chest::DelveGemChests => "Delve Gem Chests",
             Chest::VoltaxicSulphite => "Voltaxic Sulphite",
             Chest::DelveInteractablesBehindFracturedWall => "Delve Interactables behind Fractured Wall",
-            Chest::DelveCityLightJewelleryChest => "Light Jewellery chest (Primeval Ruins, Abyssal City, Vaal Outpost)",
+            Chest::DelveCityLightJewellery => "Light Jewellery chest (Primeval Ruins, Abyssal City, Vaal Outpost)",
             Chest::MavenCrucible => "The Maven's Crucible",
-            Chest::HeistMapChest => "Map Reward Heist Chests",
+            Chest::HeistMap => "Map Reward Heist Chests",
             Chest::BreachClaspedHand => "Breach Clasped Hand",
             Chest::IzaroTreasure => "Izaro's Treasure",
             Chest::VaalVessel => "Vaal Vessel (Vaal Side Areas)",
@@ -104,13 +104,13 @@ impl Identified for Chest {
     fn aliases(&self) -> Vec<&str> {
         match self {
             Chest::AbyssalTrove => vec![],
-            Chest::DelveChest => vec!["Delve Chest"],
+            Chest::Delve => vec!["Delve Chest"],
             Chest::DelveGemChests => vec![],
             Chest::VoltaxicSulphite => vec![],
             Chest::DelveInteractablesBehindFracturedWall => vec![],
-            Chest::DelveCityLightJewelleryChest => vec![],
+            Chest::DelveCityLightJewellery => vec![],
             Chest::MavenCrucible => vec![],
-            Chest::HeistMapChest => vec![],
+            Chest::HeistMap => vec![],
             Chest::BreachClaspedHand => vec![],
             Chest::IzaroTreasure => vec![],
             Chest::VaalVessel => vec![],

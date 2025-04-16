@@ -1,19 +1,15 @@
 //! Big fat enum with all drop sources.
 
-pub mod area;
-pub mod id;
-pub mod monster;
-mod other;
-
-use self::id::Identified;
-pub use self::{area::Area, monster::UniqueMonster};
-pub use other::{Chest, Strongbox, Vendor};
+use id::Identified;
 use poe_data::act::ActAreaId;
 #[allow(unused_imports)]
 use poe_data::PoeData;
+use predefined::PredefinedSource;
 use serde::{de, ser::SerializeStruct, Deserialize, Serialize};
-use std::str::FromStr;
 use strum::IntoEnumIterator;
+
+pub mod id;
+pub mod predefined;
 
 /// First group of variants of 4 (Act, Map, ActBoss, MapBoss)
 /// is being resolved after s.parse::<Source> fails.
@@ -30,49 +26,7 @@ pub enum Source {
     ActBoss(String),
     MapBoss(String),
 
-    // Everything below is predefined and gets parsed with simple s.parse::<Source>
-    UniqueMonster(UniqueMonster),
-    Area(Area),
-
-    Chest(Chest),
-    Strongbox(Strongbox),
-    Vendor(Vendor),
-
-    KiracMissions,
-    MaelstromOfChaosWithBarrelSextant,
-    Delirium,
-    DeliriumCurrencyRewards,
-    Disabled,
-}
-
-/// `s.parse::<Source>` validates only predefined sources.
-/// It does not account for [PoeData] and cannot be used independently.
-/// Use it solely as the initial step in drop source parsing.
-#[derive(Debug)]
-pub struct UnknownPredefinedSource(pub String);
-
-impl FromStr for Source {
-    type Err = UnknownPredefinedSource;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        match s {
-            "Kirac Missions" => Ok(Source::KiracMissions),
-            "Disabled" => Ok(Source::Disabled),
-            "Delirium Currency Rewards" | "Delirium Currency reward" => {
-                Ok(Source::DeliriumCurrencyRewards)
-            }
-            "Maelström of Chaos with Barrel Sextant" => {
-                Ok(Source::MaelstromOfChaosWithBarrelSextant)
-            }
-            _ => UniqueMonster::from_str(s)
-                .map(Self::UniqueMonster)
-                .or_else(|_| Area::from_str(s).map(Self::Area))
-                .or_else(|_| Vendor::from_str(s).map(Self::Vendor))
-                .or_else(|_| Strongbox::from_str(s).map(Self::Strongbox))
-                .or_else(|_| Chest::from_str(s).map(Self::Chest))
-                .map_err(|_| UnknownPredefinedSource(s.to_owned())),
-        }
-    }
+    Predefined(PredefinedSource),
 }
 
 impl<'de> Deserialize<'de> for Source {
@@ -90,8 +44,8 @@ impl<'de> Deserialize<'de> for Source {
 
         let JSSource { id, _type, kind } = JSSource::deserialize(deserializer)?;
         match kind {
-            Kind::Category => match _type.parse::<Source>() {
-                Ok(source) => Ok(source),
+            Kind::Category => match _type.parse::<PredefinedSource>() {
+                Ok(source) => Ok(Source::Predefined(source)),
                 Err(_) => Err(de::Error::custom(format!(
                     "Could not deserialize Source. {_type}"
                 ))),
@@ -100,8 +54,8 @@ impl<'de> Deserialize<'de> for Source {
                 let Some(id) = id else {
                     return Err(de::Error::custom("No id field"));
                 };
-                match id.parse::<Source>() {
-                    Ok(source) => Ok(source),
+                match id.parse::<PredefinedSource>() {
+                    Ok(source) => Ok(Source::Predefined(source)),
                     Err(_) => match _type.as_str() {
                         "Map" => Ok(Source::Map(id)),
                         "Map Boss" => Ok(Source::MapBoss(id)),
@@ -130,19 +84,7 @@ impl Identified for Source {
             Source::Map(name) => name.as_str(),
             Source::ActBoss(name) => name.as_str(),
             Source::MapBoss(name) => name.as_str(),
-
-            Source::UniqueMonster(m) => m.id(),
-            Source::Area(a) => a.id(),
-
-            Source::Chest(chest) => chest.id(),
-            Source::Strongbox(strongbox) => strongbox.id(),
-            Source::Vendor(vendor) => vendor.id(),
-
-            Source::Delirium => "Delirium",
-            Source::DeliriumCurrencyRewards => "Delirium Currency Rewards",
-            Source::Disabled => "Disabled",
-            Source::MaelstromOfChaosWithBarrelSextant => "Maelström of Chaos with Barrel Sextant",
-            Source::KiracMissions => "Kirac Missions",
+            Source::Predefined(predefined_source) => predefined_source.id(),
         }
     }
 }
@@ -154,20 +96,12 @@ impl Source {
             Source::Map { .. } => "Map",
             Source::ActBoss { .. } => "Act Boss",
             Source::MapBoss { .. } => "Map Boss",
-
-            Source::UniqueMonster(monster) => monster._type(),
-            Source::Area(area) => area._type(),
-
-            Source::Chest(_) => "Chest",
-            Source::Strongbox(_) => "Strongbox",
-            Source::Vendor(_) => "Vendor",
-
-            Source::Delirium => "Delirium",
-            Source::DeliriumCurrencyRewards => "Delirium Currency Rewards",
-            Source::Disabled => "Disabled",
-            Source::MaelstromOfChaosWithBarrelSextant => "Maelström of Chaos with Barrel Sextant",
-            Source::KiracMissions => "Kirac Missions",
+            Source::Predefined(predefined_source) => predefined_source._type(),
         }
+    }
+
+    pub fn disabled() -> Source {
+        Source::Predefined(PredefinedSource::Disabled)
     }
 
     pub fn slug(&self) -> String {
@@ -181,8 +115,7 @@ impl Source {
     pub fn types() -> Vec<String> {
         let mut vec: Vec<String> = vec![];
         Source::iter().for_each(|source| match source {
-            Source::UniqueMonster(_) => vec.extend(UniqueMonster::_types()),
-            Source::Area(_) => vec.extend(Area::_types()),
+            Source::Predefined(_) => vec.extend(PredefinedSource::types()),
             _ => vec.push(source._type().to_string()),
         });
         vec

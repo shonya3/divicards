@@ -36,7 +36,7 @@ async fn main() {
             .sources
             .iter()
             .filter_map(|source| match source {
-                Source::Strongbox(..) | Source::Chest(..) => Some(source.to_string()),
+                Source::Act(..) | Source::ActBoss(..) => Some(source.to_string()),
                 _ => None,
             })
             .collect::<Vec<String>>()

@@ -1,5 +1,6 @@
 //! Parse drop sources.
 
+use crate::dropsource::predefined::PredefinedSource;
 use crate::dropsource::Source;
 use crate::spreadsheet::record::ParseDumbError;
 use crate::spreadsheet::rich::HexColor;
@@ -263,7 +264,7 @@ pub fn parse_record_dropsources(
             card: dumb.card.to_owned(),
             kind: ParseSourceErrorKind::LegacyCardShouldBeMarkedAsDisabled,
         };
-        return (vec![Source::Disabled], vec![err]);
+        return (vec![Source::disabled()], vec![err]);
     }
 
     let mut errors: Vec<ParseSourceError> = Vec::new();
@@ -275,7 +276,7 @@ pub fn parse_record_dropsources(
                 kind: ParseSourceErrorKind::GreynoteDisabledButCardNotLegacy,
             });
         }
-        return (vec![Source::Disabled], vec![]);
+        return (vec![Source::disabled()], vec![]);
     }
 
     // Parse
@@ -377,8 +378,8 @@ pub fn parse_one_drops_from(
 
     let card_min_drop_level = cards.card(&dumb.card).min_level.unwrap_or_default();
 
-    if let Ok(source) = d.name.parse::<Source>() {
-        return Ok(vec![source]);
+    if let Ok(predefined_source) = d.name.parse::<PredefinedSource>() {
+        return Ok(vec![Source::Predefined(predefined_source)]);
     }
 
     // Acts + bosses
