@@ -392,6 +392,13 @@ impl Identified for Elderslayer {
             Elderslayer::Sirus => "Sirus, Awakener of Worlds",
         }
     }
+
+    fn aliases(&self) -> Vec<&str> {
+        match self {
+            Self::Baran => vec!["Baran, the Crusader"],
+            _ => vec![],
+        }
+    }
 }
 
 impl FromStr for Elderslayer {
