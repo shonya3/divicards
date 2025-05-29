@@ -1,8 +1,8 @@
-import { ACTIVE_LEAGUE, downloadText } from '@divicards/shared/lib';
+import { ACTIVE_LEAGUE } from '@divicards/shared/lib.js';
 import { defineStore } from 'pinia';
 import { SampleData, command } from '../command';
-import { DivinationCardsSample, League, TradeLeague, isTradeLeague, leagues } from '@divicards/shared/types';
-import { Props as SampleCardProps } from '@divicards/wc/src/wc/e-sample-card/e-sample-card';
+import { DivinationCardsSample, League, TradeLeague, isTradeLeague, leagues } from '@divicards/shared/types.js';
+import { Props as SampleCardProps } from '@divicards/wc/e-sample-card/e-sample-card.js';
 
 const sampleCardsAmount = (sample: DivinationCardsSample): number => {
 	return sample.cards.reduce((total, { amount }) => (total += amount), 0);

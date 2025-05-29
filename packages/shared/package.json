@@ -4,7 +4,14 @@
 	"description": "",
 	"main": "index.js",
 	"type": "module",
+	"exports": {
+		"./*": "./dist/*"
+	},
+	"files": [
+		"dist"
+	],
 	"scripts": {
+		"build": "tsc",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
@@ -12,5 +19,8 @@
 	"license": "ISC",
 	"dependencies": {
 		"poe-custom-elements": "0.3.14"
+	},
+	"devDependencies": {
+		"typescript": "^5.8.3"
 	}
 }

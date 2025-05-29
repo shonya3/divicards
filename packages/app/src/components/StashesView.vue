@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
+import { ACTIVE_LEAGUE } from '@divicards/shared/lib.js';
 import type {
 	ExtractCardsEvent,
 	SampleFromStashtabEvent,
 	StashesViewProps,
 	StashtabFetchedEvent,
-} from '@divicards/wc/src/wc/stashes/e-stashes-view';
-import '@divicards/wc/src/wc/stashes/e-stashes-view';
-import type { DivinationCardsSample, League } from '@divicards/shared/types';
+} from '@divicards/wc/stashes/e-stashes-view.js';
+import '@divicards/wc/stashes/e-stashes-view';
+import type { DivinationCardsSample, League } from '@divicards/shared/types.js';
 import { TabWithItems } from 'poe-custom-elements/types.js';
 withDefaults(defineProps<StashesViewProps>(), { league: ACTIVE_LEAGUE });
 const emit = defineEmits<{

@@ -7,7 +7,7 @@ import {
 	GoogleIdentity,
 	TablePreferences,
 	Column,
-} from '@divicards/shared/types';
+} from '@divicards/shared/types.js';
 import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
 
 export type SampleData = string | NameAmount[] | DivinationCardsSample;

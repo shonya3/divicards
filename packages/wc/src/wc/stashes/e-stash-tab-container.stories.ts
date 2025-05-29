@@ -2,8 +2,10 @@ import { Meta } from '@storybook/web-components';
 import './e-stash-tab-container';
 import { html } from 'lit';
 import { StashTabContainerElement } from './e-stash-tab-container.js';
-import quadStash from './json/QuadStashStd.json' with {type: "json"};
-import fragmentsTab from './json/fragmentsTab.json' with {type: "json"};
+//@ts-ignore
+import quadStash from './json/QuadStashStd.json';
+//@ts-ignore
+import fragmentsTab from './json/fragmentsTab.json';
 import { TabWithItems } from 'poe-custom-elements/types.js';
 
 export default {

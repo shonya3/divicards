@@ -6,10 +6,10 @@ import {
 	SelectedChangeEvent,
 	MinimumCardsPriceChangeEvent,
 	SubmitExportSampleEvent,
-} from '@divicards/wc/src/wc/e-sample-card/e-sample-card';
-import '@divicards/wc/src/wc/e-sample-card/e-sample-card';
-import { League } from '@divicards/shared/types';
-import { LeagueChangeEvent } from '@divicards/wc/src/wc/events/change/league';
+} from '@divicards/wc/e-sample-card/e-sample-card.js';
+import '@divicards/wc/e-sample-card/e-sample-card';
+import { League } from '@divicards/shared/types.js';
+import { LeagueChangeEvent } from '@divicards/wc/events/change/league.js';
 const props = defineProps<Props>();
 const emit = defineEmits<{
 	'update:selected': [selected: SampleCardElement['selected']];

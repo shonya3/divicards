@@ -1,5 +1,5 @@
 import { toast } from './toast';
-import { TauriError } from '@divicards/shared/error';
+import { TauriError } from '@divicards/shared/error.js';
 
 export const isTauriError = (e: unknown): e is TauriError => {
 	if (typeof e === 'object' && e !== null) {

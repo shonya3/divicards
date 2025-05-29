@@ -18,11 +18,11 @@ SlAlrt.define('sl-alert');
 SlButton.define('sl-button');
 SlIcon.define('sl-icon');
 
-import '@divicards/wc/src/wc/e-theme-toggle/e-theme-toggle';
-import '@divicards/wc/src/wc/e-poe-auth';
-import '@divicards/wc/src/wc/e-google-auth';
-import '@divicards/wc/src/wc/e-drop-files-message';
-import '@divicards/wc/src/wc/e-base-popup';
+import '@divicards/wc/e-theme-toggle/e-theme-toggle';
+import '@divicards/wc/e-poe-auth';
+import '@divicards/wc/e-google-auth';
+import '@divicards/wc/e-drop-files-message';
+import '@divicards/wc/e-base-popup';
 
 const pinia = createPinia();
 

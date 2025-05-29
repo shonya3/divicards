@@ -1,12 +1,6 @@
-import styles from './styles.css?inline';
-const css = new CSSStyleSheet();
-css.replaceSync(styles);
-
-import sunmoonStyles from './sunmoon.css?inline';
+import { styles } from './styles.js';
+import { sunmoon } from './sunmoon.js';
 import { template as themeToggleTemplate } from './template.js';
-const sunmoonCss = new CSSStyleSheet();
-sunmoonCss.replaceSync(sunmoonStyles);
-
 export type ColorTheme = 'light' | 'dark';
 
 const themeUtils = Object.freeze({
@@ -89,7 +83,7 @@ export class ThemeToggle extends HTMLElement {
 			template.innerHTML = themeToggleTemplate;
 
 			this.#shadowRoot = this.attachShadow({ mode: 'open' });
-			this.#shadowRoot.adoptedStyleSheets = [css, sunmoonCss];
+			this.#shadowRoot.adoptedStyleSheets = [styles.styleSheet!, sunmoon.styleSheet!];
 			this.#shadowRoot.append(template.content.cloneNode(true));
 		} else {
 			this.#shadowRoot = shadowRoot;

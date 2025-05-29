@@ -1,17 +1,46 @@
+// {
+// 	"compilerOptions": {
+// 		"target": "ESNext",
+// 		"useDefineForClassFields": false,
+// 		"module": "NodeNext",
+// 		"moduleResolution": "NodeNext",
+// 		"strict": true,
+// 		"jsx": "preserve",
+// 		"sourceMap": true,
+// 		"resolveJsonModule": true,
+// 		"isolatedModules": true,
+// 		"esModuleInterop": true,
+// 		"skipLibCheck": true,
+// 		"experimentalDecorators": true
+// 	},
+// 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "*.ts"]
+// }
+
 {
 	"compilerOptions": {
 		"target": "ESNext",
-		"useDefineForClassFields": false,
 		"module": "NodeNext",
+		"lib": ["ESNext", "DOM", "DOM.Iterable"],
+		"skipLibCheck": true,
+
 		"moduleResolution": "NodeNext",
-		"strict": true,
-		"jsx": "preserve",
-		"sourceMap": true,
 		"resolveJsonModule": true,
 		"isolatedModules": true,
-		"esModuleInterop": true,
-		"skipLibCheck": true,
-		"experimentalDecorators": true
+
+		/* Linting */
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true,
+
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"useDefineForClassFields": false,
+		"outDir": "./dist",
+		"sourceMap": true,
+		"declaration": true,
+		"declarationMap": true
+		// "isolatedDeclarations": true
 	},
-	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "*.ts"]
+	"include": ["src"]
 }

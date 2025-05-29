@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NameAmount } from '@divicards/shared/types';
+import { NameAmount } from '@divicards/shared/types.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 import { TabWithItems } from 'poe-custom-elements/types.js';
 import { Ref, computed, ref, watch } from 'vue';
