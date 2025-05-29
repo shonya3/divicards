@@ -25,3 +25,8 @@ fs_cache_fetcher = ["dep:fs_cache_fetcher", "poe_data/fs_cache_fetcher"]
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }
+
+
+[lints.clippy]
+# Configure the maximum size for the Err variant in a Result
+result_large_err = {level = "warn", max-size = 200}

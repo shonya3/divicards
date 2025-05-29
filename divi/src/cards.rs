@@ -131,7 +131,7 @@ impl From<Prices> for Cards {
 pub fn check_card_name(card: &str) -> CheckCardName {
     if card.is_card() {
         return CheckCardName::Valid;
-    };
+    }
 
     match fix_name(card) {
         Some(fixed) => CheckCardName::TypoFixed(FixedCardName {

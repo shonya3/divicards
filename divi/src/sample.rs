@@ -82,7 +82,7 @@ impl Sample {
                     sample.fixed_names.push(fixed_name);
                 }
                 CheckCardName::NotACard => sample.not_cards.push(name),
-            };
+            }
         }
 
         sample.write_weight();
@@ -303,19 +303,19 @@ fn preserve_column_order(columns: &[Column]) -> Vec<Column> {
 
     if columns.iter().any(|c| c == &Column::Name) {
         vec.push(Column::Name);
-    };
+    }
     if columns.iter().any(|c| c == &Column::Amount) {
         vec.push(Column::Amount);
-    };
+    }
     if columns.iter().any(|c| c == &Column::Weight) {
         vec.push(Column::Weight);
-    };
+    }
     if columns.iter().any(|c| c == &Column::Price) {
         vec.push(Column::Price);
-    };
+    }
     if columns.iter().any(|c| c == &Column::Sum) {
         vec.push(Column::Sum);
-    };
+    }
 
     vec
 }
