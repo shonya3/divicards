@@ -3,7 +3,7 @@ const css = new CSSStyleSheet();
 css.replaceSync(styles);
 
 import sunmoonStyles from './sunmoon.css?inline';
-import { template as themeToggleTemplate } from './template';
+import { template as themeToggleTemplate } from './template.js';
 const sunmoonCss = new CSSStyleSheet();
 sunmoonCss.replaceSync(sunmoonStyles);
 

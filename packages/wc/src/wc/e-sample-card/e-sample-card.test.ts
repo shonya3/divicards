@@ -1,10 +1,10 @@
 import { expect, html, fixture } from '@open-wc/testing';
 import sinon from 'sinon';
-import { SampleCardElement } from './e-sample-card';
-import { props } from './data';
+import { SampleCardElement } from './e-sample-card.js';
+import { props } from './data.js';
 import { sendKeys } from '@web/test-runner-commands';
 import './e-sample-card';
-import type { Props } from './e-sample-card';
+import type { Props } from './e-sample-card.js';
 
 describe('<wc-sample-card>', () => {
 	let el: SampleCardElement;

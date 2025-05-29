@@ -1,7 +1,7 @@
-import { OrderTriangleElement, Size } from './e-order-triangle';
+import { OrderTriangleElement, Size } from './e-order-triangle.js';
 import { Meta } from '@storybook/web-components';
 import { html } from 'lit';
-import { Order } from '@divicards/shared/types';
+import { Order } from '@divicards/shared/types.js';
 import './e-order-triangle';
 
 export default {

@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { cards } from './data';
+import { cards } from './data.js';
 import './e-sample-table';
 
 export default {

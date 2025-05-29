@@ -1,28 +1,28 @@
-import { IStashLoader } from '@divicards/shared/IStashLoader';
+import type { IStashLoader } from '@divicards/shared/IStashLoader.js';
 import { html, PropertyValues, nothing, LitElement } from 'lit';
 import '../e-help-tip';
 import '../e-league-select';
 import './e-tab-badge-group';
 import './e-stash-tab-errors';
 import { property, state, query, customElement } from 'lit/decorators.js';
-import { DivinationCardsSample, League } from '@divicards/shared/types';
-import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
+import { DivinationCardsSample, type League } from '@divicards/shared/types.js';
+import { ACTIVE_LEAGUE } from '@divicards/shared/lib.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/radio-button/radio-button.js';
 import '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js';
 import '@shoelace-style/shoelace/dist/components/spinner/spinner.js';
-import { isStashTabError } from '@divicards/shared/error';
-import { ErrorLabel } from './types';
-import { styles } from './e-stashes-view.styles';
+import { isStashTabError } from '@divicards/shared/error.js';
+import { ErrorLabel } from './types.js';
+import { styles } from './e-stashes-view.styles.js';
 import './e-stash-tab-container';
 import { Task } from '@lit/task';
-import { StashTabContainerElement } from './e-stash-tab-container';
+import { StashTabContainerElement } from './e-stash-tab-container.js';
 import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
-import { LeagueChangeEvent } from '../events/change/league';
-import { SelectedTabsChangeEvent } from './events';
-import { MultiselectChangeEvent } from './e-tab-badge-group';
-import { TabClickEvent } from './e-tab-badge';
+import { LeagueChangeEvent } from '../events/change/league.js';
+import { SelectedTabsChangeEvent } from './events.js';
+import { MultiselectChangeEvent } from './e-tab-badge-group.js';
+import { TabClickEvent } from './e-tab-badge.js';
 
 const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
@@ -111,24 +111,24 @@ export class StashesViewElement extends LitElement {
 								${this.fetchingStashTab
 									? html`<sl-button><sl-spinner></sl-spinner></sl-button>`
 									: this.multiselect
-										? html`<sl-button
-												id="get-data-btn"
-												class="btn-load-items"
-												.disabled=${this.selected_tabs.size === 0 ||
-												this.fetchingStashTab ||
-												this.stashLoadsAvailable === 0}
-												@click=${this.#onLoadItemsClicked}
-											>
-												Load Tabs Contents
-											</sl-button>`
-										: null}
+									? html`<sl-button
+											id="get-data-btn"
+											class="btn-load-items"
+											.disabled=${this.selected_tabs.size === 0 ||
+											this.fetchingStashTab ||
+											this.stashLoadsAvailable === 0}
+											@click=${this.#onLoadItemsClicked}
+									  >
+											Load Tabs Contents
+									  </sl-button>`
+									: null}
 							</div>
-						`
+					  `
 					: html`<div>
 							${this.fetchingStash
 								? html`<sl-button><sl-spinner></sl-spinner></sl-button>`
 								: html`<sl-button id="stashes-btn" @click=${this.#loadStash}>Load Stash</sl-button>`}
-						</div> `}
+					  </div> `}
 				<div class="top-right-corner">
 					${this.stashtabs_badges.length
 						? html`
@@ -137,7 +137,7 @@ export class StashesViewElement extends LitElement {
 											@sl-change=${this.#onDownloadAsChanged}
 											.helpText=${`Download as`}
 											value=${this.downloadAs}
-										>
+									  >
 											${DOWNLOAD_AS_VARIANTS.map(
 												variant =>
 													html`<sl-radio-button size="small" value=${variant}
@@ -146,7 +146,7 @@ export class StashesViewElement extends LitElement {
 															: 'poe tab'}</sl-radio-button
 													>`
 											)}
-										</sl-radio-group>`
+									  </sl-radio-group>`
 									: null}
 								<div class="tips">
 									<e-help-tip>
@@ -154,7 +154,7 @@ export class StashesViewElement extends LitElement {
 									</e-help-tip>
 									<div>Loads available: ${this.stashLoadsAvailable}</div>
 								</div>
-							`
+						  `
 						: nothing}
 					<sl-button @click=${this.#onCloseClicked} class="btn-close">Close</sl-button>
 				</div>
@@ -167,7 +167,7 @@ export class StashesViewElement extends LitElement {
 							@upd:hoveredErrorTabId=${this.#handleUpdHoveredError}
 							@upd:errors=${this.#handleUpdErrors}
 							.errors=${this.errors}
-						></e-stash-tab-errors>`
+					  ></e-stash-tab-errors>`
 					: nothing}
 			</div>
 			<e-tab-badge-group
@@ -212,7 +212,7 @@ export class StashesViewElement extends LitElement {
 							}
 							return html`<div>${err.message}</div>`;
 						},
-					})
+				  })
 				: null}
 		</div>`;
 	}

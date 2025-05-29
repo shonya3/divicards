@@ -1,8 +1,8 @@
 import { Meta } from '@storybook/web-components';
-import { LeagueSelectElement } from './e-league-select';
+import { LeagueSelectElement } from './e-league-select.js';
 import './e-league-select';
 import { html } from 'lit';
-import { League, tradeLeagues } from '@divicards/shared/types';
+import { League, tradeLeagues } from '@divicards/shared/types.js';
 
 export default {
 	title: 'Elements/e-league-select',

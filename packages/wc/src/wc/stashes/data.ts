@@ -1,15 +1,15 @@
-import { DivinationCardsSample, League } from '@divicards/shared/types';
-import { IStashLoader } from '@divicards/shared/IStashLoader';
+import { DivinationCardsSample, League } from '@divicards/shared/types.js';
+import { IStashLoader } from '@divicards/shared/IStashLoader.js';
 
-import stashesData from './json/stashes.json' assert { type: 'json' };
-import sampleData from './json/sample.json' assert { type: 'json' };
+import stashesData from './json/stashes.json' with { type: 'json' };
+import sampleData from './json/sample.json' with { type: 'json' };
 import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
 
 export const stashes = stashesData as NoItemsTab[];
 export const league: League = 'Standard';
 export const sample: DivinationCardsSample = sampleData;
-import quadStash from './json/QuadStashStd.json';
-import fragmentsStash from './json/fragmentsTab.json';
+import quadStash from './json/QuadStashStd.json'  with { type: 'json' };
+import fragmentsStash from './json/fragmentsTab.json'  with { type: 'json' };
 const quad = quadStash as TabWithItems;
 const fragments = fragmentsStash as TabWithItems;
 

@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { Meta } from '@storybook/web-components';
-import { BasePopupElement } from './e-base-popup';
+import { BasePopupElement } from './e-base-popup.js';
 import './e-base-popup';
-import { cards } from './e-sample-card/e-sample-table/data';
+import { cards } from './e-sample-card/e-sample-table/data.js';
 import './e-sample-card/e-sample-table/e-sample-table';
 import './e-sample-card/e-form-export-sample/e-form-export-sample';
 

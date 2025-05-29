@@ -2,7 +2,7 @@ import { html, css, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import { Order } from '@divicards/shared/types';
+import type { Order } from '@divicards/shared/types.js';
 
 declare global {
 	interface HTMLElementTagNameMap {

@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/web-components';
-import { PaginationElement } from './e-pagination';
+import { PaginationElement } from './e-pagination.js';
 import './e-pagination';
 import { html } from 'lit';
 

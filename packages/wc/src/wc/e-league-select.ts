@@ -1,11 +1,11 @@
 import { LitElement, PropertyValueMap, css, html, nothing } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
-import { League, tradeLeagues, leagues as allLeagues } from '@divicards/shared/types';
+import { ACTIVE_LEAGUE } from '@divicards/shared/lib.js';
+import { type League, tradeLeagues, leagues as allLeagues } from '@divicards/shared/types.js';
 import '@shoelace-style/shoelace/dist/components/select/select.js';
 import '@shoelace-style/shoelace/dist/components/option/option.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
-import { LeagueChangeEvent } from './events/change/league';
+import { LeagueChangeEvent } from './events/change/league.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -76,7 +76,7 @@ export class LeagueSelectElement extends LitElement {
 						type="text"
 						.helpText=${`Private league`}
 						size="small"
-					></sl-input>`
+				  ></sl-input>`
 				: nothing}
 		</div>`;
 	}

@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/web-components';
-import { TabBadgeElement } from './e-tab-badge';
+import { TabBadgeElement } from './e-tab-badge.js';
 import './e-tab-badge';
 import { html } from 'lit';
 import { NoItemsTab } from 'poe-custom-elements/types.js';

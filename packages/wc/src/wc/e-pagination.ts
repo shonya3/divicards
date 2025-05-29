@@ -3,8 +3,8 @@ import { customElement, property } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
-import { PageChangeEvent } from './events/change/page';
-import { PerPageChangeEvent } from './events/change/per_page';
+import { PageChangeEvent } from './events/change/page.js';
+import { PerPageChangeEvent } from './events/change/per_page.js';
 
 export interface Events {
 	'change:page': PageChangeEvent;

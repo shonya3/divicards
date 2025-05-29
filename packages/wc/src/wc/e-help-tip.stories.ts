@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { Meta } from '@storybook/web-components';
-import { HelpTipElement } from './e-help-tip';
+import { HelpTipElement } from './e-help-tip.js';
 import './e-help-tip';
 import { styleMap } from 'lit/directives/style-map.js';
 

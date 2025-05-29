@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/web-components';
 import { html } from 'lit';
-import { StashTabErrorsElement } from './e-stash-tab-errors';
+import { StashTabErrorsElement } from './e-stash-tab-errors.js';
 import './e-stash-tab-errors';
 
 export default {

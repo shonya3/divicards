@@ -1,9 +1,9 @@
 import { Meta } from '@storybook/web-components';
-import { FixedNamesElement } from './e-fixed-names';
+import { FixedNamesElement } from './e-fixed-names.js';
 import './e-fixed-names';
 import { html } from 'lit';
-import { fixedNames } from './data';
-import { FixedName } from '@divicards/shared/types';
+import { fixedNames } from './data.js';
+import { FixedName } from '@divicards/shared/types.js';
 
 export default {
 	title: 'Elements/e-sample-card/e-fixed-names',

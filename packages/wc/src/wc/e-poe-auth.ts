@@ -1,7 +1,7 @@
 import { html, css, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
-import { emit } from '../utils';
+import { emit } from '../utils.js';
 
 @customElement('e-poe-auth')
 export class PoeAuthElement extends LitElement {
@@ -15,10 +15,10 @@ export class PoeAuthElement extends LitElement {
 				? html`<div class="logged-in">
 						<p>${this.name}</p>
 						<sl-button @click=${this.#emitLogout}>Logout</sl-button>
-					</div>`
+				  </div>`
 				: html`<div>
 						<sl-button @click=${this.#emitLogin}>Login</sl-button>
-					</div>`}
+				  </div>`}
 		</div>`;
 	}
 

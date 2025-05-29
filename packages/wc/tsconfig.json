@@ -1,21 +1,29 @@
 {
 	"compilerOptions": {
 		"target": "ESNext",
-		"useDefineForClassFields": false,
-		"module": "ESNext",
-		"moduleResolution": "bundler",
-		"strict": true,
-		"jsx": "preserve",
-		"sourceMap": true,
+		"module": "NodeNext",
+		"lib": ["ESNext", "DOM", "DOM.Iterable"],
+		"skipLibCheck": true,
+
+		"moduleResolution": "NodeNext",
 		"resolveJsonModule": true,
 		"isolatedModules": true,
-		"esModuleInterop": true,
-		"lib": ["ESNext", "DOM"],
-		"skipLibCheck": true,
+
+		/* Linting */
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true,
+
 		"experimentalDecorators": true,
-		"noEmit": true,
-		"noUnusedLocals": true
+		"emitDecoratorMetadata": true,
+		"useDefineForClassFields": false,
+		"outDir": "./dist",
+		"sourceMap": true,
+		"declaration": true,
+		"declarationMap": true
+		// "isolatedDeclarations": true
 	},
-	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "main.ts", "types/**/.d.ts"],
+	"include": ["src"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -2,7 +2,7 @@ import { html, css, nothing, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import './e-tab-badge';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
-import { ErrorLabel } from './types';
+import { ErrorLabel } from './types.js';
 
 declare global {
 	interface HTMLElementTagNameMap {

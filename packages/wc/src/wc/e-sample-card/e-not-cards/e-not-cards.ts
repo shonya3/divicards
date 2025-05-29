@@ -1,6 +1,6 @@
 import { html, css, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { BasePopupElement } from '../../e-base-popup';
+import { BasePopupElement } from '../../e-base-popup.js';
 import '../../e-base-popup';
 
 @customElement('e-not-cards')

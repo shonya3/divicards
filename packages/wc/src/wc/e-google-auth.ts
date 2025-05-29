@@ -1,6 +1,6 @@
 import { html, css, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { emit } from '../utils';
+import { emit } from '../utils.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -24,7 +24,7 @@ export class GoogleAuthElement extends LitElement {
 					<img src=${this.picture} alt="user avatar" width="32" height="32" />
 					<p>${this.name}</p>
 					${logoutButton}
-				</div>`
+			  </div>`
 			: html`<div>${loginButton}</div>`;
 
 		return html`<div class="auth">${template}</div>`;

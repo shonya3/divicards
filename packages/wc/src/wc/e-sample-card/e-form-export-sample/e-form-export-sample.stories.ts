@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { FormExportSampleElement } from './e-form-export-sample';
+import { FormExportSampleElement } from './e-form-export-sample.js';
 import './e-form-export-sample';
 import { Meta } from '@storybook/web-components';
 

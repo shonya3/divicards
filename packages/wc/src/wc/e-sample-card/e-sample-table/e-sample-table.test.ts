@@ -1,5 +1,5 @@
 import { fixture, expect, html } from '@open-wc/testing';
-import { SampleTableElement } from './e-sample-table';
+import { SampleTableElement } from './e-sample-table.js';
 import sinon from 'sinon';
 import './e-sample-table';
 

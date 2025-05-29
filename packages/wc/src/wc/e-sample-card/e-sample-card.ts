@@ -1,12 +1,12 @@
 import { html, css, nothing, LitElement } from 'lit';
-import { LeagueSelectElement } from '../e-league-select';
+import { LeagueSelectElement } from '../e-league-select.js';
 import '../e-league-select';
-import { BasePopupElement } from '../e-base-popup';
+import { BasePopupElement } from '../e-base-popup.js';
 import './e-fixed-names/e-fixed-names';
 import './e-not-cards/e-not-cards';
-import { DivinationCardsSample, League, TradeLeague, isTradeLeague } from '@divicards/shared/types';
+import { type DivinationCardsSample, League, type TradeLeague, isTradeLeague } from '@divicards/shared/types.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
+import { ACTIVE_LEAGUE } from '@divicards/shared/lib.js';
 import { classMap } from 'lit/directives/class-map.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/range/range.js';
@@ -15,11 +15,15 @@ import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 import SlRange from '@shoelace-style/shoelace/dist/components/range/range.js';
 import './e-sample-table/e-sample-table';
 import '../e-base-popup';
-import { SampleTableElement } from './e-sample-table/e-sample-table';
-import { LeagueChangeEvent } from '../events/change/league';
+import { SampleTableElement } from './e-sample-table/e-sample-table.js';
+import { LeagueChangeEvent } from '../events/change/league.js';
 import './e-form-export-sample/e-form-export-sample';
 import '../e-base-popup';
-import { ExportFormArgs, ExportSampleTo, PresubmitExportFormEvent } from './e-form-export-sample/e-form-export-sample';
+import {
+	ExportFormArgs,
+	type ExportSampleTo,
+	PresubmitExportFormEvent,
+} from './e-form-export-sample/e-form-export-sample.js';
 
 export interface Props {
 	league?: TradeLeague;
@@ -158,7 +162,7 @@ export class SampleCardElement extends LitElement {
 						.checked=${this.selected}
 						id="selected-checkbox"
 						@change=${this.#change_selected_and_emit}
-					/>`}
+				  />`}
 			<e-base-popup id="table-popup">
 				<e-sample-table .cards=${this.sample.cards}> </e-sample-table>
 			</e-base-popup>
@@ -265,9 +269,7 @@ export class SampleCardElement extends LitElement {
 				justify-content: space-between;
 				gap: 1rem;
 				width: fit-content;
-				box-shadow:
-					rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-					rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+				box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 
 				/* max-height: 320px; */
 				width: 250px;

@@ -1,7 +1,7 @@
 import { html, css, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { FixedName } from '@divicards/shared/types';
-import { BasePopupElement } from '../../e-base-popup';
+import { FixedName } from '@divicards/shared/types.js';
+import { BasePopupElement } from '../../e-base-popup.js';
 import '../../e-base-popup';
 import './e-fixed-icon';
 

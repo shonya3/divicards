@@ -1,21 +1,21 @@
 import { html, css, nothing, LitElement } from 'lit';
 import { property, state, query, customElement } from 'lit/decorators.js';
 import './e-tab-badge';
-import { League, isPermanentLeague } from '@divicards/shared/types';
-import { ACTIVE_LEAGUE } from '@divicards/shared/lib';
+import { type League, isPermanentLeague } from '@divicards/shared/types.js';
+import { ACTIVE_LEAGUE } from '@divicards/shared/lib.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
 import '../e-pagination';
 import '../e-help-tip';
-import { ErrorLabel } from './types';
+import { ErrorLabel } from './types.js';
 import { classMap } from 'lit/directives/class-map.js';
 import SlCheckbox from '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
 import { NoItemsTab } from 'poe-custom-elements/types.js';
-import { PageChangeEvent } from '../events/change/page';
-import { PerPageChangeEvent } from '../events/change/per_page';
-import { SelectedTabsChangeEvent } from './events';
-import { TabClickEvent, TabSelectEvent } from './e-tab-badge';
+import { PageChangeEvent } from '../events/change/page.js';
+import { PerPageChangeEvent } from '../events/change/per_page.js';
+import { SelectedTabsChangeEvent } from './events.js';
+import { TabClickEvent, TabSelectEvent } from './e-tab-badge.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -127,13 +127,13 @@ export class TabBadgeGroupElement extends LitElement {
 													.checked=${this.hideRemoveOnly}
 													>Hide remove-only</sl-checkbox
 												>
-											</div>`
+										  </div>`
 										: nothing}
 									<div class="tabs-total">
 										<span class="tabs-total__count">${this.tabsTotal}</span> stash tabs
 									</div>
 								</div>
-							</header>`
+						  </header>`
 						: nothing
 				}
 				<ul class="list">

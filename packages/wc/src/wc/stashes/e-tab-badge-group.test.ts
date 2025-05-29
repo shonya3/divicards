@@ -1,5 +1,5 @@
 import { fixture, expect, html } from '@open-wc/testing';
-import { TabBadgeGroupElement } from './e-tab-badge-group';
+import { TabBadgeGroupElement } from './e-tab-badge-group.js';
 
 describe('wc-tab-badge-group', async () => {
 	let el: TabBadgeGroupElement;

@@ -1,14 +1,14 @@
 import { html, PropertyValues, LitElement } from 'lit';
 import { property, state, query, customElement } from 'lit/decorators.js';
-import { toOrderedBy } from '@divicards/shared/toOrderedBy';
+import { toOrderedBy } from '@divicards/shared/toOrderedBy.js';
 import '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/range/range.js';
 import 'poe-custom-elements/item-card.js';
-import { Column, DivinationCardRecord, Order } from '@divicards/shared/types';
-import { styles } from './e-sample-table.styles';
+import { type Column, DivinationCardRecord, type Order } from '@divicards/shared/types.js';
+import { styles } from './e-sample-table.styles.js';
 import './e-order-triangle';
-import { emit } from '../../../utils';
+import { emit } from '../../../utils.js';
 
 declare global {
 	interface HTMLElementTagNameMap {

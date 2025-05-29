@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/web-components';
-import { SampleCardElement } from './e-sample-card';
+import { SampleCardElement } from './e-sample-card.js';
 import './e-sample-card';
-import { league, filename, selected, uuid, minimumCardPrice, sample } from './data';
+import { league, filename, selected, uuid, minimumCardPrice, sample } from './data.js';
 import { html } from 'lit';
 
 export default {

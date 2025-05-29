@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/web-components';
-import { PoeAuthElement } from './e-poe-auth';
+import { PoeAuthElement } from './e-poe-auth.js';
 import { html } from 'lit';
 import './e-poe-auth';
 

@@ -1,4 +1,4 @@
-import { League } from '@divicards/shared/types';
+import { League } from '@divicards/shared/types.js';
 
 declare global {
 	interface HTMLElementEventMap {
