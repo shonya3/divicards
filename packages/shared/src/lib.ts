@@ -1,5 +1,5 @@
 export const ACTIVE_LEAGUE = 'Settlers';
-export const downloadText = (filename: string, text: string = 'empty') => {
+export const downloadText = (filename: string, text: string = 'empty'): void => {
 	const file = new File([text], filename);
 	const a = document.createElement('a');
 	a.download = filename;
