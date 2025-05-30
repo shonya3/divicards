@@ -1,5 +1,5 @@
 import type { IStashLoader } from '@divicards/shared/IStashLoader.js';
-import { html, PropertyValues, nothing, LitElement } from 'lit';
+import { html, PropertyValues, nothing, LitElement, CSSResult, TemplateResult } from 'lit';
 import '../e-help-tip';
 import '../e-league-select';
 import './e-tab-badge-group';
@@ -46,7 +46,7 @@ const DOWNLOAD_AS_VARIANTS = ['divination-cards-sample', 'general-tab'] as const
 
 @customElement('e-stashes-view')
 export class StashesViewElement extends LitElement {
-	static override styles = styles;
+	static override styles: Array<CSSResult> = [styles];
 
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
 	@property() downloadAs: DownloadAs = 'divination-cards-sample';
@@ -97,7 +97,7 @@ export class StashesViewElement extends LitElement {
 		}
 	}
 
-	protected override render() {
+	protected override render(): TemplateResult {
 		return html`<div class="main-stashes-component">
 			<header class="header">
 				<e-league-select

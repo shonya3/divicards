@@ -1,12 +1,14 @@
 import { Meta } from '@storybook/web-components';
 import { TabBadgeElement } from './e-tab-badge.js';
 import './e-tab-badge';
-import { html } from 'lit';
+import { html, TemplateResult } from 'lit';
 import { NoItemsTab } from 'poe-custom-elements/types.js';
 
-export default {
+const meta: Meta<TabBadgeElement> = {
 	title: 'Elements/stashes/e-tab-badge',
-} satisfies Meta<TabBadgeElement>;
+};
+
+export default meta;
 
 const noItemsTab = {
 	id: '7f967993bb',
@@ -19,7 +21,7 @@ const noItemsTab = {
 } as const satisfies NoItemsTab;
 
 export const Default = {
-	render() {
+	render(): TemplateResult {
 		return html`<e-tab-badge .tab=${noItemsTab}></e-tab-badge>`;
 	},
 };

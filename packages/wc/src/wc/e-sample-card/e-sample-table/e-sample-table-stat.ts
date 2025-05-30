@@ -1,4 +1,4 @@
-import { LitElement, html, css, TemplateResult } from 'lit';
+import { LitElement, html, css, TemplateResult, CSSResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
 declare global {
@@ -13,7 +13,7 @@ export class DivTableStatElement extends LitElement {
 		return html`content`;
 	}
 
-	static styles = css`
+	static styles: CSSResult = css`
 		* {
 			padding: 0;
 			margin: 0;

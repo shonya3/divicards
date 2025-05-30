@@ -1,4 +1,4 @@
-import { html } from 'lit';
+import { html, TemplateResult } from 'lit';
 import { cards } from './data.js';
 import './e-sample-table';
 
@@ -7,7 +7,7 @@ export default {
 };
 
 export const Default = {
-	render() {
+	render(): TemplateResult {
 		return html`<e-sample-table .cards=${cards}></e-sample-table>`;
 	},
 };

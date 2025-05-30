@@ -1,4 +1,4 @@
-import { html } from 'lit';
+import { html, TemplateResult } from 'lit';
 import './e-stashes-view';
 import { MockStashLoader } from './data.js';
 
@@ -7,7 +7,7 @@ export default {
 };
 
 export const Default = {
-	render() {
+	render(): TemplateResult {
 		return html`<e-stashes-view .stashLoader=${new MockStashLoader()}></e-stashes-view>`;
 	},
 };

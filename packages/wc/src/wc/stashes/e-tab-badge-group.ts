@@ -1,4 +1,4 @@
-import { html, css, nothing, LitElement } from 'lit';
+import { html, css, nothing, LitElement, TemplateResult, CSSResult } from 'lit';
 import { property, state, query, customElement } from 'lit/decorators.js';
 import './e-tab-badge';
 import { type League, isPermanentLeague } from '@divicards/shared/types.js';
@@ -37,7 +37,7 @@ export type Events = {
 
 @customElement('e-tab-badge-group')
 export class TabBadgeGroupElement extends LitElement {
-	static override styles = [styles()];
+	static override styles: Array<CSSResult> = [styles()];
 
 	@property({ type: Boolean, attribute: 'badges-disabled' }) badgesDisabled = false;
 	@property({ type: Boolean }) multiselect = false;
@@ -68,29 +68,29 @@ export class TabBadgeGroupElement extends LitElement {
 			e.stopPropagation();
 		});
 	}
-	get shouldFilter() {
+	get shouldFilter(): boolean {
 		return this.stashes.length > 50;
 	}
-	get withHideRemoveOnly() {
+	get withHideRemoveOnly(): boolean {
 		return shouldUnlockHideRemoveOnly(this.league, this.stashes);
 	}
-	get filtered() {
+	get filtered(): Array<NoItemsTab> {
 		return filter(this.stashes, this.stashtab_name_query, this.shouldFilter, this.hideRemoveOnly);
 	}
-	get paginated() {
+	get paginated(): Array<NoItemsTab> {
 		return paginate(this.filtered, this.page, this.perPage);
 	}
-	get tabsTotal() {
+	get tabsTotal(): number {
 		return this.filtered.length;
 	}
 
-	willUpdate(changed: Map<string, unknown>) {
+	willUpdate(changed: Map<string, unknown>): void {
 		if (changed.has('nameQuery') || changed.has('hideRemoveOnly') || changed.has('perPage')) {
 			this.page = 1;
 		}
 	}
 
-	protected override render() {
+	protected override render(): TemplateResult {
 		return html`</div>
 			<div class="tab-badge-group">
 				${
@@ -180,12 +180,12 @@ export class TabBadgeGroupElement extends LitElement {
 		this.multiselect = (e.target as SlCheckbox).checked;
 		this.dispatchEvent(new MultiselectChangeEvent(this.multiselect));
 	}
-	decreasePage() {
+	decreasePage(): void {
 		if (this.page > 1) {
 			this.page--;
 		}
 	}
-	increasePage() {
+	increasePage(): void {
 		this.page++;
 	}
 }

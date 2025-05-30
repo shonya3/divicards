@@ -1,4 +1,4 @@
-import { html } from 'lit';
+import { html, TemplateResult } from 'lit';
 import { Meta } from '@storybook/web-components';
 import { BasePopupElement } from './e-base-popup.js';
 import './e-base-popup';
@@ -6,12 +6,13 @@ import { cards } from './e-sample-card/e-sample-table/data.js';
 import './e-sample-card/e-sample-table/e-sample-table';
 import './e-sample-card/e-form-export-sample/e-form-export-sample';
 
-export default {
+const meta: Meta<BasePopupElement> = {
 	title: 'Elements/e-base-popup',
-} satisfies Meta<BasePopupElement>;
+};
+export default meta;
 
 export const Default = {
-	render() {
+	render(): TemplateResult {
 		const popup = document.createElement('e-base-popup');
 		popup.open = true;
 		const table = document.createElement('e-sample-table');
@@ -23,7 +24,7 @@ export const Default = {
 };
 
 export const Form = {
-	render() {
+	render(): TemplateResult {
 		return html`<e-base-popup open>
 			<e-form-export-sample></e-form-export-sample>
 		</e-base-popup>`;

@@ -1,10 +1,16 @@
-import { html, css, nothing, LitElement } from 'lit';
+import { html, css, nothing, LitElement, CSSResult, TemplateResult } from 'lit';
 import { LeagueSelectElement } from '../e-league-select.js';
 import '../e-league-select';
 import { BasePopupElement } from '../e-base-popup.js';
 import './e-fixed-names/e-fixed-names';
 import './e-not-cards/e-not-cards';
-import { type DivinationCardsSample, League, type TradeLeague, isTradeLeague } from '@divicards/shared/types.js';
+import {
+	DivinationCardRecord,
+	type DivinationCardsSample,
+	League,
+	type TradeLeague,
+	isTradeLeague,
+} from '@divicards/shared/types.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -80,7 +86,7 @@ export class SampleCardElement extends LitElement {
 		});
 	}
 
-	protected override render() {
+	protected override render(): TemplateResult {
 		return html`<div
 			class=${classMap({
 				'sample-card': true,
@@ -169,13 +175,13 @@ export class SampleCardElement extends LitElement {
 		</div>`;
 	}
 
-	get filteredCards() {
+	get filteredCards(): Array<DivinationCardRecord> {
 		return this.sample.cards.filter(card => {
 			return (card.price ?? 0) >= this.minimum_card_price;
 		});
 	}
 
-	get filteredSummary() {
+	get filteredSummary(): { amount: number; value: number } {
 		let value = 0;
 		let amount = 0;
 
@@ -251,7 +257,7 @@ export class SampleCardElement extends LitElement {
 		this.dispatchEvent(new MinimumCardsPriceChangeEvent(this.minimum_card_price));
 	}
 
-	static override styles = [
+	static override styles: Array<CSSResult> = [
 		css`
 			:host {
 				--border-color: rgba(255, 255, 255, 0.3);

@@ -21,8 +21,8 @@
 		"outDir": "./dist",
 		"sourceMap": true,
 		"declaration": true,
-		"declarationMap": true
-		// "isolatedDeclarations": true
+		"declarationMap": true,
+		"isolatedDeclarations": true
 	},
 	"include": ["src"],
 	"references": [{ "path": "./tsconfig.node.json" }]

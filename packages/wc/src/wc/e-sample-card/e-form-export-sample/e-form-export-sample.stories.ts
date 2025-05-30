@@ -1,14 +1,15 @@
-import { html } from 'lit';
+import { html, TemplateResult } from 'lit';
 import { FormExportSampleElement } from './e-form-export-sample.js';
 import './e-form-export-sample';
 import { Meta } from '@storybook/web-components';
 
-export default {
+const meta: Meta<FormExportSampleElement> = {
 	title: 'Elements/e-sample-card/e-form-export-sample',
-} satisfies Meta<FormExportSampleElement>;
+};
+export default meta;
 
 export const Default = {
-	render() {
+	render(): TemplateResult {
 		return html`<e-form-export-sample></e-form-export-sample>`;
 	},
 };

@@ -1,4 +1,4 @@
-import { html } from 'lit';
+import { html, TemplateResult } from 'lit';
 import './e-tab-badge-group';
 import { league, stashes } from './data.js';
 
@@ -7,7 +7,7 @@ export default {
 };
 
 export const Default = {
-	render() {
+	render(): TemplateResult {
 		return html`<e-tab-badge-group .stashes=${stashes} .league=${league}></e-tab-badge-group>`;
 	},
 };

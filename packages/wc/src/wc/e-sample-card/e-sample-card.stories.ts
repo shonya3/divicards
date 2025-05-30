@@ -2,14 +2,15 @@ import { Meta } from '@storybook/web-components';
 import { SampleCardElement } from './e-sample-card.js';
 import './e-sample-card';
 import { league, filename, selected, uuid, minimumCardPrice, sample } from './data.js';
-import { html } from 'lit';
+import { html, TemplateResult } from 'lit';
 
-export default {
+const meta: Meta<SampleCardElement> = {
 	title: 'Elements/e-sample-card/e-sample-card',
-} satisfies Meta<SampleCardElement>;
+};
+export default meta;
 
 export const Default = {
-	render() {
+	render(): TemplateResult {
 		return html`<e-sample-card
 			league=${league ?? 'Standard'}
 			filename=${filename}

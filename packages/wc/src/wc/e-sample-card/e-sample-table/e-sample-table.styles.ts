@@ -1,4 +1,4 @@
-import { css } from 'lit';
+import { css, CSSResult } from 'lit';
 
 const table = css`
 	.table-wrapper {
@@ -88,7 +88,7 @@ const table = css`
 	}
 `;
 
-export const styles = css`
+export const styles: CSSResult = css`
 	:host {
 		display: block;
 		max-width: 1220px;

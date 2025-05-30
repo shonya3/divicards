@@ -7,7 +7,7 @@ import './e-tab-badge';
 import '@shoelace-style/shoelace/dist/components/alert/alert.js';
 import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 
-import { LitElement, html, css, TemplateResult } from 'lit';
+import { LitElement, html, css, TemplateResult, CSSResult } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { TabWithItems } from 'poe-custom-elements/types.js';
 import SlAlert from '@shoelace-style/shoelace/dist/components/alert/alert.js';
@@ -42,15 +42,15 @@ export class StashTabContainerElement extends LitElement {
 									.copyLabel=${`Click to copy JSON of the tab`}
 									.successLabel=${`You copied JSON of the tab`}
 									.errorLabel=${`Whoops, your browser doesn't support this!`}
-								></sl-copy-button>`
+							  ></sl-copy-button>`
 							: null}
 					</div>
 					${this.status === 'complete' && this.tab
 						? this.tab.type === 'FragmentStash'
 							? html` <sl-button @click=${this.#copyScarabs}>Copy Scarabs</sl-button> `
 							: stashtab_has_cards(this.tab)
-								? html`<sl-button @click=${this.#emitExtractCards}>Extract cards sample</sl-button>`
-								: null
+							? html`<sl-button @click=${this.#emitExtractCards}>Extract cards sample</sl-button>`
+							: null
 						: null}
 					<sl-icon-button name="x-lg" @click=${this.#emitClose} class="btn-close">X</sl-icon-button>
 				</div>
@@ -89,7 +89,7 @@ export class StashTabContainerElement extends LitElement {
 		this.dispatchEvent(new Event('close'));
 	}
 
-	static styles = css`
+	static styles: CSSResult = css`
 		* {
 			padding: 0;
 			margin: 0;

@@ -1,4 +1,4 @@
-import { html, css, nothing, LitElement } from 'lit';
+import { html, css, nothing, LitElement, TemplateResult, CSSResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import { Column, type TablePreferences } from '@divicards/shared/types.js';
@@ -24,7 +24,7 @@ export interface Events {
 
 @customElement('e-form-export-sample')
 export class FormExportSampleElement extends LitElement {
-	static override styles = [styles()];
+	static override styles: Array<CSSResult> = [styles()];
 
 	@property({ type: Object }) table_preferences: TablePreferences = {
 		order: 'desc',
@@ -108,7 +108,7 @@ export class FormExportSampleElement extends LitElement {
 			})
 		);
 	}
-	protected override render() {
+	protected override render(): TemplateResult {
 		return html`<div id="root">
 			${this.export_sample_to === 'sheets' ? this.sheetsFieldset() : nothing}
 			<form @submit=${this.#onSubmit} id="form">
@@ -241,7 +241,7 @@ export class FormExportSampleElement extends LitElement {
 		</div>`;
 	}
 
-	protected sheetsFieldset() {
+	protected sheetsFieldset(): TemplateResult {
 		return html`
                 <fieldset>
 					<legend>Sheets Identificators</legend>

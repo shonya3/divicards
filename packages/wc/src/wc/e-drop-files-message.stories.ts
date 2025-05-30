@@ -1,14 +1,15 @@
-import { html } from 'lit';
+import { html, TemplateResult } from 'lit';
 import { DropFilesMessageElement } from './e-drop-files-message.js';
 import { Meta } from '@storybook/web-components';
 import './e-drop-files-message';
 
-export default {
+const meta: Meta<DropFilesMessageElement> = {
 	title: 'Elements/drop-files-message',
-} satisfies Meta<DropFilesMessageElement>;
+};
+export default meta;
 
 export const Default = {
-	render() {
+	render(): TemplateResult {
 		return html`<e-drop-files-message></e-drop-files-message>`;
 	},
 };

@@ -1,6 +1,6 @@
-import { css } from 'lit';
+import { css, CSSResult } from 'lit';
 
-export const styles = css`
+export const styles: CSSResult = css`
 	.theme-toggle {
 		--size: 2rem;
 		--icon-fill: hsl(210 10% 35%);

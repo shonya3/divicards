@@ -1,19 +1,20 @@
 import { Meta } from '@storybook/web-components';
 import { FixedNamesElement } from './e-fixed-names.js';
 import './e-fixed-names';
-import { html } from 'lit';
+import { html, TemplateResult } from 'lit';
 import { fixedNames } from './data.js';
 import { FixedName } from '@divicards/shared/types.js';
 
-export default {
+const meta: Meta<FixedNamesElement> = {
 	title: 'Elements/e-sample-card/e-fixed-names',
 	args: {
 		fixedNames,
 	},
-} satisfies Meta<FixedNamesElement>;
+};
+export default meta;
 
 export const Default = {
-	render({ fixedNames }: { fixedNames: FixedName[] }) {
+	render({ fixedNames }: { fixedNames: FixedName[] }): TemplateResult {
 		return html`<e-fixed-names .fixedNames=${fixedNames}></e-fixed-names>`;
 	},
 };

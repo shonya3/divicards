@@ -1,4 +1,4 @@
-import { css, html, LitElement } from 'lit';
+import { css, CSSResult, html, LitElement, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
 declare global {
@@ -13,8 +13,8 @@ declare global {
  */
 @customElement('e-help-tip')
 export class HelpTipElement extends LitElement {
-	static override styles = [styles()];
-	override render() {
+	static override styles: Array<CSSResult> = [styles()];
+	override render(): TemplateResult {
 		return html`<div class="help-tip">
 			<div part="tooltip" class="tooltip">
 				<slot> Your tip here </slot>

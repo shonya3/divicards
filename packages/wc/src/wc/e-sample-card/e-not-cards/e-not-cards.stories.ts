@@ -1,16 +1,16 @@
 import { Meta } from '@storybook/web-components';
-NotCardsElement;
-import { html } from 'lit';
+import { html, TemplateResult } from 'lit';
 import { NotCardsElement } from './e-not-cards.js';
 import './e-not-cards';
 import { notCards } from './data.js';
 
-export default {
+const meta: Meta<NotCardsElement> = {
 	title: 'Elements/e-sample-card/e-not-cards',
-} satisfies Meta<NotCardsElement>;
+};
+export default meta;
 
 export const Default = {
-	render() {
+	render(): TemplateResult {
 		return html`<e-not-cards .notCards=${notCards}></e-not-cards>`;
 	},
 };

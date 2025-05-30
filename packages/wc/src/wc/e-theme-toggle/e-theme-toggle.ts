@@ -38,7 +38,7 @@ const themeUtils = Object.freeze({
  * @cssproperty	--icon-fill
  */
 export class ThemeToggle extends HTMLElement {
-	static define(tag = 'e-theme-toggle') {
+	static define(tag = 'e-theme-toggle'): void {
 		if (!customElements.get(tag)) {
 			customElements.define('e-theme-toggle', ThemeToggle);
 		}
@@ -59,8 +59,8 @@ export class ThemeToggle extends HTMLElement {
 		}
 	}
 
-	static observedAttributes = ['theme'];
-	attributeChangedCallback(name: 'theme', _: string | null, val: string | null) {
+	static observedAttributes = ['theme'] as const;
+	attributeChangedCallback(name: 'theme', _: string | null, val: string | null): void {
 		switch (name) {
 			case 'theme':
 				if (val !== 'dark' && val !== 'light') return;
@@ -91,7 +91,7 @@ export class ThemeToggle extends HTMLElement {
 
 		this.$button?.addEventListener('click', this.toggleTheme.bind(this));
 	}
-	connectedCallback() {
+	connectedCallback(): void {
 		this.theme = themeUtils.getTheme();
 	}
 

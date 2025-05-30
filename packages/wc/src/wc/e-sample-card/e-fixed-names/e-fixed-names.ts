@@ -1,4 +1,4 @@
-import { html, css, LitElement } from 'lit';
+import { html, css, LitElement, TemplateResult, CSSResult } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { FixedName } from '@divicards/shared/types.js';
 import { BasePopupElement } from '../../e-base-popup.js';
@@ -23,7 +23,7 @@ export class FixedNamesElement extends LitElement {
 		this.popup.showModal();
 	}
 
-	protected override render() {
+	protected override render(): TemplateResult {
 		return html`<e-fixed-icon
 				@click=${this.#onIconClicked}
 				width=${this.width}
@@ -45,13 +45,13 @@ export class FixedNamesElement extends LitElement {
 			</e-base-popup> `;
 	}
 
-	protected arrowIcon() {
+	protected arrowIcon(): TemplateResult {
 		return html`<svg width="16" height="16" viewBox="0 0 24 24">
 			<path fill="currentColor" d="m14 18l-1.4-1.45L16.15 13H4v-2h12.15L12.6 7.45L14 6l6 6Z"></path>
 		</svg>`;
 	}
 
-	static override styles = [
+	static override styles: Array<CSSResult> = [
 		css`
 			.heading {
 				font-weight: 500;

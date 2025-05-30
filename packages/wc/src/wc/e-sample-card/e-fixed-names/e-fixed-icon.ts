@@ -1,4 +1,4 @@
-import { html, css, LitElement } from 'lit';
+import { html, css, LitElement, TemplateResult, CSSResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 declare global {
@@ -9,7 +9,7 @@ declare global {
 
 @customElement('e-fixed-icon')
 export class FixedIconElement extends LitElement {
-	static override styles = [
+	static override styles: Array<CSSResult> = [
 		css`
 			svg {
 				cursor: pointer;
@@ -20,7 +20,7 @@ export class FixedIconElement extends LitElement {
 	@property({ reflect: true, type: Number }) width = 32;
 	@property({ reflect: true, type: Number }) height = 32;
 
-	protected override render() {
+	protected override render(): TemplateResult {
 		return html`<svg width=${this.width} height=${this.height} viewBox="0 0 24 24">
 			<path
 				fill="currentColor"

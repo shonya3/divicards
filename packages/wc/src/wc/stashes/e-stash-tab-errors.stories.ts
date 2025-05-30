@@ -1,11 +1,12 @@
 import { Meta } from '@storybook/web-components';
-import { html } from 'lit';
+import { html, TemplateResult } from 'lit';
 import { StashTabErrorsElement } from './e-stash-tab-errors.js';
 import './e-stash-tab-errors';
 
-export default {
+const meta: Meta<StashTabErrorsElement> = {
 	title: 'Elements/stashes/e-stash-tab-errors',
-} satisfies Meta<StashTabErrorsElement>;
+};
+export default meta;
 
 const errors = [
 	{
@@ -35,7 +36,7 @@ const errors = [
 ] as const;
 
 export const Default = {
-	render() {
+	render(): TemplateResult {
 		return html`<e-stash-tab-errors .errors=${errors}></e-stash-tab-errors>`;
 	},
 };

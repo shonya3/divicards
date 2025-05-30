@@ -1,14 +1,15 @@
 import { Meta } from '@storybook/web-components';
 import { PaginationElement } from './e-pagination.js';
 import './e-pagination';
-import { html } from 'lit';
+import { html, TemplateResult } from 'lit';
 
-export default {
+const meta: Meta<PaginationElement> = {
 	title: 'Elements/e-pagination',
-} satisfies Meta<PaginationElement>;
+};
+export default meta;
 
 export const Default = {
-	render() {
+	render(): TemplateResult {
 		return html`<e-pagination .n=${50}></e-pagination>`;
 	},
 };

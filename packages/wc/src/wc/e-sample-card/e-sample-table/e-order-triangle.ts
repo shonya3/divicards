@@ -1,4 +1,4 @@
-import { html, css, LitElement } from 'lit';
+import { html, css, LitElement, CSSResult, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
@@ -28,13 +28,13 @@ const degree = (order: Order): number => {
 
 @customElement('e-order-triangle')
 export class OrderTriangleElement extends LitElement {
-	static override styles = [styles()];
+	static override styles: Array<CSSResult> = [styles()];
 
 	@property({ reflect: true }) size: Size = '1rem';
 	@property({ reflect: true }) order: Order = 'unordered';
 	@property({ type: Boolean }) active = false;
 
-	protected override render() {
+	protected override render(): TemplateResult {
 		const styles = styleMap({
 			'--size': this.size,
 			transform: `rotate(${degree(this.order)}deg)`,

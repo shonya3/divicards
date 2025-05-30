@@ -1,4 +1,4 @@
-import { html, css, LitElement } from 'lit';
+import { html, css, LitElement, CSSResult, TemplateResult } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { REMOVE_ONLY } from './e-tab-badge-group.js';
@@ -36,7 +36,7 @@ export class TabBadgeElement extends LitElement {
 		return '#fff';
 	}
 
-	protected nameLabel() {
+	protected nameLabel(): TemplateResult {
 		const removeOnly = this.tab.name.includes(REMOVE_ONLY);
 
 		if (removeOnly) {
@@ -47,7 +47,7 @@ export class TabBadgeElement extends LitElement {
 		return html`<label for=${this.tab.id} class="name">${this.tab.name}</label>`;
 	}
 
-	protected override render() {
+	protected override render(): TemplateResult {
 		const cssProps = styleMap({
 			'--badge-color': `${this.computedColor}`,
 			'--tab-index': `' ${this.tab.index} '`,
@@ -75,6 +75,8 @@ export class TabBadgeElement extends LitElement {
 				${this.nameLabel()}
 			</button>`;
 		}
+
+		throw new Error('never');
 	}
 
 	@query('input') checkbox!: HTMLInputElement;
@@ -86,7 +88,7 @@ export class TabBadgeElement extends LitElement {
 		this.dispatchEvent(new TabClickEvent(this.tab, { composed: true }));
 	}
 
-	static styles = css`
+	static styles: CSSResult = css`
 		.tab-badge-as-button {
 			background-color: var(--badge-color);
 			width: 5.5rem;

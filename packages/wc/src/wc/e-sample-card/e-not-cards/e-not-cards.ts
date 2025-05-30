@@ -1,16 +1,16 @@
-import { html, css, LitElement } from 'lit';
+import { html, css, LitElement, TemplateResult, CSSResult } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { BasePopupElement } from '../../e-base-popup.js';
 import '../../e-base-popup';
 
 @customElement('e-not-cards')
 export class NotCardsElement extends LitElement {
-	static override styles = [styles()];
+	static override styles: Array<CSSResult> = [styles()];
 
 	@property({ type: Array }) notCards: string[] = [];
 	@query('e-base-popup') popup!: BasePopupElement;
 
-	protected override render() {
+	protected override render(): TemplateResult {
 		return html`
 			<svg
 				@click=${this.#onIconClicked}

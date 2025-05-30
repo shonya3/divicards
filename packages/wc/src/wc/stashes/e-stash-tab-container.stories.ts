@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/web-components';
 import './e-stash-tab-container';
-import { html } from 'lit';
+import { html, TemplateResult } from 'lit';
 import { StashTabContainerElement } from './e-stash-tab-container.js';
 //@ts-ignore
 import quadStash from './json/QuadStashStd.json';
@@ -8,12 +8,13 @@ import quadStash from './json/QuadStashStd.json';
 import fragmentsTab from './json/fragmentsTab.json';
 import { TabWithItems } from 'poe-custom-elements/types.js';
 
-export default {
+const meta: Meta<StashTabContainerElement> = {
 	title: 'Elements/stashes/e-stash-tab-container',
-} satisfies Meta<StashTabContainerElement>;
+};
+export default meta;
 
 export const Default = {
-	render() {
+	render(): TemplateResult {
 		return html`<e-stash-tab-container
 			status="complete"
 			.tab=${quadStash as TabWithItems}
@@ -22,7 +23,7 @@ export const Default = {
 };
 
 export const Fragments = {
-	render() {
+	render(): TemplateResult {
 		return html`<e-stash-tab-container
 			status="complete"
 			.tab=${fragmentsTab as TabWithItems}

@@ -1,4 +1,4 @@
-import { html, css, LitElement } from 'lit';
+import { html, css, LitElement, TemplateResult, CSSResult } from 'lit';
 import './e-help-tip';
 import { customElement } from 'lit/decorators.js';
 
@@ -13,7 +13,7 @@ declare global {
  */
 @customElement('e-drop-files-message')
 export class DropFilesMessageElement extends LitElement {
-	protected override render() {
+	protected override render(): TemplateResult {
 		return html`<div style="display: flex; gap: 1rem">
 			<div class="drop">Drop files <span>Here!</span></div>
 			<e-help-tip>
@@ -23,7 +23,7 @@ export class DropFilesMessageElement extends LitElement {
 			/></e-help-tip>
 		</div>`;
 	}
-	static override styles = css`
+	static override styles: CSSResult = css`
 		:host {
 			display: block;
 		}

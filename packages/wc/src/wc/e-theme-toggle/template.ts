@@ -1,4 +1,4 @@
-export const template = String.raw`
+export const template: string = String.raw`
     <button
         class="theme-toggle"
         id="theme-toggle"

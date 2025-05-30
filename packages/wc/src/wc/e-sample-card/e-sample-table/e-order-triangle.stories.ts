@@ -1,10 +1,10 @@
 import { OrderTriangleElement, Size } from './e-order-triangle.js';
 import { Meta } from '@storybook/web-components';
-import { html } from 'lit';
+import { html, TemplateResult } from 'lit';
 import { Order } from '@divicards/shared/types.js';
 import './e-order-triangle';
 
-export default {
+const meta: Meta<OrderTriangleElement> = {
 	title: 'Elements/e-sample-card/e-sample-table/e-order-triangle',
 	args: {
 		order: 'asc',
@@ -19,10 +19,11 @@ export default {
 		},
 		active: { control: { control: 'boolean' } },
 	},
-} satisfies Meta<OrderTriangleElement>;
+};
+export default meta;
 
 export const Default = {
-	render({ order, active, size }: { order: Order; active: boolean; size: Size }) {
+	render({ order, active, size }: { order: Order; active: boolean; size: Size }): TemplateResult {
 		return html`<e-order-triangle order=${order} size=${size} ?active=${active}></e-order-triangle>`;
 	},
 };

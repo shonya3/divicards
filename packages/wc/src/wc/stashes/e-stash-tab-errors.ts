@@ -1,4 +1,4 @@
-import { html, css, nothing, LitElement } from 'lit';
+import { html, css, LitElement, CSSResult, TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import './e-tab-badge';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
@@ -20,9 +20,9 @@ export class StashTabErrorsElement extends LitElement {
 	@property({ type: Array }) errors: Array<ErrorLabel> = [];
 	@state() hoveredErrorTabId: ErrorLabel['noItemsTab']['id'] | null = null;
 
-	protected render() {
+	protected render(): TemplateResult | null {
 		if (!this.errors.length) {
-			return nothing;
+			return null;
 		}
 		return html`<ul>
 			<h3>Errors</h3>
@@ -53,7 +53,7 @@ export class StashTabErrorsElement extends LitElement {
 		this.dispatchEvent(new CustomEvent('upd:hoveredErrorTabId', { detail: null }));
 	}
 
-	static styles = css`
+	static styles: CSSResult = css`
 		* {
 			padding: 0;
 			margin: 0;

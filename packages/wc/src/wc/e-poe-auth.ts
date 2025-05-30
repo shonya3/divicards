@@ -1,15 +1,15 @@
-import { html, css, LitElement } from 'lit';
+import { html, css, LitElement, TemplateResult, CSSResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import { emit } from '../utils.js';
 
 @customElement('e-poe-auth')
 export class PoeAuthElement extends LitElement {
-	static override styles = [styles()];
+	static override styles: Array<CSSResult> = [styles()];
 	@property({ reflect: true }) name: string = '';
 	@property({ type: Boolean, reflect: true }) loggedIn: boolean = false;
 
-	protected override render() {
+	protected override render(): TemplateResult {
 		return html`<div class="poe-auth">
 			${this.loggedIn
 				? html`<div class="logged-in">

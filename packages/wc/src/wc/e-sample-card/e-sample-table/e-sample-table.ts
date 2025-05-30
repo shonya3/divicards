@@ -1,4 +1,4 @@
-import { html, PropertyValues, LitElement } from 'lit';
+import { html, PropertyValues, LitElement, CSSResult, TemplateResult } from 'lit';
 import { property, state, query, customElement } from 'lit/decorators.js';
 import { toOrderedBy } from '@divicards/shared/toOrderedBy.js';
 import '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
@@ -25,7 +25,7 @@ export interface Events {
 
 @customElement('e-sample-table')
 export class SampleTableElement extends LitElement {
-	static override styles = [styles];
+	static override styles: Array<CSSResult> = [styles];
 
 	@property({ type: Array }) cards: Readonly<DivinationCardRecord[]> = [];
 	@property({ reflect: true, type: Number, attribute: 'min-price' }) minPrice: number = 0;
@@ -40,7 +40,7 @@ export class SampleTableElement extends LitElement {
 
 	@query('sl-checkbox#hide-zero-sum-checkbox') checkboxHideZeroSum!: HTMLInputElement;
 
-	override willUpdate(map: PropertyValues<this>) {
+	override willUpdate(map: PropertyValues<this>): void {
 		if (map.has('cards')) {
 			this._cards = Array.from(this.cards);
 		}
@@ -76,7 +76,7 @@ export class SampleTableElement extends LitElement {
 		}
 	}
 
-	protected override render() {
+	protected override render(): TemplateResult {
 		return html`<div class="layout">
 			<!-- Header -->
 			<header class="header">
@@ -218,7 +218,7 @@ export class SampleTableElement extends LitElement {
 		</div>`;
 	}
 
-	toggleOrder(newActivecolumn: Column) {
+	toggleOrder(newActivecolumn: Column): void {
 		if (this.column === newActivecolumn) {
 			this.order = this.order === 'asc' ? 'desc' : 'asc';
 		}

@@ -1,4 +1,4 @@
-import { html, css, PropertyValueMap, LitElement } from 'lit';
+import { html, css, PropertyValueMap, LitElement, CSSResult, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
@@ -11,7 +11,7 @@ declare global {
 
 @customElement('e-base-popup')
 export class BasePopupElement extends LitElement {
-	static override styles = [styles()];
+	static override styles: Array<CSSResult> = [styles()];
 	/** Instead of dialog's non-modal open, runs showModal() if true https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#open */
 	@property({ type: Boolean, reflect: true }) open = false;
 
@@ -35,7 +35,7 @@ export class BasePopupElement extends LitElement {
 		}
 	}
 
-	protected override render() {
+	protected override render(): TemplateResult {
 		return html`<dialog>
 			<div class="slot-parent">
 				<slot></slot>
@@ -66,7 +66,7 @@ export class BasePopupElement extends LitElement {
 		await this.updateComplete;
 	}
 
-	onEscape = (e: KeyboardEvent) => {
+	onEscape = (e: KeyboardEvent): void => {
 		if (e.code === 'Escape') {
 			this.open = false;
 		}

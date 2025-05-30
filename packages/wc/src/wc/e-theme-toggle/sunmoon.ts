@@ -1,6 +1,6 @@
-import { css } from 'lit';
+import { css, CSSResult } from 'lit';
 
-export const sunmoon = css`
+export const sunmoon: CSSResult = css`
 	/* @import 'https://unpkg.com/open-props/easings.min.css'; */
 	:host {
 		--ease-1: cubic-bezier(0.25, 0, 0.5, 1);

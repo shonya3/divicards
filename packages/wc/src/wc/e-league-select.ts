@@ -1,4 +1,4 @@
-import { LitElement, PropertyValueMap, css, html, nothing } from 'lit';
+import { CSSResult, LitElement, PropertyValueMap, TemplateResult, css, html, nothing } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib.js';
 import { type League, tradeLeagues, leagues as allLeagues } from '@divicards/shared/types.js';
@@ -50,7 +50,7 @@ export class LeagueSelectElement extends LitElement {
 		this.select.focus();
 	}
 
-	protected override render() {
+	protected override render(): TemplateResult {
 		const leagues = this.trade ? tradeLeagues : allLeagues;
 
 		const options = html`${leagues.map(
@@ -88,7 +88,7 @@ export class LeagueSelectElement extends LitElement {
 		this.dispatchEvent(new LeagueChangeEvent(this.league));
 	}
 
-	override firstUpdated() {
+	override firstUpdated(): void {
 		this.select.value = this.league;
 	}
 
@@ -98,7 +98,7 @@ export class LeagueSelectElement extends LitElement {
 		this.dispatchEvent(new LeagueChangeEvent(this.league));
 	}
 
-	static styles = css`
+	static styles: CSSResult = css`
 		.league-select {
 			display: flex;
 			gap: 0.2rem;
