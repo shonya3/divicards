@@ -84,7 +84,7 @@ export class LeagueSelectElement extends LitElement {
 	#onPrivateLeagueInput(e: InputEvent) {
 		const target = e.target as HTMLInputElement;
 		this.privateLeague = target.value;
-		this.league = this.privateLeague;
+		this.league = this.privateLeague as League;
 		this.dispatchEvent(new LeagueChangeEvent(this.league));
 	}
 

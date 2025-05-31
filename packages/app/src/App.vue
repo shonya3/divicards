@@ -22,7 +22,9 @@ import { TabWithItems } from 'poe-custom-elements/types.js';
 import { SampleCardElement } from '@divicards/wc/e-sample-card/e-sample-card.js';
 
 import '@divicards/wc/e-sample-card/e-sample-card.js';
+import '@divicards/wc/stashes/e-stashes-view.js';
 import { SubmitExportSampleEvent } from '@divicards/wc/e-sample-card/events.js';
+import { ExtractCardsEvent, StashtabFetchedEvent } from '@divicards/wc/stashes/events.js';
 
 const dropZoneRef = shallowRef<HTMLElement | null>(null);
 const sampleStore = useSampleStore();
@@ -94,14 +96,14 @@ async function export_sample({
 	}
 }
 
-const onTabWithItemsLoaded = (name: string, tab: TabWithItems, league: League) => {
-	tab.items.sort((a, b) => (b.stackSize ?? 0) - (a.stackSize ?? 0));
-	tabsWithItems.value.push(tab);
+const handle_stashtab_fetched = (e: StashtabFetchedEvent) => {
+	e.$stashtab.items.sort((a, b) => (b.stackSize ?? 0) - (a.stackSize ?? 0));
+	tabsWithItems.value.push(e.$stashtab);
 };
 
-const extractCards = async (tab: TabWithItems, league: League) => {
-	const sample = await command('extract_cards', { tab, league });
-	sampleStore.addSample(tab.name, sample, league);
+const handle_extract_cards = async (e: ExtractCardsEvent) => {
+	const sample = await command('extract_cards', { tab: e.$tab, league: e.$league });
+	sampleStore.addSample(e.$tab.name, sample, e.$league);
 	toast('success', 'Cards successfully extracted');
 };
 </script>
@@ -166,15 +168,14 @@ const extractCards = async (tab: TabWithItems, league: League) => {
 		<e-base-popup v-if="update" ref="changelogPopupRef">
 			<UpdateChangelog @update-clicked="installAndRelaunch" :version="update.version" />
 		</e-base-popup>
-		<div v-show="authStore.loggedIn && stashVisible">
-			<StashesView
-				:stashLoader="stashLoader"
-				@sample-from-tab="sampleStore.addSample"
-				@stashtab-fetched="onTabWithItemsLoaded"
-				@close="stashVisible = false"
-				@extract-cards="extractCards"
-			/>
-		</div>
+		<e-stashes-view
+			v-show="authStore.loggedIn && stashVisible"
+			:stashLoader="stashLoader"
+			@stashes__sample-from-stashtab="e => sampleStore.addSample(e.$stashtab_name, e.$sample, e.$league)"
+			@stashes__stashtab-fetched="handle_stashtab_fetched"
+			@stashes__close="stashVisible = false"
+			@stashes__extract-cards="handle_extract_cards"
+		></e-stashes-view>
 		<Transition>
 			<div>
 				<e-sample-card

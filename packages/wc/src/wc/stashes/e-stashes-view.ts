@@ -5,7 +5,7 @@ import '../e-league-select';
 import './e-tab-badge-group';
 import './e-stash-tab-errors';
 import { property, state, query, customElement } from 'lit/decorators.js';
-import { DivinationCardsSample, type League } from '@divicards/shared/types.js';
+import { type League } from '@divicards/shared/types.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
@@ -20,21 +20,22 @@ import { Task } from '@lit/task';
 import { StashTabContainerElement } from './e-stash-tab-container.js';
 import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
 import { LeagueChangeEvent } from '../events/change/league.js';
-import { SelectedTabsChangeEvent } from './events.js';
+import {
+	ExtractCardsEvent,
+	SampleFromStashtabEvent,
+	SelectedTabsChangeEvent,
+	StashtabFetchedEvent,
+	StashtabsBadgesFetchedEvent,
+	CloseEvent,
+	Events,
+} from './events.js';
 import { MultiselectChangeEvent } from './e-tab-badge-group.js';
 import { TabClickEvent } from './e-tab-badge.js';
+import { DefineComponent } from 'vue';
+import { VueEventHandlers } from '../../event-utils.js';
 
 const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
-
-export type Events = {
-	[CloseEvent.tag]: CloseEvent;
-	[SelectedTabsChangeEvent.tag]: SelectedTabsChangeEvent;
-	[StashtabsBadgesFetchedEvent.tag]: StashtabsBadgesFetchedEvent;
-	[ExtractCardsEvent.tag]: ExtractCardsEvent;
-	[SampleFromStashtabEvent.tag]: SampleFromStashtabEvent;
-	[StashtabFetchedEvent.tag]: StashtabFetchedEvent;
-};
 
 export interface StashesViewProps {
 	league?: League;
@@ -237,7 +238,7 @@ export class StashesViewElement extends LitElement {
 		this.dispatchEvent(new LeagueChangeEvent(e.$league));
 	}
 	#handle_selected_tabs_change(e: SelectedTabsChangeEvent): void {
-		this.selected_tabs = new Map(e.selected_tabs);
+		this.selected_tabs = new Map(e.$selected_tabs);
 		this.dispatchEvent(new SelectedTabsChangeEvent(this.selected_tabs));
 	}
 	#handle_tab_badge_click(e: TabClickEvent): void {
@@ -378,90 +379,8 @@ declare global {
 	}
 }
 
-declare global {
-	interface HTMLElementEventMap {
-		stashes__close: CloseEvent;
-	}
-}
-export class CloseEvent extends Event {
-	static readonly tag = 'stashes__close';
-	constructor(options?: EventInit) {
-		super(CloseEvent.tag, options);
-	}
-}
-
-declare global {
-	interface HTMLElementEventMap {
-		'stashes__stashtabs-badges-fetched': StashtabsBadgesFetchedEvent;
-	}
-}
-export class StashtabsBadgesFetchedEvent extends Event {
-	static readonly tag = 'stashes__stashtabs-badges-fetched';
-	readonly stashtabs_badges: Array<NoItemsTab>;
-	constructor(stashtabs_badges: Array<NoItemsTab>, options?: EventInit) {
-		super(StashtabsBadgesFetchedEvent.tag, options);
-		this.stashtabs_badges = stashtabs_badges;
-	}
-}
-
-declare global {
-	interface HTMLElementEventMap {
-		'stashes__extract-cards': ExtractCardsEvent;
-	}
-}
-export class ExtractCardsEvent extends Event {
-	static readonly tag = 'stashes__extract-cards';
-	readonly tab: TabWithItems;
-	readonly league: League;
-	constructor(tab: TabWithItems, league: League, options?: EventInit) {
-		super(ExtractCardsEvent.tag, options);
-		this.tab = tab;
-		this.league = league;
-	}
-}
-
-declare global {
-	interface HTMLElementEventMap {
-		'stashes__sample-from-stashtab': SampleFromStashtabEvent;
-	}
-}
-export class SampleFromStashtabEvent extends Event {
-	static readonly tag = 'stashes__sample-from-stashtab';
-	readonly stashtab_name: string;
-	readonly sample: DivinationCardsSample;
-	readonly league: League;
-	constructor(
-		{
-			stashtab_name,
-			sample,
-			league,
-		}: {
-			stashtab_name: string;
-			sample: DivinationCardsSample;
-			league: League;
-		},
-		options?: EventInit
-	) {
-		super(SampleFromStashtabEvent.tag, options);
-		this.stashtab_name = stashtab_name;
-		this.sample = sample;
-		this.league = league;
-	}
-}
-
-declare global {
-	interface HTMLElementEventMap {
-		'stashes__stashtab-fetched': StashtabFetchedEvent;
-	}
-}
-export class StashtabFetchedEvent extends Event {
-	static readonly tag = 'stashes__stashtab-fetched';
-	readonly stashtab: TabWithItems;
-	readonly league: League;
-
-	constructor(stashtab: TabWithItems, league: League, options?: EventInit) {
-		super(StashtabFetchedEvent.tag, options);
-		this.stashtab = stashtab;
-		this.league = league;
+declare module 'vue' {
+	interface GlobalComponents {
+		'e-stashes-view': DefineComponent<StashesViewProps & VueEventHandlers<Events>>;
 	}
 }

@@ -24,7 +24,7 @@ export function isPermanentLeague(league: unknown): league is PermanentLeague | 
 	return typeof league === 'string' && permanentLeagues.includes(league as PermanentLeague);
 }
 
-export type League = (typeof leagues)[number];
+export type League = (typeof leagues)[number] | string;
 export type TradeLeague = (typeof tradeLeagues)[number];
 export type PermanentLeague = (typeof permanentLeagues)[number];
 
