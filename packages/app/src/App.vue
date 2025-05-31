@@ -4,13 +4,12 @@ import { StashLoader } from './StashLoader';
 import { command } from './command';
 import { toast } from './toast';
 import { isTauriError } from './error';
-import { League } from '@divicards/shared/types.js';
+import { isTradeLeague, League, TradeLeague } from '@divicards/shared/types.js';
 import { downloadText } from '@divicards/shared/lib.js';
 import { useSampleStore } from './stores/sample';
 import { useGoogleAuthStore } from './stores/googleAuth';
 import { useAuthStore } from './stores/auth';
 import { useAutoAnimate } from './composables/useAutoAnimate';
-import SampleCard from './components/SampleCard.vue';
 import StashesView from './components/StashesView.vue';
 import '@shoelace-style/shoelace/dist/components/copy-button/copy-button.js';
 import { BasePopupElement } from '@divicards/wc/e-base-popup.js';
@@ -20,7 +19,10 @@ import { useAppVersion } from './composables/useAppVersion';
 import GeneralTabWithItems from './components/GeneralTabWithItems.vue';
 import { useTauriUpdater } from './composables/useTauriUpdater';
 import { TabWithItems } from 'poe-custom-elements/types.js';
-import { SampleCardElement, SubmitExportSampleEvent } from '@divicards/wc/e-sample-card/e-sample-card.js';
+import { SampleCardElement } from '@divicards/wc/e-sample-card/e-sample-card.js';
+
+import '@divicards/wc/e-sample-card/e-sample-card.js';
+import { SubmitExportSampleEvent } from '@divicards/wc/e-sample-card/events.js';
 
 const dropZoneRef = shallowRef<HTMLElement | null>(null);
 const sampleStore = useSampleStore();
@@ -46,18 +48,18 @@ async function export_sample({
 	spreadsheetId,
 	sheetTitle,
 	preferences: table_preferences,
-	sample,
-	league,
+	$sample,
+	$league,
 	export_sample_to,
-	filename,
+	$filename,
 	target,
 }: SubmitExportSampleEvent) {
 	const preferences = { ...table_preferences, columns: Array.from(table_preferences.columns) };
 
 	switch (export_sample_to) {
 		case 'file': {
-			const csv = await command('sample_into_csv', { sample, preferences });
-			downloadText(filename, csv);
+			const csv = await command('sample_into_csv', { sample: $sample, preferences });
+			downloadText($filename, csv);
 			(target as SampleCardElement).form_popup.open = false;
 			break;
 		}
@@ -70,9 +72,9 @@ async function export_sample({
 				const url = await command('new_sheet_with_sample', {
 					spreadsheetId: spreadsheetId ?? '',
 					title: sheetTitle ?? '',
-					sample,
+					sample: $sample,
 					preferences,
-					league,
+					league: $league,
 				});
 				toast('success', 'New sheet created successfully');
 				(target as SampleCardElement).form_popup.open = false;
@@ -174,14 +176,27 @@ const extractCards = async (tab: TabWithItems, league: League) => {
 			/>
 		</div>
 		<Transition>
-			<SampleCard
-				v-if="sampleStore.merged"
-				v-bind="sampleStore.merged"
-				@delete="sampleStore.deleteMerged"
-				@update:minimumCardPrice="price => sampleStore.merged && (sampleStore.merged.minimumCardPrice = price)"
-				@update:league="sampleStore.replaceMerged"
-				@submit-sample="export_sample"
-			/>
+			<div>
+				<e-sample-card
+					v-if="sampleStore.merged"
+					v-bind="sampleStore.merged"
+					@sample__delete="sampleStore.deleteMerged"
+					@sample__change:minimum_card_price="
+						e => {
+							if (!sampleStore.merged) return;
+							sampleStore.merged.minimumCardPrice = e.$minimum_card_price;
+						}
+					"
+					@change:league="
+						e => {
+							if (!sampleStore.merged || !isTradeLeague(e.$league)) return;
+							sampleStore.merged.league = e.$league;
+							sampleStore.replaceMerged(e.$league);
+						}
+					"
+					@sample__submit-export-sample="export_sample"
+				></e-sample-card>
+			</div>
 		</Transition>
 		<div v-if="sampleStore.sampleCards.length >= 2">
 			<h3>Select samples you want to merge</h3>
@@ -209,15 +224,21 @@ const extractCards = async (tab: TabWithItems, league: League) => {
 		</ul>
 		<Transition>
 			<div ref="filesTemplateRef" class="samples" v-show="sampleStore.sampleCards.length">
-				<SampleCard
+				<e-sample-card
 					v-for="fileCard in sampleStore.sampleCards"
 					v-bind="fileCard"
-					@delete="sampleStore.deleteFile"
-					v-model:selected="fileCard.selected"
-					v-model:minimumCardPrice="fileCard.minimumCardPrice"
-					@update:league="league => sampleStore.replaceFileCard(league, fileCard)"
-					@submit-sample="export_sample"
-				/>
+					@sample__delete="e => sampleStore.deleteFile(e.$uuid)"
+					@sample__change:selected="e => (fileCard.selected = e.$selected)"
+					@sample__change:minimum_card_price="e => (fileCard.minimumCardPrice = e.$minimum_card_price)"
+					@change:league="
+						e => {
+							if (!isTradeLeague(e.$league)) return;
+							fileCard.league = e.$league;
+							sampleStore.replaceFileCard(e.$league, fileCard);
+						}
+					"
+					@sample__submit-export-sample="export_sample"
+				></e-sample-card>
 			</div>
 		</Transition>
 	</div>

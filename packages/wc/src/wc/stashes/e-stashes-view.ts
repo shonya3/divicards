@@ -232,9 +232,9 @@ export class StashesViewElement extends LitElement {
 	#onDownloadAsChanged(e: InputEvent) {
 		this.downloadAs = (e.target as HTMLInputElement).value as DownloadAs;
 	}
-	#handle_league_selected({ league }: LeagueChangeEvent): void {
-		this.league = league;
-		this.dispatchEvent(new LeagueChangeEvent(league));
+	#handle_league_selected(e: LeagueChangeEvent): void {
+		this.league = e.$league;
+		this.dispatchEvent(new LeagueChangeEvent(e.$league));
 	}
 	#handle_selected_tabs_change(e: SelectedTabsChangeEvent): void {
 		this.selected_tabs = new Map(e.selected_tabs);

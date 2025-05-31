@@ -1,4 +1,5 @@
-import { html, css, nothing, LitElement, CSSResult, TemplateResult } from 'lit';
+import { html, nothing, LitElement, CSSResult, TemplateResult } from 'lit';
+import { DefineComponent } from 'vue';
 import { LeagueSelectElement } from '../e-league-select.js';
 import '../e-league-select';
 import { BasePopupElement } from '../e-base-popup.js';
@@ -7,7 +8,6 @@ import './e-not-cards/e-not-cards';
 import {
 	DivinationCardRecord,
 	type DivinationCardsSample,
-	League,
 	type TradeLeague,
 	isTradeLeague,
 } from '@divicards/shared/types.js';
@@ -25,11 +25,18 @@ import { SampleTableElement } from './e-sample-table/e-sample-table.js';
 import { LeagueChangeEvent } from '../events/change/league.js';
 import './e-form-export-sample/e-form-export-sample';
 import '../e-base-popup';
+import { type ExportSampleTo, PresubmitExportFormEvent } from './e-form-export-sample/e-form-export-sample.js';
+import { styles } from './e-sample-card.styles.js';
 import {
-	ExportFormArgs,
-	type ExportSampleTo,
-	PresubmitExportFormEvent,
-} from './e-form-export-sample/e-form-export-sample.js';
+	SubmitExportSampleEvent,
+	SaveToFileClickEvent,
+	GoogleSheetsClickEvent,
+	SelectedChangeEvent,
+	DeleteThisSampleEvent,
+	MinimumCardsPriceChangeEvent,
+	Events,
+} from './events.js';
+import { VueEventHandlers } from '../../event-utils.js';
 
 export interface Props {
 	league?: TradeLeague;
@@ -40,20 +47,12 @@ export interface Props {
 	sample: DivinationCardsSample;
 }
 
-export type Events = {
-	[DeleteThisSampleEvent.tag]: DeleteThisSampleEvent;
-	[SelectedChangeEvent.tag]: SelectedChangeEvent;
-	[LeagueChangeEvent.tag]: LeagueChangeEvent;
-	[SaveToFileClickEvent.tag]: SaveToFileClickEvent;
-	[GoogleSheetsClickEvent.tag]: GoogleSheetsClickEvent;
-	[MinimumCardsPriceChangeEvent.tag]: MinimumCardsPriceChangeEvent;
-	[SubmitExportSampleEvent.tag]: SubmitExportSampleEvent;
-};
-
 const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 
 @customElement('e-sample-card')
 export class SampleCardElement extends LitElement {
+	static override styles: Array<CSSResult> = [styles];
+
 	@property({ reflect: true }) league: TradeLeague = ACTIVE_LEAGUE;
 	@property({ reflect: true }) filename: string = 'NO FILE NAMENO FILE NAME';
 	@property({ type: Boolean, reflect: true }) selected: boolean | null = false;
@@ -238,11 +237,11 @@ export class SampleCardElement extends LitElement {
 	}
 
 	#handle_league_change(e: LeagueChangeEvent): void {
-		if (!isTradeLeague(e.league)) {
+		if (!isTradeLeague(e.$league)) {
 			return;
 		}
-		this.league = e.league;
-		this.dispatchEvent(new LeagueChangeEvent(e.league));
+		this.league = e.$league;
+		this.dispatchEvent(new LeagueChangeEvent(e.$league));
 	}
 
 	#emit_delete_this_sample(): void {
@@ -256,137 +255,6 @@ export class SampleCardElement extends LitElement {
 		this.minimum_card_price = Number(e.target.value);
 		this.dispatchEvent(new MinimumCardsPriceChangeEvent(this.minimum_card_price));
 	}
-
-	static override styles: Array<CSSResult> = [
-		css`
-			:host {
-				--border-color: rgba(255, 255, 255, 0.3);
-				--border-radius: 0.25rem;
-			}
-
-			.sample-card {
-				position: relative;
-				padding-inline: 1rem;
-				padding-top: 1.4rem;
-				padding-bottom: 0.4rem;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: space-between;
-				gap: 1rem;
-				width: fit-content;
-				box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-
-				/* max-height: 320px; */
-				width: 250px;
-				height: 530px;
-
-				border: 1px solid black;
-				border-color: var(--border-color);
-				border-radius: var(--border-radius);
-				background-color: var(--sl-color-gray-100);
-				transition: 0.2s border-color;
-			}
-
-			.sample-card--selected {
-				border-color: var(--sl-color-green-600);
-			}
-
-			.icon {
-				cursor: pointer;
-			}
-
-			p {
-				margin: 0;
-			}
-
-			.minor-icons {
-				position: absolute;
-				top: 30%;
-				left: 20px;
-			}
-
-			.file-error {
-				border-color: red;
-			}
-
-			.filename {
-				font-size: 1rem;
-				letter-spacing: -0.4px;
-				overflow: hidden;
-				max-height: 60px;
-				max-width: 100%;
-				margin-top: 1.2rem;
-			}
-
-			.filename:hover {
-				overflow: visible;
-			}
-
-			.slider-box {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				gap: 0.5rem;
-			}
-
-			.btn-delete {
-				position: absolute;
-				top: 0;
-				right: 0;
-				padding: 0.2rem;
-				border: none;
-				background-color: transparent;
-				cursor: pointer;
-			}
-
-			sl-icon {
-				color: var(--sl-color-green-600);
-			}
-
-			.export-buttons {
-				margin-top: 2rem;
-				display: flex;
-				flex-direction: column;
-			}
-
-			.checkbox {
-				background-color: red;
-				transform: scale(2);
-				accent-color: var(--sl-color-green-600);
-				cursor: pointer;
-
-				position: absolute;
-				bottom: 0;
-				right: 0;
-				width: 10px;
-				height: 10px;
-				transform: translate(50%, 50%) scale(2);
-			}
-
-			.export-to-google-docs {
-				margin-top: auto;
-				cursor: pointer;
-			}
-
-			.total-price,
-			.cards-amount {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				font-size: 2rem;
-			}
-
-			.grid-icon {
-				display: block;
-				cursor: pointer;
-				padding: 0;
-				margin: 0;
-				width: 100px;
-				height: 100px;
-			}
-		`,
-	];
 }
 
 declare global {
@@ -395,115 +263,8 @@ declare global {
 	}
 }
 
-declare global {
-	interface HTMLElementEventMap {
-		sample__delete: DeleteThisSampleEvent;
-	}
-}
-export class DeleteThisSampleEvent extends Event {
-	static readonly tag = 'sample__delete';
-	uuid: string;
-	constructor(uuid: string, options?: EventInit) {
-		super(DeleteThisSampleEvent.tag, options);
-		this.uuid = uuid;
-	}
-}
-
-declare global {
-	interface HTMLElementEventMap {
-		'sample__change:selected': SelectedChangeEvent;
-	}
-}
-export class SelectedChangeEvent extends Event {
-	static readonly tag = 'sample__change:selected';
-	selected: boolean | null;
-	constructor(selected: boolean | null, options?: EventInit) {
-		super(SelectedChangeEvent.tag, options);
-		this.selected = selected;
-	}
-}
-
-declare global {
-	interface HTMLElementEventMap {
-		'sample__change:minimum_card_price': MinimumCardsPriceChangeEvent;
-	}
-}
-export class MinimumCardsPriceChangeEvent extends Event {
-	static readonly tag = 'sample__change:minimum_card_price';
-	minimum_card_price: number;
-
-	constructor(minimum_card_price: number, options?: EventInit) {
-		super(MinimumCardsPriceChangeEvent.tag, options);
-		this.minimum_card_price = minimum_card_price;
-	}
-}
-
-declare global {
-	interface HTMLElementEventMap {
-		'sample__google-sheets-click': GoogleSheetsClickEvent;
-	}
-}
-export class GoogleSheetsClickEvent extends Event {
-	static readonly tag = 'sample__google-sheets-click';
-	readonly sample: DivinationCardsSample;
-	readonly league: League;
-
-	constructor(sample: DivinationCardsSample, league: League, options?: EventInit) {
-		super(GoogleSheetsClickEvent.tag, options);
-		this.sample = sample;
-		this.league = league;
-	}
-}
-
-declare global {
-	interface HTMLElementEventMap {
-		'sample__save-to-file-click': SaveToFileClickEvent;
-	}
-}
-export class SaveToFileClickEvent extends Event {
-	static readonly tag = 'sample__save-to-file-click';
-	readonly sample: DivinationCardsSample;
-	readonly league: League;
-	readonly filename: string;
-
-	constructor(
-		args: {
-			sample: DivinationCardsSample;
-			league: League;
-			filename: string;
-		},
-		options?: EventInit
-	) {
-		super(SaveToFileClickEvent.tag, options);
-		this.sample = args.sample;
-		this.league = args.league;
-		this.filename = args.filename;
-	}
-}
-
-declare global {
-	interface HTMLElementEventMap {
-		'sample__submit-export-sample': SubmitExportSampleEvent;
-	}
-}
-export class SubmitExportSampleEvent extends PresubmitExportFormEvent {
-	static readonly tag = 'sample__submit-export-sample';
-	sample: DivinationCardsSample;
-	league: League;
-	filename: string;
-
-	constructor(
-		{
-			form_args,
-			sample,
-			league,
-			filename,
-		}: { filename: string; form_args: ExportFormArgs; sample: DivinationCardsSample; league: League },
-		options?: EventInit
-	) {
-		super(form_args, SubmitExportSampleEvent.tag, options);
-		this.sample = sample;
-		this.league = league;
-		this.filename = filename;
+declare module 'vue' {
+	interface GlobalComponents {
+		'e-sample-card': DefineComponent<Props & VueEventHandlers<Events>>;
 	}
 }

@@ -133,7 +133,7 @@ importers:
         version: 8.3.3(lit@3.2.1)(storybook@8.3.5)
       '@storybook/web-components-vite':
         specifier: 8.3.3
-        version: 8.3.3(lit@3.2.1)(storybook@8.3.5)(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.4))
+        version: 8.3.3(lit@3.2.1)(storybook@8.3.5)(typescript@5.8.3)(vite@5.4.8(@types/node@22.7.4))
       '@types/mocha':
         specifier: ^10.0.7
         version: 10.0.7
@@ -169,7 +169,7 @@ importers:
         version: 8.3.5
       typescript:
         specifier: ^5.6.3
-        version: 5.6.3
+        version: 5.8.3
       vite:
         specifier: 5.4.8
         version: 5.4.8(@types/node@22.7.4)
@@ -177,8 +177,8 @@ importers:
         specifier: 1.0.6
         version: 1.0.6(vite@5.4.8(@types/node@22.7.4))
       vue:
-        specifier: ^3.5.11
-        version: 3.5.12(typescript@5.6.3)
+        specifier: ^3.5.12
+        version: 3.5.12(typescript@5.8.3)
 
 packages:
 
@@ -3310,11 +3310,6 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  typescript@5.6.3:
-    resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
-    engines: {node: '>=14.17'}
-    hasBin: true
-
   typescript@5.8.3:
     resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
     engines: {node: '>=14.17'}
@@ -4409,7 +4404,7 @@ snapshots:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
 
-  '@storybook/builder-vite@8.3.3(storybook@8.3.5)(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.4))':
+  '@storybook/builder-vite@8.3.3(storybook@8.3.5)(typescript@5.8.3)(vite@5.4.8(@types/node@22.7.4))':
     dependencies:
       '@storybook/csf-plugin': 8.3.3(storybook@8.3.5)
       '@types/find-cache-dir': 3.2.1
@@ -4423,7 +4418,7 @@ snapshots:
       ts-dedent: 2.2.0
       vite: 5.4.8(@types/node@22.7.4)
     optionalDependencies:
-      typescript: 5.6.3
+      typescript: 5.8.3
     transitivePeerDependencies:
       - supports-color
 
@@ -4485,9 +4480,9 @@ snapshots:
     dependencies:
       storybook: 8.3.5
 
-  '@storybook/web-components-vite@8.3.3(lit@3.2.1)(storybook@8.3.5)(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.4))':
+  '@storybook/web-components-vite@8.3.3(lit@3.2.1)(storybook@8.3.5)(typescript@5.8.3)(vite@5.4.8(@types/node@22.7.4))':
     dependencies:
-      '@storybook/builder-vite': 8.3.3(storybook@8.3.5)(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.4))
+      '@storybook/builder-vite': 8.3.3(storybook@8.3.5)(typescript@5.8.3)(vite@5.4.8(@types/node@22.7.4))
       '@storybook/web-components': 8.3.3(lit@3.2.1)(storybook@8.3.5)
       magic-string: 0.30.10
       storybook: 8.3.5
@@ -4914,11 +4909,11 @@ snapshots:
       '@vue/shared': 3.5.12
       vue: 3.5.12(typescript@5.6.2)
 
-  '@vue/server-renderer@3.5.12(vue@3.5.12(typescript@5.6.3))':
+  '@vue/server-renderer@3.5.12(vue@3.5.12(typescript@5.8.3))':
     dependencies:
       '@vue/compiler-ssr': 3.5.12
       '@vue/shared': 3.5.12
-      vue: 3.5.12(typescript@5.6.3)
+      vue: 3.5.12(typescript@5.8.3)
 
   '@vue/shared@3.5.12': {}
 
@@ -7000,8 +6995,6 @@ snapshots:
 
   typescript@5.6.2: {}
 
-  typescript@5.6.3: {}
-
   typescript@5.8.3: {}
 
   typical@4.0.0: {}
@@ -7196,15 +7189,15 @@ snapshots:
     optionalDependencies:
       typescript: 5.6.2
 
-  vue@3.5.12(typescript@5.6.3):
+  vue@3.5.12(typescript@5.8.3):
     dependencies:
       '@vue/compiler-dom': 3.5.12
       '@vue/compiler-sfc': 3.5.12
       '@vue/runtime-dom': 3.5.12
-      '@vue/server-renderer': 3.5.12(vue@3.5.12(typescript@5.6.3))
+      '@vue/server-renderer': 3.5.12(vue@3.5.12(typescript@5.8.3))
       '@vue/shared': 3.5.12
     optionalDependencies:
-      typescript: 5.6.3
+      typescript: 5.8.3
 
   web-component-analyzer@2.0.0:
     dependencies:
