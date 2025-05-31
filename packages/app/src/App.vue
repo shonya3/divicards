@@ -10,7 +10,6 @@ import { useSampleStore } from './stores/sample';
 import { useGoogleAuthStore } from './stores/googleAuth';
 import { useAuthStore } from './stores/auth';
 import { useAutoAnimate } from './composables/useAutoAnimate';
-import StashesView from './components/StashesView.vue';
 import '@shoelace-style/shoelace/dist/components/copy-button/copy-button.js';
 import { BasePopupElement } from '@divicards/wc/e-base-popup.js';
 import UpdateChangelog from './components/UpdateChangelog.vue';
