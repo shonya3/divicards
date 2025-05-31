@@ -4,7 +4,7 @@ import { StashLoader } from './StashLoader';
 import { command } from './command';
 import { toast } from './toast';
 import { isTauriError } from './error';
-import { isTradeLeague, League, TradeLeague } from '@divicards/shared/types.js';
+import { isTradeLeague } from '@divicards/shared/types.js';
 import { downloadText } from '@divicards/shared/lib.js';
 import { useSampleStore } from './stores/sample';
 import { useGoogleAuthStore } from './stores/googleAuth';
@@ -20,12 +20,14 @@ import { useTauriUpdater } from './composables/useTauriUpdater';
 import { TabWithItems } from 'poe-custom-elements/types.js';
 import { SampleCardElement } from '@divicards/wc/e-sample-card/e-sample-card.js';
 
+import '@divicards/wc/e-theme-toggle/e-theme-toggle.js';
 import '@divicards/wc/e-sample-card/e-sample-card.js';
 import '@divicards/wc/stashes/e-stashes-view.js';
 import '@divicards/wc/e-poe-auth/e-poe-auth.js';
 
 import { SubmitExportSampleEvent } from '@divicards/wc/e-sample-card/events.js';
 import { ExtractCardsEvent, StashtabFetchedEvent } from '@divicards/wc/stashes/events.js';
+import { ChangeThemeEvent } from '@divicards/wc/e-theme-toggle/events.js';
 
 const dropZoneRef = shallowRef<HTMLElement | null>(null);
 const sampleStore = useSampleStore();
@@ -107,6 +109,10 @@ const handle_extract_cards = async (e: ExtractCardsEvent) => {
 	sampleStore.addSample(e.$tab.name, sample, e.$league);
 	toast('success', 'Cards successfully extracted');
 };
+
+const handle_change_theme = (e: ChangeThemeEvent) => {
+	console.log(`Theme changed: ${e.$theme}`);
+};
 </script>
 
 <template>
@@ -167,7 +173,7 @@ const handle_extract_cards = async (e: ExtractCardsEvent) => {
 					@click="() => changelogPopupRef?.showModal()"
 					>Update is ready</sl-button
 				>
-				<e-theme-toggle></e-theme-toggle>
+				<e-theme-toggle @theme-toggle__change:theme="handle_change_theme"></e-theme-toggle>
 			</div>
 		</header>
 		<e-base-popup v-if="update" ref="changelogPopupRef">

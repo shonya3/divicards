@@ -1,13 +1,16 @@
+import { DefineComponent } from 'vue';
+import { ChangeThemeEvent, Events } from './events.js';
 import { styles } from './styles.js';
 import { sunmoon } from './sunmoon.js';
 import { template as themeToggleTemplate } from './template.js';
+import { VueEventHandlers } from '../../event-utils.js';
 export type ColorTheme = 'light' | 'dark';
 
 const themeUtils = Object.freeze({
 	LOCAL_STORAGE_KEY: 'theme-preference',
-	// getSystemPreference(): ColorTheme {
-	// 	return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-	// },
+	getSystemPreference(): ColorTheme {
+		return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+	},
 	getStorageValue(): string | null {
 		return localStorage.getItem(this.LOCAL_STORAGE_KEY);
 	},
@@ -15,11 +18,10 @@ const themeUtils = Object.freeze({
 	getTheme(): ColorTheme {
 		const storagePreference = this.getStorageValue();
 		if (!storagePreference) {
-			// return this.getSystemPreference();
-			return 'dark';
+			return this.getSystemPreference();
 		}
 
-		if (storagePreference !== 'dark' && storagePreference !== 'light') return 'dark';
+		if (storagePreference !== 'dark' && storagePreference !== 'light') return 'light';
 		return storagePreference;
 	},
 
@@ -89,15 +91,21 @@ export class ThemeToggle extends HTMLElement {
 			this.#shadowRoot = shadowRoot;
 		}
 
-		this.$button?.addEventListener('click', this.toggleTheme.bind(this));
+		this.$button?.addEventListener('click', this.#handle_click);
 	}
 	connectedCallback(): void {
 		this.theme = themeUtils.getTheme();
+		this.dispatchEvent(new ChangeThemeEvent(this.theme));
 	}
 
 	toggleTheme(): void {
 		this.theme = this.theme === 'dark' ? 'light' : 'dark';
 	}
+
+	#handle_click = () => {
+		this.toggleTheme();
+		this.dispatchEvent(new ChangeThemeEvent(this.theme));
+	};
 }
 
 customElements.define('e-theme-toggle', ThemeToggle);
@@ -105,5 +113,11 @@ customElements.define('e-theme-toggle', ThemeToggle);
 declare global {
 	interface HTMLElementTagNameMap {
 		'e-theme-toggle': ThemeToggle;
+	}
+}
+
+declare module 'vue' {
+	interface GlobalComponents {
+		'e-theme-toggle': DefineComponent<VueEventHandlers<Events>>;
 	}
 }
