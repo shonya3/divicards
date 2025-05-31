@@ -1,19 +1,27 @@
 import { html, css, LitElement, TemplateResult, CSSResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
-import { emit } from '../utils.js';
+import { Events, LoginClickEvent, LogoutClickEvent } from './events.js';
+import { DefineComponent } from 'vue';
+import { VueEventHandlers } from '../../event-utils.js';
+
+export type PoeAuthProps = {
+	auth: AuthState;
+};
+
+export type AuthState = { loggedIn: true; username: string } | { loggedIn: false };
 
 @customElement('e-poe-auth')
 export class PoeAuthElement extends LitElement {
 	static override styles: Array<CSSResult> = [styles()];
-	@property({ reflect: true }) name: string = '';
-	@property({ type: Boolean, reflect: true }) loggedIn: boolean = false;
+
+	@property({ type: Object }) auth: AuthState = { loggedIn: false };
 
 	protected override render(): TemplateResult {
 		return html`<div class="poe-auth">
-			${this.loggedIn
+			${this.auth.loggedIn
 				? html`<div class="logged-in">
-						<p>${this.name}</p>
+						<p>${this.auth.username}</p>
 						<sl-button @click=${this.#emitLogout}>Logout</sl-button>
 				  </div>`
 				: html`<div>
@@ -23,11 +31,12 @@ export class PoeAuthElement extends LitElement {
 	}
 
 	#emitLogin() {
-		emit(this, 'login');
+		this.dispatchEvent(new LoginClickEvent());
 	}
 
 	#emitLogout() {
-		emit(this, 'logout');
+		console.log('logout click');
+		this.dispatchEvent(new LogoutClickEvent());
 	}
 }
 
@@ -45,5 +54,11 @@ function styles() {
 declare global {
 	interface HTMLElementTagNameMap {
 		'e-poe-auth': PoeAuthElement;
+	}
+}
+
+declare module 'vue' {
+	interface GlobalComponents {
+		'e-poe-auth': DefineComponent<PoeAuthProps & VueEventHandlers<Events>>;
 	}
 }

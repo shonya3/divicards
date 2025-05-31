@@ -8,20 +8,9 @@ import 'poe-custom-elements/item-card.js';
 import { type Column, DivinationCardRecord, type Order } from '@divicards/shared/types.js';
 import { styles } from './e-sample-table.styles.js';
 import './e-order-triangle';
-import { emit } from '../../../utils.js';
-
-declare global {
-	interface HTMLElementTagNameMap {
-		'e-sample-table': SampleTableElement;
-	}
-}
+import { ChangeColumnOrder, ChangeMinPrice } from './events.js';
 
 const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
-
-export interface Events {
-	'min-price-changed': number;
-	'column-order-changed': { column: Column; order: Order };
-}
 
 @customElement('e-sample-table')
 export class SampleTableElement extends LitElement {
@@ -232,10 +221,8 @@ export class SampleTableElement extends LitElement {
 	}
 
 	#onNameQueryInput(e: InputEvent) {
-		const target = e.composedPath()[0];
-		if (target instanceof HTMLInputElement) {
-			this.nameQuery = target.value;
-		}
+		const target = e.target as HTMLInputElement;
+		this.nameQuery = target.value;
 	}
 
 	#onHideZeroCheckbox() {
@@ -243,18 +230,19 @@ export class SampleTableElement extends LitElement {
 	}
 
 	#onMinPriceSlider(e: InputEvent) {
-		const target = e.composedPath()[0];
-		if (target instanceof HTMLInputElement) {
-			this.minPrice = Number(target.value);
-			emit<Events['min-price-changed']>(this, 'min-price-changed', this.minPrice);
-		}
+		const target = e.target as HTMLInputElement;
+		this.minPrice = Number(target.value);
+		this.dispatchEvent(new ChangeMinPrice(this.minPrice));
 	}
 
 	#onOrderTriangleClicked(newActiveColumn: Column) {
 		this.toggleOrder(newActiveColumn);
-		emit<Events['column-order-changed']>(this, 'column-order-changed', {
-			column: this.column,
-			order: this.order,
-		});
+		this.dispatchEvent(new ChangeColumnOrder(this.column, this.order));
+	}
+}
+
+declare global {
+	interface HTMLElementTagNameMap {
+		'e-sample-table': SampleTableElement;
 	}
 }

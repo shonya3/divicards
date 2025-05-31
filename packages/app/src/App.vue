@@ -22,6 +22,8 @@ import { SampleCardElement } from '@divicards/wc/e-sample-card/e-sample-card.js'
 
 import '@divicards/wc/e-sample-card/e-sample-card.js';
 import '@divicards/wc/stashes/e-stashes-view.js';
+import '@divicards/wc/e-poe-auth/e-poe-auth.js';
+
 import { SubmitExportSampleEvent } from '@divicards/wc/e-sample-card/events.js';
 import { ExtractCardsEvent, StashtabFetchedEvent } from '@divicards/wc/stashes/events.js';
 
@@ -138,7 +140,9 @@ const handle_extract_cards = async (e: ExtractCardsEvent) => {
 	>
 		<header class="header">
 			<e-drop-files-message></e-drop-files-message>
-			<sl-button v-if="!stashVisible" @click="openStashWindow()">Load from stash</sl-button>
+			<sl-button v-if="!stashVisible || !authStore.loggedIn" @click="openStashWindow()"
+				>Load from stash</sl-button
+			>
 			<div class="header__right">
 				<e-google-auth
 					v-if="googleAuthStore.loggedIn"
@@ -150,10 +154,12 @@ const handle_extract_cards = async (e: ExtractCardsEvent) => {
 				></e-google-auth>
 				<e-poe-auth
 					v-if="authStore.loggedIn"
-					@login="authStore.login"
-					@logout="authStore.logout"
-					:name="authStore.name"
-					:loggedIn="authStore.loggedIn"
+					@poe-auth__login="authStore.login"
+					@poe-auth__logout="authStore.logout"
+					:auth="{
+						loggedIn: authStore.loggedIn,
+						username: authStore.name,
+					}"
 				></e-poe-auth>
 				<sl-button
 					variant="success"
