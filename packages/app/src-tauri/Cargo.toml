@@ -36,7 +36,7 @@ serde_json.workspace = true
 
 axum = { version = "0.8", features = [] }
 oauth2 = "5"
-keyring = "3"
+keyring = "2"
 open = "5"
 async-trait = "0.1.77"
 url = "2.5.0"

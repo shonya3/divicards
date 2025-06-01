@@ -37,7 +37,7 @@ impl Persist for AccessTokenStorage {
     }
 
     fn delete(&self) -> Result<(), keyring::Error> {
-        self.0.delete_credential()
+        self.0.delete_password()
     }
 }
 
