@@ -16,15 +16,16 @@ path = "lib/src/lib.rs"
 crate-type = ["lib", "staticlib", "cdylib"]
 
 [build-dependencies]
-tauri-build = { version = "2.0.0-beta", features = [] }
+tauri-build = { version = "2", features = [] }
 
 [dependencies]
 divi = {path = "../../../divi"}
 googlesheets = {path = "../../../googlesheets"}
 
-tauri = { version = "2.0.0-beta", features = [] }
-tauri-plugin-updater = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v2" }
-tauri-plugin-process = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v2" }
+tauri = { version = "2.5.0", features = [] }
+[target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
+tauri-plugin-updater = "2"
+tauri-plugin-process = "2"
 
 tokio = {version = "1", features = ["full"] }
 tracing.workspace = true

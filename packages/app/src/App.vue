@@ -19,6 +19,7 @@ import GeneralTabWithItems from './components/GeneralTabWithItems.vue';
 import { useTauriUpdater } from './composables/useTauriUpdater';
 import { TabWithItems } from 'poe-custom-elements/types.js';
 import { SampleCardElement } from '@divicards/wc/e-sample-card/e-sample-card.js';
+import { webviewWindow } from '@tauri-apps/api';
 
 import '@divicards/wc/e-theme-toggle/e-theme-toggle.js';
 import '@divicards/wc/e-sample-card/e-sample-card.js';
@@ -112,6 +113,7 @@ const handle_extract_cards = async (e: ExtractCardsEvent) => {
 
 const handle_change_theme = (e: ChangeThemeEvent) => {
 	console.log(`Theme changed: ${e.$theme}`);
+	webviewWindow.WebviewWindow.getCurrent().setTheme(e.$theme);
 };
 </script>
 

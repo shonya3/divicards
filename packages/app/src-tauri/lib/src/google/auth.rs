@@ -7,8 +7,7 @@ use oauth2::{
 };
 use serde::{Deserialize, Serialize};
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
-use tauri::Manager;
-use tauri::{command, State, Window};
+use tauri::{command, Emitter, State, Window};
 use tokio::{net::TcpListener, sync::mpsc};
 use tracing::debug;
 

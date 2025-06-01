@@ -28,8 +28,8 @@ const app = createApp(App);
 app.use(pinia);
 app.mount('#app');
 
-window.addEventListener('unhandledrejection', event => handleError(event.reason));
-app.config.errorHandler = handleError;
-addRustListener('toast', e => {
-	toast(e.payload.variant, e.payload.message);
-});
+// window.addEventListener('unhandledrejection', event => handleError(event.reason));
+// app.config.errorHandler = handleError;
+// addRustListener('toast', e => {
+// 	toast(e.payload.variant, e.payload.message);
+// });
