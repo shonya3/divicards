@@ -112,7 +112,6 @@ const handle_extract_cards = async (e: ExtractCardsEvent) => {
 };
 
 const handle_change_theme = (e: ChangeThemeEvent) => {
-	console.log(`Theme changed: ${e.$theme}`);
 	webviewWindow.WebviewWindow.getCurrent().setTheme(e.$theme);
 };
 </script>
