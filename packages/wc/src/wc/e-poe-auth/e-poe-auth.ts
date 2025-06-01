@@ -7,9 +7,15 @@ import { VueEventHandlers } from '../../event-utils.js';
 
 export type PoeAuthProps = {
 	auth: AuthState;
+
+	/**
+	 * The button's size.
+	 */
+	size?: ButtonSize;
 };
 
 export type AuthState = { loggedIn: true; username: string } | { loggedIn: false };
+export type ButtonSize = 'small' | 'medium' | 'large';
 
 @customElement('e-poe-auth')
 export class PoeAuthElement extends LitElement {
@@ -17,17 +23,33 @@ export class PoeAuthElement extends LitElement {
 
 	@property({ type: Object }) auth: AuthState = { loggedIn: false };
 
+	/** The button's size. */
+	@property()
+	size: ButtonSize = 'small';
+
 	protected override render(): TemplateResult {
 		return html`<div class="poe-auth">
 			${this.auth.loggedIn
 				? html`<div class="logged-in">
-						<p>${this.auth.username}</p>
-						<sl-button @click=${this.#emitLogout}>Logout</sl-button>
+						<p>${this.name_without_hash}</p>
+						<sl-button .size=${this.size} @click=${this.#emitLogout}>Logout</sl-button>
 				  </div>`
 				: html`<div>
-						<sl-button @click=${this.#emitLogin}>Login</sl-button>
+						<sl-button .size=${this.size} @click=${this.#emitLogin}>Login</sl-button>
 				  </div>`}
 		</div>`;
+	}
+
+	/** Get the name without the hash part. */
+	get name_without_hash(): string | null {
+		if (!this.auth.loggedIn) return null;
+
+		const name = this.auth.username;
+
+		const hash_index = name.indexOf('#');
+		if (hash_index === -1) return name;
+
+		return name.slice(0, hash_index);
 	}
 
 	#emitLogin() {
