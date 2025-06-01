@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/web-components';
+import { Meta } from '@storybook/web-components-vite';
 import { SampleCardElement } from './e-sample-card.js';
 import './e-sample-card';
 import { league, filename, selected, uuid, minimumCardPrice, sample } from './data.js';

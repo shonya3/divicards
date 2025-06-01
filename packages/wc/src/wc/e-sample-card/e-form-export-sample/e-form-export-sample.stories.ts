@@ -1,7 +1,7 @@
 import { html, TemplateResult } from 'lit';
 import { FormExportSampleElement } from './e-form-export-sample.js';
 import './e-form-export-sample';
-import { Meta } from '@storybook/web-components';
+import { Meta } from '@storybook/web-components-vite';
 
 const meta: Meta<FormExportSampleElement> = {
 	title: 'Elements/e-sample-card/e-form-export-sample',

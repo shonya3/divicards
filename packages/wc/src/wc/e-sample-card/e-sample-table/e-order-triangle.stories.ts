@@ -1,5 +1,5 @@
 import { OrderTriangleElement, Size } from './e-order-triangle.js';
-import { Meta } from '@storybook/web-components';
+import { Meta } from '@storybook/web-components-vite';
 import { html, TemplateResult } from 'lit';
 import { Order } from '@divicards/shared/types.js';
 import './e-order-triangle';

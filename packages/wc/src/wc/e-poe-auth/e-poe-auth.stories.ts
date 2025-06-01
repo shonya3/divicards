@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/web-components';
+import { Meta } from '@storybook/web-components-vite';
 import { AuthState, PoeAuthElement } from './e-poe-auth.js';
 import { html, TemplateResult } from 'lit';
 import './e-poe-auth';

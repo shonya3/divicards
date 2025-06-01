@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/web-components';
+import { Meta } from '@storybook/web-components-vite';
 import { LeagueSelectElement } from './e-league-select.js';
 import './e-league-select';
 import { html, TemplateResult } from 'lit';

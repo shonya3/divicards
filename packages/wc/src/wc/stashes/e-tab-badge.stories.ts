@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/web-components';
+import { Meta } from '@storybook/web-components-vite';
 import { TabBadgeElement } from './e-tab-badge.js';
 import './e-tab-badge';
 import { html, TemplateResult } from 'lit';

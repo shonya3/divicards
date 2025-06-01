@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/web-components';
+import { Meta } from '@storybook/web-components-vite';
 import { html, TemplateResult } from 'lit';
 import { NotCardsElement } from './e-not-cards.js';
 import './e-not-cards';

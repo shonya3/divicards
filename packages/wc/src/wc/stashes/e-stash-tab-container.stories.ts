@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/web-components';
+import { Meta } from '@storybook/web-components-vite';
 import './e-stash-tab-container';
 import { html, TemplateResult } from 'lit';
 import { StashTabContainerElement } from './e-stash-tab-container.js';

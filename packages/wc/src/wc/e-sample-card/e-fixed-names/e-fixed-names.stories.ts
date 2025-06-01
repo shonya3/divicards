@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/web-components';
+import { Meta } from '@storybook/web-components-vite';
 import { FixedNamesElement } from './e-fixed-names.js';
 import './e-fixed-names';
 import { html, TemplateResult } from 'lit';

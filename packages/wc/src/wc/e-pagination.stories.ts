@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/web-components';
+import { Meta } from '@storybook/web-components-vite';
 import { PaginationElement } from './e-pagination.js';
 import './e-pagination';
 import { html, TemplateResult } from 'lit';

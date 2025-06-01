@@ -1,6 +1,6 @@
 import { html, TemplateResult } from 'lit';
 import { DropFilesMessageElement } from './e-drop-files-message.js';
-import { Meta } from '@storybook/web-components';
+import { Meta } from '@storybook/web-components-vite';
 import './e-drop-files-message';
 
 const meta: Meta<DropFilesMessageElement> = {

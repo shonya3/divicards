@@ -1,5 +1,5 @@
 import { html, TemplateResult } from 'lit';
-import { Meta } from '@storybook/web-components';
+import { Meta } from '@storybook/web-components-vite';
 import { BasePopupElement } from './e-base-popup.js';
 import './e-base-popup';
 import { cards } from './e-sample-card/e-sample-table/data.js';
