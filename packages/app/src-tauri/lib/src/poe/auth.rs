@@ -19,13 +19,10 @@ pub async fn poe_auth(version: State<'_, AppVersion>, window: Window) -> Result<
     let redirect_uri =
         RedirectUrl::new(format!("http://localhost:{}/callback", addr.port())).unwrap();
 
-    let client = BasicClient::new(
-        ClientId::new(CLIENT_ID.into()),
-        None,
-        AuthUrl::new(AUTH_URL.into()).unwrap(),
-        TokenUrl::new(TOKEN_URL.into()).ok(),
-    )
-    .set_redirect_uri(redirect_uri.clone());
+    let client = BasicClient::new(ClientId::new(CLIENT_ID.to_owned()))
+        .set_auth_uri(AuthUrl::new(AUTH_URL.to_owned()).unwrap())
+        .set_token_uri(TokenUrl::new(TOKEN_URL.to_owned()).unwrap())
+        .set_redirect_uri(redirect_uri.clone());
 
     let (pkce_challenge, pkce_verifier) = PkceCodeChallenge::new_random_sha256();
 
