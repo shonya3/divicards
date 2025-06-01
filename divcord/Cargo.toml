@@ -13,8 +13,8 @@ dotenv = "0.15.0"
 googlesheets = {path = "../googlesheets"}
 divi = {path = "../divi"}
 reqwest = { workspace = true }
-strum_macros = "0.25.3"
-strum = "0.25.0"
+strum_macros = "0.27"
+strum = "0.27"
 poe_data = {path = "../poe_data"}
 fs_cache_fetcher = {path = "../fs_cache_fetcher", optional = true}
 slug = "0.1.5"
