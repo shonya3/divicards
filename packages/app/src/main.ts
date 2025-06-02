@@ -19,7 +19,6 @@ SlButton.define('sl-button');
 SlIcon.define('sl-icon');
 
 import '@divicards/wc/e-google-auth';
-import '@divicards/wc/e-drop-files-message';
 import '@divicards/wc/e-base-popup';
 
 const pinia = createPinia();
@@ -28,8 +27,8 @@ const app = createApp(App);
 app.use(pinia);
 app.mount('#app');
 
-// window.addEventListener('unhandledrejection', event => handleError(event.reason));
-// app.config.errorHandler = handleError;
-// addRustListener('toast', e => {
-// 	toast(e.payload.variant, e.payload.message);
-// });
+window.addEventListener('unhandledrejection', event => handleError(event.reason));
+app.config.errorHandler = handleError;
+addRustListener('toast', e => {
+	toast(e.payload.variant, e.payload.message);
+});

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, Ref, shallowRef } from 'vue';
+import { computed, ref, Ref, shallowRef } from 'vue';
 import { StashLoader } from './StashLoader';
 import { command } from './command';
 import { toast } from './toast';
@@ -25,6 +25,8 @@ import '@divicards/wc/e-theme-toggle/e-theme-toggle.js';
 import '@divicards/wc/e-sample-card/e-sample-card.js';
 import '@divicards/wc/stashes/e-stashes-view.js';
 import '@divicards/wc/e-poe-auth/e-poe-auth.js';
+import '@divicards/wc/e-drop-files-message.js';
+import '@divicards/wc/e-import-file-tip.js';
 
 import { SubmitExportSampleEvent } from '@divicards/wc/e-sample-card/events.js';
 import { ExtractCardsEvent, StashtabFetchedEvent } from '@divicards/wc/stashes/events.js';
@@ -35,6 +37,7 @@ const sampleStore = useSampleStore();
 const authStore = useAuthStore();
 const googleAuthStore = useGoogleAuthStore();
 const stashVisible = ref(false);
+const shouldShowImportActions = computed(() => !stashVisible.value || !authStore.loggedIn);
 const { releaseUrl, tag } = useAppVersion();
 const { update, installAndRelaunch } = useTauriUpdater();
 const stashLoader = new StashLoader();
@@ -114,42 +117,59 @@ const handle_extract_cards = async (e: ExtractCardsEvent) => {
 const handle_change_theme = (e: ChangeThemeEvent) => {
 	webviewWindow.WebviewWindow.getCurrent().setTheme(e.$theme);
 };
+
+// --Dragzone handlers
+const isDragging = ref(false);
+const handleDropZoneDragEnter = (event: DragEvent) => {
+	event.preventDefault();
+	// Only activate if files are being dragged
+	if (event.dataTransfer && Array.from(event.dataTransfer.types).includes('Files')) {
+		dropZoneRef.value?.classList.add('drop-zone--active');
+		isDragging.value = true;
+	}
+};
+
+const handleDropZoneDragOver = (event: DragEvent) => {
+	event.preventDefault(); // Necessary to allow dropping
+};
+
+const handleDropZoneDragLeave = (event: DragEvent) => {
+	event.preventDefault();
+	const dropZoneEl = dropZoneRef.value;
+	// Check if the mouse is truly leaving the dropZoneEl, not just moving to a child.
+	if (dropZoneEl && (event.relatedTarget === null || !dropZoneEl.contains(event.relatedTarget as Node))) {
+		dropZoneEl.classList.remove('drop-zone--active');
+		isDragging.value = false;
+	}
+};
+
+const handleDropZoneDrop = (event: DragEvent) => {
+	event.preventDefault();
+	dropZoneRef.value?.classList.remove('drop-zone--active');
+	isDragging.value = false;
+	sampleStore.addFromDragAndDrop(event);
+};
 </script>
 
 <template>
 	<div
 		ref="dropZoneRef"
-		@drop.prevent="
-			(e: DragEvent) => {
-				sampleStore.addFromDragAndDrop(e);
-				dropZoneRef?.classList.remove('drop-zone--active');
-			}
-		"
-		@dragenter="
-			(e: DragEvent) => {
-				e.preventDefault();
-				dropZoneRef?.classList.add('drop-zone--active');
-			}
-		"
-		@dragover="
-			(e: DragEvent) => {
-				e.preventDefault();
-				dropZoneRef?.classList.add('drop-zone--active');
-			}
-		"
-		@dragleave="
-			(e: DragEvent) => {
-				e.preventDefault();
-				dropZoneRef?.classList.remove('drop-zone--active');
-			}
-		"
+		@drop.prevent="handleDropZoneDrop"
+		@dragenter.prevent="handleDropZoneDragEnter"
+		@dragover.prevent="handleDropZoneDragOver"
+		@dragleave.prevent="handleDropZoneDragLeave"
 		class="drop-zone"
 	>
-		<header class="header">
+		<div v-if="isDragging" class="drop-overlay-message">
 			<e-drop-files-message></e-drop-files-message>
-			<sl-button v-if="!stashVisible || !authStore.loggedIn" @click="openStashWindow()"
-				>Load from stash</sl-button
-			>
+		</div>
+		<header class="header">
+			<div class="import-actions">
+				<sl-button variant="primary" v-if="shouldShowImportActions" @click="openStashWindow()"
+					>Load from Stash</sl-button
+				>
+				<e-import-file-tip v-if="!isDragging && shouldShowImportActions"></e-import-file-tip>
+			</div>
 			<div class="header__right">
 				<e-google-auth
 					v-if="googleAuthStore.loggedIn"
@@ -177,6 +197,7 @@ const handle_change_theme = (e: ChangeThemeEvent) => {
 				<e-theme-toggle @theme-toggle__change:theme="handle_change_theme"></e-theme-toggle>
 			</div>
 		</header>
+
 		<e-base-popup v-if="update" ref="changelogPopupRef">
 			<UpdateChangelog @update-clicked="installAndRelaunch" :version="update.version" />
 		</e-base-popup>
@@ -261,6 +282,25 @@ const handle_change_theme = (e: ChangeThemeEvent) => {
 </template>
 
 <style scoped>
+.import-actions {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+}
+
+.drop-overlay-message {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 10; /* Ensure it's above other content but below popups/modals */
+	pointer-events: none; /* Allows drag events to pass through to the drop-zone itself */
+}
+
 .header {
 	display: flex;
 	justify-content: space-between;

@@ -9,20 +9,10 @@ declare global {
 }
 
 /**
- * @summary Message to drop files for main app screen
+ * Message to drop files for main app screen when dragging
  */
 @customElement('e-drop-files-message')
 export class DropFilesMessageElement extends LitElement {
-	protected override render(): TemplateResult {
-		return html`<div style="display: flex; gap: 1rem">
-			<div class="drop">Drop files <span>Here!</span></div>
-			<e-help-tip>
-				<p>Excel, .csv or just .txt</p>
-				<p>Required headers: name and amount</p>
-				<img src="/simple.png" alt="Example of simple .txt file"
-			/></e-help-tip>
-		</div>`;
-	}
 	static override styles: CSSResult = css`
 		:host {
 			display: block;
@@ -36,4 +26,10 @@ export class DropFilesMessageElement extends LitElement {
 			font-weight: 700;
 		}
 	`;
+
+	protected override render(): TemplateResult {
+		return html`<div style="display: flex; gap: 1rem">
+			<div class="drop">Drop files <span>Here!</span></div>
+		</div>`;
+	}
 }
