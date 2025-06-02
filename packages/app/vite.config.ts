@@ -13,11 +13,7 @@ export default defineConfig({
 			template: {
 				compilerOptions: {
 					isCustomElement(tag: string) {
-						if (!tag.includes('-')) {
-							return false;
-						}
-
-						return tag.startsWith('e-') || tag.startsWith('sl-');
+						return tag.includes('-');
 					},
 				},
 			},
@@ -25,6 +21,10 @@ export default defineConfig({
 		VueDevTools(),
 		viteStaticCopy({
 			targets: [
+				{
+					src: 'node_modules/@shoelace-style/shoelace/dist/assets/icons/question-circle.svg',
+					dest: 'assets/icons',
+				},
 				{
 					src: 'node_modules/@shoelace-style/shoelace/dist/assets/icons/info-circle.svg',
 					dest: 'assets/icons',

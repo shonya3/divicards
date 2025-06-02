@@ -45,6 +45,7 @@
 	},
 	"dependencies": {
 		"@divicards/shared": "workspace:^",
+		"@floating-ui/dom": "^1.7.0",
 		"@lit/task": "^1",
 		"@shoelace-style/shoelace": "^2",
 		"@web/dev-server-esbuild": "^1.0.2",
