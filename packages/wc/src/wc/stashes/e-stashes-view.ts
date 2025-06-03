@@ -13,7 +13,7 @@ import '@shoelace-style/shoelace/dist/components/radio-button/radio-button.js';
 import '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js';
 import '@shoelace-style/shoelace/dist/components/spinner/spinner.js';
 import { isStashTabError } from '@divicards/shared/error.js';
-import { ErrorLabel } from './types.js';
+import type { ErrorLabel, SelectedStashtabs } from './types.js';
 import { styles } from './e-stashes-view.styles.js';
 import './e-stash-tab-container';
 import { Task } from '@lit/task';
@@ -53,7 +53,7 @@ export class StashesViewElement extends LitElement {
 	@property() downloadAs: DownloadAs = 'divination-cards-sample';
 	@property({ type: Boolean }) multiselect = false;
 
-	@state() selected_tabs: Map<NoItemsTab['id'], { id: NoItemsTab['id']; name: NoItemsTab['name'] }> = new Map();
+	@state() selected_tabs: SelectedStashtabs = new Map();
 	/** PoE /stashes data about all stashtabs in stash (does not include items) */
 	@state() stashtabs_badges: NoItemsTab[] = [];
 	@state() noStashesMessage: string = '';

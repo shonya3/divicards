@@ -8,7 +8,7 @@ import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
 import '../e-pagination';
 import '../e-help-tip';
-import { ErrorLabel } from './types.js';
+import type { ErrorLabel, SelectedStashtabs } from './types.js';
 import { classMap } from 'lit/directives/class-map.js';
 import SlCheckbox from '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
 import { NoItemsTab } from 'poe-custom-elements/types.js';
@@ -49,10 +49,7 @@ export class TabBadgeGroupElement extends LitElement {
 	@property({ type: Number, reflect: true }) page = 1;
 	/** Query for searching stashtab by name */
 	@property() stashtab_name_query = '';
-	@property({ type: Object }) selected_tabs: Map<
-		NoItemsTab['id'],
-		{ id: NoItemsTab['id']; name: NoItemsTab['name'] }
-	> = new Map();
+	@property({ type: Object }) selected_tabs: SelectedStashtabs = new Map();
 
 	@state() hideRemoveOnly = false;
 
