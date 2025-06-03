@@ -271,6 +271,11 @@ const handleDropZoneDrop = (event: DragEvent) => {
 							sampleStore.replaceFileCard(e.$league, fileCard);
 						}
 					"
+					@sample__change:filename="
+						e => {
+							fileCard.filename = e.$filename;
+						}
+					"
 					@sample__submit-export-sample="export_sample"
 				></e-sample-card>
 			</div>

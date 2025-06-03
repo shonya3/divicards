@@ -9,7 +9,8 @@ export type Events = [
 	typeof DeleteThisSampleEvent,
 	typeof LeagueChangeEvent,
 	typeof SaveToFileClickEvent,
-	typeof GoogleSheetsClickEvent
+	typeof GoogleSheetsClickEvent,
+	typeof FilenameChangeEvent
 ];
 
 declare global {
@@ -122,5 +123,17 @@ export class SubmitExportSampleEvent extends PresubmitExportFormEvent {
 		this.$sample = sample;
 		this.$league = league;
 		this.$filename = filename;
+	}
+}
+
+declare global {
+	interface HTMLElementEventMap {
+		'sample__change:filename': FilenameChangeEvent;
+	}
+}
+export class FilenameChangeEvent extends Event {
+	static readonly tag = 'sample__change:filename';
+	constructor(public readonly $filename: string) {
+		super(FilenameChangeEvent.tag);
 	}
 }

@@ -59,7 +59,7 @@ export class LeagueSelectElement extends LitElement {
 
 		return html`<div class="league-select">
 			<sl-select
-				.helpText=${`Choose league`}
+				.label=${`Choose league(for currency calc)`}
 				size="small"
 				.value=${SlConverter.toSlValue(this.league)}
 				@sl-change="${this.#emitLeagueChange}"
@@ -74,7 +74,7 @@ export class LeagueSelectElement extends LitElement {
 						@sl-input=${this.#onPrivateLeagueInput}
 						id="custom-league-input"
 						type="text"
-						.helpText=${`Private league`}
+						.label=${`Private league`}
 						size="small"
 				  ></sl-input>`
 				: nothing}

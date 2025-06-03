@@ -19,6 +19,7 @@ import '@shoelace-style/shoelace/dist/components/range/range.js';
 import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 import SlRange from '@shoelace-style/shoelace/dist/components/range/range.js';
+import '@shoelace-style/shoelace/dist/components/input/input.js';
 import './e-sample-table/e-sample-table';
 import '../e-base-popup';
 import { SampleTableElement } from './e-sample-table/e-sample-table.js';
@@ -34,6 +35,7 @@ import {
 	SelectedChangeEvent,
 	DeleteThisSampleEvent,
 	MinimumCardsPriceChangeEvent,
+	FilenameChangeEvent,
 	Events,
 } from './events.js';
 import { VueEventHandlers } from '../../event-utils.js';
@@ -99,7 +101,13 @@ export class SampleCardElement extends LitElement {
 				></e-form-export-sample>
 			</e-base-popup>
 
-			<p class="filename">${this.filename}</p>
+			<sl-input
+				size="small"
+				class="filename-input"
+				value=${this.filename}
+				@sl-change=${this.#handle_filename_change}
+				.label=${`Edit filename`}
+			></sl-input>
 
 			<sl-icon-button
 				@click=${this.#emit_delete_this_sample}
@@ -254,6 +262,12 @@ export class SampleCardElement extends LitElement {
 		}
 		this.minimum_card_price = Number(e.target.value);
 		this.dispatchEvent(new MinimumCardsPriceChangeEvent(this.minimum_card_price));
+	}
+
+	#handle_filename_change(e: Event): void {
+		const newFilename = (e.target as HTMLInputElement).value;
+		this.filename = newFilename;
+		this.dispatchEvent(new FilenameChangeEvent(newFilename));
 	}
 }
 
