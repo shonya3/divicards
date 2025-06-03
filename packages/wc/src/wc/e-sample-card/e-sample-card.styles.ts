@@ -17,7 +17,8 @@ export const styles: CSSResult = css`
 		justify-content: space-between;
 		gap: 1rem;
 		width: fit-content;
-		box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+		box-shadow: 0 2px 8px color-mix(in srgb, var(--sl-color-neutral-1000, black) 6%, transparent),
+			0 4px 12px color-mix(in srgb, var(--sl-color-neutral-1000, black) 8%, transparent);
 
 		/* max-height: 320px; */
 		width: 250px;
@@ -26,7 +27,8 @@ export const styles: CSSResult = css`
 		border: 1px solid black;
 		border-color: var(--border-color);
 		border-radius: var(--border-radius);
-		background-color: var(--sl-color-gray-100);
+		background-color: var(--sl-color-neutral-0);
+		padding: 2rem;
 		transition: 0.2s border-color;
 	}
 
