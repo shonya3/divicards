@@ -59,7 +59,7 @@ export class LeagueSelectElement extends LitElement {
 
 		return html`<div class="league-select">
 			<sl-select
-				.label=${`Choose league(for currency calc)`}
+				.label=${`Choose league`}
 				size="small"
 				.value=${SlConverter.toSlValue(this.league)}
 				@sl-change="${this.#emitLeagueChange}"
@@ -104,7 +104,7 @@ export class LeagueSelectElement extends LitElement {
 			gap: 0.2rem;
 		}
 		.private-league-input {
-			width: 10ch;
+			width: 12ch;
 		}
 	`;
 }
