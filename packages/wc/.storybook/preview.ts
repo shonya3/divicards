@@ -1,10 +1,11 @@
 import { withThemeToggle } from './withThemeToggle';
 import type { Preview } from '@storybook/web-components-vite';
+import './styles.css';
 import '@shoelace-style/shoelace/dist/themes/dark.css';
 import '@shoelace-style/shoelace/dist/themes/light.css';
-import './styles.css';
 
 const preview: Preview = {
+	decorators: [withThemeToggle],
 	parameters: {
 		actions: { argTypesRegex: '^on[A-Z].*' },
 		controls: {
@@ -34,5 +35,3 @@ export const globalTypes = {
 		},
 	},
 };
-
-export const decorators = [withThemeToggle];

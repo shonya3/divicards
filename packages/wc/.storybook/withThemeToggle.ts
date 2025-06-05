@@ -1,16 +1,18 @@
 import { StoryContext, StoryFn } from '@storybook/web-components-vite';
 
+function setShoelaceTheme(container: HTMLElement, theme: 'dark' | 'light'): void {
+	if (theme === 'dark') {
+		container.classList.add('sl-theme-dark');
+	} else {
+		container.classList.remove('sl-theme-dark');
+	}
+}
+
 /** theme toggle Story decorator */
-export const withThemeToggle = (story: StoryFn, context: StoryContext) => {
+export function withThemeToggle(story: StoryFn, context: StoryContext): ReturnType<StoryFn> {
 	const theme = context.globals.theme || 'light';
 
-	if (theme === 'dark') {
-		document.body.classList.add('sl-theme-dark');
-		document.documentElement.setAttribute('data-theme', 'dark');
-	} else {
-		document.body.classList.remove('sl-theme-dark');
-		document.documentElement.setAttribute('data-theme', 'light');
-	}
+	setShoelaceTheme(document.body, theme);
 
 	return story(context.args, context);
-};
+}
