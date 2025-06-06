@@ -23,11 +23,11 @@ export class SampleTableElement extends LitElement {
 
 	@state() _cards: DivinationCardRecord[] = [];
 	@state() nameQuery = '';
-	@state() hideZeroSum = true;
+	@state() hideZeroAmount = true;
 	@state() filteredRecords: DivinationCardRecord[] = [];
 	@state() summary: { amount: number; sum: number } = Object.create({});
 
-	@query('sl-checkbox#hide-zero-sum-checkbox') checkboxHideZeroSum!: HTMLInputElement;
+	@query('sl-checkbox#hide-zero-amount-checkbox') checkboxhideZeroAmount!: HTMLInputElement;
 
 	override willUpdate(map: PropertyValues<this>): void {
 		if (map.has('cards')) {
@@ -40,13 +40,13 @@ export class SampleTableElement extends LitElement {
 			map.has('minPrice') ||
 			map.has('nameQuery') ||
 			map.has('order') ||
-			map.has('hideZeroSum')
+			map.has('hideZeroAmount')
 		) {
 			this._cards = toOrderedBy(this._cards, this.column, this.order);
 
-			this.filteredRecords = this._cards.filter(({ name, price, sum }) => {
-				if (this.hideZeroSum) {
-					if (sum === 0 || sum === null) return false;
+			this.filteredRecords = this._cards.filter(({ name, price, amount }) => {
+				if (this.hideZeroAmount) {
+					if (!amount) return false;
 				}
 
 				return (
@@ -92,10 +92,10 @@ export class SampleTableElement extends LitElement {
 				</label>
 				<div style="display: flex; gap: 0.8rem">
 					<sl-checkbox
-						id="hide-zero-sum-checkbox"
-						.checked=${this.hideZeroSum}
+						id="hide-zero-amount-checkbox"
+						.checked=${this.hideZeroAmount}
 						@sl-change=${this.#onHideZeroCheckbox}
-						>hide nullish rows</sl-checkbox
+						>Hide zero amount cards</sl-checkbox
 					>
 				</div>
 			</header>
@@ -226,7 +226,7 @@ export class SampleTableElement extends LitElement {
 	}
 
 	#onHideZeroCheckbox() {
-		this.hideZeroSum = this.checkboxHideZeroSum.checked;
+		this.hideZeroAmount = this.checkboxhideZeroAmount.checked;
 	}
 
 	#onMinPriceSlider(e: InputEvent) {
