@@ -1,4 +1,4 @@
-import { html, nothing, LitElement, CSSResult, TemplateResult } from 'lit';
+import { html, LitElement, CSSResult, TemplateResult } from 'lit';
 import { DefineComponent } from 'vue';
 import { LeagueSelectElement } from '../e-league-select.js';
 import '../e-league-select';
@@ -19,6 +19,7 @@ import '@shoelace-style/shoelace/dist/components/range/range.js';
 import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 import SlRange from '@shoelace-style/shoelace/dist/components/range/range.js';
+import '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import './e-sample-table/e-sample-table';
 import '../e-base-popup';
@@ -63,7 +64,7 @@ export class SampleCardElement extends LitElement {
 	@property({ type: Object }) sample: DivinationCardsSample = { notCards: [], fixedNames: [], cards: [] };
 
 	@query('e-base-popup#table-popup') tablePopup!: BasePopupElement;
-	@query('input#selected-checkbox') selectedCheckbox!: HTMLInputElement;
+	@query('#selected-checkbox') selectedCheckbox!: HTMLInputElement;
 	@query('e-league-select') leagueSelect!: LeagueSelectElement;
 	@query('#minimum-card-price-slider') priceSlider!: HTMLInputElement;
 	@query('e-sample-table') table!: SampleTableElement;
@@ -118,10 +119,10 @@ export class SampleCardElement extends LitElement {
 			<div class="minor-icons">
 				${this.sample.fixedNames.length > 0
 					? html`<e-fixed-names .fixedNames=${this.sample.fixedNames}></e-fixed-names>`
-					: nothing}
+					: null}
 				${this.sample.notCards.length > 0
 					? html`<e-not-cards .notCards=${this.sample.notCards}></e-not-cards>`
-					: nothing}
+					: null}
 			</div>
 			<svg
 				class="grid-icon"
@@ -158,24 +159,24 @@ export class SampleCardElement extends LitElement {
 				@change:league=${this.#handle_league_change}
 			></e-league-select>
 			<div class="export-buttons">
-				<sl-button size="large" @click=${this.#emit_save_to_file_click}>
+				<sl-button @click=${this.#emit_save_to_file_click}>
 					<sl-icon style="font-size:1.6rem" name="filetype-csv"></sl-icon>
 					Save to file</sl-button
 				>
-				<sl-button @click=${this.#emit_google_sheets_click} size="large">
+				<sl-button @click=${this.#emit_google_sheets_click}>
 					<sl-icon style="font-size:1.6rem" name="file-earmark-spreadsheet"></sl-icon>
 					Export to Google Sheets</sl-button
 				>
 			</div>
 			${this.selected === null
-				? nothing
-				: html`<input
-						class="checkbox"
-						type="checkbox"
-						.checked=${this.selected}
-						id="selected-checkbox"
-						@change=${this.#change_selected_and_emit}
-				  />`}
+				? null
+				: html`
+						<sl-checkbox
+							id="selected-checkbox"
+							.checked=${this.selected}
+							@sl-change=${this.#change_selected_and_emit}
+						></sl-checkbox>
+				  `}
 			<e-base-popup id="table-popup">
 				<e-sample-table .cards=${this.sample.cards}> </e-sample-table>
 			</e-base-popup>

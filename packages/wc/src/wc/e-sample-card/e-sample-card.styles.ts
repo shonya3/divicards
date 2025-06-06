@@ -84,28 +84,35 @@ export const styles: CSSResult = css`
 		cursor: pointer;
 	}
 
-	sl-icon {
-		color: var(--sl-color-green-600);
-	}
-
 	.export-buttons {
 		margin-top: 2rem;
 		display: flex;
 		flex-direction: column;
+		gap: 0.2rem;
+
+		& sl-icon {
+			color: var(--sl-color-green-600);
+			font-size: 1.25rem !important;
+		}
 	}
 
-	.checkbox {
-		background-color: red;
-		transform: scale(2);
-		accent-color: var(--sl-color-green-600);
-		cursor: pointer;
-
+	#selected-checkbox {
 		position: absolute;
 		bottom: 0;
 		right: 0;
 		width: 10px;
 		height: 10px;
-		transform: translate(50%, 50%) scale(2);
+
+		&::part(control--checked),
+		&::part(control--indeterminate) {
+			background-color: var(--sl-color-green-600);
+			border-color: var(--sl-color-green-600);
+		}
+
+		&::part(checked-icon),
+		&::part(indeterminate-icon) {
+			color: white;
+		}
 	}
 
 	.export-to-google-docs {
