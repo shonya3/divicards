@@ -99,12 +99,12 @@ function styles() {
 			margin: auto;
 			border: none;
 			border-radius: 10px;
-			animation: content-fade-in 300ms forwards ease-out;
+			animation: content-fade-in 100ms forwards;
 		}
 
 		dialog::backdrop {
 			filter: blur(0px);
-			animation: backdrop-fade-in 300ms forwards ease-out;
+			animation: backdrop-fade-in 100ms forwards;
 			max-width: 100%;
 			backdrop-filter: blur(100px);
 		}
