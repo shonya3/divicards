@@ -2,6 +2,10 @@
 
 Desktop Application for Path of Exile divination cards
 
+## Demo
+
+![Application Demo Workflow](assets/demo.gif)
+
 ### Features
 
 -   Pulling your stash contents from GGG's API to create a list of divination cards you have in your tabs. You can select which tabs you want to export and can select several at once. This uses OAuth and does not rely on poesessid, login credentials, or any other information that could harm the user;
