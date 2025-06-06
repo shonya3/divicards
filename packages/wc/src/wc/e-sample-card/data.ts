@@ -4,7 +4,7 @@ import { DivinationCardsSample } from '@divicards/shared/types.js';
 
 export const props: Props = json as Props;
 
-export const league: "Settlers" | "Standard" | "Hardcore Settlers" | "Hardcore" | undefined = props.league;
+export const league: "Mercenaries" | "Standard" | "Hardcore Mercenaries" | "Hardcore" | undefined = props.league;
 export const filename: string = props.filename;
 export const selected: SampleCardElement['selected'] = props.selected;
 export const uuid : string = props.uuid;
