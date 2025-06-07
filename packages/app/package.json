@@ -5,7 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
-		"build": "vue-tsc --noEmit && vite build",
+		"build": "pnpm --filter @divicards/shared build && pnpm --filter @divicards/wc build && vue-tsc --noEmit && vite build",
 		"check": "vue-tsc --noEmit",
 		"preview": "vite preview",
 		"tauri": "tauri"
