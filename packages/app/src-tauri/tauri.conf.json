@@ -32,8 +32,7 @@
 				"resizable": true,
 				"title": "Divicards",
 				"width": 1400,
-				"dragDropEnabled": false,
-				"theme": "Dark"
+				"dragDropEnabled": false
 			}
 		]
 	}
