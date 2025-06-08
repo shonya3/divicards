@@ -33,9 +33,11 @@ function styles() {
 		:host {
 			display: inline-block;
 		}
+
 		.icon-trigger {
 			color: var(--sl-color-sky-700);
 			font-size: 1.25rem;
+			display: flex;
 		}
 
 		.tooltip-box {
