@@ -60,3 +60,13 @@ type KebabToCamelCase<S extends string> = S extends `${infer First}-${infer Rest
  * type T = KebabToPascalCase<'hello-world'>;  // 'HelloWorld'
  */
 type KebabToPascalCase<S extends string> = Capitalize<KebabToCamelCase<S>>;
+
+/**
+ * Converts tuple of event constructors to HTMLElementEventMap-compatible interface
+ * @example
+ * type MyEventMap = EventMapFrom<[typeof MyEvent]>;
+ * // { 'my-event': MyEvent }
+ */
+export type EventMapFrom<T extends readonly (new (...args: any) => Event)[]> = {
+	[K in T[number] as K extends { tag: infer Tag extends string } ? Tag : never]: InstanceType<K>;
+};

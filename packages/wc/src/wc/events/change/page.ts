@@ -6,9 +6,7 @@ declare global {
 
 export class PageChangeEvent extends Event {
 	static readonly tag = 'change:page';
-	readonly page: number;
-	constructor(page: number, options?: EventInit) {
+	constructor(readonly page: number, options?: EventInit) {
 		super(PageChangeEvent.tag, options);
-		this.page = page;
 	}
 }

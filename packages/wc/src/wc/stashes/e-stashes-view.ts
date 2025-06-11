@@ -30,9 +30,9 @@ import {
 	Events,
 } from './events.js';
 import { MultiselectChangeEvent } from './e-tab-badge-group.js';
-import { TabClickEvent } from './e-tab-badge.js';
 import { DefineComponent } from 'vue';
 import { VueEventHandlers } from '../../event-utils.js';
+import { TabClickEvent } from './e-tab-badge/e-tab-badge.js';
 
 const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
@@ -242,7 +242,7 @@ export class StashesViewElement extends LitElement {
 		this.dispatchEvent(new SelectedTabsChangeEvent(this.selected_tabs));
 	}
 	#handle_tab_badge_click(e: TabClickEvent): void {
-		this.opened_tab = e.tab;
+		this.opened_tab = e.$tab;
 	}
 	#change_multiselect(e: MultiselectChangeEvent): void {
 		this.multiselect = e.multiselect;

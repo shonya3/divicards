@@ -1,8 +1,9 @@
 import { html, css, LitElement, CSSResult, TemplateResult } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import { REMOVE_ONLY } from './e-tab-badge-group.js';
+import { REMOVE_ONLY } from '../e-tab-badge-group.js';
 import type { NoItemsTab } from 'poe-custom-elements/types.js';
+import { EventMapFrom } from '../../../event-utils.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -10,10 +11,11 @@ declare global {
 	}
 }
 
-export type Events = {
-	[TabSelectEvent.tag]: TabSelectEvent;
-	[TabClickEvent.tag]: TabClickEvent;
-};
+export type Events = [typeof TabSelectEvent, typeof TabClickEvent];
+
+declare global {
+	interface HTMLElementEventMap extends EventMapFrom<Events> {}
+}
 
 @customElement('e-tab-badge')
 export class TabBadgeElement extends LitElement {
@@ -176,29 +178,16 @@ export class TabBadgeElement extends LitElement {
 	`;
 }
 
-declare global {
-	interface HTMLElementEventMap {
-		'stashes__tab-select': TabSelectEvent;
-		'stashes__tab-click': TabClickEvent;
-	}
-}
-
 export class TabSelectEvent extends Event {
 	static readonly tag = 'stashes__tab-select';
-	tab: NoItemsTab;
-	selected: boolean;
-	constructor(tab: NoItemsTab, selected: boolean, options?: EventInit) {
+	constructor(readonly tab: NoItemsTab, readonly selected: boolean, options?: EventInit) {
 		super(TabSelectEvent.tag, options);
-		this.tab = tab;
-		this.selected = selected;
 	}
 }
 
 export class TabClickEvent extends Event {
 	static readonly tag = 'stashes__tab-click';
-	tab: NoItemsTab;
-	constructor(tab: NoItemsTab, options?: EventInit) {
+	constructor(public readonly $tab: NoItemsTab, options?: EventInit) {
 		super(TabClickEvent.tag, options);
-		this.tab = tab;
 	}
 }

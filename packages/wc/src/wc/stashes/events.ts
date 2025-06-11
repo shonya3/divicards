@@ -1,6 +1,11 @@
 import { League, DivinationCardsSample } from '@divicards/shared/types.js';
 import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
-import { TabClickEvent } from './e-tab-badge.js';
+import { EventMapFrom } from '../../event-utils.js';
+import { TabClickEvent } from './e-tab-badge/e-tab-badge.js';
+
+declare global {
+	interface HTMLElementEventMap extends EventMapFrom<Events> {}
+}
 
 export type Events = [
 	typeof CloseEvent,
@@ -12,11 +17,6 @@ export type Events = [
 	typeof TabClickEvent
 ];
 
-declare global {
-	interface HTMLElementEventMap {
-		stashes__close: CloseEvent;
-	}
-}
 export class CloseEvent extends Event {
 	static readonly tag = 'stashes__close';
 	constructor(options?: EventInit) {
@@ -24,11 +24,6 @@ export class CloseEvent extends Event {
 	}
 }
 
-declare global {
-	interface HTMLElementEventMap {
-		'stashes__stashtabs-badges-fetched': StashtabsBadgesFetchedEvent;
-	}
-}
 export class StashtabsBadgesFetchedEvent extends Event {
 	static readonly tag = 'stashes__stashtabs-badges-fetched';
 	readonly stashtabs_badges: Array<NoItemsTab>;
@@ -38,11 +33,6 @@ export class StashtabsBadgesFetchedEvent extends Event {
 	}
 }
 
-declare global {
-	interface HTMLElementEventMap {
-		'stashes__extract-cards': ExtractCardsEvent;
-	}
-}
 export class ExtractCardsEvent extends Event {
 	static readonly tag = 'stashes__extract-cards';
 	readonly $tab: TabWithItems;
@@ -54,11 +44,6 @@ export class ExtractCardsEvent extends Event {
 	}
 }
 
-declare global {
-	interface HTMLElementEventMap {
-		'stashes__sample-from-stashtab': SampleFromStashtabEvent;
-	}
-}
 export class SampleFromStashtabEvent extends Event {
 	static readonly tag = 'stashes__sample-from-stashtab';
 	readonly $stashtab_name: string;
@@ -83,11 +68,6 @@ export class SampleFromStashtabEvent extends Event {
 	}
 }
 
-declare global {
-	interface HTMLElementEventMap {
-		'stashes__stashtab-fetched': StashtabFetchedEvent;
-	}
-}
 export class StashtabFetchedEvent extends Event {
 	static readonly tag = 'stashes__stashtab-fetched';
 	readonly $stashtab: TabWithItems;
@@ -97,12 +77,6 @@ export class StashtabFetchedEvent extends Event {
 		super(StashtabFetchedEvent.tag, options);
 		this.$stashtab = stashtab;
 		this.$league = league;
-	}
-}
-
-declare global {
-	interface HTMLElementEventMap {
-		'change:selected_tabs': SelectedTabsChangeEvent;
 	}
 }
 

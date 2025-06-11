@@ -1,10 +1,11 @@
-export type Events = [typeof LoginClickEvent, typeof LogoutClickEvent];
+import { EventMapFrom } from '../../event-utils.js';
 
 declare global {
-	interface HTMLElementEventMap {
-		'poe-auth__login': LoginClickEvent;
-	}
+	interface HTMLElementEventMap extends EventMapFrom<Events> {}
 }
+
+export type Events = [typeof LoginClickEvent, typeof LogoutClickEvent];
+
 export class LoginClickEvent extends Event {
 	static readonly tag = 'poe-auth__login';
 
@@ -13,11 +14,6 @@ export class LoginClickEvent extends Event {
 	}
 }
 
-declare global {
-	interface HTMLElementEventMap {
-		'poe-auth__logout': LogoutClickEvent;
-	}
-}
 export class LogoutClickEvent extends Event {
 	static readonly tag = 'poe-auth__logout';
 

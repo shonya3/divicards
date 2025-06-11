@@ -1,12 +1,12 @@
+import { EventMapFrom } from '../../event-utils.js';
 import { ColorTheme } from './e-theme-toggle.js';
+
+declare global {
+	interface HTMLElementEventMap extends EventMapFrom<Events> {}
+}
 
 export type Events = [typeof ChangeThemeEvent];
 
-declare global {
-	interface HTMLElementEventMap {
-		'theme-toggle__change:theme': ChangeThemeEvent;
-	}
-}
 export class ChangeThemeEvent extends Event {
 	static readonly tag = 'theme-toggle__change:theme';
 

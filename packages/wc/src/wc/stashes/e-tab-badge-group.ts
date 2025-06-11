@@ -15,7 +15,7 @@ import { NoItemsTab } from 'poe-custom-elements/types.js';
 import { PageChangeEvent } from '../events/change/page.js';
 import { PerPageChangeEvent } from '../events/change/per_page.js';
 import { SelectedTabsChangeEvent } from './events.js';
-import { TabClickEvent, TabSelectEvent } from './e-tab-badge.js';
+import { TabClickEvent, TabSelectEvent } from './e-tab-badge/e-tab-badge.js';
 
 declare global {
 	interface HTMLElementTagNameMap {

@@ -1,6 +1,11 @@
 import { DivinationCardsSample, League } from '@divicards/shared/types.js';
 import { PresubmitExportFormEvent, ExportFormArgs } from './e-form-export-sample/e-form-export-sample.js';
 import { LeagueChangeEvent } from '../events/change/league.js';
+import { EventMapFrom } from '../../event-utils.js';
+
+declare global {
+	interface HTMLElementEventMap extends EventMapFrom<Events> {}
+}
 
 export type Events = [
 	typeof SubmitExportSampleEvent,
@@ -13,11 +18,6 @@ export type Events = [
 	typeof FilenameChangeEvent
 ];
 
-declare global {
-	interface HTMLElementEventMap {
-		sample__delete: DeleteThisSampleEvent;
-	}
-}
 export class DeleteThisSampleEvent extends Event {
 	static readonly tag = 'sample__delete';
 	readonly $uuid: string;
@@ -27,11 +27,6 @@ export class DeleteThisSampleEvent extends Event {
 	}
 }
 
-declare global {
-	interface HTMLElementEventMap {
-		'sample__change:selected': SelectedChangeEvent;
-	}
-}
 export class SelectedChangeEvent extends Event {
 	static readonly tag = 'sample__change:selected';
 	readonly $selected: boolean | null;
@@ -41,11 +36,6 @@ export class SelectedChangeEvent extends Event {
 	}
 }
 
-declare global {
-	interface HTMLElementEventMap {
-		'sample__change:minimum_card_price': MinimumCardsPriceChangeEvent;
-	}
-}
 export class MinimumCardsPriceChangeEvent extends Event {
 	static readonly tag = 'sample__change:minimum_card_price';
 	readonly $minimum_card_price: number;
@@ -56,11 +46,6 @@ export class MinimumCardsPriceChangeEvent extends Event {
 	}
 }
 
-declare global {
-	interface HTMLElementEventMap {
-		'sample__google-sheets-click': GoogleSheetsClickEvent;
-	}
-}
 export class GoogleSheetsClickEvent extends Event {
 	static readonly tag = 'sample__google-sheets-click';
 	readonly $sample: DivinationCardsSample;
@@ -73,11 +58,6 @@ export class GoogleSheetsClickEvent extends Event {
 	}
 }
 
-declare global {
-	interface HTMLElementEventMap {
-		'sample__save-to-file-click': SaveToFileClickEvent;
-	}
-}
 export class SaveToFileClickEvent extends Event {
 	static readonly tag = 'sample__save-to-file-click';
 	readonly $sample: DivinationCardsSample;
@@ -99,11 +79,6 @@ export class SaveToFileClickEvent extends Event {
 	}
 }
 
-declare global {
-	interface HTMLElementEventMap {
-		'sample__submit-export-sample': SubmitExportSampleEvent;
-	}
-}
 export class SubmitExportSampleEvent extends PresubmitExportFormEvent {
 	static readonly tag = 'sample__submit-export-sample';
 	readonly $sample: DivinationCardsSample;
@@ -126,11 +101,6 @@ export class SubmitExportSampleEvent extends PresubmitExportFormEvent {
 	}
 }
 
-declare global {
-	interface HTMLElementEventMap {
-		'sample__change:filename': FilenameChangeEvent;
-	}
-}
 export class FilenameChangeEvent extends Event {
 	static readonly tag = 'sample__change:filename';
 	constructor(public readonly $filename: string) {

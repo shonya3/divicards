@@ -1,6 +1,6 @@
 import { html, css, LitElement, CSSResult, TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import './e-tab-badge';
+import './e-tab-badge/e-tab-badge';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 import { ErrorLabel } from './types.js';
 
