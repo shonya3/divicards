@@ -116,7 +116,7 @@ export class FormExportSampleElement extends LitElement {
 					<legend>Table Preferences</legend>
 					<fieldset id="fieldset-hide-nullish">
 						<legend>Cards must have the amount</legend>
-						<div>
+						<div class="input-wrapper">
 							<label for="input-title">Interested only in cards with amount</label>
 							<input
 								id="input-title"
@@ -128,7 +128,7 @@ export class FormExportSampleElement extends LitElement {
 					</fieldset>
 					<fieldset id="fieldset-order">
 						<legend>Order</legend>
-						<div>
+						<div class="input-wrapper">
 							<label for="ordered-by">Ordered by</label>
 							<select
 								@input=${this.#onOrderedBySelected}
@@ -143,7 +143,7 @@ export class FormExportSampleElement extends LitElement {
 								<option value="price">sum</option>
 							</select>
 						</div>
-						<div>
+						<div class="input-wrapper">
 							<label for="asc">Smallest to Largest (A -> Z)</label>
 							<input
 								id="asc"
@@ -153,7 +153,7 @@ export class FormExportSampleElement extends LitElement {
 								@input=${this.#onOrderRadio}
 							/>
 						</div>
-						<div>
+						<div class="input-wrapper">
 							<label for="desc">Largest to Smallest (Z -> A)</label>
 							<input
 								id="desc"
@@ -167,7 +167,7 @@ export class FormExportSampleElement extends LitElement {
 
 					<fieldset id="fieldset-columns">
 						<legend>Columns</legend>
-						<div>
+						<div class="input-wrapper">
 							<div>
 								<label for="column-name">name</label>
 								<input
@@ -178,7 +178,7 @@ export class FormExportSampleElement extends LitElement {
 								/>
 							</div>
 
-							<div>
+							<div class="input-wrapper">
 								<label for="columnd-amount">amount</label>
 								<input
 									id="columnd-amount"
@@ -188,7 +188,7 @@ export class FormExportSampleElement extends LitElement {
 								/>
 							</div>
 
-							<div>
+							<div class="input-wrapper">
 								<label for="column-weight">weight</label>
 								<input
 									id="column-weight"
@@ -198,7 +198,7 @@ export class FormExportSampleElement extends LitElement {
 								/>
 							</div>
 
-							<div>
+							<div class="input-wrapper">
 								<label for="column-price">price</label>
 								<input
 									id="column-price"
@@ -208,7 +208,7 @@ export class FormExportSampleElement extends LitElement {
 								/>
 							</div>
 
-							<div>
+							<div class="input-wrapper">
 								<label for="column-sum">sum</label>
 								<input
 									id="column-sum"
@@ -222,7 +222,7 @@ export class FormExportSampleElement extends LitElement {
 
 					<fieldset id="fieldset-min-price">
 						<legend>Minimum chaos price</legend>
-						<div>
+						<div class="input-wrapper">
 							<label for="input-min-price">Ignore cheaper cards</label>
 							<input
 								id="input-min-price"
@@ -247,7 +247,7 @@ export class FormExportSampleElement extends LitElement {
 					<legend>Sheets Identificators</legend>
 					<fieldset id="fieldset-spreadsheetId">
 						<legend>Spreadsheet Id</legend>
-						<div>
+						<div class="input-wrapper">
 							<label for="input-spreadsheet-id">id</label>
 							<input
 								required
@@ -307,6 +307,12 @@ function styles() {
 		wc-help-tip::part(tooltip) {
 			left: -520px;
 			font-size: 0.7rem;
+		}
+
+		.input-wrapper {
+			display: flex;
+			align-items: center;
+			gap: 0.25rem;
 		}
 	`;
 }
