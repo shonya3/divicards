@@ -21,9 +21,7 @@ export class HelpTipElement extends LitElement {
 				<sl-icon name="question-circle"></sl-icon>
 			</div>
 			<e-simple-tooltip part="tooltip">
-				<div class="tooltip-box">
-					<slot></slot>
-				</div>
+				<slot></slot>
 			</e-simple-tooltip>`;
 	}
 }
@@ -38,26 +36,6 @@ function styles() {
 			color: var(--sl-color-sky-700);
 			font-size: 1.25rem;
 			display: flex;
-		}
-
-		.tooltip-box {
-			text-align: left;
-			background-color: var(--e-help-tip-bg, var(--bg-color, var(--sl-color-neutral-900)));
-			padding: 1rem;
-			min-width: 300px;
-			border-radius: 8px;
-			border: 1px solid
-				var(
-					--e-help-tip-border-color,
-					color-mix(in srgb, var(--color, var(--sl-color-neutral-0)) 20%, transparent)
-				);
-			box-shadow: var(
-				--e-help-tip-shadow,
-				0 2px 12px color-mix(in srgb, var(--color, var(--sl-color-neutral-0)) 10%, transparent)
-			);
-			color: var(--e-help-tip-text-color, var(--color, var(--sl-color-neutral-0)));
-			font-size: 1rem;
-			line-height: 1.4;
 		}
 	`;
 }

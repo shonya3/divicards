@@ -45,6 +45,26 @@ export class SimpleTooltip extends LitElement {
 		:host([showing]) {
 			opacity: 1;
 		}
+
+		.tooltip-box {
+			text-align: left;
+			background-color: var(--e-help-tip-bg, var(--bg-color, var(--sl-color-neutral-900)));
+			padding: 1rem;
+			min-width: 300px;
+			border-radius: 8px;
+			border: 1px solid
+				var(
+					--e-help-tip-border-color,
+					color-mix(in srgb, var(--color, var(--sl-color-neutral-0)) 20%, transparent)
+				);
+			box-shadow: var(
+				--e-help-tip-shadow,
+				0 2px 12px color-mix(in srgb, var(--color, var(--sl-color-neutral-0)) 10%, transparent)
+			);
+			color: var(--e-help-tip-text-color, var(--color, var(--sl-color-neutral-0)));
+			font-size: 1rem;
+			line-height: 1.4;
+		}
 	`;
 
 	// Attribute for styling "showing"
@@ -113,7 +133,7 @@ export class SimpleTooltip extends LitElement {
 	};
 
 	render(): TemplateResult {
-		return html`<slot></slot>`;
+		return html`<div class="tooltip-box"><slot></slot></div>`;
 	}
 }
 
