@@ -1,6 +1,6 @@
 import { html, css, nothing, LitElement, TemplateResult, CSSResult } from 'lit';
 import { property, state, query, customElement } from 'lit/decorators.js';
-import './e-tab-badge';
+import './e-tab-badge/e-tab-badge.js';
 import { type League, isPermanentLeague } from '@divicards/shared/types.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
