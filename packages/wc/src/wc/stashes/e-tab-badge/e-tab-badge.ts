@@ -1,7 +1,7 @@
 import { html, css, LitElement, CSSResult, TemplateResult } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import { REMOVE_ONLY } from '../e-tab-badge-group.js';
+import { REMOVE_ONLY } from '../e-tab-badge-group/e-tab-badge-group.js';
 import type { NoItemsTab } from 'poe-custom-elements/types.js';
 import { EventMapFrom } from '../../../event-utils.js';
 

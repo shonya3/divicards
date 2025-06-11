@@ -1,21 +1,22 @@
 import { html, css, nothing, LitElement, TemplateResult, CSSResult } from 'lit';
 import { property, state, query, customElement } from 'lit/decorators.js';
-import './e-tab-badge/e-tab-badge.js';
+import '../e-tab-badge/e-tab-badge.js';
 import { type League, isPermanentLeague } from '@divicards/shared/types.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
-import '../e-pagination';
-import '../e-help-tip';
-import type { ErrorLabel, SelectedStashtabs } from './types.js';
+import '../../e-pagination.js';
+import '../../e-help-tip.js';
+import type { ErrorLabel, SelectedStashtabs } from '../types.js';
 import { classMap } from 'lit/directives/class-map.js';
 import SlCheckbox from '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
 import { NoItemsTab } from 'poe-custom-elements/types.js';
-import { PageChangeEvent } from '../events/change/page.js';
-import { PerPageChangeEvent } from '../events/change/per_page.js';
-import { SelectedTabsChangeEvent } from './events.js';
-import { TabClickEvent, TabSelectEvent } from './e-tab-badge/e-tab-badge.js';
+import { PageChangeEvent } from '../../events/change/page.js';
+import { PerPageChangeEvent } from '../../events/change/per_page.js';
+import { SelectedTabsChangeEvent } from '../events.js';
+import { TabSelectEvent } from '../e-tab-badge/e-tab-badge.js';
+import { MultiselectChangeEvent } from './events.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -24,16 +25,6 @@ declare global {
 }
 
 export const REMOVE_ONLY = '(Remove-only)';
-
-export type Events = {
-	[PageChangeEvent.tag]: PageChangeEvent;
-	[PerPageChangeEvent.tag]: PerPageChangeEvent;
-	[SelectedTabsChangeEvent.tag]: SelectedTabsChangeEvent;
-	[MultiselectChangeEvent.tag]: MultiselectChangeEvent;
-
-	/** composed from e-tab-badge */
-	[TabClickEvent.tag]: TabClickEvent;
-};
 
 @customElement('e-tab-badge-group')
 export class TabBadgeGroupElement extends LitElement {
@@ -276,18 +267,4 @@ function paginate(stashes: NoItemsTab[], page: number, perPage: number) {
 
 function shouldUnlockHideRemoveOnly(league: League, stashes: NoItemsTab[]) {
 	return isPermanentLeague(league) && stashes.some(({ name }) => name.includes(REMOVE_ONLY));
-}
-
-declare global {
-	interface HTMLElementEventMap {
-		'change:multiselect': MultiselectChangeEvent;
-	}
-}
-export class MultiselectChangeEvent extends Event {
-	static readonly tag = 'change:multiselect';
-	readonly multiselect: boolean;
-	constructor(multiselect: boolean, options?: EventInit) {
-		super(MultiselectChangeEvent.tag, options);
-		this.multiselect = multiselect;
-	}
 }

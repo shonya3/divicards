@@ -2,7 +2,7 @@ import type { IStashLoader } from '@divicards/shared/IStashLoader.js';
 import { html, PropertyValues, nothing, LitElement, CSSResult, TemplateResult } from 'lit';
 import '../e-help-tip';
 import '../e-league-select';
-import './e-tab-badge-group';
+import './e-tab-badge-group/e-tab-badge-group.js';
 import './e-stash-tab-errors';
 import { property, state, query, customElement } from 'lit/decorators.js';
 import { type League } from '@divicards/shared/types.js';
@@ -29,10 +29,10 @@ import {
 	CloseEvent,
 	Events,
 } from './events.js';
-import { MultiselectChangeEvent } from './e-tab-badge-group.js';
 import { DefineComponent } from 'vue';
 import { VueEventHandlers } from '../../event-utils.js';
 import { TabClickEvent } from './e-tab-badge/e-tab-badge.js';
+import { MultiselectChangeEvent } from './e-tab-badge-group/events.js';
 
 const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
@@ -245,7 +245,7 @@ export class StashesViewElement extends LitElement {
 		this.opened_tab = e.$tab;
 	}
 	#change_multiselect(e: MultiselectChangeEvent): void {
-		this.multiselect = e.multiselect;
+		this.multiselect = e.$multiselect;
 	}
 	#emitExtractCards(e: Event) {
 		const tab = (e.target as StashTabContainerElement)?.tab;
