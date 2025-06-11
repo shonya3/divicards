@@ -8,9 +8,6 @@ export const styles: CSSResult = css`
 
 	.sample-card {
 		position: relative;
-		padding-inline: 1rem;
-		padding-top: 1.4rem;
-		padding-bottom: 0.4rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -22,14 +19,23 @@ export const styles: CSSResult = css`
 
 		/* max-height: 320px; */
 		width: 250px;
-		height: 530px;
+		height: 580px;
 
 		border: 1px solid black;
 		border-color: var(--border-color);
 		border-radius: var(--border-radius);
 		background-color: var(--sl-color-neutral-0);
 		padding: 2rem;
+		padding-top: 0.5rem;
 		transition: 0.2s border-color;
+	}
+
+	.card-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		margin-bottom: 1rem;
 	}
 
 	.sample-card--selected {
@@ -48,6 +54,8 @@ export const styles: CSSResult = css`
 		position: absolute;
 		top: 30%;
 		left: 20px;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.file-error {
@@ -75,10 +83,6 @@ export const styles: CSSResult = css`
 	}
 
 	.btn-delete {
-		position: absolute;
-		top: 0;
-		right: 0;
-		padding: 0.2rem;
 		border: none;
 		background-color: transparent;
 		cursor: pointer;
@@ -135,5 +139,21 @@ export const styles: CSSResult = css`
 		margin: 0;
 		width: 100px;
 		height: 100px;
+	}
+
+	.drag-handle-container {
+		cursor: grab;
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+		padding: 0.25rem;
+		border-radius: var(--sl-border-radius-medium);
+	}
+
+	.drag-handle-icon {
+		font-size: 1.5rem;
+	}
+	.drag-handle-text {
+		font-size: var(--sl-font-size-small);
 	}
 `;

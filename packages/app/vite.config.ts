@@ -22,6 +22,10 @@ export default defineConfig({
 		viteStaticCopy({
 			targets: [
 				{
+					src: 'node_modules/@shoelace-style/shoelace/dist/assets/icons/grip-vertical.svg',
+					dest: 'assets/icons',
+				},
+				{
 					src: 'node_modules/@shoelace-style/shoelace/dist/assets/icons/question-circle.svg',
 					dest: 'assets/icons',
 				},

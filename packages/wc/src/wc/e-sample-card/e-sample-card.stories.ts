@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/web-components-vite';
 import { SampleCardElement } from './e-sample-card.js';
 import './e-sample-card';
-import { league, filename, selected, uuid, minimumCardPrice, sample } from './data.js';
+import { league, filename, selected, uuid, minimumCardPrice, sample, csvDataForDrag } from './data.js';
 import { html, TemplateResult } from 'lit';
 
 const meta: Meta<SampleCardElement> = {
@@ -18,6 +18,7 @@ export const Default = {
 			uuid=${uuid}
 			minimum-card-price=${minimumCardPrice}
 			.sample=${sample}
+			.csvDataForDrag=${csvDataForDrag}
 		></e-sample-card>`;
 	},
 };

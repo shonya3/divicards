@@ -10,3 +10,4 @@ export const selected: SampleCardElement['selected'] = props.selected;
 export const uuid : string = props.uuid;
 export const minimumCardPrice: number = props.minimumCardPrice;
 export const sample: DivinationCardsSample = props.sample;
+export const csvDataForDrag: string = props.csvDataForDrag

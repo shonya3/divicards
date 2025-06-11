@@ -85,6 +85,7 @@ describe('<wc-sample-card>', () => {
 				notCards: [],
 				fixedNames: [],
 			},
+			csvDataForDrag: 'no data',
 		};
 
 		Object.assign(el, { ...newProps });

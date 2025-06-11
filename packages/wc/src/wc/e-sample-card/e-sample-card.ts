@@ -41,14 +41,15 @@ import {
 } from './events.js';
 import { VueEventHandlers } from '../../event-utils.js';
 
-export interface Props {
+export type Props = {
 	league?: TradeLeague;
 	filename: string;
 	selected: boolean | null;
 	uuid: string;
 	minimumCardPrice: number;
 	sample: DivinationCardsSample;
-}
+	csvDataForDrag: string;
+};
 
 const { format } = new Intl.NumberFormat('ru', { maximumFractionDigits: 0 });
 
@@ -61,6 +62,7 @@ export class SampleCardElement extends LitElement {
 	@property({ type: Boolean, reflect: true }) selected: boolean | null = false;
 	@property({ reflect: true }) uuid: string = 'NO ID';
 	@property({ type: Number, reflect: true, attribute: 'minimum-card-price' }) minimum_card_price: number = 0;
+	@property({ type: String, attribute: false }) csvDataForDrag = 'CSV DATA';
 	@property({ type: Object }) sample: DivinationCardsSample = { notCards: [], fixedNames: [], cards: [] };
 
 	@query('e-base-popup#table-popup') tablePopup!: BasePopupElement;
@@ -88,6 +90,32 @@ export class SampleCardElement extends LitElement {
 		});
 	}
 
+	#handleDragStart(event: DragEvent) {
+		if (!event.dataTransfer || !this.csvDataForDrag) {
+			// If no CSV data is provided, or dataTransfer is not available, do nothing.
+			// Optionally, you could prevent the drag or show a visual cue.
+			if (!this.csvDataForDrag) {
+				console.warn('Drag started, but no csvDataForDrag available for sample:', this.filename);
+				event.preventDefault(); // Stop the drag if no data
+			}
+			return;
+		}
+		const csvContent = this.csvDataForDrag;
+		let dragFilename = this.filename;
+		if (!dragFilename.toLowerCase().endsWith('.csv')) {
+			dragFilename = `${dragFilename}.csv`;
+		}
+
+		const dataUrl = `data:text/csv;charset=utf-8,${encodeURIComponent(csvContent)}`;
+		event.dataTransfer.setData('DownloadURL', `text/csv:${dragFilename}:${dataUrl}`);
+		event.dataTransfer.effectAllowed = 'copy';
+
+		// Set the drag image to be the entire card element.
+		// event.offsetX and event.offsetY position the drag image relative to the cursor.
+		// This makes the card appear as if grabbed from where the cursor is on the handle.
+		event.dataTransfer.setDragImage(this, event.offsetX, event.offsetY);
+	}
+
 	protected override render(): TemplateResult {
 		return html`<div
 			class=${classMap({
@@ -95,6 +123,14 @@ export class SampleCardElement extends LitElement {
 				'sample-card--selected': Boolean(this.selected),
 			})}
 		>
+			<div class="card-header">
+				<div class="drag-handle-container" draggable="true" @dragstart=${this.#handleDragStart}>
+					<sl-icon name="grip-vertical" class="drag-handle-icon" title="Drag to create file"></sl-icon>
+					<span class="drag-handle-text">Drag to export</span>
+				</div>
+				<sl-icon-button @click=${this.#emit_delete_this_sample} class="btn-delete" name="x-lg"></sl-icon-button>
+			</div>
+
 			<e-base-popup id="form_popup">
 				<e-form-export-sample
 					.export_sample_to=${this.export_sample_to}
@@ -110,12 +146,6 @@ export class SampleCardElement extends LitElement {
 				.label=${`Edit filename`}
 			></sl-input>
 
-			<sl-icon-button
-				@click=${this.#emit_delete_this_sample}
-				id="btn-delete"
-				class="btn-delete"
-				name="x-lg"
-			></sl-icon-button>
 			<div class="minor-icons">
 				${this.sample.fixedNames.length > 0
 					? html`<e-fixed-names .fixedNames=${this.sample.fixedNames}></e-fixed-names>`
@@ -184,7 +214,7 @@ export class SampleCardElement extends LitElement {
 	}
 
 	get filteredCards(): Array<DivinationCardRecord> {
-		return this.sample.cards.filter(card => {
+		return (this.sample?.cards ?? []).filter(card => {
 			return (card.price ?? 0) >= this.minimum_card_price;
 		});
 	}

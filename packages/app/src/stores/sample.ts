@@ -25,12 +25,38 @@ const prefixFilename = (name: string, league: League, sample: DivinationCardsSam
 	return `${league}-${sampleCardsAmount(sample)}${UNDERSCORE_GLUE}${name}`;
 };
 
+async function prepareCsvDataForDrag(sample: DivinationCardsSample): Promise<string> {
+	return await command('sample_into_csv', {
+		sample,
+		preferences: {
+			order: 'desc',
+			columns: ['name', 'amount'],
+			orderedBy: 'amount',
+			cardsMustHaveAmount: false,
+			minPrice: 0,
+		},
+	});
+}
+
 export const createSampleCard = async (
 	name: string,
 	sampleData: SampleData,
 	league: TradeLeague
 ): Promise<SampleCardProps> => {
 	const sample = await command('sample', { data: sampleData, league });
+	const csv = await prepareCsvDataForDrag(sample);
+
+	const props = {
+		uuid: crypto.randomUUID(),
+		filename: prefixFilename(name, league, sample),
+		league,
+		sample,
+		selected: false,
+		minimumCardPrice: 0,
+		csvDataForDrag: csv,
+	};
+
+	return props;
 
 	return {
 		uuid: crypto.randomUUID(),
@@ -39,14 +65,16 @@ export const createSampleCard = async (
 		sample,
 		selected: false,
 		minimumCardPrice: 0,
+		csvDataForDrag: csv,
 	};
 };
 
-export const createSampleCardFromSample = (
+export const createSampleCardFromSample = async (
 	name: string,
 	sample: DivinationCardsSample,
 	league: TradeLeague
-): SampleCardProps => {
+): Promise<SampleCardProps> => {
+	const csv = await prepareCsvDataForDrag(sample);
 	return {
 		uuid: crypto.randomUUID(),
 		filename: prefixFilename(name, league, sample),
@@ -54,6 +82,7 @@ export const createSampleCardFromSample = (
 		sample,
 		selected: false,
 		minimumCardPrice: 0,
+		csvDataForDrag: csv,
 	};
 };
 
@@ -99,7 +128,7 @@ export const useSampleStore = defineStore('sampleCards', {
 
 		async merge(samples: DivinationCardsSample[]): Promise<void> {
 			const sample = await command('merge', { samples });
-			const merged = createSampleCardFromSample('merged.csv', sample, ACTIVE_LEAGUE);
+			const merged = await createSampleCardFromSample('merged.csv', sample, ACTIVE_LEAGUE);
 
 			// No point to select merged file, `null` makes it nonselectable by removing checkbox
 			// maybe should refactor later
@@ -129,7 +158,11 @@ export const useSampleStore = defineStore('sampleCards', {
 		},
 
 		async addSample(name: string, sample: DivinationCardsSample, league: League): Promise<void> {
-			const sampleCard = createSampleCardFromSample(name, sample, isTradeLeague(league) ? league : ACTIVE_LEAGUE);
+			const sampleCard = await createSampleCardFromSample(
+				name,
+				sample,
+				isTradeLeague(league) ? league : ACTIVE_LEAGUE
+			);
 			this.sampleCards.push(sampleCard);
 		},
 
