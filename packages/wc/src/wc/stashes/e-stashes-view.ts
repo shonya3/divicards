@@ -292,7 +292,7 @@ export class StashesViewElement extends LitElement {
 					switch (this.downloadAs) {
 						case 'divination-cards-sample': {
 							const sample = await this.#loadSingleTabContent(id, league, this.stashLoader.sampleFromTab);
-							this.dispatchEvent(new SampleFromStashtabEvent({ stashtab_name, sample, league }));
+							this.dispatchEvent(new SampleFromStashtabEvent(stashtab_name, sample, league));
 							break;
 						}
 						case 'general-tab': {

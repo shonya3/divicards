@@ -20,62 +20,46 @@ export type Events = [
 
 export class DeleteThisSampleEvent extends Event {
 	static readonly tag = 'sample__delete';
-	readonly $uuid: string;
-	constructor(uuid: string, options?: EventInit) {
+
+	constructor(readonly $uuid: string, options?: EventInit) {
 		super(DeleteThisSampleEvent.tag, options);
-		this.$uuid = uuid;
 	}
 }
 
 export class SelectedChangeEvent extends Event {
 	static readonly tag = 'sample__change:selected';
-	readonly $selected: boolean | null;
-	constructor(selected: boolean | null, options?: EventInit) {
+
+	constructor(readonly $selected: boolean | null, options?: EventInit) {
 		super(SelectedChangeEvent.tag, options);
-		this.$selected = selected;
 	}
 }
 
 export class MinimumCardsPriceChangeEvent extends Event {
 	static readonly tag = 'sample__change:minimum_card_price';
-	readonly $minimum_card_price: number;
 
-	constructor(minimum_card_price: number, options?: EventInit) {
+	constructor(readonly $minimum_card_price: number, options?: EventInit) {
 		super(MinimumCardsPriceChangeEvent.tag, options);
-		this.$minimum_card_price = minimum_card_price;
 	}
 }
 
 export class GoogleSheetsClickEvent extends Event {
 	static readonly tag = 'sample__google-sheets-click';
-	readonly $sample: DivinationCardsSample;
-	readonly $league: League;
 
-	constructor(sample: DivinationCardsSample, league: League, options?: EventInit) {
+	constructor(readonly $sample: DivinationCardsSample, readonly $league: League, options?: EventInit) {
 		super(GoogleSheetsClickEvent.tag, options);
-		this.$sample = sample;
-		this.$league = league;
 	}
 }
 
 export class SaveToFileClickEvent extends Event {
 	static readonly tag = 'sample__save-to-file-click';
-	readonly $sample: DivinationCardsSample;
-	readonly $league: League;
-	readonly $filename: string;
 
 	constructor(
-		args: {
-			sample: DivinationCardsSample;
-			league: League;
-			filename: string;
-		},
+		readonly $sample: DivinationCardsSample,
+		readonly $league: League,
+		readonly $filename: string,
 		options?: EventInit
 	) {
 		super(SaveToFileClickEvent.tag, options);
-		this.$sample = args.sample;
-		this.$league = args.league;
-		this.$filename = args.filename;
 	}
 }
 
@@ -103,6 +87,7 @@ export class SubmitExportSampleEvent extends PresubmitExportFormEvent {
 
 export class FilenameChangeEvent extends Event {
 	static readonly tag = 'sample__change:filename';
+
 	constructor(public readonly $filename: string) {
 		super(FilenameChangeEvent.tag);
 	}

@@ -222,13 +222,7 @@ export class SampleCardElement extends LitElement {
 	}
 
 	#emit_save_to_file_click() {
-		this.dispatchEvent(
-			new SaveToFileClickEvent({
-				sample: this.sample,
-				league: this.league,
-				filename: this.filename,
-			})
-		);
+		this.dispatchEvent(new SaveToFileClickEvent(this.sample, this.league, this.filename));
 	}
 
 	#emit_google_sheets_click(): void {
