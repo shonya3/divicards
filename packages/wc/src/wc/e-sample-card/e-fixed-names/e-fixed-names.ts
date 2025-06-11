@@ -1,8 +1,7 @@
 import { html, css, LitElement, TemplateResult, CSSResult } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { FixedName } from '@divicards/shared/types.js';
-import { BasePopupElement } from '../../e-base-popup.js';
-import '../../e-base-popup';
+import '../../e-simple-tooltip.js';
 import './e-fixed-icon';
 
 declare global {
@@ -17,19 +16,9 @@ export class FixedNamesElement extends LitElement {
 	@property({ reflect: true, type: Number }) height = 24;
 	@property({ type: Array }) fixedNames: FixedName[] = [];
 
-	@query('e-base-popup') popup!: BasePopupElement;
-
-	#onIconClicked() {
-		this.popup.showModal();
-	}
-
 	protected override render(): TemplateResult {
-		return html`<e-fixed-icon
-				@click=${this.#onIconClicked}
-				width=${this.width}
-				height=${this.height}
-			></e-fixed-icon>
-			<e-base-popup>
+		return html`<e-fixed-icon width=${this.width} height=${this.height}></e-fixed-icon>
+			<e-simple-tooltip>
 				<div class="content">
 					<h2 class="heading">Automatically fixed typos</h2>
 					<ul class="fixed-names-list">
@@ -42,7 +31,7 @@ export class FixedNamesElement extends LitElement {
 						})}
 					</ul>
 				</div>
-			</e-base-popup> `;
+			</e-simple-tooltip> `;
 	}
 
 	protected arrowIcon(): TemplateResult {
@@ -58,7 +47,7 @@ export class FixedNamesElement extends LitElement {
 			}
 
 			.content {
-				padding: 2rem;
+				padding: 1rem;
 			}
 
 			.fixed-names-list {
