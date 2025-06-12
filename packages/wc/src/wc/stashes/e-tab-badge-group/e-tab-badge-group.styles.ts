@@ -17,15 +17,23 @@ export const styles: CSSResult = css`
 		align-items: center;
 		gap: 2rem;
 
+		& .header__left {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 1rem;
+			flex-grow: 1;
+
+			& sl-input {
+				width: 15ch;
+				margin-top: 18px;
+			}
+		}
+
 		.header__right {
-			margin-top: 12px;
 			display: flex;
 			align-items: center;
 			gap: 1rem;
-		}
-
-		> sl-input {
-			margin-top: 1rem;
 		}
 	}
 

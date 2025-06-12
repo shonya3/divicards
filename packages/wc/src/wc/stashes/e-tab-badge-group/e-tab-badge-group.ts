@@ -86,21 +86,23 @@ export class TabBadgeGroupElement extends LitElement {
 				${
 					this.shouldFilter
 						? html`<header class="header">
-								<sl-input
-									size="small"
-									type="text"
-									id="filter-stashes-by-name"
-									.value=${this.stashtab_name_query}
-									@input=${this.#change_query}
-									.helpText=${`Search tab by name`}
-								></sl-input>
-								<e-pagination
-									.n=${this.tabsTotal}
-									.page=${this.page}
-									.per_page=${this.perPage}
-									@change:page=${this.#handle_page_change}
-									@change:per_page=${this.#handle_per_page_change}
-								></e-pagination>
+								<div class="header__left">
+									<sl-input
+										size="small"
+										type="text"
+										id="filter-stashes-by-name"
+										.value=${this.stashtab_name_query}
+										@input=${this.#change_query}
+										.helpText=${`Search tab by name`}
+									></sl-input>
+									<e-pagination
+										.n=${this.tabsTotal}
+										.page=${this.page}
+										.per_page=${this.perPage}
+										@change:page=${this.#handle_page_change}
+										@change:per_page=${this.#handle_per_page_change}
+									></e-pagination>
+								</div>
 								<div class="header__right">
 									<sl-dropdown>
 										<sl-button slot="trigger" caret size="small">Options</sl-button>
