@@ -34,8 +34,8 @@ export const styles: CSSResult = css`
 
 	.top-right-corner {
 		display: flex;
-		gap: 2rem;
-		align-items: baseline;
+		gap: 1rem;
+		align-items: center;
 	}
 
 	.btn-load-items:not([disabled]) {
