@@ -5,12 +5,10 @@ import { type League, isPermanentLeague } from '@divicards/shared/types.js';
 import { ACTIVE_LEAGUE } from '@divicards/shared/lib.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
-import '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
 import '../../e-pagination/e-pagination.js';
 import '../../e-help-tip.js';
 import type { ErrorLabel, SelectedStashtabs } from '../types.js';
 import { classMap } from 'lit/directives/class-map.js';
-import SlCheckbox from '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
 import { NoItemsTab } from 'poe-custom-elements/types.js';
 import { PageChangeEvent } from '../../events/change/page.js';
 import { PerPageChangeEvent } from '../../events/change/per_page.js';
@@ -18,6 +16,10 @@ import { SelectedTabsChangeEvent } from '../events.js';
 import { MultiselectChangeEvent } from './events.js';
 import { styles } from './e-tab-badge-group.styles.js';
 import { TabSelectEvent } from '../e-tab-badge/events.js';
+import '@shoelace-style/shoelace/dist/components/dropdown/dropdown.js';
+import '@shoelace-style/shoelace/dist/components/menu/menu.js';
+import '@shoelace-style/shoelace/dist/components/menu-item/menu-item.js';
+import type SlMenuItem from '@shoelace-style/shoelace/dist/components/menu-item/menu-item.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -45,7 +47,6 @@ export class TabBadgeGroupElement extends LitElement {
 
 	@state() hideRemoveOnly = false;
 
-	@query('sl-checkbox#hide-remove-only') checkbox!: HTMLInputElement;
 	@query('sl-input#per-page') perPageInput!: HTMLInputElement;
 	@query('sl-input#page') pageInput!: HTMLInputElement;
 	@query('sl-input#filter-stashes-by-name') nameQueryInput!: HTMLInputElement;
@@ -101,24 +102,31 @@ export class TabBadgeGroupElement extends LitElement {
 									@change:per_page=${this.#handle_per_page_change}
 								></e-pagination>
 								<div class="header__right">
-									<div class="multiselect">
-										<sl-checkbox
-											@sl-change=${this.#change_multiselect_and_emit}
-											.checked=${this.multiselect}
-											>Multiselect</sl-checkbox
-										>
-										<e-help-tip>Select multiple tabs at once to download it in one go.</e-help-tip>
-									</div>
-									${this.withHideRemoveOnly
-										? html` <div class="hide-remove-only">
-												<sl-checkbox
-													id="hide-remove-only"
-													@sl-change=${this.#onHideRemoveOnlyChange}
-													.checked=${this.hideRemoveOnly}
-													>Hide remove-only</sl-checkbox
+									<sl-dropdown>
+										<sl-button slot="trigger" caret size="small">Options</sl-button>
+										<sl-menu @sl-select=${this.#handle_menu_item_select}>
+											<sl-menu-item
+												value="multiselect"
+												type="checkbox"
+												?checked=${this.multiselect}
+											>
+												Multiselect
+												<e-help-tip slot="suffix"
+													>Select multiple tabs at once to download it in one go.</e-help-tip
 												>
-										  </div>`
-										: nothing}
+											</sl-menu-item>
+											${this.withHideRemoveOnly
+												? html`
+														<sl-menu-item
+															value="hideRemoveOnly"
+															type="checkbox"
+															?checked=${this.hideRemoveOnly}
+															>Hide remove-only</sl-menu-item
+														>
+												  `
+												: nothing}
+										</sl-menu>
+									</sl-dropdown>
 								</div>
 						  </header>`
 						: nothing
@@ -143,9 +151,6 @@ export class TabBadgeGroupElement extends LitElement {
 			</div>`;
 	}
 
-	#onHideRemoveOnlyChange() {
-		this.hideRemoveOnly = this.checkbox.checked;
-	}
 	#handle_page_change({ page }: PageChangeEvent): void {
 		this.page = page;
 		this.dispatchEvent(new PageChangeEvent(page));
@@ -163,10 +168,18 @@ export class TabBadgeGroupElement extends LitElement {
 		this.selected_tabs = new Map(this.selected_tabs);
 		this.dispatchEvent(new SelectedTabsChangeEvent(this.selected_tabs));
 	}
-	#change_multiselect_and_emit(e: InputEvent): void {
-		this.multiselect = (e.target as SlCheckbox).checked;
-		this.dispatchEvent(new MultiselectChangeEvent(this.multiselect));
+
+	#handle_menu_item_select(e: CustomEvent): void {
+		const selectedItem = e.detail.item as SlMenuItem;
+
+		if (selectedItem.value === 'multiselect') {
+			this.multiselect = selectedItem.checked;
+			this.dispatchEvent(new MultiselectChangeEvent(this.multiselect));
+		} else if (selectedItem.value === 'hideRemoveOnly') {
+			this.hideRemoveOnly = selectedItem.checked;
+		}
 	}
+
 	decreasePage(): void {
 		if (this.page > 1) {
 			this.page--;

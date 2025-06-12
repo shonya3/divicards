@@ -29,20 +29,8 @@ export const styles: CSSResult = css`
 		}
 	}
 
-	.hide-remove-only {
-		display: flex;
-		align-items: center;
-		gap: 0.2rem;
-	}
-
 	.tabs-total__count {
 		color: var(--sl-color-amber-800);
-	}
-
-	.multiselect {
-		display: flex;
-		align-items: center;
-		gap: 4px;
 	}
 
 	.list {
