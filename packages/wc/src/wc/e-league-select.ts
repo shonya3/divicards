@@ -106,6 +106,28 @@ export class LeagueSelectElement extends LitElement {
 		.private-league-input {
 			width: 12ch;
 		}
+
+		sl-input::part(form-control) {
+			display: flex;
+			flex-direction: column;
+		}
+
+		sl-input::part(form-control-label) {
+			order: 2;
+			color: var(--sl-color-neutral-500);
+			font-size: 0.75rem;
+		}
+
+		sl-select::part(form-control) {
+			display: flex;
+			flex-direction: column;
+		}
+
+		sl-select::part(form-control-label) {
+			order: 2;
+			color: var(--sl-color-neutral-500);
+			font-size: 0.75rem;
+		}
 	`;
 }
 

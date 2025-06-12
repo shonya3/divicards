@@ -7,14 +7,12 @@ export const styles: CSSResult = css`
 		background-color: var(--sl-color-neutral-0);
 		box-shadow: 0 2px 8px color-mix(in srgb, var(--sl-color-neutral-1000, black) 6%, transparent),
 			0 4px 12px color-mix(in srgb, var(--sl-color-neutral-1000, black) 8%, transparent);
-		padding: 1rem;
 	}
 
 	.main-stashes-component {
 		position: relative;
-		padding: 1rem;
-		padding: 0.6rem;
 		border-radius: 0.25rem;
+		padding-inline: 1rem;
 	}
 
 	wc-help-tip::part(tooltip) {
@@ -23,7 +21,12 @@ export const styles: CSSResult = css`
 
 	.header {
 		display: flex;
+		align-items: center;
 		justify-content: space-between;
+
+		& e-league-select {
+			margin-top: 1rem;
+		}
 	}
 
 	.tips {
