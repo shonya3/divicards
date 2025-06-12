@@ -48,20 +48,20 @@ export class SimpleTooltip extends LitElement {
 
 		.tooltip-box {
 			text-align: left;
-			background-color: var(--e-help-tip-bg, var(--bg-color, var(--sl-color-neutral-900)));
+			background-color: var(--e-help-tip-bg, var(--bg-color, var(--sl-color-neutral-0)));
 			padding: 1rem;
 			min-width: 300px;
 			border-radius: 8px;
 			border: 1px solid
 				var(
 					--e-help-tip-border-color,
-					color-mix(in srgb, var(--color, var(--sl-color-neutral-0)) 20%, transparent)
+					color-mix(in srgb, var(--color, var(--sl-color-neutral-950)) 20%, transparent)
 				);
 			box-shadow: var(
 				--e-help-tip-shadow,
-				0 2px 12px color-mix(in srgb, var(--color, var(--sl-color-neutral-0)) 10%, transparent)
+				0 2px 12px color-mix(in srgb, var(--color, var(--sl-color-neutral-950)) 10%, transparent)
 			);
-			color: var(--e-help-tip-text-color, var(--color, var(--sl-color-neutral-0)));
+			color: var(--e-help-tip-text-color, var(--color, var(--sl-color-neutral-950)));
 			font-size: 1rem;
 			line-height: 1.4;
 		}

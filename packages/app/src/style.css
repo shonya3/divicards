@@ -1,30 +1,12 @@
-/* ==========================================================================
-   1. Global Reset
-   ========================================================================== */
 * {
 	margin: 0;
 	box-sizing: border-box;
 }
 
-/* ==========================================================================
-   2. Font Definitions
-   ========================================================================== */
-@font-face {
-	font-family: 'fontin';
-	font-weight: normal;
-	font-style: normal;
-	src: url('/fontin.woff') format('woff');
-}
-/* ==========================================================================
-   3. Root Styles & Default (Light) Theme Variables
-   ========================================================================== */
 :root {
-	--color: #242424;
-	--bg-color: rgba(255, 255, 255, 0.95);
+	color: var(--sl-color-neutral-950);
+	background-color: var(--sl-color-neutral-50);
 	--border-color: #646cff;
-
-	color: var(--color);
-	background-color: var(--bg-color);
 
 	font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
 	font-weight: 400;
@@ -36,18 +18,17 @@
 	-webkit-text-size-adjust: 100%;
 }
 
-/* ==========================================================================
-   4. Dark Theme Overrides
-   ========================================================================== */
 :root[data-theme='dark'] {
-	--color: rgba(255, 255, 255, 0.95);
-	--bg-color: #242424;
 	color-scheme: dark;
 }
 
-/* ==========================================================================
-   5. Element Styles
-   ========================================================================== */
+@font-face {
+	font-family: 'fontin';
+	font-weight: normal;
+	font-style: normal;
+	src: url('/fontin.woff') format('woff');
+}
+
 a {
 	font-weight: 500;
 	color: #646cff;
