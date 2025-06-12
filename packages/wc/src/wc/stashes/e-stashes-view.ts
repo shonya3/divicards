@@ -128,7 +128,11 @@ export class StashesViewElement extends LitElement {
 					: html`<div>
 							${this.fetchingStash
 								? html`<sl-button size="small"><sl-spinner></sl-spinner></sl-button>`
-								: html`<sl-button size="small" id="stashes-btn" @click=${this.#loadStash}
+								: html`<sl-button
+										variant="primary"
+										size="small"
+										id="stashes-btn"
+										@click=${this.#loadStash}
 										>Load Stash</sl-button
 								  >`}
 					  </div> `}
