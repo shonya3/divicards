@@ -2,7 +2,6 @@ import { css, CSSResult } from 'lit';
 
 export const styles: CSSResult = css`
 	:host {
-		--border-color: rgba(255, 255, 255, 0.3);
 		--border-radius: 0.25rem;
 	}
 
@@ -17,12 +16,9 @@ export const styles: CSSResult = css`
 		box-shadow: 0 2px 8px color-mix(in srgb, var(--sl-color-neutral-1000, black) 6%, transparent),
 			0 4px 12px color-mix(in srgb, var(--sl-color-neutral-1000, black) 8%, transparent);
 
-		/* max-height: 320px; */
 		width: 250px;
 		height: 580px;
 
-		border: 1px solid black;
-		border-color: var(--border-color);
 		border-radius: var(--border-radius);
 		background-color: var(--sl-color-neutral-0);
 		padding: 2rem;
