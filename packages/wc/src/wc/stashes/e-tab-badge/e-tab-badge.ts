@@ -1,53 +1,23 @@
-import { html, css, LitElement, CSSResult, TemplateResult } from 'lit';
+import { html, LitElement, CSSResult, TemplateResult } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { REMOVE_ONLY } from '../e-tab-badge-group/e-tab-badge-group.js';
 import type { NoItemsTab } from 'poe-custom-elements/types.js';
-import { EventMapFrom } from '../../../event-utils.js';
-
-declare global {
-	interface HTMLElementTagNameMap {
-		'e-tab-badge': TabBadgeElement;
-	}
-}
-
-export type Events = [typeof TabSelectEvent, typeof TabClickEvent];
-
-declare global {
-	interface HTMLElementEventMap extends EventMapFrom<Events> {}
-}
+import { styles } from './e-tab-badge.styles.js';
+import { TabSelectEvent, TabClickEvent } from './events.js';
 
 @customElement('e-tab-badge')
 export class TabBadgeElement extends LitElement {
+	static styles: Array<CSSResult> = [styles];
+
 	@property({ type: Object }) tab!: NoItemsTab;
 	@property({ type: Boolean }) disabled = false;
 	@property({ type: Boolean, reflect: true }) selected = false;
-	// /** Any valid CSS color */
+	/** Any valid CSS color */
 	@property({ reflect: true, attribute: 'color' }) color?: string;
 	@property() as: 'button' | 'checkbox' = 'button';
 
 	@state() tabState!: NoItemsTab;
-
-	get computedColor(): string {
-		if (this.color) {
-			return this.color;
-		}
-		if (this.tab.metadata?.colour) {
-			return `#${this.tab.metadata?.colour?.padStart(6, '0')}`;
-		}
-		return '#fff';
-	}
-
-	protected nameLabel(): TemplateResult {
-		const removeOnly = this.tab.name.includes(REMOVE_ONLY);
-
-		if (removeOnly) {
-			const [name] = this.tab.name.split(REMOVE_ONLY);
-			return html`<label for=${this.tab.id} class="name">${name}<span class="remove-only">R</span></label>`;
-		}
-
-		return html`<label for=${this.tab.id} class="name">${this.tab.name}</label>`;
-	}
 
 	protected override render(): TemplateResult {
 		const cssProps = styleMap({
@@ -78,7 +48,28 @@ export class TabBadgeElement extends LitElement {
 			</button>`;
 		}
 
-		throw new Error('never');
+		return html`e-tab-badge Error: Unexpected variant of prop 'as': ${this.as}`;
+	}
+
+	get computedColor(): string {
+		if (this.color) {
+			return this.color;
+		}
+		if (this.tab.metadata?.colour) {
+			return `#${this.tab.metadata?.colour?.padStart(6, '0')}`;
+		}
+		return '#fff';
+	}
+
+	protected nameLabel(): TemplateResult {
+		const removeOnly = this.tab.name.includes(REMOVE_ONLY);
+
+		if (removeOnly) {
+			const [name] = this.tab.name.split(REMOVE_ONLY);
+			return html`<label for=${this.tab.id} class="name">${name}<span class="remove-only">R</span></label>`;
+		}
+
+		return html`<label for=${this.tab.id} class="name">${this.tab.name}</label>`;
 	}
 
 	@query('input') checkbox!: HTMLInputElement;
@@ -89,105 +80,10 @@ export class TabBadgeElement extends LitElement {
 	#emit_tab_click() {
 		this.dispatchEvent(new TabClickEvent(this.tab, { composed: true }));
 	}
-
-	static styles: CSSResult = css`
-		.tab-badge-as-button {
-			background-color: var(--badge-color);
-			width: 5.5rem;
-			height: 2.2rem;
-			border-radius: 0.4rem;
-			border: 1px solid #000;
-			cursor: pointer;
-			overflow: hidden;
-			position: relative;
-			&:hover {
-			}
-			&:disabled {
-				filter: grayscale(0.6);
-			}
-			.name {
-				pointer-events: none;
-			}
-
-			&::after {
-				display: block;
-				position: absolute;
-				bottom: 0;
-				right: 0;
-				background-color: rgba(255, 255, 255, 0.06);
-				color: #000;
-				content: var(--tab-index);
-				text-align: center;
-				border-top-left-radius: 2rem;
-				font-size: 0.6rem;
-				min-width: 1rem;
-			}
-		}
-
-		.name {
-			color: var(--badge-color);
-			font-size: 0.85rem;
-			color: #000;
-			position: relative;
-
-			.remove-only {
-				font-size: 60%;
-				vertical-align: sub;
-			}
-		}
-
-		.tab-badge-as-checkbox {
-			width: 5.5rem;
-			height: 2.2rem;
-			aspect-ratio: 1;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			border-radius: 0.4rem;
-			border: 1px solid #000;
-			overflow: clip;
-			background-color: var(--badge-color);
-			position: relative;
-			&:has(.checkbox:checked) {
-				transform: scale(1.3);
-				z-index: 2;
-			}
-
-			.checkbox {
-				position: absolute;
-				appearance: none;
-				height: 100%;
-				width: 100%;
-				cursor: pointer;
-			}
-
-			&::after {
-				display: block;
-				position: absolute;
-				bottom: 0;
-				right: 0;
-				background-color: rgba(255, 255, 255, 0.06);
-				color: #000;
-				content: var(--tab-index);
-				text-align: center;
-				border-top-left-radius: 2rem;
-				font-size: 0.6rem;
-				min-width: 1rem;
-			}
-		}
-	`;
 }
 
-export class TabSelectEvent extends Event {
-	static readonly tag = 'stashes__tab-select';
-	constructor(readonly tab: NoItemsTab, readonly selected: boolean, options?: EventInit) {
-		super(TabSelectEvent.tag, options);
-	}
-}
-
-export class TabClickEvent extends Event {
-	static readonly tag = 'stashes__tab-click';
-	constructor(public readonly $tab: NoItemsTab, options?: EventInit) {
-		super(TabClickEvent.tag, options);
+declare global {
+	interface HTMLElementTagNameMap {
+		'e-tab-badge': TabBadgeElement;
 	}
 }
