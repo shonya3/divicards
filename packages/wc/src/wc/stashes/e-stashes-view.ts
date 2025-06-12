@@ -31,8 +31,8 @@ import {
 } from './events.js';
 import { DefineComponent } from 'vue';
 import { VueEventHandlers } from '../../event-utils.js';
-import { TabClickEvent } from './e-tab-badge/e-tab-badge.js';
 import { MultiselectChangeEvent } from './e-tab-badge-group/events.js';
+import { TabClickEvent } from './e-tab-badge/events.js';
 
 const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
@@ -127,8 +127,10 @@ export class StashesViewElement extends LitElement {
 					  `
 					: html`<div>
 							${this.fetchingStash
-								? html`<sl-button><sl-spinner></sl-spinner></sl-button>`
-								: html`<sl-button id="stashes-btn" @click=${this.#loadStash}>Load Stash</sl-button>`}
+								? html`<sl-button size="small"><sl-spinner></sl-spinner></sl-button>`
+								: html`<sl-button size="small" id="stashes-btn" @click=${this.#loadStash}
+										>Load Stash</sl-button
+								  >`}
 					  </div> `}
 				<div class="top-right-corner">
 					${this.stashtabs_badges.length
@@ -157,7 +159,7 @@ export class StashesViewElement extends LitElement {
 								</div>
 						  `
 						: nothing}
-					<sl-button @click=${this.#onCloseClicked} class="btn-close">Close</sl-button>
+					<sl-button size="small" @click=${this.#onCloseClicked} class="btn-close">Close</sl-button>
 				</div>
 			</header>
 			<div class="messages">

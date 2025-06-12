@@ -1,8 +1,8 @@
 import { League, DivinationCardsSample } from '@divicards/shared/types.js';
 import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
 import { EventMapFrom } from '../../event-utils.js';
-import { TabClickEvent } from './e-tab-badge/e-tab-badge.js';
 import { SelectedStashtabs } from './types.js';
+import { TabClickEvent } from './e-tab-badge/events.js';
 
 declare global {
 	interface HTMLElementEventMap extends EventMapFrom<Events> {}
