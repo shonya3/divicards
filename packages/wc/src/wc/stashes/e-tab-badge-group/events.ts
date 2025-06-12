@@ -1,7 +1,7 @@
 import { EventMapFrom } from '../../../event-utils.js';
 import { PageChangeEvent } from '../../events/change/page.js';
 import { PerPageChangeEvent } from '../../events/change/per_page.js';
-import { TabClickEvent } from '../e-tab-badge/e-tab-badge.js';
+import { TabClickEvent } from '../e-tab-badge/events.js';
 import { SelectedTabsChangeEvent } from '../events.js';
 
 declare global {

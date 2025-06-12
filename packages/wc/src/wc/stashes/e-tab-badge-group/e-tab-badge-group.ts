@@ -1,4 +1,4 @@
-import { html, css, nothing, LitElement, TemplateResult, CSSResult } from 'lit';
+import { html, nothing, LitElement, TemplateResult, CSSResult } from 'lit';
 import { property, state, query, customElement } from 'lit/decorators.js';
 import '../e-tab-badge/e-tab-badge.js';
 import { type League, isPermanentLeague } from '@divicards/shared/types.js';
@@ -6,7 +6,7 @@ import { ACTIVE_LEAGUE } from '@divicards/shared/lib.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
-import '../../e-pagination.js';
+import '../../e-pagination/e-pagination.js';
 import '../../e-help-tip.js';
 import type { ErrorLabel, SelectedStashtabs } from '../types.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -15,8 +15,9 @@ import { NoItemsTab } from 'poe-custom-elements/types.js';
 import { PageChangeEvent } from '../../events/change/page.js';
 import { PerPageChangeEvent } from '../../events/change/per_page.js';
 import { SelectedTabsChangeEvent } from '../events.js';
-import { TabSelectEvent } from '../e-tab-badge/e-tab-badge.js';
 import { MultiselectChangeEvent } from './events.js';
+import { styles } from './e-tab-badge-group.styles.js';
+import { TabSelectEvent } from '../e-tab-badge/events.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -28,7 +29,7 @@ export const REMOVE_ONLY = '(Remove-only)';
 
 @customElement('e-tab-badge-group')
 export class TabBadgeGroupElement extends LitElement {
-	static override styles: Array<CSSResult> = [styles()];
+	static override styles: Array<CSSResult> = [styles];
 
 	@property({ type: Boolean, attribute: 'badges-disabled' }) badgesDisabled = false;
 	@property({ type: Boolean }) multiselect = false;
@@ -85,6 +86,7 @@ export class TabBadgeGroupElement extends LitElement {
 					this.shouldFilter
 						? html`<header class="header">
 								<sl-input
+									size="small"
 									type="text"
 									id="filter-stashes-by-name"
 									.value=${this.stashtab_name_query}
@@ -117,9 +119,6 @@ export class TabBadgeGroupElement extends LitElement {
 												>
 										  </div>`
 										: nothing}
-									<div class="tabs-total">
-										<span class="tabs-total__count">${this.tabsTotal}</span> stash tabs
-									</div>
 								</div>
 						  </header>`
 						: nothing
@@ -176,71 +175,6 @@ export class TabBadgeGroupElement extends LitElement {
 	increasePage(): void {
 		this.page++;
 	}
-}
-
-function styles() {
-	return css`
-		:host {
-			display: inline-block;
-		}
-		.tab-badge-group {
-			display: grid;
-			gap: 1rem;
-		}
-
-		.header {
-			padding-inline: 2rem;
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-between;
-			align-items: center;
-			gap: 2rem;
-
-			.header__right {
-				margin-top: 12px;
-				display: flex;
-				align-items: center;
-				gap: 1rem;
-			}
-
-			> sl-input {
-				margin-top: 1rem;
-			}
-		}
-
-		.hide-remove-only {
-			display: flex;
-			align-items: center;
-			gap: 0.2rem;
-		}
-
-		.tabs-total__count {
-			color: var(--sl-color-amber-800);
-		}
-
-		.multiselect {
-			display: flex;
-			align-items: center;
-			gap: 4px;
-		}
-
-		.list {
-			display: flex;
-			flex-wrap: wrap;
-			list-style: none;
-			gap: 5px;
-			margin-inline: 1rem;
-		}
-
-		li {
-			border: 1px solid transparent;
-			border-radius: 4px;
-		}
-
-		.hovered-error {
-			border-color: red;
-		}
-	`;
 }
 
 function filter(
