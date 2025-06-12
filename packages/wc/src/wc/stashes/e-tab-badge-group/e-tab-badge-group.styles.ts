@@ -45,7 +45,7 @@ export const styles: CSSResult = css`
 		display: flex;
 		flex-wrap: wrap;
 		list-style: none;
-		gap: 5px;
+		gap: 0.5rem;
 		margin-inline: 1rem;
 	}
 

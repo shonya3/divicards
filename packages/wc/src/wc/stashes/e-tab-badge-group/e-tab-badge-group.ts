@@ -39,7 +39,7 @@ export class TabBadgeGroupElement extends LitElement {
 	@property({ reflect: true }) league: League = ACTIVE_LEAGUE;
 	@property({ type: Array }) errors: Array<ErrorLabel> = [];
 	@property() hoveredErrorTabId: string | null = null;
-	@property({ type: Number, reflect: true }) perPage = 50;
+	@property({ type: Number, reflect: true }) perPage = 20;
 	@property({ type: Number, reflect: true }) page = 1;
 	/** Query for searching stashtab by name */
 	@property() stashtab_name_query = '';
