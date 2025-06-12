@@ -27,6 +27,14 @@ export const styles: CSSResult = css`
 		& e-league-select {
 			margin-top: 1rem;
 		}
+
+		& .loads-available {
+			color: var(--sl-color-neutral-600);
+		}
+
+		& .loads-available__value {
+			color: var(--sl-color-neutral-700);
+		}
 	}
 
 	.tips {

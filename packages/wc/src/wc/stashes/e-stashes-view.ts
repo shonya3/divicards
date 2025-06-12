@@ -155,7 +155,11 @@ export class StashesViewElement extends LitElement {
 									<e-help-tip>
 										<p>PoE API allows 30 requests in 5 minutes</p>
 									</e-help-tip>
-									<div>Loads available: ${this.stashLoadsAvailable}</div>
+									<div class="loads-available">
+										Loads available:<span class="loads-available__value"
+											>${this.stashLoadsAvailable}</span
+										>
+									</div>
 								</div>
 						  `
 						: nothing}
