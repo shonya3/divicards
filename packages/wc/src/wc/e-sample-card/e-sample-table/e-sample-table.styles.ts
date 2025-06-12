@@ -92,7 +92,6 @@ export const styles: CSSResult = css`
 	:host {
 		display: block;
 		max-width: 1220px;
-		background-color: var(--bg-color, #242424);
 	}
 
 	.ch-3 {
@@ -103,8 +102,6 @@ export const styles: CSSResult = css`
 	.layout {
 		height: 100%;
 		max-width: 1220px;
-		background-color: var(--bg-color, #242424);
-		color: var(--color, rgba(255, 255, 255, 0.87));
 
 		padding: 2rem;
 		display: grid;
@@ -122,7 +119,6 @@ export const styles: CSSResult = css`
 		align-items: center;
 		flex-wrap: wrap;
 		z-index: 2;
-		background-color: var(--bg-color, #242424);
 		padding-top: 20px;
 		padding-bottom: 20px;
 		border-bottom: 1px solid var(--sl-color-gray-100);
