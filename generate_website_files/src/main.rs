@@ -24,7 +24,7 @@ async fn main() {
 
     // 1. Write data jsons
     // Prepare paths
-    let dir = PathBuf::from("../../divicards-site/src/gen");
+    let dir = PathBuf::from("../../divicards-site/gen");
     let json_dir = dir.join("json");
     if !json_dir.exists() {
         std::fs::create_dir_all(&json_dir).unwrap();
