@@ -13,7 +13,7 @@
 		"icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.icns", "icons/icon.ico"]
 	},
 	"productName": "divicards",
-	"version": "0.9.1",
+	"version": "0.9.2",
 	"identifier": "divicards",
 	"plugins": {
 		"updater": {
