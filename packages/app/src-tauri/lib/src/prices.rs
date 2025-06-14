@@ -8,7 +8,9 @@ use std::{collections::HashMap, fs, path::PathBuf};
 use tauri::Window;
 use tracing::{debug, instrument};
 
-pub const DAY_AS_SECS: f64 = 86_400.0;
+pub const MINUTE_AS_SECS: f64 = 60.0;
+const UP_TO_DATE_THRESHOLD_MINUTES: f32 = 20.0;
+const STILL_USABLE_THRESHOLD_MINUTES: f32 = 20.0;
 
 pub enum LeagueFileState {
     UpToDate(Prices),
@@ -27,11 +29,11 @@ impl AppCardPrices {
 
         match self.read_file(league) {
             LeagueFileState::UpToDate(prices) => prices,
-            LeagueFileState::StillUsable(prices, days_old) => self
+            LeagueFileState::StillUsable(prices, minutes_old) => self
                 .fetch_and_update(league, window)
                 .await
                 .unwrap_or_else(|_| {
-                       let message = format!("Prices are not up-to-date, but still usable({days_old:.1} days old). Unable to load new prices.");
+                       let message = format!("Prices are not up-to-date, but still usable ({minutes_old:.0} minutes old). Unable to load new prices.");
                         Event::Toast {
                             variant: ToastVariant::Warning,
                             message,
@@ -57,10 +59,10 @@ impl AppCardPrices {
             return LeagueFileState::Invalid;
         };
 
-        if let Some(days_old) = self.file_days_old(league) {
-            match days_old {
-                n if n <= 1.0 => LeagueFileState::UpToDate(prices),
-                n if n <= 7.0 => LeagueFileState::StillUsable(prices, n),
+        if let Some(minutes_old) = self.file_minutes_old(league) {
+            match minutes_old {
+                n if n <= UP_TO_DATE_THRESHOLD_MINUTES => LeagueFileState::UpToDate(prices),
+                n if n <= STILL_USABLE_THRESHOLD_MINUTES => LeagueFileState::StillUsable(prices, n),
                 _ => LeagueFileState::TooOld,
             }
         } else {
@@ -153,47 +155,45 @@ impl AppCardPrices {
 
     #[instrument(skip(self))]
     fn file_is_up_to_date(&self, league: &TradeLeague) -> bool {
-        match self.file_days_old(league) {
-            Some(days_old) => days_old <= 1.0,
+        match self.file_minutes_old(league) {
+            Some(minutes_old) => minutes_old <= UP_TO_DATE_THRESHOLD_MINUTES,
             None => false,
         }
     }
 
     #[instrument(skip(self))]
     fn file_is_still_usable(&self, league: &TradeLeague) -> bool {
-        match self.file_days_old(league) {
-            Some(days_old) => days_old <= 7.0,
+        match self.file_minutes_old(league) {
+            Some(minutes_old) => minutes_old <= STILL_USABLE_THRESHOLD_MINUTES,
             None => false,
         }
     }
 
     #[instrument(skip(self))]
-    fn file_days_old(&self, league: &TradeLeague) -> Option<f32> {
+    fn file_minutes_old(&self, league: &TradeLeague) -> Option<f32> {
         let path = self.league_path(league);
-        let exists = path.try_exists().unwrap_or(false);
-        match exists {
-            true => match fs::metadata(&path) {
-                Ok(metadata) => match metadata.modified() {
-                    Ok(time) => {
-                        let Ok(days) = time
-                            .elapsed()
-                            .map(|elapsed| (elapsed.as_secs() as f64 / DAY_AS_SECS) as f32)
-                        else {
-                            return None;
-                        };
-                        Some(days)
-                    }
-                    Err(err) => {
-                        debug!("{err}");
+        match fs::metadata(&path) {
+            Ok(metadata) => match metadata.modified() {
+                Ok(modified_time) => match modified_time.elapsed() {
+                    Ok(duration) => Some((duration.as_secs_f64() / MINUTE_AS_SECS) as f32),
+                    Err(_e) => {
+                        // SystemTimeError: modified time is later than current time.
+                        debug!(
+                            "File {:?} modification time is in the future. Treating as needing update.",
+                            path
+                        );
                         None
                     }
                 },
-                Err(err) => {
-                    debug!("{err}");
+                Err(e) => {
+                    debug!("Failed to read modification time for {:?}: {}", path, e);
                     None
                 }
             },
-            false => None,
+            Err(e) => {
+                debug!("Failed to read metadata for {:?}: {}", path, e);
+                None
+            }
         }
     }
 
