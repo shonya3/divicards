@@ -2,21 +2,15 @@
 pub const CONDENSING_FACTOR: f32 = 2.0 / 3.0;
 pub const RAIN_OF_CHAOS_CONDENSED_WEIGHT: f32 = 2_452.655;
 
-pub const LEGACY_CARDS_N: usize = 15;
+pub const LEGACY_CARDS_N: usize = 9;
 pub const LEGACY_CARDS: [&str; LEGACY_CARDS_N] = [
-    "Squandered Prosperity",
     "Blessing of God",
     "The Devastator",
     "Luck of the Vaal",
     "The Valley of Steel Boxes",
     "Birth of the Three",
-    "The Mayor",
     "Treasures of the Vaal",
-    "The Bargain",
     "The Sustenance",
-    "Monochrome",
-    "Underground Forest",
-    "Sambodhi's Wisdom",
     "Soul Quenched",
     "The Master",
 ];
@@ -27,8 +21,13 @@ pub const NEVER_EXISTED: [&str; 3] = [
     "Luck of the Vaal",
 ];
 
-pub const CARDS_N: usize = 449;
+pub const CARDS_N: usize = 454;
 pub const CARDS: [&str; CARDS_N] = [
+    "Runic Luck",
+    "Last Stand",
+    "Damnation",
+    "When Currents Blaze",
+    "History",
     "Avian Pursuit",
     "Father's Love",
     "Lonely Warrior",
