@@ -2,8 +2,8 @@
 
 use std::fmt::Display;
 
-use super::rich::{Cell, DropsFrom, ParseCellError};
-use crate::dropsource::Source;
+use super::rich::{DropsFrom, ParseCellError};
+use crate::{dropsource::Source, spreadsheet::StyledDropsCells};
 use divi::cards::CheckCardName;
 use serde::{Deserialize, Serialize};
 use serde_json::{Error as SerdeJsonError, Value};
@@ -51,13 +51,13 @@ pub struct Dumb {
     #[serde(default)]
     pub remaining_work: RemainingWork,
 
-    /// G
+    /// G "drops" + H "drops datamined"
     pub drops: Vec<DropsFrom>,
 
-    /// H
+    /// I
     pub drops_to_verify: Vec<DropsFrom>,
 
-    /// I
+    /// J
     #[serde(skip_serializing_if = "Option::is_none")]
     pub notes: Option<String>,
 }
@@ -137,8 +137,7 @@ impl Dumb {
     pub fn create(
         row_index: usize,
         spreadsheet_row: &[Value],
-        confirmations_new_325_cell: &Cell,
-        to_confirm_or_verify_cell: &Cell,
+        cells: StyledDropsCells,
     ) -> Result<Self, ParseDumbError> {
         let record_id = Dumb::record_id(row_index);
         // B 1 Card name
@@ -193,8 +192,9 @@ impl Dumb {
                 )
             })?;
 
-        // G 6 - New confirmations - drops
-        let drops = confirmations_new_325_cell
+        // G 6 - drops
+        let mut drops = cells
+            .drops
             .drops_from()
             .map_err(|parse_styled_cell_error| {
                 ParseDumbError::new(
@@ -204,9 +204,10 @@ impl Dumb {
                 )
             })?;
 
-        // H 7 - To Confirm or Verify
-        let drops_to_verify =
-            to_confirm_or_verify_cell
+        // J 7 - datamined drops
+        let drops_datamined =
+            cells
+                .drops_datamined
                 .drops_from()
                 .map_err(|parse_styled_cell_error| {
                     ParseDumbError::new(
@@ -216,11 +217,24 @@ impl Dumb {
                     )
                 })?;
 
-        // I 8 - Notes
-        let notes = spreadsheet_row.get(8).and_then(parse_string_cell);
-        // J 9 - Old Sources - SKIP
-        // K 10 - Old Wiki Disagreements - SKIP
-        // L 11 - Old Need to verify - SKIP
+        // Combine drops and datamined drops
+        drops.extend(drops_datamined);
+
+        // I 8 - To Confirm or Verify
+        let drops_to_verify =
+            cells
+                .drops_verify
+                .drops_from()
+                .map_err(|parse_styled_cell_error| {
+                    ParseDumbError::new(
+                        record_id,
+                        card.clone(),
+                        ParseDumbErrKind::StyledCell(parse_styled_cell_error),
+                    )
+                })?;
+
+        // J 9 - Notes
+        let notes = spreadsheet_row.get(9).and_then(parse_string_cell);
 
         Ok(Dumb {
             id: record_id,

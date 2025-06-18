@@ -114,7 +114,7 @@ pub struct ParseRecordResult {
 pub fn parse_record(dumb: Dumb, poe_data: &PoeData) -> ParseRecordResult {
     let (sources, mut errors) = parse_record_dropsources(&dumb, poe_data);
     let (verify_sources, errors_verify_drops_from) =
-        parse_dropses_from(&dumb, poe_data, RichColumnVariant::Verify);
+        parse_dropses_from(&dumb, poe_data, SourcesKind::Verify);
 
     errors.extend(
         errors_verify_drops_from
@@ -280,8 +280,7 @@ pub fn parse_record_dropsources(
     }
 
     // Parse
-    let (sources, drops_from_errors) =
-        parse_dropses_from(dumb, poe_data, RichColumnVariant::Sources);
+    let (sources, drops_from_errors) = parse_dropses_from(dumb, poe_data, SourcesKind::Source);
     errors.extend(drops_from_errors.into_iter().map(ParseSourceError::from));
 
     // Final checks
@@ -306,32 +305,22 @@ pub fn parse_record_dropsources(
 }
 
 #[derive(Debug, PartialEq, Eq, Hash, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub enum RichColumnVariant {
-    Sources,
+pub enum SourcesKind {
+    Source,
     Verify,
-}
-
-impl RichColumnVariant {
-    pub fn column_letter(&self) -> char {
-        match self {
-            RichColumnVariant::Sources => 'G',
-            RichColumnVariant::Verify => 'H',
-        }
-    }
 }
 
 /// Parses all instances of record's drops_from and collects it into one Vec<Source>
 pub fn parse_dropses_from(
     dumb: &Dumb,
     poe_data: &PoeData,
-    column: RichColumnVariant,
+    column: SourcesKind,
 ) -> (Vec<Source>, Vec<ParseDropsFromError>) {
     let mut sources: Vec<Source> = vec![];
     let mut errors: Vec<ParseDropsFromError> = Vec::new();
     let drops_to_parse = match column {
-        RichColumnVariant::Sources => &dumb.drops,
-        RichColumnVariant::Verify => &dumb.drops_to_verify,
+        SourcesKind::Source => &dumb.drops,
+        SourcesKind::Verify => &dumb.drops_to_verify,
     };
 
     for d in drops_to_parse {
