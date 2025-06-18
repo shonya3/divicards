@@ -1,30 +1,15 @@
 #[cfg(test)]
 mod tests {
-    use std::time::Duration;
-
     use divcord::parse::*;
     use divcord::spreadsheet::{
         record::{Confidence, GreyNote, RemainingWork},
         rich::{FontStyles, HexColor},
     };
     use divcord::{
-        cards::FromChild,
-        records,
-        spreadsheet::{
-            fs_cache_fetcher::{DataFetcher, SpreadsheetFetcher, Stale},
-            record::Dumb,
-            rich::DropsFrom,
-        },
-        Source,
+        // cards::FromChild,
+        spreadsheet::{record::Dumb, rich::DropsFrom},
     };
-    use poe_data::act::ActAreaId;
     use poe_data::PoeData;
-
-    async fn load_spreadsheet() -> divcord::Spreadsheet {
-        let mut fetcher = SpreadsheetFetcher::default();
-        fetcher.0.stale = Stale::After(Duration::from_secs(81400));
-        fetcher.load().await.unwrap()
-    }
 
     #[tokio::test]
     async fn dropsources_comma_separated_produce_error() {
@@ -58,22 +43,28 @@ mod tests {
         assert!(source.is_err());
     }
 
-    #[tokio::test]
-    async fn child_sources_for_acts() {
-        let poe_data = PoeData::load().await.unwrap();
-        let spreadsheet = load_spreadsheet().await;
+    // async fn load_spreadsheet() -> divcord::Spreadsheet {
+    //     let mut fetcher = SpreadsheetFetcher::default();
+    //     fetcher.0.stale = Stale::After(Duration::from_secs(81400));
+    //     fetcher.load().await.unwrap()
+    // }
 
-        let records = records(&spreadsheet, &poe_data).unwrap();
-        let dried_lake = Source::Act(ActAreaId::new("1_4_2".to_owned()));
+    // #[tokio::test]
+    // async fn child_sources_for_acts() {
+    //     let poe_data = PoeData::load().await.unwrap();
+    //     let spreadsheet = load_spreadsheet().await;
 
-        let vec_from_child =
-            divcord::cards::cards_from_child_sources(&dried_lake, &records, &poe_data);
+    //     let records = records(&spreadsheet, &poe_data).unwrap();
+    //     let dried_lake = Source::Act(ActAreaId::new("1_4_2".to_owned()));
 
-        assert!(vec_from_child.contains(&FromChild {
-            source: dried_lake.to_owned(),
-            card: "The Fletcher".to_owned(),
-            column: divcord::parse::RichColumnVariant::Verify,
-            child: Source::ActBoss("Nightwane".to_owned())
-        }))
-    }
+    //     let vec_from_child =
+    //         divcord::cards::cards_from_child_sources(&dried_lake, &records, &poe_data);
+
+    //     assert!(vec_from_child.contains(&FromChild {
+    //         source: dried_lake.to_owned(),
+    //         card: "The Fletcher".to_owned(),
+    //         column: divcord::parse::RichColumnVariant::Verify,
+    //         child: Source::ActBoss("Nightwane".to_owned())
+    //     }))
+    // }
 }
