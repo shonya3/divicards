@@ -24,6 +24,7 @@ pub enum UniqueMonster {
     Argus,
     AllInvasionBosses,
     AllVaalSideAreaBosses,
+    Incarnation(Incarnation),
     BreachlordBossDomain(BreachlordBossDomain),
     Architect(Architect),
     ShaperGuardianBoss(ShaperGuardianBoss),
@@ -84,6 +85,7 @@ impl FromStr for UniqueMonster {
             "Argus" => Ok(Self::Argus),
             _ => BreachlordBossDomain::from_str(s)
                 .map(Self::BreachlordBossDomain)
+                .or_else(|_| Incarnation::from_str(s).map(Self::Incarnation))
                 .or_else(|_| Architect::from_str(s).map(Self::Architect))
                 .or_else(|_| ShaperGuardianBoss::from_str(s).map(Self::ShaperGuardianBoss))
                 .or_else(|_| SyndicateMember::from_str(s).map(Self::SyndicateMember))
@@ -139,6 +141,7 @@ impl Identified for UniqueMonster {
             UniqueMonster::AllInvasionBosses => "All Invasion Bosses",
             UniqueMonster::AllVaalSideAreaBosses => "All Vaal Side Area Bosses",
             UniqueMonster::BreachlordBossDomain(m) => m.id(),
+            UniqueMonster::Incarnation(m) => m.id(),
             UniqueMonster::Architect(m) => m.id(),
             UniqueMonster::ShaperGuardianBoss(m) => m.id(),
             UniqueMonster::SyndicateMember(m) => m.id(),
@@ -198,6 +201,7 @@ impl UniqueMonster {
             UniqueMonster::AllInvasionBosses => "All Invasion Bosses",
             UniqueMonster::AllVaalSideAreaBosses => "All Vaal Side Area Bosses",
             UniqueMonster::BreachlordBossDomain(_) => "Breachlord Boss Domain",
+            UniqueMonster::Incarnation(_) => "Incarnation",
             UniqueMonster::Architect(_) => "Architect",
             UniqueMonster::ShaperGuardianBoss(_) => "Shaper Guardian Boss",
             UniqueMonster::SyndicateMember(_) => "Syndicate Member",
@@ -222,6 +226,32 @@ impl UniqueMonster {
             UniqueMonster::OshabiBoss(_) => "Oshabi Boss",
             UniqueMonster::EldritchPerfectionMonster(_) => "Eldritch Perfection Monster",
         }
+    }
+}
+
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
+pub enum Incarnation {
+    #[default]
+    Dread,
+    Fear,
+    Neglect,
+}
+
+impl Identified for Incarnation {
+    fn id(&self) -> &str {
+        match self {
+            Incarnation::Dread => "Incarnation of Dread",
+            Incarnation::Fear => "Incarnation of Fear",
+            Incarnation::Neglect => "Incarnation of Neglect",
+        }
+    }
+}
+
+impl FromStr for Incarnation {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
     }
 }
 
