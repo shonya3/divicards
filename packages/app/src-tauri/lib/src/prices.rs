@@ -30,7 +30,7 @@ impl AppCardPrices {
         match self.read_file(league) {
             LeagueFileState::UpToDate(prices) => prices,
             LeagueFileState::StillUsable(prices, minutes_old) => self
-                .fetch_and_update(league, window)
+                .fetch_and_update(league)
                 .await
                 .unwrap_or_else(|_| {
                        let message = format!("Prices are not up-to-date, but still usable ({minutes_old:.0} minutes old). Unable to load new prices.");
@@ -42,7 +42,7 @@ impl AppCardPrices {
                         prices
                 }),
             _ => self
-                .fetch_and_update(league, window)
+                .fetch_and_update(league)
                 .await
                 .unwrap_or_else(|err| {
                     self.send_default_prices_with_toast_warning(&err, league, window)
@@ -119,12 +119,8 @@ impl AppCardPrices {
         self.dir.join(format!("{}-prices.json", { league }))
     }
 
-    #[instrument(skip(self, window))]
-    async fn fetch_and_update(
-        &mut self,
-        league: &TradeLeague,
-        window: &Window,
-    ) -> Result<Prices, Error> {
+    #[instrument(skip(self))]
+    async fn fetch_and_update(&mut self, league: &TradeLeague) -> Result<Prices, Error> {
         let prices = Prices::fetch(league).await.map_err(DiviError::NinjaError)?;
         debug!("fetch_and_update: fetched. Serializing to json");
         let json = serde_json::to_string(&prices)?;
@@ -136,12 +132,6 @@ impl AppCardPrices {
         debug!("fetch_and_update: wrote to file");
         self.prices_by_league
             .insert(league.to_owned(), prices.clone());
-
-        Event::Toast {
-            variant: ToastVariant::Neutral,
-            message: format!("Prices for {league} league have been updated"),
-        }
-        .emit(window);
 
         Ok(prices)
     }
