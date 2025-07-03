@@ -3,9 +3,9 @@ import './e-stash-tab-container';
 import { html, TemplateResult } from 'lit';
 import { StashTabContainerElement } from './e-stash-tab-container.js';
 //@ts-ignore
-import quadStash from './json/QuadStashStd.json';
+import quadStash from '../json/QuadStashStd.json';
 //@ts-ignore
-import fragmentsTab from './json/fragmentsTab.json';
+import fragmentsTab from '../json/fragmentsTab.json';
 import { TabWithItems } from 'poe-custom-elements/types.js';
 
 const meta: Meta<StashTabContainerElement> = {

@@ -17,7 +17,7 @@ import type { ErrorLabel, SelectedStashtabs } from './types.js';
 import { styles } from './e-stashes-view.styles.js';
 import './e-stash-tab-container';
 import { Task } from '@lit/task';
-import { StashTabContainerElement } from './e-stash-tab-container.js';
+import { ExtractCardsEvent as ContainerExtractCardsEvent } from './e-stash-tab-container/events.js';
 import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
 import { LeagueChangeEvent } from '../events/change/league.js';
 import {
@@ -197,13 +197,13 @@ export class StashesViewElement extends LitElement {
 						pending: () => {
 							return html`<e-stash-tab-container
 								status="pending"
-								@close=${this.#handleTabContainerClose}
+								@e-stash-tab-container__close=${this.#handleTabContainerClose}
 							></e-stash-tab-container>`;
 						},
 						complete: tab =>
 							html`<e-stash-tab-container
-								@close=${this.#handleTabContainerClose}
-								@extract-cards=${this.#emitExtractCards}
+								@e-stash-tab-container__close=${this.#handleTabContainerClose}
+								@e-stash-tab-container__extract-cards=${this.#emitExtractCards}
 								status="complete"
 								.tab=${tab}
 							></e-stash-tab-container>`,
@@ -257,11 +257,8 @@ export class StashesViewElement extends LitElement {
 	#change_multiselect(e: MultiselectChangeEvent): void {
 		this.multiselect = e.$multiselect;
 	}
-	#emitExtractCards(e: Event) {
-		const tab = (e.target as StashTabContainerElement)?.tab;
-		if (tab) {
-			this.dispatchEvent(new ExtractCardsEvent(tab, this.league));
-		}
+	#emitExtractCards(e: ContainerExtractCardsEvent) {
+		this.dispatchEvent(new ExtractCardsEvent(e.$tab, this.league));
 	}
 	#handleTabContainerClose() {
 		this.opened_tab = null;

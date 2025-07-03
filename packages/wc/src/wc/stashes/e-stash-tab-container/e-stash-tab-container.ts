@@ -3,7 +3,7 @@ import '@shoelace-style/shoelace/dist/components/spinner/spinner.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 import '@shoelace-style/shoelace/dist/components/copy-button/copy-button.js';
-import './e-tab-badge/e-tab-badge.js';
+import '../e-tab-badge/e-tab-badge.js';
 import '@shoelace-style/shoelace/dist/components/alert/alert.js';
 import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 
@@ -20,8 +20,8 @@ declare global {
 
 /**
  * @summary Container for poe stash tab with header with actions.
- * @event extract-cards - Emitted on "Extract cards sample" button click.
- * @event close - Emitted on "X" button click.
+ * @event e-stash-tab-container__extract-cards - Emitted on "Extract cards sample" button click.
+ * @event e-stash-tab-container__close - Emitted on "X" button click.
  */
 @customElement('e-stash-tab-container')
 export class StashTabContainerElement extends LitElement {
