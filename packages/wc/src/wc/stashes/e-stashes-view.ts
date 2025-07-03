@@ -15,7 +15,7 @@ import '@shoelace-style/shoelace/dist/components/spinner/spinner.js';
 import { isStashTabError } from '@divicards/shared/error.js';
 import type { ErrorLabel, SelectedStashtabs } from './types.js';
 import { styles } from './e-stashes-view.styles.js';
-import './e-stash-tab-container';
+import './e-stash-tab-container/e-stash-tab-container.js';
 import { Task } from '@lit/task';
 import { ExtractCardsEvent as ContainerExtractCardsEvent } from './e-stash-tab-container/events.js';
 import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
@@ -67,6 +67,8 @@ export class StashesViewElement extends LitElement {
 	@state() hoveredErrorTabId: string | null = null;
 	@state() downloadedStashTabs: Array<TabWithItems> = [];
 	@state() opened_tab: NoItemsTab | null = null;
+	/** Indicator whether cards was just extracted. */
+	@state() cardsJustExtracted = false;
 	private stashTabTask = new Task(this, {
 		task: async ([tab]) => {
 			if (!tab) {
@@ -202,6 +204,7 @@ export class StashesViewElement extends LitElement {
 						},
 						complete: tab =>
 							html`<e-stash-tab-container
+								.cardsJustExtracted=${this.cardsJustExtracted}
 								@e-stash-tab-container__close=${this.#handleTabContainerClose}
 								@e-stash-tab-container__extract-cards=${this.#emitExtractCards}
 								status="complete"
@@ -258,6 +261,10 @@ export class StashesViewElement extends LitElement {
 		this.multiselect = e.$multiselect;
 	}
 	#emitExtractCards(e: ContainerExtractCardsEvent) {
+		this.cardsJustExtracted = true;
+		setTimeout(() => {
+			this.cardsJustExtracted = false;
+		}, 2000);
 		this.dispatchEvent(new ExtractCardsEvent(e.$tab, this.league));
 	}
 	#handleTabContainerClose() {

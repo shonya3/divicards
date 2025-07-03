@@ -11,6 +11,7 @@ import { LitElement, html, css, TemplateResult, CSSResult } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { TabWithItems } from 'poe-custom-elements/types.js';
 import SlAlert from '@shoelace-style/shoelace/dist/components/alert/alert.js';
+import { CloseEvent, ExtractCardsEvent } from './events.js';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -28,6 +29,7 @@ export class StashTabContainerElement extends LitElement {
 	/** PoE API tab data https://www.pathofexile.com/developer/docs/reference#stashes-get */
 	@property({ type: Object }) tab: TabWithItems | null = null;
 	@property() status: 'pending' | 'complete' = 'pending';
+	@property({ type: Boolean }) cardsJustExtracted: boolean = false;
 
 	@query('sl-alert') scarabsSuccessAlert!: SlAlert;
 
@@ -49,7 +51,9 @@ export class StashTabContainerElement extends LitElement {
 						? this.tab.type === 'FragmentStash'
 							? html` <sl-button @click=${this.#copyScarabs}>Copy Scarabs</sl-button> `
 							: stashtab_has_cards(this.tab)
-							? html`<sl-button @click=${this.#emitExtractCards}>Extract cards sample</sl-button>`
+							? this.cardsJustExtracted
+								? html`<sl-button variant="success">Extracted</sl-button>`
+								: html`<sl-button @click=${this.#emitExtractCards}>Extract cards sample</sl-button>`
 							: null
 						: null}
 					<sl-icon-button name="x-lg" @click=${this.#emitClose} class="btn-close">X</sl-icon-button>
@@ -83,10 +87,14 @@ export class StashTabContainerElement extends LitElement {
 		});
 	}
 	#emitExtractCards() {
-		this.dispatchEvent(new Event('extract-cards'));
+		if (this.tab) {
+			this.dispatchEvent(new ExtractCardsEvent(this.tab));
+		} else {
+			console.warn(`Tab is expected to be present but there is none`);
+		}
 	}
 	#emitClose() {
-		this.dispatchEvent(new Event('close'));
+		this.dispatchEvent(new CloseEvent());
 	}
 
 	static styles: CSSResult = css`

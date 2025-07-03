@@ -111,7 +111,6 @@ const handle_stashtab_fetched = (e: StashtabFetchedEvent) => {
 const handle_extract_cards = async (e: ExtractCardsEvent) => {
 	const sample = await command('extract_cards', { tab: e.$tab, league: e.$league });
 	sampleStore.addSample(e.$tab.name, sample, e.$league);
-	toast('success', 'Cards successfully extracted');
 };
 
 const handle_change_theme = (e: ChangeThemeEvent) => {
