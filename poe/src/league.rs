@@ -38,7 +38,7 @@ impl Display for League {
             League::HardcoreMercenaries => write!(f, "Hardcore Mercenaries"),
             League::SSFMercenaries => write!(f, "SSF Mercenaries"),
             League::SSFHCMercenaries => write!(f, "HC SSF Mercenaries"),
-            League::Custom(league) => write!(f, "{}", league),
+            League::Custom(league) => write!(f, "{league}"),
         }
     }
 }

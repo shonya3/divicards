@@ -246,7 +246,7 @@ impl ProtobufColor {
 
     pub fn rgb_to_css_color(red: u8, green: u8, blue: u8) -> HexColor {
         let rgb_number = ((red as u32) << 16) | ((green as u32) << 8) | blue as u32;
-        match format!("{:06X}", rgb_number).as_str() {
+        match format!("{rgb_number:06X}").as_str() {
             "FFFFFF" => HexColor::White,
             "666666" => HexColor::Grey,
             six_digits => HexColor::Other(format!("#{six_digits}")),

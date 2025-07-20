@@ -99,9 +99,9 @@ impl StashAPI {
     ) -> Result<TabWithItems, Error> {
         let url = match substash_id {
             Some(substash_id) => {
-                format!("{}/stash/{}/{}/{}", API_URL, league, stash_id, substash_id)
+                format!("{API_URL}/stash/{league}/{stash_id}/{substash_id}")
             }
-            None => format!("{}/stash/{}/{}", API_URL, league, stash_id),
+            None => format!("{API_URL}/stash/{league}/{stash_id}"),
         };
 
         let response = StashAPI::with_auth_headers(&url, version).send().await?;
@@ -114,8 +114,7 @@ impl StashAPI {
         if let Some(limit_account_header) = headers.get("x-rate-limit-account") {
             if let Some(limit_account_state_header) = headers.get("x-rate-limit-account-state") {
                 println!(
-                    "x-rate-limit-account: {:?}, x-rate-limit-account-state: {:?}",
-                    limit_account_header, limit_account_state_header
+                    "x-rate-limit-account: {limit_account_header:?}, x-rate-limit-account-state: {limit_account_state_header:?}"
                 );
             };
         };
@@ -130,7 +129,7 @@ impl StashAPI {
     }
 
     async fn stashes(league: League, version: &AppVersion) -> Result<TabNoItems, Error> {
-        let url = format!("{}/stash/{}", API_URL, league);
+        let url = format!("{API_URL}/stash/{league}");
         let response = StashAPI::with_auth_headers(&url, version).send().await?;
         Ok(response.json().await?)
     }

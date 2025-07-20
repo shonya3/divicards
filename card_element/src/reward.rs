@@ -249,7 +249,7 @@ impl Div {
             return format!("<div class=reward>{paragraphs_html}</div>");
         };
 
-        format!("<div class='reward {}'>{paragraphs_html}</div>", modifier)
+        format!("<div class='reward {modifier}'>{paragraphs_html}</div>")
     }
 }
 

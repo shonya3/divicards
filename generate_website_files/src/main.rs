@@ -126,7 +126,7 @@ pub fn divcord_wasm_pkg(path: &Path, dirname: &str) {
                 }
             }
             Err(err) => {
-                eprintln!("Failed to execute command: {}", err);
+                eprintln!("Failed to execute command: {err}");
             }
         }
 

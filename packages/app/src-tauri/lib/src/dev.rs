@@ -6,7 +6,7 @@ pub fn init_tracing() {
         Err(_) => String::from("app=debug,tauri=debug,lib=debug,divi=debug,googlesheets=debug"),
     };
 
-    println!("tracing mode: {}", log_filter);
+    println!("tracing mode: {log_filter}");
 
     tracing_subscriber::fmt()
         .with_env_filter(log_filter)
