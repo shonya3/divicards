@@ -34,6 +34,7 @@ impl CardsData {
 
 #[cfg(feature = "fs_cache_fetcher")]
 pub mod fetch {
+    use std::collections::HashMap;
     use std::{fmt::Display, num::ParseIntError};
 
     use super::CardsData;
@@ -44,14 +45,13 @@ pub mod fetch {
             SHEET_RANGES_OF_TOTAL_CARDS_FROM_PRE_REWORK_WEIGHT_LEAGUE, WEIGHT_SPREADSHEET_ID,
             WIKI_API_URL,
         },
-        error::Error,
-        league::{LeagueReleaseInfo, ReleaseVersion},
+        league::{self, fetch::Error as LeagueError, ReleaseVersion},
         HTTP_CLIENT,
     };
     use divi::{
         prices::Prices,
         sample::{Input, Sample},
-        Error as DiviError, IsCard,
+        IsCard,
     };
     use googlesheets::sheet::Credential;
     use serde::{Deserialize, Serialize};
@@ -67,7 +67,49 @@ pub mod fetch {
         release_version: Option<ReleaseVersion>,
     }
 
-    pub async fn fetch() -> Result<CardsData, crate::error::Error> {
+    #[derive(Debug)]
+    pub enum Error {
+        Ninja(divi::error::NinjaError),
+        GoogleSheets(googlesheets::error::Error),
+        Divi(divi::error::Error),
+        Wiki(WikiError),
+        League(LeagueError),
+    }
+
+    impl Display for Error {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match self {
+                Error::Ninja(e) => write!(f, "Failed to fetch prices from poe.ninja: {e}"),
+                Error::GoogleSheets(e) => write!(f, "Failed to read from Google Sheets: {e}"),
+                Error::Divi(e) => write!(f, "Failed to process divination card sample data: {e}"),
+                Error::Wiki(e) => write!(f, "Failed to load wiki card data: {e}"),
+                Error::League(e) => write!(f, "Failed to load league info: {e}"),
+            }
+        }
+    }
+
+    impl From<divi::error::Error> for Error {
+        fn from(err: divi::error::Error) -> Self {
+            Error::Divi(err)
+        }
+    }
+    impl From<googlesheets::error::Error> for Error {
+        fn from(err: googlesheets::error::Error) -> Self {
+            Error::GoogleSheets(err)
+        }
+    }
+    impl From<WikiError> for Error {
+        fn from(err: WikiError) -> Self {
+            Error::Wiki(err)
+        }
+    }
+    impl From<LeagueError> for Error {
+        fn from(err: LeagueError) -> Self {
+            Error::League(err)
+        }
+    }
+
+    pub async fn fetch() -> Result<CardsData, Error> {
         println!("Fetching cards");
         dotenv::dotenv().ok();
         let key = std::env::var("GOOGLE_API_KEY").expect("GOOGLE_API_KEY is expected.");
@@ -76,22 +118,20 @@ pub mod fetch {
             Prices::fetch(&divi::TradeLeague::Standard),
             load_sample_with_pre_rework_weight(key.clone()),
             load_wiki_cards(),
-            LeagueReleaseInfo::fetch()
+            league::fetch::fetch()
         );
-        let prices = prices_res.map_err(DiviError::NinjaError)?;
+        let prices = prices_res.map_err(Error::Ninja)?;
         let pre_rework_weight_sample = pre_rework_weight_sample_res?;
         let league_info = league_info_vec_res?;
         let sample = load_league_amounts_sample(key.clone(), Some(prices)).await?;
-        let mut wikicards = wikicards_res.unwrap();
+        let mut wikicards = wikicards_res?;
 
         let mut cards: Vec<Card> = sample
             .cards
             .into_iter()
             .map(|card| {
                 let (min_level, max_level, release_version) = wikicards
-                    .iter()
-                    .position(|wikicard| wikicard.name == card.name)
-                    .map(|index| wikicards.swap_remove(index))
+                    .remove(&card.name)
                     .map(|w| (w.min_level, w.max_level, w.release_version))
                     .unwrap_or_default();
 
@@ -158,7 +198,7 @@ pub mod fetch {
     }
 
     #[derive(Debug)]
-    enum LoadWikiCardsError {
+    pub enum WikiError {
         Http(reqwest::Error),
         ParseCardLevel {
             given_str: String,
@@ -168,11 +208,11 @@ pub mod fetch {
         },
     }
 
-    impl Display for LoadWikiCardsError {
+    impl Display for WikiError {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match self {
-                LoadWikiCardsError::Http(error) => write!(f, "HTTP error while fetching wiki cards data: {error}"),
-                LoadWikiCardsError::ParseCardLevel {
+                WikiError::Http(error) => write!(f, "HTTP error while fetching wiki cards data: {error}"),
+                WikiError::ParseCardLevel {
                     given_str,
                     card,
                     field_name,
@@ -185,7 +225,7 @@ pub mod fetch {
         }
     }
 
-    async fn load_wiki_cards() -> Result<Vec<WikiCard>, LoadWikiCardsError> {
+    async fn load_wiki_cards() -> Result<HashMap<String, WikiCard>, WikiError> {
         #[derive(Serialize, Deserialize, Debug, Clone)]
         struct WikiCardsResponse {
             cargoquery: Vec<WikiCardWrapper>,
@@ -223,24 +263,23 @@ pub mod fetch {
             .query(&params)
             .send()
             .await
-            .map_err(LoadWikiCardsError::Http)?
+            .map_err(WikiError::Http)?
             .json::<WikiCardsResponse>()
             .await
-            .map_err(LoadWikiCardsError::Http)?;
+            .map_err(WikiError::Http)?;
 
         let parse_level = |level_str: Option<String>,
                            card_name: &str,
                            field_name: &str|
-         -> Result<Option<u32>, LoadWikiCardsError> {
+         -> Result<Option<u32>, WikiError> {
             level_str
                 .map(|s| {
-                    s.parse::<u32>()
-                        .map_err(|err| LoadWikiCardsError::ParseCardLevel {
-                            given_str: s,
-                            card: card_name.to_string(),
-                            field_name: field_name.to_string(),
-                            err,
-                        })
+                    s.parse::<u32>().map_err(|err| WikiError::ParseCardLevel {
+                        given_str: s,
+                        card: card_name.to_string(),
+                        field_name: field_name.to_string(),
+                        err,
+                    })
                 })
                 .transpose()
         };
@@ -249,13 +288,17 @@ pub mod fetch {
             .cargoquery
             .into_iter()
             .map(|WikiCardWrapper { title: raw }| {
-                Ok(WikiCard {
-                    min_level: parse_level(raw.min_level, &raw.name, "min_level")?,
-                    max_level: parse_level(raw.max_level, &raw.name, "max_level")?,
-                    release_version: raw.release_version,
-                    name: raw.name,
-                })
+                let name = raw.name.clone();
+                Ok((
+                    name,
+                    WikiCard {
+                        min_level: parse_level(raw.min_level, &raw.name, "min_level")?,
+                        max_level: parse_level(raw.max_level, &raw.name, "max_level")?,
+                        release_version: raw.release_version,
+                        name: raw.name,
+                    },
+                ))
             })
-            .collect()
+            .collect::<Result<HashMap<String, WikiCard>, _>>()
     }
 }

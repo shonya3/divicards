@@ -1,6 +1,6 @@
 use crate::sample::{CsvError, MissingHeadersError};
 use crate::TradeLeague;
-use ninja::Error as NinjaError;
+pub use ninja::Error as NinjaError;
 use reqwest::Error as ReqwestError;
 use serde::Serialize;
 use serde_json::Error as SerdeError;

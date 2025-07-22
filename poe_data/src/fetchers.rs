@@ -141,7 +141,7 @@ impl DataFetcher for CardsFetcher {
     type Item = CardsData;
     type Error = Error;
     async fn fetch(&self) -> Result<CardsData, Error> {
-        crate::cards::fetch::fetch().await
+        Ok(crate::cards::fetch::fetch().await?)
     }
     fn config(&self) -> &Config {
         &self.0

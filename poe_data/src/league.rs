@@ -73,12 +73,47 @@ impl Display for UnexpectedLeagueInfoShapeError {
     }
 }
 
-impl LeagueReleaseInfo {
-    #[cfg(feature = "fs_cache_fetcher")]
-    pub async fn fetch() -> Result<Vec<LeagueReleaseInfo>, crate::error::Error> {
-        use crate::consts::WIKI_API_URL;
-        use serde_json::Value;
+#[cfg(feature = "fs_cache_fetcher")]
+pub mod fetch {
+    use super::{LeagueReleaseInfo, UnexpectedLeagueInfoShapeError};
+    use crate::consts::WIKI_API_URL;
+    use serde_json::Value;
+    use std::fmt::Display;
 
+    #[derive(Debug)]
+    pub enum Error {
+        Http(reqwest::Error),
+        Json(serde_json::Error),
+        Shape(UnexpectedLeagueInfoShapeError),
+    }
+
+    impl Display for Error {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match self {
+                Error::Http(e) => write!(f, "Failed to fetch league info from wiki: {e}"),
+                Error::Json(e) => write!(f, "Failed to parse league info JSON from wiki: {e}"),
+                Error::Shape(e) => write!(f, "Unexpected shape for league info from wiki: {e}"),
+            }
+        }
+    }
+
+    impl From<reqwest::Error> for Error {
+        fn from(err: reqwest::Error) -> Self {
+            Error::Http(err)
+        }
+    }
+    impl From<serde_json::Error> for Error {
+        fn from(err: serde_json::Error) -> Self {
+            Error::Json(err)
+        }
+    }
+    impl From<UnexpectedLeagueInfoShapeError> for Error {
+        fn from(err: UnexpectedLeagueInfoShapeError) -> Self {
+            Error::Shape(err)
+        }
+    }
+
+    pub async fn fetch() -> Result<Vec<LeagueReleaseInfo>, Error> {
         let mut league_relese_info_vec: Vec<LeagueReleaseInfo> = vec![];
         let url = format!("{WIKI_API_URL}?action=cargoquery&format=json&tables=events&fields=events.name,release_date,release_version&where=events.type=%22Challenge%20league%22");
         let json: Value = reqwest::get(url).await?.json().await?;
