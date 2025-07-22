@@ -34,6 +34,10 @@ fn is_equal() {
 }
 
 impl ReleaseVersion {
+    pub fn new(version: String) -> Self {
+        Self(version)
+    }
+
     pub fn is_equal(&self, other: &Self) -> bool {
         let major = self.major();
         let minor = self.minor();

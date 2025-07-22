@@ -12,11 +12,10 @@ pub struct Card {
     pub min_level: Option<u32>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub max_level: Option<u32>,
-    pub weight: Option<f32>,
+    pub weights: HashMap<String, f32>,
     pub price: Option<f32>,
     #[serde(alias = "release version")]
     pub league: Option<LeagueReleaseInfo>,
-    pub pre_rework_weight: Option<f32>,
     pub disabled: bool,
 }
 
@@ -34,16 +33,14 @@ impl CardsData {
 
 #[cfg(feature = "fs_cache_fetcher")]
 pub mod fetch {
-    use std::collections::HashMap;
-    use std::{fmt::Display, num::ParseIntError};
+    use std::{collections::HashSet, fmt::Display, num::ParseIntError};
 
     use super::CardsData;
     use crate::{
         cards::Card,
         consts::{
-            SHEET_RANGES_OF_TOTAL_CARDS_FROM_LATEST_LEAGUE,
-            SHEET_RANGES_OF_TOTAL_CARDS_FROM_PRE_REWORK_WEIGHT_LEAGUE, WEIGHT_SPREADSHEET_ID,
-            WIKI_API_URL,
+            SHEET_RANGES_3_24, SHEET_RANGES_3_25, SHEET_RANGES_3_26, SHEET_RANGES_PRE_REWORK,
+            WEIGHT_SPREADSHEET_ID, WIKI_API_URL,
         },
         league::{self, fetch::Error as LeagueError, ReleaseVersion},
         HTTP_CLIENT,
@@ -55,6 +52,7 @@ pub mod fetch {
     };
     use googlesheets::sheet::Credential;
     use serde::{Deserialize, Serialize};
+    use std::collections::HashMap;
 
     #[derive(Serialize, Deserialize, Debug, Clone)]
     struct WikiCard {
@@ -109,59 +107,129 @@ pub mod fetch {
         }
     }
 
+    /// Loads Total amounts from a given league, constructs Sample from them https://docs.google.com/spreadsheets/d/1PmGES_e1on6K7O5ghHuoorEjruAVb7dQ5m7PGrW7t80/edit#gid=898101079
+    async fn load_sample_from_ranges(
+        api_key: String,
+        ranges: &'static [&'static str],
+        prices: Option<Prices>,
+    ) -> Result<Sample, Error> {
+        let batch_read =
+            googlesheets::read_batch(WEIGHT_SPREADSHEET_ID, ranges, Credential::ApiKey(api_key))
+                .await?;
+        let data = Input::try_from(batch_read)?;
+        let sample = Sample::create(data, prices)?;
+        Ok(sample)
+    }
+
     pub async fn fetch() -> Result<CardsData, Error> {
         println!("Fetching cards");
         dotenv::dotenv().ok();
         let key = std::env::var("GOOGLE_API_KEY").expect("GOOGLE_API_KEY is expected.");
 
-        let (prices_res, pre_rework_weight_sample_res, wikicards_res, league_info_vec_res) = tokio::join!(
+        let (
+            prices_res,
+            sample_3_25_res,
+            sample_3_24_res,
+            pre_rework_weight_sample_res,
+            wikicards_res,
+            league_info_vec_res,
+        ) = tokio::join!(
             Prices::fetch(&divi::TradeLeague::Standard),
-            load_sample_with_pre_rework_weight(key.clone()),
+            load_sample_from_ranges(key.clone(), SHEET_RANGES_3_25, None),
+            load_sample_from_ranges(key.clone(), SHEET_RANGES_3_24, None),
+            load_sample_from_ranges(key.clone(), SHEET_RANGES_PRE_REWORK, None),
             load_wiki_cards(),
             league::fetch::fetch()
         );
+
         let prices = prices_res.map_err(Error::Ninja)?;
+        let sample_3_25 = sample_3_25_res?;
+        let sample_3_24 = sample_3_24_res?;
         let pre_rework_weight_sample = pre_rework_weight_sample_res?;
-        let league_info = league_info_vec_res?;
-        let sample = load_league_amounts_sample(key.clone(), Some(prices)).await?;
+        let league_info_vec = league_info_vec_res?;
+
+        // Fetch latest sample separately with prices
+        let sample_3_26 = load_sample_from_ranges(key, SHEET_RANGES_3_26, Some(prices)).await?;
         let mut wikicards = wikicards_res?;
 
-        let mut cards: Vec<Card> = sample
-            .cards
+        let version_3_26 = get_version_from_range(SHEET_RANGES_3_26[0])
+            .unwrap()
+            .to_string();
+        let version_3_25 = get_version_from_range(SHEET_RANGES_3_25[0])
+            .unwrap()
+            .to_string();
+        let version_3_24 = get_version_from_range(SHEET_RANGES_3_24[0])
+            .unwrap()
+            .to_string();
+        let version_pre_rework = get_version_from_range(SHEET_RANGES_PRE_REWORK[0])
+            .unwrap()
+            .to_string();
+
+        let all_card_names: HashSet<String> = [
+            &sample_3_26,
+            &sample_3_25,
+            &sample_3_24,
+            &pre_rework_weight_sample,
+        ]
+        .into_iter()
+        .flat_map(|sample| &sample.cards)
+        .map(|card| card.name.clone())
+        .collect();
+
+        let mut cards: Vec<Card> = all_card_names
             .into_iter()
-            .map(|card| {
+            .filter_map(|card_name| {
+                let mut weights = HashMap::new();
+                let card_3_26 = sample_3_26.cards.get(&card_name);
+                let card_3_25 = sample_3_25.cards.get(&card_name);
+                let card_3_24 = sample_3_24.cards.get(&card_name);
+                let pre_rework_card = pre_rework_weight_sample.cards.get(&card_name);
+
+                if let Some(weight) = card_3_26.and_then(|c| c.weight) {
+                    weights.insert(version_3_26.clone(), weight);
+                }
+                if let Some(weight) = card_3_25.and_then(|c| c.weight) {
+                    weights.insert(version_3_25.clone(), weight);
+                }
+                if let Some(weight) = card_3_24.and_then(|c| c.weight) {
+                    weights.insert(version_3_24.clone(), weight);
+                }
+                if let Some(weight) = pre_rework_card.and_then(|c| c.weight) {
+                    weights.insert(version_pre_rework.clone(), weight);
+                }
+
+                // A card might not exist in all samples.
+                // We need to get the card record from *any* sample to get price, is_legacy, etc.
+                // We use filter_map to discard if not found in any sample.
+                let divi_card = card_3_26.or(card_3_25).or(card_3_24).or(pre_rework_card)?;
+
                 let (min_level, max_level, release_version) = wikicards
-                    .remove(&card.name)
+                    .remove(&card_name)
                     .map(|w| (w.min_level, w.max_level, w.release_version))
                     .unwrap_or_default();
 
-                Card {
-                    slug: slug::slugify(&card.name),
+                Some(Card {
+                    slug: slug::slugify(&card_name),
+                    name: card_name,
                     min_level,
                     max_level,
-                    weight: card.weight,
-                    pre_rework_weight: pre_rework_weight_sample
-                        .cards
-                        .get(&card.name)
-                        .and_then(|card| card.weight),
-                    price: card.price,
-                    league: release_version
-                        .and_then(|version| {
-                            league_info
-                                .iter()
-                                .find(|info| info.version.is_equal(&version))
-                        })
-                        .cloned(),
-                    disabled: card.is_legacy_card(),
-                    name: card.name,
-                }
+                    weights,
+                    price: divi_card.price,
+                    league: release_version.and_then(|version| {
+                        league_info_vec
+                            .iter()
+                            .find(|info| info.version.is_equal(&version))
+                            .cloned()
+                    }),
+                    disabled: divi_card.is_legacy_card(),
+                })
             })
             .collect();
 
         let big_value = 1_000_000.0;
         cards.sort_by(|a, b| {
-            let a_weight = a.weight.unwrap_or(big_value);
-            let b_weight = b.weight.unwrap_or(big_value);
+            let a_weight = a.weights.get(&version_3_26).copied().unwrap_or(big_value);
+            let b_weight = b.weights.get(&version_3_26).copied().unwrap_or(big_value);
             a_weight.partial_cmp(&b_weight).unwrap()
         });
 
@@ -169,32 +237,8 @@ pub mod fetch {
         Ok(CardsData(cards_hashmap))
     }
 
-    /// Loads Total amounts from latest league, constructs Sample from them https://docs.google.com/spreadsheets/d/1PmGES_e1on6K7O5ghHuoorEjruAVb7dQ5m7PGrW7t80/edit#gid=898101079
-    async fn load_league_amounts_sample(
-        api_key: String,
-        prices: Option<Prices>,
-    ) -> Result<Sample, Error> {
-        let batch_read = googlesheets::read_batch(
-            WEIGHT_SPREADSHEET_ID,
-            SHEET_RANGES_OF_TOTAL_CARDS_FROM_LATEST_LEAGUE,
-            Credential::ApiKey(api_key),
-        )
-        .await?;
-        let data = Input::try_from(batch_read)?;
-        let sample = Sample::create(data, prices)?;
-        Ok(sample)
-    }
-
-    async fn load_sample_with_pre_rework_weight(api_key: String) -> Result<Sample, Error> {
-        let batch_read = googlesheets::read_batch(
-            WEIGHT_SPREADSHEET_ID,
-            SHEET_RANGES_OF_TOTAL_CARDS_FROM_PRE_REWORK_WEIGHT_LEAGUE,
-            Credential::ApiKey(api_key),
-        )
-        .await?;
-        let data = Input::try_from(batch_read)?;
-        let sample = Sample::create(data, None)?;
-        Ok(sample)
+    fn get_version_from_range(range: &str) -> Option<&str> {
+        range.split('!').next()
     }
 
     #[derive(Debug)]
