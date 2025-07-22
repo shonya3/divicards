@@ -44,6 +44,7 @@ pub mod fetch {
         },
         error::Error,
         league::{LeagueReleaseInfo, ReleaseVersion},
+        HTTP_CLIENT,
     };
     use divi::{
         prices::Prices,
@@ -51,7 +52,6 @@ pub mod fetch {
         Error as DiviError, IsCard,
     };
     use googlesheets::sheet::Credential;
-    use reqwest::Client;
     use serde::{Deserialize, Serialize};
 
     #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -177,14 +177,26 @@ pub mod fetch {
             title: WikiCardRaw,
         }
 
-        let url = format!("{WIKI_API_URL}?action=cargoquery&format=json&smaxage=1&maxage=1&tables=items&limit=500&fields=items.release_version,items.name,items.drop_level,items.drop_level_maximum,items.drop_areas,items.drop_monsters&where=items.class_id='DivinationCard'");
+        let params = [
+            ("action", "cargoquery"),
+            ("format", "json"),
+            ("smaxage", "1"),
+            ("maxage", "1"),
+            ("tables", "items"),
+            ("limit", "500"),
+            ("fields", "items.release_version,items.name,items.drop_level,items.drop_level_maximum,items.drop_areas,items.drop_monsters"),
+            ("where", "items.class_id='DivinationCard'"),
+        ];
 
-        Ok(Client::new()
-            .get(url)
+        let response = HTTP_CLIENT
+            .get(WIKI_API_URL)
+            .query(&params)
             .send()
             .await?
             .json::<WikiCardsResponse>()
-            .await?
+            .await?;
+
+        Ok(response
             .cargoquery
             .into_iter()
             .map(|WikiCardWrapper { title }| {

@@ -41,7 +41,6 @@ pub async fn read_batch(
                 .await?
         }
         Credential::ApiKey(api_key) => {
-            dbg!(&api_key);
             let url =
         format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values:batchGet?{formatted_ranges}&key={api_key}");
             Client::new().get(url).send().await?

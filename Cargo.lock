@@ -3665,6 +3665,7 @@ dependencies = [
  "dotenv",
  "fs_cache_fetcher",
  "googlesheets",
+ "once_cell",
  "playwright",
  "regex",
  "reqwest 0.12.5",

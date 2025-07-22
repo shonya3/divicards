@@ -9,7 +9,13 @@ pub mod maps;
 
 use self::{act::ActArea, cards::CardsData, mapbosses::MapBoss, maps::Map};
 use act::ActAreaId;
+use once_cell::sync::Lazy;
+use reqwest::Client;
 use serde::{Deserialize, Serialize};
+
+#[cfg(feature = "fs_cache_fetcher")]
+// Create a single, shared HTTP client to be reused across requests.
+pub(crate) static HTTP_CLIENT: Lazy<Client> = Lazy::new(Client::new);
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct PoeData {
