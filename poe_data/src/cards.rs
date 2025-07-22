@@ -34,6 +34,8 @@ impl CardsData {
 
 #[cfg(feature = "fs_cache_fetcher")]
 pub mod fetch {
+    use std::{fmt::Display, num::ParseIntError};
+
     use super::CardsData;
     use crate::{
         cards::Card,
@@ -70,17 +72,17 @@ pub mod fetch {
         dotenv::dotenv().ok();
         let key = std::env::var("GOOGLE_API_KEY").expect("GOOGLE_API_KEY is expected.");
 
-        let (prices, pre_rework_weight_sample, wikicards, league_info_vec) = tokio::join!(
+        let (prices_res, pre_rework_weight_sample_res, wikicards_res, league_info_vec_res) = tokio::join!(
             Prices::fetch(&divi::TradeLeague::Standard),
             load_sample_with_pre_rework_weight(key.clone()),
-            load_wiki(),
+            load_wiki_cards(),
             LeagueReleaseInfo::fetch()
         );
-        let prices = prices.map_err(DiviError::NinjaError)?;
-        let pre_rework_weight_sample = pre_rework_weight_sample?;
-        let league_info = league_info_vec?;
+        let prices = prices_res.map_err(DiviError::NinjaError)?;
+        let pre_rework_weight_sample = pre_rework_weight_sample_res?;
+        let league_info = league_info_vec_res?;
         let sample = load_league_amounts_sample(key.clone(), Some(prices)).await?;
-        let mut wikicards = wikicards?;
+        let mut wikicards = wikicards_res.unwrap();
 
         let mut cards: Vec<Card> = sample
             .cards
@@ -155,7 +157,35 @@ pub mod fetch {
         Ok(sample)
     }
 
-    async fn load_wiki() -> Result<Vec<WikiCard>, Error> {
+    #[derive(Debug)]
+    enum LoadWikiCardsError {
+        Http(reqwest::Error),
+        ParseCardLevel {
+            given_str: String,
+            card: String,
+            field_name: String,
+            err: ParseIntError,
+        },
+    }
+
+    impl Display for LoadWikiCardsError {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match self {
+                LoadWikiCardsError::Http(error) => write!(f, "HTTP error while fetching wiki cards data: {error}"),
+                LoadWikiCardsError::ParseCardLevel {
+                    given_str,
+                    card,
+                    field_name,
+                    err,
+                } => write!(
+                    f,
+                    "Failed to parse {field_name} for card '{card}'. Value was: '{given_str}'. Error: {err}"
+                ),
+            }
+        }
+    }
+
+    async fn load_wiki_cards() -> Result<Vec<WikiCard>, LoadWikiCardsError> {
         #[derive(Serialize, Deserialize, Debug, Clone)]
         struct WikiCardsResponse {
             cargoquery: Vec<WikiCardWrapper>,
@@ -192,22 +222,40 @@ pub mod fetch {
             .get(WIKI_API_URL)
             .query(&params)
             .send()
-            .await?
+            .await
+            .map_err(LoadWikiCardsError::Http)?
             .json::<WikiCardsResponse>()
-            .await?;
+            .await
+            .map_err(LoadWikiCardsError::Http)?;
 
-        Ok(response
+        let parse_level = |level_str: Option<String>,
+                           card_name: &str,
+                           field_name: &str|
+         -> Result<Option<u32>, LoadWikiCardsError> {
+            level_str
+                .map(|s| {
+                    s.parse::<u32>()
+                        .map_err(|err| LoadWikiCardsError::ParseCardLevel {
+                            given_str: s,
+                            card: card_name.to_string(),
+                            field_name: field_name.to_string(),
+                            err,
+                        })
+                })
+                .transpose()
+        };
+
+        response
             .cargoquery
             .into_iter()
-            .map(|WikiCardWrapper { title }| {
-                let raw = title;
-                WikiCard {
-                    name: raw.name.clone(),
-                    min_level: raw.min_level.map(|s| s.parse().unwrap()),
-                    max_level: raw.max_level.map(|s| s.parse().unwrap()),
+            .map(|WikiCardWrapper { title: raw }| {
+                Ok(WikiCard {
+                    min_level: parse_level(raw.min_level, &raw.name, "min_level")?,
+                    max_level: parse_level(raw.max_level, &raw.name, "max_level")?,
                     release_version: raw.release_version,
-                }
+                    name: raw.name,
+                })
             })
-            .collect())
+            .collect()
     }
 }
