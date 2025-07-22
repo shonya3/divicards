@@ -23,18 +23,18 @@ impl PartialEq for ReleaseVersion {
 }
 
 #[test]
-fn same_league() {
+fn is_equal() {
     let version = ReleaseVersion("2.0.3".to_string());
     let other = ReleaseVersion("2.0.5".to_string());
     assert_eq!(version.major(), Some(2u16));
     assert_eq!(version.minor(), Some(0u16));
     assert_eq!(version.patch(), Some(3u16));
     assert_eq!(other.patch(), Some(5u16));
-    assert!(version.same_league(&other))
+    assert!(version.is_equal(&other))
 }
 
 impl ReleaseVersion {
-    pub fn same_league(&self, other: &Self) -> bool {
+    pub fn is_equal(&self, other: &Self) -> bool {
         let major = self.major();
         let minor = self.minor();
 
