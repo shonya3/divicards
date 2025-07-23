@@ -21,6 +21,7 @@ tokio = {workspace = true, optional = true}
 slug = "0.1.5"
 regex = "1.10.6"
 once_cell = { version = "1.21.3", optional = true }
+futures = { version = "0.3", optional = true}
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }
@@ -29,4 +30,4 @@ playwright = {version = "0.0.20"}
 
 [features]
 default = []
-fs_cache_fetcher = ["dep:serde_json", "dep:playwright", "dep:divi", "dep:dotenv", "dep:googlesheets", "dep:reqwest", "dep:fs_cache_fetcher", "dep:tokio", "dep:once_cell"]
+fs_cache_fetcher = ["dep:serde_json", "dep:playwright", "dep:divi", "dep:dotenv", "dep:googlesheets", "dep:reqwest", "dep:fs_cache_fetcher", "dep:tokio", "dep:once_cell", "dep:futures"]

@@ -50,6 +50,7 @@ pub mod fetch {
         sample::{Input, Sample},
         IsCard,
     };
+    use futures::future::try_join_all;
     use googlesheets::sheet::Credential;
     use serde::{Deserialize, Serialize};
     use std::collections::HashMap;
@@ -126,82 +127,64 @@ pub mod fetch {
         dotenv::dotenv().ok();
         let key = std::env::var("GOOGLE_API_KEY").expect("GOOGLE_API_KEY is expected.");
 
-        let (
-            prices_res,
-            sample_3_25_res,
-            sample_3_24_res,
-            pre_rework_weight_sample_res,
-            wikicards_res,
-            league_info_vec_res,
-        ) = tokio::join!(
+        let all_ranges: &[&[&str]] = &[
+            SHEET_RANGES_3_26,
+            SHEET_RANGES_3_25,
+            SHEET_RANGES_3_24,
+            SHEET_RANGES_PRE_REWORK,
+        ];
+
+        let (prices_res, other_samples_res, wikicards_res, league_info_vec_res) = tokio::join!(
             Prices::fetch(&divi::TradeLeague::Standard),
-            load_sample_from_ranges(key.clone(), SHEET_RANGES_3_25, None),
-            load_sample_from_ranges(key.clone(), SHEET_RANGES_3_24, None),
-            load_sample_from_ranges(key.clone(), SHEET_RANGES_PRE_REWORK, None),
+            try_join_all(
+                all_ranges
+                    .iter()
+                    .skip(1) // Skip latest, it's fetched separately
+                    .map(|&ranges| load_sample_from_ranges(key.clone(), ranges, None))
+            ),
             load_wiki_cards(),
             league::fetch::fetch()
         );
 
         let prices = prices_res.map_err(Error::Ninja)?;
-        let sample_3_25 = sample_3_25_res?;
-        let sample_3_24 = sample_3_24_res?;
-        let pre_rework_weight_sample = pre_rework_weight_sample_res?;
+        let mut other_samples = other_samples_res?;
+        let mut wikicards = wikicards_res?;
         let league_info_vec = league_info_vec_res?;
 
         // Fetch latest sample separately with prices
-        let sample_3_26 = load_sample_from_ranges(key, SHEET_RANGES_3_26, Some(prices)).await?;
-        let mut wikicards = wikicards_res?;
+        let latest_sample =
+            load_sample_from_ranges(key, all_ranges[0], Some(prices.clone())).await?;
 
-        let version_3_26 = get_version_from_range(SHEET_RANGES_3_26[0])
-            .unwrap()
-            .to_string();
-        let version_3_25 = get_version_from_range(SHEET_RANGES_3_25[0])
-            .unwrap()
-            .to_string();
-        let version_3_24 = get_version_from_range(SHEET_RANGES_3_24[0])
-            .unwrap()
-            .to_string();
-        let version_pre_rework = get_version_from_range(SHEET_RANGES_PRE_REWORK[0])
-            .unwrap()
-            .to_string();
+        let mut samples = vec![latest_sample];
+        samples.append(&mut other_samples);
 
-        let all_card_names: HashSet<String> = [
-            &sample_3_26,
-            &sample_3_25,
-            &sample_3_24,
-            &pre_rework_weight_sample,
-        ]
-        .into_iter()
-        .flat_map(|sample| &sample.cards)
-        .map(|card| card.name.clone())
-        .collect();
+        let versions: Vec<String> = all_ranges
+            .iter()
+            .map(|ranges| get_version_from_range(ranges[0]).unwrap().to_string())
+            .collect();
+
+        let all_card_names: HashSet<String> = samples
+            .iter()
+            .flat_map(|sample| &sample.cards)
+            .map(|card| card.name.clone())
+            .collect();
 
         let mut cards: Vec<Card> = all_card_names
             .into_iter()
             .filter_map(|card_name| {
                 let mut weights = HashMap::new();
-                let card_3_26 = sample_3_26.cards.get(&card_name);
-                let card_3_25 = sample_3_25.cards.get(&card_name);
-                let card_3_24 = sample_3_24.cards.get(&card_name);
-                let pre_rework_card = pre_rework_weight_sample.cards.get(&card_name);
-
-                if let Some(weight) = card_3_26.and_then(|c| c.weight) {
-                    weights.insert(version_3_26.clone(), weight);
-                }
-                if let Some(weight) = card_3_25.and_then(|c| c.weight) {
-                    weights.insert(version_3_25.clone(), weight);
-                }
-                if let Some(weight) = card_3_24.and_then(|c| c.weight) {
-                    weights.insert(version_3_24.clone(), weight);
-                }
-                if let Some(weight) = pre_rework_card.and_then(|c| c.weight) {
-                    weights.insert(version_pre_rework.clone(), weight);
+                for (i, sample) in samples.iter().enumerate() {
+                    if let Some(weight) = sample.cards.get(&card_name).and_then(|c| c.weight) {
+                        weights.insert(versions[i].clone(), weight);
+                    }
                 }
 
                 // A card might not exist in all samples.
                 // We need to get the card record from *any* sample to get price, is_legacy, etc.
                 // We use filter_map to discard if not found in any sample.
-                let divi_card = card_3_26.or(card_3_25).or(card_3_24).or(pre_rework_card)?;
+                let divi_card = samples
+                    .iter()
+                    .find_map(|sample| sample.cards.get(&card_name))?;
 
                 let (min_level, max_level, release_version) = wikicards
                     .remove(&card_name)
@@ -228,8 +211,9 @@ pub mod fetch {
 
         let big_value = 1_000_000.0;
         cards.sort_by(|a, b| {
-            let a_weight = a.weights.get(&version_3_26).copied().unwrap_or(big_value);
-            let b_weight = b.weights.get(&version_3_26).copied().unwrap_or(big_value);
+            let latest_version = &versions[0];
+            let a_weight = a.weights.get(latest_version).copied().unwrap_or(big_value);
+            let b_weight = b.weights.get(latest_version).copied().unwrap_or(big_value);
             a_weight.partial_cmp(&b_weight).unwrap()
         });
 
