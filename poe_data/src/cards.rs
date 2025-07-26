@@ -1,8 +1,42 @@
-use crate::league::LeagueReleaseInfo;
+use crate::league::{LeagueReleaseInfo, ReleaseVersion};
+use once_cell::sync::Lazy;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+#[cfg(feature = "fs_cache_fetcher")]
+pub struct LeagueRanges {
+    pub version: ReleaseVersion,
+    pub names_range: String,
+    pub weights_range: String,
+}
+
 pub const POE_CDN_CARDS: &str = "https://web.poecdn.com/image/divination-card/";
+
+#[cfg(feature = "fs_cache_fetcher")]
+pub static LEAGUE_RANGES: Lazy<[LeagueRanges; 4]> = Lazy::new(|| {
+    [
+        LeagueRanges {
+            version: ReleaseVersion::new("3.26".to_string()),
+            names_range: "3.26!H3:H".to_string(),
+            weights_range: "3.26!S3:S".to_string(),
+        },
+        LeagueRanges {
+            version: ReleaseVersion::new("3.25".to_string()),
+            names_range: "3.25!F3:F".to_string(),
+            weights_range: "3.25!Q3:Q".to_string(),
+        },
+        LeagueRanges {
+            version: ReleaseVersion::new("3.24".to_string()),
+            names_range: "3.24!D3:D".to_string(),
+            weights_range: "3.24!O3:O".to_string(),
+        },
+        LeagueRanges {
+            version: ReleaseVersion::new("3.23".to_string()),
+            names_range: "3.23!D3:D".to_string(),
+            weights_range: "3.23!P3:P".to_string(),
+        },
+    ]
+});
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -35,13 +69,10 @@ impl CardsData {
 pub mod fetch {
     use std::{collections::HashSet, fmt::Display, num::ParseIntError};
 
-    use super::CardsData;
+    use super::LeagueRanges;
     use crate::{
-        cards::Card,
-        consts::{
-            SHEET_RANGES_3_24, SHEET_RANGES_3_25, SHEET_RANGES_3_26, SHEET_RANGES_PRE_REWORK,
-            WEIGHT_SPREADSHEET_ID, WIKI_API_URL,
-        },
+        cards::{Card, CardsData, LEAGUE_RANGES},
+        consts::{WEIGHT_SPREADSHEET_ID, WIKI_API_URL},
         league::{self, fetch::Error as LeagueError, ReleaseVersion},
         HTTP_CLIENT,
     };
@@ -111,12 +142,15 @@ pub mod fetch {
     /// Loads Total amounts from a given league, constructs Sample from them https://docs.google.com/spreadsheets/d/1PmGES_e1on6K7O5ghHuoorEjruAVb7dQ5m7PGrW7t80/edit#gid=898101079
     async fn load_sample_from_ranges(
         api_key: String,
-        ranges: &'static [&'static str],
+        league_ranges: &LeagueRanges,
         prices: Option<Prices>,
     ) -> Result<Sample, Error> {
-        let batch_read =
-            googlesheets::read_batch(WEIGHT_SPREADSHEET_ID, ranges, Credential::ApiKey(api_key))
-                .await?;
+        let batch_read = googlesheets::read_batch(
+            WEIGHT_SPREADSHEET_ID,
+            &[&league_ranges.names_range, &league_ranges.weights_range],
+            Credential::ApiKey(api_key),
+        )
+        .await?;
         let data = Input::try_from(batch_read)?;
         let sample = Sample::create(data, prices)?;
         Ok(sample)
@@ -127,20 +161,13 @@ pub mod fetch {
         dotenv::dotenv().ok();
         let key = std::env::var("GOOGLE_API_KEY").expect("GOOGLE_API_KEY is expected.");
 
-        let all_ranges: &[&[&str]] = &[
-            SHEET_RANGES_3_26,
-            SHEET_RANGES_3_25,
-            SHEET_RANGES_3_24,
-            SHEET_RANGES_PRE_REWORK,
-        ];
-
         let (prices_res, other_samples_res, wikicards_res, league_info_vec_res) = tokio::join!(
             Prices::fetch(&divi::TradeLeague::Standard),
             try_join_all(
-                all_ranges
+                LEAGUE_RANGES
                     .iter()
                     .skip(1) // Skip latest, it's fetched separately
-                    .map(|&ranges| load_sample_from_ranges(key.clone(), ranges, None))
+                    .map(|league_range| load_sample_from_ranges(key.clone(), league_range, None))
             ),
             load_wiki_cards(),
             league::fetch::fetch()
@@ -153,14 +180,14 @@ pub mod fetch {
 
         // Fetch latest sample separately with prices
         let latest_sample =
-            load_sample_from_ranges(key, all_ranges[0], Some(prices.clone())).await?;
+            load_sample_from_ranges(key, &LEAGUE_RANGES[0], Some(prices.clone())).await?;
 
         let mut samples = vec![latest_sample];
         samples.append(&mut other_samples);
 
-        let versions: Vec<String> = all_ranges
+        let versions: Vec<String> = LEAGUE_RANGES
             .iter()
-            .map(|ranges| get_version_from_range(ranges[0]).unwrap().to_string())
+            .map(|lr| lr.version.to_string())
             .collect();
 
         let all_card_names: HashSet<String> = samples
@@ -219,10 +246,6 @@ pub mod fetch {
 
         let cards_hashmap = cards.into_iter().map(|c| (c.name.clone(), c)).collect();
         Ok(CardsData(cards_hashmap))
-    }
-
-    fn get_version_from_range(range: &str) -> Option<&str> {
-        range.split('!').next()
     }
 
     #[derive(Debug)]
