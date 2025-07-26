@@ -3,14 +3,21 @@ use once_cell::sync::Lazy;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+pub const POE_CDN_CARDS: &str = "https://web.poecdn.com/image/divination-card/";
+
 #[cfg(feature = "fs_cache_fetcher")]
+/// Represents the Google Sheets ranges for a specific league's divination card data.
+///
+/// This is used to fetch card names and their corresponding weights from a spreadsheet
+/// for different Path of Exile league versions.
 pub struct LeagueRanges {
+    /// The league version, e.g., "3.26".
     pub version: ReleaseVersion,
+    /// The sheet range for card names, e.g., "3.26!H3:H".
     pub names_range: String,
+    /// The sheet range for card weights, e.g., "3.26!S3:S".
     pub weights_range: String,
 }
-
-pub const POE_CDN_CARDS: &str = "https://web.poecdn.com/image/divination-card/";
 
 #[cfg(feature = "fs_cache_fetcher")]
 pub static LEAGUE_RANGES: Lazy<[LeagueRanges; 4]> = Lazy::new(|| {
