@@ -1,5 +1,6 @@
 use crate::Error;
 use poe::league::TradeLeague;
+use reqwest::Client;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
@@ -9,11 +10,19 @@ pub async fn fetch_card_data(league: &TradeLeague) -> Result<Vec<CardData>, Erro
         lines: Vec<CardData>,
     }
 
-    let url = format!(
-        "https://poe.ninja/api/data/itemoverview?league={league}&type=DivinationCard&language=en"
-    );
-    let json = reqwest::get(url).await?.text().await?;
-    let data = serde_json::from_str::<ResponseShape>(&json)?;
+    let league_str = league.to_string();
+    let params = [
+        ("league", league_str.as_str()),
+        ("type", "DivinationCard"),
+        ("language", "en"),
+    ];
+    let data = Client::new()
+        .get("https://poe.ninja/api/data/itemoverview")
+        .query(&params)
+        .send()
+        .await?
+        .json::<ResponseShape>()
+        .await?;
     if data.lines.is_empty() {
         return Err(Error::NoItemsBadRequest);
     }
