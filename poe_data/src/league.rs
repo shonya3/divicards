@@ -87,6 +87,7 @@ impl Display for UnexpectedLeagueInfoShapeError {
 pub mod fetch {
     use super::{LeagueReleaseInfo, UnexpectedLeagueInfoShapeError};
     use crate::consts::WIKI_API_URL;
+    use crate::HTTP_CLIENT;
     use serde_json::Value;
     use std::fmt::Display;
 
@@ -125,8 +126,20 @@ pub mod fetch {
 
     pub async fn fetch() -> Result<Vec<LeagueReleaseInfo>, Error> {
         let mut league_relese_info_vec: Vec<LeagueReleaseInfo> = vec![];
-        let url = format!("{WIKI_API_URL}?action=cargoquery&format=json&tables=events&fields=events.name,release_date,release_version&where=events.type=%22Challenge%20league%22");
-        let json: Value = reqwest::get(url).await?.json().await?;
+        let params = [
+            ("action", "cargoquery"),
+            ("format", "json"),
+            ("tables", "events"),
+            ("fields", "events.name,release_date,release_version"),
+            ("where", "events.type=\"Challenge league\""),
+        ];
+        let json: Value = HTTP_CLIENT
+            .get(WIKI_API_URL)
+            .query(&params)
+            .send()
+            .await?
+            .json()
+            .await?;
         let Some(vec) = json["cargoquery"].as_array() else {
             return Err(UnexpectedLeagueInfoShapeError::NoCargoqueryArray.into());
         };
