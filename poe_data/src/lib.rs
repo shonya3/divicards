@@ -9,9 +9,10 @@ pub mod maps;
 
 use self::{act::ActArea, cards::CardsData, mapbosses::MapBoss, maps::Map};
 use act::ActAreaId;
-use once_cell::sync::Lazy;
-use reqwest::Client;
 use serde::{Deserialize, Serialize};
+
+#[cfg(feature = "fs_cache_fetcher")]
+use {once_cell::sync::Lazy, reqwest::Client};
 
 #[cfg(feature = "fs_cache_fetcher")]
 // Create a single, shared HTTP client to be reused across requests.

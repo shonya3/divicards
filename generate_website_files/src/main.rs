@@ -118,11 +118,21 @@ pub fn divcord_wasm_pkg(path: &Path, dirname: &str) {
             Ok(output) => {
                 if output.status.success() {
                     println!("{}", String::from_utf8_lossy(&output.stdout)); // Print wasm-pack's stdout
-                    eprintln!("{}", String::from_utf8_lossy(&output.stderr)); // Print wasm-pack's stderr
-
+                    let stderr = String::from_utf8_lossy(&output.stderr);
+                    if !stderr.is_empty() {
+                        eprintln!("{stderr}"); // Print wasm-pack's stderr
+                    }
                     println!("Command executed successfully!");
                 } else {
-                    eprintln!("Error executing command");
+                    eprintln!("Error executing command. Status: {}", output.status);
+                    eprintln!(
+                        "--- stderr ---\n{}",
+                        String::from_utf8_lossy(&output.stderr)
+                    );
+                    eprintln!(
+                        "--- stdout ---\n{}",
+                        String::from_utf8_lossy(&output.stdout)
+                    );
                 }
             }
             Err(err) => {

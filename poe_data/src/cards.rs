@@ -1,4 +1,5 @@
 use crate::league::{LeagueReleaseInfo, ReleaseVersion};
+#[cfg(feature = "fs_cache_fetcher")]
 use once_cell::sync::Lazy;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
