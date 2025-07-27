@@ -18,3 +18,4 @@ ninja = { path = "../ninja" }
 poe_data = { path = "../poe_data", features = ["fs_cache_fetcher"] }
 slug = "0.1.5"
 dotenv.workspace = true
+once_cell = "1.21.3"

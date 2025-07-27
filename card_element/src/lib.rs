@@ -1,8 +1,12 @@
+pub mod base_items_fetcher;
 pub mod drop_level;
 pub mod error;
 pub mod fetcher;
 pub mod images;
 pub mod reward;
+pub mod unique;
+pub mod uniques_fetcher;
+use crate::unique::UniqueReward;
 
 use drop_level::DropLevel;
 pub use error::Error;
@@ -20,6 +24,7 @@ pub struct DivinationCardElementData {
     pub flavour_text: String,
     pub stack_size: Option<usize>,
     pub drop_level: DropLevel,
+    pub unique: Option<UniqueReward>,
 }
 
 impl DivinationCardElementData {

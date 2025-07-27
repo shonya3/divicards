@@ -18,6 +18,7 @@ use divi::Prices;
 use error::Error;
 use fs_cache_fetcher::DataFetcher;
 use fs_cache_fetcher::{Config, Stale};
+use poe::TradeLeague;
 use poe_data::fetchers::MapsFetcher;
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
@@ -32,4 +33,13 @@ use std::{
 mod error;
 
 #[tokio::main]
-async fn main() {}
+async fn main() {
+    let data = DivinationCardElementData::load().await.unwrap();
+
+    jsonsave("cardElement.json", data);
+}
+
+pub fn jsonsave<S: Serialize>(path: &str, data: S) {
+    let json = serde_json::to_string(&data).unwrap();
+    std::fs::write(path, json).unwrap();
+}

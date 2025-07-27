@@ -19,3 +19,5 @@ poe_data = {path  = "../poe_data", features = ["fs_cache_fetcher"]}
 card_element = {path = "../card_element"}
 poe = { path = "../poe" }
 ninja = { path = "../ninja" }
+regex = "1.11.1"
+once_cell = "1.21.3"

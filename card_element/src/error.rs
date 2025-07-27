@@ -1,3 +1,4 @@
+use crate::uniques_fetcher::Error as FetchUniquesError;
 use std::fmt::Display;
 
 #[derive(Debug)]
@@ -7,16 +8,18 @@ pub enum Error {
     SerdeError(serde_json::Error),
     NinjaError(ninja::Error),
     PoeDataError(poe_data::error::Error),
+    FetchUniques(FetchUniquesError),
 }
 
 impl Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Error::RegExpError(err) => err.fmt(f),
-            Error::IoError(err) => err.fmt(f),
-            Error::SerdeError(err) => err.fmt(f),
-            Error::NinjaError(err) => err.fmt(f),
-            Error::PoeDataError(err) => err.fmt(f),
+            Error::RegExpError(e) => e.fmt(f),
+            Error::IoError(e) => e.fmt(f),
+            Error::SerdeError(e) => e.fmt(f),
+            Error::NinjaError(e) => e.fmt(f),
+            Error::PoeDataError(e) => e.fmt(f),
+            Error::FetchUniques(e) => e.fmt(f),
         }
     }
 }
@@ -48,5 +51,11 @@ impl From<ninja::Error> for Error {
 impl From<poe_data::error::Error> for Error {
     fn from(value: poe_data::error::Error) -> Self {
         Self::PoeDataError(value)
+    }
+}
+
+impl From<FetchUniquesError> for Error {
+    fn from(value: FetchUniquesError) -> Self {
+        Self::FetchUniques(value)
     }
 }
