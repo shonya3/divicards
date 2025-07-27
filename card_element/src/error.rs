@@ -1,3 +1,4 @@
+use crate::base_items_fetcher::Error as FetchBaseItemsError;
 use crate::uniques_fetcher::Error as FetchUniquesError;
 use std::fmt::Display;
 
@@ -9,6 +10,7 @@ pub enum Error {
     NinjaError(ninja::Error),
     PoeDataError(poe_data::error::Error),
     FetchUniques(FetchUniquesError),
+    FetchBaseItems(FetchBaseItemsError),
 }
 
 impl Display for Error {
@@ -20,6 +22,7 @@ impl Display for Error {
             Error::NinjaError(e) => e.fmt(f),
             Error::PoeDataError(e) => e.fmt(f),
             Error::FetchUniques(e) => e.fmt(f),
+            Error::FetchBaseItems(e) => e.fmt(f),
         }
     }
 }
@@ -57,5 +60,11 @@ impl From<poe_data::error::Error> for Error {
 impl From<FetchUniquesError> for Error {
     fn from(value: FetchUniquesError) -> Self {
         Self::FetchUniques(value)
+    }
+}
+
+impl From<FetchBaseItemsError> for Error {
+    fn from(value: FetchBaseItemsError) -> Self {
+        Self::FetchBaseItems(value)
     }
 }

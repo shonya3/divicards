@@ -1,7 +1,10 @@
 use crate::drop_level;
 use crate::{
-    reward::reward_to_html, unique::extract_unique_name_from_mod, unique::UniqueReward,
-    uniques_fetcher::UniquesFetcher, DivinationCardElementData, Error,
+    base_items_fetcher::{BaseItem, BaseItemsFetcher},
+    reward::reward_to_html,
+    unique::extract_unique_name_from_mod,
+    uniques_fetcher::UniquesFetcher,
+    DivinationCardElementData, Error,
 };
 use fs_cache_fetcher::{Config, DataFetcher, Stale};
 use poe::TradeLeague;
@@ -27,17 +30,26 @@ impl DataFetcher for Fetcher {
         let league = TradeLeague::default();
         let cards_fetcher = CardsFetcher::default();
         let uniques_fetcher = UniquesFetcher::default();
-        let (ninja_data, cards, uniques_data) = tokio::join!(
+        let base_items_fetcher = BaseItemsFetcher::default();
+        let (ninja_data, cards, uniques_data, base_items_data) = tokio::join!(
             ninja::fetch_card_data(&league),
             cards_fetcher.load(),
-            uniques_fetcher.load()
+            uniques_fetcher.load(),
+            base_items_fetcher.load()
         );
         let ninja_data = ninja_data?;
         let cards = cards?;
         let uniques_data = uniques_data?;
+        let base_items_data = base_items_data?;
 
         // Build a lookup map for faster access.
         let uniques_map = crate::unique::build_uniques_map(&uniques_data);
+        let base_items_map: std::collections::HashMap<String, &BaseItem> = base_items_data
+            .0
+            .values()
+            .map(|item| (item.name.clone(), item))
+            .collect();
+        let item_class_set = crate::unique::build_item_class_set(&uniques_data);
 
         let v: Vec<DivinationCardElementData> = ninja_data
             .into_iter()
@@ -57,12 +69,13 @@ impl DataFetcher for Fetcher {
                     .iter()
                     .find_map(|modifier| extract_unique_name_from_mod(&modifier.text));
 
-                // Look up the item class and create the UniqueReward struct.
                 let unique = unique_name.and_then(|name| {
-                    uniques_map.get(&name).map(|info| UniqueReward {
-                        name: info.name.clone(),
-                        item_class: info.item_class.clone(),
-                    })
+                    crate::unique::find_unique_reward(
+                        &name,
+                        &uniques_map,
+                        &base_items_map,
+                        &item_class_set,
+                    )
                 });
 
                 let card = cards.0.get(&data.name);

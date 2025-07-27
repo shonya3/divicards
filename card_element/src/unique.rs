@@ -1,3 +1,10 @@
+//! This module provides utilities for parsing and identifying unique item rewards.
+//!
+//! It contains the data structures (`UniqueReward`, `UniqueInfo`) for representing
+//! unique items, functions for extracting unique item names from raw text, and the
+//! core logic (`find_unique_reward`) for resolving a reward name against multiple
+//! data sources (specific uniques, base items, and item classes).
+use crate::base_items_fetcher::BaseItem;
 use once_cell::sync::Lazy;
 use regex::Regex;
 use serde::{Deserialize, Serialize};
@@ -41,12 +48,42 @@ pub fn build_uniques_map(
         .collect()
 }
 
-/// Builds a set of all unique item classes.
+/// Builds a set of all unique item classes for quick lookups.
 pub fn build_item_class_set(uniques_data: &HashMap<String, UniqueInfo>) -> HashSet<String> {
     uniques_data
         .values()
         .map(|info| info.item_class.clone())
         .collect()
+}
+
+/// Finds a unique reward by checking specific uniques, then base items, then item classes.
+pub fn find_unique_reward<'a>(
+    name: &str,
+    uniques_map: &'a HashMap<String, UniqueInfo>,
+    base_items_map: &'a HashMap<String, &'a BaseItem>,
+    item_class_set: &'a HashSet<String>,
+) -> Option<UniqueReward> {
+    if let Some(info) = uniques_map.get(name) {
+        // Case 1: A specific unique item.
+        Some(UniqueReward {
+            name: info.name.clone(),
+            item_class: info.item_class.clone(),
+        })
+    } else if let Some(base_item) = base_items_map.get(name) {
+        // Case 2: A unique base type, like "Timeless Jewel".
+        Some(UniqueReward {
+            name: name.to_string(),
+            item_class: base_item.item_class.clone(),
+        })
+    } else if item_class_set.contains(name) {
+        // Case 3: A generic unique item class, like "Jewel" or "Ring".
+        Some(UniqueReward {
+            name: name.to_string(),
+            item_class: name.to_string(),
+        })
+    } else {
+        None
+    }
 }
 
 #[cfg(test)]
@@ -90,5 +127,65 @@ mod tests {
             extract_unique_name_from_mod(mod_text),
             Some("Headhunter".to_string())
         );
+    }
+
+    #[test]
+    fn test_find_unique_reward() {
+        // --- Mock Data Setup ---
+        let mut uniques_map = HashMap::new();
+        uniques_map.insert(
+            "Mageblood".to_string(),
+            UniqueInfo {
+                name: "Mageblood".to_string(),
+                item_class: "Belt".to_string(),
+            },
+        );
+        uniques_map.insert(
+            "Unnatural Instinct".to_string(),
+            UniqueInfo {
+                name: "Unnatural Instinct".to_string(),
+                item_class: "Jewel".to_string(),
+            },
+        );
+
+        let timeless_jewel = BaseItem {
+            name: "Timeless Jewel".to_string(),
+            item_class: "Jewel".to_string(),
+        };
+        let mut base_items_map = HashMap::new();
+        base_items_map.insert("Timeless Jewel".to_string(), &timeless_jewel);
+
+        let mut item_class_set = HashSet::new();
+        item_class_set.insert("Jewel".to_string());
+        item_class_set.insert("Belt".to_string());
+
+        // --- Test Cases ---
+
+        // Case 1: Specific unique item
+        let result1 =
+            find_unique_reward("Mageblood", &uniques_map, &base_items_map, &item_class_set);
+        assert_eq!(result1.unwrap().item_class, "Belt");
+
+        // Case 2: Unique base type
+        let result2 = find_unique_reward(
+            "Timeless Jewel",
+            &uniques_map,
+            &base_items_map,
+            &item_class_set,
+        );
+        assert_eq!(result2.unwrap().item_class, "Jewel");
+
+        // Case 3: Generic item class
+        let result3 = find_unique_reward("Jewel", &uniques_map, &base_items_map, &item_class_set);
+        assert_eq!(result3.unwrap().item_class, "Jewel");
+
+        // Case 4: No match
+        let result4 = find_unique_reward(
+            "Random Item",
+            &uniques_map,
+            &base_items_map,
+            &item_class_set,
+        );
+        assert!(result4.is_none());
     }
 }
