@@ -2,7 +2,7 @@ use crate::drop_level;
 use crate::{
     base_items_fetcher::{BaseItem, BaseItemsFetcher},
     reward::reward_to_html,
-    unique::extract_unique_name_from_mod,
+    unique,
     uniques_fetcher::UniquesFetcher,
     DivinationCardElementData, Error,
 };
@@ -43,13 +43,19 @@ impl DataFetcher for Fetcher {
         let base_items_data = base_items_data?;
 
         // Build a lookup map for faster access.
-        let uniques_map = crate::unique::build_uniques_map(&uniques_data);
+        let uniques_map = unique::build_uniques_map(&uniques_data);
         let base_items_map: std::collections::HashMap<String, &BaseItem> = base_items_data
             .0
             .values()
             .map(|item| (item.name.clone(), item))
             .collect();
-        let item_class_set = crate::unique::build_item_class_set(&uniques_data);
+        let mut item_class_set = unique::build_item_class_set(&uniques_data);
+        item_class_set.extend(
+            base_items_data
+                .0
+                .values()
+                .map(|item| item.item_class.clone()),
+        );
 
         let v: Vec<DivinationCardElementData> = ninja_data
             .into_iter()
@@ -67,10 +73,10 @@ impl DataFetcher for Fetcher {
                 let unique_name = data
                     .explicit_modifiers
                     .iter()
-                    .find_map(|modifier| extract_unique_name_from_mod(&modifier.text));
+                    .find_map(|modifier| unique::extract_unique_name_from_mod(&modifier.text));
 
                 let unique = unique_name.and_then(|name| {
-                    crate::unique::find_unique_reward(
+                    unique::find_unique_reward(
                         &name,
                         &uniques_map,
                         &base_items_map,

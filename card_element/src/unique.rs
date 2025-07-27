@@ -63,6 +63,67 @@ pub fn find_unique_reward<'a>(
     base_items_map: &'a HashMap<String, &'a BaseItem>,
     item_class_set: &'a HashSet<String>,
 ) -> Option<UniqueReward> {
+    // Handle special, abstract unique categories and specific items that aren't in the data files.
+    // This is a fallback layer for when the primary data sources are incomplete.
+    match name {
+        // https://divicards-site.pages.dev/card/damnation
+        "The Original Scripture" => {
+            return Some(UniqueReward {
+                name: name.to_string(),
+                item_class: "Relic".to_string(),
+            })
+        }
+
+        // http:///divicards-site.pages.dev/card/deadly-joy
+        "Torrent's Reclamation" => {
+            return Some(UniqueReward {
+                name: name.to_string(),
+                item_class: "Belt".to_string(),
+            })
+        }
+
+        // https://divicards-site.pages.dev/card/the-unexpected-prize
+        "Attribute Transforming Jewel" => {
+            return Some(UniqueReward {
+                name: name.to_string(),
+                item_class: "Jewel".to_string(),
+            })
+        }
+
+        "Vaal Aspect"
+        | "League-Specific Item"
+        | "Maven Item"
+        | "Farrul Item"
+        | "Chayula Item"
+        | "Atziri Item"
+        | "Nemesis Item"
+        | "Breach Item"
+        | "Synthesis Item"
+        | "Bestiary Item"
+        | "Delve Item"
+        | "Harbinger Piece"
+        | "Item"
+        | "Fishing Item"
+        | "Synthesis Map"
+        | "Replica Item"
+        | "Weapon"
+        | "Lioneye Item"
+        | "Doedre Item"
+        | "Shavronne Item"
+        | "Agnerod Staff"
+        | "Rigwald Item"
+        | "Jewellery"
+        | "Metamorph Item"
+        | "Beyond Item" => {
+            return Some(UniqueReward {
+                name: name.to_string(),
+                item_class: name.to_string(),
+            })
+        }
+
+        _ => {}
+    }
+
     if let Some(info) = uniques_map.get(name) {
         // Case 1: A specific unique item.
         Some(UniqueReward {
@@ -132,6 +193,8 @@ mod tests {
     #[test]
     fn test_find_unique_reward() {
         // --- Mock Data Setup ---
+
+        // A map of specific unique items (from uniques.json)
         let mut uniques_map = HashMap::new();
         uniques_map.insert(
             "Mageblood".to_string(),
@@ -140,52 +203,89 @@ mod tests {
                 item_class: "Belt".to_string(),
             },
         );
-        uniques_map.insert(
-            "Unnatural Instinct".to_string(),
-            UniqueInfo {
-                name: "Unnatural Instinct".to_string(),
-                item_class: "Jewel".to_string(),
-            },
-        );
 
-        let timeless_jewel = BaseItem {
+        // A map of base items (from base_items.json)
+        let timeless_jewel_base = BaseItem {
             name: "Timeless Jewel".to_string(),
             item_class: "Jewel".to_string(),
         };
         let mut base_items_map = HashMap::new();
-        base_items_map.insert("Timeless Jewel".to_string(), &timeless_jewel);
+        base_items_map.insert("Timeless Jewel".to_string(), &timeless_jewel_base);
 
+        // A comprehensive set of all possible item classes from both data sources
         let mut item_class_set = HashSet::new();
         item_class_set.insert("Jewel".to_string());
         item_class_set.insert("Belt".to_string());
+        item_class_set.insert("Relic".to_string());
 
         // --- Test Cases ---
+        struct TestCase<'a> {
+            name: &'a str,
+            input: &'a str,
+            expected_name: &'a str,
+            expected_class: &'a str,
+        }
 
-        // Case 1: Specific unique item
-        let result1 =
-            find_unique_reward("Mageblood", &uniques_map, &base_items_map, &item_class_set);
-        assert_eq!(result1.unwrap().item_class, "Belt");
+        let test_cases = vec![
+            TestCase {
+                name: "Case 0: Special 'League-Specific Item'",
+                input: "League-Specific Item",
+                expected_name: "League-Specific Item",
+                expected_class: "League-Specific Item",
+            },
+            TestCase {
+                name: "Case 1: Specific unique item ('Mageblood')",
+                input: "Mageblood",
+                expected_name: "Mageblood",
+                expected_class: "Belt",
+            },
+            TestCase {
+                name: "Case 2: Unique base type ('Timeless Jewel')",
+                input: "Timeless Jewel",
+                expected_name: "Timeless Jewel",
+                expected_class: "Jewel",
+            },
+            TestCase {
+                name: "Case 3: Generic item class ('Relic')",
+                input: "Relic",
+                expected_name: "Relic",
+                expected_class: "Relic",
+            },
+            TestCase {
+                name: "Case 4: Special case unique ('The Original Scripture')",
+                input: "The Original Scripture",
+                expected_name: "The Original Scripture",
+                expected_class: "Relic",
+            },
+        ];
 
-        // Case 2: Unique base type
-        let result2 = find_unique_reward(
-            "Timeless Jewel",
-            &uniques_map,
-            &base_items_map,
-            &item_class_set,
-        );
-        assert_eq!(result2.unwrap().item_class, "Jewel");
+        for case in test_cases {
+            let result =
+                find_unique_reward(case.input, &uniques_map, &base_items_map, &item_class_set)
+                    .unwrap_or_else(|| panic!("Test case '{}' failed: got None", case.name));
 
-        // Case 3: Generic item class
-        let result3 = find_unique_reward("Jewel", &uniques_map, &base_items_map, &item_class_set);
-        assert_eq!(result3.unwrap().item_class, "Jewel");
+            assert_eq!(
+                result.name, case.expected_name,
+                "Failed name for case: {}",
+                case.name
+            );
+            assert_eq!(
+                result.item_class, case.expected_class,
+                "Failed item_class for case: {}",
+                case.name
+            );
+        }
 
-        // Case 4: No match
-        let result4 = find_unique_reward(
+        // --- Test No Match ---
+        let no_match_result = find_unique_reward(
             "Random Item",
             &uniques_map,
             &base_items_map,
             &item_class_set,
         );
-        assert!(result4.is_none());
+        assert!(
+            no_match_result.is_none(),
+            "Expected None for non-existent item"
+        );
     }
 }
