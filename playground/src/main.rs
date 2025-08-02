@@ -34,9 +34,10 @@ mod error;
 
 #[tokio::main]
 async fn main() {
-    let data = DivinationCardElementData::load().await.unwrap();
+    let poe_data = PoeData::load().await.unwrap();
+    let spreadsheet = Spreadsheet::load().await.unwrap();
 
-    jsonsave("cardElement.json", data);
+    divcord::records(&spreadsheet, &poe_data).unwrap();
 }
 
 pub fn jsonsave<S: Serialize>(path: &str, data: S) {

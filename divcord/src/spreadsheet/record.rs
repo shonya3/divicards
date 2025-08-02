@@ -69,6 +69,7 @@ pub enum ParseDumbErrKind {
     Confidence(SerdeJsonError),
     RemainingWork(SerdeJsonError),
     StyledCell(ParseCellError),
+    DuplicateDropSource(DropsFrom),
 }
 
 impl Display for ParseDumbError {
@@ -104,6 +105,11 @@ impl Display for ParseDumbError {
                     "{preparsing_phase} {record_id} {card}. Parse remaining work error. {error}"
                 )
             }
+            ParseDumbErrKind::DuplicateDropSource(drops_from) => write!(
+                f,
+                "{preparsing_phase} {record_id} {card}. Duplicate drop source: {}",
+                drops_from.name
+            ),
             ParseDumbErrKind::StyledCell(parse_cell_error) => write!(
                 f,
                 "{preparsing_phase} {record_id} {card} Could not parse styled cell into chunks. {parse_cell_error}"
@@ -219,6 +225,18 @@ impl Dumb {
 
         // Combine drops and datamined drops
         drops.extend(drops_datamined);
+
+        // Check if there are duplicates in drops
+        let mut seen = std::collections::HashSet::new();
+        for drop in &drops {
+            if !seen.insert(&drop.name) {
+                return Err(ParseDumbError::new(
+                    record_id,
+                    card.clone(),
+                    ParseDumbErrKind::DuplicateDropSource(drop.clone()),
+                ));
+            }
+        }
 
         // I 8 - To Confirm or Verify
         let drops_to_verify =
