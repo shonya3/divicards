@@ -10,6 +10,7 @@ use divcord::{spreadsheet::Spreadsheet, ParseRecordError, Record, Source};
 use poe_data::PoeData;
 use serde::Serialize;
 
+#[allow(unused)]
 #[tokio::main]
 async fn main() {
     dotenv::dotenv().ok();
@@ -21,6 +22,8 @@ async fn main() {
     let records = parse_divcord_records(&spreadsheet, &poe_data);
 
     let card_element = DivinationCardElementData::load().await.unwrap();
+
+    ensure_all_unique_rewards_handled(&card_element).unwrap();
 
     // 1. Write data jsons
     // Prepare paths
@@ -175,4 +178,29 @@ where
     let json = serde_json::to_string(&value).unwrap();
     let p = dir.join(filename);
     std::fs::write(p, json).unwrap();
+}
+
+/// Ensure that all card elements that have unique class in their reward html
+///  also have something in "unique" field.
+pub fn ensure_all_unique_rewards_handled(
+    card_elements: &[DivinationCardElementData],
+) -> Result<(), String> {
+    let cards = card_elements
+        .iter()
+        .filter(|c| c.reward_html.contains("unique") && c.unique.is_none())
+        .collect::<Vec<_>>();
+
+    if !cards.is_empty() {
+        let cards_s = cards
+            .iter()
+            .map(|card| format!("{}: {}", card.name, card.reward_html))
+            .collect::<Vec<_>>()
+            .join("\n");
+
+        return Err(format!(
+            "Card element data preparation error. Not all unique rewards are handled.\n{cards_s}"
+        ));
+    }
+
+    Ok(())
 }
