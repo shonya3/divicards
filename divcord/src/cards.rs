@@ -12,10 +12,10 @@ pub fn cards_by_source(
         .into_iter()
         .map(CardBySource::Direct)
         .collect::<Vec<_>>();
-    let from_children = cards_from_child_sources(source, records, poe_data)
+    let transitive_cards = cards_from_transitive_sources(source, records, poe_data)
         .into_iter()
-        .map(CardBySource::FromChild);
-    direct_cards.extend(from_children);
+        .map(CardBySource::Transitive);
+    direct_cards.extend(transitive_cards);
     direct_cards
 }
 
@@ -51,9 +51,9 @@ pub fn cards_by_source_types(
         poe_data.maps.clone().into_iter().for_each(|map| {
             let source = Source::from(map);
 
-            let cards = cards_from_child_sources(&source, records, poe_data)
+            let cards = cards_from_transitive_sources(&source, records, poe_data)
                 .into_iter()
-                .map(CardBySource::FromChild)
+                .map(CardBySource::Transitive)
                 .collect::<Vec<_>>();
             if !cards.is_empty() {
                 hash_map.entry(source.clone()).or_default().extend(cards);
@@ -68,9 +68,9 @@ pub fn cards_by_source_types(
             }
 
             let source = Source::from(act_area);
-            let cards = cards_from_child_sources(&source, records, poe_data)
+            let cards = cards_from_transitive_sources(&source, records, poe_data)
                 .into_iter()
-                .map(CardBySource::FromChild)
+                .map(CardBySource::Transitive)
                 .collect::<Vec<_>>();
             if !cards.is_empty() {
                 hash_map.entry(source.clone()).or_default().extend(cards)
@@ -93,55 +93,55 @@ pub struct Direct {
 }
 
 #[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
-pub struct FromChild {
+pub struct Transitive {
     #[serde(skip_serializing)]
     pub source: Source,
     pub card: String,
     pub column: SourcesKind,
-    pub child: Source,
+    pub transitive: Source,
 }
 
 #[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CardBySource {
     Direct(Direct),
-    #[serde(rename = "child")]
-    FromChild(FromChild),
+    #[serde(rename = "transitive")]
+    Transitive(Transitive),
 }
 
 impl CardBySource {
-    pub fn is_child(&self) -> bool {
+    pub fn is_transitive(&self) -> bool {
         match self {
             CardBySource::Direct(_) => false,
-            CardBySource::FromChild(_) => true,
+            CardBySource::Transitive(_) => true,
         }
     }
 
     pub fn is_direct(&self) -> bool {
         match self {
             CardBySource::Direct(_) => true,
-            CardBySource::FromChild(_) => false,
+            CardBySource::Transitive(_) => false,
         }
     }
 
     pub fn column(&self) -> &SourcesKind {
         match self {
             CardBySource::Direct(d) => &d.column,
-            CardBySource::FromChild(c) => &c.column,
+            CardBySource::Transitive(c) => &c.column,
         }
     }
 
     pub fn card(&self) -> &String {
         match self {
             CardBySource::Direct(d) => &d.card,
-            CardBySource::FromChild(c) => &c.card,
+            CardBySource::Transitive(c) => &c.card,
         }
     }
 
     pub fn source(&self) -> &Source {
         match self {
             CardBySource::Direct(d) => &d.source,
-            CardBySource::FromChild(c) => &c.source,
+            CardBySource::Transitive(c) => &c.source,
         }
     }
 }
@@ -176,7 +176,7 @@ impl From<poe_data::act::ActArea> for Source {
     }
 }
 
-pub fn child_sources(source: &Source, poe_data: &PoeData) -> Vec<Source> {
+pub fn transitive_sources(source: &Source, poe_data: &PoeData) -> Vec<Source> {
     match source {
         Source::Act(act) => poe_data
             .act_area_id(act)
@@ -197,21 +197,21 @@ pub fn child_sources(source: &Source, poe_data: &PoeData) -> Vec<Source> {
     }
 }
 
-pub fn cards_from_child_sources(
+pub fn cards_from_transitive_sources(
     direct_source: &Source,
     records: &[Record],
     poe_data: &PoeData,
-) -> Vec<FromChild> {
-    child_sources(direct_source, poe_data)
+) -> Vec<Transitive> {
+    transitive_sources(direct_source, poe_data)
         .iter()
-        .flat_map(|child| {
-            cards_by_source_directly(child, records)
+        .flat_map(|transit| {
+            cards_by_source_directly(transit, records)
                 .into_iter()
-                .map(|by_child| FromChild {
+                .map(|by_transit| Transitive {
                     source: direct_source.to_owned(),
-                    card: by_child.card,
-                    column: by_child.column,
-                    child: by_child.source,
+                    card: by_transit.card,
+                    column: by_transit.column,
+                    transitive: by_transit.source,
                 })
         })
         .collect()
@@ -248,9 +248,9 @@ pub fn cards_by_source_directly(direct_source: &Source, records: &[Record]) -> V
         .collect()
 }
 
-impl From<FromChild> for CardBySource {
-    fn from(value: FromChild) -> Self {
-        Self::FromChild(value)
+impl From<Transitive> for CardBySource {
+    fn from(value: Transitive) -> Self {
+        Self::Transitive(value)
     }
 }
 

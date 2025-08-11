@@ -8,7 +8,7 @@ mod tests {
         rich::{FontStyles, HexColor},
     };
     use divcord::{
-        cards::FromChild,
+        cards::Transitive,
         records,
         spreadsheet::{
             fs_cache_fetcher::{DataFetcher, SpreadsheetFetcher, Stale},
@@ -66,14 +66,14 @@ mod tests {
         let records = records(&spreadsheet, &poe_data).unwrap();
         let dried_lake = Source::Act(ActAreaId::new("1_4_2".to_owned()));
 
-        let vec_from_child =
-            divcord::cards::cards_from_child_sources(&dried_lake, &records, &poe_data);
+        let transitive_cards =
+            divcord::cards::cards_from_transitive_sources(&dried_lake, &records, &poe_data);
 
-        assert!(vec_from_child.contains(&FromChild {
+        assert!(transitive_cards.contains(&Transitive {
             source: dried_lake.to_owned(),
             card: "The Fletcher".to_owned(),
             column: divcord::parse::SourcesKind::Verify,
-            child: Source::ActBoss("Nightwane".to_owned())
+            transitive: Source::ActBoss("Nightwane".to_owned())
         }))
     }
 }

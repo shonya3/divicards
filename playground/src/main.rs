@@ -37,7 +37,7 @@ async fn main() {
     let poe_data = PoeData::load().await.unwrap();
     let spreadsheet = Spreadsheet::load().await.unwrap();
 
-    divcord::records(&spreadsheet, &poe_data).unwrap();
+    divcord::records_with_collect_all_errors(&spreadsheet, &poe_data).unwrap();
 }
 
 pub fn jsonsave<S: Serialize>(path: &str, data: S) {
