@@ -67,7 +67,7 @@ mod tests {
         let dried_lake = Source::Act(ActAreaId::new("1_4_2".to_owned()));
 
         let transitive_cards =
-            divcord::cards::cards_from_transitive_sources(&dried_lake, &records, &poe_data);
+            divcord::cards::get_transitive_cards_from_source(&dried_lake, &records, &poe_data);
 
         assert!(transitive_cards.contains(&Transitive {
             source: dried_lake.to_owned(),

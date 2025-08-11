@@ -8,15 +8,13 @@ pub fn cards_by_source(
     records: &[Record],
     poe_data: &PoeData,
 ) -> Vec<CardBySource> {
-    let mut direct_cards = cards_by_source_directly(source, records)
+    let direct_cards = get_direct_cards_from_source(source, records)
         .into_iter()
-        .map(CardBySource::Direct)
-        .collect::<Vec<_>>();
-    let transitive_cards = cards_from_transitive_sources(source, records, poe_data)
+        .map(CardBySource::Direct);
+    let transitive_cards = get_transitive_cards_from_source(source, records, poe_data)
         .into_iter()
         .map(CardBySource::Transitive);
-    direct_cards.extend(transitive_cards);
-    direct_cards
+    direct_cards.chain(transitive_cards).collect()
 }
 
 pub fn cards_by_source_types(
@@ -51,7 +49,7 @@ pub fn cards_by_source_types(
         poe_data.maps.clone().into_iter().for_each(|map| {
             let source = Source::from(map);
 
-            let cards = cards_from_transitive_sources(&source, records, poe_data)
+            let cards = get_transitive_cards_from_source(&source, records, poe_data)
                 .into_iter()
                 .map(CardBySource::Transitive)
                 .collect::<Vec<_>>();
@@ -68,7 +66,7 @@ pub fn cards_by_source_types(
             }
 
             let source = Source::from(act_area);
-            let cards = cards_from_transitive_sources(&source, records, poe_data)
+            let cards = get_transitive_cards_from_source(&source, records, poe_data)
                 .into_iter()
                 .map(CardBySource::Transitive)
                 .collect::<Vec<_>>();
@@ -197,7 +195,7 @@ pub fn transitive_sources(source: &Source, poe_data: &PoeData) -> Vec<Source> {
     }
 }
 
-pub fn cards_from_transitive_sources(
+pub fn get_transitive_cards_from_source(
     direct_source: &Source,
     records: &[Record],
     poe_data: &PoeData,
@@ -205,7 +203,7 @@ pub fn cards_from_transitive_sources(
     transitive_sources(direct_source, poe_data)
         .iter()
         .flat_map(|transit| {
-            cards_by_source_directly(transit, records)
+            get_direct_cards_from_source(transit, records)
                 .into_iter()
                 .map(|by_transit| Transitive {
                     source: direct_source.to_owned(),
@@ -217,7 +215,7 @@ pub fn cards_from_transitive_sources(
         .collect()
 }
 
-pub fn cards_by_source_directly(direct_source: &Source, records: &[Record]) -> Vec<Direct> {
+pub fn get_direct_cards_from_source(direct_source: &Source, records: &[Record]) -> Vec<Direct> {
     records
         .iter()
         .flat_map(|record| {
