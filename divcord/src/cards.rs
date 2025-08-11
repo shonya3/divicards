@@ -3,17 +3,14 @@ use poe_data::{act::Bossfight, mapbosses::MapBoss, maps::Map, PoeData};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-pub fn cards_by_source(
-    source: &Source,
-    records: &[Record],
-    poe_data: &PoeData,
+pub fn cards_by_source<'a>(
+    source: &'a Source,
+    records: &'a [Record],
+    poe_data: &'a PoeData,
 ) -> Vec<CardBySource> {
-    let direct_cards = get_direct_cards_from_source(source, records)
-        .into_iter()
-        .map(CardBySource::Direct);
-    let transitive_cards = get_transitive_cards_from_source(source, records, poe_data)
-        .into_iter()
-        .map(CardBySource::Transitive);
+    let direct_cards = get_direct_cards_from_source(source, records).map(CardBySource::Direct);
+    let transitive_cards =
+        get_transitive_cards_from_source(source, records, poe_data).map(CardBySource::Transitive);
     direct_cards.chain(transitive_cards).collect()
 }
 
@@ -50,7 +47,6 @@ pub fn cards_by_source_types(
             let source = Source::from(map);
 
             let cards = get_transitive_cards_from_source(&source, records, poe_data)
-                .into_iter()
                 .map(CardBySource::Transitive)
                 .collect::<Vec<_>>();
             if !cards.is_empty() {
@@ -67,7 +63,6 @@ pub fn cards_by_source_types(
 
             let source = Source::from(act_area);
             let cards = get_transitive_cards_from_source(&source, records, poe_data)
-                .into_iter()
                 .map(CardBySource::Transitive)
                 .collect::<Vec<_>>();
             if !cards.is_empty() {
@@ -195,55 +190,53 @@ pub fn transitive_sources(source: &Source, poe_data: &PoeData) -> Vec<Source> {
     }
 }
 
-pub fn get_transitive_cards_from_source(
-    direct_source: &Source,
-    records: &[Record],
-    poe_data: &PoeData,
-) -> Vec<Transitive> {
+pub fn get_transitive_cards_from_source<'a>(
+    direct_source: &'a Source,
+    records: &'a [Record],
+    poe_data: &'a PoeData,
+) -> impl Iterator<Item = Transitive> + 'a {
     transitive_sources(direct_source, poe_data)
-        .iter()
-        .flat_map(|transit| {
-            get_direct_cards_from_source(transit, records)
+        .into_iter()
+        .flat_map(move |transit| {
+            get_direct_cards_from_source(&transit, records)
+                .collect::<Vec<_>>()
                 .into_iter()
-                .map(|by_transit| Transitive {
+                .map(move |by_transit| Transitive {
                     source: direct_source.to_owned(),
                     card: by_transit.card,
                     column: by_transit.column,
                     transitive: by_transit.source,
                 })
         })
-        .collect()
 }
 
-pub fn get_direct_cards_from_source(direct_source: &Source, records: &[Record]) -> Vec<Direct> {
-    records
-        .iter()
-        .flat_map(|record| {
-            // 1. by sources
-            record
-                .sources
-                .iter()
-                .filter(|source| *source == direct_source)
-                .map(|source| Direct {
-                    source: source.to_owned(),
-                    card: record.card.to_owned(),
-                    column: SourcesKind::Source,
-                })
-                .chain(
-                    // 2. by verify sources
-                    record
-                        .verify_sources
-                        .iter()
-                        .filter(|verify| *verify == direct_source)
-                        .map(|source| Direct {
-                            source: source.to_owned(),
-                            card: record.card.to_owned(),
-                            column: SourcesKind::Verify,
-                        }),
-                )
-                .collect::<Vec<Direct>>()
-        })
-        .collect()
+pub fn get_direct_cards_from_source<'a>(
+    direct_source: &'a Source,
+    records: &'a [Record],
+) -> impl Iterator<Item = Direct> + 'a {
+    records.iter().flat_map(move |record| {
+        let card = &record.card;
+        record
+            .sources
+            .iter()
+            .filter(move |&s| s == direct_source)
+            .map(move |s| Direct {
+                source: s.clone(),
+                card: card.clone(),
+                column: SourcesKind::Source,
+            })
+            .chain(
+                record
+                    .verify_sources
+                    .iter()
+                    .filter(move |&s| s == direct_source)
+                    .map(move |s| Direct {
+                        source: s.clone(),
+                        card: card.clone(),
+                        column: SourcesKind::Verify,
+                    }),
+            )
+    })
 }
 
 impl From<Transitive> for CardBySource {
