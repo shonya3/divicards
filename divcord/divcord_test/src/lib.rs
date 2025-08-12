@@ -2,6 +2,7 @@
 mod tests {
     use std::time::Duration;
 
+    use divcord::cards::VerificationStatus;
     use divcord::parse::*;
     use divcord::spreadsheet::{
         record::{Confidence, GreyNote, RemainingWork},
@@ -73,7 +74,7 @@ mod tests {
         assert!(transitive_cards.contains(&Transitive {
             source: dried_lake.to_owned(),
             card: "The Fletcher".to_owned(),
-            column: divcord::parse::SourcesKind::Verify,
+            status: VerificationStatus::Verify,
             transitive: Source::ActBoss("Nightwane".to_owned())
         }))
     }

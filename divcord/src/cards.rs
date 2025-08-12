@@ -1,16 +1,29 @@
-use crate::{parse::SourcesKind, Record, Source};
+use crate::{dropsource::predefined::PredefinedSource, Record, Source};
 use poe_data::{act::Bossfight, mapbosses::MapBoss, maps::Map, PoeData};
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
+
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, Eq, Hash, PartialEq)]
+pub enum VerificationStatus {
+    #[serde(rename = "done")]
+    Done,
+    #[serde(rename = "verify")]
+    Verify,
+}
 
 pub fn cards_by_source<'a>(
     source: &'a Source,
     records: &'a [Record],
     poe_data: &'a PoeData,
 ) -> Vec<CardBySource> {
-    let direct_cards = get_direct_cards_from_source(source, records).map(CardBySource::Direct);
-    let transitive_cards =
-        get_transitive_cards_from_source(source, records, poe_data).map(CardBySource::Transitive);
+    let direct_cards = get_direct_cards_from_source(source, records)
+        .collect::<HashSet<Direct>>()
+        .into_iter()
+        .map(CardBySource::Direct);
+    let transitive_cards = get_transitive_cards_from_source(source, records, poe_data)
+        .collect::<HashSet<Transitive>>()
+        .into_iter()
+        .map(CardBySource::Transitive);
     direct_cards.chain(transitive_cards).collect()
 }
 
@@ -19,61 +32,86 @@ pub fn cards_by_source_types(
     records: &[Record],
     poe_data: &PoeData,
 ) -> Vec<SourceAndCards> {
-    let mut hash_map: HashMap<Source, Vec<CardBySource>> = HashMap::new();
+    let mut hash_map: HashMap<Source, HashSet<CardBySource>> = HashMap::new();
 
-    records.iter().for_each(|record| {
-        record
-            .sources
+    // 1. Collect all direct drops
+    let mut process_source = |record: &Record, source: &Source, status: VerificationStatus| {
+        if !source_types.iter().any(|s| source._type() == *s) {
+            return;
+        }
+
+        let entry = hash_map.entry(source.clone()).or_default();
+        entry.insert(CardBySource::Direct(Direct {
+            source: source.clone(),
+            card: record.card.clone(),
+            status,
+        }));
+    };
+    records.iter().for_each(|r| {
+        r.sources
             .iter()
-            .filter(|source| source_types.iter().any(|s| source._type() == *s))
-            .chain(
-                record
-                    .verify_sources
-                    .iter()
-                    .filter(|verify| source_types.iter().any(|s| verify._type() == *s)),
-            )
-            .for_each(|source| {
-                let entry = hash_map.entry(source.clone()).or_default();
-                entry.push(CardBySource::Direct(Direct {
-                    source: source.clone(),
-                    card: record.card.clone(),
-                    column: SourcesKind::Source,
-                }));
-            })
+            .for_each(|s| process_source(r, s, VerificationStatus::Done));
+        r.verify_sources
+            .iter()
+            .for_each(|v| process_source(r, v, VerificationStatus::Verify));
     });
 
+    // 2. Add transitive drops for existing sources
+    hash_map.iter_mut().for_each(|(source, cards)| {
+        get_transitive_cards_from_source(source, records, poe_data)
+            .map(CardBySource::Transitive)
+            .for_each(|c| {
+                cards.insert(c);
+            });
+    });
+
+    // 3. Add sources that only have transitive drops
     if source_types.contains(&"Map".to_owned()) {
-        poe_data.maps.clone().into_iter().for_each(|map| {
-            let source = Source::from(map);
+        poe_data.maps.iter().for_each(|m| {
+            let map = Source::Map(m.name.clone());
 
-            let cards = get_transitive_cards_from_source(&source, records, poe_data)
-                .map(CardBySource::Transitive)
-                .collect::<Vec<_>>();
-            if !cards.is_empty() {
-                hash_map.entry(source.clone()).or_default().extend(cards);
-            }
-        })
-    };
-
-    if source_types.contains(&"Act".to_owned()) {
-        poe_data.acts.clone().into_iter().for_each(|act_area| {
-            if act_area.is_town {
+            if hash_map.contains_key(&map) {
                 return;
             }
 
-            let source = Source::from(act_area);
-            let cards = get_transitive_cards_from_source(&source, records, poe_data)
+            let entry = hash_map.entry(map.clone()).or_default();
+
+            get_transitive_cards_from_source(&map, records, poe_data)
                 .map(CardBySource::Transitive)
-                .collect::<Vec<_>>();
-            if !cards.is_empty() {
-                hash_map.entry(source.clone()).or_default().extend(cards)
-            }
-        })
+                .for_each(|c| {
+                    entry.insert(c);
+                });
+        });
     };
+
+    if source_types.contains(&"Act".to_owned()) {
+        poe_data.acts.iter().for_each(|a| {
+            if a.is_town {
+                return;
+            }
+
+            let act = Source::Act(a.id.clone());
+
+            if hash_map.contains_key(&act) {
+                return;
+            }
+
+            let entry = hash_map.entry(act.clone()).or_default();
+
+            get_transitive_cards_from_source(&act, records, poe_data)
+                .map(CardBySource::Transitive)
+                .for_each(|c| {
+                    entry.insert(c);
+                });
+        });
+    }
 
     hash_map
         .into_iter()
-        .map(|(source, cards)| SourceAndCards { source, cards })
+        .map(|(source, cards)| SourceAndCards {
+            source,
+            cards: Vec::from_iter(cards),
+        })
         .collect()
 }
 
@@ -82,7 +120,7 @@ pub struct Direct {
     #[serde(skip_serializing)]
     pub source: Source,
     pub card: String,
-    pub column: SourcesKind,
+    pub status: VerificationStatus,
 }
 
 #[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -90,7 +128,7 @@ pub struct Transitive {
     #[serde(skip_serializing)]
     pub source: Source,
     pub card: String,
-    pub column: SourcesKind,
+    pub status: VerificationStatus,
     pub transitive: Source,
 }
 
@@ -117,10 +155,10 @@ impl CardBySource {
         }
     }
 
-    pub fn column(&self) -> &SourcesKind {
+    pub fn status(&self) -> VerificationStatus {
         match self {
-            CardBySource::Direct(d) => &d.column,
-            CardBySource::Transitive(c) => &c.column,
+            CardBySource::Direct(d) => d.status,
+            CardBySource::Transitive(c) => c.status,
         }
     }
 
@@ -147,6 +185,11 @@ pub struct SourceAndCards {
 
 impl From<MapBoss> for Source {
     fn from(value: MapBoss) -> Self {
+        // For cases like Chimera, which is predefined source, but also can be found as mapboss.
+        // It should be Predefined.
+        if let Ok(source) = value.name.parse::<PredefinedSource>() {
+            return Source::Predefined(source);
+        }
         Source::MapBoss(value.name)
     }
 }
@@ -204,7 +247,7 @@ pub fn get_transitive_cards_from_source<'a>(
                 .map(move |by_transit| Transitive {
                     source: direct_source.to_owned(),
                     card: by_transit.card,
-                    column: by_transit.column,
+                    status: by_transit.status,
                     transitive: by_transit.source,
                 })
         })
@@ -223,7 +266,7 @@ pub fn get_direct_cards_from_source<'a>(
             .map(move |s| Direct {
                 source: s.clone(),
                 card: card.clone(),
-                column: SourcesKind::Source,
+                status: VerificationStatus::Done,
             })
             .chain(
                 record
@@ -233,7 +276,7 @@ pub fn get_direct_cards_from_source<'a>(
                     .map(move |s| Direct {
                         source: s.clone(),
                         card: card.clone(),
-                        column: SourcesKind::Verify,
+                        status: VerificationStatus::Verify,
                     }),
             )
     })

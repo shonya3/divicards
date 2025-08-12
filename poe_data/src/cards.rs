@@ -1,4 +1,5 @@
 use crate::league::LeagueReleaseInfo;
+#[cfg(feature = "fs_cache_fetcher")]
 use crate::league::ReleaseVersion;
 #[cfg(feature = "fs_cache_fetcher")]
 use once_cell::sync::Lazy;
@@ -23,6 +24,8 @@ pub struct LeagueRanges {
 
 #[cfg(feature = "fs_cache_fetcher")]
 pub static LEAGUE_RANGES: Lazy<[LeagueRanges; 4]> = Lazy::new(|| {
+    use crate::league::ReleaseVersion;
+
     [
         LeagueRanges {
             version: ReleaseVersion::new("3.26".to_string()),
