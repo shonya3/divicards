@@ -13,6 +13,7 @@ use divi::IsCard;
 use poe_data::act::ActArea;
 use poe_data::PoeData;
 use serde::{Deserialize, Serialize};
+use std::collections::HashSet;
 use std::fmt::Display;
 
 /// Go-to function for records
@@ -116,6 +117,17 @@ pub fn parse_record(dumb: Dumb, poe_data: &PoeData) -> ParseRecordResult {
     let (verify_sources, errors_verify_drops_from) =
         parse_dropses_from(&dumb, poe_data, SourcesKind::Verify);
 
+    // Check if any drops are done and verify at same time
+    let sources_set = HashSet::<Source>::from_iter(sources.clone());
+    let verify_set = HashSet::<Source>::from_iter(verify_sources.clone());
+    if sources_set.intersection(&verify_set).count() > 0 {
+        errors.push(ParseSourceError {
+            card: dumb.card.clone(),
+            record_id: dumb.id,
+            kind: ParseSourceErrorKind::SomeSourcesAreDoneAndVerifyAtSameTime,
+        });
+    };
+
     errors.extend(
         errors_verify_drops_from
             .into_iter()
@@ -153,6 +165,7 @@ pub enum ParseSourceErrorKind {
     GreynoteDisabledButCardNotLegacy,
     LegacyCardShouldBeMarkedAsDisabled,
     ConfidenceNoneButHasSources,
+    SomeSourcesAreDoneAndVerifyAtSameTime,
 }
 
 impl From<ParseDropsFromError> for ParseSourceError {
@@ -188,37 +201,41 @@ impl Display for ParseSourceError {
         } = self;
         match kind {
             ParseSourceErrorKind::UnknownDropSource(drops_from) => write!(
-                        f,
-                        "{record_id}.{card}. Unknown variant of card source {}. {}",
-                        drops_from.name,
-                        record_url(*record_id, DivcordColumn::Sources)
-                    ),
+                                f,
+                                "{record_id}.{card}. Unknown variant of card source {}. {}",
+                                drops_from.name,
+                                record_url(*record_id, DivcordColumn::Sources)
+                            ),
             ParseSourceErrorKind::ActsMustBeItalic(drops_from) => write!(
-                        f,
-                        "{record_id}.{card}. Spreadsheet styling error: If {} refers to acts, it's font-style must be italic. {}",
-                        drops_from.name,
-                        record_url(*record_id, DivcordColumn::Sources)
-                    ),
+                                f,
+                                "{record_id}.{card}. Spreadsheet styling error: If {} refers to acts, it's font-style must be italic. {}",
+                                drops_from.name,
+                                record_url(*record_id, DivcordColumn::Sources)
+                            ),
             ParseSourceErrorKind::SourceOrVerifyIsExpectedButEmpty => write!(
-                        f,
-                        "{record_id}.{card}. Source or need-to-verify source is expected, but there is none. {}",
-                        record_url(*record_id, DivcordColumn::Sources)
-                    ),
+                                f,
+                                "{record_id}.{card}. Source or need-to-verify source is expected, but there is none. {}",
+                                record_url(*record_id, DivcordColumn::Sources)
+                            ),
             ParseSourceErrorKind::GreynoteDisabledButCardNotLegacy => write!(
-                        f,
-                        "{record_id}. Card {card} has greynote Disabled, but this is not a legacy card {}",
-                        record_url(*record_id, DivcordColumn::GreyNote)
-                    ),
+                                f,
+                                "{record_id}. Card {card} has greynote Disabled, but this is not a legacy card {}",
+                                record_url(*record_id, DivcordColumn::GreyNote)
+                            ),
             ParseSourceErrorKind::LegacyCardShouldBeMarkedAsDisabled => write!(
-                        f,
-                        "{record_id}. Card {card} is legacy, but not marked as disabled. {}",
-                        record_url(*record_id, DivcordColumn::GreyNote)
-                    ),
+                                f,
+                                "{record_id}. Card {card} is legacy, but not marked as disabled. {}",
+                                record_url(*record_id, DivcordColumn::GreyNote)
+                            ),
             ParseSourceErrorKind::ConfidenceNoneButHasSources => write!(
-                        f,
-                        "{record_id}.{card}. Confidence is None, but sources not empty {}",
-                        record_url(*record_id, DivcordColumn::Sources)
-                    ),
+                                f,
+                                "{record_id}.{card}. Confidence is None, but sources not empty {}",
+                                record_url(*record_id, DivcordColumn::Sources)
+                            ),
+            ParseSourceErrorKind::SomeSourcesAreDoneAndVerifyAtSameTime => write!(
+                                f, "{record_id}.{card}. Some sources are done and verify at same time {}", 
+                                record_url(*record_id, DivcordColumn::Sources)
+                            ),
         }
     }
 }
