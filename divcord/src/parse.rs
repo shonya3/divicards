@@ -117,7 +117,7 @@ pub fn parse_record(dumb: Dumb, poe_data: &PoeData) -> ParseRecordResult {
     let (mut verify_sources, errors_verify_drops_from) =
         parse_dropses_from(&dumb, poe_data, SourcesKind::Verify);
 
-    // Check if any drops are done and verify at same time
+    // Check if any drops are "done" and "verify" at same time
     {
         let sources_set = HashSet::<Source>::from_iter(sources.clone());
         let mut verify_set = HashSet::<Source>::from_iter(verify_sources.clone());
@@ -138,6 +138,8 @@ pub fn parse_record(dumb: Dumb, poe_data: &PoeData) -> ParseRecordResult {
 
             verify_set.remove(s);
         }
+
+        // remove duplicates from "verify"
         if !intersected_sources.is_empty() {
             verify_sources = Vec::from_iter(verify_set)
         };
