@@ -42,7 +42,7 @@ pub fn cards_by_source_types(
 
         let entry = hash_map.entry(source.clone()).or_default();
         entry.insert(CardBySource::Direct(Direct {
-            source: source.clone(),
+            // source: source.clone(),
             card: record.card.clone(),
             status,
         }));
@@ -117,16 +117,16 @@ pub fn cards_by_source_types(
 
 #[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct Direct {
-    #[serde(skip_serializing)]
-    pub source: Source,
+    // #[serde(skip_serializing)]
+    // pub source: Source,
     pub card: String,
     pub status: VerificationStatus,
 }
 
 #[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct Transitive {
-    #[serde(skip_serializing)]
-    pub source: Source,
+    // #[serde(skip_serializing)]
+    // pub source: Source,
     pub card: String,
     pub status: VerificationStatus,
     pub transitive: Source,
@@ -136,7 +136,6 @@ pub struct Transitive {
 #[serde(untagged)]
 pub enum CardBySource {
     Direct(Direct),
-    #[serde(rename = "transitive")]
     Transitive(Transitive),
 }
 
@@ -169,12 +168,12 @@ impl CardBySource {
         }
     }
 
-    pub fn source(&self) -> &Source {
-        match self {
-            CardBySource::Direct(d) => &d.source,
-            CardBySource::Transitive(c) => &c.source,
-        }
-    }
+    // pub fn source(&self) -> &Source {
+    //     match self {
+    //         CardBySource::Direct(d) => &d.source,
+    //         CardBySource::Transitive(c) => &c.source,
+    //     }
+    // }
 }
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash)]
@@ -245,10 +244,10 @@ pub fn get_transitive_cards_from_source<'a>(
                 .collect::<Vec<_>>()
                 .into_iter()
                 .map(move |by_transit| Transitive {
-                    source: direct_source.to_owned(),
+                    // source: direct_source.to_owned(),
                     card: by_transit.card,
                     status: by_transit.status,
-                    transitive: by_transit.source,
+                    transitive: transit.clone(),
                 })
         })
 }
@@ -263,8 +262,8 @@ pub fn get_direct_cards_from_source<'a>(
             .sources
             .iter()
             .filter(move |&s| s == direct_source)
-            .map(move |s| Direct {
-                source: s.clone(),
+            .map(move |_s| Direct {
+                // source: s.clone(),
                 card: card.clone(),
                 status: VerificationStatus::Done,
             })
@@ -273,8 +272,8 @@ pub fn get_direct_cards_from_source<'a>(
                     .verify_sources
                     .iter()
                     .filter(move |&s| s == direct_source)
-                    .map(move |s| Direct {
-                        source: s.clone(),
+                    .map(move |_s| Direct {
+                        // source: s.clone(),
                         card: card.clone(),
                         status: VerificationStatus::Verify,
                     }),
