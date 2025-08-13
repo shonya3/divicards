@@ -72,7 +72,7 @@ mod tests {
                 .collect();
 
         assert!(transitive_cards.contains(&Transitive {
-            source: dried_lake.to_owned(),
+            // source: dried_lake.to_owned(),
             card: "The Fletcher".to_owned(),
             status: VerificationStatus::Verify,
             transitive: Source::ActBoss("Nightwane".to_owned())
