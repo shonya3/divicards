@@ -114,19 +114,34 @@ pub struct ParseRecordResult {
 /// [Dumb] -> [Record]
 pub fn parse_record(dumb: Dumb, poe_data: &PoeData) -> ParseRecordResult {
     let (sources, mut errors) = parse_record_dropsources(&dumb, poe_data);
-    let (verify_sources, errors_verify_drops_from) =
+    let (mut verify_sources, errors_verify_drops_from) =
         parse_dropses_from(&dumb, poe_data, SourcesKind::Verify);
 
     // Check if any drops are done and verify at same time
-    let sources_set = HashSet::<Source>::from_iter(sources.clone());
-    let verify_set = HashSet::<Source>::from_iter(verify_sources.clone());
-    if sources_set.intersection(&verify_set).count() > 0 {
-        errors.push(ParseSourceError {
-            card: dumb.card.clone(),
-            record_id: dumb.id,
-            kind: ParseSourceErrorKind::SomeSourcesAreDoneAndVerifyAtSameTime,
-        });
-    };
+    {
+        let sources_set = HashSet::<Source>::from_iter(sources.clone());
+        let mut verify_set = HashSet::<Source>::from_iter(verify_sources.clone());
+
+        let verify_set_clone = verify_set.clone();
+        let intersected_sources = sources_set
+            .intersection(&verify_set_clone)
+            .collect::<Vec<_>>();
+
+        for s in &intersected_sources {
+            errors.push(ParseSourceError {
+                card: dumb.card.clone(),
+                record_id: dumb.id,
+                kind: ParseSourceErrorKind::SourceIsDoneAndVerifyAtSameTime(
+                    s.to_owned().to_owned(),
+                ),
+            });
+
+            verify_set.remove(s);
+        }
+        if !intersected_sources.is_empty() {
+            verify_sources = Vec::from_iter(verify_set)
+        };
+    }
 
     errors.extend(
         errors_verify_drops_from
@@ -165,7 +180,7 @@ pub enum ParseSourceErrorKind {
     GreynoteDisabledButCardNotLegacy,
     LegacyCardShouldBeMarkedAsDisabled,
     ConfidenceNoneButHasSources,
-    SomeSourcesAreDoneAndVerifyAtSameTime,
+    SourceIsDoneAndVerifyAtSameTime(Source),
 }
 
 impl From<ParseDropsFromError> for ParseSourceError {
@@ -232,8 +247,8 @@ impl Display for ParseSourceError {
                                 "{record_id}.{card}. Confidence is None, but sources not empty {}",
                                 record_url(*record_id, DivcordColumn::Sources)
                             ),
-            ParseSourceErrorKind::SomeSourcesAreDoneAndVerifyAtSameTime => write!(
-                                f, "{record_id}.{card}. Some sources are done and verify at same time {}", 
+            ParseSourceErrorKind::SourceIsDoneAndVerifyAtSameTime(source) => write!(
+                                f, "{record_id}.{card}. Source {source:?} is done and verify at same time {}", 
                                 record_url(*record_id, DivcordColumn::Sources)
                             ),
         }
