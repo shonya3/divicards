@@ -74,13 +74,14 @@ pub fn cards_by_source_types(
                 return;
             }
 
-            let entry = hash_map.entry(map.clone()).or_default();
+            let set: HashSet<CardBySource> =
+                get_transitive_cards_from_source(&map, records, poe_data)
+                    .map(CardBySource::Transitive)
+                    .collect();
 
-            get_transitive_cards_from_source(&map, records, poe_data)
-                .map(CardBySource::Transitive)
-                .for_each(|c| {
-                    entry.insert(c);
-                });
+            if !set.is_empty() {
+                hash_map.insert(map, set);
+            }
         });
     };
 
@@ -96,13 +97,14 @@ pub fn cards_by_source_types(
                 return;
             }
 
-            let entry = hash_map.entry(act.clone()).or_default();
+            let set: HashSet<CardBySource> =
+                get_transitive_cards_from_source(&act, records, poe_data)
+                    .map(CardBySource::Transitive)
+                    .collect();
 
-            get_transitive_cards_from_source(&act, records, poe_data)
-                .map(CardBySource::Transitive)
-                .for_each(|c| {
-                    entry.insert(c);
-                });
+            if !set.is_empty() {
+                hash_map.insert(act, set);
+            }
         });
     }
 
