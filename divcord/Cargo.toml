@@ -25,5 +25,10 @@ fs_cache_fetcher = ["dep:fs_cache_fetcher", "poe_data/fs_cache_fetcher"]
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }
+criterion = "0.7"
 
 
+
+[[bench]]
+name = "cards"
+harness = false
