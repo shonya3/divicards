@@ -52,20 +52,35 @@ extern "C" {
     fn log(s: &str);
 }
 
-// #[wasm_bindgen]
-// pub fn find_cards_by_source_types(types: JsValue, records: JsValue, poe_data: String) -> JsValue {
-//     set_panic_hook();
-//     let poe_data: PoeData = serde_json::from_str(&poe_data).unwrap();
+#[wasm_bindgen]
+pub fn find_cards_by_source_types(types: JsValue, records: JsValue, poe_data: JsValue) -> JsValue {
+    set_panic_hook();
+    let poe_data: PoeData = serde_wasm_bindgen::from_value(poe_data).unwrap();
 
-//     let types: Vec<String> = serde_wasm_bindgen::from_value(types).unwrap();
-//     let records: Vec<Record> = serde_wasm_bindgen::from_value(records).unwrap();
+    let types: Vec<String> = serde_wasm_bindgen::from_value(types).unwrap();
+    let records: Vec<Record> = serde_wasm_bindgen::from_value(records).unwrap();
 
-//     let cards = divcord::cards::cards_by_source_types(&types, &records, &poe_data);
+    let cards = divcord::cards::cards_by_source_types(&types, &records, &poe_data);
 
-//     log(&format!("{}", cards.len()));
+    serde_wasm_bindgen::to_value(&cards).unwrap()
+}
 
-//     serde_wasm_bindgen::to_value(&cards).unwrap()
-// }
+#[wasm_bindgen]
+pub fn find_cards_by_source_types_strings(
+    types: String,
+    records: String,
+    poe_data: String,
+) -> String {
+    set_panic_hook();
+    let types: Vec<String> = serde_json::from_str(&types).unwrap();
+    let poe_data: PoeData = serde_json::from_str(&poe_data).unwrap();
+    let records: Vec<Record> = serde_json::from_str(&records).unwrap();
+
+    let cards = divcord::cards::cards_by_source_types(&types, &records, &poe_data);
+
+    // serde_wasm_bindgen::to_value(&cards).unwrap()
+    serde_json::to_string(&cards).unwrap()
+}
 
 #[wasm_bindgen]
 pub fn slug(s: String) -> String {

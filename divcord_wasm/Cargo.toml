@@ -29,6 +29,7 @@ js-sys = "0.3.67"
 # serde_json.workspace = true
 slug = "0.1.5"
 wasm-bindgen-futures = "0.4.50"
+serde_json.workspace = true
 # [dependencies.web-sys]
 # version = "0.3.4"
 # features = [
