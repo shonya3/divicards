@@ -3,7 +3,7 @@ use card_element::DivinationCardElementData;
 use divcord::{
     cards::{
         cards_by_source, cards_by_source_types, get_direct_cards_from_source,
-        get_transitive_cards_from_source, CardBySource, SourceAndCards,
+        get_transitive_cards_from_source, CardBySource, SourceAndCards, Transitive,
     },
     dropsource::{id::Identified, predefined::PredefinedSource, Source},
     parse::SourcesKind,
@@ -23,7 +23,7 @@ use fs_cache_fetcher::DataFetcher;
 use fs_cache_fetcher::{Config, Stale};
 use poe::TradeLeague;
 use poe_data::fetchers::MapsFetcher;
-use serde::{Deserialize, Serialize};
+use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_json::{json, Value};
 use std::{
     clone,
@@ -45,23 +45,33 @@ async fn main() {
     .load()
     .await
     .unwrap();
-    let records = divcord::records_with_collect_all_errors(&spreadsheet, &poe_data).unwrap();
+    let records = match divcord::records_with_collect_all_errors(&spreadsheet, &poe_data) {
+        Ok(records) => records,
+        Err(err) => {
+            println!("Errors parsing divcord");
+            for e in err {
+                println!("{e:?}");
+            }
+            return;
+        }
+    };
 
-    // let now = Instant::now();
+    // let rogues = Source::Predefined("All Rogue Exiles".parse::<PredefinedSource>().unwrap());
+    let source_types = Source::types();
 
-    let rogues = Source::Predefined("All Rogue Exiles".parse::<PredefinedSource>().unwrap());
-    // let source_types = ["All Rogue Exiles".to_string()];
-    // let sources_and_cards =
-    //     divcord::cards::cards_by_source_types(&source_types, &records, &poe_data);
+    let now = Instant::now();
+    let cards = divcord::cards::cards_by_source_types(&source_types, &records, &poe_data);
+    dbg!(now.elapsed().as_micros());
 
-    // println!("{}", now.elapsed().as_millis());
-    // jsonsave("sourcesAndCards.json", &sources_and_cards);
-
-    let cards = cards_by_source(&rogues, &records, &poe_data);
-    println!("{cards:#?}");
+    jsonsave("cards.json", &cards);
 }
 
 pub fn jsonsave<S: Serialize>(path: &str, data: S) {
     let json = serde_json::to_string_pretty(&data).unwrap();
     std::fs::write(path, json).unwrap();
+}
+
+pub fn jsonread<D: DeserializeOwned>(path: &str) -> D {
+    let s = std::fs::read_to_string(path).unwrap();
+    serde_json::from_str::<D>(&s).unwrap()
 }
