@@ -56,23 +56,10 @@ pub fn cards_by_source_types(
             .for_each(|v| process_source(r, v, VerificationStatus::Verify));
     });
 
-    // 2. Add transitive drops for existing sources
-    hash_map.iter_mut().for_each(|(source, cards)| {
-        get_transitive_cards_from_source(source, records, poe_data)
-            .map(CardBySource::Transitive)
-            .for_each(|c| {
-                cards.insert(c);
-            });
-    });
-
-    // 3. Add sources that only have transitive drops
+    // 2. Transitive sources(for maps and acts)
     if source_types.contains(&"Map".to_owned()) {
         poe_data.maps.iter().for_each(|m| {
             let map = Source::Map(m.name.clone());
-
-            if hash_map.contains_key(&map) {
-                return;
-            }
 
             let set: HashSet<CardBySource> =
                 get_transitive_cards_from_source(&map, records, poe_data)
@@ -80,7 +67,7 @@ pub fn cards_by_source_types(
                     .collect();
 
             if !set.is_empty() {
-                hash_map.insert(map, set);
+                hash_map.entry(map).or_default().extend(set);
             }
         });
     };
@@ -93,17 +80,13 @@ pub fn cards_by_source_types(
 
             let act = Source::Act(a.id.clone());
 
-            if hash_map.contains_key(&act) {
-                return;
-            }
-
             let set: HashSet<CardBySource> =
                 get_transitive_cards_from_source(&act, records, poe_data)
                     .map(CardBySource::Transitive)
                     .collect();
 
             if !set.is_empty() {
-                hash_map.insert(act, set);
+                hash_map.entry(act).or_default().extend(set);
             }
         });
     }
@@ -117,7 +100,7 @@ pub fn cards_by_source_types(
         .collect()
 }
 
-#[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct Direct {
     // #[serde(skip_serializing)]
     // pub source: Source,
@@ -125,7 +108,7 @@ pub struct Direct {
     pub status: VerificationStatus,
 }
 
-#[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct Transitive {
     // #[serde(skip_serializing)]
     // pub source: Source,
@@ -134,7 +117,7 @@ pub struct Transitive {
     pub transitive: Source,
 }
 
-#[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CardBySource {
     Direct(Direct),
@@ -178,7 +161,7 @@ impl CardBySource {
     // }
 }
 
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq, Hash)]
 pub struct SourceAndCards {
     pub source: Source,
     pub cards: Vec<CardBySource>,
