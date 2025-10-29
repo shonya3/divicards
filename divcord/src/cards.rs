@@ -277,3 +277,230 @@ impl From<Direct> for CardBySource {
         Self::Direct(value)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::VerificationStatus;
+    use crate::{
+        dropsource::predefined::PredefinedSource, spreadsheet::record::Confidence, Record, Source,
+    };
+
+    #[test]
+    fn test_get_direct_cards_from_source() {
+        let source = Source::Predefined(PredefinedSource::Delirium);
+        let records = vec![
+            Record {
+                id: 1,
+                greynote: Default::default(),
+                card: "Card1".to_string(),
+                tag_hypothesis: None,
+                confidence: Confidence::None,
+                remaining_work: Default::default(),
+                sources: vec![source.clone()],
+                notes: None,
+                verify_sources: vec![],
+            },
+            Record {
+                id: 2,
+                greynote: Default::default(),
+                card: "Card2".to_string(),
+                tag_hypothesis: None,
+                confidence: Confidence::None,
+                remaining_work: Default::default(),
+                sources: vec![],
+                notes: None,
+                verify_sources: vec![source.clone()],
+            },
+            Record {
+                id: 3,
+                greynote: Default::default(),
+                card: "Card3".to_string(),
+                tag_hypothesis: None,
+                confidence: Confidence::None,
+                remaining_work: Default::default(),
+                sources: vec![],
+                notes: None,
+                verify_sources: vec![],
+            },
+        ];
+
+        let result: Vec<_> = super::get_direct_cards_from_source(&source, &records).collect();
+
+        assert_eq!(result.len(), 2);
+        assert!(result
+            .iter()
+            .any(|d| d.card == "Card1" && d.status == VerificationStatus::Done));
+        assert!(result
+            .iter()
+            .any(|d| d.card == "Card2" && d.status == VerificationStatus::Verify));
+    }
+
+    #[test]
+    fn test_get_transitive_cards_from_source() {
+        use poe_data::{cards::CardsData, mapbosses::MapBoss, PoeData};
+        use std::collections::HashMap;
+
+        let map_source = Source::Map("Some Map".to_string());
+        let boss_source = Source::MapBoss("Some Map Boss".to_string());
+
+        let records = vec![Record {
+            id: 1,
+            greynote: Default::default(),
+            card: "Some Card".to_string(),
+            tag_hypothesis: None,
+            confidence: Confidence::None,
+            remaining_work: Default::default(),
+            sources: vec![boss_source.clone()],
+            notes: None,
+            verify_sources: vec![],
+        }];
+
+        let poe_data = PoeData {
+            acts: vec![],
+            cards: CardsData(HashMap::new()),
+            maps: vec![],
+            mapbosses: vec![MapBoss {
+                name: "Some Map Boss".to_string(),
+                maps: vec!["Some Map".to_string()],
+            }],
+        };
+
+        let result: Vec<_> =
+            super::get_transitive_cards_from_source(&map_source, &records, &poe_data).collect();
+
+        assert_eq!(result.len(), 1);
+        let transitive = &result[0];
+        assert_eq!(transitive.card, "Some Card");
+        assert_eq!(transitive.status, VerificationStatus::Done);
+        assert_eq!(transitive.transitive, boss_source);
+    }
+
+    #[test]
+    fn test_cards_by_source() {
+        use poe_data::{cards::CardsData, mapbosses::MapBoss, PoeData};
+        use std::collections::HashMap;
+
+        let map_source = Source::Map("Some Map".to_string());
+        let boss_source = Source::MapBoss("Some Map Boss".to_string());
+
+        let records = vec![
+            Record {
+                id: 1,
+                greynote: Default::default(),
+                card: "Direct Card".to_string(),
+                tag_hypothesis: None,
+                confidence: Confidence::None,
+                remaining_work: Default::default(),
+                sources: vec![map_source.clone()],
+                notes: None,
+                verify_sources: vec![],
+            },
+            Record {
+                id: 2,
+                greynote: Default::default(),
+                card: "Transitive Card".to_string(),
+                tag_hypothesis: None,
+                confidence: Confidence::None,
+                remaining_work: Default::default(),
+                sources: vec![boss_source.clone()],
+                notes: None,
+                verify_sources: vec![],
+            },
+        ];
+
+        let poe_data = PoeData {
+            acts: vec![],
+            cards: CardsData(HashMap::new()),
+            maps: vec![],
+            mapbosses: vec![MapBoss {
+                name: "Some Map Boss".to_string(),
+                maps: vec!["Some Map".to_string()],
+            }],
+        };
+
+        let result = super::cards_by_source(&map_source, &records, &poe_data);
+
+        assert_eq!(result.len(), 2);
+        assert!(result.iter().any(|c| c.is_direct() && c.card() == "Direct Card"));
+        assert!(result.iter().any(|c| c.is_transitive() && c.card() == "Transitive Card"));
+    }
+
+    #[test]
+    fn test_cards_by_source_types() {
+        use poe_data::{cards::CardsData, mapbosses::MapBoss, maps::Map, PoeData};
+        use std::collections::HashMap;
+
+        let map_source = Source::Map("Some Map".to_string());
+        let boss_source = Source::MapBoss("Some Map Boss".to_string());
+        let other_source = Source::Predefined(PredefinedSource::Delirium);
+
+        let records = vec![
+            Record {
+                id: 1,
+                greynote: Default::default(),
+                card: "Direct Card".to_string(),
+                tag_hypothesis: None,
+                confidence: Confidence::None,
+                remaining_work: Default::default(),
+                sources: vec![map_source.clone()],
+                notes: None,
+                verify_sources: vec![],
+            },
+            Record {
+                id: 2,
+                greynote: Default::default(),
+                card: "Transitive Card".to_string(),
+                tag_hypothesis: None,
+                confidence: Confidence::None,
+                remaining_work: Default::default(),
+                sources: vec![boss_source.clone()],
+                notes: None,
+                verify_sources: vec![],
+            },
+            Record {
+                id: 3,
+                greynote: Default::default(),
+                card: "Other Card".to_string(),
+                tag_hypothesis: None,
+                confidence: Confidence::None,
+                remaining_work: Default::default(),
+                sources: vec![other_source],
+                notes: None,
+                verify_sources: vec![],
+            },
+        ];
+
+        let poe_data = PoeData {
+            acts: vec![],
+            cards: CardsData(HashMap::new()),
+            maps: vec![Map {
+                name: "Some Map".to_string(),
+                tier: 1,
+                available: true,
+                unique: false,
+                icon: "".to_string(),
+                slug: "".to_string(),
+            }],
+            mapbosses: vec![MapBoss {
+                name: "Some Map Boss".to_string(),
+                maps: vec!["Some Map".to_string()],
+            }],
+        };
+
+        let result =
+            super::cards_by_source_types(&["Map".to_string()], &records, &poe_data);
+
+        assert_eq!(result.len(), 1);
+        let source_and_cards = &result[0];
+        assert_eq!(source_and_cards.source, map_source);
+        assert_eq!(source_and_cards.cards.len(), 2);
+        assert!(source_and_cards
+            .cards
+            .iter()
+            .any(|c| c.is_direct() && c.card() == "Direct Card"));
+        assert!(source_and_cards
+            .cards
+            .iter()
+            .any(|c| c.is_transitive() && c.card() == "Transitive Card"));
+    }
+}
