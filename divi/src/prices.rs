@@ -21,14 +21,14 @@ impl Prices {
         let mut prices = Prices::default();
         prices.0.iter_mut().for_each(|price| {
             if let Some(NinjaCardData {
-                sparkline,
+                spark_line,
                 chaos_value,
                 ..
             }) = ninja_card_data
                 .iter()
                 .find(|ninja_data| ninja_data.name == price.name)
             {
-                if !sparkline.data.is_empty() {
+                if !spark_line.data.is_empty() {
                     price.price = *chaos_value;
                 }
             }
