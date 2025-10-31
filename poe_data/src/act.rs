@@ -47,9 +47,8 @@ pub use fetch::fetch;
 #[cfg(feature = "fs_cache_fetcher")]
 mod fetch {
     use super::ActArea;
-    use crate::error::Error;
     use playwright::{api::Page, Playwright};
-    use std::sync::Arc;
+    use std::{sync::Arc, time::Duration};
 
     pub async fn fetch() -> Result<Vec<ActArea>, crate::error::Error> {
         let script = format!(
@@ -62,8 +61,13 @@ mod fetch {
 
         let playwright = Playwright::initialize().await.unwrap();
         playwright.install_chromium().unwrap();
-        let chrome = playwright.chromium();
-        let browser = chrome.launcher().headless(false).launch().await.unwrap();
+        let browser = playwright
+            .chromium()
+            .launcher()
+            .headless(true)
+            .launch()
+            .await
+            .unwrap();
         let context = browser
             .context_builder()
             .clear_user_agent()
@@ -91,7 +95,17 @@ mod fetch {
         Ok(act_areas)
     }
 
-    async fn fetch_specific_act(act: u8, page: &Page, script: &str) -> Result<Vec<ActArea>, Error> {
+    #[allow(dead_code)]
+    #[derive(Debug)]
+    pub enum FetchSpecificActError {
+        NoTippyContent { area: String },
+    }
+
+    async fn fetch_specific_act(
+        act: u8,
+        page: &Page,
+        script: &str,
+    ) -> Result<Vec<ActArea>, FetchSpecificActError> {
         println!("Doing act {act}");
         page.goto_builder(&ActArea::act_url(act))
             .wait_until(playwright::api::DocumentLoadState::DomContentLoaded)
@@ -114,11 +128,14 @@ mod fetch {
                     .wait_for_selector_builder("div.tippy-content[data-state=visible]:has(img)")
                     .wait_for_selector()
                     .await
-                    .unwrap()
-                    .unwrap();
+                    .map_err(|_| FetchSpecificActError::NoTippyContent { area: area.clone() })?
+                    .ok_or(FetchSpecificActError::NoTippyContent { area })?;
 
                 let a: ActArea = page.evaluate(script, tippy_content).await.unwrap();
                 areas.push(a);
+
+                page.mouse.r#move(0., 0., None).await.unwrap();
+                tokio::time::sleep(Duration::from_millis(500)).await;
             }
         }
 

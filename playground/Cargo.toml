@@ -21,3 +21,4 @@ poe = { path = "../poe" }
 ninja = { path = "../ninja" }
 regex = "1.11.1"
 once_cell = "1.21.3"
+playwright = {version = "0.0.20"}

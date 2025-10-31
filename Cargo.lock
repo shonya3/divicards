@@ -3747,6 +3747,7 @@ dependencies = [
  "fs_cache_fetcher",
  "ninja",
  "once_cell",
+ "playwright",
  "poe",
  "poe_data",
  "regex",

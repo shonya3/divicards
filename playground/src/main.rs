@@ -21,8 +21,12 @@ use divi::Prices;
 use error::Error;
 use fs_cache_fetcher::DataFetcher;
 use fs_cache_fetcher::{Config, Stale};
+use playwright::api::Page;
 use poe::TradeLeague;
-use poe_data::fetchers::MapsFetcher;
+use poe_data::{
+    act::ActArea,
+    fetchers::{ActsFetcher, MapsFetcher},
+};
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_json::{json, Value};
 use std::{
@@ -37,41 +41,74 @@ mod error;
 
 #[tokio::main]
 async fn main() {
-    let poe_data = PoeData::load().await.unwrap();
+    etc::ensure_divcord_no_errors().await.unwrap();
+}
 
-    let spreadsheet = SpreadsheetFetcher::default_with_mut_config(|c| {
-        c.stale = Stale::After(Duration::from_secs(84400))
-    })
-    .load()
-    .await
-    .unwrap();
-    let records = match divcord::records_with_collect_all_errors(&spreadsheet, &poe_data) {
-        Ok(records) => records,
-        Err(err) => {
-            println!("Errors parsing divcord");
-            for e in err {
-                println!("{e:?}");
+mod etc {
+    use std::time::{Duration, Instant};
+
+    use divcord::{DataFetcher, PoeData, Record, Source, Spreadsheet, SpreadsheetFetcher};
+    use fs_cache_fetcher::Stale;
+    use serde::{de::DeserializeOwned, Serialize};
+
+    pub async fn ensure_divcord_no_errors() -> Result<(Spreadsheet, PoeData, Vec<Record>), ()> {
+        let poe_data = PoeData::load().await.unwrap();
+        let spreadsheet = SpreadsheetFetcher::default_with_mut_config(|c| {
+            c.stale = Stale::After(Duration::from_secs(84400))
+        })
+        .load()
+        .await
+        .unwrap();
+        let records = match divcord::records_with_collect_all_errors(&spreadsheet, &poe_data) {
+            Ok(records) => records,
+            Err(err) => {
+                println!("Errors parsing divcord");
+                for e in err {
+                    println!("{e:?}");
+                }
+                return Err(());
             }
-            return;
-        }
-    };
+        };
 
-    // let rogues = Source::Predefined("All Rogue Exiles".parse::<PredefinedSource>().unwrap());
-    let source_types = Source::types();
+        Ok((spreadsheet, poe_data, records))
+    }
 
-    let now = Instant::now();
-    let cards = divcord::cards::cards_by_source_types(&source_types, &records, &poe_data);
-    dbg!(now.elapsed().as_micros());
+    pub fn jsonsave<S: Serialize>(path: &str, data: S) {
+        let json = serde_json::to_string_pretty(&data).unwrap();
+        std::fs::write(path, json).unwrap();
+    }
 
-    jsonsave("cards.json", &cards);
-}
+    pub fn jsonread<D: DeserializeOwned>(path: &str) -> D {
+        let s = std::fs::read_to_string(path).unwrap();
+        serde_json::from_str::<D>(&s).unwrap()
+    }
 
-pub fn jsonsave<S: Serialize>(path: &str, data: S) {
-    let json = serde_json::to_string_pretty(&data).unwrap();
-    std::fs::write(path, json).unwrap();
-}
+    async fn old_main() {
+        let poe_data = PoeData::load().await.unwrap();
+        let spreadsheet = SpreadsheetFetcher::default_with_mut_config(|c| {
+            c.stale = Stale::After(Duration::from_secs(84400))
+        })
+        .load()
+        .await
+        .unwrap();
+        let records = match divcord::records_with_collect_all_errors(&spreadsheet, &poe_data) {
+            Ok(records) => records,
+            Err(err) => {
+                println!("Errors parsing divcord");
+                for e in err {
+                    println!("{e:?}");
+                }
+                return;
+            }
+        };
 
-pub fn jsonread<D: DeserializeOwned>(path: &str) -> D {
-    let s = std::fs::read_to_string(path).unwrap();
-    serde_json::from_str::<D>(&s).unwrap()
+        // let rogues = Source::Predefined("All Rogue Exiles".parse::<PredefinedSource>().unwrap());
+        let source_types = Source::types();
+
+        let now = Instant::now();
+        let cards = divcord::cards::cards_by_source_types(&source_types, &records, &poe_data);
+        dbg!(now.elapsed().as_micros());
+
+        jsonsave("cards.json", &cards);
+    }
 }
