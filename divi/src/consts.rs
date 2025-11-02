@@ -21,8 +21,13 @@ pub const NEVER_EXISTED: [&str; 3] = [
     "Luck of the Vaal",
 ];
 
-pub const CARDS_N: usize = 454;
+pub const CARDS_N: usize = 459;
 pub const CARDS: [&str; CARDS_N] = [
+    "Bound by Flame",
+    "One Last Score",
+    "Outfoxed",
+    "The Lake",
+    "The Last Laugh",
     "Runic Luck",
     "Last Stand",
     "Damnation",
