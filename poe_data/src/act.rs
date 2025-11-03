@@ -106,8 +106,9 @@ mod fetch {
         page: &Page,
         script: &str,
     ) -> Result<Vec<ActArea>, FetchSpecificActError> {
-        println!("Doing act {act}");
-        page.goto_builder(&ActArea::act_url(act))
+        let url = ActArea::act_url(act);
+        println!("Doing act {act} {url}");
+        page.goto_builder(&url)
             .wait_until(playwright::api::DocumentLoadState::DomContentLoaded)
             .goto()
             .await
@@ -119,7 +120,7 @@ mod fetch {
         let mut areas = vec![];
         for row in rows {
             let columns = row.query_selector_all("td").await.unwrap();
-            let name_column = &columns[1];
+            let name_column = &columns[0];
             for name_element in name_column.query_selector_all("a").await.unwrap() {
                 let area = name_element.inner_text().await.unwrap();
                 println!("{area}");
