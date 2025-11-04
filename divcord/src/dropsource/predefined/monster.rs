@@ -3,8 +3,11 @@ use std::str::FromStr;
 use strum::IntoEnumIterator;
 use strum_macros::EnumIter;
 
+// When adding new variant, do not forget to add a line to
+// impl FromStr for UniqueMonster fn from_str
 #[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum UniqueMonster {
+    HivebornMonsters,
     StygianSpire,
     BreachMonsters,
     Allt3Andt4HarvestMonsters,
@@ -53,6 +56,7 @@ impl FromStr for UniqueMonster {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "Hiveborn monsters" => Ok(Self::HivebornMonsters),
             "Stygian Spire" => Ok(Self::StygianSpire),
             "Breach monsters" => Ok(Self::BreachMonsters),
             "All T3/T4 (boss) Harvest monsters" | "All T3-T4 (boss) Harvest monsters" => {
@@ -116,6 +120,7 @@ impl FromStr for UniqueMonster {
 impl Identified for UniqueMonster {
     fn id(&self) -> &str {
         match self {
+            UniqueMonster::HivebornMonsters => "Hiveborn monsters",
             UniqueMonster::StygianSpire => "Stygian Spire",
             UniqueMonster::BreachMonsters => "Breach monsters",
             UniqueMonster::Allt3Andt4HarvestMonsters => "All T3-T4 (boss) Harvest monsters",
@@ -179,6 +184,7 @@ impl UniqueMonster {
 
     pub fn _type(&self) -> &str {
         match self {
+            UniqueMonster::HivebornMonsters => "Hiveborn monsters",
             UniqueMonster::StygianSpire => "Stygian Spire",
             UniqueMonster::BreachMonsters => "Breach monsters",
             UniqueMonster::Allt3Andt4HarvestMonsters => "All T3-T4 (boss) Harvest monsters",
