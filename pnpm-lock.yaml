@@ -45,8 +45,8 @@ importers:
         specifier: ^3
         version: 3.0.2(typescript@5.8.3)(vue@3.5.16(typescript@5.8.3))
       poe-custom-elements:
-        specifier: 0.3.15
-        version: 0.3.15
+        specifier: 0.3.19
+        version: 0.3.19
       vue:
         specifier: 3.5.16
         version: 3.5.16(typescript@5.8.3)
@@ -107,8 +107,8 @@ importers:
         specifier: ^3
         version: 3.3.0
       poe-custom-elements:
-        specifier: 0.3.15
-        version: 0.3.15
+        specifier: 0.3.19
+        version: 0.3.19
     devDependencies:
       '@chromatic-com/storybook':
         specifier: 4.0.0-next.16
@@ -2665,8 +2665,8 @@ packages:
   poe-custom-elements@0.3.14:
     resolution: {integrity: sha512-5Znvev5z3zmUsoTL4N9ozcpXjTYLPoUxYaBCiLVdzitgXMiPpkvhAMzM1OMWfxv+njGLHo7I9v2c1tSdq7i0pA==}
 
-  poe-custom-elements@0.3.15:
-    resolution: {integrity: sha512-8DadFPapr1Bqy8aUqWPqFdQL/OlUg8++JKFgmmIs0Ozhxv2pLeJqb5jPsEa7HtiZzElZ0qsViJh+OF67IqsPmg==}
+  poe-custom-elements@0.3.19:
+    resolution: {integrity: sha512-xsS6plyAfEdqKrZ233laud9PIrowabyZApq01KcUVITA4cW+FHtI0vDv9xTR1GyYQXAS5jys1p1vJ8Zy0ESfuQ==}
 
   portfinder@1.0.32:
     resolution: {integrity: sha512-on2ZJVVDXRADWE6jnQaX0ioEylzgBpQk8r55NE4wjXW1ZxO+BgDlY6DXwj20i0V8eB4SenDQ00WEaxfiIQPcxg==}
@@ -5872,7 +5872,7 @@ snapshots:
       '@floating-ui/dom': 1.7.0
       lit: 3.3.0
 
-  poe-custom-elements@0.3.15:
+  poe-custom-elements@0.3.19:
     dependencies:
       '@floating-ui/dom': 1.7.0
       lit: 3.3.0

@@ -21,7 +21,7 @@
 		"@vueuse/core": "^13.3.0",
 		"lit": "^3.3.0",
 		"pinia": "^3",
-		"poe-custom-elements": "0.3.15",
+		"poe-custom-elements": "0.3.19",
 		"vue": "3.5.16"
 	},
 	"devDependencies": {
