@@ -19,8 +19,8 @@ crate-type = ["lib", "staticlib", "cdylib"]
 tauri-build = { version = "2", features = [] }
 
 [dependencies]
-divi = {path = "../../../divi"}
-googlesheets = {path = "../../../googlesheets"}
+divi = {path = "../../../crates/divi"}
+googlesheets = {path = "../../../crates/googlesheets"}
 
 tauri = { version = "2.5.0", features = [] }
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]

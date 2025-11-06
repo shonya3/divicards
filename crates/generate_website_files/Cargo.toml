@@ -12,6 +12,7 @@ serde_json = {workspace = true}
 divcord = {path = "../divcord", features = ["fs_cache_fetcher"]}
 poe_data = {path = "../poe_data", features = ["fs_cache_fetcher"]}
 card_element = {path = "../card_element"}
-tokio = {workspace = true}
+tokio = { workspace = true }
 reqwest.workspace = true
-dotenv = {workspace = true}
+dotenv = { workspace = true }
+project-root = { workspace = true }

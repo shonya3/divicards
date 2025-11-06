@@ -29,7 +29,22 @@ async fn main() {
 
     // 1. Write data jsons
     // Prepare paths
-    let dir = PathBuf::from("../../divicards-site/gen");
+    let dir = project_root::get_project_root()
+        .unwrap()
+        .parent()
+        .unwrap()
+        .join("divicards-site")
+        .join("gen");
+
+    println!("target dir: {}", dir.display());
+
+    if !dir.exists() {
+        panic!(
+            "divicards-site/gen dir does not exist at path: {}",
+            dir.display()
+        );
+    }
+
     let json_dir = dir.join("json");
     if !json_dir.exists() {
         std::fs::create_dir_all(&json_dir).unwrap();
