@@ -34,10 +34,9 @@ const LATEST_RELEASE = 'https://github.com/shonya3/divicards/releases/latest';
 .link-release-notes {
 	display: block;
 	margin-top: 1rem;
-	color: white;
+	color: var(--sl-color-gray-700);
 	text-decoration: underline;
 	text-align: center;
-	font-size: 1.1rem;
 }
 
 .link-release-notes:hover {
@@ -47,7 +46,7 @@ const LATEST_RELEASE = 'https://github.com/shonya3/divicards/releases/latest';
 .update-btn {
 	display: block;
 	margin-inline: auto;
-	margin-top: 3rem;
+	margin-top: 2rem;
 }
 
 .heading {
