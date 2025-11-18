@@ -55,6 +55,7 @@ const exportableLeague = computed<League | null>(() => {
 const changelogPopupRef = ref<BasePopupElement | null>(null);
 const samplesContainerRef = ref<HTMLElement | null>(null) as Ref<HTMLElement | null>;
 useAutoAnimate(samplesContainerRef);
+const gemCacheMinutes = ref<number>(15);
 
 async function quickExportToSheets() {
     if (!googleAuthStore.loggedIn) {
@@ -364,7 +365,16 @@ const handleDropZoneDrop = (event: DragEvent) => {
                     :value="googleAuthStore.spreadsheetId"
                     @sl-input="(e: any) => (googleAuthStore.spreadsheetId = e.target.value)"
                 ></sl-input>
-                <sl-button variant="primary" @click="() => settingsPopupRef?.close()">Save</sl-button>
+                <sl-input
+                    placeholder="Gem pricing cache minutes"
+                    type="number"
+                    :value="gemCacheMinutes"
+                    @sl-input="(e: any) => (gemCacheMinutes = Number(e.target.value))"
+                ></sl-input>
+                <sl-button
+                    variant="primary"
+                    @click="async () => { await command('set_gem_prices_cache_ttl_minutes', { minutes: Number(gemCacheMinutes) }); settingsPopupRef?.close(); }"
+                >Save</sl-button>
             </div>
         </e-base-popup>
 		<e-stashes-view

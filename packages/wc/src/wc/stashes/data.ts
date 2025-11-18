@@ -48,6 +48,9 @@ export class MockStashLoader implements IStashLoader {
     async essencePrices(_league: League): Promise<Array<{ name: string; variant: string | null; chaos_value: number | null }>> {
         return [];
     }
+    async gemPrices(_league: League): Promise<Array<{ name: string; level: number; quality: number; chaos_value: number | null }>> {
+        return [];
+    }
     tabs(_league: League): Promise<NoItemsTab[]> {
         return new Promise(r => r(stashes));
     }

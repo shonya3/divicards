@@ -44,6 +44,10 @@ export class StashLoader implements IStashLoader {
 		return command('essence_prices', { league });
 	}
 
+	gemPrices(league: League): Promise<Array<{ name: string; level: number; quality: number; chaos_value: number | null }>> {
+		return command('gem_prices', { league });
+	}
+
 	async tabs(league: League | string): Promise<NoItemsTab[]> {
 		const { stashes = [] } = await command('stashes', { league });
 		return this.#flattenStashes(stashes);

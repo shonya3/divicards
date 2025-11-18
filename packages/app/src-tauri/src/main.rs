@@ -49,6 +49,8 @@ async fn main() {
             lib::prices::currency_prices,
             lib::prices::fragment_prices,
             lib::prices::essence_prices,
+            lib::prices::gem_prices,
+            lib::prices::set_gem_prices_cache_ttl_minutes,
             poe::auth::poe_auth,
             poe::auth::poe_logout,
             poe::stash::stashes,

@@ -11,6 +11,7 @@ export interface IStashLoader {
     currencyPrices: (league: League) => Promise<Array<{ name: string; chaos_value: number | null }>>;
     fragmentPrices: (league: League) => Promise<Array<{ name: string; chaos_value: number | null }>>;
     essencePrices: (league: League) => Promise<Array<{ name: string; variant: string | null; chaos_value: number | null }>>;
+    gemPrices: (league: League) => Promise<Array<{ name: string; level: number; quality: number; chaos_value: number | null }>>;
 }
 
 export interface IDefaultStashLoader {

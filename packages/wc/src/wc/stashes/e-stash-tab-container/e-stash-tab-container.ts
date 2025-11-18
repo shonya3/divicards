@@ -5,6 +5,7 @@ import '../poe-map-stash-list';
 import '../poe-currency-stash-list';
 import '../poe-fragment-stash-list';
 import '../poe-essence-stash-list';
+import '../poe-gem-stash-list';
 import '@shoelace-style/shoelace/dist/components/spinner/spinner.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
@@ -82,13 +83,17 @@ export class StashTabContainerElement extends LitElement {
 							? html`<poe-map-stash-list .league=${this.league} .stashLoader=${this.stashLoader} .tab=${this.tab}></poe-map-stash-list>`
 							: (this.tab.type as unknown as string) === 'CurrencyStash'
 								? html`<poe-currency-stash-list .league=${this.league} .stashLoader=${this.stashLoader} .tab=${this.tab}></poe-currency-stash-list>`
-								: (this.tab.type as unknown as string) === 'FragmentStash'
-									? html`<poe-fragment-stash-list .league=${this.league} .stashLoader=${this.stashLoader} .tab=${this.tab}></poe-fragment-stash-list>`
-									: (this.tab.type as unknown as string) === 'EssenceStash'
-										? html`<poe-essence-stash-list .league=${this.league} .stashLoader=${this.stashLoader} .tab=${this.tab}></poe-essence-stash-list>`
-							: isSupportedTabType(this.tab.type)
-								? html`<poe-stash-tab .tab=${this.tab}></poe-stash-tab>`
-								: html`<poe-simple-stash-tab .tab=${this.tab}></poe-simple-stash-tab>`
+                        : (this.tab.type as unknown as string) === 'FragmentStash'
+                            ? html`<poe-fragment-stash-list .league=${this.league} .stashLoader=${this.stashLoader} .tab=${this.tab}></poe-fragment-stash-list>`
+                            : (this.tab.type as unknown as string) === 'EssenceStash'
+                                ? html`<poe-essence-stash-list .league=${this.league} .stashLoader=${this.stashLoader} .tab=${this.tab}></poe-essence-stash-list>`
+                                : (this.tab.type as unknown as string) === 'GemStash'
+                                    ? html`<poe-gem-stash-list .league=${this.league} .stashLoader=${this.stashLoader} .tab=${this.tab}></poe-gem-stash-list>`
+                                    : stashtab_has_gems(this.tab)
+                                        ? html`<poe-gem-stash-list .league=${this.league} .stashLoader=${this.stashLoader} .tab=${this.tab}></poe-gem-stash-list>`
+                            : isSupportedTabType(this.tab.type)
+                                ? html`<poe-stash-tab .tab=${this.tab}></poe-stash-tab>`
+                                : html`<poe-simple-stash-tab .tab=${this.tab}></poe-simple-stash-tab>`
 					: html`<sl-spinner></sl-spinner>`}
 			</div> `;
 	}
@@ -189,11 +194,27 @@ export class StashTabContainerElement extends LitElement {
 }
 
 function stashtab_has_cards(stashtab: TabWithItems | null): boolean {
-	if (!stashtab) {
-		return false;
-	}
+    if (!stashtab) {
+        return false;
+    }
 
-	return stashtab.items.some(item => item.frameType === 6);
+    return stashtab.items.some(item => item.frameType === 6);
+}
+
+function stashtab_has_gems(stashtab: TabWithItems | null): boolean {
+    if (!stashtab) return false;
+    const items = stashtab.items || [];
+    for (const it of items) {
+        const props = (it as any).properties || [];
+        if (Array.isArray(props) && props.some((p: any) => p?.name === 'Gem Level' || p?.name === 'Level')) {
+            return true;
+        }
+        const name = (it as any).typeLine || (it as any).baseType || (it as any).name || '';
+        if (typeof name === 'string' && (name.includes(' Support') || name.includes('Gem'))) {
+            return true;
+        }
+    }
+    return false;
 }
 
 function isSupportedTabType(type: string): boolean {
@@ -203,6 +224,7 @@ function isSupportedTabType(type: string): boolean {
         'QuadStash',
         'FragmentStash',
         'EssenceStash',
+        'GemStash',
         'Folder',
         'NormalStash',
         'DivinationCardStash',
