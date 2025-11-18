@@ -7,6 +7,9 @@ import '@shoelace-style/shoelace/dist/components/alert/alert.js';
 import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 import '@shoelace-style/shoelace/dist/components/dialog/dialog.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
+import '@shoelace-style/shoelace/dist/components/select/select.js';
+import '@shoelace-style/shoelace/dist/components/option/option.js';
+import '@shoelace-style/shoelace/dist/components/popup/popup.js';
 import '../shared/e-json-viewer';
 
 @customElement('poe-general-priced-list')
@@ -23,6 +26,46 @@ export class PoeGeneralPricedListElement extends LitElement {
   @property({ type: Boolean }) aggregate: boolean = false;
   @property() filter: string = '';
   @property({ type: Boolean }) invalidRegex: boolean = false;
+  @property({ type: Boolean }) filtersOpen: boolean = false;
+  @property() category: string | null = null;
+  @property({ type: Number }) qtyMin: number | null = null;
+  @property({ type: Number }) qtyMax: number | null = null;
+  @property({ type: Number }) priceMin: number | null = null;
+  @property({ type: Number }) priceMax: number | null = null;
+  @property({ type: Number }) totalMin: number | null = null;
+  @property({ type: Number }) totalMax: number | null = null;
+  private categoryIndex: Map<string, string> = new Map();
+
+  private buildCategoryIndex(src: CategorySource): void {
+    const map = new Map<string, string>();
+    (Object.keys(src) as Array<keyof CategorySource>).forEach(key => {
+      const arr = src[key] || [];
+      const category = categoryFromKey(key);
+      arr.forEach(r => { if (r && typeof (r as any).name === 'string') map.set(normalizeName((r as any).name), category); });
+    });
+    this.categoryIndex = map;
+  }
+
+  private categories(): string[] {
+    const set = new Set<string>(Array.from(this.categoryIndex.values()));
+    return Array.from(set.values());
+  }
+
+  private matchesAdvancedFilters(r: { name: string; qty: number; price: number; total: number }): boolean {
+    if (this.aggregate) {
+      if (this.category) {
+        const cat = this.categoryIndex.get(normalizeName(r.name)) ?? 'Other';
+        if (cat !== this.category) return false;
+      }
+      if (this.qtyMin !== null && r.qty < this.qtyMin) return false;
+      if (this.qtyMax !== null && r.qty > this.qtyMax) return false;
+      if (this.priceMin !== null && r.price < this.priceMin) return false;
+      if (this.priceMax !== null && r.price > this.priceMax) return false;
+      if (this.totalMin !== null && r.total < this.totalMin) return false;
+      if (this.totalMax !== null && r.total > this.totalMax) return false;
+    }
+    return true;
+  }
 
   async willUpdate(map: Map<PropertyKey, unknown>): Promise<void> {
     if (map.has('league') || this.prices.size === 0) {
@@ -57,6 +100,7 @@ export class PoeGeneralPricedListElement extends LitElement {
         });
       };
       [currency, fragments, oils, incubators, fossils, resonators, deliriumOrbs, vials].forEach(merge);
+      this.buildCategoryIndex({ currency, fragments, oils, incubators, fossils, resonators, deliriumOrbs, vials });
       this.prices = next;
       this.errorMessage = null;
     } catch (err: unknown) {
@@ -84,7 +128,8 @@ export class PoeGeneralPricedListElement extends LitElement {
         this.invalidRegex = true;
       }
     }
-    const filtered = regex ? rows.filter(r => regex!.test(r.name)) : rows;
+    const filteredByRegex = regex ? rows.filter(r => regex!.test(r.name)) : rows;
+    const filtered = filteredByRegex.filter(r => this.matchesAdvancedFilters(r));
     filtered.sort((a, b) => {
       const mul = this.sortDir === 'asc' ? 1 : -1;
       switch (this.sortBy) {
@@ -97,11 +142,40 @@ export class PoeGeneralPricedListElement extends LitElement {
     });
 
     const headerCols = this.aggregate ? ['Name', 'Quantity', 'Price', 'Total'] : ['Name', 'Tab', 'Quantity', 'Price', 'Total'];
+    const filteredTotal = filtered.reduce((sum, r) => sum + (r.total || 0), 0);
     return html`<div class="list">
       <div class="tools">
         <sl-input size="small" placeholder="Filter (regex)" .value=${this.filter} @sl-input=${(e: any) => { this.filter = e.target.value; }}></sl-input>
+        ${this.aggregate ? html`<sl-button size="small" id="filtersBtn" @click=${() => { this.filtersOpen = !this.filtersOpen; }}>Filters</sl-button>` : null}
+        ${this.aggregate ? html`<div class="filtered-total">Filtered total: ${filteredTotal.toFixed(0)}c</div>` : null}
         <sl-button size="small" @click=${() => { this.viewPricesOpen = true; }}>View Prices JSON</sl-button>
       </div>
+      ${this.aggregate ? html`<sl-popup .active=${this.filtersOpen} anchor="filtersBtn" placement="bottom-end" distance="8">
+        <div class="filters-panel">
+          <h4>Category</h4>
+          <sl-select hoist .value=${this.category ?? ''} @sl-change=${(e: any) => { const v = e.target.value; this.category = v ? String(v) : null; }} placeholder="Filter by category">
+            ${this.categories().map(c => html`<sl-option value=${c}>${c}</sl-option>`)}
+          </sl-select>
+          <div class="divider"></div>
+          <h4>Quantity Range</h4>
+          <div class="grid-2">
+            <sl-input type="number" placeholder="No minimum" .value=${String(this.qtyMin ?? '')} @sl-input=${(e: any) => { const v = e.target.value; this.qtyMin = v === '' ? null : Number(v); }}></sl-input>
+            <sl-input type="number" placeholder="No maximum" .value=${String(this.qtyMax ?? '')} @sl-input=${(e: any) => { const v = e.target.value; this.qtyMax = v === '' ? null : Number(v); }}></sl-input>
+          </div>
+          <div class="divider"></div>
+          <h4>Item Price Range</h4>
+          <div class="grid-2">
+            <sl-input type="number" placeholder="No minimum" .value=${String(this.priceMin ?? '')} @sl-input=${(e: any) => { const v = e.target.value; this.priceMin = v === '' ? null : Number(v); }}></sl-input>
+            <sl-input type="number" placeholder="No maximum" .value=${String(this.priceMax ?? '')} @sl-input=${(e: any) => { const v = e.target.value; this.priceMax = v === '' ? null : Number(v); }}></sl-input>
+          </div>
+          <div class="divider"></div>
+          <h4>Total Price Range</h4>
+          <div class="grid-2">
+            <sl-input type="number" placeholder="No minimum" .value=${String(this.totalMin ?? '')} @sl-input=${(e: any) => { const v = e.target.value; this.totalMin = v === '' ? null : Number(v); }}></sl-input>
+            <sl-input type="number" placeholder="No maximum" .value=${String(this.totalMax ?? '')} @sl-input=${(e: any) => { const v = e.target.value; this.totalMax = v === '' ? null : Number(v); }}></sl-input>
+          </div>
+        </div>
+      </sl-popup>` : null}
       ${this.errorMessage ? html`<sl-alert variant="danger" closable @sl-after-hide=${() => (this.errorMessage = null)}>
         <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
         ${this.errorMessage}
@@ -151,8 +225,9 @@ export class PoeGeneralPricedListElement extends LitElement {
   static styles: CSSResult = css`
     :host { display: block; width: 100%; height: auto; }
     .list { width: 100%; padding: 8px; display: grid; grid-auto-rows: min-content; row-gap: 6px; overflow: auto; }
-    .tools { display: flex; justify-content: flex-end; gap: 8px; padding-bottom: 6px; }
+    .tools { display: flex; justify-content: flex-end; gap: 8px; padding-bottom: 6px; align-items: center; }
     .tools sl-input { min-width: 260px; }
+    .filtered-total { font-weight: 600; opacity: 0.8; }
     sl-alert { position: sticky; top: 0; z-index: 1; }
     .header, .row { display: grid; grid-template-columns: 1fr 60px 80px 80px 100px; align-items: center; column-gap: 12px; }
     .header.agg, .row.agg { grid-template-columns: 1fr 80px 80px 100px; }
@@ -164,6 +239,10 @@ export class PoeGeneralPricedListElement extends LitElement {
     .qty { text-align: right; }
     .price, .total { text-align: right; }
     .row { border-bottom: 1px solid var(--sl-color-gray-200); padding: 6px 0; }
+    .filters-panel { width: 360px; max-width: 80vw; padding: 12px; display: grid; row-gap: 10px; }
+    .filters-panel h4 { margin: 0; font-size: 0.95rem; }
+    .divider { height: 1px; background: var(--sl-color-gray-200); margin: 4px 0; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; column-gap: 8px; }
   `;
 }
 
@@ -188,4 +267,31 @@ function groupByName(items: PoeItem[]): Map<string, Group> {
     if (prev) prev.total += qty; else map.set(name, { name, total: qty, sample: it });
   }
   return map;
+}
+
+type CategorySource = {
+  currency: Array<{ name: string }>,
+  fragments: Array<{ name: string }>,
+  oils: Array<{ name: string }>,
+  incubators: Array<{ name: string }>,
+  fossils: Array<{ name: string }>,
+  resonators: Array<{ name: string }>,
+  deliriumOrbs: Array<{ name: string }>,
+  vials: Array<{ name: string }>
+};
+
+function normalizeName(n: string): string { return n.trim(); }
+
+function categoryFromKey(k: keyof CategorySource): string {
+  switch (k) {
+    case 'currency': return 'Currency';
+    case 'fragments': return 'Fragment';
+    case 'oils': return 'Oil';
+    case 'incubators': return 'Incubator';
+    case 'fossils': return 'Fossil';
+    case 'resonators': return 'Resonator';
+    case 'deliriumOrbs': return 'Delirium Orb';
+    case 'vials': return 'Vial';
+    default: return 'Other';
+  }
 }
