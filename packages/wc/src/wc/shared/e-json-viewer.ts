@@ -8,7 +8,7 @@ import '@shoelace-style/shoelace/dist/components/copy-button/copy-button.js';
 @customElement('e-json-viewer')
 export class EJsonViewer extends LitElement {
   @property({ attribute: false }) data: unknown = null;
-  @property() expandAll: boolean = false;
+  @property({ type: Boolean }) expandAll: boolean = false;
   @property() filter: string = '';
 
   protected render(): TemplateResult {
@@ -17,7 +17,7 @@ export class EJsonViewer extends LitElement {
       <sl-input placeholder="Filter keys" size="small" @sl-input=${(e: any) => { this.filter = e.target.value ?? ''; }}></sl-input>
       <sl-button size="small" @click=${() => { this.expandAll = true; }}>Expand all</sl-button>
       <sl-button size="small" @click=${() => { this.expandAll = false; }}>Collapse all</sl-button>
-      <sl-copy-button .value=${JSON.stringify(json, null, 2)} size="small"></sl-copy-button>
+      <sl-copy-button .value=${JSON.stringify(json, null, 2)}></sl-copy-button>
     </div>
     <div class="tree">${this.renderNode('root', json)}</div>`;
   }
@@ -68,4 +68,3 @@ function formatPrimitive(v: unknown): string {
   if (v === null || v === undefined) return 'null';
   try { return JSON.stringify(v); } catch { return String(v); }
 }
-

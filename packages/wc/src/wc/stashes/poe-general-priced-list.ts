@@ -6,6 +6,7 @@ import type { IStashLoader } from '@divicards/shared/IStashLoader.js';
 import '@shoelace-style/shoelace/dist/components/alert/alert.js';
 import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 import '@shoelace-style/shoelace/dist/components/dialog/dialog.js';
+import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '../shared/e-json-viewer';
 
 @customElement('poe-general-priced-list')
@@ -20,6 +21,8 @@ export class PoeGeneralPricedListElement extends LitElement {
   @property({ type: Boolean }) viewPricesOpen: boolean = false;
   @property({ attribute: false }) debugData: Record<string, any[]> = {};
   @property({ type: Boolean }) aggregate: boolean = false;
+  @property() filter: string = '';
+  @property({ type: Boolean }) invalidRegex: boolean = false;
 
   async willUpdate(map: Map<PropertyKey, unknown>): Promise<void> {
     if (map.has('league') || this.prices.size === 0) {
@@ -72,7 +75,17 @@ export class PoeGeneralPricedListElement extends LitElement {
       const total = +(price * g.total).toFixed(1);
       return { name: g.name, qty: g.total, tab: tabIndex, price, total, sample: g.sample };
     });
-    rows.sort((a, b) => {
+    let regex: RegExp | null = null;
+    this.invalidRegex = false;
+    if (this.filter && this.filter.trim().length) {
+      try {
+        regex = new RegExp(this.filter.trim(), 'i');
+      } catch (_) {
+        this.invalidRegex = true;
+      }
+    }
+    const filtered = regex ? rows.filter(r => regex!.test(r.name)) : rows;
+    filtered.sort((a, b) => {
       const mul = this.sortDir === 'asc' ? 1 : -1;
       switch (this.sortBy) {
         case 'name': return a.name.localeCompare(b.name) * mul;
@@ -86,22 +99,27 @@ export class PoeGeneralPricedListElement extends LitElement {
     const headerCols = this.aggregate ? ['Name', 'Quantity', 'Price', 'Total'] : ['Name', 'Tab', 'Quantity', 'Price', 'Total'];
     return html`<div class="list">
       <div class="tools">
+        <sl-input size="small" placeholder="Filter (regex)" .value=${this.filter} @sl-input=${(e: any) => { this.filter = e.target.value; }}></sl-input>
         <sl-button size="small" @click=${() => { this.viewPricesOpen = true; }}>View Prices JSON</sl-button>
       </div>
       ${this.errorMessage ? html`<sl-alert variant="danger" closable @sl-after-hide=${() => (this.errorMessage = null)}>
         <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
         ${this.errorMessage}
       </sl-alert>` : null}
+      ${this.invalidRegex ? html`<sl-alert variant="warning" closable @sl-after-hide=${() => (this.invalidRegex = false)}>
+        <sl-icon slot="icon" name="exclamation-triangle"></sl-icon>
+        Invalid regex: ${this.filter}
+      </sl-alert>` : null}
       ${this.renderHeader(headerCols)}
-      ${rows.map(r => html`<div class="row ${this.aggregate ? 'agg' : ''}">
+      ${filtered.map(r => html`<div class="row ${this.aggregate ? 'agg' : ''}">
         <div class="name">
           <poe-item .item=${normalizeItem(r.sample)}></poe-item>
           <span>${r.name}</span>
         </div>
-        ${this.aggregate ? null : html`<div>${r.tab}</div>`}
+        ${this.aggregate ? null : html`<div class="tab">${r.tab}</div>`}
         <div class="qty">${r.qty}</div>
-        <div>${r.price ? `${r.price.toFixed(0)}c` : '-'}</div>
-        <div>${r.total ? `${r.total.toFixed(0)}c` : '-'}</div>
+        <div class="price">${r.price ? `${r.price.toFixed(0)}c` : '-'}</div>
+        <div class="total">${r.total ? `${r.total.toFixed(0)}c` : '-'}</div>
       </div>`)}
     </div>
     <sl-dialog label="Prices JSON" .open=${this.viewPricesOpen} @sl-hide=${() => { this.viewPricesOpen = false; }} style="--width: 800px;">
@@ -114,8 +132,9 @@ export class PoeGeneralPricedListElement extends LitElement {
     const keys: Record<string, PoeGeneralPricedListElement['sortBy']> = {
       Name: 'name', Tab: 'tab', Quantity: 'qty', Price: 'price', Total: 'total'
     };
-    return html`<div class="header">
-      ${cols.map(c => html`<button class="th" @click=${() => this.onSort(keys[c])}>${c}${this.sortBy === keys[c] ? (this.sortDir === 'asc' ? ' ▲' : ' ▼') : ''}</button>`)}
+    const numeric = new Set(['Quantity', 'Price', 'Total']);
+    return html`<div class="header ${this.aggregate ? 'agg' : ''}">
+      ${cols.map(c => html`<button class="th ${numeric.has(c) ? 'numeric' : ''}" @click=${() => this.onSort(keys[c])}>${c}${this.sortBy === keys[c] ? (this.sortDir === 'asc' ? ' ▲' : ' ▼') : ''}</button>`)}
     </div>`;
   }
 
@@ -132,15 +151,18 @@ export class PoeGeneralPricedListElement extends LitElement {
   static styles: CSSResult = css`
     :host { display: block; width: 100%; height: auto; }
     .list { width: 100%; padding: 8px; display: grid; grid-auto-rows: min-content; row-gap: 6px; overflow: auto; }
-    .tools { display: flex; justify-content: flex-end; padding-bottom: 6px; }
+    .tools { display: flex; justify-content: flex-end; gap: 8px; padding-bottom: 6px; }
+    .tools sl-input { min-width: 260px; }
     sl-alert { position: sticky; top: 0; z-index: 1; }
     .header, .row { display: grid; grid-template-columns: 1fr 60px 80px 80px 100px; align-items: center; column-gap: 12px; }
-    .row.agg { grid-template-columns: 1fr 80px 80px 100px; }
-    .header { font-weight: 600; position: sticky; top: 0; background: var(--sl-color-gray-50); z-index: 1; padding: 6px 0; border-bottom: 1px solid var(--sl-color-gray-200); }
+    .header.agg, .row.agg { grid-template-columns: 1fr 80px 80px 100px; }
+    .header { font-weight: 600; position: sticky; top: 0; background: var(--sl-color-gray-50); z-index: 2; padding: 6px 0; border-bottom: 1px solid var(--sl-color-gray-200); }
     .header .th { text-align: left; background: transparent; border: none; color: inherit; cursor: pointer; padding: 4px 0; }
+    .header .th.numeric { text-align: right; }
     .name { display: flex; align-items: center; gap: 8px; }
     poe-item { --cell-size: 32px; --poe-item-size: 32px; --stack-size-font-size: 10px; }
     .qty { text-align: right; }
+    .price, .total { text-align: right; }
     .row { border-bottom: 1px solid var(--sl-color-gray-200); padding: 6px 0; }
   `;
 }
