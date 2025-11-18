@@ -72,6 +72,10 @@ export class StashLoader implements IStashLoader {
 		return command('vial_prices', { league });
 	}
 
+	ninjaDenseOverviewsRaw(league: League): Promise<Record<string, unknown>> {
+		return command('ninja_dense_overviews_raw', { league });
+	}
+
 	async tabs(league: League | string): Promise<NoItemsTab[]> {
 		const { stashes = [] } = await command('stashes', { league });
 		return this.#flattenStashes(stashes);

@@ -5,6 +5,8 @@ import 'poe-custom-elements/item.js';
 import type { IStashLoader } from '@divicards/shared/IStashLoader.js';
 import '@shoelace-style/shoelace/dist/components/alert/alert.js';
 import '@shoelace-style/shoelace/dist/components/icon/icon.js';
+import '@shoelace-style/shoelace/dist/components/dialog/dialog.js';
+import '../shared/e-json-viewer';
 
 @customElement('poe-general-priced-list')
 export class PoeGeneralPricedListElement extends LitElement {
@@ -15,6 +17,8 @@ export class PoeGeneralPricedListElement extends LitElement {
   @property() sortDir: 'asc' | 'desc' = 'asc';
   @property({ attribute: false }) stashLoader!: IStashLoader;
   @property() errorMessage: string | null = null;
+  @property({ type: Boolean }) viewPricesOpen: boolean = false;
+  @property({ attribute: false }) debugData: Record<string, any[]> = {};
 
   async willUpdate(map: Map<PropertyKey, unknown>): Promise<void> {
     if (map.has('league') || this.prices.size === 0) {
@@ -38,6 +42,7 @@ export class PoeGeneralPricedListElement extends LitElement {
         this.stashLoader.deliriumOrbPrices(this.league as any),
         this.stashLoader.vialPrices(this.league as any),
       ]);
+      this.debugData = { currency, fragments, oils, incubators, fossils, resonators, deliriumOrbs, vials } as any;
       const next = new Map<string, number>();
       const merge = (rows: Array<{ name: string; chaos_value: number | null }>) => {
         rows.forEach(r => {
@@ -78,6 +83,9 @@ export class PoeGeneralPricedListElement extends LitElement {
     });
 
     return html`<div class="list">
+      <div class="tools">
+        <sl-button size="small" @click=${() => { this.viewPricesOpen = true; }}>View Prices JSON</sl-button>
+      </div>
       ${this.errorMessage ? html`<sl-alert variant="danger" closable @sl-after-hide=${() => (this.errorMessage = null)}>
         <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
         ${this.errorMessage}
@@ -93,7 +101,11 @@ export class PoeGeneralPricedListElement extends LitElement {
         <div>${r.price ? `${r.price.toFixed(0)}c` : '-'}</div>
         <div>${r.total ? `${r.total.toFixed(0)}c` : '-'}</div>
       </div>`)}
-    </div>`;
+    </div>
+    <sl-dialog label="Prices JSON" .open=${this.viewPricesOpen} @sl-hide=${() => { this.viewPricesOpen = false; }} style="--width: 800px;">
+      <e-json-viewer .data=${this.debugData}></e-json-viewer>
+      <sl-button slot="footer" variant="primary" @click=${() => { this.viewPricesOpen = false; }}>Close</sl-button>
+    </sl-dialog>`;
   }
 
   private renderHeader(cols: string[]): TemplateResult {
@@ -118,6 +130,7 @@ export class PoeGeneralPricedListElement extends LitElement {
   static styles: CSSResult = css`
     :host { display: block; width: var(--size, 569px); height: var(--size, 569px); }
     .list { width: 100%; height: 100%; padding: 8px; display: grid; grid-auto-rows: min-content; row-gap: 6px; overflow: auto; }
+    .tools { display: flex; justify-content: flex-end; padding-bottom: 6px; }
     sl-alert { position: sticky; top: 0; z-index: 1; }
     .header, .row { display: grid; grid-template-columns: 1fr 50px 80px 80px 100px; align-items: center; column-gap: 12px; }
     .header { font-weight: 600; position: sticky; top: 0; background: var(--sl-color-gray-50); z-index: 1; padding: 6px 0; border-bottom: 1px solid var(--sl-color-gray-200); }
@@ -151,4 +164,3 @@ function groupByName(items: PoeItem[]): Map<string, Group> {
   }
   return map;
 }
-

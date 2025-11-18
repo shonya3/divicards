@@ -54,6 +54,7 @@ export interface Commands {
 		resonator_prices: (args: { league: League }) => Array<{ name: string; chaos_value: number | null }>;
 		delirium_orb_prices: (args: { league: League }) => Array<{ name: string; chaos_value: number | null }>;
 		vial_prices: (args: { league: League }) => Array<{ name: string; chaos_value: number | null }>;
+		ninja_dense_overviews_raw: (args: { league: League }) => Record<string, unknown>;
 		set_gem_prices_cache_ttl_minutes: (args: { minutes: number }) => void;
 }
 

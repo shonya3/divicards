@@ -3,7 +3,7 @@ use crate::{
     event::{Event, ToastVariant},
 };
 use divi::{prices::Prices, Error as DiviError, TradeLeague};
-use ninja::{fetch_by_item_category, fetch_currency_by_category, fetch_stash_currency_overview, fetch_stash_item_overview};
+use ninja::{fetch_by_item_category, fetch_currency_by_category, fetch_stash_currency_overview, fetch_stash_item_overview, fetch_stash_dense_overviews_raw};
 use serde_json::Value;
 use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, fs, path::PathBuf};
@@ -330,6 +330,13 @@ pub async fn vial_prices(league: TradeLeague) -> Result<Vec<NamedPrice>, Error> 
     }
     info!(league = %league, count = out.len(), "vial_prices fetched");
     Ok(out)
+}
+
+#[tauri::command]
+#[instrument]
+pub async fn ninja_dense_overviews_raw(league: TradeLeague) -> Result<Value, Error> {
+    let v = fetch_stash_dense_overviews_raw(&league).await.map_err(DiviError::NinjaError)?;
+    Ok(v)
 }
 
 #[tauri::command]

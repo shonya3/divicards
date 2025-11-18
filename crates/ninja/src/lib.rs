@@ -164,3 +164,14 @@ pub async fn fetch_stash_dense_overviews_flat(
     }
     Ok(out)
 }
+
+pub async fn fetch_stash_dense_overviews_raw(
+    league: &TradeLeague,
+) -> Result<Value, Error> {
+    let url = format!(
+        "https://poe.ninja/poe1/api/economy/stash/current/dense/overviews?league={league}"
+    );
+    let json = reqwest::get(url).await?.text().await?;
+    let v = serde_json::from_str::<Value>(&json)?;
+    Ok(v)
+}

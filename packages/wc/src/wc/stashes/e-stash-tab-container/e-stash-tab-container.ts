@@ -14,6 +14,8 @@ import '@shoelace-style/shoelace/dist/components/copy-button/copy-button.js';
 import '../e-tab-badge/e-tab-badge.js';
 import '@shoelace-style/shoelace/dist/components/alert/alert.js';
 import '@shoelace-style/shoelace/dist/components/icon/icon.js';
+import '@shoelace-style/shoelace/dist/components/dialog/dialog.js';
+import '../shared/e-json-viewer';
 
 import { LitElement, html, css, TemplateResult, CSSResult } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
@@ -41,6 +43,9 @@ export class StashTabContainerElement extends LitElement {
 	@property({ type: Boolean }) cardsJustExtracted: boolean = false;
 	@property() league: string = 'Standard';
 	@property({ attribute: false }) stashLoader!: IStashLoader;
+	@property({ type: Boolean }) viewJsonOpen: boolean = false;
+	@property({ type: Boolean }) viewDenseOpen: boolean = false;
+	@property({ attribute: false }) denseJson: any = null;
 
 	@query('sl-alert') scarabsSuccessAlert!: SlAlert;
 
@@ -48,15 +53,17 @@ export class StashTabContainerElement extends LitElement {
 		return html`<header class="header">
 				<div class="header-main">
 					<div class="badge-and-copy">
-						${this.tab ? html`<e-tab-badge as="button" .tab=${this.tab}></e-tab-badge>` : null}
-						${this.tab
-							? html`<sl-copy-button
-									.value=${JSON.stringify(this.tab, null, 4)}
-									.copyLabel=${`Click to copy JSON of the tab`}
-									.successLabel=${`You copied JSON of the tab`}
-									.errorLabel=${`Whoops, your browser doesn't support this!`}
-							  ></sl-copy-button>`
-							: null}
+					${this.tab ? html`<e-tab-badge as="button" .tab=${this.tab}></e-tab-badge>` : null}
+					${this.tab
+						? html`<sl-copy-button
+								.value=${JSON.stringify(this.tab, null, 4)}
+								.copyLabel=${`Click to copy JSON of the tab`}
+								.successLabel=${`You copied JSON of the tab`}
+								.errorLabel=${`Whoops, your browser doesn't support this!`}
+						  ></sl-copy-button>`
+						: null}
+					${this.tab ? html`<sl-button size="small" @click=${() => { this.viewJsonOpen = true; }}>View JSON</sl-button>` : null}
+					${this.tab ? html`<sl-button size="small" @click=${this.#openDenseJson}>View Ninja Dense</sl-button>` : null}
 					</div>
 					${this.status === 'complete' && this.tab
 						? this.tab.type === 'FragmentStash'
@@ -76,6 +83,14 @@ export class StashTabContainerElement extends LitElement {
 					</sl-alert>
 				</div>
 			</header>
+			<sl-dialog label="Tab JSON" .open=${this.viewJsonOpen} @sl-hide=${() => { this.viewJsonOpen = false; }} style="--width: 800px;">
+				${this.tab ? html`<e-json-viewer .data=${this.tab}></e-json-viewer>` : null}
+				<sl-button slot="footer" variant="primary" @click=${() => { this.viewJsonOpen = false; }}>Close</sl-button>
+			</sl-dialog>
+			<sl-dialog label="Ninja Dense Overviews" .open=${this.viewDenseOpen} @sl-hide=${() => { this.viewDenseOpen = false; }} style="--width: 920px;">
+				${this.denseJson ? html`<e-json-viewer .data=${this.denseJson}></e-json-viewer>` : html`<sl-spinner></sl-spinner>`}
+				<sl-button slot="footer" variant="primary" @click=${() => { this.viewDenseOpen = false; }}>Close</sl-button>
+			</sl-dialog>
 			<div class="tab-box">
 				${this.tab && this.status === 'complete'
                     ? (this.tab.type as unknown as string) === 'DelveStash'
@@ -124,6 +139,15 @@ export class StashTabContainerElement extends LitElement {
 	}
 	#emitClose() {
 		this.dispatchEvent(new CloseEvent());
+	}
+
+	#openDenseJson = async () => {
+		try {
+			this.viewDenseOpen = true;
+			this.denseJson = await this.stashLoader.ninjaDenseOverviewsRaw(this.league as any);
+		} catch (err) {
+			console.error('Failed to load dense JSON', err);
+		}
 	}
 
 	static styles: CSSResult = css`
