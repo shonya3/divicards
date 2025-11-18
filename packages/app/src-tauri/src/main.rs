@@ -45,6 +45,7 @@ async fn main() {
             commands::merge,
             commands::open_url,
             commands::sample_into_csv,
+            lib::prices::map_prices,
             poe::auth::poe_auth,
             poe::auth::poe_logout,
             poe::stash::stashes,

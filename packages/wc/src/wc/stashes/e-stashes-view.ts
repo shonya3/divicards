@@ -74,7 +74,45 @@ export class StashesViewElement extends LitElement {
 			if (!tab) {
 				return null;
 			}
-			return await this.#loadSingleTabContent(tab.id, this.league, this.stashLoader.tab);
+			// Aggregate MapStash items across all children regardless of flattening
+			if (tab.type === 'MapStash') {
+				const parentId = tab.parent ?? tab.id;
+				let children = this.stashtabs_badges.filter(t => t.parent === parentId);
+                if (children.length > 0) {
+                    const items: TabWithItems['items'] = [];
+                    for (const child of children) {
+                        const childTab = await this.stashLoader.tabFromBadge(child, this.league);
+                        items.push(...childTab.items);
+                    }
+                    return { ...tab, items, children } as TabWithItems;
+                }
+				// fallback to existing child array if present
+                if (Array.isArray(tab.children) && tab.children.length > 0) {
+                    const items: TabWithItems['items'] = [];
+                    for (const child of tab.children) {
+                        const childTab = await this.stashLoader.tabFromBadge(child, this.league);
+                        items.push(...childTab.items);
+                    }
+                    return { ...tab, items, children: tab.children } as TabWithItems;
+                }
+				// re-fetch badges to discover children and try again
+				try {
+					const badges = await this.stashLoader.tabs(this.league);
+					this.stashtabs_badges = badges;
+					children = badges.filter(t => t.parent === parentId);
+                    if (children.length > 0) {
+                        const items: TabWithItems['items'] = [];
+                        for (const child of children) {
+                            const childTab = await this.stashLoader.tabFromBadge(child, this.league);
+                            items.push(...childTab.items);
+                        }
+                        return { ...tab, items, children } as TabWithItems;
+                    }
+				} catch {
+					// ignore and fallthrough
+				}
+			}
+	            return await this.#loadSingleTabContent(tab.id, this.league, (_id, _league) => this.stashLoader.tabFromBadge(this.opened_tab!, this.league));
 		},
 		args: () => [this.opened_tab],
 	});
@@ -202,14 +240,16 @@ export class StashesViewElement extends LitElement {
 								@e-stash-tab-container__close=${this.#handleTabContainerClose}
 							></e-stash-tab-container>`;
 						},
-						complete: tab =>
-							html`<e-stash-tab-container
-								.cardsJustExtracted=${this.cardsJustExtracted}
-								@e-stash-tab-container__close=${this.#handleTabContainerClose}
-								@e-stash-tab-container__extract-cards=${this.#emitExtractCards}
-								status="complete"
-								.tab=${tab}
-							></e-stash-tab-container>`,
+                        complete: tab =>
+                            html`<e-stash-tab-container
+                                .cardsJustExtracted=${this.cardsJustExtracted}
+                                @e-stash-tab-container__close=${this.#handleTabContainerClose}
+                                @e-stash-tab-container__extract-cards=${this.#emitExtractCards}
+                                status="complete"
+                                .league=${this.league}
+                                .stashLoader=${this.stashLoader}
+                                .tab=${tab}
+                            ></e-stash-tab-container>`,
 						initial: () => {
 							return html`initial`;
 						},
@@ -255,7 +295,13 @@ export class StashesViewElement extends LitElement {
 		this.dispatchEvent(new SelectedTabsChangeEvent(this.selected_tabs));
 	}
 	#handle_tab_badge_click(e: TabClickEvent): void {
-		this.opened_tab = e.$tab;
+		const clicked = e.$tab;
+		if (!clicked.parent && Array.isArray(clicked.children) && clicked.children.length > 0) {
+			const withItems = clicked.children.find(c => c.metadata?.items);
+			this.opened_tab = withItems ?? clicked.children[0];
+			return;
+		}
+		this.opened_tab = clicked;
 	}
 	#change_multiselect(e: MultiselectChangeEvent): void {
 		this.multiselect = e.$multiselect;
@@ -305,12 +351,14 @@ export class StashesViewElement extends LitElement {
 				try {
 					switch (this.downloadAs) {
 						case 'divination-cards-sample': {
-							const sample = await this.#loadSingleTabContent(id, league, this.stashLoader.sampleFromTab);
+                            const badge = this.stashtabs_badges.find(t => t.id === id)!;
+                            const sample = await this.#loadSingleTabContent(id, league, (_sid, _lg) => this.stashLoader.sampleFromBadge(badge, league));
 							this.dispatchEvent(new SampleFromStashtabEvent(stashtab_name, sample, league));
 							break;
 						}
 						case 'general-tab': {
-							const stashtab = await this.#loadSingleTabContent(id, league, this.stashLoader.tab);
+                            const badge = this.stashtabs_badges.find(t => t.id === id)!;
+                            const stashtab = await this.#loadSingleTabContent(id, league, (_sid, _lg) => this.stashLoader.tabFromBadge(badge, league));
 							this.dispatchEvent(new StashtabFetchedEvent(stashtab, this.league));
 							break;
 						}

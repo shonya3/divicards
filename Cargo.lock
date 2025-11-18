@@ -95,6 +95,7 @@ dependencies = [
  "divi",
  "googlesheets",
  "keyring",
+ "ninja",
  "oauth2",
  "open",
  "reqwest 0.12.5",

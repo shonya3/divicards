@@ -52,9 +52,24 @@ pub async fn sample_from_tab(
 pub async fn tab_with_items(
     league: League,
     stash_id: String,
+    substash_id: Option<String>,
     version: State<'_, AppVersion>,
-) -> Result<TabWithItems, Error> {
-    StashAPI::tab_with_items(&league, stash_id, None, version.inner()).await
+    ) -> Result<TabWithItems, Error> {
+    let tab = StashAPI::tab_with_items(&league, stash_id.clone(), substash_id.clone(), version.inner()).await?;
+    let item_count = tab.items().count();
+    let map_count = tab
+        .items()
+        .filter(|i| i.base_type().is_some_and(|b| b.ends_with(" Map")))
+        .count();
+    tracing::info!(
+        league = %league,
+        stash_id = %stash_id,
+        substash_id = ?substash_id,
+        items = item_count,
+        maps = map_count,
+        "tab_with_items response"
+    );
+    Ok(tab)
 }
 
 #[command]

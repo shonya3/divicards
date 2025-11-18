@@ -3,10 +3,12 @@ use crate::{
     event::{Event, ToastVariant},
 };
 use divi::{prices::Prices, Error as DiviError, TradeLeague};
+use ninja::fetch_by_item_category;
+use serde_json::Value;
 use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, fs, path::PathBuf};
 use tauri::Window;
-use tracing::{debug, instrument};
+use tracing::{debug, instrument, info};
 
 pub const MINUTE_AS_SECS: f64 = 60.0;
 const UP_TO_DATE_THRESHOLD_MINUTES: f32 = 20.0;
@@ -81,6 +83,34 @@ impl AppCardPrices {
 pub struct AppCardPrices {
     pub dir: PathBuf,
     pub prices_by_league: HashMap<TradeLeague, Prices>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MapPrice {
+    pub name: String,
+    pub tier: u8,
+    pub chaos_value: Option<f32>,
+}
+
+#[tauri::command]
+#[instrument]
+pub async fn map_prices(league: TradeLeague) -> Result<Vec<MapPrice>, Error> {
+    let lines = fetch_by_item_category("Map", &league).await.map_err(DiviError::NinjaError)?;
+    let mut out: Vec<MapPrice> = Vec::with_capacity(lines.len());
+    for v in lines.into_iter() {
+        let name = v.get("name").and_then(Value::as_str).unwrap_or("").to_string();
+        let tier = v
+            .get("mapTier")
+            .and_then(Value::as_u64)
+            .map(|n| n as u8)
+            .unwrap_or(0);
+        let chaos_value = v.get("chaosValue").and_then(Value::as_f64).map(|n| n as f32);
+        if !name.is_empty() {
+            out.push(MapPrice { name, tier, chaos_value });
+        }
+    }
+    info!(league = %league, count = out.len(), "map_prices fetched");
+    Ok(out)
 }
 impl AppCardPrices {
     pub fn new(dir: PathBuf) -> Result<Self, Error> {

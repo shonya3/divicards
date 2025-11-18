@@ -17,20 +17,29 @@ const sleepSecs = (secs: number): Promise<void> => new Promise(resolve => setTim
 
 let stash: 'quad' | 'fragments' = 'quad';
 export class MockStashLoader implements IStashLoader {
-	async tab(_tabId: string, _league: string): Promise<TabWithItems> {
-		const nextStash = stash === 'quad' ? fragments : quad;
-		stash = stash === 'quad' ? 'fragments' : 'quad';
-		await sleepSecs(0.2);
-		return nextStash;
-	}
-	sampleFromTab(_tabId: string, _league: League): Promise<DivinationCardsSample> {
-		return new Promise(r =>
-			setTimeout(() => {
-				r(sample);
-			}, 50)
-		);
-	}
-	tabs(_league: League): Promise<NoItemsTab[]> {
-		return new Promise(r => r(stashes));
-	}
+    async tab(_tabId: string, _league: string): Promise<TabWithItems> {
+        const nextStash = stash === 'quad' ? fragments : quad;
+        stash = stash === 'quad' ? 'fragments' : 'quad';
+        await sleepSecs(0.2);
+        return nextStash;
+    }
+    async tabFromBadge(_tab: NoItemsTab, _league: League): Promise<TabWithItems> {
+        return this.tab('', _league);
+    }
+    sampleFromTab(_tabId: string, _league: League): Promise<DivinationCardsSample> {
+        return new Promise(r =>
+            setTimeout(() => {
+                r(sample);
+            }, 50)
+        );
+    }
+    sampleFromBadge(_tab: NoItemsTab, _league: League): Promise<DivinationCardsSample> {
+        return this.sampleFromTab('', _league);
+    }
+    async mapPrices(_league: League): Promise<Array<{ name: string; tier: number; chaos_value: number | null }>> {
+        return [];
+    }
+    tabs(_league: League): Promise<NoItemsTab[]> {
+        return new Promise(r => r(stashes));
+    }
 }

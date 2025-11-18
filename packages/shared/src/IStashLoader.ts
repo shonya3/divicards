@@ -2,9 +2,12 @@ import { DivinationCardsSample, League } from './types.js';
 import { NoItemsTab, TabWithItems } from 'poe-custom-elements';
 
 export interface IStashLoader {
-	tabs(league: League): Promise<NoItemsTab[]>;
-	sampleFromTab(tabId: string, league: League): Promise<DivinationCardsSample>;
-	tab: (tabId: string, league: League) => Promise<TabWithItems>;
+    tabs(league: League): Promise<NoItemsTab[]>;
+    sampleFromTab(tabId: string, league: League): Promise<DivinationCardsSample>;
+    tab: (tabId: string, league: League) => Promise<TabWithItems>;
+    tabFromBadge: (tab: NoItemsTab, league: League) => Promise<TabWithItems>;
+    sampleFromBadge: (tab: NoItemsTab, league: League) => Promise<DivinationCardsSample>;
+    mapPrices: (league: League) => Promise<Array<{ name: string; tier: number; chaos_value: number | null }>>;
 }
 
 export interface IDefaultStashLoader {
