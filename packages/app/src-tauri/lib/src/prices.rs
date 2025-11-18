@@ -84,6 +84,9 @@ pub struct AppCardPrices {
 }
 impl AppCardPrices {
     pub fn new(dir: PathBuf) -> Result<Self, Error> {
+        if !dir.exists() {
+            fs::create_dir_all(&dir)?;
+        }
         Ok(AppCardPrices {
             dir,
             prices_by_league: HashMap::new(),

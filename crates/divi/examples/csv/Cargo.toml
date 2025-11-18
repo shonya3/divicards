@@ -8,3 +8,5 @@ edition = "2021"
 [dependencies]
 divi ={ path = "../../"}
 tokio = {version = "1", features = ["full"]}
+
+[workspace]

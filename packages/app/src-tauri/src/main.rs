@@ -24,8 +24,10 @@ async fn main() {
                 .unwrap();
             let app_prices = Mutex::new(AppCardPrices::new(app_dir).unwrap());
             let app_version = AppVersion(app.config().version.clone().unwrap());
+            let google_token_state = google::AccessTokenState(Mutex::new(None));
             app.manage(app_prices);
             app.manage(app_version);
+            app.manage(google_token_state);
             #[cfg(debug_assertions)] // only include this code on debug builds
             {
                 let window = app.get_webview_window("main").unwrap();

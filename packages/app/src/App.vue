@@ -3,9 +3,9 @@ import { computed, ref, Ref, shallowRef } from 'vue';
 import { StashLoader } from './StashLoader';
 import { command } from './command';
 import { toast } from './toast';
-import { isTauriError } from './error';
-import { isTradeLeague } from '@divicards/shared/types.js';
-import { downloadText } from '@divicards/shared/lib.js';
+import { isTauriError, handleError } from './error';
+import { isTradeLeague, Column, League, Order } from '@divicards/shared/types.js';
+import { downloadText, ACTIVE_LEAGUE } from '@divicards/shared/lib.js';
 import { useSampleStore } from './stores/sample';
 import { useGoogleAuthStore } from './stores/googleAuth';
 import { useAuthStore } from './stores/auth';
@@ -42,65 +42,184 @@ const { releaseUrl, tag } = useAppVersion();
 const { update, installAndRelaunch } = useTauriUpdater();
 const stashLoader = new StashLoader();
 const tabsWithItems: Ref<TabWithItems[]> = ref<TabWithItems[]>([]);
+const availableTabs = ref<{ id: string; name: string; type: string }[]>([]);
+const selectedTabId = ref<string | null>(null);
 const changelogPopupRef = ref<BasePopupElement | null>(null);
 const samplesContainerRef = ref<HTMLElement | null>(null) as Ref<HTMLElement | null>;
 useAutoAnimate(samplesContainerRef);
 
+async function quickExportToSheets() {
+    if (!googleAuthStore.loggedIn) {
+        await googleAuthStore.login();
+    }
+    const hasMerged = !!sampleStore.merged;
+    const hasAny = sampleStore.sampleCards.length > 0;
+    if (!hasMerged && !hasAny) {
+        toast('warning', 'Add a sample first (drag CSV or load stash)');
+        return;
+    }
+    let sample;
+    let league: League;
+    if (hasMerged) {
+        sample = sampleStore.merged!.sample;
+        league = sampleStore.merged!.league as League;
+    } else {
+        sample = sampleStore.sampleCards[0].sample;
+        league = sampleStore.sampleCards[0].league as League;
+    }
+    let spreadsheetId = googleAuthStore.spreadsheetId;
+    if (!spreadsheetId) {
+        spreadsheetId = window.prompt('Enter Spreadsheet ID') ?? '';
+        googleAuthStore.setSpreadsheetId(spreadsheetId);
+    }
+    const now = new Date();
+    const title = `Divicards Export - ${now.toLocaleString()}`;
+    const preferences = {
+        columns: ['name', 'amount', 'weight', 'price', 'sum'] as Column[],
+        orderedBy: 'amount' as Column,
+        order: 'desc' as Order,
+        cardsMustHaveAmount: false,
+        minPrice: 0,
+    };
+    try {
+        const url = await command('new_sheet_with_sample', {
+            spreadsheetId,
+            title,
+            sample,
+            preferences,
+            league,
+        });
+        toast('success', 'Exported to Google Sheets');
+        command('open_url', { url });
+    } catch (err) {
+        handleError(err);
+    }
+}
+
 const openStashWindow = async () => {
-	if (!authStore.loggedIn) {
-		await authStore.login();
-	}
-	stashVisible.value = true;
+    if (!authStore.loggedIn) {
+        await authStore.login();
+    }
+    stashVisible.value = true;
+    const league = ACTIVE_LEAGUE;
+    const tabs = await stashLoader.tabs(league);
+    availableTabs.value = tabs.filter(t => t.type === 'DivinationCardStash');
+    if (availableTabs.value.length && !selectedTabId.value) {
+        selectedTabId.value = availableTabs.value[0].id;
+    }
+};
+
+const extractAllFromStash = async () => {
+    if (!authStore.loggedIn) {
+        await authStore.login();
+    }
+    const league = ACTIVE_LEAGUE;
+    const tabs = await stashLoader.tabs(league);
+    if (!tabs.length) {
+        toast('warning', 'No stash tabs found for league');
+        return;
+    }
+    const divTabs = tabs.filter(t => t.type === 'DivinationCardStash');
+    if (!divTabs.length) {
+        toast('warning', 'No Divination Card tabs found');
+        return;
+    }
+    for (const tab of divTabs) {
+        try {
+            const sample = await stashLoader.sampleFromTab(tab.id, league);
+            await sampleStore.addSample(tab.name, sample, league);
+            await new Promise(r => setTimeout(r, 200));
+        } catch (err) {
+            console.log('Failed to extract tab', tab.id, err);
+        }
+    }
+    if (sampleStore.samples.length >= 2) {
+        await sampleStore.mergeAll();
+        toast('success', 'Extracted and merged all stash tabs');
+    } else {
+        toast('success', 'Extracted cards from stash');
+    }
+};
+
+const extractSelectedTab = async () => {
+    if (!authStore.loggedIn) {
+        await authStore.login();
+    }
+    const league = ACTIVE_LEAGUE;
+    if (!selectedTabId.value) {
+        toast('warning', 'Select a Divination Card tab');
+        return;
+    }
+    try {
+        const tab = availableTabs.value.find(t => t.id === selectedTabId.value);
+        if (!tab) {
+            toast('warning', 'Selected tab not found');
+            return;
+        }
+        const sample = await stashLoader.sampleFromTab(tab.id, league);
+        await sampleStore.addSample(tab.name, sample, league);
+        toast('success', `Extracted cards from ${tab.name}`);
+    } catch (err) {
+        console.log('Failed to extract selected tab', selectedTabId.value, err);
+        toast('danger', 'Failed to extract selected tab');
+    }
 };
 
 async function export_sample({
-	spreadsheetId,
-	sheetTitle,
-	preferences: table_preferences,
-	$sample,
-	$league,
-	export_sample_to,
-	$filename,
-	target,
+    spreadsheetId,
+    sheetTitle,
+    preferences: table_preferences,
+    $sample,
+    $league,
+    export_sample_to,
+    $filename,
+    target,
 }: SubmitExportSampleEvent) {
-	const preferences = { ...table_preferences, columns: Array.from(table_preferences.columns) };
+    const preferences = { ...table_preferences, columns: Array.from(table_preferences.columns) };
 
-	switch (export_sample_to) {
-		case 'file': {
-			const csv = await command('sample_into_csv', { sample: $sample, preferences });
-			downloadText($filename, csv);
-			(target as SampleCardElement).form_popup.open = false;
-			break;
-		}
+    switch (export_sample_to) {
+        case 'file': {
+            const csv = await command('sample_into_csv', { sample: $sample, preferences });
+            downloadText($filename, csv);
+            (target as SampleCardElement).form_popup.open = false;
+            break;
+        }
 
-		case 'sheets': {
-			if (!googleAuthStore.loggedIn) {
-				await googleAuthStore.login();
-			}
-			try {
-				const url = await command('new_sheet_with_sample', {
-					spreadsheetId: spreadsheetId ?? '',
-					title: sheetTitle ?? '',
-					sample: $sample,
-					preferences,
-					league: $league,
-				});
-				toast('success', 'New sheet created successfully');
-				(target as SampleCardElement).form_popup.open = false;
-				command('open_url', { url });
-			} catch (err) {
-				if (isTauriError(err)) {
-					// TODO
-					// exportSample.sheetsError = err.message;
-				} else {
-					console.log(err);
-					(target as SampleCardElement).form_popup.open = false;
-					throw err;
-				}
-			}
-			break;
-		}
-	}
+        case 'sheets': {
+            if (!googleAuthStore.loggedIn) {
+                await googleAuthStore.login();
+            }
+            const now = new Date();
+            const defaultTitle = `Divicards Export - ${now.toLocaleString()}`;
+            const id = spreadsheetId || googleAuthStore.spreadsheetId;
+            const finalTitle = sheetTitle || defaultTitle;
+            if (!id || !finalTitle) {
+                toast('warning', 'Enter Spreadsheet ID and Sheet Title');
+                return;
+            }
+            try {
+                const url = await command('new_sheet_with_sample', {
+                    spreadsheetId: id,
+                    title: finalTitle,
+                    sample: $sample,
+                    preferences,
+                    league: $league,
+                });
+                toast('success', 'New sheet created successfully');
+                (target as SampleCardElement).form_popup.open = false;
+                command('open_url', { url });
+            } catch (err) {
+                if (isTauriError(err)) {
+                    toast('danger', err.message ?? 'Export failed');
+                } else {
+                    console.log(err);
+                    (target as SampleCardElement).form_popup.open = false;
+                    toast('danger', 'Export failed');
+                }
+            }
+            break;
+        }
+    }
 }
 
 const handle_stashtab_fetched = (e: StashtabFetchedEvent) => {
@@ -163,18 +282,52 @@ const handleDropZoneDrop = (event: DragEvent) => {
 			<e-drop-files-message></e-drop-files-message>
 		</div>
 		<header class="header">
-			<div class="import-actions">
-				<sl-button variant="primary" v-if="shouldShowImportActions" @click="openStashWindow()"
-					>Load from Stash</sl-button
-				>
-				<e-import-file-tip v-if="!isDragging && shouldShowImportActions"></e-import-file-tip>
-			</div>
-			<div class="header__right">
-				<e-google-auth
-					v-if="googleAuthStore.loggedIn"
-					@login="googleAuthStore.login"
-					@logout="googleAuthStore.logout"
-					:name="googleAuthStore.name"
+        <div class="import-actions">
+            <sl-button variant="primary" v-if="shouldShowImportActions" @click="openStashWindow()"
+                >Load from Stash</sl-button
+            >
+            <sl-button variant="primary" v-if="stashVisible && authStore.loggedIn" @click="extractAllFromStash"
+                >Extract all cards (stash)</sl-button
+            >
+            <sl-select
+                v-if="stashVisible && authStore.loggedIn && availableTabs.length"
+                :value="selectedTabId"
+                @sl-change="(e: any) => (selectedTabId = e.target.value)"
+                placeholder="Select Divination tab"
+            >
+                <sl-option v-for="t in availableTabs" :key="t.id" :value="t.id">{{ t.name }}</sl-option>
+            </sl-select>
+            <sl-button
+                variant="default"
+                v-if="stashVisible && authStore.loggedIn && availableTabs.length"
+                @click="extractSelectedTab"
+            >
+                Extract selected tab
+            </sl-button>
+            <e-import-file-tip v-if="!isDragging && shouldShowImportActions"></e-import-file-tip>
+        </div>
+            <div class="header__right">
+                <sl-button v-if="!googleAuthStore.loggedIn" @click="googleAuthStore.login" variant="default"
+                    >Sign in with Google</sl-button
+                >
+                <sl-button
+                    v-if="googleAuthStore.loggedIn && (sampleStore.merged || sampleStore.sampleCards.length > 0)"
+                    @click="quickExportToSheets"
+                    variant="primary"
+                    >Export to Google Sheets</sl-button
+                >
+                <sl-input
+                    v-if="googleAuthStore.loggedIn"
+                    style="min-width: 360px"
+                    placeholder="Saved Spreadsheet ID"
+                    :value="googleAuthStore.spreadsheetId"
+                    @sl-change="(e: any) => googleAuthStore.setSpreadsheetId(e.target.value)"
+                ></sl-input>
+                <e-google-auth
+                    v-if="googleAuthStore.loggedIn"
+                    @login="googleAuthStore.login"
+                    @logout="googleAuthStore.logout"
+                    :name="googleAuthStore.name"
 					:picture="googleAuthStore.picture"
 					:loggedIn="googleAuthStore.loggedIn"
 				></e-google-auth>

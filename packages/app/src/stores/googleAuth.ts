@@ -80,19 +80,21 @@ export const useExpirationDate = (log = false) => {
 const { expirationDate, loggedIn, setExpiration, timeLeft, log } = useExpirationDate();
 
 export const useGoogleAuthStore = defineStore('google-auth', {
-	state: (): {
-		name: Ref<string>;
-		picture: Ref<string>;
-		expiration: Ref<Date | null>;
-		loggingIn: boolean;
-		auth_url: string | null;
-	} => ({
-		name: useLocalStorage(GOOGLE_NAME_KEY, ''),
-		picture: useLocalStorage(GOOGLE_AVATAR_KEY, ''),
-		expiration: expirationDate,
-		loggingIn: false,
-		auth_url: null,
-	}),
+    state: (): {
+        name: Ref<string>;
+        picture: Ref<string>;
+        expiration: Ref<Date | null>;
+        loggingIn: boolean;
+        auth_url: string | null;
+        spreadsheetId: Ref<string>;
+    } => ({
+        name: useLocalStorage(GOOGLE_NAME_KEY, ''),
+        picture: useLocalStorage(GOOGLE_AVATAR_KEY, ''),
+        expiration: expirationDate,
+        loggingIn: false,
+        auth_url: null,
+        spreadsheetId: useLocalStorage('sheets-spreadsheet-id', ''),
+    }),
 
 	getters: {
 		timeLeft(): number {
@@ -105,8 +107,8 @@ export const useGoogleAuthStore = defineStore('google-auth', {
 			return log;
 		},
 	},
-	actions: {
-		async login(): Promise<void> {
+    actions: {
+        async login(): Promise<void> {
 			if (this.loggingIn) {
 				console.log('Already logging in');
 				if (!this.auth_url) return;
@@ -136,11 +138,15 @@ export const useGoogleAuthStore = defineStore('google-auth', {
 				this.auth_url = null;
 				unlisten();
 			}
-		},
+        },
 
-		async logout(): Promise<void> {
-			await command('google_logout');
-			this.expiration = null;
-		},
-	},
+        async logout(): Promise<void> {
+            await command('google_logout');
+            this.expiration = null;
+        },
+
+        setSpreadsheetId(id: string) {
+            this.spreadsheetId = id.trim();
+        },
+    },
 });

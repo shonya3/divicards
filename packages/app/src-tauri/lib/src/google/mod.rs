@@ -1,5 +1,6 @@
 use keyring::Entry;
 use serde::{Deserialize, Serialize};
+use tokio::sync::Mutex;
 
 pub mod auth;
 pub mod sheets;
@@ -53,3 +54,6 @@ pub struct Identity {
     pub picture: Option<String>,
     pub locale: Option<String>,
 }
+
+#[derive(Debug)]
+pub struct AccessTokenState(pub Mutex<Option<String>>);

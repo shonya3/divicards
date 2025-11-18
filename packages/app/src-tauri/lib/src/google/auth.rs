@@ -1,4 +1,4 @@
-use super::{AccessTokenStorage, Identity, Persist, AUTH_URL, CLIENT_ID, TOKEN_URL};
+use super::{AccessTokenState, AccessTokenStorage, Identity, Persist, AUTH_URL, CLIENT_ID, TOKEN_URL};
 use crate::{error::Error, event::Event, poe::error::AuthError, version::AppVersion};
 use axum::{extract::Query, response::Html, routing::get, Router};
 use oauth2::{
@@ -33,7 +33,11 @@ pub async fn identity(acces_token: String) -> Identity {
 }
 
 #[command]
-pub async fn google_auth(version: State<'_, AppVersion>, window: Window) -> Result<(), Error> {
+pub async fn google_auth(
+    version: State<'_, AppVersion>,
+    window: Window,
+    token_state: State<'_, AccessTokenState>,
+) -> Result<(), Error> {
     let (sender, mut receiver) = mpsc::channel::<AuthResponse>(1);
     let addr = SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8080);
     let redirect_uri =
@@ -107,9 +111,12 @@ pub async fn google_auth(version: State<'_, AppVersion>, window: Window) -> Resu
             .await
             .unwrap();
 
-            AccessTokenStorage::new()
-                .set(token_data.access_token.secret())
-                .unwrap();
+            let token_str = token_data.access_token.secret().to_string();
+            AccessTokenStorage::new().set(&token_str).unwrap();
+            {
+                let mut guard = token_state.0.lock().await;
+                *guard = Some(token_str);
+            }
             Ok(())
 
             // Ok(username)
