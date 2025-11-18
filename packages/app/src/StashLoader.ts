@@ -48,6 +48,30 @@ export class StashLoader implements IStashLoader {
 		return command('gem_prices', { league });
 	}
 
+	oilPrices(league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
+		return command('oil_prices', { league });
+	}
+
+	incubatorPrices(league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
+		return command('incubator_prices', { league });
+	}
+
+	fossilPrices(league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
+		return command('fossil_prices', { league });
+	}
+
+	resonatorPrices(league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
+		return command('resonator_prices', { league });
+	}
+
+	deliriumOrbPrices(league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
+		return command('delirium_orb_prices', { league });
+	}
+
+	vialPrices(league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
+		return command('vial_prices', { league });
+	}
+
 	async tabs(league: League | string): Promise<NoItemsTab[]> {
 		const { stashes = [] } = await command('stashes', { league });
 		return this.#flattenStashes(stashes);

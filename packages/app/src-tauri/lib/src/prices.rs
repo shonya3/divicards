@@ -120,7 +120,7 @@ static GEM_TTL_SECS: OnceLock<AtomicU64> = OnceLock::new();
 #[tauri::command]
 #[instrument]
 pub async fn map_prices(league: TradeLeague) -> Result<Vec<MapPrice>, Error> {
-    let lines = fetch_by_item_category("Map", &league).await.map_err(DiviError::NinjaError)?;
+    let lines = fetch_stash_item_overview("Map", &league).await.map_err(DiviError::NinjaError)?;
     let mut out: Vec<MapPrice> = Vec::with_capacity(lines.len());
     for v in lines.into_iter() {
         let name = v.get("name").and_then(Value::as_str).unwrap_or("").to_string();
@@ -141,7 +141,7 @@ pub async fn map_prices(league: TradeLeague) -> Result<Vec<MapPrice>, Error> {
 #[tauri::command]
 #[instrument]
 pub async fn currency_prices(league: TradeLeague) -> Result<Vec<NamedPrice>, Error> {
-    let lines = fetch_currency_by_category("Currency", &league).await.map_err(DiviError::NinjaError)?;
+    let lines = fetch_stash_currency_overview("Currency", &league).await.map_err(DiviError::NinjaError)?;
     let mut out: Vec<NamedPrice> = Vec::with_capacity(lines.len());
     for v in lines.into_iter() {
         let name = v
@@ -250,22 +250,97 @@ pub async fn fragment_prices(league: TradeLeague) -> Result<Vec<NamedPrice>, Err
 
 #[tauri::command]
 #[instrument]
+pub async fn oil_prices(league: TradeLeague) -> Result<Vec<NamedPrice>, Error> {
+    let lines = fetch_stash_item_overview("Oil", &league).await.map_err(DiviError::NinjaError)?;
+    let mut out: Vec<NamedPrice> = Vec::with_capacity(lines.len());
+    for v in lines.into_iter() {
+        let name = v.get("name").and_then(Value::as_str).unwrap_or("").to_string();
+        let chaos_value = v.get("chaosValue").and_then(Value::as_f64).map(|n| n as f32);
+        if !name.is_empty() { out.push(NamedPrice { name, chaos_value }); }
+    }
+    info!(league = %league, count = out.len(), "oil_prices fetched");
+    Ok(out)
+}
+
+#[tauri::command]
+#[instrument]
+pub async fn incubator_prices(league: TradeLeague) -> Result<Vec<NamedPrice>, Error> {
+    let lines = fetch_stash_item_overview("Incubator", &league).await.map_err(DiviError::NinjaError)?;
+    let mut out: Vec<NamedPrice> = Vec::with_capacity(lines.len());
+    for v in lines.into_iter() {
+        let name = v.get("name").and_then(Value::as_str).unwrap_or("").to_string();
+        let chaos_value = v.get("chaosValue").and_then(Value::as_f64).map(|n| n as f32);
+        if !name.is_empty() { out.push(NamedPrice { name, chaos_value }); }
+    }
+    info!(league = %league, count = out.len(), "incubator_prices fetched");
+    Ok(out)
+}
+
+#[tauri::command]
+#[instrument]
+pub async fn fossil_prices(league: TradeLeague) -> Result<Vec<NamedPrice>, Error> {
+    let lines = fetch_stash_item_overview("Fossil", &league).await.map_err(DiviError::NinjaError)?;
+    let mut out: Vec<NamedPrice> = Vec::with_capacity(lines.len());
+    for v in lines.into_iter() {
+        let name = v.get("name").and_then(Value::as_str).unwrap_or("").to_string();
+        let chaos_value = v.get("chaosValue").and_then(Value::as_f64).map(|n| n as f32);
+        if !name.is_empty() { out.push(NamedPrice { name, chaos_value }); }
+    }
+    info!(league = %league, count = out.len(), "fossil_prices fetched");
+    Ok(out)
+}
+
+#[tauri::command]
+#[instrument]
+pub async fn resonator_prices(league: TradeLeague) -> Result<Vec<NamedPrice>, Error> {
+    let lines = fetch_stash_item_overview("Resonator", &league).await.map_err(DiviError::NinjaError)?;
+    let mut out: Vec<NamedPrice> = Vec::with_capacity(lines.len());
+    for v in lines.into_iter() {
+        let name = v.get("name").and_then(Value::as_str).unwrap_or("").to_string();
+        let chaos_value = v.get("chaosValue").and_then(Value::as_f64).map(|n| n as f32);
+        if !name.is_empty() { out.push(NamedPrice { name, chaos_value }); }
+    }
+    info!(league = %league, count = out.len(), "resonator_prices fetched");
+    Ok(out)
+}
+
+#[tauri::command]
+#[instrument]
+pub async fn delirium_orb_prices(league: TradeLeague) -> Result<Vec<NamedPrice>, Error> {
+    let lines = fetch_stash_item_overview("DeliriumOrb", &league).await.map_err(DiviError::NinjaError)?;
+    let mut out: Vec<NamedPrice> = Vec::with_capacity(lines.len());
+    for v in lines.into_iter() {
+        let name = v.get("name").and_then(Value::as_str).unwrap_or("").to_string();
+        let chaos_value = v.get("chaosValue").and_then(Value::as_f64).map(|n| n as f32);
+        if !name.is_empty() { out.push(NamedPrice { name, chaos_value }); }
+    }
+    info!(league = %league, count = out.len(), "delirium_orb_prices fetched");
+    Ok(out)
+}
+
+#[tauri::command]
+#[instrument]
+pub async fn vial_prices(league: TradeLeague) -> Result<Vec<NamedPrice>, Error> {
+    let lines = fetch_stash_item_overview("Vial", &league).await.map_err(DiviError::NinjaError)?;
+    let mut out: Vec<NamedPrice> = Vec::with_capacity(lines.len());
+    for v in lines.into_iter() {
+        let name = v.get("name").and_then(Value::as_str).unwrap_or("").to_string();
+        let chaos_value = v.get("chaosValue").and_then(Value::as_f64).map(|n| n as f32);
+        if !name.is_empty() { out.push(NamedPrice { name, chaos_value }); }
+    }
+    info!(league = %league, count = out.len(), "vial_prices fetched");
+    Ok(out)
+}
+
+#[tauri::command]
+#[instrument]
 pub async fn essence_prices(league: TradeLeague) -> Result<Vec<EssencePrice>, Error> {
-    let lines = fetch_currency_by_category("Essence", &league).await.map_err(DiviError::NinjaError)?;
+    let lines = fetch_stash_item_overview("Essence", &league).await.map_err(DiviError::NinjaError)?;
     let mut out: Vec<EssencePrice> = Vec::with_capacity(lines.len());
     for v in lines.into_iter() {
-        let name = v
-            .get("currencyTypeName")
-            .and_then(Value::as_str)
-            .or_else(|| v.get("name").and_then(Value::as_str))
-            .unwrap_or("")
-            .to_string();
+        let name = v.get("name").and_then(Value::as_str).unwrap_or("").to_string();
         let variant = v.get("variant").and_then(Value::as_str).map(|s| s.to_string());
-        let chaos_value = v
-            .get("chaosEquivalent")
-            .and_then(Value::as_f64)
-            .or_else(|| v.get("chaosValue").and_then(Value::as_f64))
-            .map(|n| n as f32);
+        let chaos_value = v.get("chaosValue").and_then(Value::as_f64).map(|n| n as f32);
         if !name.is_empty() {
             out.push(EssencePrice { name, variant, chaos_value });
         }
@@ -291,7 +366,7 @@ pub async fn gem_prices(league: TradeLeague) -> Result<Vec<GemPrice>, Error> {
         drop(guard);
     }
 
-    let lines = fetch_by_item_category("Skill Gem", &league).await.map_err(DiviError::NinjaError)?;
+    let lines = fetch_stash_item_overview("SkillGem", &league).await.map_err(DiviError::NinjaError)?;
     let mut out: Vec<GemPrice> = Vec::with_capacity(lines.len());
     for v in lines.into_iter() {
         let name = v.get("name").and_then(Value::as_str).unwrap_or("").to_string();

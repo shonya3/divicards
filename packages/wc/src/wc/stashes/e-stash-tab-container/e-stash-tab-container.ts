@@ -1,11 +1,12 @@
 import 'poe-custom-elements/stash-tab.js';
-import '../poe-delve-stash-tab';
+import '../poe-delve-priced-list';
 import '../poe-simple-stash-tab';
 import '../poe-map-stash-list';
 import '../poe-currency-stash-list';
 import '../poe-fragment-stash-list';
 import '../poe-essence-stash-list';
 import '../poe-gem-stash-list';
+import '../poe-general-priced-list';
 import '@shoelace-style/shoelace/dist/components/spinner/spinner.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
@@ -77,8 +78,8 @@ export class StashTabContainerElement extends LitElement {
 			</header>
 			<div class="tab-box">
 				${this.tab && this.status === 'complete'
-					? (this.tab.type as unknown as string) === 'DelveStash'
-						? html`<poe-delve-stash-tab .tab=${this.tab}></poe-delve-stash-tab>`
+                    ? (this.tab.type as unknown as string) === 'DelveStash'
+                        ? html`<poe-delve-priced-list .league=${this.league} .stashLoader=${this.stashLoader} .tab=${this.tab}></poe-delve-priced-list>`
 						: (this.tab.type as unknown as string) === 'MapStash'
 							? html`<poe-map-stash-list .league=${this.league} .stashLoader=${this.stashLoader} .tab=${this.tab}></poe-map-stash-list>`
 							: (this.tab.type as unknown as string) === 'CurrencyStash'
@@ -93,7 +94,7 @@ export class StashTabContainerElement extends LitElement {
                                         ? html`<poe-gem-stash-list .league=${this.league} .stashLoader=${this.stashLoader} .tab=${this.tab}></poe-gem-stash-list>`
                             : isSupportedTabType(this.tab.type)
                                 ? html`<poe-stash-tab .tab=${this.tab}></poe-stash-tab>`
-                                : html`<poe-simple-stash-tab .tab=${this.tab}></poe-simple-stash-tab>`
+                                : html`<poe-general-priced-list .league=${this.league} .stashLoader=${this.stashLoader} .tab=${this.tab}></poe-general-priced-list>`
 					: html`<sl-spinner></sl-spinner>`}
 			</div> `;
 	}
