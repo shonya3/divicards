@@ -5,7 +5,8 @@ import { DivinationCardsSample, League, TradeLeague, isTradeLeague, leagues } fr
 import { Props as SampleCardProps } from '@divicards/wc/e-sample-card/e-sample-card.js';
 
 const sampleCardsAmount = (sample: DivinationCardsSample): number => {
-	return sample.cards.reduce((total, { amount }) => (total += amount), 0);
+    const cards = Array.isArray((sample as any)?.cards) ? (sample as any).cards : [];
+    return cards.reduce((total: number, { amount }: { amount: number }) => total + amount, 0);
 };
 
 const prefixFilename = (name: string, league: League, sample: DivinationCardsSample): string => {

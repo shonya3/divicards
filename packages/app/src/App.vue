@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, Ref, shallowRef } from 'vue';
+import { computed, ref, Ref, shallowRef, nextTick } from 'vue';
 import { StashLoader } from './StashLoader';
 import { command } from './command';
 import { toast } from './toast';
@@ -27,6 +27,8 @@ import '@divicards/wc/stashes/e-stashes-view.js';
 import '@divicards/wc/e-poe-auth/e-poe-auth.js';
 import '@divicards/wc/e-drop-files-message.js';
 import '@divicards/wc/e-import-file-tip.js';
+import '@divicards/wc/e-league-select';
+import '@divicards/wc/stashes/poe-general-priced-list.js';
 
 import { SubmitExportSampleEvent } from '@divicards/wc/e-sample-card/events.js';
 import { ExtractCardsEvent, StashtabFetchedEvent } from '@divicards/wc/stashes/events.js';
@@ -41,7 +43,21 @@ const shouldShowImportActions = computed(() => !stashVisible.value || !authStore
 const { releaseUrl, tag } = useAppVersion();
 const { update, installAndRelaunch } = useTauriUpdater();
 const stashLoader = new StashLoader();
+const league = ref<League>(ACTIVE_LEAGUE as League);
 const tabsWithItems: Ref<TabWithItems[]> = ref<TabWithItems[]>([]);
+const selectedIds = ref<string[]>([]);
+const aggregatedTab = computed<TabWithItems | null>(() => {
+    const map = new Map<string, TabWithItems>();
+    for (const t of tabsWithItems.value) map.set(t.id, t);
+    const ids = selectedIds.value.length ? selectedIds.value : Array.from(map.keys());
+    const items: TabWithItems['items'] = [];
+    for (const id of ids) {
+        const t = map.get(id);
+        if (t) items.push(...t.items);
+    }
+    if (!items.length) return null;
+    return { id: 'aggregate', name: 'Aggregate', type: 'NormalStash', index: 0, items } as TabWithItems;
+});
 const availableTabs = ref<{ id: string; name: string; type: string }[]>([]);
 const selectedTabId = ref<string | null>(null);
 const settingsPopupRef = ref<BasePopupElement | null>(null);
@@ -56,6 +72,18 @@ const changelogPopupRef = ref<BasePopupElement | null>(null);
 const samplesContainerRef = ref<HTMLElement | null>(null) as Ref<HTMLElement | null>;
 useAutoAnimate(samplesContainerRef);
 const gemCacheMinutes = ref<number>(15);
+const stashesViewRef = shallowRef<HTMLElement | null>(null);
+const bulkMode = ref<boolean>(false);
+
+const bulkLoadStash = async () => {
+    if (!authStore.loggedIn) {
+        await authStore.login();
+    }
+    stashVisible.value = true;
+    bulkMode.value = true;
+    await nextTick();
+    stashesViewRef.value?.dispatchEvent(new Event('stashes__bulk-load-all'));
+};
 
 async function quickExportToSheets() {
     if (!googleAuthStore.loggedIn) {
@@ -111,8 +139,8 @@ const openStashWindow = async () => {
         await authStore.login();
     }
     stashVisible.value = true;
-    const league = ACTIVE_LEAGUE;
-    const tabs = await stashLoader.tabs(league);
+    bulkMode.value = false;
+    const tabs = await stashLoader.tabs(league.value);
     availableTabs.value = tabs.filter(t => t.type === 'DivinationCardStash');
     if (availableTabs.value.length && !selectedTabId.value) {
         selectedTabId.value = availableTabs.value[0].id;
@@ -125,7 +153,6 @@ const extractSelectedTab = async () => {
     if (!authStore.loggedIn) {
         await authStore.login();
     }
-    const league = ACTIVE_LEAGUE;
     if (!selectedTabId.value) {
         toast('warning', 'Select a Divination Card tab');
         return;
@@ -138,8 +165,8 @@ const extractSelectedTab = async () => {
             extractingSelected.value = false;
             return;
         }
-        const sample = await stashLoader.sampleFromTab(tab.id, league);
-        await sampleStore.addSample(tab.name, sample, league);
+        const sample = await stashLoader.sampleFromTab(tab.id, league.value);
+        await sampleStore.addSample(tab.name, sample, league.value);
         toast('success', `Extracted cards from ${tab.name}`);
     } catch (err) {
         console.log('Failed to extract selected tab', selectedTabId.value, err);
@@ -147,6 +174,13 @@ const extractSelectedTab = async () => {
     }
     extractingSelected.value = false;
 };
+
+function changeLeague(e: any) {
+    const l = e.$league as League;
+    if (isTradeLeague(l)) {
+        league.value = l;
+    }
+}
 
 async function export_sample({
     spreadsheetId,
@@ -226,7 +260,10 @@ const handle_extract_cards = async (e: ExtractCardsEvent) => {
 };
 
 const handle_change_theme = (e: ChangeThemeEvent) => {
-    const isTauri = typeof window !== 'undefined' && '__TAURI__' in window;
+    const isTauri =
+        (typeof window !== 'undefined' && (window as any).__TAURI_INTERNALS__ != null) ||
+        (typeof navigator !== 'undefined' && navigator.userAgent.includes('Tauri')) ||
+        (typeof import.meta !== 'undefined' && (import.meta as any).env && ((import.meta as any).env.TAURI_PLATFORM ?? (import.meta as any).env.TAURI));
     if (!isTauri) return;
     webviewWindow.WebviewWindow.getCurrent().setTheme(e.$theme);
 };
@@ -278,31 +315,11 @@ const handleDropZoneDrop = (event: DragEvent) => {
 		</div>
         <header class="toolbar">
             <div class="toolbar__left">
-                <sl-button variant="primary" v-if="shouldShowImportActions" @click="openStashWindow()"
+                <e-league-select with-private-league-input :league="league" @change:league="changeLeague"></e-league-select>
+                <sl-button variant="primary" @click="openStashWindow()"
                     >Load from Stash</sl-button
                 >
-                <sl-select
-                    v-if="stashVisible && authStore.loggedIn && availableTabs.length"
-                    :value="selectedTabId"
-                    @sl-change="(e: any) => (selectedTabId = e.target.value)"
-                    placeholder="Select Divination tab"
-                >
-                    <sl-option v-for="t in availableTabs" :key="t.id" :value="t.id">{{ t.name }}</sl-option>
-                </sl-select>
-                <sl-button
-                    variant="default"
-                    v-if="stashVisible && authStore.loggedIn && availableTabs.length"
-                    :disabled="extractingSelected"
-                    @click="extractSelectedTab"
-                >
-                    Extract selected tab
-                </sl-button>
-                <sl-button
-                    v-if="stashVisible && authStore.loggedIn && availableTabs.length === 0"
-                    disabled
-                >
-                    No Divination tabs found
-                </sl-button>
+                <sl-button variant="default" @click="bulkLoadStash">Bulk load Stash</sl-button>
                 <e-import-file-tip v-if="!isDragging && shouldShowImportActions"></e-import-file-tip>
             </div>
             <div class="toolbar__right">
@@ -377,18 +394,21 @@ const handleDropZoneDrop = (event: DragEvent) => {
                 >Save</sl-button>
             </div>
         </e-base-popup>
-		<e-stashes-view
-			v-show="authStore.loggedIn && stashVisible"
-			:stashLoader="stashLoader"
-			@stashes__sample-from-stashtab="e => sampleStore.addSample(e.$stashtab_name, e.$sample, e.$league)"
-			@stashes__stashtab-fetched="handle_stashtab_fetched"
-			@stashes__close="stashVisible = false"
-			@stashes__extract-cards="handle_extract_cards"
-		></e-stashes-view>
+        <e-stashes-view
+            v-show="authStore.loggedIn && stashVisible"
+            :league="league"
+            :stashLoader="stashLoader"
+            ref="stashesViewRef"
+            @stashes__sample-from-stashtab="e => sampleStore.addSample(e.$stashtab_name, e.$sample, e.$league)"
+            @stashes__stashtab-fetched="handle_stashtab_fetched"
+            @stashes__close="stashVisible = false"
+            @stashes__extract-cards="handle_extract_cards"
+            @change:selected_tabs="e => (selectedIds = Array.from(e.$selected_tabs.keys()))"
+        ></e-stashes-view>
 		<Transition>
 			<div>
 				<e-sample-card
-					v-if="sampleStore.merged"
+					v-if="!bulkMode && sampleStore.merged"
 					v-bind="sampleStore.merged"
 					@sample__delete="sampleStore.deleteMerged"
 					@sample__change:minimum_card_price="
@@ -408,7 +428,7 @@ const handleDropZoneDrop = (event: DragEvent) => {
 				></e-sample-card>
 			</div>
 		</Transition>
-		<div v-if="sampleStore.sampleCards.length >= 2">
+		<div v-if="!bulkMode && sampleStore.sampleCards.length >= 2">
 			<h3>Select samples you want to merge</h3>
 			<div class="sample-buttons">
 				<sl-button :disabled="sampleStore.samples.length < 2" @click="sampleStore.mergeAll">
@@ -420,20 +440,11 @@ const handleDropZoneDrop = (event: DragEvent) => {
 				<sl-button @click="sampleStore.deleteAllFiles">Remove samples</sl-button>
 			</div>
 		</div>
-		<ul class="general-tabs" v-for="tab in tabsWithItems">
-			<li>
-				<GeneralTabWithItems
-					@close="
-						() => {
-							tabsWithItems = tabsWithItems.filter(({ id }) => id !== tab.id);
-						}
-					"
-					:tab="tab"
-				/>
-			</li>
-		</ul>
+        <div v-if="aggregatedTab">
+            <poe-general-priced-list aggregate :league="league" :stashLoader="stashLoader" :tab="aggregatedTab as any"></poe-general-priced-list>
+        </div>
 		<Transition>
-			<div ref="filesTemplateRef" class="samples" v-show="sampleStore.sampleCards.length">
+			<div ref="filesTemplateRef" class="samples" v-show="!bulkMode && sampleStore.sampleCards.length">
 				<e-sample-card
 					v-for="fileCard in sampleStore.sampleCards"
 					v-bind="fileCard"

@@ -1,7 +1,7 @@
 import type { IStashLoader } from '@divicards/shared/IStashLoader.js';
 import { html, PropertyValues, nothing, LitElement, CSSResult, TemplateResult } from 'lit';
 import '../e-help-tip';
-import '../e-league-select';
+// league select moved to app toolbar
 import './e-tab-badge-group/e-tab-badge-group.js';
 import './e-stash-tab-errors';
 import { property, state, query, customElement } from 'lit/decorators.js';
@@ -19,7 +19,7 @@ import './e-stash-tab-container/e-stash-tab-container.js';
 import { Task } from '@lit/task';
 import { ExtractCardsEvent as ContainerExtractCardsEvent } from './e-stash-tab-container/events.js';
 import { NoItemsTab, TabWithItems } from 'poe-custom-elements/types.js';
-import { LeagueChangeEvent } from '../events/change/league.js';
+// removed league change handler; app controls league
 import {
 	ExtractCardsEvent,
 	SampleFromStashtabEvent,
@@ -66,6 +66,7 @@ export class StashesViewElement extends LitElement {
 	@state() availableInTenSeconds = 15;
 	@state() hoveredErrorTabId: string | null = null;
 	@state() downloadedStashTabs: Array<TabWithItems> = [];
+	@state() tabsCache: Map<string, TabWithItems> = new Map();
 	@state() opened_tab: NoItemsTab | null = null;
 	/** Indicator whether cards was just extracted. */
 	@state() cardsJustExtracted = false;
@@ -73,6 +74,11 @@ export class StashesViewElement extends LitElement {
 		task: async ([tab]) => {
 			if (!tab) {
 				return null;
+			}
+			// If we have this tab in cache, serve it without an API call
+			const inCache = this.tabsCache.get(tab.id);
+			if (inCache) {
+				return inCache;
 			}
 			// Aggregate MapStash items across all children regardless of flattening
 			if (tab.type === 'MapStash') {
@@ -112,101 +118,104 @@ export class StashesViewElement extends LitElement {
 					// ignore and fallthrough
 				}
 			}
-	            return await this.#loadSingleTabContent(tab.id, this.league, (_id, _league) => this.stashLoader.tabFromBadge(this.opened_tab!, this.league));
+	            const loaded = await this.#loadSingleTabContent('general-tab', tab.id, this.league, (_id, _league) => this.stashLoader.tabFromBadge(this.opened_tab!, this.league), false);
+	            if (loaded && typeof (loaded as any)?.id === 'string') {
+	                this.tabsCache.set((loaded as any).id, loaded as any);
+	            }
+	            return loaded;
 		},
 		args: () => [this.opened_tab],
 	});
 
-	constructor() {
-		super();
+    constructor() {
+        super();
 
 		this.addEventListener('stashes__tab-click', e => {
 			this.#handle_tab_badge_click(e);
 			e.stopPropagation();
 		});
-	}
+        this.addEventListener('stashes__bulk-load-all', async e => {
+            e.stopPropagation();
+            await this.#bulkLoadAllTabs();
+        });
+    }
 
 	@query('button#stashes-btn') stashesButton!: HTMLButtonElement;
 	@query('button#get-data-btn') getDataButton!: HTMLButtonElement;
 
-	protected willUpdate(map: PropertyValues<this>): void {
-		if (map.has('league')) {
-			this.stashtabs_badges = [];
-			this.msg = '';
-			this.selected_tabs = new Map();
-			this.errors = [];
-		}
-	}
+    protected willUpdate(map: PropertyValues<this>): void {
+        if (map.has('league')) {
+            this.stashtabs_badges = [];
+            this.msg = '';
+            this.selected_tabs = new Map();
+            this.errors = [];
+        }
+    }
+
+    protected async firstUpdated(): Promise<void> {
+        if (!this.fetchingStash) {
+            await this.#loadStash();
+        }
+    }
 
 	protected override render(): TemplateResult {
 		return html`<div class="main-stashes-component">
 			<header class="header">
-				<e-league-select
-					with-private-league-input
-					.league=${this.league}
-					@change:league=${this.#handle_league_selected}
-				></e-league-select>
-				${this.stashtabs_badges.length
-					? html`
-							<div>
-								${this.fetchingStashTab
-									? html`<sl-button><sl-spinner></sl-spinner></sl-button>`
-									: this.multiselect
-									? html`<sl-button
-											id="get-data-btn"
-											class="btn-load-items"
-											.disabled=${this.selected_tabs.size === 0 ||
-											this.fetchingStashTab ||
-											this.stashLoadsAvailable === 0}
-											@click=${this.#onLoadItemsClicked}
-									  >
-											Load Tabs Contents
-									  </sl-button>`
-									: null}
-							</div>
-					  `
-					: html`<div>
-							${this.fetchingStash
-								? html`<sl-button size="small"><sl-spinner></sl-spinner></sl-button>`
-								: html`<sl-button
-										variant="primary"
-										size="small"
-										id="stashes-btn"
-										@click=${this.#loadStash}
-										>Load Stash</sl-button
-								  >`}
-					  </div> `}
+                ${this.stashtabs_badges.length
+                    ? html`
+                            <div>
+                                ${this.fetchingStashTab
+                                    ? html`<sl-button><sl-spinner></sl-spinner></sl-button>`
+                                    : this.multiselect
+                                    ? html`<sl-button
+                                            id="get-data-btn"
+                                            class="btn-load-items"
+                                            .disabled=${this.selected_tabs.size === 0 ||
+                                            this.fetchingStashTab ||
+                                            this.stashLoadsAvailable === 0}
+                                            @click=${this.#onLoadItemsClicked}
+                                      >
+                                            Force reload selected
+                                      </sl-button>`
+                                    : null}
+                            </div>
+                      `
+                    : html`<div>
+                            ${this.fetchingStash
+                                ? html`<sl-button size="small"><sl-spinner></sl-spinner></sl-button>`
+                                : nothing}
+                      </div> `}
 				<div class="top-right-corner">
-					${this.stashtabs_badges.length
-						? html`
-								${this.multiselect
-									? html`<sl-radio-group
-											@sl-change=${this.#onDownloadAsChanged}
-											.helpText=${`Download as`}
-											value=${this.downloadAs}
-									  >
-											${DOWNLOAD_AS_VARIANTS.map(
-												variant =>
-													html`<sl-radio-button size="small" value=${variant}
-														>${variant === 'divination-cards-sample'
-															? 'cards'
-															: 'poe tab'}</sl-radio-button
-													>`
-											)}
-									  </sl-radio-group>`
-									: null}
-								<div class="tips">
-									<e-help-tip>
-										<p>PoE API allows 30 requests in 5 minutes</p>
-									</e-help-tip>
-									<div class="loads-available">
-										Loads available:<span class="loads-available__value"
-											>${this.stashLoadsAvailable}</span
-										>
-									</div>
-								</div>
-						  `
-						: nothing}
+                    ${this.stashtabs_badges.length
+                        ? html`
+                                ${this.multiselect && this.opened_tab && (this.opened_tab.type === 'DivinationCardStash')
+                                    ? html`<sl-radio-group
+                                            @sl-change=${this.#onDownloadAsChanged}
+                                            .helpText=${`Download as`}
+                                            value=${this.downloadAs}
+                                      >
+                                            ${DOWNLOAD_AS_VARIANTS.map(
+                                                variant =>
+                                                    html`<sl-radio-button size="small" value=${variant}
+                                                        >${variant === 'divination-cards-sample'
+                                                            ? 'cards'
+                                                            : 'poe tab'}</sl-radio-button
+                                                    >`
+                                            )}
+                                      </sl-radio-group>`
+                                    : null}
+                                <div class="tips">
+                                    <e-help-tip>
+                                        <p>PoE API allows 30 requests in 5 minutes</p>
+                                    </e-help-tip>
+                                    <div class="loads-available">
+                                        Loads available:<span class="loads-available__value"
+                                            >${this.stashLoadsAvailable}</span
+                                        >
+                                    </div>
+                                </div>
+                          `
+                        : nothing}
 					<sl-button size="small" @click=${this.#onCloseClicked} class="btn-close">Close</sl-button>
 				</div>
 			</header>
@@ -240,16 +249,16 @@ export class StashesViewElement extends LitElement {
 								@e-stash-tab-container__close=${this.#handleTabContainerClose}
 							></e-stash-tab-container>`;
 						},
-                        complete: tab =>
-                            html`<e-stash-tab-container
-                                .cardsJustExtracted=${this.cardsJustExtracted}
-                                @e-stash-tab-container__close=${this.#handleTabContainerClose}
-                                @e-stash-tab-container__extract-cards=${this.#emitExtractCards}
-                                status="complete"
-                                .league=${this.league}
-                                .stashLoader=${this.stashLoader}
-                                .tab=${tab}
-                            ></e-stash-tab-container>`,
+						complete: tab =>
+							html`<e-stash-tab-container
+								.cardsJustExtracted=${this.cardsJustExtracted}
+								@e-stash-tab-container__close=${this.#handleTabContainerClose}
+								@e-stash-tab-container__extract-cards=${this.#emitExtractCards}
+								status="complete"
+								.league=${this.league}
+								.stashLoader=${this.stashLoader}
+								.tab=${tab}
+							></e-stash-tab-container>`,
 						initial: () => {
 							return html`initial`;
 						},
@@ -278,7 +287,7 @@ export class StashesViewElement extends LitElement {
 		this.errors = e.detail;
 	}
 	#onLoadItemsClicked() {
-		this.#load_selected_tabs(this.league);
+		this.#load_selected_tabs(this.league, true);
 	}
 	#onCloseClicked() {
 		this.dispatchEvent(new CloseEvent());
@@ -286,10 +295,24 @@ export class StashesViewElement extends LitElement {
 	#onDownloadAsChanged(e: InputEvent) {
 		this.downloadAs = (e.target as HTMLInputElement).value as DownloadAs;
 	}
-	#handle_league_selected(e: LeagueChangeEvent): void {
-		this.league = e.$league;
-		this.dispatchEvent(new LeagueChangeEvent(e.$league));
-	}
+
+    async #bulkLoadAllTabs(): Promise<void> {
+        if (!this.stashtabs_badges.length) {
+            await this.#loadStash();
+        }
+        this.multiselect = true;
+        const next: SelectedStashtabs = new Map();
+        for (const t of this.stashtabs_badges) {
+            next.set(t.id, { id: t.id, name: t.name });
+        }
+        this.selected_tabs = next;
+        this.dispatchEvent(new SelectedTabsChangeEvent(this.selected_tabs));
+        const prev = this.downloadAs;
+        this.downloadAs = 'general-tab';
+        await this.#load_selected_tabs(this.league);
+        this.downloadAs = prev;
+    }
+
 	#handle_selected_tabs_change(e: SelectedTabsChangeEvent): void {
 		this.selected_tabs = new Map(e.$selected_tabs);
 		this.dispatchEvent(new SelectedTabsChangeEvent(this.selected_tabs));
@@ -344,21 +367,22 @@ export class StashesViewElement extends LitElement {
 	}
 
 	/** For each selected stashtab badge, load stashtab and emit it */
-	async #load_selected_tabs(league: League): Promise<void> {
+	async #load_selected_tabs(league: League, force = false): Promise<void> {
 		while (this.selected_tabs.size > 0) {
 			for (const { id, name: stashtab_name } of this.selected_tabs.values()) {
 				this.fetchingStashTab = true;
 				try {
 					switch (this.downloadAs) {
 						case 'divination-cards-sample': {
-                            const badge = this.stashtabs_badges.find(t => t.id === id)!;
-                            const sample = await this.#loadSingleTabContent(id, league, (_sid, _lg) => this.stashLoader.sampleFromBadge(badge, league));
+							const badge = this.stashtabs_badges.find(t => t.id === id)!;
+							const sample = await this.#loadSingleTabContent('sample', id, league, (_sid, _lg) => this.stashLoader.sampleFromBadge(badge, league), force);
 							this.dispatchEvent(new SampleFromStashtabEvent(stashtab_name, sample, league));
 							break;
 						}
 						case 'general-tab': {
-                            const badge = this.stashtabs_badges.find(t => t.id === id)!;
-                            const stashtab = await this.#loadSingleTabContent(id, league, (_sid, _lg) => this.stashLoader.tabFromBadge(badge, league));
+							const badge = this.stashtabs_badges.find(t => t.id === id)!;
+							const stashtab = await this.#loadSingleTabContent('general-tab', id, league, (_sid, _lg) => this.stashLoader.tabFromBadge(badge, league), force);
+							if (stashtab) this.tabsCache.set(stashtab.id, stashtab);
 							this.dispatchEvent(new StashtabFetchedEvent(stashtab, this.league));
 							break;
 						}
@@ -404,12 +428,21 @@ export class StashesViewElement extends LitElement {
 	}
 
 	async #loadSingleTabContent<T>(
+		kind: 'general-tab' | 'sample',
 		id: string,
 		league: League,
-		loadFunction: (id: string, league: League) => T
+		loadFunction: (id: string, league: League) => T,
+		force: boolean
 	): Promise<T> {
 		if (!this.stashLoader) {
 			throw new Error('No stash loader');
+		}
+
+		if (!force && kind === 'general-tab') {
+			const cached = this.tabsCache.get(id);
+			if (cached) {
+				return cached as unknown as T;
+			}
 		}
 
 		await this.#waitForLoadsAvailable();
@@ -442,7 +475,7 @@ declare global {
 }
 
 declare module 'vue' {
-	interface GlobalComponents {
-		'e-stashes-view': DefineComponent<StashesViewProps & VueEventHandlers<Events>>;
-	}
+    interface GlobalComponents {
+        'e-stashes-view': DefineComponent<StashesViewProps & VueEventHandlers<Events>>;
+    }
 }

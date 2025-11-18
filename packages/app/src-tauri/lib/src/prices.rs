@@ -292,6 +292,20 @@ pub async fn fossil_prices(league: TradeLeague) -> Result<Vec<NamedPrice>, Error
 
 #[tauri::command]
 #[instrument]
+pub async fn divination_card_prices(league: TradeLeague) -> Result<Vec<NamedPrice>, Error> {
+    let lines = fetch_stash_item_overview("DivinationCard", &league).await.map_err(DiviError::NinjaError)?;
+    let mut out: Vec<NamedPrice> = Vec::with_capacity(lines.len());
+    for v in lines.into_iter() {
+        let name = v.get("name").and_then(Value::as_str).unwrap_or("").to_string();
+        let chaos_value = v.get("chaosValue").and_then(Value::as_f64).map(|n| n as f32);
+        if !name.is_empty() { out.push(NamedPrice { name, chaos_value }); }
+    }
+    info!(league = %league, count = out.len(), "divination_card_prices fetched");
+    Ok(out)
+}
+
+#[tauri::command]
+#[instrument]
 pub async fn resonator_prices(league: TradeLeague) -> Result<Vec<NamedPrice>, Error> {
     let lines = fetch_stash_item_overview("Resonator", &league).await.map_err(DiviError::NinjaError)?;
     let mut out: Vec<NamedPrice> = Vec::with_capacity(lines.len());

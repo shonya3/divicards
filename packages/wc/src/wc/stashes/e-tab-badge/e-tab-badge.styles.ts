@@ -2,9 +2,9 @@ import { css, CSSResult } from 'lit';
 
 export const styles: CSSResult = css`
 	.tab-badge-as-button {
-		padding: 0.6rem 1rem;
-		border-radius: 0.4rem;
-		border: 3px solid;
+		padding: 0.3rem 0.6rem;
+		border-radius: 0.35rem;
+		border: 2px solid;
 		border-color: var(--badge-color);
 		cursor: pointer;
 		overflow: hidden;
@@ -36,7 +36,7 @@ export const styles: CSSResult = css`
 		}
 
 		& .name {
-			font-size: 1rem;
+			font-size: 0.95rem;
 			color: var(--sl-color-neutral-950);
 
 			& .remove-only {

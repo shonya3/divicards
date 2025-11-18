@@ -41,13 +41,13 @@ export const styles: CSSResult = css`
 		color: var(--sl-color-amber-800);
 	}
 
-	.list {
-		display: flex;
-		flex-wrap: wrap;
-		list-style: none;
-		gap: 0.5rem;
-		margin-inline: 1rem;
-	}
+		.list {
+			display: flex;
+			flex-wrap: wrap;
+			list-style: none;
+			gap: 0.5rem;
+			margin-inline: 1rem;
+		}
 
 	li {
 		border: 1px solid transparent;

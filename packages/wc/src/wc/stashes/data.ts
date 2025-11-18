@@ -51,6 +51,30 @@ export class MockStashLoader implements IStashLoader {
     async gemPrices(_league: League): Promise<Array<{ name: string; level: number; quality: number; chaos_value: number | null }>> {
         return [];
     }
+    async oilPrices(_league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
+        return [];
+    }
+    async incubatorPrices(_league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
+        return [];
+    }
+    async fossilPrices(_league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
+        return [];
+    }
+    async resonatorPrices(_league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
+        return [];
+    }
+    async deliriumOrbPrices(_league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
+        return [];
+    }
+    async vialPrices(_league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
+        return [];
+    }
+    async divinationCardPrices(_league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
+        return [];
+    }
+    async ninjaDenseOverviewsRaw(_league: League): Promise<Record<string, unknown>> {
+        return {};
+    }
     tabs(_league: League): Promise<NoItemsTab[]> {
         return new Promise(r => r(stashes));
     }

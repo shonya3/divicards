@@ -8,8 +8,8 @@ import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 import '@shoelace-style/shoelace/dist/components/dialog/dialog.js';
 import '../shared/e-json-viewer';
 
-@customElement('poe-general-priced-list')
-export class PoeGeneralPricedListElement extends LitElement {
+@customElement('poe-divination-stash-list')
+export class PoeDivinationStashListElement extends LitElement {
   @property({ type: Object }) tab!: TabWithItems;
   @property() league: string = 'Standard';
   @property({ type: Object }) prices: Map<string, number> = new Map();
@@ -19,7 +19,6 @@ export class PoeGeneralPricedListElement extends LitElement {
   @property() errorMessage: string | null = null;
   @property({ type: Boolean }) viewPricesOpen: boolean = false;
   @property({ attribute: false }) debugData: Record<string, any[]> = {};
-  @property({ type: Boolean }) aggregate: boolean = false;
 
   async willUpdate(map: Map<PropertyKey, unknown>): Promise<void> {
     if (map.has('league') || this.prices.size === 0) {
@@ -33,38 +32,45 @@ export class PoeGeneralPricedListElement extends LitElement {
 
   private async loadPrices(): Promise<void> {
     try {
-      const [currency, fragments, oils, incubators, fossils, resonators, deliriumOrbs, vials] = await Promise.all([
-        this.stashLoader.currencyPrices(this.league as any),
-        this.stashLoader.fragmentPrices(this.league as any),
-        this.stashLoader.oilPrices(this.league as any),
-        this.stashLoader.incubatorPrices(this.league as any),
-        this.stashLoader.fossilPrices(this.league as any),
-        this.stashLoader.resonatorPrices(this.league as any),
-        this.stashLoader.deliriumOrbPrices(this.league as any),
-        this.stashLoader.vialPrices(this.league as any),
-      ]);
-      this.debugData = { currency, fragments, oils, incubators, fossils, resonators, deliriumOrbs, vials } as any;
+      const cards: Array<{ name: string; chaos_value: number | null }> = await this.stashLoader.divinationCardPrices(this.league as any);
+      this.debugData = { cards } as any;
       const next = new Map<string, number>();
-      const merge = (rows: Array<{ name: string; chaos_value: number | null }>) => {
-        rows.forEach(r => {
-          if (!r || typeof r.name !== 'string') return;
-          if (typeof r.chaos_value === 'number') {
-            if (!next.has(r.name)) next.set(r.name, r.chaos_value);
-          }
-        });
-      };
-      [currency, fragments, oils, incubators, fossils, resonators, deliriumOrbs, vials].forEach(merge);
+      cards.forEach((r) => {
+        if (!r || typeof r.name !== 'string') return;
+        if (typeof r.chaos_value === 'number') {
+          if (!next.has(r.name)) next.set(r.name, r.chaos_value);
+        }
+      });
       this.prices = next;
       this.errorMessage = null;
     } catch (err: unknown) {
       this.prices = new Map();
-      const msg = typeof err === 'string' ? err : err instanceof Error ? err.message : 'Failed to fetch prices';
-      this.errorMessage = `${msg}`;
+      try {
+        const url = `https://poe.ninja/poe1/api/economy/stash/current/item/overview?league=${encodeURIComponent(this.league)}&type=DivinationCard`;
+        const res = await fetch(url);
+        if (res.ok) {
+          const data = await res.json();
+          const lines: Array<{ name: string; chaosValue: number }> = Array.isArray(data?.lines) ? data.lines : [];
+          const next = new Map<string, number>();
+          for (const v of lines) {
+            if (typeof v?.name === 'string' && typeof v?.chaosValue === 'number') {
+              if (!next.has(v.name)) next.set(v.name, v.chaosValue);
+            }
+          }
+          this.prices = next;
+          this.errorMessage = null;
+          return;
+        }
+        this.errorMessage = `HTTP ${res.status} while fetching divination prices`;
+      } catch (e: unknown) {
+        const msg = typeof e === 'string' ? e : e instanceof Error ? e.message : 'Failed to fetch divination prices';
+        this.errorMessage = `${msg}`;
+      }
     }
   }
 
   protected render(): TemplateResult {
-    const items = this.tab?.items ?? [];
+    const items = (this.tab?.items ?? []).filter(i => (i.frameType ?? 0) === 6);
     const tabIndex = this.tab?.index ?? 0;
     const groups = groupByName(items);
     const rows = Array.from(groups.values()).map(g => {
@@ -83,7 +89,6 @@ export class PoeGeneralPricedListElement extends LitElement {
       }
     });
 
-    const headerCols = this.aggregate ? ['Name', 'Quantity', 'Price', 'Total'] : ['Name', 'Tab', 'Quantity', 'Price', 'Total'];
     return html`<div class="list">
       <div class="tools">
         <sl-button size="small" @click=${() => { this.viewPricesOpen = true; }}>View Prices JSON</sl-button>
@@ -92,26 +97,26 @@ export class PoeGeneralPricedListElement extends LitElement {
         <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
         ${this.errorMessage}
       </sl-alert>` : null}
-      ${this.renderHeader(headerCols)}
-      ${rows.map(r => html`<div class="row ${this.aggregate ? 'agg' : ''}">
+      ${this.renderHeader(['Name', 'Tab', 'Quantity', 'Price', 'Total'])}
+      ${rows.map(r => html`<div class="row">
         <div class="name">
           <poe-item .item=${normalizeItem(r.sample)}></poe-item>
           <span>${r.name}</span>
         </div>
-        ${this.aggregate ? null : html`<div>${r.tab}</div>`}
+        <div>${r.tab}</div>
         <div class="qty">${r.qty}</div>
         <div>${r.price ? `${r.price.toFixed(0)}c` : '-'}</div>
         <div>${r.total ? `${r.total.toFixed(0)}c` : '-'}</div>
       </div>`)}
     </div>
-    <sl-dialog label="Prices JSON" .open=${this.viewPricesOpen} @sl-hide=${() => { this.viewPricesOpen = false; }} style="--width: 800px;">
+    <sl-dialog label="Divination Prices JSON" .open=${this.viewPricesOpen} @sl-hide=${() => { this.viewPricesOpen = false; }} style="--width: 800px;">
       <e-json-viewer .data=${this.debugData}></e-json-viewer>
       <sl-button slot="footer" variant="primary" @click=${() => { this.viewPricesOpen = false; }}>Close</sl-button>
     </sl-dialog>`;
   }
 
   private renderHeader(cols: string[]): TemplateResult {
-    const keys: Record<string, PoeGeneralPricedListElement['sortBy']> = {
+    const keys: Record<string, PoeDivinationStashListElement['sortBy']> = {
       Name: 'name', Tab: 'tab', Quantity: 'qty', Price: 'price', Total: 'total'
     };
     return html`<div class="header">
@@ -119,7 +124,7 @@ export class PoeGeneralPricedListElement extends LitElement {
     </div>`;
   }
 
-  private onSort(col: PoeGeneralPricedListElement['sortBy']) {
+  private onSort(col: PoeDivinationStashListElement['sortBy']) {
     if (this.sortBy === col) {
       this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc';
     } else {
@@ -135,7 +140,6 @@ export class PoeGeneralPricedListElement extends LitElement {
     .tools { display: flex; justify-content: flex-end; padding-bottom: 6px; }
     sl-alert { position: sticky; top: 0; z-index: 1; }
     .header, .row { display: grid; grid-template-columns: 1fr 60px 80px 80px 100px; align-items: center; column-gap: 12px; }
-    .row.agg { grid-template-columns: 1fr 80px 80px 100px; }
     .header { font-weight: 600; position: sticky; top: 0; background: var(--sl-color-gray-50); z-index: 1; padding: 6px 0; border-bottom: 1px solid var(--sl-color-gray-200); }
     .header .th { text-align: left; background: transparent; border: none; color: inherit; cursor: pointer; padding: 4px 0; }
     .name { display: flex; align-items: center; gap: 8px; }
@@ -147,7 +151,7 @@ export class PoeGeneralPricedListElement extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'poe-general-priced-list': PoeGeneralPricedListElement;
+    'poe-divination-stash-list': PoeDivinationStashListElement;
   }
 }
 

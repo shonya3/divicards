@@ -52,17 +52,21 @@ export class StashLoader implements IStashLoader {
 		return command('oil_prices', { league });
 	}
 
-	incubatorPrices(league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
-		return command('incubator_prices', { league });
-	}
+    incubatorPrices(league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
+        return command('incubator_prices', { league });
+    }
 
 	fossilPrices(league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
 		return command('fossil_prices', { league });
 	}
 
-	resonatorPrices(league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
-		return command('resonator_prices', { league });
-	}
+    resonatorPrices(league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
+        return command('resonator_prices', { league });
+    }
+
+    divinationCardPrices(league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
+        return command('divination_card_prices', { league });
+    }
 
 	deliriumOrbPrices(league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
 		return command('delirium_orb_prices', { league });

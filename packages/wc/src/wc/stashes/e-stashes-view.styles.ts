@@ -64,6 +64,8 @@ export const styles: CSSResult = css`
 		font-size: 20px;
 	}
 
+
+
 	e-stash-tab-container {
 		display: block;
 		margin-inline: auto;

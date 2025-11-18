@@ -15,7 +15,8 @@ export type Events = [
 	typeof ExtractCardsEvent,
 	typeof SelectedTabsChangeEvent,
 	typeof StashtabsBadgesFetchedEvent,
-	typeof TabClickEvent
+	typeof TabClickEvent,
+	typeof BulkLoadAllTabsEvent
 ];
 
 export class CloseEvent extends Event {
@@ -69,4 +70,12 @@ export class SelectedTabsChangeEvent extends Event {
 	constructor(readonly $selected_tabs: SelectedStashtabs, options?: EventInit) {
 		super(SelectedTabsChangeEvent.tag, options);
 	}
+}
+
+export class BulkLoadAllTabsEvent extends Event {
+    static readonly tag = 'stashes__bulk-load-all';
+
+    constructor(options?: EventInit) {
+        super(BulkLoadAllTabsEvent.tag, options);
+    }
 }

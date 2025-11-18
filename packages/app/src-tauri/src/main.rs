@@ -56,6 +56,7 @@ async fn main() {
             lib::prices::resonator_prices,
             lib::prices::delirium_orb_prices,
             lib::prices::vial_prices,
+            lib::prices::divination_card_prices,
             lib::prices::ninja_dense_overviews_raw,
             lib::prices::set_gem_prices_cache_ttl_minutes,
             poe::auth::poe_auth,

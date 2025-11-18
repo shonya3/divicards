@@ -12,6 +12,14 @@ export interface IStashLoader {
     fragmentPrices: (league: League) => Promise<Array<{ name: string; chaos_value: number | null }>>;
     essencePrices: (league: League) => Promise<Array<{ name: string; variant: string | null; chaos_value: number | null }>>;
     gemPrices: (league: League) => Promise<Array<{ name: string; level: number; quality: number; chaos_value: number | null }>>;
+    oilPrices: (league: League) => Promise<Array<{ name: string; chaos_value: number | null }>>;
+    incubatorPrices: (league: League) => Promise<Array<{ name: string; chaos_value: number | null }>>;
+    fossilPrices: (league: League) => Promise<Array<{ name: string; chaos_value: number | null }>>;
+    resonatorPrices: (league: League) => Promise<Array<{ name: string; chaos_value: number | null }>>;
+    deliriumOrbPrices: (league: League) => Promise<Array<{ name: string; chaos_value: number | null }>>;
+    vialPrices: (league: League) => Promise<Array<{ name: string; chaos_value: number | null }>>;
+    divinationCardPrices: (league: League) => Promise<Array<{ name: string; chaos_value: number | null }>>;
+    ninjaDenseOverviewsRaw: (league: League) => Promise<Record<string, unknown>>;
 }
 
 export interface IDefaultStashLoader {
