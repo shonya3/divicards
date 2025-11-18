@@ -14,8 +14,10 @@ export interface RustEvents {
 }
 
 export const addRustListener = <EventName extends keyof RustEvents>(
-	name: EventName,
-	handler: EventCallback<RustEvents[EventName]>
+    name: EventName,
+    handler: EventCallback<RustEvents[EventName]>
 ) => {
-	return listen(name, handler);
+    const isTauri = typeof window !== 'undefined' && '__TAURI__' in window;
+    if (!isTauri) return Promise.resolve(() => {});
+    return listen(name, handler);
 };

@@ -26,6 +26,7 @@ import '../e-base-popup';
 import { SampleTableElement } from './e-sample-table/e-sample-table.js';
 import { LeagueChangeEvent } from '../events/change/league.js';
 import './e-form-export-sample/e-form-export-sample';
+import type { TablePreferences } from '@divicards/shared/types.js';
 import '../e-base-popup';
 import { type ExportSampleTo, PresubmitExportFormEvent } from './e-form-export-sample/e-form-export-sample.js';
 import { styles } from './e-sample-card.styles.js';
@@ -117,6 +118,16 @@ export class SampleCardElement extends LitElement {
 	}
 
 	protected override render(): TemplateResult {
+		const defaultSpreadsheetId = localStorage.getItem('sheets-spreadsheet-id') ?? '';
+		const defaultSheetTitle = `Divicards Export - ${new Date().toLocaleString()}`;
+		const defaultTablePreferences: TablePreferences = {
+			order: 'desc',
+			columns: new Set(['name', 'amount']),
+			orderedBy: 'amount',
+			cardsMustHaveAmount: true,
+			minPrice: 0,
+		};
+
 		return html`<div
 			class=${classMap({
 				'sample-card': true,
@@ -131,12 +142,15 @@ export class SampleCardElement extends LitElement {
 				<sl-icon-button @click=${this.#emit_delete_this_sample} class="btn-delete" name="x-lg"></sl-icon-button>
 			</div>
 
-			<e-base-popup id="form_popup">
-				<e-form-export-sample
-					.export_sample_to=${this.export_sample_to}
-					@sample__presubmit=${this.#handle_presubmit}
-				></e-form-export-sample>
-			</e-base-popup>
+				<e-base-popup id="form_popup">
+					<e-form-export-sample
+						.export_sample_to=${this.export_sample_to}
+						.spreadsheetId=${defaultSpreadsheetId}
+						.sheetTitle=${defaultSheetTitle}
+						.table_preferences=${defaultTablePreferences}
+						@sample__presubmit=${this.#handle_presubmit}
+					></e-form-export-sample>
+				</e-base-popup>
 
 			<sl-input
 				size="small"

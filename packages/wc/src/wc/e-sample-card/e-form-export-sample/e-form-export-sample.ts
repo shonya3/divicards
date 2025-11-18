@@ -1,6 +1,7 @@
 import { html, css, nothing, LitElement, TemplateResult, CSSResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
+import '@shoelace-style/shoelace/dist/components/divider/divider.js';
 import { Column, type TablePreferences } from '@divicards/shared/types.js';
 import '../../e-help-tip';
 // import { emit } from '../../../utils';
@@ -30,13 +31,29 @@ export class FormExportSampleElement extends LitElement {
 		order: 'desc',
 		columns: new Set(['name', 'amount']),
 		orderedBy: 'amount',
-		cardsMustHaveAmount: false,
+		cardsMustHaveAmount: true,
 		minPrice: 0,
 	};
 	@property({ reflect: true, attribute: 'spreadsheet-id' }) spreadsheetId: string = '';
 	@property({ reflect: true, attribute: 'sheet-title' }) sheetTitle: string = '';
 	@property({ attribute: false, reflect: true }) error: string | null = null;
 	@property({ reflect: true }) export_sample_to: ExportSampleTo = 'sheets';
+
+	#applyPreset(preset: 'minimal' | 'full' | 'detailed') {
+		if (preset === 'minimal') {
+			this.table_preferences.columns = new Set(['name', 'amount']);
+			this.table_preferences.orderedBy = 'amount';
+			this.table_preferences.order = 'desc';
+		} else if (preset === 'full') {
+			this.table_preferences.columns = new Set(['name', 'amount', 'price', 'sum']);
+			this.table_preferences.orderedBy = 'amount';
+			this.table_preferences.order = 'desc';
+		} else {
+			this.table_preferences.columns = new Set(['name', 'amount', 'weight', 'price', 'sum']);
+			this.table_preferences.orderedBy = 'amount';
+			this.table_preferences.order = 'desc';
+		}
+	}
 
 	#onColumnCheckbox(e: InputEvent, column: Column) {
 		if (!(e.target instanceof HTMLInputElement)) {
@@ -110,10 +127,23 @@ export class FormExportSampleElement extends LitElement {
 	}
 	protected override render(): TemplateResult {
 		return html`<div id="root">
+			<div class="header">
+				<div class="title">Divination Cards Export</div>
+				<small class="subtitle">This export targets divination cards only</small>
+			</div>
 			${this.export_sample_to === 'sheets' ? this.sheetsFieldset() : nothing}
+			<sl-divider></sl-divider>
 			<form @submit=${this.#onSubmit} id="form">
 				<fieldset style="margin-top: 0.5rem">
 					<legend>Table Preferences</legend>
+					<fieldset id="fieldset-presets">
+						<legend>Presets</legend>
+						<div class="presets">
+							<sl-button size="small" @click=${() => this.#applyPreset('minimal')}>Minimal</sl-button>
+							<sl-button size="small" @click=${() => this.#applyPreset('full')}>Full</sl-button>
+							<sl-button size="small" @click=${() => this.#applyPreset('detailed')}>Detailed</sl-button>
+						</div>
+					</fieldset>
 					<fieldset id="fieldset-hide-nullish">
 						<legend>Cards must have the amount</legend>
 						<div class="input-wrapper">
@@ -174,6 +204,7 @@ export class FormExportSampleElement extends LitElement {
 									id="column-name"
 									type="checkbox"
 									.checked=${this.table_preferences.columns.has('name')}
+									disabled
 									@input=${(e: InputEvent) => this.#onColumnCheckbox(e, 'name')}
 								/>
 							</div>
@@ -184,6 +215,7 @@ export class FormExportSampleElement extends LitElement {
 									id="columnd-amount"
 									type="checkbox"
 									.checked=${this.table_preferences.columns.has('amount')}
+									disabled
 									@input=${(e: InputEvent) => this.#onColumnCheckbox(e, 'amount')}
 								/>
 							</div>
@@ -291,6 +323,19 @@ function styles() {
 			width: 600px;
 		}
 
+		.header {
+			display: flex;
+			flex-direction: column;
+			gap: 0.2rem;
+			margin-bottom: 0.4rem;
+		}
+		.title {
+			font-weight: 600;
+		}
+		.subtitle {
+			opacity: 0.8;
+		}
+
 		#submit {
 			margin-top: 1rem;
 			display: block;
@@ -313,6 +358,12 @@ function styles() {
 			display: flex;
 			align-items: center;
 			gap: 0.25rem;
+		}
+
+		.presets {
+			display: flex;
+			gap: 0.4rem;
+			align-items: center;
 		}
 	`;
 }

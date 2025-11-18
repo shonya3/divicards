@@ -44,6 +44,14 @@ const stashLoader = new StashLoader();
 const tabsWithItems: Ref<TabWithItems[]> = ref<TabWithItems[]>([]);
 const availableTabs = ref<{ id: string; name: string; type: string }[]>([]);
 const selectedTabId = ref<string | null>(null);
+const settingsPopupRef = ref<BasePopupElement | null>(null);
+const extractingSelected = ref(false);
+const hasExportableSample = computed(() => !!sampleStore.merged || sampleStore.sampleCards.length > 0);
+const exportableLeague = computed<League | null>(() => {
+    if (sampleStore.merged) return sampleStore.merged.league as League;
+    if (sampleStore.sampleCards.length > 0) return sampleStore.sampleCards[0].league as League;
+    return null;
+});
 const changelogPopupRef = ref<BasePopupElement | null>(null);
 const samplesContainerRef = ref<HTMLElement | null>(null) as Ref<HTMLElement | null>;
 useAutoAnimate(samplesContainerRef);
@@ -70,7 +78,7 @@ async function quickExportToSheets() {
     let spreadsheetId = googleAuthStore.spreadsheetId;
     if (!spreadsheetId) {
         spreadsheetId = window.prompt('Enter Spreadsheet ID') ?? '';
-        googleAuthStore.setSpreadsheetId(spreadsheetId);
+        googleAuthStore.spreadsheetId = spreadsheetId;
     }
     const now = new Date();
     const title = `Divicards Export - ${now.toLocaleString()}`;
@@ -78,7 +86,7 @@ async function quickExportToSheets() {
         columns: ['name', 'amount', 'weight', 'price', 'sum'] as Column[],
         orderedBy: 'amount' as Column,
         order: 'desc' as Order,
-        cardsMustHaveAmount: false,
+        cardsMustHaveAmount: true,
         minPrice: 0,
     };
     try {
@@ -90,6 +98,7 @@ async function quickExportToSheets() {
             league,
         });
         toast('success', 'Exported to Google Sheets');
+        googleAuthStore.spreadsheetId = spreadsheetId;
         command('open_url', { url });
     } catch (err) {
         handleError(err);
@@ -109,39 +118,9 @@ const openStashWindow = async () => {
     }
 };
 
-const extractAllFromStash = async () => {
-    if (!authStore.loggedIn) {
-        await authStore.login();
-    }
-    const league = ACTIVE_LEAGUE;
-    const tabs = await stashLoader.tabs(league);
-    if (!tabs.length) {
-        toast('warning', 'No stash tabs found for league');
-        return;
-    }
-    const divTabs = tabs.filter(t => t.type === 'DivinationCardStash');
-    if (!divTabs.length) {
-        toast('warning', 'No Divination Card tabs found');
-        return;
-    }
-    for (const tab of divTabs) {
-        try {
-            const sample = await stashLoader.sampleFromTab(tab.id, league);
-            await sampleStore.addSample(tab.name, sample, league);
-            await new Promise(r => setTimeout(r, 200));
-        } catch (err) {
-            console.log('Failed to extract tab', tab.id, err);
-        }
-    }
-    if (sampleStore.samples.length >= 2) {
-        await sampleStore.mergeAll();
-        toast('success', 'Extracted and merged all stash tabs');
-    } else {
-        toast('success', 'Extracted cards from stash');
-    }
-};
 
 const extractSelectedTab = async () => {
+    if (extractingSelected.value) return;
     if (!authStore.loggedIn) {
         await authStore.login();
     }
@@ -151,9 +130,11 @@ const extractSelectedTab = async () => {
         return;
     }
     try {
+        extractingSelected.value = true;
         const tab = availableTabs.value.find(t => t.id === selectedTabId.value);
         if (!tab) {
             toast('warning', 'Selected tab not found');
+            extractingSelected.value = false;
             return;
         }
         const sample = await stashLoader.sampleFromTab(tab.id, league);
@@ -163,6 +144,7 @@ const extractSelectedTab = async () => {
         console.log('Failed to extract selected tab', selectedTabId.value, err);
         toast('danger', 'Failed to extract selected tab');
     }
+    extractingSelected.value = false;
 };
 
 async function export_sample({
@@ -175,7 +157,16 @@ async function export_sample({
     $filename,
     target,
 }: SubmitExportSampleEvent) {
-    const preferences = { ...table_preferences, columns: Array.from(table_preferences.columns) };
+    const preferences = {
+        ...table_preferences,
+        columns: (() => {
+            const cols = Array.from(table_preferences.columns);
+            if (!cols.includes('name')) cols.unshift('name');
+            if (!cols.includes('amount')) cols.splice(1, 0, 'amount');
+            return cols;
+        })(),
+        cardsMustHaveAmount: table_preferences.cardsMustHaveAmount ?? true,
+    };
 
     switch (export_sample_to) {
         case 'file': {
@@ -191,7 +182,7 @@ async function export_sample({
             }
             const now = new Date();
             const defaultTitle = `Divicards Export - ${now.toLocaleString()}`;
-            const id = spreadsheetId || googleAuthStore.spreadsheetId;
+            const id = (spreadsheetId || googleAuthStore.spreadsheetId).trim();
             const finalTitle = sheetTitle || defaultTitle;
             if (!id || !finalTitle) {
                 toast('warning', 'Enter Spreadsheet ID and Sheet Title');
@@ -207,6 +198,7 @@ async function export_sample({
                 });
                 toast('success', 'New sheet created successfully');
                 (target as SampleCardElement).form_popup.open = false;
+                googleAuthStore.spreadsheetId = id;
                 command('open_url', { url });
             } catch (err) {
                 if (isTauriError(err)) {
@@ -233,7 +225,9 @@ const handle_extract_cards = async (e: ExtractCardsEvent) => {
 };
 
 const handle_change_theme = (e: ChangeThemeEvent) => {
-	webviewWindow.WebviewWindow.getCurrent().setTheme(e.$theme);
+    const isTauri = typeof window !== 'undefined' && '__TAURI__' in window;
+    if (!isTauri) return;
+    webviewWindow.WebviewWindow.getCurrent().setTheme(e.$theme);
 };
 
 // --Dragzone handlers
@@ -281,78 +275,98 @@ const handleDropZoneDrop = (event: DragEvent) => {
 		<div v-if="isDragging" class="drop-overlay-message">
 			<e-drop-files-message></e-drop-files-message>
 		</div>
-		<header class="header">
-        <div class="import-actions">
-            <sl-button variant="primary" v-if="shouldShowImportActions" @click="openStashWindow()"
-                >Load from Stash</sl-button
-            >
-            <sl-button variant="primary" v-if="stashVisible && authStore.loggedIn" @click="extractAllFromStash"
-                >Extract all cards (stash)</sl-button
-            >
-            <sl-select
-                v-if="stashVisible && authStore.loggedIn && availableTabs.length"
-                :value="selectedTabId"
-                @sl-change="(e: any) => (selectedTabId = e.target.value)"
-                placeholder="Select Divination tab"
-            >
-                <sl-option v-for="t in availableTabs" :key="t.id" :value="t.id">{{ t.name }}</sl-option>
-            </sl-select>
-            <sl-button
-                variant="default"
-                v-if="stashVisible && authStore.loggedIn && availableTabs.length"
-                @click="extractSelectedTab"
-            >
-                Extract selected tab
-            </sl-button>
-            <e-import-file-tip v-if="!isDragging && shouldShowImportActions"></e-import-file-tip>
-        </div>
-            <div class="header__right">
+        <header class="toolbar">
+            <div class="toolbar__left">
+                <sl-button variant="primary" v-if="shouldShowImportActions" @click="openStashWindow()"
+                    >Load from Stash</sl-button
+                >
+                <sl-select
+                    v-if="stashVisible && authStore.loggedIn && availableTabs.length"
+                    :value="selectedTabId"
+                    @sl-change="(e: any) => (selectedTabId = e.target.value)"
+                    placeholder="Select Divination tab"
+                >
+                    <sl-option v-for="t in availableTabs" :key="t.id" :value="t.id">{{ t.name }}</sl-option>
+                </sl-select>
+                <sl-button
+                    variant="default"
+                    v-if="stashVisible && authStore.loggedIn && availableTabs.length"
+                    :disabled="extractingSelected"
+                    @click="extractSelectedTab"
+                >
+                    Extract selected tab
+                </sl-button>
+                <sl-button
+                    v-if="stashVisible && authStore.loggedIn && availableTabs.length === 0"
+                    disabled
+                >
+                    No Divination tabs found
+                </sl-button>
+                <e-import-file-tip v-if="!isDragging && shouldShowImportActions"></e-import-file-tip>
+            </div>
+            <div class="toolbar__right">
                 <sl-button v-if="!googleAuthStore.loggedIn" @click="googleAuthStore.login" variant="default"
                     >Sign in with Google</sl-button
                 >
                 <sl-button
-                    v-if="googleAuthStore.loggedIn && (sampleStore.merged || sampleStore.sampleCards.length > 0)"
+                    v-if="googleAuthStore.loggedIn"
+                    :disabled="!hasExportableSample"
                     @click="quickExportToSheets"
                     variant="primary"
                     >Export to Google Sheets</sl-button
                 >
                 <sl-input
                     v-if="googleAuthStore.loggedIn"
-                    style="min-width: 360px"
+                    class="spreadsheet-id-input"
                     placeholder="Saved Spreadsheet ID"
                     :value="googleAuthStore.spreadsheetId"
-                    @sl-change="(e: any) => googleAuthStore.setSpreadsheetId(e.target.value)"
+                    @sl-input="(e: any) => (googleAuthStore.spreadsheetId = e.target.value)"
                 ></sl-input>
+                <sl-button v-if="googleAuthStore.loggedIn" variant="default" @click="() => settingsPopupRef?.showModal()"
+                    >Settings</sl-button
+                >
                 <e-google-auth
                     v-if="googleAuthStore.loggedIn"
                     @login="googleAuthStore.login"
                     @logout="googleAuthStore.logout"
                     :name="googleAuthStore.name"
-					:picture="googleAuthStore.picture"
-					:loggedIn="googleAuthStore.loggedIn"
-				></e-google-auth>
-				<e-poe-auth
-					v-if="authStore.loggedIn"
-					@poe-auth__login="authStore.login"
-					@poe-auth__logout="authStore.logout"
-					:auth="{
-						loggedIn: authStore.loggedIn,
-						username: authStore.name,
-					}"
-				></e-poe-auth>
-				<sl-button
-					variant="success"
-					v-if="update && update.available"
-					@click="() => changelogPopupRef?.showModal()"
-					>Update is ready</sl-button
-				>
-				<e-theme-toggle @theme-toggle__change:theme="handle_change_theme"></e-theme-toggle>
-			</div>
-		</header>
+                    :picture="googleAuthStore.picture"
+                    :loggedIn="googleAuthStore.loggedIn"
+                ></e-google-auth>
+                <e-poe-auth
+                    v-if="authStore.loggedIn"
+                    @poe-auth__login="authStore.login"
+                    @poe-auth__logout="authStore.logout"
+                    :auth="{
+                        loggedIn: authStore.loggedIn,
+                        username: authStore.name,
+                    }"
+                ></e-poe-auth>
+                <sl-button
+                    variant="success"
+                    v-if="update && update.available"
+                    @click="() => changelogPopupRef?.showModal()"
+                    >Update is ready</sl-button
+                >
+                <e-theme-toggle @theme-toggle__change:theme="handle_change_theme"></e-theme-toggle>
+            </div>
+        </header>
+        <sl-divider></sl-divider>
 
-		<e-base-popup v-if="update" ref="changelogPopupRef">
-			<UpdateChangelog @update-clicked="installAndRelaunch" :version="update.version" />
-		</e-base-popup>
+        <e-base-popup v-if="update" ref="changelogPopupRef">
+            <UpdateChangelog @update-clicked="installAndRelaunch" :version="update.version" />
+        </e-base-popup>
+        <e-base-popup ref="settingsPopupRef">
+            <div style="display:flex;flex-direction:column;gap:0.8rem;min-width:400px">
+                <h3>Settings</h3>
+                <sl-input
+                    placeholder="Spreadsheet ID"
+                    :value="googleAuthStore.spreadsheetId"
+                    @sl-input="(e: any) => (googleAuthStore.spreadsheetId = e.target.value)"
+                ></sl-input>
+                <sl-button variant="primary" @click="() => settingsPopupRef?.close()">Save</sl-button>
+            </div>
+        </e-base-popup>
 		<e-stashes-view
 			v-show="authStore.loggedIn && stashVisible"
 			:stashLoader="stashLoader"
@@ -458,16 +472,22 @@ const handleDropZoneDrop = (event: DragEvent) => {
 	pointer-events: none; /* Allows drag events to pass through to the drop-zone itself */
 }
 
-.header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 1.2rem;
+.toolbar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 0.8rem;
 }
-.header__right {
-	display: flex;
-	gap: 1rem;
-	align-items: center;
+.toolbar__left,
+.toolbar__right {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+}
+.spreadsheet-id-input {
+    min-width: 360px;
+    flex: 1 1 360px;
 }
 
 .v-enter-active,
