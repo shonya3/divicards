@@ -3,7 +3,7 @@ use crate::{
     event::{Event, ToastVariant},
 };
 use divi::{prices::Prices, Error as DiviError, TradeLeague};
-use ninja::fetch_by_item_category;
+use ninja::{fetch_by_item_category, fetch_currency_by_category};
 use serde_json::Value;
 use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, fs, path::PathBuf};
@@ -129,7 +129,7 @@ pub async fn map_prices(league: TradeLeague) -> Result<Vec<MapPrice>, Error> {
 #[tauri::command]
 #[instrument]
 pub async fn currency_prices(league: TradeLeague) -> Result<Vec<NamedPrice>, Error> {
-    let lines = fetch_by_item_category("Currency", &league).await.map_err(DiviError::NinjaError)?;
+    let lines = fetch_currency_by_category("Currency", &league).await.map_err(DiviError::NinjaError)?;
     let mut out: Vec<NamedPrice> = Vec::with_capacity(lines.len());
     for v in lines.into_iter() {
         let name = v
@@ -154,28 +154,54 @@ pub async fn currency_prices(league: TradeLeague) -> Result<Vec<NamedPrice>, Err
 #[tauri::command]
 #[instrument]
 pub async fn fragment_prices(league: TradeLeague) -> Result<Vec<NamedPrice>, Error> {
-    let lines = fetch_by_item_category("Fragment", &league).await.map_err(DiviError::NinjaError)?;
-    let mut out: Vec<NamedPrice> = Vec::with_capacity(lines.len());
-    for v in lines.into_iter() {
+    let fragments = fetch_by_item_category("Fragment", &league).await.map_err(DiviError::NinjaError)?;
+    let scarabs = fetch_currency_by_category("Scarab", &league).await.map_err(DiviError::NinjaError)?;
+    let mut out: Vec<NamedPrice> = Vec::with_capacity(fragments.len() + scarabs.len());
+    for v in fragments.into_iter() {
         let name = v.get("name").and_then(Value::as_str).unwrap_or("").to_string();
         let chaos_value = v.get("chaosValue").and_then(Value::as_f64).map(|n| n as f32);
         if !name.is_empty() {
             out.push(NamedPrice { name, chaos_value });
         }
     }
-    info!(league = %league, count = out.len(), "fragment_prices fetched");
+    for v in scarabs.into_iter() {
+        let name = v
+            .get("currencyTypeName")
+            .and_then(Value::as_str)
+            .or_else(|| v.get("name").and_then(Value::as_str))
+            .unwrap_or("")
+            .to_string();
+        let chaos_value = v
+            .get("chaosEquivalent")
+            .and_then(Value::as_f64)
+            .or_else(|| v.get("chaosValue").and_then(Value::as_f64))
+            .map(|n| n as f32);
+        if !name.is_empty() {
+            out.push(NamedPrice { name, chaos_value });
+        }
+    }
+    info!(league = %league, count = out.len(), "fragment_prices fetched (fragments + scarabs)");
     Ok(out)
 }
 
 #[tauri::command]
 #[instrument]
 pub async fn essence_prices(league: TradeLeague) -> Result<Vec<EssencePrice>, Error> {
-    let lines = fetch_by_item_category("Essence", &league).await.map_err(DiviError::NinjaError)?;
+    let lines = fetch_currency_by_category("Essence", &league).await.map_err(DiviError::NinjaError)?;
     let mut out: Vec<EssencePrice> = Vec::with_capacity(lines.len());
     for v in lines.into_iter() {
-        let name = v.get("name").and_then(Value::as_str).unwrap_or("").to_string();
+        let name = v
+            .get("currencyTypeName")
+            .and_then(Value::as_str)
+            .or_else(|| v.get("name").and_then(Value::as_str))
+            .unwrap_or("")
+            .to_string();
         let variant = v.get("variant").and_then(Value::as_str).map(|s| s.to_string());
-        let chaos_value = v.get("chaosValue").and_then(Value::as_f64).map(|n| n as f32);
+        let chaos_value = v
+            .get("chaosEquivalent")
+            .and_then(Value::as_f64)
+            .or_else(|| v.get("chaosValue").and_then(Value::as_f64))
+            .map(|n| n as f32);
         if !name.is_empty() {
             out.push(EssencePrice { name, variant, chaos_value });
         }

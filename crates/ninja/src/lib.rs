@@ -29,3 +29,23 @@ pub async fn fetch_by_item_category(
     }
     Ok(data.lines)
 }
+
+pub async fn fetch_currency_by_category(
+    currency_category: &str,
+    league: &TradeLeague,
+) -> Result<Vec<Value>, Error> {
+    #[derive(Deserialize, Debug, Serialize)]
+    struct ResponseShape {
+        lines: Vec<Value>,
+    }
+
+    let url = format!(
+        "https://poe.ninja/api/data/currencyoverview?league={league}&type={currency_category}&language=en"
+    );
+    let json = reqwest::get(url).await?.text().await?;
+    let data = serde_json::from_str::<ResponseShape>(&json)?;
+    if data.lines.is_empty() {
+        return Err(Error::NoItemsBadRequest);
+    }
+    Ok(data.lines)
+}
