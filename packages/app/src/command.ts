@@ -44,6 +44,9 @@ export interface Commands {
 	tab_with_items: (args: { league: League; stashId: string; subStashId?: string }) => TabWithItems;
 	extract_cards: (args: { tab: TabWithItems; league: League }) => DivinationCardsSample;
 	map_prices: (args: { league: League }) => Array<{ name: string; tier: number; chaos_value: number | null }>;
+	currency_prices: (args: { league: League }) => Array<{ name: string; chaos_value: number | null }>;
+	fragment_prices: (args: { league: League }) => Array<{ name: string; chaos_value: number | null }>;
+	essence_prices: (args: { league: League }) => Array<{ name: string; variant: string | null; chaos_value: number | null }>;
 }
 
 const { format } = new Intl.NumberFormat();

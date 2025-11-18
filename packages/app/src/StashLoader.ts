@@ -32,6 +32,18 @@ export class StashLoader implements IStashLoader {
 		return command('map_prices', { league });
 	}
 
+	currencyPrices(league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
+		return command('currency_prices', { league });
+	}
+
+	fragmentPrices(league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
+		return command('fragment_prices', { league });
+	}
+
+	essencePrices(league: League): Promise<Array<{ name: string; variant: string | null; chaos_value: number | null }>> {
+		return command('essence_prices', { league });
+	}
+
 	async tabs(league: League | string): Promise<NoItemsTab[]> {
 		const { stashes = [] } = await command('stashes', { league });
 		return this.#flattenStashes(stashes);

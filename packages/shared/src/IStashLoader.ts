@@ -8,6 +8,9 @@ export interface IStashLoader {
     tabFromBadge: (tab: NoItemsTab, league: League) => Promise<TabWithItems>;
     sampleFromBadge: (tab: NoItemsTab, league: League) => Promise<DivinationCardsSample>;
     mapPrices: (league: League) => Promise<Array<{ name: string; tier: number; chaos_value: number | null }>>;
+    currencyPrices: (league: League) => Promise<Array<{ name: string; chaos_value: number | null }>>;
+    fragmentPrices: (league: League) => Promise<Array<{ name: string; chaos_value: number | null }>>;
+    essencePrices: (league: League) => Promise<Array<{ name: string; variant: string | null; chaos_value: number | null }>>;
 }
 
 export interface IDefaultStashLoader {

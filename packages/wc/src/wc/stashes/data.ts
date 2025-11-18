@@ -39,6 +39,15 @@ export class MockStashLoader implements IStashLoader {
     async mapPrices(_league: League): Promise<Array<{ name: string; tier: number; chaos_value: number | null }>> {
         return [];
     }
+    async currencyPrices(_league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
+        return [];
+    }
+    async fragmentPrices(_league: League): Promise<Array<{ name: string; chaos_value: number | null }>> {
+        return [];
+    }
+    async essencePrices(_league: League): Promise<Array<{ name: string; variant: string | null; chaos_value: number | null }>> {
+        return [];
+    }
     tabs(_league: League): Promise<NoItemsTab[]> {
         return new Promise(r => r(stashes));
     }

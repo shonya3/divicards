@@ -2,6 +2,9 @@ import 'poe-custom-elements/stash-tab.js';
 import '../poe-delve-stash-tab';
 import '../poe-simple-stash-tab';
 import '../poe-map-stash-list';
+import '../poe-currency-stash-list';
+import '../poe-fragment-stash-list';
+import '../poe-essence-stash-list';
 import '@shoelace-style/shoelace/dist/components/spinner/spinner.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
@@ -77,6 +80,12 @@ export class StashTabContainerElement extends LitElement {
 						? html`<poe-delve-stash-tab .tab=${this.tab}></poe-delve-stash-tab>`
 						: (this.tab.type as unknown as string) === 'MapStash'
 							? html`<poe-map-stash-list .league=${this.league} .stashLoader=${this.stashLoader} .tab=${this.tab}></poe-map-stash-list>`
+							: (this.tab.type as unknown as string) === 'CurrencyStash'
+								? html`<poe-currency-stash-list .league=${this.league} .stashLoader=${this.stashLoader} .tab=${this.tab}></poe-currency-stash-list>`
+								: (this.tab.type as unknown as string) === 'FragmentStash'
+									? html`<poe-fragment-stash-list .league=${this.league} .stashLoader=${this.stashLoader} .tab=${this.tab}></poe-fragment-stash-list>`
+									: (this.tab.type as unknown as string) === 'EssenceStash'
+										? html`<poe-essence-stash-list .league=${this.league} .stashLoader=${this.stashLoader} .tab=${this.tab}></poe-essence-stash-list>`
 							: isSupportedTabType(this.tab.type)
 								? html`<poe-stash-tab .tab=${this.tab}></poe-stash-tab>`
 								: html`<poe-simple-stash-tab .tab=${this.tab}></poe-simple-stash-tab>`
