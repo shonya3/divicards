@@ -25,6 +25,7 @@ pub enum PredefinedSource {
     MaelstromOfChaosWithBarrelSextant,
     Delirium,
     DeliriumCurrencyRewards,
+    BreachEncountersKeepers,
     #[default]
     Disabled,
 }
@@ -62,6 +63,7 @@ impl FromStr for PredefinedSource {
             "Maelström of Chaos with Barrel Sextant" => {
                 Ok(PredefinedSource::MaelstromOfChaosWithBarrelSextant)
             }
+            "Breach encounters (Keepers)" => Ok(PredefinedSource::BreachEncountersKeepers),
             _ => UniqueMonster::from_str(s)
                 .map(Self::UniqueMonster)
                 .or_else(|_| Area::from_str(s).map(Self::Area))
@@ -78,11 +80,9 @@ impl PredefinedSource {
         match self {
             PredefinedSource::UniqueMonster(monster) => monster._type(),
             PredefinedSource::Area(area) => area._type(),
-
             PredefinedSource::Chest(_) => "Chest",
             PredefinedSource::Strongbox(_) => "Strongbox",
             PredefinedSource::Vendor(_) => "Vendor",
-
             PredefinedSource::Delirium => "Delirium",
             PredefinedSource::DeliriumCurrencyRewards => "Delirium Currency Rewards",
             PredefinedSource::Disabled => "Disabled",
@@ -90,6 +90,7 @@ impl PredefinedSource {
                 "Maelström of Chaos with Barrel Sextant"
             }
             PredefinedSource::KiracMissions => "Kirac Missions",
+            PredefinedSource::BreachEncountersKeepers => "Breach encounters (Keepers)",
         }
     }
 }
@@ -99,11 +100,9 @@ impl Identified for PredefinedSource {
         match self {
             PredefinedSource::UniqueMonster(m) => m.id(),
             PredefinedSource::Area(a) => a.id(),
-
             PredefinedSource::Chest(chest) => chest.id(),
             PredefinedSource::Strongbox(strongbox) => strongbox.id(),
             PredefinedSource::Vendor(vendor) => vendor.id(),
-
             PredefinedSource::Delirium => "Delirium",
             PredefinedSource::DeliriumCurrencyRewards => "Delirium Currency Rewards",
             PredefinedSource::Disabled => "Disabled",
@@ -111,6 +110,7 @@ impl Identified for PredefinedSource {
                 "Maelström of Chaos with Barrel Sextant"
             }
             PredefinedSource::KiracMissions => "Kirac Missions",
+            PredefinedSource::BreachEncountersKeepers => "Breach encounters (Keepers)",
         }
     }
 }

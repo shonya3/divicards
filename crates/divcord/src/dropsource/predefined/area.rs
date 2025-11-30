@@ -122,6 +122,7 @@ pub enum AreaSpecific {
     EshsDomain,
     XophsDomain,
     TulsDomain,
+    HiveColony,
 }
 
 impl Identified for AreaSpecific {
@@ -132,6 +133,7 @@ impl Identified for AreaSpecific {
             AreaSpecific::EshsDomain => "Esh's Domain",
             AreaSpecific::XophsDomain => "Xoph's Domain",
             AreaSpecific::TulsDomain => "Tul's Domain",
+            AreaSpecific::HiveColony => "Hive Colony",
         }
     }
 }

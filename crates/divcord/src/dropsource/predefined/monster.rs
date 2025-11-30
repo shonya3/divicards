@@ -269,6 +269,8 @@ pub enum BreachlordBossDomain {
     Esh,
     Chayula,
     UulNetol,
+    ItThatWasTul,
+    ItThatWasEsh,
 }
 
 impl Identified for BreachlordBossDomain {
@@ -279,6 +281,8 @@ impl Identified for BreachlordBossDomain {
             BreachlordBossDomain::Esh => "Esh, Forked Thought",
             BreachlordBossDomain::Chayula => "Chayula, Who Dreamt",
             BreachlordBossDomain::UulNetol => "Uul-Netol, Unburdened Flesh",
+            BreachlordBossDomain::ItThatWasTul => "It That Was Tul",
+            BreachlordBossDomain::ItThatWasEsh => "It That Was Esh",
         }
     }
 }
