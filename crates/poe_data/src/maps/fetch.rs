@@ -1,7 +1,7 @@
 use super::icon::FetchMapIconError;
 use super::Map;
 use crate::consts::POEDB_MAPS_URL;
-use crate::maps::wiki::MapDataFromWiki;
+use crate::maps::wiki::{FetchWikiMapsError, MapDataFromWiki};
 use playwright::api::{DocumentLoadState, ElementHandle, Page};
 use playwright::Playwright;
 use regex::Regex;
@@ -10,9 +10,6 @@ use std::sync::Arc;
 use tokio::task::JoinHandle;
 
 pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
-    let mut maps: Vec<Map> = vec![];
-    let wiki_maplist = super::wiki::fetch_wiki_maplist().await?;
-
     // Prepare Playwright context
     let playwright = Playwright::initialize().await.unwrap();
     let playwright = Arc::new(playwright);
@@ -30,8 +27,9 @@ pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
         load_poedb_available_non_unique_name_tier_list(&context.new_page().await?, &playwright)
             .await?;
     let poedb_available_maps = Arc::new(poedb_available_maps);
-    let mut tasks = vec![];
 
+    let mut tasks = vec![];
+    let wiki_maplist = super::wiki::fetch_wiki_maplist().await?;
     for wiki_maps_chunked in wiki_maplist
         .chunks(20)
         .map(|chunk| chunk.to_vec())
@@ -72,6 +70,7 @@ pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
         tasks.push(task);
     }
 
+    let mut maps: Vec<Map> = vec![];
     for task_handle in tasks {
         let task_maps = task_handle.await.unwrap()?;
         maps.extend(task_maps);
@@ -83,6 +82,7 @@ pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
 #[derive(Debug)]
 pub enum FetchMapsError {
     Playwright(Arc<playwright::Error>),
+    FetchWikiMaps(FetchWikiMapsError),
     FetchMapIcon(FetchMapIconError),
     Reqwest(reqwest::Error),
     MapsItemContainerNotFound,
@@ -105,6 +105,12 @@ impl From<FetchMapIconError> for FetchMapsError {
 impl From<reqwest::Error> for FetchMapsError {
     fn from(value: reqwest::Error) -> Self {
         Self::Reqwest(value)
+    }
+}
+
+impl From<FetchWikiMapsError> for FetchMapsError {
+    fn from(value: FetchWikiMapsError) -> Self {
+        Self::FetchWikiMaps(value)
     }
 }
 

@@ -1,29 +1,25 @@
 //! Load a list of maps from wiki
 
+use std::{collections::HashSet, fmt::Display};
+
 use crate::consts::WIKI_API_URL;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct MapDataFromWiki {
-    pub name: String,
-    pub tier: u32,
-}
-
-pub async fn fetch_wiki_maplist() -> Result<Vec<MapDataFromWiki>, reqwest::Error> {
+pub async fn fetch_wiki_maplist() -> Result<Vec<MapDataFromWiki>, FetchWikiMapsError> {
     #[derive(Deserialize)]
-    pub struct WikiResponse {
-        pub cargoquery: Vec<Title>,
+    struct WikiResponse {
+        cargoquery: Vec<Title>,
     }
 
     #[derive(Deserialize)]
-    pub struct Title {
-        pub title: MapRecord,
+    struct Title {
+        title: MapRecord,
     }
 
     #[derive(Deserialize)]
-    pub struct MapRecord {
-        pub name: String,
-        pub tier: String,
+    struct MapRecord {
+        name: String,
+        tier: String,
     }
 
     let params = [
@@ -48,6 +44,16 @@ pub async fn fetch_wiki_maplist() -> Result<Vec<MapDataFromWiki>, reqwest::Error
         .json()
         .await?;
 
+    let wiki_maps: Vec<&str> = response
+        .cargoquery
+        .iter()
+        .map(|Title { title }| title.name.as_str())
+        .collect();
+
+    if let Err(missing_maps) = ensure_expected_maps(&wiki_maps) {
+        return Err(FetchWikiMapsError::MissingExpectedMaps(missing_maps));
+    };
+
     Ok(response
         .cargoquery
         .into_iter()
@@ -56,4 +62,62 @@ pub async fn fetch_wiki_maplist() -> Result<Vec<MapDataFromWiki>, reqwest::Error
             tier: title.title.tier.parse().unwrap(),
         })
         .collect::<Vec<MapDataFromWiki>>())
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MapDataFromWiki {
+    pub name: String,
+    pub tier: u32,
+}
+
+#[derive(Debug)]
+pub enum FetchWikiMapsError {
+    Reqwest(reqwest::Error),
+    MissingExpectedMaps(Vec<String>),
+}
+
+impl Display for FetchWikiMapsError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            FetchWikiMapsError::Reqwest(err) => err.fmt(f),
+            FetchWikiMapsError::MissingExpectedMaps(expected_maps) => {
+                write!(f, "Missing expected maps: {}", expected_maps.join(","))
+            }
+        }
+    }
+}
+
+impl From<reqwest::Error> for FetchWikiMapsError {
+    fn from(value: reqwest::Error) -> Self {
+        Self::Reqwest(value)
+    }
+}
+
+fn ensure_expected_maps(wiki_maps: &[&str]) -> Result<(), Vec<String>> {
+    // t17 and Shaper Guardians
+    const EXPECTED_MAPS: [&str; 9] = [
+        "Abomination Map",
+        "Citadel Map",
+        "Fortress Map",
+        "Sanctuary Map",
+        "Ziggurat Map",
+        "Forge of the Phoenix Map",
+        "Lair of the Hydra Map",
+        "Maze of the Minotaur Map",
+        "Pit of the Chimera Map",
+    ];
+
+    let wiki_maps_set: HashSet<&str> = wiki_maps.iter().copied().collect();
+
+    let missing_maps: Vec<String> = EXPECTED_MAPS
+        .iter()
+        .filter(|&&expected_map| !wiki_maps_set.contains(expected_map))
+        .map(|&s| s.to_string())
+        .collect();
+
+    if missing_maps.is_empty() {
+        Ok(())
+    } else {
+        Err(missing_maps)
+    }
 }
