@@ -56,18 +56,6 @@ pub async fn fetch_wiki_maplist() -> Result<Vec<MapDataFromWiki>, FetchWikiMapsE
         return Err(FetchWikiMapsError::MissingExpectedMaps(missing_maps));
     };
 
-    // let resp: serde_json::Value = reqwest::Client::new()
-    //     .get(WIKI_API_URL)
-    //     .query(&params)
-    //     .send()
-    //     .await?
-    //     .error_for_status()?
-    //     .json()
-    //     .await?;
-
-    // let s = resp.to_string();
-    // std::fs::write("maps.json", &s).unwrap();
-
     Ok(response
         .cargoquery
         .into_iter()
