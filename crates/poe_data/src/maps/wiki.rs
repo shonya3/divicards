@@ -6,18 +6,20 @@ use crate::consts::WIKI_API_URL;
 use serde::{Deserialize, Serialize};
 
 pub async fn fetch_wiki_maplist() -> Result<Vec<MapDataFromWiki>, FetchWikiMapsError> {
-    #[derive(Deserialize)]
+    #[derive(Deserialize, Serialize)]
     struct WikiResponse {
         cargoquery: Vec<Title>,
     }
 
-    #[derive(Deserialize)]
+    #[derive(Deserialize, Serialize)]
     struct Title {
         title: MapRecord,
     }
 
-    #[derive(Deserialize)]
+    #[derive(Deserialize, Serialize)]
     struct MapRecord {
+        #[serde(alias = "area id")]
+        id: String,
         name: String,
         tier: String,
     }
@@ -54,18 +56,32 @@ pub async fn fetch_wiki_maplist() -> Result<Vec<MapDataFromWiki>, FetchWikiMapsE
         return Err(FetchWikiMapsError::MissingExpectedMaps(missing_maps));
     };
 
+    // let resp: serde_json::Value = reqwest::Client::new()
+    //     .get(WIKI_API_URL)
+    //     .query(&params)
+    //     .send()
+    //     .await?
+    //     .error_for_status()?
+    //     .json()
+    //     .await?;
+
+    // let s = resp.to_string();
+    // std::fs::write("maps.json", &s).unwrap();
+
     Ok(response
         .cargoquery
         .into_iter()
-        .map(|title| MapDataFromWiki {
-            name: title.title.name,
-            tier: title.title.tier.parse().unwrap(),
+        .map(|Title { title }| MapDataFromWiki {
+            id: title.id,
+            name: title.name,
+            tier: title.tier.parse().unwrap(),
         })
         .collect::<Vec<MapDataFromWiki>>())
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MapDataFromWiki {
+    pub id: String,
     pub name: String,
     pub tier: u32,
 }

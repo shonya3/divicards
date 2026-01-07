@@ -42,7 +42,7 @@ pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
         let task: JoinHandle<Result<Vec<Map>, FetchMapsError>> = tokio::spawn(async move {
             let mut task_maps: Vec<Map> = vec![];
             let page = context.new_page().await.unwrap();
-            for MapDataFromWiki { name, mut tier } in wiki_maps_chunked {
+            for MapDataFromWiki { name, mut tier, .. } in wiki_maps_chunked {
                 let is_unique_map = !name.ends_with(" Map");
 
                 let poedb = poedb_available_maps
