@@ -24,6 +24,14 @@ pub async fn fetch_wiki_maplist() -> Result<Vec<MapDataFromWiki>, FetchWikiMapsE
         tier: String,
     }
 
+    let where_s: String = [
+        "areas.area_level != 0 AND areas.is_legacy_map_area=false AND areas.is_hideout_area=false AND ",
+        "areas.is_town_area=false AND areas.is_labyrinth_area=false AND areas.is_labyrinth_airlock_area=false AND ",
+        "areas.is_labyrinth_boss_area=false AND areas.is_vaal_area=false AND ",
+        "(areas.is_map_area OR areas.is_unique_map_area OR areas.act != 11 AND ",
+        "(areas.id LIKE '1_%' OR areas.id LIKE '2_%') OR areas.id LIKE '%Labyrinth%')"
+    ].into_iter().collect();
+
     let params = [
         ("action", "cargoquery"),
         ("format", "json"),
@@ -34,7 +42,7 @@ pub async fn fetch_wiki_maplist() -> Result<Vec<MapDataFromWiki>, FetchWikiMapsE
         ("join_on", "items._pageID=maps._pageID,maps.area_id=areas.id"),
         ("fields", "maps.tier,items.name,maps.area_id,maps.area_level,areas.boss_monster_ids,maps.unique_area_id"),
         ("group_by", "items.name"),
-        ("where", "items.class_id='Map' AND maps.area_id LIKE '%MapWorlds%'"),
+        ("where", where_s.as_str()),
     ];
 
     let response: WikiResponse = reqwest::Client::new()
@@ -99,7 +107,7 @@ impl From<reqwest::Error> for FetchWikiMapsError {
 
 fn ensure_expected_maps(wiki_maps: &[&str]) -> Result<(), Vec<String>> {
     // t17 and Shaper Guardians
-    const EXPECTED_MAPS: [&str; 9] = [
+    const EXPECTED_MAPS: [&str; 10] = [
         "Abomination Map",
         "Citadel Map",
         "Fortress Map",
@@ -109,6 +117,7 @@ fn ensure_expected_maps(wiki_maps: &[&str]) -> Result<(), Vec<String>> {
         "Lair of the Hydra Map",
         "Maze of the Minotaur Map",
         "Pit of the Chimera Map",
+        "Cortex",
     ];
 
     let wiki_maps_set: HashSet<&str> = wiki_maps.iter().copied().collect();
