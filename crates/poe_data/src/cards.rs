@@ -21,7 +21,7 @@ pub struct Card {
     pub disabled: bool,
 
     /// List of map names, provided by in-game atlas.
-    atlas: Vec<String>,
+    pub atlas: Vec<String>,
 }
 
 pub const POE_CDN_CARDS: &str = "https://web.poecdn.com/image/divination-card/";
