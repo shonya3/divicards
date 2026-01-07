@@ -19,7 +19,7 @@ pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
     let playwright = Playwright::initialize().await.unwrap();
     let playwright = Arc::new(playwright);
     let chrome = playwright.chromium();
-    let browser = chrome.launcher().headless(false).launch().await.unwrap();
+    let browser = chrome.launcher().headless(true).launch().await.unwrap();
     let context = browser
         .context_builder()
         .clear_user_agent()
