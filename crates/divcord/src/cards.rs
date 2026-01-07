@@ -421,8 +421,12 @@ mod tests {
         let result = super::cards_by_source(&map_source, &records, &poe_data);
 
         assert_eq!(result.len(), 2);
-        assert!(result.iter().any(|c| c.is_direct() && c.card() == "Direct Card"));
-        assert!(result.iter().any(|c| c.is_transitive() && c.card() == "Transitive Card"));
+        assert!(result
+            .iter()
+            .any(|c| c.is_direct() && c.card() == "Direct Card"));
+        assert!(result
+            .iter()
+            .any(|c| c.is_transitive() && c.card() == "Transitive Card"));
     }
 
     #[test]
@@ -480,6 +484,7 @@ mod tests {
                 unique: false,
                 icon: "".to_string(),
                 slug: "".to_string(),
+                atlas_cards: vec![],
             }],
             mapbosses: vec![MapBoss {
                 name: "Some Map Boss".to_string(),
@@ -487,8 +492,7 @@ mod tests {
             }],
         };
 
-        let result =
-            super::cards_by_source_types(&["Map".to_string()], &records, &poe_data);
+        let result = super::cards_by_source_types(&["Map".to_string()], &records, &poe_data);
 
         assert_eq!(result.len(), 1);
         let source_and_cards = &result[0];
