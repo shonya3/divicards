@@ -384,9 +384,8 @@ pub mod fetch {
                     .filter(|s| s.contains("MapWorlds"))
                     .map(|s| s.to_string())
                     .collect();
-                let name = raw.name.clone();
                 Ok((
-                    name,
+                    raw.name.clone(),
                     WikiCard {
                         min_level: parse_level(raw.min_level, &raw.name, "min_level")?,
                         max_level: parse_level(raw.max_level, &raw.name, "max_level")?,
