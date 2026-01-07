@@ -6,6 +6,24 @@ use once_cell::sync::Lazy;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Card {
+    pub slug: String,
+    pub name: String,
+    pub min_level: Option<u32>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub max_level: Option<u32>,
+    pub weights: HashMap<String, f32>,
+    pub price: Option<f32>,
+    #[serde(alias = "release version")]
+    pub league: Option<LeagueReleaseInfo>,
+    pub disabled: bool,
+
+    /// List of map names, provided by in-game atlas.
+    atlas: Vec<String>,
+}
+
 pub const POE_CDN_CARDS: &str = "https://web.poecdn.com/image/divination-card/";
 
 #[cfg(feature = "fs_cache_fetcher")]
@@ -52,21 +70,6 @@ pub static LEAGUE_RANGES: Lazy<[LeagueRanges; 4]> = Lazy::new(|| {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Card {
-    pub slug: String,
-    pub name: String,
-    pub min_level: Option<u32>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub max_level: Option<u32>,
-    pub weights: HashMap<String, f32>,
-    pub price: Option<f32>,
-    #[serde(alias = "release version")]
-    pub league: Option<LeagueReleaseInfo>,
-    pub disabled: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
 pub struct CardsData(pub HashMap<String, Card>);
 impl CardsData {
     pub fn card(&self, s: &str) -> &Card {
@@ -86,6 +89,7 @@ pub mod fetch {
         cards::{Card, CardsData, LEAGUE_RANGES},
         consts::{WEIGHT_SPREADSHEET_ID, WIKI_API_URL},
         league::{self, fetch::Error as LeagueError, ReleaseVersion},
+        maps::wiki::FetchWikiMapsError,
         HTTP_CLIENT,
     };
     use divi::{
@@ -107,6 +111,7 @@ pub mod fetch {
         max_level: Option<u32>,
         #[serde(alias = "release version")]
         release_version: Option<ReleaseVersion>,
+        drop_maps_ids: Vec<String>,
     }
 
     #[derive(Debug)]
@@ -116,6 +121,7 @@ pub mod fetch {
         Divi(divi::error::Error),
         Wiki(WikiError),
         League(LeagueError),
+        MapsWiki(FetchWikiMapsError),
     }
 
     impl Display for Error {
@@ -126,6 +132,7 @@ pub mod fetch {
                 Error::Divi(e) => write!(f, "Failed to process divination card sample data: {e}"),
                 Error::Wiki(e) => write!(f, "Failed to load wiki card data: {e}"),
                 Error::League(e) => write!(f, "Failed to load league info: {e}"),
+                Error::MapsWiki(e) => e.fmt(f),
             }
         }
     }
@@ -148,6 +155,11 @@ pub mod fetch {
     impl From<LeagueError> for Error {
         fn from(err: LeagueError) -> Self {
             Error::League(err)
+        }
+    }
+    impl From<FetchWikiMapsError> for Error {
+        fn from(err: FetchWikiMapsError) -> Self {
+            Error::MapsWiki(err)
         }
     }
 
@@ -173,7 +185,7 @@ pub mod fetch {
         dotenv::dotenv().ok();
         let key = std::env::var("GOOGLE_API_KEY").expect("GOOGLE_API_KEY is expected.");
 
-        let (prices_res, other_samples_res, wikicards_res, league_info_vec_res) = tokio::join!(
+        let (prices_res, other_samples_res, wikicards_res, league_info_vec_res, maps_wiki_res) = tokio::join!(
             Prices::fetch(&divi::TradeLeague::Standard),
             try_join_all(
                 LEAGUE_RANGES
@@ -182,13 +194,15 @@ pub mod fetch {
                     .map(|league_range| load_sample_from_ranges(key.clone(), league_range, None))
             ),
             load_wiki_cards(),
-            league::fetch::fetch()
+            league::fetch::fetch(),
+            crate::maps::wiki::fetch_wiki_maplist()
         );
 
         let prices = prices_res.map_err(Error::Ninja)?;
         let mut other_samples = other_samples_res?;
         let mut wikicards = wikicards_res?;
         let league_info_vec = league_info_vec_res?;
+        let maps_wiki = maps_wiki_res?;
 
         // Fetch latest sample separately with prices
         let latest_sample =
@@ -225,9 +239,18 @@ pub mod fetch {
                     .iter()
                     .find_map(|sample| sample.cards.get(&card_name))?;
 
-                let (min_level, max_level, release_version) = wikicards
+                let (min_level, max_level, release_version, atlas) = wikicards
                     .remove(&card_name)
-                    .map(|w| (w.min_level, w.max_level, w.release_version))
+                    .map(|w| {
+                        let atlas: Vec<String> = w
+                            .drop_maps_ids
+                            .into_iter()
+                            .filter_map(|id| maps_wiki.iter().find(|map| map.id == id))
+                            .map(|wiki_map| wiki_map.name.clone())
+                            .collect();
+
+                        (w.min_level, w.max_level, w.release_version, atlas)
+                    })
                     .unwrap_or_default();
 
                 Some(Card {
@@ -244,6 +267,7 @@ pub mod fetch {
                             .cloned()
                     }),
                     disabled: divi_card.is_legacy_card(),
+                    atlas,
                 })
             })
             .collect();
@@ -303,6 +327,8 @@ pub mod fetch {
             max_level: Option<String>,
             #[serde(alias = "release version")]
             release_version: Option<ReleaseVersion>,
+            #[serde(alias = "drop areas")]
+            drop_areas: Option<String>,
         }
 
         #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -318,7 +344,7 @@ pub mod fetch {
             ("tables", "items"),
             ("limit", "500"),
             ("fields", "items.release_version,items.name,items.drop_level,items.drop_level_maximum,items.drop_areas,items.drop_monsters"),
-            ("where", "items.class_id='DivinationCard'"),
+            ("where", "items.class_id='DivinationCard' AND items._pageName NOT LIKE \"%User:%\""),
         ];
 
         let response = HTTP_CLIENT
@@ -351,6 +377,17 @@ pub mod fetch {
             .cargoquery
             .into_iter()
             .map(|WikiCardWrapper { title: raw }| {
+                if raw.drop_areas.is_none() {
+                    println!("{}", raw.name);
+                }
+
+                let maps_ids: Vec<String> = raw
+                    .drop_areas
+                    .unwrap_or_default()
+                    .split(",")
+                    .filter(|s| s.contains("MapWorlds"))
+                    .map(|s| s.to_string())
+                    .collect();
                 let name = raw.name.clone();
                 Ok((
                     name,
@@ -359,6 +396,7 @@ pub mod fetch {
                         max_level: parse_level(raw.max_level, &raw.name, "max_level")?,
                         release_version: raw.release_version,
                         name: raw.name,
+                        drop_maps_ids: maps_ids,
                     },
                 ))
             })
