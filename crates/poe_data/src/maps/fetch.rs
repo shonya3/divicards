@@ -1,5 +1,6 @@
 use super::icon::FetchMapIconError;
 use super::Map;
+use crate::cards::Card;
 use crate::consts::POEDB_MAPS_URL;
 use crate::maps::wiki::{FetchWikiMapsError, MapDataFromWiki};
 use playwright::api::{DocumentLoadState, ElementHandle, Page};
@@ -10,6 +11,10 @@ use std::sync::Arc;
 use tokio::task::JoinHandle;
 
 pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
+    let cards = crate::cards::fetch::fetch().await?;
+    let cards: Vec<Card> = cards.0.values().cloned().collect();
+    let cards = Arc::new(cards);
+
     // Prepare Playwright context
     let playwright = Playwright::initialize().await.unwrap();
     let playwright = Arc::new(playwright);
@@ -38,6 +43,7 @@ pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
         let context = Arc::clone(&context);
         let poedb_available_maps = Arc::clone(&poedb_available_maps);
         let playwright = Arc::clone(&playwright);
+        let cards = cards.clone();
 
         let task: JoinHandle<Result<Vec<Map>, FetchMapsError>> = tokio::spawn(async move {
             let mut task_maps: Vec<Map> = vec![];
@@ -53,6 +59,13 @@ pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
                 }
 
                 let icon = super::icon::get_map_icon(&name, &page, &playwright).await?;
+
+                let atlas_cards: Vec<String> = cards
+                    .iter()
+                    .filter(|card| card.atlas.contains(&name))
+                    .map(|card| card.name.clone())
+                    .collect();
+
                 let map = Map {
                     slug: slug::slugify(&name),
                     name,
@@ -60,6 +73,7 @@ pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
                     available: is_unique_map || poedb.is_some(),
                     unique: is_unique_map,
                     icon: super::icon::poecdn_icon_url(&icon),
+                    atlas_cards,
                 };
                 task_maps.push(map);
             }
@@ -88,6 +102,7 @@ pub enum FetchMapsError {
     MapsItemContainerNotFound,
     NameElementNotFound,
     ParseMapTier { name: String, tier_string: String },
+    FetchCards(crate::cards::fetch::Error),
 }
 
 impl From<Arc<playwright::Error>> for FetchMapsError {
@@ -111,6 +126,12 @@ impl From<reqwest::Error> for FetchMapsError {
 impl From<FetchWikiMapsError> for FetchMapsError {
     fn from(value: FetchWikiMapsError) -> Self {
         Self::FetchWikiMaps(value)
+    }
+}
+
+impl From<crate::cards::fetch::Error> for FetchMapsError {
+    fn from(value: crate::cards::fetch::Error) -> Self {
+        Self::FetchCards(value)
     }
 }
 
