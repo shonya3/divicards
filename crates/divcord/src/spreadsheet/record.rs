@@ -51,7 +51,7 @@ pub struct Dumb {
     #[serde(default)]
     pub remaining_work: RemainingWork,
 
-    /// G "drops" + H "drops datamined"
+    /// G "non-atlas locations"
     pub drops: Vec<DropsFrom>,
 
     /// I
@@ -199,7 +199,7 @@ impl Dumb {
             })?;
 
         // G 6 - drops
-        let mut drops = cells
+        let drops = cells
             .drops
             .drops_from()
             .map_err(|parse_styled_cell_error| {
@@ -209,22 +209,6 @@ impl Dumb {
                     ParseDumbErrKind::StyledCell(parse_styled_cell_error),
                 )
             })?;
-
-        // J 7 - datamined drops
-        let drops_datamined =
-            cells
-                .drops_datamined
-                .drops_from()
-                .map_err(|parse_styled_cell_error| {
-                    ParseDumbError::new(
-                        record_id,
-                        card.clone(),
-                        ParseDumbErrKind::StyledCell(parse_styled_cell_error),
-                    )
-                })?;
-
-        // Combine drops and datamined drops
-        drops.extend(drops_datamined);
 
         // Check if there are duplicates in drops
         let mut seen = std::collections::HashSet::new();

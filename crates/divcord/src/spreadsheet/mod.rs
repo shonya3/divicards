@@ -36,7 +36,6 @@ pub struct StyledDropsColumns {
 
 pub struct StyledDropsCells<'a> {
     drops: &'a Cell,
-    drops_datamined: &'a Cell,
     drops_verify: &'a Cell,
 }
 
@@ -69,17 +68,12 @@ impl Spreadsheet {
             .values
             .iter()
             .zip(self.styled_columns.drops.cells())
-            .zip(self.styled_columns.drops_datamined.cells())
             .zip(self.styled_columns.drops_verify.cells())
             .enumerate()
             .map(
-                |(
-                    row_index,
-                    (((spreadsheet_row, drops_cell), drops_datamined_cell), drops_verify_cell),
-                )| {
+                |(row_index, ((spreadsheet_row, drops_cell), drops_verify_cell))| {
                     let cells = StyledDropsCells {
                         drops: drops_cell,
-                        drops_datamined: drops_datamined_cell,
                         drops_verify: drops_verify_cell,
                     };
 
