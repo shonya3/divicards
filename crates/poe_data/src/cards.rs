@@ -377,10 +377,6 @@ pub mod fetch {
             .cargoquery
             .into_iter()
             .map(|WikiCardWrapper { title: raw }| {
-                if raw.drop_areas.is_none() {
-                    println!("{}", raw.name);
-                }
-
                 let maps_ids: Vec<String> = raw
                     .drop_areas
                     .unwrap_or_default()
