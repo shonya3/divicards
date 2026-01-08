@@ -326,7 +326,11 @@ pub fn parse_record_dropsources(
         });
     }
 
-    if dumb.confidence == Confidence::Done && sources.is_empty() && dumb.drops_to_verify.is_empty()
+    if dumb.confidence == Confidence::Done
+        && sources.is_empty()
+        && dumb.drops_to_verify.is_empty()
+        // For Atlas records, use data from the in-game atlas.
+        && dumb.greynote != GreyNote::Atlas
     {
         errors.push(ParseSourceError {
             record_id: dumb.id,
