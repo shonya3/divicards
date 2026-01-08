@@ -50,7 +50,7 @@ async fn main() {
         std::fs::create_dir_all(&json_dir).unwrap();
     }
 
-    let sources_hashmap: HashMap<String, Source> = records
+    let mut sources_hashmap: HashMap<String, Source> = records
         .clone()
         .into_iter()
         .flat_map(|record| record.sources.into_iter().chain(record.verify_sources))
@@ -58,6 +58,13 @@ async fn main() {
         .into_iter()
         .map(|source| (source.slug(), source))
         .collect();
+
+    poe_data.maps.iter().for_each(|map| {
+        sources_hashmap
+            .entry(map.slug.clone())
+            .or_insert(Source::Map(map.name.clone()));
+    });
+
     write(&sources_hashmap, &json_dir, "sources2.json");
     write(&records, &json_dir, "records.json");
     write(&poe_data, &json_dir, PoeData::filename());
