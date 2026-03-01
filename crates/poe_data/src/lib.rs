@@ -18,7 +18,7 @@ use {once_cell::sync::Lazy, reqwest::Client};
 // Create a single, shared HTTP client to be reused across requests.
 pub(crate) static HTTP_CLIENT: Lazy<Client> = Lazy::new(Client::new);
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone, Default)]
 pub struct PoeData {
     pub acts: Vec<ActArea>,
     pub cards: CardsData,

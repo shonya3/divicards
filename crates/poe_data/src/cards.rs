@@ -68,7 +68,7 @@ pub static LEAGUE_RANGES: Lazy<[LeagueRanges; 4]> = Lazy::new(|| {
     ]
 });
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct CardsData(pub HashMap<String, Card>);
 impl CardsData {

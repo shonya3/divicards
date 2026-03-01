@@ -1,4 +1,5 @@
 use crate::{dropsource::predefined::PredefinedSource, Record, Source};
+use itertools::Either;
 use poe_data::{act::Bossfight, mapbosses::MapBoss, maps::Map, PoeData};
 use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, HashSet};
@@ -9,6 +10,8 @@ pub enum VerificationStatus {
     Done,
     #[serde(rename = "verify")]
     Verify,
+    #[serde(rename = "atlas")]
+    Atlas,
 }
 
 pub fn cards_by_source<'a>(
@@ -16,7 +19,7 @@ pub fn cards_by_source<'a>(
     records: &'a [Record],
     poe_data: &'a PoeData,
 ) -> Vec<CardBySource> {
-    let direct_cards = get_direct_cards_from_source(source, records)
+    let direct_cards = get_direct_cards_from_source(source, records, poe_data)
         .collect::<HashSet<Direct>>()
         .into_iter()
         .map(CardBySource::Direct);
@@ -56,22 +59,33 @@ pub fn cards_by_source_types(
             .for_each(|v| process_source(r, v, VerificationStatus::Verify));
     });
 
-    // 2. Transitive sources(for maps and acts)
+    // 2. Maps: Atlas cards + transitive sources
     if source_types.contains(&"Map".to_owned()) {
         poe_data.maps.iter().for_each(|m| {
-            let map = Source::Map(m.name.clone());
+            let m_as_source = Source::Map(m.name.clone());
+            let entry = hash_map.entry(m_as_source.clone()).or_default();
 
+            // a. Add atlas cards
+            m.atlas_cards.clone().into_iter().for_each(|c| {
+                entry.insert(CardBySource::Direct(Direct {
+                    card: c,
+                    status: VerificationStatus::Atlas,
+                }));
+            });
+
+            // b. From transitive sources (map bosses)
             let set: HashSet<CardBySource> =
-                get_transitive_cards_from_source(&map, records, poe_data)
+                get_transitive_cards_from_source(&m_as_source, records, poe_data)
                     .map(CardBySource::Transitive)
                     .collect();
 
             if !set.is_empty() {
-                hash_map.entry(map).or_default().extend(set);
+                entry.extend(set);
             }
         });
     };
 
+    // 3. Acts transitive sources (boss-specific cards)
     if source_types.contains(&"Act".to_owned()) {
         poe_data.acts.iter().for_each(|a| {
             if a.is_town {
@@ -225,7 +239,7 @@ pub fn get_transitive_cards_from_source<'a>(
     transitive_sources(direct_source, poe_data)
         .into_iter()
         .flat_map(move |transit| {
-            get_direct_cards_from_source(&transit, records)
+            get_direct_cards_from_source(&transit, records, poe_data)
                 .collect::<Vec<_>>()
                 .into_iter()
                 .map(move |by_transit| Transitive {
@@ -240,8 +254,9 @@ pub fn get_transitive_cards_from_source<'a>(
 pub fn get_direct_cards_from_source<'a>(
     direct_source: &'a Source,
     records: &'a [Record],
+    poe_data: &'a PoeData,
 ) -> impl Iterator<Item = Direct> + 'a {
-    records.iter().flat_map(move |record| {
+    let iterator_cards = records.iter().flat_map(move |record| {
         let card = &record.card;
         record
             .sources
@@ -263,7 +278,28 @@ pub fn get_direct_cards_from_source<'a>(
                         status: VerificationStatus::Verify,
                     }),
             )
-    })
+    });
+
+    if let Source::Map(map) = &direct_source {
+        let atlas_cards = poe_data
+            .maps
+            .iter()
+            .find(|m| map.as_str() == m.name)
+            // Map is expected to exist any single time. Maybe will wrap in Result later.
+            // But no need for this.
+            .unwrap_or_else(|| panic!("Map {} does not exist in PoeData", map.as_str()))
+            .atlas_cards
+            .clone()
+            .into_iter()
+            .map(|c| Direct {
+                card: c,
+                status: VerificationStatus::Atlas,
+            });
+
+        return Either::Left(iterator_cards.chain(atlas_cards));
+    };
+
+    Either::Right(iterator_cards)
 }
 
 impl From<Transitive> for CardBySource {
@@ -280,6 +316,8 @@ impl From<Direct> for CardBySource {
 
 #[cfg(test)]
 mod tests {
+    use poe_data::PoeData;
+
     use super::VerificationStatus;
     use crate::{
         dropsource::predefined::PredefinedSource, spreadsheet::record::Confidence, Record, Source,
@@ -324,7 +362,8 @@ mod tests {
             },
         ];
 
-        let result: Vec<_> = super::get_direct_cards_from_source(&source, &records).collect();
+        let result: Vec<_> =
+            super::get_direct_cards_from_source(&source, &records, &PoeData::default()).collect();
 
         assert_eq!(result.len(), 2);
         assert!(result
