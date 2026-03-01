@@ -519,11 +519,11 @@ mod tests {
             maps: vec![Map {
                 name: "Some Map".to_string(),
                 tier: 1,
-                available: true,
                 unique: false,
                 icon: "".to_string(),
                 slug: "".to_string(),
                 atlas_cards: vec![],
+                series: "".to_string(),
             }],
             mapbosses: vec![MapBoss {
                 name: "Some Map Boss".to_string(),

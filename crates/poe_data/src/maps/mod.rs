@@ -13,10 +13,10 @@ use serde::{Deserialize, Serialize};
 pub struct Map {
     pub name: String,
     pub tier: u32,
-    pub available: bool,
     pub unique: bool,
     pub icon: String,
     pub slug: String,
+    pub series: String,
 
     /// List of card names, provided by in-game atlas.
     pub atlas_cards: Vec<String>,

@@ -22,6 +22,7 @@ pub async fn fetch_wiki_maplist() -> Result<Vec<MapDataFromWiki>, FetchWikiMapsE
         id: String,
         name: String,
         tier: String,
+        series: String,
     }
 
     let where_s: String = [
@@ -40,7 +41,7 @@ pub async fn fetch_wiki_maplist() -> Result<Vec<MapDataFromWiki>, FetchWikiMapsE
         ("limit", "500"),
         ("tables", "maps,items,areas"),
         ("join_on", "items._pageID=maps._pageID,maps.area_id=areas.id"),
-        ("fields", "maps.tier,items.name,maps.area_id,maps.area_level,areas.boss_monster_ids,maps.unique_area_id"),
+        ("fields", "maps.tier,maps.series,items.name,maps.area_id,maps.area_level,areas.boss_monster_ids,maps.unique_area_id"),
         ("group_by", "items.name"),
         ("where", where_s.as_str()),
     ];
@@ -71,6 +72,7 @@ pub async fn fetch_wiki_maplist() -> Result<Vec<MapDataFromWiki>, FetchWikiMapsE
             id: title.id,
             name: title.name,
             tier: title.tier.parse().unwrap(),
+            series: title.series,
         })
         .collect::<Vec<MapDataFromWiki>>())
 }
@@ -80,6 +82,7 @@ pub struct MapDataFromWiki {
     pub id: String,
     pub name: String,
     pub tier: u32,
+    pub series: String,
 }
 
 #[derive(Debug)]
