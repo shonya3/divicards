@@ -48,7 +48,7 @@ pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
 
                 let atlas_cards: Vec<String> = cards
                     .iter()
-                    .filter(|card| card.atlas.contains(&name))
+                    .filter(|card| card.atlas_maps.contains(&name))
                     .map(|card| card.name.clone())
                     .collect();
 

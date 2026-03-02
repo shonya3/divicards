@@ -21,7 +21,7 @@ pub struct Card {
     pub disabled: bool,
 
     /// List of map names, provided by in-game atlas.
-    pub atlas: Vec<String>,
+    pub atlas_maps: Vec<String>,
 }
 
 pub const POE_CDN_CARDS: &str = "https://web.poecdn.com/image/divination-card/";
@@ -239,17 +239,17 @@ pub mod fetch {
                     .iter()
                     .find_map(|sample| sample.cards.get(&card_name))?;
 
-                let (min_level, max_level, release_version, atlas) = wikicards
+                let (min_level, max_level, release_version, atlas_maps) = wikicards
                     .remove(&card_name)
                     .map(|w| {
-                        let atlas: Vec<String> = w
+                        let atlas_maps: Vec<String> = w
                             .drop_maps_ids
                             .into_iter()
                             .filter_map(|id| maps_wiki.iter().find(|map| map.id == id))
                             .map(|wiki_map| wiki_map.name.clone())
                             .collect();
 
-                        (w.min_level, w.max_level, w.release_version, atlas)
+                        (w.min_level, w.max_level, w.release_version, atlas_maps)
                     })
                     .unwrap_or_default();
 
@@ -267,7 +267,7 @@ pub mod fetch {
                             .cloned()
                     }),
                     disabled: divi_card.is_legacy_card(),
-                    atlas,
+                    atlas_maps,
                 })
             })
             .collect();
