@@ -10,6 +10,7 @@ pub use fetch::{fetch_maps, FetchMapsError};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Map {
     pub name: String,
     pub tier: u32,
