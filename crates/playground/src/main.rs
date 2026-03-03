@@ -41,14 +41,14 @@ mod error;
 
 #[tokio::main]
 async fn main() {
-    // etc::ensure_divcord_no_errors().await.unwrap();
+    etc::ensure_divcord_no_errors().await.unwrap();
 
     // let maps = poe_data::maps::wiki::fetch_wiki_maplist().await.unwrap();
 
     // println!("{:?}", maps[25]);
 
-    let maps = poe_data::maps::fetch_maps().await.unwrap();
-    etc::jsonsave("maps.json", maps);
+    // let maps = poe_data::maps::fetch_maps().await.unwrap();
+    // etc::jsonsave("maps.json", maps);
 
     // let maps = poe_data::maps::wiki::fetch_wiki_maplist().await.unwrap();
     // etc::jsonsave("maps.json", maps);

@@ -6,7 +6,6 @@ use strum_macros::EnumIter;
 #[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum Area {
     #[default]
-    TrialOfStingingDoubt,
     TempleOfAtzoatl,
     AllVaalSideAreas,
     VaalSideAreas,
@@ -16,12 +15,12 @@ pub enum Area {
     AreaSpecific(AreaSpecific),
     AtziriArea(AtziriArea),
     UniqueHeistContractOrBoss(UniqueHeistContractOrBoss),
+    EternalLabTrial(EternalLabTrial),
 }
 
 impl Area {
     pub fn _type(&self) -> &str {
         match self {
-            Area::TrialOfStingingDoubt => "Trial of Stinging Doubt",
             Area::TempleOfAtzoatl => "The Temple of Atzoatl",
             Area::AllVaalSideAreas => "All Vaal side areas (need specific information)",
             Area::VaalSideAreas => "Vaal Side Areas",
@@ -31,6 +30,7 @@ impl Area {
             Area::ExpeditionLogbook => "Expedition Logbook",
             Area::LabyrinthTrialAreas => "Labyrinth Trial Areas",
             Area::UniqueHeistContractOrBoss(_) => "Unique heist contract or boss",
+            Area::EternalLabTrial(_) => "Eternal Lab Trial",
         }
     }
 
@@ -44,7 +44,6 @@ impl FromStr for Area {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "Trial of Stinging Doubt" => Ok(Self::TrialOfStingingDoubt),
             "The Temple of Atzoatl" => Ok(Self::TempleOfAtzoatl),
             "Redeemer influenced maps" => Ok(Self::RedeemerInfluencedMaps),
             "All Vaal side areas" | "All Vaal side areas (need specific information)" => {
@@ -59,6 +58,7 @@ impl FromStr for Area {
                 .or_else(|_| {
                     UniqueHeistContractOrBoss::from_str(s).map(Self::UniqueHeistContractOrBoss)
                 })
+                .or_else(|_| EternalLabTrial::from_str(s).map(Self::EternalLabTrial))
                 .map_err(|_| strum::ParseError::VariantNotFound),
         }
     }
@@ -67,7 +67,6 @@ impl FromStr for Area {
 impl Identified for Area {
     fn id(&self) -> &str {
         match self {
-            Area::TrialOfStingingDoubt => "Trial of Stinging Doubt",
             Area::TempleOfAtzoatl => "The Temple of Atzoatl",
             Area::AllVaalSideAreas => "All Vaal side areas",
             Area::VaalSideAreas => "Vaal Side Areas",
@@ -77,6 +76,7 @@ impl Identified for Area {
             Area::AreaSpecific(a) => a.id(),
             Area::AtziriArea(a) => a.id(),
             Area::UniqueHeistContractOrBoss(a) => a.id(),
+            Area::EternalLabTrial(a) => a.id(),
         }
     }
 }
@@ -183,6 +183,38 @@ impl Identified for UniqueHeistContractOrBoss {
 }
 
 impl FromStr for UniqueHeistContractOrBoss {
+    type Err = UnknownVariant<Self>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        parseid(s)
+    }
+}
+
+#[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
+pub enum EternalLabTrial {
+    #[default]
+    StingingDoubt,
+    CripplingGrief,
+    BurningRage,
+    LingeringPain,
+    PiercingTruth,
+    SwirlingFear,
+}
+
+impl Identified for EternalLabTrial {
+    fn id(&self) -> &str {
+        match self {
+            EternalLabTrial::StingingDoubt => "Trial of Stinging Doubt",
+            EternalLabTrial::CripplingGrief => "Trial of Crippling Grief",
+            EternalLabTrial::BurningRage => "Trial of Burning Rage",
+            EternalLabTrial::LingeringPain => "Trial of Lingering Pain",
+            EternalLabTrial::PiercingTruth => "Trial of Piercing Truth",
+            EternalLabTrial::SwirlingFear => "Trial of Swirling Fear",
+        }
+    }
+}
+
+impl FromStr for EternalLabTrial {
     type Err = UnknownVariant<Self>;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
