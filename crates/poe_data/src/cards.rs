@@ -41,10 +41,15 @@ pub struct LeagueRanges {
 }
 
 #[cfg(feature = "fs_cache_fetcher")]
-pub static LEAGUE_RANGES: Lazy<[LeagueRanges; 4]> = Lazy::new(|| {
+pub static LEAGUE_RANGES: Lazy<[LeagueRanges; 5]> = Lazy::new(|| {
     use crate::league::ReleaseVersion;
 
     [
+        LeagueRanges {
+            version: ReleaseVersion::new("3.27".to_string()),
+            names_range: "3.27!H3:H".to_string(),
+            weights_range: "3.27!S3:S".to_string(),
+        },
         LeagueRanges {
             version: ReleaseVersion::new("3.26".to_string()),
             names_range: "3.26!H3:H".to_string(),
