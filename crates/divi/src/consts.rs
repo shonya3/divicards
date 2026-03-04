@@ -21,8 +21,16 @@ pub const NEVER_EXISTED: [&str; 3] = [
     "Luck of the Vaal",
 ];
 
-pub const CARDS_N: usize = 459;
+pub const CARDS_N: usize = 467;
 pub const CARDS: [&str; CARDS_N] = [
+    "The Everlasting",
+    "Lucky Bastion",
+    "The Miracle",
+    "Apocalypse",
+    "The Slumbering Beast",
+    "The Forbidden Fruit",
+    "The Silly Boy",
+    "Reflection of the Heart",
     "Bound by Flame",
     "One Last Score",
     "Outfoxed",
