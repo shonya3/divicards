@@ -316,7 +316,7 @@ impl From<Direct> for CardBySource {
 
 #[cfg(test)]
 mod tests {
-    use poe_data::PoeData;
+    use poe_data::{maps::Map, PoeData};
 
     use super::VerificationStatus;
     use crate::{
@@ -377,7 +377,6 @@ mod tests {
     #[test]
     fn test_get_transitive_cards_from_source() {
         use poe_data::{cards::CardsData, mapbosses::MapBoss, PoeData};
-        use std::collections::HashMap;
 
         let map_source = Source::Map("Some Map".to_string());
         let boss_source = Source::MapBoss("Some Map Boss".to_string());
@@ -396,7 +395,7 @@ mod tests {
 
         let poe_data = PoeData {
             acts: vec![],
-            cards: CardsData(HashMap::new()),
+            cards: CardsData::default(),
             maps: vec![],
             mapbosses: vec![MapBoss {
                 name: "Some Map Boss".to_string(),
@@ -417,7 +416,6 @@ mod tests {
     #[test]
     fn test_cards_by_source() {
         use poe_data::{cards::CardsData, mapbosses::MapBoss, PoeData};
-        use std::collections::HashMap;
 
         let map_source = Source::Map("Some Map".to_string());
         let boss_source = Source::MapBoss("Some Map Boss".to_string());
@@ -449,8 +447,16 @@ mod tests {
 
         let poe_data = PoeData {
             acts: vec![],
-            cards: CardsData(HashMap::new()),
-            maps: vec![],
+            cards: CardsData::default(),
+            maps: vec![Map {
+                name: "Some Map".to_string(),
+                tier: 1,
+                unique: false,
+                icon: "".to_string(),
+                slug: "some-map".to_string(),
+                series: "Keepers".to_string(),
+                atlas_cards: vec![],
+            }],
             mapbosses: vec![MapBoss {
                 name: "Some Map Boss".to_string(),
                 maps: vec!["Some Map".to_string()],
@@ -471,7 +477,6 @@ mod tests {
     #[test]
     fn test_cards_by_source_types() {
         use poe_data::{cards::CardsData, mapbosses::MapBoss, maps::Map, PoeData};
-        use std::collections::HashMap;
 
         let map_source = Source::Map("Some Map".to_string());
         let boss_source = Source::MapBoss("Some Map Boss".to_string());
@@ -515,7 +520,7 @@ mod tests {
 
         let poe_data = PoeData {
             acts: vec![],
-            cards: CardsData(HashMap::new()),
+            cards: CardsData::default(),
             maps: vec![Map {
                 name: "Some Map".to_string(),
                 tier: 1,

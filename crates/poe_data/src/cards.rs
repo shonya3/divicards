@@ -6,6 +6,23 @@ use once_cell::sync::Lazy;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[serde(rename_all = "camelCase")]
+pub struct CardsData {
+    pub dict: HashMap<String, Card>,
+    /// Total number of cards collected during latest league by community.
+    pub latest_league_collected: u32,
+}
+
+impl CardsData {
+    pub fn card(&self, s: &str) -> &Card {
+        let Some(card) = self.dict.get(s) else {
+            panic!("Card not exists {s}");
+        };
+        card
+    }
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Card {
@@ -72,18 +89,6 @@ pub static LEAGUE_RANGES: Lazy<[LeagueRanges; 5]> = Lazy::new(|| {
         },
     ]
 });
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[serde(rename_all = "camelCase")]
-pub struct CardsData(pub HashMap<String, Card>);
-impl CardsData {
-    pub fn card(&self, s: &str) -> &Card {
-        let Some(card) = self.0.get(s) else {
-            panic!("Card not exists {s}");
-        };
-        card
-    }
-}
 
 #[cfg(feature = "fs_cache_fetcher")]
 pub mod fetch {
@@ -213,6 +218,8 @@ pub mod fetch {
         let latest_sample =
             load_sample_from_ranges(key, &LEAGUE_RANGES[0], Some(prices.clone())).await?;
 
+        let latest_league_collected = latest_sample.cards.n();
+
         let mut samples = vec![latest_sample];
         samples.append(&mut other_samples);
 
@@ -286,7 +293,10 @@ pub mod fetch {
         });
 
         let cards_hashmap = cards.into_iter().map(|c| (c.name.clone(), c)).collect();
-        Ok(CardsData(cards_hashmap))
+        Ok(CardsData {
+            dict: cards_hashmap,
+            latest_league_collected,
+        })
     }
 
     #[derive(Debug)]

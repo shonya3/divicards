@@ -8,7 +8,7 @@ use tokio::task::JoinHandle;
 
 pub async fn fetch_maps() -> Result<Vec<Map>, FetchMapsError> {
     let cards = crate::cards::fetch::fetch().await?;
-    let cards: Vec<Card> = cards.0.values().cloned().collect();
+    let cards: Vec<Card> = cards.dict.values().cloned().collect();
     let cards = Arc::new(cards);
 
     // Prepare Playwright context

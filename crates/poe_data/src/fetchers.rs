@@ -1,7 +1,8 @@
 #![cfg(feature = "fs_cache_fetcher")]
+use std::time::Duration;
+
 use crate::{act::ActArea, cards::CardsData, error::Error, mapbosses::MapBoss, maps::Map, PoeData};
 use fs_cache_fetcher::{Config, DataFetcher, Stale};
-use std::time::Duration;
 
 pub struct PoeDataFetcher {
     config: Config,
@@ -133,7 +134,8 @@ impl Default for CardsFetcher {
         Self(Config {
             save: true,
             filename: "cards.json",
-            stale: Stale::After(Duration::from_secs(86_400)),
+            // stale: Stale::ReloadEveryTime,
+            stale: Stale::After(Duration::from_secs(600)),
         })
     }
 }

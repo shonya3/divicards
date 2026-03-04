@@ -21,6 +21,12 @@ impl Cards {
         self.0.iter().find(|c| c.name == name)
     }
 
+    #[must_use]
+    /// Total number of cards.
+    pub fn n(&self) -> u32 {
+        self.0.iter().map(|c| c.amount).sum()
+    }
+
     pub fn get_mut(&mut self, name: &str) -> Option<&mut CardRecord> {
         self.0.iter_mut().find(|c| c.name == name)
     }

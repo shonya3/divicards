@@ -84,7 +84,7 @@ impl DataFetcher for Fetcher {
                     )
                 });
 
-                let card = cards.0.get(&data.name);
+                let card = cards.dict.get(&data.name);
                 DivinationCardElementData {
                     slug: slug::slugify(&data.name),
                     name: data.name,
