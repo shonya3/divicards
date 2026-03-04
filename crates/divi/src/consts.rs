@@ -2,8 +2,17 @@
 pub const CONDENSING_FACTOR: f32 = 2.0 / 3.0;
 pub const RAIN_OF_CHAOS_CONDENSED_WEIGHT: f32 = 2_452.655;
 
-pub const LEGACY_CARDS_N: usize = 9;
+pub const LEGACY_CARDS_N: usize = 18;
 pub const LEGACY_CARDS: [&str; LEGACY_CARDS_N] = [
+    "The Cheater",
+    "Desecrated Virtue",
+    "The Bargain",
+    "The Eye of Terror",
+    "The Obscured",
+    "The Puzzle",
+    "The Journey",
+    "The Messenger",
+    "The Landing",
     "Blessing of God",
     "The Devastator",
     "Luck of the Vaal",
