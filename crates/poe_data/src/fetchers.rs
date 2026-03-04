@@ -135,7 +135,7 @@ impl Default for CardsFetcher {
             save: true,
             filename: "cards.json",
             // stale: Stale::ReloadEveryTime,
-            stale: Stale::After(Duration::from_secs(600)),
+            stale: Stale::After(Duration::from_secs(1)),
         })
     }
 }

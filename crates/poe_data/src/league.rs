@@ -12,7 +12,7 @@ pub struct LeagueReleaseInfo {
     pub version: ReleaseVersion,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, Eq)]
+#[derive(Debug, Clone, Serialize, Deserialize, Eq, Default)]
 #[serde(transparent)]
 pub struct ReleaseVersion(String);
 

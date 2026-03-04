@@ -1,5 +1,4 @@
 use crate::league::LeagueReleaseInfo;
-#[cfg(feature = "fs_cache_fetcher")]
 use crate::league::ReleaseVersion;
 #[cfg(feature = "fs_cache_fetcher")]
 use once_cell::sync::Lazy;
@@ -11,7 +10,14 @@ use std::collections::HashMap;
 pub struct CardsData {
     pub dict: HashMap<String, Card>,
     /// Total number of cards collected during latest league by community.
-    pub latest_league_collected: u32,
+    pub latest_weights_collected: LeagueCardsCollected,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[serde(rename_all = "camelCase")]
+pub struct LeagueCardsCollected {
+    version: ReleaseVersion,
+    total_cards: u32,
 }
 
 impl CardsData {
@@ -96,7 +102,7 @@ pub mod fetch {
 
     use super::LeagueRanges;
     use crate::{
-        cards::{Card, CardsData, LEAGUE_RANGES},
+        cards::{Card, CardsData, LeagueCardsCollected, LEAGUE_RANGES},
         consts::{WEIGHT_SPREADSHEET_ID, WIKI_API_URL},
         league::{self, fetch::Error as LeagueError, ReleaseVersion},
         maps::wiki::FetchWikiMapsError,
@@ -218,7 +224,10 @@ pub mod fetch {
         let latest_sample =
             load_sample_from_ranges(key, &LEAGUE_RANGES[0], Some(prices.clone())).await?;
 
-        let latest_league_collected = latest_sample.cards.n();
+        let latest_weights_collected = LeagueCardsCollected {
+            version: LEAGUE_RANGES[0].version.clone(),
+            total_cards: latest_sample.cards.n(),
+        };
 
         let mut samples = vec![latest_sample];
         samples.append(&mut other_samples);
@@ -295,7 +304,7 @@ pub mod fetch {
         let cards_hashmap = cards.into_iter().map(|c| (c.name.clone(), c)).collect();
         Ok(CardsData {
             dict: cards_hashmap,
-            latest_league_collected,
+            latest_weights_collected,
         })
     }
 
