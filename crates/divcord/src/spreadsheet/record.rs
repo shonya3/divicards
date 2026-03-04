@@ -352,8 +352,8 @@ pub enum GreyNote {
 )]
 #[serde(rename_all = "camelCase")]
 pub enum Confidence {
-    #[strum(to_string = "None", serialize = "none")]
-    #[serde(alias = "None", alias = "none")]
+    #[strum(to_string = "None", serialize = "none", serialize = "NONE")]
+    #[serde(alias = "None", alias = "none", alias = "NONE")]
     None,
     #[strum(to_string = "Low", serialize = "low")]
     #[serde(alias = "Low", alias = "low")]
