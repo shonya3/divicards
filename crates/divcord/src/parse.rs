@@ -303,14 +303,15 @@ pub fn parse_record_dropsources(
 
     let mut errors: Vec<ParseSourceError> = Vec::new();
     if dumb.greynote == GreyNote::Disabled {
-        if !dumb.card.as_str().is_legacy_card() {
-            errors.push(ParseSourceError {
-                record_id: dumb.id,
-                card: dumb.card.to_owned(),
-                kind: ParseSourceErrorKind::GreynoteDisabledButCardNotLegacy,
-            });
+        if dumb.card.as_str().is_legacy_card() {
+            return (vec![Source::disabled()], vec![]);
         }
-        return (vec![Source::disabled()], vec![]);
+
+        errors.push(ParseSourceError {
+            record_id: dumb.id,
+            card: dumb.card.to_owned(),
+            kind: ParseSourceErrorKind::GreynoteDisabledButCardNotLegacy,
+        });
     }
 
     // Parse
