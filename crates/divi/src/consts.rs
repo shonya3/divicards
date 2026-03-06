@@ -2,8 +2,10 @@
 pub const CONDENSING_FACTOR: f32 = 2.0 / 3.0;
 pub const RAIN_OF_CHAOS_CONDENSED_WEIGHT: f32 = 2_452.655;
 
-pub const LEGACY_CARDS_N: usize = 14;
+pub const LEGACY_CARDS_N: usize = 16;
 pub const LEGACY_CARDS: [&str; LEGACY_CARDS_N] = [
+    "The Cartographer",
+    "The Emptiness",
     "The Cheater",
     "The Bargain",
     "The Obscured",
