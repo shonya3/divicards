@@ -1,12 +1,9 @@
 [workspace]
 resolver = "2"
-members = [
-    "crates/*",
-    "packages/app/src-tauri",
-]
+members = ["crates/*", "packages/app/src-tauri"]
 
 [workspace.package]
-version = "0.10.1"
+version = "0.11.0"
 edition = "2021"
 repository = "https://github.com/shonya3/divicards"
 

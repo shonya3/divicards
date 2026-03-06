@@ -1,39 +1,45 @@
 {
-	"$schema": "https://schema.tauri.app/config/2",
-	"build": {
-		"beforeBuildCommand": "npm run build",
-		"beforeDevCommand": "npm run dev",
-		"frontendDist": "../dist",
-		"devUrl": "http://localhost:5173"
-	},
-	"bundle": {
-		"createUpdaterArtifacts": true,
-		"active": true,
-		"targets": "all",
-		"icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.icns", "icons/icon.ico"]
-	},
-	"productName": "divicards",
-	"version": "0.10.1",
-	"identifier": "divicards",
-	"plugins": {
-		"updater": {
-			"endpoints": ["https://github.com/shonya3/divicards/releases/latest/download/latest.json"],
-			"pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDk3QTM3NkQyN0ZBRjRBREQKUldUZFNxOS8wbmFqbDRMUFhFQi9aWngrbG5PMzB6TmY2djE1YzZ6VWNYTmpQS3AvOWMwRGdGVGwK"
-		}
-	},
-	"app": {
-		"security": {
-			"csp": null
-		},
-		"windows": [
-			{
-				"fullscreen": false,
-				"height": 1200,
-				"resizable": true,
-				"title": "Divicards",
-				"width": 1400,
-				"dragDropEnabled": false
-			}
-		]
-	}
+  "$schema": "https://schema.tauri.app/config/2",
+  "build": {
+    "beforeBuildCommand": "npm run build",
+    "beforeDevCommand": "npm run dev",
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:5173"
+  },
+  "bundle": {
+    "createUpdaterArtifacts": true,
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  },
+  "productName": "divicards",
+  "version": "0.11.0",
+  "identifier": "divicards",
+  "plugins": {
+    "updater": {
+      "endpoints": ["https://github.com/shonya3/divicards/releases/latest/download/latest.json"],
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDk3QTM3NkQyN0ZBRjRBREQKUldUZFNxOS8wbmFqbDRMUFhFQi9aWngrbG5PMzB6TmY2djE1YzZ6VWNYTmpQS3AvOWMwRGdGVGwK"
+    }
+  },
+  "app": {
+    "security": {
+      "csp": null
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "height": 1200,
+        "resizable": true,
+        "title": "Divicards",
+        "width": 1400,
+        "dragDropEnabled": false
+      }
+    ]
+  }
 }

@@ -1,20 +1,20 @@
 {
-	"name": "divicards",
-	"version": "0.10.1",
-	"description": "",
-	"type": "module",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"tauri": "cd packages/app && pnpm tauri",
-		"wc:dev": "cd packages/wc && pnpm dev",
-		"storybook": "cd packages/wc && pnpm storybook",
-		"wc:test:watch": "cd packages/wc && pnpm web-test-runner --watch --group default",
-		"wc:test:watch:group": "cd packages/wc && pnpm web-test-runner --watch --group"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"devDependencies": {
-		"@tauri-apps/cli": "^2"
-	}
+  "name": "divicards",
+  "version": "0.11.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tauri": "cd packages/app && pnpm tauri",
+    "wc:dev": "cd packages/wc && pnpm dev",
+    "storybook": "cd packages/wc && pnpm storybook",
+    "wc:test:watch": "cd packages/wc && pnpm web-test-runner --watch --group default",
+    "wc:test:watch:group": "cd packages/wc && pnpm web-test-runner --watch --group"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2"
+  }
 }
