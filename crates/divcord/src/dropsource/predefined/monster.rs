@@ -7,6 +7,7 @@ use strum_macros::EnumIter;
 // impl FromStr for UniqueMonster fn from_str
 #[derive(Debug, Clone, Default, EnumIter, PartialEq, Eq, Hash)]
 pub enum UniqueMonster {
+    Vruun,
     HivebornMonsters,
     StygianSpire,
     BreachMonsters,
@@ -56,6 +57,7 @@ impl FromStr for UniqueMonster {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "Vruun, Marshal of Xesht" => Ok(Self::Vruun),
             "Hiveborn monsters" => Ok(Self::HivebornMonsters),
             "Stygian Spire" => Ok(Self::StygianSpire),
             "Breach monsters" => Ok(Self::BreachMonsters),
@@ -120,6 +122,7 @@ impl FromStr for UniqueMonster {
 impl Identified for UniqueMonster {
     fn id(&self) -> &str {
         match self {
+            UniqueMonster::Vruun => "Vruun, Marshal of Xesht",
             UniqueMonster::HivebornMonsters => "Hiveborn monsters",
             UniqueMonster::StygianSpire => "Stygian Spire",
             UniqueMonster::BreachMonsters => "Breach monsters",
@@ -184,6 +187,7 @@ impl UniqueMonster {
 
     pub fn _type(&self) -> &str {
         match self {
+            UniqueMonster::Vruun => "Vruun, Marshal of Xesht",
             UniqueMonster::HivebornMonsters => "Hiveborn monsters",
             UniqueMonster::StygianSpire => "Stygian Spire",
             UniqueMonster::BreachMonsters => "Breach monsters",
