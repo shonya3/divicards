@@ -110,8 +110,14 @@ impl HighlightedExpression {
             let open_angle = *open_angle;
             let closing_angle = s[open_angle..].find('>').unwrap() + open_angle;
             if let Some(modifier_str) = s.get(open_angle + 1..closing_angle) {
-                let modifier: Modifier =
-                    serde_json::from_str(&json!(modifier_str).to_string()).unwrap();
+                let modifier: Modifier = serde_json::from_str(&json!(modifier_str).to_string())
+                    .unwrap_or_else(|_| {
+                        dbg!(
+                            "Unknown variant of card reward modifier: {}. Returning Default",
+                            modifier_str
+                        );
+                        Modifier::Default
+                    });
                 match modifier {
                     Modifier::Size(size) => {
                         let open_curly = s[closing_angle..].find('{').unwrap() + closing_angle;

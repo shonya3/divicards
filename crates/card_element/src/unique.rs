@@ -114,7 +114,9 @@ pub fn find_unique_reward<'a>(
         | "Rigwald Item"
         | "Jewellery"
         | "Metamorph Item"
-        | "Beyond Item" => {
+        | "Beyond Item"
+        | "Originator Incarnation Item"
+        | "Harbinger Item" => {
             return Some(UniqueReward {
                 name: name.to_string(),
                 item_class: name.to_string(),
