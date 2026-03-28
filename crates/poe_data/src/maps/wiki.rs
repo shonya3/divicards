@@ -5,6 +5,14 @@ use std::{collections::HashSet, fmt::Display};
 use crate::consts::WIKI_API_URL;
 use serde::{Deserialize, Serialize};
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MapDataFromWiki {
+    pub id: String,
+    pub name: String,
+    pub tier: u32,
+    pub series: Option<String>,
+}
+
 pub async fn fetch_wiki_maplist() -> Result<Vec<MapDataFromWiki>, FetchWikiMapsError> {
     #[derive(Deserialize, Serialize)]
     struct WikiResponse {
@@ -22,7 +30,7 @@ pub async fn fetch_wiki_maplist() -> Result<Vec<MapDataFromWiki>, FetchWikiMapsE
         id: String,
         name: String,
         tier: String,
-        series: String,
+        series: Option<String>,
     }
 
     let where_s: String = [
@@ -75,14 +83,6 @@ pub async fn fetch_wiki_maplist() -> Result<Vec<MapDataFromWiki>, FetchWikiMapsE
             series: title.series,
         })
         .collect::<Vec<MapDataFromWiki>>())
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct MapDataFromWiki {
-    pub id: String,
-    pub name: String,
-    pub tier: u32,
-    pub series: String,
 }
 
 #[derive(Debug)]

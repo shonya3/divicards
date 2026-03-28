@@ -17,7 +17,7 @@ pub struct Map {
     pub unique: bool,
     pub icon: String,
     pub slug: String,
-    pub series: String,
+    pub series: Option<String>,
 
     /// List of card names, provided by in-game atlas.
     pub atlas_cards: Vec<String>,

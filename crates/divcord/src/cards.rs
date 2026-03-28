@@ -454,7 +454,7 @@ mod tests {
                 unique: false,
                 icon: "".to_string(),
                 slug: "some-map".to_string(),
-                series: "Keepers".to_string(),
+                series: Some("Keepers".to_string()),
                 atlas_cards: vec![],
             }],
             mapbosses: vec![MapBoss {
@@ -528,7 +528,7 @@ mod tests {
                 icon: "".to_string(),
                 slug: "".to_string(),
                 atlas_cards: vec![],
-                series: "".to_string(),
+                series: None,
             }],
             mapbosses: vec![MapBoss {
                 name: "Some Map Boss".to_string(),
