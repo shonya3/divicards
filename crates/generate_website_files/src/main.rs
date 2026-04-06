@@ -10,7 +10,7 @@ use divcord::{spreadsheet::Spreadsheet, ParseRecordError, Record, Source};
 use poe_data::PoeData;
 use serde::Serialize;
 
-// cargo install cargo-install
+// cargo install cargo-binstall
 // cargo binstall wasm-pack
 #[allow(unused)]
 #[tokio::main]
