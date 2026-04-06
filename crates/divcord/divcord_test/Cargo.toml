@@ -7,7 +7,7 @@ repository.workspace = true
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-divcord = {path = "../", features = ["fs_cache_fetcher"]}
+divcord = { path = "../", features = ["fs_cache_fetcher"] }
 tokio = { workspace = true, features = ["full"] }
-poe_data = {path = "../../poe_data", features = ["fs_cache_fetcher"]}
+poe_data = { path = "../../poe_data", features = ["fs_cache_fetcher"] }
 dotenv.workspace = true

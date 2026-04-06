@@ -1,29 +1,29 @@
 {
-	"compilerOptions": {
-		"target": "ESNext",
-		"module": "NodeNext",
-		"lib": ["ESNext", "DOM", "DOM.Iterable"],
-		"skipLibCheck": true,
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
 
-		"moduleResolution": "NodeNext",
-		"resolveJsonModule": true,
-		"isolatedModules": true,
+    "moduleResolution": "NodeNext",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
 
-		/* Linting */
-		"strict": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"noFallthroughCasesInSwitch": true,
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
 
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true,
-		"useDefineForClassFields": false,
-		"outDir": "./dist",
-		"sourceMap": true,
-		"declaration": true,
-		"declarationMap": true,
-		"isolatedDeclarations": true
-	},
-	"include": ["src"],
-	"references": [{ "path": "./tsconfig.node.json" }]
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "useDefineForClassFields": false,
+    "outDir": "./dist",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "isolatedDeclarations": true
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

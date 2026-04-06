@@ -1,4 +1,4 @@
-import { css, CSSResult } from 'lit';
+import { css, CSSResult } from "lit";
 
 const table = css`
 	.table-wrapper {
@@ -89,69 +89,69 @@ const table = css`
 `;
 
 export const styles: CSSResult = css`
-	:host {
-		display: block;
-		max-width: 1220px;
-	}
+  :host {
+    display: block;
+    max-width: 1220px;
+  }
 
-	.ch-3 {
-		text-align: center;
-		min-width: 3ch;
-	}
+  .ch-3 {
+    text-align: center;
+    min-width: 3ch;
+  }
 
-	.layout {
-		height: 100%;
-		max-width: 1220px;
+  .layout {
+    height: 100%;
+    max-width: 1220px;
 
-		padding: 2rem;
-		display: grid;
-		grid-template:
-			'header not-header'
-			'table stats' auto / 750px 1fr;
-	}
+    padding: 2rem;
+    display: grid;
+    grid-template:
+      "header not-header"
+      "table stats" auto / 750px 1fr;
+  }
 
-	.header {
-		grid-area: header;
-		position: sticky;
-		top: 0;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		flex-wrap: wrap;
-		z-index: 2;
-		padding-top: 20px;
-		padding-bottom: 20px;
-		border-bottom: 1px solid var(--sl-color-gray-100);
-	}
+  .header {
+    grid-area: header;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    z-index: 2;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--sl-color-gray-100);
+  }
 
-	.slider-box {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		gap: 0.5rem;
-	}
+  .slider-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
 
-	.stats {
-		grid-area: stats;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		list-style: none;
-		gap: 2rem;
-		padding: 1rem;
-	}
+  .stats {
+    grid-area: stats;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    gap: 2rem;
+    padding: 1rem;
+  }
 
-	.stat {
-		padding: 2rem;
-		display: flex;
-		align-items: center;
-		width: 200px;
-		border: 1px solid var(--sl-color-gray-300);
-		border-radius: 0.25rem;
-		font-size: 2rem;
-		font-weight: 500;
-		gap: 1.5rem;
-	}
+  .stat {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    width: 200px;
+    border: 1px solid var(--sl-color-gray-300);
+    border-radius: 0.25rem;
+    font-size: 2rem;
+    font-weight: 500;
+    gap: 1.5rem;
+  }
 
-	${table}
+  ${table}
 `;

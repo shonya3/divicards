@@ -7,11 +7,11 @@ repository.workspace = true
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-serde = {workspace = true}
-serde_json = {workspace = true}
-divcord = {path = "../divcord", features = ["fs_cache_fetcher"]}
-poe_data = {path = "../poe_data", features = ["fs_cache_fetcher"]}
-card_element = {path = "../card_element"}
+serde = { workspace = true }
+serde_json = { workspace = true }
+divcord = { path = "../divcord", features = ["fs_cache_fetcher"] }
+poe_data = { path = "../poe_data", features = ["fs_cache_fetcher"] }
+card_element = { path = "../card_element" }
 tokio = { workspace = true }
 reqwest.workspace = true
 dotenv = { workspace = true }

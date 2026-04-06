@@ -1,27 +1,27 @@
 {
-	"compilerOptions": {
-		"target": "ESNext",
-		"useDefineForClassFields": false,
-		"module": "ESNext",
-		"moduleResolution": "bundler",
-		"strict": true,
-		"jsx": "preserve",
-		"sourceMap": true,
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"esModuleInterop": true,
-		"lib": ["ESNext", "DOM"],
-		"skipLibCheck": true,
-		"experimentalDecorators": true,
-		"types": ["./node_modules/@shoelace-style/shoelace/dist/types/vue/index.d.ts"]
-	},
-	"include": [
-		"src/**/*.ts",
-		"src/**/*.d.ts",
-		"src/**/*.tsx",
-		"src/**/*.vue",
-		"../shared/poe.types.ts",
-		"../shared/IStashLoader.ts"
-	],
-	"references": [{ "path": "./tsconfig.node.json" }]
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": false,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM"],
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "types": ["./node_modules/@shoelace-style/shoelace/dist/types/vue/index.d.ts"]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "../shared/poe.types.ts",
+    "../shared/IStashLoader.ts"
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

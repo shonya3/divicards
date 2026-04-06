@@ -1,248 +1,248 @@
-import { html, css, nothing, LitElement, TemplateResult, CSSResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import '@shoelace-style/shoelace/dist/components/button/button.js';
-import { Column, type TablePreferences } from '@divicards/shared/types.js';
-import '../../e-help-tip';
+import { html, css, nothing, LitElement, TemplateResult, CSSResult } from "lit";
+import { customElement, property } from "lit/decorators.js";
+import "@shoelace-style/shoelace/dist/components/button/button.js";
+import { Column, type TablePreferences } from "@divicards/shared/types.js";
+import "../../e-help-tip";
 // import { emit } from '../../../utils';
 
-export type ExportSampleTo = 'file' | 'sheets';
+export type ExportSampleTo = "file" | "sheets";
 const isColumn = (s: unknown): s is Column => {
-	return s === 'name' || s === 'amount' || s === 'weight' || s === 'price';
+  return s === "name" || s === "amount" || s === "weight" || s === "price";
 };
 
 export interface Props {
-	spreadsheetId?: string;
-	sheetTitle?: string;
-	preferences: TablePreferences;
-	export_sample_to: ExportSampleTo;
-	error: string | null;
+  spreadsheetId?: string;
+  sheetTitle?: string;
+  preferences: TablePreferences;
+  export_sample_to: ExportSampleTo;
+  error: string | null;
 }
 
 export interface Events {
-	submit: Props;
+  submit: Props;
 }
 
-@customElement('e-form-export-sample')
+@customElement("e-form-export-sample")
 export class FormExportSampleElement extends LitElement {
-	static override styles: Array<CSSResult> = [styles()];
+  static override styles: Array<CSSResult> = [styles()];
 
-	@property({ type: Object }) table_preferences: TablePreferences = {
-		order: 'desc',
-		columns: new Set(['name', 'amount']),
-		orderedBy: 'amount',
-		cardsMustHaveAmount: false,
-		minPrice: 0,
-	};
-	@property({ reflect: true, attribute: 'spreadsheet-id' }) spreadsheetId: string = '';
-	@property({ reflect: true, attribute: 'sheet-title' }) sheetTitle: string = '';
-	@property({ attribute: false, reflect: true }) error: string | null = null;
-	@property({ reflect: true }) export_sample_to: ExportSampleTo = 'sheets';
+  @property({ type: Object }) table_preferences: TablePreferences = {
+    order: "desc",
+    columns: new Set(["name", "amount"]),
+    orderedBy: "amount",
+    cardsMustHaveAmount: false,
+    minPrice: 0,
+  };
+  @property({ reflect: true, attribute: "spreadsheet-id" }) spreadsheetId: string = "";
+  @property({ reflect: true, attribute: "sheet-title" }) sheetTitle: string = "";
+  @property({ attribute: false, reflect: true }) error: string | null = null;
+  @property({ reflect: true }) export_sample_to: ExportSampleTo = "sheets";
 
-	#onColumnCheckbox(e: InputEvent, column: Column) {
-		if (!(e.target instanceof HTMLInputElement)) {
-			return;
-		}
+  #onColumnCheckbox(e: InputEvent, column: Column) {
+    if (!(e.target instanceof HTMLInputElement)) {
+      return;
+    }
 
-		if (e.target.checked) {
-			this.table_preferences.columns.add(column);
-		} else {
-			this.table_preferences.columns.delete(column);
-		}
-	}
+    if (e.target.checked) {
+      this.table_preferences.columns.add(column);
+    } else {
+      this.table_preferences.columns.delete(column);
+    }
+  }
 
-	#onOrderRadio(e: InputEvent) {
-		const target = e.target;
-		if (!(target instanceof HTMLInputElement)) return;
+  #onOrderRadio(e: InputEvent) {
+    const target = e.target;
+    if (!(target instanceof HTMLInputElement)) return;
 
-		if (target.id === 'asc') {
-			this.table_preferences.order = 'asc';
-		} else this.table_preferences.order = 'desc';
-	}
+    if (target.id === "asc") {
+      this.table_preferences.order = "asc";
+    } else this.table_preferences.order = "desc";
+  }
 
-	#onOrderedBySelected(e: InputEvent) {
-		const target = e.target;
-		if (!(target instanceof HTMLSelectElement)) return;
-		if (!isColumn(target.value)) return;
+  #onOrderedBySelected(e: InputEvent) {
+    const target = e.target;
+    if (!(target instanceof HTMLSelectElement)) return;
+    if (!isColumn(target.value)) return;
 
-		this.table_preferences.orderedBy = target.value;
-	}
+    this.table_preferences.orderedBy = target.value;
+  }
 
-	#onCardsMustHaveAmountCheckbox(e: InputEvent) {
-		if (!(e.target instanceof HTMLInputElement)) {
-			return;
-		}
+  #onCardsMustHaveAmountCheckbox(e: InputEvent) {
+    if (!(e.target instanceof HTMLInputElement)) {
+      return;
+    }
 
-		this.table_preferences.cardsMustHaveAmount = e.target.checked;
-	}
+    this.table_preferences.cardsMustHaveAmount = e.target.checked;
+  }
 
-	#onMinPriceSlider(e: InputEvent) {
-		if (!(e.target instanceof HTMLInputElement)) {
-			return;
-		}
+  #onMinPriceSlider(e: InputEvent) {
+    if (!(e.target instanceof HTMLInputElement)) {
+      return;
+    }
 
-		this.table_preferences.minPrice = Number(e.target.value);
-	}
+    this.table_preferences.minPrice = Number(e.target.value);
+  }
 
-	#onSheetTitleInput(e: InputEvent) {
-		if (!(e.target instanceof HTMLInputElement)) return;
-		this.error = null;
-		this.sheetTitle = e.target.value;
-	}
+  #onSheetTitleInput(e: InputEvent) {
+    if (!(e.target instanceof HTMLInputElement)) return;
+    this.error = null;
+    this.sheetTitle = e.target.value;
+  }
 
-	#onSpreadsheetIdInput(e: InputEvent) {
-		if (!(e.target instanceof HTMLInputElement)) return;
-		this.error = null;
-		this.spreadsheetId = e.target.value;
-	}
+  #onSpreadsheetIdInput(e: InputEvent) {
+    if (!(e.target instanceof HTMLInputElement)) return;
+    this.error = null;
+    this.spreadsheetId = e.target.value;
+  }
 
-	#onSubmit(e: SubmitEvent) {
-		e.preventDefault();
+  #onSubmit(e: SubmitEvent) {
+    e.preventDefault();
 
-		this.dispatchEvent(
-			new PresubmitExportFormEvent({
-				spreadsheetId: this.spreadsheetId,
-				sheetTitle: this.sheetTitle,
-				preferences: this.table_preferences,
-				export_sample_to: this.export_sample_to,
-				error: this.error,
-			})
-		);
-	}
-	protected override render(): TemplateResult {
-		return html`<div id="root">
-			${this.export_sample_to === 'sheets' ? this.sheetsFieldset() : nothing}
-			<form @submit=${this.#onSubmit} id="form">
-				<fieldset style="margin-top: 0.5rem">
-					<legend>Table Preferences</legend>
-					<fieldset id="fieldset-hide-nullish">
-						<legend>Cards must have the amount</legend>
-						<div class="input-wrapper">
-							<label for="input-title">Interested only in cards with amount</label>
-							<input
-								id="input-title"
-								type="checkbox"
-								.checked=${this.table_preferences.cardsMustHaveAmount}
-								@input=${this.#onCardsMustHaveAmountCheckbox}
-							/>
-						</div>
-					</fieldset>
-					<fieldset id="fieldset-order">
-						<legend>Order</legend>
-						<div class="input-wrapper">
-							<label for="ordered-by">Ordered by</label>
-							<select
-								@input=${this.#onOrderedBySelected}
-								.value=${this.table_preferences.orderedBy}
-								name=""
-								id="ordered-by"
-							>
-								<option value="name">name</option>
-								<option value="amount">amount</option>
-								<option value="weight">weight</option>
-								<option value="price">price</option>
-								<option value="price">sum</option>
-							</select>
-						</div>
-						<div class="input-wrapper">
-							<label for="asc">Smallest to Largest (A -> Z)</label>
-							<input
-								id="asc"
-								type="radio"
-								name="order"
-								.checked=${this.table_preferences.order === 'asc'}
-								@input=${this.#onOrderRadio}
-							/>
-						</div>
-						<div class="input-wrapper">
-							<label for="desc">Largest to Smallest (Z -> A)</label>
-							<input
-								id="desc"
-								type="radio"
-								name="order"
-								.checked=${this.table_preferences.order === 'desc'}
-								@input=${this.#onOrderRadio}
-							/>
-						</div>
-					</fieldset>
+    this.dispatchEvent(
+      new PresubmitExportFormEvent({
+        spreadsheetId: this.spreadsheetId,
+        sheetTitle: this.sheetTitle,
+        preferences: this.table_preferences,
+        export_sample_to: this.export_sample_to,
+        error: this.error,
+      }),
+    );
+  }
+  protected override render(): TemplateResult {
+    return html`<div id="root">
+      ${this.export_sample_to === "sheets" ? this.sheetsFieldset() : nothing}
+      <form @submit=${this.#onSubmit} id="form">
+        <fieldset style="margin-top: 0.5rem">
+          <legend>Table Preferences</legend>
+          <fieldset id="fieldset-hide-nullish">
+            <legend>Cards must have the amount</legend>
+            <div class="input-wrapper">
+              <label for="input-title">Interested only in cards with amount</label>
+              <input
+                id="input-title"
+                type="checkbox"
+                .checked=${this.table_preferences.cardsMustHaveAmount}
+                @input=${this.#onCardsMustHaveAmountCheckbox}
+              />
+            </div>
+          </fieldset>
+          <fieldset id="fieldset-order">
+            <legend>Order</legend>
+            <div class="input-wrapper">
+              <label for="ordered-by">Ordered by</label>
+              <select
+                @input=${this.#onOrderedBySelected}
+                .value=${this.table_preferences.orderedBy}
+                name=""
+                id="ordered-by"
+              >
+                <option value="name">name</option>
+                <option value="amount">amount</option>
+                <option value="weight">weight</option>
+                <option value="price">price</option>
+                <option value="price">sum</option>
+              </select>
+            </div>
+            <div class="input-wrapper">
+              <label for="asc">Smallest to Largest (A -> Z)</label>
+              <input
+                id="asc"
+                type="radio"
+                name="order"
+                .checked=${this.table_preferences.order === "asc"}
+                @input=${this.#onOrderRadio}
+              />
+            </div>
+            <div class="input-wrapper">
+              <label for="desc">Largest to Smallest (Z -> A)</label>
+              <input
+                id="desc"
+                type="radio"
+                name="order"
+                .checked=${this.table_preferences.order === "desc"}
+                @input=${this.#onOrderRadio}
+              />
+            </div>
+          </fieldset>
 
-					<fieldset id="fieldset-columns">
-						<legend>Columns</legend>
-						<div class="input-wrapper">
-							<div>
-								<label for="column-name">name</label>
-								<input
-									id="column-name"
-									type="checkbox"
-									.checked=${this.table_preferences.columns.has('name')}
-									@input=${(e: InputEvent) => this.#onColumnCheckbox(e, 'name')}
-								/>
-							</div>
+          <fieldset id="fieldset-columns">
+            <legend>Columns</legend>
+            <div class="input-wrapper">
+              <div>
+                <label for="column-name">name</label>
+                <input
+                  id="column-name"
+                  type="checkbox"
+                  .checked=${this.table_preferences.columns.has("name")}
+                  @input=${(e: InputEvent) => this.#onColumnCheckbox(e, "name")}
+                />
+              </div>
 
-							<div class="input-wrapper">
-								<label for="columnd-amount">amount</label>
-								<input
-									id="columnd-amount"
-									type="checkbox"
-									.checked=${this.table_preferences.columns.has('amount')}
-									@input=${(e: InputEvent) => this.#onColumnCheckbox(e, 'amount')}
-								/>
-							</div>
+              <div class="input-wrapper">
+                <label for="columnd-amount">amount</label>
+                <input
+                  id="columnd-amount"
+                  type="checkbox"
+                  .checked=${this.table_preferences.columns.has("amount")}
+                  @input=${(e: InputEvent) => this.#onColumnCheckbox(e, "amount")}
+                />
+              </div>
 
-							<div class="input-wrapper">
-								<label for="column-weight">weight</label>
-								<input
-									id="column-weight"
-									type="checkbox"
-									.checked=${this.table_preferences.columns.has('weight')}
-									@input=${(e: InputEvent) => this.#onColumnCheckbox(e, 'weight')}
-								/>
-							</div>
+              <div class="input-wrapper">
+                <label for="column-weight">weight</label>
+                <input
+                  id="column-weight"
+                  type="checkbox"
+                  .checked=${this.table_preferences.columns.has("weight")}
+                  @input=${(e: InputEvent) => this.#onColumnCheckbox(e, "weight")}
+                />
+              </div>
 
-							<div class="input-wrapper">
-								<label for="column-price">price</label>
-								<input
-									id="column-price"
-									type="checkbox"
-									.checked=${this.table_preferences.columns.has('price')}
-									@input=${(e: InputEvent) => this.#onColumnCheckbox(e, 'price')}
-								/>
-							</div>
+              <div class="input-wrapper">
+                <label for="column-price">price</label>
+                <input
+                  id="column-price"
+                  type="checkbox"
+                  .checked=${this.table_preferences.columns.has("price")}
+                  @input=${(e: InputEvent) => this.#onColumnCheckbox(e, "price")}
+                />
+              </div>
 
-							<div class="input-wrapper">
-								<label for="column-sum">sum</label>
-								<input
-									id="column-sum"
-									type="checkbox"
-									.checked=${this.table_preferences.columns.has('sum')}
-									@input=${(e: InputEvent) => this.#onColumnCheckbox(e, 'sum')}
-								/>
-							</div>
-						</div>
-					</fieldset>
+              <div class="input-wrapper">
+                <label for="column-sum">sum</label>
+                <input
+                  id="column-sum"
+                  type="checkbox"
+                  .checked=${this.table_preferences.columns.has("sum")}
+                  @input=${(e: InputEvent) => this.#onColumnCheckbox(e, "sum")}
+                />
+              </div>
+            </div>
+          </fieldset>
 
-					<fieldset id="fieldset-min-price">
-						<legend>Minimum chaos price</legend>
-						<div class="input-wrapper">
-							<label for="input-min-price">Ignore cheaper cards</label>
-							<input
-								id="input-min-price"
-								type="number"
-								min="0"
-								max="10000"
-								.value=${String(this.table_preferences.minPrice)}
-								@input=${this.#onMinPriceSlider}
-							/>
-						</div>
-					</fieldset>
-				</fieldset>
-				${this.error && html`<div id="error">${this.error}</div>`}
-				<sl-button type="submit" id="submit">Submit</sl-button>
-			</form>
-		</div>`;
-	}
+          <fieldset id="fieldset-min-price">
+            <legend>Minimum chaos price</legend>
+            <div class="input-wrapper">
+              <label for="input-min-price">Ignore cheaper cards</label>
+              <input
+                id="input-min-price"
+                type="number"
+                min="0"
+                max="10000"
+                .value=${String(this.table_preferences.minPrice)}
+                @input=${this.#onMinPriceSlider}
+              />
+            </div>
+          </fieldset>
+        </fieldset>
+        ${this.error && html`<div id="error">${this.error}</div>`}
+        <sl-button type="submit" id="submit">Submit</sl-button>
+      </form>
+    </div>`;
+  }
 
-	protected sheetsFieldset(): TemplateResult {
-		return html`
+  protected sheetsFieldset(): TemplateResult {
+    return html`
                 <fieldset>
 					<legend>Sheets Identificators</legend>
 					<fieldset id="fieldset-spreadsheetId">
@@ -281,77 +281,77 @@ export class FormExportSampleElement extends LitElement {
 						</div>
 					</fieldset>
 				</fieldset>`;
-	}
+  }
 }
 
 function styles() {
-	return css`
-		#root {
-			padding: 2rem;
-			width: 600px;
-		}
+  return css`
+    #root {
+      padding: 2rem;
+      width: 600px;
+    }
 
-		#submit {
-			margin-top: 1rem;
-			display: block;
-			margin-inline: auto;
-			font-size: 2rem;
-			border: 1px solid #fff;
-		}
+    #submit {
+      margin-top: 1rem;
+      display: block;
+      margin-inline: auto;
+      font-size: 2rem;
+      border: 1px solid #fff;
+    }
 
-		#error {
-			margin-top: 1rem;
-			border: 2px solid red;
-		}
+    #error {
+      margin-top: 1rem;
+      border: 2px solid red;
+    }
 
-		wc-help-tip::part(tooltip) {
-			left: -520px;
-			font-size: 0.7rem;
-		}
+    wc-help-tip::part(tooltip) {
+      left: -520px;
+      font-size: 0.7rem;
+    }
 
-		.input-wrapper {
-			display: flex;
-			align-items: center;
-			gap: 0.25rem;
-		}
-	`;
+    .input-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+  `;
 }
 
 declare global {
-	interface HTMLElementTagNameMap {
-		'e-form-export-sample': FormExportSampleElement;
-	}
+  interface HTMLElementTagNameMap {
+    "e-form-export-sample": FormExportSampleElement;
+  }
 }
 
 declare global {
-	interface HTMLElementEventMap {
-		sample__presubmit: PresubmitExportFormEvent;
-	}
+  interface HTMLElementEventMap {
+    sample__presubmit: PresubmitExportFormEvent;
+  }
 }
 export interface ExportFormArgs {
-	spreadsheetId?: string;
-	sheetTitle?: string;
-	preferences: TablePreferences;
-	export_sample_to: ExportSampleTo;
-	error: string | null;
+  spreadsheetId?: string;
+  sheetTitle?: string;
+  preferences: TablePreferences;
+  export_sample_to: ExportSampleTo;
+  error: string | null;
 }
 export class PresubmitExportFormEvent extends Event {
-	readonly export_sample_to: ExportSampleTo;
-	readonly spreadsheetId?: string;
-	readonly sheetTitle?: string;
-	readonly preferences: TablePreferences;
-	readonly error: string | null = null;
+  readonly export_sample_to: ExportSampleTo;
+  readonly spreadsheetId?: string;
+  readonly sheetTitle?: string;
+  readonly preferences: TablePreferences;
+  readonly error: string | null = null;
 
-	constructor(
-		{ spreadsheetId, sheetTitle, preferences, export_sample_to, error }: ExportFormArgs,
-		tag = 'sample__presubmit',
-		options?: EventInit
-	) {
-		super(tag, options);
-		this.spreadsheetId = spreadsheetId;
-		this.sheetTitle = sheetTitle;
-		this.preferences = preferences;
-		this.export_sample_to = export_sample_to;
-		this.error = error;
-	}
+  constructor(
+    { spreadsheetId, sheetTitle, preferences, export_sample_to, error }: ExportFormArgs,
+    tag = "sample__presubmit",
+    options?: EventInit,
+  ) {
+    super(tag, options);
+    this.spreadsheetId = spreadsheetId;
+    this.sheetTitle = sheetTitle;
+    this.preferences = preferences;
+    this.export_sample_to = export_sample_to;
+    this.error = error;
+  }
 }

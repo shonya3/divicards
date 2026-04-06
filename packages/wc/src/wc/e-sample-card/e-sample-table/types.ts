@@ -1,5 +1,5 @@
-import { Column, Order } from '@divicards/shared/types.js';
+import { Column, Order } from "@divicards/shared/types.js";
 
 export type SortState = {
-	[col in Column]: Order;
+  [col in Column]: Order;
 };

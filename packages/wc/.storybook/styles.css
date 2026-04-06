@@ -1,13 +1,13 @@
 :root {
-	font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-	font-weight: 400;
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 400;
 }
 
 body {
-	color: var(--sl-color-neutral-900);
-	height: 100vh;
+  color: var(--sl-color-neutral-900);
+  height: 100vh;
 }
 
 .sl-theme-dark {
-	background-color: var(--sl-color-neutral-50);
+  background-color: var(--sl-color-neutral-50);
 }

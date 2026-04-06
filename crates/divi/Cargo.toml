@@ -11,13 +11,13 @@ serde_json.workspace = true
 tracing.workspace = true
 serde.workspace = true
 csv.workspace = true
-googlesheets ={ path = "../googlesheets"}
+googlesheets = { path = "../googlesheets" }
 strsim = "0.11"
-poe = { path = "../poe"}
+poe = { path = "../poe" }
 ninja = { path = "../ninja" }
 
 [dev-dependencies]
-tokio = {workspace = true}
+tokio = { workspace = true }
 
 [lints.clippy]
 pedantic = "warn"

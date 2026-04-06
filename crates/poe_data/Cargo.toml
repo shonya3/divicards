@@ -7,27 +7,38 @@ repository.workspace = true
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-serde = {workspace = true}
+serde = { workspace = true }
 
 
-reqwest = { workspace = true, optional = true}
-googlesheets = {path = "../googlesheets", optional = true}
-dotenv = { version = "0.15.0", optional = true}
-divi = {path = "../divi", optional = true}
-playwright = {version = "0.0.20", optional = true}
-serde_json = {workspace = true, optional = true}
-fs_cache_fetcher = {path = "../fs_cache_fetcher", optional = true}
-tokio = {workspace = true, optional = true}
+reqwest = { workspace = true, optional = true }
+googlesheets = { path = "../googlesheets", optional = true }
+dotenv = { version = "0.15.0", optional = true }
+divi = { path = "../divi", optional = true }
+playwright = { version = "0.0.20", optional = true }
+serde_json = { workspace = true, optional = true }
+fs_cache_fetcher = { path = "../fs_cache_fetcher", optional = true }
+tokio = { workspace = true, optional = true }
 slug = "0.1.5"
 regex = "1.10.6"
 once_cell = { version = "1.21.3", optional = true }
-futures = { version = "0.3", optional = true}
+futures = { version = "0.3", optional = true }
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }
-playwright = {version = "0.0.20"}
+playwright = { version = "0.0.20" }
 
 
 [features]
 default = []
-fs_cache_fetcher = ["dep:serde_json", "dep:playwright", "dep:divi", "dep:dotenv", "dep:googlesheets", "dep:reqwest", "dep:fs_cache_fetcher", "dep:tokio", "dep:once_cell", "dep:futures"]
+fs_cache_fetcher = [
+  "dep:serde_json",
+  "dep:playwright",
+  "dep:divi",
+  "dep:dotenv",
+  "dep:googlesheets",
+  "dep:reqwest",
+  "dep:fs_cache_fetcher",
+  "dep:tokio",
+  "dep:once_cell",
+  "dep:futures",
+]
