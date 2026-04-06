@@ -17,6 +17,19 @@ use serde::Serialize;
 async fn main() {
     dotenv::dotenv().ok();
 
+    let dir = project_root::get_project_root()
+        .unwrap()
+        .parent()
+        .unwrap()
+        .join("divicards-site")
+        .join("gen");
+    println!("target dir: {}", dir.display());
+
+    let json_dir = dir.join("json");
+    if !json_dir.exists() {
+        std::fs::create_dir_all(&json_dir).unwrap();
+    }
+
     // load and parse
     let spreadsheet = Spreadsheet::load().await.unwrap();
     let poe_data = PoeData::load().await.unwrap();
@@ -24,30 +37,18 @@ async fn main() {
     let records = parse_divcord_records(&spreadsheet, &poe_data);
 
     let card_element = DivinationCardElementData::load().await.unwrap();
-
     ensure_all_unique_rewards_handled(&card_element).unwrap();
-
-    // 1. Write data jsons
-    // Prepare paths
-    let dir = project_root::get_project_root()
-        .unwrap()
-        .parent()
-        .unwrap()
-        .join("divicards-site")
-        .join("gen");
-
-    println!("target dir: {}", dir.display());
+    write(
+        &card_element,
+        &json_dir,
+        DivinationCardElementData::filename(),
+    );
 
     if !dir.exists() {
         panic!(
             "divicards-site/gen dir does not exist at path: {}",
             dir.display()
         );
-    }
-
-    let json_dir = dir.join("json");
-    if !json_dir.exists() {
-        std::fs::create_dir_all(&json_dir).unwrap();
     }
 
     let mut sources_hashmap: HashMap<String, Source> = records
@@ -68,11 +69,6 @@ async fn main() {
     write(&sources_hashmap, &json_dir, "sources2.json");
     write(&records, &json_dir, "records.json");
     write(&poe_data, &json_dir, PoeData::filename());
-    write(
-        &card_element,
-        &json_dir,
-        DivinationCardElementData::filename(),
-    );
 
     match avatars::prepare_avatars_ts().await {
         Ok(avatars_string) => std::fs::write(dir.join("avatars.ts"), avatars_string).unwrap(),
