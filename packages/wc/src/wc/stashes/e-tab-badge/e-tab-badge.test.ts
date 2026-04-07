@@ -1,7 +1,7 @@
 import { fixture, expect, html } from "@open-wc/testing";
 import sinon from "sinon";
 import { TabBadgeElement } from "./e-tab-badge.js";
-import "./e-tab-badge";
+import "./e-tab-badge.js";
 
 describe("e-tab-badge", () => {
   let el: TabBadgeElement;

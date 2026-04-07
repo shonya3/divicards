@@ -1,7 +1,7 @@
 import { fixture, expect, html } from "@open-wc/testing";
 import { SampleTableElement } from "./e-sample-table.js";
 import sinon from "sinon";
-import "./e-sample-table";
+import "./e-sample-table.js";
 
 describe("<e-sample-table>", () => {
   let el: SampleTableElement;

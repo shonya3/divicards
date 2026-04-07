@@ -3,7 +3,7 @@ import sinon from "sinon";
 import { SampleCardElement } from "./e-sample-card.js";
 import { props } from "./data.js";
 import { sendKeys } from "@web/test-runner-commands";
-import "./e-sample-card";
+import "./e-sample-card.js";
 import type { Props } from "./e-sample-card.js";
 
 describe("<wc-sample-card>", () => {

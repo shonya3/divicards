@@ -1,7 +1,7 @@
 import { StashesViewElement } from "./e-stashes-view.js";
 import { fixture, expect, html } from "@open-wc/testing";
 import sinon from "sinon";
-import "./e-stashes-view";
+import "./e-stashes-view.js";
 import { MockStashLoader } from "./data.js";
 
 describe("e-tab-badge-group", async () => {

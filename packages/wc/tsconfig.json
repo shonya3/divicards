@@ -4,6 +4,7 @@
     "module": "NodeNext",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
+    "types": ["mocha"],
 
     "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
