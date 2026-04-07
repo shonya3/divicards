@@ -1,6 +1,6 @@
 import { html, TemplateResult } from "lit";
 import { cards } from "./data.js";
-import "./e-sample-table";
+import "./e-sample-table.js";
 
 export default {
   title: "Elements/e-sample-card/e-sample-table",

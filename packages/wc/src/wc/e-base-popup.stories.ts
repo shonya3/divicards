@@ -1,10 +1,10 @@
 import { html, TemplateResult } from "lit";
 import { Meta } from "@storybook/web-components-vite";
 import { BasePopupElement } from "./e-base-popup.js";
-import "./e-base-popup";
+import "./e-base-popup.js";
 import { cards } from "./e-sample-card/e-sample-table/data.js";
-import "./e-sample-card/e-sample-table/e-sample-table";
-import "./e-sample-card/e-form-export-sample/e-form-export-sample";
+import "./e-sample-card/e-sample-table/e-sample-table.js";
+import "./e-sample-card/e-form-export-sample/e-form-export-sample.js";
 
 const meta: Meta<BasePopupElement> = {
   title: "Elements/e-base-popup",

@@ -1,9 +1,9 @@
 import type { IStashLoader } from "@divicards/shared/IStashLoader.js";
 import { html, PropertyValues, nothing, LitElement, CSSResult, TemplateResult } from "lit";
-import "../e-help-tip";
-import "../e-league-select";
+import "../e-help-tip.js";
+import "../e-league-select.js";
 import "./e-tab-badge-group/e-tab-badge-group.js";
-import "./e-stash-tab-errors";
+import "./e-stash-tab-errors.js";
 import { property, state, query, customElement } from "lit/decorators.js";
 import { type League } from "@divicards/shared/types.js";
 import { ACTIVE_LEAGUE } from "@divicards/shared/lib.js";

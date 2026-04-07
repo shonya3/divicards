@@ -18,6 +18,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "useDefineForClassFields": false,
+    "rootDir": "./src",
     "outDir": "./dist",
     "sourceMap": true,
     "declaration": true,

@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/web-components-vite";
 import { html, TemplateResult } from "lit";
 import { StashTabErrorsElement } from "./e-stash-tab-errors.js";
-import "./e-stash-tab-errors";
+import "./e-stash-tab-errors.js";
 
 const meta: Meta<StashTabErrorsElement> = {
   title: "Elements/stashes/e-stash-tab-errors",

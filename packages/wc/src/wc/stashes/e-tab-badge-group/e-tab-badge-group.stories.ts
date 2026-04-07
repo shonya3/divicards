@@ -1,5 +1,5 @@
 import { html, TemplateResult } from "lit";
-import "./e-tab-badge-group";
+import "./e-tab-badge-group.js";
 import { league, stashes } from "../data.js";
 
 export default {

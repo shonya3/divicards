@@ -1,5 +1,5 @@
 import { Meta } from "@storybook/web-components-vite";
-import "./e-stash-tab-container";
+import "./e-stash-tab-container.js";
 import { html, TemplateResult } from "lit";
 import { StashTabContainerElement } from "./e-stash-tab-container.js";
 //@ts-ignore

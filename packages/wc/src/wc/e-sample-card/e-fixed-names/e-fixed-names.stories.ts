@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/web-components-vite";
 import { FixedNamesElement } from "./e-fixed-names.js";
-import "./e-fixed-names";
+import "./e-fixed-names.js";
 import { html, TemplateResult } from "lit";
 import { fixedNames } from "./data.js";
 import { FixedName } from "@divicards/shared/types.js";

@@ -2,7 +2,7 @@ import { OrderTriangleElement, Size } from "./e-order-triangle.js";
 import { Meta } from "@storybook/web-components-vite";
 import { html, TemplateResult } from "lit";
 import { Order } from "@divicards/shared/types.js";
-import "./e-order-triangle";
+import "./e-order-triangle.js";
 
 const meta: Meta<OrderTriangleElement> = {
   title: "Elements/e-sample-card/e-sample-table/e-order-triangle",

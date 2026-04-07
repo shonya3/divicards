@@ -1,10 +1,10 @@
 import { html, LitElement, CSSResult, TemplateResult } from "lit";
 import { DefineComponent } from "vue";
 import { LeagueSelectElement } from "../e-league-select.js";
-import "../e-league-select";
+import "../e-league-select.js";
 import { BasePopupElement } from "../e-base-popup.js";
-import "./e-fixed-names/e-fixed-names";
-import "./e-not-cards/e-not-cards";
+import "./e-fixed-names/e-fixed-names.js";
+import "./e-not-cards/e-not-cards.js";
 import {
   DivinationCardRecord,
   type DivinationCardsSample,
@@ -21,12 +21,12 @@ import "@shoelace-style/shoelace/dist/components/icon-button/icon-button.js";
 import SlRange from "@shoelace-style/shoelace/dist/components/range/range.js";
 import "@shoelace-style/shoelace/dist/components/checkbox/checkbox.js";
 import "@shoelace-style/shoelace/dist/components/input/input.js";
-import "./e-sample-table/e-sample-table";
-import "../e-base-popup";
+import "./e-sample-table/e-sample-table.js";
+import "../e-base-popup.js";
 import { SampleTableElement } from "./e-sample-table/e-sample-table.js";
 import { LeagueChangeEvent } from "../events/change/league.js";
-import "./e-form-export-sample/e-form-export-sample";
-import "../e-base-popup";
+import "./e-form-export-sample/e-form-export-sample.js";
+import "../e-base-popup.js";
 import {
   type ExportSampleTo,
   PresubmitExportFormEvent,

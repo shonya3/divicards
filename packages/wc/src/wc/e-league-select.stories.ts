@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/web-components-vite";
 import { LeagueSelectElement } from "./e-league-select.js";
-import "./e-league-select";
+import "./e-league-select.js";
 import { html, TemplateResult } from "lit";
 import { League, tradeLeagues } from "@divicards/shared/types.js";
 

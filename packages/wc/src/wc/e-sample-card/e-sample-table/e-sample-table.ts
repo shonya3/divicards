@@ -7,7 +7,7 @@ import "@shoelace-style/shoelace/dist/components/range/range.js";
 import "poe-custom-elements/item-card.js";
 import { type Column, DivinationCardRecord, type Order } from "@divicards/shared/types.js";
 import { styles } from "./e-sample-table.styles.js";
-import "./e-order-triangle";
+import "./e-order-triangle.js";
 import { ChangeColumnOrder, ChangeMinPrice } from "./events.js";
 
 const { format } = new Intl.NumberFormat("ru", { maximumFractionDigits: 0 });

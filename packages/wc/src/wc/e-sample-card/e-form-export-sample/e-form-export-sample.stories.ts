@@ -1,6 +1,6 @@
 import { html, TemplateResult } from "lit";
 import { FormExportSampleElement } from "./e-form-export-sample.js";
-import "./e-form-export-sample";
+import "./e-form-export-sample.js";
 import { Meta } from "@storybook/web-components-vite";
 
 const meta: Meta<FormExportSampleElement> = {
