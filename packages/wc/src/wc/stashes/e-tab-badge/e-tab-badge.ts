@@ -7,6 +7,10 @@ import { styles } from "./e-tab-badge.styles.js";
 import { TabSelectEvent, TabClickEvent } from "./events.js";
 
 @customElement("e-tab-badge")
+/**
+ * @fires stashes__tab-click - When element is clicked and as="button"
+ * @fires stashes__tab-select - When checkbox is changed
+ */
 export class TabBadgeElement extends LitElement {
   static styles: Array<CSSResult> = [styles];
 
@@ -18,6 +22,17 @@ export class TabBadgeElement extends LitElement {
   @property() as: "button" | "checkbox" = "button";
 
   @state() tabState!: NoItemsTab;
+
+  constructor() {
+    super();
+    this.addEventListener("click", this.#handle_host_click);
+  }
+
+  #handle_host_click = () => {
+    if (this.as === "button") {
+      this.#emit_tab_click();
+    }
+  };
 
   protected override render(): TemplateResult {
     const cssProps = styleMap({
