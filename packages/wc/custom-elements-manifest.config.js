@@ -9,7 +9,7 @@ import { customElementVuejsPlugin } from "custom-element-vuejs-integration";
 const plugins = [
   {
     name: "my-custom-plugin",
-    analyzePhase({ ts, node, moduleDoc, context }) {},
+    analyzePhase() {},
     collectPhase(params) {
       console.log(params.context);
     },
