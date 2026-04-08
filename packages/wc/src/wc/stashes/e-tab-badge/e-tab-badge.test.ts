@@ -1,12 +1,13 @@
 import { test, expect, vi, describe, beforeEach } from "vitest";
 import "./e-tab-badge.js";
-import type { TabBadgeElement } from "./e-tab-badge.js";
 import { TabClickEvent, TabSelectEvent } from "./events.js";
 
 describe("<e-tab-badge>", () => {
-  let el: TabBadgeElement;
+  let el: HTMLElementTagNameMap["e-tab-badge"];
 
   beforeEach(async () => {
+    await customElements.whenDefined("e-tab-badge");
+    document.body.innerHTML = "";
     el = document.createElement("e-tab-badge");
     el.tab = {
       id: "Test id",
@@ -17,10 +18,6 @@ describe("<e-tab-badge>", () => {
     };
     document.body.append(el);
     await el.updateComplete;
-
-    return () => {
-      el.remove();
-    };
   });
 
   test("should render a component", () => {
