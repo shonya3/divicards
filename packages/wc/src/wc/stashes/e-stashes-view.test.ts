@@ -1,37 +1,59 @@
-import { StashesViewElement } from "./e-stashes-view.js";
-import { fixture, expect, html } from "@open-wc/testing";
-import sinon from "sinon";
+import { test, expect, vi, describe, beforeEach } from "vitest";
+import { page } from "vitest/browser";
 import "./e-stashes-view.js";
 import { MockStashLoader } from "./data.js";
 
-describe("e-tab-badge-group", async () => {
-  let el: StashesViewElement;
+describe("<e-stashes-view>", () => {
+  let el: HTMLElementTagNameMap["e-stashes-view"];
+
   beforeEach(async () => {
-    el = await fixture(
-      html`<e-stashes-view .stashLoader=${new MockStashLoader()}></e-stashes-view>`,
-    );
+    await customElements.whenDefined("e-stashes-view");
+    document.body.innerHTML = "";
+    el = document.createElement("e-stashes-view");
+    el.stashLoader = new MockStashLoader();
+    document.body.append(el);
+
+    await el.updateComplete;
   });
 
-  it("should render a component", () => {
-    expect(el).to.exist;
+  test("should render a component", () => {
+    expect(document.querySelector("e-stashes-view")).to.not.be.null;
   });
 
-  it("should emit sample-from-tab", async () => {
-    await el.updateComplete;
-    const spy = sinon.spy();
-    el.addEventListener("sample-from-tab", spy);
-    el.stashesButton.click();
-    await el.updateComplete;
+  test("should decrement loads available on stash tab loaded", async () => {
+    const loadStashBtn = page.getByRole("button", { name: "Load Stash" });
+    await expect.element(loadStashBtn).toBeVisible();
+    await loadStashBtn.click();
 
-    const group = el.shadowRoot!.querySelector("e-tab-badge-group")!;
-    await group.updateComplete;
-    await group.updateComplete;
-    const firstTabBadge = group.shadowRoot!.querySelector("e-tab-badge")!;
-    firstTabBadge.shadowRoot!.querySelector("input")!.click();
-    await el.updateComplete;
-    el.getDataButton.click();
-    await el.updateComplete;
+    const loadsAvailableInitial = page.getByText("Loads available:30");
+    await expect.element(loadsAvailableInitial).toBeVisible();
 
-    expect(spy).to.be.called;
+    const stashTab = page.getByRole("listitem").getByRole("button").first();
+    await stashTab.click();
+
+    const extractCardsBtn = page.getByRole("button", { name: "Extract cards sample" });
+    await expect.element(extractCardsBtn).toBeVisible();
+    await extractCardsBtn.click();
+
+    const loadsAvailable = page.getByText("Loads available:29");
+    await expect.element(loadsAvailable).toBeVisible();
+  });
+
+  test("should load stash tabs and emit stashes__extract-cards when Extract cards sample button clicked", async () => {
+    const loadStashBtn = page.getByRole("button", { name: "Load Stash" });
+    await expect.element(loadStashBtn).toBeVisible();
+    await loadStashBtn.click();
+
+    const stashTab = page.getByRole("listitem").getByRole("button").first();
+    await stashTab.click();
+
+    const extractCardsBtn = page.getByRole("button", { name: "Extract cards sample" });
+    await expect.element(extractCardsBtn).toBeVisible();
+
+    const spy = vi.fn();
+    el.addEventListener("stashes__extract-cards", spy);
+    await extractCardsBtn.click();
+
+    expect(spy).toHaveBeenCalledOnce();
   });
 });

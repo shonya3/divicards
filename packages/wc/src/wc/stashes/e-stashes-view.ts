@@ -45,6 +45,9 @@ export interface StashesViewProps {
 export type DownloadAs = (typeof DOWNLOAD_AS_VARIANTS)[number];
 const DOWNLOAD_AS_VARIANTS = ["divination-cards-sample", "general-tab"] as const;
 
+/**
+ * @fires stashes__extract-cards - When "Extract cards sample" btn is clicked
+ */
 @customElement("e-stashes-view")
 export class StashesViewElement extends LitElement {
   static override styles: Array<CSSResult> = [styles];
@@ -67,14 +70,15 @@ export class StashesViewElement extends LitElement {
   @state() hoveredErrorTabId: string | null = null;
   @state() downloadedStashTabs: Array<TabWithItems> = [];
   @state() opened_tab: NoItemsTab | null = null;
-  /** Indicator whether cards was just extracted. */
   @state() cardsJustExtracted = false;
   private stashTabTask = new Task(this, {
     task: async ([tab]) => {
       if (!tab) {
         return null;
       }
-      return await this.#loadSingleTabContent(tab.id, this.league, this.stashLoader.tab);
+      return await this.#loadSingleTabContent(tab.id, this.league, () =>
+        this.stashLoader.tab(tab.id, this.league),
+      );
     },
     args: () => [this.opened_tab],
   });
