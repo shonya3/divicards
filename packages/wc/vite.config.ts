@@ -11,8 +11,5 @@ export default defineConfig({
       instances: [{ browser: "chromium" }],
     },
     setupFiles: ["./src/test/setup.ts"],
-    api: {
-      port: 51234,
-    },
   },
 });
