@@ -166,7 +166,11 @@ export class TabBadgeGroupElement extends LitElement {
   }
   #handle_tab_select({ tab, selected }: TabSelectEvent): void {
     const { id, name } = tab;
-    selected ? this.selected_tabs.set(id, { id, name }) : this.selected_tabs.delete(id);
+    if (selected) {
+      this.selected_tabs.set(id, { id, name });
+    } else {
+      this.selected_tabs.delete(id);
+    }
     this.selected_tabs = new Map(this.selected_tabs);
     this.dispatchEvent(new SelectedTabsChangeEvent(this.selected_tabs));
   }

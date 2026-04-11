@@ -15,10 +15,6 @@ describe("<e-sample-card>", () => {
     await el.updateComplete;
   });
 
-  test("should render a component", () => {
-    expect(document.querySelector("e-sample-card")).to.not.be.null;
-  });
-
   test("should emit sample__change:selected on checkbox click", async () => {
     const checkbox = page.getByRole("checkbox");
     await expect.element(checkbox).toBeVisible();

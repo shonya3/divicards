@@ -15,10 +15,6 @@ describe("<e-sample-table>", () => {
     await el.updateComplete;
   });
 
-  test("should render a component", () => {
-    expect(document.querySelector("e-sample-table")).to.not.be.null;
-  });
-
   test("should emit sample-table__change:min_price on slider change", async () => {
     const spy = vi.fn();
     const minPrice = 100;
@@ -54,10 +50,10 @@ describe("<e-sample-table>", () => {
 
     const table = page.getByRole("table");
     await expect.element(table).toBeVisible();
-    
+
     const triangle = table.getByRole("button").first();
     await expect.element(triangle).toBeVisible();
-    
+
     await userEvent.click(triangle);
 
     expect(spy).toHaveBeenCalledOnce();

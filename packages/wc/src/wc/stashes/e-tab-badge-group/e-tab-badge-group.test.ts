@@ -18,7 +18,6 @@ describe("<e-tab-badge-group>", () => {
   });
 
   test("should render element with provided stash tabs", () => {
-    expect(document.querySelector("e-tab-badge-group")).to.not.be.null;
     const badges = el.shadowRoot!.querySelectorAll("e-tab-badge");
     expect(badges.length).to.equal(2);
   });

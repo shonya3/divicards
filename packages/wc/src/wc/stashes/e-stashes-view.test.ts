@@ -16,10 +16,6 @@ describe("<e-stashes-view>", () => {
     await el.updateComplete;
   });
 
-  test("should render a component", () => {
-    expect(document.querySelector("e-stashes-view")).to.not.be.null;
-  });
-
   test("should decrement loads available on stash tab loaded", async () => {
     const loadStashBtn = page.getByRole("button", { name: "Load Stash" });
     await expect.element(loadStashBtn).toBeVisible();

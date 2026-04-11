@@ -21,10 +21,6 @@ describe("<e-tab-badge>", () => {
     await el.updateComplete;
   });
 
-  test("should render a component", () => {
-    expect(document.querySelector("e-tab-badge")).to.not.be.null;
-  });
-
   test("should emit stashes__tab-click on element click when as=button", async () => {
     const spy = vi.fn();
 

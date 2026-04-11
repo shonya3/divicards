@@ -103,7 +103,9 @@ export class PaginationElement extends LitElement {
     this.page++;
   }
   decrease_page(): void {
-    this.page > 1 && this.page--;
+    if (this.page > 1) {
+      this.page--;
+    }
   }
 
   last_page_number(): number {
