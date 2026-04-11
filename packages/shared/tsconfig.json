@@ -37,6 +37,7 @@
     "emitDecoratorMetadata": true,
     "useDefineForClassFields": false,
     "outDir": "./dist",
+    "rootDir": "./src",
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
