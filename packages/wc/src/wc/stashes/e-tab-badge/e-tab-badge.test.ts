@@ -1,4 +1,5 @@
 import { test, expect, vi, describe, beforeEach } from "vitest";
+import { page, userEvent } from "vitest/browser";
 import "./e-tab-badge.js";
 import { TabClickEvent, TabSelectEvent } from "./events.js";
 
@@ -32,7 +33,7 @@ describe("<e-tab-badge>", () => {
       spy();
     });
 
-    el.click();
+    await userEvent.click(el);
 
     expect(spy).toHaveBeenCalledOnce();
   });
@@ -44,7 +45,7 @@ describe("<e-tab-badge>", () => {
     const clickHandler = vi.fn();
     el.addEventListener("stashes__tab-click", clickHandler);
 
-    el.click();
+    await userEvent.click(el);
 
     expect(clickHandler).not.toHaveBeenCalled();
   });
@@ -59,7 +60,8 @@ describe("<e-tab-badge>", () => {
       spy();
     });
 
-    el.checkbox.click();
+    const checkbox = page.getByRole("checkbox");
+    await userEvent.click(checkbox);
 
     expect(spy).toHaveBeenCalledOnce();
   });

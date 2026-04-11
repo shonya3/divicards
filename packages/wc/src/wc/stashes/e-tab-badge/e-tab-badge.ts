@@ -23,16 +23,17 @@ export class TabBadgeElement extends LitElement {
 
   @state() tabState!: NoItemsTab;
 
-  constructor() {
-    super();
-    this.addEventListener("click", this.#handle_host_click);
-  }
-
-  #handle_host_click = () => {
-    if (this.as === "button") {
-      this.#emit_tab_click();
+  protected willUpdate(changedProperties: Map<string, unknown>): void {
+    if (changedProperties.has("as")) {
+      if (this.as === "button") {
+        this.setAttribute("role", "button");
+        this.setAttribute("tabindex", "0");
+      } else {
+        this.removeAttribute("role");
+        this.removeAttribute("tabindex");
+      }
     }
-  };
+  }
 
   protected override render(): TemplateResult {
     const cssProps = styleMap({

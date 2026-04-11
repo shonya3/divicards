@@ -1,5 +1,5 @@
 import { test, expect, vi, describe, beforeEach } from "vitest";
-import { page } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 import "./e-stashes-view.js";
 import { MockStashLoader } from "./data.js";
 
@@ -23,17 +23,17 @@ describe("<e-stashes-view>", () => {
   test("should decrement loads available on stash tab loaded", async () => {
     const loadStashBtn = page.getByRole("button", { name: "Load Stash" });
     await expect.element(loadStashBtn).toBeVisible();
-    await loadStashBtn.click();
+    await userEvent.click(loadStashBtn);
 
     const loadsAvailableInitial = page.getByText("Loads available:30");
     await expect.element(loadsAvailableInitial).toBeVisible();
 
     const stashTab = page.getByRole("listitem").getByRole("button").first();
-    await stashTab.click();
+    await userEvent.click(stashTab);
 
     const extractCardsBtn = page.getByRole("button", { name: "Extract cards sample" });
     await expect.element(extractCardsBtn).toBeVisible();
-    await extractCardsBtn.click();
+    await userEvent.click(extractCardsBtn);
 
     const loadsAvailable = page.getByText("Loads available:29");
     await expect.element(loadsAvailable).toBeVisible();
@@ -42,17 +42,17 @@ describe("<e-stashes-view>", () => {
   test("should load stash tabs and emit stashes__extract-cards when Extract cards sample button clicked", async () => {
     const loadStashBtn = page.getByRole("button", { name: "Load Stash" });
     await expect.element(loadStashBtn).toBeVisible();
-    await loadStashBtn.click();
+    await userEvent.click(loadStashBtn);
 
     const stashTab = page.getByRole("listitem").getByRole("button").first();
-    await stashTab.click();
+    await userEvent.click(stashTab);
 
     const extractCardsBtn = page.getByRole("button", { name: "Extract cards sample" });
     await expect.element(extractCardsBtn).toBeVisible();
 
     const spy = vi.fn();
     el.addEventListener("stashes__extract-cards", spy);
-    await extractCardsBtn.click();
+    await userEvent.click(extractCardsBtn);
 
     expect(spy).toHaveBeenCalledOnce();
   });

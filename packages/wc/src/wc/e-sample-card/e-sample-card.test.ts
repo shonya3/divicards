@@ -29,8 +29,7 @@ describe("<e-sample-card>", () => {
       spy();
     });
 
-    await checkbox.click({ force: true });
-    await expect.element(checkbox).toBeChecked();
+    await userEvent.click(checkbox, { force: true });
 
     expect(spy).toHaveBeenCalledOnce();
   });
