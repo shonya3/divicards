@@ -56,6 +56,16 @@ export type Props = {
 
 const { format } = new Intl.NumberFormat("ru", { maximumFractionDigits: 0 });
 
+/**
+ * @fires sample__change:selected - When clicking checkbox
+ * @fires sample__delete - When clicking X("delete sample") button
+ * @fires sample__change:minimum_card_price - When slider value changes
+ * @fires sample__change:filename - When filename input changes
+ * @fires sample__save-to-file-click - When clicking Save to file button
+ * @fires sample__google-sheets-click - When clicking Google Sheets button
+ * @fires sample__submit-export-sample - When export form is submitted
+ * @fires change:league - When league selection changes
+ */
 @customElement("e-sample-card")
 export class SampleCardElement extends LitElement {
   static override styles: Array<CSSResult> = [styles];
@@ -141,6 +151,7 @@ export class SampleCardElement extends LitElement {
           <span class="drag-handle-text">Drag to export</span>
         </div>
         <sl-icon-button
+          label="delete sample"
           @click=${this.#emit_delete_this_sample}
           class="btn-delete"
           name="x-lg"
@@ -182,6 +193,7 @@ export class SampleCardElement extends LitElement {
         />
       </svg>
       <sl-range
+        .label=${`min card price in chaos`}
         id="minimum-card-price-slider"
         class="slider"
         name=""

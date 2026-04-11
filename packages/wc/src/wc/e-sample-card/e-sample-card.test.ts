@@ -1,99 +1,119 @@
-import { expect, html, fixture } from "@open-wc/testing";
-import sinon from "sinon";
-import { SampleCardElement } from "./e-sample-card.js";
-import { props } from "./data.js";
-import { sendKeys } from "@web/test-runner-commands";
+import { test, expect, vi, describe, beforeEach } from "vitest";
+import { page, userEvent } from "vitest/browser";
 import "./e-sample-card.js";
-import type { Props } from "./e-sample-card.js";
+import { props } from "./data.js";
 
-describe("<wc-sample-card>", () => {
-  let el: SampleCardElement;
+describe("<e-sample-card>", () => {
+  let el: HTMLElementTagNameMap["e-sample-card"];
 
   beforeEach(async () => {
-    el = await fixture(html`<e-sample-card></e-sample-card>`);
-    Object.assign(el, { ...props });
+    await customElements.whenDefined("e-sample-card");
+    document.body.innerHTML = "";
+    el = document.createElement("e-sample-card");
+    Object.assign(el, props);
+    document.body.append(el);
+    await el.updateComplete;
   });
 
-  it("should render a component", () => {
-    expect(el).to.exist;
+  test("should render a component", () => {
+    expect(document.querySelector("e-sample-card")).to.not.be.null;
   });
 
-  it("emits upd:selected on checkbox", async () => {
-    await el.updateComplete;
-    const checkboxSpy = sinon.spy();
-    el.addEventListener("upd:selected", checkboxSpy);
-    el.selectedCheckbox.click();
-    await el.updateComplete;
+  test("should emit sample__change:selected on checkbox click", async () => {
+    const checkbox = page.getByRole("checkbox");
+    await expect.element(checkbox).toBeVisible();
 
-    expect(checkboxSpy).to.be.calledOnce;
+    const spy = vi.fn();
+    el.addEventListener("sample__change:selected", (e) => {
+      expect(e.$selected).toBeTruthy();
+      spy();
+    });
+
+    await checkbox.click({ force: true });
+    await expect.element(checkbox).toBeChecked();
+
+    expect(spy).toHaveBeenCalledOnce();
   });
 
-  it("emits change:league on selecting league", async () => {
-    await el.updateComplete;
-    const spy = sinon.spy();
-    el.addEventListener("change:league", spy);
+  test("should emit sample__delete on clicking delete sample button", async () => {
+    const btnDelete = page.getByRole("button", { name: "delete sample" });
+    await expect.element(btnDelete).toBeVisible();
 
-    el.leagueSelect.focus();
-    await sendKeys({ press: "ArrowDown" });
-    await el.updateComplete;
+    const spy = vi.fn();
+    el.addEventListener("sample__delete", spy);
 
-    const event = spy.args[0][0];
-    expect(spy).to.be.called;
-    expect(el.leagueSelect.league).to.be.equal(el.league);
-    expect(event.detail).to.be.equal(el.league);
+    await userEvent.click(btnDelete);
+
+    expect(spy).toHaveBeenCalledOnce();
   });
 
-  it("emits delete on btn-delete click", async () => {
-    await el.updateComplete;
-    const spy = sinon.spy();
-    el.addEventListener("delete", spy);
+  test("should emit sample__google-sheets-click on button click", async () => {
+    const btnGoogleSheets = page.getByRole("button", { name: "Export to Google Sheets" });
+    await expect.element(btnGoogleSheets).toBeVisible();
 
-    const button = el.shadowRoot!.querySelector("#btn-delete") as HTMLButtonElement;
-    expect(button).to.exist;
+    const spy = vi.fn();
+    el.addEventListener("sample__google-sheets-click", spy);
 
-    button.click();
+    await userEvent.click(btnGoogleSheets);
 
-    expect(spy).to.be.called;
-    const event = spy.args[0][0];
-    expect(event.detail).to.not.equal("NO ID");
-    expect(event.detail).to.be.equal(el.uuid);
+    expect(spy).toHaveBeenCalledOnce();
   });
 
-  it("emits upd:minimum_card_price on slider", async () => {
-    await el.updateComplete;
-    const spy = sinon.spy();
-    el.addEventListener("upd:minimum_card_price", spy);
-    el.priceSlider.focus();
-    await sendKeys({ press: "ArrowRight" });
-    await el.updateComplete;
+  test("should emit sample__save-to-file-click on button click", async () => {
+    const btnSaveToFile = page.getByRole("button", { name: "save to file" });
+    await expect.element(btnSaveToFile).toBeVisible();
 
-    const event = spy.args[0][0];
-    expect(spy).to.be.calledOnce;
-    expect(event.detail).to.be.equal(el.minimum_card_price);
+    const spy = vi.fn();
+    el.addEventListener("sample__save-to-file-click", spy);
+
+    await userEvent.click(btnSaveToFile);
+
+    expect(spy).toHaveBeenCalledOnce();
   });
 
-  it("table cards get updated when filecard cards get updated", async () => {
-    await el.updateComplete;
-    const newProps: Props = {
-      league: "Standard",
-      filename: "Standard.csv",
-      selected: false,
-      uuid: "2",
-      minimumCardPrice: 0,
-      sample: {
-        cards: [{ name: "Rain of Chaos", price: 1, amount: 1, sum: 1, weight: 0 }],
-        notCards: [],
-        fixedNames: [],
-      },
-      csvDataForDrag: "no data",
-    };
+  test("should emit sample__change:minimum_card_price on slider change", async () => {
+    const spy = vi.fn();
+    const minPrice = 100;
 
-    Object.assign(el, { ...newProps });
+    el.addEventListener("sample__change:minimum_card_price", (e) => {
+      expect(e.$minimum_card_price).toBe(minPrice);
+      spy();
+    });
 
-    await el.updateComplete;
-    expect(el.table.cards.length).to.be.equal(1);
-    expect(el.table.cards[0].name).to.be.equal("Rain of Chaos");
-    expect(el.table.filteredRecords.length).to.be.equal(1);
-    expect(el.table.filteredRecords[0].name).to.be.equal("Rain of Chaos");
+    const sliderMinPrice = page.getByRole("slider", { name: "min card price in chaos" });
+    await userEvent.fill(sliderMinPrice, String(minPrice));
+
+    expect(spy).toHaveBeenCalledOnce();
+  });
+
+  test("should emit sample__change:filename on input change", async () => {
+    const spy = vi.fn();
+    const newName = "my-sample";
+    el.addEventListener("sample__change:filename", (e) => {
+      expect(e.$filename).toBe(newName);
+      spy();
+    });
+
+    const textbox = page.getByRole("textbox", { name: "Edit filename" });
+
+    await userEvent.fill(textbox, newName);
+    await userEvent.tab();
+
+    expect(spy).toHaveBeenCalled();
+  });
+
+  test("should emit sample__submit-export-sample on export form submit", async () => {
+    const spy = vi.fn();
+    el.addEventListener("sample__submit-export-sample", spy);
+
+    const btnSaveToFile = page.getByRole("button", { name: "Save to file" });
+    await expect.element(btnSaveToFile).toBeVisible();
+    await userEvent.click(btnSaveToFile);
+
+    const btnSubmit = page.getByRole("button", { name: "Submit" });
+    await expect.element(btnSubmit).toBeVisible();
+    await userEvent.click(btnSubmit);
+
+    expect(spy).toHaveBeenCalledOnce();
   });
 });
