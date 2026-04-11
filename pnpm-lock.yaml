@@ -123,14 +123,11 @@ importers:
         specifier: ^25
         version: 25.6.0
       '@vitest/browser':
-        specifier: ^4.1.2
+        specifier: ^4.1
         version: 4.1.2(vite@8.0.8(@types/node@25.6.0))(vitest@4.1.2)
       '@vitest/browser-playwright':
-        specifier: ^4.1.2
+        specifier: ^4.1
         version: 4.1.2(playwright@1.59.1)(vite@8.0.8(@types/node@25.6.0))(vitest@4.1.2)
-      '@vitest/spy':
-        specifier: ^4.1.2
-        version: 4.1.2
       custom-element-vuejs-integration:
         specifier: ^1.4
         version: 1.4.0(prettier@3.3.2)
