@@ -11,7 +11,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "lint": "lit-analyzer --strict --rules.no-invalid-css off && tsc --noEmit",
+    "lint": "oxlint && lit-analyzer --strict --rules.no-invalid-css off && tsc --noEmit",
     "build": "tsc",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
