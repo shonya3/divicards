@@ -12,6 +12,10 @@ import { ChangeColumnOrder, ChangeMinPrice } from "./events.js";
 
 const { format } = new Intl.NumberFormat("ru", { maximumFractionDigits: 0 });
 
+/**
+ * @fires sample-table__change:min_price - When min price slider changes
+ * @fires sample-table__change:column-order - When column order triangle is clicked
+ */
 @customElement("e-sample-table")
 export class SampleTableElement extends LitElement {
   static override styles: Array<CSSResult> = [styles];

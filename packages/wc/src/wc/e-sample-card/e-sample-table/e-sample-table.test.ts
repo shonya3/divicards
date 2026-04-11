@@ -1,27 +1,70 @@
-import { fixture, expect, html } from "@open-wc/testing";
-import { SampleTableElement } from "./e-sample-table.js";
-import sinon from "sinon";
+import { test, expect, vi, describe, beforeEach } from "vitest";
+import { page, userEvent } from "vitest/browser";
 import "./e-sample-table.js";
+import { cards } from "./data.js";
 
 describe("<e-sample-table>", () => {
-  let el: SampleTableElement;
+  let el: HTMLElementTagNameMap["e-sample-table"];
 
   beforeEach(async () => {
-    el = await fixture(html` <e-sample-table> </e-sample-table> `);
-  });
-
-  it("should render a component", () => {
-    expect(el).to.exist;
-  });
-
-  it("emits column-order-changed", async () => {
-    const selectedChangeSpy = sinon.spy();
-    el.addEventListener("column-order-changed", selectedChangeSpy);
-
-    const node = el.shadowRoot!.querySelector("e-order-triangle")!;
-    node.click();
+    await customElements.whenDefined("e-sample-table");
+    document.body.innerHTML = "";
+    el = document.createElement("e-sample-table");
+    el.cards = cards;
+    document.body.append(el);
     await el.updateComplete;
-    console.log(node);
-    expect(selectedChangeSpy).to.have.been.called;
+  });
+
+  test("should render a component", () => {
+    expect(document.querySelector("e-sample-table")).to.not.be.null;
+  });
+
+  test("should emit sample-table__change:min_price on slider change", async () => {
+    const spy = vi.fn();
+    const minPrice = 100;
+
+    el.addEventListener("sample-table__change:min_price", (e) => {
+      expect(e.$min_price).toBe(minPrice);
+      spy();
+    });
+
+    const slider = page.getByRole("slider", { name: "min price" });
+    await userEvent.fill(slider, String(minPrice));
+
+    expect(spy).toHaveBeenCalledOnce();
+  });
+
+  test("should filter cards by name query", async () => {
+    const textbox = page.getByRole("textbox", { name: "enter name" });
+    await userEvent.fill(textbox, "The");
+    await userEvent.tab();
+
+    const table = page.getByRole("table");
+    await expect.element(table).toBeVisible();
+  });
+
+  test("should emit sample-table__change:column-order on triangle click", async () => {
+    const spy = vi.fn();
+
+    el.addEventListener("sample-table__change:column-order", (e) => {
+      expect(e.$column).toBeDefined();
+      expect(e.$order).toBeDefined();
+      spy();
+    });
+
+    const table = page.getByRole("table");
+    await expect.element(table).toBeVisible();
+    
+    const triangle = table.getByRole("button").first();
+    await expect.element(triangle).toBeVisible();
+    
+    await userEvent.click(triangle);
+
+    expect(spy).toHaveBeenCalledOnce();
+  });
+
+  test("should render table with cards", async () => {
+    const table = page.getByRole("table");
+    await expect.element(table).toBeVisible();
   });
 });

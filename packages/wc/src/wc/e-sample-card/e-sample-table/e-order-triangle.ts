@@ -42,7 +42,7 @@ export class OrderTriangleElement extends LitElement {
 
     const classes = classMap({ "order--active": this.active, order: true });
 
-    return html`<div style=${styles} class=${classes} title="Order"></div>`;
+    return html`<div style=${styles} class=${classes} title="Order" role="button" tabindex="0"></div>`;
   }
 }
 
