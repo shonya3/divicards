@@ -2,8 +2,6 @@ import { setBasePath } from "@shoelace-style/shoelace";
 import SlAlrt from "@shoelace-style/shoelace/dist/components/alert/alert.component.js";
 import SlButton from "@shoelace-style/shoelace/dist/components/button/button.component.js";
 import SlIcon from "@shoelace-style/shoelace/dist/components/icon/icon.component.js";
-import "@shoelace-style/shoelace/dist/themes/dark.css";
-import "@shoelace-style/shoelace/dist/themes/light.css";
 
 import "@divicards/wc/e-base-popup.js";
 import "@divicards/wc/e-google-auth.js";

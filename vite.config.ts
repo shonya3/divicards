@@ -23,7 +23,7 @@ export default defineConfig({
     ignorePatterns: ["crates/**/*.js", "**/.storybook/**"],
   },
   fmt: {
-    ignorePatterns: ["dist/**"],
+    ignorePatterns: ["**/dist/**", "**/gen/**"],
     printWidth: 120,
     sortImports: {
       sortSideEffects: true,
