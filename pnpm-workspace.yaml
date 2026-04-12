@@ -1,3 +1,24 @@
 packages:
   # all packages in direct subdirs of packages/
   - "packages/*"
+catalog:
+  "@types/node": ^25
+  vite-plugin-static-copy: ^4
+  typescript: ^6.0
+  "@shoelace-style/shoelace": ^2.20
+  poe-custom-elements: latest
+  lit: ^3
+  vue: ^3
+  vite: npm:@voidzero-dev/vite-plus-core@latest
+  vitest: npm:@voidzero-dev/vite-plus-test@latest
+  vite-plus: latest
+overrides:
+  vite: "catalog:"
+  vitest: "catalog:"
+peerDependencyRules:
+  allowAny:
+    - vite
+    - vitest
+  allowedVersions:
+    vite: "*"
+    vitest: "*"

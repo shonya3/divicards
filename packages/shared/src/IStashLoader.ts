@@ -51,7 +51,7 @@ export class StashLoader implements IDefaultStashLoader {
     this.#token = token;
   }
 
-  async tab(league: string, tabId: string, subtabId?: string): Promise<TabWithItems> {
+  async tab(league: League, tabId: string, subtabId?: string): Promise<TabWithItems> {
     let url = `${StashLoader.API_URL}/stash/${league}/${tabId}`;
     if (subtabId) {
       url = `${url}/${subtabId}`;
@@ -72,7 +72,7 @@ export class StashLoader implements IDefaultStashLoader {
     return body.stash;
   }
 
-  async tabs(league: string): Promise<NoItemsTab[]> {
+  async tabs(league: League): Promise<NoItemsTab[]> {
     const url = `${StashLoader.API_URL}/stash/${league}`;
     const response = await fetch(url, {
       headers: this.#authHeaders(),

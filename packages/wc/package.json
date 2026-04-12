@@ -10,43 +10,40 @@
     "./*": "./dist/wc/*"
   },
   "scripts": {
-    "dev": "vite",
-    "lint": "oxlint && lit-analyzer --strict --rules.no-invalid-css off && tsc --noEmit",
+    "dev": "vp dev",
+    "lint": "vp lint && lit-analyzer --strict --rules.no-invalid-css off && tsc --noEmit",
     "build": "tsc",
-    "preview": "vite preview",
+    "preview": "vp preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "vitest run",
-    "test:headless": "vitest run --browser.headless",
-    "test:watch": "vitest",
+    "test": "vp test run",
+    "test:headless": "vp test run --browser.headless",
+    "test:watch": "vp test",
     "cem": "cem"
   },
   "dependencies": {
     "@divicards/shared": "workspace:^",
     "@floating-ui/dom": "^1.7.0",
     "@lit/task": "^1",
-    "@shoelace-style/shoelace": "^2",
-    "lit": "^3",
-    "poe-custom-elements": "0.4.0"
+    "@shoelace-style/shoelace": "catalog:",
+    "lit": "catalog:",
+    "poe-custom-elements": "catalog:"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "5.1.1",
     "@custom-elements-manifest/analyzer": "^0.11",
     "@storybook/addon-links": "10.3.5",
     "@storybook/web-components-vite": "10.3.5",
-    "@types/node": "^25",
-    "@vitest/browser": "^4.1",
-    "@vitest/browser-playwright": "^4.1",
+    "@types/node": "catalog:",
     "custom-element-vuejs-integration": "^1.4",
     "custom-elements-manifest": "^2.1.0",
     "lit-analyzer": "^2",
-    "oxlint": "^1.59.0",
-    "playwright": "^1.59.1",
     "storybook": "10.3.5",
-    "typescript": "^6.0",
-    "vite": "^8",
-    "vite-plugin-static-copy": "^4",
-    "vitest": "^4.1.2",
-    "vue": "^3"
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-static-copy": "catalog:",
+    "vite-plus": "catalog:",
+    "vitest": "catalog:",
+    "vue": "catalog:"
   }
 }

@@ -12,10 +12,12 @@
     "wc:dev": "cd packages/wc && pnpm dev",
     "storybook": "cd packages/wc && pnpm storybook",
     "wc:test:watch": "cd packages/wc && pnpm web-test-runner --watch --group default",
-    "wc:test:watch:group": "cd packages/wc && pnpm web-test-runner --watch --group"
+    "wc:test:watch:group": "cd packages/wc && pnpm web-test-runner --watch --group",
+    "prepare": "vp config"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2",
-    "oxfmt": "^0.43.0"
-  }
+    "vite-plus": "catalog:"
+  },
+  "packageManager": "pnpm@10.33.0"
 }

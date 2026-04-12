@@ -1,4 +1,4 @@
-import { test, expect, describe, beforeEach } from "vitest";
+import { test, expect, describe, beforeEach } from "vite-plus/test";
 
 import "../e-tab-badge/e-tab-badge.js";
 import "./e-tab-badge-group.js";

@@ -1,5 +1,5 @@
-import { test, expect, vi, describe, beforeEach } from "vitest";
-import { page, userEvent } from "vitest/browser";
+import { test, expect, vi, describe, beforeEach } from "vite-plus/test";
+import { page, userEvent } from "vite-plus/test/browser";
 
 import { cards } from "./data.js";
 import "./e-sample-table.js";
