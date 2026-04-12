@@ -1,8 +1,10 @@
-import { withThemeToggle } from "./withThemeToggle";
-import type { Preview } from "@storybook/web-components-vite";
-import "./styles.css";
 import "@shoelace-style/shoelace/dist/themes/dark.css";
 import "@shoelace-style/shoelace/dist/themes/light.css";
+
+import "./styles.css";
+import { withThemeToggle } from "./withThemeToggle";
+
+import type { Preview } from "@storybook/web-components-vite";
 
 const preview: Preview = {
   decorators: [withThemeToggle],

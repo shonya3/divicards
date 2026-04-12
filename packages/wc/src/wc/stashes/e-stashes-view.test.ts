@@ -1,7 +1,8 @@
 import { test, expect, vi, describe, beforeEach } from "vitest";
 import { page, userEvent } from "vitest/browser";
-import "./e-stashes-view.js";
+
 import { MockStashLoader } from "./data.js";
+import "./e-stashes-view.js";
 
 describe("<e-stashes-view>", () => {
   let el: HTMLElementTagNameMap["e-stashes-view"];

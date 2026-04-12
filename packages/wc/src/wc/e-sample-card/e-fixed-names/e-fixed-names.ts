@@ -1,6 +1,8 @@
 import { html, css, LitElement, TemplateResult, CSSResult } from "lit";
 import { customElement, property } from "lit/decorators.js";
+
 import { FixedName } from "@divicards/shared/types.js";
+
 import "../../e-simple-tooltip.js";
 import "./e-fixed-icon.js";
 

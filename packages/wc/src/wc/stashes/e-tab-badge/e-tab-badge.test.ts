@@ -1,5 +1,6 @@
 import { test, expect, vi, describe, beforeEach } from "vitest";
 import { page, userEvent } from "vitest/browser";
+
 import "./e-tab-badge.js";
 import { TabClickEvent, TabSelectEvent } from "./events.js";
 

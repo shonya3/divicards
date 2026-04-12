@@ -1,5 +1,6 @@
 import { html, css, LitElement, TemplateResult, CSSResult } from "lit";
 import { customElement, property } from "lit/decorators.js";
+
 import "../../e-simple-tooltip.js";
 
 @customElement("e-not-cards")

@@ -1,25 +1,29 @@
 import { html, nothing, LitElement, TemplateResult, CSSResult } from "lit";
 import { property, state, query, customElement } from "lit/decorators.js";
-import "../e-tab-badge/e-tab-badge.js";
-import { type League, isPermanentLeague } from "@divicards/shared/types.js";
-import { ACTIVE_LEAGUE } from "@divicards/shared/lib.js";
-import "@shoelace-style/shoelace/dist/components/input/input.js";
-import "@shoelace-style/shoelace/dist/components/button/button.js";
-import "../../e-pagination/e-pagination.js";
-import "../../e-help-tip.js";
-import type { ErrorLabel, SelectedStashtabs } from "../types.js";
 import { classMap } from "lit/directives/class-map.js";
-import { NoItemsTab } from "poe-custom-elements/types.js";
-import { PageChangeEvent } from "../../events/change/page.js";
-import { PerPageChangeEvent } from "../../events/change/per_page.js";
-import { SelectedTabsChangeEvent } from "../events.js";
-import { MultiselectChangeEvent } from "./events.js";
-import { styles } from "./e-tab-badge-group.styles.js";
-import { TabSelectEvent } from "../e-tab-badge/events.js";
+
+import "@shoelace-style/shoelace/dist/components/button/button.js";
 import "@shoelace-style/shoelace/dist/components/dropdown/dropdown.js";
-import "@shoelace-style/shoelace/dist/components/menu/menu.js";
+import "@shoelace-style/shoelace/dist/components/input/input.js";
 import "@shoelace-style/shoelace/dist/components/menu-item/menu-item.js";
 import type SlMenuItem from "@shoelace-style/shoelace/dist/components/menu-item/menu-item.js";
+import "@shoelace-style/shoelace/dist/components/menu/menu.js";
+
+import { ACTIVE_LEAGUE } from "@divicards/shared/lib.js";
+import { type League, isPermanentLeague } from "@divicards/shared/types.js";
+import { NoItemsTab } from "poe-custom-elements/types.js";
+
+import "../../e-help-tip.js";
+import "../../e-pagination/e-pagination.js";
+import { PageChangeEvent } from "../../events/change/page.js";
+import { PerPageChangeEvent } from "../../events/change/per_page.js";
+import "../e-tab-badge/e-tab-badge.js";
+import { TabSelectEvent } from "../e-tab-badge/events.js";
+import { SelectedTabsChangeEvent } from "../events.js";
+import { styles } from "./e-tab-badge-group.styles.js";
+import { MultiselectChangeEvent } from "./events.js";
+
+import type { ErrorLabel, SelectedStashtabs } from "../types.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -107,22 +111,13 @@ export class TabBadgeGroupElement extends LitElement {
                   <sl-dropdown>
                     <sl-button slot="trigger" caret size="small">Options</sl-button>
                     <sl-menu @sl-select=${this.#handle_menu_item_select}>
-                      <sl-menu-item
-                        value="multiselect"
-                        type="checkbox"
-                        ?checked=${this.multiselect}
-                      >
+                      <sl-menu-item value="multiselect" type="checkbox" ?checked=${this.multiselect}>
                         Multiselect
-                        <e-help-tip slot="suffix"
-                          >Select multiple tabs at once to download it in one go.</e-help-tip
-                        >
+                        <e-help-tip slot="suffix">Select multiple tabs at once to download it in one go.</e-help-tip>
                       </sl-menu-item>
                       ${this.withHideRemoveOnly
                         ? html`
-                            <sl-menu-item
-                              value="hideRemoveOnly"
-                              type="checkbox"
-                              ?checked=${this.hideRemoveOnly}
+                            <sl-menu-item value="hideRemoveOnly" type="checkbox" ?checked=${this.hideRemoveOnly}
                               >Hide remove-only</sl-menu-item
                             >
                           `

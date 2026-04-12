@@ -1,4 +1,3 @@
-import { invoke } from "@tauri-apps/api/core";
 import {
   DivinationCardsSample,
   League,
@@ -8,6 +7,7 @@ import {
   TablePreferences,
   Column,
 } from "@divicards/shared/types.js";
+import { invoke } from "@tauri-apps/api/core";
 import { NoItemsTab, TabWithItems } from "poe-custom-elements/types.js";
 
 export type SampleData = string | NameAmount[] | DivinationCardsSample;
@@ -40,11 +40,7 @@ export interface Commands {
   poe_logout: () => void;
   stashes: (args: { league: League }) => { stashes: NoItemsTab[] };
   sample_into_csv: (args: { sample: DivinationCardsSample; preferences: Preferences }) => string;
-  sample_from_tab: (args: {
-    league: League;
-    stashId: string;
-    subStashId?: string;
-  }) => DivinationCardsSample;
+  sample_from_tab: (args: { league: League; stashId: string; subStashId?: string }) => DivinationCardsSample;
   tab_with_items: (args: { league: League; stashId: string }) => TabWithItems;
   extract_cards: (args: { tab: TabWithItems; league: League }) => DivinationCardsSample;
 }

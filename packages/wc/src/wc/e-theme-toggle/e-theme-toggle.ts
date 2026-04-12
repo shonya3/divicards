@@ -1,9 +1,10 @@
 import { DefineComponent } from "vue";
+
+import { VueEventHandlers } from "../../event-utils.js";
 import { ChangeThemeEvent, Events } from "./events.js";
 import { styles } from "./styles.js";
 import { sunmoon } from "./sunmoon.js";
 import { template as themeToggleTemplate } from "./template.js";
-import { VueEventHandlers } from "../../event-utils.js";
 export type ColorTheme = "light" | "dark";
 
 const themeUtils = Object.freeze({

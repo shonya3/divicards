@@ -1,5 +1,7 @@
-import { Meta } from "@storybook/web-components-vite";
 import { html, TemplateResult } from "lit";
+
+import { Meta } from "@storybook/web-components-vite";
+
 import { StashTabErrorsElement } from "./e-stash-tab-errors.js";
 import "./e-stash-tab-errors.js";
 

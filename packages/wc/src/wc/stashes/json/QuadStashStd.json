@@ -18,9 +18,7 @@
       "league": "Standard",
       "maxStackSize": 50000,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["13513/50000", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["13513/50000", 0]] }],
       "stackSize": 13513,
       "stackSizeText": "13.5K",
       "typeLine": "Rogue's Marker",
@@ -43,9 +41,7 @@
       "league": "Standard",
       "maxStackSize": 40,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["40/40", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["40/40", 0]] }],
       "stackSize": 40,
       "typeLine": "Scroll of Wisdom",
       "verified": false,
@@ -67,9 +63,7 @@
       "league": "Standard",
       "maxStackSize": 40,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["40/40", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["40/40", 0]] }],
       "stackSize": 40,
       "typeLine": "Portal Scroll",
       "verified": false,
@@ -91,9 +85,7 @@
       "league": "Standard",
       "maxStackSize": 40,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["40/40", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["40/40", 0]] }],
       "stackSize": 40,
       "typeLine": "Scroll of Wisdom",
       "verified": false,
@@ -115,9 +107,7 @@
       "league": "Standard",
       "maxStackSize": 40,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["40/40", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["40/40", 0]] }],
       "stackSize": 40,
       "typeLine": "Scroll of Wisdom",
       "verified": false,
@@ -139,9 +129,7 @@
       "league": "Standard",
       "maxStackSize": 40,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["40/40", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["40/40", 0]] }],
       "stackSize": 40,
       "typeLine": "Portal Scroll",
       "verified": false,
@@ -163,9 +151,7 @@
       "league": "Standard",
       "maxStackSize": 40,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["40/40", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["40/40", 0]] }],
       "stackSize": 40,
       "typeLine": "Scroll of Wisdom",
       "verified": false,
@@ -187,9 +173,7 @@
       "league": "Standard",
       "maxStackSize": 40,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["40/40", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["40/40", 0]] }],
       "stackSize": 40,
       "typeLine": "Portal Scroll",
       "verified": false,
@@ -211,9 +195,7 @@
       "league": "Standard",
       "maxStackSize": 40,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["40/40", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["40/40", 0]] }],
       "stackSize": 40,
       "typeLine": "Portal Scroll",
       "verified": false,
@@ -234,9 +216,7 @@
       "league": "Standard",
       "maxStackSize": 300,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["32/300", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["32/300", 0]] }],
       "stackSize": 32,
       "typeLine": "Simulacrum Splinter",
       "verified": false,
@@ -258,9 +238,7 @@
       "league": "Standard",
       "maxStackSize": 40,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["21/40", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["21/40", 0]] }],
       "stackSize": 21,
       "typeLine": "Scroll of Wisdom",
       "verified": false,
@@ -282,9 +260,7 @@
       "league": "Standard",
       "maxStackSize": 20,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["20/20", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["20/20", 0]] }],
       "stackSize": 20,
       "typeLine": "Jeweller's Orb",
       "verified": false,
@@ -305,9 +281,7 @@
       "league": "Standard",
       "maxStackSize": 100,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["10/100", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["10/100", 0]] }],
       "stackSize": 10,
       "typeLine": "Splinter of Xoph",
       "verified": false,
@@ -328,9 +302,7 @@
       "league": "Standard",
       "maxStackSize": 100,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["10/100", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["10/100", 0]] }],
       "stackSize": 10,
       "typeLine": "Timeless Maraketh Splinter",
       "verified": false,
@@ -352,9 +324,7 @@
       "league": "Standard",
       "maxStackSize": 40,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["10/40", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["10/40", 0]] }],
       "stackSize": 10,
       "typeLine": "Portal Scroll",
       "verified": false,
@@ -376,9 +346,7 @@
       "league": "Standard",
       "maxStackSize": 20,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["9/20", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["9/20", 0]] }],
       "stackSize": 9,
       "typeLine": "Cartographer's Chisel",
       "verified": false,
@@ -399,9 +367,7 @@
       "league": "Standard",
       "maxStackSize": 100,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["8/100", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["8/100", 0]] }],
       "stackSize": 8,
       "typeLine": "Timeless Vaal Splinter",
       "verified": false,
@@ -422,9 +388,7 @@
       "league": "Standard",
       "maxStackSize": 100,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["7/100", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["7/100", 0]] }],
       "stackSize": 7,
       "typeLine": "Timeless Karui Splinter",
       "verified": false,
@@ -445,9 +409,7 @@
       "league": "Standard",
       "maxStackSize": 100,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["5/100", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["5/100", 0]] }],
       "stackSize": 5,
       "typeLine": "Splinter of Esh",
       "verified": false,
@@ -469,9 +431,7 @@
       "league": "Standard",
       "maxStackSize": 20,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["5/20", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["5/20", 0]] }],
       "stackSize": 5,
       "typeLine": "Orb of Fusing",
       "verified": false,
@@ -493,9 +453,7 @@
       "league": "Standard",
       "maxStackSize": 20,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["4/20", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["4/20", 0]] }],
       "stackSize": 4,
       "typeLine": "Orb of Alchemy",
       "verified": false,
@@ -520,9 +478,7 @@
       "league": "Standard",
       "maxStackSize": 11,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["4/11", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["4/11", 0]] }],
       "stackSize": 4,
       "typeLine": "The Chains that Bind",
       "verified": false,
@@ -544,9 +500,7 @@
       "league": "Standard",
       "maxStackSize": 20,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["4/20", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["4/20", 0]] }],
       "stackSize": 4,
       "typeLine": "Vaal Orb",
       "verified": false,
@@ -567,9 +521,7 @@
       "league": "Standard",
       "maxStackSize": 20,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["3/20", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["3/20", 0]] }],
       "stackSize": 3,
       "typeLine": "Annulment Shard",
       "verified": false,
@@ -591,9 +543,7 @@
       "league": "Standard",
       "maxStackSize": 40,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["3/40", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["3/40", 0]] }],
       "stackSize": 3,
       "typeLine": "Orb of Regret",
       "verified": false,
@@ -615,9 +565,7 @@
       "league": "Standard",
       "maxStackSize": 30,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["2/30", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["2/30", 0]] }],
       "stackSize": 2,
       "typeLine": "Orb of Scouring",
       "verified": false,
@@ -638,9 +586,7 @@
       "league": "Standard",
       "maxStackSize": 100,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["2/100", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["2/100", 0]] }],
       "stackSize": 2,
       "typeLine": "Timeless Eternal Empire Splinter",
       "verified": false,
@@ -662,9 +608,7 @@
       "league": "Standard",
       "maxStackSize": 20,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["2/20", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["2/20", 0]] }],
       "stackSize": 2,
       "typeLine": "Chromatic Orb",
       "verified": false,
@@ -686,9 +630,7 @@
       "league": "Standard",
       "maxStackSize": 20,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["2/20", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["2/20", 0]] }],
       "stackSize": 2,
       "typeLine": "Frigid Fossil",
       "verified": false,
@@ -709,9 +651,7 @@
       "league": "Standard",
       "maxStackSize": 100,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["2/100", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["2/100", 0]] }],
       "stackSize": 2,
       "typeLine": "Splinter of Tul",
       "verified": false,
@@ -733,9 +673,7 @@
       "league": "Standard",
       "maxStackSize": 10,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }],
       "stackSize": 1,
       "typeLine": "Sacrifice at Dusk",
       "verified": false,
@@ -746,9 +684,7 @@
     {
       "baseType": "Fossilised Incubator",
       "descrText": "Right click this item then left click an item to apply it. The Incubated item drops after killing a specific number of monsters.",
-      "explicitMods": [
-        "Adds an incubated Fossil item to an equippable item\r\nItem drops after killing 8924 monsters"
-      ],
+      "explicitMods": ["Adds an incubated Fossil item to an equippable item\r\nItem drops after killing 8924 monsters"],
       "frameType": 5,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvSW5jdWJhdGlvbi9JbmN1YmF0aW9uRm9zc2lscyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/30fb338730/IncubationFossils.png",
@@ -760,9 +696,7 @@
       "league": "Standard",
       "maxStackSize": 10,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }],
       "stackSize": 1,
       "typeLine": "Fossilised Incubator",
       "verified": false,
@@ -773,9 +707,7 @@
     {
       "baseType": "Fossilised Incubator",
       "descrText": "Right click this item then left click an item to apply it. The Incubated item drops after killing a specific number of monsters.",
-      "explicitMods": [
-        "Adds an incubated Fossil item to an equippable item\r\nItem drops after killing 8924 monsters"
-      ],
+      "explicitMods": ["Adds an incubated Fossil item to an equippable item\r\nItem drops after killing 8924 monsters"],
       "frameType": 5,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvSW5jdWJhdGlvbi9JbmN1YmF0aW9uRm9zc2lscyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/30fb338730/IncubationFossils.png",
@@ -787,9 +719,7 @@
       "league": "Standard",
       "maxStackSize": 10,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }],
       "stackSize": 1,
       "typeLine": "Fossilised Incubator",
       "verified": false,
@@ -814,9 +744,7 @@
       "league": "Standard",
       "maxStackSize": 10,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }],
       "stackSize": 1,
       "typeLine": "Obscured Incubator",
       "verified": false,
@@ -841,9 +769,7 @@
       "league": "Standard",
       "maxStackSize": 10,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }],
       "stackSize": 1,
       "typeLine": "Obscured Incubator",
       "verified": false,
@@ -866,9 +792,7 @@
       "league": "Standard",
       "maxStackSize": 9,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/9", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/9", 0]] }],
       "stackSize": 1,
       "typeLine": "The Endless Darkness",
       "verified": false,
@@ -893,9 +817,7 @@
       "league": "Standard",
       "maxStackSize": 4,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/4", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/4", 0]] }],
       "stackSize": 1,
       "typeLine": "The Lord of Celebration",
       "verified": false,
@@ -929,9 +851,7 @@
       "league": "Standard",
       "maxStackSize": 9,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/9", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/9", 0]] }],
       "stackSize": 1,
       "typeLine": "Shrieking Essence of Torment",
       "verified": false,
@@ -943,9 +863,7 @@
       "artFilename": "GarishPower",
       "baseType": "The Garish Power",
       "explicitMods": ["<uniqueitem>{Jewel}"],
-      "flavourText": [
-        "Maligaro may have valued function over form, but that did not mute his flair for the dramatic."
-      ],
+      "flavourText": ["Maligaro may have valued function over form, but that did not mute his flair for the dramatic."],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
@@ -956,9 +874,7 @@
       "league": "Standard",
       "maxStackSize": 4,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/4", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/4", 0]] }],
       "stackSize": 1,
       "typeLine": "The Garish Power",
       "verified": false,
@@ -980,9 +896,7 @@
       "league": "Standard",
       "maxStackSize": 20,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/20", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/20", 0]] }],
       "stackSize": 1,
       "typeLine": "Jeweller's Orb",
       "verified": false,
@@ -993,10 +907,7 @@
     {
       "baseType": "Fragment of the Phoenix",
       "descrText": "Can be used in a personal Map Device.",
-      "flavourText": [
-        "Enter the crucible. The nexus of\r",
-        "nothingness and equilibrium of eternity."
-      ],
+      "flavourText": ["Enter the crucible. The nexus of\r", "nothingness and equilibrium of eternity."],
       "frameType": 0,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9BdGxhc01hcHMvRnJhZ21lbnRQaG9lbml4IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/bf64bb03f8/FragmentPhoenix.png",
@@ -1007,9 +918,7 @@
       "league": "Standard",
       "maxStackSize": 10,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }],
       "stackSize": 1,
       "typeLine": "Fragment of the Phoenix",
       "verified": false,
@@ -1031,9 +940,7 @@
       "league": "Standard",
       "maxStackSize": 10,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }],
       "stackSize": 1,
       "typeLine": "Sacrifice at Dusk",
       "verified": false,
@@ -1054,9 +961,7 @@
       "league": "Standard",
       "maxStackSize": 10,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }],
       "stackSize": 1,
       "typeLine": "Sepia Oil",
       "verified": false,
@@ -1079,9 +984,7 @@
       "league": "Standard",
       "maxStackSize": 5,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/5", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/5", 0]] }],
       "stackSize": 1,
       "typeLine": "The Gambler",
       "verified": false,
@@ -1104,9 +1007,7 @@
       "league": "Standard",
       "maxStackSize": 8,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/8", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/8", 0]] }],
       "stackSize": 1,
       "typeLine": "The Scavenger",
       "verified": false,
@@ -1128,9 +1029,7 @@
       "league": "Standard",
       "maxStackSize": 30,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/30", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/30", 0]] }],
       "stackSize": 1,
       "typeLine": "Orb of Augmentation",
       "verified": false,
@@ -1156,9 +1055,7 @@
       "league": "Standard",
       "maxStackSize": 5,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/5", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/5", 0]] }],
       "stackSize": 1,
       "typeLine": "Alone in the Darkness",
       "verified": false,
@@ -1169,10 +1066,7 @@
     {
       "baseType": "Fragment of the Minotaur",
       "descrText": "Can be used in a personal Map Device.",
-      "flavourText": [
-        "Enter the crucible. The nexus of\r",
-        "nothingness and equilibrium of eternity."
-      ],
+      "flavourText": ["Enter the crucible. The nexus of\r", "nothingness and equilibrium of eternity."],
       "frameType": 0,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9BdGxhc01hcHMvRnJhZ21lbnRNaW5vdGF1ciIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/a6307f6cc9/FragmentMinotaur.png",
@@ -1183,9 +1077,7 @@
       "league": "Standard",
       "maxStackSize": 10,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }],
       "stackSize": 1,
       "typeLine": "Fragment of the Minotaur",
       "verified": false,
@@ -1207,9 +1099,7 @@
       "league": "Standard",
       "maxStackSize": 20,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/20", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/20", 0]] }],
       "stackSize": 1,
       "typeLine": "Bound Fossil",
       "verified": false,
@@ -1231,9 +1121,7 @@
       "league": "Standard",
       "maxStackSize": 10,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }],
       "stackSize": 1,
       "typeLine": "Sacrifice at Dusk",
       "verified": false,
@@ -1255,9 +1143,7 @@
       "league": "Standard",
       "maxStackSize": 10,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/10", 0]] }],
       "stackSize": 1,
       "typeLine": "Sacrifice at Dusk",
       "verified": false,
@@ -1285,9 +1171,7 @@
       "league": "Standard",
       "maxStackSize": 5,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/5", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/5", 0]] }],
       "stackSize": 1,
       "typeLine": "The Rite of Elements",
       "verified": false,
@@ -1310,9 +1194,7 @@
       "league": "Standard",
       "maxStackSize": 9,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/9", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/9", 0]] }],
       "stackSize": 1,
       "typeLine": "A Dab of Ink",
       "verified": false,
@@ -1345,9 +1227,7 @@
       "league": "Standard",
       "maxStackSize": 9,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/9", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/9", 0]] }],
       "stackSize": 1,
       "typeLine": "Screaming Essence of Fear",
       "verified": false,
@@ -1380,9 +1260,7 @@
       "league": "Standard",
       "maxStackSize": 9,
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/9", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["1/9", 0]] }],
       "stackSize": 1,
       "typeLine": "Screaming Essence of Scorn",
       "verified": false,
@@ -1402,10 +1280,7 @@
       ],
       "baseType": "Concentrated Effect Support",
       "descrText": "This is a Support Gem. It does not grant a bonus to your character, but to skills in sockets connected to it. Place into an item socket connected to a socket containing the Skill Gem you wish to augment. Right click to remove from a socket.",
-      "explicitMods": [
-        "Supported Skills deal 38% more Area Damage",
-        "Supported Skills have 30% less Area of Effect"
-      ],
+      "explicitMods": ["Supported Skills deal 38% more Area Damage", "Supported Skills have 30% less Area of Effect"],
       "frameType": 4,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0NvbmNlbnRyYXRlZEFPRSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/4db641d292/ConcentratedAOE.png",
@@ -1435,11 +1310,7 @@
     {
       "baseType": "Gold Ring",
       "cisRaceReward": true,
-      "explicitMods": [
-        "+10 to Dexterity",
-        "65% increased Rarity of Items found",
-        "-20% to all Elemental Resistances"
-      ],
+      "explicitMods": ["+10 to Dexterity", "65% increased Rarity of Items found", "-20% to all Elemental Resistances"],
       "flavourText": ["Danger is the price of wealth."],
       "frameType": 3,
       "h": 1,
@@ -1681,10 +1552,7 @@
         "Adds Knockback to Melee Attacks during Effect",
         "34% more Melee Physical Damage during effect"
       ],
-      "flavourText": [
-        "A sprinkle of hunger, a spoonful of menace\r",
-        "and three generous cups of Might."
-      ],
+      "flavourText": ["A sprinkle of hunger, a spoonful of menace\r", "and three generous cups of Might."],
       "frameType": 3,
       "h": 2,
       "icon": "https://web.poecdn.com/gen/image/WzksMTQseyJmIjoiMkRJdGVtcy9GbGFza3MveUZsYXNrNSIsInciOjEsImgiOjIsInNjYWxlIjoxLCJsZXZlbCI6MX1d/69fe070e32/yFlask5.png",
@@ -1897,9 +1765,7 @@
         { "displayMode": 0, "name": "Attacks per Second", "type": 13, "values": [["1.25", 0]] }
       ],
       "rarity": "Magic",
-      "requirements": [
-        { "displayMode": 1, "name": "Dexterity", "type": 64, "values": [["185", 0]] }
-      ],
+      "requirements": [{ "displayMode": 1, "name": "Dexterity", "type": 64, "values": [["185", 0]] }],
       "socketedItems": [],
       "sockets": [
         { "attr": "D", "group": 0, "sColour": "G" },
@@ -2662,13 +2528,9 @@
       "inventoryId": "Stash1",
       "league": "Standard",
       "name": "",
-      "properties": [
-        { "displayMode": 0, "name": "Energy Shield", "type": 18, "values": [["123", 0]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Energy Shield", "type": 18, "values": [["123", 0]] }],
       "rarity": "Rare",
-      "requirements": [
-        { "displayMode": 1, "name": "Intelligence", "type": 65, "values": [["160", 0]] }
-      ],
+      "requirements": [{ "displayMode": 1, "name": "Intelligence", "type": 65, "values": [["160", 0]] }],
       "socketedItems": [],
       "sockets": [
         { "attr": "S", "group": 0, "sColour": "R" },
@@ -2815,10 +2677,7 @@
           "baseType": "Summon Stone Golem",
           "colour": "S",
           "descrText": "Place into an item socket of the right colour to gain this skill. Right click to remove from a socket.",
-          "explicitMods": [
-            "Maximum 1 Summoned Golem",
-            "Golems grant 103 Life Regenerated per second"
-          ],
+          "explicitMods": ["Maximum 1 Summoned Golem", "Golems grant 103 Life Regenerated per second"],
           "frameType": 4,
           "h": 1,
           "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Sb2NrR29sZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/f0d237e67b/RockGolem.png",
@@ -3264,10 +3123,7 @@
       "descrText": "Place into an allocated Jewel Socket on the Passive Skill Tree. Right click to remove from the Socket.",
       "explicitMods": ["5% increased Attack Speed", "+10% to Fire and Lightning Resistances"],
       "fractured": true,
-      "fracturedMods": [
-        "8% increased Attack Speed with Maces or Sceptres",
-        "7% increased maximum Life"
-      ],
+      "fracturedMods": ["8% increased Attack Speed with Maces or Sceptres", "7% increased maximum Life"],
       "frameType": 2,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvSmV3ZWxzL2Jhc2ljc3RyIiwidyI6MSwiaCI6MSwic2NhbGUiOjEsImZyYWN0dXJlZCI6dHJ1ZX1d/11becdd5a3/basicstr.png",
@@ -3317,11 +3173,7 @@
         "25% increased Movement Speed",
         "10% chance to Avoid Elemental Ailments while Phasing"
       ],
-      "flavourText": [
-        "Move in with haste.\r",
-        "Strike quick, strike hard.\r",
-        "Vanish like smoke in the wind."
-      ],
+      "flavourText": ["Move in with haste.\r", "Strike quick, strike hard.\r", "Vanish like smoke in the wind."],
       "frameType": 3,
       "h": 2,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9Cb290cy9UaHJlZVN0ZXBBc3NhdWx0IiwidyI6MiwiaCI6Miwic2NhbGUiOjF9XQ/56daf8a36a/ThreeStepAssault.png",
@@ -3331,9 +3183,7 @@
       "inventoryId": "Stash1",
       "league": "Standard",
       "name": "Three-step Assault",
-      "properties": [
-        { "displayMode": 0, "name": "Evasion Rating", "type": 17, "values": [["236", 1]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Evasion Rating", "type": 17, "values": [["236", 1]] }],
       "rarity": "Unique",
       "requirements": [
         { "displayMode": 0, "name": "Level", "suffix": "(gem)", "type": 62, "values": [["68", 0]] },
@@ -3791,10 +3641,7 @@
     {
       "baseType": "Basalt Flask",
       "descrText": "Right click to drink. Can only hold charges while in belt. Refills as you kill monsters.",
-      "explicitMods": [
-        "25% reduced Charges per use",
-        "0.4% of Physical Attack Damage Leeched as Mana during Effect"
-      ],
+      "explicitMods": ["25% reduced Charges per use", "0.4% of Physical Attack Damage Leeched as Mana during Effect"],
       "frameType": 1,
       "h": 2,
       "icon": "https://web.poecdn.com/gen/image/WzksMTQseyJmIjoiMkRJdGVtcy9GbGFza3Mvc3RvbmUiLCJ3IjoxLCJoIjoyLCJzY2FsZSI6MSwibGV2ZWwiOjF9XQ/00261d09db/stone.png",
@@ -3829,10 +3676,7 @@
     {
       "baseType": "Diamond Flask",
       "descrText": "Right click to drink. Can only hold charges while in belt. Refills as you kill monsters.",
-      "explicitMods": [
-        "40% increased Duration",
-        "20% additional Elemental Resistances during Effect"
-      ],
+      "explicitMods": ["40% increased Duration", "20% additional Elemental Resistances during Effect"],
       "frameType": 1,
       "h": 2,
       "icon": "https://web.poecdn.com/gen/image/WzksMTQseyJmIjoiMkRJdGVtcy9GbGFza3MvZGlhbW9uZCIsInciOjEsImgiOjIsInNjYWxlIjoxLCJsZXZlbCI6MX1d/98bf48b8dd/diamond.png",
@@ -4385,10 +4229,7 @@
     {
       "baseType": "Basalt Flask",
       "descrText": "Right click to drink. Can only hold charges while in belt. Refills as you kill monsters.",
-      "explicitMods": [
-        "25% reduced Charges per use",
-        "Grants Immunity to Shock for 4 seconds if used while Shocked"
-      ],
+      "explicitMods": ["25% reduced Charges per use", "Grants Immunity to Shock for 4 seconds if used while Shocked"],
       "frameType": 1,
       "h": 2,
       "icon": "https://web.poecdn.com/gen/image/WzksMTQseyJmIjoiMkRJdGVtcy9GbGFza3Mvc3RvbmUiLCJ3IjoxLCJoIjoyLCJzY2FsZSI6MSwibGV2ZWwiOjF9XQ/00261d09db/stone.png",
@@ -5292,10 +5133,7 @@
     {
       "baseType": "Viridian Jewel",
       "descrText": "Place into an allocated Jewel Socket on the Passive Skill Tree. Right click to remove from the Socket.",
-      "explicitMods": [
-        "Projectiles Pierce an additional Target",
-        "10% increased Projectile Damage"
-      ],
+      "explicitMods": ["Projectiles Pierce an additional Target", "10% increased Projectile Damage"],
       "flavourText": ["A sharp eye can be more deadly than a sharp blade."],
       "frameType": 3,
       "h": 1,
@@ -5489,11 +5327,7 @@
     {
       "baseType": "Imperial Claw",
       "craftedMods": ["83% increased Physical Damage", "15% chance to Blind Enemies on hit"],
-      "explicitMods": [
-        "Adds 18 to 37 Physical Damage",
-        "23% increased Attack Speed",
-        "Gain 2 Mana per Enemy Killed"
-      ],
+      "explicitMods": ["Adds 18 to 37 Physical Damage", "23% increased Attack Speed", "Gain 2 Mana per Enemy Killed"],
       "frameType": 2,
       "h": 2,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvV2VhcG9ucy9PbmVIYW5kV2VhcG9ucy9DbGF3cy9DbGF3NyIsInciOjIsImgiOjIsInNjYWxlIjoxfV0/9efad90cdb/Claw7.png",
@@ -5977,10 +5811,7 @@
     {
       "baseType": "Jade Flask",
       "descrText": "Right click to drink. Can only hold charges while in belt. Refills as you kill monsters.",
-      "explicitMods": [
-        "39% increased Charge Recovery",
-        "100% increased Evasion Rating during Effect"
-      ],
+      "explicitMods": ["39% increased Charge Recovery", "100% increased Evasion Rating during Effect"],
       "frameType": 1,
       "h": 2,
       "icon": "https://web.poecdn.com/gen/image/WzksMTQseyJmIjoiMkRJdGVtcy9GbGFza3MvZXZhc2lvbmZsYXNrMDEiLCJ3IjoxLCJoIjoyLCJzY2FsZSI6MSwibGV2ZWwiOjF9XQ/8ead4435df/evasionflask01.png",
@@ -6241,9 +6072,7 @@
       "inventoryId": "Stash1",
       "league": "Standard",
       "name": "Death Halo",
-      "properties": [
-        { "displayMode": 0, "name": "Evasion Rating", "type": 17, "values": [["373", 1]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Evasion Rating", "type": 17, "values": [["373", 1]] }],
       "rarity": "Rare",
       "requirements": [
         { "displayMode": 0, "name": "Level", "suffix": "(gem)", "type": 62, "values": [["69", 0]] },
@@ -6265,10 +6094,7 @@
           "baseType": "Summon Stone Golem",
           "colour": "S",
           "descrText": "Place into an item socket of the right colour to gain this skill. Right click to remove from a socket.",
-          "explicitMods": [
-            "Maximum 1 Summoned Golem",
-            "Golems grant 103 Life Regenerated per second"
-          ],
+          "explicitMods": ["Maximum 1 Summoned Golem", "Golems grant 103 Life Regenerated per second"],
           "frameType": 4,
           "h": 1,
           "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Sb2NrR29sZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/f0d237e67b/RockGolem.png",
@@ -6940,10 +6766,7 @@
       "baseType": "Viridian Jewel",
       "corrupted": true,
       "descrText": "Place into an allocated Jewel Socket on the Passive Skill Tree. Right click to remove from the Socket.",
-      "explicitMods": [
-        "10% increased Projectile Damage",
-        "Projectiles Pierce an additional Target"
-      ],
+      "explicitMods": ["10% increased Projectile Damage", "Projectiles Pierce an additional Target"],
       "flavourText": ["A sharp eye can be more deadly than a sharp blade."],
       "frameType": 3,
       "h": 1,
@@ -6994,11 +6817,7 @@
     {
       "baseType": "Simple Robe",
       "corrupted": true,
-      "explicitMods": [
-        "Sockets cannot be modified",
-        "+1 to Level of Socketed Gems",
-        "100% increased Global Defences"
-      ],
+      "explicitMods": ["Sockets cannot be modified", "+1 to Level of Socketed Gems", "100% increased Global Defences"],
       "flavourText": [
         "We happily give our limbs.\r",
         "A net woven to keep safe the bones of the Lords.\r",
@@ -7011,10 +6830,7 @@
       "id": "e30d8419e3f828a1330d86ef8b9607c256d84e0d51d89ed274228b2e434b789f",
       "identified": true,
       "ilvl": 25,
-      "implicitMods": [
-        "+2 to Level of Socketed AoE Gems",
-        "+2 to Level of Socketed Projectile Gems"
-      ],
+      "implicitMods": ["+2 to Level of Socketed AoE Gems", "+2 to Level of Socketed Projectile Gems"],
       "inventoryId": "Stash1",
       "league": "Standard",
       "name": "Skin of the Loyal",
@@ -7568,10 +7384,7 @@
         "Adds Knockback to Melee Attacks during Effect",
         "24% more Melee Physical Damage during effect"
       ],
-      "flavourText": [
-        "A sprinkle of hunger, a spoonful of menace\r",
-        "and three generous cups of Might."
-      ],
+      "flavourText": ["A sprinkle of hunger, a spoonful of menace\r", "and three generous cups of Might."],
       "frameType": 3,
       "h": 2,
       "icon": "https://web.poecdn.com/gen/image/WzksMTQseyJmIjoiMkRJdGVtcy9GbGFza3MveUZsYXNrNSIsInciOjEsImgiOjIsInNjYWxlIjoxLCJsZXZlbCI6MX1d/69fe070e32/yFlask5.png",
@@ -7672,11 +7485,7 @@
       "baseType": "Cobalt Jewel",
       "corrupted": true,
       "descrText": "Place into an allocated Jewel Socket on the Passive Skill Tree. Right click to remove from the Socket.",
-      "explicitMods": [
-        "+8 to all Attributes",
-        "15% increased Global Physical Damage",
-        "5% increased maximum Life"
-      ],
+      "explicitMods": ["+8 to all Attributes", "15% increased Global Physical Damage", "5% increased maximum Life"],
       "frameType": 2,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvSmV3ZWxzL2Jhc2ljaW50IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/510013aec2/basicint.png",
@@ -7893,10 +7702,7 @@
           "baseType": "Summon Stone Golem",
           "colour": "S",
           "descrText": "Place into an item socket of the right colour to gain this skill. Right click to remove from a socket.",
-          "explicitMods": [
-            "Maximum 1 Summoned Golem",
-            "Golems grant 100 Life Regenerated per second"
-          ],
+          "explicitMods": ["Maximum 1 Summoned Golem", "Golems grant 100 Life Regenerated per second"],
           "frameType": 4,
           "h": 1,
           "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Sb2NrR29sZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/f0d237e67b/RockGolem.png",
@@ -7939,10 +7745,7 @@
     },
     {
       "baseType": "Eelskin Boots",
-      "craftedMods": [
-        "18% increased Movement Speed",
-        "8% chance to gain Onslaught for 4 seconds on Kill"
-      ],
+      "craftedMods": ["18% increased Movement Speed", "8% chance to gain Onslaught for 4 seconds on Kill"],
       "enchantMods": ["10% increased Movement Speed if you haven't been Hit Recently"],
       "explicitMods": [
         "+33 to Evasion Rating",
@@ -7959,9 +7762,7 @@
       "inventoryId": "Stash1",
       "league": "Standard",
       "name": "Eagle Stride",
-      "properties": [
-        { "displayMode": 0, "name": "Evasion Rating", "type": 17, "values": [["162", 1]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Evasion Rating", "type": 17, "values": [["162", 1]] }],
       "rarity": "Rare",
       "requirements": [
         { "displayMode": 0, "name": "Level", "suffix": "(gem)", "type": 62, "values": [["68", 0]] },
@@ -8713,10 +8514,7 @@
     {
       "baseType": "Cobalt Jewel",
       "descrText": "Place into an allocated Jewel Socket on the Passive Skill Tree. Right click to remove from the Socket.",
-      "explicitMods": [
-        "Summon 2 additional Skeletons with Summon Skeletons",
-        "+1 second to Summon Skeleton Cooldown"
-      ],
+      "explicitMods": ["Summon 2 additional Skeletons with Summon Skeletons", "+1 second to Summon Skeleton Cooldown"],
       "flavourText": [
         "\"Would you leave an orchard of apples to rot unharvested?\r",
         "A cemetery is no different.\" \r",
@@ -8976,10 +8774,7 @@
       ],
       "baseType": "Chain Support",
       "descrText": "This is a Support Gem. It does not grant a bonus to your character, but to skills in sockets connected to it. Place into an item socket connected to a socket containing the Skill Gem you wish to augment. Right click to remove from a socket.",
-      "explicitMods": [
-        "Supported Skills Chain +2 times",
-        "Supported Skills deal 22% less Damage with Hits"
-      ],
+      "explicitMods": ["Supported Skills Chain +2 times", "Supported Skills deal 22% less Damage with Hits"],
       "frameType": 4,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L2NoYWluIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/812e47f631/chain.png",
@@ -9599,10 +9394,7 @@
         "+97 to maximum Life",
         "Gain 50 Life when you Stun an Enemy"
       ],
-      "flavourText": [
-        "All creatures have the potential for greatness\r",
-        "or unequivocal failure."
-      ],
+      "flavourText": ["All creatures have the potential for greatness\r", "or unequivocal failure."],
       "frameType": 3,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQmVsdHMvUnl1c2xhdGhhc0NsdXRjaGVzIiwidyI6MiwiaCI6MSwic2NhbGUiOjF9XQ/5b990decd3/RyuslathasClutches.png",
@@ -10038,9 +9830,7 @@
         { "displayMode": 0, "name": "Energy Shield", "type": 18, "values": [["74", 1]] }
       ],
       "rarity": "Rare",
-      "requirements": [
-        { "displayMode": 1, "name": "Intelligence", "type": 65, "values": [["159", 0]] }
-      ],
+      "requirements": [{ "displayMode": 1, "name": "Intelligence", "type": 65, "values": [["159", 0]] }],
       "socketedItems": [],
       "sockets": [
         { "attr": "I", "group": 0, "sColour": "B" },
@@ -10654,10 +10444,7 @@
         "+99 to maximum Life",
         "Gain 50 Life when you Stun an Enemy"
       ],
-      "flavourText": [
-        "All creatures have the potential for greatness\r",
-        "or unequivocal failure."
-      ],
+      "flavourText": ["All creatures have the potential for greatness\r", "or unequivocal failure."],
       "frameType": 3,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQmVsdHMvUnl1c2xhdGhhc0NsdXRjaGVzIiwidyI6MiwiaCI6MSwic2NhbGUiOjF9XQ/5b990decd3/RyuslathasClutches.png",
@@ -11070,10 +10857,7 @@
       "abyssJewel": true,
       "baseType": "Ghastly Eye Jewel",
       "descrText": "Place into an Abyssal Socket on an Item or into an allocated Jewel Socket on the Passive Skill Tree. Right click to remove from the Socket.",
-      "explicitMods": [
-        "+48 to maximum Mana",
-        "Minions have 6% chance to Hinder Enemies on Hit with Spells"
-      ],
+      "explicitMods": ["+48 to maximum Mana", "Minions have 6% chance to Hinder Enemies on Hit with Spells"],
       "frameType": 1,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvSmV3ZWxzL0doYXN0bHlFeWUiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/ed72511412/GhastlyEye.png",
@@ -11311,10 +11095,7 @@
       "baseType": "Less Duration Support",
       "corrupted": true,
       "descrText": "This is a Support Gem. It does not grant a bonus to your character, but to skills in sockets connected to it. Place into an item socket connected to a socket containing the Skill Gem you wish to augment. Right click to remove from a socket.",
-      "explicitMods": [
-        "Supported Skills deal 19% more Damage",
-        "Supported Skills have 59% less Skill Effect Duration"
-      ],
+      "explicitMods": ["Supported Skills deal 19% more Damage", "Supported Skills have 59% less Skill Effect Duration"],
       "frameType": 4,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1JlZHVjZUR1cmF0aW9uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/ab88044f5f/ReduceDuration.png",
@@ -11606,9 +11387,7 @@
       "inventoryId": "Stash1",
       "league": "Standard",
       "name": "Entropy Ward",
-      "properties": [
-        { "displayMode": 0, "name": "Evasion Rating", "type": 17, "values": [["775", 1]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Evasion Rating", "type": 17, "values": [["775", 1]] }],
       "rarity": "Rare",
       "requirements": [
         { "displayMode": 0, "name": "Level", "type": 62, "values": [["67", 0]] },
@@ -11768,10 +11547,7 @@
         "Adds Knockback to Melee Attacks during Effect",
         "25% more Melee Physical Damage during effect"
       ],
-      "flavourText": [
-        "A sprinkle of hunger, a spoonful of menace\r",
-        "and three generous cups of Might."
-      ],
+      "flavourText": ["A sprinkle of hunger, a spoonful of menace\r", "and three generous cups of Might."],
       "frameType": 3,
       "h": 2,
       "icon": "https://web.poecdn.com/gen/image/WzksMTQseyJmIjoiMkRJdGVtcy9GbGFza3MveUZsYXNrNSIsInciOjEsImgiOjIsInNjYWxlIjoxLCJsZXZlbCI6MX1d/69fe070e32/yFlask5.png",
@@ -12260,10 +12036,7 @@
         "14 to 24 Added Physical Damage with Bow Attacks",
         "Arrows deal 50% increased Damage with Hits and Ailments to Targets they Pierce"
       ],
-      "flavourText": [
-        "\"Why waste such a fine arrow on just one man?\" \r",
-        "- Kiravi, Vaal Archer"
-      ],
+      "flavourText": ["\"Why waste such a fine arrow on just one man?\" \r", "- Kiravi, Vaal Archer"],
       "frameType": 3,
       "h": 3,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvUXVpdmVycy9EcmlsbG5lY2siLCJ3IjoyLCJoIjozLCJzY2FsZSI6MX1d/2e0770a7b1/Drillneck.png",
@@ -12367,9 +12140,7 @@
       "inventoryId": "Stash1",
       "league": "Standard",
       "name": "Brood Shell",
-      "properties": [
-        { "displayMode": 0, "name": "Evasion Rating", "type": 17, "values": [["1393", 1]] }
-      ],
+      "properties": [{ "displayMode": 0, "name": "Evasion Rating", "type": 17, "values": [["1393", 1]] }],
       "rarity": "Rare",
       "requirements": [
         { "displayMode": 0, "name": "Level", "type": 62, "values": [["68", 0]] },
@@ -12517,10 +12288,7 @@
         "+84 to maximum Life",
         "Gain 50 Life when you Stun an Enemy"
       ],
-      "flavourText": [
-        "All creatures have the potential for greatness\r",
-        "or unequivocal failure."
-      ],
+      "flavourText": ["All creatures have the potential for greatness\r", "or unequivocal failure."],
       "frameType": 3,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQmVsdHMvUnl1c2xhdGhhc0NsdXRjaGVzIiwidyI6MiwiaCI6MSwic2NhbGUiOjF9XQ/5b990decd3/RyuslathasClutches.png",
@@ -12568,10 +12336,7 @@
       "baseType": "Viridian Jewel",
       "corrupted": true,
       "descrText": "Place into an allocated Jewel Socket on the Passive Skill Tree. Right click to remove from the Socket.",
-      "explicitMods": [
-        "16% increased Damage per Curse on you",
-        "An additional Curse can be applied to you"
-      ],
+      "explicitMods": ["16% increased Damage per Curse on you", "An additional Curse can be applied to you"],
       "flavourText": ["Beg for forgiveness."],
       "frameType": 3,
       "h": 1,
@@ -12633,10 +12398,7 @@
         "Adds Knockback to Melee Attacks during Effect",
         "33% more Melee Physical Damage during effect"
       ],
-      "flavourText": [
-        "A sprinkle of hunger, a spoonful of menace\r",
-        "and three generous cups of Might."
-      ],
+      "flavourText": ["A sprinkle of hunger, a spoonful of menace\r", "and three generous cups of Might."],
       "frameType": 3,
       "h": 2,
       "icon": "https://web.poecdn.com/gen/image/WzksMTQseyJmIjoiMkRJdGVtcy9GbGFza3MveUZsYXNrNSIsInciOjEsImgiOjIsInNjYWxlIjoxLCJsZXZlbCI6MX1d/69fe070e32/yFlask5.png",
@@ -12699,10 +12461,7 @@
     {
       "baseType": "Quicksilver Flask",
       "descrText": "Right click to drink. Can only hold charges while in belt. Refills as you kill monsters.",
-      "explicitMods": [
-        "20% increased Charge Recovery",
-        "30% increased Movement Speed during Effect"
-      ],
+      "explicitMods": ["20% increased Charge Recovery", "30% increased Movement Speed during Effect"],
       "frameType": 1,
       "h": 2,
       "icon": "https://web.poecdn.com/gen/image/WzksMTQseyJmIjoiMkRJdGVtcy9GbGFza3Mvc3ByaW50IiwidyI6MSwiaCI6Miwic2NhbGUiOjEsImxldmVsIjoxfV0/aa66be180b/sprint.png",
@@ -12756,11 +12515,7 @@
       "id": "ecbe812661657148a826a014134dfcc5818b501bba3ff2d36e5185bb9cb9cefb",
       "identified": true,
       "ilvl": 27,
-      "implicitMods": [
-        "6% increased Strength",
-        "9% increased Dexterity",
-        "6% increased Intelligence"
-      ],
+      "implicitMods": ["6% increased Strength", "9% increased Dexterity", "6% increased Intelligence"],
       "inventoryId": "Stash1",
       "league": "Standard",
       "name": "Daresso's Salute",

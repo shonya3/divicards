@@ -1,4 +1,5 @@
 import { EventCallback, listen } from "@tauri-apps/api/event";
+
 import { ToastVariant } from "./toast";
 
 export interface RustEvents {

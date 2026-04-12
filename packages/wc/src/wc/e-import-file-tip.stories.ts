@@ -1,7 +1,9 @@
 import { html, TemplateResult } from "lit";
+
+import { Meta } from "@storybook/web-components-vite";
+
 import "./e-import-file-tip.js";
 import { ImportFileTipElement } from "./e-import-file-tip.js";
-import { Meta } from "@storybook/web-components-vite";
 
 const meta: Meta<ImportFileTipElement> = {
   title: "Elements/e-import-file-tip",

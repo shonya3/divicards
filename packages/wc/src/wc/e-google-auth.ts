@@ -1,5 +1,6 @@
 import { html, css, LitElement, CSSResult, TemplateResult } from "lit";
 import { customElement, property } from "lit/decorators.js";
+
 import { emit } from "../utils.js";
 
 declare global {

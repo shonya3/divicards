@@ -1,10 +1,12 @@
 import { html, LitElement, CSSResult, TemplateResult } from "lit";
 import { customElement, property, query, state } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
+
 import { REMOVE_ONLY } from "../e-tab-badge-group/e-tab-badge-group.js";
-import type { NoItemsTab } from "poe-custom-elements/types.js";
 import { styles } from "./e-tab-badge.styles.js";
 import { TabSelectEvent, TabClickEvent } from "./events.js";
+
+import type { NoItemsTab } from "poe-custom-elements/types.js";
 
 @customElement("e-tab-badge")
 /**
@@ -44,12 +46,7 @@ export class TabBadgeElement extends LitElement {
     if (this.as === "checkbox") {
       return html`<div class="tab-badge-as-checkbox" style=${cssProps}>
         ${this.nameLabel()}
-        <input
-          @change=${this.#set_selected_and_emit}
-          class="checkbox"
-          type="checkbox"
-          .checked=${this.selected}
-        />
+        <input @change=${this.#set_selected_and_emit} class="checkbox" type="checkbox" .checked=${this.selected} />
       </div>`;
     }
 
@@ -82,9 +79,7 @@ export class TabBadgeElement extends LitElement {
 
     if (removeOnly) {
       const [name] = this.tab.name.split(REMOVE_ONLY);
-      return html`<label for=${this.tab.id} class="name"
-        >${name}<span class="remove-only">R</span></label
-      >`;
+      return html`<label for=${this.tab.id} class="name">${name}<span class="remove-only">R</span></label>`;
     }
 
     return html`<label for=${this.tab.id} class="name">${this.tab.name}</label>`;

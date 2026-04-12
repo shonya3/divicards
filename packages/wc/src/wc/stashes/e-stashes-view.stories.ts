@@ -1,6 +1,7 @@
 import { html, TemplateResult } from "lit";
-import "./e-stashes-view.js";
+
 import { MockStashLoader } from "./data.js";
+import "./e-stashes-view.js";
 
 export default {
   title: "Elements/stashes/stashes-view",

@@ -1,6 +1,7 @@
 import { test, expect, describe, beforeEach } from "vitest";
-import "./e-tab-badge-group.js";
+
 import "../e-tab-badge/e-tab-badge.js";
+import "./e-tab-badge-group.js";
 
 describe("<e-tab-badge-group>", () => {
   let el: HTMLElementTagNameMap["e-tab-badge-group"];

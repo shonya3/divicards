@@ -1,7 +1,10 @@
 import { html, css, nothing, LitElement, TemplateResult, CSSResult } from "lit";
 import { customElement, property } from "lit/decorators.js";
+
 import "@shoelace-style/shoelace/dist/components/button/button.js";
+
 import { Column, type TablePreferences } from "@divicards/shared/types.js";
+
 import "../../e-help-tip.js";
 // import { emit } from '../../../utils';
 

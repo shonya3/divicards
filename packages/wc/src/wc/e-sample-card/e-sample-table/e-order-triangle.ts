@@ -2,6 +2,7 @@ import { html, css, LitElement, CSSResult, TemplateResult } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { styleMap } from "lit/directives/style-map.js";
+
 import type { Order } from "@divicards/shared/types.js";
 
 declare global {
@@ -42,13 +43,7 @@ export class OrderTriangleElement extends LitElement {
 
     const classes = classMap({ "order--active": this.active, order: true });
 
-    return html`<div
-      style=${styles}
-      class=${classes}
-      title="Order"
-      role="button"
-      tabindex="0"
-    ></div>`;
+    return html`<div style=${styles} class=${classes} title="Order" role="button" tabindex="0"></div>`;
   }
 }
 

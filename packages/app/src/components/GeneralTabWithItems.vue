@@ -1,20 +1,17 @@
 <script setup lang="ts">
-import { NameAmount } from "@divicards/shared/types.js";
 import "@shoelace-style/shoelace/dist/components/icon-button/icon-button.js";
+
+import { NameAmount } from "@divicards/shared/types.js";
 import { TabWithItems } from "poe-custom-elements/types.js";
 import { Ref, computed, ref, watch } from "vue";
 const props = defineProps<{ tab: TabWithItems }>();
 const emits = defineEmits(["close"]);
 const nameAmountPairs: Ref<NameAmount[]> = ref([]);
 const mergeable = computed(() => {
-  return Object.values(Object.groupBy(nameAmountPairs.value, ({ name }) => name)).some(
-    (arr = []) => arr.length > 1,
-  );
+  return Object.values(Object.groupBy(nameAmountPairs.value, ({ name }) => name)).some((arr = []) => arr.length > 1);
 });
 const tableAsClipboardString = computed(
-  () =>
-    "name\tamount\n" +
-    nameAmountPairs.value.map(({ name, amount = "" }) => `${name}\t${amount}`).join("\n"),
+  () => "name\tamount\n" + nameAmountPairs.value.map(({ name, amount = "" }) => `${name}\t${amount}`).join("\n"),
 );
 
 watch(
@@ -29,12 +26,12 @@ watch(
 );
 
 function onMergeStacksClick() {
-  nameAmountPairs.value = Object.entries(
-    Object.groupBy(nameAmountPairs.value, ({ name }) => name),
-  ).flatMap(([name, pairs = []]) => ({
-    name,
-    amount: pairs.reduce((sum, { amount = 0 }) => (sum += amount), 0),
-  }));
+  nameAmountPairs.value = Object.entries(Object.groupBy(nameAmountPairs.value, ({ name }) => name)).flatMap(
+    ([name, pairs = []]) => ({
+      name,
+      amount: pairs.reduce((sum, { amount = 0 }) => (sum += amount), 0),
+    }),
+  );
 }
 </script>
 

@@ -1,6 +1,6 @@
+import { customElementVuejsPlugin } from "custom-element-vuejs-integration";
 // @ts-check
 import nodePath from "node:path";
-import { customElementVuejsPlugin } from "custom-element-vuejs-integration";
 /** @import {Plugin} from '@custom-elements-manifest/analyzer' */
 
 /**

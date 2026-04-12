@@ -1,9 +1,9 @@
-import { DivinationCardsSample, League } from "@divicards/shared/types.js";
 import { IStashLoader } from "@divicards/shared/IStashLoader.js";
-
-import stashesData from "./json/stashes.json" with { type: "json" };
-import sampleData from "./json/sample.json" with { type: "json" };
+import { DivinationCardsSample, League } from "@divicards/shared/types.js";
 import { NoItemsTab, TabWithItems } from "poe-custom-elements/types.js";
+
+import sampleData from "./json/sample.json" with { type: "json" };
+import stashesData from "./json/stashes.json" with { type: "json" };
 
 export const stashes = stashesData as NoItemsTab[];
 export const league: League = "Standard";

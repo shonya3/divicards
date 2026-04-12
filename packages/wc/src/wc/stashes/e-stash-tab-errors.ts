@@ -1,7 +1,9 @@
 import { html, css, LitElement, CSSResult, TemplateResult } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import "./e-tab-badge/e-tab-badge.js";
+
 import "@shoelace-style/shoelace/dist/components/icon-button/icon-button.js";
+
+import "./e-tab-badge/e-tab-badge.js";
 import { ErrorLabel } from "./types.js";
 
 declare global {
@@ -28,16 +30,10 @@ export class StashTabErrorsElement extends LitElement {
       <h3>Errors</h3>
       ${this.errors.map(
         ({ noItemsTab: tab, message }) =>
-          html`<li
-            @mouseenter=${() => this.#handleMouseEnter(tab.id)}
-            @mouseleave=${this.#handleMouseLeave}
-          >
+          html`<li @mouseenter=${() => this.#handleMouseEnter(tab.id)} @mouseleave=${this.#handleMouseLeave}>
             <e-tab-badge .tab=${tab}></e-tab-badge>
             <p>${message}</p>
-            <sl-icon-button
-              name="x-lg"
-              @click=${() => this.#handleCloseClick(tab.id)}
-              class="btn-close"
+            <sl-icon-button name="x-lg" @click=${() => this.#handleCloseClick(tab.id)} class="btn-close"
               >X</sl-icon-button
             >
           </li>`,

@@ -1,7 +1,8 @@
 import { IStashLoader } from "@divicards/shared/IStashLoader.js";
 import { DivinationCardsSample, League } from "@divicards/shared/types.js";
-import { command } from "./command";
 import { NoItemsTab, TabWithItems } from "poe-custom-elements/types.js";
+
+import { command } from "./command";
 
 export class StashLoader implements IStashLoader {
   tab(tabId: string, league: string): Promise<TabWithItems> {

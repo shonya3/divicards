@@ -1,8 +1,10 @@
 import { LitElement, html, nothing, TemplateResult, CSSResult } from "lit";
 import { customElement, property } from "lit/decorators.js";
+
 import "@shoelace-style/shoelace/dist/components/button/button.js";
-import "@shoelace-style/shoelace/dist/components/input/input.js";
 import "@shoelace-style/shoelace/dist/components/icon-button/icon-button.js";
+import "@shoelace-style/shoelace/dist/components/input/input.js";
+
 import { PageChangeEvent } from "../events/change/page.js";
 import { PerPageChangeEvent } from "../events/change/per_page.js";
 import { styles } from "./e-pagination.styles.js";
@@ -71,9 +73,7 @@ export class PaginationElement extends LitElement {
           ></sl-input>
         </div>
         <span class="current-items-label"
-          >${range !== null && this.n > 0
-            ? html` <p>${range[0]}-${range[1]} of ${this.n}</p> `
-            : nothing}</span
+          >${range !== null && this.n > 0 ? html` <p>${range[0]}-${range[1]} of ${this.n}</p> ` : nothing}</span
         >
       </div>
     `;

@@ -1,16 +1,10 @@
+import { html, TemplateResult } from "lit";
+
 import { Meta } from "@storybook/web-components-vite";
+
+import { league, filename, selected, uuid, minimumCardPrice, sample, csvDataForDrag } from "./data.js";
 import { SampleCardElement } from "./e-sample-card.js";
 import "./e-sample-card.js";
-import {
-  league,
-  filename,
-  selected,
-  uuid,
-  minimumCardPrice,
-  sample,
-  csvDataForDrag,
-} from "./data.js";
-import { html, TemplateResult } from "lit";
 
 const meta: Meta<SampleCardElement> = {
   title: "Elements/e-sample-card/e-sample-card",

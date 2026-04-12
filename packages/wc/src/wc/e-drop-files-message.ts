@@ -1,6 +1,7 @@
 import { html, css, LitElement, TemplateResult, CSSResult } from "lit";
-import "./e-help-tip.js";
 import { customElement } from "lit/decorators.js";
+
+import "./e-help-tip.js";
 
 declare global {
   interface HTMLElementTagNameMap {

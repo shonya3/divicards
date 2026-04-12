@@ -29,10 +29,8 @@
  * @returns {ActArea}
  */
 const extractActAreaPopupData = (actAreaPopup) => {
-  const TOWN_IMAGE_URL =
-    "https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/WorldPanelTownPinIcon.webp";
-  const WAYPOINT_IMAGE_URL =
-    "https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/WorldPanelWaypointIcon.webp";
+  const TOWN_IMAGE_URL = "https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/WorldPanelTownPinIcon.webp";
+  const WAYPOINT_IMAGE_URL = "https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/WorldPanelWaypointIcon.webp";
   const LABYRINTH_TRIAL_IMAGE_URL =
     "https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/WorldPanelLabyrinthWaypointPinIcon.webp";
 

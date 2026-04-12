@@ -1,36 +1,36 @@
 <script setup lang="ts">
-import { computed, ref, Ref, shallowRef } from "vue";
-import { StashLoader } from "./StashLoader";
-import { command } from "./command";
-import { toast } from "./toast";
-import { isTauriError } from "./error";
-import { isTradeLeague } from "@divicards/shared/types.js";
-import { downloadText } from "@divicards/shared/lib.js";
-import { useSampleStore } from "./stores/sample";
-import { useGoogleAuthStore } from "./stores/googleAuth";
-import { useAuthStore } from "./stores/auth";
-import { useAutoAnimate } from "./composables/useAutoAnimate";
 import "@shoelace-style/shoelace/dist/components/copy-button/copy-button.js";
-import { BasePopupElement } from "@divicards/wc/e-base-popup.js";
-import UpdateChangelog from "./components/UpdateChangelog.vue";
-import NativeBrowserLink from "./components/NativeBrowserLink.vue";
-import { useAppVersion } from "./composables/useAppVersion";
-import GeneralTabWithItems from "./components/GeneralTabWithItems.vue";
-import { useTauriUpdater } from "./composables/useTauriUpdater";
-import { TabWithItems } from "poe-custom-elements/types.js";
-import { SampleCardElement } from "@divicards/wc/e-sample-card/e-sample-card.js";
-import { webviewWindow } from "@tauri-apps/api";
 
-import "@divicards/wc/e-theme-toggle/e-theme-toggle.js";
-import "@divicards/wc/e-sample-card/e-sample-card.js";
-import "@divicards/wc/stashes/e-stashes-view.js";
-import "@divicards/wc/e-poe-auth/e-poe-auth.js";
+import { downloadText } from "@divicards/shared/lib.js";
+import { isTradeLeague } from "@divicards/shared/types.js";
+import { BasePopupElement } from "@divicards/wc/e-base-popup.js";
 import "@divicards/wc/e-drop-files-message.js";
 import "@divicards/wc/e-import-file-tip.js";
-
+import "@divicards/wc/e-poe-auth/e-poe-auth.js";
+import { SampleCardElement } from "@divicards/wc/e-sample-card/e-sample-card.js";
+import "@divicards/wc/e-sample-card/e-sample-card.js";
 import { SubmitExportSampleEvent } from "@divicards/wc/e-sample-card/events.js";
-import { ExtractCardsEvent, StashtabFetchedEvent } from "@divicards/wc/stashes/events.js";
+import "@divicards/wc/e-theme-toggle/e-theme-toggle.js";
 import { ChangeThemeEvent } from "@divicards/wc/e-theme-toggle/events.js";
+import "@divicards/wc/stashes/e-stashes-view.js";
+import { ExtractCardsEvent, StashtabFetchedEvent } from "@divicards/wc/stashes/events.js";
+import { webviewWindow } from "@tauri-apps/api";
+import { TabWithItems } from "poe-custom-elements/types.js";
+import { computed, ref, Ref, shallowRef } from "vue";
+
+import { command } from "./command";
+import GeneralTabWithItems from "./components/GeneralTabWithItems.vue";
+import NativeBrowserLink from "./components/NativeBrowserLink.vue";
+import UpdateChangelog from "./components/UpdateChangelog.vue";
+import { useAppVersion } from "./composables/useAppVersion";
+import { useAutoAnimate } from "./composables/useAutoAnimate";
+import { useTauriUpdater } from "./composables/useTauriUpdater";
+import { isTauriError } from "./error";
+import { StashLoader } from "./StashLoader";
+import { useAuthStore } from "./stores/auth";
+import { useGoogleAuthStore } from "./stores/googleAuth";
+import { useSampleStore } from "./stores/sample";
+import { toast } from "./toast";
 
 const dropZoneRef = shallowRef<HTMLElement | null>(null);
 const sampleStore = useSampleStore();
@@ -136,10 +136,7 @@ const handleDropZoneDragLeave = (event: DragEvent) => {
   event.preventDefault();
   const dropZoneEl = dropZoneRef.value;
   // Check if the mouse is truly leaving the dropZoneEl, not just moving to a child.
-  if (
-    dropZoneEl &&
-    (event.relatedTarget === null || !dropZoneEl.contains(event.relatedTarget as Node))
-  ) {
+  if (dropZoneEl && (event.relatedTarget === null || !dropZoneEl.contains(event.relatedTarget as Node))) {
     dropZoneEl.classList.remove("drop-zone--active");
     isDragging.value = false;
   }
@@ -190,10 +187,7 @@ const handleDropZoneDrop = (event: DragEvent) => {
             username: authStore.name,
           }"
         ></e-poe-auth>
-        <sl-button
-          variant="success"
-          v-if="update && update.available"
-          @click="() => changelogPopupRef?.showModal()"
+        <sl-button variant="success" v-if="update && update.available" @click="() => changelogPopupRef?.showModal()"
           >Update is ready</sl-button
         >
         <e-theme-toggle @theme-toggle__change:theme="handle_change_theme"></e-theme-toggle>
@@ -206,9 +200,7 @@ const handleDropZoneDrop = (event: DragEvent) => {
     <e-stashes-view
       v-show="authStore.loggedIn && stashVisible"
       :stashLoader="stashLoader"
-      @stashes__sample-from-stashtab="
-        (e) => sampleStore.addSample(e.$stashtab_name, e.$sample, e.$league)
-      "
+      @stashes__sample-from-stashtab="(e) => sampleStore.addSample(e.$stashtab_name, e.$sample, e.$league)"
       @stashes__stashtab-fetched="handle_stashtab_fetched"
       @stashes__close="stashVisible = false"
       @stashes__extract-cards="handle_extract_cards"
@@ -239,13 +231,8 @@ const handleDropZoneDrop = (event: DragEvent) => {
     <div v-if="sampleStore.sampleCards.length >= 2">
       <h3>Select samples you want to merge</h3>
       <div class="sample-buttons">
-        <sl-button :disabled="sampleStore.samples.length < 2" @click="sampleStore.mergeAll">
-          Merge All
-        </sl-button>
-        <sl-button
-          :disabled="sampleStore.selectedSampleCards.length < 2"
-          @click="sampleStore.mergeSelected"
-        >
+        <sl-button :disabled="sampleStore.samples.length < 2" @click="sampleStore.mergeAll"> Merge All </sl-button>
+        <sl-button :disabled="sampleStore.selectedSampleCards.length < 2" @click="sampleStore.mergeSelected">
           Merge selected
         </sl-button>
         <sl-button @click="sampleStore.deleteAllFiles">Remove samples</sl-button>
@@ -270,9 +257,7 @@ const handleDropZoneDrop = (event: DragEvent) => {
           v-bind="fileCard"
           @sample__delete="(e) => sampleStore.deleteFile(e.$uuid)"
           @sample__change:selected="(e) => (fileCard.selected = e.$selected)"
-          @sample__change:minimum_card_price="
-            (e) => (fileCard.minimumCardPrice = e.$minimum_card_price)
-          "
+          @sample__change:minimum_card_price="(e) => (fileCard.minimumCardPrice = e.$minimum_card_price)"
           @change:league="
             (e) => {
               if (!isTradeLeague(e.$league)) return;

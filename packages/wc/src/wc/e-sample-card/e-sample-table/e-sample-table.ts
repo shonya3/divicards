@@ -1,13 +1,16 @@
 import { html, PropertyValues, LitElement, CSSResult, TemplateResult } from "lit";
 import { property, state, query, customElement } from "lit/decorators.js";
-import { toOrderedBy } from "@divicards/shared/toOrderedBy.js";
+
 import "@shoelace-style/shoelace/dist/components/checkbox/checkbox.js";
 import "@shoelace-style/shoelace/dist/components/input/input.js";
 import "@shoelace-style/shoelace/dist/components/range/range.js";
-import "poe-custom-elements/item-card.js";
+
+import { toOrderedBy } from "@divicards/shared/toOrderedBy.js";
 import { type Column, DivinationCardRecord, type Order } from "@divicards/shared/types.js";
-import { styles } from "./e-sample-table.styles.js";
+import "poe-custom-elements/item-card.js";
+
 import "./e-order-triangle.js";
+import { styles } from "./e-sample-table.styles.js";
 import { ChangeColumnOrder, ChangeMinPrice } from "./events.js";
 
 const { format } = new Intl.NumberFormat("ru", { maximumFractionDigits: 0 });
@@ -53,10 +56,7 @@ export class SampleTableElement extends LitElement {
           if (!amount) return false;
         }
 
-        return (
-          name.toLowerCase().includes(this.nameQuery.trim().toLowerCase()) &&
-          (price ?? 0) >= this.minPrice
-        );
+        return name.toLowerCase().includes(this.nameQuery.trim().toLowerCase()) && (price ?? 0) >= this.minPrice;
       });
 
       this.summary = this.filteredRecords.reduce(

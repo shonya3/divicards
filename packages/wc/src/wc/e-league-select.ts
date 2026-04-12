@@ -1,10 +1,13 @@
 import { CSSResult, LitElement, PropertyValueMap, TemplateResult, css, html, nothing } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
+
+import "@shoelace-style/shoelace/dist/components/input/input.js";
+import "@shoelace-style/shoelace/dist/components/option/option.js";
+import "@shoelace-style/shoelace/dist/components/select/select.js";
+
 import { ACTIVE_LEAGUE } from "@divicards/shared/lib.js";
 import { type League, tradeLeagues, leagues as allLeagues } from "@divicards/shared/types.js";
-import "@shoelace-style/shoelace/dist/components/select/select.js";
-import "@shoelace-style/shoelace/dist/components/option/option.js";
-import "@shoelace-style/shoelace/dist/components/input/input.js";
+
 import { LeagueChangeEvent } from "./events/change/league.js";
 
 declare global {

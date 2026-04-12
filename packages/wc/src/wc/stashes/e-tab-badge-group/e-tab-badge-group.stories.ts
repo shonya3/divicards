@@ -1,6 +1,7 @@
 import { html, TemplateResult } from "lit";
-import "./e-tab-badge-group.js";
+
 import { league, stashes } from "../data.js";
+import "./e-tab-badge-group.js";
 
 export default {
   title: "Elements/stashes/e-tab-badge-group",

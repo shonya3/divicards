@@ -488,36 +488,8 @@
         "Flooded Mine; Crystal Ore; Dig; Excavation; Grotto; Geode",
         "Maze of the Minotaur"
       ],
-      [
-        "disabled",
-        "Birth of the Three",
-        "",
-        "DONE",
-        "DONE",
-        "n/a",
-        "",
-        "",
-        "",
-        "drop disabled",
-        "n/a",
-        "n/a",
-        "n/a"
-      ],
-      [
-        "disabled",
-        "Blessing of God",
-        "",
-        "DONE",
-        "DONE",
-        "n/a",
-        "",
-        "",
-        "",
-        "drop disabled",
-        "n/a",
-        "n/a",
-        "n/a"
-      ],
+      ["disabled", "Birth of the Three", "", "DONE", "DONE", "n/a", "", "", "", "drop disabled", "n/a", "n/a", "n/a"],
+      ["disabled", "Blessing of God", "", "DONE", "DONE", "n/a", "", "", "", "drop disabled", "n/a", "n/a", "n/a"],
       [
         "atlas",
         "Blind Venture",
@@ -1982,43 +1954,9 @@
         "n/a",
         "The Sceptre of God"
       ],
-      [
-        "atlas",
-        "Lingering Remnants",
-        "",
-        "DONE",
-        "DONE",
-        "n/a",
-        "",
-        "Castle Ruins; Primordial Blocks"
-      ],
-      [
-        "atlas",
-        "Lonely Warrior",
-        "",
-        "DONE",
-        "",
-        "n/a",
-        "",
-        "Estuary",
-        "",
-        "3.25: Listed on Atlas."
-      ],
-      [
-        "Vendor",
-        "Lost Worlds",
-        "",
-        "DONE",
-        "DONE",
-        "n/a",
-        "Kirac shop",
-        "",
-        "",
-        "Kirac shop",
-        "n/a",
-        "n/a",
-        "n/a"
-      ],
+      ["atlas", "Lingering Remnants", "", "DONE", "DONE", "n/a", "", "Castle Ruins; Primordial Blocks"],
+      ["atlas", "Lonely Warrior", "", "DONE", "", "n/a", "", "Estuary", "", "3.25: Listed on Atlas."],
+      ["Vendor", "Lost Worlds", "", "DONE", "DONE", "n/a", "Kirac shop", "", "", "Kirac shop", "n/a", "n/a", "n/a"],
       [
         "",
         "Love Through Ice",
@@ -2048,21 +1986,7 @@
         "Barrows; Grotto; Lair; Caer Blaidd, Wolfpack's Den; The Den (A7)",
         "n/a"
       ],
-      [
-        "disabled",
-        "Luck of the Vaal",
-        "",
-        "DONE",
-        "DONE",
-        "n/a",
-        "",
-        "",
-        "",
-        "drop disabled",
-        "n/a",
-        "n/a",
-        "n/a"
-      ],
+      ["disabled", "Luck of the Vaal", "", "DONE", "DONE", "n/a", "", "", "", "drop disabled", "n/a", "n/a", "n/a"],
       [
         "atlas",
         "Lucky Connections",
@@ -2362,18 +2286,7 @@
         "",
         "Maligaro's Sanctum; The Temple of Decay Level 2"
       ],
-      [
-        "",
-        "Prejudice",
-        "",
-        "DONE",
-        "DONE",
-        "n/a",
-        "Redeemer influenced maps",
-        "",
-        "",
-        "Redeemer influenced maps"
-      ],
+      ["", "Prejudice", "", "DONE", "DONE", "n/a", "Redeemer influenced maps", "", "", "Redeemer influenced maps"],
       [
         "atlas",
         "Pride Before the Fall",
@@ -2700,18 +2613,7 @@
         "n/a",
         "n/a"
       ],
-      [
-        "atlas",
-        "Temperance",
-        "",
-        "DONE",
-        "",
-        "n/a",
-        "",
-        "Ancient City; Siege",
-        "",
-        "3.25: Listed on Atlas."
-      ],
+      ["atlas", "Temperance", "", "DONE", "", "n/a", "", "Ancient City; Siege", "", "3.25: Listed on Atlas."],
       [
         "atlas",
         "Terrible Secret of Space",
@@ -3798,16 +3700,7 @@
         "",
         "Maelström of Chaos with Barrel Sextant"
       ],
-      [
-        "atlas",
-        "The Encroaching Darkness",
-        "",
-        "DONE",
-        "DONE",
-        "n/a",
-        "",
-        "Death and Taxes; Maelström of Chaos"
-      ],
+      ["atlas", "The Encroaching Darkness", "", "DONE", "DONE", "n/a", "", "Death and Taxes; Maelström of Chaos"],
       [
         "",
         "The Endless Darkness",
@@ -6312,18 +6205,7 @@
         "n/a",
         "n/a"
       ],
-      [
-        "disabled",
-        "The Valley of Steel Boxes",
-        "",
-        "DONE",
-        "DONE",
-        "n/a",
-        "",
-        "",
-        "",
-        "drop disabled"
-      ],
+      ["disabled", "The Valley of Steel Boxes", "", "DONE", "DONE", "n/a", "", "", "", "drop disabled"],
       [
         "atlas",
         "The Vast",
@@ -6800,18 +6682,7 @@
         "n/a",
         "n/a"
       ],
-      [
-        "atlas",
-        "Toxic Tidings",
-        "",
-        "DONE",
-        "",
-        "n/a",
-        "",
-        "Sunken City; Toxic Sewer",
-        "",
-        "3.25: Listed on Atlas."
-      ],
+      ["atlas", "Toxic Tidings", "", "DONE", "", "n/a", "", "Sunken City; Toxic Sewer", "", "3.25: Listed on Atlas."],
       [
         "atlas",
         "Tranquillity",
@@ -7027,18 +6898,7 @@
         "",
         "Factory"
       ],
-      [
-        "",
-        "Winter's Embrace",
-        "",
-        "none",
-        "none",
-        "no hypothesis",
-        "",
-        "",
-        "",
-        "snow_area? no leads"
-      ]
+      ["", "Winter's Embrace", "", "none", "none", "no hypothesis", "", "", "", "snow_area? no leads"]
     ]
   },
   "styled_columns": {

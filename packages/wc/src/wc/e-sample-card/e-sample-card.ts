@@ -1,37 +1,38 @@
 import { html, LitElement, CSSResult, TemplateResult } from "lit";
-import { DefineComponent } from "vue";
-import { LeagueSelectElement } from "../e-league-select.js";
-import "../e-league-select.js";
-import { BasePopupElement } from "../e-base-popup.js";
-import "./e-fixed-names/e-fixed-names.js";
-import "./e-not-cards/e-not-cards.js";
+import { customElement, property, query, state } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+
+import "@shoelace-style/shoelace/dist/components/button/button.js";
+import "@shoelace-style/shoelace/dist/components/checkbox/checkbox.js";
+import "@shoelace-style/shoelace/dist/components/icon-button/icon-button.js";
+import "@shoelace-style/shoelace/dist/components/icon/icon.js";
+import "@shoelace-style/shoelace/dist/components/input/input.js";
+import "@shoelace-style/shoelace/dist/components/range/range.js";
+import SlRange from "@shoelace-style/shoelace/dist/components/range/range.js";
+
+import { ACTIVE_LEAGUE } from "@divicards/shared/lib.js";
 import {
   DivinationCardRecord,
   type DivinationCardsSample,
   type TradeLeague,
   isTradeLeague,
 } from "@divicards/shared/types.js";
-import { customElement, property, query, state } from "lit/decorators.js";
-import { ACTIVE_LEAGUE } from "@divicards/shared/lib.js";
-import { classMap } from "lit/directives/class-map.js";
-import "@shoelace-style/shoelace/dist/components/button/button.js";
-import "@shoelace-style/shoelace/dist/components/range/range.js";
-import "@shoelace-style/shoelace/dist/components/icon/icon.js";
-import "@shoelace-style/shoelace/dist/components/icon-button/icon-button.js";
-import SlRange from "@shoelace-style/shoelace/dist/components/range/range.js";
-import "@shoelace-style/shoelace/dist/components/checkbox/checkbox.js";
-import "@shoelace-style/shoelace/dist/components/input/input.js";
-import "./e-sample-table/e-sample-table.js";
+import { DefineComponent } from "vue";
+
+import { VueEventHandlers } from "../../event-utils.js";
+import { BasePopupElement } from "../e-base-popup.js";
 import "../e-base-popup.js";
-import { SampleTableElement } from "./e-sample-table/e-sample-table.js";
+import "../e-base-popup.js";
+import { LeagueSelectElement } from "../e-league-select.js";
+import "../e-league-select.js";
 import { LeagueChangeEvent } from "../events/change/league.js";
+import "./e-fixed-names/e-fixed-names.js";
 import "./e-form-export-sample/e-form-export-sample.js";
-import "../e-base-popup.js";
-import {
-  type ExportSampleTo,
-  PresubmitExportFormEvent,
-} from "./e-form-export-sample/e-form-export-sample.js";
+import { type ExportSampleTo, PresubmitExportFormEvent } from "./e-form-export-sample/e-form-export-sample.js";
+import "./e-not-cards/e-not-cards.js";
 import { styles } from "./e-sample-card.styles.js";
+import "./e-sample-table/e-sample-table.js";
+import { SampleTableElement } from "./e-sample-table/e-sample-table.js";
 import {
   SubmitExportSampleEvent,
   SaveToFileClickEvent,
@@ -42,7 +43,6 @@ import {
   FilenameChangeEvent,
   Events,
 } from "./events.js";
-import { VueEventHandlers } from "../../event-utils.js";
 
 export type Props = {
   league?: TradeLeague;
@@ -143,11 +143,7 @@ export class SampleCardElement extends LitElement {
     >
       <div class="card-header">
         <div class="drag-handle-container" draggable="true" @dragstart=${this.#handleDragStart}>
-          <sl-icon
-            name="grip-vertical"
-            class="drag-handle-icon"
-            title="Drag to create file"
-          ></sl-icon>
+          <sl-icon name="grip-vertical" class="drag-handle-icon" title="Drag to create file"></sl-icon>
           <span class="drag-handle-text">Drag to export</span>
         </div>
         <sl-icon-button
@@ -177,9 +173,7 @@ export class SampleCardElement extends LitElement {
         ${this.sample.fixedNames.length > 0
           ? html`<e-fixed-names .fixedNames=${this.sample.fixedNames}></e-fixed-names>`
           : null}
-        ${this.sample.notCards.length > 0
-          ? html`<e-not-cards .notCards=${this.sample.notCards}></e-not-cards>`
-          : null}
+        ${this.sample.notCards.length > 0 ? html`<e-not-cards .notCards=${this.sample.notCards}></e-not-cards>` : null}
       </div>
       <svg
         class="grid-icon"
@@ -211,11 +205,7 @@ export class SampleCardElement extends LitElement {
         <p>${this.filteredSummary.amount}</p>
         <img width="35" height="35" src="/divination-card.png" alt="Divination card" />
       </div>
-      <e-league-select
-        trade
-        .league=${this.league}
-        @change:league=${this.#handle_league_change}
-      ></e-league-select>
+      <e-league-select trade .league=${this.league} @change:league=${this.#handle_league_change}></e-league-select>
       <div class="export-buttons">
         <sl-button @click=${this.#emit_save_to_file_click}>
           <sl-icon style="font-size:1.6rem" name="filetype-csv"></sl-icon>

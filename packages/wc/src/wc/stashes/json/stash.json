@@ -71,9 +71,7 @@
     {
       "baseType": "Mysterious Incubator",
       "descrText": "Right click this item then left click an item to apply it. The Incubated item drops after killing a specific number of monsters.",
-      "explicitMods": [
-        "Adds an incubated item to an equippable item\r\nItem drops after killing 8307 monsters"
-      ],
+      "explicitMods": ["Adds an incubated item to an equippable item\r\nItem drops after killing 8307 monsters"],
       "frameType": 5,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvSW5jdWJhdGlvbi9JbmN1YmF0aW9uR2VuZXJpYyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/63aabd064b/IncubationGeneric.png",
@@ -224,11 +222,7 @@
       "artFilename": "SambodhisVow",
       "baseType": "Sambodhi's Vow",
       "explicitMods": ["<whiteitem>{Mortal Fragment}"],
-      "flavourText": [
-        "<size:34>{He dispels dark realms\r",
-        "until mortal sufferings\r",
-        "yield to hopeful light.}"
-      ],
+      "flavourText": ["<size:34>{He dispels dark realms\r", "until mortal sufferings\r", "yield to hopeful light.}"],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
@@ -323,9 +317,7 @@
       "artFilename": "TheRealm",
       "baseType": "The Realm",
       "explicitMods": ["<gemitem>{Portal}\r\n<default>{Quality:} <augmented>{+1-20%}"],
-      "flavourText": [
-        "If you wish to rush into strange places, be prepared to face strange things."
-      ],
+      "flavourText": ["If you wish to rush into strange places, be prepared to face strange things."],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
@@ -355,9 +347,7 @@
       "artFilename": "TheLastSupper",
       "baseType": "The Last Supper",
       "explicitMods": ["<uniqueitem>{Bino's Kitchen Knife}"],
-      "flavourText": [
-        "\"Bino's brief career as a chef at Axiom saved the executioner a lot of work.\""
-      ],
+      "flavourText": ["\"Bino's brief career as a chef at Axiom saved the executioner a lot of work.\""],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
@@ -631,13 +621,8 @@
     {
       "artFilename": "StruckbyLightning",
       "baseType": "Struck by Lightning",
-      "explicitMods": [
-        "<magicitem>{Electrocuting Jewellery}\r\n<default>{Item Level:} <normal>{76}"
-      ],
-      "flavourText": [
-        "'Lightning never strikes the same place twice'\r",
-        "is really just wishful thinking."
-      ],
+      "explicitMods": ["<magicitem>{Electrocuting Jewellery}\r\n<default>{Item Level:} <normal>{76}"],
+      "flavourText": ["'Lightning never strikes the same place twice'\r", "is really just wishful thinking."],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
@@ -666,9 +651,7 @@
     {
       "artFilename": "TheSpoiledPrince",
       "baseType": "The Spoiled Prince",
-      "explicitMods": [
-        "<magicitem>{Dictator's Prophecy Wand}\r\n<default>{Item Level:} <normal>{100}"
-      ],
+      "explicitMods": ["<magicitem>{Dictator's Prophecy Wand}\r\n<default>{Item Level:} <normal>{100}"],
       "flavourText": ["A boy who grows up with everything learns to appreciate nothing."],
       "frameType": 6,
       "h": 1,
@@ -886,9 +869,7 @@
     {
       "artFilename": "EmperorOfPurity",
       "baseType": "Emperor of Purity",
-      "explicitMods": [
-        "<whiteitem>{Six-Link Holy Chainmail}\r\n<default>{Item Level:} <normal>{60}"
-      ],
+      "explicitMods": ["<whiteitem>{Six-Link Holy Chainmail}\r\n<default>{Item Level:} <normal>{60}"],
       "flavourText": [
         "True to his title,\r",
         "Voll, newly crowned,\r",
@@ -1022,9 +1003,7 @@
       "artFilename": "TheScarredMeadow",
       "baseType": "The Scarred Meadow",
       "explicitMods": ["<uniqueitem>{Wake of Destruction}"],
-      "flavourText": [
-        "The earth offers nourishment, growth and healing. Unless, of course, the sky has other plans."
-      ],
+      "flavourText": ["The earth offers nourishment, growth and healing. Unless, of course, the sky has other plans."],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
@@ -1338,9 +1317,7 @@
       "artFilename": "AtzirisArmory",
       "baseType": "Atziri's Arsenal",
       "explicitMods": ["<uniqueitem>{Weapon}\r\n<corrupted>{Corrupted}"],
-      "flavourText": [
-        "In the prison of all sins, will you grasp godhood or sorrow? Only hope lies under the shadows."
-      ],
+      "flavourText": ["In the prison of all sins, will you grasp godhood or sorrow? Only hope lies under the shadows."],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
@@ -1399,12 +1376,8 @@
     {
       "artFilename": "TheTrial",
       "baseType": "The Trial",
-      "explicitMods": [
-        "<rareitem>{Map}\r\n<default>{Map Tier:} <normal>{15}\r\n<corrupted>{Corrupted}"
-      ],
-      "flavourText": [
-        "You cannot journey to new lands until you have the courage to leave the safety of home."
-      ],
+      "explicitMods": ["<rareitem>{Map}\r\n<default>{Map Tier:} <normal>{15}\r\n<corrupted>{Corrupted}"],
+      "flavourText": ["You cannot journey to new lands until you have the courage to leave the safety of home."],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
@@ -1434,9 +1407,7 @@
       "artFilename": "TheObscured",
       "baseType": "The Obscured",
       "explicitMods": ["<normal>{Breachstone}"],
-      "flavourText": [
-        "Our world, dangerous as it is, is far safer than what lies just beyond our sight."
-      ],
+      "flavourText": ["Our world, dangerous as it is, is far safer than what lies just beyond our sight."],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
@@ -1466,9 +1437,7 @@
       "artFilename": "TheGemcutter",
       "baseType": "The Gemcutter",
       "explicitMods": ["<currencyitem>{Gemcutter's Prism}"],
-      "flavourText": [
-        "In the hands of a master craftsman, a worthless pebble can adorn the crown of a king."
-      ],
+      "flavourText": ["In the hands of a master craftsman, a worthless pebble can adorn the crown of a king."],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
@@ -1498,12 +1467,7 @@
       "artFilename": "TheSurvivalist",
       "baseType": "The Survivalist",
       "explicitMods": ["<currencyitem>{7x Orb of Alchemy}"],
-      "flavourText": [
-        "A lucky number \r",
-        "For us all \r",
-        "To help us through \r",
-        "The perils told."
-      ],
+      "flavourText": ["A lucky number \r", "For us all \r", "To help us through \r", "The perils told."],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
@@ -1561,9 +1525,7 @@
     {
       "baseType": "Explorer's Scouting Report",
       "descrText": "Right click this item while viewing Kirac's Atlas Missions to use it.",
-      "explicitMods": [
-        "Reroll all of Kirac's Atlas Missions, using uncompleted Maps where possible."
-      ],
+      "explicitMods": ["Reroll all of Kirac's Atlas Missions, using uncompleted Maps where possible."],
       "frameType": 5,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NvdXRpbmdSZXBvcnQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/584635f3c8/ScoutingReport.png",
@@ -1650,12 +1612,8 @@
     {
       "artFilename": "TheTrial",
       "baseType": "The Trial",
-      "explicitMods": [
-        "<rareitem>{Map}\r\n<default>{Map Tier:} <normal>{15}\r\n<corrupted>{Corrupted}"
-      ],
-      "flavourText": [
-        "You cannot journey to new lands until you have the courage to leave the safety of home."
-      ],
+      "explicitMods": ["<rareitem>{Map}\r\n<default>{Map Tier:} <normal>{15}\r\n<corrupted>{Corrupted}"],
+      "flavourText": ["You cannot journey to new lands until you have the courage to leave the safety of home."],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
@@ -1776,9 +1734,7 @@
     {
       "artFilename": "AkilsProphecy",
       "baseType": "Akil's Prophecy",
-      "explicitMods": [
-        "<uniqueitem>{Elegant Round Shield}\r\n<corrupted>{Two-Implicit}\r\n<corrupted>{Corrupted}"
-      ],
+      "explicitMods": ["<uniqueitem>{Elegant Round Shield}\r\n<corrupted>{Two-Implicit}\r\n<corrupted>{Corrupted}"],
       "flavourText": [
         "<size:28>{The hatungo know many answers to the same question, \r",
         "for time itself is a tangled web.}"
@@ -2435,9 +2391,7 @@
       "artFilename": "BrushPaintAndPalette",
       "baseType": "Brush, Paint and Palette",
       "explicitMods": ["<divination>{The Artist}"],
-      "flavourText": [
-        "\"Man may shape the world, but these? These shape the man.\" -Inquisitor Maligaro"
-      ],
+      "flavourText": ["\"Man may shape the world, but these? These shape the man.\" -Inquisitor Maligaro"],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
@@ -2467,9 +2421,7 @@
       "artFilename": "TheIncantation",
       "baseType": "The Incantation",
       "explicitMods": ["<uniqueitem>{The Whispering Ice}"],
-      "flavourText": [
-        "When there is no other choice, even the meekest whisper can bring about the greatest storm."
-      ],
+      "flavourText": ["When there is no other choice, even the meekest whisper can bring about the greatest storm."],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
@@ -2499,9 +2451,7 @@
       "artFilename": "TheMasterArtisan",
       "baseType": "The Master Artisan",
       "explicitMods": ["<currencyitem>{20x Quality Currency}"],
-      "flavourText": [
-        "Perfection is the standard, excellence will be handled on a case by case basis."
-      ],
+      "flavourText": ["Perfection is the standard, excellence will be handled on a case by case basis."],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
@@ -2530,9 +2480,7 @@
     {
       "artFilename": "TheKingsBlade",
       "baseType": "The King's Blade",
-      "explicitMods": [
-        "<size:31>{<magicitem>{Bloodthirsty Eternal Sword}\r\n<default>{Item Level:} <normal>{66}}"
-      ],
+      "explicitMods": ["<size:31>{<magicitem>{Bloodthirsty Eternal Sword}\r\n<default>{Item Level:} <normal>{66}}"],
       "flavourText": [
         "<size:25>{\"To know for what you fight. To get up again when you've been struck down. To outmanoeuvre someone faster, trick someone smarter, crush someone stronger. That's what it takes to claim the crown.\"\r",
         "- Daresso, the King of Swords}"
@@ -2566,9 +2514,7 @@
       "artFilename": "TheMasterArtisan",
       "baseType": "The Master Artisan",
       "explicitMods": ["<currencyitem>{20x Quality Currency}"],
-      "flavourText": [
-        "Perfection is the standard, excellence will be handled on a case by case basis."
-      ],
+      "flavourText": ["Perfection is the standard, excellence will be handled on a case by case basis."],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
@@ -2657,9 +2603,7 @@
     {
       "artFilename": "VolatilePower",
       "baseType": "Volatile Power",
-      "explicitMods": [
-        "<gemitem>{Vaal Gem}\r\n<default>{Quality:} <augmented>{+20%}\r\n<corrupted>{Corrupted}"
-      ],
+      "explicitMods": ["<gemitem>{Vaal Gem}\r\n<default>{Quality:} <augmented>{+20%}\r\n<corrupted>{Corrupted}"],
       "flavourText": ["Unlimited power is apt to corrupt the minds of those who possess it."],
       "frameType": 6,
       "h": 1,
@@ -2690,9 +2634,7 @@
       "artFilename": "TheCelestialJusticar",
       "baseType": "The Celestial Justicar",
       "explicitMods": ["<whiteitem>{Six-Link Astral Plate}"],
-      "flavourText": [
-        "Wrapped in the glory of the heavens, she comes to mete out justice for the fallen."
-      ],
+      "flavourText": ["Wrapped in the glory of the heavens, she comes to mete out justice for the fallen."],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
@@ -2752,9 +2694,7 @@
       "artFilename": "TheGemcutter",
       "baseType": "The Gemcutter",
       "explicitMods": ["<currencyitem>{Gemcutter's Prism}"],
-      "flavourText": [
-        "In the hands of a master craftsman, a worthless pebble can adorn the crown of a king."
-      ],
+      "flavourText": ["In the hands of a master craftsman, a worthless pebble can adorn the crown of a king."],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
@@ -2813,9 +2753,7 @@
     {
       "baseType": "Jeweller's Delirium Orb",
       "descrText": "Right click this item then left click a Map item to apply it. Can apply up to 5 to a single Map item.",
-      "explicitMods": [
-        "Modifies a Map item adding layers of Delirium with the Trinkets reward type"
-      ],
+      "explicitMods": ["Modifies a Map item adding layers of Delirium with the Trinkets reward type"],
       "frameType": 5,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJUcmlua2V0cyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/51a3def31b/DeliriumOrbTrinkets.png",
@@ -3022,9 +2960,7 @@
       "artFilename": "TheSurveyor",
       "baseType": "The Surveyor",
       "explicitMods": ["<whiteitem>{Map}\r\n<default>{Map Tier:} <normal>{14}"],
-      "flavourText": [
-        "Exploring lands made of flesh and sorrow, we'll reap and plunder like there's no tomorrow."
-      ],
+      "flavourText": ["Exploring lands made of flesh and sorrow, we'll reap and plunder like there's no tomorrow."],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
@@ -3083,9 +3019,7 @@
     {
       "artFilename": "DyingAnguish",
       "baseType": "Dying Anguish",
-      "explicitMods": [
-        "<gemitem>{Level 19 Gem}\r\n<default>{Alternate Quality:} <augmented>{+19%}"
-      ],
+      "explicitMods": ["<gemitem>{Level 19 Gem}\r\n<default>{Alternate Quality:} <augmented>{+19%}"],
       "flavourText": [
         "<size:29>{Moribund, he gazed upon the journey taken as blood trickled down his chin. His eye closed on the city ahead that he would never call home.}"
       ],
@@ -3203,9 +3137,7 @@
       "artFilename": "TheBattleBorn",
       "baseType": "The Battle Born",
       "explicitMods": ["<uniqueitem>{Axe}"],
-      "flavourText": [
-        "\"No man can best me, no demon can fell me. For I vanquish all with my axe!\""
-      ],
+      "flavourText": ["\"No man can best me, no demon can fell me. For I vanquish all with my axe!\""],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
@@ -3392,10 +3324,7 @@
     {
       "baseType": "Small Cluster Jewel",
       "descrText": "Place into an allocated Small, Medium or Large Jewel Socket on the Passive Skill Tree. Added passives do not interact with jewel radiuses. Right click to remove from the Socket.",
-      "enchantMods": [
-        "Adds 2 Passive Skills",
-        "Added Small Passive Skills grant: 15% increased Evasion Rating"
-      ],
+      "enchantMods": ["Adds 2 Passive Skills", "Added Small Passive Skills grant: 15% increased Evasion Rating"],
       "frameType": 2,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvSmV3ZWxzL05ld0dlbUJhc2UxIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/0eb1a9d981/NewGemBase1.png",
@@ -3545,9 +3474,7 @@
     {
       "artFilename": "ImperialLegacy",
       "baseType": "Imperial Legacy",
-      "explicitMods": [
-        "<whiteitem>{Six-Link Imperial Bow}\r\n<default>{Item Level:} <normal>{100}"
-      ],
+      "explicitMods": ["<whiteitem>{Six-Link Imperial Bow}\r\n<default>{Item Level:} <normal>{100}"],
       "flavourText": ["A life lost, A legacy born."],
       "frameType": 6,
       "h": 1,
@@ -3629,9 +3556,7 @@
       "artFilename": "TheComingStorm",
       "baseType": "The Coming Storm",
       "explicitMods": ["<uniqueitem>{Lightning Coil}"],
-      "flavourText": [
-        "No man may hope to turn back the storm. You can only hope you do not attract its ire."
-      ],
+      "flavourText": ["No man may hope to turn back the storm. You can only hope you do not attract its ire."],
       "frameType": 6,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",

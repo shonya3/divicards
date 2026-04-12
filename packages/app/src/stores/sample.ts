@@ -1,14 +1,9 @@
 import { ACTIVE_LEAGUE } from "@divicards/shared/lib.js";
-import { defineStore } from "pinia";
-import { SampleData, command } from "../command";
-import {
-  DivinationCardsSample,
-  League,
-  TradeLeague,
-  isTradeLeague,
-  leagues,
-} from "@divicards/shared/types.js";
+import { DivinationCardsSample, League, TradeLeague, isTradeLeague, leagues } from "@divicards/shared/types.js";
 import { Props as SampleCardProps } from "@divicards/wc/e-sample-card/e-sample-card.js";
+import { defineStore } from "pinia";
+
+import { SampleData, command } from "../command";
 
 const sampleCardsAmount = (sample: DivinationCardsSample): number => {
   return sample.cards.reduce((total, { amount }) => (total += amount), 0);
@@ -119,11 +114,7 @@ export const useSampleStore = defineStore("sampleCards", {
       return this.sampleCards.find((c) => c.uuid === id) ?? null;
     },
 
-    async addCard(
-      filename: string,
-      sampleData: SampleData,
-      league: TradeLeague = ACTIVE_LEAGUE,
-    ): Promise<void> {
+    async addCard(filename: string, sampleData: SampleData, league: TradeLeague = ACTIVE_LEAGUE): Promise<void> {
       const sampleCard = await createSampleCard(filename, sampleData, league);
       this.sampleCards.push(sampleCard);
     },
@@ -164,17 +155,11 @@ export const useSampleStore = defineStore("sampleCards", {
     },
 
     async addFromDragAndDrop(e: DragEvent): Promise<PromiseSettledResult<void>[]> {
-      return Promise.allSettled(
-        Array.from(e.dataTransfer?.files ?? []).map((f) => this.addFromFile(f)),
-      );
+      return Promise.allSettled(Array.from(e.dataTransfer?.files ?? []).map((f) => this.addFromFile(f)));
     },
 
     async addSample(name: string, sample: DivinationCardsSample, league: League): Promise<void> {
-      const sampleCard = await createSampleCardFromSample(
-        name,
-        sample,
-        isTradeLeague(league) ? league : ACTIVE_LEAGUE,
-      );
+      const sampleCard = await createSampleCardFromSample(name, sample, isTradeLeague(league) ? league : ACTIVE_LEAGUE);
       this.sampleCards.push(sampleCard);
     },
 
@@ -183,11 +168,7 @@ export const useSampleStore = defineStore("sampleCards", {
 
       const index = this.sampleCards.findIndex((c) => c.uuid === oldSampleCard.uuid);
       if (index === -1) return;
-      this.sampleCards[index] = await createSampleCard(
-        oldSampleCard.filename,
-        oldSampleCard.sample,
-        league,
-      );
+      this.sampleCards[index] = await createSampleCard(oldSampleCard.filename, oldSampleCard.sample, league);
     },
 
     async replaceMerged(league: League): Promise<void> {

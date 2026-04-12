@@ -1,9 +1,11 @@
+import { html, TemplateResult } from "lit";
+
+import { FixedName } from "@divicards/shared/types.js";
 import { Meta } from "@storybook/web-components-vite";
+
+import { fixedNames } from "./data.js";
 import { FixedNamesElement } from "./e-fixed-names.js";
 import "./e-fixed-names.js";
-import { html, TemplateResult } from "lit";
-import { fixedNames } from "./data.js";
-import { FixedName } from "@divicards/shared/types.js";
 
 const meta: Meta<FixedNamesElement> = {
   title: "Elements/e-sample-card/e-fixed-names",

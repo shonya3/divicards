@@ -1,9 +1,12 @@
 import { html, css, LitElement, TemplateResult, CSSResult } from "lit";
 import { customElement, property } from "lit/decorators.js";
+
 import "@shoelace-style/shoelace/dist/components/button/button.js";
-import { Events, LoginClickEvent, LogoutClickEvent } from "./events.js";
+
 import { DefineComponent } from "vue";
+
 import { VueEventHandlers } from "../../event-utils.js";
+import { Events, LoginClickEvent, LogoutClickEvent } from "./events.js";
 
 export type PoeAuthProps = {
   auth: AuthState;

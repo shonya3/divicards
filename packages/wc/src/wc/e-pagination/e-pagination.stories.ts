@@ -1,7 +1,9 @@
+import { html, TemplateResult } from "lit";
+
 import { Meta } from "@storybook/web-components-vite";
+
 import { PaginationElement } from "./e-pagination.js";
 import "./e-pagination.js";
-import { html, TemplateResult } from "lit";
 
 const meta: Meta<PaginationElement> = {
   title: "Elements/e-pagination",

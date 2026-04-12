@@ -1,7 +1,9 @@
-import { OrderTriangleElement, Size } from "./e-order-triangle.js";
-import { Meta } from "@storybook/web-components-vite";
 import { html, TemplateResult } from "lit";
+
 import { Order } from "@divicards/shared/types.js";
+import { Meta } from "@storybook/web-components-vite";
+
+import { OrderTriangleElement, Size } from "./e-order-triangle.js";
 import "./e-order-triangle.js";
 
 const meta: Meta<OrderTriangleElement> = {
@@ -24,10 +26,6 @@ export default meta;
 
 export const Default = {
   render({ order, active, size }: { order: Order; active: boolean; size: Size }): TemplateResult {
-    return html`<e-order-triangle
-      order=${order}
-      size=${size}
-      ?active=${active}
-    ></e-order-triangle>`;
+    return html`<e-order-triangle order=${order} size=${size} ?active=${active}></e-order-triangle>`;
   },
 };

@@ -1,25 +1,30 @@
-import type { IStashLoader } from "@divicards/shared/IStashLoader.js";
+import { Task } from "@lit/task";
 import { html, PropertyValues, nothing, LitElement, CSSResult, TemplateResult } from "lit";
-import "../e-help-tip.js";
-import "../e-league-select.js";
-import "./e-tab-badge-group/e-tab-badge-group.js";
-import "./e-stash-tab-errors.js";
 import { property, state, query, customElement } from "lit/decorators.js";
-import { type League } from "@divicards/shared/types.js";
-import { ACTIVE_LEAGUE } from "@divicards/shared/lib.js";
-import "@shoelace-style/shoelace/dist/components/input/input.js";
+
 import "@shoelace-style/shoelace/dist/components/button/button.js";
+import "@shoelace-style/shoelace/dist/components/input/input.js";
 import "@shoelace-style/shoelace/dist/components/radio-button/radio-button.js";
 import "@shoelace-style/shoelace/dist/components/radio-group/radio-group.js";
 import "@shoelace-style/shoelace/dist/components/spinner/spinner.js";
+
 import { isStashTabError } from "@divicards/shared/error.js";
-import type { ErrorLabel, SelectedStashtabs } from "./types.js";
-import { styles } from "./e-stashes-view.styles.js";
-import "./e-stash-tab-container/e-stash-tab-container.js";
-import { Task } from "@lit/task";
-import { ExtractCardsEvent as ContainerExtractCardsEvent } from "./e-stash-tab-container/events.js";
+import { ACTIVE_LEAGUE } from "@divicards/shared/lib.js";
+import { type League } from "@divicards/shared/types.js";
 import { NoItemsTab, TabWithItems } from "poe-custom-elements/types.js";
+import { DefineComponent } from "vue";
+
+import { VueEventHandlers } from "../../event-utils.js";
+import "../e-help-tip.js";
+import "../e-league-select.js";
 import { LeagueChangeEvent } from "../events/change/league.js";
+import "./e-stash-tab-container/e-stash-tab-container.js";
+import { ExtractCardsEvent as ContainerExtractCardsEvent } from "./e-stash-tab-container/events.js";
+import "./e-stash-tab-errors.js";
+import { styles } from "./e-stashes-view.styles.js";
+import "./e-tab-badge-group/e-tab-badge-group.js";
+import { MultiselectChangeEvent } from "./e-tab-badge-group/events.js";
+import { TabClickEvent } from "./e-tab-badge/events.js";
 import {
   ExtractCardsEvent,
   SampleFromStashtabEvent,
@@ -29,10 +34,9 @@ import {
   CloseEvent,
   Events,
 } from "./events.js";
-import { DefineComponent } from "vue";
-import { VueEventHandlers } from "../../event-utils.js";
-import { MultiselectChangeEvent } from "./e-tab-badge-group/events.js";
-import { TabClickEvent } from "./e-tab-badge/events.js";
+
+import type { ErrorLabel, SelectedStashtabs } from "./types.js";
+import type { IStashLoader } from "@divicards/shared/IStashLoader.js";
 
 const SECS_300 = 300 * 1000;
 const SECS_10 = 10 * 1000;
@@ -76,9 +80,7 @@ export class StashesViewElement extends LitElement {
       if (!tab) {
         return null;
       }
-      return await this.#loadSingleTabContent(tab.id, this.league, () =>
-        this.stashLoader.tab(tab.id, this.league),
-      );
+      return await this.#loadSingleTabContent(tab.id, this.league, () => this.stashLoader.tab(tab.id, this.league));
     },
     args: () => [this.opened_tab],
   });
@@ -116,7 +118,7 @@ export class StashesViewElement extends LitElement {
           ? html`
               <div>
                 ${this.fetchingStashTab
-                  ? html`<sl-button><sl-spinner></sl-spinner></sl-button>`
+                  ? html` <sl-button><sl-spinner></sl-spinner></sl-button> `
                   : this.multiselect
                     ? html`<sl-button
                         id="get-data-btn"
@@ -133,12 +135,8 @@ export class StashesViewElement extends LitElement {
             `
           : html`<div>
               ${this.fetchingStash
-                ? html`<sl-button size="small"><sl-spinner></sl-spinner></sl-button>`
-                : html`<sl-button
-                    variant="primary"
-                    size="small"
-                    id="stashes-btn"
-                    @click=${this.#loadStash}
+                ? html` <sl-button size="small"><sl-spinner></sl-spinner></sl-button> `
+                : html`<sl-button variant="primary" size="small" id="stashes-btn" @click=${this.#loadStash}
                     >Load Stash</sl-button
                   >`}
             </div> `}
@@ -154,9 +152,7 @@ export class StashesViewElement extends LitElement {
                       ${DOWNLOAD_AS_VARIANTS.map(
                         (variant) =>
                           html`<sl-radio-button size="small" value=${variant}
-                            >${variant === "divination-cards-sample"
-                              ? "cards"
-                              : "poe tab"}</sl-radio-button
+                            >${variant === "divination-cards-sample" ? "cards" : "poe tab"}</sl-radio-button
                           >`,
                       )}
                     </sl-radio-group>`
@@ -166,9 +162,7 @@ export class StashesViewElement extends LitElement {
                     <p>PoE API allows 30 requests in 5 minutes</p>
                   </e-help-tip>
                   <div class="loads-available">
-                    Loads available:<span class="loads-available__value"
-                      >${this.stashLoadsAvailable}</span
-                    >
+                    Loads available:<span class="loads-available__value">${this.stashLoadsAvailable}</span>
                   </div>
                 </div>
               `
@@ -215,17 +209,10 @@ export class StashesViewElement extends LitElement {
                 .tab=${tab}
               ></e-stash-tab-container>`,
             initial: () => {
-              return html`initial`;
+              return html` initial `;
             },
             error: (err: unknown) => {
-              if (
-                !(
-                  typeof err === "object" &&
-                  err !== null &&
-                  "message" in err &&
-                  typeof err.message === "string"
-                )
-              ) {
+              if (!(typeof err === "object" && err !== null && "message" in err && typeof err.message === "string")) {
                 return;
               }
               return html`<div>${err.message}</div>`;
@@ -309,11 +296,7 @@ export class StashesViewElement extends LitElement {
         try {
           switch (this.downloadAs) {
             case "divination-cards-sample": {
-              const sample = await this.#loadSingleTabContent(
-                id,
-                league,
-                this.stashLoader.sampleFromTab,
-              );
+              const sample = await this.#loadSingleTabContent(id, league, this.stashLoader.sampleFromTab);
               this.dispatchEvent(new SampleFromStashtabEvent(stashtab_name, sample, league));
               break;
             }

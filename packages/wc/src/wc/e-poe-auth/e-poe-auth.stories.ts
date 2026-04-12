@@ -1,6 +1,8 @@
-import { Meta } from "@storybook/web-components-vite";
-import { AuthState, ButtonSize, PoeAuthElement } from "./e-poe-auth.js";
 import { html, TemplateResult } from "lit";
+
+import { Meta } from "@storybook/web-components-vite";
+
+import { AuthState, ButtonSize, PoeAuthElement } from "./e-poe-auth.js";
 import "./e-poe-auth.js";
 
 const meta: Meta<PoeAuthElement> = {

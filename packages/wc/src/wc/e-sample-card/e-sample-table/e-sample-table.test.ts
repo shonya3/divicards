@@ -1,7 +1,8 @@
 import { test, expect, vi, describe, beforeEach } from "vitest";
 import { page, userEvent } from "vitest/browser";
-import "./e-sample-table.js";
+
 import { cards } from "./data.js";
+import "./e-sample-table.js";
 
 describe("<e-sample-table>", () => {
   let el: HTMLElementTagNameMap["e-sample-table"];

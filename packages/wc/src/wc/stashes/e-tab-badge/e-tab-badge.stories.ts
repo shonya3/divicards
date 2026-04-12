@@ -1,8 +1,10 @@
+import { html, TemplateResult } from "lit";
+
 import { Meta } from "@storybook/web-components-vite";
+import { NoItemsTab } from "poe-custom-elements/types.js";
+
 import { TabBadgeElement } from "./e-tab-badge.js";
 import "./e-tab-badge.js";
-import { html, TemplateResult } from "lit";
-import { NoItemsTab } from "poe-custom-elements/types.js";
 
 const meta: Meta<TabBadgeElement> = {
   title: "Elements/stashes/e-tab-badge",

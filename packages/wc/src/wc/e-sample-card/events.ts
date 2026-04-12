@@ -1,10 +1,8 @@
 import { DivinationCardsSample, League } from "@divicards/shared/types.js";
-import {
-  PresubmitExportFormEvent,
-  ExportFormArgs,
-} from "./e-form-export-sample/e-form-export-sample.js";
-import { LeagueChangeEvent } from "../events/change/league.js";
+
 import { EventMapFrom } from "../../event-utils.js";
+import { LeagueChangeEvent } from "../events/change/league.js";
+import { PresubmitExportFormEvent, ExportFormArgs } from "./e-form-export-sample/e-form-export-sample.js";
 
 declare global {
   interface HTMLElementEventMap extends EventMapFrom<Events> {}

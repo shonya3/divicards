@@ -1,4 +1,5 @@
 import { NoItemsTab } from "poe-custom-elements/types.js";
+
 import { EventMapFrom } from "../../../event-utils.js";
 
 export type Events = [typeof TabSelectEvent, typeof TabClickEvent];

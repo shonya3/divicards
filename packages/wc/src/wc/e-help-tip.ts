@@ -1,7 +1,9 @@
 import { css, CSSResult, html, LitElement, TemplateResult } from "lit";
 import { customElement } from "lit/decorators.js";
-import "./e-simple-tooltip.js";
+
 import "@shoelace-style/shoelace/dist/components/icon/icon.js";
+
+import "./e-simple-tooltip.js";
 
 declare global {
   interface HTMLElementTagNameMap {

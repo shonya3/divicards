@@ -75,9 +75,7 @@
       "hasWaypoint": false,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "Kadavrus the Defiler", "url": "https://poedb.tw/us/Kadavrus_the_Defiler" }
-      ],
+      "bossfights": [{ "name": "Kadavrus the Defiler", "url": "https://poedb.tw/us/Kadavrus_the_Defiler" }],
       "flavourText": "Sluggish waters simmering with decay."
     },
     {
@@ -90,9 +88,7 @@
       "hasWaypoint": false,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "The Dweller of the Deep", "url": "https://poedb.tw/us/The_Dweller_of_the_Deep" }
-      ],
+      "bossfights": [{ "name": "The Dweller of the Deep", "url": "https://poedb.tw/us/The_Dweller_of_the_Deep" }],
       "flavourText": "Darkness chilled into stillness."
     },
     {
@@ -134,9 +130,7 @@
       "hasWaypoint": true,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "Ironpoint the Forsaken", "url": "https://poedb.tw/us/Ironpoint_the_Forsaken" }
-      ],
+      "bossfights": [{ "name": "Ironpoint the Forsaken", "url": "https://poedb.tw/us/Ironpoint_the_Forsaken" }],
       "flavourText": "The cliffs glower down like judges in session."
     },
     {
@@ -194,9 +188,7 @@
       "hasWaypoint": true,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "Captain Fairgraves", "url": "https://poedb.tw/us/Captain_Fairgraves" }
-      ],
+      "bossfights": [{ "name": "Captain Fairgraves", "url": "https://poedb.tw/us/Captain_Fairgraves" }],
       "flavourText": "Whispered agonies of the marooned dead."
     },
     {
@@ -272,9 +264,7 @@
       "hasWaypoint": true,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "Calaf, Headstaver", "url": "https://poedb.tw/us/Calaf%2C_Headstaver" }
-      ],
+      "bossfights": [{ "name": "Calaf, Headstaver", "url": "https://poedb.tw/us/Calaf%2C_Headstaver" }],
       "flavourText": "Lush and humid, sweating violence."
     },
     {
@@ -300,9 +290,7 @@
       "hasWaypoint": false,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "The Great White Beast", "url": "https://poedb.tw/us/The_Great_White_Beast" }
-      ],
+      "bossfights": [{ "name": "The Great White Beast", "url": "https://poedb.tw/us/The_Great_White_Beast" }],
       "flavourText": "Hot and sour as the panting of a rabid bear."
     },
     {
@@ -390,9 +378,7 @@
       "hasWaypoint": true,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "Kraityn, Scarbearer", "url": "https://poedb.tw/us/Kraityn%2C_Scarbearer" }
-      ],
+      "bossfights": [{ "name": "Kraityn, Scarbearer", "url": "https://poedb.tw/us/Kraityn%2C_Scarbearer" }],
       "flavourText": "A pure, soothing river once red and clogged with the victims of war."
     },
     {
@@ -473,9 +459,7 @@
       "hasWaypoint": true,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "Oak, Skullbreaker", "url": "https://poedb.tw/us/Oak%2C_Skullbreaker" }
-      ],
+      "bossfights": [{ "name": "Oak, Skullbreaker", "url": "https://poedb.tw/us/Oak%2C_Skullbreaker" }],
       "flavourText": "Corrupted waters, pouring from the Mantle above."
     },
     {
@@ -595,9 +579,7 @@
       "hasWaypoint": true,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "Marceus the Defaced", "url": "https://poedb.tw/us/Marceus_the_Defaced" }
-      ],
+      "bossfights": [{ "name": "Marceus the Defaced", "url": "https://poedb.tw/us/Marceus_the_Defaced" }],
       "flavourText": "All the money in the world can't stop a world from ending."
     },
     {
@@ -623,9 +605,7 @@
       "hasWaypoint": true,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "Captain Aurelianus", "url": "https://poedb.tw/us/Captain_Aurelianus" }
-      ],
+      "bossfights": [{ "name": "Captain Aurelianus", "url": "https://poedb.tw/us/Captain_Aurelianus" }],
       "flavourText": "Charred flesh and spilled bowels. Sweet and sour."
     },
     {
@@ -671,9 +651,7 @@
       "hasWaypoint": true,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "The Shipyard Terror", "url": "https://poedb.tw/us/The_Shipyard_Terror" }
-      ],
+      "bossfights": [{ "name": "The Shipyard Terror", "url": "https://poedb.tw/us/The_Shipyard_Terror" }],
       "flavourText": "Life pales in the wake of progress."
     },
     {
@@ -699,9 +677,7 @@
       "hasWaypoint": true,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "General Gravicius", "url": "https://poedb.tw/us/General_Gravicius" }
-      ],
+      "bossfights": [{ "name": "General Gravicius", "url": "https://poedb.tw/us/General_Gravicius" }],
       "flavourText": "Polished surfaces reflect brutal efficiency."
     },
     {
@@ -796,9 +772,7 @@
       "hasWaypoint": true,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "Caliga, Imperatrix", "url": "https://poedb.tw/us/Caliga%2C_Imperatrix" }
-      ],
+      "bossfights": [{ "name": "Caliga, Imperatrix", "url": "https://poedb.tw/us/Caliga%2C_Imperatrix" }],
       "flavourText": "The pinnacle of power. The height of hubris."
     },
     {
@@ -853,9 +827,7 @@
       "hasWaypoint": true,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "The Hundred Foot Shadow", "url": "https://poedb.tw/us/The_Hundred_Foot_Shadow" }
-      ],
+      "bossfights": [{ "name": "The Hundred Foot Shadow", "url": "https://poedb.tw/us/The_Hundred_Foot_Shadow" }],
       "flavourText": "The rushing lifeblood of a long-dead Empire."
     },
     {
@@ -1009,9 +981,7 @@
       "hasWaypoint": false,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "Piety, the Abomination", "url": "https://poedb.tw/us/Piety%2C_the_Abomination" }
-      ],
+      "bossfights": [{ "name": "Piety, the Abomination", "url": "https://poedb.tw/us/Piety%2C_the_Abomination" }],
       "flavourText": "Enter the Nightmare."
     },
     {
@@ -1091,9 +1061,7 @@
       "hasWaypoint": false,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "Justicar Casticus", "url": "https://poedb.tw/us/Justicar_Casticus" }
-      ],
+      "bossfights": [{ "name": "Justicar Casticus", "url": "https://poedb.tw/us/Justicar_Casticus" }],
       "flavourText": "The illusion of control is swiftly severed by the blade of reality."
     },
     {
@@ -1148,9 +1116,7 @@
       "hasWaypoint": false,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "Cato, Scholar of Light", "url": "https://poedb.tw/us/Cato%2C_Scholar_of_Light" }
-      ],
+      "bossfights": [{ "name": "Cato, Scholar of Light", "url": "https://poedb.tw/us/Cato%2C_Scholar_of_Light" }],
       "flavourText": "Fuelled by blood and chaos, a dark inferno engulfs the halls of justice."
     },
     {
@@ -1208,9 +1174,7 @@
       "hasWaypoint": true,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "Kitava, the Insatiable", "url": "https://poedb.tw/us/Kitava%2C_the_Insatiable" }
-      ],
+      "bossfights": [{ "name": "Kitava, the Insatiable", "url": "https://poedb.tw/us/Kitava%2C_the_Insatiable" }],
       "flavourText": "Atop this burning monument to arrogance, Oriath's final hope remains."
     },
     {
@@ -1380,9 +1344,7 @@
       "hasWaypoint": true,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "Defiled Proclamation", "url": "https://poedb.tw/us/Defiled_Proclamation" }
-      ],
+      "bossfights": [{ "name": "Defiled Proclamation", "url": "https://poedb.tw/us/Defiled_Proclamation" }],
       "flavourText": "What madness flitters and creeps through the darkened trees?"
     },
     {
@@ -1754,9 +1716,7 @@
       "hasWaypoint": false,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "Lingering Aberration", "url": "https://poedb.tw/us/Lingering_Aberration" }
-      ],
+      "bossfights": [{ "name": "Lingering Aberration", "url": "https://poedb.tw/us/Lingering_Aberration" }],
       "flavourText": "Spells of blood foul the waters below."
     },
     {
@@ -1782,9 +1742,7 @@
       "hasWaypoint": false,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "Ondar, the Betrayer", "url": "https://poedb.tw/us/Ondar%2C_the_Betrayer" }
-      ],
+      "bossfights": [{ "name": "Ondar, the Betrayer", "url": "https://poedb.tw/us/Ondar%2C_the_Betrayer" }],
       "flavourText": "A favourite walk of noble lords, now fallen into disrepair."
     },
     {
@@ -1833,9 +1791,7 @@
       "hasWaypoint": true,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "Nightbringer Lucius", "url": "https://poedb.tw/us/Nightbringer_Lucius" }
-      ],
+      "bossfights": [{ "name": "Nightbringer Lucius", "url": "https://poedb.tw/us/Nightbringer_Lucius" }],
       "flavourText": "Allegiances falter like the waning of the moon."
     },
     {
@@ -1923,9 +1879,7 @@
       "hasWaypoint": true,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "Regulus, Sun's Herald", "url": "https://poedb.tw/us/Regulus%2C_Suns_Herald" }
-      ],
+      "bossfights": [{ "name": "Regulus, Sun's Herald", "url": "https://poedb.tw/us/Regulus%2C_Suns_Herald" }],
       "flavourText": "Conquered by the fog of war."
     },
     {
@@ -2186,9 +2140,7 @@
       "hasWaypoint": true,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "The Rotten Matriarch", "url": "https://poedb.tw/us/The_Rotten_Matriarch" }
-      ],
+      "bossfights": [{ "name": "The Rotten Matriarch", "url": "https://poedb.tw/us/The_Rotten_Matriarch" }],
       "flavourText": "A flourishing place of trade, barely recognizable amidst the countless deaths."
     },
     {
@@ -2214,9 +2166,7 @@
       "hasWaypoint": true,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "Avarius, Reassembled", "url": "https://poedb.tw/us/Avarius%2C_Reassembled" }
-      ],
+      "bossfights": [{ "name": "Avarius, Reassembled", "url": "https://poedb.tw/us/Avarius%2C_Reassembled" }],
       "flavourText": "Mad men toil under smoking skies to pervert a holy sanctum."
     },
     {
@@ -2242,9 +2192,7 @@
       "hasWaypoint": false,
       "hasLabyrinthTrial": false,
       "isTown": false,
-      "bossfights": [
-        { "name": "Kitava, the Insatiable", "url": "https://poedb.tw/us/Kitava%2C_the_Insatiable" }
-      ],
+      "bossfights": [{ "name": "Kitava, the Insatiable", "url": "https://poedb.tw/us/Kitava%2C_the_Insatiable" }],
       "flavourText": "Cries of torment and pathetic moans as the unholy banquet of flesh continues."
     },
     {

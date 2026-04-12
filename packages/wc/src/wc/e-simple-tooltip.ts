@@ -1,7 +1,7 @@
 import { html, css, LitElement, TemplateResult, CSSResult } from "lit";
+import { ElementPart, render } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { Directive, DirectiveParameters, DirectiveResult, directive } from "lit/directive.js";
-import { ElementPart, render } from "lit";
 
 // Positioning library
 import { computePosition, autoPlacement, offset, shift } from "@floating-ui/dom";
@@ -53,10 +53,7 @@ export class SimpleTooltip extends LitElement {
       min-width: 300px;
       border-radius: 8px;
       border: 1px solid
-        var(
-          --e-help-tip-border-color,
-          color-mix(in srgb, var(--color, var(--sl-color-neutral-950)) 20%, transparent)
-        );
+        var(--e-help-tip-border-color, color-mix(in srgb, var(--color, var(--sl-color-neutral-950)) 20%, transparent));
       box-shadow: var(
         --e-help-tip-shadow,
         0 2px 12px color-mix(in srgb, var(--color, var(--sl-color-neutral-950)) 10%, transparent)
@@ -113,11 +110,7 @@ export class SimpleTooltip extends LitElement {
     this.style.cssText = "";
     computePosition(this.target!, this, {
       strategy: "fixed",
-      middleware: [
-        offset(this.offset),
-        shift(),
-        autoPlacement({ allowedPlacements: ["top", "bottom"] }),
-      ],
+      middleware: [offset(this.offset), shift(), autoPlacement({ allowedPlacements: ["top", "bottom"] })],
     }).then(({ x, y }: { x: number; y: number }) => {
       this.style.left = `${x}px`;
       this.style.top = `${y}px`;

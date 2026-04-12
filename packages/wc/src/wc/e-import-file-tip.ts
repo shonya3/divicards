@@ -1,7 +1,9 @@
 import { LitElement, CSSResult, css, TemplateResult, html } from "lit";
 import { customElement } from "lit/decorators.js";
-import "./e-help-tip.js";
+
 import { DefineComponent } from "vue";
+
+import "./e-help-tip.js";
 
 /**
  * @summary A help tip specifically for file import instructions.

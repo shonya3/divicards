@@ -1,4 +1,5 @@
 import { TabWithItems } from "poe-custom-elements/types.js";
+
 import { EventMapFrom } from "../../../event-utils.js";
 
 declare global {

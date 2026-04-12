@@ -1,8 +1,9 @@
-import { defineStore } from "pinia";
-import { command } from "../command";
-import { ref, watch, Ref, computed } from "vue";
-import { addRustListener } from "../event";
 import { useLocalStorage } from "@vueuse/core";
+import { defineStore } from "pinia";
+import { ref, watch, Ref, computed } from "vue";
+
+import { command } from "../command";
+import { addRustListener } from "../event";
 
 const ONE_HOUR_IN_MILLIS = 3600 * 1000;
 const EXPIRES_IN_MILLIS = ONE_HOUR_IN_MILLIS;

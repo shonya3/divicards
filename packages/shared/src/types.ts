@@ -18,12 +18,7 @@ export const leagues = [
   "HC SSF Mirage",
 ] as const;
 export const tradeLeagues = ["Mirage", "Standard", "Hardcore Mirage", "Hardcore"] as const;
-export const permanentLeagues = [
-  "Standard",
-  "Hardcore",
-  "Solo Self-Found",
-  "Hardcore SSF",
-] as const;
+export const permanentLeagues = ["Standard", "Hardcore", "Solo Self-Found", "Hardcore SSF"] as const;
 
 export function isPermanentLeague(league: unknown): league is PermanentLeague | never {
   return typeof league === "string" && permanentLeagues.includes(league as PermanentLeague);

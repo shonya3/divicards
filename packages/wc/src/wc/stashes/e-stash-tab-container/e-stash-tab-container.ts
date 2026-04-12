@@ -1,16 +1,18 @@
-import "poe-custom-elements/stash-tab.js";
-import "@shoelace-style/shoelace/dist/components/spinner/spinner.js";
-import "@shoelace-style/shoelace/dist/components/button/button.js";
-import "@shoelace-style/shoelace/dist/components/icon-button/icon-button.js";
-import "@shoelace-style/shoelace/dist/components/copy-button/copy-button.js";
-import "../e-tab-badge/e-tab-badge.js";
-import "@shoelace-style/shoelace/dist/components/alert/alert.js";
-import "@shoelace-style/shoelace/dist/components/icon/icon.js";
-
 import { LitElement, html, css, TemplateResult, CSSResult } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
-import { TabWithItems } from "poe-custom-elements/types.js";
+
+import "@shoelace-style/shoelace/dist/components/alert/alert.js";
 import SlAlert from "@shoelace-style/shoelace/dist/components/alert/alert.js";
+import "@shoelace-style/shoelace/dist/components/button/button.js";
+import "@shoelace-style/shoelace/dist/components/copy-button/copy-button.js";
+import "@shoelace-style/shoelace/dist/components/icon-button/icon-button.js";
+import "@shoelace-style/shoelace/dist/components/icon/icon.js";
+import "@shoelace-style/shoelace/dist/components/spinner/spinner.js";
+
+import "poe-custom-elements/stash-tab.js";
+import { TabWithItems } from "poe-custom-elements/types.js";
+
+import "../e-tab-badge/e-tab-badge.js";
 import { CloseEvent, ExtractCardsEvent } from "./events.js";
 
 declare global {
@@ -53,9 +55,7 @@ export class StashTabContainerElement extends LitElement {
               : stashtab_has_cards(this.tab)
                 ? this.cardsJustExtracted
                   ? html`<sl-button variant="success">Extracted</sl-button>`
-                  : html`<sl-button @click=${this.#emitExtractCards}
-                      >Extract cards sample</sl-button
-                    >`
+                  : html`<sl-button @click=${this.#emitExtractCards}>Extract cards sample</sl-button>`
                 : null
             : null}
           <sl-icon-button name="x-lg" @click=${this.#emitClose} class="btn-close">X</sl-icon-button>

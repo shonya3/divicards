@@ -77,9 +77,7 @@
     {
       "baseType": "Scarab of Bisection",
       "descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
-      "explicitMods": [
-        "You can select the Nullify Prefixes or Nullify Suffixes crafting options on the Map Device"
-      ],
+      "explicitMods": ["You can select the Nullify Prefixes or Nullify Suffixes crafting options on the Map Device"],
       "flavourText": ["When something is cut in half, which half is the original?"],
       "frameType": 0,
       "h": 1,
@@ -332,10 +330,7 @@
     {
       "baseType": "Offering to the Goddess",
       "descrText": "Travel to the Aspirants' Plaza and spend this item to open the Eternal Labyrinth.",
-      "flavourText": [
-        "It is time for the Goddess to give her final verdict.\r",
-        "Your fate rests in her even hands."
-      ],
+      "flavourText": ["It is time for the Goddess to give her final verdict.\r", "Your fate rests in her even hands."],
       "frameType": 0,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9MYWJ5cmludGgiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/fb891dc265/Labyrinth.png",
@@ -596,9 +591,7 @@
     {
       "baseType": "Ultimatum Scarab of Catalysing",
       "descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
-      "explicitMods": [
-        "Ultimatum Encounters in Area will only offer Catalysts\nas Rewards to the Map Owner"
-      ],
+      "explicitMods": ["Ultimatum Encounters in Area will only offer Catalysts\nas Rewards to the Map Owner"],
       "flavourText": ["Most regret finding out how the powder is made."],
       "frameType": 0,
       "h": 1,
@@ -635,9 +628,7 @@
       "baseType": "Essence Scarab",
       "descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
       "explicitMods": ["Area contains 2 additional Imprisoned Monsters"],
-      "flavourText": [
-        "It is perfectly safe, the creatures trapped inside couldn't possibly still be living."
-      ],
+      "flavourText": ["It is perfectly safe, the creatures trapped inside couldn't possibly still be living."],
       "frameType": 0,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJFc3NlbmNlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/c9f153a8cf/LesserScarabEssence.png",
@@ -966,9 +957,7 @@
     {
       "baseType": "Expedition Scarab of Runefinding",
       "descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
-      "explicitMods": [
-        "Expedition Encounters in Area have 100% increased\nnumber of Runic Monster Markers"
-      ],
+      "explicitMods": ["Expedition Encounters in Area have 100% increased\nnumber of Runic Monster Markers"],
       "flavourText": ["That which came from the stars longs to return."],
       "frameType": 0,
       "h": 1,
@@ -1042,9 +1031,7 @@
     {
       "baseType": "Beyond Scarab of the Invasion",
       "descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
-      "explicitMods": [
-        "Rare and Unique Monsters slain in Area create 8 to 12 additional Beyond Portals"
-      ],
+      "explicitMods": ["Rare and Unique Monsters slain in Area create 8 to 12 additional Beyond Portals"],
       "flavourText": ["The fated hour is almost nigh."],
       "frameType": 0,
       "h": 1,
@@ -1226,9 +1213,7 @@
     {
       "baseType": "Betrayal Scarab of Intelligence",
       "descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
-      "explicitMods": [
-        "150% Increased Intelligence gained from\nImmortal Syndicate targets encountered in Area"
-      ],
+      "explicitMods": ["150% Increased Intelligence gained from\nImmortal Syndicate targets encountered in Area"],
       "flavourText": ["Those that can never die fear only pain."],
       "frameType": 0,
       "h": 1,
@@ -1300,9 +1285,7 @@
     {
       "baseType": "Anarchy Scarab of Gigantification",
       "descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
-      "explicitMods": [
-        "Wild Rogue Exiles in Area have a 30% chance to be replaced with a Rogue Giant"
-      ],
+      "explicitMods": ["Wild Rogue Exiles in Area have a 30% chance to be replaced with a Rogue Giant"],
       "flavourText": ["The consumption of sulphite can cause strange growth."],
       "frameType": 0,
       "h": 1,
@@ -1476,9 +1459,7 @@
     {
       "baseType": "Essence Scarab of Calcification",
       "descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
-      "explicitMods": [
-        "Rare monsters that are natural inhabitants of the Area are imprisoned by Essences"
-      ],
+      "explicitMods": ["Rare monsters that are natural inhabitants of the Area are imprisoned by Essences"],
       "flavourText": ["The crystals... can spread?"],
       "frameType": 0,
       "h": 1,
@@ -1692,9 +1673,7 @@
     {
       "baseType": "Divination Scarab of Plenty",
       "descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
-      "explicitMods": [
-        "Up to 3 Packs of Magic Monsters in Area have 800% increased\nchance to drop Divination Cards"
-      ],
+      "explicitMods": ["Up to 3 Packs of Magic Monsters in Area have 800% increased\nchance to drop Divination Cards"],
       "flavourText": ["We create a thousand futures with every action."],
       "frameType": 0,
       "h": 1,
@@ -2661,9 +2640,7 @@
     {
       "baseType": "Beyond Scarab",
       "descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
-      "explicitMods": [
-        "Slaying enemies close together in Area can attract monsters from Beyond this realm"
-      ],
+      "explicitMods": ["Slaying enemies close together in Area can attract monsters from Beyond this realm"],
       "flavourText": ["The silent wall and the raging storm oppose the endless swarm."],
       "frameType": 0,
       "h": 1,
@@ -2700,9 +2677,7 @@
       "baseType": "Harbinger Scarab of Warhoards",
       "descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
       "explicitMods": ["Currency shards dropped by Harbingers in Area are duplicated"],
-      "flavourText": [
-        "For those who can leverage it, war can be as much a machine of profit as it is death."
-      ],
+      "flavourText": ["For those who can leverage it, war can be as much a machine of profit as it is death."],
       "frameType": 0,
       "h": 1,
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9UaWVyNFNjYXJhYkhhcmJpbmdlcnMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/81caefbf3f/Tier4ScarabHarbingers.png",
@@ -3139,9 +3114,7 @@
     {
       "baseType": "Harbinger Scarab of Regency",
       "descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
-      "explicitMods": [
-        "Harbingers in Area have a 50% chance to be replaced by a powerful Harbinger Boss"
-      ],
+      "explicitMods": ["Harbingers in Area have a 50% chance to be replaced by a powerful Harbinger Boss"],
       "flavourText": ["The truly noble wage war from the front."],
       "frameType": 0,
       "h": 1,
@@ -3251,9 +3224,7 @@
     {
       "baseType": "Essence Scarab of Stability",
       "descrText": "Can be used in a personal Map Device to add modifiers to a Map.",
-      "explicitMods": [
-        "Using a Remnant of Corruption in Area can only result in\nupgrading or transforming Essences"
-      ],
+      "explicitMods": ["Using a Remnant of Corruption in Area can only result in\nupgrading or transforming Essences"],
       "flavourText": [
         "With the right tools and a precise hand, the manipulation of the crystals",
         "can be made predictable."

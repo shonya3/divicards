@@ -1,5 +1,6 @@
-import { DivinationCardsSample, League } from "./types.js";
 import { NoItemsTab, TabWithItems } from "poe-custom-elements";
+
+import { DivinationCardsSample, League } from "./types.js";
 
 export interface IStashLoader {
   tabs(league: League): Promise<NoItemsTab[]>;

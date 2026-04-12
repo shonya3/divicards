@@ -1,8 +1,9 @@
-import type { DefineComponent } from "vue";
-import type { MyEvent, MyCustomEvent } from "./events";
-import { MinimumCardsPriceChangeEvent } from "@divicards/wc/src/wc/e-sample-card/e-sample-card";
 import { TradeLeague } from "@divicards/shared/types";
 import { DivinationCardsSample } from "@divicards/shared/types";
+import { MinimumCardsPriceChangeEvent } from "@divicards/wc/src/wc/e-sample-card/e-sample-card";
+
+import type { MyEvent, MyCustomEvent } from "./events";
+import type { DefineComponent } from "vue";
 
 declare module "vue" {
   // Extending Vue's GlobalComponents interface

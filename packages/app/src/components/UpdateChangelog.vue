@@ -13,16 +13,11 @@ const LATEST_RELEASE = "https://github.com/shonya3/divicards/releases/latest";
 <template>
   <div class="changelog">
     <h1 class="heading">Divicards v{{ version }}</h1>
-    <a
-      class="link-release-notes"
-      @click.prevent="command('open_url', { url: LATEST_RELEASE })"
-      :href="LATEST_RELEASE"
+    <a class="link-release-notes" @click.prevent="command('open_url', { url: LATEST_RELEASE })" :href="LATEST_RELEASE"
       >Check release notes</a
     >
 
-    <sl-button variant="success" class="update-btn" @click="$emit('update-clicked')"
-      >Update</sl-button
-    >
+    <sl-button variant="success" class="update-btn" @click="$emit('update-clicked')">Update</sl-button>
   </div>
 </template>
 

@@ -1,9 +1,6 @@
 import { DivinationCardRecord, Order } from "./types.js";
 
-export const byPrice = (
-  order: Order,
-  cards: readonly DivinationCardRecord[],
-): Array<DivinationCardRecord> => {
+export const byPrice = (order: Order, cards: readonly DivinationCardRecord[]): Array<DivinationCardRecord> => {
   return Array.from(cards).sort((a, b) => {
     if (order === "asc") return (a.price ?? 0) - (b.price ?? 0);
     if (order === "desc") return (b.price ?? 0) - (a.price ?? 0);
@@ -11,10 +8,7 @@ export const byPrice = (
   });
 };
 
-export const byAmount = (
-  order: Order,
-  cards: readonly DivinationCardRecord[],
-): Array<DivinationCardRecord> => {
+export const byAmount = (order: Order, cards: readonly DivinationCardRecord[]): Array<DivinationCardRecord> => {
   return Array.from(cards).sort((a, b) => {
     if (order === "asc") return a.amount - b.amount;
     if (order === "desc") return b.amount - a.amount;
@@ -22,10 +16,7 @@ export const byAmount = (
   });
 };
 
-export const bySum = (
-  order: Order,
-  cards: readonly DivinationCardRecord[],
-): Array<DivinationCardRecord> => {
+export const bySum = (order: Order, cards: readonly DivinationCardRecord[]): Array<DivinationCardRecord> => {
   return Array.from(cards).sort((a, b) => {
     if (order === "asc") return (a.sum ?? 0) - (b.sum ?? 0);
     if (order === "desc") return (b.sum ?? 0) - (a.sum ?? 0);
@@ -33,10 +24,7 @@ export const bySum = (
   });
 };
 
-export const byName = (
-  order: Order,
-  cards: readonly DivinationCardRecord[],
-): Array<DivinationCardRecord> => {
+export const byName = (order: Order, cards: readonly DivinationCardRecord[]): Array<DivinationCardRecord> => {
   return Array.from(cards).sort((a, b) => {
     if (order === "asc") return a.name < b.name ? -1 : 1;
     if (order === "desc") return a.name > b.name ? -1 : 1;
@@ -44,10 +32,7 @@ export const byName = (
   });
 };
 
-export const byWeight = (
-  order: Order,
-  cards: readonly DivinationCardRecord[],
-): Array<DivinationCardRecord> => {
+export const byWeight = (order: Order, cards: readonly DivinationCardRecord[]): Array<DivinationCardRecord> => {
   return Array.from(cards).sort((a, b) => {
     if (order === "asc") return (a.weight ?? 0) - (b.weight ?? 0);
     if (order === "desc") return (b.weight ?? 0) - (a.weight ?? 0);
