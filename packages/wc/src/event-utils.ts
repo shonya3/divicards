@@ -70,3 +70,12 @@ type KebabToPascalCase<S extends string> = Capitalize<KebabToCamelCase<S>>;
 export type EventMapFrom<T extends readonly (new (...args: any) => Event)[]> = {
   [K in T[number] as K extends { tag: infer Tag extends string } ? Tag : never]: InstanceType<K>;
 };
+
+/**
+ * Generates React-compatible event handler types from a tuple of event constructors
+ */
+export type ReactEventHandlers<T extends readonly (new (...args: any) => any)[]> = {
+  [K in T[number] as K extends { tag: infer Tag extends string } ? `on${Lowercase<Tag>}` : never]?: (
+    event: InstanceType<K>,
+  ) => void;
+};
