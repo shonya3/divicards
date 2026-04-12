@@ -12,14 +12,13 @@ import { addRustListener } from "./event";
 import { toast } from "./toast";
 import { handleError } from "./error";
 import { setBasePath } from "@shoelace-style/shoelace";
+import "@divicards/wc/e-google-auth.js";
+import "@divicards/wc/e-base-popup.js";
 
 setBasePath("/");
 SlAlrt.define("sl-alert");
 SlButton.define("sl-button");
 SlIcon.define("sl-icon");
-
-import "@divicards/wc/e-google-auth";
-import "@divicards/wc/e-base-popup";
 
 const pinia = createPinia();
 
