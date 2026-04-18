@@ -1,17 +1,19 @@
 packages:
   # all packages in direct subdirs of packages/
   - "packages/*"
+allowBuilds:
+  wasm-pack: true
 catalog:
-  "@types/node": ^25
-  vite-plugin-static-copy: ^4
-  typescript: ^6.0
   "@shoelace-style/shoelace": ^2.20
+  "@types/node": ^25
+  lit: ^3.3.2
   poe-custom-elements: latest
-  lit: ^3
-  vue: ^3
+  typescript: ^6.0
   vite: npm:@voidzero-dev/vite-plus-core@latest
-  vitest: npm:@voidzero-dev/vite-plus-test@latest
+  vite-plugin-static-copy: ^4
   vite-plus: latest
+  vitest: npm:@voidzero-dev/vite-plus-test@latest
+  vue: ^3
 overrides:
   vite: "catalog:"
   vitest: "catalog:"
