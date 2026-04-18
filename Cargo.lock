@@ -1297,6 +1297,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "divi-wasm"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "divi",
+ "serde",
+ "serde-wasm-bindgen",
+ "serde_json",
+ "wasm-bindgen",
+ "wasm-bindgen-test",
+]
+
+[[package]]
 name = "dlopen2"
 version = "0.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"

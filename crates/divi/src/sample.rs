@@ -60,9 +60,13 @@ impl Sample {
     /// # }
     /// ```
     #[tracing::instrument(skip(source, prices))]
-    pub fn create(source: Input, prices: Option<Prices>) -> Result<Sample, Error> {
+    pub fn create<I>(source: I, prices: Option<Prices>) -> Result<Sample, Error>
+    where
+        I: Into<Input>,
+    {
+        let input = source.into();
         let mut sample = Self::from_prices(prices);
-        let name_amount_pairs = match source {
+        let name_amount_pairs = match input {
             Input::Csv(csv_data) => parse_csv(&csv_data)?,
             Input::NameAmountPairs(vec) => vec,
             Input::Sample(sample) => sample.to_name_amount_pairs(),

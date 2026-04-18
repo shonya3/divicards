@@ -1,0 +1,26 @@
+{
+  "name": "@divicards/divi-wasm",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "types": "./src/types.d.ts",
+  "exports": {
+    ".": {
+      "import": "./pkg/divi_wasm.js",
+      "types": "./src/types.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "wasm-pack build --target web ../../crates/divi-wasm --out-dir ../../packages/divi-wasm/pkg"
+  },
+  "dependencies": {
+    "@divicards/shared": "workspace:*",
+    "poe-custom-elements": "catalog:"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plus": "catalog:",
+    "wasm-pack": "^0.14"
+  }
+}
