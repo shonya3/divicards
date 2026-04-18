@@ -198,7 +198,7 @@ pub fn reward_to_html(s: &str) -> String {
 impl From<Vec<HighlightedExpression>> for Div {
     fn from(mut exprs: Vec<HighlightedExpression>) -> Self {
         let mut div = Div(vec![], None);
-        exprs.sort_by(|a, b| a.order.cmp(&b.order));
+        exprs.sort_by_key(|a| a.order);
         let Some(number_of_lines) = exprs.iter().map(|e| e.line).max() else {
             return div;
         };

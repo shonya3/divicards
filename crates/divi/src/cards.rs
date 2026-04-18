@@ -48,8 +48,8 @@ impl Cards {
                 Order::Unordered => {}
             },
             Column::Amount => match order {
-                Order::Asc => vec.sort_by(|a, b| a.amount.cmp(&b.amount)),
-                Order::Desc => vec.sort_by(|a, b| b.amount.cmp(&a.amount)),
+                Order::Asc => vec.sort_by_key(|a| a.amount),
+                Order::Desc => vec.sort_by_key(|b| std::cmp::Reverse(b.amount)),
                 Order::Unordered => {}
             },
             Column::Weight => match order {
