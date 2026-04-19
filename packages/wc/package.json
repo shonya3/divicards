@@ -38,6 +38,7 @@
     "custom-element-vuejs-integration": "^1.4",
     "custom-elements-manifest": "^2.1.0",
     "lit-analyzer": "^2",
+    "playwright": "^1.59.1",
     "storybook": "10.3.5",
     "typescript": "catalog:",
     "vite": "catalog:",
