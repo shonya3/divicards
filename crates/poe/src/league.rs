@@ -10,13 +10,13 @@ pub enum League {
     #[serde(alias = "SSF Hardcore", alias = "Hardcore SSF")]
     SSFHardcore,
     #[default]
-    Mirage,
-    #[serde(alias = "Hardcore Mirage")]
-    HardcoreMirage,
-    #[serde(alias = "SSF Mirage")]
-    SSFMirage,
-    #[serde(alias = "HC SSF Mirage")]
-    SSFHCMirage,
+    Allflame,
+    #[serde(alias = "Hardcore Allflame")]
+    HardcoreAllflame,
+    #[serde(alias = "SSF Allflame")]
+    SSFAllflame,
+    #[serde(alias = "HC SSF Allflame")]
+    SSFHCAllflame,
     #[serde(untagged)]
     Custom(String),
 }
@@ -34,10 +34,10 @@ impl Display for League {
             League::Hardcore => write!(f, "Hardcore"),
             League::SSFStandard => write!(f, "Solo Self-Found"),
             League::SSFHardcore => write!(f, "Hardcore SSF"),
-            League::Mirage => write!(f, "Mirage"),
-            League::HardcoreMirage => write!(f, "Hardcore Mirage"),
-            League::SSFMirage => write!(f, "SSF Mirage"),
-            League::SSFHCMirage => write!(f, "HC SSF Mirage"),
+            League::Allflame => write!(f, "Allflame"),
+            League::HardcoreAllflame => write!(f, "Hardcore Allflame"),
+            League::SSFAllflame => write!(f, "SSF Allflame"),
+            League::SSFHCAllflame => write!(f, "HC SSF Allflame"),
             League::Custom(league) => write!(f, "{league}"),
         }
     }
@@ -48,8 +48,8 @@ impl From<TradeLeague> for League {
         match value {
             TradeLeague::Standard => League::Standard,
             TradeLeague::Hardcore => League::Hardcore,
-            TradeLeague::Mirage => League::Mirage,
-            TradeLeague::HardcoreMirage => League::HardcoreMirage,
+            TradeLeague::Allflame => League::Allflame,
+            TradeLeague::HardcoreAllflame => League::HardcoreAllflame,
         }
     }
 }
@@ -59,9 +59,9 @@ pub enum TradeLeague {
     Standard,
     Hardcore,
     #[default]
-    Mirage,
-    #[serde(alias = "Hardcore Mirage", rename = "Hardcore Mirage")]
-    HardcoreMirage,
+    Allflame,
+    #[serde(alias = "Hardcore Allflame", rename = "Hardcore Allflame")]
+    HardcoreAllflame,
 }
 
 impl Display for TradeLeague {
@@ -69,8 +69,8 @@ impl Display for TradeLeague {
         match self {
             TradeLeague::Standard => write!(f, "Standard"),
             TradeLeague::Hardcore => write!(f, "Hardcore"),
-            TradeLeague::Mirage => write!(f, "Mirage"),
-            TradeLeague::HardcoreMirage => write!(f, "Hardcore Mirage"),
+            TradeLeague::Allflame => write!(f, "Allflame"),
+            TradeLeague::HardcoreAllflame => write!(f, "Hardcore Allflame"),
         }
     }
 }
@@ -86,10 +86,10 @@ impl TryFrom<League> for TradeLeague {
             League::Hardcore => Ok(TradeLeague::Hardcore),
             League::SSFStandard => Err(msg),
             League::SSFHardcore => Err(msg),
-            League::Mirage => Ok(TradeLeague::Mirage),
-            League::HardcoreMirage => Ok(TradeLeague::HardcoreMirage),
-            League::SSFMirage => Err(msg),
-            League::SSFHCMirage => Err(msg),
+            League::Allflame => Ok(TradeLeague::Allflame),
+            League::HardcoreAllflame => Ok(TradeLeague::HardcoreAllflame),
+            League::SSFAllflame => Err(msg),
+            League::SSFHCAllflame => Err(msg),
             League::Custom(_) => Err(msg),
         }
     }

@@ -9,15 +9,15 @@ export type TablePreferences = {
 };
 
 export const leagues = [
-  "Mirage",
+  "Allflame",
   "Standard",
-  "Hardcore Mirage",
+  "Hardcore Allflame",
   "Hardcore",
   "Solo Self-Found",
-  "SSF Mirage",
-  "HC SSF Mirage",
+  "SSF Allflame",
+  "HC SSF Allflame",
 ] as const;
-export const tradeLeagues = ["Mirage", "Standard", "Hardcore Mirage", "Hardcore"] as const;
+export const tradeLeagues = ["Allflame", "Standard", "Hardcore Allflame", "Hardcore"] as const;
 export const permanentLeagues = ["Standard", "Hardcore", "Solo Self-Found", "Hardcore SSF"] as const;
 
 export function isPermanentLeague(league: unknown): league is PermanentLeague {

@@ -1,4 +1,4 @@
-export const ACTIVE_LEAGUE = "Mirage";
+export const ACTIVE_LEAGUE = "Allflame";
 export const downloadText = (filename: string, text: string = "empty"): void => {
   const file = new File([text], filename);
   const a = document.createElement("a");
