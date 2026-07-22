@@ -2,7 +2,7 @@
 pub const CONDENSING_FACTOR: f32 = 2.0 / 3.0;
 pub const RAIN_OF_CHAOS_CONDENSED_WEIGHT: f32 = 2_452.655;
 
-pub const LEGACY_CARDS_N: usize = 16;
+pub const LEGACY_CARDS_N: usize = 23;
 pub const LEGACY_CARDS: [&str; LEGACY_CARDS_N] = [
     "The Cartographer",
     "The Emptiness",
@@ -20,6 +20,13 @@ pub const LEGACY_CARDS: [&str; LEGACY_CARDS_N] = [
     "The Sustenance",
     "Soul Quenched",
     "The Master",
+    "Damnation",
+    "Duality",
+    "Last Stand",
+    "Broken Promises",
+    "Imperfect Memories",
+    "Magnum Opus",
+    "Parasitic Passengers",
 ];
 
 pub const NEVER_EXISTED: [&str; 3] = [
