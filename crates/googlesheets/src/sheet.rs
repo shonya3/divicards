@@ -1,10 +1,16 @@
-use std::fmt::{Debug, Display};
-
+use crate::error::{Error, GoogleErrorResponse};
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
+use std::fmt::{Debug, Display};
+use std::sync::LazyLock;
 
-use crate::error::{Error, GoogleErrorResponse};
+static HTTP_CLIENT: LazyLock<Client> = LazyLock::new(|| {
+    Client::builder()
+        .timeout(std::time::Duration::from_secs(30))
+        .build()
+        .expect("Failed to create reqwest client")
+});
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum Credential {
@@ -34,7 +40,7 @@ pub async fn read_batch(
         Credential::AccessToken(token) => {
             let url =
         format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values:batchGet?{formatted_ranges}");
-            Client::new()
+            HTTP_CLIENT
                 .get(url)
                 .header("Authorization", format!("Bearer {token}"))
                 .send()
@@ -43,7 +49,7 @@ pub async fn read_batch(
         Credential::ApiKey(api_key) => {
             let url =
         format!("https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values:batchGet?{formatted_ranges}&key={api_key}");
-            Client::new().get(url).send().await?
+            HTTP_CLIENT.get(url).send().await?
         }
     };
 
@@ -67,7 +73,7 @@ pub async fn read(
                 "https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{range}"
             );
 
-            Client::new()
+            HTTP_CLIENT
                 .get(url)
                 .header("Authorization", format!("Bearer {token}"))
                 .send()
@@ -78,7 +84,7 @@ pub async fn read(
                 "https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{range}?key={api_key}"
             );
 
-            Client::new().get(url).send().await?
+            HTTP_CLIENT.get(url).send().await?
         }
     };
 
@@ -124,7 +130,7 @@ pub async fn batch_update(
     data: Vec<ValueRange>,
     token: &str,
 ) -> Result<Value, Error> {
-    let response = Client::new()
+    let response = HTTP_CLIENT
         .post(format!(
             "https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values:batchUpdate
 "
@@ -190,7 +196,7 @@ pub async fn write_values_into_sheet(
       "values": values
     }))?;
 
-    let response = Client::new()
+    let response = HTTP_CLIENT
         .put(url)
         .header("Authorization", format!("Bearer {token}"))
         .body(body)
@@ -207,7 +213,7 @@ pub async fn write_values_into_sheet(
 }
 
 pub async fn add_sheet(spreadsheet_id: &str, title: &str, token: &str) -> Result<AddSheet, Error> {
-    let response = Client::new()
+    let response = HTTP_CLIENT
         .post(format!(
             "https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}:batchUpdate"
         ))
@@ -284,7 +290,7 @@ mod tests {
     //         );
     //         let body = serde_json::to_string(&json).unwrap();
 
-    //         let response = Client::new()
+    //         let response = &HTTP_CLIENT
     //             .post(url)
     //             .header("Authorization", format!("Bearer {token}"))
     //             .body(body)
@@ -357,7 +363,7 @@ pub struct GridProperties {
 
 // #[tauri::command]
 // pub async fn read_sheet() -> Result<Value, Error> {
-//     let client = Client::new();
+//     let client = &HTTP_CLIENT;
 //     let response = client
 //         .get("https://sheets.googleapis.com/v4/spreadsheets/1RBkCNHCclRxGHZxKWi_UCWbDgdNnpnJ60g2rdL_msG0/values/Sheet1!A1:D5")
 //         .header(
@@ -372,7 +378,7 @@ pub struct GridProperties {
 // }
 
 // pub async fn api_create_spreadsheet(access_token: String) -> Result<Value, Error> {
-//     let client = Client::new();
+//     let client = &HTTP_CLIENT;
 //     let url = "https://sheets.googleapis.com/v4/spreadsheets";
 //     let response = client
 //         .post(url)
