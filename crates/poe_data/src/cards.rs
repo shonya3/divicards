@@ -124,7 +124,7 @@ pub mod fetch {
     use std::collections::HashMap;
 
     #[derive(Serialize, Deserialize, Debug, Clone)]
-    struct WikiCard {
+    pub struct WikiCard {
         name: String,
         #[serde(alias = "drop level")]
         min_level: Option<u32>,
@@ -341,7 +341,7 @@ pub mod fetch {
         }
     }
 
-    async fn load_wiki_cards() -> Result<HashMap<String, WikiCard>, WikiError> {
+    pub async fn load_wiki_cards() -> Result<HashMap<String, WikiCard>, WikiError> {
         #[derive(Serialize, Deserialize, Debug, Clone)]
         struct WikiCardsResponse {
             cargoquery: Vec<WikiCardWrapper>,
