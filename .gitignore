@@ -29,4 +29,3 @@ target
 .env
 data/*
 .cargo/config.toml
-vendor/playwright-patched

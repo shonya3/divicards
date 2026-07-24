@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_LOG: trace
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install latest nightly
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+          components: rustfmt, clippy
+
+      - name: Lint
+        run: cargo clippy --all-targets
+      - name: Prepare driver and browsers
+        run: cargo test hello
+      - name: Test
+        run: cargo test --all-targets -- --nocapture
+
+      - name: Coverage
+        if: success() && matrix.os == 'ubuntu-latest' && github.ref == 'refs/heads/master'
+        run: |
+          cargo install cargo-tarpaulin
+          cargo tarpaulin --out Xml --verbose --exclude-files scripts/ tests/ src/build.rs src/main.rs src/generated.rs
+      - name: Upload to codecov.io
+        if: success() && matrix.os == 'ubuntu-latest' && github.ref == 'refs/heads/master'
+        uses: codecov/codecov-action@v1.0.2
+        with:
+          file: cobertura.xml
+          token: ${{secrets.CODECOV}}
