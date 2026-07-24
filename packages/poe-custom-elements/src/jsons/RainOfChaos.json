@@ -1,0 +1,36 @@
+{
+	"artFilename": "RainOfChaos",
+	"baseType": "Rain of Chaos",
+	"explicitMods": ["<currencyitem>{Chaos Orb}"],
+	"flavourText": [
+		"<size:27>{Fire filled the sky that night \r",
+		"Chaos reigned \r",
+		"Where the shards fell \r",
+		"All was destroyed \r",
+		"-Jozen Kasigi, retelling an urban legend of the Cataclysm}"
+	],
+	"frameType": 6,
+	"h": 1,
+	"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvRGl2aW5hdGlvbi9JbnZlbnRvcnlJY29uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/f34bf8cbb5/InventoryIcon.png",
+	"id": "7674c458b1721f4a65f7abf6b07a686f8098337f11550a8c10553cd1bae8cb34",
+	"identified": true,
+	"ilvl": 0,
+	"inventoryId": "Stash1",
+	"league": "Standard",
+	"maxStackSize": 8,
+	"name": "",
+	"properties": [
+		{
+			"displayMode": 0,
+			"name": "Stack Size",
+			"type": 32,
+			"values": [["8/8", 0]]
+		}
+	],
+	"stackSize": 8,
+	"typeLine": "Rain of Chaos",
+	"verified": false,
+	"w": 1,
+	"x": 2,
+	"y": 5
+}

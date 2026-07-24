@@ -1,0 +1,33 @@
+name: Publish
+on:
+    push:
+        branches:
+            - 'main'
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  id-token: write  # Required for OIDC
+  contents: read
+
+jobs:
+    publish:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v6
+              with:
+                  version: 10
+            - uses: actions/setup-node@v6
+              with:
+                  node-version: latest
+                  cache: 'pnpm'
+
+            - run: pnpm install --frozen-lockfile
+            - name: Create Release Pull Request or Publish
+              id: changesets
+              uses: changesets/action@v1
+              with:
+                  publish: pnpm run release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

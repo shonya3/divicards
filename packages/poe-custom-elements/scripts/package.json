@@ -1,0 +1,22 @@
+{
+	"name": "scripts",
+	"version": "1.0.0",
+	"type": "module",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"images": "node --watch download_card_images.ts"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"dependencies": {
+		"@types/sharp": "^0.31.1",
+		"sharp": "^0.33.5",
+		"valibot": "^1.4.2"
+	},
+	"devDependencies": {
+		"@types/node": "22.15.16",
+		"typescript": "^7.0"
+	}
+}

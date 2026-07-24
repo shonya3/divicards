@@ -1,0 +1,348 @@
+{
+	"id": "b6ffb9167c",
+	"index": 0,
+	"items": [
+		{
+			"baseType": "Rogue's Marker",
+			"descrText": "Right click on this item while in a Town or Hideout to use it.",
+			"explicitMods": [
+				"Creates a portal to the Rogue Harbour from a Town or Hideout\nUsed as Currency for services in the Rogue Harbour"
+			],
+			"frameType": 5,
+			"h": 1,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvSGVpc3QvSGVpc3RDb2luQ3VycmVuY3kiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/987a8953f9/HeistCoinCurrency.png",
+			"id": "34a220443e2aed22c3c0b821dc6742ac6b8815720c6fe7210a6d195238495488",
+			"identified": true,
+			"ilvl": 0,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Necropolis",
+			"maxStackSize": 50000,
+			"name": "",
+			"properties": [{ "displayMode": 0, "name": "Stack Size", "type": 32, "values": [["54/50000", 0]] }],
+			"stackSize": 54,
+			"typeLine": "Rogue's Marker",
+			"verified": false,
+			"w": 1,
+			"x": 2,
+			"y": 2
+		},
+		{
+			"baseType": "Gladiator Helmet",
+			"craftedMods": ["+9% to Cold and Chaos Resistances"],
+			"explicitMods": [
+				"+84 to Armour",
+				"30% increased Armour",
+				"+74 to maximum Life",
+				"Regenerate 2 Life per second",
+				"12% increased Stun and Block Recovery"
+			],
+			"frameType": 2,
+			"h": 2,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9IZWxtZXRzL0hlbG1ldFN0cjUiLCJ3IjoyLCJoIjoyLCJzY2FsZSI6MX1d/38bfc94781/HelmetStr5.png",
+			"id": "782a4d354d289e542b8f9d07eed043dfee070cce0e82e7333264a2c2695c8f9f",
+			"identified": true,
+			"ilvl": 46,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Necropolis",
+			"name": "Agony Veil",
+			"properties": [{ "displayMode": 0, "name": "Armour", "type": 16, "values": [["350", 1]] }],
+			"rarity": "Rare",
+			"requirements": [
+				{ "displayMode": 0, "name": "Level", "type": 62, "values": [["48", 0]] },
+				{ "displayMode": 1, "name": "Str", "type": 63, "values": [["75", 0]] }
+			],
+			"socketedItems": [],
+			"sockets": [
+				{ "attr": "S", "group": 0, "sColour": "R" },
+				{ "attr": "I", "group": 1, "sColour": "B" },
+				{ "attr": "S", "group": 2, "sColour": "R" },
+				{ "attr": "S", "group": 3, "sColour": "R" }
+			],
+			"typeLine": "Gladiator Helmet",
+			"verified": false,
+			"w": 2,
+			"x": 0,
+			"y": 8
+		},
+		{
+			"baseType": "Exquisite Leather",
+			"explicitMods": [
+				"+24 to Dexterity",
+				"+277 to Evasion Rating",
+				"+85 to maximum Life",
+				"Regenerate 10.7 Life per second",
+				"+24% to Cold Resistance"
+			],
+			"frameType": 2,
+			"h": 3,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9Cb2R5QXJtb3Vycy9Cb2R5RGV4MUMiLCJ3IjoyLCJoIjozLCJzY2FsZSI6MX1d/47360dcc4a/BodyDex1C.png",
+			"id": "899312fe1001ec3113a5627d0589f1fb15ad1ce6ddaaac90b05e1447a4666722",
+			"identified": true,
+			"ilvl": 62,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Necropolis",
+			"name": "Dusk Pelt",
+			"properties": [
+				{ "displayMode": 0, "name": "Quality", "type": 6, "values": [["+8%", 1]] },
+				{ "displayMode": 0, "name": "Evasion Rating", "type": 17, "values": [["1119", 1]] }
+			],
+			"rarity": "Rare",
+			"requirements": [
+				{ "displayMode": 0, "name": "Level", "type": 62, "values": [["62", 0]] },
+				{ "displayMode": 1, "name": "Dex", "type": 64, "values": [["170", 0]] }
+			],
+			"socketedItems": [],
+			"sockets": [
+				{ "attr": "D", "group": 0, "sColour": "G" },
+				{ "attr": "I", "group": 0, "sColour": "B" },
+				{ "attr": "D", "group": 1, "sColour": "G" }
+			],
+			"typeLine": "Exquisite Leather",
+			"verified": false,
+			"w": 2,
+			"x": 0,
+			"y": 0
+		},
+		{
+			"baseType": "Eternal Mana Flask",
+			"descrText": "Right click to drink. Can only hold charges while in belt. Refills as you kill monsters.",
+			"explicitMods": [
+				"25% increased Charges per use",
+				"44% increased Amount Recovered",
+				"Grants Immunity to Ignite for 10 seconds if used while Ignited\nRemoves all Burning when used"
+			],
+			"frameType": 1,
+			"h": 2,
+			"icon": "https://web.poecdn.com/gen/image/WzksMTQseyJmIjoiMkRJdGVtcy9GbGFza3MvbWFuYWZsYXNrMTIiLCJ3IjoxLCJoIjoyLCJzY2FsZSI6MSwibGV2ZWwiOjF9XQ/6146902646/manaflask12.png",
+			"id": "4d10c50afc8568cd44cf18acbab99423a8f4852d99d4d6f9a65e5f0014d51dda",
+			"identified": true,
+			"ilvl": 68,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Necropolis",
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 3,
+					"name": "Recovers {0} Mana over {1} Seconds",
+					"values": [
+						["2592", 1],
+						["7", 0]
+					]
+				},
+				{
+					"displayMode": 3,
+					"name": "Consumes {0} of {1} Charges on use",
+					"values": [
+						["10", 1],
+						["42", 0]
+					]
+				},
+				{ "displayMode": 3, "name": "Currently has {0} Charges", "values": [["0", 0]] }
+			],
+			"rarity": "Magic",
+			"requirements": [{ "displayMode": 0, "name": "Level", "type": 62, "values": [["65", 0]] }],
+			"typeLine": "Kainite Eternal Mana Flask of Quashing",
+			"verified": false,
+			"w": 1,
+			"x": 2,
+			"y": 5
+		},
+		{
+			"baseType": "Eternal Life Flask",
+			"descrText": "Right click to drink. Can only hold charges while in belt. Refills as you kill monsters.",
+			"explicitMods": ["58% increased Recovery rate"],
+			"frameType": 1,
+			"h": 2,
+			"icon": "https://web.poecdn.com/gen/image/WzksMTQseyJmIjoiMkRJdGVtcy9GbGFza3MvbGlmZWZsYXNrMTIiLCJ3IjoxLCJoIjoyLCJzY2FsZSI6MSwibGV2ZWwiOjF9XQ/7be2c09015/lifeflask12.png",
+			"id": "c7d4689a090caf1a0f0a2daa829276e7d9f35b10188cc0890a1fb352e784c045",
+			"identified": true,
+			"ilvl": 68,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Necropolis",
+			"name": "",
+			"properties": [
+				{
+					"displayMode": 3,
+					"name": "Recovers {0} Life over {1} Seconds",
+					"values": [
+						["2080", 0],
+						["1.30", 1]
+					]
+				},
+				{
+					"displayMode": 3,
+					"name": "Consumes {0} of {1} Charges on use",
+					"values": [
+						["15", 0],
+						["45", 0]
+					]
+				},
+				{ "displayMode": 3, "name": "Currently has {0} Charges", "values": [["0", 0]] }
+			],
+			"rarity": "Magic",
+			"requirements": [{ "displayMode": 0, "name": "Level", "type": 62, "values": [["65", 0]] }],
+			"typeLine": "Viscous Eternal Life Flask",
+			"verified": false,
+			"w": 1,
+			"x": 2,
+			"y": 3
+		},
+		{
+			"baseType": "Carnal Mitts",
+			"explicitMods": [
+				"Adds 11 to 22 Cold Damage to Attacks",
+				"+44 to maximum Life",
+				"Regenerate 1.9 Life per second",
+				"+36% to Cold Resistance",
+				"+37% to Lightning Resistance"
+			],
+			"frameType": 2,
+			"h": 2,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9HbG92ZXMvR2xvdmVzRGV4SW50MyIsInciOjIsImgiOjIsInNjYWxlIjoxfV0/060b6ea395/GlovesDexInt3.png",
+			"id": "16267e908e26aa233a0ef3a4126fa9cbb37554b4203cfe7ea18e04fc7a0a03ff",
+			"identified": true,
+			"ilvl": 66,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Necropolis",
+			"name": "Glyph Palm",
+			"properties": [
+				{ "displayMode": 0, "name": "Evasion Rating", "type": 17, "values": [["92", 0]] },
+				{ "displayMode": 0, "name": "Energy Shield", "type": 18, "values": [["19", 0]] }
+			],
+			"rarity": "Rare",
+			"requirements": [
+				{ "displayMode": 0, "name": "Level", "type": 62, "values": [["50", 0]] },
+				{ "displayMode": 1, "name": "Dex", "type": 64, "values": [["39", 0]] },
+				{ "displayMode": 1, "name": "Int", "type": 65, "values": [["39", 0]] }
+			],
+			"socketedItems": [],
+			"sockets": [
+				{ "attr": "I", "group": 0, "sColour": "B" },
+				{ "attr": "I", "group": 1, "sColour": "B" }
+			],
+			"typeLine": "Carnal Mitts",
+			"verified": false,
+			"w": 2,
+			"x": 0,
+			"y": 10
+		},
+		{
+			"baseType": "Zealot Helmet",
+			"explicitMods": [
+				"32% reduced Attribute Requirements",
+				"+15 to Intelligence",
+				"+87 to maximum Life",
+				"+48 to maximum Mana",
+				"+17% to Fire Resistance"
+			],
+			"frameType": 2,
+			"h": 2,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9IZWxtZXRzL0hlbG1ldFN0ckludDYiLCJ3IjoyLCJoIjoyLCJzY2FsZSI6MX1d/cff363f9cb/HelmetStrInt6.png",
+			"id": "c42dd0523965fd39cd4e3e53455dee8eca8ba8384f922740d71f9583cb6b6f1b",
+			"identified": true,
+			"ilvl": 64,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Necropolis",
+			"name": "Foe Horn",
+			"properties": [
+				{ "displayMode": 0, "name": "Armour", "type": 16, "values": [["122", 0]] },
+				{ "displayMode": 0, "name": "Energy Shield", "type": 18, "values": [["26", 0]] }
+			],
+			"rarity": "Rare",
+			"requirements": [
+				{ "displayMode": 0, "name": "Level", "type": 62, "values": [["48", 0]] },
+				{ "displayMode": 1, "name": "Str", "type": 63, "values": [["34", 1]] },
+				{ "displayMode": 1, "name": "Int", "type": 65, "values": [["34", 1]] }
+			],
+			"socketedItems": [],
+			"sockets": [
+				{ "attr": "I", "group": 0, "sColour": "B" },
+				{ "attr": "I", "group": 0, "sColour": "B" },
+				{ "attr": "S", "group": 1, "sColour": "R" }
+			],
+			"typeLine": "Zealot Helmet",
+			"verified": false,
+			"w": 2,
+			"x": 0,
+			"y": 3
+		},
+		{
+			"baseType": "Majestic Plate",
+			"explicitMods": [
+				"+231 to Armour",
+				"+78 to maximum Life",
+				"+20% to Cold Resistance",
+				"+37% to Lightning Resistance"
+			],
+			"frameType": 2,
+			"h": 3,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9Cb2R5QXJtb3Vycy9Cb2R5U3RyM0MiLCJ3IjoyLCJoIjozLCJzY2FsZSI6MX1d/09903268a5/BodyStr3C.png",
+			"id": "f81d68dad8c01c020eed917632642a4d540e447ac39b11bfe4dccbc9fe634ba3",
+			"identified": true,
+			"ilvl": 61,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Necropolis",
+			"name": "Loath Guardian",
+			"properties": [
+				{ "displayMode": 0, "name": "Quality", "type": 6, "values": [["+20%", 1]] },
+				{ "displayMode": 0, "name": "Armour", "type": 16, "values": [["976", 1]] }
+			],
+			"rarity": "Rare",
+			"requirements": [
+				{ "displayMode": 0, "name": "Level", "type": 62, "values": [["53", 0]] },
+				{ "displayMode": 1, "name": "Str", "type": 63, "values": [["145", 0]] }
+			],
+			"socketedItems": [],
+			"sockets": [
+				{ "attr": "S", "group": 0, "sColour": "R" },
+				{ "attr": "S", "group": 0, "sColour": "R" },
+				{ "attr": "S", "group": 0, "sColour": "R" },
+				{ "attr": "I", "group": 0, "sColour": "B" },
+				{ "attr": "S", "group": 1, "sColour": "R" }
+			],
+			"typeLine": "Majestic Plate",
+			"verified": false,
+			"w": 2,
+			"x": 0,
+			"y": 5
+		},
+		{
+			"baseType": "Goliath Greaves",
+			"explicitMods": [
+				"+15 to maximum Life",
+				"Regenerate 8.6 Life per second",
+				"+17% to Fire Resistance",
+				"+23% to Lightning Resistance",
+				"30% increased Movement Speed"
+			],
+			"frameType": 2,
+			"h": 2,
+			"icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9Cb290cy9Cb290c1N0cjQiLCJ3IjoyLCJoIjoyLCJzY2FsZSI6MX1d/82bedfd1e0/BootsStr4.png",
+			"id": "3eafffe573851c4f1ffc69c9286ec3173942e01565a5088199030f037e337f24",
+			"identified": true,
+			"ilvl": 68,
+			"inventoryId": "Stash1",
+			"league": "Hardcore Necropolis",
+			"name": "Oblivion Stride",
+			"properties": [{ "displayMode": 0, "name": "Armour", "type": 16, "values": [["191", 0]] }],
+			"rarity": "Rare",
+			"requirements": [
+				{ "displayMode": 0, "name": "Level", "type": 62, "values": [["54", 0]] },
+				{ "displayMode": 1, "name": "Str", "type": 63, "values": [["95", 0]] }
+			],
+			"socketedItems": [],
+			"sockets": [
+				{ "attr": "S", "group": 0, "sColour": "R" },
+				{ "attr": "S", "group": 1, "sColour": "R" }
+			],
+			"typeLine": "Goliath Greaves",
+			"verified": false,
+			"w": 2,
+			"x": 2,
+			"y": 0
+		}
+	],
+	"metadata": { "colour": "f0ff80" },
+	"name": "a",
+	"type": "PremiumStash"
+}

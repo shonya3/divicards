@@ -35,8 +35,11 @@ pub const NEVER_EXISTED: [&str; 3] = [
     "Luck of the Vaal",
 ];
 
-pub const CARDS_N: usize = 467;
+pub const CARDS_N: usize = 470;
 pub const CARDS: [&str; CARDS_N] = [
+    "Divine Shard",
+    "Energy Sword",
+    "Pearls Before Swine",
     "The Everlasting",
     "Lucky Bastion",
     "The Miracle",
