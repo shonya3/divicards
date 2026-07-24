@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@divicards/shared": "workspace:*",
-    "poe-custom-elements": "catalog:"
+    "poe-custom-elements": "workspace:^"
   },
   "devDependencies": {
     "typescript": "catalog:",

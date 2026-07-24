@@ -21,7 +21,7 @@
     "@vueuse/core": "^13.3.0",
     "lit": "catalog:",
     "pinia": "^3",
-    "poe-custom-elements": "catalog:",
+    "poe-custom-elements": "workspace:^",
     "vue": "catalog:"
   },
   "devDependencies": {

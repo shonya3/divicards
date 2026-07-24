@@ -27,7 +27,7 @@
     "@lit/task": "^1",
     "@shoelace-style/shoelace": "catalog:",
     "lit": "catalog:",
-    "poe-custom-elements": "catalog:"
+    "poe-custom-elements": "workspace:^"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "5.1.1",
