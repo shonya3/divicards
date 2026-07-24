@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vp dev",
-    "build": "pnpm --filter @divicards/shared build && pnpm --filter @divicards/wc build && vue-tsc --noEmit && vp build",
+    "build": "pnpm --filter @divicards/poe-custom-elements build && pnpm --filter @divicards/shared build && pnpm --filter @divicards/wc build && vue-tsc --noEmit && vp build",
     "check": "vue-tsc --noEmit",
     "preview": "vp preview",
     "tauri": "tauri"
