@@ -8,7 +8,6 @@ pub mod unique;
 pub mod uniques_fetcher;
 use crate::unique::UniqueReward;
 
-use drop_level::DropLevel;
 pub use error::Error;
 use fetcher::Fetcher;
 use fs_cache_fetcher::DataFetcher;
@@ -23,7 +22,7 @@ pub struct DivinationCardElementData {
     pub reward_html: String,
     pub flavour_text: String,
     pub stack_size: Option<usize>,
-    pub drop_level: DropLevel,
+    pub min_level: u32,
     pub unique: Option<UniqueReward>,
 }
 

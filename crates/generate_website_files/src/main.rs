@@ -12,9 +12,109 @@ use serde::Serialize;
 
 // cargo install cargo-binstall
 // cargo binstall wasm-pack
-#[allow(unused)]
 #[tokio::main]
 async fn main() {
+    let args: Vec<String> = std::env::args().collect();
+    let dump_path = if args.len() > 1 {
+        PathBuf::from(&args[1])
+    } else {
+        project_root::get_project_root()
+            .unwrap()
+            .parent()
+            .unwrap()
+            .join("dump")
+            .join("out")
+    };
+
+    let dir = project_root::get_project_root()
+        .unwrap()
+        .parent()
+        .unwrap()
+        .join("divicards-site")
+        .join("gen");
+    println!("target dir: {}", dir.display());
+
+    let json_dir = dir.join("json");
+    if !json_dir.exists() {
+        std::fs::create_dir_all(&json_dir).unwrap();
+    }
+
+    // Load poeData from dump
+    let poe_data_path = dump_path.join("poeData.json");
+    println!("Loading poeData from: {}", poe_data_path.display());
+    let poe_data: PoeData = serde_json::from_str(
+        &std::fs::read_to_string(&poe_data_path).expect("poeData.json not found"),
+    )
+    .expect("Failed to parse poeData.json");
+
+    // Load cardElementData from dump
+    let card_element_path = dump_path.join("cardElementData.json");
+    println!(
+        "Loading cardElementData from: {}",
+        card_element_path.display()
+    );
+    let card_element: Vec<DivinationCardElementData> = serde_json::from_str(
+        &std::fs::read_to_string(&card_element_path).expect("cardElementData.json not found"),
+    )
+    .expect("Failed to parse cardElementData.json");
+
+    ensure_all_unique_rewards_handled(&card_element).unwrap();
+    write(
+        &card_element,
+        &json_dir,
+        DivinationCardElementData::filename(),
+    );
+
+    // ── Spreadsheet (still fetched live) ──────────────────────
+    dotenv::dotenv().ok();
+    let spreadsheet = Spreadsheet::load().await.unwrap();
+    let records = parse_divcord_records(&spreadsheet, &poe_data);
+
+    if !dir.exists() {
+        panic!(
+            "divicards-site/gen dir does not exist at path: {}",
+            dir.display()
+        );
+    }
+
+    let mut sources_hashmap: HashMap<String, Source> = records
+        .clone()
+        .into_iter()
+        .flat_map(|record| record.sources.into_iter().chain(record.verify_sources))
+        .collect::<HashSet<Source>>()
+        .into_iter()
+        .map(|source| (source.slug(), source))
+        .collect();
+
+    poe_data.maps.iter().for_each(|map| {
+        sources_hashmap
+            .entry(map.slug.clone())
+            .or_insert(Source::Map(map.name.clone()));
+    });
+
+    write(&sources_hashmap, &json_dir, "sources2.json");
+    write(&records, &json_dir, "records.json");
+    write(&poe_data, &json_dir, PoeData::filename());
+
+    match avatars::prepare_avatars_ts().await {
+        Ok(avatars_string) => std::fs::write(dir.join("avatars.ts"), avatars_string).unwrap(),
+        Err(err) => println!("Preparing avatars error: {err:?}"),
+    }
+
+    // 2. Generate TypeScript
+    std::fs::write(
+        dir.join("Source.ts"),
+        divcord::dropsource::Source::typescript_types(),
+    )
+    .unwrap();
+
+    // 3. Compile WASM Divcord
+    divcord_wasm_pkg(&dir, "divcordWasm");
+}
+
+#[allow(unused)]
+#[tokio::main]
+async fn main_old() {
     dotenv::dotenv().ok();
 
     let dir = project_root::get_project_root()

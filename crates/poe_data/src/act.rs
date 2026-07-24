@@ -13,6 +13,7 @@ pub struct ActArea {
     pub has_labyrinth_trial: bool,
     pub is_town: bool,
     pub bossfights: Vec<Bossfight>,
+    #[serde(default)]
     pub flavour_text: String,
 }
 
@@ -32,6 +33,7 @@ impl ActAreaId {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Bossfight {
     pub name: String,
+    #[serde(default)]
     pub url: String,
 }
 

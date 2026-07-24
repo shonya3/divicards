@@ -1,4 +1,3 @@
-use crate::drop_level;
 use crate::{
     base_items_fetcher::{BaseItem, BaseItemsFetcher},
     reward::reward_to_html,
@@ -92,7 +91,7 @@ impl DataFetcher for Fetcher {
                     flavour_text: fl,
                     stack_size: data.stack_size,
                     reward_html: reward_to_html(&data.explicit_modifiers[0].text),
-                    drop_level: drop_level::extract_drop_level(card),
+                    min_level: card.and_then(|c| c.min_level).unwrap_or(0),
                     unique,
                 }
             })

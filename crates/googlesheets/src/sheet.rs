@@ -7,7 +7,6 @@ use std::sync::LazyLock;
 
 static HTTP_CLIENT: LazyLock<Client> = LazyLock::new(|| {
     Client::builder()
-        .timeout(std::time::Duration::from_secs(30))
         .build()
         .expect("Failed to create reqwest client")
 });

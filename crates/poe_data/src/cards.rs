@@ -35,9 +35,10 @@ pub struct Card {
     pub slug: String,
     pub name: String,
     pub min_level: Option<u32>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub max_level: Option<u32>,
     pub weights: HashMap<String, f32>,
+    #[serde(default)]
     pub price: Option<f32>,
     #[serde(alias = "release version")]
     pub league: Option<LeagueReleaseInfo>,
