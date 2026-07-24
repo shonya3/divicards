@@ -1,16 +1,27 @@
 {
-  "name": "poe-custom-elements",
-  "description": "Path of Exile custom elements",
-  "private": false,
+  "name": "@divicards/poe-custom-elements",
   "version": "0.4.0",
-  "type": "module",
-  "license": "MIT",
+  "private": false,
+  "description": "Path of Exile custom elements",
   "keywords": [
-    "web components",
     "custom elements",
     "path of exile",
-    "poe"
+    "poe",
+    "web components"
   ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shonya3/poe-custom-elements.git"
+  },
+  "files": [
+    "./custom-elements.json",
+    "./dist",
+    "./public",
+    "CHANGELOG.md",
+    "LICENCE"
+  ],
+  "type": "module",
   "exports": {
     "./types.js": "./dist/poe.types.js",
     "./stash-tab.js": "./dist/elements/poe-stash-tab.js",
@@ -24,6 +35,9 @@
       "default": "./dist/poe.types.js"
     },
     "./lib/base_path.js": "./dist/lib/base_path.js"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "dev": "vite",
@@ -39,10 +53,6 @@
   "dependencies": {
     "@floating-ui/dom": "1.7.6",
     "lit": "3.3.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/shonya3/poe-custom-elements.git"
   },
   "devDependencies": {
     "@changesets/cli": "2.30",
@@ -60,16 +70,6 @@
     "storybook": "8.6.12",
     "typescript": "^5.9.3",
     "vite": "8"
-  },
-  "files": [
-    "./custom-elements.json",
-    "./dist",
-    "./public",
-    "CHANGELOG.md",
-    "LICENCE"
-  ],
-  "publishConfig": {
-    "access": "public"
   },
   "customElements": "./custom-elements.json"
 }
