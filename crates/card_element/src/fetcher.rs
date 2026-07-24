@@ -32,7 +32,7 @@ impl DataFetcher for Fetcher {
         let uniques_fetcher = UniquesFetcher::default();
         let base_items_fetcher = BaseItemsFetcher::default();
         let (ninja_data, cards, uniques_data, base_items_data) = tokio::join!(
-            ninja::fetch_card_data(&league),
+            ninja::fetch_card_data(league),
             cards_fetcher.load(),
             uniques_fetcher.load(),
             base_items_fetcher.load()
