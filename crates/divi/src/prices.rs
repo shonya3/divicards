@@ -1,5 +1,4 @@
 use crate::consts::CARDS;
-use ninja::CardData as NinjaCardData;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -17,20 +16,11 @@ impl Prices {
     /// ## Errors
     /// Returns `ninja::Error` when cannot fetch from ninja
     pub async fn fetch(league: poe::TradeLeague) -> Result<Prices, ninja::Error> {
-        let ninja_card_data = ninja::fetch_card_data(league).await?;
+        let exchange_prices = ninja::fetch_exchange_prices(league).await?;
         let mut prices = Prices::default();
         prices.0.iter_mut().for_each(|price| {
-            if let Some(NinjaCardData {
-                spark_line,
-                chaos_value,
-                ..
-            }) = ninja_card_data
-                .iter()
-                .find(|ninja_data| ninja_data.name == price.name)
-            {
-                if !spark_line.data.is_empty() {
-                    price.price = *chaos_value;
-                }
+            if let Some(exchange) = exchange_prices.iter().find(|e| e.name == price.name) {
+                price.price = exchange.chaos_value;
             }
         });
 
