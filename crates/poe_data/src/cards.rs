@@ -207,7 +207,7 @@ pub mod fetch {
         let key = std::env::var("GOOGLE_API_KEY").expect("GOOGLE_API_KEY is expected.");
 
         let (prices_res, other_samples_res, wikicards_res, league_info_vec_res, maps_wiki_res) = tokio::join!(
-            Prices::fetch(&divi::TradeLeague::Standard),
+            Prices::fetch(divi::TradeLeague::Standard),
             try_join_all(
                 LEAGUE_RANGES
                     .iter()

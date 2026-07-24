@@ -54,7 +54,7 @@ impl From<TradeLeague> for League {
     }
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone, Hash, Eq, PartialEq, Default)]
+#[derive(Debug, Serialize, Deserialize, Clone, Copy, Hash, Eq, PartialEq, Default)]
 pub enum TradeLeague {
     Standard,
     Hardcore,

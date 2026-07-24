@@ -6,7 +6,7 @@ use divi::{
 
 #[tokio::main]
 async fn main() -> Result<(), divi::error::Error> {
-    let prices = Prices::fetch(&TradeLeague::Standard).await?;
+    let prices = Prices::fetch(TradeLeague::Standard).await?;
     let csv = r#"name,amount
     The Doctor,2
     Rain of Chaos,30"#;

@@ -121,7 +121,7 @@ impl AppCardPrices {
 
     #[instrument(skip(self))]
     async fn fetch_and_update(&mut self, league: &TradeLeague) -> Result<Prices, Error> {
-        let prices = Prices::fetch(league).await.map_err(DiviError::NinjaError)?;
+        let prices = Prices::fetch(*league).await.map_err(DiviError::NinjaError)?;
         debug!("fetch_and_update: fetched. Serializing to json");
         let json = serde_json::to_string(&prices)?;
 
