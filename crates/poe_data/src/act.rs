@@ -95,10 +95,12 @@ mod fetch {
         Ok(act_areas)
     }
 
-    #[allow(dead_code)]
     #[derive(Debug)]
     pub enum FetchSpecificActError {
-        NoTippyContent { area: String },
+        NoTippyContent {
+            #[allow(unused)]
+            area: String,
+        },
     }
 
     async fn fetch_specific_act(
