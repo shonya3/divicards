@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::fmt::Display;
+use std::str::FromStr;
 
 #[derive(Debug, Serialize, Deserialize, Clone, Hash, PartialEq, Eq, Default)]
 pub enum League {
@@ -71,6 +72,20 @@ impl Display for TradeLeague {
             TradeLeague::Hardcore => write!(f, "Hardcore"),
             TradeLeague::Allflame => write!(f, "Allflame"),
             TradeLeague::HardcoreAllflame => write!(f, "Hardcore Allflame"),
+        }
+    }
+}
+
+impl FromStr for TradeLeague {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "Standard" => Ok(TradeLeague::Standard),
+            "Hardcore" => Ok(TradeLeague::Hardcore),
+            "Allflame" => Ok(TradeLeague::Allflame),
+            "Hardcore Allflame" => Ok(TradeLeague::HardcoreAllflame),
+            _ => Err(format!("Unknown trade league: {s}")),
         }
     }
 }
