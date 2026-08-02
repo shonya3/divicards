@@ -275,7 +275,10 @@ fn parse_divcord_records(spreadsheet: &Spreadsheet, poe_data: &PoeData) -> Vec<R
 }
 
 pub fn divcord_wasm_pkg(path: &Path, dirname: &str) {
-    let dir_path = Path::new("../divcord_wasm");
+    let dir_path = project_root::get_project_root()
+        .unwrap()
+        .join("crates")
+        .join("divcord_wasm");
 
     let path = std::env::current_dir()
         .unwrap()
