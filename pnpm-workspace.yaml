@@ -4,6 +4,7 @@ packages:
 allowBuilds:
   wasm-pack: true
 catalog:
+  poe-custom-elements: latest
   "@shoelace-style/shoelace": ^2.20
   "@types/node": ^25
   lit: ^3.3.2
