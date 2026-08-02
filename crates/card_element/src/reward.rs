@@ -226,11 +226,11 @@ impl Span {
     pub fn as_html(&self) -> String {
         // dbg!(&self.0.modifier.to_string());
         let classlist = match &self.0.size {
-            Some(size) => format!("\"{} {}\"", &self.0.modifier.to_string(), size),
+            Some(size) => format!("\"{} {}\"", self.0.modifier, size),
             None => self.0.modifier.to_string(),
         };
 
-        format!("<span class={}>{}</span>", classlist, &self.0.text)
+        format!("<span class={}>{}</span>", classlist, self.0.text)
     }
 }
 

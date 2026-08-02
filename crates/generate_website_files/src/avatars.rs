@@ -103,7 +103,7 @@ pub async fn prepare_avatars_ts() -> Result<String, PrepareAvatarsError> {
 
 pub async fn fetch_user_avatar(user: &InitialUserData) -> Result<UserAvatar, reqwest::Error> {
     let discord_user: DiscordUser = reqwest::Client::new()
-        .get(format!("https://discord.com/api/users/{}", &user.id))
+        .get(format!("https://discord.com/api/users/{}", user.id))
         .header(
             "Authorization",
             format!("Bot {}", std::env::var("DISCORD_TOKEN").unwrap()),
