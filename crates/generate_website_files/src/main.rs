@@ -15,16 +15,18 @@ use serde::Serialize;
 #[tokio::main]
 async fn main() {
     let args: Vec<String> = std::env::args().collect();
+    let dump_dir = project_root::get_project_root()
+        .unwrap()
+        .parent()
+        .unwrap()
+        .join("dump");
     let dump_path = if args.len() > 1 {
         PathBuf::from(&args[1])
     } else {
-        project_root::get_project_root()
-            .unwrap()
-            .parent()
-            .unwrap()
-            .join("dump")
-            .join("out")
+        dump_dir.join("out")
     };
+
+    run_dump(&dump_dir, &dump_path);
 
     let dir = project_root::get_project_root()
         .unwrap()
@@ -62,6 +64,25 @@ async fn main() {
     write(
         &card_element,
         &json_dir,
+        DivinationCardElementData::filename(),
+    );
+
+    // Sync cardElementData to poe-custom-elements (pretty-printed)
+    let poe_custom_elements_dir = project_root::get_project_root()
+        .unwrap()
+        .parent()
+        .unwrap()
+        .join("poe-custom-elements")
+        .join("src")
+        .join("elements")
+        .join("divination-card");
+    println!(
+        "target dir: {}",
+        poe_custom_elements_dir.display()
+    );
+    write_pretty(
+        &card_element,
+        &poe_custom_elements_dir,
         DivinationCardElementData::filename(),
     );
 
@@ -186,6 +207,48 @@ async fn main_old() {
     divcord_wasm_pkg(&dir, "divcordWasm");
 }
 
+fn run_dump(dump_dir: &Path, dump_path: &Path) {
+    println!(
+        "Running dump (cargo run --release -- all --output {})",
+        dump_path.display()
+    );
+    let output = Command::new("cargo")
+        .args(["run", "--release", "--", "all", "--output"])
+        .arg(dump_path)
+        .current_dir(dump_dir)
+        .env_remove("RUSTUP_TOOLCHAIN")
+        .env_remove("CARGO")
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .output();
+
+    match output {
+        Ok(output) => {
+            if output.status.success() {
+                println!("{}", String::from_utf8_lossy(&output.stdout));
+                let stderr = String::from_utf8_lossy(&output.stderr);
+                if !stderr.is_empty() {
+                    eprintln!("{stderr}");
+                }
+                println!("Dump executed successfully!");
+            } else {
+                eprintln!("Error executing dump. Status: {}", output.status);
+                eprintln!(
+                    "--- stderr ---\n{}",
+                    String::from_utf8_lossy(&output.stderr)
+                );
+                eprintln!(
+                    "--- stdout ---\n{}",
+                    String::from_utf8_lossy(&output.stdout)
+                );
+            }
+        }
+        Err(err) => {
+            eprintln!("Failed to execute dump: {err}");
+        }
+    }
+}
+
 fn parse_divcord_records(spreadsheet: &Spreadsheet, poe_data: &PoeData) -> Vec<Record> {
     println!("Parse divcord records");
     let on_err = |s: &str| {
@@ -296,6 +359,15 @@ where
     T: Serialize,
 {
     let json = serde_json::to_string(&value).unwrap();
+    let p = dir.join(filename);
+    std::fs::write(p, json).unwrap();
+}
+
+pub fn write_pretty<T>(value: &T, dir: &Path, filename: &str)
+where
+    T: Serialize,
+{
+    let json = serde_json::to_string_pretty(&value).unwrap();
     let p = dir.join(filename);
     std::fs::write(p, json).unwrap();
 }
