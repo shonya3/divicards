@@ -1,68 +1,53 @@
+//! Data extraction and fetching for the divicards ecosystem.
+//!
+//! Extracts Path of Exile data from game files and external sources
+//! (poewiki, poe.ninja, Google Sheets, RePoE), producing the model types
+//! defined in [`divcord::poe_data`] (and [`card_element`]). Also hosts the
+//! in-process `DataFetcher`s and the `dump` CLI.
+
 pub mod act;
 pub mod cards;
-pub mod consts;
-pub mod error;
 pub mod fetchers;
-pub mod league;
 pub mod mapbosses;
 pub mod maps;
 
-use self::{act::ActArea, cards::CardsData, mapbosses::MapBoss, maps::Map};
-use act::ActAreaId;
-use serde::{Deserialize, Serialize};
+use anyhow::{Context, Result};
+pub use fetchers::PoeDataFetcher;
+use poe_data_tools::{dat::schema::fetch_schema, fs::FS};
+use reqwest::Client;
+use std::path::{Path, PathBuf};
+use std::sync::LazyLock;
 
-#[cfg(feature = "fs_cache_fetcher")]
-use {once_cell::sync::Lazy, reqwest::Client};
+/// Base URL for all poewiki.net Cargo and MediaWiki API calls.
+pub(crate) const WIKI_API_URL: &str = "https://www.poewiki.net/w/api.php";
 
-#[cfg(feature = "fs_cache_fetcher")]
-// Create a single, shared HTTP client to be reused across requests.
-pub(crate) static HTTP_CLIENT: Lazy<Client> = Lazy::new(Client::new);
+/// Single shared HTTP client reused across all requests.
+pub(crate) static HTTP_CLIENT: LazyLock<Client> = LazyLock::new(|| {
+    Client::builder()
+        .timeout(std::time::Duration::from_secs(30))
+        .build()
+        .expect("Failed to create reqwest client")
+});
 
-#[derive(Debug, Serialize, Deserialize, Clone, Default)]
-pub struct PoeData {
-    pub acts: Vec<ActArea>,
-    pub cards: CardsData,
-    pub maps: Vec<Map>,
-    pub mapbosses: Vec<MapBoss>,
+/// Default Path of Exile installation (Steam).
+pub fn default_steam_path() -> PathBuf {
+    let home = std::env::var("HOME").unwrap_or_else(|_| "/home/shonya".into());
+    PathBuf::from(format!(
+        "{home}/.local/share/Steam/steamapps/common/Path of Exile"
+    ))
 }
 
-impl PoeData {
-    /// Load cached data or fetch fresh based on config conditions or if there is no cached data.
-    #[cfg(feature = "fs_cache_fetcher")]
-    pub async fn load() -> Result<Self, crate::error::Error> {
-        use fs_cache_fetcher::DataFetcher;
-        crate::fetchers::PoeDataFetcher::default().load().await
-    }
-
-    #[cfg(feature = "fs_cache_fetcher")]
-    pub fn filename() -> &'static str {
-        use fs_cache_fetcher::DataFetcher;
-        crate::fetchers::PoeDataFetcher::default().config().filename
-    }
-
-    pub fn mapboss(&self, name: &str) -> Option<&MapBoss> {
-        self.mapbosses
-            .iter()
-            .find(|map_boss| map_boss.name.to_lowercase() == name.to_lowercase())
-    }
-
-    pub fn act_area_id(&self, id: &ActAreaId) -> Option<&ActArea> {
-        self.acts.iter().find(|act_area| act_area.id == *id)
-    }
-
-    pub fn act_area_name(&self, name: &str) -> Option<&ActArea> {
-        self.acts.iter().find(|act_area| act_area.name == name)
-    }
-
-    pub fn bosses_of_map(&self, map: &str) -> Vec<&MapBoss> {
-        self.mapbosses
-            .iter()
-            .filter(|map_boss| {
-                map_boss
-                    .maps
-                    .iter()
-                    .any(|m| m.to_lowercase() == map.to_lowercase())
-            })
-            .collect()
-    }
+/// Opens the game files and fetches the dat schemas (cached in the OS cache dir).
+pub async fn open_game_data(
+    steam: &Path,
+) -> Result<(FS, poe_data_tools::dat::schema::SchemaCollection)> {
+    let cache_dir = dirs::cache_dir().unwrap().join("poe_data_tools");
+    eprintln!("opening game files...");
+    let fs = FS::from_steam(steam.to_path_buf()).context("Failed to open game files")?;
+    eprintln!("fetching schema...");
+    let schemas = tokio::task::spawn_blocking(move || {
+        fetch_schema(&cache_dir).context("Failed to fetch schema")
+    })
+    .await??;
+    Ok((fs, schemas))
 }

@@ -10,8 +10,8 @@ use crate::spreadsheet::{
     Spreadsheet,
 };
 use divi::IsCard;
-use poe_data::act::ActArea;
-use poe_data::PoeData;
+use crate::poe_data::act::ActArea;
+use crate::poe_data::PoeData;
 use serde::{Deserialize, Serialize};
 use std::collections::HashSet;
 use std::fmt::Display;
@@ -408,7 +408,7 @@ pub fn parse_one_drops_from(
         return Ok(vec![Source::Predefined(predefined_source)]);
     }
 
-    let card_min_drop_level = cards.card(&dumb.card).min_level.unwrap_or_default();
+    let card_min_drop_level = cards.card(&dumb.card).min_level;
     // Acts + bosses
     if d.styles.italic {
         if let Some(sources) =
@@ -506,7 +506,7 @@ fn strip_comment(input: &str) -> String {
 
 mod acts {
     use crate::spreadsheet::rich::DropsFrom;
-    use poe_data::act::{ActArea, ActAreaId};
+    use crate::poe_data::act::{ActArea, ActAreaId};
     use serde::{Deserialize, Serialize};
 
     /// Examples of acts areas in divcord spreadsheet:

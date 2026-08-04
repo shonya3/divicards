@@ -1,6 +1,6 @@
 use crate::{dropsource::predefined::PredefinedSource, Record, Source};
 use itertools::Either;
-use poe_data::{act::Bossfight, mapbosses::MapBoss, maps::Map, PoeData};
+use crate::poe_data::{act::Bossfight, mapbosses::MapBoss, maps::Map, PoeData};
 use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, HashSet};
 
@@ -198,14 +198,14 @@ impl From<Bossfight> for Source {
     }
 }
 
-impl From<poe_data::maps::Map> for Source {
+impl From<crate::poe_data::maps::Map> for Source {
     fn from(value: Map) -> Self {
         Source::Map(value.name)
     }
 }
 
-impl From<poe_data::act::ActArea> for Source {
-    fn from(value: poe_data::act::ActArea) -> Self {
+impl From<crate::poe_data::act::ActArea> for Source {
+    fn from(value: crate::poe_data::act::ActArea) -> Self {
         Source::Act(value.id)
     }
 }
@@ -316,7 +316,7 @@ impl From<Direct> for CardBySource {
 
 #[cfg(test)]
 mod tests {
-    use poe_data::{maps::Map, PoeData};
+    use crate::poe_data::{maps::Map, PoeData};
 
     use super::VerificationStatus;
     use crate::{
@@ -376,7 +376,7 @@ mod tests {
 
     #[test]
     fn test_get_transitive_cards_from_source() {
-        use poe_data::{cards::CardsData, mapbosses::MapBoss, PoeData};
+        use crate::poe_data::{cards::CardsData, mapbosses::MapBoss, PoeData};
 
         let map_source = Source::Map("Some Map".to_string());
         let boss_source = Source::MapBoss("Some Map Boss".to_string());
@@ -415,7 +415,7 @@ mod tests {
 
     #[test]
     fn test_cards_by_source() {
-        use poe_data::{cards::CardsData, mapbosses::MapBoss, PoeData};
+        use crate::poe_data::{cards::CardsData, mapbosses::MapBoss, PoeData};
 
         let map_source = Source::Map("Some Map".to_string());
         let boss_source = Source::MapBoss("Some Map Boss".to_string());
@@ -454,7 +454,6 @@ mod tests {
                 unique: false,
                 icon: "".to_string(),
                 slug: "some-map".to_string(),
-                series: Some("Keepers".to_string()),
                 atlas_cards: vec![],
             }],
             mapbosses: vec![MapBoss {
@@ -476,7 +475,7 @@ mod tests {
 
     #[test]
     fn test_cards_by_source_types() {
-        use poe_data::{cards::CardsData, mapbosses::MapBoss, maps::Map, PoeData};
+        use crate::poe_data::{cards::CardsData, mapbosses::MapBoss, maps::Map, PoeData};
 
         let map_source = Source::Map("Some Map".to_string());
         let boss_source = Source::MapBoss("Some Map Boss".to_string());
@@ -528,7 +527,6 @@ mod tests {
                 icon: "".to_string(),
                 slug: "".to_string(),
                 atlas_cards: vec![],
-                series: None,
             }],
             mapbosses: vec![MapBoss {
                 name: "Some Map Boss".to_string(),

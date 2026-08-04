@@ -106,22 +106,15 @@ impl AppCardPrices {
     }
 
     #[instrument(skip(self))]
-    fn read_from_file_update_and_return(&mut self, league: &TradeLeague) -> Result<Prices, Error> {
-        let json = std::fs::read_to_string(self.league_path(league))?;
-        let prices = serde_json::from_str::<Prices>(&json)?;
-        self.prices_by_league
-            .insert(league.to_owned(), prices.clone());
-        Ok(prices)
-    }
-
-    #[instrument(skip(self))]
     pub fn league_path(&self, league: &TradeLeague) -> PathBuf {
         self.dir.join(format!("{}-prices.json", { league }))
     }
 
     #[instrument(skip(self))]
     async fn fetch_and_update(&mut self, league: &TradeLeague) -> Result<Prices, Error> {
-        let prices = Prices::fetch(*league).await.map_err(DiviError::NinjaError)?;
+        let prices = Prices::fetch(*league)
+            .await
+            .map_err(DiviError::NinjaError)?;
         debug!("fetch_and_update: fetched. Serializing to json");
         let json = serde_json::to_string(&prices)?;
 
@@ -141,22 +134,6 @@ impl AppCardPrices {
         let json = std::fs::read_to_string(self.league_path(league))?;
         let prices = serde_json::from_str::<Prices>(&json)?;
         Ok(prices)
-    }
-
-    #[instrument(skip(self))]
-    fn file_is_up_to_date(&self, league: &TradeLeague) -> bool {
-        match self.file_minutes_old(league) {
-            Some(minutes_old) => minutes_old <= UP_TO_DATE_THRESHOLD_MINUTES,
-            None => false,
-        }
-    }
-
-    #[instrument(skip(self))]
-    fn file_is_still_usable(&self, league: &TradeLeague) -> bool {
-        match self.file_minutes_old(league) {
-            Some(minutes_old) => minutes_old <= STILL_USABLE_THRESHOLD_MINUTES,
-            None => false,
-        }
     }
 
     #[instrument(skip(self))]

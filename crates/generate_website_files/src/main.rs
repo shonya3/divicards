@@ -6,27 +6,21 @@ use std::{
 };
 
 use card_element::DivinationCardElementData;
-use divcord::{spreadsheet::Spreadsheet, ParseRecordError, Record, Source};
-use poe_data::PoeData;
+use divcord::{spreadsheet::Spreadsheet, ParseRecordError, PoeData, Record, Source};
+use fs_cache_fetcher::DataFetcher;
+use poe_data::fetchers::{CardElementsFetcher, PoeDataFetcher};
 use serde::Serialize;
 
 // cargo install cargo-binstall
 // cargo binstall wasm-pack
 #[tokio::main]
 async fn main() {
-    let args: Vec<String> = std::env::args().collect();
-    let dump_dir = project_root::get_project_root()
-        .unwrap()
-        .parent()
-        .unwrap()
-        .join("dump");
-    let dump_path = if args.len() > 1 {
-        PathBuf::from(&args[1])
-    } else {
-        dump_dir.join("out")
-    };
+    // Load poeData (runs the extraction pipeline when stale)
+    let poe_data: PoeData = PoeDataFetcher::default().load().await.unwrap();
 
-    run_dump(&dump_dir, &dump_path);
+    // Load cardElementData
+    let card_element: Vec<DivinationCardElementData> =
+        CardElementsFetcher::default().load().await.unwrap();
 
     let dir = project_root::get_project_root()
         .unwrap()
@@ -41,30 +35,11 @@ async fn main() {
         std::fs::create_dir_all(&json_dir).unwrap();
     }
 
-    // Load poeData from dump
-    let poe_data_path = dump_path.join("poeData.json");
-    println!("Loading poeData from: {}", poe_data_path.display());
-    let poe_data: PoeData = serde_json::from_str(
-        &std::fs::read_to_string(&poe_data_path).expect("poeData.json not found"),
-    )
-    .expect("Failed to parse poeData.json");
-
-    // Load cardElementData from dump
-    let card_element_path = dump_path.join("cardElementData.json");
-    println!(
-        "Loading cardElementData from: {}",
-        card_element_path.display()
-    );
-    let card_element: Vec<DivinationCardElementData> = serde_json::from_str(
-        &std::fs::read_to_string(&card_element_path).expect("cardElementData.json not found"),
-    )
-    .expect("Failed to parse cardElementData.json");
-
     ensure_all_unique_rewards_handled(&card_element).unwrap();
     write(
         &card_element,
         &json_dir,
-        DivinationCardElementData::filename(),
+        CardElementsFetcher::default().filename(),
     );
 
     // Sync cardElementData to poe-custom-elements (pretty-printed)
@@ -83,7 +58,7 @@ async fn main() {
     write_pretty(
         &card_element,
         &poe_custom_elements_dir,
-        DivinationCardElementData::filename(),
+        CardElementsFetcher::default().filename(),
     );
 
     // ── Spreadsheet (still fetched live) ──────────────────────
@@ -115,7 +90,11 @@ async fn main() {
 
     write(&sources_hashmap, &json_dir, "sources2.json");
     write(&records, &json_dir, "records.json");
-    write(&poe_data, &json_dir, PoeData::filename());
+    write(
+        &poe_data,
+        &json_dir,
+        PoeDataFetcher::default().filename(),
+    );
 
     match avatars::prepare_avatars_ts().await {
         Ok(avatars_string) => std::fs::write(dir.join("avatars.ts"), avatars_string).unwrap(),
@@ -153,16 +132,17 @@ async fn main_old() {
 
     // load and parse
     let spreadsheet = Spreadsheet::load().await.unwrap();
-    let poe_data = PoeData::load().await.unwrap();
+    let poe_data: PoeData = PoeDataFetcher::default().load().await.unwrap();
 
     let records = parse_divcord_records(&spreadsheet, &poe_data);
 
-    let card_element = DivinationCardElementData::load().await.unwrap();
+    let card_element: Vec<DivinationCardElementData> =
+        CardElementsFetcher::default().load().await.unwrap();
     ensure_all_unique_rewards_handled(&card_element).unwrap();
     write(
         &card_element,
         &json_dir,
-        DivinationCardElementData::filename(),
+        CardElementsFetcher::default().filename(),
     );
 
     if !dir.exists() {
@@ -189,7 +169,11 @@ async fn main_old() {
 
     write(&sources_hashmap, &json_dir, "sources2.json");
     write(&records, &json_dir, "records.json");
-    write(&poe_data, &json_dir, PoeData::filename());
+    write(
+        &poe_data,
+        &json_dir,
+        PoeDataFetcher::default().filename(),
+    );
 
     match avatars::prepare_avatars_ts().await {
         Ok(avatars_string) => std::fs::write(dir.join("avatars.ts"), avatars_string).unwrap(),
@@ -205,48 +189,6 @@ async fn main_old() {
 
     // 3. Compile WASM Divcord
     divcord_wasm_pkg(&dir, "divcordWasm");
-}
-
-fn run_dump(dump_dir: &Path, dump_path: &Path) {
-    println!(
-        "Running dump (cargo run --release -- all --output {})",
-        dump_path.display()
-    );
-    let output = Command::new("cargo")
-        .args(["run", "--release", "--", "all", "--output"])
-        .arg(dump_path)
-        .current_dir(dump_dir)
-        .env_remove("RUSTUP_TOOLCHAIN")
-        .env_remove("CARGO")
-        .stdout(Stdio::piped())
-        .stderr(Stdio::piped())
-        .output();
-
-    match output {
-        Ok(output) => {
-            if output.status.success() {
-                println!("{}", String::from_utf8_lossy(&output.stdout));
-                let stderr = String::from_utf8_lossy(&output.stderr);
-                if !stderr.is_empty() {
-                    eprintln!("{stderr}");
-                }
-                println!("Dump executed successfully!");
-            } else {
-                eprintln!("Error executing dump. Status: {}", output.status);
-                eprintln!(
-                    "--- stderr ---\n{}",
-                    String::from_utf8_lossy(&output.stderr)
-                );
-                eprintln!(
-                    "--- stdout ---\n{}",
-                    String::from_utf8_lossy(&output.stdout)
-                );
-            }
-        }
-        Err(err) => {
-            eprintln!("Failed to execute dump: {err}");
-        }
-    }
 }
 
 fn parse_divcord_records(spreadsheet: &Spreadsheet, poe_data: &PoeData) -> Vec<Record> {

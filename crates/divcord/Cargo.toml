@@ -15,18 +15,19 @@ divi = { path = "../divi" }
 reqwest = { workspace = true }
 strum_macros = "0.27"
 strum = "0.27"
-poe_data = { path = "../poe_data" }
 fs_cache_fetcher = { path = "../fs_cache_fetcher", optional = true }
 slug = "0.1.5"
 itertools = "0.14.0"
 
 [features]
 default = []
-fs_cache_fetcher = ["dep:fs_cache_fetcher", "poe_data/fs_cache_fetcher"]
+fs_cache_fetcher = ["dep:fs_cache_fetcher"]
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }
 criterion = "0.7"
+poe_data = { path = "../poe_data" }
+fs_cache_fetcher = { path = "../fs_cache_fetcher" }
 
 
 [[bench]]

@@ -1,9 +1,9 @@
 //! Big fat enum with all drop sources.
 
 use id::Identified;
-use poe_data::act::ActAreaId;
+use crate::poe_data::act::ActAreaId;
 #[allow(unused_imports)]
-use poe_data::PoeData;
+use crate::poe_data::PoeData;
 use predefined::PredefinedSource;
 use serde::{de, ser::SerializeStruct, Deserialize, Serialize};
 use strum::IntoEnumIterator;

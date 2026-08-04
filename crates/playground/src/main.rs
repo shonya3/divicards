@@ -15,18 +15,14 @@ use divcord::{
         rich::{DropsFrom, FontStyles, HexColor, RichColumn},
         Spreadsheet,
     },
-    PoeData, PoeDataFetcher,
+    PoeData,
 };
 use divi::Prices;
 use error::Error;
 use fs_cache_fetcher::DataFetcher;
 use fs_cache_fetcher::{Config, Stale};
-use playwright::api::Page;
 use poe::TradeLeague;
-use poe_data::{
-    act::ActArea,
-    fetchers::{ActsFetcher, MapsFetcher},
-};
+use poe_data::PoeDataFetcher;
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_json::{json, Value};
 use std::{
@@ -41,20 +37,9 @@ mod error;
 
 #[tokio::main]
 async fn main() {
-    etc::ensure_divcord_no_errors().await.unwrap();
+    let data = PoeDataFetcher::default().load().await.unwrap();
 
-    // let maps = poe_data::maps::wiki::fetch_wiki_maplist().await.unwrap();
-
-    // println!("{:?}", maps[25]);
-
-    // let maps = poe_data::maps::fetch_maps().await.unwrap();
-    // etc::jsonsave("maps.json", maps);
-
-    // let maps = poe_data::maps::wiki::fetch_wiki_maplist().await.unwrap();
-    // etc::jsonsave("maps.json", maps);
-
-    // let now = Instant::now();
-    // println!("Elapsed: {} ms", now.elapsed().as_millis());
+    // etc::ensure_divcord_no_errors().await.unwrap();
 }
 
 mod etc {
@@ -65,7 +50,9 @@ mod etc {
     use serde::{de::DeserializeOwned, Serialize};
 
     pub async fn ensure_divcord_no_errors() -> Result<(Spreadsheet, PoeData, Vec<Record>), ()> {
-        let poe_data = PoeData::load().await.unwrap();
+        use poe_data::fetchers::PoeDataFetcher;
+
+        let poe_data = PoeDataFetcher::default().load().await.unwrap();
         let spreadsheet = SpreadsheetFetcher::default_with_mut_config(|c| {
             c.stale = Stale::After(Duration::from_secs(84400))
         })
@@ -97,7 +84,9 @@ mod etc {
     }
 
     async fn old_main() {
-        let poe_data = PoeData::load().await.unwrap();
+        use poe_data::fetchers::PoeDataFetcher;
+
+        let poe_data = PoeDataFetcher::default().load().await.unwrap();
         let spreadsheet = SpreadsheetFetcher::default_with_mut_config(|c| {
             c.stale = Stale::After(Duration::from_secs(84400))
         })

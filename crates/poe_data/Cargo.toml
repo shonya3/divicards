@@ -1,44 +1,30 @@
 [package]
 name = "poe_data"
-version.workspace = true
-edition.workspace = true
-repository.workspace = true
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+version = "0.1.0"
+edition = "2024"
 
 [dependencies]
-serde = { workspace = true }
-
-
-reqwest = { workspace = true, optional = true }
-googlesheets = { path = "../googlesheets", optional = true }
-dotenv = { version = "0.15.0", optional = true }
-divi = { path = "../divi", optional = true }
-playwright = { version = "0.0.20", optional = true }
-serde_json = { workspace = true, optional = true }
-fs_cache_fetcher = { path = "../fs_cache_fetcher", optional = true }
-tokio = { workspace = true, optional = true }
-slug = "0.1.5"
-regex = "1.10.6"
-once_cell = { version = "1.21.3", optional = true }
-futures = { version = "0.3", optional = true }
-
-[dev-dependencies]
+poe_data_tools = { path = "/home/shonya/Desktop/poe_data_tools/crates/poe_data_tools-lib" }
+anyhow = "1"
+arrow-array = "56"
+arrow-schema = "56"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+clap = { version = "4", features = ["derive"] }
+dirs = "6"
+csv = "1"
+reqwest = { version = "0.12", features = ["json"] }
 tokio = { version = "1", features = ["full"] }
-playwright = { version = "0.0.20" }
+regex = "1"
+slug = "0.1"
+dotenv = "0.15"
+futures = "0.3"
+divcord = { path = "../divcord" }
+card_element = { path = "../card_element" }
+divi = { path = "../divi" }
+googlesheets = { path = "../googlesheets" }
+fs_cache_fetcher = { path = "../fs_cache_fetcher" }
 
-
-[features]
-default = []
-fs_cache_fetcher = [
-  "dep:serde_json",
-  "dep:playwright",
-  "dep:divi",
-  "dep:dotenv",
-  "dep:googlesheets",
-  "dep:reqwest",
-  "dep:fs_cache_fetcher",
-  "dep:tokio",
-  "dep:once_cell",
-  "dep:futures",
-]
+[[bin]]
+name = "dump"
+path = "src/main.rs"

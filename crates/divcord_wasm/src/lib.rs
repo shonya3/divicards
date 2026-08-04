@@ -1,7 +1,6 @@
 mod utils;
 
-use divcord::{ParseRecordError, Record};
-use poe_data::PoeData;
+use divcord::{ParseRecordError, PoeData, Record};
 use utils::set_panic_hook;
 use wasm_bindgen::{prelude::wasm_bindgen, JsValue};
 

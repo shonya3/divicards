@@ -10,15 +10,14 @@ repository.workspace = true
 serde = { workspace = true }
 serde_json = { workspace = true }
 divcord = { path = "../divcord", features = ["fs_cache_fetcher"] }
+poe_data = { path = "../poe_data" }
 tokio = { workspace = true }
 reqwest.workspace = true
 dotenv = "0.15.0"
 fs_cache_fetcher = { path = "../fs_cache_fetcher" }
 divi = { path = "../divi" }
-poe_data = { path = "../poe_data", features = ["fs_cache_fetcher"] }
 card_element = { path = "../card_element" }
 poe = { path = "../poe" }
 ninja = { path = "../ninja" }
 regex = "1.11.1"
 once_cell = "1.21.3"
-playwright = { version = "0.0.20" }

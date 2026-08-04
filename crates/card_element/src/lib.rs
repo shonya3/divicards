@@ -1,17 +1,12 @@
-pub mod base_items_fetcher;
-pub mod drop_level;
-pub mod error;
-pub mod fetcher;
-pub mod images;
-pub mod reward;
-pub mod unique;
-pub mod uniques_fetcher;
-use crate::unique::UniqueReward;
+#![doc = include_str!("../README.md")]
 
-pub use error::Error;
-use fetcher::Fetcher;
-use fs_cache_fetcher::DataFetcher;
 use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct UniqueReward {
+    pub name: String,
+    pub item_class: String,
+}
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 #[serde(rename_all = "camelCase")]
@@ -21,17 +16,7 @@ pub struct DivinationCardElementData {
     pub art_filename: String,
     pub reward_html: String,
     pub flavour_text: String,
-    pub stack_size: Option<usize>,
+    pub stack_size: u32,
     pub min_level: u32,
     pub unique: Option<UniqueReward>,
-}
-
-impl DivinationCardElementData {
-    pub fn filename() -> &'static str {
-        Fetcher::default().config().filename
-    }
-
-    pub async fn load() -> Result<Vec<DivinationCardElementData>, Error> {
-        Fetcher::default().load().await
-    }
 }

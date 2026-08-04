@@ -7,17 +7,22 @@ use divcord::{
     PoeData,
 };
 
+#[cfg(feature = "fs_cache_fetcher")]
+use fs_cache_fetcher::DataFetcher;
+
 #[tokio::test]
 #[cfg(feature = "fs_cache_fetcher")] // cargo test --features fetch
 async fn parses_spreadsheet() {
     use divcord::SpreadsheetFetcher;
-    use fs_cache_fetcher::{DataFetcher, Stale};
+    use fs_cache_fetcher::Stale;
     use std::time::Duration;
     let load_spreadsheet = SpreadsheetFetcher::load_with_mut_default_config(|config| {
         config.stale(Stale::After(Duration::from_secs(84000)));
     });
 
-    let (poe_data, spreadsheet) = tokio::join!(PoeData::load(), load_spreadsheet);
+    let poe_data_fetcher = poe_data::fetchers::PoeDataFetcher::default();
+    let load_poe_data = poe_data_fetcher.load();
+    let (poe_data, spreadsheet) = tokio::join!(load_poe_data, load_spreadsheet);
     let poe_data = poe_data.unwrap();
     let spreadsheet = spreadsheet.unwrap();
     let _records = divcord::records_with_collect_all_errors(&spreadsheet, &poe_data).unwrap();
@@ -53,7 +58,7 @@ async fn acts_should_be_italic() {
     use divcord::parse::ParseDropsFromErrorKind;
     use divcord::spreadsheet::rich::{FontStyles, HexColor};
 
-    let poe_data = PoeData::load().await.unwrap();
+    let poe_data = poe_data::fetchers::PoeDataFetcher::default().load().await.unwrap();
     let drops_from = DropsFrom {
         name: "Innocence, God-Emperor of Eternity".to_owned(),
         styles: FontStyles {
@@ -74,7 +79,7 @@ async fn acts_should_be_italic() {
 #[cfg(feature = "fs_cache_fetcher")]
 async fn main() {
     use divcord::spreadsheet::rich::{FontStyles, HexColor};
-    let poe_data = PoeData::load().await.unwrap();
+    let poe_data = poe_data::fetchers::PoeDataFetcher::default().load().await.unwrap();
 
     let sources = parse_drop(
         "The Endurance",

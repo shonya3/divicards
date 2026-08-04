@@ -4,6 +4,7 @@ pub mod cards;
 pub mod consts;
 pub mod dropsource;
 pub mod parse;
+pub mod poe_data;
 pub mod spreadsheet;
 
 pub use crate::{
@@ -13,10 +14,9 @@ pub use crate::{
     spreadsheet::{record::Record, Spreadsheet},
 };
 
-pub use poe_data::PoeData;
+pub use crate::poe_data::PoeData;
 
 #[cfg(feature = "fs_cache_fetcher")]
 pub use {
-    fs_cache_fetcher::DataFetcher, poe_data::fetchers::PoeDataFetcher,
-    spreadsheet::fs_cache_fetcher::SpreadsheetFetcher,
+    fs_cache_fetcher::DataFetcher, spreadsheet::fs_cache_fetcher::SpreadsheetFetcher,
 };
