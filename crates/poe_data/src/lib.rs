@@ -9,6 +9,7 @@ pub mod act;
 pub mod cards;
 pub mod fetchers;
 pub mod game_files;
+pub mod log;
 pub mod mapbosses;
 pub mod maps;
 

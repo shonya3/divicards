@@ -41,7 +41,7 @@ use divcord::poe_data::{
     cards::{Card, CardsData, LeagueWeightsCollected},
     league::ReleaseVersion,
 };
-use crate::GameFiles;
+use crate::{GameFiles, log};
 use divi::prices::Prices as DiviPrices;
 use divi::TradeLeague;
 use std::collections::HashMap;
@@ -50,6 +50,7 @@ use std::collections::HashMap;
 ///
 /// `league` is used for poe.ninja price fetching.
 pub async fn extract_cards(source: &GameFiles, league: TradeLeague) -> Result<CardsData> {
+    eprintln!("{}", log::ColoredLabel::Cards);
     let opened = crate::open_game_data(source).await?;
 
     // Game-file reads use blocking IO (the CDN backend in particular), so run

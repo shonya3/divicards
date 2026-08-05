@@ -24,7 +24,7 @@
 //! (Steam install, GGG CDN or GGPK file), opened once per process via
 //! [`open_game_data`] and shared across pieces.
 
-use crate::{GameFiles, act, cards, mapbosses, maps, open_game_data};
+use crate::{GameFiles, act, cards, log, mapbosses, maps, open_game_data};
 use card_element::DivinationCardElementData;
 use divcord::poe_data::{PoeData, act::ActArea, cards::CardsData, mapbosses::MapBoss, maps::Map};
 use divi::TradeLeague;
@@ -111,6 +111,7 @@ impl DataFetcher for ActsFetcher {
         // run the extraction on the blocking pool.
         tokio::task::spawn_blocking(move || {
             let opened = opened.lock().unwrap();
+            eprintln!("{}", log::ColoredLabel::ActAreas);
             eprintln!("extracting act areas...");
             let (areas, _) = act::extract_areas(&opened.fs, &opened.schemas)?;
             eprintln!("  {} areas extracted", areas.len());
@@ -162,6 +163,7 @@ impl DataFetcher for MapsFetcher {
         let opened = open_game_data(&self.source).await?;
         tokio::task::spawn_blocking(move || {
             let opened = opened.lock().unwrap();
+            eprintln!("{}", log::ColoredLabel::Maps);
             eprintln!("extracting maps...");
             let maps = maps::extract(&opened.fs, &opened.schemas)?;
             eprintln!("  {} maps extracted", maps.len());
@@ -213,6 +215,7 @@ impl DataFetcher for MapBossesFetcher {
         let opened = open_game_data(&self.source).await?;
         tokio::task::spawn_blocking(move || {
             let opened = opened.lock().unwrap();
+            eprintln!("{}", log::ColoredLabel::MapBosses);
             eprintln!("extracting map bosses...");
             let bosses = mapbosses::extract(&opened.fs, &opened.schemas)?;
             eprintln!("  {} bosses extracted", bosses.len());
@@ -377,6 +380,7 @@ impl DataFetcher for PoeDataFetcher {
     type Error = Error;
 
     async fn fetch(&self) -> Result<PoeData, Error> {
+        let started = std::time::Instant::now();
         // All four pieces read game files through one shared `FS` handle, so
         // they run one after another. Reads are serialized by the mutex
         // around the handle (needed because the GGPK backend keeps a single
@@ -385,10 +389,15 @@ impl DataFetcher for PoeDataFetcher {
         // (poe.ninja, wiki, spreadsheets) after its game-file reads, so
         // there is nothing to overlap — no `join!` here.
         let acts = self.acts.load().await?;
+        eprintln!("{} {} areas -> acts.json", log::ColoredLabel::ActAreas, acts.len());
         let maps = self.maps.load().await?;
+        eprintln!("{} {} maps -> maps.json", log::ColoredLabel::Maps, maps.len());
         let mapbosses = self.mapbosses.load().await?;
+        eprintln!("{} {} bosses -> mapBosses.json", log::ColoredLabel::MapBosses, mapbosses.len());
         let cards = self.cards.load().await?;
+        eprintln!("{} {} cards -> cards.json", log::ColoredLabel::Cards, cards.dict.len());
 
+        eprintln!("done in {:.1}s", started.elapsed().as_secs_f64());
         Ok(PoeData {
             acts,
             cards,

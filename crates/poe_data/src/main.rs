@@ -2,7 +2,7 @@ use anyhow::Result;
 use clap::Parser;
 use divcord::poe_data::{cards::CardsData, mapbosses::MapBoss, maps::Map, PoeData};
 use divi::TradeLeague;
-use poe_data::GameFiles;
+use poe_data::{GameFiles, log};
 use std::path::PathBuf;
 
 #[derive(Parser)]
@@ -112,6 +112,7 @@ async fn main() -> Result<()> {
             let opened = opened.clone();
             let maps: Vec<Map> = tokio::task::spawn_blocking(move || {
                 let opened = opened.lock().unwrap();
+                eprintln!("{}", log::ColoredLabel::Maps);
                 eprintln!("extracting maps...");
                 let maps = poe_data::maps::extract(&opened.fs, &opened.schemas)?;
                 eprintln!("  {} maps extracted", maps.len());
@@ -131,6 +132,7 @@ async fn main() -> Result<()> {
             let opened = opened.clone();
             let bosses: Vec<MapBoss> = tokio::task::spawn_blocking(move || {
                 let opened = opened.lock().unwrap();
+                eprintln!("{}", log::ColoredLabel::MapBosses);
                 eprintln!("extracting map bosses...");
                 let bosses = poe_data::mapbosses::extract(&opened.fs, &opened.schemas)?;
                 eprintln!("  {} bosses extracted", bosses.len());
@@ -155,15 +157,15 @@ async fn main() -> Result<()> {
             let (acts, maps, bosses) = tokio::task::spawn_blocking(move || {
                 let opened = opened.lock().unwrap();
 
-                println!("=== Act Areas ===");
+                println!("{}", log::ColoredLabel::ActAreas);
                 let (acts, _) = poe_data::act::extract_areas(&opened.fs, &opened.schemas)?;
                 println!("  {} areas -> acts.json", acts.len());
 
-                println!("\n=== Maps ===");
+                println!("{}", log::ColoredLabel::Maps);
                 let maps: Vec<Map> = poe_data::maps::extract(&opened.fs, &opened.schemas)?;
                 println!("  {} maps -> maps.json", maps.len());
 
-                println!("\n=== Map Bosses ===");
+                println!("{}", log::ColoredLabel::MapBosses);
                 let bosses: Vec<MapBoss> =
                     poe_data::mapbosses::extract(&opened.fs, &opened.schemas)?;
                 println!("  {} bosses -> mapBosses.json", bosses.len());
@@ -186,7 +188,7 @@ async fn main() -> Result<()> {
                 serde_json::to_string_pretty(&bosses)?,
             )?;
 
-            println!("\n=== Divination Cards ===");
+            println!("{}", log::ColoredLabel::Cards);
             let cards_output: CardsData = poe_data::cards::extract_cards(&source, league).await?;
             let cards: Vec<_> = cards_output.dict.values().cloned().collect();
             let (enriched, _) = poe_data::cards::card_element_data(&cards).await?;
