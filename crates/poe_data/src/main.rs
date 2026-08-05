@@ -1,9 +1,9 @@
-use std::path::PathBuf;
-
 use anyhow::Result;
 use clap::Parser;
 use divcord::poe_data::{cards::CardsData, mapbosses::MapBoss, maps::Map, PoeData};
 use divi::TradeLeague;
+use poe_data::GameFiles;
+use std::path::PathBuf;
 
 #[derive(Parser)]
 #[command(name = "dump", version)]
@@ -16,16 +16,18 @@ struct Cli {
 enum Command {
     /// Extract campaign act areas from game files
     Act {
-        #[arg(short, long)]
-        steam: Option<PathBuf>,
+        /// Game files source: `steam[:path]`, `cdn[:patch]` or `ggpk:path`
+        #[arg(short, long, default_value = "steam")]
+        source: GameFiles,
 
         #[arg(short, long, default_value = "out")]
         output: PathBuf,
     },
     /// Extract and enrich divination cards
     Divination {
-        #[arg(short, long)]
-        steam: Option<PathBuf>,
+        /// Game files source: `steam[:path]`, `cdn[:patch]` or `ggpk:path`
+        #[arg(short, long, default_value = "steam")]
+        source: GameFiles,
 
         #[arg(short, long, default_value = "out")]
         output: PathBuf,
@@ -36,24 +38,27 @@ enum Command {
     },
     /// Extract atlas maps
     Map {
-        #[arg(short, long)]
-        steam: Option<PathBuf>,
+        /// Game files source: `steam[:path]`, `cdn[:patch]` or `ggpk:path`
+        #[arg(short, long, default_value = "steam")]
+        source: GameFiles,
 
         #[arg(short, long, default_value = "out")]
         output: PathBuf,
     },
     /// Extract map bosses from game files
     MapBoss {
-        #[arg(short, long)]
-        steam: Option<PathBuf>,
+        /// Game files source: `steam[:path]`, `cdn[:patch]` or `ggpk:path`
+        #[arg(short, long, default_value = "steam")]
+        source: GameFiles,
 
         #[arg(short, long, default_value = "out")]
         output: PathBuf,
     },
     /// Run all extractions (act, map, map-boss, divination)
     All {
-        #[arg(short, long)]
-        steam: Option<PathBuf>,
+        /// Game files source: `steam[:path]`, `cdn[:patch]` or `ggpk:path`
+        #[arg(short, long, default_value = "steam")]
+        source: GameFiles,
 
         #[arg(short, long, default_value = "out")]
         output: PathBuf,
@@ -67,17 +72,17 @@ enum Command {
 async fn main() -> Result<()> {
     let cli = Cli::parse();
     match cli.command {
-        Command::Act { steam, output } => {
-            let steam = steam.unwrap_or_else(poe_data::default_steam_path);
-            poe_data::act::run(&steam, &output)
+        Command::Act { source, output } => {
+            tokio::task::spawn_blocking(move || poe_data::act::run(&source, &output))
+                .await
+                .unwrap_or_else(|e| Err(anyhow::anyhow!("act task panicked: {e}")))
         }
         Command::Divination {
-            steam,
+            source,
             output,
             league,
         } => {
-            let steam = steam.unwrap_or_else(poe_data::default_steam_path);
-            let cards_output = poe_data::cards::extract_cards(&steam, league).await?;
+            let cards_output = poe_data::cards::extract_cards(&source, league).await?;
             let cards: Vec<_> = cards_output.dict.values().cloned().collect();
             let (enriched, _item_db) = poe_data::cards::card_element_data(&cards).await?;
             std::fs::create_dir_all(&output)?;
@@ -102,12 +107,17 @@ async fn main() -> Result<()> {
             println!("  Elements: {}", elem_path.display());
             Ok(())
         }
-        Command::Map { steam, output } => {
-            let steam = steam.unwrap_or_else(poe_data::default_steam_path);
-            let (fs, schemas) = poe_data::open_game_data(&steam).await?;
-            eprintln!("extracting maps...");
-            let maps: Vec<Map> = poe_data::maps::extract(&fs, &schemas).await?;
-            eprintln!("  {} maps extracted", maps.len());
+        Command::Map { source, output } => {
+            let opened = poe_data::open_game_data(&source).await?;
+            let opened = opened.clone();
+            let maps: Vec<Map> = tokio::task::spawn_blocking(move || {
+                let opened = opened.lock().unwrap();
+                eprintln!("extracting maps...");
+                let maps = poe_data::maps::extract(&opened.fs, &opened.schemas)?;
+                eprintln!("  {} maps extracted", maps.len());
+                Ok::<_, anyhow::Error>(maps)
+            })
+            .await??;
 
             std::fs::create_dir_all(&output)?;
             let path = output.join("maps.json");
@@ -116,12 +126,17 @@ async fn main() -> Result<()> {
             println!("  Maps: {}", path.display());
             Ok(())
         }
-        Command::MapBoss { steam, output } => {
-            let steam = steam.unwrap_or_else(poe_data::default_steam_path);
-            let (fs, schemas) = poe_data::open_game_data(&steam).await?;
-            eprintln!("extracting map bosses...");
-            let bosses: Vec<MapBoss> = poe_data::mapbosses::extract(&fs, &schemas)?;
-            eprintln!("  {} bosses extracted", bosses.len());
+        Command::MapBoss { source, output } => {
+            let opened = poe_data::open_game_data(&source).await?;
+            let opened = opened.clone();
+            let bosses: Vec<MapBoss> = tokio::task::spawn_blocking(move || {
+                let opened = opened.lock().unwrap();
+                eprintln!("extracting map bosses...");
+                let bosses = poe_data::mapbosses::extract(&opened.fs, &opened.schemas)?;
+                eprintln!("  {} bosses extracted", bosses.len());
+                Ok::<_, anyhow::Error>(bosses)
+            })
+            .await??;
 
             std::fs::create_dir_all(&output)?;
             let path = output.join("mapBosses.json");
@@ -131,40 +146,48 @@ async fn main() -> Result<()> {
             Ok(())
         }
         Command::All {
-            steam: steam_opt,
+            source,
             output,
             league,
         } => {
-            let steam = steam_opt.unwrap_or_else(poe_data::default_steam_path);
-            let (fs, schemas) = poe_data::open_game_data(&steam).await?;
+            let opened = poe_data::open_game_data(&source).await?;
+            let opened = opened.clone();
+            let (acts, maps, bosses) = tokio::task::spawn_blocking(move || {
+                let opened = opened.lock().unwrap();
 
-            println!("=== Act Areas ===");
-            let (acts, _) = poe_data::act::extract_areas(&fs, &schemas)?;
+                println!("=== Act Areas ===");
+                let (acts, _) = poe_data::act::extract_areas(&opened.fs, &opened.schemas)?;
+                println!("  {} areas -> acts.json", acts.len());
+
+                println!("\n=== Maps ===");
+                let maps: Vec<Map> = poe_data::maps::extract(&opened.fs, &opened.schemas)?;
+                println!("  {} maps -> maps.json", maps.len());
+
+                println!("\n=== Map Bosses ===");
+                let bosses: Vec<MapBoss> =
+                    poe_data::mapbosses::extract(&opened.fs, &opened.schemas)?;
+                println!("  {} bosses -> mapBosses.json", bosses.len());
+
+                Ok::<_, anyhow::Error>((acts, maps, bosses))
+            })
+            .await??;
+
             std::fs::create_dir_all(&output)?;
             std::fs::write(
                 output.join("acts.json"),
                 serde_json::to_string_pretty(&acts)?,
             )?;
-            println!("  {} areas -> acts.json", acts.len());
-
-            println!("\n=== Maps ===");
-            let maps: Vec<Map> = poe_data::maps::extract(&fs, &schemas).await?;
             std::fs::write(
                 output.join("maps.json"),
                 serde_json::to_string_pretty(&maps)?,
             )?;
-            println!("  {} maps -> maps.json", maps.len());
-
-            println!("\n=== Map Bosses ===");
-            let bosses: Vec<MapBoss> = poe_data::mapbosses::extract(&fs, &schemas)?;
             std::fs::write(
                 output.join("mapBosses.json"),
                 serde_json::to_string_pretty(&bosses)?,
             )?;
-            println!("  {} bosses -> mapBosses.json", bosses.len());
 
             println!("\n=== Divination Cards ===");
-            let cards_output: CardsData = poe_data::cards::extract_cards(&steam, league).await?;
+            let cards_output: CardsData = poe_data::cards::extract_cards(&source, league).await?;
             let cards: Vec<_> = cards_output.dict.values().cloned().collect();
             let (enriched, _) = poe_data::cards::card_element_data(&cards).await?;
             std::fs::write(

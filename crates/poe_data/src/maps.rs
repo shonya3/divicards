@@ -75,7 +75,7 @@ struct UniqueMapInfo {
     icon: String,
 }
 
-pub async fn extract(fs: &impl FileSystem, schemas: &SchemaCollection) -> Result<Vec<Map>> {
+pub fn extract(fs: &impl FileSystem, schemas: &SchemaCollection) -> Result<Vec<Map>> {
     let schema = |name: &str, valid_fors: &[u32]| {
         schemas
             .tables

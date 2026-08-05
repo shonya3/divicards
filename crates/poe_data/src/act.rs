@@ -30,8 +30,9 @@ use divcord::poe_data::act::{ActArea, ActAreaId, Bossfight};
 use poe_data_tools::{
     dat::{schema::SchemaCollection, schema::fetch_schema, table::parse_table},
     file_parsers::{FileParser, dat::DatParser},
-    fs::{FS, FileSystem},
+    fs::FileSystem,
 };
+use crate::GameFiles;
 
 fn is_campaign_area(id: &str, act: u32) -> bool {
     let parts: Vec<&str> = id.splitn(3, '_').collect();
@@ -247,9 +248,9 @@ pub fn extract_areas(
     Ok((areas, monster_names))
 }
 
-pub fn run(steam: &Path, output: &Path) -> Result<()> {
+pub fn run(source: &GameFiles, output: &Path) -> Result<()> {
     let cache_dir = dirs::cache_dir().unwrap().join("poe_data_tools");
-    let fs = FS::from_steam(steam.to_path_buf()).context("Failed to open game files")?;
+    let fs = source.open().context("Failed to open game files")?;
     let schemas = fetch_schema(&cache_dir).context("Failed to fetch schema")?;
 
     let (areas, _all_monster_names) = extract_areas(&fs, &schemas)?;

@@ -1,4 +1,10 @@
-//! Divination card extraction and enrichment pipeline.
+//! Divination card extraction pipeline with two outputs:
+//!
+//! - [`extract_cards`] → [`CardsData`] — game-file extraction plus atlas drop maps,
+//!   release leagues, discovery weights and poe.ninja prices
+//! - [`card_element_data`] → `Vec<DivinationCardElementData>` — enriches the cards
+//!   with wiki reward descriptions and RePoE item classes for the site's card
+//!   custom element
 //!
 //! # Stages
 //!
@@ -20,12 +26,6 @@
 //! 8. **`card_element_data`** — Combines all sources, skips cards marked
 //!    `disabled` (set from `divi::consts::LEGACY_CARDS` in `extract_cards`),
 //!    and produces `Vec<DivinationCardElementData>` for JSON output.
-//!
-//! # Pipeline output
-//!
-//! `card_element_data()` → `cardElementData.json` with fields:
-//! `slug`, `name`, `artFilename`, `rewardHtml`, `flavourText`,
-//! `stackSize`, `minLevel`, `unique`.
 
 pub mod atlas;
 pub mod dat;
@@ -41,25 +41,34 @@ use divcord::poe_data::{
     cards::{Card, CardsData, LeagueWeightsCollected},
     league::ReleaseVersion,
 };
+use crate::GameFiles;
 use divi::prices::Prices as DiviPrices;
 use divi::TradeLeague;
 use std::collections::HashMap;
-use std::path::Path;
 
 /// Opens game files, extracts cards, and attaches community weights, prices, and league info.
 ///
 /// `league` is used for poe.ninja price fetching.
-pub async fn extract_cards(steam: &Path, league: TradeLeague) -> Result<CardsData> {
-    let (fs, schemas) = crate::open_game_data(steam).await?;
+pub async fn extract_cards(source: &GameFiles, league: TradeLeague) -> Result<CardsData> {
+    let opened = crate::open_game_data(source).await?;
 
-    eprintln!("extracting cards from .datc64...");
-    let mut cards = dat::extract(&fs, &schemas)?;
+    // Game-file reads use blocking IO (the CDN backend in particular), so run
+    // the extraction phases on the blocking pool.
+    let mut cards = {
+        tokio::task::spawn_blocking(move || {
+            let opened = opened.lock().unwrap();
+            eprintln!("extracting cards from .datc64...");
+            let mut cards = dat::extract(&opened.fs, &opened.schemas)?;
 
-    eprintln!("extracting atlas maps...");
-    let atlas_maps = atlas::extract(&fs, &schemas)?;
-    for card in &mut cards {
-        card.atlas_maps = atlas_maps.get(&card.id).cloned().unwrap_or_default();
-    }
+            eprintln!("extracting atlas maps...");
+            let atlas_maps = atlas::extract(&opened.fs, &opened.schemas)?;
+            for card in &mut cards {
+                card.atlas_maps = atlas_maps.get(&card.id).cloned().unwrap_or_default();
+            }
+            Ok::<_, anyhow::Error>(cards)
+        })
+        .await??
+    };
 
     eprintln!("fetching league info + card release versions (wiki)...");
     let (leagues, release_versions) = tokio::join!(
