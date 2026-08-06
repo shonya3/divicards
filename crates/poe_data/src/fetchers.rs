@@ -6,9 +6,9 @@
 //!
 //! | Fetcher | Cache file | Staleness |
 //! |---------|------------|-----------|
-//! | [`ActsFetcher`] | `acts.json` | [`Stale::Never`] (game-file data) |
-//! | [`MapsFetcher`] | `maps.json` | [`Stale::Never`] |
-//! | [`MapBossesFetcher`] | `mapBosses.json` | [`Stale::Never`] |
+//! | [`ActsFetcher`] | `acts.json` | [`Stale::ReloadEveryTime`] (game-file data) |
+//! | [`MapsFetcher`] | `maps.json` | [`Stale::ReloadEveryTime`] |
+//! | [`MapBossesFetcher`] | `mapBosses.json` | [`Stale::ReloadEveryTime`] |
 //! | [`CardsFetcher`] | `cards.json` | [`Stale::After`] 1s (prices/weights are live) |
 //! | [`CardElementsFetcher`] | `cardElementData.json` | [`Stale::After`] 1s |
 //! | [`PoeDataFetcher`] | `poeData.json` | [`Stale::ReloadEveryTime`] (composition) |
@@ -87,7 +87,7 @@ impl Default for ActsFetcher {
             config: Config {
                 save: true,
                 filename: "acts.json",
-                stale: Stale::Never,
+                stale: Stale::ReloadEveryTime,
             },
             source: GameFiles::default(),
         }
@@ -141,7 +141,7 @@ impl Default for MapsFetcher {
             config: Config {
                 save: true,
                 filename: "maps.json",
-                stale: Stale::Never,
+                stale: Stale::ReloadEveryTime,
             },
             source: GameFiles::default(),
         }
@@ -193,7 +193,7 @@ impl Default for MapBossesFetcher {
             config: Config {
                 save: true,
                 filename: "mapBosses.json",
-                stale: Stale::Never,
+                stale: Stale::ReloadEveryTime,
             },
             source: GameFiles::default(),
         }
