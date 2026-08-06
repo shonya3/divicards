@@ -9,7 +9,6 @@
 //! | `act` | `WorldAreas.datc64` → `Act` column |
 //! | `area_level` | `WorldAreas.datc64` → `AreaLevel` column |
 //! | `image_url` | Derived from `id`: strip game prefix, drop trailing sub-level number, format `/images/acts/{key}.webp` |
-//! | `poedb_image_url` | `https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/Acts/{act}/{key}.webp` |
 //! | `has_waypoint` | `WorldAreas.datc64` → `HasWaypoint` column |
 //! | `is_town` | `WorldAreas.datc64` → `IsTown` column |
 //! | `has_labyrinth_trial` | `LabyrinthTrials.datc64` → FK into `WorldAreas` row index |
@@ -227,9 +226,6 @@ pub fn extract_areas(
             act: act as u8,
             area_level: area_level as u8,
             image_url: format!("/images/acts/{key}.webp"),
-            poedb_image_url: format!(
-                "https://cdn.poedb.tw/image/Art/2DArt/UIImages/InGame/Acts/{act}/{key}.webp"
-            ),
             has_waypoint,
             is_town,
             has_labyrinth_trial,

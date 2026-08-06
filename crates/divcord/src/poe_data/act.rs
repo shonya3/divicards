@@ -8,7 +8,6 @@ pub struct ActArea {
     pub act: u8,
     pub area_level: u8,
     pub image_url: String,
-    pub poedb_image_url: String,
     pub has_waypoint: bool,
     pub has_labyrinth_trial: bool,
     pub is_town: bool,
