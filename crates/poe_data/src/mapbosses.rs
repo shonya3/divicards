@@ -5,9 +5,9 @@
 //! | Field | Source |
 //! |-------|--------|
 //! | `name` | `MonsterVarieties.datc64` → `Name` column, joined via `WorldAreas.Bosses_MonsterVarietiesKeys` FK |
-//! | `maps` | `WorldAreas.datc64` → `Name` (with `" Map"` appended for non-unique map areas), filtered to `IsMapArea` or `IsUniqueMapArea` |
+//! | `maps` | `WorldAreas.datc64` → `Name` (with `" Map"` appended for non-unique map areas), filtered to atlas maps (`AtlasNode.datc64`) or unique maps with an item (`UniqueMaps.datc64`), matching the `maps` list |
 
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 use anyhow::{Context, Result};
 use arrow_array::{Array, BooleanArray, ListArray, StringArray, UInt64Array};
@@ -69,11 +69,74 @@ pub fn extract(
     let bosses_col = wa_df.column(wa_df.schema().index_of("Bosses_MonsterVarietiesKeys").unwrap());
     let bosses_col = bosses_col.as_any().downcast_ref::<ListArray>().unwrap();
 
+    // WorldAreas rows that are real maps: atlas nodes (normal, or unique with
+    // an item entry) — the same membership rule as `maps::extract`.
+    let mut um_areas: HashSet<usize> = HashSet::new();
+    {
+        let um_bytes = fs.read("Data/UniqueMaps.datc64")
+            .context("Failed to read UniqueMaps")?;
+        let um_table = DatParser.parse(&um_bytes)?;
+        let um_schema = schema("UniqueMaps", &[3])
+            .context("No schema for UniqueMaps")?;
+        let um_df = parse_table(&um_table, um_schema)
+            .context("Failed to parse UniqueMaps")?;
+
+        let um_wa = um_df
+            .column(um_df.schema().index_of("WorldAreasKey").unwrap())
+            .as_any()
+            .downcast_ref::<UInt64Array>()
+            .unwrap();
+        let um_replica = um_df.column(4).as_any().downcast_ref::<BooleanArray>().unwrap();
+        let um_disabled = um_df
+            .column(um_df.schema().index_of("IsDropDisabled").unwrap())
+            .as_any()
+            .downcast_ref::<BooleanArray>()
+            .unwrap();
+        for i in 0..um_df.num_rows() {
+            if um_replica.value(i) && !um_disabled.value(i) {
+                continue;
+            }
+            um_areas.insert(um_wa.value(i) as usize);
+        }
+    }
+    let mut real_map_areas: HashSet<usize> = HashSet::new();
+    {
+        let an_bytes = fs.read("Data/AtlasNode.datc64")
+            .context("Failed to read AtlasNode")?;
+        let an_table = DatParser.parse(&an_bytes)?;
+        let an_schema = schema("AtlasNode", &[3])
+            .context("No schema for AtlasNode")?;
+        let an_df = parse_table(&an_table, an_schema)
+            .context("Failed to parse AtlasNode")?;
+
+        let an_area = an_df
+            .column(an_df.schema().index_of("Area1").unwrap())
+            .as_any()
+            .downcast_ref::<UInt64Array>()
+            .unwrap();
+        let an_is_norm = an_df
+            .column(an_df.schema().index_of("IsNormalMap").unwrap())
+            .as_any()
+            .downcast_ref::<BooleanArray>()
+            .unwrap();
+        let an_is_uniq = an_df
+            .column(an_df.schema().index_of("IsUniqueMap").unwrap())
+            .as_any()
+            .downcast_ref::<BooleanArray>()
+            .unwrap();
+        for i in 0..an_df.num_rows() {
+            let area = an_area.value(i) as usize;
+            if an_is_norm.value(i) || (an_is_uniq.value(i) && um_areas.contains(&area)) {
+                real_map_areas.insert(area);
+            }
+        }
+    }
+
     // Build map_name → [boss_name]
     let mut map_bosses: HashMap<String, Vec<String>> = HashMap::new();
 
     for i in 0..wa_df.num_rows() {
-        if !is_map.value(i) && !is_unique.value(i) { continue; }
+        if !real_map_areas.contains(&i) { continue; }
         if bosses_col.is_null(i) { continue; }
 
         let name = wa_names.value(i).to_string();
