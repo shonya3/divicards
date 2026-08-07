@@ -265,7 +265,7 @@ impl DataFetcher for CardsFetcher {
     type Error = Error;
 
     async fn fetch(&self) -> Result<CardsData, Error> {
-        Ok(cards::extract_cards(&self.source, TradeLeague::Standard).await?)
+        Ok(cards::extract_cards(&self.source, TradeLeague::Allflame).await?)
     }
 
     fn config(&self) -> &Config {
@@ -389,13 +389,29 @@ impl DataFetcher for PoeDataFetcher {
         // (poe.ninja, wiki, spreadsheets) after its game-file reads, so
         // there is nothing to overlap — no `join!` here.
         let acts = self.acts.load().await?;
-        eprintln!("{} {} areas -> acts.json", log::ColoredLabel::ActAreas, acts.len());
+        eprintln!(
+            "{} {} areas -> acts.json",
+            log::ColoredLabel::ActAreas,
+            acts.len()
+        );
         let maps = self.maps.load().await?;
-        eprintln!("{} {} maps -> maps.json", log::ColoredLabel::Maps, maps.len());
+        eprintln!(
+            "{} {} maps -> maps.json",
+            log::ColoredLabel::Maps,
+            maps.len()
+        );
         let mapbosses = self.mapbosses.load().await?;
-        eprintln!("{} {} bosses -> mapBosses.json", log::ColoredLabel::MapBosses, mapbosses.len());
+        eprintln!(
+            "{} {} bosses -> mapBosses.json",
+            log::ColoredLabel::MapBosses,
+            mapbosses.len()
+        );
         let cards = self.cards.load().await?;
-        eprintln!("{} {} cards -> cards.json", log::ColoredLabel::Cards, cards.dict.len());
+        eprintln!(
+            "{} {} cards -> cards.json",
+            log::ColoredLabel::Cards,
+            cards.dict.len()
+        );
 
         eprintln!("done in {:.1}s", started.elapsed().as_secs_f64());
         Ok(PoeData {
