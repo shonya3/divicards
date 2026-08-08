@@ -51,10 +51,7 @@ async fn main() {
         .join("src")
         .join("elements")
         .join("divination-card");
-    println!(
-        "target dir: {}",
-        poe_custom_elements_dir.display()
-    );
+    println!("target dir: {}", poe_custom_elements_dir.display());
     write_pretty(
         &card_element,
         &poe_custom_elements_dir,
@@ -90,90 +87,7 @@ async fn main() {
 
     write(&sources_hashmap, &json_dir, "sources2.json");
     write(&records, &json_dir, "records.json");
-    write(
-        &poe_data,
-        &json_dir,
-        PoeDataFetcher::default().filename(),
-    );
-
-    match avatars::prepare_avatars_ts().await {
-        Ok(avatars_string) => std::fs::write(dir.join("avatars.ts"), avatars_string).unwrap(),
-        Err(err) => println!("Preparing avatars error: {err:?}"),
-    }
-
-    // 2. Generate TypeScript
-    std::fs::write(
-        dir.join("Source.ts"),
-        divcord::dropsource::Source::typescript_types(),
-    )
-    .unwrap();
-
-    // 3. Compile WASM Divcord
-    divcord_wasm_pkg(&dir, "divcordWasm");
-}
-
-#[allow(unused)]
-#[tokio::main]
-async fn main_old() {
-    dotenv::dotenv().ok();
-
-    let dir = project_root::get_project_root()
-        .unwrap()
-        .parent()
-        .unwrap()
-        .join("divicards-site")
-        .join("gen");
-    println!("target dir: {}", dir.display());
-
-    let json_dir = dir.join("json");
-    if !json_dir.exists() {
-        std::fs::create_dir_all(&json_dir).unwrap();
-    }
-
-    // load and parse
-    let spreadsheet = Spreadsheet::load().await.unwrap();
-    let poe_data: PoeData = PoeDataFetcher::default().load().await.unwrap();
-
-    let records = parse_divcord_records(&spreadsheet, &poe_data);
-
-    let card_element: Vec<DivinationCardElementData> =
-        CardElementsFetcher::default().load().await.unwrap();
-    ensure_all_unique_rewards_handled(&card_element).unwrap();
-    write(
-        &card_element,
-        &json_dir,
-        CardElementsFetcher::default().filename(),
-    );
-
-    if !dir.exists() {
-        panic!(
-            "divicards-site/gen dir does not exist at path: {}",
-            dir.display()
-        );
-    }
-
-    let mut sources_hashmap: HashMap<String, Source> = records
-        .clone()
-        .into_iter()
-        .flat_map(|record| record.sources.into_iter().chain(record.verify_sources))
-        .collect::<HashSet<Source>>()
-        .into_iter()
-        .map(|source| (source.slug(), source))
-        .collect();
-
-    poe_data.maps.iter().for_each(|map| {
-        sources_hashmap
-            .entry(map.slug.clone())
-            .or_insert(Source::Map(map.name.clone()));
-    });
-
-    write(&sources_hashmap, &json_dir, "sources2.json");
-    write(&records, &json_dir, "records.json");
-    write(
-        &poe_data,
-        &json_dir,
-        PoeDataFetcher::default().filename(),
-    );
+    write(&poe_data, &json_dir, PoeDataFetcher::default().filename());
 
     match avatars::prepare_avatars_ts().await {
         Ok(avatars_string) => std::fs::write(dir.join("avatars.ts"), avatars_string).unwrap(),
