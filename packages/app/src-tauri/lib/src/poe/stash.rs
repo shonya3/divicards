@@ -104,7 +104,7 @@ impl StashAPI {
             None => format!("{API_URL}/stash/{league}/{stash_id}"),
         };
 
-        let response = StashAPI::with_auth_headers(&url, version).send().await?;
+        let response = StashAPI::with_auth_headers(&url, version)?.send().await?;
 
         let headers = &response.headers();
         if let Some(s) = headers.get("retry-after") {
@@ -130,25 +130,28 @@ impl StashAPI {
 
     async fn stashes(league: League, version: &AppVersion) -> Result<TabNoItems, Error> {
         let url = format!("{API_URL}/stash/{league}");
-        let response = StashAPI::with_auth_headers(&url, version).send().await?;
+        let response = StashAPI::with_auth_headers(&url, version)?.send().await?;
         Ok(response.json().await?)
     }
 
-    fn with_auth_headers(url: &str, version: &AppVersion) -> RequestBuilder {
-        Client::new()
+    fn with_auth_headers(url: &str, version: &AppVersion) -> Result<RequestBuilder, Error> {
+        let token = access_token()?;
+        Ok(Client::new()
             .get(url)
-            .header("Authorization", format!("Bearer {}", { access_token() }))
+            .header("Authorization", format!("Bearer {}", token))
             .header(
                 "User-Agent",
                 format!("OAuth divicards/{} (contact: poeshonya3@gmail.com)", {
                     version
                 }),
-            )
+            ))
     }
 }
 
-fn access_token() -> String {
-    AccessTokenStorage::new().get().unwrap()
+fn access_token() -> Result<String, Error> {
+    AccessTokenStorage::new()
+        .get()
+        .map_err(|_| Error::AuthError(crate::poe::error::AuthError::Failed))
 }
 
 #[instrument]

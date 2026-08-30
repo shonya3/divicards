@@ -17,7 +17,7 @@ pub async fn new_sheet_with_sample(
     league: League,
     preferences: Option<divi::sample::TablePreferences>,
 ) -> Result<SheetUrl, Error> {
-    let token = AccessTokenStorage::new().get().unwrap();
+    let token = AccessTokenStorage::new().get().map_err(|_| Error::AuthError(crate::poe::error::AuthError::Failed))?;
     let add_sheet_response = googlesheets::add_sheet(spreadsheet_id, title, &token).await?;
 
     let sample_values = ValueRange {
@@ -56,7 +56,7 @@ pub async fn read_batch(
     let value = googlesheets::read_batch(
         spreadsheet_id,
         &ranges,
-        Credential::AccessToken(AccessTokenStorage::new().get().unwrap()),
+        Credential::AccessToken(AccessTokenStorage::new().get().map_err(|_| Error::AuthError(crate::poe::error::AuthError::Failed))?),
     )
     .await?;
 
@@ -69,7 +69,7 @@ pub async fn read_sheet(spreadsheet_id: &str, range: &str) -> Result<ValueRange,
     let value_range = googlesheets::read(
         spreadsheet_id,
         range,
-        Credential::AccessToken(AccessTokenStorage::new().get().unwrap()),
+        Credential::AccessToken(AccessTokenStorage::new().get().map_err(|_| Error::AuthError(crate::poe::error::AuthError::Failed))?),
     )
     .await?;
 
