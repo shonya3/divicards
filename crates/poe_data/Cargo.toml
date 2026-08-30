@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-poe_data_tools = { path = "/home/shonya/Desktop/poe_data_tools/crates/poe_data_tools-lib" }
+poe_data_tools = { git = "https://github.com/shonya3/poe_data_tools.git" }
 anyhow = "1"
 arrow-array = "56"
 arrow-schema = "56"

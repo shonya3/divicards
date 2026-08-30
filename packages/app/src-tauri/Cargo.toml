@@ -1,11 +1,11 @@
 [package]
-name = "app"
+name = "divicards"
 version.workspace = true
 description = "A Tauri App"
 authors = ["you"]
 license = ""
 repository = ""
-default-run = "app"
+default-run = "divicards"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
