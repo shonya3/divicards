@@ -4,8 +4,9 @@ use crate::{
     consts::{CONDENSING_FACTOR, RAIN_OF_CHAOS_CONDENSED_WEIGHT},
     error::Error,
     prices::Prices,
+    IsCard,
 };
-use csv::{ReaderBuilder, Trim};
+use csv::{ReaderBuilder, StringRecord, Trim};
 use googlesheets::sheet::ReadBatchResponse;
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
@@ -235,16 +236,72 @@ impl From<csv::Error> for Error {
 fn parse_csv(csv_data: &str) -> Result<Vec<NameAmount>, Error> {
     let data = remove_lines_before_headers(csv_data)?;
     let mut rdr = ReaderBuilder::new()
+        .flexible(true)
         .trim(Trim::All)
         .from_reader(data.as_bytes());
 
+    let headers = rdr.headers().map_err(Error::from)?.clone();
+
     let mut vec = vec![];
-    for result in rdr.deserialize::<NameAmount>() {
-        let name_amount_pair = result?;
-        vec.push(name_amount_pair);
+    for result in rdr.records() {
+        let record = result?;
+        let name_amount = reconstruct_name_amount(&record, &headers)?;
+        vec.push(name_amount);
     }
 
     Ok(vec)
+}
+
+/// Reconstruct a [`NameAmount`] from a single CSV record.
+///
+/// For the standard `name,amount` layout (headers in columns 0 and 1), handles
+/// two cases:
+/// - **2 fields** — well-formed row, parsed directly.
+/// - **> 2 fields** — the card name contains an unquoted comma
+///   (e.g. `Brush, Paint and Palette,775`). The last field is taken as the
+///   amount. The remaining fields are joined with `,` and tested against every
+///   known card name (`is_card` / `is_legacy_card`) to find the correct split
+///   point. If no known card matches the trimmed join, all-but-last fields are
+///   returned as-is and [`check_card_name`](crate::check_card_name) will handle
+///   any resulting typo fix or rejection later in the pipeline.
+///
+/// For all other header layouts the record is deserialized via the `csv` crate
+/// using the header row for column-name mapping.
+fn reconstruct_name_amount(record: &StringRecord, headers: &StringRecord) -> Result<NameAmount, Error> {
+    let amount_idx = headers.iter().position(|h| {
+        ["amount", "stackSize", "Quantity"]
+            .iter()
+            .any(|c| h.trim().eq_ignore_ascii_case(c))
+    });
+    let name_idx = headers.iter().position(|h| {
+        ["name", "Name"]
+            .iter()
+            .any(|c| h.trim().eq_ignore_ascii_case(c))
+    });
+
+    if let (Some(0), Some(1)) = (name_idx, amount_idx) {
+        if record.len() == 2 {
+            return Ok(NameAmount::new(record[0].trim().to_owned(), record[1].trim().parse().unwrap_or(0)));
+        }
+        if record.len() > 2 {
+            let amount = record.get(record.len() - 1)
+                .and_then(|a| a.trim().parse::<u32>().ok())
+                .unwrap_or(0);
+            for split in 1..record.len() {
+                let candidate = record.iter().take(split).collect::<Vec<_>>().join(",").trim().to_owned();
+                if candidate.as_str().is_card() || candidate.as_str().is_legacy_card() {
+                    return Ok(NameAmount::new(candidate, amount));
+                }
+            }
+            return Ok(NameAmount::new(
+                record.iter().take(record.len() - 1).collect::<Vec<_>>().join(",").trim().to_owned(),
+                amount,
+            ));
+        }
+    }
+
+    let pair = record.deserialize(Some(headers))?;
+    Ok(pair)
 }
 
 #[derive(Debug)]
@@ -465,6 +522,28 @@ Encroaching Darkness,5\r\nThe Endless Darkness,1\r\nThe Endurance,19\r\nThe Enfo
         let trimmed = super::remove_lines_before_headers(s).unwrap();
 
         assert_eq!(trimmed.lines().next().unwrap(), "name,stackSize");
+    }
+
+    #[test]
+    fn unquoted_comma_in_card_name() {
+        let csv = "name,amount\r\nBrush, Paint and Palette,775\r\nThe Doctor,1";
+        let sample = Sample::create(Input::Csv(csv.to_string()), None).unwrap();
+
+        let brush = sample
+            .cards
+            .iter()
+            .find(|c| c.name == "Brush, Paint and Palette")
+            .expect("Brush, Paint and Palette should be in cards");
+        assert_eq!(brush.amount, 775);
+
+        assert!(
+            sample
+                .fixed_names
+                .iter()
+                .any(|f| f.fixed == "Brush, Paint and Palette"),
+            "Brush, Paint and Palette should appear in fixed_names, got: {:?}",
+            sample.fixed_names,
+        );
     }
 
     #[test]

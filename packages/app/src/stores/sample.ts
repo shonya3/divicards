@@ -4,6 +4,7 @@ import { Props as SampleCardProps } from "@divicards/wc/e-sample-card/e-sample-c
 import { defineStore } from "pinia";
 
 import { SampleData, command } from "../command";
+import { handleError } from "../error";
 
 const sampleCardsAmount = (sample: DivinationCardsSample): number => {
   return sample.cards.reduce((total, { amount }) => (total += amount), 0);
@@ -46,18 +47,6 @@ export const createSampleCard = async (
 ): Promise<SampleCardProps> => {
   const sample = await command("sample", { data: sampleData, league });
   const csv = await prepareCsvDataForDrag(sample);
-
-  const props = {
-    uuid: crypto.randomUUID(),
-    filename: prefixFilename(name, league, sample),
-    league,
-    sample,
-    selected: false,
-    minimumCardPrice: 0,
-    csvDataForDrag: csv,
-  };
-
-  return props;
 
   return {
     uuid: crypto.randomUUID(),
@@ -154,8 +143,21 @@ export const useSampleStore = defineStore("sampleCards", {
       this.addCard(file.name, text, ACTIVE_LEAGUE);
     },
 
-    async addFromDragAndDrop(e: DragEvent): Promise<PromiseSettledResult<void>[]> {
-      return Promise.allSettled(Array.from(e.dataTransfer?.files ?? []).map((f) => this.addFromFile(f)));
+    async addFromPaths(paths: string[]): Promise<PromiseSettledResult<void>[]> {
+      return Promise.allSettled(
+        paths.map(async (path) => {
+          const text = await command("read_file_content", { path });
+          const filename = path.split(/[\\/]/).pop() ?? path;
+          await this.addCard(filename, text, ACTIVE_LEAGUE);
+        }),
+      ).then((results) => {
+        results.forEach((result) => {
+          if (result.status === "rejected") {
+            handleError(result.reason);
+          }
+        });
+        return results;
+      });
     },
 
     async addSample(name: string, sample: DivinationCardsSample, league: League): Promise<void> {

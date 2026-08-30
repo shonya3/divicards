@@ -43,6 +43,7 @@ export interface Commands {
   sample_from_tab: (args: { league: League; stashId: string; subStashId?: string }) => DivinationCardsSample;
   tab_with_items: (args: { league: League; stashId: string }) => TabWithItems;
   extract_cards: (args: { tab: TabWithItems; league: League }) => DivinationCardsSample;
+  read_file_content: (args: { path: string }) => string;
 }
 
 const { format } = new Intl.NumberFormat();

@@ -52,6 +52,11 @@ pub async fn sample_into_csv(
 }
 
 #[command]
+pub async fn read_file_content(path: String) -> Result<String, Error> {
+    Ok(tokio::fs::read_to_string(&path).await?)
+}
+
+#[command]
 pub async fn version(version: State<'_, AppVersion>) -> Result<AppVersion, Error> {
     Ok(version.inner().clone())
 }

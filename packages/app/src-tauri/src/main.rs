@@ -43,6 +43,7 @@ async fn main() {
             commands::merge,
             commands::open_url,
             commands::sample_into_csv,
+            commands::read_file_content,
             poe::auth::poe_auth,
             poe::auth::poe_logout,
             poe::stash::stashes,

@@ -15,8 +15,9 @@ import { ChangeThemeEvent } from "@divicards/wc/e-theme-toggle/events.js";
 import "@divicards/wc/stashes/e-stashes-view.js";
 import { ExtractCardsEvent, StashtabFetchedEvent } from "@divicards/wc/stashes/events.js";
 import { webviewWindow } from "@tauri-apps/api";
+import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { TabWithItems } from "poe-custom-elements/types.js";
-import { computed, ref, Ref, shallowRef } from "vue";
+import { computed, onMounted, onUnmounted, ref, Ref, shallowRef } from "vue";
 
 import { command } from "./command";
 import GeneralTabWithItems from "./components/GeneralTabWithItems.vue";
@@ -119,46 +120,29 @@ const handle_change_theme = (e: ChangeThemeEvent) => {
 
 // --Dragzone handlers
 const isDragging = ref(false);
-const handleDropZoneDragEnter = (event: DragEvent) => {
-  event.preventDefault();
-  // Only activate if files are being dragged
-  if (event.dataTransfer && Array.from(event.dataTransfer.types).includes("Files")) {
-    dropZoneRef.value?.classList.add("drop-zone--active");
-    isDragging.value = true;
-  }
-};
+let unlistenDragDrop: (() => void) | null = null;
 
-const handleDropZoneDragOver = (event: DragEvent) => {
-  event.preventDefault(); // Necessary to allow dropping
-};
+onMounted(async () => {
+  const appWindow = getCurrentWebviewWindow();
+  unlistenDragDrop = await appWindow.onDragDropEvent((event) => {
+    if (event.payload.type === "enter" || event.payload.type === "over") {
+      isDragging.value = true;
+    } else if (event.payload.type === "leave") {
+      isDragging.value = false;
+    } else if (event.payload.type === "drop") {
+      isDragging.value = false;
+      sampleStore.addFromPaths(event.payload.paths);
+    }
+  });
+});
 
-const handleDropZoneDragLeave = (event: DragEvent) => {
-  event.preventDefault();
-  const dropZoneEl = dropZoneRef.value;
-  // Check if the mouse is truly leaving the dropZoneEl, not just moving to a child.
-  if (dropZoneEl && (event.relatedTarget === null || !dropZoneEl.contains(event.relatedTarget as Node))) {
-    dropZoneEl.classList.remove("drop-zone--active");
-    isDragging.value = false;
-  }
-};
-
-const handleDropZoneDrop = (event: DragEvent) => {
-  event.preventDefault();
-  dropZoneRef.value?.classList.remove("drop-zone--active");
-  isDragging.value = false;
-  sampleStore.addFromDragAndDrop(event);
-};
+onUnmounted(() => {
+  unlistenDragDrop?.();
+});
 </script>
 
 <template>
-  <div
-    ref="dropZoneRef"
-    @drop.prevent="handleDropZoneDrop"
-    @dragenter.prevent="handleDropZoneDragEnter"
-    @dragover.prevent="handleDropZoneDragOver"
-    @dragleave.prevent="handleDropZoneDragLeave"
-    class="drop-zone"
-  >
+  <div ref="dropZoneRef" class="drop-zone" :class="{ 'drop-zone--active': isDragging }">
     <div v-if="isDragging" class="drop-overlay-message">
       <e-drop-files-message></e-drop-files-message>
     </div>
