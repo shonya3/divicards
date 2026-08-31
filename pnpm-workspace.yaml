@@ -2,7 +2,11 @@ packages:
   # all packages in direct subdirs of packages/
   - "packages/*"
 allowBuilds:
+  esbuild: true
+  rs-module-lexer: true
   wasm-pack: true
+minimumReleaseAgeExclude:
+  - poe-custom-elements
 catalog:
   poe-custom-elements: latest
   "@shoelace-style/shoelace": ^2.20
@@ -17,6 +21,7 @@ catalog:
 overrides:
   vite: "catalog:"
   vitest: "catalog:"
+  "@voidzero-dev/vite-plus-core": "npm:@voidzero-dev/vite-plus-core@0.3.0"
 peerDependencyRules:
   allowAny:
     - vite
