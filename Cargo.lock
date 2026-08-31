@@ -601,7 +601,7 @@ dependencies = [
 
 [[package]]
 name = "card_element"
-version = "0.12.3"
+version = "0.12.4"
 dependencies = [
  "serde",
 ]
@@ -1257,7 +1257,7 @@ dependencies = [
 
 [[package]]
 name = "divcord"
-version = "0.12.3"
+version = "0.12.4"
 dependencies = [
  "criterion",
  "divi",
@@ -1321,7 +1321,7 @@ dependencies = [
 
 [[package]]
 name = "divicards"
-version = "0.12.3"
+version = "0.12.4"
 dependencies = [
  "async-trait",
  "axum",
@@ -1892,7 +1892,7 @@ dependencies = [
 
 [[package]]
 name = "generate_website_files"
-version = "0.12.3"
+version = "0.12.4"
 dependencies = [
  "card_element",
  "divcord",
@@ -2050,7 +2050,7 @@ dependencies = [
 
 [[package]]
 name = "googlesheets"
-version = "0.12.3"
+version = "0.12.4"
 dependencies = [
  "reqwest",
  "serde",
@@ -2885,7 +2885,7 @@ checksum = "650eef8c711430f1a879fdd01d4745a7deea475becfb90269c06775983bbf086"
 
 [[package]]
 name = "ninja"
-version = "0.12.3"
+version = "0.12.4"
 dependencies = [
  "poe",
  "reqwest",
@@ -3677,7 +3677,7 @@ checksum = "d231b230927b5e4ad203db57bbcbee2802f6bce620b1e4a9024a07d94e2907ec"
 
 [[package]]
 name = "playground"
-version = "0.12.3"
+version = "0.12.4"
 dependencies = [
  "card_element",
  "divcord",
@@ -3752,7 +3752,7 @@ dependencies = [
 
 [[package]]
 name = "poe"
-version = "0.12.3"
+version = "0.12.4"
 dependencies = [
  "serde",
  "serde_json",
