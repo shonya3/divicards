@@ -1,7 +1,7 @@
 [package]
 name = "divicards"
 version.workspace = true
-description = "A Tauri App"
+description = "PoE Divination Cards"
 authors = ["you"]
 license = ""
 repository = ""
