@@ -9,6 +9,18 @@ catalogs:
     '@shoelace-style/shoelace':
       specifier: ^2.20
       version: 2.20.1
+    '@tauri-apps/api':
+      specifier: ^2
+      version: 2.11.1
+    '@tauri-apps/cli':
+      specifier: ^2
+      version: 2.5.0
+    '@tauri-apps/plugin-process':
+      specifier: ^2
+      version: 2.3.1
+    '@tauri-apps/plugin-updater':
+      specifier: ^2
+      version: 2.11.0
     '@types/node':
       specifier: ^25
       version: 25.9.5
@@ -41,7 +53,7 @@ importers:
   .:
     devDependencies:
       '@tauri-apps/cli':
-        specifier: ^2
+        specifier: 'catalog:'
         version: 2.5.0
       vite-plus:
         specifier: 'catalog:'
@@ -62,13 +74,13 @@ importers:
         specifier: 'catalog:'
         version: 2.20.1(@floating-ui/utils@0.2.12)(@types/react@19.2.18)
       '@tauri-apps/api':
-        specifier: ^2
+        specifier: 'catalog:'
         version: 2.11.1
       '@tauri-apps/plugin-process':
-        specifier: ^2
+        specifier: 'catalog:'
         version: 2.3.1
       '@tauri-apps/plugin-updater':
-        specifier: ^2
+        specifier: 'catalog:'
         version: 2.11.0
       '@vueuse/core':
         specifier: ^13.3.0
@@ -86,9 +98,6 @@ importers:
         specifier: 'catalog:'
         version: 3.5.42(typescript@6.0.3)
     devDependencies:
-      '@tauri-apps/cli':
-        specifier: 2.5.0
-        version: 2.5.0
       '@vitejs/plugin-vue':
         specifier: 5.2.4
         version: 5.2.4(@voidzero-dev/vite-plus-core@0.3.0(@types/node@25.9.5)(esbuild@0.27.7)(typescript@6.0.3))(vue@3.5.42(typescript@6.0.3))

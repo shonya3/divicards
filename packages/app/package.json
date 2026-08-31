@@ -15,9 +15,9 @@
     "@divicards/wc": "workspace:^",
     "@formkit/auto-animate": "1.0.0-beta.6",
     "@shoelace-style/shoelace": "catalog:",
-    "@tauri-apps/api": "^2",
-    "@tauri-apps/plugin-process": "^2",
-    "@tauri-apps/plugin-updater": "^2",
+    "@tauri-apps/api": "catalog:",
+    "@tauri-apps/plugin-process": "catalog:",
+    "@tauri-apps/plugin-updater": "catalog:",
     "@vueuse/core": "^13.3.0",
     "lit": "catalog:",
     "pinia": "^3",
@@ -25,7 +25,6 @@
     "vue": "catalog:"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "2.5.0",
     "@vitejs/plugin-vue": "5.2.4",
     "typescript": "catalog:",
     "vite": "catalog:",
