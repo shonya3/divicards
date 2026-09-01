@@ -15,6 +15,14 @@ pub struct CardsData {
 pub struct LeagueWeightsCollected {
     pub version: ReleaseVersion,
     pub total_cards: u32,
+    pub contributors: Vec<Contributor>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[serde(rename_all = "camelCase")]
+pub struct Contributor {
+    pub name: String,
+    pub total_cards: u32,
 }
 
 impl CardsData {

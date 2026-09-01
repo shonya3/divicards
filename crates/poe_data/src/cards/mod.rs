@@ -113,11 +113,16 @@ pub async fn extract_cards(source: &GameFiles, league: TradeLeague) -> Result<Ca
         card.price = price_lookup.get(card.name.as_str()).copied();
     }
 
+    let latest_version = weights_data.versions.first().cloned().unwrap_or_default();
+    let latest_contributors = weights_data
+        .contributors
+        .get(&latest_version)
+        .cloned()
+        .unwrap_or_default();
     let latest = LeagueWeightsCollected {
-        version: ReleaseVersion::new(
-            weights_data.versions.first().cloned().unwrap_or_default(),
-        ),
+        version: ReleaseVersion::new(latest_version),
         total_cards: weights_data.total_cards,
+        contributors: latest_contributors,
     };
     let dict: HashMap<_, _> = cards.into_iter().map(|c| (c.name.clone(), c)).collect();
 
