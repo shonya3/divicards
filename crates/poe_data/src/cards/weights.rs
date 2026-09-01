@@ -12,7 +12,7 @@
 //!
 //! # League ranges
 //!
-//! | League | Names range | Weights range |
+//! | League | Names range | Amounts range |
 //! |--------|-------------|---------------|
 //! | 3.29   | `3.29!G3:G` | `3.29!R3:R` |
 //! | 3.28   | `3.28!F3:F` | `3.28!Q3:Q` |
@@ -32,7 +32,8 @@ const SPREADSHEET_ID: &str = "1PmGES_e1on6K7O5ghHuoorEjruAVb7dQ5m7PGrW7t80";
 struct LeagueRange {
     version: String,
     names_range: String,
-    weights_range: String,
+    /// Total amounts per card (sum of all contributors).
+    amounts_range: String,
 }
 
 fn league_ranges() -> [LeagueRange; 7] {
@@ -40,37 +41,37 @@ fn league_ranges() -> [LeagueRange; 7] {
         LeagueRange {
             version: "3.29".into(),
             names_range: "3.29!G3:G".into(),
-            weights_range: "3.29!R3:R".into(),
+            amounts_range: "3.29!R3:R".into(),
         },
         LeagueRange {
             version: "3.28".into(),
             names_range: "3.28!F3:F".into(),
-            weights_range: "3.28!Q3:Q".into(),
+            amounts_range: "3.28!Q3:Q".into(),
         },
         LeagueRange {
             version: "3.27".into(),
             names_range: "3.27!H3:H".into(),
-            weights_range: "3.27!S3:S".into(),
+            amounts_range: "3.27!S3:S".into(),
         },
         LeagueRange {
             version: "3.26".into(),
             names_range: "3.26!H3:H".into(),
-            weights_range: "3.26!S3:S".into(),
+            amounts_range: "3.26!S3:S".into(),
         },
         LeagueRange {
             version: "3.25".into(),
             names_range: "3.25!F3:F".into(),
-            weights_range: "3.25!Q3:Q".into(),
+            amounts_range: "3.25!Q3:Q".into(),
         },
         LeagueRange {
             version: "3.24".into(),
             names_range: "3.24!D3:D".into(),
-            weights_range: "3.24!O3:O".into(),
+            amounts_range: "3.24!O3:O".into(),
         },
         LeagueRange {
             version: "3.23".into(),
             names_range: "3.23!D3:D".into(),
-            weights_range: "3.23!P3:P".into(),
+            amounts_range: "3.23!P3:P".into(),
         },
     ]
 }
@@ -98,7 +99,7 @@ async fn fetch_league_data(api_key: String, lr: &LeagueRange, idx: usize) -> Res
     eprintln!("  fetching {}...", lr.version);
     let resp = googlesheets::sheet::read_batch(
         SPREADSHEET_ID,
-        &[&lr.names_range, &lr.weights_range],
+        &[&lr.names_range, &lr.amounts_range],
         Credential::ApiKey(api_key),
     )
     .await
