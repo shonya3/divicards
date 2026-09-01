@@ -14,6 +14,7 @@
 //!
 //! | League | Names range | Weights range |
 //! |--------|-------------|---------------|
+//! | 3.29   | `3.29!G3:G` | `3.29!R3:R` |
 //! | 3.28   | `3.28!F3:F` | `3.28!Q3:Q` |
 //! | 3.27   | `3.27!H3:H` | `3.27!S3:S` |
 //! | 3.26   | `3.26!H3:H` | `3.26!S3:S` |
@@ -34,8 +35,13 @@ struct LeagueRange {
     weights_range: String,
 }
 
-fn league_ranges() -> [LeagueRange; 6] {
+fn league_ranges() -> [LeagueRange; 7] {
     [
+        LeagueRange {
+            version: "3.29".into(),
+            names_range: "3.29!G3:G".into(),
+            weights_range: "3.29!R3:R".into(),
+        },
         LeagueRange {
             version: "3.28".into(),
             names_range: "3.28!F3:F".into(),
